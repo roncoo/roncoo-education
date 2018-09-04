@@ -1,7 +1,11 @@
 package com.roncoo.education.system.service.biz.gateway;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import com.roncoo.education.system.common.bean.dto.WebsiteDTO;
 import com.roncoo.education.system.service.dao.WebsiteDao;
@@ -24,6 +28,13 @@ public class ApiWebsiteBiz {
 	public Result<WebsiteDTO> get() {
 		Website website = websitedao.getByStatusId(StatusIdEnum.YES.getCode());
 		WebsiteDTO dto = BeanUtil.copyProperties(website, WebsiteDTO.class);
+		if (StringUtils.hasText(dto.getPrn())) {
+			// 公安网备案号处理
+			String regEx = "[^0-9]";
+			Pattern p = Pattern.compile(regEx);
+			Matcher m = p.matcher(dto.getPrn());
+			dto.setPrnNo(m.replaceAll("").trim());
+		}
 		return Result.success(dto);
 	}
 
