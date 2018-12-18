@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.roncoo.education.course.service.dao.impl.mapper.CourseChapterPeriodMapper" >
+  <resultMap id="BaseResultMap" type="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriod" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="status_id" property="statusId" jdbcType="TINYINT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="chapter_id" property="chapterId" jdbcType="BIGINT" />
+    <result column="period_name" property="periodName" jdbcType="VARCHAR" />
+    <result column="period_desc" property="periodDesc" jdbcType="VARCHAR" />
+    <result column="is_free" property="isFree" jdbcType="TINYINT" />
+    <result column="period_original" property="periodOriginal" jdbcType="DECIMAL" />
+    <result column="period_discount" property="periodDiscount" jdbcType="DECIMAL" />
+    <result column="count_buy" property="countBuy" jdbcType="INTEGER" />
+    <result column="count_study" property="countStudy" jdbcType="INTEGER" />
+    <result column="is_doc" property="isDoc" jdbcType="TINYINT" />
+    <result column="doc_name" property="docName" jdbcType="VARCHAR" />
+    <result column="doc_url" property="docUrl" jdbcType="VARCHAR" />
+    <result column="is_video" property="isVideo" jdbcType="VARCHAR" />
+    <result column="video_no" property="videoNo" jdbcType="BIGINT" />
+    <result column="video_name" property="videoName" jdbcType="VARCHAR" />
+    <result column="video_length" property="videoLength" jdbcType="VARCHAR" />
+    <result column="video_vid" property="videoVid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, gmt_create, gmt_modified, status_id, sort, course_id, chapter_id, period_name, 
+    period_desc, is_free, period_original, period_discount, count_buy, count_study, is_doc, 
+    doc_name, doc_url, is_video, video_no, video_name, video_length, video_vid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriodExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course_chapter_period
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from course_chapter_period
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from course_chapter_period
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriodExample" >
+    delete from course_chapter_period
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriod" >
+    insert into course_chapter_period (id, gmt_create, gmt_modified, 
+      status_id, sort, course_id, 
+      chapter_id, period_name, period_desc, 
+      is_free, period_original, period_discount, 
+      count_buy, count_study, is_doc, 
+      doc_name, doc_url, is_video, 
+      video_no, video_name, video_length, 
+      video_vid)
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
+      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{courseId,jdbcType=BIGINT}, 
+      #{chapterId,jdbcType=BIGINT}, #{periodName,jdbcType=VARCHAR}, #{periodDesc,jdbcType=VARCHAR}, 
+      #{isFree,jdbcType=TINYINT}, #{periodOriginal,jdbcType=DECIMAL}, #{periodDiscount,jdbcType=DECIMAL}, 
+      #{countBuy,jdbcType=INTEGER}, #{countStudy,jdbcType=INTEGER}, #{isDoc,jdbcType=TINYINT}, 
+      #{docName,jdbcType=VARCHAR}, #{docUrl,jdbcType=VARCHAR}, #{isVideo,jdbcType=VARCHAR}, 
+      #{videoNo,jdbcType=BIGINT}, #{videoName,jdbcType=VARCHAR}, #{videoLength,jdbcType=VARCHAR}, 
+      #{videoVid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriod" >
+    insert into course_chapter_period
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="statusId != null" >
+        status_id,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="chapterId != null" >
+        chapter_id,
+      </if>
+      <if test="periodName != null" >
+        period_name,
+      </if>
+      <if test="periodDesc != null" >
+        period_desc,
+      </if>
+      <if test="isFree != null" >
+        is_free,
+      </if>
+      <if test="periodOriginal != null" >
+        period_original,
+      </if>
+      <if test="periodDiscount != null" >
+        period_discount,
+      </if>
+      <if test="countBuy != null" >
+        count_buy,
+      </if>
+      <if test="countStudy != null" >
+        count_study,
+      </if>
+      <if test="isDoc != null" >
+        is_doc,
+      </if>
+      <if test="docName != null" >
+        doc_name,
+      </if>
+      <if test="docUrl != null" >
+        doc_url,
+      </if>
+      <if test="isVideo != null" >
+        is_video,
+      </if>
+      <if test="videoNo != null" >
+        video_no,
+      </if>
+      <if test="videoName != null" >
+        video_name,
+      </if>
+      <if test="videoLength != null" >
+        video_length,
+      </if>
+      <if test="videoVid != null" >
+        video_vid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusId != null" >
+        #{statusId,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="chapterId != null" >
+        #{chapterId,jdbcType=BIGINT},
+      </if>
+      <if test="periodName != null" >
+        #{periodName,jdbcType=VARCHAR},
+      </if>
+      <if test="periodDesc != null" >
+        #{periodDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="isFree != null" >
+        #{isFree,jdbcType=TINYINT},
+      </if>
+      <if test="periodOriginal != null" >
+        #{periodOriginal,jdbcType=DECIMAL},
+      </if>
+      <if test="periodDiscount != null" >
+        #{periodDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="countBuy != null" >
+        #{countBuy,jdbcType=INTEGER},
+      </if>
+      <if test="countStudy != null" >
+        #{countStudy,jdbcType=INTEGER},
+      </if>
+      <if test="isDoc != null" >
+        #{isDoc,jdbcType=TINYINT},
+      </if>
+      <if test="docName != null" >
+        #{docName,jdbcType=VARCHAR},
+      </if>
+      <if test="docUrl != null" >
+        #{docUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isVideo != null" >
+        #{isVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="videoNo != null" >
+        #{videoNo,jdbcType=BIGINT},
+      </if>
+      <if test="videoName != null" >
+        #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoLength != null" >
+        #{videoLength,jdbcType=VARCHAR},
+      </if>
+      <if test="videoVid != null" >
+        #{videoVid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriodExample" resultType="java.lang.Integer" >
+    select count(*) from course_chapter_period
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update course_chapter_period
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.gmtCreate != null" >
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModified != null" >
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.statusId != null" >
+        status_id = #{record.statusId,jdbcType=TINYINT},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseId != null" >
+        course_id = #{record.courseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.chapterId != null" >
+        chapter_id = #{record.chapterId,jdbcType=BIGINT},
+      </if>
+      <if test="record.periodName != null" >
+        period_name = #{record.periodName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.periodDesc != null" >
+        period_desc = #{record.periodDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isFree != null" >
+        is_free = #{record.isFree,jdbcType=TINYINT},
+      </if>
+      <if test="record.periodOriginal != null" >
+        period_original = #{record.periodOriginal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.periodDiscount != null" >
+        period_discount = #{record.periodDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.countBuy != null" >
+        count_buy = #{record.countBuy,jdbcType=INTEGER},
+      </if>
+      <if test="record.countStudy != null" >
+        count_study = #{record.countStudy,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDoc != null" >
+        is_doc = #{record.isDoc,jdbcType=TINYINT},
+      </if>
+      <if test="record.docName != null" >
+        doc_name = #{record.docName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.docUrl != null" >
+        doc_url = #{record.docUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isVideo != null" >
+        is_video = #{record.isVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoNo != null" >
+        video_no = #{record.videoNo,jdbcType=BIGINT},
+      </if>
+      <if test="record.videoName != null" >
+        video_name = #{record.videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoLength != null" >
+        video_length = #{record.videoLength,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoVid != null" >
+        video_vid = #{record.videoVid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update course_chapter_period
+    set id = #{record.id,jdbcType=BIGINT},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      status_id = #{record.statusId,jdbcType=TINYINT},
+      sort = #{record.sort,jdbcType=INTEGER},
+      course_id = #{record.courseId,jdbcType=BIGINT},
+      chapter_id = #{record.chapterId,jdbcType=BIGINT},
+      period_name = #{record.periodName,jdbcType=VARCHAR},
+      period_desc = #{record.periodDesc,jdbcType=VARCHAR},
+      is_free = #{record.isFree,jdbcType=TINYINT},
+      period_original = #{record.periodOriginal,jdbcType=DECIMAL},
+      period_discount = #{record.periodDiscount,jdbcType=DECIMAL},
+      count_buy = #{record.countBuy,jdbcType=INTEGER},
+      count_study = #{record.countStudy,jdbcType=INTEGER},
+      is_doc = #{record.isDoc,jdbcType=TINYINT},
+      doc_name = #{record.docName,jdbcType=VARCHAR},
+      doc_url = #{record.docUrl,jdbcType=VARCHAR},
+      is_video = #{record.isVideo,jdbcType=VARCHAR},
+      video_no = #{record.videoNo,jdbcType=BIGINT},
+      video_name = #{record.videoName,jdbcType=VARCHAR},
+      video_length = #{record.videoLength,jdbcType=VARCHAR},
+      video_vid = #{record.videoVid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriod" >
+    update course_chapter_period
+    <set >
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusId != null" >
+        status_id = #{statusId,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="chapterId != null" >
+        chapter_id = #{chapterId,jdbcType=BIGINT},
+      </if>
+      <if test="periodName != null" >
+        period_name = #{periodName,jdbcType=VARCHAR},
+      </if>
+      <if test="periodDesc != null" >
+        period_desc = #{periodDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="isFree != null" >
+        is_free = #{isFree,jdbcType=TINYINT},
+      </if>
+      <if test="periodOriginal != null" >
+        period_original = #{periodOriginal,jdbcType=DECIMAL},
+      </if>
+      <if test="periodDiscount != null" >
+        period_discount = #{periodDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="countBuy != null" >
+        count_buy = #{countBuy,jdbcType=INTEGER},
+      </if>
+      <if test="countStudy != null" >
+        count_study = #{countStudy,jdbcType=INTEGER},
+      </if>
+      <if test="isDoc != null" >
+        is_doc = #{isDoc,jdbcType=TINYINT},
+      </if>
+      <if test="docName != null" >
+        doc_name = #{docName,jdbcType=VARCHAR},
+      </if>
+      <if test="docUrl != null" >
+        doc_url = #{docUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isVideo != null" >
+        is_video = #{isVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="videoNo != null" >
+        video_no = #{videoNo,jdbcType=BIGINT},
+      </if>
+      <if test="videoName != null" >
+        video_name = #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoLength != null" >
+        video_length = #{videoLength,jdbcType=VARCHAR},
+      </if>
+      <if test="videoVid != null" >
+        video_vid = #{videoVid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriod" >
+    update course_chapter_period
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      status_id = #{statusId,jdbcType=TINYINT},
+      sort = #{sort,jdbcType=INTEGER},
+      course_id = #{courseId,jdbcType=BIGINT},
+      chapter_id = #{chapterId,jdbcType=BIGINT},
+      period_name = #{periodName,jdbcType=VARCHAR},
+      period_desc = #{periodDesc,jdbcType=VARCHAR},
+      is_free = #{isFree,jdbcType=TINYINT},
+      period_original = #{periodOriginal,jdbcType=DECIMAL},
+      period_discount = #{periodDiscount,jdbcType=DECIMAL},
+      count_buy = #{countBuy,jdbcType=INTEGER},
+      count_study = #{countStudy,jdbcType=INTEGER},
+      is_doc = #{isDoc,jdbcType=TINYINT},
+      doc_name = #{docName,jdbcType=VARCHAR},
+      doc_url = #{docUrl,jdbcType=VARCHAR},
+      is_video = #{isVideo,jdbcType=VARCHAR},
+      video_no = #{videoNo,jdbcType=BIGINT},
+      video_name = #{videoName,jdbcType=VARCHAR},
+      video_length = #{videoLength,jdbcType=VARCHAR},
+      video_vid = #{videoVid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

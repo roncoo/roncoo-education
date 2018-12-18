@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.roncoo.education.user.service.dao.impl.mapper.LecturerProfitMapper" >
+  <resultMap id="BaseResultMap" type="com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerProfit" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="lecturer_user_no" property="lecturerUserNo" jdbcType="BIGINT" />
+    <result column="bank_card_no" property="bankCardNo" jdbcType="VARCHAR" />
+    <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+    <result column="bank_branch_name" property="bankBranchName" jdbcType="VARCHAR" />
+    <result column="bank_user_name" property="bankUserName" jdbcType="VARCHAR" />
+    <result column="bank_id_card_no" property="bankIdCardNo" jdbcType="VARCHAR" />
+    <result column="lecturer_profit" property="lecturerProfit" jdbcType="DECIMAL" />
+    <result column="platform_profit" property="platformProfit" jdbcType="DECIMAL" />
+    <result column="profit_status" property="profitStatus" jdbcType="TINYINT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, gmt_create, lecturer_user_no, bank_card_no, bank_name, bank_branch_name, bank_user_name, 
+    bank_id_card_no, lecturer_profit, platform_profit, profit_status, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerProfitExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from lecturer_profit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lecturer_profit
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lecturer_profit
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerProfitExample" >
+    delete from lecturer_profit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerProfit" >
+    insert into lecturer_profit (id, gmt_create, lecturer_user_no, 
+      bank_card_no, bank_name, bank_branch_name, 
+      bank_user_name, bank_id_card_no, lecturer_profit, 
+      platform_profit, profit_status, remark
+      )
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{lecturerUserNo,jdbcType=BIGINT}, 
+      #{bankCardNo,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, #{bankBranchName,jdbcType=VARCHAR}, 
+      #{bankUserName,jdbcType=VARCHAR}, #{bankIdCardNo,jdbcType=VARCHAR}, #{lecturerProfit,jdbcType=DECIMAL}, 
+      #{platformProfit,jdbcType=DECIMAL}, #{profitStatus,jdbcType=TINYINT}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerProfit" >
+    insert into lecturer_profit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="lecturerUserNo != null" >
+        lecturer_user_no,
+      </if>
+      <if test="bankCardNo != null" >
+        bank_card_no,
+      </if>
+      <if test="bankName != null" >
+        bank_name,
+      </if>
+      <if test="bankBranchName != null" >
+        bank_branch_name,
+      </if>
+      <if test="bankUserName != null" >
+        bank_user_name,
+      </if>
+      <if test="bankIdCardNo != null" >
+        bank_id_card_no,
+      </if>
+      <if test="lecturerProfit != null" >
+        lecturer_profit,
+      </if>
+      <if test="platformProfit != null" >
+        platform_profit,
+      </if>
+      <if test="profitStatus != null" >
+        profit_status,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lecturerUserNo != null" >
+        #{lecturerUserNo,jdbcType=BIGINT},
+      </if>
+      <if test="bankCardNo != null" >
+        #{bankCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankBranchName != null" >
+        #{bankBranchName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankUserName != null" >
+        #{bankUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankIdCardNo != null" >
+        #{bankIdCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="lecturerProfit != null" >
+        #{lecturerProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="platformProfit != null" >
+        #{platformProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="profitStatus != null" >
+        #{profitStatus,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerProfitExample" resultType="java.lang.Integer" >
+    select count(*) from lecturer_profit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update lecturer_profit
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.gmtCreate != null" >
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lecturerUserNo != null" >
+        lecturer_user_no = #{record.lecturerUserNo,jdbcType=BIGINT},
+      </if>
+      <if test="record.bankCardNo != null" >
+        bank_card_no = #{record.bankCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankName != null" >
+        bank_name = #{record.bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankBranchName != null" >
+        bank_branch_name = #{record.bankBranchName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankUserName != null" >
+        bank_user_name = #{record.bankUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankIdCardNo != null" >
+        bank_id_card_no = #{record.bankIdCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lecturerProfit != null" >
+        lecturer_profit = #{record.lecturerProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.platformProfit != null" >
+        platform_profit = #{record.platformProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.profitStatus != null" >
+        profit_status = #{record.profitStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update lecturer_profit
+    set id = #{record.id,jdbcType=BIGINT},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      lecturer_user_no = #{record.lecturerUserNo,jdbcType=BIGINT},
+      bank_card_no = #{record.bankCardNo,jdbcType=VARCHAR},
+      bank_name = #{record.bankName,jdbcType=VARCHAR},
+      bank_branch_name = #{record.bankBranchName,jdbcType=VARCHAR},
+      bank_user_name = #{record.bankUserName,jdbcType=VARCHAR},
+      bank_id_card_no = #{record.bankIdCardNo,jdbcType=VARCHAR},
+      lecturer_profit = #{record.lecturerProfit,jdbcType=DECIMAL},
+      platform_profit = #{record.platformProfit,jdbcType=DECIMAL},
+      profit_status = #{record.profitStatus,jdbcType=TINYINT},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerProfit" >
+    update lecturer_profit
+    <set >
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lecturerUserNo != null" >
+        lecturer_user_no = #{lecturerUserNo,jdbcType=BIGINT},
+      </if>
+      <if test="bankCardNo != null" >
+        bank_card_no = #{bankCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        bank_name = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankBranchName != null" >
+        bank_branch_name = #{bankBranchName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankUserName != null" >
+        bank_user_name = #{bankUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankIdCardNo != null" >
+        bank_id_card_no = #{bankIdCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="lecturerProfit != null" >
+        lecturer_profit = #{lecturerProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="platformProfit != null" >
+        platform_profit = #{platformProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="profitStatus != null" >
+        profit_status = #{profitStatus,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerProfit" >
+    update lecturer_profit
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      lecturer_user_no = #{lecturerUserNo,jdbcType=BIGINT},
+      bank_card_no = #{bankCardNo,jdbcType=VARCHAR},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      bank_branch_name = #{bankBranchName,jdbcType=VARCHAR},
+      bank_user_name = #{bankUserName,jdbcType=VARCHAR},
+      bank_id_card_no = #{bankIdCardNo,jdbcType=VARCHAR},
+      lecturer_profit = #{lecturerProfit,jdbcType=DECIMAL},
+      platform_profit = #{platformProfit,jdbcType=DECIMAL},
+      profit_status = #{profitStatus,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,7 @@
+ _ __ ___  _ __   ___ ___   ___  
+| '__/ _ \| '_ \ / __/ _ \ / _ \ 
+| | | (_) | | | | (_| (_) | (_) |
+|_|  \___/|_| |_|\___\___/ \___/ 
+
+龙果技术团队开发: http://www.roncoo.com
+Spring Boot Version: ${spring-boot.version}${spring-boot.formatted-version}

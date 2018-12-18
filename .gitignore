@@ -1,0 +1,11 @@
+*/target/
+*.project
+*.classpath
+*.project
+*.settings
+*.mvn
+*.project
+*.springBeans
+*.factorypath
+*/src/main/resources/config/prod/
+*/src/main/resources/application-prod.properties

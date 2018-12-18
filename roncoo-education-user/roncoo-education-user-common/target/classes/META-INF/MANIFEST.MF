@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: roncoo-education-user-common
+Implementation-Version: 1.0-SNAPSHOT
+Built-By: Administrator
+Implementation-Vendor-Id: com.roncoo
+Build-Jdk: 1.8.0_144
+Implementation-URL: http://www.roncoo.com/roncoo-education-user/roncoo
+ -education-user-common
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: 领课网络
+

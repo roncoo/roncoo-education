@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: roncoo-education-course-feign
+Implementation-Version: 1.0-SNAPSHOT
+Built-By: Administrator
+Implementation-Vendor-Id: com.roncoo
+Build-Jdk: 1.8.0_144
+Implementation-URL: http://www.roncoo.com/roncoo-education-course/ronc
+ oo-education-course-feign
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: 领课网络
+

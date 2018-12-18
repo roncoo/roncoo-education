@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.roncoo.education.course.service.dao.impl.mapper.CourseChapterMapper" >
+  <resultMap id="BaseResultMap" type="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapter" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="status_id" property="statusId" jdbcType="TINYINT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="chapter_name" property="chapterName" jdbcType="VARCHAR" />
+    <result column="chapter_desc" property="chapterDesc" jdbcType="VARCHAR" />
+    <result column="is_free" property="isFree" jdbcType="TINYINT" />
+    <result column="chapter_original" property="chapterOriginal" jdbcType="DECIMAL" />
+    <result column="chapter_discount" property="chapterDiscount" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, gmt_create, gmt_modified, status_id, sort, course_id, chapter_name, chapter_desc, 
+    is_free, chapter_original, chapter_discount
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course_chapter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from course_chapter
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from course_chapter
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterExample" >
+    delete from course_chapter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapter" >
+    insert into course_chapter (id, gmt_create, gmt_modified, 
+      status_id, sort, course_id, 
+      chapter_name, chapter_desc, is_free, 
+      chapter_original, chapter_discount)
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
+      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{courseId,jdbcType=BIGINT}, 
+      #{chapterName,jdbcType=VARCHAR}, #{chapterDesc,jdbcType=VARCHAR}, #{isFree,jdbcType=TINYINT}, 
+      #{chapterOriginal,jdbcType=DECIMAL}, #{chapterDiscount,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapter" >
+    insert into course_chapter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="statusId != null" >
+        status_id,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="chapterName != null" >
+        chapter_name,
+      </if>
+      <if test="chapterDesc != null" >
+        chapter_desc,
+      </if>
+      <if test="isFree != null" >
+        is_free,
+      </if>
+      <if test="chapterOriginal != null" >
+        chapter_original,
+      </if>
+      <if test="chapterDiscount != null" >
+        chapter_discount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusId != null" >
+        #{statusId,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="chapterName != null" >
+        #{chapterName,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterDesc != null" >
+        #{chapterDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="isFree != null" >
+        #{isFree,jdbcType=TINYINT},
+      </if>
+      <if test="chapterOriginal != null" >
+        #{chapterOriginal,jdbcType=DECIMAL},
+      </if>
+      <if test="chapterDiscount != null" >
+        #{chapterDiscount,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterExample" resultType="java.lang.Integer" >
+    select count(*) from course_chapter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update course_chapter
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.gmtCreate != null" >
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModified != null" >
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.statusId != null" >
+        status_id = #{record.statusId,jdbcType=TINYINT},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseId != null" >
+        course_id = #{record.courseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.chapterName != null" >
+        chapter_name = #{record.chapterName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chapterDesc != null" >
+        chapter_desc = #{record.chapterDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isFree != null" >
+        is_free = #{record.isFree,jdbcType=TINYINT},
+      </if>
+      <if test="record.chapterOriginal != null" >
+        chapter_original = #{record.chapterOriginal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chapterDiscount != null" >
+        chapter_discount = #{record.chapterDiscount,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update course_chapter
+    set id = #{record.id,jdbcType=BIGINT},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      status_id = #{record.statusId,jdbcType=TINYINT},
+      sort = #{record.sort,jdbcType=INTEGER},
+      course_id = #{record.courseId,jdbcType=BIGINT},
+      chapter_name = #{record.chapterName,jdbcType=VARCHAR},
+      chapter_desc = #{record.chapterDesc,jdbcType=VARCHAR},
+      is_free = #{record.isFree,jdbcType=TINYINT},
+      chapter_original = #{record.chapterOriginal,jdbcType=DECIMAL},
+      chapter_discount = #{record.chapterDiscount,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapter" >
+    update course_chapter
+    <set >
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusId != null" >
+        status_id = #{statusId,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="chapterName != null" >
+        chapter_name = #{chapterName,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterDesc != null" >
+        chapter_desc = #{chapterDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="isFree != null" >
+        is_free = #{isFree,jdbcType=TINYINT},
+      </if>
+      <if test="chapterOriginal != null" >
+        chapter_original = #{chapterOriginal,jdbcType=DECIMAL},
+      </if>
+      <if test="chapterDiscount != null" >
+        chapter_discount = #{chapterDiscount,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapter" >
+    update course_chapter
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      status_id = #{statusId,jdbcType=TINYINT},
+      sort = #{sort,jdbcType=INTEGER},
+      course_id = #{courseId,jdbcType=BIGINT},
+      chapter_name = #{chapterName,jdbcType=VARCHAR},
+      chapter_desc = #{chapterDesc,jdbcType=VARCHAR},
+      is_free = #{isFree,jdbcType=TINYINT},
+      chapter_original = #{chapterOriginal,jdbcType=DECIMAL},
+      chapter_discount = #{chapterDiscount,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.roncoo.education.system.service.dao.impl.mapper.WebsiteMapper" >
+  <resultMap id="BaseResultMap" type="com.roncoo.education.system.service.dao.impl.mapper.entity.Website" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="status_id" property="statusId" jdbcType="TINYINT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="website_title" property="websiteTitle" jdbcType="VARCHAR" />
+    <result column="website_keyword" property="websiteKeyword" jdbcType="VARCHAR" />
+    <result column="website_desc" property="websiteDesc" jdbcType="VARCHAR" />
+    <result column="copyright" property="copyright" jdbcType="VARCHAR" />
+    <result column="weixin" property="weixin" jdbcType="VARCHAR" />
+    <result column="weibo" property="weibo" jdbcType="VARCHAR" />
+    <result column="is_enable_statistics" property="isEnableStatistics" jdbcType="TINYINT" />
+    <result column="statistics_code" property="statisticsCode" jdbcType="VARCHAR" />
+    <result column="is_show_service" property="isShowService" jdbcType="TINYINT" />
+    <result column="service1" property="service1" jdbcType="VARCHAR" />
+    <result column="service2" property="service2" jdbcType="VARCHAR" />
+    <result column="service3" property="service3" jdbcType="VARCHAR" />
+    <result column="service4" property="service4" jdbcType="VARCHAR" />
+    <result column="service5" property="service5" jdbcType="VARCHAR" />
+    <result column="polyv_status" property="polyvStatus" jdbcType="TINYINT" />
+    <result column="polyv_logo" property="polyvLogo" jdbcType="VARCHAR" />
+    <result column="is_watermark" property="isWatermark" jdbcType="TINYINT" />
+    <result column="pic_watermark" property="picWatermark" jdbcType="VARCHAR" />
+    <result column="picx" property="picx" jdbcType="INTEGER" />
+    <result column="picy" property="picy" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, gmt_create, gmt_modified, status_id, sort, website_title, website_keyword, website_desc, 
+    copyright, weixin, weibo, is_enable_statistics, statistics_code, is_show_service, 
+    service1, service2, service3, service4, service5, polyv_status, polyv_logo, is_watermark, 
+    pic_watermark, picx, picy
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from website
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from website
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from website
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteExample" >
+    delete from website
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Website" >
+    insert into website (id, gmt_create, gmt_modified, 
+      status_id, sort, website_title, 
+      website_keyword, website_desc, copyright, 
+      weixin, weibo, is_enable_statistics, 
+      statistics_code, is_show_service, service1, 
+      service2, service3, service4, 
+      service5, polyv_status, polyv_logo, 
+      is_watermark, pic_watermark, picx, 
+      picy)
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
+      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{websiteTitle,jdbcType=VARCHAR}, 
+      #{websiteKeyword,jdbcType=VARCHAR}, #{websiteDesc,jdbcType=VARCHAR}, #{copyright,jdbcType=VARCHAR}, 
+      #{weixin,jdbcType=VARCHAR}, #{weibo,jdbcType=VARCHAR}, #{isEnableStatistics,jdbcType=TINYINT}, 
+      #{statisticsCode,jdbcType=VARCHAR}, #{isShowService,jdbcType=TINYINT}, #{service1,jdbcType=VARCHAR}, 
+      #{service2,jdbcType=VARCHAR}, #{service3,jdbcType=VARCHAR}, #{service4,jdbcType=VARCHAR}, 
+      #{service5,jdbcType=VARCHAR}, #{polyvStatus,jdbcType=TINYINT}, #{polyvLogo,jdbcType=VARCHAR}, 
+      #{isWatermark,jdbcType=TINYINT}, #{picWatermark,jdbcType=VARCHAR}, #{picx,jdbcType=INTEGER}, 
+      #{picy,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Website" >
+    insert into website
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="statusId != null" >
+        status_id,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="websiteTitle != null" >
+        website_title,
+      </if>
+      <if test="websiteKeyword != null" >
+        website_keyword,
+      </if>
+      <if test="websiteDesc != null" >
+        website_desc,
+      </if>
+      <if test="copyright != null" >
+        copyright,
+      </if>
+      <if test="weixin != null" >
+        weixin,
+      </if>
+      <if test="weibo != null" >
+        weibo,
+      </if>
+      <if test="isEnableStatistics != null" >
+        is_enable_statistics,
+      </if>
+      <if test="statisticsCode != null" >
+        statistics_code,
+      </if>
+      <if test="isShowService != null" >
+        is_show_service,
+      </if>
+      <if test="service1 != null" >
+        service1,
+      </if>
+      <if test="service2 != null" >
+        service2,
+      </if>
+      <if test="service3 != null" >
+        service3,
+      </if>
+      <if test="service4 != null" >
+        service4,
+      </if>
+      <if test="service5 != null" >
+        service5,
+      </if>
+      <if test="polyvStatus != null" >
+        polyv_status,
+      </if>
+      <if test="polyvLogo != null" >
+        polyv_logo,
+      </if>
+      <if test="isWatermark != null" >
+        is_watermark,
+      </if>
+      <if test="picWatermark != null" >
+        pic_watermark,
+      </if>
+      <if test="picx != null" >
+        picx,
+      </if>
+      <if test="picy != null" >
+        picy,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusId != null" >
+        #{statusId,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="websiteTitle != null" >
+        #{websiteTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="websiteKeyword != null" >
+        #{websiteKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="websiteDesc != null" >
+        #{websiteDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="copyright != null" >
+        #{copyright,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null" >
+        #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="weibo != null" >
+        #{weibo,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnableStatistics != null" >
+        #{isEnableStatistics,jdbcType=TINYINT},
+      </if>
+      <if test="statisticsCode != null" >
+        #{statisticsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isShowService != null" >
+        #{isShowService,jdbcType=TINYINT},
+      </if>
+      <if test="service1 != null" >
+        #{service1,jdbcType=VARCHAR},
+      </if>
+      <if test="service2 != null" >
+        #{service2,jdbcType=VARCHAR},
+      </if>
+      <if test="service3 != null" >
+        #{service3,jdbcType=VARCHAR},
+      </if>
+      <if test="service4 != null" >
+        #{service4,jdbcType=VARCHAR},
+      </if>
+      <if test="service5 != null" >
+        #{service5,jdbcType=VARCHAR},
+      </if>
+      <if test="polyvStatus != null" >
+        #{polyvStatus,jdbcType=TINYINT},
+      </if>
+      <if test="polyvLogo != null" >
+        #{polyvLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="isWatermark != null" >
+        #{isWatermark,jdbcType=TINYINT},
+      </if>
+      <if test="picWatermark != null" >
+        #{picWatermark,jdbcType=VARCHAR},
+      </if>
+      <if test="picx != null" >
+        #{picx,jdbcType=INTEGER},
+      </if>
+      <if test="picy != null" >
+        #{picy,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteExample" resultType="java.lang.Integer" >
+    select count(*) from website
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update website
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.gmtCreate != null" >
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModified != null" >
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.statusId != null" >
+        status_id = #{record.statusId,jdbcType=TINYINT},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.websiteTitle != null" >
+        website_title = #{record.websiteTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.websiteKeyword != null" >
+        website_keyword = #{record.websiteKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.websiteDesc != null" >
+        website_desc = #{record.websiteDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.copyright != null" >
+        copyright = #{record.copyright,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weixin != null" >
+        weixin = #{record.weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weibo != null" >
+        weibo = #{record.weibo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isEnableStatistics != null" >
+        is_enable_statistics = #{record.isEnableStatistics,jdbcType=TINYINT},
+      </if>
+      <if test="record.statisticsCode != null" >
+        statistics_code = #{record.statisticsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isShowService != null" >
+        is_show_service = #{record.isShowService,jdbcType=TINYINT},
+      </if>
+      <if test="record.service1 != null" >
+        service1 = #{record.service1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.service2 != null" >
+        service2 = #{record.service2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.service3 != null" >
+        service3 = #{record.service3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.service4 != null" >
+        service4 = #{record.service4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.service5 != null" >
+        service5 = #{record.service5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.polyvStatus != null" >
+        polyv_status = #{record.polyvStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.polyvLogo != null" >
+        polyv_logo = #{record.polyvLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isWatermark != null" >
+        is_watermark = #{record.isWatermark,jdbcType=TINYINT},
+      </if>
+      <if test="record.picWatermark != null" >
+        pic_watermark = #{record.picWatermark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picx != null" >
+        picx = #{record.picx,jdbcType=INTEGER},
+      </if>
+      <if test="record.picy != null" >
+        picy = #{record.picy,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update website
+    set id = #{record.id,jdbcType=BIGINT},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      status_id = #{record.statusId,jdbcType=TINYINT},
+      sort = #{record.sort,jdbcType=INTEGER},
+      website_title = #{record.websiteTitle,jdbcType=VARCHAR},
+      website_keyword = #{record.websiteKeyword,jdbcType=VARCHAR},
+      website_desc = #{record.websiteDesc,jdbcType=VARCHAR},
+      copyright = #{record.copyright,jdbcType=VARCHAR},
+      weixin = #{record.weixin,jdbcType=VARCHAR},
+      weibo = #{record.weibo,jdbcType=VARCHAR},
+      is_enable_statistics = #{record.isEnableStatistics,jdbcType=TINYINT},
+      statistics_code = #{record.statisticsCode,jdbcType=VARCHAR},
+      is_show_service = #{record.isShowService,jdbcType=TINYINT},
+      service1 = #{record.service1,jdbcType=VARCHAR},
+      service2 = #{record.service2,jdbcType=VARCHAR},
+      service3 = #{record.service3,jdbcType=VARCHAR},
+      service4 = #{record.service4,jdbcType=VARCHAR},
+      service5 = #{record.service5,jdbcType=VARCHAR},
+      polyv_status = #{record.polyvStatus,jdbcType=TINYINT},
+      polyv_logo = #{record.polyvLogo,jdbcType=VARCHAR},
+      is_watermark = #{record.isWatermark,jdbcType=TINYINT},
+      pic_watermark = #{record.picWatermark,jdbcType=VARCHAR},
+      picx = #{record.picx,jdbcType=INTEGER},
+      picy = #{record.picy,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Website" >
+    update website
+    <set >
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusId != null" >
+        status_id = #{statusId,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="websiteTitle != null" >
+        website_title = #{websiteTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="websiteKeyword != null" >
+        website_keyword = #{websiteKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="websiteDesc != null" >
+        website_desc = #{websiteDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="copyright != null" >
+        copyright = #{copyright,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null" >
+        weixin = #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="weibo != null" >
+        weibo = #{weibo,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnableStatistics != null" >
+        is_enable_statistics = #{isEnableStatistics,jdbcType=TINYINT},
+      </if>
+      <if test="statisticsCode != null" >
+        statistics_code = #{statisticsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isShowService != null" >
+        is_show_service = #{isShowService,jdbcType=TINYINT},
+      </if>
+      <if test="service1 != null" >
+        service1 = #{service1,jdbcType=VARCHAR},
+      </if>
+      <if test="service2 != null" >
+        service2 = #{service2,jdbcType=VARCHAR},
+      </if>
+      <if test="service3 != null" >
+        service3 = #{service3,jdbcType=VARCHAR},
+      </if>
+      <if test="service4 != null" >
+        service4 = #{service4,jdbcType=VARCHAR},
+      </if>
+      <if test="service5 != null" >
+        service5 = #{service5,jdbcType=VARCHAR},
+      </if>
+      <if test="polyvStatus != null" >
+        polyv_status = #{polyvStatus,jdbcType=TINYINT},
+      </if>
+      <if test="polyvLogo != null" >
+        polyv_logo = #{polyvLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="isWatermark != null" >
+        is_watermark = #{isWatermark,jdbcType=TINYINT},
+      </if>
+      <if test="picWatermark != null" >
+        pic_watermark = #{picWatermark,jdbcType=VARCHAR},
+      </if>
+      <if test="picx != null" >
+        picx = #{picx,jdbcType=INTEGER},
+      </if>
+      <if test="picy != null" >
+        picy = #{picy,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Website" >
+    update website
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      status_id = #{statusId,jdbcType=TINYINT},
+      sort = #{sort,jdbcType=INTEGER},
+      website_title = #{websiteTitle,jdbcType=VARCHAR},
+      website_keyword = #{websiteKeyword,jdbcType=VARCHAR},
+      website_desc = #{websiteDesc,jdbcType=VARCHAR},
+      copyright = #{copyright,jdbcType=VARCHAR},
+      weixin = #{weixin,jdbcType=VARCHAR},
+      weibo = #{weibo,jdbcType=VARCHAR},
+      is_enable_statistics = #{isEnableStatistics,jdbcType=TINYINT},
+      statistics_code = #{statisticsCode,jdbcType=VARCHAR},
+      is_show_service = #{isShowService,jdbcType=TINYINT},
+      service1 = #{service1,jdbcType=VARCHAR},
+      service2 = #{service2,jdbcType=VARCHAR},
+      service3 = #{service3,jdbcType=VARCHAR},
+      service4 = #{service4,jdbcType=VARCHAR},
+      service5 = #{service5,jdbcType=VARCHAR},
+      polyv_status = #{polyvStatus,jdbcType=TINYINT},
+      polyv_logo = #{polyvLogo,jdbcType=VARCHAR},
+      is_watermark = #{isWatermark,jdbcType=TINYINT},
+      pic_watermark = #{picWatermark,jdbcType=VARCHAR},
+      picx = #{picx,jdbcType=INTEGER},
+      picy = #{picy,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

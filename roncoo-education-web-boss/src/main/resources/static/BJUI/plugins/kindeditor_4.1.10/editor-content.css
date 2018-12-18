@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+/*自定义--编辑框内的内容样式*/
+.ke-content table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.ke-content table th,
+.ke-content table td {
+    border: 1px solid #ddd !important;
+}

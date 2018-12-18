@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.roncoo.education.course.service.dao.impl.mapper.OrderInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="lecturer_user_no" property="lecturerUserNo" jdbcType="BIGINT" />
+    <result column="lecturer_name" property="lecturerName" jdbcType="VARCHAR" />
+    <result column="user_no" property="userNo" jdbcType="BIGINT" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
+    <result column="order_no" property="orderNo" jdbcType="BIGINT" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="course_name" property="courseName" jdbcType="VARCHAR" />
+    <result column="price_payable" property="pricePayable" jdbcType="DECIMAL" />
+    <result column="price_discount" property="priceDiscount" jdbcType="DECIMAL" />
+    <result column="price_paid" property="pricePaid" jdbcType="DECIMAL" />
+    <result column="platform_profit" property="platformProfit" jdbcType="DECIMAL" />
+    <result column="lecturer_profit" property="lecturerProfit" jdbcType="DECIMAL" />
+    <result column="trade_type" property="tradeType" jdbcType="TINYINT" />
+    <result column="pay_type" property="payType" jdbcType="TINYINT" />
+    <result column="channel_type" property="channelType" jdbcType="TINYINT" />
+    <result column="order_status" property="orderStatus" jdbcType="TINYINT" />
+    <result column="is_show_lecturer" property="isShowLecturer" jdbcType="TINYINT" />
+    <result column="is_show_user" property="isShowUser" jdbcType="TINYINT" />
+    <result column="remark_cus" property="remarkCus" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, gmt_create, gmt_modified, lecturer_user_no, lecturer_name, user_no, mobile, register_time, 
+    order_no, course_id, course_name, price_payable, price_discount, price_paid, platform_profit, 
+    lecturer_profit, trade_type, pay_type, channel_type, order_status, is_show_lecturer, 
+    is_show_user, remark_cus, remark, pay_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from order_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfoExample" >
+    delete from order_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo" >
+    insert into order_info (id, gmt_create, gmt_modified, 
+      lecturer_user_no, lecturer_name, user_no, 
+      mobile, register_time, order_no, 
+      course_id, course_name, price_payable, 
+      price_discount, price_paid, platform_profit, 
+      lecturer_profit, trade_type, pay_type, 
+      channel_type, order_status, is_show_lecturer, 
+      is_show_user, remark_cus, remark, 
+      pay_time)
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
+      #{lecturerUserNo,jdbcType=BIGINT}, #{lecturerName,jdbcType=VARCHAR}, #{userNo,jdbcType=BIGINT}, 
+      #{mobile,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP}, #{orderNo,jdbcType=BIGINT}, 
+      #{courseId,jdbcType=BIGINT}, #{courseName,jdbcType=VARCHAR}, #{pricePayable,jdbcType=DECIMAL}, 
+      #{priceDiscount,jdbcType=DECIMAL}, #{pricePaid,jdbcType=DECIMAL}, #{platformProfit,jdbcType=DECIMAL}, 
+      #{lecturerProfit,jdbcType=DECIMAL}, #{tradeType,jdbcType=TINYINT}, #{payType,jdbcType=TINYINT}, 
+      #{channelType,jdbcType=TINYINT}, #{orderStatus,jdbcType=TINYINT}, #{isShowLecturer,jdbcType=TINYINT}, 
+      #{isShowUser,jdbcType=TINYINT}, #{remarkCus,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{payTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo" >
+    insert into order_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="lecturerUserNo != null" >
+        lecturer_user_no,
+      </if>
+      <if test="lecturerName != null" >
+        lecturer_name,
+      </if>
+      <if test="userNo != null" >
+        user_no,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="registerTime != null" >
+        register_time,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="courseName != null" >
+        course_name,
+      </if>
+      <if test="pricePayable != null" >
+        price_payable,
+      </if>
+      <if test="priceDiscount != null" >
+        price_discount,
+      </if>
+      <if test="pricePaid != null" >
+        price_paid,
+      </if>
+      <if test="platformProfit != null" >
+        platform_profit,
+      </if>
+      <if test="lecturerProfit != null" >
+        lecturer_profit,
+      </if>
+      <if test="tradeType != null" >
+        trade_type,
+      </if>
+      <if test="payType != null" >
+        pay_type,
+      </if>
+      <if test="channelType != null" >
+        channel_type,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+      <if test="isShowLecturer != null" >
+        is_show_lecturer,
+      </if>
+      <if test="isShowUser != null" >
+        is_show_user,
+      </if>
+      <if test="remarkCus != null" >
+        remark_cus,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="payTime != null" >
+        pay_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lecturerUserNo != null" >
+        #{lecturerUserNo,jdbcType=BIGINT},
+      </if>
+      <if test="lecturerName != null" >
+        #{lecturerName,jdbcType=VARCHAR},
+      </if>
+      <if test="userNo != null" >
+        #{userNo,jdbcType=BIGINT},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null" >
+        #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="courseName != null" >
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="pricePayable != null" >
+        #{pricePayable,jdbcType=DECIMAL},
+      </if>
+      <if test="priceDiscount != null" >
+        #{priceDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="pricePaid != null" >
+        #{pricePaid,jdbcType=DECIMAL},
+      </if>
+      <if test="platformProfit != null" >
+        #{platformProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="lecturerProfit != null" >
+        #{lecturerProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeType != null" >
+        #{tradeType,jdbcType=TINYINT},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=TINYINT},
+      </if>
+      <if test="channelType != null" >
+        #{channelType,jdbcType=TINYINT},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="isShowLecturer != null" >
+        #{isShowLecturer,jdbcType=TINYINT},
+      </if>
+      <if test="isShowUser != null" >
+        #{isShowUser,jdbcType=TINYINT},
+      </if>
+      <if test="remarkCus != null" >
+        #{remarkCus,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfoExample" resultType="java.lang.Integer" >
+    select count(*) from order_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update order_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.gmtCreate != null" >
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModified != null" >
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lecturerUserNo != null" >
+        lecturer_user_no = #{record.lecturerUserNo,jdbcType=BIGINT},
+      </if>
+      <if test="record.lecturerName != null" >
+        lecturer_name = #{record.lecturerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userNo != null" >
+        user_no = #{record.userNo,jdbcType=BIGINT},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registerTime != null" >
+        register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderNo != null" >
+        order_no = #{record.orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="record.courseId != null" >
+        course_id = #{record.courseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.courseName != null" >
+        course_name = #{record.courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pricePayable != null" >
+        price_payable = #{record.pricePayable,jdbcType=DECIMAL},
+      </if>
+      <if test="record.priceDiscount != null" >
+        price_discount = #{record.priceDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pricePaid != null" >
+        price_paid = #{record.pricePaid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.platformProfit != null" >
+        platform_profit = #{record.platformProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lecturerProfit != null" >
+        lecturer_profit = #{record.lecturerProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tradeType != null" >
+        trade_type = #{record.tradeType,jdbcType=TINYINT},
+      </if>
+      <if test="record.payType != null" >
+        pay_type = #{record.payType,jdbcType=TINYINT},
+      </if>
+      <if test="record.channelType != null" >
+        channel_type = #{record.channelType,jdbcType=TINYINT},
+      </if>
+      <if test="record.orderStatus != null" >
+        order_status = #{record.orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.isShowLecturer != null" >
+        is_show_lecturer = #{record.isShowLecturer,jdbcType=TINYINT},
+      </if>
+      <if test="record.isShowUser != null" >
+        is_show_user = #{record.isShowUser,jdbcType=TINYINT},
+      </if>
+      <if test="record.remarkCus != null" >
+        remark_cus = #{record.remarkCus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payTime != null" >
+        pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update order_info
+    set id = #{record.id,jdbcType=BIGINT},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      lecturer_user_no = #{record.lecturerUserNo,jdbcType=BIGINT},
+      lecturer_name = #{record.lecturerName,jdbcType=VARCHAR},
+      user_no = #{record.userNo,jdbcType=BIGINT},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+      order_no = #{record.orderNo,jdbcType=BIGINT},
+      course_id = #{record.courseId,jdbcType=BIGINT},
+      course_name = #{record.courseName,jdbcType=VARCHAR},
+      price_payable = #{record.pricePayable,jdbcType=DECIMAL},
+      price_discount = #{record.priceDiscount,jdbcType=DECIMAL},
+      price_paid = #{record.pricePaid,jdbcType=DECIMAL},
+      platform_profit = #{record.platformProfit,jdbcType=DECIMAL},
+      lecturer_profit = #{record.lecturerProfit,jdbcType=DECIMAL},
+      trade_type = #{record.tradeType,jdbcType=TINYINT},
+      pay_type = #{record.payType,jdbcType=TINYINT},
+      channel_type = #{record.channelType,jdbcType=TINYINT},
+      order_status = #{record.orderStatus,jdbcType=TINYINT},
+      is_show_lecturer = #{record.isShowLecturer,jdbcType=TINYINT},
+      is_show_user = #{record.isShowUser,jdbcType=TINYINT},
+      remark_cus = #{record.remarkCus,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      pay_time = #{record.payTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo" >
+    update order_info
+    <set >
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lecturerUserNo != null" >
+        lecturer_user_no = #{lecturerUserNo,jdbcType=BIGINT},
+      </if>
+      <if test="lecturerName != null" >
+        lecturer_name = #{lecturerName,jdbcType=VARCHAR},
+      </if>
+      <if test="userNo != null" >
+        user_no = #{userNo,jdbcType=BIGINT},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null" >
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="courseName != null" >
+        course_name = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="pricePayable != null" >
+        price_payable = #{pricePayable,jdbcType=DECIMAL},
+      </if>
+      <if test="priceDiscount != null" >
+        price_discount = #{priceDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="pricePaid != null" >
+        price_paid = #{pricePaid,jdbcType=DECIMAL},
+      </if>
+      <if test="platformProfit != null" >
+        platform_profit = #{platformProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="lecturerProfit != null" >
+        lecturer_profit = #{lecturerProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeType != null" >
+        trade_type = #{tradeType,jdbcType=TINYINT},
+      </if>
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=TINYINT},
+      </if>
+      <if test="channelType != null" >
+        channel_type = #{channelType,jdbcType=TINYINT},
+      </if>
+      <if test="orderStatus != null" >
+        order_status = #{orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="isShowLecturer != null" >
+        is_show_lecturer = #{isShowLecturer,jdbcType=TINYINT},
+      </if>
+      <if test="isShowUser != null" >
+        is_show_user = #{isShowUser,jdbcType=TINYINT},
+      </if>
+      <if test="remarkCus != null" >
+        remark_cus = #{remarkCus,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null" >
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo" >
+    update order_info
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      lecturer_user_no = #{lecturerUserNo,jdbcType=BIGINT},
+      lecturer_name = #{lecturerName,jdbcType=VARCHAR},
+      user_no = #{userNo,jdbcType=BIGINT},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      register_time = #{registerTime,jdbcType=TIMESTAMP},
+      order_no = #{orderNo,jdbcType=BIGINT},
+      course_id = #{courseId,jdbcType=BIGINT},
+      course_name = #{courseName,jdbcType=VARCHAR},
+      price_payable = #{pricePayable,jdbcType=DECIMAL},
+      price_discount = #{priceDiscount,jdbcType=DECIMAL},
+      price_paid = #{pricePaid,jdbcType=DECIMAL},
+      platform_profit = #{platformProfit,jdbcType=DECIMAL},
+      lecturer_profit = #{lecturerProfit,jdbcType=DECIMAL},
+      trade_type = #{tradeType,jdbcType=TINYINT},
+      pay_type = #{payType,jdbcType=TINYINT},
+      channel_type = #{channelType,jdbcType=TINYINT},
+      order_status = #{orderStatus,jdbcType=TINYINT},
+      is_show_lecturer = #{isShowLecturer,jdbcType=TINYINT},
+      is_show_user = #{isShowUser,jdbcType=TINYINT},
+      remark_cus = #{remarkCus,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      pay_time = #{payTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

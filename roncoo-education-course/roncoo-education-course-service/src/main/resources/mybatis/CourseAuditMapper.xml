@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.roncoo.education.course.service.dao.impl.mapper.CourseAuditMapper" >
+  <resultMap id="BaseResultMap" type="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAudit" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="status_id" property="statusId" jdbcType="TINYINT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="audit_status" property="auditStatus" jdbcType="INTEGER" />
+    <result column="audit_opinion" property="auditOpinion" jdbcType="VARCHAR" />
+    <result column="lecturer_user_no" property="lecturerUserNo" jdbcType="BIGINT" />
+    <result column="category_id1" property="categoryId1" jdbcType="BIGINT" />
+    <result column="category_id2" property="categoryId2" jdbcType="BIGINT" />
+    <result column="category_id3" property="categoryId3" jdbcType="BIGINT" />
+    <result column="course_name" property="courseName" jdbcType="VARCHAR" />
+    <result column="course_logo" property="courseLogo" jdbcType="VARCHAR" />
+    <result column="introduce_id" property="introduceId" jdbcType="BIGINT" />
+    <result column="is_free" property="isFree" jdbcType="TINYINT" />
+    <result column="course_original" property="courseOriginal" jdbcType="DECIMAL" />
+    <result column="course_discount" property="courseDiscount" jdbcType="DECIMAL" />
+    <result column="is_putaway" property="isPutaway" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, gmt_create, gmt_modified, status_id, sort, audit_status, audit_opinion, lecturer_user_no, 
+    category_id1, category_id2, category_id3, course_name, course_logo, introduce_id, 
+    is_free, course_original, course_discount, is_putaway
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAuditExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course_audit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from course_audit
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from course_audit
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAuditExample" >
+    delete from course_audit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAudit" >
+    insert into course_audit (id, gmt_create, gmt_modified, 
+      status_id, sort, audit_status, 
+      audit_opinion, lecturer_user_no, category_id1, 
+      category_id2, category_id3, course_name, 
+      course_logo, introduce_id, is_free, 
+      course_original, course_discount, is_putaway
+      )
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
+      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{auditStatus,jdbcType=INTEGER}, 
+      #{auditOpinion,jdbcType=VARCHAR}, #{lecturerUserNo,jdbcType=BIGINT}, #{categoryId1,jdbcType=BIGINT}, 
+      #{categoryId2,jdbcType=BIGINT}, #{categoryId3,jdbcType=BIGINT}, #{courseName,jdbcType=VARCHAR}, 
+      #{courseLogo,jdbcType=VARCHAR}, #{introduceId,jdbcType=BIGINT}, #{isFree,jdbcType=TINYINT}, 
+      #{courseOriginal,jdbcType=DECIMAL}, #{courseDiscount,jdbcType=DECIMAL}, #{isPutaway,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAudit" >
+    insert into course_audit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="statusId != null" >
+        status_id,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="auditStatus != null" >
+        audit_status,
+      </if>
+      <if test="auditOpinion != null" >
+        audit_opinion,
+      </if>
+      <if test="lecturerUserNo != null" >
+        lecturer_user_no,
+      </if>
+      <if test="categoryId1 != null" >
+        category_id1,
+      </if>
+      <if test="categoryId2 != null" >
+        category_id2,
+      </if>
+      <if test="categoryId3 != null" >
+        category_id3,
+      </if>
+      <if test="courseName != null" >
+        course_name,
+      </if>
+      <if test="courseLogo != null" >
+        course_logo,
+      </if>
+      <if test="introduceId != null" >
+        introduce_id,
+      </if>
+      <if test="isFree != null" >
+        is_free,
+      </if>
+      <if test="courseOriginal != null" >
+        course_original,
+      </if>
+      <if test="courseDiscount != null" >
+        course_discount,
+      </if>
+      <if test="isPutaway != null" >
+        is_putaway,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusId != null" >
+        #{statusId,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="auditStatus != null" >
+        #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="auditOpinion != null" >
+        #{auditOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="lecturerUserNo != null" >
+        #{lecturerUserNo,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId1 != null" >
+        #{categoryId1,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId2 != null" >
+        #{categoryId2,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId3 != null" >
+        #{categoryId3,jdbcType=BIGINT},
+      </if>
+      <if test="courseName != null" >
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseLogo != null" >
+        #{courseLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="introduceId != null" >
+        #{introduceId,jdbcType=BIGINT},
+      </if>
+      <if test="isFree != null" >
+        #{isFree,jdbcType=TINYINT},
+      </if>
+      <if test="courseOriginal != null" >
+        #{courseOriginal,jdbcType=DECIMAL},
+      </if>
+      <if test="courseDiscount != null" >
+        #{courseDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="isPutaway != null" >
+        #{isPutaway,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAuditExample" resultType="java.lang.Integer" >
+    select count(*) from course_audit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update course_audit
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.gmtCreate != null" >
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModified != null" >
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.statusId != null" >
+        status_id = #{record.statusId,jdbcType=TINYINT},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditStatus != null" >
+        audit_status = #{record.auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditOpinion != null" >
+        audit_opinion = #{record.auditOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lecturerUserNo != null" >
+        lecturer_user_no = #{record.lecturerUserNo,jdbcType=BIGINT},
+      </if>
+      <if test="record.categoryId1 != null" >
+        category_id1 = #{record.categoryId1,jdbcType=BIGINT},
+      </if>
+      <if test="record.categoryId2 != null" >
+        category_id2 = #{record.categoryId2,jdbcType=BIGINT},
+      </if>
+      <if test="record.categoryId3 != null" >
+        category_id3 = #{record.categoryId3,jdbcType=BIGINT},
+      </if>
+      <if test="record.courseName != null" >
+        course_name = #{record.courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseLogo != null" >
+        course_logo = #{record.courseLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.introduceId != null" >
+        introduce_id = #{record.introduceId,jdbcType=BIGINT},
+      </if>
+      <if test="record.isFree != null" >
+        is_free = #{record.isFree,jdbcType=TINYINT},
+      </if>
+      <if test="record.courseOriginal != null" >
+        course_original = #{record.courseOriginal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.courseDiscount != null" >
+        course_discount = #{record.courseDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isPutaway != null" >
+        is_putaway = #{record.isPutaway,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update course_audit
+    set id = #{record.id,jdbcType=BIGINT},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      status_id = #{record.statusId,jdbcType=TINYINT},
+      sort = #{record.sort,jdbcType=INTEGER},
+      audit_status = #{record.auditStatus,jdbcType=INTEGER},
+      audit_opinion = #{record.auditOpinion,jdbcType=VARCHAR},
+      lecturer_user_no = #{record.lecturerUserNo,jdbcType=BIGINT},
+      category_id1 = #{record.categoryId1,jdbcType=BIGINT},
+      category_id2 = #{record.categoryId2,jdbcType=BIGINT},
+      category_id3 = #{record.categoryId3,jdbcType=BIGINT},
+      course_name = #{record.courseName,jdbcType=VARCHAR},
+      course_logo = #{record.courseLogo,jdbcType=VARCHAR},
+      introduce_id = #{record.introduceId,jdbcType=BIGINT},
+      is_free = #{record.isFree,jdbcType=TINYINT},
+      course_original = #{record.courseOriginal,jdbcType=DECIMAL},
+      course_discount = #{record.courseDiscount,jdbcType=DECIMAL},
+      is_putaway = #{record.isPutaway,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAudit" >
+    update course_audit
+    <set >
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusId != null" >
+        status_id = #{statusId,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="auditStatus != null" >
+        audit_status = #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="auditOpinion != null" >
+        audit_opinion = #{auditOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="lecturerUserNo != null" >
+        lecturer_user_no = #{lecturerUserNo,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId1 != null" >
+        category_id1 = #{categoryId1,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId2 != null" >
+        category_id2 = #{categoryId2,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId3 != null" >
+        category_id3 = #{categoryId3,jdbcType=BIGINT},
+      </if>
+      <if test="courseName != null" >
+        course_name = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseLogo != null" >
+        course_logo = #{courseLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="introduceId != null" >
+        introduce_id = #{introduceId,jdbcType=BIGINT},
+      </if>
+      <if test="isFree != null" >
+        is_free = #{isFree,jdbcType=TINYINT},
+      </if>
+      <if test="courseOriginal != null" >
+        course_original = #{courseOriginal,jdbcType=DECIMAL},
+      </if>
+      <if test="courseDiscount != null" >
+        course_discount = #{courseDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="isPutaway != null" >
+        is_putaway = #{isPutaway,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAudit" >
+    update course_audit
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      status_id = #{statusId,jdbcType=TINYINT},
+      sort = #{sort,jdbcType=INTEGER},
+      audit_status = #{auditStatus,jdbcType=INTEGER},
+      audit_opinion = #{auditOpinion,jdbcType=VARCHAR},
+      lecturer_user_no = #{lecturerUserNo,jdbcType=BIGINT},
+      category_id1 = #{categoryId1,jdbcType=BIGINT},
+      category_id2 = #{categoryId2,jdbcType=BIGINT},
+      category_id3 = #{categoryId3,jdbcType=BIGINT},
+      course_name = #{courseName,jdbcType=VARCHAR},
+      course_logo = #{courseLogo,jdbcType=VARCHAR},
+      introduce_id = #{introduceId,jdbcType=BIGINT},
+      is_free = #{isFree,jdbcType=TINYINT},
+      course_original = #{courseOriginal,jdbcType=DECIMAL},
+      course_discount = #{courseDiscount,jdbcType=DECIMAL},
+      is_putaway = #{isPutaway,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

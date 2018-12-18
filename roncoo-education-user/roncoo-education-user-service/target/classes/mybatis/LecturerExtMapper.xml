@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.roncoo.education.user.service.dao.impl.mapper.LecturerExtMapper" >
+  <resultMap id="BaseResultMap" type="com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerExt" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="status_id" property="statusId" jdbcType="TINYINT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="lecturer_user_no" property="lecturerUserNo" jdbcType="BIGINT" />
+    <result column="total_income" property="totalIncome" jdbcType="DECIMAL" />
+    <result column="history_money" property="historyMoney" jdbcType="DECIMAL" />
+    <result column="enable_balances" property="enableBalances" jdbcType="DECIMAL" />
+    <result column="freeze_balances" property="freezeBalances" jdbcType="DECIMAL" />
+    <result column="sign" property="sign" jdbcType="CHAR" />
+    <result column="bank_card_no" property="bankCardNo" jdbcType="VARCHAR" />
+    <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+    <result column="bank_branch_name" property="bankBranchName" jdbcType="VARCHAR" />
+    <result column="bank_user_name" property="bankUserName" jdbcType="VARCHAR" />
+    <result column="bank_id_card_no" property="bankIdCardNo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, gmt_create, gmt_modified, status_id, sort, lecturer_user_no, total_income, history_money, 
+    enable_balances, freeze_balances, sign, bank_card_no, bank_name, bank_branch_name, 
+    bank_user_name, bank_id_card_no
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerExtExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from lecturer_ext
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lecturer_ext
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lecturer_ext
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerExtExample" >
+    delete from lecturer_ext
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerExt" >
+    insert into lecturer_ext (id, gmt_create, gmt_modified, 
+      status_id, sort, lecturer_user_no, 
+      total_income, history_money, enable_balances, 
+      freeze_balances, sign, bank_card_no, 
+      bank_name, bank_branch_name, bank_user_name, 
+      bank_id_card_no)
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
+      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{lecturerUserNo,jdbcType=BIGINT}, 
+      #{totalIncome,jdbcType=DECIMAL}, #{historyMoney,jdbcType=DECIMAL}, #{enableBalances,jdbcType=DECIMAL}, 
+      #{freezeBalances,jdbcType=DECIMAL}, #{sign,jdbcType=CHAR}, #{bankCardNo,jdbcType=VARCHAR}, 
+      #{bankName,jdbcType=VARCHAR}, #{bankBranchName,jdbcType=VARCHAR}, #{bankUserName,jdbcType=VARCHAR}, 
+      #{bankIdCardNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerExt" >
+    insert into lecturer_ext
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="statusId != null" >
+        status_id,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="lecturerUserNo != null" >
+        lecturer_user_no,
+      </if>
+      <if test="totalIncome != null" >
+        total_income,
+      </if>
+      <if test="historyMoney != null" >
+        history_money,
+      </if>
+      <if test="enableBalances != null" >
+        enable_balances,
+      </if>
+      <if test="freezeBalances != null" >
+        freeze_balances,
+      </if>
+      <if test="sign != null" >
+        sign,
+      </if>
+      <if test="bankCardNo != null" >
+        bank_card_no,
+      </if>
+      <if test="bankName != null" >
+        bank_name,
+      </if>
+      <if test="bankBranchName != null" >
+        bank_branch_name,
+      </if>
+      <if test="bankUserName != null" >
+        bank_user_name,
+      </if>
+      <if test="bankIdCardNo != null" >
+        bank_id_card_no,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusId != null" >
+        #{statusId,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="lecturerUserNo != null" >
+        #{lecturerUserNo,jdbcType=BIGINT},
+      </if>
+      <if test="totalIncome != null" >
+        #{totalIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="historyMoney != null" >
+        #{historyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="enableBalances != null" >
+        #{enableBalances,jdbcType=DECIMAL},
+      </if>
+      <if test="freezeBalances != null" >
+        #{freezeBalances,jdbcType=DECIMAL},
+      </if>
+      <if test="sign != null" >
+        #{sign,jdbcType=CHAR},
+      </if>
+      <if test="bankCardNo != null" >
+        #{bankCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankBranchName != null" >
+        #{bankBranchName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankUserName != null" >
+        #{bankUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankIdCardNo != null" >
+        #{bankIdCardNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerExtExample" resultType="java.lang.Integer" >
+    select count(*) from lecturer_ext
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update lecturer_ext
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.gmtCreate != null" >
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModified != null" >
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.statusId != null" >
+        status_id = #{record.statusId,jdbcType=TINYINT},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.lecturerUserNo != null" >
+        lecturer_user_no = #{record.lecturerUserNo,jdbcType=BIGINT},
+      </if>
+      <if test="record.totalIncome != null" >
+        total_income = #{record.totalIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="record.historyMoney != null" >
+        history_money = #{record.historyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.enableBalances != null" >
+        enable_balances = #{record.enableBalances,jdbcType=DECIMAL},
+      </if>
+      <if test="record.freezeBalances != null" >
+        freeze_balances = #{record.freezeBalances,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sign != null" >
+        sign = #{record.sign,jdbcType=CHAR},
+      </if>
+      <if test="record.bankCardNo != null" >
+        bank_card_no = #{record.bankCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankName != null" >
+        bank_name = #{record.bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankBranchName != null" >
+        bank_branch_name = #{record.bankBranchName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankUserName != null" >
+        bank_user_name = #{record.bankUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankIdCardNo != null" >
+        bank_id_card_no = #{record.bankIdCardNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update lecturer_ext
+    set id = #{record.id,jdbcType=BIGINT},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      status_id = #{record.statusId,jdbcType=TINYINT},
+      sort = #{record.sort,jdbcType=INTEGER},
+      lecturer_user_no = #{record.lecturerUserNo,jdbcType=BIGINT},
+      total_income = #{record.totalIncome,jdbcType=DECIMAL},
+      history_money = #{record.historyMoney,jdbcType=DECIMAL},
+      enable_balances = #{record.enableBalances,jdbcType=DECIMAL},
+      freeze_balances = #{record.freezeBalances,jdbcType=DECIMAL},
+      sign = #{record.sign,jdbcType=CHAR},
+      bank_card_no = #{record.bankCardNo,jdbcType=VARCHAR},
+      bank_name = #{record.bankName,jdbcType=VARCHAR},
+      bank_branch_name = #{record.bankBranchName,jdbcType=VARCHAR},
+      bank_user_name = #{record.bankUserName,jdbcType=VARCHAR},
+      bank_id_card_no = #{record.bankIdCardNo,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerExt" >
+    update lecturer_ext
+    <set >
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusId != null" >
+        status_id = #{statusId,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="lecturerUserNo != null" >
+        lecturer_user_no = #{lecturerUserNo,jdbcType=BIGINT},
+      </if>
+      <if test="totalIncome != null" >
+        total_income = #{totalIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="historyMoney != null" >
+        history_money = #{historyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="enableBalances != null" >
+        enable_balances = #{enableBalances,jdbcType=DECIMAL},
+      </if>
+      <if test="freezeBalances != null" >
+        freeze_balances = #{freezeBalances,jdbcType=DECIMAL},
+      </if>
+      <if test="sign != null" >
+        sign = #{sign,jdbcType=CHAR},
+      </if>
+      <if test="bankCardNo != null" >
+        bank_card_no = #{bankCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        bank_name = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankBranchName != null" >
+        bank_branch_name = #{bankBranchName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankUserName != null" >
+        bank_user_name = #{bankUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankIdCardNo != null" >
+        bank_id_card_no = #{bankIdCardNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerExt" >
+    update lecturer_ext
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      status_id = #{statusId,jdbcType=TINYINT},
+      sort = #{sort,jdbcType=INTEGER},
+      lecturer_user_no = #{lecturerUserNo,jdbcType=BIGINT},
+      total_income = #{totalIncome,jdbcType=DECIMAL},
+      history_money = #{historyMoney,jdbcType=DECIMAL},
+      enable_balances = #{enableBalances,jdbcType=DECIMAL},
+      freeze_balances = #{freezeBalances,jdbcType=DECIMAL},
+      sign = #{sign,jdbcType=CHAR},
+      bank_card_no = #{bankCardNo,jdbcType=VARCHAR},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      bank_branch_name = #{bankBranchName,jdbcType=VARCHAR},
+      bank_user_name = #{bankUserName,jdbcType=VARCHAR},
+      bank_id_card_no = #{bankIdCardNo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
