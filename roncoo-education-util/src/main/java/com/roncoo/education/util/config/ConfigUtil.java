@@ -30,9 +30,6 @@ public final class ConfigUtil {
 		return properties.getProperty(keyName, "").trim();
 	}
 
-	public static final String AUTH_DOMAIN = getProperty("auth_domain");
-	public static final String BOSS_DOMAIN = getProperty("boss_domain");
-
 	public static final String ALIYUN_ACCESSKEYID = getProperty("aliyun_accessKeyId");
 	public static final String ALIYUN_ACCESSKEYSECRET = getProperty("aliyun_accessKeySecret");
 
@@ -50,9 +47,9 @@ public final class ConfigUtil {
 	public static final String RONCOO_PAY_NOTIFY = getProperty("roncoo_pay_notify");
 	public static final String WEIXIN_PAY_NOTIFY = getProperty("weixin_pay_notify");
 	public static final String ALI_PAY_NOTIFY = getProperty("ali_pay_notify");
-    public static final String PAY_URL = getProperty("pay_url");
-    public static final String PAY_KEY = getProperty("pay_key");
-    public static final String PAY_SECRET = getProperty("pay_secret");
+	public static final String PAY_URL = getProperty("pay_url");
+	public static final String PAY_KEY = getProperty("pay_key");
+	public static final String PAY_SECRET = getProperty("pay_secret");
 
 	public static final String POLYV_GETCATAURL = getProperty("polyv_getCataUrl");
 	public static final String POLYV_UPLOADVIDEO = getProperty("polyv_uploadVideo");
@@ -67,7 +64,5 @@ public final class ConfigUtil {
 	public static final String POLYV_CODESECRETKEY = getProperty("polyv_codeSecretKey");
 	public static final String POLYV_GETTOKEN = getProperty("polyv_getToken");
 
-
-	
 	public static final String LECTURER_DEFAULT_PROPORTION = getProperty("lecturer_default_proportion");
 }
