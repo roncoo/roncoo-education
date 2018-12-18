@@ -7,5 +7,5 @@
 *.project
 *.springBeans
 *.factorypath
-*/src/main/resources/config/prod/
-*/src/main/resources/application-prod.properties
+*/src/main/resources/config/*
+*/src/main/resources/config.properties
