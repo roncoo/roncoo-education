@@ -13,9 +13,29 @@
 	<url>http://www.roncoo.com</url>
 
 	<organization>
-		<name>领课网络</name>
-		<url>http://www.roncoo.net</url>
+		<name>LingKe, Co., Ltd.</name>
+		<url>http://www.roncoo.com</url>
 	</organization>
+
+	<licenses>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>fengyongwei</name>
+			<email>fengyw@roncoo.com</email>
+			<organization>LingKe, Co., Ltd.</organization>
+			<organizationUrl>http://www.roncoo.com</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
+	</developers>
 
 	<!-- io.spring.platform -->
 	<parent>
@@ -47,7 +67,7 @@
 				<artifactId>roncoo-education-course-feign</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.roncoo</groupId>
 				<artifactId>roncoo-education-system-common</artifactId>
@@ -58,7 +78,7 @@
 				<artifactId>roncoo-education-system-feign</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.roncoo</groupId>
 				<artifactId>roncoo-education-user-common</artifactId>
@@ -69,13 +89,13 @@
 				<artifactId>roncoo-education-user-feign</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.roncoo</groupId>
 				<artifactId>roncoo-education-util</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			
+
 			<!-- fastjson -->
 			<dependency>
 				<groupId>com.alibaba</groupId>
@@ -207,6 +227,7 @@
 		</pluginManagement>
 	</build>
 
+	<!-- 环境变量 -->
 	<profiles>
 		<profile>
 			<id>test</id>
@@ -223,16 +244,24 @@
 	</profiles>
 
 	<modules>
+		<!-- 注册中心 -->
 		<module>roncoo-education-server-eureka</module>
+		<!-- 配置中心 -->
 		<module>roncoo-education-server-config</module>
+		<!-- 公用工具 -->
 		<module>roncoo-education-util</module>
+		<!-- 系统管理 -->
 		<module>roncoo-education-system</module>
+		<!-- 用户管理 -->
 		<module>roncoo-education-user</module>
+		<!-- 课程管理 -->
 		<module>roncoo-education-course</module>
+		<!-- 定时任务 -->
 		<module>roncoo-education-crontab-plan</module>
+		<!-- 网关接口 -->
 		<module>roncoo-education-gateway-api</module>
+		<!-- 管理后台 -->
 		<module>roncoo-education-web-boss</module>
-		<module>roncoo-education-web-auth</module>
 	</modules>
 
 </project>
