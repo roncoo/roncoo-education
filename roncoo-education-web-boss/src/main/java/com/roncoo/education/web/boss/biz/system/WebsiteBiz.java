@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.roncoo.education.util.enums.PlatformEnum;
 import com.roncoo.education.system.common.bean.qo.WebsiteQO;
 import com.roncoo.education.system.common.bean.vo.WebsiteVO;
 import com.roncoo.education.system.feign.web.IBossWebsite;
 import com.roncoo.education.util.aliyun.AliyunOssUtil;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
+import com.roncoo.education.util.enums.PlatformEnum;
 
 /**
  * 站点信息
@@ -62,7 +62,7 @@ public class WebsiteBiz extends BaseBiz {
 	 * @return
 	 * @author wuyun
 	 */
-	public int updateWebsite(WebsiteQO qo, MultipartFile polyvLogoFile, MultipartFile picWatermarkFile, MultipartFile weixinFile, MultipartFile weiboFile) {
+	public int updateWebsite(WebsiteQO qo, MultipartFile polyvLogoFile, MultipartFile picWatermarkFile, MultipartFile weixinFile, MultipartFile weiboFile,MultipartFile logoImgFile,MultipartFile logoIcoFile) {
 		if (StringUtils.isNotBlank(qo.getPicxy())) {
 			String[] picxy = qo.getPicxy().split(",");
 			List<String> list = Arrays.asList(picxy);
@@ -84,6 +84,12 @@ public class WebsiteBiz extends BaseBiz {
 		}
 		if (null != weiboFile && !weiboFile.isEmpty()) {
 			qo.setWeibo(AliyunOssUtil.uploadPic(PlatformEnum.SYSTEM, weiboFile));
+		}
+		if (null != logoImgFile && !logoImgFile.isEmpty()) {
+			qo.setLogoImg(AliyunOssUtil.uploadPic(PlatformEnum.SYSTEM, logoImgFile));
+		}
+		if (null != logoIcoFile && !logoIcoFile.isEmpty()) {
+			qo.setLogoIco(AliyunOssUtil.uploadPic(PlatformEnum.SYSTEM, logoIcoFile));
 		}
 		return bossWebsite.updateById(qo);
 	}

@@ -99,6 +99,17 @@
                 <input name="picWatermarkFile" type="file" />
                 <img src="${bean.picWatermark!}" width="150">
             </div>
+            
+            <div class="form-group">
+                <label class="control-label x120">logoImg：</label>
+                <input name="logoImgFile" type="file" />
+                <img src="${bean.logoImg!}" width="80">
+            </div>
+            <div class="form-group">
+                <label class="control-label x120">logoIco：</label>
+                <input name="logoIcoFile" type="file" />
+                <img src="${bean.logoIco!}" width="80">
+            </div>
         </fieldset>
         
 	</form>

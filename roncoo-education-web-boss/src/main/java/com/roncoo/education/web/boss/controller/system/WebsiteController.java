@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.roncoo.education.web.boss.biz.system.WebsiteBiz;
 import com.roncoo.education.system.common.bean.qo.WebsiteQO;
 import com.roncoo.education.util.annotation.AdminLog;
 import com.roncoo.education.util.base.BaseController;
+import com.roncoo.education.web.boss.biz.system.WebsiteBiz;
 
 /**
  * 站点信息
@@ -91,10 +91,12 @@ public class WebsiteController extends BaseController {
 	@ResponseBody
 	@AdminLog(value = "站点信息更新")
 	@RequestMapping(value = "/updateWebsite", method = RequestMethod.POST)
-	public String updateWebsite(@ModelAttribute WebsiteQO qo, @RequestParam(value = "polyvLogoFile", required = false) MultipartFile polyvLogoFile, @RequestParam(value = "picWatermarkFile", required = false) MultipartFile picWatermarkFile,
-			@RequestParam(value = "weixinFile", required = false) MultipartFile weixinFile, @RequestParam(value = "weiboFile", required = false) MultipartFile weiboFile) {
+	public String updateWebsite(@ModelAttribute WebsiteQO qo, @RequestParam(value = "polyvLogoFile", required = false) MultipartFile polyvLogoFile,
+			@RequestParam(value = "picWatermarkFile", required = false) MultipartFile picWatermarkFile, @RequestParam(value = "weixinFile", required = false) MultipartFile weixinFile,
+			@RequestParam(value = "weiboFile", required = false) MultipartFile weiboFile, @RequestParam(value = "logoImgFile", required = false) MultipartFile logoImgFile,
+			@RequestParam(value = "logoIcoFile", required = false) MultipartFile logoIcoFile) {
 		// 保存站点信息
-		if (biz.updateWebsite(qo, polyvLogoFile, picWatermarkFile, weixinFile, weiboFile) > 0) {
+		if (biz.updateWebsite(qo, polyvLogoFile, picWatermarkFile, weixinFile, weiboFile, logoIcoFile, logoImgFile) > 0) {
 			return success(TARGETID);
 		}
 		return error("修改失败");

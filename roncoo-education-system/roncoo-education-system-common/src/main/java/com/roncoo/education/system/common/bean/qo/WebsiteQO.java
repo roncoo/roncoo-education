@@ -127,4 +127,12 @@ public class WebsiteQO implements Serializable {
     private Integer picy;
 
     private String picxy;
+    /**
+     * logoImg
+     */
+    private String logoImg;
+    /**
+     * logoIco
+     */
+    private String logoIco;
 }
