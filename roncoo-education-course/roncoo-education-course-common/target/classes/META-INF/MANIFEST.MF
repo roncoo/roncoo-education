@@ -7,5 +7,5 @@ Build-Jdk: 1.8.0_144
 Implementation-URL: http://www.roncoo.com/roncoo-education-course/ronc
  oo-education-course-common
 Created-By: Maven Integration for Eclipse
-Implementation-Vendor: 领课网络
+Implementation-Vendor: LingKe, Co., Ltd.
 
