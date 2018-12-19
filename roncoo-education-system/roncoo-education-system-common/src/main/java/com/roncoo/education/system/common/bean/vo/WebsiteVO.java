@@ -117,4 +117,12 @@ public class WebsiteVO implements Serializable {
      * y位置
      */
     private Integer picy;
+    /**
+     * logoImg
+     */
+    private String logoImg;
+    /**
+     * logoIco
+     */
+    private String logoIco;
 }
