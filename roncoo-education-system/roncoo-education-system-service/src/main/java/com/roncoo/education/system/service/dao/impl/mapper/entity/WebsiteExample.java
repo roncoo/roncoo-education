@@ -1764,6 +1764,146 @@ public class WebsiteExample {
             addCriterion("picy not between", value1, value2, "picy");
             return (Criteria) this;
         }
+
+        public Criteria andLogoImgIsNull() {
+            addCriterion("logo_img is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgIsNotNull() {
+            addCriterion("logo_img is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgEqualTo(String value) {
+            addCriterion("logo_img =", value, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgNotEqualTo(String value) {
+            addCriterion("logo_img <>", value, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgGreaterThan(String value) {
+            addCriterion("logo_img >", value, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgGreaterThanOrEqualTo(String value) {
+            addCriterion("logo_img >=", value, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgLessThan(String value) {
+            addCriterion("logo_img <", value, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgLessThanOrEqualTo(String value) {
+            addCriterion("logo_img <=", value, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgLike(String value) {
+            addCriterion("logo_img like", value, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgNotLike(String value) {
+            addCriterion("logo_img not like", value, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgIn(List<String> values) {
+            addCriterion("logo_img in", values, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgNotIn(List<String> values) {
+            addCriterion("logo_img not in", values, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgBetween(String value1, String value2) {
+            addCriterion("logo_img between", value1, value2, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgNotBetween(String value1, String value2) {
+            addCriterion("logo_img not between", value1, value2, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoIsNull() {
+            addCriterion("logo_ico is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoIsNotNull() {
+            addCriterion("logo_ico is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoEqualTo(String value) {
+            addCriterion("logo_ico =", value, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoNotEqualTo(String value) {
+            addCriterion("logo_ico <>", value, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoGreaterThan(String value) {
+            addCriterion("logo_ico >", value, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoGreaterThanOrEqualTo(String value) {
+            addCriterion("logo_ico >=", value, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoLessThan(String value) {
+            addCriterion("logo_ico <", value, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoLessThanOrEqualTo(String value) {
+            addCriterion("logo_ico <=", value, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoLike(String value) {
+            addCriterion("logo_ico like", value, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoNotLike(String value) {
+            addCriterion("logo_ico not like", value, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoIn(List<String> values) {
+            addCriterion("logo_ico in", values, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoNotIn(List<String> values) {
+            addCriterion("logo_ico not in", values, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoBetween(String value1, String value2) {
+            addCriterion("logo_ico between", value1, value2, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoNotBetween(String value1, String value2) {
+            addCriterion("logo_ico not between", value1, value2, "logoIco");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -27,6 +27,8 @@
     <result column="pic_watermark" property="picWatermark" jdbcType="VARCHAR" />
     <result column="picx" property="picx" jdbcType="INTEGER" />
     <result column="picy" property="picy" jdbcType="INTEGER" />
+    <result column="logo_img" property="logoImg" jdbcType="VARCHAR" />
+    <result column="logo_ico" property="logoIco" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -90,7 +92,7 @@
     id, gmt_create, gmt_modified, status_id, sort, website_title, website_keyword, website_desc, 
     copyright, weixin, weibo, is_enable_statistics, statistics_code, is_show_service, 
     service1, service2, service3, service4, service5, polyv_status, polyv_logo, is_watermark, 
-    pic_watermark, picx, picy
+    pic_watermark, picx, picy, logo_img, logo_ico
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteExample" >
     select
@@ -134,7 +136,8 @@
       service2, service3, service4, 
       service5, polyv_status, polyv_logo, 
       is_watermark, pic_watermark, picx, 
-      picy)
+      picy, logo_img, logo_ico
+      )
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{websiteTitle,jdbcType=VARCHAR}, 
       #{websiteKeyword,jdbcType=VARCHAR}, #{websiteDesc,jdbcType=VARCHAR}, #{copyright,jdbcType=VARCHAR}, 
@@ -143,7 +146,8 @@
       #{service2,jdbcType=VARCHAR}, #{service3,jdbcType=VARCHAR}, #{service4,jdbcType=VARCHAR}, 
       #{service5,jdbcType=VARCHAR}, #{polyvStatus,jdbcType=TINYINT}, #{polyvLogo,jdbcType=VARCHAR}, 
       #{isWatermark,jdbcType=TINYINT}, #{picWatermark,jdbcType=VARCHAR}, #{picx,jdbcType=INTEGER}, 
-      #{picy,jdbcType=INTEGER})
+      #{picy,jdbcType=INTEGER}, #{logoImg,jdbcType=VARCHAR}, #{logoIco,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Website" >
     insert into website
@@ -223,6 +227,12 @@
       <if test="picy != null" >
         picy,
       </if>
+      <if test="logoImg != null" >
+        logo_img,
+      </if>
+      <if test="logoIco != null" >
+        logo_ico,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -299,6 +309,12 @@
       </if>
       <if test="picy != null" >
         #{picy,jdbcType=INTEGER},
+      </if>
+      <if test="logoImg != null" >
+        #{logoImg,jdbcType=VARCHAR},
+      </if>
+      <if test="logoIco != null" >
+        #{logoIco,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -386,6 +402,12 @@
       <if test="record.picy != null" >
         picy = #{record.picy,jdbcType=INTEGER},
       </if>
+      <if test="record.logoImg != null" >
+        logo_img = #{record.logoImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logoIco != null" >
+        logo_ico = #{record.logoIco,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -417,7 +439,9 @@
       is_watermark = #{record.isWatermark,jdbcType=TINYINT},
       pic_watermark = #{record.picWatermark,jdbcType=VARCHAR},
       picx = #{record.picx,jdbcType=INTEGER},
-      picy = #{record.picy,jdbcType=INTEGER}
+      picy = #{record.picy,jdbcType=INTEGER},
+      logo_img = #{record.logoImg,jdbcType=VARCHAR},
+      logo_ico = #{record.logoIco,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -497,6 +521,12 @@
       <if test="picy != null" >
         picy = #{picy,jdbcType=INTEGER},
       </if>
+      <if test="logoImg != null" >
+        logo_img = #{logoImg,jdbcType=VARCHAR},
+      </if>
+      <if test="logoIco != null" >
+        logo_ico = #{logoIco,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -525,7 +555,9 @@
       is_watermark = #{isWatermark,jdbcType=TINYINT},
       pic_watermark = #{picWatermark,jdbcType=VARCHAR},
       picx = #{picx,jdbcType=INTEGER},
-      picy = #{picy,jdbcType=INTEGER}
+      picy = #{picy,jdbcType=INTEGER},
+      logo_img = #{logoImg,jdbcType=VARCHAR},
+      logo_ico = #{logoIco,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

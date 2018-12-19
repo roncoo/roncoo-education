@@ -54,6 +54,10 @@ public class Website implements Serializable {
 
     private Integer picy;
 
+    private String logoImg;
+
+    private String logoIco;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -256,6 +260,22 @@ public class Website implements Serializable {
         this.picy = picy;
     }
 
+    public String getLogoImg() {
+        return logoImg;
+    }
+
+    public void setLogoImg(String logoImg) {
+        this.logoImg = logoImg == null ? null : logoImg.trim();
+    }
+
+    public String getLogoIco() {
+        return logoIco;
+    }
+
+    public void setLogoIco(String logoIco) {
+        this.logoIco = logoIco == null ? null : logoIco.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -287,6 +307,8 @@ public class Website implements Serializable {
         sb.append(", picWatermark=").append(picWatermark);
         sb.append(", picx=").append(picx);
         sb.append(", picy=").append(picy);
+        sb.append(", logoImg=").append(logoImg);
+        sb.append(", logoIco=").append(logoIco);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

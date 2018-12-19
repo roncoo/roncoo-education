@@ -93,4 +93,12 @@ public class WebsiteDTO implements Serializable {
      * 客服信息5
      */
     private String service5;
+    /**
+     * logoImg
+     */
+    private String logoImg;
+    /**
+     * logoIco
+     */
+    private String logoIco;
 }
