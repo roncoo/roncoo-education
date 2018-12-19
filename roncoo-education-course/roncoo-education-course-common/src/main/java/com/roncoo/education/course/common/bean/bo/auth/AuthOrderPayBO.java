@@ -1,6 +1,7 @@
 package com.roncoo.education.course.common.bean.bo.auth;
 
 import java.io.Serializable;
+
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;

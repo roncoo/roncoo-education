@@ -2,6 +2,7 @@ package com.roncoo.education.course.common.bean.bo;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 

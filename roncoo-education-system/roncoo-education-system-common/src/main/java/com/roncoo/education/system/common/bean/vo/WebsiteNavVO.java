@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.roncoo.education.system.common.bean.vo.WebsiteNavVO;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
 

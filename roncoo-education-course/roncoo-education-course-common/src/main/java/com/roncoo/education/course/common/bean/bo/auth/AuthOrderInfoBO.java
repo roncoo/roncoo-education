@@ -3,6 +3,7 @@ package com.roncoo.education.course.common.bean.bo.auth;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 

@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import com.roncoo.education.course.common.bean.dto.CourseCategoryTwoDTO;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
