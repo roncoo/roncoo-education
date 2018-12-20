@@ -13,7 +13,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum StatusIdEnum {
 
-	NO(0, "禁用", "red"), YES(1, "正常", "");
+	YES(1, "正常", ""), NO(0, "禁用", "red");
 
 	private Integer code;
 
