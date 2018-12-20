@@ -13,18 +13,13 @@
 * 支付功能，系统无缝集成了龙果支付
 
 ### 技术选型
-* 核心技术框架：Spring Cloud
-* 注册中心：Eureka
-* 服务网关：Zuul
-* 负载均衡：Feign + Ribbon
-* 断路器：Hystrix
-* 持久层：Mybatis
-* 连接池：Druid
-* 缓存：Redis
-* 模板引擎：Freemarker
-* 日志框架：Logback
-* 常用工具：Hutool
-* 版本维护：Spring IO Platform
+| 核心技术框架                           | 注册中心                                  | 服务网关                                   | 负载均衡                                     |
+| ----------------- | ----------------- | ----------------- | ------------------ | 
+| Spring Cloud      | Eureka            | Zuul              | Feign + Ribbon     | 
+| 断路器                                      | 持久层                                       | 连接池                                      | 缓存                                            | 
+| Hystrix           | Mybatis           | Druid             | Redis              | 
+| 模板引擎                                  | 日志框架                                   | 常用工具                                   | 版本维护                                     | 
+| Freemarker        | Logback           | Hutool            | Spring IO Platform | 
 
 ### 加速maven构建
 在maven的settings.xml 文件里配置mirrors的子节点，添加如下mirror
