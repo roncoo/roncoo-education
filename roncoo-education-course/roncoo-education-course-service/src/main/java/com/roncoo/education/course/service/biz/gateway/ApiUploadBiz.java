@@ -20,24 +20,23 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriodAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideo;
-import com.roncoo.education.system.common.bean.vo.WebsiteVO;
+import com.roncoo.education.system.common.bean.vo.SysVO;
+import com.roncoo.education.system.feign.web.IBossSys;
 import com.roncoo.education.system.feign.web.IBossWebsite;
-import com.roncoo.education.util.aliyun.AliyunOasUtil;
-import com.roncoo.education.util.aliyun.AliyunOssUtil;
+import com.roncoo.education.util.aliyun.Aliyun;
+import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.config.ConfigUtil;
 import com.roncoo.education.util.enums.AuditStatusEnum;
 import com.roncoo.education.util.enums.IsDocEnum;
-import com.roncoo.education.util.enums.IsWatermarkEnum;
 import com.roncoo.education.util.enums.PlatformEnum;
-import com.roncoo.education.util.enums.PolyvStatusEnum;
 import com.roncoo.education.util.enums.VideoStatusEnum;
 import com.roncoo.education.util.polyv.PolyvUtil;
 import com.roncoo.education.util.polyv.UploadFile;
 import com.roncoo.education.util.polyv.UploadFileResult;
+import com.roncoo.education.util.tools.BeanUtil;
 import com.roncoo.education.util.tools.IdWorker;
-import com.roncoo.education.util.tools.ImgUtil;
 import com.roncoo.education.util.tools.StrUtil;
 import com.xiaoleilu.hutool.util.ObjectUtil;
 
@@ -59,7 +58,7 @@ public class ApiUploadBiz extends BaseBiz {
 	private CourseVideoDao courseVideoDao;
 
 	@Autowired
-	private IBossWebsite bossWebsite;
+	private IBossSys bossSys;
 
 	/**
 	 * 上传视频接口
@@ -123,13 +122,10 @@ public class ApiUploadBiz extends BaseBiz {
 					uploadFile.setTag(videoFile.getOriginalFilename());
 					uploadFile.setCataid(1L);
 
-					// 获取站点信息的 参数
-					WebsiteVO websiteVO = bossWebsite.getWebsite();
+					// 获取系统配置信息
+					SysVO sys = bossSys.getSys();
 
-					if (PolyvStatusEnum.ENABLE.getCode().equals(websiteVO.getPolyvStatus())) {
-						uploadFile.setWatermark(websiteVO.getPolyvLogo());
-					}
-					UploadFileResult result = PolyvUtil.uploadFile(targetFile, uploadFile);
+					UploadFileResult result = PolyvUtil.uploadFile(targetFile, uploadFile, sys.getPolyvWritetoken());
 					if (result == null) {
 						// 上传异常，不再进行处理，定时任务会继续进行处理
 						return;
@@ -141,7 +137,7 @@ public class ApiUploadBiz extends BaseBiz {
 					courseVideoDao.updateById(courseVideo);
 
 					// 3、异步上传到阿里云
-					String videoOasId = AliyunOasUtil.upload(targetFile);
+					String videoOasId = AliyunUtil.uploadDoc(PlatformEnum.COURSE, targetFile, BeanUtil.copyProperties(sys, Aliyun.class));
 					courseVideo.setVideoOasId(videoOasId);
 					courseVideoDao.updateById(courseVideo);
 
@@ -177,35 +173,8 @@ public class ApiUploadBiz extends BaseBiz {
 	 */
 	public Result<String> uploadPic(MultipartFile picFile) {
 		if (ObjectUtil.isNotNull(picFile) && !picFile.isEmpty()) {
-			// 获取站点信息的 参数
-			WebsiteVO websiteVO = bossWebsite.getWebsite();
-			if (websiteVO != null && StringUtils.hasText(websiteVO.getPicWatermark()) && websiteVO.getIsWatermark().equals(IsWatermarkEnum.ENABLE.getCode())) {
-				File pressImgFile = AliyunOssUtil.download(websiteVO.getPicWatermark());
-				if (!pressImgFile.getParentFile().exists()) {
-					pressImgFile.getParentFile().mkdirs();
-				}
-				File srcImageFile = new File(ConfigUtil.PIC_PATH + "src/" + picFile.getOriginalFilename());
-				File destImageFile = new File(ConfigUtil.PIC_PATH + "dest/" + picFile.getOriginalFilename());
-				if (!srcImageFile.getParentFile().exists()) {
-					srcImageFile.getParentFile().mkdirs();
-				}
-				if (!destImageFile.getParentFile().exists()) {
-					destImageFile.getParentFile().mkdirs();
-				}
-				try {
-					picFile.transferTo(srcImageFile);
-					// 水印的处理
-					ImgUtil.pressImage(pressImgFile, srcImageFile, destImageFile, websiteVO.getPicx(), websiteVO.getPicy());
-				} catch (Exception e) {
-					logger.error("上传图片失败", e);
-					return Result.error("上传图片失败，请重试");
-				}
-				String wString = AliyunOssUtil.uploadPic(PlatformEnum.COURSE, destImageFile);
-				return Result.success(wString);
-			} else {
-				// 没水印，单独上传
-				return Result.success(AliyunOssUtil.uploadPic(PlatformEnum.COURSE, picFile));
-			}
+			// 没水印，单独上传
+			return Result.success(AliyunUtil.uploadPic(PlatformEnum.COURSE, picFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
 		}
 		return Result.error("请选择上传的图片");
 	}
@@ -221,9 +190,17 @@ public class ApiUploadBiz extends BaseBiz {
 			if (ObjectUtil.isNull(courseChapterPeriodAudit)) {
 				return Result.error("找不到课时信息");
 			}
-
-			String fileName = docFile.getOriginalFilename();// 获取上传文件的原名
-			String url = AliyunOssUtil.uploadDoc(PlatformEnum.COURSE, docFile, fileName);
+			SysVO sys = bossSys.getSys();
+			if (ObjectUtil.isNull(sys)) {
+				return Result.error("找不到系统配置信息");
+			}
+			if (StringUtils.isEmpty(sys.getAliyunAccessKeyId()) || StringUtils.isEmpty(sys.getAliyunAccessKeySecret())) {
+				return Result.error("accessKeyId或者accessKeySecret没配置");
+			}
+			if (StringUtils.isEmpty(sys.getAliyunOasVault()) || StringUtils.isEmpty(sys.getAliyunOssBucket()) || StringUtils.isEmpty(sys.getAliyunOssUrl())) {
+				return Result.error("oasVault,ossBucket或ossUrl没配置");
+			}
+			String url = AliyunUtil.uploadDoc(PlatformEnum.COURSE, docFile, BeanUtil.copyProperties(sys, Aliyun.class));
 
 			// 更新课程审核表为待审核状态
 			CourseAudit courseAudit = new CourseAudit();
@@ -239,7 +216,7 @@ public class ApiUploadBiz extends BaseBiz {
 			CourseChapterPeriodAudit periodAudit = new CourseChapterPeriodAudit();
 			periodAudit.setId(periodId);
 			periodAudit.setIsDoc(Integer.valueOf(IsDocEnum.YES.getCode()));
-			periodAudit.setDocName(fileName);
+			periodAudit.setDocName(docFile.getOriginalFilename());
 			periodAudit.setDocUrl(url);
 			periodAudit.setAuditStatus(AuditStatusEnum.WAIT.getCode());
 			courseChapterPeriodAuditDao.updateById(periodAudit);

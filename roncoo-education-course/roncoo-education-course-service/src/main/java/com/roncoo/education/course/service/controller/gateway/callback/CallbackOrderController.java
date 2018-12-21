@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,23 +15,28 @@ import com.roncoo.education.course.common.bean.bo.OrderInfoPayNotifyBO;
 import com.roncoo.education.course.common.bean.bo.callback.CallbackOrderBO;
 import com.roncoo.education.course.common.interfaces.gateway.callback.CallbackOrder;
 import com.roncoo.education.course.service.biz.gateway.callback.CallbackOrderBiz;
+import com.roncoo.education.system.common.bean.vo.SysVO;
+import com.roncoo.education.system.feign.web.IBossSys;
 import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.config.ConfigUtil;
 import com.roncoo.education.util.enums.OrderStatusEnum;
 import com.roncoo.education.util.enums.TradeStatusEnum;
 import com.roncoo.education.util.pay.MerchantApiUtil;
+import com.xiaoleilu.hutool.util.ObjectUtil;
 
 /**
  * 订单信息表
  *
  * @author wujing123
  */
-@RestController														   
+@RestController
 public class CallbackOrderController extends BaseController implements CallbackOrder {
-	
+
 	@Autowired
-	private CallbackOrderBiz biz ;
-	
+	private CallbackOrderBiz biz;
+
+	@Autowired
+	private IBossSys bossSys;
+
 	@Override
 	public String roncooPayNotify(@ModelAttribute CallbackOrderBO bo) {
 		logger.info("龙果支付回调结果：{}", bo);
@@ -47,11 +53,19 @@ public class CallbackOrderController extends BaseController implements CallbackO
 		paramMap.put("trxNo", bo.getTrxNo());
 		paramMap.put("remark", bo.getRemark());
 
+		SysVO sys = bossSys.getSys();
+		if (ObjectUtil.isNull(sys)) {
+			return "找不到系统配置信息";
+		}
+		if (StringUtils.isEmpty(sys.getPaySecret())) {
+			return "paySecret未配置";
+		}
+
 		// 注意：这里返回的备注信息=机构号
 		// 根据机构编号查找机构的扩展信息
-		String sign = MerchantApiUtil.getSign(paramMap, ConfigUtil.PAY_SECRET);
+		String sign = MerchantApiUtil.getSign(paramMap, sys.getPaySecret());
 		if (!sign.equals(bo.getSign())) {
-			logger.error("签名前参数={}，签名sign={}，签名secret={}", paramMap, sign, ConfigUtil.PAY_SECRET);
+			logger.error("签名前参数={}，签名sign={}，签名secret={}", paramMap, sign, sys.getPaySecret());
 			return "fail";
 		}
 

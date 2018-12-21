@@ -48,13 +48,14 @@
 				    <@shiro.hasPermission name="/admin/sysRoleUser/set">
 				    <a href="${base}/admin/sysRoleUser/set?userId=${bean.id}" class="btn btn-orange" data-toggle="dialog" data-id="sysUser-set" data-options="{title:'设置角色', height:350, width:800}">设置角色 </a>
                 	</@shiro.hasPermission>
-                	
+                	<@shiro.hasPermission name="/admin/sysUser/proportion">
                 	<#if bean.userType?? && bean.userType == 2>
                 	   <a href="${base}/admin/sysUser/proportion?id=${bean.id}" class="btn btn-red" data-toggle="dialog" data-id="sysUser-proportion" data-options="{title:'设置分成', height:200}">设置分成 </a>
                 	</#if>
                 	<#if bean.userType?? && bean.userType == 1>
                 	   <a href="${base}/admin/sysUser/login?id=${bean.id}" class="btn btn-red">身份登录</a>
                 	</#if>
+                	</@shiro.hasPermission>
                 </td>
 			</tr>
 			</#list>

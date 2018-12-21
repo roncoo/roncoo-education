@@ -16,7 +16,9 @@
 			
 			<br />
 			<br />
+			<@shiro.hasPermission name="/system/websiteNav/add">
 			<a href="${base}/system/websiteNav/add?parentId=0" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="websiteNav-add" data-options="{title:'添加', height:130, width:350}">添加 </a>
+			</@shiro.hasPermission>
 		</div>
 	</form>
 </div>

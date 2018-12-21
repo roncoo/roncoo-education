@@ -54,7 +54,7 @@
 				<td>
 					<a href="${base}/course/course/view?id=${bean.id!}" data-toggle="dialog" data-options="{mask:true,title:'${bean.courseName}-详细信息',width:900,height:600}">${bean.courseName!}</a>
 					<div style="margin-top: 5px;"></div>
-                                                         讲师:<#if lecturerList??>【<#list lecturerList as lecturer><#if lecturer.lecturerUserNo == bean.lecturerUserNo><a href="${base}/user/lecturer/get?lecturerUserNo=${bean.lecturerUserNo!}" data-toggle="dialog" data-width="800" data-height="618">${lecturer.lecturerName!}</a></#if></#list>】</#if>
+                                    讲师:<#if lecturerList??>【<#list lecturerList as lecturer><#if lecturer.lecturerUserNo == bean.lecturerUserNo><a href="${base}/user/lecturer/get?lecturerUserNo=${bean.lecturerUserNo!}" data-toggle="dialog" data-width="800" data-height="618">${lecturer.lecturerName!}</a></#if></#list>】</#if>
 				</td>
 				<td>
 					<#list courseCategoryEnums as em><#if bean.courseCategory?? && bean.courseCategory == em.code> <span class="${em.color}">${em.desc}</span></#if></#list>
@@ -71,16 +71,9 @@
 				<td><#list statusIdEnums as em><#if bean.statusId?? && bean.statusId==em.code><span class="${em.color}">${em.desc}</span></#if></#list></td>
 				<td>${bean.sort!}</td>
 				<td>
-					<#if bean.statusId == 1>
-    					<@shiro.hasPermission name="/course/course/updateByStatusId">
-    						<a href="${base}/course/course/status?id=${bean.id}&statusId=0" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确定要禁用吗？">禁用</a>
-    					</@shiro.hasPermission>
-					</#if >
-					<#if bean.statusId = 0>
-    					<@shiro.hasPermission name="/course/course/updateByStatusId">
-    						<a href="${base}/course/course/status?id=${bean.id}&statusId=1" class="btn btn-green" data-toggle="doajax" data-confirm-msg="确定要启用吗？">启用</a>
-    					</@shiro.hasPermission>
-					</#if >
+					<@shiro.hasPermission name="/course/course/edit">
+						<a href="${base}/course/course/edit?id=${bean.id}" class="btn btn-blue" data-toggle="navtab" data-options="{title:'${bean.courseName}',id:'${bean.courseName}'}">设置</a>
+					</@shiro.hasPermission>
 				</td>
 			</tr>
 			</#list>

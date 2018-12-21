@@ -256,7 +256,7 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 		int result = dao.updateById(courseVideo);
 		if (result > 0) {
 			// 删除保利威视的视频
-			PolyvUtil.deleteFile(courseVideo.getVideoVid());
+			PolyvUtil.deleteFile(courseVideo.getVideoVid(), bo.getUseid(), bo.getUecretkey());
 			if (!courseVideo.getPeriodId().equals(Long.valueOf(0))) {
 				CourseChapterPeriodAudit periodInfoAudit = periodAuditDao.getById(courseVideo.getPeriodId());
 				periodInfoAudit.setAuditStatus(AuditStatusEnum.WAIT.getCode());

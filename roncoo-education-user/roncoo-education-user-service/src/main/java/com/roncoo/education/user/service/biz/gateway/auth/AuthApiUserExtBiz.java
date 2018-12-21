@@ -4,12 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import com.roncoo.education.system.feign.web.IBossSys;
 import com.roncoo.education.user.common.bean.bo.auth.AuthUserExtBO;
 import com.roncoo.education.user.common.bean.bo.auth.AuthUserExtViewBO;
 import com.roncoo.education.user.common.bean.dto.auth.AuthUserExtDTO;
 import com.roncoo.education.user.service.dao.UserExtDao;
 import com.roncoo.education.user.service.dao.impl.mapper.entity.UserExt;
-import com.roncoo.education.util.aliyun.AliyunOssUtil;
+import com.roncoo.education.util.aliyun.Aliyun;
+import com.roncoo.education.util.aliyun.AliyunUtil;
+import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.tools.BeanUtil;
@@ -21,10 +24,13 @@ import com.xiaoleilu.hutool.util.ObjectUtil;
  * @author wujing
  */
 @Component
-public class AuthApiUserExtBiz {
+public class AuthApiUserExtBiz extends BaseBiz {
 
 	@Autowired
 	private UserExtDao userExtDao;
+
+	@Autowired
+	private IBossSys bossSys;
 
 	/**
 	 * 用户信息查看接口
@@ -68,7 +74,7 @@ public class AuthApiUserExtBiz {
 		// 如果修改图片删除阿里云oss上的原图片
 		if (!StringUtils.isEmpty(authUserExtBO.getHeadImgUrl())) {
 			if (!StringUtils.isEmpty(userExt.getHeadImgUrl()) && !authUserExtBO.getHeadImgUrl().equals(userExt.getHeadImgUrl())) {
-				AliyunOssUtil.delete(userExt.getHeadImgUrl());
+				AliyunUtil.delete(userExt.getHeadImgUrl(), BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class));
 			}
 		}
 		userExt = BeanUtil.copyProperties(authUserExtBO, UserExt.class);

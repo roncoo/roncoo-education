@@ -16,7 +16,7 @@
             <br/>
             <div class="form-group">
                 <label class="control-label x85">文章描述：</label>
-                <div style="margin-left: 90px; width:800px" id="editEditor" upload-url="${base}/uploadPic"></div>
+                <div style="margin-left: 90px; width:800px" id="articleAddEditor" upload-url="${base}/uploadPic"></div>
             	<textarea id="wnaAddArtDesc" name="artDesc" style="display:none" style="width:100%; height:200px;"></textarea>
             </div>
         </fieldset>
@@ -28,4 +28,4 @@
         <li><button type="submit" class="btn-default">添加</button></li>
     </ul>
 </div>
-<script>initEdit();</script>
+<script>initEdit('#articleAddEditor','${base}/upload');</script>

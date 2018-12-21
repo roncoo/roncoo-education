@@ -14,6 +14,10 @@ public class Website implements Serializable {
 
     private Integer sort;
 
+    private String logoIco;
+
+    private String logoImg;
+
     private String websiteTitle;
 
     private String websiteKeyword;
@@ -35,28 +39,6 @@ public class Website implements Serializable {
     private String service1;
 
     private String service2;
-
-    private String service3;
-
-    private String service4;
-
-    private String service5;
-
-    private Integer polyvStatus;
-
-    private String polyvLogo;
-
-    private Integer isWatermark;
-
-    private String picWatermark;
-
-    private Integer picx;
-
-    private Integer picy;
-
-    private String logoImg;
-
-    private String logoIco;
 
     private static final long serialVersionUID = 1L;
 
@@ -98,6 +80,22 @@ public class Website implements Serializable {
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public String getLogoIco() {
+        return logoIco;
+    }
+
+    public void setLogoIco(String logoIco) {
+        this.logoIco = logoIco == null ? null : logoIco.trim();
+    }
+
+    public String getLogoImg() {
+        return logoImg;
+    }
+
+    public void setLogoImg(String logoImg) {
+        this.logoImg = logoImg == null ? null : logoImg.trim();
     }
 
     public String getWebsiteTitle() {
@@ -188,94 +186,6 @@ public class Website implements Serializable {
         this.service2 = service2 == null ? null : service2.trim();
     }
 
-    public String getService3() {
-        return service3;
-    }
-
-    public void setService3(String service3) {
-        this.service3 = service3 == null ? null : service3.trim();
-    }
-
-    public String getService4() {
-        return service4;
-    }
-
-    public void setService4(String service4) {
-        this.service4 = service4 == null ? null : service4.trim();
-    }
-
-    public String getService5() {
-        return service5;
-    }
-
-    public void setService5(String service5) {
-        this.service5 = service5 == null ? null : service5.trim();
-    }
-
-    public Integer getPolyvStatus() {
-        return polyvStatus;
-    }
-
-    public void setPolyvStatus(Integer polyvStatus) {
-        this.polyvStatus = polyvStatus;
-    }
-
-    public String getPolyvLogo() {
-        return polyvLogo;
-    }
-
-    public void setPolyvLogo(String polyvLogo) {
-        this.polyvLogo = polyvLogo == null ? null : polyvLogo.trim();
-    }
-
-    public Integer getIsWatermark() {
-        return isWatermark;
-    }
-
-    public void setIsWatermark(Integer isWatermark) {
-        this.isWatermark = isWatermark;
-    }
-
-    public String getPicWatermark() {
-        return picWatermark;
-    }
-
-    public void setPicWatermark(String picWatermark) {
-        this.picWatermark = picWatermark == null ? null : picWatermark.trim();
-    }
-
-    public Integer getPicx() {
-        return picx;
-    }
-
-    public void setPicx(Integer picx) {
-        this.picx = picx;
-    }
-
-    public Integer getPicy() {
-        return picy;
-    }
-
-    public void setPicy(Integer picy) {
-        this.picy = picy;
-    }
-
-    public String getLogoImg() {
-        return logoImg;
-    }
-
-    public void setLogoImg(String logoImg) {
-        this.logoImg = logoImg == null ? null : logoImg.trim();
-    }
-
-    public String getLogoIco() {
-        return logoIco;
-    }
-
-    public void setLogoIco(String logoIco) {
-        this.logoIco = logoIco == null ? null : logoIco.trim();
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -287,6 +197,8 @@ public class Website implements Serializable {
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", statusId=").append(statusId);
         sb.append(", sort=").append(sort);
+        sb.append(", logoIco=").append(logoIco);
+        sb.append(", logoImg=").append(logoImg);
         sb.append(", websiteTitle=").append(websiteTitle);
         sb.append(", websiteKeyword=").append(websiteKeyword);
         sb.append(", websiteDesc=").append(websiteDesc);
@@ -298,17 +210,6 @@ public class Website implements Serializable {
         sb.append(", isShowService=").append(isShowService);
         sb.append(", service1=").append(service1);
         sb.append(", service2=").append(service2);
-        sb.append(", service3=").append(service3);
-        sb.append(", service4=").append(service4);
-        sb.append(", service5=").append(service5);
-        sb.append(", polyvStatus=").append(polyvStatus);
-        sb.append(", polyvLogo=").append(polyvLogo);
-        sb.append(", isWatermark=").append(isWatermark);
-        sb.append(", picWatermark=").append(picWatermark);
-        sb.append(", picx=").append(picx);
-        sb.append(", picy=").append(picy);
-        sb.append(", logoImg=").append(logoImg);
-        sb.append(", logoIco=").append(logoIco);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

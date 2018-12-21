@@ -91,12 +91,9 @@ public class WebsiteController extends BaseController {
 	@ResponseBody
 	@AdminLog(value = "站点信息更新")
 	@RequestMapping(value = "/updateWebsite", method = RequestMethod.POST)
-	public String updateWebsite(@ModelAttribute WebsiteQO qo, @RequestParam(value = "polyvLogoFile", required = false) MultipartFile polyvLogoFile,
-			@RequestParam(value = "picWatermarkFile", required = false) MultipartFile picWatermarkFile, @RequestParam(value = "weixinFile", required = false) MultipartFile weixinFile,
-			@RequestParam(value = "weiboFile", required = false) MultipartFile weiboFile, @RequestParam(value = "logoImgFile", required = false) MultipartFile logoImgFile,
-			@RequestParam(value = "logoIcoFile", required = false) MultipartFile logoIcoFile) {
+	public String updateWebsite(@ModelAttribute WebsiteQO qo, @RequestParam(value = "weixinFile", required = false) MultipartFile weixinFile, @RequestParam(value = "weiboFile", required = false) MultipartFile weiboFile, @RequestParam(value = "logoImgFile", required = false) MultipartFile logoImgFile, @RequestParam(value = "logoIcoFile", required = false) MultipartFile logoIcoFile) {
 		// 保存站点信息
-		if (biz.updateWebsite(qo, polyvLogoFile, picWatermarkFile, weixinFile, weiboFile, logoIcoFile, logoImgFile) > 0) {
+		if (biz.updateWebsite(qo, weixinFile, weiboFile, logoIcoFile, logoImgFile) > 0) {
 			return success(TARGETID);
 		}
 		return error("修改失败");

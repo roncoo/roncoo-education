@@ -28,16 +28,16 @@
 			<tr>
 				<td align="center">${bean_index+1}</td>
 				<td>
-					<@shiro.hasPermission name="/course/course/view">
 					<a href="${base}/course/course/view?id=${bean.id}" data-toggle="dialog" data-options="{mask:true,title:'${bean.courseName}-详细信息',width:900,height:600}">${bean.courseName!}</a>
-					</@shiro.hasPermission>
 				</td>
 				<td>${bean.categoryName1!} / ${bean.categoryName2!} / ${bean.categoryName3!}</td>
 				<td><#list isFreeEnums as em><#if bean.isFree?? && bean.isFree == em.code> <span class="${em.color}">${em.desc}</span></#if></#list></td>
 				<td>${bean.courseOriginal!}</td>				
 				<td><#list statusIdEnums as em><#if bean.statusId?? && bean.statusId==em.code><span class="${em.color}">${em.desc}</span></#if></#list></td>
 				<td>${bean.sort!}</td>
-				<td><a type="button" class="btn btn-blue" href="${base}/course/zoneCourse/save?zoneId=${zoneId}&courseId=${bean.id}" data-toggle="doajax" data-confirm-msg="确定要选择吗？" data-icon="check">选择</a></td>
+				<@shiro.hasPermission name="/course/zoneCourse/save">
+					<td><a type="button" class="btn btn-blue" href="${base}/course/zoneCourse/save?zoneId=${zoneId}&courseId=${bean.id}" data-toggle="doajax" data-confirm-msg="确定要选择吗？" data-icon="check">选择</a></td>
+				</@shiro.hasPermission>
 			</#list>
 			</#if>
 		</tbody>

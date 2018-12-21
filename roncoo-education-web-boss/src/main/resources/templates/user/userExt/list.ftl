@@ -56,7 +56,9 @@
                         <a href="${base}/user/userExt/updateStatusId?id=${bean.id!}&statusId=1" class="btn btn-green" data-toggle="doajax" data-id="userExt-updateStatusId" data-confirm-msg="确定要启用吗？">启用</a>
                         </@shiro.hasPermission>
                     </#if>
-                    <a href="${base}/course/courseUserStudyLog/list?userNo=${bean.userNo}" class="btn btn-default" data-toggle="navtab" data-id="course-courseUserStudyLog" data-width="1100" data-height="550">学习记录</a>
+                    <@shiro.hasPermission name="/course/courseUserStudyLog/list">
+                    	<a href="${base}/course/courseUserStudyLog/list?userNo=${bean.userNo}" class="btn btn-default" data-toggle="navtab" data-id="course-courseUserStudyLog" data-width="1100" data-height="550">学习记录</a>
+					</@shiro.hasPermission>
 				</td>
 			</tr>
 			</#list>

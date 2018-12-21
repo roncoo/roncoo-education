@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.roncoo.education.system.service.dao.impl.mapper.SysMapper" >
+  <resultMap id="BaseResultMap" type="com.roncoo.education.system.service.dao.impl.mapper.entity.Sys" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="status_id" property="statusId" jdbcType="TINYINT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="video_type" property="videoType" jdbcType="TINYINT" />
+    <result column="polyv_useid" property="polyvUseid" jdbcType="VARCHAR" />
+    <result column="polyv_writetoken" property="polyvWritetoken" jdbcType="VARCHAR" />
+    <result column="polyv_readtoken" property="polyvReadtoken" jdbcType="VARCHAR" />
+    <result column="polyv_secretkey" property="polyvSecretkey" jdbcType="VARCHAR" />
+    <result column="file_type" property="fileType" jdbcType="TINYINT" />
+    <result column="aliyun_access_key_id" property="aliyunAccessKeyId" jdbcType="VARCHAR" />
+    <result column="aliyun_access_key_secret" property="aliyunAccessKeySecret" jdbcType="VARCHAR" />
+    <result column="aliyun_oss_url" property="aliyunOssUrl" jdbcType="VARCHAR" />
+    <result column="aliyun_oss_bucket" property="aliyunOssBucket" jdbcType="VARCHAR" />
+    <result column="aliyun_oas_vault" property="aliyunOasVault" jdbcType="VARCHAR" />
+    <result column="pay_type" property="payType" jdbcType="TINYINT" />
+    <result column="pay_url" property="payUrl" jdbcType="VARCHAR" />
+    <result column="pay_key" property="payKey" jdbcType="VARCHAR" />
+    <result column="pay_secret" property="paySecret" jdbcType="VARCHAR" />
+    <result column="notify_url" property="notifyUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, gmt_create, gmt_modified, status_id, sort, video_type, polyv_useid, polyv_writetoken, 
+    polyv_readtoken, polyv_secretkey, file_type, aliyun_access_key_id, aliyun_access_key_secret, 
+    aliyun_oss_url, aliyun_oss_bucket, aliyun_oas_vault, pay_type, pay_url, pay_key, 
+    pay_secret, notify_url
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.SysExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.SysExample" >
+    delete from sys
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Sys" >
+    insert into sys (id, gmt_create, gmt_modified, 
+      status_id, sort, video_type, 
+      polyv_useid, polyv_writetoken, polyv_readtoken, 
+      polyv_secretkey, file_type, aliyun_access_key_id, 
+      aliyun_access_key_secret, aliyun_oss_url, aliyun_oss_bucket, 
+      aliyun_oas_vault, pay_type, pay_url, 
+      pay_key, pay_secret, notify_url
+      )
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
+      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{videoType,jdbcType=TINYINT}, 
+      #{polyvUseid,jdbcType=VARCHAR}, #{polyvWritetoken,jdbcType=VARCHAR}, #{polyvReadtoken,jdbcType=VARCHAR}, 
+      #{polyvSecretkey,jdbcType=VARCHAR}, #{fileType,jdbcType=TINYINT}, #{aliyunAccessKeyId,jdbcType=VARCHAR}, 
+      #{aliyunAccessKeySecret,jdbcType=VARCHAR}, #{aliyunOssUrl,jdbcType=VARCHAR}, #{aliyunOssBucket,jdbcType=VARCHAR}, 
+      #{aliyunOasVault,jdbcType=VARCHAR}, #{payType,jdbcType=TINYINT}, #{payUrl,jdbcType=VARCHAR}, 
+      #{payKey,jdbcType=VARCHAR}, #{paySecret,jdbcType=VARCHAR}, #{notifyUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Sys" >
+    insert into sys
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="statusId != null" >
+        status_id,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="videoType != null" >
+        video_type,
+      </if>
+      <if test="polyvUseid != null" >
+        polyv_useid,
+      </if>
+      <if test="polyvWritetoken != null" >
+        polyv_writetoken,
+      </if>
+      <if test="polyvReadtoken != null" >
+        polyv_readtoken,
+      </if>
+      <if test="polyvSecretkey != null" >
+        polyv_secretkey,
+      </if>
+      <if test="fileType != null" >
+        file_type,
+      </if>
+      <if test="aliyunAccessKeyId != null" >
+        aliyun_access_key_id,
+      </if>
+      <if test="aliyunAccessKeySecret != null" >
+        aliyun_access_key_secret,
+      </if>
+      <if test="aliyunOssUrl != null" >
+        aliyun_oss_url,
+      </if>
+      <if test="aliyunOssBucket != null" >
+        aliyun_oss_bucket,
+      </if>
+      <if test="aliyunOasVault != null" >
+        aliyun_oas_vault,
+      </if>
+      <if test="payType != null" >
+        pay_type,
+      </if>
+      <if test="payUrl != null" >
+        pay_url,
+      </if>
+      <if test="payKey != null" >
+        pay_key,
+      </if>
+      <if test="paySecret != null" >
+        pay_secret,
+      </if>
+      <if test="notifyUrl != null" >
+        notify_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusId != null" >
+        #{statusId,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="videoType != null" >
+        #{videoType,jdbcType=TINYINT},
+      </if>
+      <if test="polyvUseid != null" >
+        #{polyvUseid,jdbcType=VARCHAR},
+      </if>
+      <if test="polyvWritetoken != null" >
+        #{polyvWritetoken,jdbcType=VARCHAR},
+      </if>
+      <if test="polyvReadtoken != null" >
+        #{polyvReadtoken,jdbcType=VARCHAR},
+      </if>
+      <if test="polyvSecretkey != null" >
+        #{polyvSecretkey,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null" >
+        #{fileType,jdbcType=TINYINT},
+      </if>
+      <if test="aliyunAccessKeyId != null" >
+        #{aliyunAccessKeyId,jdbcType=VARCHAR},
+      </if>
+      <if test="aliyunAccessKeySecret != null" >
+        #{aliyunAccessKeySecret,jdbcType=VARCHAR},
+      </if>
+      <if test="aliyunOssUrl != null" >
+        #{aliyunOssUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="aliyunOssBucket != null" >
+        #{aliyunOssBucket,jdbcType=VARCHAR},
+      </if>
+      <if test="aliyunOasVault != null" >
+        #{aliyunOasVault,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=TINYINT},
+      </if>
+      <if test="payUrl != null" >
+        #{payUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="payKey != null" >
+        #{payKey,jdbcType=VARCHAR},
+      </if>
+      <if test="paySecret != null" >
+        #{paySecret,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyUrl != null" >
+        #{notifyUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.SysExample" resultType="java.lang.Integer" >
+    select count(*) from sys
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.gmtCreate != null" >
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModified != null" >
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.statusId != null" >
+        status_id = #{record.statusId,jdbcType=TINYINT},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.videoType != null" >
+        video_type = #{record.videoType,jdbcType=TINYINT},
+      </if>
+      <if test="record.polyvUseid != null" >
+        polyv_useid = #{record.polyvUseid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.polyvWritetoken != null" >
+        polyv_writetoken = #{record.polyvWritetoken,jdbcType=VARCHAR},
+      </if>
+      <if test="record.polyvReadtoken != null" >
+        polyv_readtoken = #{record.polyvReadtoken,jdbcType=VARCHAR},
+      </if>
+      <if test="record.polyvSecretkey != null" >
+        polyv_secretkey = #{record.polyvSecretkey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileType != null" >
+        file_type = #{record.fileType,jdbcType=TINYINT},
+      </if>
+      <if test="record.aliyunAccessKeyId != null" >
+        aliyun_access_key_id = #{record.aliyunAccessKeyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aliyunAccessKeySecret != null" >
+        aliyun_access_key_secret = #{record.aliyunAccessKeySecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aliyunOssUrl != null" >
+        aliyun_oss_url = #{record.aliyunOssUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aliyunOssBucket != null" >
+        aliyun_oss_bucket = #{record.aliyunOssBucket,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aliyunOasVault != null" >
+        aliyun_oas_vault = #{record.aliyunOasVault,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payType != null" >
+        pay_type = #{record.payType,jdbcType=TINYINT},
+      </if>
+      <if test="record.payUrl != null" >
+        pay_url = #{record.payUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payKey != null" >
+        pay_key = #{record.payKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paySecret != null" >
+        pay_secret = #{record.paySecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notifyUrl != null" >
+        notify_url = #{record.notifyUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys
+    set id = #{record.id,jdbcType=BIGINT},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      status_id = #{record.statusId,jdbcType=TINYINT},
+      sort = #{record.sort,jdbcType=INTEGER},
+      video_type = #{record.videoType,jdbcType=TINYINT},
+      polyv_useid = #{record.polyvUseid,jdbcType=VARCHAR},
+      polyv_writetoken = #{record.polyvWritetoken,jdbcType=VARCHAR},
+      polyv_readtoken = #{record.polyvReadtoken,jdbcType=VARCHAR},
+      polyv_secretkey = #{record.polyvSecretkey,jdbcType=VARCHAR},
+      file_type = #{record.fileType,jdbcType=TINYINT},
+      aliyun_access_key_id = #{record.aliyunAccessKeyId,jdbcType=VARCHAR},
+      aliyun_access_key_secret = #{record.aliyunAccessKeySecret,jdbcType=VARCHAR},
+      aliyun_oss_url = #{record.aliyunOssUrl,jdbcType=VARCHAR},
+      aliyun_oss_bucket = #{record.aliyunOssBucket,jdbcType=VARCHAR},
+      aliyun_oas_vault = #{record.aliyunOasVault,jdbcType=VARCHAR},
+      pay_type = #{record.payType,jdbcType=TINYINT},
+      pay_url = #{record.payUrl,jdbcType=VARCHAR},
+      pay_key = #{record.payKey,jdbcType=VARCHAR},
+      pay_secret = #{record.paySecret,jdbcType=VARCHAR},
+      notify_url = #{record.notifyUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Sys" >
+    update sys
+    <set >
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusId != null" >
+        status_id = #{statusId,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="videoType != null" >
+        video_type = #{videoType,jdbcType=TINYINT},
+      </if>
+      <if test="polyvUseid != null" >
+        polyv_useid = #{polyvUseid,jdbcType=VARCHAR},
+      </if>
+      <if test="polyvWritetoken != null" >
+        polyv_writetoken = #{polyvWritetoken,jdbcType=VARCHAR},
+      </if>
+      <if test="polyvReadtoken != null" >
+        polyv_readtoken = #{polyvReadtoken,jdbcType=VARCHAR},
+      </if>
+      <if test="polyvSecretkey != null" >
+        polyv_secretkey = #{polyvSecretkey,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null" >
+        file_type = #{fileType,jdbcType=TINYINT},
+      </if>
+      <if test="aliyunAccessKeyId != null" >
+        aliyun_access_key_id = #{aliyunAccessKeyId,jdbcType=VARCHAR},
+      </if>
+      <if test="aliyunAccessKeySecret != null" >
+        aliyun_access_key_secret = #{aliyunAccessKeySecret,jdbcType=VARCHAR},
+      </if>
+      <if test="aliyunOssUrl != null" >
+        aliyun_oss_url = #{aliyunOssUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="aliyunOssBucket != null" >
+        aliyun_oss_bucket = #{aliyunOssBucket,jdbcType=VARCHAR},
+      </if>
+      <if test="aliyunOasVault != null" >
+        aliyun_oas_vault = #{aliyunOasVault,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=TINYINT},
+      </if>
+      <if test="payUrl != null" >
+        pay_url = #{payUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="payKey != null" >
+        pay_key = #{payKey,jdbcType=VARCHAR},
+      </if>
+      <if test="paySecret != null" >
+        pay_secret = #{paySecret,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyUrl != null" >
+        notify_url = #{notifyUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Sys" >
+    update sys
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      status_id = #{statusId,jdbcType=TINYINT},
+      sort = #{sort,jdbcType=INTEGER},
+      video_type = #{videoType,jdbcType=TINYINT},
+      polyv_useid = #{polyvUseid,jdbcType=VARCHAR},
+      polyv_writetoken = #{polyvWritetoken,jdbcType=VARCHAR},
+      polyv_readtoken = #{polyvReadtoken,jdbcType=VARCHAR},
+      polyv_secretkey = #{polyvSecretkey,jdbcType=VARCHAR},
+      file_type = #{fileType,jdbcType=TINYINT},
+      aliyun_access_key_id = #{aliyunAccessKeyId,jdbcType=VARCHAR},
+      aliyun_access_key_secret = #{aliyunAccessKeySecret,jdbcType=VARCHAR},
+      aliyun_oss_url = #{aliyunOssUrl,jdbcType=VARCHAR},
+      aliyun_oss_bucket = #{aliyunOssBucket,jdbcType=VARCHAR},
+      aliyun_oas_vault = #{aliyunOasVault,jdbcType=VARCHAR},
+      pay_type = #{payType,jdbcType=TINYINT},
+      pay_url = #{payUrl,jdbcType=VARCHAR},
+      pay_key = #{payKey,jdbcType=VARCHAR},
+      pay_secret = #{paySecret,jdbcType=VARCHAR},
+      notify_url = #{notifyUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

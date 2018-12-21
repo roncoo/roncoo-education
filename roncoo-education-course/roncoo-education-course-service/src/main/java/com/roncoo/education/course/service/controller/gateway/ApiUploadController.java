@@ -34,7 +34,7 @@ public class ApiUploadController extends BaseController implements ApiUpload {
 	public Result<String> uploadPic(@RequestParam(value = "picFile", required = false) MultipartFile picFile) {
 		return biz.uploadPic(picFile);
 	}
-
+	
 	@Override
 	public Result<String> uploadDoc(@RequestParam(name = "docFile", required = false) MultipartFile docFile, @PathVariable(name = "periodId") Long periodId) {
 		return biz.uploadDoc(docFile, periodId);

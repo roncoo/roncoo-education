@@ -1,11 +1,13 @@
 package com.roncoo.education.course.service.biz.web;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.roncoo.education.course.common.bean.qo.CourseQO;
@@ -16,6 +18,7 @@ import com.roncoo.education.course.service.dao.CourseCategoryDao;
 import com.roncoo.education.course.service.dao.CourseChapterDao;
 import com.roncoo.education.course.service.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.service.dao.CourseDao;
+import com.roncoo.education.course.service.dao.CourseIntroduceDao;
 import com.roncoo.education.course.service.dao.ZoneCourseDao;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseCategory;
@@ -23,9 +26,12 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapter;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriod;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseExample;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseExample.Criteria;
+import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduce;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.ZoneCourse;
+import com.roncoo.education.util.base.BaseException;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
+import com.roncoo.education.util.enums.IsFreeEnum;
 import com.roncoo.education.util.enums.StatusIdEnum;
 import com.roncoo.education.util.tools.BeanUtil;
 import com.xiaoleilu.hutool.util.ObjectUtil;
@@ -41,13 +47,15 @@ public class BossCourseBiz {
 	@Autowired
 	private CourseDao dao;
 	@Autowired
-	private CourseCategoryDao courseCategoryDao;
+	private ZoneCourseDao zoneCourseDao;
 	@Autowired
 	private CourseChapterDao courseChapterDao;
 	@Autowired
-	private CourseChapterPeriodDao courseChapterPeriodDao;
+	private CourseIntroduceDao courseIntroduceDao;
 	@Autowired
-	private ZoneCourseDao zoneCourseDao;
+	private CourseCategoryDao courseCategoryDao;
+	@Autowired
+	private CourseChapterPeriodDao courseChapterPeriodDao;
 
 	public Page<CourseVO> listForPage(CourseQO qo) {
 		CourseExample example = new CourseExample();
@@ -116,13 +124,38 @@ public class BossCourseBiz {
 	}
 
 	public CourseVO getById(Long id) {
+		// 根据id查找课程信息
 		Course record = dao.getById(id);
-		return BeanUtil.copyProperties(record, CourseVO.class);
+		CourseVO course = BeanUtil.copyProperties(record, CourseVO.class);
+		if (ObjectUtil.isNotNull(course)) {
+			// 根据id查找课程简介信息
+			CourseIntroduce courseIntroduce = courseIntroduceDao.getById(record.getIntroduceId());
+			// 把课程简介带回课程信息
+			if (ObjectUtil.isNotNull(courseIntroduce)) {
+				course.setIntroduce(courseIntroduce.getIntroduce());
+			}
+		}
+		return course;
 	}
 
+	@Transactional
 	public int updateById(CourseQO qo) {
+		if (IsFreeEnum.FREE.getCode().equals(qo.getIsFree())) {
+			qo.setCourseOriginal(BigDecimal.ZERO);
+			qo.setCourseDiscount(BigDecimal.ZERO);
+		}
 		Course record = BeanUtil.copyProperties(qo, Course.class);
-		return dao.updateById(record);
+		int result = dao.updateById(record);
+		if (result < 1) {
+			throw new BaseException("课程信息表更新失败");
+		}
+		CourseIntroduce courseIntroduce = courseIntroduceDao.getById(record.getIntroduceId());
+		if (ObjectUtil.isNull(courseIntroduce)) {
+			throw new BaseException("找不到课程简介信息");
+		}
+		courseIntroduce.setId(qo.getIntroduceId());
+		courseIntroduce.setIntroduce(qo.getIntroduce());
+		return courseIntroduceDao.updateById(courseIntroduce);
 	}
 
 	public CourseVO getByCourseId(Long id) {

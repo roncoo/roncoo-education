@@ -12,6 +12,8 @@ public class PolyvVideo implements Serializable {
 	private String sign;
 
 	private String type;
+	
+	private String secretkey;
 
 	private static final long serialVersionUID = 1L;
 
@@ -39,9 +41,16 @@ public class PolyvVideo implements Serializable {
 		this.vid = vid;
 	}
 
+	public String getSecretkey() {
+		return secretkey;
+	}
+	
+	public void setSecretkey(String secretkey) {
+		this.secretkey = secretkey;
+	}
 	@Override
 	public String toString() {
-		return "PolyVideo [vid=" + vid + ", sign=" + sign + ", type=" + type + "]";
+		return "PolyvVideo [vid=" + vid + ", sign=" + sign + ", type=" + type + ", secretkey=" + secretkey + "]";
 	}
 
 }

@@ -6,18 +6,19 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import com.roncoo.education.course.common.bean.qo.CourseVideoQO;
 import com.roncoo.education.course.common.bean.vo.CourseVideoVO;
 import com.roncoo.education.course.service.dao.CourseVideoDao;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideo;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideoExample;
-import com.roncoo.education.system.common.bean.vo.WebsiteVO;
-import com.roncoo.education.system.feign.web.IBossWebsite;
-import com.roncoo.education.util.aliyun.AliyunOasUtil;
+import com.roncoo.education.system.common.bean.vo.SysVO;
+import com.roncoo.education.system.feign.web.IBossSys;
+import com.roncoo.education.util.aliyun.Aliyun;
+import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.enums.PolyvStatusEnum;
 import com.roncoo.education.util.enums.VideoStatusEnum;
 import com.roncoo.education.util.polyv.PolyvUtil;
 import com.roncoo.education.util.polyv.UploadFile;
@@ -38,7 +39,7 @@ public class BossCourseVideoBiz {
 	private CourseVideoDao dao;
 
 	@Autowired
-	private IBossWebsite bossWebsite;
+	private IBossSys bossSys;
 
 	public Page<CourseVideoVO> listForPage(CourseVideoQO qo) {
 		CourseVideoExample example = new CourseVideoExample();
@@ -84,15 +85,28 @@ public class BossCourseVideoBiz {
 		uploadFile.setTag(courseVideo.getVideoName());
 		uploadFile.setCataid(1L);
 
-		WebsiteVO websiteVO = bossWebsite.getWebsite();
-		if (PolyvStatusEnum.ENABLE.getCode().equals(websiteVO.getPolyvStatus())) {
-			uploadFile.setWatermark(websiteVO.getPolyvLogo());
+		SysVO sys = bossSys.getSys();
+		if (ObjectUtil.isNull(sys)) {
+			try {
+				throw new Exception("找不到系统配置信息");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		UploadFileResult result = PolyvUtil.uploadFile(targetFile, uploadFile);
+		if (StringUtils.isEmpty(sys.getPolyvWritetoken())) {
+			try {
+				throw new Exception("writetoken没配置");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		UploadFileResult result = PolyvUtil.uploadFile(targetFile, uploadFile, sys.getPolyvWritetoken());
 
 		if (ObjectUtil.isNotNull(result)) {
 			// 2、异步上传到阿里云
-			String videoOasId = AliyunOasUtil.upload(targetFile);
+			String videoOasId = AliyunUtil.uploadOAS(targetFile, BeanUtil.copyProperties(sys, Aliyun.class));
 			if (CollectionUtils.isNotEmpty(list)) {
 				for (CourseVideo info : list) {
 					// 上传

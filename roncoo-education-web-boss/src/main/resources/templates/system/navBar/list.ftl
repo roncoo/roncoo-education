@@ -17,7 +17,9 @@
 			
 			<br />
 			<br />
+			<@shiro.hasPermission name="/system/navBar/add">
 			<a href="${base}/system/navBar/add" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="navBar-add" data-options="{title:'添加', height:255, width:451}">添加 </a>
+			</@shiro.hasPermission>
 		</div>
 	</form>
 </div>

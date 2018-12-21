@@ -7,6 +7,8 @@
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
     <result column="status_id" property="statusId" jdbcType="TINYINT" />
     <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="logo_ico" property="logoIco" jdbcType="VARCHAR" />
+    <result column="logo_img" property="logoImg" jdbcType="VARCHAR" />
     <result column="website_title" property="websiteTitle" jdbcType="VARCHAR" />
     <result column="website_keyword" property="websiteKeyword" jdbcType="VARCHAR" />
     <result column="website_desc" property="websiteDesc" jdbcType="VARCHAR" />
@@ -18,17 +20,6 @@
     <result column="is_show_service" property="isShowService" jdbcType="TINYINT" />
     <result column="service1" property="service1" jdbcType="VARCHAR" />
     <result column="service2" property="service2" jdbcType="VARCHAR" />
-    <result column="service3" property="service3" jdbcType="VARCHAR" />
-    <result column="service4" property="service4" jdbcType="VARCHAR" />
-    <result column="service5" property="service5" jdbcType="VARCHAR" />
-    <result column="polyv_status" property="polyvStatus" jdbcType="TINYINT" />
-    <result column="polyv_logo" property="polyvLogo" jdbcType="VARCHAR" />
-    <result column="is_watermark" property="isWatermark" jdbcType="TINYINT" />
-    <result column="pic_watermark" property="picWatermark" jdbcType="VARCHAR" />
-    <result column="picx" property="picx" jdbcType="INTEGER" />
-    <result column="picy" property="picy" jdbcType="INTEGER" />
-    <result column="logo_img" property="logoImg" jdbcType="VARCHAR" />
-    <result column="logo_ico" property="logoIco" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -89,10 +80,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, gmt_create, gmt_modified, status_id, sort, website_title, website_keyword, website_desc, 
-    copyright, weixin, weibo, is_enable_statistics, statistics_code, is_show_service, 
-    service1, service2, service3, service4, service5, polyv_status, polyv_logo, is_watermark, 
-    pic_watermark, picx, picy, logo_img, logo_ico
+    id, gmt_create, gmt_modified, status_id, sort, logo_ico, logo_img, website_title, 
+    website_keyword, website_desc, copyright, weixin, weibo, is_enable_statistics, statistics_code, 
+    is_show_service, service1, service2
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteExample" >
     select
@@ -129,24 +119,18 @@
   </delete>
   <insert id="insert" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Website" >
     insert into website (id, gmt_create, gmt_modified, 
-      status_id, sort, website_title, 
-      website_keyword, website_desc, copyright, 
-      weixin, weibo, is_enable_statistics, 
-      statistics_code, is_show_service, service1, 
-      service2, service3, service4, 
-      service5, polyv_status, polyv_logo, 
-      is_watermark, pic_watermark, picx, 
-      picy, logo_img, logo_ico
+      status_id, sort, logo_ico, 
+      logo_img, website_title, website_keyword, 
+      website_desc, copyright, weixin, 
+      weibo, is_enable_statistics, statistics_code, 
+      is_show_service, service1, service2
       )
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{websiteTitle,jdbcType=VARCHAR}, 
-      #{websiteKeyword,jdbcType=VARCHAR}, #{websiteDesc,jdbcType=VARCHAR}, #{copyright,jdbcType=VARCHAR}, 
-      #{weixin,jdbcType=VARCHAR}, #{weibo,jdbcType=VARCHAR}, #{isEnableStatistics,jdbcType=TINYINT}, 
-      #{statisticsCode,jdbcType=VARCHAR}, #{isShowService,jdbcType=TINYINT}, #{service1,jdbcType=VARCHAR}, 
-      #{service2,jdbcType=VARCHAR}, #{service3,jdbcType=VARCHAR}, #{service4,jdbcType=VARCHAR}, 
-      #{service5,jdbcType=VARCHAR}, #{polyvStatus,jdbcType=TINYINT}, #{polyvLogo,jdbcType=VARCHAR}, 
-      #{isWatermark,jdbcType=TINYINT}, #{picWatermark,jdbcType=VARCHAR}, #{picx,jdbcType=INTEGER}, 
-      #{picy,jdbcType=INTEGER}, #{logoImg,jdbcType=VARCHAR}, #{logoIco,jdbcType=VARCHAR}
+      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{logoIco,jdbcType=VARCHAR}, 
+      #{logoImg,jdbcType=VARCHAR}, #{websiteTitle,jdbcType=VARCHAR}, #{websiteKeyword,jdbcType=VARCHAR}, 
+      #{websiteDesc,jdbcType=VARCHAR}, #{copyright,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, 
+      #{weibo,jdbcType=VARCHAR}, #{isEnableStatistics,jdbcType=TINYINT}, #{statisticsCode,jdbcType=VARCHAR}, 
+      #{isShowService,jdbcType=TINYINT}, #{service1,jdbcType=VARCHAR}, #{service2,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Website" >
@@ -166,6 +150,12 @@
       </if>
       <if test="sort != null" >
         sort,
+      </if>
+      <if test="logoIco != null" >
+        logo_ico,
+      </if>
+      <if test="logoImg != null" >
+        logo_img,
       </if>
       <if test="websiteTitle != null" >
         website_title,
@@ -200,39 +190,6 @@
       <if test="service2 != null" >
         service2,
       </if>
-      <if test="service3 != null" >
-        service3,
-      </if>
-      <if test="service4 != null" >
-        service4,
-      </if>
-      <if test="service5 != null" >
-        service5,
-      </if>
-      <if test="polyvStatus != null" >
-        polyv_status,
-      </if>
-      <if test="polyvLogo != null" >
-        polyv_logo,
-      </if>
-      <if test="isWatermark != null" >
-        is_watermark,
-      </if>
-      <if test="picWatermark != null" >
-        pic_watermark,
-      </if>
-      <if test="picx != null" >
-        picx,
-      </if>
-      <if test="picy != null" >
-        picy,
-      </if>
-      <if test="logoImg != null" >
-        logo_img,
-      </if>
-      <if test="logoIco != null" >
-        logo_ico,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -249,6 +206,12 @@
       </if>
       <if test="sort != null" >
         #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="logoIco != null" >
+        #{logoIco,jdbcType=VARCHAR},
+      </if>
+      <if test="logoImg != null" >
+        #{logoImg,jdbcType=VARCHAR},
       </if>
       <if test="websiteTitle != null" >
         #{websiteTitle,jdbcType=VARCHAR},
@@ -283,39 +246,6 @@
       <if test="service2 != null" >
         #{service2,jdbcType=VARCHAR},
       </if>
-      <if test="service3 != null" >
-        #{service3,jdbcType=VARCHAR},
-      </if>
-      <if test="service4 != null" >
-        #{service4,jdbcType=VARCHAR},
-      </if>
-      <if test="service5 != null" >
-        #{service5,jdbcType=VARCHAR},
-      </if>
-      <if test="polyvStatus != null" >
-        #{polyvStatus,jdbcType=TINYINT},
-      </if>
-      <if test="polyvLogo != null" >
-        #{polyvLogo,jdbcType=VARCHAR},
-      </if>
-      <if test="isWatermark != null" >
-        #{isWatermark,jdbcType=TINYINT},
-      </if>
-      <if test="picWatermark != null" >
-        #{picWatermark,jdbcType=VARCHAR},
-      </if>
-      <if test="picx != null" >
-        #{picx,jdbcType=INTEGER},
-      </if>
-      <if test="picy != null" >
-        #{picy,jdbcType=INTEGER},
-      </if>
-      <if test="logoImg != null" >
-        #{logoImg,jdbcType=VARCHAR},
-      </if>
-      <if test="logoIco != null" >
-        #{logoIco,jdbcType=VARCHAR},
-      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteExample" resultType="java.lang.Integer" >
@@ -341,6 +271,12 @@
       </if>
       <if test="record.sort != null" >
         sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.logoIco != null" >
+        logo_ico = #{record.logoIco,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logoImg != null" >
+        logo_img = #{record.logoImg,jdbcType=VARCHAR},
       </if>
       <if test="record.websiteTitle != null" >
         website_title = #{record.websiteTitle,jdbcType=VARCHAR},
@@ -375,39 +311,6 @@
       <if test="record.service2 != null" >
         service2 = #{record.service2,jdbcType=VARCHAR},
       </if>
-      <if test="record.service3 != null" >
-        service3 = #{record.service3,jdbcType=VARCHAR},
-      </if>
-      <if test="record.service4 != null" >
-        service4 = #{record.service4,jdbcType=VARCHAR},
-      </if>
-      <if test="record.service5 != null" >
-        service5 = #{record.service5,jdbcType=VARCHAR},
-      </if>
-      <if test="record.polyvStatus != null" >
-        polyv_status = #{record.polyvStatus,jdbcType=TINYINT},
-      </if>
-      <if test="record.polyvLogo != null" >
-        polyv_logo = #{record.polyvLogo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.isWatermark != null" >
-        is_watermark = #{record.isWatermark,jdbcType=TINYINT},
-      </if>
-      <if test="record.picWatermark != null" >
-        pic_watermark = #{record.picWatermark,jdbcType=VARCHAR},
-      </if>
-      <if test="record.picx != null" >
-        picx = #{record.picx,jdbcType=INTEGER},
-      </if>
-      <if test="record.picy != null" >
-        picy = #{record.picy,jdbcType=INTEGER},
-      </if>
-      <if test="record.logoImg != null" >
-        logo_img = #{record.logoImg,jdbcType=VARCHAR},
-      </if>
-      <if test="record.logoIco != null" >
-        logo_ico = #{record.logoIco,jdbcType=VARCHAR},
-      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -420,6 +323,8 @@
       gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
       status_id = #{record.statusId,jdbcType=TINYINT},
       sort = #{record.sort,jdbcType=INTEGER},
+      logo_ico = #{record.logoIco,jdbcType=VARCHAR},
+      logo_img = #{record.logoImg,jdbcType=VARCHAR},
       website_title = #{record.websiteTitle,jdbcType=VARCHAR},
       website_keyword = #{record.websiteKeyword,jdbcType=VARCHAR},
       website_desc = #{record.websiteDesc,jdbcType=VARCHAR},
@@ -430,18 +335,7 @@
       statistics_code = #{record.statisticsCode,jdbcType=VARCHAR},
       is_show_service = #{record.isShowService,jdbcType=TINYINT},
       service1 = #{record.service1,jdbcType=VARCHAR},
-      service2 = #{record.service2,jdbcType=VARCHAR},
-      service3 = #{record.service3,jdbcType=VARCHAR},
-      service4 = #{record.service4,jdbcType=VARCHAR},
-      service5 = #{record.service5,jdbcType=VARCHAR},
-      polyv_status = #{record.polyvStatus,jdbcType=TINYINT},
-      polyv_logo = #{record.polyvLogo,jdbcType=VARCHAR},
-      is_watermark = #{record.isWatermark,jdbcType=TINYINT},
-      pic_watermark = #{record.picWatermark,jdbcType=VARCHAR},
-      picx = #{record.picx,jdbcType=INTEGER},
-      picy = #{record.picy,jdbcType=INTEGER},
-      logo_img = #{record.logoImg,jdbcType=VARCHAR},
-      logo_ico = #{record.logoIco,jdbcType=VARCHAR}
+      service2 = #{record.service2,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -460,6 +354,12 @@
       </if>
       <if test="sort != null" >
         sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="logoIco != null" >
+        logo_ico = #{logoIco,jdbcType=VARCHAR},
+      </if>
+      <if test="logoImg != null" >
+        logo_img = #{logoImg,jdbcType=VARCHAR},
       </if>
       <if test="websiteTitle != null" >
         website_title = #{websiteTitle,jdbcType=VARCHAR},
@@ -494,39 +394,6 @@
       <if test="service2 != null" >
         service2 = #{service2,jdbcType=VARCHAR},
       </if>
-      <if test="service3 != null" >
-        service3 = #{service3,jdbcType=VARCHAR},
-      </if>
-      <if test="service4 != null" >
-        service4 = #{service4,jdbcType=VARCHAR},
-      </if>
-      <if test="service5 != null" >
-        service5 = #{service5,jdbcType=VARCHAR},
-      </if>
-      <if test="polyvStatus != null" >
-        polyv_status = #{polyvStatus,jdbcType=TINYINT},
-      </if>
-      <if test="polyvLogo != null" >
-        polyv_logo = #{polyvLogo,jdbcType=VARCHAR},
-      </if>
-      <if test="isWatermark != null" >
-        is_watermark = #{isWatermark,jdbcType=TINYINT},
-      </if>
-      <if test="picWatermark != null" >
-        pic_watermark = #{picWatermark,jdbcType=VARCHAR},
-      </if>
-      <if test="picx != null" >
-        picx = #{picx,jdbcType=INTEGER},
-      </if>
-      <if test="picy != null" >
-        picy = #{picy,jdbcType=INTEGER},
-      </if>
-      <if test="logoImg != null" >
-        logo_img = #{logoImg,jdbcType=VARCHAR},
-      </if>
-      <if test="logoIco != null" >
-        logo_ico = #{logoIco,jdbcType=VARCHAR},
-      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -536,6 +403,8 @@
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       status_id = #{statusId,jdbcType=TINYINT},
       sort = #{sort,jdbcType=INTEGER},
+      logo_ico = #{logoIco,jdbcType=VARCHAR},
+      logo_img = #{logoImg,jdbcType=VARCHAR},
       website_title = #{websiteTitle,jdbcType=VARCHAR},
       website_keyword = #{websiteKeyword,jdbcType=VARCHAR},
       website_desc = #{websiteDesc,jdbcType=VARCHAR},
@@ -546,18 +415,7 @@
       statistics_code = #{statisticsCode,jdbcType=VARCHAR},
       is_show_service = #{isShowService,jdbcType=TINYINT},
       service1 = #{service1,jdbcType=VARCHAR},
-      service2 = #{service2,jdbcType=VARCHAR},
-      service3 = #{service3,jdbcType=VARCHAR},
-      service4 = #{service4,jdbcType=VARCHAR},
-      service5 = #{service5,jdbcType=VARCHAR},
-      polyv_status = #{polyvStatus,jdbcType=TINYINT},
-      polyv_logo = #{polyvLogo,jdbcType=VARCHAR},
-      is_watermark = #{isWatermark,jdbcType=TINYINT},
-      pic_watermark = #{picWatermark,jdbcType=VARCHAR},
-      picx = #{picx,jdbcType=INTEGER},
-      picy = #{picy,jdbcType=INTEGER},
-      logo_img = #{logoImg,jdbcType=VARCHAR},
-      logo_ico = #{logoIco,jdbcType=VARCHAR}
+      service2 = #{service2,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

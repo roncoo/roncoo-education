@@ -44,18 +44,10 @@
             <div class="form-group">
                 <label class="control-label x85">客服信息1：</label>
                 <input type="text" name="service1" value="${bean.service1!}" placeholder="客服信息1" size="20">
-                <label class="control-label x85">客服信息2：</label>
+            </div>
+            <div class="form-group">
+            	<label class="control-label x85">客服信息2：</label>
                 <input type="text" name="service2" value="${bean.service2!}" placeholder="客服信息2" size="20">
-            </div>
-            <div class="form-group">
-                <label class="control-label x85">客服信息3：</label>
-                <input type="text" name="service3" value="${bean.service3!}" placeholder="客服信息3" size="20">
-                <label class="control-label x85">客服信息4：</label>
-                <input type="text" name="service4" value="${bean.service4!}" placeholder="客服信息4" size="20">
-            </div>
-            <div class="form-group">
-                <label class="control-label x85">客服信息5：</label>
-                <input type="text" name="service5" value="${bean.service5!}" placeholder="客服信息5" size="20">
             </div>
         </fieldset> 
     
@@ -75,31 +67,6 @@
         
         <fieldset>
             <legend>扩展信息</legend>
-            <div class="form-group">
-                <label for="polyvStatus" class="control-label x120">保利威视设置：</label>
-                <#list polyvStatusEnums as em>
-                <input type="radio" id="polyvStatus${em.code}" name="polyvStatus" value="${em.code}" <#if bean.polyvStatus?? && bean.polyvStatus==em.code>checked</#if> data-toggle="icheck" data-label="${em.desc}" size="20">
-                </#list>
-                
-                <label class="control-label x120">视频水印：</label>
-                <input name="polyvLogoFile" type="file" />
-                <img src="${bean.polyvLogo!}" width="150">
-            </div>
-            
-            <div class="form-group">
-                <label for="isWatermark" class="control-label x120">图片水印设置：</label>
-                <#list isWatermarkEnums as em>
-                <input type="radio" id="isWatermark${em.code}" name="isWatermark" value="${em.code}" <#if bean.isWatermark?? && bean.isWatermark==em.code>checked</#if> data-toggle="icheck" data-label="${em.desc}" size="20">
-                </#list>
-            
-                <label class="control-label x120">水印x,y轴：</label>
-                <input type="text" name="picxy" value="${bean.picx!},${bean.picy!}" placeholder="水印x,y轴位置" size="20">
-                
-                <label class="control-label x120">水印图片：</label>
-                <input name="picWatermarkFile" type="file" />
-                <img src="${bean.picWatermark!}" width="150">
-            </div>
-            
             <div class="form-group">
                 <label class="control-label x120">logoImg：</label>
                 <input name="logoImgFile" type="file" />

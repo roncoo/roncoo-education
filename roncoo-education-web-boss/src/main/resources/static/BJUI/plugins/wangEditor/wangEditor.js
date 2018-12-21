@@ -1,7 +1,7 @@
-var initEdit = function() {
- 	var E = window.wangEditor
- 	var editor = new E('#editEditor')
-    var $desc = $('#editEditor').next('textarea');
+var initEdit = function(editEditor, url) {
+ 	var E = window.wangEditor;
+ 	var editor = new E(editEditor);
+    var $desc = $(editEditor).next('textarea');
     // 自定义菜单配置
     editor.customConfig.menus = [
         'head',  // 标题
@@ -25,7 +25,7 @@ var initEdit = function() {
 	    'undo',  // 撤销
 	    'redo'  // 重复
     ]
-    editor.customConfig.uploadImgServer = $('#editEditor').attr('upload-url');
+    editor.customConfig.uploadImgServer = url;
     editor.customConfig.uploadFileName = 'descFile';
     editor.customConfig.onchange = function (html) {
         $desc.val(html);// 监控变化，同步更新到 textarea

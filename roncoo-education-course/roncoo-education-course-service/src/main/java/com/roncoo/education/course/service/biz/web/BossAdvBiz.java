@@ -10,7 +10,9 @@ import com.roncoo.education.course.service.dao.AdvDao;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.Adv;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.AdvExample;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.AdvExample.Criteria;
-import com.roncoo.education.util.aliyun.AliyunOssUtil;
+import com.roncoo.education.system.feign.web.IBossSys;
+import com.roncoo.education.util.aliyun.Aliyun;
+import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.tools.BeanUtil;
@@ -25,6 +27,9 @@ public class BossAdvBiz {
 
 	@Autowired
 	private AdvDao dao;
+
+	@Autowired
+	private IBossSys bossSys;
 
 	public Page<AdvVO> listForPage(AdvQO qo) {
 		AdvExample example = new AdvExample();
@@ -51,7 +56,7 @@ public class BossAdvBiz {
 	public int deleteById(Long id) {
 		Adv adv = dao.getById(id);
 		if (adv != null) {
-			AliyunOssUtil.delete(adv.getAdvImg());
+			AliyunUtil.delete(adv.getAdvImg(), BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class));
 		}
 		return dao.deleteById(id);
 	}
@@ -64,7 +69,7 @@ public class BossAdvBiz {
 	public int updateById(AdvQO qo) {
 		Adv adv = dao.getById(qo.getId());
 		if (StringUtils.hasText(qo.getAdvImg()) && !adv.getAdvImg().equals(qo.getAdvImg())) {
-			AliyunOssUtil.delete(adv.getAdvImg());
+			AliyunUtil.delete(adv.getAdvImg(), BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class));
 		}
 		Adv record = BeanUtil.copyProperties(qo, Adv.class);
 		return dao.updateById(record);

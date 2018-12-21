@@ -4,13 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.roncoo.education.system.feign.web.IBossSys;
 import com.roncoo.education.user.common.bean.qo.UserExtQO;
 import com.roncoo.education.user.common.bean.vo.UserExtVO;
 import com.roncoo.education.user.feign.web.IBossUserExt;
-import com.roncoo.education.util.aliyun.AliyunOssUtil;
+import com.roncoo.education.util.aliyun.Aliyun;
+import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.enums.PlatformEnum;
+import com.roncoo.education.util.tools.BeanUtil;
 
 /**
  * 用户教育信息
@@ -20,6 +23,8 @@ import com.roncoo.education.util.enums.PlatformEnum;
 @Component
 public class UserExtBiz extends BaseBiz {
 
+	@Autowired
+	private IBossSys bossSys;
 	@Autowired
 	private IBossUserExt bossUserExt;
 
@@ -41,7 +46,7 @@ public class UserExtBiz extends BaseBiz {
 
 	public int updateById(UserExtQO qo, MultipartFile headImgFile) {
 		if (headImgFile != null && !headImgFile.isEmpty()) {
-			qo.setHeadImgUrl(AliyunOssUtil.uploadPic(PlatformEnum.USER, headImgFile));
+			qo.setHeadImgUrl(AliyunUtil.uploadPic(PlatformEnum.USER, headImgFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
 		}
 		return bossUserExt.updateById(qo);
 	}

@@ -89,12 +89,12 @@
 				<td>
                     <a href="${base}/user/lecturer/get?lecturerUserNo=${bean.lecturerUserNo!}" data-id="order-lecturer-get" data-toggle="dialog" data-width="800" data-height="618">${bean.lecturerName!}</a>
                     <div style="margin-top: 5px;"></div>
-                                                     【<a href="${base}/course/orderInfo/list?lecturerUserNo=${bean.lecturerUserNo!}&orderStatus=2" data-id="order-lecturer-list" data-toggle="dialog" data-width="1200" data-height="500">明细</a>】
+                                   【<a href="${base}/course/orderInfo/list?lecturerUserNo=${bean.lecturerUserNo!}&orderStatus=2" data-id="order-lecturer-list" data-toggle="dialog" data-width="1200" data-height="500">明细</a>】
                  </td>
 				<td>
 				    <a href="${base}/user/userExt/get?userNo=${bean.userNo!}" data-toggle="dialog" data-id="order-userExt-view" data-options="{title:'查看' ,width:650, height:450}">${bean.mobile!}</a>
 				    <div style="margin-top: 5px;"></div>
-				            【<a href="${base}/course/orderInfo/list?mobile=${bean.mobile!}&orderStatus=2" data-id="order-list" data-toggle="dialog" data-width="1200" data-height="500">明细</a>】
+				      【<a href="${base}/course/orderInfo/list?mobile=${bean.mobile!}&orderStatus=2" data-id="order-list" data-toggle="dialog" data-width="1200" data-height="500">明细</a>】
 				</td>
 				<td><#list tradeTypeEnums as b> <#if b.code == bean.tradeType>${b.desc!}</#if> </#list></td>
 				<td>

@@ -46,6 +46,14 @@ public class WebsiteQO implements Serializable {
      */
     private Integer sort;
     /**
+     * logoIco
+     */
+    private String logoIco;
+    /**
+     * logoImg
+     */
+    private String logoImg;
+    /**
      * 站点标题
      */
     private String websiteTitle;
@@ -89,50 +97,5 @@ public class WebsiteQO implements Serializable {
      * 客服信息2
      */
     private String service2;
-    /**
-     * 客服信息3
-     */
-    private String service3;
-    /**
-     * 客服信息4
-     */
-    private String service4;
-    /**
-     * 客服信息5
-     */
-    private String service5;
-    /**
-     * 是否启用保利威视(1:启用;0:关闭)
-     */
-    private Integer polyvStatus;
-    /**
-     * 保利威视logo设置
-     */
-    private String polyvLogo;
-    /**
-     * 是否启用水印(1启用，0关闭)
-     */
-    private Integer isWatermark;
-    /**
-     * 图片水印
-     */
-    private String picWatermark;
-    /**
-     * x位置
-     */
-    private Integer picx;
-    /**
-     * y位置
-     */
-    private Integer picy;
-
-    private String picxy;
-    /**
-     * logoImg
-     */
-    private String logoImg;
-    /**
-     * logoIco
-     */
-    private String logoIco;
+    
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.roncoo.education.course.common.bean.qo.CourseQO;
 import com.roncoo.education.util.base.BaseController;
@@ -63,8 +64,8 @@ public class CourseController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/update")
-	public String update(@ModelAttribute CourseQO qo) {
-		if (biz.updateById(qo) > 0) {
+	public String update(@ModelAttribute CourseQO qo, MultipartFile advFile) {
+		if (biz.updateById(qo, advFile) > 0) {
 			return success(TARGETID);
 		}
 		return error("修改失败");
@@ -84,5 +85,5 @@ public class CourseController extends BaseController {
 		}
 		return error("修改失败");
 	}
-	
+
 }

@@ -135,4 +135,8 @@ public class CourseQO implements Serializable {
 	 * 集合
 	 */
 	List<Long> notInCourseNoList;
+	/**
+	 * 课程简介
+	 */
+	private String introduce;
 }

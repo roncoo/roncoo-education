@@ -29,7 +29,7 @@ public interface ApiUpload {
 	@ApiOperation(value = "上传视频接口", notes = "上传视频")
 	@RequestMapping(value = "/course/api/upload/video", method = RequestMethod.POST)
 	Result<String> uploadVideo(@RequestParam(name = "videoFile", required = false) MultipartFile videoFile);
-
+	
 	/**
 	 * 上传图片接口
 	 * 

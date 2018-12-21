@@ -17,7 +17,9 @@
 			
 			<br />
 			<br />
+			<@shiro.hasPermission name="/system/websiteLink/add">
 			<a href="${base}/system/websiteLink/add" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="websiteLink-add" data-options="{title:'添加', height:250, width:410}">添加 </a>
+			</@shiro.hasPermission>
 		</div>
 	</form>
 </div>

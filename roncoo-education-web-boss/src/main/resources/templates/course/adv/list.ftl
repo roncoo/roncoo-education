@@ -16,8 +16,9 @@
 			
 			<br />
 			<br />
-			<a href="${base}/course/adv/add?platShow=${bean.platShow}" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="adv-add" data-options="{title:'添加', height:343,width:545}">添加 </a>
-			
+			<@shiro.hasPermission name="/course/adv/add">
+				<a href="${base}/course/adv/add?platShow=${bean.platShow}" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="adv-add" data-options="{title:'添加', height:343,width:545}">添加 </a>
+			</@shiro.hasPermission>
 		</div>
 	</form>
 </div>

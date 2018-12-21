@@ -119,5 +119,9 @@ public class CourseVO implements Serializable {
 	 * 章节集合
 	 */
 	private List<CourseChapterVO> courseChapterVOList;
+	/**
+	 * 课程简介
+	 */
+	private String introduce;
 
 }

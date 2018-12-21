@@ -425,6 +425,146 @@ public class WebsiteExample {
             return (Criteria) this;
         }
 
+        public Criteria andLogoIcoIsNull() {
+            addCriterion("logo_ico is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoIsNotNull() {
+            addCriterion("logo_ico is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoEqualTo(String value) {
+            addCriterion("logo_ico =", value, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoNotEqualTo(String value) {
+            addCriterion("logo_ico <>", value, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoGreaterThan(String value) {
+            addCriterion("logo_ico >", value, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoGreaterThanOrEqualTo(String value) {
+            addCriterion("logo_ico >=", value, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoLessThan(String value) {
+            addCriterion("logo_ico <", value, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoLessThanOrEqualTo(String value) {
+            addCriterion("logo_ico <=", value, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoLike(String value) {
+            addCriterion("logo_ico like", value, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoNotLike(String value) {
+            addCriterion("logo_ico not like", value, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoIn(List<String> values) {
+            addCriterion("logo_ico in", values, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoNotIn(List<String> values) {
+            addCriterion("logo_ico not in", values, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoBetween(String value1, String value2) {
+            addCriterion("logo_ico between", value1, value2, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoIcoNotBetween(String value1, String value2) {
+            addCriterion("logo_ico not between", value1, value2, "logoIco");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgIsNull() {
+            addCriterion("logo_img is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgIsNotNull() {
+            addCriterion("logo_img is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgEqualTo(String value) {
+            addCriterion("logo_img =", value, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgNotEqualTo(String value) {
+            addCriterion("logo_img <>", value, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgGreaterThan(String value) {
+            addCriterion("logo_img >", value, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgGreaterThanOrEqualTo(String value) {
+            addCriterion("logo_img >=", value, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgLessThan(String value) {
+            addCriterion("logo_img <", value, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgLessThanOrEqualTo(String value) {
+            addCriterion("logo_img <=", value, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgLike(String value) {
+            addCriterion("logo_img like", value, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgNotLike(String value) {
+            addCriterion("logo_img not like", value, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgIn(List<String> values) {
+            addCriterion("logo_img in", values, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgNotIn(List<String> values) {
+            addCriterion("logo_img not in", values, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgBetween(String value1, String value2) {
+            addCriterion("logo_img between", value1, value2, "logoImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogoImgNotBetween(String value1, String value2) {
+            addCriterion("logo_img not between", value1, value2, "logoImg");
+            return (Criteria) this;
+        }
+
         public Criteria andWebsiteTitleIsNull() {
             addCriterion("website_title is null");
             return (Criteria) this;
@@ -1172,736 +1312,6 @@ public class WebsiteExample {
 
         public Criteria andService2NotBetween(String value1, String value2) {
             addCriterion("service2 not between", value1, value2, "service2");
-            return (Criteria) this;
-        }
-
-        public Criteria andService3IsNull() {
-            addCriterion("service3 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andService3IsNotNull() {
-            addCriterion("service3 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andService3EqualTo(String value) {
-            addCriterion("service3 =", value, "service3");
-            return (Criteria) this;
-        }
-
-        public Criteria andService3NotEqualTo(String value) {
-            addCriterion("service3 <>", value, "service3");
-            return (Criteria) this;
-        }
-
-        public Criteria andService3GreaterThan(String value) {
-            addCriterion("service3 >", value, "service3");
-            return (Criteria) this;
-        }
-
-        public Criteria andService3GreaterThanOrEqualTo(String value) {
-            addCriterion("service3 >=", value, "service3");
-            return (Criteria) this;
-        }
-
-        public Criteria andService3LessThan(String value) {
-            addCriterion("service3 <", value, "service3");
-            return (Criteria) this;
-        }
-
-        public Criteria andService3LessThanOrEqualTo(String value) {
-            addCriterion("service3 <=", value, "service3");
-            return (Criteria) this;
-        }
-
-        public Criteria andService3Like(String value) {
-            addCriterion("service3 like", value, "service3");
-            return (Criteria) this;
-        }
-
-        public Criteria andService3NotLike(String value) {
-            addCriterion("service3 not like", value, "service3");
-            return (Criteria) this;
-        }
-
-        public Criteria andService3In(List<String> values) {
-            addCriterion("service3 in", values, "service3");
-            return (Criteria) this;
-        }
-
-        public Criteria andService3NotIn(List<String> values) {
-            addCriterion("service3 not in", values, "service3");
-            return (Criteria) this;
-        }
-
-        public Criteria andService3Between(String value1, String value2) {
-            addCriterion("service3 between", value1, value2, "service3");
-            return (Criteria) this;
-        }
-
-        public Criteria andService3NotBetween(String value1, String value2) {
-            addCriterion("service3 not between", value1, value2, "service3");
-            return (Criteria) this;
-        }
-
-        public Criteria andService4IsNull() {
-            addCriterion("service4 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andService4IsNotNull() {
-            addCriterion("service4 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andService4EqualTo(String value) {
-            addCriterion("service4 =", value, "service4");
-            return (Criteria) this;
-        }
-
-        public Criteria andService4NotEqualTo(String value) {
-            addCriterion("service4 <>", value, "service4");
-            return (Criteria) this;
-        }
-
-        public Criteria andService4GreaterThan(String value) {
-            addCriterion("service4 >", value, "service4");
-            return (Criteria) this;
-        }
-
-        public Criteria andService4GreaterThanOrEqualTo(String value) {
-            addCriterion("service4 >=", value, "service4");
-            return (Criteria) this;
-        }
-
-        public Criteria andService4LessThan(String value) {
-            addCriterion("service4 <", value, "service4");
-            return (Criteria) this;
-        }
-
-        public Criteria andService4LessThanOrEqualTo(String value) {
-            addCriterion("service4 <=", value, "service4");
-            return (Criteria) this;
-        }
-
-        public Criteria andService4Like(String value) {
-            addCriterion("service4 like", value, "service4");
-            return (Criteria) this;
-        }
-
-        public Criteria andService4NotLike(String value) {
-            addCriterion("service4 not like", value, "service4");
-            return (Criteria) this;
-        }
-
-        public Criteria andService4In(List<String> values) {
-            addCriterion("service4 in", values, "service4");
-            return (Criteria) this;
-        }
-
-        public Criteria andService4NotIn(List<String> values) {
-            addCriterion("service4 not in", values, "service4");
-            return (Criteria) this;
-        }
-
-        public Criteria andService4Between(String value1, String value2) {
-            addCriterion("service4 between", value1, value2, "service4");
-            return (Criteria) this;
-        }
-
-        public Criteria andService4NotBetween(String value1, String value2) {
-            addCriterion("service4 not between", value1, value2, "service4");
-            return (Criteria) this;
-        }
-
-        public Criteria andService5IsNull() {
-            addCriterion("service5 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andService5IsNotNull() {
-            addCriterion("service5 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andService5EqualTo(String value) {
-            addCriterion("service5 =", value, "service5");
-            return (Criteria) this;
-        }
-
-        public Criteria andService5NotEqualTo(String value) {
-            addCriterion("service5 <>", value, "service5");
-            return (Criteria) this;
-        }
-
-        public Criteria andService5GreaterThan(String value) {
-            addCriterion("service5 >", value, "service5");
-            return (Criteria) this;
-        }
-
-        public Criteria andService5GreaterThanOrEqualTo(String value) {
-            addCriterion("service5 >=", value, "service5");
-            return (Criteria) this;
-        }
-
-        public Criteria andService5LessThan(String value) {
-            addCriterion("service5 <", value, "service5");
-            return (Criteria) this;
-        }
-
-        public Criteria andService5LessThanOrEqualTo(String value) {
-            addCriterion("service5 <=", value, "service5");
-            return (Criteria) this;
-        }
-
-        public Criteria andService5Like(String value) {
-            addCriterion("service5 like", value, "service5");
-            return (Criteria) this;
-        }
-
-        public Criteria andService5NotLike(String value) {
-            addCriterion("service5 not like", value, "service5");
-            return (Criteria) this;
-        }
-
-        public Criteria andService5In(List<String> values) {
-            addCriterion("service5 in", values, "service5");
-            return (Criteria) this;
-        }
-
-        public Criteria andService5NotIn(List<String> values) {
-            addCriterion("service5 not in", values, "service5");
-            return (Criteria) this;
-        }
-
-        public Criteria andService5Between(String value1, String value2) {
-            addCriterion("service5 between", value1, value2, "service5");
-            return (Criteria) this;
-        }
-
-        public Criteria andService5NotBetween(String value1, String value2) {
-            addCriterion("service5 not between", value1, value2, "service5");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvStatusIsNull() {
-            addCriterion("polyv_status is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvStatusIsNotNull() {
-            addCriterion("polyv_status is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvStatusEqualTo(Integer value) {
-            addCriterion("polyv_status =", value, "polyvStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvStatusNotEqualTo(Integer value) {
-            addCriterion("polyv_status <>", value, "polyvStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvStatusGreaterThan(Integer value) {
-            addCriterion("polyv_status >", value, "polyvStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvStatusGreaterThanOrEqualTo(Integer value) {
-            addCriterion("polyv_status >=", value, "polyvStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvStatusLessThan(Integer value) {
-            addCriterion("polyv_status <", value, "polyvStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvStatusLessThanOrEqualTo(Integer value) {
-            addCriterion("polyv_status <=", value, "polyvStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvStatusIn(List<Integer> values) {
-            addCriterion("polyv_status in", values, "polyvStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvStatusNotIn(List<Integer> values) {
-            addCriterion("polyv_status not in", values, "polyvStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvStatusBetween(Integer value1, Integer value2) {
-            addCriterion("polyv_status between", value1, value2, "polyvStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvStatusNotBetween(Integer value1, Integer value2) {
-            addCriterion("polyv_status not between", value1, value2, "polyvStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvLogoIsNull() {
-            addCriterion("polyv_logo is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvLogoIsNotNull() {
-            addCriterion("polyv_logo is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvLogoEqualTo(String value) {
-            addCriterion("polyv_logo =", value, "polyvLogo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvLogoNotEqualTo(String value) {
-            addCriterion("polyv_logo <>", value, "polyvLogo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvLogoGreaterThan(String value) {
-            addCriterion("polyv_logo >", value, "polyvLogo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvLogoGreaterThanOrEqualTo(String value) {
-            addCriterion("polyv_logo >=", value, "polyvLogo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvLogoLessThan(String value) {
-            addCriterion("polyv_logo <", value, "polyvLogo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvLogoLessThanOrEqualTo(String value) {
-            addCriterion("polyv_logo <=", value, "polyvLogo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvLogoLike(String value) {
-            addCriterion("polyv_logo like", value, "polyvLogo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvLogoNotLike(String value) {
-            addCriterion("polyv_logo not like", value, "polyvLogo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvLogoIn(List<String> values) {
-            addCriterion("polyv_logo in", values, "polyvLogo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvLogoNotIn(List<String> values) {
-            addCriterion("polyv_logo not in", values, "polyvLogo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvLogoBetween(String value1, String value2) {
-            addCriterion("polyv_logo between", value1, value2, "polyvLogo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPolyvLogoNotBetween(String value1, String value2) {
-            addCriterion("polyv_logo not between", value1, value2, "polyvLogo");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsWatermarkIsNull() {
-            addCriterion("is_watermark is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsWatermarkIsNotNull() {
-            addCriterion("is_watermark is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsWatermarkEqualTo(Integer value) {
-            addCriterion("is_watermark =", value, "isWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsWatermarkNotEqualTo(Integer value) {
-            addCriterion("is_watermark <>", value, "isWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsWatermarkGreaterThan(Integer value) {
-            addCriterion("is_watermark >", value, "isWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsWatermarkGreaterThanOrEqualTo(Integer value) {
-            addCriterion("is_watermark >=", value, "isWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsWatermarkLessThan(Integer value) {
-            addCriterion("is_watermark <", value, "isWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsWatermarkLessThanOrEqualTo(Integer value) {
-            addCriterion("is_watermark <=", value, "isWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsWatermarkIn(List<Integer> values) {
-            addCriterion("is_watermark in", values, "isWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsWatermarkNotIn(List<Integer> values) {
-            addCriterion("is_watermark not in", values, "isWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsWatermarkBetween(Integer value1, Integer value2) {
-            addCriterion("is_watermark between", value1, value2, "isWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsWatermarkNotBetween(Integer value1, Integer value2) {
-            addCriterion("is_watermark not between", value1, value2, "isWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicWatermarkIsNull() {
-            addCriterion("pic_watermark is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicWatermarkIsNotNull() {
-            addCriterion("pic_watermark is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicWatermarkEqualTo(String value) {
-            addCriterion("pic_watermark =", value, "picWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicWatermarkNotEqualTo(String value) {
-            addCriterion("pic_watermark <>", value, "picWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicWatermarkGreaterThan(String value) {
-            addCriterion("pic_watermark >", value, "picWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicWatermarkGreaterThanOrEqualTo(String value) {
-            addCriterion("pic_watermark >=", value, "picWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicWatermarkLessThan(String value) {
-            addCriterion("pic_watermark <", value, "picWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicWatermarkLessThanOrEqualTo(String value) {
-            addCriterion("pic_watermark <=", value, "picWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicWatermarkLike(String value) {
-            addCriterion("pic_watermark like", value, "picWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicWatermarkNotLike(String value) {
-            addCriterion("pic_watermark not like", value, "picWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicWatermarkIn(List<String> values) {
-            addCriterion("pic_watermark in", values, "picWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicWatermarkNotIn(List<String> values) {
-            addCriterion("pic_watermark not in", values, "picWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicWatermarkBetween(String value1, String value2) {
-            addCriterion("pic_watermark between", value1, value2, "picWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicWatermarkNotBetween(String value1, String value2) {
-            addCriterion("pic_watermark not between", value1, value2, "picWatermark");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicxIsNull() {
-            addCriterion("picx is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicxIsNotNull() {
-            addCriterion("picx is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicxEqualTo(Integer value) {
-            addCriterion("picx =", value, "picx");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicxNotEqualTo(Integer value) {
-            addCriterion("picx <>", value, "picx");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicxGreaterThan(Integer value) {
-            addCriterion("picx >", value, "picx");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicxGreaterThanOrEqualTo(Integer value) {
-            addCriterion("picx >=", value, "picx");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicxLessThan(Integer value) {
-            addCriterion("picx <", value, "picx");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicxLessThanOrEqualTo(Integer value) {
-            addCriterion("picx <=", value, "picx");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicxIn(List<Integer> values) {
-            addCriterion("picx in", values, "picx");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicxNotIn(List<Integer> values) {
-            addCriterion("picx not in", values, "picx");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicxBetween(Integer value1, Integer value2) {
-            addCriterion("picx between", value1, value2, "picx");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicxNotBetween(Integer value1, Integer value2) {
-            addCriterion("picx not between", value1, value2, "picx");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicyIsNull() {
-            addCriterion("picy is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicyIsNotNull() {
-            addCriterion("picy is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicyEqualTo(Integer value) {
-            addCriterion("picy =", value, "picy");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicyNotEqualTo(Integer value) {
-            addCriterion("picy <>", value, "picy");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicyGreaterThan(Integer value) {
-            addCriterion("picy >", value, "picy");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicyGreaterThanOrEqualTo(Integer value) {
-            addCriterion("picy >=", value, "picy");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicyLessThan(Integer value) {
-            addCriterion("picy <", value, "picy");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicyLessThanOrEqualTo(Integer value) {
-            addCriterion("picy <=", value, "picy");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicyIn(List<Integer> values) {
-            addCriterion("picy in", values, "picy");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicyNotIn(List<Integer> values) {
-            addCriterion("picy not in", values, "picy");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicyBetween(Integer value1, Integer value2) {
-            addCriterion("picy between", value1, value2, "picy");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicyNotBetween(Integer value1, Integer value2) {
-            addCriterion("picy not between", value1, value2, "picy");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoImgIsNull() {
-            addCriterion("logo_img is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoImgIsNotNull() {
-            addCriterion("logo_img is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoImgEqualTo(String value) {
-            addCriterion("logo_img =", value, "logoImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoImgNotEqualTo(String value) {
-            addCriterion("logo_img <>", value, "logoImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoImgGreaterThan(String value) {
-            addCriterion("logo_img >", value, "logoImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoImgGreaterThanOrEqualTo(String value) {
-            addCriterion("logo_img >=", value, "logoImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoImgLessThan(String value) {
-            addCriterion("logo_img <", value, "logoImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoImgLessThanOrEqualTo(String value) {
-            addCriterion("logo_img <=", value, "logoImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoImgLike(String value) {
-            addCriterion("logo_img like", value, "logoImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoImgNotLike(String value) {
-            addCriterion("logo_img not like", value, "logoImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoImgIn(List<String> values) {
-            addCriterion("logo_img in", values, "logoImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoImgNotIn(List<String> values) {
-            addCriterion("logo_img not in", values, "logoImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoImgBetween(String value1, String value2) {
-            addCriterion("logo_img between", value1, value2, "logoImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoImgNotBetween(String value1, String value2) {
-            addCriterion("logo_img not between", value1, value2, "logoImg");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoIcoIsNull() {
-            addCriterion("logo_ico is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoIcoIsNotNull() {
-            addCriterion("logo_ico is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoIcoEqualTo(String value) {
-            addCriterion("logo_ico =", value, "logoIco");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoIcoNotEqualTo(String value) {
-            addCriterion("logo_ico <>", value, "logoIco");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoIcoGreaterThan(String value) {
-            addCriterion("logo_ico >", value, "logoIco");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoIcoGreaterThanOrEqualTo(String value) {
-            addCriterion("logo_ico >=", value, "logoIco");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoIcoLessThan(String value) {
-            addCriterion("logo_ico <", value, "logoIco");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoIcoLessThanOrEqualTo(String value) {
-            addCriterion("logo_ico <=", value, "logoIco");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoIcoLike(String value) {
-            addCriterion("logo_ico like", value, "logoIco");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoIcoNotLike(String value) {
-            addCriterion("logo_ico not like", value, "logoIco");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoIcoIn(List<String> values) {
-            addCriterion("logo_ico in", values, "logoIco");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoIcoNotIn(List<String> values) {
-            addCriterion("logo_ico not in", values, "logoIco");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoIcoBetween(String value1, String value2) {
-            addCriterion("logo_ico between", value1, value2, "logoIco");
-            return (Criteria) this;
-        }
-
-        public Criteria andLogoIcoNotBetween(String value1, String value2) {
-            addCriterion("logo_ico not between", value1, value2, "logoIco");
             return (Criteria) this;
         }
     }

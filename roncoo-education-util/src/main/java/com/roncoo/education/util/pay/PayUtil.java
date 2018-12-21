@@ -34,7 +34,7 @@ public final class PayUtil {
 	/**
 	 * roncoo支付
 	 */
-	public static String roncooPay(String serialNumber, String productName, BigDecimal productPrice, Integer payType, String payKey, String paySecret) {
+	public static String roncooPay(String serialNumber, String productName, BigDecimal productPrice, Integer payType, String payKey, String paySecret, String payUrl) {
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("payKey", payKey);
 		paramMap.put("orderPrice", productPrice);
@@ -68,7 +68,7 @@ public final class PayUtil {
 		paramMap.put("remark", serialNumber);
 		String sign = getSign(paramMap, paySecret);
 		paramMap.put("sign", sign);
-		String resp = HttpUtil.postForPay(ConfigUtil.PAY_URL, paramMap);
+		String resp = HttpUtil.postForPay(payUrl, paramMap);
 		logger.debug("roncoo支付返回报文={}", resp);
 		try {
 			@SuppressWarnings("unchecked")

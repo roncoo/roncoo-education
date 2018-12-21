@@ -65,7 +65,9 @@
 				<td><#list profitStatusEnums as em><#if bean.profitStatus?? && bean.profitStatus==em.code>${em.desc}</#if></#list></td>
 				<td>${bean.gmtCreate?string('yyy-MM-dd HH:mm:ss')!}</td>
 				<td>
+					<@shiro.hasPermission name="/user/lecturerProfit/isStatus">
 					<a class="btn btn-green" data-title="操作进度" data-width="350" data-height="200" data-toggle="dialog" data-id="lecturerProfit-isStatus" href="${base}/user/lecturerProfit/isStatus?id=${bean.id}">打款</a>
+					</@shiro.hasPermission>
 				</td>
 			</tr>
 			</#list>

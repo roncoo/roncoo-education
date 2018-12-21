@@ -7,7 +7,9 @@
 			<button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;<a class="btn btn-orange" href="javascript:;" data-toggle="reloadsearch" data-clear-query="true" data-icon="undo">清空查询</a>
 			<br />
 			<br />
-			<a href="${base}/course/zone/add" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="zone-add" data-options="{title:'添加', height:300}">添加 </a>
+			<@shiro.hasPermission name="/course/zone/add">
+				<a href="${base}/course/zone/add" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="zone-add" data-options="{title:'添加', height:300}">添加 </a>
+			</@shiro.hasPermission>
 		</div>
 	</form>
 </div>
@@ -28,12 +30,10 @@
 			<#list page.list as bean>
 			<tr>
 				<td align="center">${bean_index+1}</td>				
-				<@shiro.hasPermission name="/course/zone/view">
 				<td>
 				    <a href="${base}/course/zone/view?id=${bean.id}" data-toggle="dialog" data-options="{mask:true,title:'${bean.zoneName!}-详细信息',height:300}">${bean.zoneName!}
 				</td>
 				<td>${bean.zoneDesc!}</td>
-				</@shiro.hasPermission>
 				<td>${bean.sort!}</td>
 				<td><#list statusIdEnums as em><#if bean.statusId==em.code><span class="${em.color}">${em.desc}</span></#if></#list></td>
 				<td>

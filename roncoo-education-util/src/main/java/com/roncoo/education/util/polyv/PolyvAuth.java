@@ -11,6 +11,7 @@ public class PolyvAuth implements Serializable {
 	private String t;
 	private String code;
 	private String callback;
+	private String secretkey;
 
 	private static final long serialVersionUID = 1L;
 
@@ -45,10 +46,18 @@ public class PolyvAuth implements Serializable {
 	public void setCallback(String callback) {
 		this.callback = callback;
 	}
+	
+	public String getSecretkey() {
+		return secretkey;
+	}
+
+	public void setSecretkey(String secretkey) {
+		this.secretkey = secretkey;
+	}
 
 	@Override
 	public String toString() {
-		return "PolyvAuth [vid=" + vid + ", t=" + t + ", code=" + code + ", callback=" + callback + "]";
+		return "PolyvAuth [vid=" + vid + ", t=" + t + ", code=" + code + ", callback=" + callback + ", secretkey=" + secretkey + "]";
 	}
 
 }

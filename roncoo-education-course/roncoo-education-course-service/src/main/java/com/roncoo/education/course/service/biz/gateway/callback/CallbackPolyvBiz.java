@@ -18,7 +18,6 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo;
 import com.roncoo.education.user.common.bean.vo.UserExtVO;
 import com.roncoo.education.user.feign.web.IBossUserExt;
 import com.roncoo.education.util.base.BaseBiz;
-import com.roncoo.education.util.config.ConfigUtil;
 import com.roncoo.education.util.enums.IsFreeEnum;
 import com.roncoo.education.util.enums.OrderStatusEnum;
 import com.roncoo.education.util.polyv.PolyvAuth;
@@ -45,10 +44,10 @@ public class CallbackPolyvBiz extends BaseBiz {
 	private CourseChapterPeriodDao courseChapterPeriodDao;
 	@Autowired
 	private OrderInfoDao orderInfoDao;
-	
+
 	@Autowired
 	private IBossUserExt bossUserExt;
-	
+
 	/**
 	 * 保利威视，视频上传回调接口
 	 * 
@@ -57,7 +56,7 @@ public class CallbackPolyvBiz extends BaseBiz {
 	 * @author wuyun
 	 */
 	public String video(PolyvVideo polyvVideo) {
-		if (checkSign(polyvVideo.getSign(), polyvVideo.getType(), polyvVideo.getVid())) {
+		if (checkSign(polyvVideo.getSign(), polyvVideo.getType(), polyvVideo.getVid(), polyvVideo.getSecretkey())) {
 			if ("pass".equalsIgnoreCase(polyvVideo.getType())) {
 				logger.warn("保利威视-上传视频-回调成功：{}", polyvVideo);
 				return "success";
@@ -67,8 +66,7 @@ public class CallbackPolyvBiz extends BaseBiz {
 	}
 
 	/**
-	 * 保利威视，视频授权播放回调接口
-	 * 解密保利威视返回code值，获取到用户编号和课时编号
+	 * 保利威视，视频授权播放回调接口 解密保利威视返回code值，获取到用户编号和课时编号
 	 * 
 	 * @param polyvAuth
 	 * @return
@@ -137,7 +135,7 @@ public class CallbackPolyvBiz extends BaseBiz {
 	}
 
 	private String resp(PolyvAuthResult result, PolyvAuth polyvAuth) {
-		result.setSign(MD5Util.MD5("vid=" + polyvAuth.getVid() + "&secretkey=" + ConfigUtil.POLYV_SECRETKEY + "&username=" + result.getUsername() + "&code=" + polyvAuth.getCode() + "&status=" + result.getStatus() + "&t=" + polyvAuth.getT()));
+		result.setSign(MD5Util.MD5("vid=" + polyvAuth.getVid() + "&secretkey=" + polyvAuth.getSecretkey() + "&username=" + result.getUsername() + "&code=" + polyvAuth.getCode() + "&status=" + result.getStatus() + "&t=" + polyvAuth.getT()));
 		StringBuffer sb = new StringBuffer();
 		if (StringUtils.hasText(polyvAuth.getCallback())) {
 			sb.append(polyvAuth.getCallback()).append("(").append(JSONUtil.toJSONString(result)).append(")");
@@ -148,15 +146,15 @@ public class CallbackPolyvBiz extends BaseBiz {
 		logger.warn("保利威视，播放授权回调接口，返回报文={}", sb);
 		return sb.toString();
 	}
-	
+
 	private String getUsername(String mobile, Long userNo) {
 		return mobile;
 	}
 
 	// sign值校验
-	public static boolean checkSign(String sign, String type, String vid) {
+	public static boolean checkSign(String sign, String type, String vid, String secretkey) {
 		StringBuilder sb = new StringBuilder();
-		String argSign = MD5Util.MD5(sb.append("manage").append(type).append(vid).append(ConfigUtil.POLYV_SECRETKEY).toString());
+		String argSign = MD5Util.MD5(sb.append("manage").append(type).append(vid).append(secretkey).toString());
 		if (argSign.equals(sign)) {
 			return true;
 		}

@@ -16,7 +16,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.roncoo.education.util.enums.NavEnum;
 import com.roncoo.education.util.enums.AdvTargetEnum;
 import com.roncoo.education.util.enums.AuditStatusEnum;
 import com.roncoo.education.util.enums.CategoryTypeEnum;
@@ -24,24 +23,26 @@ import com.roncoo.education.util.enums.ChannelTypeEnum;
 import com.roncoo.education.util.enums.CourseCategoryEnum;
 import com.roncoo.education.util.enums.CourseTypeEnum;
 import com.roncoo.education.util.enums.ExtractStatusEnum;
+import com.roncoo.education.util.enums.FileTypeEnum;
 import com.roncoo.education.util.enums.IsEnableStatisticsEnum;
 import com.roncoo.education.util.enums.IsFreeEnum;
 import com.roncoo.education.util.enums.IsPayEnum;
 import com.roncoo.education.util.enums.IsPutawayEnum;
 import com.roncoo.education.util.enums.IsShowServiceEnum;
-import com.roncoo.education.util.enums.IsWatermarkEnum;
+import com.roncoo.education.util.enums.NavEnum;
 import com.roncoo.education.util.enums.OrderStatusEnum;
 import com.roncoo.education.util.enums.PayTypeEnum;
 import com.roncoo.education.util.enums.PlatformEnum;
-import com.roncoo.education.util.enums.PolyvStatusEnum;
 import com.roncoo.education.util.enums.ProfitStatusEnum;
 import com.roncoo.education.util.enums.SexEnum;
 import com.roncoo.education.util.enums.StatusIdEnum;
+import com.roncoo.education.util.enums.SysTypeEnum;
 import com.roncoo.education.util.enums.TradeStatusEnum;
 import com.roncoo.education.util.enums.TradeTypeEnum;
 import com.roncoo.education.util.enums.TrxTypeEnum;
 import com.roncoo.education.util.enums.UserTypeEnum;
 import com.roncoo.education.util.enums.VideoStatusEnum;
+import com.roncoo.education.util.enums.VideoTypeEnum;
 import com.roncoo.education.util.enums.ZoneLocationEnum;
 import com.roncoo.education.util.tools.JSONUtil;
 
@@ -74,7 +75,6 @@ public class BaseController extends Base {
 		modelMap.put("isFreeEnums", IsFreeEnum.values());
 		modelMap.put("isPayEnums", IsPayEnum.values());
 		modelMap.put("isPutawayEnums", IsPutawayEnum.values());
-		modelMap.put("isWatermarkEnums", IsWatermarkEnum.values());
 		modelMap.put("isShowServiceEnums", IsShowServiceEnum.values());
 		modelMap.put("navEnum", NavEnum.values());
 		modelMap.put("orderStatusEnums", OrderStatusEnum.values());
@@ -82,7 +82,6 @@ public class BaseController extends Base {
 		modelMap.put("profitList", ExtractStatusEnum.values());
 		modelMap.put("profitStatusEnums", ProfitStatusEnum.values());
 		modelMap.put("platformEnums", PlatformEnum.values());
-		modelMap.put("polyvStatusEnums", PolyvStatusEnum.values());
 		modelMap.put("sexEnums", SexEnum.values());
 		modelMap.put("statusIdEnums", StatusIdEnum.values());
 		modelMap.put("tradeStatusEnums", TradeStatusEnum.values());
@@ -91,7 +90,9 @@ public class BaseController extends Base {
 		modelMap.put("userTypeEnums", UserTypeEnum.values());
 		modelMap.put("videoStatusEnums", VideoStatusEnum.values());
 		modelMap.put("zoneLocationEnums", ZoneLocationEnum.values());
-
+		modelMap.put("videoTypeEnums", VideoTypeEnum.values());
+		modelMap.put("sysTypeEnums", SysTypeEnum.values());
+		modelMap.put("fileTypeEnums", FileTypeEnum.values());
 	}
 
 	/**

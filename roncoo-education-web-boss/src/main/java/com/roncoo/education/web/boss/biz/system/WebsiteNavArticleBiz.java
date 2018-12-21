@@ -4,13 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.roncoo.education.util.aliyun.AliyunOssUtil;
-import com.roncoo.education.util.enums.PlatformEnum;
 import com.roncoo.education.system.common.bean.qo.WebsiteNavArticleQO;
 import com.roncoo.education.system.common.bean.vo.WebsiteNavArticleVO;
+import com.roncoo.education.system.feign.web.IBossSys;
 import com.roncoo.education.system.feign.web.IBossWebsiteNavArticle;
+import com.roncoo.education.util.aliyun.Aliyun;
+import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
+import com.roncoo.education.util.enums.PlatformEnum;
+import com.roncoo.education.util.tools.BeanUtil;
 
 /**
  * 站点导航文章
@@ -21,6 +24,8 @@ import com.roncoo.education.util.base.Page;
 public class WebsiteNavArticleBiz extends BaseBiz {
 
 	@Autowired
+	private IBossSys bossSys;
+	@Autowired
 	private IBossWebsiteNavArticle bossWebsiteNavArticle;
 
 	public Page<WebsiteNavArticleVO> listForPage(WebsiteNavArticleQO qo) {
@@ -29,7 +34,7 @@ public class WebsiteNavArticleBiz extends BaseBiz {
 
 	public int save(WebsiteNavArticleQO qo, MultipartFile articleFile) {
 		if (articleFile != null && !articleFile.isEmpty()) {
-			qo.setArtPic(AliyunOssUtil.uploadPic(PlatformEnum.SYSTEM, articleFile));
+			qo.setArtPic(AliyunUtil.uploadPic(PlatformEnum.SYSTEM, articleFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
 		}
 		return bossWebsiteNavArticle.save(qo);
 	}
@@ -44,7 +49,7 @@ public class WebsiteNavArticleBiz extends BaseBiz {
 
 	public int updateById(WebsiteNavArticleQO qo, MultipartFile articleFile) {
 		if (articleFile != null && !articleFile.isEmpty()) {
-			qo.setArtPic(AliyunOssUtil.uploadPic(PlatformEnum.SYSTEM, articleFile));
+			qo.setArtPic(AliyunUtil.uploadPic(PlatformEnum.SYSTEM, articleFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
 		}
 		return bossWebsiteNavArticle.updateById(qo);
 	}

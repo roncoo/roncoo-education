@@ -18,7 +18,7 @@
             <br/>
             <div class="form-group">
                 <label class="control-label x85">文章描述：</label>
-                <div style="margin-left: 90px; width:800px" id="editEditor" upload-url="${base}/uploadPic"><p>${bean.artDesc!}</p></div>
+                <div style="margin-left: 90px; width:800px" id="articleEditEditor"><p>${bean.artDesc!}</p></div>
             	<textarea id="wnaEditArtDesc" name="artDesc" style="display:none" style="width:100%; height:200px;"></textarea>
             </div>
         </fieldset>
@@ -30,4 +30,4 @@
         <li><button type="submit" class="btn-default">修改</button></li>
     </ul>
 </div>
-<script>initEdit();</script>
+<script>initEdit('#articleEditEditor','${base}/upload');</script>

@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.aliyuncs.exceptions.ClientException;
+import com.roncoo.education.system.common.bean.vo.SysVO;
+import com.roncoo.education.system.feign.web.IBossSys;
 import com.roncoo.education.user.common.bean.bo.UserLoginCodeBO;
 import com.roncoo.education.user.common.bean.bo.UserLoginPasswordBO;
 import com.roncoo.education.user.common.bean.bo.UserRegisterBO;
@@ -23,12 +25,14 @@ import com.roncoo.education.user.service.dao.impl.mapper.entity.Platform;
 import com.roncoo.education.user.service.dao.impl.mapper.entity.User;
 import com.roncoo.education.user.service.dao.impl.mapper.entity.UserExt;
 import com.roncoo.education.user.service.dao.impl.mapper.entity.UserLogLogin;
-import com.roncoo.education.util.aliyun.AliyunSmsUtil;
+import com.roncoo.education.util.aliyun.Aliyun;
+import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.LoginStatusEnum;
 import com.roncoo.education.util.enums.StatusIdEnum;
 import com.roncoo.education.util.enums.UserTypeEnum;
+import com.roncoo.education.util.tools.BeanUtil;
 import com.roncoo.education.util.tools.Constants;
 import com.roncoo.education.util.tools.JWTUtil;
 import com.roncoo.education.util.tools.NOUtil;
@@ -44,6 +48,9 @@ import com.xiaoleilu.hutool.util.RandomUtil;
  */
 @Component
 public class ApiUserInfoBiz extends BaseBiz {
+
+	@Autowired
+	private IBossSys bossSys;
 
 	@Autowired
 	private PlatformDao platformDao;
@@ -219,13 +226,17 @@ public class ApiUserInfoBiz extends BaseBiz {
 			return Result.error("该平台状态异常，请联系管理员");
 		}
 
+		SysVO sys = bossSys.getSys();
+		if (ObjectUtil.isNull(sys)) {
+			return Result.error("找不到系统配置信息");
+		}
 		// 校验发送次数
 
 		// 获取模板
 		String code = RandomUtil.randomNumbers(6);
 		try {
 			// 发送验证码
-			AliyunSmsUtil.sendCode(userSendCodeBO.getMobile(), code);
+			AliyunUtil.sendMsg(userSendCodeBO.getMobile(), code, BeanUtil.copyProperties(sys, Aliyun.class));
 			// 验证码存入缓存：5分钟有效
 			redisTemplate.opsForValue().set(userSendCodeBO.getClientId() + userSendCodeBO.getMobile(), code, 5, TimeUnit.MINUTES);
 			return Result.success("发送成功");
@@ -251,7 +262,7 @@ public class ApiUserInfoBiz extends BaseBiz {
 		userExt.setUserType(UserTypeEnum.USER.getCode());
 		userExt.setMobile(user.getMobile());
 		userExtDao.save(userExt);
-		
+
 		return user;
 	}
 

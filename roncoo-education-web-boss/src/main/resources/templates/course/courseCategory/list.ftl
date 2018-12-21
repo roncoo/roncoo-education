@@ -12,7 +12,9 @@
 			
 			<br />
 			<br />
+			<@shiro.hasPermission name="/course/courseCategory/add">
 			<a href="${base}/course/courseCategory/add?parentId=0&floor=1&categoryType=${bean.categoryType!'1'}" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="courseCategory-add" data-options="{title:'添加', height:250}">添加 </a>
+			</@shiro.hasPermission>
 		</div>
 	</form>
 </div>

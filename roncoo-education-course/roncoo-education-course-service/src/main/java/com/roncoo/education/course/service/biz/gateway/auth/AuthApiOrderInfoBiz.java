@@ -39,6 +39,8 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfoExample;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfoExample.Criteria;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderPay;
+import com.roncoo.education.system.common.bean.vo.SysVO;
+import com.roncoo.education.system.feign.web.IBossSys;
 import com.roncoo.education.user.common.bean.vo.LecturerVO;
 import com.roncoo.education.user.common.bean.vo.UserExtVO;
 import com.roncoo.education.user.feign.web.IBossLecturer;
@@ -48,7 +50,6 @@ import com.roncoo.education.util.base.BaseException;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.base.Result;
-import com.roncoo.education.util.config.ConfigUtil;
 import com.roncoo.education.util.enums.IsShowEnum;
 import com.roncoo.education.util.enums.IsShowUserEnum;
 import com.roncoo.education.util.enums.OrderStatusEnum;
@@ -75,6 +76,8 @@ public class AuthApiOrderInfoBiz extends BaseBiz {
 	@Autowired
 	private CourseDao courseDao;
 
+	@Autowired
+	private IBossSys bossSys;
 	@Autowired
 	private IBossUserExt bossUserExt;
 	@Autowired
@@ -155,8 +158,17 @@ public class AuthApiOrderInfoBiz extends BaseBiz {
 		// 创建支付订单
 		OrderPay orderPay = createOrderPay(orderInfo);
 
+		// 查找系统配置信息
+		SysVO sys = bossSys.getSys();
+		if (ObjectUtil.isNull(sys)) {
+			return Result.error("找不到系统配置信息");
+		}
+		if (StringUtils.isEmpty(sys.getPayKey()) || StringUtils.isEmpty(sys.getPaySecret()) || StringUtils.isEmpty(sys.getPayUrl())) {
+			return Result.error("payKey,paySecret或payUrl未配置");
+		}
+
 		// 调用支付接口
-		String payMessage = PayUtil.roncooPay(String.valueOf(orderPay.getSerialNumber()), orderInfo.getCourseName(), orderInfo.getPricePaid(), orderInfo.getPayType(), ConfigUtil.PAY_KEY, ConfigUtil.PAY_SECRET);
+		String payMessage = PayUtil.roncooPay(String.valueOf(orderPay.getSerialNumber()), orderInfo.getCourseName(), orderInfo.getPricePaid(), orderInfo.getPayType(), sys.getPayKey(), sys.getPaySecret(), sys.getPayUrl());
 		if (StringUtils.isEmpty(payMessage)) {
 			return Result.error("系统繁忙，请稍后再试");
 		}
@@ -216,8 +228,17 @@ public class AuthApiOrderInfoBiz extends BaseBiz {
 		orderPay.setSerialNumber(NOUtil.getSerialNumber());
 		orderPayDao.updateById(orderPay);
 
+		// 查找系统配置信息
+		SysVO sys = bossSys.getSys();
+		if (ObjectUtil.isNull(sys)) {
+			return Result.error("找不到系统配置信息");
+		}
+		if (StringUtils.isEmpty(sys.getPayKey()) || StringUtils.isEmpty(sys.getPaySecret()) || StringUtils.isEmpty(sys.getPayUrl())) {
+			return Result.error("payKey,paySecret或payUrl未配置");
+		}
+
 		// 调用支付接口
-		String payMessage = PayUtil.roncooPay(String.valueOf(orderPay.getSerialNumber()), orderInfo.getCourseName(), orderInfo.getPricePaid(), orderInfo.getPayType(), ConfigUtil.PAY_KEY, ConfigUtil.PAY_SECRET);
+		String payMessage = PayUtil.roncooPay(String.valueOf(orderPay.getSerialNumber()), orderInfo.getCourseName(), orderInfo.getPricePaid(), orderInfo.getPayType(), sys.getPayKey(), sys.getPaySecret(), sys.getPayUrl());
 		if (StringUtils.isEmpty(payMessage)) {
 			return Result.error("系统繁忙，请稍后再试");
 		}

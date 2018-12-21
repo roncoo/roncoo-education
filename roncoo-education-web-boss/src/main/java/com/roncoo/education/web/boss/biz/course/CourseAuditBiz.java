@@ -12,9 +12,12 @@ import com.roncoo.education.course.common.bean.vo.CourseAuditVO;
 import com.roncoo.education.course.common.bean.vo.CourseCategoryVO;
 import com.roncoo.education.course.feign.web.IBossCourseAudit;
 import com.roncoo.education.course.feign.web.IBossCourseCategory;
-import com.roncoo.education.util.aliyun.AliyunOssUtil;
+import com.roncoo.education.system.feign.web.IBossSys;
+import com.roncoo.education.util.aliyun.Aliyun;
+import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.enums.PlatformEnum;
+import com.roncoo.education.util.tools.BeanUtil;
 import com.roncoo.education.web.boss.common.BizBoss;
 
 /**
@@ -25,6 +28,8 @@ import com.roncoo.education.web.boss.common.BizBoss;
 @Component
 public class CourseAuditBiz extends BizBoss {
 
+	@Autowired
+	private IBossSys bossSys;
 	@Autowired
 	private IBossCourseAudit bossCourseAudit;
 
@@ -49,7 +54,7 @@ public class CourseAuditBiz extends BizBoss {
 
 	public int updateById(CourseAuditQO qo, MultipartFile advFile) {
 		if (null != advFile && !advFile.isEmpty()) {
-			qo.setCourseLogo(AliyunOssUtil.uploadPic(PlatformEnum.COURSE, advFile));
+			qo.setCourseLogo(AliyunUtil.uploadPic(PlatformEnum.COURSE, advFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
 		}
 		return bossCourseAudit.updateById(qo);
 	}

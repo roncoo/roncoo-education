@@ -1,20 +1,19 @@
 package com.roncoo.education.web.boss.biz.system;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.roncoo.education.system.common.bean.qo.WebsiteQO;
 import com.roncoo.education.system.common.bean.vo.WebsiteVO;
+import com.roncoo.education.system.feign.web.IBossSys;
 import com.roncoo.education.system.feign.web.IBossWebsite;
-import com.roncoo.education.util.aliyun.AliyunOssUtil;
+import com.roncoo.education.util.aliyun.Aliyun;
+import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.enums.PlatformEnum;
+import com.roncoo.education.util.tools.BeanUtil;
 
 /**
  * 站点信息
@@ -24,6 +23,8 @@ import com.roncoo.education.util.enums.PlatformEnum;
 @Component
 public class WebsiteBiz extends BaseBiz {
 
+	@Autowired
+	private IBossSys bossSys;
 	@Autowired
 	private IBossWebsite bossWebsite;
 
@@ -55,41 +56,25 @@ public class WebsiteBiz extends BaseBiz {
 	 * 修改站点信息
 	 * 
 	 * @param qo
-	 * @param polyvLogoFile
-	 * @param picWatermarkFile
+	 * @param logoImgFile
+	 * @param logoIcoFile
 	 * @param weixinFile
 	 * @param weiboFile
 	 * @return
 	 * @author wuyun
 	 */
-	public int updateWebsite(WebsiteQO qo, MultipartFile polyvLogoFile, MultipartFile picWatermarkFile, MultipartFile weixinFile, MultipartFile weiboFile,MultipartFile logoImgFile,MultipartFile logoIcoFile) {
-		if (StringUtils.isNotBlank(qo.getPicxy())) {
-			String[] picxy = qo.getPicxy().split(",");
-			List<String> list = Arrays.asList(picxy);
-			if (!list.get(0).equals("")) {
-				qo.setPicx(Integer.parseInt(list.get(0)));
-			}
-			if (!list.get(1).equals("")) {
-				qo.setPicy(Integer.parseInt(list.get(1)));
-			}
-		}
-		if (null != polyvLogoFile && !polyvLogoFile.isEmpty()) {
-			qo.setPolyvLogo(AliyunOssUtil.uploadPic(PlatformEnum.SYSTEM, polyvLogoFile));
-		}
-		if (null != picWatermarkFile && !picWatermarkFile.isEmpty()) {
-			qo.setPicWatermark(AliyunOssUtil.uploadPic(PlatformEnum.SYSTEM, picWatermarkFile));
-		}
+	public int updateWebsite(WebsiteQO qo, MultipartFile weixinFile, MultipartFile weiboFile, MultipartFile logoImgFile, MultipartFile logoIcoFile) {
 		if (null != weixinFile && !weixinFile.isEmpty()) {
-			qo.setWeixin(AliyunOssUtil.uploadPic(PlatformEnum.SYSTEM, weixinFile));
+			qo.setWeixin(AliyunUtil.uploadPic(PlatformEnum.SYSTEM, weixinFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
 		}
 		if (null != weiboFile && !weiboFile.isEmpty()) {
-			qo.setWeibo(AliyunOssUtil.uploadPic(PlatformEnum.SYSTEM, weiboFile));
+			qo.setWeibo(AliyunUtil.uploadPic(PlatformEnum.SYSTEM, weiboFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
 		}
 		if (null != logoImgFile && !logoImgFile.isEmpty()) {
-			qo.setLogoImg(AliyunOssUtil.uploadPic(PlatformEnum.SYSTEM, logoImgFile));
+			qo.setLogoImg(AliyunUtil.uploadPic(PlatformEnum.SYSTEM, logoImgFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
 		}
 		if (null != logoIcoFile && !logoIcoFile.isEmpty()) {
-			qo.setLogoIco(AliyunOssUtil.uploadPic(PlatformEnum.SYSTEM, logoIcoFile));
+			qo.setLogoIco(AliyunUtil.uploadPic(PlatformEnum.SYSTEM, logoIcoFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
 		}
 		return bossWebsite.updateById(qo);
 	}

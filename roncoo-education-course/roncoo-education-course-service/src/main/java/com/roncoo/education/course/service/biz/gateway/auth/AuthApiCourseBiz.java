@@ -27,6 +27,8 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduc
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseUserStudy;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseUserStudyLog;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo;
+import com.roncoo.education.system.common.bean.vo.SysVO;
+import com.roncoo.education.system.feign.web.IBossSys;
 import com.roncoo.education.user.common.bean.dto.auth.AuthLecturerDTO;
 import com.roncoo.education.user.common.bean.vo.LecturerVO;
 import com.roncoo.education.user.feign.web.IBossLecturer;
@@ -67,6 +69,9 @@ public class AuthApiCourseBiz extends BaseBiz {
 	private IBossLecturer bossLecturer;
 	@Autowired
 	private OrderInfoDao orderInfoDao;
+
+	@Autowired
+	private IBossSys bossSys;
 
 	public Result<AuthCourseSignDTO> sign(AuthCourseSignBO authCourseSignBO) {
 		if (ObjectUtil.isNull(authCourseSignBO.getUserNo())) {
@@ -171,11 +176,28 @@ public class AuthApiCourseBiz extends BaseBiz {
 	 * @return
 	 */
 	private AuthCourseSignDTO getSgin(AuthCourseSignBO authCourseSignBO) {
+		SysVO sys = bossSys.getSys();
+		if (ObjectUtil.isNull(sys)) {
+			try {
+				throw new Exception("找不到系统配置信息");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if (StringUtils.isEmpty(sys.getPolyvUseid()) || StringUtils.isEmpty(sys.getPolyvSecretkey())) {
+			try {
+				throw new Exception("useid或secretkey未配置");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		PolyvSign polyvSign = new PolyvSign();
 		polyvSign.setIp(authCourseSignBO.getIp());
 		polyvSign.setUserNo(authCourseSignBO.getUserNo());
 		polyvSign.setVid(authCourseSignBO.getVideoVid());
-		PolyvSignResult signResult = PolyvUtil.getSignForH5(polyvSign);
+		PolyvSignResult signResult = PolyvUtil.getSignForH5(polyvSign, sys.getPolyvUseid(), sys.getPolyvSecretkey());
 		AuthCourseSignDTO dto = BeanUtil.copyProperties(signResult, AuthCourseSignDTO.class);
 		PolyvCode polyvCode = new PolyvCode();
 		polyvCode.setPeriodId(authCourseSignBO.getPeriodId());

@@ -76,7 +76,7 @@
 				<td colspan="3">
 					<label class="control-label x85">课程简介：</label>
 					<br />
-					<div style="margin-left: 90px; width:800px" id="editEditor" upload-url="${base}/uploadPic"><p>${bean.introduce!}</p></div>
+					<div style="margin-left: 90px; width:800px" id="auditEditEditor" upload-url="${base}/uploadPic"><p>${bean.introduce!}</p></div>
             		<textarea id="courseEditDesc" name="introduce" style="display:none" style="width:100%; height:200px;"></textarea>
 				</td>
 			</tr>
@@ -89,4 +89,4 @@
         <li><button type="submit" class="btn-default">修改</button></li>
     </ul>
 </div>
-<script>initEdit();</script>
+<script>initEdit('#auditEditEditor','${base}/upload');</script>

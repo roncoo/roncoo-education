@@ -89,13 +89,13 @@ public final class PolyvUtil {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static PolyvSignResult getSignForH5(PolyvSign bo) {
+	public static PolyvSignResult getSignForH5(PolyvSign bo, String useid, String secretkey) {
 		// 根据时间戳、vid、密钥生成sign值
 		String ts = String.valueOf(System.currentTimeMillis());
 
 		// 获取播放token
 		Map<String, Object> map = new HashedMap<>();
-		map.put("userId", ConfigUtil.POLYV_USEID);
+		map.put("userId", useid);
 		map.put("videoId", bo.getVid());
 		map.put("ts", ts);
 		map.put("viewerIp", bo.getIp());
@@ -103,7 +103,7 @@ public final class PolyvUtil {
 		map.put("extraParams", "HTML5");
 		map.put("viewerId", bo.getUserNo());
 		String concated = "extraParams" + map.get("extraParams") + "ts" + map.get("ts") + "userId" + map.get("userId") + "videoId" + map.get("videoId") + "viewerId" + map.get("viewerId") + "viewerIp" + map.get("viewerIp") + "viewerName" + map.get("viewerName");
-		map.put("sign", MD5Util.MD5(ConfigUtil.POLYV_SECRETKEY + concated + ConfigUtil.POLYV_SECRETKEY).toUpperCase());
+		map.put("sign", MD5Util.MD5(secretkey + concated + secretkey).toUpperCase());
 		String result = post(ConfigUtil.POLYV_GETTOKEN, map);
 		logger.info("保利威视，获取token接口：result={}", result);
 		Map<String, Object> resultMap = JSONUtil.parseObject(result, HashMap.class);
@@ -116,13 +116,13 @@ public final class PolyvUtil {
 			return null;
 		}
 		PolyvSignResult dto = new PolyvSignResult();
-		dto.setSign(MD5Util.MD5(ConfigUtil.POLYV_SECRETKEY + bo.getVid() + ts));
+		dto.setSign(MD5Util.MD5(secretkey + bo.getVid() + ts));
 		dto.setTs(ts);
 		dto.setToken(data.get("token").toString());
 		return dto;
 	}
 
-	public static UploadFileResult getVideo(String vid) {
+	public static UploadFileResult getVideo(String vid, String secretkey, String useid) {
 		Map<String, Object> param = new TreeMap<String, Object>();
 		param.put("vid", vid);
 		param.put("format", "json");
@@ -132,9 +132,9 @@ public final class PolyvUtil {
 			signStr.append("&").append(entry.getKey()).append("=").append(entry.getValue());
 		}
 		signStr = signStr.deleteCharAt(0);
-		signStr.append(ConfigUtil.POLYV_SECRETKEY);
+		signStr.append(secretkey);
 		param.put("sign", SHA1Util.getSign(signStr.toString()));
-		String s = post("http://api.polyv.net/v2/video/{userid}/get-video-msg".replace("{userid}", ConfigUtil.POLYV_USEID), param);
+		String s = post("http://api.polyv.net/v2/video/{userid}/get-video-msg".replace("{userid}", useid), param);
 		try {
 			@SuppressWarnings("unchecked")
 			Map<String, Object> m = JSONUtil.parseObject(s, HashMap.class);
@@ -155,9 +155,9 @@ public final class PolyvUtil {
 	 * @param file
 	 * @return
 	 */
-	public static UploadFileResult uploadFile(File file, UploadFile uploadFile) {
+	public static UploadFileResult uploadFile(File file, UploadFile uploadFile, String writetoken) {
 		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("writetoken", ConfigUtil.POLYV_WRITETOKEN);
+		param.put("writetoken", writetoken);
 		param.put("JSONRPC", "{\"title\": \"" + uploadFile.getTitle() + "\", \"tag\": \"" + uploadFile.getTag() + "\", \"desc\": \"" + uploadFile.getDesc() + "\"}");
 		param.put("cataid", uploadFile.getCataid());
 		param.put("watermark", uploadFile.getWatermark());
@@ -177,9 +177,9 @@ public final class PolyvUtil {
 	/**
 	 * 删除视频
 	 */
-	public static String deleteFile(String vid) {
+	public static String deleteFile(String vid, String useid, String uecretkey) {
 		SortedMap<String, String> paramMap = new TreeMap<>();
-		paramMap.put("userid", ConfigUtil.POLYV_USEID);// 用户ID
+		paramMap.put("userid", useid);// 用户ID
 		paramMap.put("vid", vid);// 视频ID
 		paramMap.put("ptime", String.valueOf(System.currentTimeMillis()));// 当前13位毫秒级时间戳
 		StringBuilder signStr = new StringBuilder();
@@ -187,10 +187,10 @@ public final class PolyvUtil {
 			signStr.append("&").append(entry.getKey()).append("=").append(entry.getValue());
 		}
 		signStr = signStr.deleteCharAt(0);
-		signStr.append(ConfigUtil.POLYV_SECRETKEY);
+		signStr.append(uecretkey);
 		String sign = SHA1Util.getSign(signStr.toString());
 		paramMap.put("sign", sign);
-		String url = ConfigUtil.POLYV_DELETEVIDEO.replace("{userid}", ConfigUtil.POLYV_USEID);
+		String url = ConfigUtil.POLYV_DELETEVIDEO.replace("{userid}", useid);
 		HttpPost httpPost = new HttpPost(url.trim());
 		RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(10000).setConnectionRequestTimeout(3600000).setSocketTimeout(3600000).build();
 		httpPost.setConfig(requestConfig);
@@ -213,7 +213,7 @@ public final class PolyvUtil {
 	/**
 	 * 上传问题接口
 	 */
-	public static QuestionResult uploadQuestion(Question question) {
+	public static QuestionResult uploadQuestion(Question question, String writetoken) {
 		try {
 			String url = ConfigUtil.POLYV_QUESTION;
 			HttpPost httpPost = new HttpPost(url.trim());
@@ -231,7 +231,7 @@ public final class PolyvUtil {
 			choices.add(righeAnswer);
 			List<BasicNameValuePair> nvps = new ArrayList<>();
 			nvps.add(new BasicNameValuePair("method", "saveExam"));
-			nvps.add(new BasicNameValuePair("writetoken", ConfigUtil.POLYV_WRITETOKEN));
+			nvps.add(new BasicNameValuePair("writetoken", writetoken));
 			nvps.add(new BasicNameValuePair("vid", question.getVid()));
 			nvps.add(new BasicNameValuePair("examId", question.getExamId()));
 			nvps.add(new BasicNameValuePair("seconds", String.valueOf(question.getSeconds())));
@@ -258,7 +258,7 @@ public final class PolyvUtil {
 	 * @param paramMap
 	 * @return
 	 */
-	public static String getSign(Map<String, Object> paramMap) {
+	public static String getSign(Map<String, Object> paramMap, String secretkey) {
 		if (paramMap.isEmpty()) {
 			return "";
 		}
@@ -271,7 +271,7 @@ public final class PolyvUtil {
 			}
 		}
 		stringBuffer.delete(stringBuffer.length() - 1, stringBuffer.length());
-		String argPreSign = stringBuffer.append("&paySecret=").append(ConfigUtil.POLYV_SECRETKEY).toString();
+		String argPreSign = stringBuffer.append("&paySecret=").append(secretkey).toString();
 		return MD5Util.MD5(argPreSign).toUpperCase();
 	}
 
