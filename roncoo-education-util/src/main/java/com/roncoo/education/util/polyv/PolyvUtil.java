@@ -177,7 +177,7 @@ public final class PolyvUtil {
 	/**
 	 * 删除视频
 	 */
-	public static String deleteFile(String vid, String useid, String uecretkey) {
+	public static String deleteFile(String vid, String useid, String secretkey) {
 		SortedMap<String, String> paramMap = new TreeMap<>();
 		paramMap.put("userid", useid);// 用户ID
 		paramMap.put("vid", vid);// 视频ID
@@ -187,7 +187,7 @@ public final class PolyvUtil {
 			signStr.append("&").append(entry.getKey()).append("=").append(entry.getValue());
 		}
 		signStr = signStr.deleteCharAt(0);
-		signStr.append(uecretkey);
+		signStr.append(secretkey);
 		String sign = SHA1Util.getSign(signStr.toString());
 		paramMap.put("sign", sign);
 		String url = ConfigUtil.POLYV_DELETEVIDEO.replace("{userid}", useid);

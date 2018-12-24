@@ -6,6 +6,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoDeleteBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoForUpdateBO;
@@ -21,6 +22,8 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriodAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideo;
+import com.roncoo.education.system.common.bean.vo.SysVO;
+import com.roncoo.education.system.feign.web.IBossSys;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.AuditStatusEnum;
@@ -49,6 +52,9 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 	private CourseChapterAuditDao chapterAuditDao;
 	@Autowired
 	private CourseAuditDao courseAuditDao;
+
+	@Autowired
+	private IBossSys bossSys;
 
 	/**
 	 * 章节视频库，课时视频库添加接口
@@ -246,6 +252,13 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 		if (!bo.getUserNo().equals(course.getLecturerUserNo())) {
 			return Result.error("传入的useNo与该课程的讲师useNo不一致");
 		}
+		SysVO sys = bossSys.getSys();
+		if (ObjectUtil.isNull(sys)) {
+			return Result.error("未找到系统配置信息");
+		}
+		if (StringUtils.isEmpty(sys.getPolyvUseid()) || StringUtils.isEmpty(sys.getPolyvSecretkey())) {
+			return Result.error("useid或secretkey未配置");
+		}
 		// 查找该视频是否被使用
 		List<CourseVideo> courseVideoList = dao.listByVideoNoAndNotEqualPeriodIdAndStatusId(courseVideo.getVideoNo(), Long.valueOf(0), StatusIdEnum.YES.getCode());
 		if (CollectionUtils.isNotEmpty(courseVideoList) && courseVideoList.size() >= 2) {
@@ -256,7 +269,7 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 		int result = dao.updateById(courseVideo);
 		if (result > 0) {
 			// 删除保利威视的视频
-			PolyvUtil.deleteFile(courseVideo.getVideoVid(), bo.getUseid(), bo.getUecretkey());
+			PolyvUtil.deleteFile(courseVideo.getVideoVid(), sys.getPolyvUseid(), sys.getPolyvSecretkey());
 			if (!courseVideo.getPeriodId().equals(Long.valueOf(0))) {
 				CourseChapterPeriodAudit periodInfoAudit = periodAuditDao.getById(courseVideo.getPeriodId());
 				periodInfoAudit.setAuditStatus(AuditStatusEnum.WAIT.getCode());

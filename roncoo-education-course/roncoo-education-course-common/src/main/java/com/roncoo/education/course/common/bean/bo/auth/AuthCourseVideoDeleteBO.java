@@ -28,16 +28,5 @@ public class AuthCourseVideoDeleteBO implements Serializable {
 	 */
 	@ApiModelProperty(value = "用户编号", required = true)
 	private Long userNo;
-	
-	/**
-	 * useid
-	 */
-	@ApiModelProperty(value = "useid", required = true)
-	private String useid;
-	
-	/**
-	 * uecretkey
-	 */
-	@ApiModelProperty(value = "uecretkey", required = true)
-	private String uecretkey;
+
 }
