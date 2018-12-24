@@ -26,7 +26,7 @@ public class ZoneBO implements Serializable {
 	/**
 	 * 位置(1电脑端，2微信端)
 	 */
-	@ApiModelProperty(value = "展示平台", required = true)
+	@ApiModelProperty(value = "位置(1电脑端，2微信端)", required = true)
 	private Integer zoneLocation;
 
 	/**
