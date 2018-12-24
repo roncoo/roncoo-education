@@ -42,7 +42,7 @@ public class ConfigurationWebMvc implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-//		registry.addInterceptor(shiroInterceptor()).addPathPatterns(PATH);
+		registry.addInterceptor(shiroInterceptor()).addPathPatterns(PATH);
 	}
 }
 
