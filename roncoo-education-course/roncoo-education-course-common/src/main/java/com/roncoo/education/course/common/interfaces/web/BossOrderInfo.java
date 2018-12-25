@@ -81,11 +81,4 @@ public interface BossOrderInfo {
 	@RequestMapping(value = "/boss/course/orderInfo/countIncome", method = RequestMethod.POST)
 	CountIncomeVO countIncome(@RequestBody OrderInfoQO qo);
 	
-	/**
-	 * 手工录单
-	 * 
-	 * @author wuyun
-	 */
-	@RequestMapping(value = "/boss/course/orderInfo/manualOrder", method = RequestMethod.POST)
-	int manualOrder(@RequestBody OrderInfoQO qo);
 }

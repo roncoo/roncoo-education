@@ -79,9 +79,4 @@ public class BossOrderInfoController extends BaseController implements BossOrder
 		return biz.countIncome(qo);
 	}
 
-	@Override
-	public int manualOrder(@RequestBody OrderInfoQO qo) {
-		return biz.manualOrder(qo);
-	}
-
 }

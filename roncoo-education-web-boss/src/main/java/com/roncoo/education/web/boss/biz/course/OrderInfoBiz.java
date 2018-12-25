@@ -9,18 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.roncoo.education.web.boss.biz.course.CourseBiz;
-import com.roncoo.education.course.common.bean.qo.CourseQO;
 import com.roncoo.education.course.common.bean.qo.OrderInfoQO;
 import com.roncoo.education.course.common.bean.vo.CountIncomeVO;
-import com.roncoo.education.course.common.bean.vo.CourseVO;
 import com.roncoo.education.course.common.bean.vo.OrderInfoVO;
 import com.roncoo.education.course.feign.web.IBossOrderInfo;
-import com.roncoo.education.user.common.bean.qo.UserExtQO;
-import com.roncoo.education.user.common.bean.vo.UserExtVO;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
-import com.roncoo.education.web.boss.biz.user.UserExtBiz;
 import com.roncoo.education.web.boss.common.ReportExcelUtil;
 
 /**
@@ -30,11 +24,6 @@ import com.roncoo.education.web.boss.common.ReportExcelUtil;
  */
 @Component
 public class OrderInfoBiz extends BaseBiz {
-
-	@Autowired
-	private CourseBiz courseInfoBiz;
-	@Autowired
-	private UserExtBiz userExtBiz;
 
 	@Autowired
 	private IBossOrderInfo bossOrderInfo;
@@ -72,18 +61,6 @@ public class OrderInfoBiz extends BaseBiz {
 
 	public CountIncomeVO countIncome(OrderInfoQO qo) {
 		return bossOrderInfo.countIncome(qo);
-	}
-
-	public int manualOrder(OrderInfoQO qo) {
-		return bossOrderInfo.manualOrder(qo);
-	}
-
-	public Page<CourseVO> courselistForPage(CourseQO courseQO) {
-		return courseInfoBiz.listForPage(courseQO);
-	}
-
-	public Page<UserExtVO> userExtlistForPage(UserExtQO userExtQO) {
-		return userExtBiz.listForPage(userExtQO);
 	}
 
 }

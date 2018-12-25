@@ -35,9 +35,6 @@
 			<br />
             <br />
 			<button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;<a class="btn btn-orange" href="javascript:;" data-toggle="reloadsearch" data-clear-query="true" data-icon="undo">清空查询</a>
-			<@shiro.hasPermission name="/course/orderInfo/course/add">
-			<button type="button" class="btn-blue" data-url="${base}/course/orderInfo/course/add" data-toggle="dialog" data-id="order-add" data-icon="plus">手工录单</button>
-			</@shiro.hasPermission>
 			<@shiro.hasPermission name="/course/orderInfo/export">
             <div class="btn-group">
                 <button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown" data-icon="copy">报表导出<span class="caret"></span></button>

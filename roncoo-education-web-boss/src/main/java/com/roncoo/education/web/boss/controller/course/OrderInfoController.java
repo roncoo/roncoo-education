@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.roncoo.education.course.common.bean.qo.CourseQO;
 import com.roncoo.education.course.common.bean.qo.OrderInfoQO;
-import com.roncoo.education.user.common.bean.qo.UserExtQO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.web.boss.biz.course.OrderInfoBiz;
 
@@ -93,46 +91,6 @@ public class OrderInfoController extends BaseController {
 	@RequestMapping(value = "/export", method = RequestMethod.GET)
 	public void orderExport(@ModelAttribute OrderInfoQO orderInfoQO, HttpServletResponse response) throws IOException {
 		biz.orderExport(orderInfoQO, response);
-	}
-
-	/**
-	 * 手工录单
-	 * 
-	 * @author wuyun
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/course/manualOrder")
-	public String manualOrder(OrderInfoQO qo) {
-		if (biz.manualOrder(qo) > 0) {
-			return success(TARGETID);
-		}
-		return error("录单失败");
-	}
-
-	/**
-	 * 跳转到课程添加页面
-	 */
-	@RequestMapping(value = "/course/add")
-	public void courseAdd() {
-
-	}
-
-	/**
-	 * 课程列表
-	 */
-	@RequestMapping(value = "/course/courseList")
-	public void courseList(CourseQO courseQO, ModelMap modelMap) {
-		modelMap.put("bean", courseQO);
-		modelMap.put("page", biz.courselistForPage(courseQO));
-	}
-
-	/**
-	 * 用户列表
-	 */
-	@RequestMapping(value = "/course/userList")
-	public void userList(UserExtQO userExtQO, ModelMap modelMap) {
-		modelMap.put("bean", userExtQO);
-		modelMap.put("page", biz.userExtlistForPage(userExtQO));
 	}
 
 }

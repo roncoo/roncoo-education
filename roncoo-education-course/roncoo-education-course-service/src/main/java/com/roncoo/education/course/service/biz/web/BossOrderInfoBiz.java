@@ -9,40 +9,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.roncoo.education.util.base.BaseException;
-import com.roncoo.education.util.enums.ChannelTypeEnum;
-import com.roncoo.education.util.enums.IsShowEnum;
-import com.roncoo.education.util.tools.IdWorker;
 import com.roncoo.education.course.common.bean.qo.OrderEchartsQO;
 import com.roncoo.education.course.common.bean.qo.OrderInfoQO;
 import com.roncoo.education.course.common.bean.vo.CountIncomeVO;
 import com.roncoo.education.course.common.bean.vo.OrderEchartsVO;
 import com.roncoo.education.course.common.bean.vo.OrderInfoVO;
 import com.roncoo.education.course.common.bean.vo.OrderReportVO;
-import com.roncoo.education.course.service.dao.CourseDao;
 import com.roncoo.education.course.service.dao.OrderInfoDao;
 import com.roncoo.education.course.service.dao.OrderPayDao;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfoExample;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfoExample.Criteria;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderPay;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderPayExample;
-import com.roncoo.education.user.common.bean.vo.LecturerVO;
-import com.roncoo.education.user.common.bean.vo.UserExtVO;
-import com.roncoo.education.user.feign.web.IBossLecturer;
-import com.roncoo.education.user.feign.web.IBossUserExt;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.enums.OrderStatusEnum;
-import com.roncoo.education.util.enums.PayTypeEnum;
-import com.roncoo.education.util.enums.TradeTypeEnum;
 import com.roncoo.education.util.tools.BeanUtil;
 import com.roncoo.education.util.tools.DateUtil;
-import com.roncoo.education.util.tools.NOUtil;
 import com.xiaoleilu.hutool.util.CollectionUtil;
-import com.xiaoleilu.hutool.util.ObjectUtil;
 
 /**
  * 订单信息表
@@ -56,13 +42,6 @@ public class BossOrderInfoBiz extends BaseBiz {
 	private OrderInfoDao dao;
 	@Autowired
 	private OrderPayDao orderPayDao;
-	@Autowired
-	private CourseDao courseDao;
-
-	@Autowired
-	private IBossLecturer bossLecturer;
-	@Autowired
-	private IBossUserExt bossUserExt;
 
 	public Page<OrderInfoVO> listForPage(OrderInfoQO qo) {
 		OrderInfoExample example = new OrderInfoExample();
@@ -234,81 +213,6 @@ public class BossOrderInfoBiz extends BaseBiz {
 			}
 		}
 		return 1;
-	}
-
-	/**
-	 * 手工录单
-	 * 
-	 * @param qo
-	 * @author wuyun
-	 */
-	public int manualOrder(OrderInfoQO qo) {
-		if (StringUtils.isEmpty(qo.getCourseId())) {
-			throw new BaseException("courseId不能为空");
-		}
-		if (StringUtils.isEmpty(qo.getUserNo())) {
-			throw new BaseException("userNo不能为空");
-		}
-
-		Course course = courseDao.getById(qo.getCourseId());
-		if (ObjectUtil.isNull(course)) {
-			throw new BaseException("根据传入的courseId没找到对应的课程信息!");
-		}
-
-		// 获取讲师信息
-		LecturerVO lecturerVO = bossLecturer.getByLecturerUserNo(course.getLecturerUserNo());
-		if (StringUtils.isEmpty(lecturerVO)) {
-			throw new BaseException("根据课程的讲师编号,没找到对应的讲师信息!");
-		}
-		// 根据用户编号和机构编号查找用户信息
-		UserExtVO userExtVO = bossUserExt.getByUserNo(qo.getUserNo());
-		if (ObjectUtil.isNull(userExtVO)) {
-			throw new BaseException("根据传入的userNo没找到对应的用户信息!");
-		}
-
-		// 插入订单信息
-		OrderInfo orderInfo = saveOrderInfoForManual(qo, course, lecturerVO, userExtVO);
-		// 插入订单支付信息
-		return saveOrderPay(orderInfo);
-
-	}
-
-	/**
-	 * 保存订单信息
-	 */
-	private OrderInfo saveOrderInfoForManual(OrderInfoQO qo, Course course, LecturerVO lecturerVO, UserExtVO userExtVO) {
-		OrderInfo orderInfo = new OrderInfo();
-		orderInfo.setLecturerUserNo(lecturerVO.getLecturerUserNo());
-		orderInfo.setLecturerName(lecturerVO.getLecturerName());
-		orderInfo.setUserNo(qo.getUserNo());
-		orderInfo.setMobile(userExtVO.getMobile());
-		orderInfo.setRegisterTime(userExtVO.getGmtCreate());
-		orderInfo.setOrderNo(NOUtil.getOrderNo());
-		orderInfo.setCourseId(course.getId());
-		orderInfo.setCourseName(course.getCourseName());
-		orderInfo.setPricePayable(qo.getPricePaid());
-		orderInfo.setPriceDiscount(qo.getPricePaid());
-		orderInfo.setPricePaid(BigDecimal.ZERO);
-		orderInfo.setPlatformProfit(BigDecimal.ZERO);
-		orderInfo.setLecturerProfit(BigDecimal.ZERO);
-		orderInfo.setTradeType(TradeTypeEnum.OFFLINE.getCode());
-		orderInfo.setPayType(PayTypeEnum.MANUAL.getCode());
-		orderInfo.setChannelType(ChannelTypeEnum.MANUAL.getCode());
-		orderInfo.setOrderStatus(OrderStatusEnum.SUCCESS.getCode());
-		orderInfo.setIsShowLecturer(IsShowEnum.NO.getCode());
-		orderInfo.setIsShowUser(IsShowEnum.NO.getCode());
-		orderInfo.setRemark(qo.getRemark());
-		dao.save(orderInfo);
-		return orderInfo;
-	}
-
-	/**
-	 * 保存订单支付信息
-	 */
-	private int saveOrderPay(OrderInfo orderInfo) {
-		OrderPay orderPay = BeanUtil.copyProperties(orderInfo, OrderPay.class);
-		orderPay.setSerialNumber(IdWorker.getId());
-		return orderPayDao.save(orderPay);
 	}
 
 }
