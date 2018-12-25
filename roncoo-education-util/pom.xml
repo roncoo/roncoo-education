@@ -117,17 +117,4 @@
 
 	</dependencies>
 
-	<build>
-		<resources>
-			<resource>
-				<directory>src/main/resources/config/${env}</directory>
-				<targetPath>${project.build.directory}/classes</targetPath>
-				<filtering>true</filtering>
-				<includes>
-					<include>**/*</include>
-				</includes>
-			</resource>
-		</resources>
-	</build>
-
 </project>

@@ -9,17 +9,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.roncoo.education.course.common.bean.bo.PeriodUploadDocBO;
-import com.roncoo.education.course.service.dao.CourseAuditDao;
-import com.roncoo.education.course.service.dao.CourseChapterAuditDao;
-import com.roncoo.education.course.service.dao.CourseChapterPeriodAuditDao;
 import com.roncoo.education.course.service.dao.CourseVideoDao;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAudit;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterAudit;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriodAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideo;
 import com.roncoo.education.system.common.bean.vo.SysVO;
 import com.roncoo.education.system.feign.web.IBossSys;
@@ -28,8 +20,6 @@ import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.config.ConfigUtil;
-import com.roncoo.education.util.enums.AuditStatusEnum;
-import com.roncoo.education.util.enums.IsDocEnum;
 import com.roncoo.education.util.enums.PlatformEnum;
 import com.roncoo.education.util.enums.VideoStatusEnum;
 import com.roncoo.education.util.polyv.PolyvUtil;
@@ -48,12 +38,6 @@ import com.xiaoleilu.hutool.util.ObjectUtil;
 @Component
 public class ApiUploadBiz extends BaseBiz {
 
-	@Autowired
-	private CourseAuditDao courseAuditDao;
-	@Autowired
-	private CourseChapterAuditDao courseChapterAuditDao;
-	@Autowired
-	private CourseChapterPeriodAuditDao courseChapterPeriodAuditDao;
 	@Autowired
 	private CourseVideoDao courseVideoDao;
 
@@ -173,7 +157,6 @@ public class ApiUploadBiz extends BaseBiz {
 	 */
 	public Result<String> uploadPic(MultipartFile picFile) {
 		if (ObjectUtil.isNotNull(picFile) && !picFile.isEmpty()) {
-			// 没水印，单独上传
 			return Result.success(AliyunUtil.uploadPic(PlatformEnum.COURSE, picFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
 		}
 		return Result.error("请选择上传的图片");
@@ -184,45 +167,8 @@ public class ApiUploadBiz extends BaseBiz {
 	 * 
 	 * @author wuyun
 	 */
-	public Result<String> uploadDoc(MultipartFile docFile, PeriodUploadDocBO bo) {
-		if (ObjectUtil.isNotNull(docFile) && !docFile.isEmpty()) { // 文档上传
-			CourseChapterPeriodAudit courseChapterPeriodAudit = courseChapterPeriodAuditDao.getById(bo.getPeriodId());
-			if (ObjectUtil.isNull(courseChapterPeriodAudit)) {
-				return Result.error("找不到课时信息");
-			}
-			SysVO sys = bossSys.getSys();
-			if (ObjectUtil.isNull(sys)) {
-				return Result.error("找不到系统配置信息");
-			}
-			if (StringUtils.isEmpty(sys.getAliyunAccessKeyId()) || StringUtils.isEmpty(sys.getAliyunAccessKeySecret())) {
-				return Result.error("accessKeyId或者accessKeySecret没配置");
-			}
-			if (StringUtils.isEmpty(sys.getAliyunOasVault()) || StringUtils.isEmpty(sys.getAliyunOssBucket()) || StringUtils.isEmpty(sys.getAliyunOssUrl())) {
-				return Result.error("oasVault,ossBucket或ossUrl没配置");
-			}
-			String url = AliyunUtil.uploadDoc(PlatformEnum.COURSE, docFile, BeanUtil.copyProperties(sys, Aliyun.class));
+	public Result<String> uploadDoc(MultipartFile docFile) {
 
-			// 更新课程审核表为待审核状态
-			CourseAudit courseAudit = new CourseAudit();
-			courseAudit.setId(courseChapterPeriodAudit.getCourseId());
-			courseAudit.setAuditStatus(AuditStatusEnum.WAIT.getCode());
-			courseAuditDao.updateById(courseAudit);
-			// 更新章节审核表为待审核状态
-			CourseChapterAudit courseChapterAudit = new CourseChapterAudit();
-			courseChapterAudit.setId(courseChapterPeriodAudit.getChapterId());
-			courseChapterAudit.setAuditStatus(AuditStatusEnum.WAIT.getCode());
-			courseChapterAuditDao.updateById(courseChapterAudit);
-			// 更新课时审核信息
-			CourseChapterPeriodAudit periodAudit = new CourseChapterPeriodAudit();
-			periodAudit.setId(bo.getPeriodId());
-			periodAudit.setIsDoc(Integer.valueOf(IsDocEnum.YES.getCode()));
-			periodAudit.setDocName(docFile.getOriginalFilename());
-			periodAudit.setDocUrl(url);
-			periodAudit.setAuditStatus(AuditStatusEnum.WAIT.getCode());
-			courseChapterPeriodAuditDao.updateById(periodAudit);
-
-			return Result.success(url);
-		}
 		return Result.error("请选择上传的文件");
 
 	}
