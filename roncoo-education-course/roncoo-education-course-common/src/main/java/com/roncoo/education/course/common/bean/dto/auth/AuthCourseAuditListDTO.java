@@ -3,6 +3,9 @@ package com.roncoo.education.course.common.bean.dto.auth;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -22,6 +25,7 @@ public class AuthCourseAuditListDTO implements Serializable {
      * 主键
      */
     @ApiModelProperty(value = "课程ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
     /**
      * 状态(1:正常，0:禁用)
