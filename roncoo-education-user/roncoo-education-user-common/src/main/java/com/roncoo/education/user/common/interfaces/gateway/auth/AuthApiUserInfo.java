@@ -22,6 +22,6 @@ public interface AuthApiUserInfo {
 	 * @author wuyun
 	 */
 	@ApiOperation(value = "用户修改密码接口", notes = "用户修改密码接口")
-	@RequestMapping(value = "/auth/user/api/user/updatePassword", method = RequestMethod.POST)
+	@RequestMapping(value = "/auth/user/api/user/update/password", method = RequestMethod.POST)
 	Result<Integer> updatePassword(@RequestBody AuthUserUpdateBO authUserUpdateBO);
 }
