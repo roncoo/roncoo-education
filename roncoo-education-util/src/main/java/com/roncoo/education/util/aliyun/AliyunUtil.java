@@ -58,7 +58,7 @@ public final class AliyunUtil {
 		try {
 			downloadObject(ConfigUtil.ALIYUN_OSS_ENDPOINT, aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret(), aliyun.getAliyunOssBucket(), key, file);
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error("上传失败", e);
 		}
 		return file;
 	}
@@ -71,7 +71,7 @@ public final class AliyunUtil {
 			getOssClient(ConfigUtil.ALIYUN_OSS_ENDPOINT, aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret()).putObject(aliyun.getAliyunOssBucket(), filePath, file);
 			return aliyun.getAliyunOssUrl() + filePath;
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("上传失败", e);
 			return "";
 		}
 	}
@@ -86,7 +86,7 @@ public final class AliyunUtil {
 			getOssClient(ConfigUtil.ALIYUN_OSS_ENDPOINT, aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret()).putObject(aliyun.getAliyunOssBucket(), filePath, in);
 			return aliyun.getAliyunOssUrl() + filePath;
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("上传失败", e);
 			return "";
 		} finally {
 			if (in != null) {
@@ -106,7 +106,7 @@ public final class AliyunUtil {
 			putObjectForFile(ConfigUtil.ALIYUN_OSS_ENDPOINT, aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret(), aliyun.getAliyunOssBucket(), filePath, new FileInputStream(file), file.getName());
 			return aliyun.getAliyunOssUrl() + filePath;
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("上传失败", e);
 			return "";
 		}
 	}
@@ -121,7 +121,7 @@ public final class AliyunUtil {
 			putObjectForFile(ConfigUtil.ALIYUN_OSS_ENDPOINT, aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret(), aliyun.getAliyunOssBucket(), filePath, in, file.getOriginalFilename());
 			return aliyun.getAliyunOssUrl() + filePath;
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("上传失败", e);
 			return "";
 		} finally {
 			if (in != null) {
@@ -143,7 +143,7 @@ public final class AliyunUtil {
 			String filePath = url.replace(aliyun.getAliyunOssUrl(), "");
 			deleteObject(aliyun.getAliyunOssBucket(), filePath, aliyun);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("上传失败", e);
 		}
 	}
 
