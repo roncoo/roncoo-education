@@ -39,7 +39,6 @@ import com.roncoo.education.util.enums.StatusIdEnum;
 import com.roncoo.education.util.enums.SysTypeEnum;
 import com.roncoo.education.util.enums.TradeStatusEnum;
 import com.roncoo.education.util.enums.TradeTypeEnum;
-import com.roncoo.education.util.enums.TrxTypeEnum;
 import com.roncoo.education.util.enums.UserTypeEnum;
 import com.roncoo.education.util.enums.VideoStatusEnum;
 import com.roncoo.education.util.enums.VideoTypeEnum;
@@ -86,7 +85,6 @@ public class BaseController extends Base {
 		modelMap.put("statusIdEnums", StatusIdEnum.values());
 		modelMap.put("tradeStatusEnums", TradeStatusEnum.values());
 		modelMap.put("tradeTypeEnums", TradeTypeEnum.values());
-		modelMap.put("trxTypeEnums", TrxTypeEnum.values());
 		modelMap.put("userTypeEnums", UserTypeEnum.values());
 		modelMap.put("videoStatusEnums", VideoStatusEnum.values());
 		modelMap.put("zoneLocationEnums", ZoneLocationEnum.values());

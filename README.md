@@ -1,7 +1,7 @@
-# 领课在线教育系统
+# 龙果教育-领课网络在线教育系统
 
 ### 项目介绍
-领课在线教育系统是基于领课团队多年的在线教育开发和运营经验的产品，打造一个全行业都适用的在线教育系统。
+龙果教育是基于领课团队多年的在线教育开发和运营经验的产品，打造一个全行业都适用的在线教育系统。
 
 ### 功能介绍
 * 权限管理功能，多角色多用户自定义配置
@@ -20,6 +20,54 @@
 | Hystrix           | Mybatis           | Druid             | Redis              | 
 | 模板引擎                                  | 日志框架                                   | 常用工具                                   | 版本维护                                     | 
 | Freemarker        | Logback           | Hutool            | Spring IO Platform | 
+
+### 项目结构
+
+```
+├─roncoo-education -----------------------------父项目，公共依赖
+│  │
+│  ├─roncoo-education-course -------------------课程模块，包括订单模块
+│  │  │
+│  │  ├─roncoo-education-course-common ---------共用工程
+│  │  │
+│  │  ├─roncoo-education-course-feign ----------接口工程，供其他工程模块使用
+│  │  │
+│  │  └─roncoo-education-course-service --------服务工程，其他接口服务
+│  │
+│  ├─roncoo-education-crontab-plan -------------定时任务，处理过期订单和统计等
+│  │
+│  ├─roncoo-education-gateway-api --------------网关工程
+│  │
+│  ├─roncoo-education-server-config ------------配置中心
+│  │
+│  ├─roncoo-education-server-eureka ------------注册中心
+│  │
+│  ├─roncoo-education-system -------------------系统基础工程
+│  │  │
+│  │  ├─roncoo-education-system-common ---------共用工程
+│  │  │
+│  │  ├─roncoo-education-system-feign ----------接口工程，供其他工程模块使用
+│  │  │
+│  │  └─roncoo-education-system-service --------服务工程，其他接口服务
+│  │
+│  ├─roncoo-education-user ---------------------用户工程
+│  │  │
+│  │  ├─roncoo-education-user-common -----------共用工程
+│  │  │
+│  │  ├─roncoo-education-user-feign ------------接口工程，供其他工程模块使用
+│  │  │
+│  │  └─roncoo-education-user-service ----------服务工程，其他接口服务
+│  │
+│  ├─roncoo-education-web-boss -----------------管理后台工程
+│  │
+│  ├─doc
+│  │  │
+│  │  ├─images --------------------------------项目演示截图
+│  │  │
+│  │  ├─lombok.jar ----------------------------Eclipse使用，放到Eclipse的根目录即可
+│  │  │
+└──└──└─cloud_education.sql------------------------项目SQL脚本：带有demo数据
+```
 
 ### 加速maven构建
 在maven的settings.xml 文件里配置mirrors的子节点，添加如下mirror
@@ -47,7 +95,7 @@ Lombok是一个可以通过简单的注解形式来帮助我们简化消除一�
 
 ![流程图](/doc/images/lombok1.png)
 
-#### 官方QQ群
+### 官方QQ群
 <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=7d1b7f1a78715320d09ed841c66d6bf0fa7b9105964cc327e9483e459b46abd4"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课" title="在线教育系统-领课"> 826617734</a>
 
 ## 项目推荐
