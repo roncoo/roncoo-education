@@ -9,6 +9,7 @@ import com.roncoo.education.user.common.bean.bo.UserLoginCodeBO;
 import com.roncoo.education.user.common.bean.bo.UserLoginPasswordBO;
 import com.roncoo.education.user.common.bean.bo.UserRegisterBO;
 import com.roncoo.education.user.common.bean.bo.UserSendCodeBO;
+import com.roncoo.education.user.common.bean.bo.auth.UserUpdateBO;
 import com.roncoo.education.user.common.bean.dto.UserLoginDTO;
 import com.roncoo.education.user.common.interfaces.gateway.ApiUserInfo;
 import com.roncoo.education.user.service.biz.gateway.ApiUserInfoBiz;
@@ -50,5 +51,11 @@ public class ApiUserInfoController extends BaseController implements ApiUserInfo
 	public Result<String> auth(@RequestBody UserAuthBO userAuthBO) {
 		return null;
 	}
+
+	@Override
+	public Result<Integer> updatePassword(@RequestBody UserUpdateBO userUpdateBO) {
+		return biz.updatePassword(userUpdateBO);
+	}
+
 
 }

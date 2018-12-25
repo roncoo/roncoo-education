@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class AuthUserUpdateBO implements Serializable {
+public class UserUpdateBO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -32,4 +32,14 @@ public class AuthUserUpdateBO implements Serializable {
 	 */
 	@ApiModelProperty(value = "确认密码")
 	private String confirmPassword;
+	/**
+	 * clientId
+	 */
+	@ApiModelProperty(value = "clientId")
+	private String clientId;
+	/**
+	 * 验证码
+	 */
+	@ApiModelProperty(value = "验证码")
+	private String code;
 }

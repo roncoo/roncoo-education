@@ -9,6 +9,7 @@ import com.roncoo.education.user.common.bean.bo.UserLoginCodeBO;
 import com.roncoo.education.user.common.bean.bo.UserLoginPasswordBO;
 import com.roncoo.education.user.common.bean.bo.UserRegisterBO;
 import com.roncoo.education.user.common.bean.bo.UserSendCodeBO;
+import com.roncoo.education.user.common.bean.bo.auth.UserUpdateBO;
 import com.roncoo.education.user.common.bean.dto.UserLoginDTO;
 import com.roncoo.education.util.base.Result;
 
@@ -55,5 +56,14 @@ public interface ApiUserInfo {
 	@ApiOperation(value = "授权登录接口", notes = "后台登录到讲师中心时使用")
 	@RequestMapping(value = "/user/api/user/auth", method = RequestMethod.POST)
 	Result<String> auth(@RequestBody UserAuthBO userAuthBO);
+	
+	/**
+	 * 用户修改密码接口
+	 * 
+	 * @author wuyun
+	 */
+	@ApiOperation(value = "用户修改密码接口", notes = "用户修改密码接口")
+	@RequestMapping(value = "/user/api/user/update/password", method = RequestMethod.POST)
+	Result<Integer> updatePassword(@RequestBody UserUpdateBO userUpdateBO);
 
 }

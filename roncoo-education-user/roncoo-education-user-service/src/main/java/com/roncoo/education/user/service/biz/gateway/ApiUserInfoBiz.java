@@ -16,6 +16,7 @@ import com.roncoo.education.user.common.bean.bo.UserLoginCodeBO;
 import com.roncoo.education.user.common.bean.bo.UserLoginPasswordBO;
 import com.roncoo.education.user.common.bean.bo.UserRegisterBO;
 import com.roncoo.education.user.common.bean.bo.UserSendCodeBO;
+import com.roncoo.education.user.common.bean.bo.auth.UserUpdateBO;
 import com.roncoo.education.user.common.bean.dto.UserLoginDTO;
 import com.roncoo.education.user.service.dao.PlatformDao;
 import com.roncoo.education.user.service.dao.UserDao;
@@ -30,6 +31,7 @@ import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.LoginStatusEnum;
+import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.enums.StatusIdEnum;
 import com.roncoo.education.util.enums.UserTypeEnum;
 import com.roncoo.education.util.tools.BeanUtil;
@@ -273,6 +275,59 @@ public class ApiUserInfoBiz extends BaseBiz {
 		record.setLoginStatus(status.getCode());
 		record.setLoginIp(ip);
 		userLogLoginDao.save(record);
+	}
+
+	public Result<Integer> updatePassword(UserUpdateBO userUpdateBO) {
+		if (StringUtils.isEmpty(userUpdateBO.getMobile())) {
+			return Result.error("手机号为空,请重试");
+		}
+		if (StringUtils.isEmpty(userUpdateBO.getCode())) {
+			return Result.error("验证码不能为空");
+		}
+		if (StringUtils.isEmpty(userUpdateBO.getClientId())) {
+			return Result.error("clientId不能为空");
+		}
+		
+		Platform platform = platformDao.getByClientId(userUpdateBO.getClientId());
+		if (null == platform) {
+			return Result.error("该平台不存在");
+		}
+		if (!StatusIdEnum.YES.getCode().equals(platform.getStatusId())) {
+			return Result.error("该平台状态异常，请联系管理员");
+		}
+		
+		String redisCode = redisTemplate.opsForValue().get(platform.getClientId() + userUpdateBO.getMobile());
+		if (StringUtils.isEmpty(redisCode)) {
+			return Result.error("请输入验证码");
+		}
+		if (!userUpdateBO.getCode().equals(redisCode)) {
+			return Result.error("验证码匹配不正确");
+		}
+		// 手机号去空处理
+		String mobile = userUpdateBO.getMobile().replaceAll(" +", "");
+
+		if (StringUtils.isEmpty(userUpdateBO.getConfirmPassword())) {
+			return Result.error("新登录密码为空,请重试");
+		}
+		if (!userUpdateBO.getNewPassword().equals(userUpdateBO.getConfirmPassword())) {
+			return Result.error("密码输入不一致，请重试");
+		}
+
+		User user = userDao.getByMobile(mobile);
+		if (ObjectUtil.isNull(user)) {
+			return Result.error("没找到用户信息,请重试");
+		}
+		if (DigestUtil.sha1Hex(user.getMobileSalt() + userUpdateBO.getNewPassword()).equals(user.getMobilePsw())) {
+			return Result.error("输入的密码与原密码一致,请重试");
+		}
+
+		// 更新密码
+		User bean = new User();
+		bean.setId(user.getId());
+		bean.setMobileSalt(StrUtil.get32UUID());
+		bean.setMobilePsw(DigestUtil.sha1Hex(bean.getMobileSalt() + userUpdateBO.getNewPassword()));
+		int result = userDao.updateById(bean);
+		return result == 1 ? Result.success(result) : Result.error(ResultEnum.USER_UPDATE_FAIL.getDesc());
 	}
 
 }
