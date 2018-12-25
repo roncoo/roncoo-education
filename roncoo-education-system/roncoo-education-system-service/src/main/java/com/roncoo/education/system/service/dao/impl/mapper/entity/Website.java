@@ -40,6 +40,8 @@ public class Website implements Serializable {
 
     private String service2;
 
+    private String userAgreement;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -186,6 +188,14 @@ public class Website implements Serializable {
         this.service2 = service2 == null ? null : service2.trim();
     }
 
+    public String getUserAgreement() {
+        return userAgreement;
+    }
+
+    public void setUserAgreement(String userAgreement) {
+        this.userAgreement = userAgreement == null ? null : userAgreement.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -210,6 +220,7 @@ public class Website implements Serializable {
         sb.append(", isShowService=").append(isShowService);
         sb.append(", service1=").append(service1);
         sb.append(", service2=").append(service2);
+        sb.append(", userAgreement=").append(userAgreement);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

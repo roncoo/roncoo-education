@@ -89,4 +89,8 @@ public class WebsiteDTO implements Serializable {
      * logoIco
      */
     private String logoIco;
+    /**
+	 * 用户协议
+	 */
+	private String userAgreement;
 }
