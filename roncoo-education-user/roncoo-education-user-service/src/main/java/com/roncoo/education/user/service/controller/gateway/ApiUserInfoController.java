@@ -1,10 +1,10 @@
 package com.roncoo.education.user.service.controller.gateway;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.roncoo.education.user.common.bean.bo.UserAuthBO;
 import com.roncoo.education.user.common.bean.bo.UserLoginCodeBO;
 import com.roncoo.education.user.common.bean.bo.UserLoginPasswordBO;
 import com.roncoo.education.user.common.bean.bo.UserRegisterBO;
@@ -47,7 +47,7 @@ public class ApiUserInfoController extends BaseController implements ApiUserInfo
 	}
 
 	@Override
-	public Result<String> auth(@PathVariable(name = "uuid") String uuid) {
+	public Result<String> auth(@RequestBody UserAuthBO userAuthBO) {
 		return null;
 	}
 

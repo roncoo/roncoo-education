@@ -4,11 +4,12 @@
 package com.roncoo.education.course.service.controller.gateway;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.roncoo.education.course.common.bean.bo.PeriodUploadDocBO;
 import com.roncoo.education.course.common.interfaces.gateway.ApiUpload;
 import com.roncoo.education.course.service.biz.gateway.ApiUploadBiz;
 import com.roncoo.education.util.base.BaseController;
@@ -34,10 +35,10 @@ public class ApiUploadController extends BaseController implements ApiUpload {
 	public Result<String> uploadPic(@RequestParam(value = "picFile", required = false) MultipartFile picFile) {
 		return biz.uploadPic(picFile);
 	}
-	
+
 	@Override
-	public Result<String> uploadDoc(@RequestParam(name = "docFile", required = false) MultipartFile docFile, @PathVariable(name = "periodId") Long periodId) {
-		return biz.uploadDoc(docFile, periodId);
+	public Result<String> uploadDoc(@RequestParam(name = "docFile", required = false) MultipartFile docFile, @RequestBody PeriodUploadDocBO bo) {
+		return biz.uploadDoc(docFile, bo);
 	}
 
 }

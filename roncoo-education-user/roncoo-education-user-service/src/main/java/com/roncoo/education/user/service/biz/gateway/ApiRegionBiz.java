@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.roncoo.education.user.common.bean.bo.UserRegionCityIdBO;
+import com.roncoo.education.user.common.bean.bo.UserRegionLevelBO;
+import com.roncoo.education.user.common.bean.bo.UserRegionProvinceBO;
 import com.roncoo.education.user.common.bean.dto.RegionDTO;
 import com.roncoo.education.user.common.bean.dto.RegionListDTO;
 import com.roncoo.education.user.service.dao.RegionDao;
@@ -24,8 +27,8 @@ public class ApiRegionBiz {
 	@Autowired
 	private RegionDao regionDao;
 
-	public Result<RegionListDTO> listForLevel(Integer level) {
-		List<Region> list = regionDao.listByLevel(level);
+	public Result<RegionListDTO> listForLevel(UserRegionLevelBO userRegionLevelBO) {
+		List<Region> list = regionDao.listByLevel(userRegionLevelBO.getLevel());
 		if (CollectionUtil.isNotEmpty(list)) {
 			RegionListDTO data = new RegionListDTO();
 			data.setRegionList(PageUtil.copyList(list, RegionDTO.class));
@@ -34,8 +37,8 @@ public class ApiRegionBiz {
 		return Result.error("找不到信息");
 	}
 
-	public Result<RegionListDTO> listForProvince(Integer provinceId) {
-		List<Region> list = regionDao.listByProvinceId(provinceId);
+	public Result<RegionListDTO> listForProvince(UserRegionProvinceBO userRegionProvinceBO) {
+		List<Region> list = regionDao.listByProvinceId(userRegionProvinceBO.getProvinceId());
 		if (CollectionUtil.isNotEmpty(list)) {
 			RegionListDTO data = new RegionListDTO();
 			data.setRegionList(PageUtil.copyList(list, RegionDTO.class));
@@ -44,8 +47,8 @@ public class ApiRegionBiz {
 		return Result.error("找不到信息");
 	}
 
-	public Result<RegionListDTO> listForCity(Integer cityId) {
-		List<Region> list = regionDao.listByCityId(cityId);
+	public Result<RegionListDTO> listForCity(UserRegionCityIdBO userRegionCityIdBO) {
+		List<Region> list = regionDao.listByCityId(userRegionCityIdBO.getCityId());
 		if (CollectionUtil.isNotEmpty(list)) {
 			RegionListDTO data = new RegionListDTO();
 			data.setRegionList(PageUtil.copyList(list, RegionDTO.class));

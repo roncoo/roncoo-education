@@ -1,9 +1,10 @@
 package com.roncoo.education.user.service.controller.gateway;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.roncoo.education.user.common.bean.bo.LecturerViewBO;
 import com.roncoo.education.user.common.bean.dto.LecturerViewDTO;
 import com.roncoo.education.user.common.interfaces.gateway.ApiLecturer;
 import com.roncoo.education.user.service.biz.gateway.ApiLecturerBiz;
@@ -22,8 +23,8 @@ public class ApiLecturerController extends BaseController implements ApiLecturer
 	private ApiLecturerBiz biz;
 
 	@Override
-	public Result<LecturerViewDTO> view(@PathVariable(value = "lecturerUserNo") Long lecturerUserNo) {
-		return biz.view(lecturerUserNo);
+	public Result<LecturerViewDTO> view(@RequestBody LecturerViewBO lecturerViewBO) {
+		return biz.view(lecturerViewBO);
 	}
 
 }

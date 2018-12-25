@@ -1,7 +1,6 @@
 package com.roncoo.education.course.service.controller.gateway.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,6 +9,7 @@ import com.roncoo.education.course.common.bean.bo.auth.AuthCourseAuditListBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseAuditSaveBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseAuditStandBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseAuditUpdateBO;
+import com.roncoo.education.course.common.bean.bo.auth.AuthCourseAuditViewBO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseAuditListDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseAuditSaveDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseAuditViewDTO;
@@ -31,8 +31,8 @@ public class AuthApiCourseAuditController extends BaseController implements Auth
 	private AuthApiCourseAuditBiz biz;
 
 	@Override
-	public Result<AuthCourseAuditViewDTO> view(@PathVariable(name = "id") Long id) {
-		return biz.view(id);
+	public Result<AuthCourseAuditViewDTO> view(@RequestBody AuthCourseAuditViewBO authCourseAuditViewBO) {
+		return biz.view(authCourseAuditViewBO);
 	}
 
 	@Override

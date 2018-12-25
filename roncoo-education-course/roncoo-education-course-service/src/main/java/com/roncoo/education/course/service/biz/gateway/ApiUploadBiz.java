@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.roncoo.education.course.common.bean.bo.PeriodUploadDocBO;
 import com.roncoo.education.course.service.dao.CourseAuditDao;
 import com.roncoo.education.course.service.dao.CourseChapterAuditDao;
 import com.roncoo.education.course.service.dao.CourseChapterPeriodAuditDao;
@@ -183,9 +184,9 @@ public class ApiUploadBiz extends BaseBiz {
 	 * 
 	 * @author wuyun
 	 */
-	public Result<String> uploadDoc(MultipartFile docFile, Long periodId) {
+	public Result<String> uploadDoc(MultipartFile docFile, PeriodUploadDocBO bo) {
 		if (ObjectUtil.isNotNull(docFile) && !docFile.isEmpty()) { // 文档上传
-			CourseChapterPeriodAudit courseChapterPeriodAudit = courseChapterPeriodAuditDao.getById(periodId);
+			CourseChapterPeriodAudit courseChapterPeriodAudit = courseChapterPeriodAuditDao.getById(bo.getPeriodId());
 			if (ObjectUtil.isNull(courseChapterPeriodAudit)) {
 				return Result.error("找不到课时信息");
 			}
@@ -213,7 +214,7 @@ public class ApiUploadBiz extends BaseBiz {
 			courseChapterAuditDao.updateById(courseChapterAudit);
 			// 更新课时审核信息
 			CourseChapterPeriodAudit periodAudit = new CourseChapterPeriodAudit();
-			periodAudit.setId(periodId);
+			periodAudit.setId(bo.getPeriodId());
 			periodAudit.setIsDoc(Integer.valueOf(IsDocEnum.YES.getCode()));
 			periodAudit.setDocName(docFile.getOriginalFilename());
 			periodAudit.setDocUrl(url);

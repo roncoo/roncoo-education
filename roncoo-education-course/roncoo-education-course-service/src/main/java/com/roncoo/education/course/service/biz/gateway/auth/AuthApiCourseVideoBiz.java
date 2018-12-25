@@ -8,10 +8,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoDeleteBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoForUpdateBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoSaveBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoUpdateBO;
+import com.roncoo.education.course.common.bean.bo.auth.AuthPeriodIdVideoBO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseVideoForListDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseVideoListDTO;
 import com.roncoo.education.course.service.dao.CourseAuditDao;
@@ -107,9 +109,9 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 	 * @param chapterId
 	 * @author wuyun
 	 */
-	public Result<AuthCourseVideoListDTO> listByChapterId(Long chapterId) {
+	public Result<AuthCourseVideoListDTO> listByChapterId(AuthCourseVideoBO authCourseVideoBO) {
 		// 查找该章节下可用的视频信息集合
-		List<CourseVideo> courseVideoList = dao.listByChapterIdAndPeriodIdAndStatusId(chapterId, Long.valueOf(0), StatusIdEnum.YES.getCode());
+		List<CourseVideo> courseVideoList = dao.listByChapterIdAndPeriodIdAndStatusId(authCourseVideoBO.getChapterId(), Long.valueOf(0), StatusIdEnum.YES.getCode());
 		AuthCourseVideoListDTO dto = new AuthCourseVideoListDTO();
 		if (CollectionUtil.isNotEmpty(courseVideoList)) {
 			List<AuthCourseVideoForListDTO> dtoList = ArrayListUtil.copy(courseVideoList, AuthCourseVideoForListDTO.class);
@@ -124,8 +126,8 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 	 * @param periodId
 	 * @author wuyun
 	 */
-	public Result<AuthCourseVideoListDTO> listByPeriodId(Long periodId) {
-		List<CourseVideo> courseVideoList = dao.listByPeriodIdAndStatusId(periodId, StatusIdEnum.YES.getCode());
+	public Result<AuthCourseVideoListDTO> listByPeriodId(AuthPeriodIdVideoBO authCourseVideoBO) {
+		List<CourseVideo> courseVideoList = dao.listByPeriodIdAndStatusId(authCourseVideoBO.getPeriodId(), StatusIdEnum.YES.getCode());
 		AuthCourseVideoListDTO dto = new AuthCourseVideoListDTO();
 		if (CollectionUtil.isNotEmpty(courseVideoList)) {
 			List<AuthCourseVideoForListDTO> dtoList = ArrayListUtil.copy(courseVideoList, AuthCourseVideoForListDTO.class);

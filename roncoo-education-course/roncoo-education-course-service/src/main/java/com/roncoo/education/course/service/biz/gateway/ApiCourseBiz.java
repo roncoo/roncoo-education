@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.roncoo.education.course.common.bean.bo.CourseInfoPageBO;
+import com.roncoo.education.course.common.bean.bo.CourseVideoBO;
 import com.roncoo.education.course.common.bean.dto.CourseChapterDTO;
 import com.roncoo.education.course.common.bean.dto.CourseChapterPeriodDTO;
 import com.roncoo.education.course.common.bean.dto.CourseInfoPageDTO;
@@ -56,15 +57,15 @@ public class ApiCourseBiz {
 	/**
 	 * 课程详情接口
 	 * 
-	 * @param courseId
+	 * @param courseView
 	 * @return
 	 */
-	public Result<CourseViewDTO> view(Long courseId) {
-		if (courseId == null) {
+	public Result<CourseViewDTO> view(CourseVideoBO courseView) {
+		if (courseView.getCourseId() == null) {
 			return Result.error("课程ID不能为空");
 		}
 		// 课程信息
-		Course course = courseDao.getById(courseId);
+		Course course = courseDao.getById(courseView.getCourseId());
 		if (course == null) {
 			return Result.error("找不到该课程信息");
 		}
@@ -84,7 +85,7 @@ public class ApiCourseBiz {
 		data.setLecturerDTO(BeanUtil.copyProperties(lecturerVO, LecturerDTO.class));
 
 		// 章节信息
-		List<CourseChapter> courseChapterList = courseChapterDao.listByCourseIdAndStatusId(courseId, StatusIdEnum.YES.getCode());
+		List<CourseChapter> courseChapterList = courseChapterDao.listByCourseIdAndStatusId(courseView.getCourseId(), StatusIdEnum.YES.getCode());
 		if (CollectionUtil.isNotEmpty(courseChapterList)) {
 			data.setCourseChapterList(PageUtil.copyList(courseChapterList, CourseChapterDTO.class));
 		}

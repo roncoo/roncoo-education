@@ -1,11 +1,11 @@
 package com.roncoo.education.course.common.interfaces.gateway;
 
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.roncoo.education.course.common.bean.bo.CourseInfoPageBO;
+import com.roncoo.education.course.common.bean.bo.CourseVideoBO;
 import com.roncoo.education.course.common.bean.dto.CourseInfoPageDTO;
 import com.roncoo.education.course.common.bean.dto.CourseViewDTO;
 import com.roncoo.education.util.base.Page;
@@ -38,7 +38,7 @@ public interface ApiCourse {
 	 * @return
 	 */
 	@ApiOperation(value = "课程详情接口", notes = "根据课程ID获取课程信息")
-	@RequestMapping(value = "/course/api/course/view/{courseId}", method = RequestMethod.POST)
-	Result<CourseViewDTO> view(@PathVariable(value = "courseId") Long courseId);
+	@RequestMapping(value = "/course/api/course/view", method = RequestMethod.POST)
+	Result<CourseViewDTO> view(@RequestBody CourseVideoBO courseView);
 
 }

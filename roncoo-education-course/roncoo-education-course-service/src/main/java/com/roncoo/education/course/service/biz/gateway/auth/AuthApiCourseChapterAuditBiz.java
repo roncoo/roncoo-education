@@ -8,10 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
+import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterAuditBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterAuditDeleteBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterAuditSaveBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterAuditSortBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterAuditUpdateBO;
+import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterAuditViewBO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterAuditDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterAuditListDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterAuditSaveDTO;
@@ -70,21 +72,21 @@ public class AuthApiCourseChapterAuditBiz extends BaseBiz {
 	 * @return
 	 * @author wuyun
 	 */
-	public Result<AuthCourseChapterAuditViewDTO> view(Long id) {
+	public Result<AuthCourseChapterAuditViewDTO> view(AuthCourseChapterAuditViewBO authCourseChapterAuditViewBO) {
 
-		if (StringUtils.isEmpty(id)) {
+		if (StringUtils.isEmpty(authCourseChapterAuditViewBO.getId())) {
 			return Result.error("章节id不能为空");
 		}
 
 		// 查询章节审核信息
-		CourseChapterAudit chapterAudit = chapterAuditDao.getById(id);
+		CourseChapterAudit chapterAudit = chapterAuditDao.getById(authCourseChapterAuditViewBO.getId());
 		if (StringUtils.isEmpty(chapterAudit)) {
 			return Result.error("找不到章节信息");
 		}
 		AuthCourseChapterAuditViewDTO dto = BeanUtil.copyProperties(chapterAudit, AuthCourseChapterAuditViewDTO.class);
 
 		// 查询课时审核信息
-		List<CourseChapterPeriodAudit> periodAuditList = periodAuditDao.listByChapterIdAndStatusId(id, StatusIdEnum.YES.getCode());
+		List<CourseChapterPeriodAudit> periodAuditList = periodAuditDao.listByChapterIdAndStatusId(authCourseChapterAuditViewBO.getId(), StatusIdEnum.YES.getCode());
 		// 写入课时信息集合
 		if (CollectionUtil.isNotEmpty(periodAuditList)) {
 			List<AuthCourseChapterPeriodAuditViewDTO> periodAuditDTOList = ArrayListUtil.copy(periodAuditList, AuthCourseChapterPeriodAuditViewDTO.class);
@@ -147,16 +149,16 @@ public class AuthApiCourseChapterAuditBiz extends BaseBiz {
 	 * @return
 	 * @author wuyun
 	 */
-	public Result<AuthCourseChapterAuditListDTO> listByCourseNo(Long courseId) {
+	public Result<AuthCourseChapterAuditListDTO> listByCourseNo(AuthCourseChapterAuditBO authCourseChapterAuditBO) {
 
-		if (StringUtils.isEmpty(courseId)) {
+		if (StringUtils.isEmpty(authCourseChapterAuditBO.getCourseId())) {
 			return Result.error("课程ID不能为空");
 		}
 
 		AuthCourseChapterAuditListDTO dto = new AuthCourseChapterAuditListDTO();
 
 		// 根据课程ID查询出章节审核信息
-		List<CourseChapterAudit> chapterAuditList = chapterAuditDao.listByCourseIdAndStatusId(courseId, StatusIdEnum.YES.getCode());
+		List<CourseChapterAudit> chapterAuditList = chapterAuditDao.listByCourseIdAndStatusId(authCourseChapterAuditBO.getCourseId(), StatusIdEnum.YES.getCode());
 		if (CollectionUtil.isNotEmpty(chapterAuditList)) {
 			List<AuthCourseChapterAuditDTO> chapterAuditDTOList = ArrayListUtil.copy(chapterAuditList, AuthCourseChapterAuditDTO.class);
 

@@ -1,4 +1,4 @@
-package com.roncoo.education.system.common.bean.bo;
+package com.roncoo.education.course.common.bean.bo.auth;
 
 import java.io.Serializable;
 
@@ -7,19 +7,20 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
- * 站点导航文章
+ * 课程视频信息
  *
  * @author wuyun
  */
 @Data
 @Accessors(chain = true)
-public class WebsiteNavArticleBO implements Serializable {
+public class AuthPeriodIdVideoBO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 导航ID
+     * 课时ID
      */
-    @ApiModelProperty(value = "导航ID")
-    private Long navId;
+    @ApiModelProperty(value = "课时ID", required = true)
+    private Long periodId;
+    
 }

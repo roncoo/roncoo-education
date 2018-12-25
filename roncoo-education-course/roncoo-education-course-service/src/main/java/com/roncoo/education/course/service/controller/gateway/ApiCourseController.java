@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.roncoo.education.course.common.bean.bo.CourseInfoPageBO;
+import com.roncoo.education.course.common.bean.bo.CourseVideoBO;
 import com.roncoo.education.course.common.bean.dto.CourseInfoPageDTO;
 import com.roncoo.education.course.common.bean.dto.CourseViewDTO;
 import com.roncoo.education.course.common.interfaces.gateway.ApiCourse;
@@ -31,8 +32,7 @@ public class ApiCourseController extends BaseController implements ApiCourse {
 	}
 
 	@Override
-	public Result<CourseViewDTO> view(@PathVariable(value = "courseId") Long courseId) {
-		return biz.view(courseId);
+	public Result<CourseViewDTO> view(@PathVariable CourseVideoBO courseView) {
+		return biz.view(courseView);
 	}
-
 }

@@ -14,6 +14,7 @@ import com.roncoo.education.course.common.bean.bo.auth.AuthCourseAuditListBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseAuditSaveBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseAuditStandBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseAuditUpdateBO;
+import com.roncoo.education.course.common.bean.bo.auth.AuthCourseAuditViewBO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseAuditListDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseAuditSaveDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseAuditViewDTO;
@@ -107,13 +108,13 @@ public class AuthApiCourseAuditBiz extends BaseBiz {
 	 * @return
 	 * @author wuyun
 	 */
-	public Result<AuthCourseAuditViewDTO> view(Long id) {
-		if (StringUtils.isEmpty(id)) {
+	public Result<AuthCourseAuditViewDTO> view(AuthCourseAuditViewBO authCourseAuditViewBO) {
+		if (StringUtils.isEmpty(authCourseAuditViewBO.getId())) {
 			return Result.error("课程id不能为空");
 		}
 
 		// 查询课程信息
-		CourseAudit courseAudit = courseAuditDao.getById(id);
+		CourseAudit courseAudit = courseAuditDao.getById(authCourseAuditViewBO.getId());
 		if (ObjectUtil.isNull(courseAudit)) {
 			return Result.error("没有找到该课程信息");
 		}

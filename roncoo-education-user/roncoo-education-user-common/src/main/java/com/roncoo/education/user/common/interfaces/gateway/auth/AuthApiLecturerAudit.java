@@ -1,12 +1,12 @@
 package com.roncoo.education.user.common.interfaces.gateway.auth;
 
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.roncoo.education.user.common.bean.bo.auth.AuthLecturerAuditBO;
 import com.roncoo.education.user.common.bean.bo.auth.AuthLecturerAuditSaveBO;
+import com.roncoo.education.user.common.bean.bo.auth.AuthLecturerAuditViewBO;
 import com.roncoo.education.user.common.bean.dto.auth.AuthLecturerAuditViewDTO;
 import com.roncoo.education.util.base.Result;
 
@@ -30,8 +30,8 @@ public interface AuthApiLecturerAudit {
 	 * 讲师信息查看接口
 	 */
 	@ApiOperation(value = "讲师查看接口", notes = "根据讲师用户编号查看讲师信息")
-	@RequestMapping(value = "/auth/user/api/lecturer/audit/view/{lecturerUserNo}", method = RequestMethod.POST)
-	Result<AuthLecturerAuditViewDTO> view(@PathVariable(value = "lecturerUserNo") Long lecturerUserNo);
+	@RequestMapping(value = "/auth/user/api/lecturer/audit/view", method = RequestMethod.POST)
+	Result<AuthLecturerAuditViewDTO> view(@RequestBody AuthLecturerAuditViewBO authLecturerAuditViewBO);
 
 	/**
 	 * 讲师申请接口

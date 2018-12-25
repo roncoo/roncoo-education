@@ -1,6 +1,5 @@
 package com.roncoo.education.course.common.interfaces.gateway.auth;
 
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,6 +9,7 @@ import com.roncoo.education.course.common.bean.bo.auth.AuthCourseAuditListBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseAuditSaveBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseAuditStandBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseAuditUpdateBO;
+import com.roncoo.education.course.common.bean.bo.auth.AuthCourseAuditViewBO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseAuditListDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseAuditSaveDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseAuditViewDTO;
@@ -29,8 +29,8 @@ public interface AuthApiCourseAudit {
 	 * 讲师课程详情接口
 	 */
 	@ApiOperation(value = "课程详情接口", notes = "根据课程ID返回课程详情信息")
-	@RequestMapping(value = "/auth/course/api/course/audit/view/{id}", method = RequestMethod.POST)
-	Result<AuthCourseAuditViewDTO> view(@PathVariable(name = "id") Long id);
+	@RequestMapping(value = "/auth/course/api/course/audit/view", method = RequestMethod.POST)
+	Result<AuthCourseAuditViewDTO> view(@RequestBody AuthCourseAuditViewBO authCourseAuditView);
 
 	/**
 	 * 讲师课程分页接口

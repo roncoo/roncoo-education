@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import com.roncoo.education.user.common.bean.bo.auth.AuthLecturerAuditBO;
 import com.roncoo.education.user.common.bean.bo.auth.AuthLecturerAuditSaveBO;
+import com.roncoo.education.user.common.bean.bo.auth.AuthLecturerAuditViewBO;
 import com.roncoo.education.user.common.bean.dto.auth.AuthLecturerAuditViewDTO;
 import com.roncoo.education.user.service.dao.LecturerAuditDao;
 import com.roncoo.education.user.service.dao.LecturerExtDao;
@@ -73,14 +74,14 @@ public class AuthApiLecturerAuditBiz extends BaseBiz {
 	/**
 	 * 讲师信息查看接口
 	 * 
-	 * @param lecturerUserNo
+	 * @param authLecturerAuditViewBO
 	 * @author wuyun
 	 */
-	public Result<AuthLecturerAuditViewDTO> view(Long lecturerUserNo) {
-		if (null == lecturerUserNo) {
+	public Result<AuthLecturerAuditViewDTO> view(AuthLecturerAuditViewBO authLecturerAuditViewBO) {
+		if (null == authLecturerAuditViewBO.getLecturerUserNo()) {
 			return Result.error("讲师编号不能为空");
 		}
-		LecturerAudit lecturerAudit = lecturerAuditDao.getByLecturerUserNo(lecturerUserNo);
+		LecturerAudit lecturerAudit = lecturerAuditDao.getByLecturerUserNo(authLecturerAuditViewBO.getLecturerUserNo());
 		if (lecturerAudit == null) {
 			return Result.error("找不到该讲师");
 		}

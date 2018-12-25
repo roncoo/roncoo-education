@@ -8,10 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
+import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditDeleteBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditSaveBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditSortBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditUpdateBO;
+import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditViewBO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterPeriodAuditDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterPeriodAuditListDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterPeriodAuditSaveDTO;
@@ -57,22 +59,22 @@ public class AuthApiCourseChapterPeriodAuditBiz extends BaseBiz {
 	/**
 	 * 课时列出接口
 	 * 
-	 * @param chapterId
+	 * @param authCourseChapterPeriodAuditBO
 	 * @return
 	 * @author wuyun
 	 */
-	public Result<AuthCourseChapterPeriodAuditListDTO> listByChapterId(Long chapterId) {
-		if (chapterId == null) {
+	public Result<AuthCourseChapterPeriodAuditListDTO> listByChapterId(AuthCourseChapterPeriodAuditBO authCourseChapterPeriodAuditBO) {
+		if (authCourseChapterPeriodAuditBO.getChapterId() == null) {
 			return Result.error("章节ID不能为空");
 		}
 
-		CourseChapterAudit courseChapter = chapterAuditDao.getById(chapterId);
+		CourseChapterAudit courseChapter = chapterAuditDao.getById(authCourseChapterPeriodAuditBO.getChapterId());
 		if (ObjectUtil.isNull(courseChapter)) {
 			return Result.error("找不到章节信息");
 		}
 
 		// 根据章节ID查询课时审核信息表
-		List<CourseChapterPeriodAudit> periodAuditList = periodAuditDao.listByChapterIdAndStatusId(chapterId, StatusIdEnum.YES.getCode());
+		List<CourseChapterPeriodAudit> periodAuditList = periodAuditDao.listByChapterIdAndStatusId(authCourseChapterPeriodAuditBO.getChapterId(), StatusIdEnum.YES.getCode());
 		AuthCourseChapterPeriodAuditListDTO dto = new AuthCourseChapterPeriodAuditListDTO();
 		if (CollectionUtil.isNotEmpty(periodAuditList)) {
 			List<AuthCourseChapterPeriodAuditDTO> periodAuditDTOList = ArrayListUtil.copy(periodAuditList, AuthCourseChapterPeriodAuditDTO.class);
@@ -96,16 +98,16 @@ public class AuthApiCourseChapterPeriodAuditBiz extends BaseBiz {
 	/**
 	 * 课时查看接口
 	 * 
-	 * @param id
+	 * @param authCourseChapterPeriodAuditViewBO
 	 * @return
 	 * @author wuyun
 	 */
-	public Result<AuthCourseChapterPeriodAuditViewDTO> view(Long id) {
+	public Result<AuthCourseChapterPeriodAuditViewDTO> view(AuthCourseChapterPeriodAuditViewBO authCourseChapterPeriodAuditViewBO) {
 
-		if (id == null) {
+		if (authCourseChapterPeriodAuditViewBO.getId() == null) {
 			return Result.error("课时ID不能为空");
 		}
-		CourseChapterPeriodAudit periodAudit = periodAuditDao.getById(id);
+		CourseChapterPeriodAudit periodAudit = periodAuditDao.getById(authCourseChapterPeriodAuditViewBO.getId());
 		if (ObjectUtil.isNull(periodAudit)) {
 			return Result.error("找不到课时信息");
 		}
@@ -121,15 +123,15 @@ public class AuthApiCourseChapterPeriodAuditBiz extends BaseBiz {
 	 * @author wuyun
 	 */
 	@Transactional
-	public Result<Integer> delete(AuthCourseChapterPeriodAuditDeleteBO bo) {
-		if (bo.getId() == null) {
+	public Result<Integer> delete(AuthCourseChapterPeriodAuditDeleteBO authCourseChapterPeriodAuditDeleteBO) {
+		if (authCourseChapterPeriodAuditDeleteBO.getId() == null) {
 			return Result.error("课时ID不能为空");
 		}
-		if (bo.getUserNo() == null) {
+		if (authCourseChapterPeriodAuditDeleteBO.getUserNo() == null) {
 			return Result.error("userNo不能为空");
 		}
 
-		CourseChapterPeriodAudit periodAudit = periodAuditDao.getById(bo.getId());
+		CourseChapterPeriodAudit periodAudit = periodAuditDao.getById(authCourseChapterPeriodAuditDeleteBO.getId());
 		if (ObjectUtil.isNull(periodAudit)) {
 			return Result.error("找不到课时信息");
 		}
@@ -137,7 +139,7 @@ public class AuthApiCourseChapterPeriodAuditBiz extends BaseBiz {
 		if (ObjectUtil.isNull(course)) {
 			return Result.error("找不到课程信息");
 		}
-		if (!bo.getUserNo().equals(course.getLecturerUserNo())) {
+		if (!authCourseChapterPeriodAuditDeleteBO.getUserNo().equals(course.getLecturerUserNo())) {
 			return Result.error("传入的useNo与该课程的讲师useNo不一致");
 		}
 
@@ -167,21 +169,21 @@ public class AuthApiCourseChapterPeriodAuditBiz extends BaseBiz {
 	 * @author wuyun
 	 */
 	@Transactional
-	public Result<AuthCourseChapterPeriodAuditSaveDTO> save(AuthCourseChapterPeriodAuditSaveBO bo) {
-		if (bo.getChapterId() == null) {
+	public Result<AuthCourseChapterPeriodAuditSaveDTO> save(AuthCourseChapterPeriodAuditSaveBO authCourseChapterPeriodAuditSaveBO) {
+		if (authCourseChapterPeriodAuditSaveBO.getChapterId() == null) {
 			return Result.error("chapterId不能为空");
 		}
-		if (StringUtils.isEmpty(bo.getPeriodName())) {
+		if (StringUtils.isEmpty(authCourseChapterPeriodAuditSaveBO.getPeriodName())) {
 			return Result.error("课时名称不能为空");
 		}
-		if (bo.getIsFree() == null) {
+		if (authCourseChapterPeriodAuditSaveBO.getIsFree() == null) {
 			return Result.error("isFree不能为空");
 		}
-		if (bo.getUserNo() == null) {
+		if (authCourseChapterPeriodAuditSaveBO.getUserNo() == null) {
 			return Result.error("userNo不能为空");
 		}
 
-		CourseChapterAudit chapterAudit = chapterAuditDao.getById(bo.getChapterId());
+		CourseChapterAudit chapterAudit = chapterAuditDao.getById(authCourseChapterPeriodAuditSaveBO.getChapterId());
 		if (ObjectUtils.isEmpty(chapterAudit)) {
 			return Result.error("找不到章节信息");
 		}
@@ -189,11 +191,11 @@ public class AuthApiCourseChapterPeriodAuditBiz extends BaseBiz {
 		if (ObjectUtil.isNull(course)) {
 			return Result.error("找不到课程信息");
 		}
-		if (!bo.getUserNo().equals(course.getLecturerUserNo())) {
+		if (!authCourseChapterPeriodAuditSaveBO.getUserNo().equals(course.getLecturerUserNo())) {
 			return Result.error("传入的useNo与该课程的讲师useNo不一致");
 		}
 
-		CourseChapterPeriodAudit record = BeanUtil.copyProperties(bo, CourseChapterPeriodAudit.class);
+		CourseChapterPeriodAudit record = BeanUtil.copyProperties(authCourseChapterPeriodAuditSaveBO, CourseChapterPeriodAudit.class);
 		// 设置剩余的数据
 		record.setCourseId(chapterAudit.getCourseId());
 		record.setAuditStatus(AuditStatusEnum.WAIT.getCode());
@@ -217,21 +219,21 @@ public class AuthApiCourseChapterPeriodAuditBiz extends BaseBiz {
 	 * @author wuyun
 	 */
 	@Transactional
-	public Result<Integer> update(AuthCourseChapterPeriodAuditUpdateBO bo) {
-		if (bo.getId() == null) {
+	public Result<Integer> update(AuthCourseChapterPeriodAuditUpdateBO authCourseChapterPeriodAuditUpdateBO) {
+		if (authCourseChapterPeriodAuditUpdateBO.getId() == null) {
 			return Result.error("课时ID不能为空");
 		}
-		if (StringUtils.isEmpty(bo.getPeriodName())) {
+		if (StringUtils.isEmpty(authCourseChapterPeriodAuditUpdateBO.getPeriodName())) {
 			return Result.error("课时名称不能为空");
 		}
-		if (bo.getIsFree() == null) {
+		if (authCourseChapterPeriodAuditUpdateBO.getIsFree() == null) {
 			return Result.error("isFree不能为空");
 		}
-		if (bo.getUserNo() == null) {
+		if (authCourseChapterPeriodAuditUpdateBO.getUserNo() == null) {
 			return Result.error("userNo不能为空");
 		}
 
-		CourseChapterPeriodAudit periodAudit = periodAuditDao.getById(bo.getId());
+		CourseChapterPeriodAudit periodAudit = periodAuditDao.getById(authCourseChapterPeriodAuditUpdateBO.getId());
 		if (ObjectUtil.isNull(periodAudit)) {
 			return Result.error("找不到课时信息");
 		}
@@ -239,11 +241,11 @@ public class AuthApiCourseChapterPeriodAuditBiz extends BaseBiz {
 		if (ObjectUtil.isNull(course)) {
 			return Result.error("找不到课程信息");
 		}
-		if (!bo.getUserNo().equals(course.getLecturerUserNo())) {
+		if (!authCourseChapterPeriodAuditUpdateBO.getUserNo().equals(course.getLecturerUserNo())) {
 			return Result.error("传入的useNo与该课程的讲师useNo不一致");
 		}
 
-		CourseChapterPeriodAudit courseChapterPeriodAudit = BeanUtil.copyProperties(bo, CourseChapterPeriodAudit.class);
+		CourseChapterPeriodAudit courseChapterPeriodAudit = BeanUtil.copyProperties(authCourseChapterPeriodAuditUpdateBO, CourseChapterPeriodAudit.class);
 		courseChapterPeriodAudit.setAuditStatus(AuditStatusEnum.WAIT.getCode());
 		int result = periodAuditDao.updateById(courseChapterPeriodAudit);
 		if (result > 0) {
@@ -262,17 +264,17 @@ public class AuthApiCourseChapterPeriodAuditBiz extends BaseBiz {
 	 * @author wuyun
 	 */
 	@Transactional
-	public Result<Integer> sort(AuthCourseChapterPeriodAuditSortBO bo) {
-		if (CollectionUtil.isEmpty(bo.getPeriodIdList())) {
+	public Result<Integer> sort(AuthCourseChapterPeriodAuditSortBO authCourseChapterPeriodAuditSortBO) {
+		if (CollectionUtil.isEmpty(authCourseChapterPeriodAuditSortBO.getPeriodIdList())) {
 			return Result.error("课时信息不能为空");
 		}
-		if (bo.getUserNo() == null) {
+		if (authCourseChapterPeriodAuditSortBO.getUserNo() == null) {
 			return Result.error("userNo不能为空");
 		}
 
-		if (CollectionUtil.isNotEmpty(bo.getPeriodIdList())) {
+		if (CollectionUtil.isNotEmpty(authCourseChapterPeriodAuditSortBO.getPeriodIdList())) {
 			int i = 1;
-			for (Long periodId : bo.getPeriodIdList()) {
+			for (Long periodId : authCourseChapterPeriodAuditSortBO.getPeriodIdList()) {
 				// 更新课时审核信息表的排序
 				periodAuditDao.updateSortByPeriodId(i++, periodId);
 				CourseChapterPeriodAudit periodAudit = periodAuditDao.getById(periodId);
@@ -281,7 +283,7 @@ public class AuthApiCourseChapterPeriodAuditBiz extends BaseBiz {
 				if (ObjectUtil.isNull(course)) {
 					return Result.error("找不到课程信息");
 				}
-				if (!bo.getUserNo().equals(course.getLecturerUserNo())) {
+				if (!authCourseChapterPeriodAuditSortBO.getUserNo().equals(course.getLecturerUserNo())) {
 					return Result.error("传入的useNo与该课程的讲师useNo不一致");
 				}
 				// 更新课时信息集合

@@ -7,19 +7,19 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
- * 章节信息-审核
+ * 课程信息-审核
  *
  * @author wujing
  */
 @Data
 @Accessors(chain = true)
-public class AuthCourseChapterAuditBO implements Serializable {
+public class AuthCourseAuditViewBO implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * 课程ID
-     */
-    @ApiModelProperty(value = "课程ID", required = true)
-    private Long courseId;
+	/**
+	 * id
+	 */
+	@ApiModelProperty(value = "id", required = true)
+	private Long id;
 }

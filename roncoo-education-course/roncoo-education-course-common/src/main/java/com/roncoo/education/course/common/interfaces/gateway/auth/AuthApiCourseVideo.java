@@ -1,13 +1,14 @@
 package com.roncoo.education.course.common.interfaces.gateway.auth;
 
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoDeleteBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoSaveBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoUpdateBO;
+import com.roncoo.education.course.common.bean.bo.auth.AuthPeriodIdVideoBO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseVideoListDTO;
 import com.roncoo.education.util.base.Result;
 
@@ -37,8 +38,8 @@ public interface AuthApiCourseVideo {
 	 * @author wuyun
 	 */
 	@ApiOperation(value = "章节视频库列出接口", notes = "根据章节ID列出讲师章节视频库信息")
-	@RequestMapping(value = "/auth/course/api/course/video/list/chapter/{chapterId}", method = RequestMethod.POST)
-	Result<AuthCourseVideoListDTO> listByChapterId(@PathVariable(name = "chapterId") Long chapterId);
+	@RequestMapping(value = "/auth/course/api/course/video/list/chapter", method = RequestMethod.POST)
+	Result<AuthCourseVideoListDTO> listByChapterId(@RequestBody AuthCourseVideoBO authCourseVideoBO);
 
 	/**
 	 * 课时视频列出（左边的展示）
@@ -47,8 +48,8 @@ public interface AuthApiCourseVideo {
 	 * @author wuyun
 	 */
 	@ApiOperation(value = "课时视频列出接口", notes = "根据课时ID列出讲师课时视频信息")
-	@RequestMapping(value = "/auth/course/api/course/video/list/period/{periodId}", method = RequestMethod.POST)
-	Result<AuthCourseVideoListDTO> listByPeriodId(@PathVariable(name = "periodId") Long periodId);
+	@RequestMapping(value = "/auth/course/api/course/video/list/period", method = RequestMethod.POST)
+	Result<AuthCourseVideoListDTO> listByPeriodId(@RequestBody AuthPeriodIdVideoBO authCourseVideoBO);
 
 	/**
 	 * 课时视频更新接口

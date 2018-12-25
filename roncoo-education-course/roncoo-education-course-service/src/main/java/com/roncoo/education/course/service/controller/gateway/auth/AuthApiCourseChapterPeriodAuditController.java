@@ -1,14 +1,15 @@
 package com.roncoo.education.course.service.controller.gateway.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditDeleteBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditSaveBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditSortBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditUpdateBO;
+import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditViewBO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterPeriodAuditListDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterPeriodAuditSaveDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterPeriodAuditViewDTO;
@@ -29,33 +30,33 @@ public class AuthApiCourseChapterPeriodAuditController extends BaseController im
 	private AuthApiCourseChapterPeriodAuditBiz biz;
 
 	@Override
-	public Result<AuthCourseChapterPeriodAuditListDTO> listByChapterId(@PathVariable(name = "chapterId") Long chapterId) {
-		return biz.listByChapterId(chapterId);
+	public Result<AuthCourseChapterPeriodAuditListDTO> listByChapterId(@RequestBody AuthCourseChapterPeriodAuditBO authCourseChapterPeriodAuditBO) {
+		return biz.listByChapterId(authCourseChapterPeriodAuditBO);
 	}
 
 	@Override
-	public Result<AuthCourseChapterPeriodAuditViewDTO> view(@PathVariable(name = "id") Long id) {
-		return biz.view(id);
+	public Result<AuthCourseChapterPeriodAuditViewDTO> view(@RequestBody AuthCourseChapterPeriodAuditViewBO authCourseChapterPeriodAuditViewBO) {
+		return biz.view(authCourseChapterPeriodAuditViewBO);
 	}
 
 	@Override
-	public Result<Integer> delete(@RequestBody AuthCourseChapterPeriodAuditDeleteBO bo) {
-		return biz.delete(bo);
+	public Result<Integer> delete(@RequestBody AuthCourseChapterPeriodAuditDeleteBO authCourseChapterPeriodAuditDeleteBO) {
+		return biz.delete(authCourseChapterPeriodAuditDeleteBO);
 	}
 
 	@Override
-	public Result<AuthCourseChapterPeriodAuditSaveDTO> save(@RequestBody AuthCourseChapterPeriodAuditSaveBO bo) {
-		return biz.save(bo);
+	public Result<AuthCourseChapterPeriodAuditSaveDTO> save(@RequestBody AuthCourseChapterPeriodAuditSaveBO authCourseChapterPeriodAuditSaveBO) {
+		return biz.save(authCourseChapterPeriodAuditSaveBO);
 	}
 
 	@Override
-	public Result<Integer> update(@RequestBody AuthCourseChapterPeriodAuditUpdateBO bo) {
-		return biz.update(bo);
+	public Result<Integer> update(@RequestBody AuthCourseChapterPeriodAuditUpdateBO authCourseChapterPeriodAuditUpdateBO) {
+		return biz.update(authCourseChapterPeriodAuditUpdateBO);
 	}
 
 	@Override
-	public Result<Integer> sort(@RequestBody AuthCourseChapterPeriodAuditSortBO bo) {
-		return biz.sort(bo);
+	public Result<Integer> sort(@RequestBody AuthCourseChapterPeriodAuditSortBO authCourseChapterPeriodAuditSortBO) {
+		return biz.sort(authCourseChapterPeriodAuditSortBO);
 	}
 
 }

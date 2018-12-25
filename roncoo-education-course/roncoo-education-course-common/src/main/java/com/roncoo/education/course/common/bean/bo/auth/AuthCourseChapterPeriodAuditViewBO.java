@@ -1,4 +1,4 @@
-package com.roncoo.education.system.common.bean.bo;
+package com.roncoo.education.course.common.bean.bo.auth;
 
 import java.io.Serializable;
 
@@ -7,19 +7,20 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
- * 站点导航文章
+ * 课时信息-审核
  *
- * @author wuyun
+ * @author wujing
  */
 @Data
 @Accessors(chain = true)
-public class WebsiteNavArticleBO implements Serializable {
+public class AuthCourseChapterPeriodAuditViewBO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 导航ID
+     * id
      */
-    @ApiModelProperty(value = "导航ID")
-    private Long navId;
+    @ApiModelProperty(value = "id", required = true)
+    private Long id;
+
 }

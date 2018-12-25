@@ -1,10 +1,10 @@
 package com.roncoo.education.user.common.interfaces.gateway;
 
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.roncoo.education.user.common.bean.bo.UserAuthBO;
 import com.roncoo.education.user.common.bean.bo.UserLoginCodeBO;
 import com.roncoo.education.user.common.bean.bo.UserLoginPasswordBO;
 import com.roncoo.education.user.common.bean.bo.UserRegisterBO;
@@ -53,7 +53,7 @@ public interface ApiUserInfo {
 	 * 授权登录接口
 	 */
 	@ApiOperation(value = "授权登录接口", notes = "后台登录到讲师中心时使用")
-	@RequestMapping(value = "/user/api/user/auth/{uuid}", method = RequestMethod.POST)
-	Result<String> auth(@PathVariable(name = "uuid") String uuid);
+	@RequestMapping(value = "/user/api/user/auth", method = RequestMethod.POST)
+	Result<String> auth(@RequestBody UserAuthBO userAuthBO);
 
 }
