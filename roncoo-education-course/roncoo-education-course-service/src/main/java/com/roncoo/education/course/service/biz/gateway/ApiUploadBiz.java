@@ -168,7 +168,9 @@ public class ApiUploadBiz extends BaseBiz {
 	 * @author wuyun
 	 */
 	public Result<String> uploadDoc(MultipartFile docFile) {
-
+		if (ObjectUtil.isNotNull(docFile) && !docFile.isEmpty()) {
+			return Result.success(AliyunUtil.uploadDoc(PlatformEnum.COURSE, docFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
+		}
 		return Result.error("请选择上传的文件");
 
 	}

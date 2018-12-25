@@ -2,7 +2,6 @@ package com.roncoo.education.course.common.bean.dto.auth;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -92,9 +91,4 @@ public class AuthCourseAuditViewDTO implements Serializable {
 	@ApiModelProperty(value = "是否免费(1:免费, 0:收费)")
 	private Integer isFree;
 
-	/**
-	 * 章节信息集合
-	 */
-	@ApiModelProperty(value = "章节信息集合", required = true)
-	private List<AuthCourseChapterAuditViewDTO> authCourseChapterAuditView;
 }

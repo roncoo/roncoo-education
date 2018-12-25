@@ -246,11 +246,19 @@ public class AuthApiCourseChapterPeriodAuditBiz extends BaseBiz {
 		}
 
 		CourseChapterPeriodAudit courseChapterPeriodAudit = BeanUtil.copyProperties(authCourseChapterPeriodAuditUpdateBO, CourseChapterPeriodAudit.class);
+		//如果有存文档进来
+		if (!StringUtils.isEmpty(authCourseChapterPeriodAuditUpdateBO.getDocUrl())) {
+			courseChapterPeriodAudit.setDocUrl(authCourseChapterPeriodAuditUpdateBO.getDocUrl());
+		}
+		if (!StringUtils.isEmpty(authCourseChapterPeriodAuditUpdateBO.getDocName())) {
+			courseChapterPeriodAudit.setDocName(authCourseChapterPeriodAuditUpdateBO.getDocName());
+		}
 		courseChapterPeriodAudit.setAuditStatus(AuditStatusEnum.WAIT.getCode());
 		int result = periodAuditDao.updateById(courseChapterPeriodAudit);
 		if (result > 0) {
 			courseAuditDao.updateAuditStatusBycourseId(AuditStatusEnum.WAIT.getCode(), periodAudit.getCourseId());
 			chapterAuditDao.updateAuditStatusByChapterNo(AuditStatusEnum.WAIT.getCode(), periodAudit.getChapterId());
+			
 			return Result.success(result);
 		}
 		return Result.error(ResultEnum.COURSE_UPDATE_FAIL);

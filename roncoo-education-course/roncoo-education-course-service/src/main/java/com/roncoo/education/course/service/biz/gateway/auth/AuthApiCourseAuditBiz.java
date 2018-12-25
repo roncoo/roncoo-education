@@ -1,9 +1,7 @@
 package com.roncoo.education.course.service.biz.gateway.auth;
 
 import java.math.BigDecimal;
-import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +16,6 @@ import com.roncoo.education.course.common.bean.bo.auth.AuthCourseAuditViewBO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseAuditListDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseAuditSaveDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseAuditViewDTO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterAuditViewDTO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterPeriodAuditViewDTO;
 import com.roncoo.education.course.service.dao.CourseAuditDao;
 import com.roncoo.education.course.service.dao.CourseCategoryDao;
 import com.roncoo.education.course.service.dao.CourseChapterAuditDao;
@@ -31,8 +27,6 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAuditExample;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAuditExample.Criteria;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseCategory;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterAudit;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriodAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduceAudit;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
@@ -43,7 +37,6 @@ import com.roncoo.education.util.enums.IsFreeEnum;
 import com.roncoo.education.util.enums.IsPutawayEnum;
 import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.enums.StatusIdEnum;
-import com.roncoo.education.util.tools.ArrayListUtil;
 import com.roncoo.education.util.tools.BeanUtil;
 import com.roncoo.education.util.tools.Constants;
 import com.xiaoleilu.hutool.util.ObjectUtil;
@@ -141,24 +134,6 @@ public class AuthApiCourseAuditBiz extends BaseBiz {
 		// 课程介绍
 		CourseIntroduceAudit courseIntroduceAudit = courseIntroduceAuditDao.getById(courseAudit.getIntroduceId());
 		dto.setIntroduce(courseIntroduceAudit.getIntroduce());
-
-		// 根据courseNo查找章节信息
-		List<CourseChapterAudit> courseChapterAuditList = courseChapterAduitDao.listByCourseIdAndStatusId(courseAudit.getId(), StatusIdEnum.YES.getCode());
-		if (CollectionUtils.isEmpty(courseChapterAuditList)) {
-			return Result.success(dto);
-		}
-		List<AuthCourseChapterAuditViewDTO> chapterInfoAuditDTOList = ArrayListUtil.copy(courseChapterAuditList, AuthCourseChapterAuditViewDTO.class);
-		dto.setAuthCourseChapterAuditView(chapterInfoAuditDTOList);
-
-		// 根据chapterNo查找课时信息
-		for (AuthCourseChapterAuditViewDTO chapterInfoAuditDTO : chapterInfoAuditDTOList) {
-			List<CourseChapterPeriodAudit> periodInfoAuditList = courseChapterPeriodAuditDao.listByChapterIdAndStatusId(chapterInfoAuditDTO.getId(), StatusIdEnum.YES.getCode());
-			if (CollectionUtils.isEmpty(periodInfoAuditList)) {
-				return Result.success(dto);
-			}
-			List<AuthCourseChapterPeriodAuditViewDTO> periodInfoAuditDTOList = ArrayListUtil.copy(periodInfoAuditList, AuthCourseChapterPeriodAuditViewDTO.class);
-			chapterInfoAuditDTO.setAuthCourseChapterPeriodAuditView(periodInfoAuditDTOList);
-		}
 
 		return Result.success(dto);
 	}
