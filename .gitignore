@@ -7,4 +7,3 @@
 *.project
 *.springBeans
 *.factorypath
-**/src/main/resources/config.properties
