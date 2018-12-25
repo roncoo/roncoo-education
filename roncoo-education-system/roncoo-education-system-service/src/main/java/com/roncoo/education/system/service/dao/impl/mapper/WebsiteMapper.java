@@ -18,15 +18,21 @@ public interface WebsiteMapper {
 
     int insertSelective(Website record);
 
+    List<Website> selectByExampleWithBLOBs(WebsiteExample example);
+
     List<Website> selectByExample(WebsiteExample example);
 
     Website selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") Website record, @Param("example") WebsiteExample example);
 
+    int updateByExampleWithBLOBs(@Param("record") Website record, @Param("example") WebsiteExample example);
+
     int updateByExample(@Param("record") Website record, @Param("example") WebsiteExample example);
 
     int updateByPrimaryKeySelective(Website record);
+
+    int updateByPrimaryKeyWithBLOBs(Website record);
 
     int updateByPrimaryKey(Website record);
 }
