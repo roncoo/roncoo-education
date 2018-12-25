@@ -11,9 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.roncoo.education.course.service.dao.CourseAuditDao;
-import com.roncoo.education.course.service.dao.CourseChapterAuditDao;
-import com.roncoo.education.course.service.dao.CourseChapterPeriodAuditDao;
 import com.roncoo.education.course.service.dao.CourseVideoDao;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideo;
 import com.roncoo.education.system.common.bean.vo.SysVO;
@@ -41,12 +38,6 @@ import com.xiaoleilu.hutool.util.ObjectUtil;
 @Component
 public class ApiUploadBiz extends BaseBiz {
 
-	@Autowired
-	private CourseAuditDao courseAuditDao;
-	@Autowired
-	private CourseChapterAuditDao courseChapterAuditDao;
-	@Autowired
-	private CourseChapterPeriodAuditDao courseChapterPeriodAuditDao;
 	@Autowired
 	private CourseVideoDao courseVideoDao;
 
