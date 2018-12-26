@@ -17,7 +17,6 @@ import com.roncoo.education.course.common.bean.dto.auth.AuthCourseAuditListDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseAuditSaveDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseAuditViewDTO;
 import com.roncoo.education.course.service.dao.CourseAuditDao;
-import com.roncoo.education.course.service.dao.CourseCategoryDao;
 import com.roncoo.education.course.service.dao.CourseChapterAuditDao;
 import com.roncoo.education.course.service.dao.CourseChapterPeriodAuditDao;
 import com.roncoo.education.course.service.dao.CourseDao;
@@ -26,7 +25,6 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAuditExample;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAuditExample.Criteria;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseCategory;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduceAudit;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
@@ -59,8 +57,6 @@ public class AuthApiCourseAuditBiz extends BaseBiz {
 	private CourseChapterPeriodAuditDao courseChapterPeriodAuditDao;
 	@Autowired
 	private CourseIntroduceAuditDao courseIntroduceAuditDao;
-	@Autowired
-	private CourseCategoryDao courseCategoryDao;
 
 	/**
 	 * 讲师课程分页接口
@@ -112,25 +108,6 @@ public class AuthApiCourseAuditBiz extends BaseBiz {
 			return Result.error("没有找到该课程信息");
 		}
 		AuthCourseAuditViewDTO dto = BeanUtil.copyProperties(courseAudit, AuthCourseAuditViewDTO.class);
-		// 根据课程的课程分类编号查找分类名称
-		if (courseAudit.getCategoryId1() != 0) {
-			CourseCategory courseCategory = courseCategoryDao.getById(courseAudit.getCategoryId1());
-			if (ObjectUtil.isNotNull(courseCategory)) {
-				dto.setCategoryName1(courseCategory.getCategoryName());
-			}
-		}
-		if (courseAudit.getCategoryId2() != 0) {
-			CourseCategory courseCategory = courseCategoryDao.getById(courseAudit.getCategoryId2());
-			if (ObjectUtil.isNotNull(courseCategory)) {
-				dto.setCategoryName2(courseCategory.getCategoryName());
-			}
-		}
-		if (courseAudit.getCategoryId3() != 0) {
-			CourseCategory courseCategory = courseCategoryDao.getById(courseAudit.getCategoryId3());
-			if (ObjectUtil.isNotNull(courseCategory)) {
-				dto.setCategoryName3(courseCategory.getCategoryName());
-			}
-		}
 		// 课程介绍
 		CourseIntroduceAudit courseIntroduceAudit = courseIntroduceAuditDao.getById(courseAudit.getIntroduceId());
 		dto.setIntroduce(courseIntroduceAudit.getIntroduce());

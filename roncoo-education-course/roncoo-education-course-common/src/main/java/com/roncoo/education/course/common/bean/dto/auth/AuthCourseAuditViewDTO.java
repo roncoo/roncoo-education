@@ -46,21 +46,6 @@ public class AuthCourseAuditViewDTO implements Serializable {
 	@JsonSerialize(using = ToStringSerializer.class)
 	private Long categoryId3;
 	/**
-	 * 一级分类名
-	 */
-	@ApiModelProperty(value = "一级分类名")
-	private String categoryName1;
-	/**
-	 * 二级分类名
-	 */
-	@ApiModelProperty(value = "二级分类名")
-	private String categoryName2;
-	/**
-	 * 三级分类名
-	 */
-	@ApiModelProperty(value = "三级分类名")
-	private String categoryName3;
-	/**
 	 * 课程名称
 	 */
 	@ApiModelProperty(value = "课程名称")
