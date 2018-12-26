@@ -19,7 +19,7 @@ import com.roncoo.education.util.aliyun.Aliyun;
 import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Result;
-import com.roncoo.education.util.config.ConfigUtil;
+import com.roncoo.education.util.config.SystemUtil;
 import com.roncoo.education.util.enums.PlatformEnum;
 import com.roncoo.education.util.enums.VideoStatusEnum;
 import com.roncoo.education.util.polyv.PolyvUtil;
@@ -73,7 +73,7 @@ public class ApiUploadBiz extends BaseBiz {
 		Long videoNo = IdWorker.getId(); // 当作存储到本地的文件名，方便定时任务的处理
 
 		// 1、上传到本地
-		File targetFile = new File(ConfigUtil.PERIOD_VIDEO_PATH + videoNo.toString() + "." + StrUtil.getSuffix(fileName));
+		File targetFile = new File(SystemUtil.PERIOD_VIDEO_PATH + videoNo.toString() + "." + StrUtil.getSuffix(fileName));
 		targetFile.setLastModified(System.currentTimeMillis());// 设置最后修改时间
 		// 判断文件目录是否存在，不存在就创建文件目录
 		if (!targetFile.getParentFile().exists()) {

@@ -11,16 +11,16 @@ import java.util.Properties;
  *
  * @author wujing
  */
-public final class ConfigUtil {
+public final class SystemUtil {
 
-	private ConfigUtil() {
+	private SystemUtil() {
 	}
 
 	private static final Properties properties = new Properties();
 
 	static {
 		try {
-			properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("config.properties"));
+			properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("system.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

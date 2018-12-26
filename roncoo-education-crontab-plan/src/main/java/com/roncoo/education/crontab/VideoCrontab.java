@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.roncoo.education.course.feign.web.IBossCourseVideo;
 import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.config.ConfigUtil;
+import com.roncoo.education.util.config.SystemUtil;
 import com.xiaoleilu.hutool.io.FileUtil;
 
 /**
@@ -41,7 +41,7 @@ public class VideoCrontab extends BaseController {
 
 		int videoSum = 0;
 
-		File file = new File(ConfigUtil.PERIOD_VIDEO_PATH);
+		File file = new File(SystemUtil.PERIOD_VIDEO_PATH);
 		if (file.isDirectory()) {// isDirectory是否文件夹
 			File[] files = file.listFiles();// listFiles是获取该目录下所有文件和目录的绝对路径
 			for (File targetFile : files) {

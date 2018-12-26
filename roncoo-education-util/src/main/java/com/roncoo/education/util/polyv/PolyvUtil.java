@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 import com.ning.http.util.Base64;
-import com.roncoo.education.util.config.ConfigUtil;
+import com.roncoo.education.util.config.SystemUtil;
 import com.roncoo.education.util.tools.JSONUtil;
 import com.roncoo.education.util.tools.MD5Util;
 import com.roncoo.education.util.tools.SHA1Util;
@@ -104,7 +104,7 @@ public final class PolyvUtil {
 		map.put("viewerId", bo.getUserNo());
 		String concated = "extraParams" + map.get("extraParams") + "ts" + map.get("ts") + "userId" + map.get("userId") + "videoId" + map.get("videoId") + "viewerId" + map.get("viewerId") + "viewerIp" + map.get("viewerIp") + "viewerName" + map.get("viewerName");
 		map.put("sign", MD5Util.MD5(secretkey + concated + secretkey).toUpperCase());
-		String result = post(ConfigUtil.POLYV_GETTOKEN, map);
+		String result = post(SystemUtil.POLYV_GETTOKEN, map);
 		logger.info("保利威视，获取token接口：result={}", result);
 		Map<String, Object> resultMap = JSONUtil.parseObject(result, HashMap.class);
 		int code = Integer.valueOf(resultMap.get("code").toString()).intValue();
@@ -161,7 +161,7 @@ public final class PolyvUtil {
 		param.put("JSONRPC", "{\"title\": \"" + uploadFile.getTitle() + "\", \"tag\": \"" + uploadFile.getTag() + "\", \"desc\": \"" + uploadFile.getDesc() + "\"}");
 		param.put("cataid", uploadFile.getCataid());
 		param.put("watermark", uploadFile.getWatermark());
-		String result = postFile(ConfigUtil.POLYV_UPLOADVIDEO, param, file);
+		String result = postFile(SystemUtil.POLYV_UPLOADVIDEO, param, file);
 		try {
 			JSONObject json = JSONObject.fromObject(result);
 			if ("0".equals(json.getString("error"))) {
@@ -190,7 +190,7 @@ public final class PolyvUtil {
 		signStr.append(secretkey);
 		String sign = SHA1Util.getSign(signStr.toString());
 		paramMap.put("sign", sign);
-		String url = ConfigUtil.POLYV_DELETEVIDEO.replace("{userid}", useid);
+		String url = SystemUtil.POLYV_DELETEVIDEO.replace("{userid}", useid);
 		HttpPost httpPost = new HttpPost(url.trim());
 		RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(10000).setConnectionRequestTimeout(3600000).setSocketTimeout(3600000).build();
 		httpPost.setConfig(requestConfig);
@@ -215,7 +215,7 @@ public final class PolyvUtil {
 	 */
 	public static QuestionResult uploadQuestion(Question question, String writetoken) {
 		try {
-			String url = ConfigUtil.POLYV_QUESTION;
+			String url = SystemUtil.POLYV_QUESTION;
 			HttpPost httpPost = new HttpPost(url.trim());
 			RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(10000).setConnectionRequestTimeout(3600000).setSocketTimeout(3600000).build();
 			httpPost.setConfig(requestConfig);
