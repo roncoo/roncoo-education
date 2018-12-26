@@ -54,10 +54,12 @@ public class SysMenuService {
 
 	@Transactional
 	public int deleteById(Long id) {
-		// 存在子菜单的时候不允许删除，要先删除子菜单
+		// 删除菜单,存在子菜单则迭代删除子菜单
 		List<SysMenu> list = dao.listByParentId(id);
 		if (CollectionUtil.isNotEmpty(list)) {
-			return 0;
+			for (SysMenu sysMenu : list) {
+				deleteById(sysMenu.getId());
+			}
 		}
 		return dao.deleteById(id);
 	}

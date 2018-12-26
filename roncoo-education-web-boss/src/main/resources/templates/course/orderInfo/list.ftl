@@ -40,7 +40,7 @@
                 <button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown" data-icon="copy">报表导出<span class="caret"></span></button>
                 <ul class="dropdown-menu right" role="menu">
                     <li>
-                         <a href="${base}/course/orderInfo/export?" data-toggle="doexport" data-confirm-msg="确定要导出信息吗？">导出<span style="color: green;">全部</span></a>
+                         <a href="${base}/course/orderInfo/export" data-toggle="doexport" data-confirm-msg="确定要导出信息吗？">导出<span style="color: green;">全部</span></a>
                     </li>
                 </ul>
             </div>

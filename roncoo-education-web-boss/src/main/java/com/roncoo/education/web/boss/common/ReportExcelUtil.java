@@ -103,7 +103,7 @@ public final class ReportExcelUtil {
 		Integer pageSize = 1000;// 每次获取的记录数
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");// 日期格式化
 		// 列名和列宽
-		String[] names = { "讲师", "课程名称", "销售（套）", "小计(元)", "备注" };// 表头
+		String[] names = { "讲师", "课程名称", "销售(套)", "小计(元)", "备注" };// 表头
 		Integer[] widths = { 10, 20, 8, 8, 12 };// 列宽
 		// 列名和列宽
 		String[] rowNames = { "序号", "订单编号", "课程名称", "金额(元)", "销售日期", "备注" };// 表头
@@ -266,7 +266,7 @@ public final class ReportExcelUtil {
 					row = sheet.createRow(rowIndex);
 					row.setHeight((short) (25 * 15));
 					row.createCell(0).setCellValue(no++);
-					row.createCell(1).setCellValue(info.getOrderNo());
+					row.createCell(1).setCellValue(info.getOrderNo().toString());
 					row.createCell(2).setCellValue(info.getCourseName());
 					row.createCell(3).setCellValue(info.getPricePaid().doubleValue());
 					if (info.getPayTime() != null) {
