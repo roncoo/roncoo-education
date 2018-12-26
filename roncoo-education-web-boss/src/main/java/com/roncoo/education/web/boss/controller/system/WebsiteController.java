@@ -93,7 +93,7 @@ public class WebsiteController extends BaseController {
 	@RequestMapping(value = "/updateWebsite", method = RequestMethod.POST)
 	public String updateWebsite(@ModelAttribute WebsiteQO qo, @RequestParam(value = "weixinFile", required = false) MultipartFile weixinFile, @RequestParam(value = "weiboFile", required = false) MultipartFile weiboFile, @RequestParam(value = "logoImgFile", required = false) MultipartFile logoImgFile, @RequestParam(value = "logoIcoFile", required = false) MultipartFile logoIcoFile) {
 		// 保存站点信息
-		if (biz.updateWebsite(qo, weixinFile, weiboFile, logoIcoFile, logoImgFile) > 0) {
+		if (biz.updateWebsite(qo, weixinFile, weiboFile, logoImgFile, logoIcoFile) > 0) {
 			return success(TARGETID);
 		}
 		return error("修改失败");

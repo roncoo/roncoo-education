@@ -45,6 +45,9 @@
 				<td><#list statusIdEnums as em><#if bean.statusId?? && bean.statusId==em.code><span class="${em.color}">${em.desc}</span></#if></#list></td>
 				<td>【讲师：${bean.lecturerProportion*100}%】</td>
 				<td>
+					<@shiro.hasPermission name="/user/lecturer/edit">
+					<a href="${base}/user/lecturer/edit?id=${bean.id}&lecturerUserNo=${bean.lecturerUserNo}" class="btn btn-green" data-toggle="dialog" data-id="lecturerAudit-edit" data-options="{title:'${bean.lecturerName}-信息修改', width:800, height:450}">修改</a>
+					</@shiro.hasPermission>
 					<#if bean.statusId == 1>
     					<@shiro.hasPermission name="/user/lecturer/updateByStatusId">
     					<a href="${base}/user/lecturer/status?id=${bean.id}&statusId=0" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确定要禁用吗？">禁用</a>

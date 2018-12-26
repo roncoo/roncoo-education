@@ -20,7 +20,6 @@
                 <label class="control-label x120">站点版权：</label>
                 <input type="text" name="copyright" value="${bean.copyright!}" placeholder="站点版权" size="50">
             </div>
-            
             <div class="form-group">
                 <label class="control-label x120">站点微信：</label>
                 <input name="weixinFile" type="file" />
@@ -31,6 +30,16 @@
                 <input name="weiboFile" type="file" />
                 <img src="${bean.weibo!}" width="80">
             </div>
+            <div class="form-group">
+                <label class="control-label x120">网站logo：</label>
+                <input name="logoImgFile" type="file" />
+                <img src="${bean.logoImg!}" width="80">
+            </div>
+            <div class="form-group">
+                <label class="control-label x120">网站Ico：</label>
+                <input name="logoIcoFile" type="file" />
+                <img src="${bean.logoIco!}" width="80">
+            </div>
         </fieldset>  
         
         <fieldset>
@@ -40,12 +49,10 @@
                 <#list isShowServiceEnums as em>
                 <input type="radio" id="isShowService${em.code}" name="isShowService" value="${em.code}" <#if bean.isShowService?? && bean.isShowService==em.code>checked</#if> data-toggle="icheck" data-label="${em.desc}" size="20">
                 </#list>
-            </div>
-            <div class="form-group">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <label class="control-label x85">客服信息1：</label>
                 <input type="text" name="service1" value="${bean.service1!}" placeholder="客服信息1" size="20">
-            </div>
-            <div class="form-group">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             	<label class="control-label x85">客服信息2：</label>
                 <input type="text" name="service2" value="${bean.service2!}" placeholder="客服信息2" size="20">
             </div>
@@ -64,21 +71,6 @@
                 <textarea data-toggle="autoheight" name="statisticsCode" cols="50">${bean.statisticsCode!}</textarea>
             </div>
         </fieldset>  
-        
-        <fieldset>
-            <legend>扩展信息</legend>
-            <div class="form-group">
-                <label class="control-label x120">logoImg：</label>
-                <input name="logoImgFile" type="file" />
-                <img src="${bean.logoImg!}" width="80">
-            </div>
-            <div class="form-group">
-                <label class="control-label x120">logoIco：</label>
-                <input name="logoIcoFile" type="file" />
-                <img src="${bean.logoIco!}" width="80">
-            </div>
-        </fieldset>
-        
 	</form>
 </div>
 <div class="bjui-pageFooter">

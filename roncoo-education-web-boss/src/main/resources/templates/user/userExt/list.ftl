@@ -57,7 +57,7 @@
                         </@shiro.hasPermission>
                     </#if>
                     <@shiro.hasPermission name="/course/courseUserStudyLog/list">
-                    	<a href="${base}/course/courseUserStudyLog/list?userNo=${bean.userNo}" class="btn btn-default" data-toggle="navtab" data-id="course-courseUserStudyLog" data-width="1100" data-height="550">学习记录</a>
+                    	<a href="${base}/course/courseUserStudyLog/list?userNo=${bean.userNo}" class="btn btn-orange" data-toggle="navtab" data-id="course-courseUserStudyLog" data-width="1100" data-height="550">学习记录</a>
 					</@shiro.hasPermission>
 				</td>
 			</tr>

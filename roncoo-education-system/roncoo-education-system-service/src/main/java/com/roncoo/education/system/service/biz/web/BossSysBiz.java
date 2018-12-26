@@ -9,8 +9,12 @@ import com.roncoo.education.system.service.dao.SysDao;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.Sys;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.SysExample;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.SysExample.Criteria;
+import com.roncoo.education.util.base.BaseException;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
+import com.roncoo.education.util.enums.FileTypeEnum;
+import com.roncoo.education.util.enums.SysTypeEnum;
+import com.roncoo.education.util.enums.VideoTypeEnum;
 import com.roncoo.education.util.tools.BeanUtil;
 
 /**
@@ -34,6 +38,15 @@ public class BossSysBiz {
 
 	public int save(SysQO qo) {
 		Sys record = BeanUtil.copyProperties(qo, Sys.class);
+		if (VideoTypeEnum.QINIU.getCode().equals(record.getVideoType())) {
+			throw new BaseException("视频存储暂未支持七牛");
+		}
+		if (FileTypeEnum.QINIU.getCode().equals(record.getFileType())) {
+			throw new BaseException("文件存储暂未支持七牛");
+		}
+		if (SysTypeEnum.OTHERPAYMENT.getCode().equals(record.getPayType())) {
+			throw new BaseException("支付通道暂时只支持龙果支付");
+		}
 		return dao.save(record);
 	}
 
@@ -48,6 +61,15 @@ public class BossSysBiz {
 
 	public int updateById(SysQO qo) {
 		Sys record = BeanUtil.copyProperties(qo, Sys.class);
+		if (VideoTypeEnum.QINIU.getCode().equals(record.getVideoType())) {
+			throw new BaseException("视频存储暂未支持七牛");
+		}
+		if (FileTypeEnum.QINIU.getCode().equals(record.getFileType())) {
+			throw new BaseException("文件存储暂未支持七牛");
+		}
+		if (SysTypeEnum.OTHERPAYMENT.getCode().equals(record.getPayType())) {
+			throw new BaseException("支付通道暂时只支持龙果支付");
+		}
 		return dao.updateById(record);
 	}
 

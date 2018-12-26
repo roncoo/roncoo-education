@@ -72,7 +72,7 @@
 				<td>${bean.sort!}</td>
 				<td>
 					<@shiro.hasPermission name="/course/course/edit">
-						<a href="${base}/course/course/edit?id=${bean.id}" class="btn btn-blue" data-toggle="navtab" data-options="{title:'${bean.courseName}',id:'${bean.courseName}'}">设置</a>
+						<a href="${base}/course/course/edit?id=${bean.id}" class="btn btn-green" data-toggle="navtab" data-options="{title:'${bean.courseName}',id:'${bean.courseName}'}">修改</a>
 					</@shiro.hasPermission>
 				</td>
 			</tr>

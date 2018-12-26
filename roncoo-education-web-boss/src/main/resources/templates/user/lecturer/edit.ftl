@@ -2,42 +2,46 @@
 <div class="bjui-pageContent">
 	<form action="${base}/user/lecturer/update" data-toggle="validate" method="post">
 		<input type="hidden" name="id" value="${bean.id}"/>
-		<div class="form-group">
-            <label class="control-label x85">创建时间：</label>
-            <input type="text" name="gmtCreate" value="${bean.gmtCreate!}" placeholder="创建时间" size="20">
-        </div>
-		<div class="form-group">
-            <label class="control-label x85">修改时间：</label>
-            <input type="text" name="gmtModified" value="${bean.gmtModified!}" placeholder="修改时间" size="20">
-        </div>
-		<div class="form-group">
-            <label class="control-label x85">状态(1:正常，0:禁用)：</label>
-            <input type="text" name="statusId" value="${bean.statusId!}" placeholder="状态(1:正常，0:禁用)" size="20">
-        </div>
-		<div class="form-group">
-            <label class="control-label x85">讲师用户编号：</label>
-            <input type="text" name="lecturerUserNo" value="${bean.lecturerUserNo!}" placeholder="讲师用户编号" size="20">
-        </div>
-		<div class="form-group">
-            <label class="control-label x85">讲师名称：</label>
-            <input type="text" name="lecturerName" value="${bean.lecturerName!}" placeholder="讲师名称" size="20">
-        </div>
-		<div class="form-group">
-            <label class="control-label x85">讲师手机：</label>
-            <input type="text" name="lecturerMobile" value="${bean.lecturerMobile!}" placeholder="讲师手机" size="20">
-        </div>
-		<div class="form-group">
-            <label class="control-label x85">讲师邮箱：</label>
-            <input type="text" name="lecturerEmail" value="${bean.lecturerEmail!}" placeholder="讲师邮箱" size="20">
-        </div>
-		<div class="form-group">
-            <label class="control-label x85">头像：</label>
-            <input type="text" name="headImgUrl" value="${bean.headImgUrl!}" placeholder="头像" size="20">
-        </div>
-		<div class="form-group">
-            <label class="control-label x85">讲师分成比例：</label>
-            <input type="text" name="lecturerProportion" value="${bean.lecturerProportion!}" placeholder="讲师分成比例" size="20">
-        </div>
+		<input type="hidden" name="lecturerUserNo" value="${bean.lecturerUserNo}"/>
+		<input type="hidden" name="lecturerProportion" value="${bean.lecturerProportion*100}">
+		<table class="table-condensed" width="100%">
+        	<tr>
+	            <td><label>一、${bean.lecturerName!''}</label></td>
+	        </tr>
+        	<tr>
+        		<td><label class="control-label x85">讲师名称：</label><input name="lecturerName" value="${bean.lecturerName!''}"/ size="20"></td>
+        		<td><label class="control-label x85">讲师职位：</label><input name="position" value="${bean.position!''}"/ size="20"></td>
+        	</tr>
+        	<tr>
+                <td><label class="control-label x85">手机号码：</label><input name="lecturerMobile" disabled value="${bean.lecturerMobile!''}"/ size="20"></td>
+                <td><label class="control-label x85">讲师邮箱：</label><input name="lecturerEmail" value="${bean.lecturerEmail!''}"/ size="20"></td>
+            </tr>
+        	<tr>
+        		<td><label class="control-label x85">讲师排序：</label><input name="sort" value="${bean.sort}" data-toggle="spinner" data-min="0"  data-step="1" size="20" /></td>
+        	</tr>
+        	<tr>
+        		<td colspan="2"><label class="control-label x85">讲师简介：</label><textarea name="introduce" rows="3" style="width:581px;">${bean.introduce!''}</textarea>
+        	<tr/>
+        	<tr>
+	            <td><label>二、讲师分成及银行信息</label></td>
+	        </tr>
+	        <tr>
+                <td><label class="control-label x85">银行名称：</label><input name="bankName" disabled value="${bean.lecturerExtVO.bankName!''}"/ size="20"></td>
+                <td><label class="control-label x85">银行卡号：</label><input name="bankCardNo" disabled value="${bean.lecturerExtVO.bankCardNo!''}"/ size="20"></td>
+            </tr>
+        	<tr>
+        		<td><label class="control-label x85">开户名称：</label><input name="bankUserName" disabled value="${bean.lecturerExtVO.bankUserName!''}"/ size="20"></td>
+        		<td><label class="control-label x85">身份证号：</label><input name="bankIdCardNo" disabled value="${bean.lecturerExtVO.bankIdCardNo!''}"/ size="20"></td>
+        	</tr>
+        	<tr>
+        		<td><label class="control-label x85">支行名称：</label><input name="bankBranchName" disabled value="${bean.lecturerExtVO.bankBranchName!''}"/ size="20"></td>
+        	</tr>
+        	<tr>
+				<td colspan="3">
+            		<span class="fa fa-info-circle red"> 注:修改立即生效，不用审核</span>
+       			</td>
+			</tr>
+        </table>
 	</form>
 </div>
 <div class="bjui-pageFooter">

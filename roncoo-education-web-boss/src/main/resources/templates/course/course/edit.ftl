@@ -8,7 +8,7 @@
 				<td colspan="3">
 					<label class="control-label x85">课程封面：</label>
 					<input type="file" id="actImg" name="advFile" />
-					<span id="doc_span_pic"><img src="${bean.courseLogo!}" width="200"> <input type="hidden" name="courseImg" value="${bean.courseImg!}" /> </span>
+					<span id="doc_span_pic"><img src="${bean.courseLogo!}" width="100"> <input type="hidden" name="courseImg" value="${bean.courseImg!}" /> </span>
 				</td>
 			</tr>
 			<tr><td></td></tr>
