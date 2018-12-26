@@ -10,9 +10,9 @@ import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAu
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditSortBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditUpdateBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditViewBO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterPeriodAuditListDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterPeriodAuditSaveDTO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterPeriodAuditViewDTO;
+import com.roncoo.education.course.common.bean.dto.auth.AuthPeriodAuditListDTO;
+import com.roncoo.education.course.common.bean.dto.auth.AuthPeriodAuditViewDTO;
 import com.roncoo.education.course.common.interfaces.gateway.auth.AuthApiCourseChapterPeriodAudit;
 import com.roncoo.education.course.service.biz.gateway.auth.AuthApiCourseChapterPeriodAuditBiz;
 import com.roncoo.education.util.base.BaseController;
@@ -30,12 +30,12 @@ public class AuthApiCourseChapterPeriodAuditController extends BaseController im
 	private AuthApiCourseChapterPeriodAuditBiz biz;
 
 	@Override
-	public Result<AuthCourseChapterPeriodAuditListDTO> listByChapterId(@RequestBody AuthCourseChapterPeriodAuditBO authCourseChapterPeriodAuditBO) {
+	public Result<AuthPeriodAuditListDTO> listByChapterId(@RequestBody AuthCourseChapterPeriodAuditBO authCourseChapterPeriodAuditBO) {
 		return biz.listByChapterId(authCourseChapterPeriodAuditBO);
 	}
 
 	@Override
-	public Result<AuthCourseChapterPeriodAuditViewDTO> view(@RequestBody AuthCourseChapterPeriodAuditViewBO authCourseChapterPeriodAuditViewBO) {
+	public Result<AuthPeriodAuditViewDTO> view(@RequestBody AuthCourseChapterPeriodAuditViewBO authCourseChapterPeriodAuditViewBO) {
 		return biz.view(authCourseChapterPeriodAuditViewBO);
 	}
 

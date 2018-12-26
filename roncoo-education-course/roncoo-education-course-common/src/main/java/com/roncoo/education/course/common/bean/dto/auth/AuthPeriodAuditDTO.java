@@ -1,6 +1,7 @@
 package com.roncoo.education.course.common.bean.dto.auth;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -16,37 +17,47 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class AuthCourseChapterPeriodAuditViewDTO implements Serializable {
+public class AuthPeriodAuditDTO implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * 课时ID
-     */
-    @ApiModelProperty(value = "课时ID")
+	/**
+	 * 主键
+	 */
+	@ApiModelProperty(value = "课时编号")
 	@JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
-    /**
-     * 审核状态(0:待审核;1:审核通过;2:审核不通过)
-     */
-    @ApiModelProperty(value = "审核状态(0:待审核;1:审核通过;2:审核不通过)")
-    private Integer auditStatus;
-    /**
-     * 课时名称
-     */
-    @ApiModelProperty(value = "课时名称")
-    private String periodName;
-    /**
-     * 课时描述
-     */
-    @ApiModelProperty(value = "课时描述")
-    private String periodDesc;
-    /**
-     * 是否免费：1免费，0收费
-     */
-    @ApiModelProperty(value = "是否免费：1免费，0收费")
-    private Integer isFree;
-    /**
+	private Long id;
+	/**
+	 * 排序
+	 */
+	@ApiModelProperty(value = "排序")
+	private Integer sort;
+	/**
+	 * 审核状态(0:待审核;1:审核通过;2:审核不通过)
+	 */
+	@ApiModelProperty(value = "审核状态(0:待审核;1:审核通过;2:审核不通过)")
+	private Integer auditStatus;
+	/**
+	 * 课时名称
+	 */
+	@ApiModelProperty(value = "课时名称")
+	private String periodName;
+	/**
+	 * 课时描述
+	 */
+	@ApiModelProperty(value = "课时描述")
+	private String periodDesc;
+	/**
+	 * 是否免费：1免费，0收费
+	 */
+	@ApiModelProperty(value = "是否免费：1免费，0收费")
+	private Integer isFree;
+	/**
+	 * 原价
+	 */
+	@ApiModelProperty(value = "原价")
+	private BigDecimal periodOriginal;
+	/**
 	 * 是否存在文档
 	 */
 	@ApiModelProperty(value = "是否存在文档")

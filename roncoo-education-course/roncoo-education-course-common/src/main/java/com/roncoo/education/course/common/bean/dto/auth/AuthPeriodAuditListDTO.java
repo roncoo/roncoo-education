@@ -14,11 +14,11 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class AuthCourseChapterPeriodAuditListDTO implements Serializable {
+public class AuthPeriodAuditListDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private List<AuthCourseChapterPeriodAuditDTO> userCourseChapterPeriodAuditListDTO;
+	private List<AuthPeriodAuditDTO> userPeriodAuditListDTO;
 
 	/**
 	 * 视频数量

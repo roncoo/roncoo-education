@@ -14,10 +14,10 @@ import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAu
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditSortBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditUpdateBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditViewBO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterPeriodAuditDTO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterPeriodAuditListDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterPeriodAuditSaveDTO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterPeriodAuditViewDTO;
+import com.roncoo.education.course.common.bean.dto.auth.AuthPeriodAuditDTO;
+import com.roncoo.education.course.common.bean.dto.auth.AuthPeriodAuditListDTO;
+import com.roncoo.education.course.common.bean.dto.auth.AuthPeriodAuditViewDTO;
 import com.roncoo.education.course.service.dao.CourseAuditDao;
 import com.roncoo.education.course.service.dao.CourseChapterAuditDao;
 import com.roncoo.education.course.service.dao.CourseChapterPeriodAuditDao;
@@ -63,7 +63,7 @@ public class AuthApiCourseChapterPeriodAuditBiz extends BaseBiz {
 	 * @return
 	 * @author wuyun
 	 */
-	public Result<AuthCourseChapterPeriodAuditListDTO> listByChapterId(AuthCourseChapterPeriodAuditBO authCourseChapterPeriodAuditBO) {
+	public Result<AuthPeriodAuditListDTO> listByChapterId(AuthCourseChapterPeriodAuditBO authCourseChapterPeriodAuditBO) {
 		if (authCourseChapterPeriodAuditBO.getChapterId() == null) {
 			return Result.error("章节ID不能为空");
 		}
@@ -75,10 +75,10 @@ public class AuthApiCourseChapterPeriodAuditBiz extends BaseBiz {
 
 		// 根据章节ID查询课时审核信息表
 		List<CourseChapterPeriodAudit> periodAuditList = periodAuditDao.listByChapterIdAndStatusId(authCourseChapterPeriodAuditBO.getChapterId(), StatusIdEnum.YES.getCode());
-		AuthCourseChapterPeriodAuditListDTO dto = new AuthCourseChapterPeriodAuditListDTO();
+		AuthPeriodAuditListDTO dto = new AuthPeriodAuditListDTO();
 		if (CollectionUtil.isNotEmpty(periodAuditList)) {
-			List<AuthCourseChapterPeriodAuditDTO> periodAuditDTOList = ArrayListUtil.copy(periodAuditList, AuthCourseChapterPeriodAuditDTO.class);
-			dto.setUserCourseChapterPeriodAuditListDTO(periodAuditDTOList);
+			List<AuthPeriodAuditDTO> periodAuditDTOList = ArrayListUtil.copy(periodAuditList, AuthPeriodAuditDTO.class);
+			dto.setUserPeriodAuditListDTO(periodAuditDTOList);
 			for (CourseChapterPeriodAudit courseChapterPeriodAudit : periodAuditList) {
 				// 根据课时ID、是否存在视频(1存在，0否)查询课时审核信息
 				List<CourseChapterPeriodAudit> isVideoList = periodAuditDao.listByIsVideoAndPeriodId(courseChapterPeriodAudit.getIsVideo(), courseChapterPeriodAudit.getId());
@@ -102,7 +102,7 @@ public class AuthApiCourseChapterPeriodAuditBiz extends BaseBiz {
 	 * @return
 	 * @author wuyun
 	 */
-	public Result<AuthCourseChapterPeriodAuditViewDTO> view(AuthCourseChapterPeriodAuditViewBO authCourseChapterPeriodAuditViewBO) {
+	public Result<AuthPeriodAuditViewDTO> view(AuthCourseChapterPeriodAuditViewBO authCourseChapterPeriodAuditViewBO) {
 
 		if (authCourseChapterPeriodAuditViewBO.getId() == null) {
 			return Result.error("课时ID不能为空");
@@ -111,7 +111,7 @@ public class AuthApiCourseChapterPeriodAuditBiz extends BaseBiz {
 		if (ObjectUtil.isNull(periodAudit)) {
 			return Result.error("找不到课时信息");
 		}
-		AuthCourseChapterPeriodAuditViewDTO dto = BeanUtil.copyProperties(periodAudit, AuthCourseChapterPeriodAuditViewDTO.class);
+		AuthPeriodAuditViewDTO dto = BeanUtil.copyProperties(periodAudit, AuthPeriodAuditViewDTO.class);
 		return Result.success(dto);
 	}
 
@@ -246,7 +246,7 @@ public class AuthApiCourseChapterPeriodAuditBiz extends BaseBiz {
 		}
 
 		CourseChapterPeriodAudit courseChapterPeriodAudit = BeanUtil.copyProperties(authCourseChapterPeriodAuditUpdateBO, CourseChapterPeriodAudit.class);
-		//如果有存文档进来
+		// 如果有存文档进来
 		if (!StringUtils.isEmpty(authCourseChapterPeriodAuditUpdateBO.getDocUrl())) {
 			courseChapterPeriodAudit.setDocUrl(authCourseChapterPeriodAuditUpdateBO.getDocUrl());
 		}
@@ -258,7 +258,7 @@ public class AuthApiCourseChapterPeriodAuditBiz extends BaseBiz {
 		if (result > 0) {
 			courseAuditDao.updateAuditStatusBycourseId(AuditStatusEnum.WAIT.getCode(), periodAudit.getCourseId());
 			chapterAuditDao.updateAuditStatusByChapterNo(AuditStatusEnum.WAIT.getCode(), periodAudit.getChapterId());
-			
+
 			return Result.success(result);
 		}
 		return Result.error(ResultEnum.COURSE_UPDATE_FAIL);

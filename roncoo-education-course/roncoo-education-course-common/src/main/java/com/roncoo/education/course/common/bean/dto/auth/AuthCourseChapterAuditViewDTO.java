@@ -64,5 +64,5 @@ public class AuthCourseChapterAuditViewDTO implements Serializable {
      * 课时信息集合
      */
     @ApiModelProperty(value = "课时信息集合", required = true)
-    private List<AuthCourseChapterPeriodAuditViewDTO> authCourseChapterPeriodAuditView;
+    private List<AuthPeriodAuditViewDTO> authPeriodAuditView;
 }

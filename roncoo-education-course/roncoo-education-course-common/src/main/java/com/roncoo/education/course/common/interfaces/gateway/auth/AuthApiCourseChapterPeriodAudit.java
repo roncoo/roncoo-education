@@ -10,9 +10,9 @@ import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAu
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditSortBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditUpdateBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditViewBO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterPeriodAuditListDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterPeriodAuditSaveDTO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterPeriodAuditViewDTO;
+import com.roncoo.education.course.common.bean.dto.auth.AuthPeriodAuditListDTO;
+import com.roncoo.education.course.common.bean.dto.auth.AuthPeriodAuditViewDTO;
 import com.roncoo.education.util.base.Result;
 
 import io.swagger.annotations.ApiOperation;
@@ -29,14 +29,14 @@ public interface AuthApiCourseChapterPeriodAudit {
 	 */
 	@ApiOperation(value = "课时列出接口", notes = "根据章节ID列出课时信息")
 	@RequestMapping(value = "/auth/course/api/course/chapter/period/audit/list", method = RequestMethod.POST)
-	Result<AuthCourseChapterPeriodAuditListDTO> listByChapterId(@RequestBody AuthCourseChapterPeriodAuditBO authCourseChapterPeriodAuditBO);
+	Result<AuthPeriodAuditListDTO> listByChapterId(@RequestBody AuthCourseChapterPeriodAuditBO authCourseChapterPeriodAuditBO);
 
 	/**
 	 * 课时查看接口
 	 */
 	@ApiOperation(value = "课时查看接口", notes = "课时查看接口")
 	@RequestMapping(value = "/auth/course/api/course/chapter/period/audit/view", method = RequestMethod.POST)
-	Result<AuthCourseChapterPeriodAuditViewDTO> view(@RequestBody AuthCourseChapterPeriodAuditViewBO authCourseChapterPeriodAuditViewBO);
+	Result<AuthPeriodAuditViewDTO> view(@RequestBody AuthCourseChapterPeriodAuditViewBO authCourseChapterPeriodAuditViewBO);
 
 	/**
 	 * 课时删除接口

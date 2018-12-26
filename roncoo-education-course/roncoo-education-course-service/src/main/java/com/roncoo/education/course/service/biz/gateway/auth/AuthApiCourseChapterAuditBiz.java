@@ -19,7 +19,7 @@ import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterAuditLi
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterAuditSaveDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterAuditUpdateDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterAuditViewDTO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterPeriodAuditViewDTO;
+import com.roncoo.education.course.common.bean.dto.auth.AuthPeriodAuditViewDTO;
 import com.roncoo.education.course.service.dao.CourseAuditDao;
 import com.roncoo.education.course.service.dao.CourseChapterAuditDao;
 import com.roncoo.education.course.service.dao.CourseChapterDao;
@@ -89,8 +89,8 @@ public class AuthApiCourseChapterAuditBiz extends BaseBiz {
 		List<CourseChapterPeriodAudit> periodAuditList = periodAuditDao.listByChapterIdAndStatusId(authCourseChapterAuditViewBO.getId(), StatusIdEnum.YES.getCode());
 		// 写入课时信息集合
 		if (CollectionUtil.isNotEmpty(periodAuditList)) {
-			List<AuthCourseChapterPeriodAuditViewDTO> periodAuditDTOList = ArrayListUtil.copy(periodAuditList, AuthCourseChapterPeriodAuditViewDTO.class);
-			dto.setAuthCourseChapterPeriodAuditView(periodAuditDTOList);
+			List<AuthPeriodAuditViewDTO> periodAuditDTOList = ArrayListUtil.copy(periodAuditList, AuthPeriodAuditViewDTO.class);
+			dto.setAuthPeriodAuditView(periodAuditDTOList);
 		}
 		return Result.success(dto);
 	}

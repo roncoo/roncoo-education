@@ -237,8 +237,10 @@ public class AuthApiCourseBiz extends BaseBiz {
 		}
 
 		private void studyCount(AuthCourseSignBO authCourseSignBO, CourseChapterPeriod courseChapterPeriod, Course course) {
+			// 查找课程用户关联表
 			CourseUserStudy courseUserStudy = courseUserStudyDao.getByUserNoAndCourseId(authCourseSignBO.getUserNo(), courseChapterPeriod.getCourseId());
-			if (courseUserStudy == null) {
+			// 如果不存在记录
+			if (null == courseUserStudy) {
 				courseUserStudy = new CourseUserStudy();
 				courseUserStudy.setCourseId(course.getId());
 				courseUserStudy.setUserNo(authCourseSignBO.getUserNo());
@@ -263,13 +265,13 @@ public class AuthApiCourseBiz extends BaseBiz {
 					courseUserStudyLog.setUserNo(authCourseSignBO.getUserNo());
 					courseUserStudyLogDao.save(courseUserStudyLog);
 
-					CourseUserStudy record = new CourseUserStudy();
-					record.setPeriodTotal(course.getPeriodTotal());
-					record.setPeriodStudy(courseUserStudy.getPeriodStudy() + 1);
-					courseUserStudyDao.updateById(record);
+					courseUserStudy.setPeriodTotal(course.getPeriodTotal());
+					courseUserStudy.setPeriodStudy(courseUserStudy.getPeriodStudy() + 1);
+					courseUserStudyDao.updateById(courseUserStudy);
 				} else {
-					CourseUserStudyLog record = new CourseUserStudyLog();
-					courseUserStudyLogDao.updateById(record);
+					courseUserStudy.setPeriodTotal(course.getPeriodTotal());
+					courseUserStudy.setPeriodStudy(courseUserStudy.getPeriodStudy() + 1);
+					courseUserStudyDao.updateById(courseUserStudy);
 				}
 			}
 		}
