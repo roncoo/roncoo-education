@@ -156,12 +156,23 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 			return Result.error("传入的useNo与该课程的讲师useNo不一致");
 		}
 
+		// 查找该课时下的所有视频信息集合更改为冻结状态
+		List<CourseVideo> periodVideoInfoAuditList = dao.listByPeriodIdAndStatusId(bo.getPeriodId(), StatusIdEnum.YES.getCode());
+		if (CollectionUtil.isNotEmpty(periodVideoInfoAuditList)) {
+			for (CourseVideo periodVideoInfoAudit : periodVideoInfoAuditList) {
+				CourseVideo audit = new CourseVideo();
+				audit.setId(periodVideoInfoAudit.getId());
+				audit.setStatusId(FREEZE);
+				dao.updateById(audit);
+			}
+		}
+
 		// 如果视频编号不为空
 		if (bo.getVideoNo() != null) {
 			// 根据视频编号课时编号查找课时视频信息
 			CourseVideo courseVideo = dao.getByVideoNoAndPeriodId(bo.getVideoNo(), bo.getPeriodId());
 			if (ObjectUtil.isNotNull(courseVideo)) {
-				// 如果存在且为禁用状态则更新为可用状态
+				// 如果存在则更新为可用状态
 				courseVideo.setStatusId(StatusIdEnum.YES.getCode());
 				dao.updateById(courseVideo);
 				// 更新课程、章节、课时
@@ -179,18 +190,7 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 			}
 			return Result.success(1);
 		} else {
-			// 根据课时ID查询课程视频信息
-			List<CourseVideo> courseVideoList = dao.listByPeriodIdAndStatusId(bo.getPeriodId(), StatusIdEnum.YES.getCode());
-			int result = 0;
-			if (!CollectionUtil.isEmpty(courseVideoList)) {
-				for (CourseVideo courseVideo : courseVideoList) {
-					CourseVideo video = new CourseVideo();
-					video.setId(courseVideo.getId());
-					video.setStatusId(StatusIdEnum.NO.getCode());
-					result = dao.updateById(video);
-				}
-			}
-			return Result.success(result);
+			return Result.success(1);
 		}
 	}
 
