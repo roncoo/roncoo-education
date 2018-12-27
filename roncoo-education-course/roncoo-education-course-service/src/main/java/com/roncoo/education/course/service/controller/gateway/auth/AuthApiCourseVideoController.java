@@ -9,6 +9,7 @@ import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoDeleteBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoSaveBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoUpdateBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthPeriodIdVideoBO;
+import com.roncoo.education.course.common.bean.dto.auth.AuthCourseVideoForListDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseVideoListDTO;
 import com.roncoo.education.course.common.interfaces.gateway.auth.AuthApiCourseVideo;
 import com.roncoo.education.course.service.biz.gateway.auth.AuthApiCourseVideoBiz;
@@ -37,7 +38,7 @@ public class AuthApiCourseVideoController extends BaseController implements Auth
 	}
 
 	@Override
-	public Result<AuthCourseVideoListDTO> listByPeriodId(@RequestBody AuthPeriodIdVideoBO authCourseVideoBO) {
+	public Result<AuthCourseVideoForListDTO> listByPeriodId(@RequestBody AuthPeriodIdVideoBO authCourseVideoBO) {
 		return biz.listByPeriodId(authCourseVideoBO);
 	}
 

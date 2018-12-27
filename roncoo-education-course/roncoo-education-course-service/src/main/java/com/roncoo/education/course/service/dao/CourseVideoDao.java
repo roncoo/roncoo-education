@@ -37,14 +37,13 @@ public interface CourseVideoDao {
 	List<CourseVideo> listByVideoNo(Long videoNo);
 
 	/**
-	 * 根据课时ID查询可用的课程视频信息集合
+	 * 根据课时ID查询课程视频信息
 	 * 
 	 * @param periodId
-	 * @param statuId
 	 * @return
 	 * @author wuyun
 	 */
-	List<CourseVideo> listByPeriodIdAndStatusId(Long periodId, Integer statuId);
+	CourseVideo getByPeriodId(Long periodId);
 
 	/**
 	 * 根据视频编号查询可用的课程视频信息
