@@ -68,5 +68,5 @@ public class CourseChapterDTO implements Serializable {
 	 * 课时信息
 	 */
 	@ApiModelProperty(value = "课时信息")
-	private List<CourseChapterPeriodDTO> courseChapterPeriodList;
+	private List<CourseChapterPeriodDTO> periodList;
 }

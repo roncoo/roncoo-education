@@ -94,7 +94,7 @@ public class ApiCourseBiz {
 		if (CollectionUtil.isNotEmpty(data.getChapterList())) {
 			for (CourseChapterDTO courseChapterDTO : data.getChapterList()) {
 				List<CourseChapterPeriod> courseChapterPeriodList = courseChapterPeriodDao.listByChapterIdAndStatusId(courseChapterDTO.getId(), StatusIdEnum.YES.getCode());
-				courseChapterDTO.setCourseChapterPeriodList(PageUtil.copyList(courseChapterPeriodList, CourseChapterPeriodDTO.class));
+				courseChapterDTO.setPeriodList(PageUtil.copyList(courseChapterPeriodList, CourseChapterPeriodDTO.class));
 			}
 		}
 		return Result.success(data);
