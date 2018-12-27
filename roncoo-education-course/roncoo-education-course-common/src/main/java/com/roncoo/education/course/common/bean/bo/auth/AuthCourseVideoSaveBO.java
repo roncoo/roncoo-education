@@ -18,11 +18,6 @@ public class AuthCourseVideoSaveBO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 课时ID
-	 */
-	@ApiModelProperty(value = "课时ID")
-	private Long periodId;
-	/**
 	 * 视频编号
 	 */
 	@ApiModelProperty(value = "视频编号")

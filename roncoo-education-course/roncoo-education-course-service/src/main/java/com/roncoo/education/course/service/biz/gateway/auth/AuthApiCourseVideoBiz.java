@@ -10,7 +10,6 @@ import org.springframework.util.StringUtils;
 
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoDeleteBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoForUpdateBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoSaveBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoUpdateBO;
 import com.roncoo.education.course.common.bean.bo.auth.AuthPeriodIdVideoBO;
@@ -86,12 +85,7 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 		// 查找视频信息
 		CourseVideo courseVideo = dao.getByVideoNo(bo.getVideoNo());
 		if (ObjectUtil.isNull(courseVideo)) {
-			return Result.error("找不到课时视频信息");
-		}
-		// 更改视频信息信息
-		if (bo.getPeriodId() != null) {
-			// 如果传进来的课时编号不为空，则为课时视频库
-			courseVideo.setPeriodId(bo.getPeriodId());
+			return Result.error("找不到视频信息");
 		}
 		courseVideo.setCourseId(chapterInfoAudit.getCourseId());
 		courseVideo.setChapterId(chapterInfoAudit.getId());
@@ -162,29 +156,40 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 			return Result.error("传入的useNo与该课程的讲师useNo不一致");
 		}
 
-		Long videoNo = null;
-		String videoName = null;
-		String videoLength = null;
-		String videovid = null;
-		List<CourseVideo> courseVideoList = dao.listByPeriodIdAndStatusId(bo.getPeriodId(), StatusIdEnum.YES.getCode());
-		if (CollectionUtil.isEmpty(courseVideoList)) {
-			return Result.error("找不到该课时的视频信息");
-		}
-		for (CourseVideo courseVideo : courseVideoList) {
-			videoNo = courseVideo.getVideoNo();
-			videoName = courseVideo.getVideoName();
-			videoLength = courseVideo.getVideoLength();
-			videovid = courseVideo.getVideoVid();
-		}
+		// 如果视频编号不为空
+		if (bo.getVideoNo() != null) {
+			// 根据视频编号课时编号查找课时视频信息
+			CourseVideo courseVideo = dao.getByVideoNoAndPeriodId(bo.getVideoNo(), bo.getPeriodId());
+			if (ObjectUtil.isNotNull(courseVideo)) {
+				// 如果存在且为禁用状态则更新为可用状态
+				courseVideo.setStatusId(StatusIdEnum.YES.getCode());
+				dao.updateById(courseVideo);
+				// 更新课程、章节、课时
+				updateCourseChapterPeriod(courseChapterPeriodAudit, courseVideo);
 
-		// 根据课时ID查询课程视频信息集合
-		List<CourseVideo> CourseVideoList = dao.listByPeriodId(bo.getPeriodId());
-		for (CourseVideo courseVideo : CourseVideoList) {
-			CourseVideo video = new CourseVideo();
-			video.setId(courseVideo.getId());
-			video.setStatusId(FREEZE);
-			dao.updateById(video);
+			} else {
+				// 根据视频编号查找可用的课时视频信息
+				CourseVideo infoAudit = dao.getByVideoNoAndStatusId(bo.getVideoNo(), StatusIdEnum.YES.getCode());
+				CourseVideo audit = BeanUtil.copyProperties(infoAudit, CourseVideo.class);
+				audit.setPeriodId(bo.getPeriodId());
+				dao.save(audit);
+				// 更新课程、章节、课时
+				updateCourseChapterPeriod(courseChapterPeriodAudit, audit);
+
+			}
+			return Result.success(1);
+		} else {
+			// 如果为空则直接返回成功
+			return Result.success(1);
 		}
+	}
+
+	// 更新课程、章节、课时
+	private void updateCourseChapterPeriod(CourseChapterPeriodAudit courseChapterPeriodAudit, CourseVideo courseVideo) {
+		Long videoNo = courseVideo.getVideoNo();
+		String videoName = courseVideo.getVideoName();
+		String videoLength = courseVideo.getVideoLength();
+		String videovid = courseVideo.getVideoVid();
 
 		// 更新课时审核信息为待审核状态
 		courseChapterPeriodAudit.setIsVideo(IsVideoEnum.YES.getCode());
@@ -204,29 +209,6 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 		courseAudit.setId(courseChapterPeriodAudit.getCourseId());
 		courseAudit.setAuditStatus(AuditStatusEnum.WAIT.getCode());
 		courseAuditDao.updateById(courseAudit);
-
-		// 如果视频集合不为空
-		if (CollectionUtil.isNotEmpty(bo.getList())) {
-			for (AuthCourseVideoForUpdateBO updateBo : bo.getList()) {
-				// 根据视频编号课时编号查找课时视频信息
-				CourseVideo courseVideo = dao.getByVideoNoAndPeriodId(updateBo.getVideoNo(), bo.getPeriodId());
-				if (ObjectUtil.isNotNull(courseVideo)) {
-					// 如果存在且为禁用状态则更新为可用状态
-					courseVideo.setStatusId(StatusIdEnum.YES.getCode());
-					dao.updateById(courseVideo);
-				} else {
-					// 根据视频编号查找可用的课时视频信息
-					CourseVideo infoAudit = dao.getByVideoNoAndStatusId(updateBo.getVideoNo(), StatusIdEnum.YES.getCode());
-					CourseVideo audit = BeanUtil.copyProperties(infoAudit, CourseVideo.class);
-					audit.setPeriodId(bo.getPeriodId());
-					dao.save(audit);
-				}
-			}
-			return Result.success(bo.getList().size());
-		} else {
-			// 如果为空则直接返回成功
-			return Result.success(0);
-		}
 	}
 
 	/**

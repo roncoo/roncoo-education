@@ -1,7 +1,6 @@
 package com.roncoo.education.course.common.bean.bo.auth;
 
 import java.io.Serializable;
-import java.util.List;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -31,7 +30,8 @@ public class AuthCourseVideoUpdateBO implements Serializable {
 	private Long userNo;
 
 	/**
-	 * 视频编号集合
+	 * 视频编号
 	 */
-	private List<AuthCourseVideoForUpdateBO> list;
+	@ApiModelProperty(value = "视频编号")
+	private Long videoNo;
 }
