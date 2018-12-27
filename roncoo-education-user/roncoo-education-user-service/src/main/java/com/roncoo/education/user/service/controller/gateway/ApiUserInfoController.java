@@ -1,5 +1,7 @@
 package com.roncoo.education.user.service.controller.gateway;
 
+import java.io.UnsupportedEncodingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,7 +60,7 @@ public class ApiUserInfoController extends BaseController implements ApiUserInfo
 	}
 
 	@Override
-	public String authRoncoo() {
+	public String authRoncoo() throws UnsupportedEncodingException {
 		return biz.authRoncoo();
 	}
 }

@@ -52,7 +52,4 @@ public final class SystemUtil {
 
 	public static final String LECTURER_DEFAULT_PROPORTION = getProperty("lecturer_default_proportion");
 	
-	public static final String AUTH_DOMAIN = getProperty("auth_domain");
-	public static final String AUTH_CLIENT_ID = getProperty("auth_client_id");
-	public static final String AUTH_REDIRECT_URI = getProperty("auth_redirect_uri");
 }
