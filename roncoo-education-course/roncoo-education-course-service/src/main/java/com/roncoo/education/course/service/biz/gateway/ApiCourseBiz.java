@@ -60,12 +60,12 @@ public class ApiCourseBiz {
 	 * @param courseView
 	 * @return
 	 */
-	public Result<CourseViewDTO> view(CourseVideoBO courseView) {
-		if (courseView.getCourseId() == null) {
+	public Result<CourseViewDTO> view(CourseVideoBO courseVideoBO) {
+		if (courseVideoBO.getCourseId() == null) {
 			return Result.error("课程ID不能为空");
 		}
 		// 课程信息
-		Course course = courseDao.getById(courseView.getCourseId());
+		Course course = courseDao.getById(courseVideoBO.getCourseId());
 		if (course == null) {
 			return Result.error("找不到该课程信息");
 		}
@@ -85,7 +85,7 @@ public class ApiCourseBiz {
 		data.setLecturerDTO(BeanUtil.copyProperties(lecturerVO, LecturerDTO.class));
 
 		// 章节信息
-		List<CourseChapter> courseChapterList = courseChapterDao.listByCourseIdAndStatusId(courseView.getCourseId(), StatusIdEnum.YES.getCode());
+		List<CourseChapter> courseChapterList = courseChapterDao.listByCourseIdAndStatusId(courseVideoBO.getCourseId(), StatusIdEnum.YES.getCode());
 		if (CollectionUtil.isNotEmpty(courseChapterList)) {
 			data.setChapterList(PageUtil.copyList(courseChapterList, CourseChapterDTO.class));
 		}

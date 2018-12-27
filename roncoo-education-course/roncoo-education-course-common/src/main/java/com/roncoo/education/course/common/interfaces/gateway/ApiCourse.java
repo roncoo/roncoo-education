@@ -39,6 +39,6 @@ public interface ApiCourse {
 	 */
 	@ApiOperation(value = "课程详情接口", notes = "根据课程ID获取课程信息")
 	@RequestMapping(value = "/course/api/course/view", method = RequestMethod.POST)
-	Result<CourseViewDTO> view(@RequestBody CourseVideoBO courseView);
+	Result<CourseViewDTO> view(@RequestBody CourseVideoBO courseViewBO);
 
 }
