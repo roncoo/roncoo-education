@@ -34,12 +34,16 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterP
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriodAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduce;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduceAudit;
+import com.roncoo.education.system.feign.web.IBossSys;
 import com.roncoo.education.user.common.bean.vo.LecturerVO;
 import com.roncoo.education.user.feign.web.IBossLecturer;
+import com.roncoo.education.util.aliyun.Aliyun;
+import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.BaseException;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.enums.AuditStatusEnum;
+import com.roncoo.education.util.enums.IsDocEnum;
 import com.roncoo.education.util.enums.IsFreeEnum;
 import com.roncoo.education.util.enums.StatusIdEnum;
 import com.roncoo.education.util.tools.BeanUtil;
@@ -74,6 +78,8 @@ public class BossCourseAuditBiz {
 
 	@Autowired
 	private IBossLecturer bossLecturer;
+	@Autowired
+	private IBossSys bossSys;
 
 	public Page<CourseAuditVO> listForPage(CourseAuditQO qo) {
 		CourseAuditExample example = new CourseAuditExample();
@@ -300,6 +306,9 @@ public class BossCourseAuditBiz {
 				CourseChapterPeriod chapterPeriod = courseChapterPeriodDao.getById(courseChapterPeriodAudit.getId());
 				// 如果信息表存在就更新信息表信息
 				if (ObjectUtil.isNotNull(chapterPeriod)) {
+					if (IsDocEnum.YES.getCode().equals(chapterPeriod.getIsDoc())) {
+						AliyunUtil.delete(chapterPeriod.getDocUrl(), BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class));
+					}
 					chapterPeriod = BeanUtil.copyProperties(chapterperiodAudit, CourseChapterPeriod.class);
 					chapterPeriod.setGmtCreate(null);
 					chapterPeriod.setGmtModified(null);
