@@ -51,4 +51,14 @@ public class AuthCourseChapterPeriodAuditSaveBO implements Serializable {
 	 */
 	@ApiModelProperty(value = "用户编号", required = true)
 	private Long userNo;
+	/**
+	 * 文档名称
+	 */
+	@ApiModelProperty(value = "文档名称")
+	private String docName;
+	/**
+	 * 文档地址
+	 */
+	@ApiModelProperty(value = "文档地址")
+	private String docUrl;
 }

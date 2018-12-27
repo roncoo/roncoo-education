@@ -46,4 +46,9 @@ public class AuthCourseChapterPeriodAuditSaveDTO implements Serializable {
      */
     @ApiModelProperty(value = "是否免费：1免费，0收费")
     private Integer isFree;
+    /**
+     * 是否存在文档
+     */
+    @ApiModelProperty(value = "是否存在文档：1存在，0否)")
+    private Integer isDoc;
 }
