@@ -168,7 +168,7 @@ public class AuthApiCourseChapterAuditBiz extends BaseBiz {
 				List<CourseChapterPeriodAudit> periodAuditList = periodAuditDao.listByChapterIdAndStatusId(authCourseChapterAuditDTO.getId(), StatusIdEnum.YES.getCode());
 				authCourseChapterAuditDTO.setPeriodNum(periodAuditList.size());
 			}
-			dto.setUserCourseChapterAuditListDTO(chapterAuditDTOList);
+			dto.setUserChapterAuditList(chapterAuditDTOList);
 		}
 		return Result.success(dto);
 	}

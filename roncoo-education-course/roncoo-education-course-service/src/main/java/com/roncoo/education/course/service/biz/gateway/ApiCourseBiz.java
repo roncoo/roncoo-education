@@ -87,12 +87,12 @@ public class ApiCourseBiz {
 		// 章节信息
 		List<CourseChapter> courseChapterList = courseChapterDao.listByCourseIdAndStatusId(courseView.getCourseId(), StatusIdEnum.YES.getCode());
 		if (CollectionUtil.isNotEmpty(courseChapterList)) {
-			data.setCourseChapterList(PageUtil.copyList(courseChapterList, CourseChapterDTO.class));
+			data.setChapterList(PageUtil.copyList(courseChapterList, CourseChapterDTO.class));
 		}
 
 		// 课时信息
-		if (CollectionUtil.isNotEmpty(data.getCourseChapterList())) {
-			for (CourseChapterDTO courseChapterDTO : data.getCourseChapterList()) {
+		if (CollectionUtil.isNotEmpty(data.getChapterList())) {
+			for (CourseChapterDTO courseChapterDTO : data.getChapterList()) {
 				List<CourseChapterPeriod> courseChapterPeriodList = courseChapterPeriodDao.listByChapterIdAndStatusId(courseChapterDTO.getId(), StatusIdEnum.YES.getCode());
 				courseChapterDTO.setCourseChapterPeriodList(PageUtil.copyList(courseChapterPeriodList, CourseChapterPeriodDTO.class));
 			}

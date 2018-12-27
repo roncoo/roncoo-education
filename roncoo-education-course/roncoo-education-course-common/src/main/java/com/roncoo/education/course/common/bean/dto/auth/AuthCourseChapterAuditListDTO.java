@@ -17,5 +17,5 @@ public class AuthCourseChapterAuditListDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private List<AuthCourseChapterAuditDTO> userCourseChapterAuditListDTO;
+    private List<AuthCourseChapterAuditDTO> userChapterAuditList;
 }

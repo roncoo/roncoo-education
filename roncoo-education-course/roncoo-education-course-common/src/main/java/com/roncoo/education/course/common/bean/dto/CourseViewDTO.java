@@ -92,6 +92,6 @@ public class CourseViewDTO implements Serializable {
 	 * 章节信息
 	 */
 	@ApiModelProperty(value = "章节信息")
-	private List<CourseChapterDTO> courseChapterList;
+	private List<CourseChapterDTO> chapterList;
 
 }
