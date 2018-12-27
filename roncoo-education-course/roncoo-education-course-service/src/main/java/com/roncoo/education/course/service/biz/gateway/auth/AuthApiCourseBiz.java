@@ -171,7 +171,7 @@ public class AuthApiCourseBiz extends BaseBiz {
 
 		// 查询讲师信息
 		LecturerVO lecturerVO = bossLecturer.getByLecturerUserNo(dto.getLecturerUserNo());
-		dto.setAuthLecturerDTO(BeanUtil.copyProperties(lecturerVO, AuthLecturerDTO.class));
+		dto.setLecturerDTO(BeanUtil.copyProperties(lecturerVO, AuthLecturerDTO.class));
 
 		return Result.success(dto);
 	}
