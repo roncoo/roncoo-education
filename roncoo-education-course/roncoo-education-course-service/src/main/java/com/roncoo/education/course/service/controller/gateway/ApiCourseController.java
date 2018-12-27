@@ -1,7 +1,6 @@
 package com.roncoo.education.course.service.controller.gateway;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,7 +31,7 @@ public class ApiCourseController extends BaseController implements ApiCourse {
 	}
 
 	@Override
-	public Result<CourseViewDTO> view(@PathVariable CourseVideoBO courseView) {
-		return biz.view(courseView);
+	public Result<CourseViewDTO> view(@RequestBody CourseVideoBO courseVideoBO) {
+		return biz.view(courseVideoBO);
 	}
 }
