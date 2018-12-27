@@ -79,6 +79,11 @@ public class AuthCourseViewDTO implements Serializable {
 	@ApiModelProperty(value = "讲师信息")
 	private AuthLecturerDTO authLecturerDTO;
 	/**
+	 * 是否购买1:已经购买;2:未购买
+	 */
+	@ApiModelProperty(value = "是否支付(1:已支付;0:未支付)")
+	private int isPay;
+	/**
 	 * 章节信息
 	 */
 	@ApiModelProperty(value = "章节信息")

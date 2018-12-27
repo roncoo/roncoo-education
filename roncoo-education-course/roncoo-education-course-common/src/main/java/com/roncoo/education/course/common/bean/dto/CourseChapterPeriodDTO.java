@@ -124,9 +124,4 @@ public class CourseChapterPeriodDTO implements Serializable {
 	 */
 	@ApiModelProperty(value = "阿里云oas")
 	private String videoOasId;
-	/**
-	 * 是否已经支付
-	 */
-	@ApiModelProperty(value = "是否支付(1:是;0:否)", required = true)
-	private int isPay;
 }

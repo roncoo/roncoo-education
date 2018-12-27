@@ -36,6 +36,7 @@ import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.IsFreeEnum;
+import com.roncoo.education.util.enums.IsPayEnum;
 import com.roncoo.education.util.enums.OrderStatusEnum;
 import com.roncoo.education.util.enums.StatusIdEnum;
 import com.roncoo.education.util.polyv.PolyvCode;
@@ -153,6 +154,19 @@ public class AuthApiCourseBiz extends BaseBiz {
 
 		// 查询订单号，查看用户是否购买了课程，是否存在订单号
 		OrderInfo orderInfo = orderInfoDao.getByUserNoAndCourseId(authCourseViewBO.getUserNo(), authCourseViewBO.getCourseId());
+		if (ObjectUtil.isNull(orderInfo)) {
+			// 未购买或者没支付情况
+			dto.setIsPay(IsPayEnum.NO.getCode());
+		} else if (OrderStatusEnum.SUCCESS.getCode().equals(orderInfo.getOrderStatus())) {
+			// 订单状态为已支付
+			dto.setIsPay(IsPayEnum.YES.getCode());
+		}else {
+			dto.setIsPay(IsPayEnum.NO.getCode());
+		}
+		// 如果课程为免费课程则设置为已付费
+		if (IsFreeEnum.FREE.getCode().equals(course.getIsFree())) {
+			dto.setIsPay(IsPayEnum.YES.getCode());
+		}
 
 		// 课时信息
 		for (CourseChapterDTO courseChapterDTO : dto.getCourseChapterList()) {
