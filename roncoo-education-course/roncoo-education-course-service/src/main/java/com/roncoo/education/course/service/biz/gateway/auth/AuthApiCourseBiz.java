@@ -138,10 +138,19 @@ public class AuthApiCourseBiz extends BaseBiz {
 		// 查询课程介绍
 		CourseIntroduce courseIntroduce = courseIntroduceDao.getById(course.getIntroduceId());
 		dto.setIntroduce(BeanUtil.copyProperties(courseIntroduce, CourseIntroduceDTO.class).getIntroduce());
-
+		
 		dto.setIsPay(IsPayEnum.NO.getCode());
 		// 如果课程为免费课程则设置为已付费
 		if (IsFreeEnum.FREE.getCode().equals(course.getIsFree())) {
+			dto.setIsPay(IsPayEnum.YES.getCode());
+		}
+		// 查询订单号，查看用户是否购买了课程，是否存在订单号
+		OrderInfo orderInfo = orderInfoDao.getByUserNoAndCourseId(authCourseViewBO.getUserNo(), authCourseViewBO.getCourseId());
+		if (ObjectUtil.isNull(orderInfo)) {
+			// 未购买或者没支付情况
+			dto.setIsPay(IsPayEnum.NO.getCode());
+		} else if (OrderStatusEnum.SUCCESS.getCode().equals(orderInfo.getOrderStatus())) {
+			// 订单状态为已支付
 			dto.setIsPay(IsPayEnum.YES.getCode());
 		}
 
@@ -151,33 +160,15 @@ public class AuthApiCourseBiz extends BaseBiz {
 		if (courseChapterList.isEmpty()) {
 			return Result.success(dto);
 		}
+		dto.setChapterList(PageUtil.copyList(courseChapterList, CourseChapterDTO.class));
 
-		dto.setCourseChapterList(PageUtil.copyList(courseChapterList, CourseChapterDTO.class));
-
-		// 查询订单号，查看用户是否购买了课程，是否存在订单号
-		OrderInfo orderInfo = orderInfoDao.getByUserNoAndCourseId(authCourseViewBO.getUserNo(), authCourseViewBO.getCourseId());
-		if (ObjectUtil.isNull(orderInfo)) {
-			// 未购买或者没支付情况
-			dto.setIsPay(IsPayEnum.NO.getCode());
-		} else if (OrderStatusEnum.SUCCESS.getCode().equals(orderInfo.getOrderStatus())) {
-			// 订单状态为已支付
-			dto.setIsPay(IsPayEnum.YES.getCode());
-		}else {
-			dto.setIsPay(IsPayEnum.NO.getCode());
-		}
 
 		// 课时信息
-		for (CourseChapterDTO courseChapterDTO : dto.getCourseChapterList()) {
+		for (CourseChapterDTO courseChapterDTO : dto.getChapterList()) {
 			List<CourseChapterPeriod> courseChapterPeriodList = courseChapterPeriodDao.listByChapterId(courseChapterDTO.getId());
-			// 存在订单号并且订单号的状态为已支付
-			if (ObjectUtil.isNotNull(orderInfo) && orderInfo.getOrderStatus().equals(OrderStatusEnum.SUCCESS.getCode())) {
-				for (CourseChapterPeriod courseChapterPeriod : courseChapterPeriodList) {
-					courseChapterPeriod.setIsFree(IsFreeEnum.FREE.getCode());
-				}
-			}
 			courseChapterDTO.setCourseChapterPeriodList(PageUtil.copyList(courseChapterPeriodList, CourseChapterPeriodDTO.class));
 		}
-		
+
 		// 查询讲师信息
 		LecturerVO lecturerVO = bossLecturer.getByLecturerUserNo(dto.getLecturerUserNo());
 		dto.setAuthLecturerDTO(BeanUtil.copyProperties(lecturerVO, AuthLecturerDTO.class));
