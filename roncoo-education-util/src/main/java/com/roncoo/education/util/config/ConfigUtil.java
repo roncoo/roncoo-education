@@ -34,4 +34,7 @@ public final class ConfigUtil {
 		return properties.getProperty(keyName, "").trim();
 	}
 
+	public static final String AUTH_DOMAIN = getProperty("auth_domain");
+	public static final String AUTH_CLIENT_ID = getProperty("auth_client_id");
+	public static final String AUTH_REDIRECT_URI = getProperty("auth_redirect_uri");
 }
