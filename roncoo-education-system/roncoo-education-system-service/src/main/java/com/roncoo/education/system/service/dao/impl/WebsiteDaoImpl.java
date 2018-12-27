@@ -32,7 +32,7 @@ public class WebsiteDaoImpl implements WebsiteDao {
 
 	@Override
 	public int updateById(Website record) {
-		return this.websiteMapper.updateByPrimaryKeySelective(record);
+		return this.websiteMapper.updateByPrimaryKeyWithBLOBs(record);
 	}
 
 	@Override

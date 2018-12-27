@@ -40,6 +40,13 @@
                 <input name="logoIcoFile" type="file" />
                 <img src="${bean.logoIco!}" width="80">
             </div>
+            <div class="form-group">
+				<label class="control-label x120">用户协议：</label>
+				<div style="margin-left: 90px; width:800px" id="userAgreementEditEditor">
+	                <p>${bean.userAgreement!}</p>
+        		</div>
+        		<textarea id="userAgreementEditDesc" style="display:none" name="userAgreement" style="width:100%; height:200px;"></textarea>
+        	</div>
         </fieldset>  
         
         <fieldset>
@@ -79,3 +86,4 @@
         <li><button type="submit" class="btn-default">修改</button></li>
     </ul>
 </div>
+<script>initEdit('#userAgreementEditEditor','${base}/upload');</script>
