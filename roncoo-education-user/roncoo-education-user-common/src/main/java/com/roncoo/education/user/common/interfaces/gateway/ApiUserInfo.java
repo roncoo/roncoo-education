@@ -66,4 +66,10 @@ public interface ApiUserInfo {
 	@RequestMapping(value = "/user/api/user/update/password", method = RequestMethod.POST)
 	Result<Integer> updatePassword(@RequestBody UserUpdateBO userUpdateBO);
 
+	/**
+	 * 授权龙果学院登陆接口
+	 */
+	@ApiOperation(value = "授权龙果学院登陆接口", notes = "授权龙果学院登陆接口")
+	@RequestMapping(value = "/user/api/user/auth/roncoo", method = RequestMethod.POST)
+	String authRoncoo();
 }

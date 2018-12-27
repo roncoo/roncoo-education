@@ -30,6 +30,7 @@ import com.roncoo.education.util.aliyun.Aliyun;
 import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Result;
+import com.roncoo.education.util.config.SystemUtil;
 import com.roncoo.education.util.enums.LoginStatusEnum;
 import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.enums.StatusIdEnum;
@@ -330,4 +331,9 @@ public class ApiUserInfoBiz extends BaseBiz {
 		return result == 1 ? Result.success(result) : Result.error(ResultEnum.USER_UPDATE_FAIL.getDesc());
 	}
 
+	public String authRoncoo() {
+		StringBuffer sb = new StringBuffer();
+		sb.append(SystemUtil.AUTH_DOMAIN).append("/login?clientId=").append(SystemUtil.AUTH_CLIENT_ID).append("&responseType=code&redirectUri=").append(SystemUtil.AUTH_REDIRECT_URI);
+		return sb.toString();
+	}
 }

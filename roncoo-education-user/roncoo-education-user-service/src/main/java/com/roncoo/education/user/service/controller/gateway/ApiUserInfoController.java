@@ -57,5 +57,8 @@ public class ApiUserInfoController extends BaseController implements ApiUserInfo
 		return biz.updatePassword(userUpdateBO);
 	}
 
-
+	@Override
+	public String authRoncoo() {
+		return biz.authRoncoo();
+	}
 }
