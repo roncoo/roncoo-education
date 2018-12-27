@@ -6,7 +6,6 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoBO;
@@ -121,14 +120,12 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 	 * @param periodId
 	 * @author wuyun
 	 */
-	public Result<AuthCourseVideoForListDTO> listByPeriodId(AuthPeriodIdVideoBO authCourseVideoBO) {
-		// 根据课时ID查询视频信息
-		CourseVideo courseVideo = dao.getByPeriodId(authCourseVideoBO.getPeriodId());
-		AuthCourseVideoForListDTO dto = new AuthCourseVideoForListDTO();
-		if (!ObjectUtils.isEmpty(courseVideo)) {
-			if (StatusIdEnum.YES.getCode().equals(courseVideo.getStatusId())) {
-				dto = BeanUtil.copyProperties(courseVideo, AuthCourseVideoForListDTO.class);
-			}
+	public Result<AuthCourseVideoListDTO> listByPeriodId(AuthPeriodIdVideoBO authCourseVideoBO) {
+		List<CourseVideo> courseVideoList = dao.listByPeriodIdAndStatusId(authCourseVideoBO.getPeriodId(), StatusIdEnum.YES.getCode());
+		AuthCourseVideoListDTO dto = new AuthCourseVideoListDTO();
+		if (CollectionUtil.isNotEmpty(courseVideoList)) {
+			List<AuthCourseVideoForListDTO> dtoList = ArrayListUtil.copy(courseVideoList, AuthCourseVideoForListDTO.class);
+			dto.setList(dtoList);
 		}
 		return Result.success(dto);
 	}
@@ -183,13 +180,15 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 			return Result.success(1);
 		} else {
 			// 根据课时ID查询课程视频信息
-			CourseVideo courseVideo = dao.getByPeriodId(bo.getPeriodId());
+			List<CourseVideo> courseVideoList = dao.listByPeriodIdAndStatusId(bo.getPeriodId(), StatusIdEnum.YES.getCode());
 			int result = 0;
-			if (!ObjectUtils.isEmpty(courseVideo)) {
-				CourseVideo video = new CourseVideo();
-				video.setId(courseVideo.getId());
-				video.setStatusId(StatusIdEnum.NO.getCode());
-				result = dao.updateById(video);
+			if (!CollectionUtil.isEmpty(courseVideoList)) {
+				for (CourseVideo courseVideo : courseVideoList) {
+					CourseVideo video = new CourseVideo();
+					video.setId(courseVideo.getId());
+					video.setStatusId(StatusIdEnum.NO.getCode());
+					result = dao.updateById(video);
+				}
 			}
 			return Result.success(result);
 		}
