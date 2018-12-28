@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.roncoo.education.user.common.bean.dto.LecturerDTO;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -25,6 +27,7 @@ public class CourseViewDTO implements Serializable {
 	 * 主键
 	 */
 	@ApiModelProperty(value = "课程ID")
+	@JsonSerialize(using = ToStringSerializer.class)
 	private Long id;
 	/**
 	 * 讲师用户编码
