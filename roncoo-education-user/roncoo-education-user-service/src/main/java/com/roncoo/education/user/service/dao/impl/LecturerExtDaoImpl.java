@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import com.roncoo.education.user.service.dao.LecturerExtDao;
 import com.roncoo.education.user.service.dao.impl.mapper.LecturerExtMapper;
-import com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerExtExample.Criteria;
 import com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerExt;
 import com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerExtExample;
+import com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerExtExample.Criteria;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.tools.IdWorker;
@@ -64,8 +64,6 @@ public class LecturerExtDaoImpl implements LecturerExtDao {
 
 	@Override
 	public int updateByLecturerUserNo(LecturerExt record) {
-		record.setGmtCreate(null);
-    	record.setGmtModified(null);
 		LecturerExtExample example = new LecturerExtExample();
 		Criteria c = example.createCriteria();
 		c.andLecturerUserNoEqualTo(record.getLecturerUserNo());
