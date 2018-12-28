@@ -174,7 +174,12 @@ public class AuthApiOrderInfoBiz extends BaseBiz {
 		}
 
 		// 返回实体
-		AuthOrderPayDTO dto = payOrder(orderInfo, payMessage);
+		AuthOrderPayDTO dto = new AuthOrderPayDTO();
+		dto.setPayMessage(payMessage);
+		dto.setOrderNo(String.valueOf(orderInfo.getOrderNo()));
+		dto.setCourseName(orderInfo.getCourseName());
+		dto.setPayType(orderInfo.getPayType());
+		dto.setPrice(orderInfo.getPricePaid());
 		return Result.success(dto);
 	}
 
@@ -244,7 +249,12 @@ public class AuthApiOrderInfoBiz extends BaseBiz {
 		}
 
 		// 返回实体
-		AuthOrderPayDTO dto = payOrder(orderInfo, payMessage);
+		AuthOrderPayDTO dto = new AuthOrderPayDTO();
+		dto.setPayMessage(payMessage);
+		dto.setOrderNo(String.valueOf(orderInfo.getOrderNo()));
+		dto.setCourseName(orderInfo.getCourseName());
+		dto.setPayType(orderInfo.getPayType());
+		dto.setPrice(orderInfo.getPricePaid());
 		return Result.success(dto);
 	}
 
@@ -436,19 +446,6 @@ public class AuthApiOrderInfoBiz extends BaseBiz {
 			return true;
 		}
 		return false;
-	}
-
-	/**
-	 * 返回支付实体
-	 */
-	private AuthOrderPayDTO payOrder(OrderInfo orderInfo, String payMessage) {
-		AuthOrderPayDTO dto = new AuthOrderPayDTO();
-		dto.setPayMessage(payMessage);
-		dto.setOrderNo(String.valueOf(orderInfo.getOrderNo()));
-		dto.setCourseName(orderInfo.getCourseName());
-		dto.setPayType(orderInfo.getPayType());
-		dto.setPrice(orderInfo.getPricePaid());
-		return dto;
 	}
 
 	/**
