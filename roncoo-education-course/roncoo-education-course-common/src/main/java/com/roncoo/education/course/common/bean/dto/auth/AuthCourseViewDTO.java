@@ -23,6 +23,11 @@ public class AuthCourseViewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * 主键
+	 */
+	@ApiModelProperty(value = "课程ID")
+	private Long id;
+	/**
 	 * 讲师用户编码
 	 */
 	@ApiModelProperty(value = "讲师用户编码")
