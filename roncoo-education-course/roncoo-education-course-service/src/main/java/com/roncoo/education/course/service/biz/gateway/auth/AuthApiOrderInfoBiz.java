@@ -168,7 +168,7 @@ public class AuthApiOrderInfoBiz extends BaseBiz {
 		}
 
 		// 调用支付接口
-		String payMessage = PayUtil.roncooPay(String.valueOf(orderPay.getSerialNumber()), orderInfo.getCourseName(), orderInfo.getPricePaid(), orderInfo.getPayType(), sys.getPayKey(), sys.getPaySecret(), sys.getPayUrl());
+		String payMessage = PayUtil.roncooPay(String.valueOf(orderPay.getSerialNumber()), orderInfo.getCourseName(), orderInfo.getPricePaid(), orderInfo.getPayType(), sys.getPayKey(), sys.getPaySecret(), sys.getPayUrl(), sys.getNotifyUrl());
 		if (StringUtils.isEmpty(payMessage)) {
 			return Result.error("系统繁忙，请稍后再试");
 		}
@@ -238,7 +238,7 @@ public class AuthApiOrderInfoBiz extends BaseBiz {
 		}
 
 		// 调用支付接口
-		String payMessage = PayUtil.roncooPay(String.valueOf(orderPay.getSerialNumber()), orderInfo.getCourseName(), orderInfo.getPricePaid(), orderInfo.getPayType(), sys.getPayKey(), sys.getPaySecret(), sys.getPayUrl());
+		String payMessage = PayUtil.roncooPay(String.valueOf(orderPay.getSerialNumber()), orderInfo.getCourseName(), orderInfo.getPricePaid(), orderInfo.getPayType(), sys.getPayKey(), sys.getPaySecret(), sys.getPayUrl(), sys.getNotifyUrl());
 		if (StringUtils.isEmpty(payMessage)) {
 			return Result.error("系统繁忙，请稍后再试");
 		}

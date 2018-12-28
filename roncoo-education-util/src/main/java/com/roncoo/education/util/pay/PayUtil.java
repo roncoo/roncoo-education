@@ -16,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
-import com.roncoo.education.util.config.SystemUtil;
 import com.roncoo.education.util.enums.DateFormatEnum;
 import com.roncoo.education.util.enums.PayProductTypeEnum;
 import com.roncoo.education.util.enums.PayTypeEnum;
@@ -34,7 +33,7 @@ public final class PayUtil {
 	/**
 	 * roncoo支付
 	 */
-	public static String roncooPay(String serialNumber, String productName, BigDecimal productPrice, Integer payType, String payKey, String paySecret, String payUrl) {
+	public static String roncooPay(String serialNumber, String productName, BigDecimal productPrice, Integer payType, String payKey, String paySecret, String payUrl, String notifyUrl) {
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("payKey", payKey);
 		paramMap.put("orderPrice", productPrice);
@@ -63,8 +62,8 @@ public final class PayUtil {
 
 		paramMap.put("orderIp", "127.0.0.1");// 下单IP
 
-		paramMap.put("returnUrl", SystemUtil.RONCOO_PAY_NOTIFY); // 页面通知返回url
-		paramMap.put("notifyUrl", SystemUtil.RONCOO_PAY_NOTIFY);
+		paramMap.put("returnUrl", notifyUrl); // 页面通知返回url
+		paramMap.put("notifyUrl", notifyUrl);
 		paramMap.put("remark", serialNumber);
 		String sign = getSign(paramMap, paySecret);
 		paramMap.put("sign", sign);
