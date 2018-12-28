@@ -33,6 +33,7 @@ public class CourseViewDTO implements Serializable {
 	 * 讲师用户编码
 	 */
 	@ApiModelProperty(value = "讲师用户编码")
+	@JsonSerialize(using = ToStringSerializer.class)
 	private Long lecturerUserNo;
 	/**
 	 * 课程名称
@@ -48,6 +49,7 @@ public class CourseViewDTO implements Serializable {
 	 * 课程介绍ID
 	 */
 	@ApiModelProperty(value = "课程介绍ID")
+	@JsonSerialize(using = ToStringSerializer.class)
 	private Long introduceId;
 	/**
 	 * 是否免费：1免费，0收费

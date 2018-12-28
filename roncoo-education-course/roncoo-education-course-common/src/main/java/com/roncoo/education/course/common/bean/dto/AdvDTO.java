@@ -2,6 +2,9 @@ package com.roncoo.education.course.common.bean.dto;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -19,6 +22,7 @@ public class AdvDTO implements Serializable {
 	/**
 	 * 主键
 	 */
+	@JsonSerialize(using = ToStringSerializer.class)
 	private Long id;
 	/**
 	 * 排序

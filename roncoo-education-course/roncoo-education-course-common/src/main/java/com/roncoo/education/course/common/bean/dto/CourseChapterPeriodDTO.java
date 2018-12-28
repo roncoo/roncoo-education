@@ -25,6 +25,7 @@ public class CourseChapterPeriodDTO implements Serializable {
 	 * 课时ID
 	 */
 	@ApiModelProperty(value = "课时ID")
+	@JsonSerialize(using = ToStringSerializer.class)
 	private Long id;
 	/**
 	 * 状态(1:正常，0:禁用)

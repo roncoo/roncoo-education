@@ -3,6 +3,10 @@ package com.roncoo.education.user.common.bean.dto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -20,6 +24,7 @@ public class LecturerDTO implements Serializable {
 	/**
 	 * 主键
 	 */
+	@JsonSerialize(using = ToStringSerializer.class)
 	private Long id;
 	/**
 	 * 创建时间
@@ -40,6 +45,7 @@ public class LecturerDTO implements Serializable {
 	/**
 	 * 讲师用户编号
 	 */
+	@JsonSerialize(using = ToStringSerializer.class)
 	private Long lecturerUserNo;
 	/**
 	 * 讲师名称
