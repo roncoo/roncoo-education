@@ -137,7 +137,7 @@ public class AuthApiOrderInfoBiz extends BaseBiz {
 
 		// 根据用户编号查找用户信息
 		UserExtVO userextVO = bossUserExt.getByUserNo(authOrderPayBO.getUserNo());
-		if (ObjectUtil.isNull(userextVO) || !StatusIdEnum.YES.getCode().equals(userextVO.getStatusId())) {
+		if (ObjectUtil.isNull(userextVO) && !StatusIdEnum.YES.getCode().equals(userextVO.getStatusId())) {
 			return Result.error("userNo不正确");
 		}
 
