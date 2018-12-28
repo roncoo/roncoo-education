@@ -7,9 +7,7 @@
 			<button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;<a class="btn btn-orange" href="javascript:;" data-toggle="reloadsearch" data-clear-query="true" data-icon="undo">清空查询</a>			
 			<br />
 			<br />
-			<@shiro.hasPermission name="/course/zoneCourse/courseList">
 			<button type="button" data-icon="plus" class="btn btn-default" data-toggle="dialog" data-width="1100" data-height="550" data-id="dialog-mask" data-mask="true" data-options="{url:'${base}/course/zoneCourse/courseList?zoneId=${bean.zoneId}&zoneLocation=${bean.zoneLocation}', title:'新增课程信息'}">添加</button>
-		    </@shiro.hasPermission>
 		</div>
 	</form>
 </div>
@@ -41,20 +39,14 @@
 				<td>${bean.sort!}</td>
 				<td>${bean.gmtCreate?string('yyy-MM-dd HH:MM:ss')!}</td>
 				<td>
-					<@shiro.hasPermission name="/course/zoneCourse/delete">
-                    	<a href="${base}/course/zoneCourse/delete?id=${bean.id}" class="btn btn-red" data-toggle="doajax" data-id="zoneCourse-delete" data-confirm-msg="确定要删除吗？">删除</a>
-				    </@shiro.hasPermission>   
-					<@shiro.hasPermission name="/course/zoneCourse/update">
+                	<a href="${base}/course/zoneCourse/delete?id=${bean.id}" class="btn btn-red" data-toggle="doajax" data-id="zoneCourse-delete" data-confirm-msg="确定要删除吗？">删除</a>
 					<#if bean.statusId == 1>
 					<a href="${base}/course/zoneCourse/status?id=${bean.id}&statusId=0" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确定要禁用吗？">禁用</a>
 					</#if>
 					<#if bean.statusId == 0>
 					<a href="${base}/course/zoneCourse/status?id=${bean.id}&statusId=1" class="btn btn-green" data-toggle="doajax" data-confirm-msg="确定要启用吗？">启用</a>
 					</#if>
-					</@shiro.hasPermission>
-					<@shiro.hasPermission name="/course/zoneCourse/edit">
 					<a href="${base}/course/zoneCourse/edit?id=${bean.id}" class="btn btn-green" data-toggle="dialog" data-id="zoneCourse-edit" data-width="400" data-height="140" data-options="{title:'排序'}">排序</a>
-					</@shiro.hasPermission>
 				</td>
 			</tr>
 			</#list>

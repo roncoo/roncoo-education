@@ -5,11 +5,9 @@
 		<div class="bjui-searchBar">
 			<label>客户端名称：</label><input type="text" name="clientName" value="${bean.clientName!}" class="form-control" size="10">&nbsp;
 			<button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;<a class="btn btn-orange" href="javascript:;" data-toggle="reloadsearch" data-clear-query="true" data-icon="undo">清空查询</a>
-			<@shiro.hasPermission name="/user/platform/add">
 			<br />
 			<br />
 			<a href="${base}/user/platform/add" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="platform-add" data-options="{title:'添加', height:200}">添加 </a>
-			</@shiro.hasPermission>
 		</div>
 	</form>
 </div>

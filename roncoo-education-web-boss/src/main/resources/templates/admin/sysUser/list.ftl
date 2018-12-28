@@ -11,9 +11,7 @@
 			
 			<br />
 			<br />
-			<@shiro.hasPermission name="/admin/sysUser/add">
 			<a href="${base}/admin/sysUser/add" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="sysUser-add" data-options="{title:'添加', height:350}">添加 </a>
-			</@shiro.hasPermission>
 		</div>
 	</form>
 </div>
@@ -39,23 +37,15 @@
 				<td>${bean.remark!}</td>
 				<td><#list statusIdEnums as em><#if bean.statusId?? && bean.statusId==em.code><span class="${em.color}">${em.desc}</span></#if></#list></td>
 				<td>
-					<@shiro.hasPermission name="/admin/sysUser/edit">
 					<a href="${base}/admin/sysUser/edit?id=${bean.id}" class="btn btn-green" data-toggle="dialog" data-id="sysUser-edit" data-options="{title:'修改', height:400}">修改 </a>
-					</@shiro.hasPermission>
-					<@shiro.hasPermission name="/admin/sysUser/delete">
 					<a href="${base}/admin/sysUser/delete?id=${bean.id}" class="btn btn-red" data-toggle="doajax" data-id="sysUser-delete" data-confirm-msg="确定要删除吗？">删除</a>
-				    </@shiro.hasPermission>
-				    <@shiro.hasPermission name="/admin/sysRoleUser/set">
 				    <a href="${base}/admin/sysRoleUser/set?userId=${bean.id}" class="btn btn-orange" data-toggle="dialog" data-id="sysUser-set" data-options="{title:'设置角色', height:350, width:800}">设置角色 </a>
-                	</@shiro.hasPermission>
-                	<@shiro.hasPermission name="/admin/sysUser/proportion">
                 	<#if bean.userType?? && bean.userType == 2>
                 	   <a href="${base}/admin/sysUser/proportion?id=${bean.id}" class="btn btn-red" data-toggle="dialog" data-id="sysUser-proportion" data-options="{title:'设置分成', height:200}">设置分成 </a>
                 	</#if>
                 	<#if bean.userType?? && bean.userType == 1>
                 	   <a href="${base}/admin/sysUser/login?id=${bean.id}" class="btn btn-red">身份登录</a>
                 	</#if>
-                	</@shiro.hasPermission>
                 </td>
 			</tr>
 			</#list>

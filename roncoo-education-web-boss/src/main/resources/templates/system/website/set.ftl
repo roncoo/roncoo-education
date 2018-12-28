@@ -42,10 +42,11 @@
             </div>
             <div class="form-group">
 				<label class="control-label x120">用户协议：</label>
-				<div style="margin-left: 90px; width:800px" id="userAgreementEditEditor">
+				<br /><br />
+				<div style="margin-left: 55px; width:800px" id="websiteEditEditor">
 	                <p>${bean.userAgreement!}</p>
         		</div>
-        		<textarea id="userAgreementEditDesc" style="display:none" name="userAgreement" style="width:100%; height:200px;"></textarea>
+        		<textarea id="websiteEditDesc" style="display:none" name="userAgreement" style="width:100%; height:200px;"></textarea>
         	</div>
         </fieldset>  
         
@@ -86,4 +87,4 @@
         <li><button type="submit" class="btn-default">修改</button></li>
     </ul>
 </div>
-<script>initEdit('#userAgreementEditEditor','${base}/upload');</script>
+<script>initEdit('#websiteEditEditor','${base}/uploadPic');</script>

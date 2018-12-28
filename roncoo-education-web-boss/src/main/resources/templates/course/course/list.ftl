@@ -71,9 +71,7 @@
 				<td><#list statusIdEnums as em><#if bean.statusId?? && bean.statusId==em.code><span class="${em.color}">${em.desc}</span></#if></#list></td>
 				<td>${bean.sort!}</td>
 				<td>
-					<@shiro.hasPermission name="/course/course/edit">
-						<a href="${base}/course/course/edit?id=${bean.id}" class="btn btn-green" data-toggle="navtab" data-options="{title:'${bean.courseName}',id:'${bean.courseName}'}">修改</a>
-					</@shiro.hasPermission>
+					<a href="${base}/course/course/edit?id=${bean.id}" class="btn btn-green" data-toggle="navtab" data-options="{title:'${bean.courseName}',id:'${bean.courseName}'}">修改</a>
 				</td>
 			</tr>
 			</#list>

@@ -35,30 +35,20 @@
 			<tr>
 				<td align="center">${bean_index+1}</td>
 				<td>${bean.userNo!}</td>
-				<@shiro.hasPermission name="/user/userExt/view">
 				<td><a href="${base}/user/userExt/view?id=${bean.id}" data-toggle="dialog" data-id="userExt-view" data-options="{title:'查看',width:650, height:450}">${bean.mobile!}</a></td>
-				</@shiro.hasPermission>
 				<td><#list userTypeEnums as em><#if bean.userType?? && bean.userType==em.code><span class="${em.color}">${em.desc}</span></#if></#list></td>
 				<td>${bean.nickname!}</td>
 				<td><#list statusIdEnums as em><#if bean.statusId?? && bean.statusId==em.code><span class="${em.color}">${em.desc}</span></#if></#list></td>
                 <td>${bean.gmtCreate?string('yyy-MM-dd HH:mm:ss')!}</td>
                 <td>
-                	<@shiro.hasPermission name="/user/userExt/edit">
-						<a href="${base}/user/userExt/edit?id=${bean.id}" class="btn btn-green" data-toggle="dialog" data-id="userExt-edit" data-options="{title:'修改', height:450}">修改</a>
-					</@shiro.hasPermission>
+					<a href="${base}/user/userExt/edit?id=${bean.id}" class="btn btn-green" data-toggle="dialog" data-id="userExt-edit" data-options="{title:'修改', height:450}">修改</a>
 					<#if bean.statusId?? && bean.statusId==1>
-				        <@shiro.hasPermission name="/user/userExt/updateStatusId">
                         <a href="${base}/user/userExt/updateStatusId?id=${bean.id!}&statusId=0" class="btn btn-red" data-toggle="doajax" data-id="userExt-updateStatusId" data-confirm-msg="确定要禁用吗？">禁用</a>
-                        </@shiro.hasPermission>
                     </#if>
 				    <#if bean.statusId?? && bean.statusId==0>
-				        <@shiro.hasPermission name="/user/userExt/updateStatusId">
                         <a href="${base}/user/userExt/updateStatusId?id=${bean.id!}&statusId=1" class="btn btn-green" data-toggle="doajax" data-id="userExt-updateStatusId" data-confirm-msg="确定要启用吗？">启用</a>
-                        </@shiro.hasPermission>
                     </#if>
-                    <@shiro.hasPermission name="/course/courseUserStudyLog/list">
-                    	<a href="${base}/course/courseUserStudyLog/list?userNo=${bean.userNo}" class="btn btn-orange" data-toggle="navtab" data-id="course-courseUserStudyLog" data-width="1100" data-height="550">学习记录</a>
-					</@shiro.hasPermission>
+                	<a href="${base}/course/courseUserStudyLog/list?userNo=${bean.userNo}" class="btn btn-orange" data-toggle="navtab" data-id="course-courseUserStudyLog" data-width="1100" data-height="550">学习记录</a>
 				</td>
 			</tr>
 			</#list>

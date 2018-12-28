@@ -17,10 +17,7 @@
 			<br />
 			<br />
 			<button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;<a class="btn btn-orange" href="javascript:;" data-toggle="reloadsearch" data-clear-query="true" data-icon="undo">清空查询</a>
-		    <@shiro.hasPermission name="/user/lecturerProfit/audit">
 			<a class="btn btn-blue" href="${base}/user/lecturerProfit/audit" data-toggle="doajaxchecked" data-confirm-msg="确定要将选中项标记为成功吗？" data-idname="ids" data-group="delids">标记为已打款</a>
-			</@shiro.hasPermission>
-		    <@shiro.hasPermission name="/user/lecturerProfit/export">
             <div class="btn-group">
                 <button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown" data-icon="copy">报表导出<span class="caret"></span></button>
                 <ul class="dropdown-menu right" role="menu">
@@ -29,7 +26,6 @@
                     </li>
                 </ul>
             </div>
-            </@shiro.hasPermission>
 		</div>
 	</form> 
 </div>
@@ -65,9 +61,7 @@
 				<td><#list profitStatusEnums as em><#if bean.profitStatus?? && bean.profitStatus==em.code>${em.desc}</#if></#list></td>
 				<td>${bean.gmtCreate?string('yyy-MM-dd HH:mm:ss')!}</td>
 				<td>
-					<@shiro.hasPermission name="/user/lecturerProfit/isStatus">
 					<a class="btn btn-green" data-title="操作进度" data-width="350" data-height="200" data-toggle="dialog" data-id="lecturerProfit-isStatus" href="${base}/user/lecturerProfit/isStatus?id=${bean.id}">打款</a>
-					</@shiro.hasPermission>
 				</td>
 			</tr>
 			</#list>

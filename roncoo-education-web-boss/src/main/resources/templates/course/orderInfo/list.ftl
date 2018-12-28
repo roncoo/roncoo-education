@@ -35,7 +35,6 @@
 			<br />
             <br />
 			<button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;<a class="btn btn-orange" href="javascript:;" data-toggle="reloadsearch" data-clear-query="true" data-icon="undo">清空查询</a>
-			<@shiro.hasPermission name="/course/orderInfo/export">
             <div class="btn-group">
                 <button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown" data-icon="copy">报表导出<span class="caret"></span></button>
                 <ul class="dropdown-menu right" role="menu">
@@ -44,8 +43,7 @@
                     </li>
                 </ul>
             </div>
-            </@shiro.hasPermission>
-            	【平台收入:<span class="red">${countMap.platformProfit?string('0.00')}</span>元】=【订单收入: <span class="red">${countMap.totalProfit?string('0.00')}</span>元】-【讲师收入:<span class="red">${countMap.lecturerProfit?string('0.00')}</span>元】
+                     【平台收入:<span class="red">${countMap.platformProfit?string('0.00')}</span>元】=【订单收入: <span class="red">${countMap.totalProfit?string('0.00')}</span>元】-【讲师收入:<span class="red">${countMap.lecturerProfit?string('0.00')}</span>元】
 		</div>
 	</form>
 </div>
@@ -104,9 +102,7 @@
 				<td>${bean.remarkCus!}</td>
 				<td style="width:60px;"><#if bean.payTime??>${bean.payTime?string('yyyy-MM-dd HH:mm:ss')}</#if></td>
 				<td>
-					<@shiro.hasPermission name="/course/orderInfo/edit">
-					   <a class="btn btn-blue" data-title="备注订单" data-width="350" data-height="200" data-toggle="dialog" data-id="order-edit" href="${base}/course/orderInfo/edit?id=${bean.id}&remark=${bean.remark!}">备注 </a>
-					</@shiro.hasPermission> 
+				   <a class="btn btn-blue" data-title="备注订单" data-width="350" data-height="200" data-toggle="dialog" data-id="order-edit" href="${base}/course/orderInfo/edit?id=${bean.id}&remark=${bean.remark!}">备注 </a>
 				</td>
 			</tr>
 			</#list>

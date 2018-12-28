@@ -222,12 +222,8 @@
 							<span id="bjui-date"></span> <span id="bjui-clock"></span>
 						</div>
 					</li>
-					<@shiro.hasPermission name="/system/website/set">
 					<li><a href="${base}/system/website/set" data-toggle="navtab">站点设置</a></li>
-					</@shiro.hasPermission>
-					<@shiro.hasPermission name="/system/sys/set">
 					<li><a href="${base}/system/sys/set" data-toggle="navtab">系统设置</a></li>
-					</@shiro.hasPermission>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">我的账户 <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">

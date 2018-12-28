@@ -16,9 +16,7 @@
 			
 			<br />
 			<br />
-			<@shiro.hasPermission name="/course/adv/add">
-				<a href="${base}/course/adv/add?platShow=${bean.platShow}" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="adv-add" data-options="{title:'添加', height:343,width:545}">添加 </a>
-			</@shiro.hasPermission>
+			<a href="${base}/course/adv/add?platShow=${bean.platShow}" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="adv-add" data-options="{title:'添加', height:343,width:545}">添加 </a>
 		</div>
 	</form>
 </div>
@@ -48,20 +46,14 @@
 				<td>${bean.beginTime!?string('yyyy-MM-dd HH:mm:ss')}</td>
 				<td>${bean.endTime!?string('yyyy-MM-dd HH:mm:ss')}</td>
 				<td>
-					<@shiro.hasPermission name="/course/adv/delete">
 					<a href="${base}/course/adv/delete?id=${bean.id}" class="btn btn-red" data-toggle="doajax" data-id="adv-delete" data-confirm-msg="确定要删除吗？">删除</a>
-					</@shiro.hasPermission>
-					<@shiro.hasPermission name="/course/adv/edit">
 					<a href="${base}/course/adv/edit?id=${bean.id}" class="btn btn-green" data-toggle="dialog" data-id="adv-edit" data-options="{title:'修改', height:343,width:545}">修改</a>
-					</@shiro.hasPermission>
-					<@shiro.hasPermission name="/course/adv/updateStatusId">
 					<#if bean.statusId == 1>
 					<a href="${base}/course/adv/status?id=${bean.id}&statusId=0" class="btn btn-red" data-toggle="doajax" data-id="adv-update" data-confirm-msg="确定要禁用吗？">禁用</a>
 					</#if>
 					<#if bean.statusId == 0>
 					<a href="${base}/course/adv/status?id=${bean.id}&statusId=1" class="btn btn-green" data-toggle="doajax" data-id="adv-update" data-confirm-msg="确定要启用吗？">启用</a>
 					</#if>
-					</@shiro.hasPermission>
 				</td>
 			</tr>
 			</#list>
