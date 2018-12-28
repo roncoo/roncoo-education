@@ -37,24 +37,24 @@ public class ApiZoneBiz {
 	/**
 	 * 专区课程分页列表接口
 	 *
-	 * @param bo
+	 * @param zoneBO
 	 * @author wuyun
 	 */
-	public Result<Page<ZoneDTO>> listForPage(ZoneBO bo) {
-		if (StringUtils.isEmpty(bo.getZoneLocation())) {
+	public Result<Page<ZoneDTO>> listForPage(ZoneBO zoneBO) {
+		if (StringUtils.isEmpty(zoneBO.getZoneLocation())) {
 			return Result.error("zoneLocation不能为空");
 		}
 		ZoneExample example = new ZoneExample();
 		Criteria c = example.createCriteria();
 		c.andStatusIdEqualTo(StatusIdEnum.YES.getCode());
-		if (!StringUtils.isEmpty(bo.getId())) {
-			c.andIdEqualTo(bo.getId());
+		if (!StringUtils.isEmpty(zoneBO.getId())) {
+			c.andIdEqualTo(zoneBO.getId());
 		}
-		if (!StringUtils.isEmpty(bo.getZoneLocation())) {
-			c.andZoneLocationEqualTo(bo.getZoneLocation());
+		if (!StringUtils.isEmpty(zoneBO.getZoneLocation())) {
+			c.andZoneLocationEqualTo(zoneBO.getZoneLocation());
 		}
 		example.setOrderByClause("sort desc, id desc");
-		Page<Zone> zonePage = zoneDao.listForPage(bo.getPageCurrent(), bo.getPageSize(), example);
+		Page<Zone> zonePage = zoneDao.listForPage(zoneBO.getPageCurrent(), zoneBO.getPageSize(), example);
 		if (StringUtils.isEmpty(zonePage)) {
 			return Result.error("找不到信息");
 		}

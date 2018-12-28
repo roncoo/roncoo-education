@@ -58,7 +58,7 @@ public interface ApiUserInfo {
 	@ApiOperation(value = "授权登录接口", notes = "后台登录到讲师中心时使用")
 	@RequestMapping(value = "/user/api/user/auth", method = RequestMethod.POST)
 	Result<String> auth(@RequestBody UserAuthBO userAuthBO);
-	
+
 	/**
 	 * 用户修改密码接口
 	 * 
@@ -70,7 +70,8 @@ public interface ApiUserInfo {
 
 	/**
 	 * 授权龙果学院登陆接口
-	 * @throws UnsupportedEncodingException 
+	 * 
+	 * @throws UnsupportedEncodingException
 	 */
 	@ApiOperation(value = "授权龙果学院登陆接口", notes = "授权龙果学院登陆接口")
 	@RequestMapping(value = "/user/api/user/auth/roncoo", method = RequestMethod.GET)

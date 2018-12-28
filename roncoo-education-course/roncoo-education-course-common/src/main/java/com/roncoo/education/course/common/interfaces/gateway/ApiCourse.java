@@ -23,22 +23,22 @@ public interface ApiCourse {
 	/**
 	 * 课程信息列表接口
 	 * 
-	 * @param courseBO
+	 * @param courseInfoPageBO
 	 * @return
 	 * @author wuyun
 	 */
 	@ApiOperation(value = "课程列表接口", notes = "根据条件分页列出课程信息")
 	@RequestMapping(value = "/course/api/course/list", method = RequestMethod.POST)
-	Result<Page<CourseInfoPageDTO>> list(@RequestBody CourseInfoPageBO courseBO);
+	Result<Page<CourseInfoPageDTO>> list(@RequestBody CourseInfoPageBO courseInfoPageBO);
 
 	/**
 	 * 课程详情接口
 	 * 
-	 * @param courseId
+	 * @param courseVideoBO
 	 * @return
 	 */
 	@ApiOperation(value = "课程详情接口", notes = "根据课程ID获取课程信息")
 	@RequestMapping(value = "/course/api/course/view", method = RequestMethod.POST)
-	Result<CourseViewDTO> view(@RequestBody CourseVideoBO courseViewBO);
+	Result<CourseViewDTO> view(@RequestBody CourseVideoBO courseVideoBO);
 
 }

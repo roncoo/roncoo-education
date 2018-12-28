@@ -18,7 +18,11 @@ public class AuthPeriodAuditListDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private List<AuthPeriodAuditDTO> userPeriodAuditListDTO;
+	/**
+	 * 课时集合信息
+	 */
+	@ApiModelProperty(value = "课时集合信息")	
+	private List<AuthPeriodAuditDTO> userPeriodAuditList;
 
 	/**
 	 * 视频数量

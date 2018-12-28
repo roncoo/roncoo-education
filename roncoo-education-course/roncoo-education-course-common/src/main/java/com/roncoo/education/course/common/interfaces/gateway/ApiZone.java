@@ -26,6 +26,6 @@ public interface ApiZone {
 	 */
 	@ApiOperation(value = "专区课程列表接口", notes = "分页列出专区课程信息")
 	@RequestMapping(value = "/course/api/zone/course/list", method = RequestMethod.POST)
-	Result<Page<ZoneDTO>> listForPage(@RequestBody ZoneBO bo);
+	Result<Page<ZoneDTO>> listForPage(@RequestBody ZoneBO zoneBO);
 
 }

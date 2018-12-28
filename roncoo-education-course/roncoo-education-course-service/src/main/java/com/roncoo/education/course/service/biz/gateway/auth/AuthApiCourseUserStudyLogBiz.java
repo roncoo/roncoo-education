@@ -3,7 +3,6 @@ package com.roncoo.education.course.service.biz.gateway.auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.course.common.bean.bo.auth.AuthCourseUserStudyLogPageBO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseUserStudyLogPageDTO;
 import com.roncoo.education.course.service.dao.CourseChapterPeriodDao;
@@ -16,6 +15,7 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseUserStud
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseUserStudyLogExample.Criteria;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
+import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.base.Result;
 
 /**
@@ -40,14 +40,14 @@ public class AuthApiCourseUserStudyLogBiz extends BaseBiz {
 	 * @return
 	 * @author wuyun
 	 */
-	public Result<Page<AuthCourseUserStudyLogPageDTO>> list(AuthCourseUserStudyLogPageBO bo) {
+	public Result<Page<AuthCourseUserStudyLogPageDTO>> list(AuthCourseUserStudyLogPageBO authCourseUserStudyLogPageBO) {
 		CourseUserStudyLogExample example = new CourseUserStudyLogExample();
 		Criteria c = example.createCriteria();
-		if (bo.getUserNo() == null) {
+		if (authCourseUserStudyLogPageBO.getUserNo() == null) {
 			return Result.error("userNo不能为空");
 		}
-		c.andUserNoEqualTo(bo.getUserNo());
-		Page<CourseUserStudyLog> page = courseUserStudyLogDao.listForPage(bo.getPageCurrent(), bo.getPageSize(), example);
+		c.andUserNoEqualTo(authCourseUserStudyLogPageBO.getUserNo());
+		Page<CourseUserStudyLog> page = courseUserStudyLogDao.listForPage(authCourseUserStudyLogPageBO.getPageCurrent(), authCourseUserStudyLogPageBO.getPageSize(), example);
 		Page<AuthCourseUserStudyLogPageDTO> dtoList = PageUtil.transform(page, AuthCourseUserStudyLogPageDTO.class);
 		for (AuthCourseUserStudyLogPageDTO dto : dtoList.getList()) {
 			// 查看课程信息

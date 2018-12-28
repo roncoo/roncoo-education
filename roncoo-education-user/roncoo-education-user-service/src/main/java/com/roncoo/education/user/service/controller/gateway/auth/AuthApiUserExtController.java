@@ -24,8 +24,8 @@ public class AuthApiUserExtController extends BaseController implements AuthApiU
 	private AuthApiUserExtBiz biz;
 
 	@Override
-	public Result<AuthUserExtDTO> view(@RequestBody AuthUserExtViewBO bo) {
-		return biz.view(bo);
+	public Result<AuthUserExtDTO> view(@RequestBody AuthUserExtViewBO authUserExtViewBO) {
+		return biz.view(authUserExtViewBO);
 	}
 
 	@Override

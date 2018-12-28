@@ -8,10 +8,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import com.roncoo.education.util.tools.BeanUtil;
-import com.roncoo.education.util.tools.SignUtil;
-import com.roncoo.education.util.enums.ResultEnum;
-import com.roncoo.education.util.enums.StatusIdEnum;
 import com.roncoo.education.user.common.bean.bo.auth.AuthLecturerExtViewBO;
 import com.roncoo.education.user.common.bean.bo.auth.AuthUserExtBankBO;
 import com.roncoo.education.user.common.bean.dto.auth.AuthLecturerExtViewDTO;
@@ -20,6 +16,10 @@ import com.roncoo.education.user.service.dao.UserExtDao;
 import com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerExt;
 import com.roncoo.education.user.service.dao.impl.mapper.entity.UserExt;
 import com.roncoo.education.util.base.Result;
+import com.roncoo.education.util.enums.ResultEnum;
+import com.roncoo.education.util.enums.StatusIdEnum;
+import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.util.tools.SignUtil;
 import com.xiaoleilu.hutool.util.ObjectUtil;
 
 /**
@@ -34,7 +34,7 @@ public class AuthApiLecturerExtBiz {
 	private LecturerExtDao lecturerExtDao;
 	@Autowired
 	private UserExtDao userExtDao;
-	
+
 	@Autowired
 	private RedisTemplate<String, String> redisTemplate;
 
@@ -44,12 +44,12 @@ public class AuthApiLecturerExtBiz {
 	 * @param authUserExtViewBO
 	 * @author wuyun
 	 */
-	public Result<AuthLecturerExtViewDTO> view(AuthLecturerExtViewBO bo) {
-		UserExt userExt = userExtDao.getByUserNo(bo.getLecturerUserNo());
+	public Result<AuthLecturerExtViewDTO> view(AuthLecturerExtViewBO uthLecturerExtViewBO) {
+		UserExt userExt = userExtDao.getByUserNo(uthLecturerExtViewBO.getLecturerUserNo());
 		if (ObjectUtil.isNull(userExt)) {
 			return Result.error("用户信息异常");
 		}
-		LecturerExt lecturerExt = lecturerExtDao.getByLecturerUserNo(bo.getLecturerUserNo());
+		LecturerExt lecturerExt = lecturerExtDao.getByLecturerUserNo(uthLecturerExtViewBO.getLecturerUserNo());
 		if (ObjectUtil.isNull(lecturerExt)) {
 			// 没账户信息，创建一个，兼容之前的业务逻辑
 			lecturerExt = new LecturerExt();
@@ -109,7 +109,7 @@ public class AuthApiLecturerExtBiz {
 		if (ObjectUtil.isNull(lecturerExt) && StatusIdEnum.YES.getCode().equals(lecturerExt.getStatusId())) {
 			return Result.error("找不到账户信息");
 		}
-		
+
 		String redisSmsCode = redisTemplate.opsForValue().get(authUserExtBankBO.getClientId() + authUserExtBankBO.getMobile());
 		if (StringUtils.isEmpty(redisSmsCode)) {
 			return Result.error("验证码已失效!");

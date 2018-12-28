@@ -38,14 +38,14 @@ public class AuthApiUserExtBiz extends BaseBiz {
 	 * @param userNo
 	 * @author wuyun
 	 */
-	public Result<AuthUserExtDTO> view(AuthUserExtViewBO bo) {
-		if (ObjectUtil.isNull(bo)) {
+	public Result<AuthUserExtDTO> view(AuthUserExtViewBO authUserExtViewBO) {
+		if (ObjectUtil.isNull(authUserExtViewBO)) {
 			return Result.error("authUserExtUserNoBO不能为空");
 		}
-		if (null == bo.getUserNo()) {
+		if (null == authUserExtViewBO.getUserNo()) {
 			return Result.error("userNo不能为空");
 		}
-		UserExt userExt = userExtDao.getByUserNo(bo.getUserNo());
+		UserExt userExt = userExtDao.getByUserNo(authUserExtViewBO.getUserNo());
 		if (userExt == null) {
 			return Result.error("找不到该用户信息");
 		}

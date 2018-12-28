@@ -26,10 +26,10 @@ public class ApiAdvBiz {
 	@Autowired
 	private AdvDao advDao;
 
-	public Result<AdvListDTO> list(AdvBO bo) {
+	public Result<AdvListDTO> list(AdvBO advBO) {
 		AdvListDTO dto = new AdvListDTO();
 		// 开始时间和结束时间
-		List<Adv> advList = advDao.listByPlatShowAndStatusId(bo.getPlatShow(), StatusIdEnum.YES.getCode());
+		List<Adv> advList = advDao.listByPlatShowAndStatusId(advBO.getPlatShow(), StatusIdEnum.YES.getCode());
 		if (CollectionUtil.isEmpty(advList)) {
 			return Result.error("找不到广告信息");
 		}

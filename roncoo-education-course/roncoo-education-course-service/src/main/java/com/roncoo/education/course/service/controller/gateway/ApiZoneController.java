@@ -13,19 +13,19 @@ import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;
 
 /**
- * 专区课程关联表 
+ * 专区课程关联表
  *
  * @author wuyun
  */
 @RestController
-public class ApiZoneController extends BaseController implements ApiZone{
+public class ApiZoneController extends BaseController implements ApiZone {
 
-    @Autowired
-    private ApiZoneBiz biz;
+	@Autowired
+	private ApiZoneBiz biz;
 
 	@Override
-	public Result<Page<ZoneDTO>> listForPage(@RequestBody ZoneBO bo) {
-		return biz.listForPage(bo);
+	public Result<Page<ZoneDTO>> listForPage(@RequestBody ZoneBO zoneBO) {
+		return biz.listForPage(zoneBO);
 	}
-    
+
 }

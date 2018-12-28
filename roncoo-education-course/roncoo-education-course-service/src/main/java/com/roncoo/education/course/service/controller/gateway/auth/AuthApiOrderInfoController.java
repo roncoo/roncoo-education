@@ -52,8 +52,8 @@ public class AuthApiOrderInfoController extends BaseController implements AuthAp
 	 * 订单继续支付接口
 	 */
 	@Override
-	public Result<AuthOrderPayDTO> continuePay(@RequestBody AuthOrderInfoContinuePayBO orderInfoContinuePayBO) {
-		return biz.continuePay(orderInfoContinuePayBO);
+	public Result<AuthOrderPayDTO> continuePay(@RequestBody AuthOrderInfoContinuePayBO authOrderInfoContinuePayBO) {
+		return biz.continuePay(authOrderInfoContinuePayBO);
 	}
 
 	/**
@@ -68,8 +68,8 @@ public class AuthApiOrderInfoController extends BaseController implements AuthAp
 	 * 订单详情接口
 	 */
 	@Override
-	public Result<AuthOrderInfoDTO> view(@RequestBody AuthOrderInfoViewBO orderInfoBO) {
-		return biz.view(orderInfoBO);
+	public Result<AuthOrderInfoDTO> view(@RequestBody AuthOrderInfoViewBO authOrderInfoViewBO) {
+		return biz.view(authOrderInfoViewBO);
 	}
 
 	/**

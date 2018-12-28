@@ -26,8 +26,8 @@ public class ApiCourseController extends BaseController implements ApiCourse {
 	private ApiCourseBiz biz;
 
 	@Override
-	public Result<Page<CourseInfoPageDTO>> list(@RequestBody CourseInfoPageBO courseBO) {
-		return biz.list(courseBO);
+	public Result<Page<CourseInfoPageDTO>> list(@RequestBody CourseInfoPageBO courseInfoPageBO) {
+		return biz.list(courseInfoPageBO);
 	}
 
 	@Override

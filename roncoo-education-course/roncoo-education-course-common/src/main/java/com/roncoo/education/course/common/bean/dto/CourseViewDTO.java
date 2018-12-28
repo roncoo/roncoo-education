@@ -87,7 +87,7 @@ public class CourseViewDTO implements Serializable {
 	 * 讲师信息
 	 */
 	@ApiModelProperty(value = "讲师信息")
-	private LecturerDTO lecturerDTO;
+	private LecturerDTO lecturer;
 	/**
 	 * 章节信息
 	 */

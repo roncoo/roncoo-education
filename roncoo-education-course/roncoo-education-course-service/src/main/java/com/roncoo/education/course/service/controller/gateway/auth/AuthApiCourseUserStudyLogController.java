@@ -24,8 +24,8 @@ public class AuthApiCourseUserStudyLogController extends BaseController implemen
 	private AuthApiCourseUserStudyLogBiz biz;
 
 	@Override
-	public Result<Page<AuthCourseUserStudyLogPageDTO>> list(@RequestBody AuthCourseUserStudyLogPageBO bo) {
-		return biz.list(bo);
+	public Result<Page<AuthCourseUserStudyLogPageDTO>> list(@RequestBody AuthCourseUserStudyLogPageBO authCourseUserStudyLogPageBO) {
+		return biz.list(authCourseUserStudyLogPageBO);
 	}
 
 }

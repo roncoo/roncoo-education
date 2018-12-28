@@ -26,7 +26,6 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriod;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriodAudit;
-import com.roncoo.education.system.feign.web.IBossSys;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.AuditStatusEnum;
@@ -57,9 +56,6 @@ public class AuthApiCourseChapterPeriodAuditBiz extends BaseBiz {
 	@Autowired
 	private CourseChapterPeriodAuditDao periodAuditDao;
 
-	@Autowired
-	private IBossSys bossSys;
-	
 	/**
 	 * 课时列出接口
 	 * 
@@ -82,7 +78,7 @@ public class AuthApiCourseChapterPeriodAuditBiz extends BaseBiz {
 		AuthPeriodAuditListDTO dto = new AuthPeriodAuditListDTO();
 		if (CollectionUtil.isNotEmpty(periodAuditList)) {
 			List<AuthPeriodAuditDTO> periodAuditDTOList = ArrayListUtil.copy(periodAuditList, AuthPeriodAuditDTO.class);
-			dto.setUserPeriodAuditListDTO(periodAuditDTOList);
+			dto.setUserPeriodAuditList(periodAuditDTOList);
 			for (CourseChapterPeriodAudit courseChapterPeriodAudit : periodAuditList) {
 				// 根据课时ID、是否存在视频(1存在，0否)查询课时审核信息
 				List<CourseChapterPeriodAudit> isVideoList = periodAuditDao.listByIsVideoAndPeriodId(courseChapterPeriodAudit.getIsVideo(), courseChapterPeriodAudit.getId());
@@ -256,14 +252,14 @@ public class AuthApiCourseChapterPeriodAuditBiz extends BaseBiz {
 		}
 
 		CourseChapterPeriodAudit courseChapterPeriodAudit = BeanUtil.copyProperties(authCourseChapterPeriodAuditUpdateBO, CourseChapterPeriodAudit.class);
-		
+
 		// 如果有文档进来就保存
 		if (!StringUtils.isEmpty(authCourseChapterPeriodAuditUpdateBO.getDocUrl())) {
 			courseChapterPeriodAudit.setDocUrl(authCourseChapterPeriodAuditUpdateBO.getDocUrl());
 			courseChapterPeriodAudit.setDocName(authCourseChapterPeriodAuditUpdateBO.getDocName());
 			courseChapterPeriodAudit.setIsDoc(IsDocEnum.YES.getCode());
-		// 如果没有则为删除文档
-		}else {
+			// 如果没有则为删除文档
+		} else {
 			courseChapterPeriodAudit.setDocUrl("");
 			courseChapterPeriodAudit.setDocName("");
 			courseChapterPeriodAudit.setIsDoc(IsDocEnum.NO.getCode());

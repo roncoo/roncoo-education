@@ -23,8 +23,8 @@ public class ApiAdvController extends BaseController implements ApiAdv {
 	private ApiAdvBiz biz;
 
 	@Override
-	public Result<AdvListDTO> list(@RequestBody AdvBO bo) {
-		return biz.list(bo);
+	public Result<AdvListDTO> list(@RequestBody AdvBO advBO) {
+		return biz.list(advBO);
 	}
 
 }

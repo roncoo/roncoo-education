@@ -50,7 +50,7 @@ public interface AuthApiCourseChapterPeriodAudit {
 	 */
 	@ApiOperation(value = "课时添加接口", notes = "课时添加接口")
 	@RequestMapping(value = "/auth/course/api/course/chapter/period/audit/save", method = RequestMethod.POST)
-	Result<AuthCourseChapterPeriodAuditSaveDTO> save(@RequestBody AuthCourseChapterPeriodAuditSaveBO bo);
+	Result<AuthCourseChapterPeriodAuditSaveDTO> save(@RequestBody AuthCourseChapterPeriodAuditSaveBO authCourseChapterPeriodAuditSaveBO);
 
 	/**
 	 * 课时更新接口

@@ -24,11 +24,11 @@ public class ApiWebsiteNavArticleBiz {
 	@Autowired
 	private WebsiteNavArticleDao dao;
 
-	public Result<WebsiteNavArticleDTO> get(WebsiteNavArticleBO bo) {
-		if (StringUtils.isEmpty(bo.getNavId())) {
+	public Result<WebsiteNavArticleDTO> get(WebsiteNavArticleBO websiteNavArticleBO) {
+		if (StringUtils.isEmpty(websiteNavArticleBO.getNavId())) {
 			return Result.error("navId不能为空");
 		}
-		WebsiteNavArticle websiteNavArticle = dao.getByNavIdAndStatusId(bo.getNavId(), StatusIdEnum.YES.getCode());
+		WebsiteNavArticle websiteNavArticle = dao.getByNavIdAndStatusId(websiteNavArticleBO.getNavId(), StatusIdEnum.YES.getCode());
 		if (ObjectUtil.isNull(websiteNavArticle)) {
 			return Result.error("没有找到站点导航文章信息");
 		}
