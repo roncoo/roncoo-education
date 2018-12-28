@@ -97,5 +97,9 @@ public class WebsiteQO implements Serializable {
      * 客服信息2
      */
     private String service2;
+    /**
+	 * 用户协议
+	 */
+	private String userAgreement;
     
 }

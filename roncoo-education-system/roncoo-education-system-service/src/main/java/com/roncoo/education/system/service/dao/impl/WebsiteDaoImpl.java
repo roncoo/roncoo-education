@@ -32,7 +32,7 @@ public class WebsiteDaoImpl implements WebsiteDao {
 
 	@Override
 	public int updateById(Website record) {
-		return this.websiteMapper.updateByPrimaryKeyWithBLOBs(record);
+		return this.websiteMapper.updateByPrimaryKeySelective(record);
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class WebsiteDaoImpl implements WebsiteDao {
 	@Override
 	public Website getWebsite() {
 		WebsiteExample example = new WebsiteExample();
-		List<Website> resultList = this.websiteMapper.selectByExample(example);
+		List<Website> resultList = this.websiteMapper.selectByExampleWithBLOBs(example);
 		if (resultList == null || resultList.isEmpty()) {
 			return null;
 		}
