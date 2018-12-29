@@ -13,6 +13,7 @@ import com.roncoo.education.system.common.bean.qo.SysQO;
 import com.roncoo.education.util.annotation.AdminLog;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.web.boss.biz.system.SysBiz;
+import com.roncoo.education.web.boss.common.SessionUtil;
 
 /**
  * 系统配置表
@@ -85,6 +86,8 @@ public class SysController extends BaseController {
 	public void set(ModelMap modelMap) {
 		// 加载站点信息
 		modelMap.put("bean", biz.getSys());
+		// 获取用户信息
+		modelMap.put("user", biz.getSysUser(SessionUtil.getUserNo()));
 	}
 
 	/**

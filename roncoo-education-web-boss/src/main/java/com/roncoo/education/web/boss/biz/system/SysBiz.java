@@ -8,6 +8,8 @@ import com.roncoo.education.system.common.bean.vo.SysVO;
 import com.roncoo.education.system.feign.web.IBossSys;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
+import com.roncoo.education.web.boss.service.dao.SysUserDao;
+import com.roncoo.education.web.boss.service.dao.impl.mapper.entity.SysUser;
 
 /**
  * 系统配置表
@@ -17,6 +19,9 @@ import com.roncoo.education.util.base.Page;
 @Component
 public class SysBiz extends BaseBiz {
 
+	@Autowired
+	private SysUserDao sysUserDao;
+	
 	@Autowired
 	private IBossSys bossSys;
 
@@ -46,6 +51,10 @@ public class SysBiz extends BaseBiz {
 
 	public int updateSys(SysQO qo) {
 		return bossSys.updateById(qo);
+	}
+
+	public SysUser getSysUser(Long userNo) {
+		return sysUserDao.getByUserNo(userNo);
 	}
 
 
