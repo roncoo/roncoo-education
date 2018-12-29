@@ -31,13 +31,11 @@ public class AuthLecturerExtViewDTO implements Serializable {
 	 * 总收入
 	 */
 	@ApiModelProperty(value = "总收入")
-	@JsonSerialize(using = ToStringSerializer.class)
 	private BigDecimal totalIncome;
 	/**
 	 * 可提余额
 	 */
 	@ApiModelProperty(value = "可提余额")
-	@JsonSerialize(using = ToStringSerializer.class)
 	private BigDecimal enableBalances;
 	/**
 	 * 讲师名称

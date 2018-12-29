@@ -21,8 +21,8 @@ public class UserLoginDTO implements Serializable {
 	/**
 	 * 用户编号
 	 */
-	@JsonSerialize(using = ToStringSerializer.class)
 	@ApiModelProperty(value = "用户编号")
+	@JsonSerialize(using = ToStringSerializer.class)
 	private Long userNo;
 	/**
 	 * 手机号码

@@ -50,7 +50,7 @@ public class OrderInfoBiz extends BaseBiz {
 
 	public void orderExport(OrderInfoQO orderInfoQO, HttpServletResponse response) {
 		try {
-			response.setContentType("application/vnd.ms-excel;charset=utf-8");// 设置强制下载不打开
+			response.setContentType("text/html;charset=utf-8");// 设置强制下载不打开
 			// 设置文件名
 			response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode("订单报表-" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()), "utf-8") + ".xlsx");
 			ReportExcelUtil.exportExcelForOrderInfo(response, bossOrderInfo, orderInfoQO);

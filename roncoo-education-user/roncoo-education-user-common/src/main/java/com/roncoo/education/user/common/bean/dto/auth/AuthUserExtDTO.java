@@ -23,13 +23,14 @@ public class AuthUserExtDTO implements Serializable {
     /**
 	 * 主键
 	 */
+    @ApiModelProperty(value = "主键")
 	@JsonSerialize(using = ToStringSerializer.class)
-	@ApiModelProperty(value = "主键")
     private Long id;
     /**
    	 * 用户编号
    	 */
    	@ApiModelProperty(value = "用户编号")
+   	@JsonSerialize(using = ToStringSerializer.class)
     private Long userNo;
     /**
    	 * 用户类型

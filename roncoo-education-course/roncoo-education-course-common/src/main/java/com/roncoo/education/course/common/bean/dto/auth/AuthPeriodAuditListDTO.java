@@ -1,6 +1,7 @@
 package com.roncoo.education.course.common.bean.dto.auth;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -22,7 +23,7 @@ public class AuthPeriodAuditListDTO implements Serializable {
 	 * 课时集合信息
 	 */
 	@ApiModelProperty(value = "课时集合信息")	
-	private List<AuthPeriodAuditDTO> userPeriodAuditList;
+	private List<AuthPeriodAuditDTO> userPeriodAuditList = new ArrayList<>();
 
 	/**
 	 * 视频数量
