@@ -79,4 +79,31 @@ public class WebsiteBiz extends BaseBiz {
 		return bossWebsite.updateById(qo);
 	}
 
+	/**
+	 * 保存站点信息
+	 * 
+	 * @param qo
+	 * @param logoImgFile
+	 * @param logoIcoFile
+	 * @param weixinFile
+	 * @param weiboFile
+	 * @return
+	 * @author YZJ
+	 */
+	public int saveWebsite(WebsiteQO qo, MultipartFile weixinFile, MultipartFile weiboFile, MultipartFile logoImgFile, MultipartFile logoIcoFile) {
+		if (null != weixinFile && !weixinFile.isEmpty()) {
+			qo.setWeixin(AliyunUtil.uploadPic(PlatformEnum.SYSTEM, weixinFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
+		}
+		if (null != weiboFile && !weiboFile.isEmpty()) {
+			qo.setWeibo(AliyunUtil.uploadPic(PlatformEnum.SYSTEM, weiboFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
+		}
+		if (null != logoImgFile && !logoImgFile.isEmpty()) {
+			qo.setLogoImg(AliyunUtil.uploadPic(PlatformEnum.SYSTEM, logoImgFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
+		}
+		if (null != logoIcoFile && !logoIcoFile.isEmpty()) {
+			qo.setLogoIco(AliyunUtil.uploadPic(PlatformEnum.SYSTEM, logoIcoFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
+		}
+		return bossWebsite.save(qo);
+	}
+
 }

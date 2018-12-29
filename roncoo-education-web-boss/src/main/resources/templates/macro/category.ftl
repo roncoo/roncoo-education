@@ -4,7 +4,6 @@
 		<#list children as bean>
 			<tr>
 			    <td align="center"></td>
-			    <td> </td>
                 <td>${label} 
                     <a href="${base}/course/courseCategory/view?id=${bean.id}" data-toggle="dialog" data-id="courseCategory-view" data-options="{title:'查看', height:250}">${bean.categoryName!} </a>
                 </td>
