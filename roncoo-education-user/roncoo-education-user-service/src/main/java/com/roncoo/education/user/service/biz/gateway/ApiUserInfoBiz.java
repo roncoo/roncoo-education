@@ -1,7 +1,5 @@
 package com.roncoo.education.user.service.biz.gateway;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
@@ -32,7 +30,6 @@ import com.roncoo.education.util.aliyun.Aliyun;
 import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Result;
-import com.roncoo.education.util.config.ConfigUtil;
 import com.roncoo.education.util.enums.LoginStatusEnum;
 import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.enums.StatusIdEnum;
@@ -333,9 +330,4 @@ public class ApiUserInfoBiz extends BaseBiz {
 		return result == 1 ? Result.success(result) : Result.error(ResultEnum.USER_UPDATE_FAIL.getDesc());
 	}
 
-	public String authRoncoo() throws UnsupportedEncodingException {
-		String url = URLEncoder.encode(ConfigUtil.AUTH_DOMAIN,"utf-8").replace("CLIENTID", ConfigUtil.AUTH_CLIENT_ID).replace("REDIRECTURI", URLEncoder.encode(ConfigUtil.AUTH_REDIRECT_URI,"utf-8"));
-		return url;
-	}
-	
 }

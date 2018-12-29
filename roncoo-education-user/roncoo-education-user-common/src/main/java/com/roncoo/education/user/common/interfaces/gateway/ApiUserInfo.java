@@ -1,7 +1,5 @@
 package com.roncoo.education.user.common.interfaces.gateway;
 
-import java.io.UnsupportedEncodingException;
-
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -68,12 +66,4 @@ public interface ApiUserInfo {
 	@RequestMapping(value = "/user/api/user/update/password", method = RequestMethod.POST)
 	Result<Integer> updatePassword(@RequestBody UserUpdateBO userUpdateBO);
 
-	/**
-	 * 授权龙果学院登陆接口
-	 * 
-	 * @throws UnsupportedEncodingException
-	 */
-	@ApiOperation(value = "授权龙果学院登陆接口", notes = "授权龙果学院登陆接口")
-	@RequestMapping(value = "/user/api/user/auth/roncoo", method = RequestMethod.GET)
-	String authRoncoo() throws UnsupportedEncodingException;
 }
