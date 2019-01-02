@@ -157,7 +157,7 @@ public class ApiUserInfoBiz extends BaseBiz {
 		dto.setToken(JWTUtil.create(user.getUserNo(), JWTUtil.DATE));
 
 		// 登录成功，存入缓存，单点登录使用
-		redisTemplate.opsForValue().set(dto.getUserNo().toString(), dto.getToken(), 1, TimeUnit.DAYS);
+		//redisTemplate.opsForValue().set(dto.getUserNo().toString(), dto.getToken(), 1, TimeUnit.DAYS);
 
 		return Result.success(dto);
 	}
