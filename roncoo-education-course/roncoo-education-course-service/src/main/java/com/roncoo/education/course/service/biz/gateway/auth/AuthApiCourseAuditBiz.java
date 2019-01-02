@@ -80,7 +80,7 @@ public class AuthApiCourseAuditBiz extends BaseBiz {
 		Page<CourseAudit> page = courseAuditDao.listForPage(authCourseAuditListBO.getPageCurrent(), authCourseAuditListBO.getPageSize(), example);
 		Page<AuthCourseAuditListDTO> dtoPage = PageUtil.transform(page, AuthCourseAuditListDTO.class);
 		for (AuthCourseAuditListDTO dto : dtoPage.getList()) {
-			Course course = courseDao.getByCourseIdAndStatusId(dto.getId(), StatusIdEnum.YES.getCode());
+			Course course = courseDao.getById(dto.getId());
 			if (ObjectUtil.isNull(course)) {
 				dto.setIsDelete(1);
 			} else {
