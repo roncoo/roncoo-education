@@ -56,9 +56,7 @@ public class FilterPre extends ZuulFilter {
 
 	@Override
 	public boolean shouldFilter() {
-		RequestContext ctx = RequestContext.getCurrentContext();
-		HttpServletRequest request = ctx.getRequest();
-		String uri = request.getServletPath();
+		String uri = RequestContext.getCurrentContext().getRequest().getServletPath();
 
 		if (uri.startsWith("/callback")) {
 			// 回调使用
