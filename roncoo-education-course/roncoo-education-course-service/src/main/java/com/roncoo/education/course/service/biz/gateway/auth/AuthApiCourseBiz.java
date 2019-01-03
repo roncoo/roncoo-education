@@ -139,11 +139,8 @@ public class AuthApiCourseBiz extends BaseBiz {
 		CourseIntroduce courseIntroduce = courseIntroduceDao.getById(course.getIntroduceId());
 		dto.setIntroduce(BeanUtil.copyProperties(courseIntroduce, CourseIntroduceDTO.class).getIntroduce());
 		
+		// 先假设为收费课程且用户未付款
 		dto.setIsPay(IsPayEnum.NO.getCode());
-		// 如果课程为免费课程则设置为已付费
-		if (IsFreeEnum.FREE.getCode().equals(course.getIsFree())) {
-			dto.setIsPay(IsPayEnum.YES.getCode());
-		}
 		// 查询订单号，查看用户是否购买了课程，是否存在订单号
 		OrderInfo orderInfo = orderInfoDao.getByUserNoAndCourseId(authCourseViewBO.getUserNo(), authCourseViewBO.getCourseId());
 		if (ObjectUtil.isNull(orderInfo)) {
@@ -153,7 +150,11 @@ public class AuthApiCourseBiz extends BaseBiz {
 			// 订单状态为已支付
 			dto.setIsPay(IsPayEnum.YES.getCode());
 		}
-
+		// 如果课程为免费课程则设置为已付费
+		if (IsFreeEnum.FREE.getCode().equals(course.getIsFree())) {
+			dto.setIsPay(IsPayEnum.YES.getCode());
+		}
+		
 		// 查询章节信息
 		List<CourseChapter> courseChapterList = courseChapterDao.listByCourseIdAndStatusId(authCourseViewBO.getCourseId(), StatusIdEnum.YES.getCode());
 		// 如果为空就直接返回
