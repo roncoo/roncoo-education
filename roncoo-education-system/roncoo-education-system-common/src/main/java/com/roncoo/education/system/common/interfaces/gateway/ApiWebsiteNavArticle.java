@@ -25,5 +25,5 @@ public interface ApiWebsiteNavArticle {
 	 */
 	@ApiOperation(value = "获取站点导航文章接口", notes = "根据站点导航ID获取站点导航文章信息")
 	@RequestMapping(value = "/system/api/website/nav/article/get", method = RequestMethod.POST)
-	Result<WebsiteNavArticleDTO> get(@RequestBody WebsiteNavArticleBO websiteNavArticle);
+	Result<WebsiteNavArticleDTO> get(@RequestBody WebsiteNavArticleBO websiteNavArticleBO);
 }

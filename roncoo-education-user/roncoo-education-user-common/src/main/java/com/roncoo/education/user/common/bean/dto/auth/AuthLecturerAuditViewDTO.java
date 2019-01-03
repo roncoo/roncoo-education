@@ -6,6 +6,7 @@ package com.roncoo.education.user.common.bean.dto.auth;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
@@ -29,13 +30,14 @@ public class AuthLecturerAuditViewDTO implements Serializable {
 	/**
 	 * 主键
 	 */
-	@JsonSerialize(using = ToStringSerializer.class)
 	@ApiModelProperty(value = "主键")
+	@JsonSerialize(using = ToStringSerializer.class)
 	private Long id;
 	/**
 	 * 创建时间
 	 */
 	@ApiModelProperty(value = "创建时间")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date gmtCreate;
 	/**
 	 * 状态(1:有效;0:无效)
@@ -45,8 +47,8 @@ public class AuthLecturerAuditViewDTO implements Serializable {
 	/**
 	 * 讲师用户编号
 	 */
-	@JsonSerialize(using = ToStringSerializer.class)
 	@ApiModelProperty(value = "讲师用户编号")
+	@JsonSerialize(using = ToStringSerializer.class)
 	private Long lecturerUserNo;
 	/**
 	 * 讲师名称

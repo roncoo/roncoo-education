@@ -60,12 +60,12 @@ public class ApiCourseBiz {
 	 * @param courseView
 	 * @return
 	 */
-	public Result<CourseViewDTO> view(CourseVideoBO courseView) {
-		if (courseView.getCourseId() == null) {
+	public Result<CourseViewDTO> view(CourseVideoBO courseVideoBO) {
+		if (courseVideoBO.getCourseId() == null) {
 			return Result.error("课程ID不能为空");
 		}
 		// 课程信息
-		Course course = courseDao.getById(courseView.getCourseId());
+		Course course = courseDao.getById(courseVideoBO.getCourseId());
 		if (course == null) {
 			return Result.error("找不到该课程信息");
 		}
@@ -82,10 +82,10 @@ public class ApiCourseBiz {
 		if (StringUtils.isEmpty(lecturerVO)) {
 			return Result.error("根据讲师用户编号没找到对应的讲师信息!");
 		}
-		data.setLecturerDTO(BeanUtil.copyProperties(lecturerVO, LecturerDTO.class));
+		data.setLecturer(BeanUtil.copyProperties(lecturerVO, LecturerDTO.class));
 
 		// 章节信息
-		List<CourseChapter> courseChapterList = courseChapterDao.listByCourseIdAndStatusId(courseView.getCourseId(), StatusIdEnum.YES.getCode());
+		List<CourseChapter> courseChapterList = courseChapterDao.listByCourseIdAndStatusId(courseVideoBO.getCourseId(), StatusIdEnum.YES.getCode());
 		if (CollectionUtil.isNotEmpty(courseChapterList)) {
 			data.setChapterList(PageUtil.copyList(courseChapterList, CourseChapterDTO.class));
 		}
@@ -94,7 +94,7 @@ public class ApiCourseBiz {
 		if (CollectionUtil.isNotEmpty(data.getChapterList())) {
 			for (CourseChapterDTO courseChapterDTO : data.getChapterList()) {
 				List<CourseChapterPeriod> courseChapterPeriodList = courseChapterPeriodDao.listByChapterIdAndStatusId(courseChapterDTO.getId(), StatusIdEnum.YES.getCode());
-				courseChapterDTO.setCourseChapterPeriodList(PageUtil.copyList(courseChapterPeriodList, CourseChapterPeriodDTO.class));
+				courseChapterDTO.setPeriodList(PageUtil.copyList(courseChapterPeriodList, CourseChapterPeriodDTO.class));
 			}
 		}
 		return Result.success(data);
@@ -103,32 +103,32 @@ public class ApiCourseBiz {
 	/**
 	 * 课程信息列表接口
 	 * 
-	 * @param courseBO
+	 * @param courseInfoPageBO
 	 * @return
 	 * @author wuyun
 	 */
-	public Result<Page<CourseInfoPageDTO>> list(CourseInfoPageBO courseBO) {
+	public Result<Page<CourseInfoPageDTO>> list(CourseInfoPageBO courseInfoPageBO) {
 		CourseExample example = new CourseExample();
 		Criteria c = example.createCriteria();
 		c.andStatusIdEqualTo(StatusIdEnum.YES.getCode());
 		c.andIsPutawayEqualTo(IsPutawayEnum.YES.getCode());
-		if (!StringUtils.isEmpty(courseBO.getCategoryId1())) {
-			c.andCategoryId1EqualTo(courseBO.getCategoryId1());
+		if (!StringUtils.isEmpty(courseInfoPageBO.getCategoryId1())) {
+			c.andCategoryId1EqualTo(courseInfoPageBO.getCategoryId1());
 		}
-		if (!StringUtils.isEmpty(courseBO.getCategoryId2())) {
-			c.andCategoryId2EqualTo(courseBO.getCategoryId2());
+		if (!StringUtils.isEmpty(courseInfoPageBO.getCategoryId2())) {
+			c.andCategoryId2EqualTo(courseInfoPageBO.getCategoryId2());
 		}
-		if (!StringUtils.isEmpty(courseBO.getCategoryId3())) {
-			c.andCategoryId3EqualTo(courseBO.getCategoryId3());
+		if (!StringUtils.isEmpty(courseInfoPageBO.getCategoryId3())) {
+			c.andCategoryId3EqualTo(courseInfoPageBO.getCategoryId3());
 		}
-		if (!StringUtils.isEmpty(courseBO.getIsFree())) {
-			c.andIsFreeEqualTo(courseBO.getIsFree());
+		if (!StringUtils.isEmpty(courseInfoPageBO.getIsFree())) {
+			c.andIsFreeEqualTo(courseInfoPageBO.getIsFree());
 		}
-		if (!StringUtils.isEmpty(courseBO.getCourseName())) {
-			c.andCourseNameLike(PageUtil.rightLike(SqlUtil.checkSql(courseBO.getCourseName())));
+		if (!StringUtils.isEmpty(courseInfoPageBO.getCourseName())) {
+			c.andCourseNameLike(PageUtil.rightLike(SqlUtil.checkSql(courseInfoPageBO.getCourseName())));
 		}
 		example.setOrderByClause(" course_sort desc, id desc ");
-		Page<Course> page = courseDao.listForPage(courseBO.getPageCurrent(), courseBO.getPageSize(), example);
+		Page<Course> page = courseDao.listForPage(courseInfoPageBO.getPageCurrent(), courseInfoPageBO.getPageSize(), example);
 		return Result.success(PageUtil.transform(page, CourseInfoPageDTO.class));
 	}
 }

@@ -7,9 +7,7 @@
 			<button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;<a class="btn btn-orange" href="javascript:;" data-toggle="reloadsearch" data-clear-query="true" data-icon="undo">清空查询</a>
 			<br />
 			<br />
-			<@shiro.hasPermission name="/course/zone/add">
-				<a href="${base}/course/zone/add" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="zone-add" data-options="{title:'添加', height:300}">添加 </a>
-			</@shiro.hasPermission>
+			<a href="${base}/course/zone/add" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="zone-add" data-options="{title:'添加', height:300}">添加 </a>
 		</div>
 	</form>
 </div>
@@ -37,23 +35,15 @@
 				<td>${bean.sort!}</td>
 				<td><#list statusIdEnums as em><#if bean.statusId==em.code><span class="${em.color}">${em.desc}</span></#if></#list></td>
 				<td>
-					<@shiro.hasPermission name="/course/zone/delete">
                     <a href="${base}/course/zone/delete?id=${bean.id}" class="btn btn-red" data-toggle="doajax" data-id="zone-delete" data-confirm-msg="确定要删除吗？">删除</a>
-				    </@shiro.hasPermission>
-					<@shiro.hasPermission name="/course/zone/edit">
 					<a href="${base}/course/zone/edit?id=${bean.id}" class="btn btn-green" data-toggle="dialog" data-id="zone-edit" data-options="{title:'修改', height:300}">修改</a>
-					</@shiro.hasPermission>
-                    <@shiro.hasPermission name="/course/zone/status">
 					<#if bean.statusId == 1>
 					<a href="${base}/course/zone/status?id=${bean.id}&statusId=0" class="btn btn-red" data-toggle="doajax" data-id="zone-update" data-confirm-msg="确定要禁用吗？">禁用</a>
 					</#if>
 					<#if bean.statusId == 0>
 					<a href="${base}/course/zone/status?id=${bean.id}&statusId=1" class="btn btn-green" data-toggle="doajax" data-id="zone-update" data-confirm-msg="确定要启用吗？">启用</a>
 					</#if>
-					</@shiro.hasPermission>
-					<@shiro.hasPermission name="/course/zoneCourse/list">
                     <a href="${base}/course/zoneCourse/list?zoneId=${bean.id}&zoneLocation=${bean.zoneLocation}" class="btn btn-orange" data-toggle="navtab" data-id="course-zoneCourse">专区课程</a>
-					</@shiro.hasPermission>
 				</td>
 			</tr>
 			</#list>

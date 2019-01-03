@@ -7,9 +7,7 @@
 			<button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;<a class="btn btn-orange" href="javascript:;" data-toggle="reloadsearch" data-clear-query="true" data-icon="undo">清空查询</a>
 			<br />
 			<br />
-			<@shiro.hasPermission name="/admin/sysRole/add">
 			<a href="${base}/admin/sysRole/add" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="sysRole-add" data-options="{title:'添加', height:200}">添加 </a>
-			</@shiro.hasPermission>
 		</div>
 	</form>
 </div>
@@ -35,15 +33,9 @@
 				<td>${bean.sort!}</td>
 				<td><#list statusIdEnums as enumvo><#if bean.statusId?? && bean.statusId==enumvo.code><span class="${enumvo.color}">${enumvo.desc}</span></#if></#list></td>
 				<td>
-					<@shiro.hasPermission name="/admin/sysRole/edit">
 					<a href="${base}/admin/sysRole/edit?id=${bean.id}" class="btn btn-green" data-toggle="dialog" data-id="sysRole-edit" data-options="{title:'修改', height:300}">修改 </a>
-					</@shiro.hasPermission>
-					<@shiro.hasPermission name="/admin/sysRole/delete">
                     <a href="${base}/admin/sysRole/delete?id=${bean.id}" class="btn btn-red" data-toggle="doajax" data-id="sysRole-delete" data-confirm-msg="确定要删除吗？">删除</a>
-                    </@shiro.hasPermission>
-					<@shiro.hasPermission name="/admin/sysMenuRole/set">
 					<a href="${base}/admin/sysMenuRole/set?roleId=${bean.id}" class="btn btn-orange" data-toggle="dialog" data-id="sysRole-set" data-options="{title:'设置权限', height:350}">设置权限 </a>
-                    </@shiro.hasPermission>
 				</td>
 			</tr>
 			</#list>

@@ -51,20 +51,20 @@ public interface AuthApiCourseChapterAudit {
 	 */
 	@ApiOperation(value = "章节添加接口", notes = "章节添加接口")
 	@RequestMapping(value = "/auth/course/api/course/chapter/audit/save", method = RequestMethod.POST)
-	Result<AuthCourseChapterAuditSaveDTO> save(@RequestBody AuthCourseChapterAuditSaveBO bo);
+	Result<AuthCourseChapterAuditSaveDTO> save(@RequestBody AuthCourseChapterAuditSaveBO authCourseChapterAuditSaveBO);
 
 	/**
 	 * 章节更新接口
 	 */
 	@ApiOperation(value = "章节更新接口", notes = "章节更新接口")
 	@RequestMapping(value = "/auth/course/api/course/chapter/audit/update", method = RequestMethod.POST)
-	Result<AuthCourseChapterAuditUpdateDTO> update(@RequestBody AuthCourseChapterAuditUpdateBO bo);
+	Result<AuthCourseChapterAuditUpdateDTO> update(@RequestBody AuthCourseChapterAuditUpdateBO authCourseChapterAuditUpdateBO);
 
 	/**
 	 * 更新章节排序接口
 	 */
 	@ApiOperation(value = "更新章节排序接口", notes = "更新章节排序接口")
 	@RequestMapping(value = "/auth/course/api/course/chapter/audit/sort", method = RequestMethod.POST)
-	Result<Integer> sort(@RequestBody AuthCourseChapterAuditSortBO bo);
+	Result<Integer> sort(@RequestBody AuthCourseChapterAuditSortBO authCourseChapterAuditSortBO);
 
 }

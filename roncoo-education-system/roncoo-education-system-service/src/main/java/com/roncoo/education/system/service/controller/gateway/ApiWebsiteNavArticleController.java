@@ -23,7 +23,7 @@ public class ApiWebsiteNavArticleController extends BaseController implements Ap
     private ApiWebsiteNavArticleBiz biz;
     
     @Override
-	public Result<WebsiteNavArticleDTO> get(@RequestBody WebsiteNavArticleBO bo) {
-		return biz.get(bo);
+	public Result<WebsiteNavArticleDTO> get(@RequestBody WebsiteNavArticleBO websiteNavArticleBO) {
+		return biz.get(websiteNavArticleBO);
 	}
 }

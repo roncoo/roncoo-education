@@ -24,7 +24,7 @@ public interface ApiRegion {
 	 */
 	@ApiOperation(value = "区域列出接口", notes = "根据级别获取区域列出信息")
 	@RequestMapping(value = "/user/api/region/list", method = RequestMethod.POST)
-	Result<RegionListDTO> listForLevel(@RequestBody UserRegionLevelBO userRegionBO);
+	Result<RegionListDTO> listForLevel(@RequestBody UserRegionLevelBO userRegionLevelBO);
 
 	/**
 	 * 区域列出接口

@@ -46,18 +46,18 @@ public class AuthApiCourseChapterAuditController extends BaseController implemen
 	}
 
 	@Override
-	public Result<AuthCourseChapterAuditSaveDTO> save(@RequestBody AuthCourseChapterAuditSaveBO bo) {
-		return biz.save(bo);
+	public Result<AuthCourseChapterAuditSaveDTO> save(@RequestBody AuthCourseChapterAuditSaveBO authCourseChapterAuditSaveBO) {
+		return biz.save(authCourseChapterAuditSaveBO);
 	}
 
 	@Override
-	public Result<AuthCourseChapterAuditUpdateDTO> update(@RequestBody AuthCourseChapterAuditUpdateBO bo) {
-		return biz.update(bo);
+	public Result<AuthCourseChapterAuditUpdateDTO> update(@RequestBody AuthCourseChapterAuditUpdateBO authCourseChapterAuditUpdateBO) {
+		return biz.update(authCourseChapterAuditUpdateBO);
 	}
 
 	@Override
-	public Result<Integer> sort(@RequestBody AuthCourseChapterAuditSortBO bo) {
-		return biz.sort(bo);
+	public Result<Integer> sort(@RequestBody AuthCourseChapterAuditSortBO authCourseChapterAuditSortBO) {
+		return biz.sort(authCourseChapterAuditSortBO);
 	}
 
 }

@@ -27,8 +27,8 @@ public class AuthApiCourseVideoController extends BaseController implements Auth
 	private AuthApiCourseVideoBiz biz;
 
 	@Override
-	public Result<Integer> save(@RequestBody AuthCourseVideoSaveBO bo) {
-		return biz.save(bo);
+	public Result<Integer> save(@RequestBody AuthCourseVideoSaveBO authCourseVideoSaveBO) {
+		return biz.save(authCourseVideoSaveBO);
 	}
 
 	@Override
@@ -42,13 +42,13 @@ public class AuthApiCourseVideoController extends BaseController implements Auth
 	}
 
 	@Override
-	public Result<Integer> update(@RequestBody AuthCourseVideoUpdateBO bo) {
-		return biz.update(bo);
+	public Result<Integer> update(@RequestBody AuthCourseVideoUpdateBO authCourseVideoUpdateBO) {
+		return biz.update(authCourseVideoUpdateBO);
 	}
 
 	@Override
-	public Result<Integer> udpateById(@RequestBody AuthCourseVideoDeleteBO bo) {
-		return biz.udpateById(bo);
+	public Result<Integer> udpateById(@RequestBody AuthCourseVideoDeleteBO authCourseVideoDeleteBO) {
+		return biz.udpateById(authCourseVideoDeleteBO);
 	}
 
 }

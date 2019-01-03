@@ -61,6 +61,7 @@ public class AuthCourseChapterAuditDTO implements Serializable {
     /**
 	 * 课时数量
 	 */
+    @ApiModelProperty(value = "课时数量")
 	private Integer periodNum;
     
 }

@@ -30,7 +30,7 @@ public interface AuthApiCourseAudit {
 	 */
 	@ApiOperation(value = "课程详情接口", notes = "根据课程ID返回课程详情信息")
 	@RequestMapping(value = "/auth/course/api/course/audit/view", method = RequestMethod.POST)
-	Result<AuthCourseAuditViewDTO> view(@RequestBody AuthCourseAuditViewBO authCourseAuditView);
+	Result<AuthCourseAuditViewDTO> view(@RequestBody AuthCourseAuditViewBO authCourseAuditViewBO);
 
 	/**
 	 * 讲师课程分页接口

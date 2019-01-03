@@ -23,7 +23,7 @@ public interface AuthApiUserExt {
 	 */
 	@ApiOperation(value = "用户信息查看接口", notes = "根据userNo获取用户信息接口")
 	@RequestMapping(value = "/auth/user/api/user/ext/view", method = RequestMethod.POST)
-	Result<AuthUserExtDTO> view(@RequestBody AuthUserExtViewBO authUserExtUserNoBO);
+	Result<AuthUserExtDTO> view(@RequestBody AuthUserExtViewBO authUserExtViewBO);
 
 	/**
 	 * 用户信息更新接口

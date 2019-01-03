@@ -82,23 +82,15 @@
 				<td><#list statusIdEnums as em><#if bean.statusId?? && bean.statusId==em.code><span class="${em.color}">${em.desc}</span></#if></#list></td>
 				<td>${bean.sort!}</td>
 				<td>
-					<@shiro.hasPermission name="/course/courseAudit/edit">
-						<a href="${base}/course/courseAudit/edit?id=${bean.id}&categoryId1=${bean.categoryId1}&categoryId2=${bean.categoryId2}&categoryId3=${bean.categoryId3}" class="btn btn-green" data-toggle="navtab" data-id="courseInfoAudit-edit" data-options="{title:'${bean.courseName}-修改',id:'${bean.courseName}'}">修改</a>
-					</@shiro.hasPermission>
+					<a href="${base}/course/courseAudit/edit?id=${bean.id}&categoryId1=${bean.categoryId1}&categoryId2=${bean.categoryId2}&categoryId3=${bean.categoryId3}" class="btn btn-green" data-toggle="navtab" data-id="courseInfoAudit-edit" data-options="{title:'${bean.courseName}-修改',id:'${bean.courseName}'}">修改</a>
 					<#if bean.isPutaway == 1>
-    					<@shiro.hasPermission name="/course/courseAudit/updateByStatusId">
-    						<a href="${base}/course/courseAudit/status?id=${bean.id}&isPutaway=0" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确定要下架吗？">下架</a>
-    					</@shiro.hasPermission>
+						<a href="${base}/course/courseAudit/status?id=${bean.id}&isPutaway=0" class="btn btn-red" data-toggle="doajax" data-confirm-msg="确定要下架吗？">下架</a>
 					</#if >
 					<#if bean.isPutaway = 0>
-    					<@shiro.hasPermission name="/course/courseAudit/updateByStatusId">
-    						<a href="${base}/course/courseAudit/status?id=${bean.id}&isPutaway=1" class="btn btn-green" data-toggle="doajax" data-confirm-msg="确定要上架吗？">上架</a>
-    					</@shiro.hasPermission>
+						<a href="${base}/course/courseAudit/status?id=${bean.id}&isPutaway=1" class="btn btn-green" data-toggle="doajax" data-confirm-msg="确定要上架吗？">上架</a>
 					</#if >
 					<#if bean.auditStatus == 0 || bean.auditStatus == 2>
-                    <@shiro.hasPermission name="/course/courseAudit/isAudit">
-                    	<a href="${base}/course/courseAudit/isAudit?id=${bean.id}" class="btn btn-blue" data-toggle="dialog" data-options="{mask:true,title:'${bean.courseName}',width:400,height:250}">审核</a>
-                    </@shiro.hasPermission>
+                		<a href="${base}/course/courseAudit/isAudit?id=${bean.id}" class="btn btn-blue" data-toggle="dialog" data-options="{mask:true,title:'${bean.courseName}',width:400,height:250}">审核</a>
                     </#if >
 				</td>
 			</tr>

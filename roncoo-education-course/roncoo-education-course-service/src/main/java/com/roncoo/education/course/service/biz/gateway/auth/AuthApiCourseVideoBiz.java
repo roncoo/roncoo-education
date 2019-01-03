@@ -63,15 +63,15 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 	 * @param authCourseVideoSaveBo
 	 * @author wuyun
 	 */
-	public Result<Integer> save(AuthCourseVideoSaveBO bo) {
-		if (bo.getChapterId().equals(Long.valueOf(0))) {
+	public Result<Integer> save(AuthCourseVideoSaveBO authCourseVideoSaveBO) {
+		if (authCourseVideoSaveBO.getChapterId().equals(Long.valueOf(0))) {
 			return Result.error("章节ID不能为空");
 		}
-		if (bo.getUserNo() == null) {
+		if (authCourseVideoSaveBO.getUserNo() == null) {
 			return Result.error("useNo不能为空");
 		}
 		// 根据章节编号查找章节信息
-		CourseChapterAudit chapterInfoAudit = chapterAuditDao.getById(bo.getChapterId());
+		CourseChapterAudit chapterInfoAudit = chapterAuditDao.getById(authCourseVideoSaveBO.getChapterId());
 		if (ObjectUtil.isNull(chapterInfoAudit)) {
 			return Result.error("找不到章节信息");
 		}
@@ -79,11 +79,11 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 		if (ObjectUtil.isNull(courseAudit)) {
 			return Result.error("找不到课程信息");
 		}
-		if (!bo.getUserNo().equals(courseAudit.getLecturerUserNo())) {
+		if (!authCourseVideoSaveBO.getUserNo().equals(courseAudit.getLecturerUserNo())) {
 			return Result.error("传入的useNo与该课程的讲师useNo不一致");
 		}
 		// 查找视频信息
-		CourseVideo courseVideo = dao.getByVideoNo(bo.getVideoNo());
+		CourseVideo courseVideo = dao.getByVideoNo(authCourseVideoSaveBO.getVideoNo());
 		if (ObjectUtil.isNull(courseVideo)) {
 			return Result.error("找不到视频信息");
 		}
@@ -137,14 +137,14 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 	 * @author wuyun
 	 */
 	@Transactional
-	public Result<Integer> update(AuthCourseVideoUpdateBO bo) {
-		if (bo.getPeriodId() == null) {
+	public Result<Integer> update(AuthCourseVideoUpdateBO authCourseVideoUpdateBO) {
+		if (authCourseVideoUpdateBO.getPeriodId() == null) {
 			return Result.error("periodId不能为空");
 		}
-		if (bo.getUserNo() == null) {
+		if (authCourseVideoUpdateBO.getUserNo() == null) {
 			return Result.error("useNo不能为空");
 		}
-		CourseChapterPeriodAudit courseChapterPeriodAudit = periodAuditDao.getById(bo.getPeriodId());
+		CourseChapterPeriodAudit courseChapterPeriodAudit = periodAuditDao.getById(authCourseVideoUpdateBO.getPeriodId());
 		if (ObjectUtil.isNull(courseChapterPeriodAudit)) {
 			return Result.error("找不到课时信息");
 		}
@@ -152,16 +152,27 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 		if (ObjectUtil.isNull(course)) {
 			return Result.error("找不到课程信息");
 		}
-		if (!bo.getUserNo().equals(course.getLecturerUserNo())) {
+		if (!authCourseVideoUpdateBO.getUserNo().equals(course.getLecturerUserNo())) {
 			return Result.error("传入的useNo与该课程的讲师useNo不一致");
 		}
 
+		// 查找该课时下的所有视频信息集合更改为冻结状态
+		List<CourseVideo> periodVideoInfoAuditList = dao.listByPeriodIdAndStatusId(authCourseVideoUpdateBO.getPeriodId(), StatusIdEnum.YES.getCode());
+		if (CollectionUtil.isNotEmpty(periodVideoInfoAuditList)) {
+			for (CourseVideo periodVideoInfoAudit : periodVideoInfoAuditList) {
+				CourseVideo audit = new CourseVideo();
+				audit.setId(periodVideoInfoAudit.getId());
+				audit.setStatusId(FREEZE);
+				dao.updateById(audit);
+			}
+		}
+
 		// 如果视频编号不为空
-		if (bo.getVideoNo() != null) {
+		if (authCourseVideoUpdateBO.getVideoNo() != null) {
 			// 根据视频编号课时编号查找课时视频信息
-			CourseVideo courseVideo = dao.getByVideoNoAndPeriodId(bo.getVideoNo(), bo.getPeriodId());
+			CourseVideo courseVideo = dao.getByVideoNoAndPeriodId(authCourseVideoUpdateBO.getVideoNo(), authCourseVideoUpdateBO.getPeriodId());
 			if (ObjectUtil.isNotNull(courseVideo)) {
-				// 如果存在且为禁用状态则更新为可用状态
+				// 如果存在则更新为可用状态
 				courseVideo.setStatusId(StatusIdEnum.YES.getCode());
 				dao.updateById(courseVideo);
 				// 更新课程、章节、课时
@@ -169,9 +180,9 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 
 			} else {
 				// 根据视频编号查找可用的课时视频信息
-				CourseVideo infoAudit = dao.getByVideoNoAndStatusId(bo.getVideoNo(), StatusIdEnum.YES.getCode());
+				CourseVideo infoAudit = dao.getByVideoNoAndStatusId(authCourseVideoUpdateBO.getVideoNo(), StatusIdEnum.YES.getCode());
 				CourseVideo audit = BeanUtil.copyProperties(infoAudit, CourseVideo.class);
-				audit.setPeriodId(bo.getPeriodId());
+				audit.setPeriodId(authCourseVideoUpdateBO.getPeriodId());
 				dao.save(audit);
 				// 更新课程、章节、课时
 				updateCourseChapterPeriod(courseChapterPeriodAudit, audit);
@@ -179,7 +190,6 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 			}
 			return Result.success(1);
 		} else {
-			// 如果为空则直接返回成功
 			return Result.success(1);
 		}
 	}
@@ -218,14 +228,14 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 	 * @author wuyun
 	 */
 	@Transactional
-	public Result<Integer> udpateById(AuthCourseVideoDeleteBO bo) {
-		if (bo.getId() == null) {
+	public Result<Integer> udpateById(AuthCourseVideoDeleteBO authCourseVideoDeleteBO) {
+		if (authCourseVideoDeleteBO.getId() == null) {
 			return Result.error("id不能为空");
 		}
-		if (bo.getUserNo() == null) {
+		if (authCourseVideoDeleteBO.getUserNo() == null) {
 			return Result.error("lecturerUserNo不能为空");
 		}
-		CourseVideo courseVideo = dao.getById(bo.getId());
+		CourseVideo courseVideo = dao.getById(authCourseVideoDeleteBO.getId());
 		if (ObjectUtil.isNull(courseVideo)) {
 			return Result.error("找不到该视频");
 		}
@@ -233,7 +243,7 @@ public class AuthApiCourseVideoBiz extends BaseBiz {
 		if (ObjectUtil.isNull(course)) {
 			return Result.error("找不到课程信息");
 		}
-		if (!bo.getUserNo().equals(course.getLecturerUserNo())) {
+		if (!authCourseVideoDeleteBO.getUserNo().equals(course.getLecturerUserNo())) {
 			return Result.error("传入的useNo与该课程的讲师useNo不一致");
 		}
 		SysVO sys = bossSys.getSys();

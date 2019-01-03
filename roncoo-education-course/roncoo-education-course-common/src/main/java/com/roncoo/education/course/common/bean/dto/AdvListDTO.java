@@ -1,6 +1,7 @@
 package com.roncoo.education.course.common.bean.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -19,5 +20,5 @@ public class AdvListDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@ApiModelProperty(value = "广告信息集合")
-	private List<AdvDTO> advList;
+	private List<AdvDTO> advList =  new ArrayList<>();
 }

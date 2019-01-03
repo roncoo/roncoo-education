@@ -35,9 +35,7 @@
 				<td>${bean.courseOriginal!}</td>				
 				<td><#list statusIdEnums as em><#if bean.statusId?? && bean.statusId==em.code><span class="${em.color}">${em.desc}</span></#if></#list></td>
 				<td>${bean.sort!}</td>
-				<@shiro.hasPermission name="/course/zoneCourse/save">
-					<td><a type="button" class="btn btn-blue" href="${base}/course/zoneCourse/save?zoneId=${zoneId}&courseId=${bean.id}" data-toggle="doajax" data-confirm-msg="确定要选择吗？" data-icon="check">选择</a></td>
-				</@shiro.hasPermission>
+				<td><a type="button" class="btn btn-blue" href="${base}/course/zoneCourse/save?zoneId=${zoneId}&courseId=${bean.id}" data-toggle="doajax" data-confirm-msg="确定要选择吗？" data-icon="check">选择</a></td>
 			</#list>
 			</#if>
 		</tbody>

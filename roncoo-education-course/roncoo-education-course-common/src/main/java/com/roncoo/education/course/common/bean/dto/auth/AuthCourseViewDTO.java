@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.roncoo.education.course.common.bean.dto.CourseChapterDTO;
 import com.roncoo.education.user.common.bean.dto.auth.AuthLecturerDTO;
 
@@ -23,9 +25,16 @@ public class AuthCourseViewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * 主键
+	 */
+	@ApiModelProperty(value = "课程ID")
+	@JsonSerialize(using = ToStringSerializer.class)
+	private Long id;
+	/**
 	 * 讲师用户编码
 	 */
 	@ApiModelProperty(value = "讲师用户编码")
+	@JsonSerialize(using = ToStringSerializer.class)
 	private Long lecturerUserNo;
 	/**
 	 * 是否免费：1免费，0收费
@@ -77,12 +86,17 @@ public class AuthCourseViewDTO implements Serializable {
 	 * 讲师信息
 	 */
 	@ApiModelProperty(value = "讲师信息")
-	private AuthLecturerDTO authLecturerDTO;
+	private AuthLecturerDTO lecturer;
+	/**
+	 * 是否购买
+	 */
+	@ApiModelProperty(value = "是否支付(1:已支付;0:未支付)")
+	private int isPay;
 	/**
 	 * 章节信息
 	 */
 	@ApiModelProperty(value = "章节信息")
-	private List<CourseChapterDTO> courseChapterList;
+	private List<CourseChapterDTO> chapterList;
 	/**
 	 * 课程学习进度
 	 */

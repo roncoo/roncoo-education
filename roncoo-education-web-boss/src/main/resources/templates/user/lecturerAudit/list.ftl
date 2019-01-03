@@ -25,9 +25,7 @@
 			<br />
 			<button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;
 			<a class="btn btn-orange" href="javascript:;" data-toggle="reloadsearch" data-clear-query="true" data-icon="undo">清空查询</a>&nbsp;
-			<@shiro.hasPermission name="/user/lecturerAudit/add">
-				<a href="${base}/user/lecturerAudit/add" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="lecturerInfoAudit-add" data-options="{title:'添加', width:460, height:260}">添加 </a>
-			</@shiro.hasPermission>
+			<a href="${base}/user/lecturerAudit/add" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="lecturerInfoAudit-add" data-options="{title:'添加', width:460, height:260}">添加 </a>
 		</div>
 	</form>
 </div>
@@ -59,13 +57,9 @@
 					<#list auditStatusEnums as em><#if bean.auditStatus?? && bean.auditStatus==em.code><span class="${em.color}">${em.desc}</span></#if></#list>
 				</td>
 				<td>
-					<@shiro.hasPermission name="/user/lecturerAudit/edit">
 					<a href="${base}/user/lecturerAudit/edit?id=${bean.id}&lecturerUserNo=${bean.lecturerUserNo}" class="btn btn-green" data-toggle="dialog" data-id="lecturerAudit-edit" data-options="{title:'${bean.lecturerName}-信息修改', width:800, height:440}">修改</a>
-					</@shiro.hasPermission>
 					<#if bean.auditStatus == 0 || bean.auditStatus == 2>
-                    <@shiro.hasPermission name="/user/lecturerAudit/isAudit">
                     <a href="${base }/user/lecturerAudit/isAudit?id=${bean.id}" class="btn btn-blue" data-toggle="dialog" data-options="{mask:true,title:'${bean.lecturerName}',width:400,height:250}">审核</a>
-                    </@shiro.hasPermission>
                     </#if >
                  </td>
 			</tr>

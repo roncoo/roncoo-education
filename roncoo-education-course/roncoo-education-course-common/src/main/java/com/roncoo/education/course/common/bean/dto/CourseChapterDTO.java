@@ -64,16 +64,9 @@ public class CourseChapterDTO implements Serializable {
 	 */
 	@ApiModelProperty(value = "优惠价")
 	private BigDecimal chapterDiscount;
-
-	/**
-	 * 是否购买1:已经购买;2:未购买
-	 */
-	@ApiModelProperty(value = "是否支付(1:已支付;0:未支付)")
-	private int isPay;
-
 	/**
 	 * 课时信息
 	 */
 	@ApiModelProperty(value = "课时信息")
-	private List<CourseChapterPeriodDTO> courseChapterPeriodList;
+	private List<CourseChapterPeriodDTO> periodList;
 }

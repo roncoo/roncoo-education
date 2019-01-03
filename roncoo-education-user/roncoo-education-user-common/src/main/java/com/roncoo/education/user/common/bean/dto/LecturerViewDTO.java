@@ -23,13 +23,14 @@ public class LecturerViewDTO implements Serializable {
 	/**
 	 * 主键
 	 */
-	@JsonSerialize(using = ToStringSerializer.class)
 	@ApiModelProperty(value = "主键")
+	@JsonSerialize(using = ToStringSerializer.class)
 	private Long id;
 	/**
 	 * 讲师编号
 	 */
 	@ApiModelProperty(value = "讲师编号")
+	@JsonSerialize(using = ToStringSerializer.class)
 	private Long lecturerUserNo;
 	/**
 	 * 讲师名称

@@ -13,9 +13,10 @@ import com.roncoo.education.system.common.bean.qo.SysQO;
 import com.roncoo.education.util.annotation.AdminLog;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.web.boss.biz.system.SysBiz;
+import com.roncoo.education.web.boss.common.SessionUtil;
 
 /**
- * 系统配置表 
+ * 系统配置表
  *
  * @author YZJ
  */
@@ -27,55 +28,55 @@ public class SysController extends BaseController {
 
 	@Autowired
 	private SysBiz biz;
-	
+
 	@RequestMapping(value = "/list")
-	public void list(@ModelAttribute SysQO qo, ModelMap modelMap){
+	public void list(@ModelAttribute SysQO qo, ModelMap modelMap) {
 		modelMap.put("page", biz.listForPage(qo));
 		modelMap.put("bean", qo);
 	}
-	
+
 	@RequestMapping(value = "/add")
-	public void add(){
-	
+	public void add() {
+
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/save")
-	public String save(@ModelAttribute SysQO qo){
+	public String save(@ModelAttribute SysQO qo) {
 		if (biz.save(qo) > 0) {
 			return success(TARGETID);
 		}
 		return error("添加失败");
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/delete")
-	public String delete(@RequestParam(value = "id") Long id){
+	public String delete(@RequestParam(value = "id") Long id) {
 		if (biz.deleteById(id) > 0) {
 			return delete(TARGETID);
 		}
 		return error("删除失败");
 	}
-	
+
 	@RequestMapping(value = "/edit")
-	public void edit(@RequestParam(value = "id") Long id, ModelMap modelMap){
+	public void edit(@RequestParam(value = "id") Long id, ModelMap modelMap) {
 		modelMap.put("bean", biz.getById(id));
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/update")
-	public String update(@ModelAttribute SysQO qo){
+	public String update(@ModelAttribute SysQO qo) {
 		if (biz.updateById(qo) > 0) {
 			return success(TARGETID);
 		}
 		return error("修改失败");
 	}
-	
+
 	@RequestMapping(value = "/view")
-	public void view(@RequestParam(value = "id") Long id, ModelMap modelMap){
+	public void view(@RequestParam(value = "id") Long id, ModelMap modelMap) {
 		modelMap.put("bean", biz.getById(id));
 	}
-	
+
 	/**
 	 * 系统配置页面展示
 	 * 
@@ -85,8 +86,10 @@ public class SysController extends BaseController {
 	public void set(ModelMap modelMap) {
 		// 加载站点信息
 		modelMap.put("bean", biz.getSys());
+		// 获取用户信息
+		modelMap.put("user", biz.getSysUser(SessionUtil.getUserNo()));
 	}
-	
+
 	/**
 	 * 系统配置
 	 * 
@@ -96,9 +99,16 @@ public class SysController extends BaseController {
 	@AdminLog(value = "系统配置更新")
 	@RequestMapping(value = "/updateSys", method = RequestMethod.POST)
 	public String updateSys(@ModelAttribute SysQO qo) {
-		// 保存站点信息
-		if (biz.updateSys(qo) > 0) {
-			return success(TARGETID);
+		// 更新站点信息
+		if (null != qo.getId()) {
+			if (biz.updateSys(qo) > 0) {
+				return success(TARGETID);
+			}
+			// 保存站点信息
+		} else {
+			if (biz.save(qo) > 0) {
+				return success(TARGETID);
+			}
 		}
 		return error("修改失败");
 	}

@@ -26,8 +26,8 @@ public class AuthLecturerProfitPageDTO implements Serializable {
     /**
 	 * 主键
 	 */
+    @ApiModelProperty(value = "主键")
 	@JsonSerialize(using = ToStringSerializer.class)
-	@ApiModelProperty(value = "主键")
     private Long id;
 	/**
 	 * 创建时间
@@ -39,6 +39,7 @@ public class AuthLecturerProfitPageDTO implements Serializable {
      * 讲师用户编号
      */
 	@ApiModelProperty(value = "讲师用户编号")
+	@JsonSerialize(using = ToStringSerializer.class)
     private Long lecturerUserNo;
     /**
      * 银行卡号

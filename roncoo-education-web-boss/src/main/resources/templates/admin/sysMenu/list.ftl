@@ -3,9 +3,7 @@
     <form id="pagerForm" data-toggle="ajaxsearch" action="${base}/admin/sysMenu/list" method="post">
         <div class="bjui-searchBar">
             <button type="submit" class="btn-default" data-icon="undo">刷新</button>&nbsp;
-            <@shiro.hasPermission name="/admin/sysMenu/add">
             <a href="${base}/admin/sysMenu/add?parentId=0" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="sysMenu-add" data-options="{title:'添加', height:320, width:425}">添加一级菜单 </a>
-        	</@shiro.hasPermission>
         </div>
     </form>
 </div>

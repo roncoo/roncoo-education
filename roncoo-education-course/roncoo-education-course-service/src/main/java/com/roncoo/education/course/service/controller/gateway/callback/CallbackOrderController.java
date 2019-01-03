@@ -38,20 +38,20 @@ public class CallbackOrderController extends BaseController implements CallbackO
 	private IBossSys bossSys;
 
 	@Override
-	public String roncooPayNotify(@ModelAttribute CallbackOrderBO bo) {
-		logger.info("龙果支付回调结果：{}", bo);
+	public String roncooPayNotify(@ModelAttribute CallbackOrderBO callbackOrderBO) {
+		logger.info("龙果支付回调结果：{}", callbackOrderBO);
 		// sign校验
 		Map<String, Object> paramMap = new HashMap<>();
-		paramMap.put("payKey", bo.getPayKey());
-		paramMap.put("productName", bo.getProductName());
-		paramMap.put("outTradeNo", bo.getOutTradeNo());
-		paramMap.put("orderPrice", bo.getOrderPrice());
-		paramMap.put("productType", bo.getProductType());
-		paramMap.put("tradeStatus", bo.getTradeStatus());
-		paramMap.put("successTime", bo.getSuccessTime());// 商品名称
-		paramMap.put("orderTime", bo.getOrderTime());
-		paramMap.put("trxNo", bo.getTrxNo());
-		paramMap.put("remark", bo.getRemark());
+		paramMap.put("payKey", callbackOrderBO.getPayKey());
+		paramMap.put("productName", callbackOrderBO.getProductName());
+		paramMap.put("outTradeNo", callbackOrderBO.getOutTradeNo());
+		paramMap.put("orderPrice", callbackOrderBO.getOrderPrice());
+		paramMap.put("productType", callbackOrderBO.getProductType());
+		paramMap.put("tradeStatus", callbackOrderBO.getTradeStatus());
+		paramMap.put("successTime", callbackOrderBO.getSuccessTime());// 商品名称
+		paramMap.put("orderTime", callbackOrderBO.getOrderTime());
+		paramMap.put("trxNo", callbackOrderBO.getTrxNo());
+		paramMap.put("remark", callbackOrderBO.getRemark());
 
 		SysVO sys = bossSys.getSys();
 		if (ObjectUtil.isNull(sys)) {
@@ -64,7 +64,7 @@ public class CallbackOrderController extends BaseController implements CallbackO
 		// 注意：这里返回的备注信息=机构号
 		// 根据机构编号查找机构的扩展信息
 		String sign = MerchantApiUtil.getSign(paramMap, sys.getPaySecret());
-		if (!sign.equals(bo.getSign())) {
+		if (!sign.equals(callbackOrderBO.getSign())) {
 			logger.error("签名前参数={}，签名sign={}，签名secret={}", paramMap, sign, sys.getPaySecret());
 			return "fail";
 		}
@@ -72,11 +72,11 @@ public class CallbackOrderController extends BaseController implements CallbackO
 		// 转换支付回调返回的实体数据
 		OrderInfoPayNotifyBO payNotifyBO = new OrderInfoPayNotifyBO();
 		// 注意：这里返回的交易号=订单的流水号
-		payNotifyBO.setSerialNumber(Long.valueOf(bo.getOutTradeNo()));
+		payNotifyBO.setSerialNumber(Long.valueOf(callbackOrderBO.getOutTradeNo()));
 		// 状态转换
-		if (TradeStatusEnum.SUCCESS.getCode().equals(bo.getTradeStatus())) {
+		if (TradeStatusEnum.SUCCESS.getCode().equals(callbackOrderBO.getTradeStatus())) {
 			payNotifyBO.setOrderStatus(OrderStatusEnum.SUCCESS.getCode());
-		} else if (TradeStatusEnum.FAILED.getCode().equals(bo.getTradeStatus())) {
+		} else if (TradeStatusEnum.FAILED.getCode().equals(callbackOrderBO.getTradeStatus())) {
 			payNotifyBO.setOrderStatus(OrderStatusEnum.FAIL.getCode());
 		}
 

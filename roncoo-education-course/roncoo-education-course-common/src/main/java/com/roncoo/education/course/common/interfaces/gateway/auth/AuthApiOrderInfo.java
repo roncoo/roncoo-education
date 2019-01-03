@@ -46,7 +46,7 @@ public interface AuthApiOrderInfo {
 	 */
 	@ApiOperation(value = "订单继续支付接口", notes = "订单继续支付接口")
 	@RequestMapping(value = "/auth/course/api/order/info/continue/pay", method = RequestMethod.POST)
-	Result<AuthOrderPayDTO> continuePay(@RequestBody AuthOrderInfoContinuePayBO orderInfoContinuePayBO);
+	Result<AuthOrderPayDTO> continuePay(@RequestBody AuthOrderInfoContinuePayBO authOrderInfoContinuePayBO);
 
 	/**
 	 * 关闭订单接口
@@ -63,7 +63,7 @@ public interface AuthApiOrderInfo {
 	 */
 	@ApiOperation(value = "订单详情信息接口", notes = "订单详情信息接口")
 	@RequestMapping(value = "/auth/course/api/order/info/view", method = RequestMethod.POST)
-	Result<AuthOrderInfoDTO> view(@RequestBody AuthOrderInfoViewBO orderInfoBO);
+	Result<AuthOrderInfoDTO> view(@RequestBody AuthOrderInfoViewBO authOrderInfoViewBO);
 
 	/**
 	 * 讲师订单收益列表

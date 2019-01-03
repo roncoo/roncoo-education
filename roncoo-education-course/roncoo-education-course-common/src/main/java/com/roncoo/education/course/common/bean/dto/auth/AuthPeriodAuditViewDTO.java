@@ -70,6 +70,7 @@ public class AuthPeriodAuditViewDTO implements Serializable {
 	 * 视频编号
 	 */
 	@ApiModelProperty(value = "视频编号")
+	@JsonSerialize(using = ToStringSerializer.class)
 	private Long videoNo;
 	/**
 	 * 视频名称

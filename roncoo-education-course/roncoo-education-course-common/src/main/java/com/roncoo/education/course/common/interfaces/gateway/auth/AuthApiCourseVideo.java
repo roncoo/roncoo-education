@@ -29,7 +29,7 @@ public interface AuthApiCourseVideo {
 	 */
 	@ApiOperation(value = "讲师视频库保存接口", notes = "讲师视频库保存接口")
 	@RequestMapping(value = "/auth/course/api/course/video/save", method = RequestMethod.POST)
-	Result<Integer> save(@RequestBody AuthCourseVideoSaveBO authCourseVideoSaveBo);
+	Result<Integer> save(@RequestBody AuthCourseVideoSaveBO authCourseVideoSaveBO);
 
 	/**
 	 * 章节视频库列出（右边的展示）
@@ -49,7 +49,7 @@ public interface AuthApiCourseVideo {
 	 */
 	@ApiOperation(value = "课时视频列出接口", notes = "根据课时ID列出讲师课时视频信息")
 	@RequestMapping(value = "/auth/course/api/course/video/list/period", method = RequestMethod.POST)
-	Result<AuthCourseVideoListDTO> listByPeriodId(@RequestBody AuthPeriodIdVideoBO authCourseVideoBO);
+	Result<AuthCourseVideoListDTO> listByPeriodId(@RequestBody AuthPeriodIdVideoBO authPeriodIdVideoBO);
 
 	/**
 	 * 课时视频更新接口
@@ -59,7 +59,7 @@ public interface AuthApiCourseVideo {
 	 */
 	@ApiOperation(value = "课时视频更新接口", notes = "讲师课时视频更新信息")
 	@RequestMapping(value = "/auth/course/api/course/video/update", method = RequestMethod.POST)
-	Result<Integer> update(@RequestBody AuthCourseVideoUpdateBO authCourseVideoUpdateBo);
+	Result<Integer> update(@RequestBody AuthCourseVideoUpdateBO authCourseVideoUpdateBO);
 
 	/**
 	 * 视频删除

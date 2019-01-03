@@ -77,11 +77,11 @@ public class CourseVideoDaoImpl implements CourseVideoDao {
 	}
 
 	@Override
-	public List<CourseVideo> listByPeriodIdAndStatusId(Long periodId, Integer statuId) {
+	public List<CourseVideo> listByPeriodIdAndStatusId(Long periodId, Integer statusId) {
 		CourseVideoExample example = new CourseVideoExample();
 		Criteria c = example.createCriteria();
 		c.andPeriodIdEqualTo(periodId);
-		c.andStatusIdEqualTo(statuId);
+		c.andStatusIdEqualTo(statusId);
 		List<CourseVideo> list = this.courseVideoMapper.selectByExample(example);
 		if (list.isEmpty() || list.size() < 1) {
 			return null;

@@ -22,6 +22,6 @@ public interface ApiAdv {
 	 */
 	@ApiOperation(value = "广告列表接口", notes = "首页轮播广告列出")
 	@RequestMapping(value = "/course/api/adv/list", method = RequestMethod.POST)
-	Result<AdvListDTO> list(@RequestBody AdvBO bo);
+	Result<AdvListDTO> list(@RequestBody AdvBO advBO);
     
 }

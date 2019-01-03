@@ -137,7 +137,7 @@ public class AuthApiOrderInfoBiz extends BaseBiz {
 
 		// 根据用户编号查找用户信息
 		UserExtVO userextVO = bossUserExt.getByUserNo(authOrderPayBO.getUserNo());
-		if (ObjectUtil.isNull(userextVO) || !StatusIdEnum.YES.getCode().equals(userextVO.getStatusId())) {
+		if (ObjectUtil.isNull(userextVO) && !StatusIdEnum.YES.getCode().equals(userextVO.getStatusId())) {
 			return Result.error("userNo不正确");
 		}
 
@@ -168,13 +168,18 @@ public class AuthApiOrderInfoBiz extends BaseBiz {
 		}
 
 		// 调用支付接口
-		String payMessage = PayUtil.roncooPay(String.valueOf(orderPay.getSerialNumber()), orderInfo.getCourseName(), orderInfo.getPricePaid(), orderInfo.getPayType(), sys.getPayKey(), sys.getPaySecret(), sys.getPayUrl());
+		String payMessage = PayUtil.roncooPay(String.valueOf(orderPay.getSerialNumber()), orderInfo.getCourseName(), orderInfo.getPricePaid(), orderInfo.getPayType(), sys.getPayKey(), sys.getPaySecret(), sys.getPayUrl(), sys.getNotifyUrl());
 		if (StringUtils.isEmpty(payMessage)) {
 			return Result.error("系统繁忙，请稍后再试");
 		}
 
 		// 返回实体
-		AuthOrderPayDTO dto = payOrder(orderInfo, payMessage);
+		AuthOrderPayDTO dto = new AuthOrderPayDTO();
+		dto.setPayMessage(payMessage);
+		dto.setOrderNo(String.valueOf(orderInfo.getOrderNo()));
+		dto.setCourseName(orderInfo.getCourseName());
+		dto.setPayType(orderInfo.getPayType());
+		dto.setPrice(orderInfo.getPricePaid());
 		return Result.success(dto);
 	}
 
@@ -185,16 +190,16 @@ public class AuthApiOrderInfoBiz extends BaseBiz {
 	 * @return
 	 */
 	@Transactional
-	public Result<AuthOrderPayDTO> continuePay(AuthOrderInfoContinuePayBO orderInfoContinuePayBO) {
-		if (StringUtils.isEmpty(orderInfoContinuePayBO.getOrderNo())) {
+	public Result<AuthOrderPayDTO> continuePay(AuthOrderInfoContinuePayBO authOrderInfoContinuePayBO) {
+		if (StringUtils.isEmpty(authOrderInfoContinuePayBO.getOrderNo())) {
 			return Result.error("orderNo不能为空");
 		}
-		if (StringUtils.isEmpty(orderInfoContinuePayBO.getPayType())) {
+		if (StringUtils.isEmpty(authOrderInfoContinuePayBO.getPayType())) {
 			return Result.error("payType不能为空");
 		}
 
 		// 订单校验
-		OrderInfo orderInfo = orderInfoDao.getByOrderNo(orderInfoContinuePayBO.getOrderNo());
+		OrderInfo orderInfo = orderInfoDao.getByOrderNo(authOrderInfoContinuePayBO.getOrderNo());
 		if (ObjectUtil.isNull(orderInfo)) {
 			return Result.error("orderNo不正确，没有找到订单信息");
 		}
@@ -219,7 +224,7 @@ public class AuthApiOrderInfoBiz extends BaseBiz {
 		}
 
 		// 更新订单信息
-		orderInfo.setPayType(orderInfoContinuePayBO.getPayType());
+		orderInfo.setPayType(authOrderInfoContinuePayBO.getPayType());
 		orderInfo.setOrderStatus(OrderStatusEnum.WAIT.getCode());
 		orderInfoDao.updateById(orderInfo);
 
@@ -238,13 +243,18 @@ public class AuthApiOrderInfoBiz extends BaseBiz {
 		}
 
 		// 调用支付接口
-		String payMessage = PayUtil.roncooPay(String.valueOf(orderPay.getSerialNumber()), orderInfo.getCourseName(), orderInfo.getPricePaid(), orderInfo.getPayType(), sys.getPayKey(), sys.getPaySecret(), sys.getPayUrl());
+		String payMessage = PayUtil.roncooPay(String.valueOf(orderPay.getSerialNumber()), orderInfo.getCourseName(), orderInfo.getPricePaid(), orderInfo.getPayType(), sys.getPayKey(), sys.getPaySecret(), sys.getPayUrl(), sys.getNotifyUrl());
 		if (StringUtils.isEmpty(payMessage)) {
 			return Result.error("系统繁忙，请稍后再试");
 		}
 
 		// 返回实体
-		AuthOrderPayDTO dto = payOrder(orderInfo, payMessage);
+		AuthOrderPayDTO dto = new AuthOrderPayDTO();
+		dto.setPayMessage(payMessage);
+		dto.setOrderNo(String.valueOf(orderInfo.getOrderNo()));
+		dto.setCourseName(orderInfo.getCourseName());
+		dto.setPayType(orderInfo.getPayType());
+		dto.setPrice(orderInfo.getPricePaid());
 		return Result.success(dto);
 	}
 
@@ -294,12 +304,12 @@ public class AuthApiOrderInfoBiz extends BaseBiz {
 	 * @param orderInfoBO
 	 * @return
 	 */
-	public Result<AuthOrderInfoDTO> view(AuthOrderInfoViewBO orderInfoBO) {
-		if (StringUtils.isEmpty(orderInfoBO.getOrderNo())) {
+	public Result<AuthOrderInfoDTO> view(AuthOrderInfoViewBO authOrderInfoViewBO) {
+		if (StringUtils.isEmpty(authOrderInfoViewBO.getOrderNo())) {
 			return Result.error("orderNo不能为空");
 		}
 		// 根据订单编号查找订单信息
-		OrderInfo order = orderInfoDao.getByOrderNo(orderInfoBO.getOrderNo());
+		OrderInfo order = orderInfoDao.getByOrderNo(authOrderInfoViewBO.getOrderNo());
 		if (ObjectUtil.isNull(order)) {
 			return Result.error("orderNo不正确");
 		}
@@ -386,17 +396,17 @@ public class AuthApiOrderInfoBiz extends BaseBiz {
 		return list;
 	}
 
-	private List<String> payTime(AuthOrderInfoForChartsBO bo, List<String> xData) {
+	private List<String> payTime(AuthOrderInfoForChartsBO authOrderInfoForChartsBO, List<String> xData) {
 		// 如果时间为空，则传入现在当前时间七天前的订单
-		if (bo.getBeginCreate() == null && bo.getEndCreate() == null) {
-			bo.setBeginCreate(DateUtil.format(DateUtil.addDate(new Date(), -7)));
-			bo.setEndCreate(DateUtil.format(new Date()));
+		if (authOrderInfoForChartsBO.getBeginCreate() == null && authOrderInfoForChartsBO.getEndCreate() == null) {
+			authOrderInfoForChartsBO.setBeginCreate(DateUtil.format(DateUtil.addDate(new Date(), -7)));
+			authOrderInfoForChartsBO.setEndCreate(DateUtil.format(new Date()));
 		}
 		Calendar tempStart = Calendar.getInstance();
-		tempStart.setTime(DateUtil.parseDate(bo.getBeginCreate(), "yyyy-MM-dd"));
+		tempStart.setTime(DateUtil.parseDate(authOrderInfoForChartsBO.getBeginCreate(), "yyyy-MM-dd"));
 		tempStart.add(Calendar.DAY_OF_YEAR, 0);
 		Calendar tempEnd = Calendar.getInstance();
-		tempEnd.setTime(DateUtil.parseDate(bo.getEndCreate(), "yyyy-MM-dd"));
+		tempEnd.setTime(DateUtil.parseDate(authOrderInfoForChartsBO.getEndCreate(), "yyyy-MM-dd"));
 		tempEnd.add(Calendar.DAY_OF_YEAR, 1);
 		while (tempStart.before(tempEnd)) {
 			xData.add(DateUtil.formatDate(tempStart.getTime()));
@@ -410,17 +420,17 @@ public class AuthApiOrderInfoBiz extends BaseBiz {
 	 * 
 	 * @param orderInfoPayBO
 	 */
-	private void verifyParam(AuthOrderPayBO orderInfoPayBO) {
-		if (StringUtils.isEmpty(orderInfoPayBO.getUserNo())) {
+	private void verifyParam(AuthOrderPayBO authOrderPayBO) {
+		if (StringUtils.isEmpty(authOrderPayBO.getUserNo())) {
 			throw new BaseException("userNo不能为空");
 		}
-		if (StringUtils.isEmpty(orderInfoPayBO.getCourseId())) {
+		if (StringUtils.isEmpty(authOrderPayBO.getCourseId())) {
 			throw new BaseException("courseId不能为空");
 		}
-		if (StringUtils.isEmpty(orderInfoPayBO.getPayType())) {
+		if (StringUtils.isEmpty(authOrderPayBO.getPayType())) {
 			throw new BaseException("payType不能为空");
 		}
-		if (StringUtils.isEmpty(orderInfoPayBO.getChannelType())) {
+		if (StringUtils.isEmpty(authOrderPayBO.getChannelType())) {
 			throw new BaseException("channelType不能为空");
 		}
 	}
@@ -436,19 +446,6 @@ public class AuthApiOrderInfoBiz extends BaseBiz {
 			return true;
 		}
 		return false;
-	}
-
-	/**
-	 * 返回支付实体
-	 */
-	private AuthOrderPayDTO payOrder(OrderInfo orderInfo, String payMessage) {
-		AuthOrderPayDTO dto = new AuthOrderPayDTO();
-		dto.setPayMessage(payMessage);
-		dto.setOrderNo(String.valueOf(orderInfo.getOrderNo()));
-		dto.setCourseName(orderInfo.getCourseName());
-		dto.setPayType(orderInfo.getPayType());
-		dto.setPrice(orderInfo.getPricePaid());
-		return dto;
 	}
 
 	/**
