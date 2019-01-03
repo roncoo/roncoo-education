@@ -27,7 +27,7 @@ public interface ApiUpload {
 	 */
 	@ApiOperation(value = "上传视频接口", notes = "上传视频")
 	@RequestMapping(value = "/course/api/upload/video", method = RequestMethod.POST)
-	Result<String> uploadVideo(@RequestParam(name = "videoFile", required = false) MultipartFile videoFile);
+	Result<String> uploadVideo(@RequestParam(value = "videoFile", required = false) MultipartFile videoFile);
 
 	/**
 	 * 上传图片接口
@@ -37,7 +37,7 @@ public interface ApiUpload {
 	 */
 	@ApiOperation(value = "上传图片接口", notes = "上传图片")
 	@RequestMapping(value = "/course/api/upload/pic", method = RequestMethod.POST)
-	Result<String> uploadPic(@RequestParam(name = "picFile", required = false) MultipartFile picFile);
+	Result<String> uploadPic(@RequestParam(value = "picFile", required = false) MultipartFile picFile);
 
 	/**
 	 * 上传文档接口
@@ -48,6 +48,6 @@ public interface ApiUpload {
 	 */
 	@ApiOperation(value = "上传文档接口", notes = "上传文档")
 	@RequestMapping(value = "/course/api/upload/doc", method = RequestMethod.POST)
-	Result<String> uploadDoc(@RequestParam(name = "docFile", required = false) MultipartFile docFile);
+	Result<String> uploadDoc(@RequestParam(value = "docFile", required = false) MultipartFile docFile);
 
 }
