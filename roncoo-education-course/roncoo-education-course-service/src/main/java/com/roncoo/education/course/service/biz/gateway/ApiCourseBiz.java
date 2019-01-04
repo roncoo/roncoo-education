@@ -13,6 +13,7 @@ import com.roncoo.education.course.common.bean.dto.CourseChapterPeriodDTO;
 import com.roncoo.education.course.common.bean.dto.CourseInfoPageDTO;
 import com.roncoo.education.course.common.bean.dto.CourseIntroduceDTO;
 import com.roncoo.education.course.common.bean.dto.CourseViewDTO;
+import com.roncoo.education.course.common.bean.dto.LecturerDTO;
 import com.roncoo.education.course.service.dao.CourseChapterDao;
 import com.roncoo.education.course.service.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.service.dao.CourseDao;
@@ -23,7 +24,6 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterP
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseExample;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseExample.Criteria;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduce;
-import com.roncoo.education.user.common.bean.dto.LecturerDTO;
 import com.roncoo.education.user.common.bean.vo.LecturerVO;
 import com.roncoo.education.user.feign.web.IBossLecturer;
 import com.roncoo.education.util.base.Page;

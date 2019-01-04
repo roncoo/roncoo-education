@@ -13,6 +13,7 @@ import com.roncoo.education.course.common.bean.dto.CourseChapterPeriodDTO;
 import com.roncoo.education.course.common.bean.dto.CourseIntroduceDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseSignDTO;
 import com.roncoo.education.course.common.bean.dto.auth.AuthCourseViewDTO;
+import com.roncoo.education.course.common.bean.dto.auth.AuthLecturerDTO;
 import com.roncoo.education.course.service.dao.CourseChapterDao;
 import com.roncoo.education.course.service.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.service.dao.CourseDao;
@@ -29,7 +30,6 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseUserStud
 import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo;
 import com.roncoo.education.system.common.bean.vo.SysVO;
 import com.roncoo.education.system.feign.web.IBossSys;
-import com.roncoo.education.user.common.bean.dto.auth.AuthLecturerDTO;
 import com.roncoo.education.user.common.bean.vo.LecturerVO;
 import com.roncoo.education.user.feign.web.IBossLecturer;
 import com.roncoo.education.util.base.BaseBiz;
@@ -189,7 +189,6 @@ public class AuthApiCourseBiz extends BaseBiz {
 			try {
 				throw new Exception("找不到系统配置信息");
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -197,7 +196,6 @@ public class AuthApiCourseBiz extends BaseBiz {
 			try {
 				throw new Exception("useid或secretkey未配置");
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
