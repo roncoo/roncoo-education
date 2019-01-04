@@ -16,17 +16,16 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.roncoo</groupId>
-			<artifactId>roncoo-education-user-common</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.roncoo</groupId>
 			<artifactId>roncoo-education-util</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>com.spring4all</groupId>
 			<artifactId>swagger-spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.github.caspar-chen</groupId>
+			<artifactId>swagger-ui-layer</artifactId>
 		</dependency>
 
 	</dependencies>
