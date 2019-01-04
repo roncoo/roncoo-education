@@ -845,6 +845,146 @@ public class WebsiteExample {
             return (Criteria) this;
         }
 
+        public Criteria andIcpIsNull() {
+            addCriterion("icp is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIcpIsNotNull() {
+            addCriterion("icp is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIcpEqualTo(String value) {
+            addCriterion("icp =", value, "icp");
+            return (Criteria) this;
+        }
+
+        public Criteria andIcpNotEqualTo(String value) {
+            addCriterion("icp <>", value, "icp");
+            return (Criteria) this;
+        }
+
+        public Criteria andIcpGreaterThan(String value) {
+            addCriterion("icp >", value, "icp");
+            return (Criteria) this;
+        }
+
+        public Criteria andIcpGreaterThanOrEqualTo(String value) {
+            addCriterion("icp >=", value, "icp");
+            return (Criteria) this;
+        }
+
+        public Criteria andIcpLessThan(String value) {
+            addCriterion("icp <", value, "icp");
+            return (Criteria) this;
+        }
+
+        public Criteria andIcpLessThanOrEqualTo(String value) {
+            addCriterion("icp <=", value, "icp");
+            return (Criteria) this;
+        }
+
+        public Criteria andIcpLike(String value) {
+            addCriterion("icp like", value, "icp");
+            return (Criteria) this;
+        }
+
+        public Criteria andIcpNotLike(String value) {
+            addCriterion("icp not like", value, "icp");
+            return (Criteria) this;
+        }
+
+        public Criteria andIcpIn(List<String> values) {
+            addCriterion("icp in", values, "icp");
+            return (Criteria) this;
+        }
+
+        public Criteria andIcpNotIn(List<String> values) {
+            addCriterion("icp not in", values, "icp");
+            return (Criteria) this;
+        }
+
+        public Criteria andIcpBetween(String value1, String value2) {
+            addCriterion("icp between", value1, value2, "icp");
+            return (Criteria) this;
+        }
+
+        public Criteria andIcpNotBetween(String value1, String value2) {
+            addCriterion("icp not between", value1, value2, "icp");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrnIsNull() {
+            addCriterion("prn is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrnIsNotNull() {
+            addCriterion("prn is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrnEqualTo(String value) {
+            addCriterion("prn =", value, "prn");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrnNotEqualTo(String value) {
+            addCriterion("prn <>", value, "prn");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrnGreaterThan(String value) {
+            addCriterion("prn >", value, "prn");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrnGreaterThanOrEqualTo(String value) {
+            addCriterion("prn >=", value, "prn");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrnLessThan(String value) {
+            addCriterion("prn <", value, "prn");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrnLessThanOrEqualTo(String value) {
+            addCriterion("prn <=", value, "prn");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrnLike(String value) {
+            addCriterion("prn like", value, "prn");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrnNotLike(String value) {
+            addCriterion("prn not like", value, "prn");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrnIn(List<String> values) {
+            addCriterion("prn in", values, "prn");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrnNotIn(List<String> values) {
+            addCriterion("prn not in", values, "prn");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrnBetween(String value1, String value2) {
+            addCriterion("prn between", value1, value2, "prn");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrnNotBetween(String value1, String value2) {
+            addCriterion("prn not between", value1, value2, "prn");
+            return (Criteria) this;
+        }
+
         public Criteria andWeixinIsNull() {
             addCriterion("weixin is null");
             return (Criteria) this;

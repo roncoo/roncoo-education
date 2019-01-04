@@ -23,6 +23,14 @@
                 <input type="text" name="copyright" value="<#if bean??>${bean.copyright!}</#if>" placeholder="站点版权" size="50">
             </div>
             <div class="form-group">
+                <label class="control-label x120">备案号：</label>
+                <input type="text" name="icp" value="<#if bean??>${bean.icp!}</#if>" placeholder="备案号" size="50">
+            </div>
+            <div class="form-group">
+                <label class="control-label x120">公安备案号：</label>
+                <input type="text" name="prn" value="<#if bean??>${bean.prn!}</#if>" placeholder="公安备案号" size="50">
+            </div>
+            <div class="form-group">
                 <label class="control-label x120">站点微信：</label>
                 <input name="weixinFile" type="file" />
                 <img src="<#if bean??>${bean.weixin!}</#if>" width="80">

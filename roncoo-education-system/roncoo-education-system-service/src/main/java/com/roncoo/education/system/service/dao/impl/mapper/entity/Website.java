@@ -26,6 +26,10 @@ public class Website implements Serializable {
 
     private String copyright;
 
+    private String icp;
+
+    private String prn;
+
     private String weixin;
 
     private String weibo;
@@ -132,6 +136,22 @@ public class Website implements Serializable {
         this.copyright = copyright == null ? null : copyright.trim();
     }
 
+    public String getIcp() {
+        return icp;
+    }
+
+    public void setIcp(String icp) {
+        this.icp = icp == null ? null : icp.trim();
+    }
+
+    public String getPrn() {
+        return prn;
+    }
+
+    public void setPrn(String prn) {
+        this.prn = prn == null ? null : prn.trim();
+    }
+
     public String getWeixin() {
         return weixin;
     }
@@ -213,6 +233,8 @@ public class Website implements Serializable {
         sb.append(", websiteKeyword=").append(websiteKeyword);
         sb.append(", websiteDesc=").append(websiteDesc);
         sb.append(", copyright=").append(copyright);
+        sb.append(", icp=").append(icp);
+        sb.append(", prn=").append(prn);
         sb.append(", weixin=").append(weixin);
         sb.append(", weibo=").append(weibo);
         sb.append(", isEnableStatistics=").append(isEnableStatistics);
