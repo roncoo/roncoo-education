@@ -7,9 +7,9 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
- * 站点信息
+ * 设置信息集合，有站点信息，讲师招募信息，代理招募信息
  *
- * @author wuyun
+ * @author YZJ
  */
 @Data
 @Accessors(chain = true)
@@ -109,5 +109,58 @@ public class WebsiteQO implements Serializable {
 	 * 用户协议
 	 */
 	private String userAgreement;
-    
+	
+	
+	//招募信息-代理招募
+	/**
+	 * 主键
+	 */
+	private Long agentId;
+	/**
+	 * 排序
+	 */
+	private Integer agentSort;
+	/**
+	 * 招募分类(1讲师招募,2代理招募)
+	 */
+	private Integer agentRecruitType;
+	/**
+	 * 招募标题
+	 */
+	private String agentRecruitTitle;
+	/**
+	 * 招募信息
+	 */
+	private String agentRecruitInfo;
+	/**
+	 * 入驻协议
+	 */
+	private String agentEntryAgreement;
+
+	// 招募信息-讲师招募
+	/**
+	 * 主键
+	 */
+	private Long lecturerId;
+	/**
+	 * 排序
+	 */
+	private Integer lecturerSort;
+	/**
+	 * 招募分类(1讲师招募,2代理招募)
+	 */
+	private Integer lecturerRecruitType;
+	/**
+	 * 招募标题
+	 */
+	private String lecturerRecruitTitle;
+	/**
+	 * 招募信息
+	 */
+	private String lecturerRecruitInfo;
+	/**
+	 * 入驻协议
+	 */
+	private String lecturerEntryAgreement;
+	
 }
