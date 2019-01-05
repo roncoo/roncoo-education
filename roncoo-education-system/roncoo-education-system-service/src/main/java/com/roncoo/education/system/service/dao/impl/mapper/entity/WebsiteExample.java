@@ -1055,6 +1055,76 @@ public class WebsiteExample {
             return (Criteria) this;
         }
 
+        public Criteria andWeixinXcxIsNull() {
+            addCriterion("weixin_xcx is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeixinXcxIsNotNull() {
+            addCriterion("weixin_xcx is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeixinXcxEqualTo(String value) {
+            addCriterion("weixin_xcx =", value, "weixinXcx");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeixinXcxNotEqualTo(String value) {
+            addCriterion("weixin_xcx <>", value, "weixinXcx");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeixinXcxGreaterThan(String value) {
+            addCriterion("weixin_xcx >", value, "weixinXcx");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeixinXcxGreaterThanOrEqualTo(String value) {
+            addCriterion("weixin_xcx >=", value, "weixinXcx");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeixinXcxLessThan(String value) {
+            addCriterion("weixin_xcx <", value, "weixinXcx");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeixinXcxLessThanOrEqualTo(String value) {
+            addCriterion("weixin_xcx <=", value, "weixinXcx");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeixinXcxLike(String value) {
+            addCriterion("weixin_xcx like", value, "weixinXcx");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeixinXcxNotLike(String value) {
+            addCriterion("weixin_xcx not like", value, "weixinXcx");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeixinXcxIn(List<String> values) {
+            addCriterion("weixin_xcx in", values, "weixinXcx");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeixinXcxNotIn(List<String> values) {
+            addCriterion("weixin_xcx not in", values, "weixinXcx");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeixinXcxBetween(String value1, String value2) {
+            addCriterion("weixin_xcx between", value1, value2, "weixinXcx");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeixinXcxNotBetween(String value1, String value2) {
+            addCriterion("weixin_xcx not between", value1, value2, "weixinXcx");
+            return (Criteria) this;
+        }
+
         public Criteria andWeiboIsNull() {
             addCriterion("weibo is null");
             return (Criteria) this;

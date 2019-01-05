@@ -93,28 +93,28 @@ public class WebsiteController extends BaseController {
 	@ResponseBody
 	@AdminLog(value = "站点信息更新")
 	@RequestMapping(value = "/updateWebsite", method = RequestMethod.POST)
-	public String updateWebsite(@ModelAttribute WebsiteQO qo, @RequestParam(value = "weixinFile", required = false) MultipartFile weixinFile, @RequestParam(value = "weiboFile", required = false) MultipartFile weiboFile, @RequestParam(value = "logoImgFile", required = false) MultipartFile logoImgFile, @RequestParam(value = "logoIcoFile", required = false) MultipartFile logoIcoFile) {
+	public String updateWebsite(@ModelAttribute WebsiteQO qo, @RequestParam(value = "weixinFile", required = false) MultipartFile weixinFile, @RequestParam(value = "weixinXcxFile", required = false) MultipartFile weixinXcxFile, @RequestParam(value = "weiboFile", required = false) MultipartFile weiboFile, @RequestParam(value = "logoImgFile", required = false) MultipartFile logoImgFile, @RequestParam(value = "logoIcoFile", required = false) MultipartFile logoIcoFile) {
 		// 保存或修改站点信息
 		if (null != qo.getId()) {
-			biz.updateWebsite(qo, weixinFile, weiboFile, logoImgFile, logoIcoFile);
+			biz.updateWebsite(qo, weixinFile, weixinXcxFile, weiboFile, logoImgFile, logoIcoFile);
 		} else {
-			biz.saveWebsite(qo, weixinFile, weiboFile, logoImgFile, logoIcoFile);
+			biz.saveWebsite(qo, weixinFile, weixinXcxFile, weiboFile, logoImgFile, logoIcoFile);
 		}
-		
+
 		// 保存或修改讲师招募信息
 		if (null != qo.getLecturerId()) {
 			biz.updateRecruitLecturer(qo);
 		} else {
 			biz.saveRecruitLecturer(qo);
 		}
-		
+
 		// 保存或修改代理招募信息
 		if (null != qo.getAgentId()) {
 			biz.updateRecruitAgent(qo);
 		} else {
 			biz.saveRecruitAgent(qo);
 		}
-		
+
 		return success(TARGETID);
 	}
 }

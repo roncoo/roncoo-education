@@ -74,6 +74,10 @@ public class WebsiteVO implements Serializable {
      */
     private String weixin;
     /**
+     * 小程序二维码
+     */
+    private String weixinXcx;
+    /**
      * 站点微博
      */
     private String weibo;

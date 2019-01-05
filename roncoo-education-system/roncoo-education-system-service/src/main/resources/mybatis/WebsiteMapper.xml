@@ -16,6 +16,7 @@
     <result column="icp" property="icp" jdbcType="VARCHAR" />
     <result column="prn" property="prn" jdbcType="VARCHAR" />
     <result column="weixin" property="weixin" jdbcType="VARCHAR" />
+    <result column="weixin_xcx" property="weixinXcx" jdbcType="VARCHAR" />
     <result column="weibo" property="weibo" jdbcType="VARCHAR" />
     <result column="is_enable_statistics" property="isEnableStatistics" jdbcType="TINYINT" />
     <result column="statistics_code" property="statisticsCode" jdbcType="VARCHAR" />
@@ -86,7 +87,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, gmt_create, gmt_modified, status_id, sort, logo_ico, logo_img, website_title, 
-    website_keyword, website_desc, copyright, icp, prn, weixin, weibo, is_enable_statistics, 
+    website_keyword, website_desc, copyright, icp, prn, weixin, weixin_xcx, weibo, is_enable_statistics, 
     statistics_code, is_show_service, service1, service2
   </sql>
   <sql id="Blob_Column_List" >
@@ -148,18 +149,18 @@
       status_id, sort, logo_ico, 
       logo_img, website_title, website_keyword, 
       website_desc, copyright, icp, 
-      prn, weixin, weibo, 
-      is_enable_statistics, statistics_code, is_show_service, 
-      service1, service2, user_agreement
-      )
+      prn, weixin, weixin_xcx, 
+      weibo, is_enable_statistics, statistics_code, 
+      is_show_service, service1, service2, 
+      user_agreement)
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{logoIco,jdbcType=VARCHAR}, 
       #{logoImg,jdbcType=VARCHAR}, #{websiteTitle,jdbcType=VARCHAR}, #{websiteKeyword,jdbcType=VARCHAR}, 
       #{websiteDesc,jdbcType=VARCHAR}, #{copyright,jdbcType=VARCHAR}, #{icp,jdbcType=VARCHAR}, 
-      #{prn,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, #{weibo,jdbcType=VARCHAR}, 
-      #{isEnableStatistics,jdbcType=TINYINT}, #{statisticsCode,jdbcType=VARCHAR}, #{isShowService,jdbcType=TINYINT}, 
-      #{service1,jdbcType=VARCHAR}, #{service2,jdbcType=VARCHAR}, #{userAgreement,jdbcType=LONGVARCHAR}
-      )
+      #{prn,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, #{weixinXcx,jdbcType=VARCHAR}, 
+      #{weibo,jdbcType=VARCHAR}, #{isEnableStatistics,jdbcType=TINYINT}, #{statisticsCode,jdbcType=VARCHAR}, 
+      #{isShowService,jdbcType=TINYINT}, #{service1,jdbcType=VARCHAR}, #{service2,jdbcType=VARCHAR}, 
+      #{userAgreement,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Website" >
     insert into website
@@ -205,6 +206,9 @@
       </if>
       <if test="weixin != null" >
         weixin,
+      </if>
+      <if test="weixinXcx != null" >
+        weixin_xcx,
       </if>
       <if test="weibo != null" >
         weibo,
@@ -270,6 +274,9 @@
       </if>
       <if test="weixin != null" >
         #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinXcx != null" >
+        #{weixinXcx,jdbcType=VARCHAR},
       </if>
       <if test="weibo != null" >
         #{weibo,jdbcType=VARCHAR},
@@ -345,6 +352,9 @@
       <if test="record.weixin != null" >
         weixin = #{record.weixin,jdbcType=VARCHAR},
       </if>
+      <if test="record.weixinXcx != null" >
+        weixin_xcx = #{record.weixinXcx,jdbcType=VARCHAR},
+      </if>
       <if test="record.weibo != null" >
         weibo = #{record.weibo,jdbcType=VARCHAR},
       </if>
@@ -387,6 +397,7 @@
       icp = #{record.icp,jdbcType=VARCHAR},
       prn = #{record.prn,jdbcType=VARCHAR},
       weixin = #{record.weixin,jdbcType=VARCHAR},
+      weixin_xcx = #{record.weixinXcx,jdbcType=VARCHAR},
       weibo = #{record.weibo,jdbcType=VARCHAR},
       is_enable_statistics = #{record.isEnableStatistics,jdbcType=TINYINT},
       statistics_code = #{record.statisticsCode,jdbcType=VARCHAR},
@@ -414,6 +425,7 @@
       icp = #{record.icp,jdbcType=VARCHAR},
       prn = #{record.prn,jdbcType=VARCHAR},
       weixin = #{record.weixin,jdbcType=VARCHAR},
+      weixin_xcx = #{record.weixinXcx,jdbcType=VARCHAR},
       weibo = #{record.weibo,jdbcType=VARCHAR},
       is_enable_statistics = #{record.isEnableStatistics,jdbcType=TINYINT},
       statistics_code = #{record.statisticsCode,jdbcType=VARCHAR},
@@ -466,6 +478,9 @@
       <if test="weixin != null" >
         weixin = #{weixin,jdbcType=VARCHAR},
       </if>
+      <if test="weixinXcx != null" >
+        weixin_xcx = #{weixinXcx,jdbcType=VARCHAR},
+      </if>
       <if test="weibo != null" >
         weibo = #{weibo,jdbcType=VARCHAR},
       </if>
@@ -505,6 +520,7 @@
       icp = #{icp,jdbcType=VARCHAR},
       prn = #{prn,jdbcType=VARCHAR},
       weixin = #{weixin,jdbcType=VARCHAR},
+      weixin_xcx = #{weixinXcx,jdbcType=VARCHAR},
       weibo = #{weibo,jdbcType=VARCHAR},
       is_enable_statistics = #{isEnableStatistics,jdbcType=TINYINT},
       statistics_code = #{statisticsCode,jdbcType=VARCHAR},
@@ -529,6 +545,7 @@
       icp = #{icp,jdbcType=VARCHAR},
       prn = #{prn,jdbcType=VARCHAR},
       weixin = #{weixin,jdbcType=VARCHAR},
+      weixin_xcx = #{weixinXcx,jdbcType=VARCHAR},
       weibo = #{weibo,jdbcType=VARCHAR},
       is_enable_statistics = #{isEnableStatistics,jdbcType=TINYINT},
       statistics_code = #{statisticsCode,jdbcType=VARCHAR},

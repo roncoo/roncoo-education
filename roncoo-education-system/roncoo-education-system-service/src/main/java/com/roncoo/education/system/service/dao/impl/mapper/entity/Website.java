@@ -32,6 +32,8 @@ public class Website implements Serializable {
 
     private String weixin;
 
+    private String weixinXcx;
+
     private String weibo;
 
     private Integer isEnableStatistics;
@@ -160,6 +162,14 @@ public class Website implements Serializable {
         this.weixin = weixin == null ? null : weixin.trim();
     }
 
+    public String getWeixinXcx() {
+        return weixinXcx;
+    }
+
+    public void setWeixinXcx(String weixinXcx) {
+        this.weixinXcx = weixinXcx == null ? null : weixinXcx.trim();
+    }
+
     public String getWeibo() {
         return weibo;
     }
@@ -236,6 +246,7 @@ public class Website implements Serializable {
         sb.append(", icp=").append(icp);
         sb.append(", prn=").append(prn);
         sb.append(", weixin=").append(weixin);
+        sb.append(", weixinXcx=").append(weixinXcx);
         sb.append(", weibo=").append(weibo);
         sb.append(", isEnableStatistics=").append(isEnableStatistics);
         sb.append(", statisticsCode=").append(statisticsCode);

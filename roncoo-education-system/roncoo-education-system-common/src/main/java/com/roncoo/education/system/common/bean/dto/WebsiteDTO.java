@@ -91,6 +91,11 @@ public class WebsiteDTO implements Serializable {
     @ApiModelProperty(value = "站点微信")
     private String weixin;
     /**
+	 * 微信小程序二维码
+	 */
+    @ApiModelProperty(value = "微信小程序二维码")
+	private String weixinXcx;
+    /**
      * 站点微博
      */
     @ApiModelProperty(value = "站点微博")

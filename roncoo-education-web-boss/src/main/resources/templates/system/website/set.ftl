@@ -36,6 +36,11 @@
                 <img src="<#if bean??>${bean.weixin!}</#if>" width="80">
             </div>
             <div class="form-group">
+                <label class="control-label x120">小程序二维码：</label>
+                <input name="weixinXcxFile" type="file" />
+                <img src="<#if bean??>${bean.weixinXcx!}</#if>" width="80">
+            </div>
+            <div class="form-group">
                 <label class="control-label x120">站点微博：</label>
                 <input name="weiboFile" type="file" />
                 <img src="<#if bean??>${bean.weibo!}</#if>" width="80">

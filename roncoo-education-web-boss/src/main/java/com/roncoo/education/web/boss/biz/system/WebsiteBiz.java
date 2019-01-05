@@ -63,7 +63,7 @@ public class WebsiteBiz extends BaseBiz {
 	public List<WebsiteRecruitVO> listWebsiteRecruit() {
 		return bossWebsiteRecruit.listWebsiteRecruit();
 	}
-	
+
 	/**
 	 * 修改站点信息
 	 * 
@@ -72,12 +72,16 @@ public class WebsiteBiz extends BaseBiz {
 	 * @param logoIcoFile
 	 * @param weixinFile
 	 * @param weiboFile
+	 * @param weixinXcxFile
 	 * @return
 	 * @author wuyun
 	 */
-	public int updateWebsite(WebsiteQO qo, MultipartFile weixinFile, MultipartFile weiboFile, MultipartFile logoImgFile, MultipartFile logoIcoFile) {
+	public int updateWebsite(WebsiteQO qo, MultipartFile weixinFile, MultipartFile weixinXcxFile, MultipartFile weiboFile, MultipartFile logoImgFile, MultipartFile logoIcoFile) {
 		if (null != weixinFile && !weixinFile.isEmpty()) {
 			qo.setWeixin(AliyunUtil.uploadPic(PlatformEnum.SYSTEM, weixinFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
+		}
+		if (null != weixinXcxFile && !weixinXcxFile.isEmpty()) {
+			qo.setWeixinXcx(AliyunUtil.uploadPic(PlatformEnum.SYSTEM, weixinXcxFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
 		}
 		if (null != weiboFile && !weiboFile.isEmpty()) {
 			qo.setWeibo(AliyunUtil.uploadPic(PlatformEnum.SYSTEM, weiboFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
@@ -99,12 +103,16 @@ public class WebsiteBiz extends BaseBiz {
 	 * @param logoIcoFile
 	 * @param weixinFile
 	 * @param weiboFile
+	 * @param weixinXcxFile
 	 * @return
 	 * @author YZJ
 	 */
-	public int saveWebsite(WebsiteQO qo, MultipartFile weixinFile, MultipartFile weiboFile, MultipartFile logoImgFile, MultipartFile logoIcoFile) {
+	public int saveWebsite(WebsiteQO qo, MultipartFile weixinFile, MultipartFile weixinXcxFile, MultipartFile weiboFile, MultipartFile logoImgFile, MultipartFile logoIcoFile) {
 		if (null != weixinFile && !weixinFile.isEmpty()) {
 			qo.setWeixin(AliyunUtil.uploadPic(PlatformEnum.SYSTEM, weixinFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
+		}
+		if (null != weixinXcxFile && !weixinXcxFile.isEmpty()) {
+			qo.setWeixinXcx(AliyunUtil.uploadPic(PlatformEnum.SYSTEM, weixinXcxFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
 		}
 		if (null != weiboFile && !weiboFile.isEmpty()) {
 			qo.setWeibo(AliyunUtil.uploadPic(PlatformEnum.SYSTEM, weiboFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
