@@ -70,6 +70,14 @@ public class WebsiteQO implements Serializable {
      */
     private String copyright;
     /**
+	 * 备案号
+	 */
+	private String icp;
+	/**
+	 * 公安备案号
+	 */
+	private String prn;
+    /**
      * 站点微信
      */
     private String weixin;

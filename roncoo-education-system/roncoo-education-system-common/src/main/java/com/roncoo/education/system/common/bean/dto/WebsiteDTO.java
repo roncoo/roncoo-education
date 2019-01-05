@@ -71,6 +71,21 @@ public class WebsiteDTO implements Serializable {
     @ApiModelProperty(value = "站点版权")
     private String copyright;
     /**
+	 * 备案号
+	 */
+    @ApiModelProperty(value = "备案号")
+	private String icp;
+	/**
+	 * 公安备案号
+	 */
+    @ApiModelProperty(value = "公安备案号")
+	private String prnNo;
+	/**
+	 * 公安备案
+	 */
+    @ApiModelProperty(value = "公安备案")
+	private String prn;
+    /**
      * 站点微信
      */
     @ApiModelProperty(value = "站点微信")

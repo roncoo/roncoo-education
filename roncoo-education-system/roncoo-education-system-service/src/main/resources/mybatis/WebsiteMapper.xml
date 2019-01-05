@@ -13,6 +13,8 @@
     <result column="website_keyword" property="websiteKeyword" jdbcType="VARCHAR" />
     <result column="website_desc" property="websiteDesc" jdbcType="VARCHAR" />
     <result column="copyright" property="copyright" jdbcType="VARCHAR" />
+    <result column="icp" property="icp" jdbcType="VARCHAR" />
+    <result column="prn" property="prn" jdbcType="VARCHAR" />
     <result column="weixin" property="weixin" jdbcType="VARCHAR" />
     <result column="weibo" property="weibo" jdbcType="VARCHAR" />
     <result column="is_enable_statistics" property="isEnableStatistics" jdbcType="TINYINT" />
@@ -84,8 +86,8 @@
   </sql>
   <sql id="Base_Column_List" >
     id, gmt_create, gmt_modified, status_id, sort, logo_ico, logo_img, website_title, 
-    website_keyword, website_desc, copyright, weixin, weibo, is_enable_statistics, statistics_code, 
-    is_show_service, service1, service2
+    website_keyword, website_desc, copyright, icp, prn, weixin, weibo, is_enable_statistics, 
+    statistics_code, is_show_service, service1, service2
   </sql>
   <sql id="Blob_Column_List" >
     user_agreement
@@ -145,17 +147,19 @@
     insert into website (id, gmt_create, gmt_modified, 
       status_id, sort, logo_ico, 
       logo_img, website_title, website_keyword, 
-      website_desc, copyright, weixin, 
-      weibo, is_enable_statistics, statistics_code, 
-      is_show_service, service1, service2, 
-      user_agreement)
+      website_desc, copyright, icp, 
+      prn, weixin, weibo, 
+      is_enable_statistics, statistics_code, is_show_service, 
+      service1, service2, user_agreement
+      )
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{logoIco,jdbcType=VARCHAR}, 
       #{logoImg,jdbcType=VARCHAR}, #{websiteTitle,jdbcType=VARCHAR}, #{websiteKeyword,jdbcType=VARCHAR}, 
-      #{websiteDesc,jdbcType=VARCHAR}, #{copyright,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, 
-      #{weibo,jdbcType=VARCHAR}, #{isEnableStatistics,jdbcType=TINYINT}, #{statisticsCode,jdbcType=VARCHAR}, 
-      #{isShowService,jdbcType=TINYINT}, #{service1,jdbcType=VARCHAR}, #{service2,jdbcType=VARCHAR}, 
-      #{userAgreement,jdbcType=LONGVARCHAR})
+      #{websiteDesc,jdbcType=VARCHAR}, #{copyright,jdbcType=VARCHAR}, #{icp,jdbcType=VARCHAR}, 
+      #{prn,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, #{weibo,jdbcType=VARCHAR}, 
+      #{isEnableStatistics,jdbcType=TINYINT}, #{statisticsCode,jdbcType=VARCHAR}, #{isShowService,jdbcType=TINYINT}, 
+      #{service1,jdbcType=VARCHAR}, #{service2,jdbcType=VARCHAR}, #{userAgreement,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Website" >
     insert into website
@@ -192,6 +196,12 @@
       </if>
       <if test="copyright != null" >
         copyright,
+      </if>
+      <if test="icp != null" >
+        icp,
+      </if>
+      <if test="prn != null" >
+        prn,
       </if>
       <if test="weixin != null" >
         weixin,
@@ -251,6 +261,12 @@
       </if>
       <if test="copyright != null" >
         #{copyright,jdbcType=VARCHAR},
+      </if>
+      <if test="icp != null" >
+        #{icp,jdbcType=VARCHAR},
+      </if>
+      <if test="prn != null" >
+        #{prn,jdbcType=VARCHAR},
       </if>
       <if test="weixin != null" >
         #{weixin,jdbcType=VARCHAR},
@@ -320,6 +336,12 @@
       <if test="record.copyright != null" >
         copyright = #{record.copyright,jdbcType=VARCHAR},
       </if>
+      <if test="record.icp != null" >
+        icp = #{record.icp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prn != null" >
+        prn = #{record.prn,jdbcType=VARCHAR},
+      </if>
       <if test="record.weixin != null" >
         weixin = #{record.weixin,jdbcType=VARCHAR},
       </if>
@@ -362,6 +384,8 @@
       website_keyword = #{record.websiteKeyword,jdbcType=VARCHAR},
       website_desc = #{record.websiteDesc,jdbcType=VARCHAR},
       copyright = #{record.copyright,jdbcType=VARCHAR},
+      icp = #{record.icp,jdbcType=VARCHAR},
+      prn = #{record.prn,jdbcType=VARCHAR},
       weixin = #{record.weixin,jdbcType=VARCHAR},
       weibo = #{record.weibo,jdbcType=VARCHAR},
       is_enable_statistics = #{record.isEnableStatistics,jdbcType=TINYINT},
@@ -387,6 +411,8 @@
       website_keyword = #{record.websiteKeyword,jdbcType=VARCHAR},
       website_desc = #{record.websiteDesc,jdbcType=VARCHAR},
       copyright = #{record.copyright,jdbcType=VARCHAR},
+      icp = #{record.icp,jdbcType=VARCHAR},
+      prn = #{record.prn,jdbcType=VARCHAR},
       weixin = #{record.weixin,jdbcType=VARCHAR},
       weibo = #{record.weibo,jdbcType=VARCHAR},
       is_enable_statistics = #{record.isEnableStatistics,jdbcType=TINYINT},
@@ -431,6 +457,12 @@
       <if test="copyright != null" >
         copyright = #{copyright,jdbcType=VARCHAR},
       </if>
+      <if test="icp != null" >
+        icp = #{icp,jdbcType=VARCHAR},
+      </if>
+      <if test="prn != null" >
+        prn = #{prn,jdbcType=VARCHAR},
+      </if>
       <if test="weixin != null" >
         weixin = #{weixin,jdbcType=VARCHAR},
       </if>
@@ -470,6 +502,8 @@
       website_keyword = #{websiteKeyword,jdbcType=VARCHAR},
       website_desc = #{websiteDesc,jdbcType=VARCHAR},
       copyright = #{copyright,jdbcType=VARCHAR},
+      icp = #{icp,jdbcType=VARCHAR},
+      prn = #{prn,jdbcType=VARCHAR},
       weixin = #{weixin,jdbcType=VARCHAR},
       weibo = #{weibo,jdbcType=VARCHAR},
       is_enable_statistics = #{isEnableStatistics,jdbcType=TINYINT},
@@ -492,6 +526,8 @@
       website_keyword = #{websiteKeyword,jdbcType=VARCHAR},
       website_desc = #{websiteDesc,jdbcType=VARCHAR},
       copyright = #{copyright,jdbcType=VARCHAR},
+      icp = #{icp,jdbcType=VARCHAR},
+      prn = #{prn,jdbcType=VARCHAR},
       weixin = #{weixin,jdbcType=VARCHAR},
       weibo = #{weibo,jdbcType=VARCHAR},
       is_enable_statistics = #{isEnableStatistics,jdbcType=TINYINT},
