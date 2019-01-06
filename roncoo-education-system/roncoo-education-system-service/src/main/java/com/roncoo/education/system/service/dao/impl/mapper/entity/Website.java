@@ -48,6 +48,12 @@ public class Website implements Serializable {
 
     private String userAgreement;
 
+    private String recruitTitle;
+
+    private String recruitInfo;
+
+    private String entryAgreement;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -226,6 +232,30 @@ public class Website implements Serializable {
         this.userAgreement = userAgreement == null ? null : userAgreement.trim();
     }
 
+    public String getRecruitTitle() {
+        return recruitTitle;
+    }
+
+    public void setRecruitTitle(String recruitTitle) {
+        this.recruitTitle = recruitTitle == null ? null : recruitTitle.trim();
+    }
+
+    public String getRecruitInfo() {
+        return recruitInfo;
+    }
+
+    public void setRecruitInfo(String recruitInfo) {
+        this.recruitInfo = recruitInfo == null ? null : recruitInfo.trim();
+    }
+
+    public String getEntryAgreement() {
+        return entryAgreement;
+    }
+
+    public void setEntryAgreement(String entryAgreement) {
+        this.entryAgreement = entryAgreement == null ? null : entryAgreement.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -254,6 +284,9 @@ public class Website implements Serializable {
         sb.append(", service1=").append(service1);
         sb.append(", service2=").append(service2);
         sb.append(", userAgreement=").append(userAgreement);
+        sb.append(", recruitTitle=").append(recruitTitle);
+        sb.append(", recruitInfo=").append(recruitInfo);
+        sb.append(", entryAgreement=").append(entryAgreement);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -104,109 +104,26 @@
                 <textarea data-toggle="autoheight" name="statisticsCode" cols="50"><#if bean??>${bean.statisticsCode!}</#if></textarea>
             </div>
         </fieldset>
-        <#if recruits?? && (recruits?size > 0) >
-        	<#list recruits as recruit>
-        		<#if recruit.recruitType==1>
-					<input type="hidden" name="lecturerId" value="${recruit.id}"/>
-					<fieldset>
-            		<legend>讲师招募</legend>
-        			<div class="form-group">
-            			<label class="control-label x120">排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序：</label>
-            			<input type="text" name=lecturerSort" value="${recruit.sort!}" data-toggle="spinner" size="20">
-        			</div>
-        			<div class="form-group">
-						<label class="control-label x120">招募信息：</label>
-						<br /><br />
-						<div style="margin-left: 55px; width:800px" id="lecturerRecruitEditEditor">
-			                <p>${recruit.recruitInfo!}</p>
-			    		</div>
-			    		<textarea id="lecturerRecruitEditDesc" style="display:none" name="lecturerRecruitInfo" style="width:100%; height:200px;"></textarea>
-			    	</div>
-			    	<div class="form-group">
-						<label class="control-label x120">入驻协议：</label>
-						<br /><br />
-						<div style="margin-left: 55px; width:800px" id="lecturerAgreementEditEditor">
-			                <p>${recruit.entryAgreement!}</p>
-			    		</div>
-			    		<textarea id="lecturerAgreementEditDesc" style="display:none" name="lecturerEntryAgreement" style="width:100%; height:200px;"></textarea>
-			    	</div>
-        			</fieldset>
-				</#if>
-				<#if recruit.recruitType==2>
-					<input type="hidden" name="agentId" value="${recruit.id}"/>
-					<fieldset>
-            		<legend>代理招募</legend>
-        			<div class="form-group">
-            			<label class="control-label x120">排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序：</label>
-            			<input type="text" name="agentSort" value="${recruit.sort!}" data-toggle="spinner" size="20">
-        			</div>
-        			<div class="form-group">
-						<label class="control-label x120">招募信息：</label>
-						<br /><br />
-						<div style="margin-left: 55px; width:800px" id="agentRecruitEditEditor">
-			                <p>${recruit.recruitInfo!}</p>
-			    		</div>
-			    		<textarea id="agentRecruitEditDesc" style="display:none" name="agentRecruitInfo" style="width:100%; height:200px;"></textarea>
-			    	</div>
-			    	<div class="form-group">
-						<label class="control-label x120">入驻协议：</label>
-						<br /><br />
-						<div style="margin-left: 55px; width:800px" id="agentAgreementEditEditor">
-			                <p>${recruit.entryAgreement!}</p>
-			    		</div>
-			    		<textarea id="agentAgreementEditDesc" style="display:none" name="agentEntryAgreement" style="width:100%; height:200px;"></textarea>
-			    	</div>
-        			</fieldset>
-				</#if>
-			</#list>
-		<#else>
-			<fieldset>
-        		<legend>讲师招募</legend>
-    			<div class="form-group">
-        			<label class="control-label x120">排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序：</label>
-        			<input type="text" name=lecturerSort" data-toggle="spinner" size="20">
-    			</div>
-    			<div class="form-group">
-					<label class="control-label x120">招募信息：</label>
-					<br /><br />
-					<div style="margin-left: 55px; width:800px" id="lecturerRecruitEditEditor">
-		                <p></p>
-		    		</div>
-		    		<textarea id="lecturerRecruitEditDesc" style="display:none" name="lecturerRecruitInfo" style="width:100%; height:200px;"></textarea>
-		    	</div>
-		    	<div class="form-group">
-					<label class="control-label x120">入驻协议：</label>
-					<br /><br />
-					<div style="margin-left: 55px; width:800px" id="lecturerAgreementEditEditor">
-		                <p></p>
-		    		</div>
-		    		<textarea id="lecturerAgreementEditDesc" style="display:none" name="lecturerEntryAgreement" style="width:100%; height:200px;"></textarea>
-		    	</div>
-    			</fieldset>
-				<fieldset>
-        		<legend>代理招募</legend>
-    			<div class="form-group">
-        			<label class="control-label x120">排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序：</label>
-        			<input type="text" name="agentSort" data-toggle="spinner" size="20">
-    			</div>
-    			<div class="form-group">
-					<label class="control-label x120">招募信息：</label>
-					<br /><br />
-					<div style="margin-left: 55px; width:800px" id="agentRecruitEditEditor">
-		                <p></p>
-		    		</div>
-		    		<textarea id="agentRecruitEditDesc" style="display:none" name="agentRecruitInfo" style="width:100%; height:200px;"></textarea>
-		    	</div>
-		    	<div class="form-group">
-					<label class="control-label x120">入驻协议：</label>
-					<br /><br />
-					<div style="margin-left: 55px; width:800px" id="agentAgreementEditEditor">
-		                <p></p>
-		    		</div>
-		    		<textarea id="agentAgreementEditDesc" style="display:none" name="agentEntryAgreement" style="width:100%; height:200px;"></textarea>
-		    	</div>
-			</fieldset>
-		</#if>
+        
+		<fieldset>
+		<legend>讲师招募</legend>
+		<div class="form-group">
+			<label class="control-label x120">招募信息：</label>
+			<br /><br />
+			<div style="margin-left: 55px; width:800px" id="recruitInfoEditEditor">
+                <p><#if bean??>${bean.recruitInfo!}</#if></p>
+    		</div>
+    		<textarea id="recruitInfoEditDesc" style="display:none" name="recruitInfo" style="width:100%; height:200px;"></textarea>
+    	</div>
+    	<div class="form-group">
+			<label class="control-label x120">入驻协议：</label>
+			<br /><br />
+			<div style="margin-left: 55px; width:800px" id="entryAgreementEditEditor">
+                <p><#if bean??>${bean.entryAgreement!}</#if></p>
+    		</div>
+    		<textarea id="entryAgreementEditDesc" style="display:none" name="entryAgreement" style="width:100%; height:200px;"></textarea>
+    	</div>
+		</fieldset>
 	</form>
 </div>
 <div class="bjui-pageFooter">
@@ -217,8 +134,6 @@
 </div>
 <script>
 initEdit('#websiteEditEditor','${base}/uploadPic');
-initEdit('#lecturerRecruitEditEditor','${base}/uploadPic');
-initEdit('#lecturerAgreementEditEditor','${base}/uploadPic');
-initEdit('#agentRecruitEditEditor','${base}/uploadPic');
-initEdit('#agentAgreementEditEditor','${base}/uploadPic');
+initEdit('#recruitInfoEditEditor','${base}/uploadPic');
+initEdit('#entryAgreementEditEditor','${base}/uploadPic');
 </script>

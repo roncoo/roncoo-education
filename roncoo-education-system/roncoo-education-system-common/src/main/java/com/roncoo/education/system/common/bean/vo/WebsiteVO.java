@@ -105,5 +105,17 @@ public class WebsiteVO implements Serializable {
 	 * 用户协议
 	 */
 	private String userAgreement;
+	/**
+	 * 招募标题
+	 */
+	private String recruitTitle;
+	/**
+	 * 招募信息
+	 */
+	private String recruitInfo;
+	/**
+	 * 入驻协议
+	 */
+	private String entryAgreement;
     
 }

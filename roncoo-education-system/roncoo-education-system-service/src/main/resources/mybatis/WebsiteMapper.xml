@@ -23,9 +23,10 @@
     <result column="is_show_service" property="isShowService" jdbcType="TINYINT" />
     <result column="service1" property="service1" jdbcType="VARCHAR" />
     <result column="service2" property="service2" jdbcType="VARCHAR" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.roncoo.education.system.service.dao.impl.mapper.entity.Website" extends="BaseResultMap" >
-    <result column="user_agreement" property="userAgreement" jdbcType="LONGVARCHAR" />
+    <result column="user_agreement" property="userAgreement" jdbcType="VARCHAR" />
+    <result column="recruit_title" property="recruitTitle" jdbcType="VARCHAR" />
+    <result column="recruit_info" property="recruitInfo" jdbcType="VARCHAR" />
+    <result column="entry_agreement" property="entryAgreement" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -88,27 +89,9 @@
   <sql id="Base_Column_List" >
     id, gmt_create, gmt_modified, status_id, sort, logo_ico, logo_img, website_title, 
     website_keyword, website_desc, copyright, icp, prn, weixin, weixin_xcx, weibo, is_enable_statistics, 
-    statistics_code, is_show_service, service1, service2
+    statistics_code, is_show_service, service1, service2, user_agreement, recruit_title, 
+    recruit_info, entry_agreement
   </sql>
-  <sql id="Blob_Column_List" >
-    user_agreement
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from website
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteExample" >
     select
     <if test="distinct" >
@@ -126,11 +109,9 @@
       limit ${limitStart} , ${pageSize}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from website
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -152,7 +133,8 @@
       prn, weixin, weixin_xcx, 
       weibo, is_enable_statistics, statistics_code, 
       is_show_service, service1, service2, 
-      user_agreement)
+      user_agreement, recruit_title, recruit_info, 
+      entry_agreement)
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{logoIco,jdbcType=VARCHAR}, 
       #{logoImg,jdbcType=VARCHAR}, #{websiteTitle,jdbcType=VARCHAR}, #{websiteKeyword,jdbcType=VARCHAR}, 
@@ -160,7 +142,8 @@
       #{prn,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, #{weixinXcx,jdbcType=VARCHAR}, 
       #{weibo,jdbcType=VARCHAR}, #{isEnableStatistics,jdbcType=TINYINT}, #{statisticsCode,jdbcType=VARCHAR}, 
       #{isShowService,jdbcType=TINYINT}, #{service1,jdbcType=VARCHAR}, #{service2,jdbcType=VARCHAR}, 
-      #{userAgreement,jdbcType=LONGVARCHAR})
+      #{userAgreement,jdbcType=VARCHAR}, #{recruitTitle,jdbcType=VARCHAR}, #{recruitInfo,jdbcType=VARCHAR}, 
+      #{entryAgreement,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Website" >
     insert into website
@@ -231,6 +214,15 @@
       <if test="userAgreement != null" >
         user_agreement,
       </if>
+      <if test="recruitTitle != null" >
+        recruit_title,
+      </if>
+      <if test="recruitInfo != null" >
+        recruit_info,
+      </if>
+      <if test="entryAgreement != null" >
+        entry_agreement,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -297,7 +289,16 @@
         #{service2,jdbcType=VARCHAR},
       </if>
       <if test="userAgreement != null" >
-        #{userAgreement,jdbcType=LONGVARCHAR},
+        #{userAgreement,jdbcType=VARCHAR},
+      </if>
+      <if test="recruitTitle != null" >
+        #{recruitTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="recruitInfo != null" >
+        #{recruitInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="entryAgreement != null" >
+        #{entryAgreement,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -374,37 +375,18 @@
         service2 = #{record.service2,jdbcType=VARCHAR},
       </if>
       <if test="record.userAgreement != null" >
-        user_agreement = #{record.userAgreement,jdbcType=LONGVARCHAR},
+        user_agreement = #{record.userAgreement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recruitTitle != null" >
+        recruit_title = #{record.recruitTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recruitInfo != null" >
+        recruit_info = #{record.recruitInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entryAgreement != null" >
+        entry_agreement = #{record.entryAgreement,jdbcType=VARCHAR},
       </if>
     </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update website
-    set id = #{record.id,jdbcType=BIGINT},
-      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
-      status_id = #{record.statusId,jdbcType=TINYINT},
-      sort = #{record.sort,jdbcType=INTEGER},
-      logo_ico = #{record.logoIco,jdbcType=VARCHAR},
-      logo_img = #{record.logoImg,jdbcType=VARCHAR},
-      website_title = #{record.websiteTitle,jdbcType=VARCHAR},
-      website_keyword = #{record.websiteKeyword,jdbcType=VARCHAR},
-      website_desc = #{record.websiteDesc,jdbcType=VARCHAR},
-      copyright = #{record.copyright,jdbcType=VARCHAR},
-      icp = #{record.icp,jdbcType=VARCHAR},
-      prn = #{record.prn,jdbcType=VARCHAR},
-      weixin = #{record.weixin,jdbcType=VARCHAR},
-      weixin_xcx = #{record.weixinXcx,jdbcType=VARCHAR},
-      weibo = #{record.weibo,jdbcType=VARCHAR},
-      is_enable_statistics = #{record.isEnableStatistics,jdbcType=TINYINT},
-      statistics_code = #{record.statisticsCode,jdbcType=VARCHAR},
-      is_show_service = #{record.isShowService,jdbcType=TINYINT},
-      service1 = #{record.service1,jdbcType=VARCHAR},
-      service2 = #{record.service2,jdbcType=VARCHAR},
-      user_agreement = #{record.userAgreement,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -431,7 +413,11 @@
       statistics_code = #{record.statisticsCode,jdbcType=VARCHAR},
       is_show_service = #{record.isShowService,jdbcType=TINYINT},
       service1 = #{record.service1,jdbcType=VARCHAR},
-      service2 = #{record.service2,jdbcType=VARCHAR}
+      service2 = #{record.service2,jdbcType=VARCHAR},
+      user_agreement = #{record.userAgreement,jdbcType=VARCHAR},
+      recruit_title = #{record.recruitTitle,jdbcType=VARCHAR},
+      recruit_info = #{record.recruitInfo,jdbcType=VARCHAR},
+      entry_agreement = #{record.entryAgreement,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -500,34 +486,18 @@
         service2 = #{service2,jdbcType=VARCHAR},
       </if>
       <if test="userAgreement != null" >
-        user_agreement = #{userAgreement,jdbcType=LONGVARCHAR},
+        user_agreement = #{userAgreement,jdbcType=VARCHAR},
+      </if>
+      <if test="recruitTitle != null" >
+        recruit_title = #{recruitTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="recruitInfo != null" >
+        recruit_info = #{recruitInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="entryAgreement != null" >
+        entry_agreement = #{entryAgreement,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Website" >
-    update website
-    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      status_id = #{statusId,jdbcType=TINYINT},
-      sort = #{sort,jdbcType=INTEGER},
-      logo_ico = #{logoIco,jdbcType=VARCHAR},
-      logo_img = #{logoImg,jdbcType=VARCHAR},
-      website_title = #{websiteTitle,jdbcType=VARCHAR},
-      website_keyword = #{websiteKeyword,jdbcType=VARCHAR},
-      website_desc = #{websiteDesc,jdbcType=VARCHAR},
-      copyright = #{copyright,jdbcType=VARCHAR},
-      icp = #{icp,jdbcType=VARCHAR},
-      prn = #{prn,jdbcType=VARCHAR},
-      weixin = #{weixin,jdbcType=VARCHAR},
-      weixin_xcx = #{weixinXcx,jdbcType=VARCHAR},
-      weibo = #{weibo,jdbcType=VARCHAR},
-      is_enable_statistics = #{isEnableStatistics,jdbcType=TINYINT},
-      statistics_code = #{statisticsCode,jdbcType=VARCHAR},
-      is_show_service = #{isShowService,jdbcType=TINYINT},
-      service1 = #{service1,jdbcType=VARCHAR},
-      service2 = #{service2,jdbcType=VARCHAR},
-      user_agreement = #{userAgreement,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Website" >
@@ -551,7 +521,11 @@
       statistics_code = #{statisticsCode,jdbcType=VARCHAR},
       is_show_service = #{isShowService,jdbcType=TINYINT},
       service1 = #{service1,jdbcType=VARCHAR},
-      service2 = #{service2,jdbcType=VARCHAR}
+      service2 = #{service2,jdbcType=VARCHAR},
+      user_agreement = #{userAgreement,jdbcType=VARCHAR},
+      recruit_title = #{recruitTitle,jdbcType=VARCHAR},
+      recruit_info = #{recruitInfo,jdbcType=VARCHAR},
+      entry_agreement = #{entryAgreement,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

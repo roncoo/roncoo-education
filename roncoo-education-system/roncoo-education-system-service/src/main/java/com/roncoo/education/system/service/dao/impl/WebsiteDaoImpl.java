@@ -54,7 +54,7 @@ public class WebsiteDaoImpl implements WebsiteDao {
 	@Override
 	public Website getWebsite() {
 		WebsiteExample example = new WebsiteExample();
-		List<Website> resultList = this.websiteMapper.selectByExampleWithBLOBs(example);
+		List<Website> resultList = this.websiteMapper.selectByExample(example);
 		if (resultList == null || resultList.isEmpty()) {
 			return null;
 		}
@@ -66,7 +66,7 @@ public class WebsiteDaoImpl implements WebsiteDao {
 		WebsiteExample example = new WebsiteExample();
 		Criteria C = example.createCriteria();
 		C.andStatusIdEqualTo(statusId);
-		List<Website> list = this.websiteMapper.selectByExampleWithBLOBs(example);
+		List<Website> list = this.websiteMapper.selectByExample(example);
 		if (list.isEmpty()) {
 			return null;
 		}

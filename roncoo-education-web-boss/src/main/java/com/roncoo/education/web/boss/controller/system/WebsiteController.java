@@ -81,8 +81,6 @@ public class WebsiteController extends BaseController {
 	public void set(ModelMap modelMap) {
 		// 加载站点信息
 		modelMap.put("bean", biz.getWebsite());
-		// 加载招募集合信息
-		modelMap.put("recruits", biz.listWebsiteRecruit());
 	}
 
 	/**
@@ -96,25 +94,14 @@ public class WebsiteController extends BaseController {
 	public String updateWebsite(@ModelAttribute WebsiteQO qo, @RequestParam(value = "weixinFile", required = false) MultipartFile weixinFile, @RequestParam(value = "weixinXcxFile", required = false) MultipartFile weixinXcxFile, @RequestParam(value = "weiboFile", required = false) MultipartFile weiboFile, @RequestParam(value = "logoImgFile", required = false) MultipartFile logoImgFile, @RequestParam(value = "logoIcoFile", required = false) MultipartFile logoIcoFile) {
 		// 保存或修改站点信息
 		if (null != qo.getId()) {
-			biz.updateWebsite(qo, weixinFile, weixinXcxFile, weiboFile, logoImgFile, logoIcoFile);
+			if (biz.updateWebsite(qo, weixinFile, weixinXcxFile, weiboFile, logoImgFile, logoIcoFile) > 0) {
+				return success(TARGETID);
+			}
 		} else {
-			biz.saveWebsite(qo, weixinFile, weixinXcxFile, weiboFile, logoImgFile, logoIcoFile);
+			if (biz.saveWebsite(qo, weixinFile, weixinXcxFile, weiboFile, logoImgFile, logoIcoFile) > 0) {
+				return success(TARGETID);
+			}
 		}
-
-		// 保存或修改讲师招募信息
-		if (null != qo.getLecturerId()) {
-			biz.updateRecruitLecturer(qo);
-		} else {
-			biz.saveRecruitLecturer(qo);
-		}
-
-		// 保存或修改代理招募信息
-		if (null != qo.getAgentId()) {
-			biz.updateRecruitAgent(qo);
-		} else {
-			biz.saveRecruitAgent(qo);
-		}
-
-		return success(TARGETID);
+		return error("修改失败");
 	}
 }

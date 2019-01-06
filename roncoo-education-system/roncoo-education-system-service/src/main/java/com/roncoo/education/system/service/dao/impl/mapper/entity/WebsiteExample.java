@@ -1524,6 +1524,286 @@ public class WebsiteExample {
             addCriterion("service2 not between", value1, value2, "service2");
             return (Criteria) this;
         }
+
+        public Criteria andUserAgreementIsNull() {
+            addCriterion("user_agreement is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserAgreementIsNotNull() {
+            addCriterion("user_agreement is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserAgreementEqualTo(String value) {
+            addCriterion("user_agreement =", value, "userAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserAgreementNotEqualTo(String value) {
+            addCriterion("user_agreement <>", value, "userAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserAgreementGreaterThan(String value) {
+            addCriterion("user_agreement >", value, "userAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserAgreementGreaterThanOrEqualTo(String value) {
+            addCriterion("user_agreement >=", value, "userAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserAgreementLessThan(String value) {
+            addCriterion("user_agreement <", value, "userAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserAgreementLessThanOrEqualTo(String value) {
+            addCriterion("user_agreement <=", value, "userAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserAgreementLike(String value) {
+            addCriterion("user_agreement like", value, "userAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserAgreementNotLike(String value) {
+            addCriterion("user_agreement not like", value, "userAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserAgreementIn(List<String> values) {
+            addCriterion("user_agreement in", values, "userAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserAgreementNotIn(List<String> values) {
+            addCriterion("user_agreement not in", values, "userAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserAgreementBetween(String value1, String value2) {
+            addCriterion("user_agreement between", value1, value2, "userAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserAgreementNotBetween(String value1, String value2) {
+            addCriterion("user_agreement not between", value1, value2, "userAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitTitleIsNull() {
+            addCriterion("recruit_title is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitTitleIsNotNull() {
+            addCriterion("recruit_title is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitTitleEqualTo(String value) {
+            addCriterion("recruit_title =", value, "recruitTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitTitleNotEqualTo(String value) {
+            addCriterion("recruit_title <>", value, "recruitTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitTitleGreaterThan(String value) {
+            addCriterion("recruit_title >", value, "recruitTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitTitleGreaterThanOrEqualTo(String value) {
+            addCriterion("recruit_title >=", value, "recruitTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitTitleLessThan(String value) {
+            addCriterion("recruit_title <", value, "recruitTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitTitleLessThanOrEqualTo(String value) {
+            addCriterion("recruit_title <=", value, "recruitTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitTitleLike(String value) {
+            addCriterion("recruit_title like", value, "recruitTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitTitleNotLike(String value) {
+            addCriterion("recruit_title not like", value, "recruitTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitTitleIn(List<String> values) {
+            addCriterion("recruit_title in", values, "recruitTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitTitleNotIn(List<String> values) {
+            addCriterion("recruit_title not in", values, "recruitTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitTitleBetween(String value1, String value2) {
+            addCriterion("recruit_title between", value1, value2, "recruitTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitTitleNotBetween(String value1, String value2) {
+            addCriterion("recruit_title not between", value1, value2, "recruitTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitInfoIsNull() {
+            addCriterion("recruit_info is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitInfoIsNotNull() {
+            addCriterion("recruit_info is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitInfoEqualTo(String value) {
+            addCriterion("recruit_info =", value, "recruitInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitInfoNotEqualTo(String value) {
+            addCriterion("recruit_info <>", value, "recruitInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitInfoGreaterThan(String value) {
+            addCriterion("recruit_info >", value, "recruitInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitInfoGreaterThanOrEqualTo(String value) {
+            addCriterion("recruit_info >=", value, "recruitInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitInfoLessThan(String value) {
+            addCriterion("recruit_info <", value, "recruitInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitInfoLessThanOrEqualTo(String value) {
+            addCriterion("recruit_info <=", value, "recruitInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitInfoLike(String value) {
+            addCriterion("recruit_info like", value, "recruitInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitInfoNotLike(String value) {
+            addCriterion("recruit_info not like", value, "recruitInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitInfoIn(List<String> values) {
+            addCriterion("recruit_info in", values, "recruitInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitInfoNotIn(List<String> values) {
+            addCriterion("recruit_info not in", values, "recruitInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitInfoBetween(String value1, String value2) {
+            addCriterion("recruit_info between", value1, value2, "recruitInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecruitInfoNotBetween(String value1, String value2) {
+            addCriterion("recruit_info not between", value1, value2, "recruitInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntryAgreementIsNull() {
+            addCriterion("entry_agreement is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntryAgreementIsNotNull() {
+            addCriterion("entry_agreement is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntryAgreementEqualTo(String value) {
+            addCriterion("entry_agreement =", value, "entryAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntryAgreementNotEqualTo(String value) {
+            addCriterion("entry_agreement <>", value, "entryAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntryAgreementGreaterThan(String value) {
+            addCriterion("entry_agreement >", value, "entryAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntryAgreementGreaterThanOrEqualTo(String value) {
+            addCriterion("entry_agreement >=", value, "entryAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntryAgreementLessThan(String value) {
+            addCriterion("entry_agreement <", value, "entryAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntryAgreementLessThanOrEqualTo(String value) {
+            addCriterion("entry_agreement <=", value, "entryAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntryAgreementLike(String value) {
+            addCriterion("entry_agreement like", value, "entryAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntryAgreementNotLike(String value) {
+            addCriterion("entry_agreement not like", value, "entryAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntryAgreementIn(List<String> values) {
+            addCriterion("entry_agreement in", values, "entryAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntryAgreementNotIn(List<String> values) {
+            addCriterion("entry_agreement not in", values, "entryAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntryAgreementBetween(String value1, String value2) {
+            addCriterion("entry_agreement between", value1, value2, "entryAgreement");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntryAgreementNotBetween(String value1, String value2) {
+            addCriterion("entry_agreement not between", value1, value2, "entryAgreement");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

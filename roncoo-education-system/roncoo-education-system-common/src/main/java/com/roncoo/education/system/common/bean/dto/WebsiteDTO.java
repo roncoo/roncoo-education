@@ -140,4 +140,19 @@ public class WebsiteDTO implements Serializable {
 	 */
     @ApiModelProperty(value = "用户协议")
 	private String userAgreement;
+    /**
+     * 招募标题
+     */
+    @ApiModelProperty(value = "招募标题")
+    private String recruitTitle;
+    /**
+     * 招募信息
+     */
+    @ApiModelProperty(value = "招募信息")
+    private String recruitInfo;
+    /**
+     * 入驻协议
+     */
+    @ApiModelProperty(value = "入驻协议")
+    private String entryAgreement;
 }
