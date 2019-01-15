@@ -13,6 +13,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.roncoo.education.util.annotation.AdminLog;
+import com.roncoo.education.util.config.SystemUtil;
 import com.roncoo.education.util.tools.JSONUtil;
 import com.roncoo.education.web.boss.service.dao.SysLogDao;
 import com.roncoo.education.web.boss.service.dao.impl.mapper.entity.SysLog;
@@ -46,7 +47,9 @@ public class AspectAdminLog {
 		// 请求的参数
 		Object[] args = joinPoint.getArgs();
 		String params = JSONUtil.toJSONString(args[0]);
-		sysLog.setContent(params);
+		if (params.length() < Integer.valueOf(SystemUtil.CONTENT_LENGTH)) {
+			sysLog.setContent(params);
+		}
 
 		// 获取IP
 		try {
