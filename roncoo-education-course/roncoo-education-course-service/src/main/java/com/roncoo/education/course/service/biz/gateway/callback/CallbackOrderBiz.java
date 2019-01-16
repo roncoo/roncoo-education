@@ -12,6 +12,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import com.roncoo.education.course.common.bean.bo.OrderInfoPayNotifyBO;
+import com.roncoo.education.course.service.dao.CourseDao;
+import com.roncoo.education.course.service.dao.OrderInfoDao;
+import com.roncoo.education.course.service.dao.OrderPayDao;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderPay;
@@ -20,14 +24,10 @@ import com.roncoo.education.user.common.bean.vo.LecturerExtVO;
 import com.roncoo.education.user.common.bean.vo.LecturerVO;
 import com.roncoo.education.user.feign.web.IBossLecturer;
 import com.roncoo.education.user.feign.web.IBossLecturerExt;
+import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.OrderStatusEnum;
 import com.xiaoleilu.hutool.util.ObjectUtil;
-import com.roncoo.education.course.common.bean.bo.OrderInfoPayNotifyBO;
-import com.roncoo.education.course.service.dao.CourseDao;
-import com.roncoo.education.course.service.dao.OrderInfoDao;
-import com.roncoo.education.course.service.dao.OrderPayDao;
-import com.roncoo.education.util.base.BaseBiz;
 
 /**
  * 订单信息表
@@ -83,11 +83,9 @@ public class CallbackOrderBiz extends BaseBiz {
 			return Result.success("success");
 		}
 
-		// 异步处理分润
-
 		// 订单状态为成功时处理
 		if (OrderStatusEnum.SUCCESS.getCode().equals(notifyBO.getOrderStatus())) {
-			// 如果为普通课程或者试卷
+			// 处理课程信息
 			return course(orderInfo, orderPay);
 		} else if (OrderStatusEnum.FAIL.getCode().equals(notifyBO.getOrderStatus())) {
 			// 更新订单信息
@@ -128,11 +126,6 @@ public class CallbackOrderBiz extends BaseBiz {
 			return Result.error("找不到讲师信息");
 		}
 
-		// 更新订单支付信息
-		orderPay.setOrderStatus(OrderStatusEnum.SUCCESS.getCode());
-		orderPay.setPayTime(new Date());
-		orderPayDao.updateById(orderPay);
-
 		// 更新课程信息的购买人数
 		course.setCountBuy(course.getCountBuy() + 1);
 		courseDao.updateById(course);
@@ -147,6 +140,11 @@ public class CallbackOrderBiz extends BaseBiz {
 
 		// 更新订单信息
 		orderInfoDao.updateById(orderInfo);
+		
+		// 更新订单支付信息
+		orderPay.setOrderStatus(OrderStatusEnum.SUCCESS.getCode());
+		orderPay.setPayTime(new Date());
+		orderPayDao.updateById(orderPay);
 
 		return Result.success("success");
 	}
