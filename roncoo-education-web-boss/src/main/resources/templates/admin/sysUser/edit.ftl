@@ -4,7 +4,7 @@
 		<input type="hidden" name="id" value="${bean.id}"/>
         <div class="form-group">
             <label class="control-label x85">手机：</label>
-            <input type="text" name="phone" value="${bean.mobile!}" placeholder="手机" size="20" data-rule="required,mobile">
+            <input type="text" name="mobile" value="${bean.mobile!}" placeholder="手机" size="20" data-rule="required,mobile">
         </div>
         <div class="form-group">
             <label class="control-label x85">姓名：</label>

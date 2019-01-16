@@ -130,8 +130,8 @@ public class IndexBiz extends BaseBiz {
 		orderInfoQO.setEndCreate(DateUtil.format(new Date()));
 		
 		// 演示需要
-		//orderInfoQO.setBeginCreate(beginCreate);
-		//orderInfoQO.setEndCreate(beginCreate);
+		//orderInfoQO.setBeginCreate("2019-01-13");
+		//orderInfoQO.setEndCreate("2019-01-22");
 		
 		Calendar tempStart = Calendar.getInstance();
 		tempStart.setTime(DateUtil.parseDate(orderInfoQO.getBeginCreate(), "yyyy-MM-dd"));
