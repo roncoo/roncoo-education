@@ -58,6 +58,7 @@ public class ZoneCourseDaoImpl implements ZoneCourseDao {
 		Criteria c = example.createCriteria();
 		c.andZoneIdEqualTo(zoneId);
 		c.andStatusIdEqualTo(statusId);
+		example.setOrderByClause("sort desc, id desc");
 		return this.zoneCourseMapper.selectByExample(example);
 	}
 
