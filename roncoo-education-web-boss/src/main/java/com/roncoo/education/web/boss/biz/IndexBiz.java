@@ -19,14 +19,14 @@ import com.github.abel533.echarts.code.Trigger;
 import com.github.abel533.echarts.feature.MagicType;
 import com.github.abel533.echarts.series.Line;
 import com.roncoo.education.course.common.bean.qo.OrderEchartsQO;
-import com.roncoo.education.course.common.bean.vo.OrderEchartsVO;
 import com.roncoo.education.course.common.bean.qo.OrderInfoQO;
+import com.roncoo.education.course.common.bean.vo.OrderEchartsVO;
 import com.roncoo.education.course.feign.web.IBossOrderInfo;
 import com.roncoo.education.user.common.bean.qo.UserExtEchartsQO;
 import com.roncoo.education.user.common.bean.vo.UserEchartsVO;
 import com.roncoo.education.user.feign.web.IBossUserExt;
-import com.roncoo.education.util.tools.DateUtil;
 import com.roncoo.education.util.base.BaseBiz;
+import com.roncoo.education.util.tools.DateUtil;
 
 /**
  * 首页信息
@@ -128,6 +128,11 @@ public class IndexBiz extends BaseBiz {
 	private List<String> payTime(OrderInfoQO orderInfoQO, List<String> data1) {
 		orderInfoQO.setBeginCreate(DateUtil.format(DateUtil.addDate(new Date(), -10)));
 		orderInfoQO.setEndCreate(DateUtil.format(new Date()));
+		
+		// 演示需要
+		//orderInfoQO.setBeginCreate(beginCreate);
+		//orderInfoQO.setEndCreate(beginCreate);
+		
 		Calendar tempStart = Calendar.getInstance();
 		tempStart.setTime(DateUtil.parseDate(orderInfoQO.getBeginCreate(), "yyyy-MM-dd"));
 		tempStart.add(Calendar.DAY_OF_YEAR, 0);
