@@ -155,6 +155,10 @@ public class AuthApiCourseBiz extends BaseBiz {
 			dto.setIsPay(IsPayEnum.YES.getCode());
 		}
 		
+		// 查询讲师信息
+		LecturerVO lecturerVO = bossLecturer.getByLecturerUserNo(dto.getLecturerUserNo());
+		dto.setLecturer(BeanUtil.copyProperties(lecturerVO, AuthLecturerDTO.class));
+		
 		// 查询章节信息
 		List<CourseChapter> courseChapterList = courseChapterDao.listByCourseIdAndStatusId(authCourseViewBO.getCourseId(), StatusIdEnum.YES.getCode());
 		// 如果为空就直接返回
@@ -163,17 +167,12 @@ public class AuthApiCourseBiz extends BaseBiz {
 		}
 		dto.setChapterList(PageUtil.copyList(courseChapterList, CourseChapterDTO.class));
 
-
 		// 课时信息
 		for (CourseChapterDTO courseChapterDTO : dto.getChapterList()) {
 			List<CourseChapterPeriod> courseChapterPeriodList = courseChapterPeriodDao.listByChapterId(courseChapterDTO.getId());
 			courseChapterDTO.setPeriodList(PageUtil.copyList(courseChapterPeriodList, CourseChapterPeriodDTO.class));
 		}
-
-		// 查询讲师信息
-		LecturerVO lecturerVO = bossLecturer.getByLecturerUserNo(dto.getLecturerUserNo());
-		dto.setLecturer(BeanUtil.copyProperties(lecturerVO, AuthLecturerDTO.class));
-
+		
 		return Result.success(dto);
 	}
 
