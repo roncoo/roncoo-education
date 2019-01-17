@@ -22,9 +22,16 @@
 | Freemarker        | Logback           | Hutool            | Spring IO Platform | 
 
 ### 流程图说明
+* 课程播放流程
 ![课程播放流程](/doc/images/course.png)
+
+* 播放鉴权流程
 ![播放鉴权流程](/doc/images/course_callback.png)
+
+* 课程下单流程
 ![课程下单流程](/doc/images/pay.png)
+
+* 下单回调流程
 ![下单回调流程](/doc/images/pay_callback.png)
 
 ### 项目结构
