@@ -21,6 +21,12 @@
 | 模板引擎                                  | 日志框架                                   | 常用工具                                   | 版本维护                                     | 
 | Freemarker        | Logback           | Hutool            | Spring IO Platform | 
 
+### 流程图说明
+![课程播放流程](/doc/images/course.png)
+![播放鉴权流程](/doc/images/course_callback.png)
+![课程下单流程](/doc/images/pay.png)
+![下单回调流程](/doc/images/pay_callback.png)
+
 ### 项目结构
 
 ```
@@ -93,7 +99,7 @@ Lombok是一个可以通过简单的注解形式来帮助我们简化消除一�
 #### 2. IntelliJ IDEA使用方法
 安装插件，如图所示
 
-![流程图](/doc/images/lombok1.png)
+![图](/doc/images/lombok1.png)
 
 ### 官方QQ群
 <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=7d1b7f1a78715320d09ed841c66d6bf0fa7b9105964cc327e9483e459b46abd4"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课" title="在线教育系统-领课"> 826617734</a>
