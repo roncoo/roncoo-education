@@ -3,7 +3,7 @@
 
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
     
-    <springProperty name="springApplicationName" source="spring.application.name" defaultValue="roncoo-cloud"/>
+    <springProperty name="springApplicationName" source="spring.application.name" defaultValue="roncoo-education"/>
     <springProperty name="FILE_PATH" source="info.roncoo.logging.path" defaultValue="/home/roncoo/logs"/>
 
     <property name="PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -|   %msg%n"/>
