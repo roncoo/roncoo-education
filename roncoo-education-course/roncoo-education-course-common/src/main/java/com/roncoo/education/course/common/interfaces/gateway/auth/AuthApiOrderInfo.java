@@ -5,16 +5,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.github.abel533.echarts.Option;
-import com.roncoo.education.course.common.bean.bo.OrderInfoCloseBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthOrderInfoContinuePayBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthOrderInfoForChartsBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthOrderInfoListBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthOrderInfoViewBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthOrderPayBO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthOrderInfoDTO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthOrderInfoListDTO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthOrderInfoListForLecturerDTO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthOrderPayDTO;
+import com.roncoo.education.course.service.common.bo.OrderInfoCloseBO;
+import com.roncoo.education.course.service.common.bo.auth.AuthOrderInfoContinuePayBO;
+import com.roncoo.education.course.service.common.bo.auth.AuthOrderInfoForChartsBO;
+import com.roncoo.education.course.service.common.bo.auth.AuthOrderInfoListBO;
+import com.roncoo.education.course.service.common.bo.auth.AuthOrderInfoViewBO;
+import com.roncoo.education.course.service.common.bo.auth.AuthOrderPayBO;
+import com.roncoo.education.course.service.common.dto.auth.AuthOrderInfoDTO;
+import com.roncoo.education.course.service.common.dto.auth.AuthOrderInfoListDTO;
+import com.roncoo.education.course.service.common.dto.auth.AuthOrderInfoListForLecturerDTO;
+import com.roncoo.education.course.service.common.dto.auth.AuthOrderPayDTO;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;
 

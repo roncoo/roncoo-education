@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.roncoo.education.course.common.bean.qo.CourseChapterAuditQO;
 import com.roncoo.education.course.common.bean.vo.CourseChapterAuditVO;
-import com.roncoo.education.course.feign.web.IBossCourseChapterAudit;
+import com.roncoo.education.course.feign.IBossCourseChapterAudit;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
 

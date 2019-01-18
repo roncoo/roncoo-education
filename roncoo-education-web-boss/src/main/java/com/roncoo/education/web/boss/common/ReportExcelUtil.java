@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 import com.roncoo.education.course.common.bean.qo.OrderInfoQO;
 import com.roncoo.education.course.common.bean.vo.OrderInfoVO;
 import com.roncoo.education.course.common.bean.vo.OrderReportVO;
-import com.roncoo.education.course.feign.web.IBossOrderInfo;
+import com.roncoo.education.course.feign.IBossOrderInfo;
 import com.roncoo.education.user.common.bean.vo.LecturerProfitVO;
 import com.roncoo.education.util.base.BaseException;
 import com.roncoo.education.util.base.Page;

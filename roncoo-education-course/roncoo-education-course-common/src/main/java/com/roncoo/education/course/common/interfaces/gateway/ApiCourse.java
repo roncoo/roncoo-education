@@ -4,10 +4,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.roncoo.education.course.common.bean.bo.CourseInfoPageBO;
-import com.roncoo.education.course.common.bean.bo.CourseVideoBO;
-import com.roncoo.education.course.common.bean.dto.CourseInfoPageDTO;
-import com.roncoo.education.course.common.bean.dto.CourseViewDTO;
+import com.roncoo.education.course.service.common.bo.CourseInfoPageBO;
+import com.roncoo.education.course.service.common.bo.CourseVideoBO;
+import com.roncoo.education.course.service.common.dto.CourseInfoPageDTO;
+import com.roncoo.education.course.service.common.dto.CourseViewDTO;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;
 

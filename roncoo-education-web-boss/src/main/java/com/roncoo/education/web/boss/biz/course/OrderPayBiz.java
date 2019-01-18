@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.roncoo.education.course.common.bean.qo.OrderPayQO;
 import com.roncoo.education.course.common.bean.vo.OrderPayVO;
-import com.roncoo.education.course.feign.web.IBossOrderPay;
+import com.roncoo.education.course.feign.IBossOrderPay;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
 

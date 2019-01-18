@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import com.roncoo.education.course.common.bean.qo.OrderInfoQO;
 import com.roncoo.education.course.common.bean.vo.CountIncomeVO;
 import com.roncoo.education.course.common.bean.vo.OrderInfoVO;
-import com.roncoo.education.course.feign.web.IBossOrderInfo;
+import com.roncoo.education.course.feign.IBossOrderInfo;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.web.boss.common.ReportExcelUtil;

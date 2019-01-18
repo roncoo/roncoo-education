@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.roncoo.education.course.feign.web.IBossOrderInfo;
+import com.roncoo.education.course.feign.IBossOrderInfo;
 import com.roncoo.education.util.base.BaseController;
 
 /**

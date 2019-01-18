@@ -4,15 +4,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditDeleteBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditSaveBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditSortBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditUpdateBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterPeriodAuditViewBO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterPeriodAuditSaveDTO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthPeriodAuditListDTO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthPeriodAuditViewDTO;
+import com.roncoo.education.course.service.common.bo.auth.AuthCourseChapterPeriodAuditBO;
+import com.roncoo.education.course.service.common.bo.auth.AuthCourseChapterPeriodAuditDeleteBO;
+import com.roncoo.education.course.service.common.bo.auth.AuthCourseChapterPeriodAuditSaveBO;
+import com.roncoo.education.course.service.common.bo.auth.AuthCourseChapterPeriodAuditSortBO;
+import com.roncoo.education.course.service.common.bo.auth.AuthCourseChapterPeriodAuditUpdateBO;
+import com.roncoo.education.course.service.common.bo.auth.AuthCourseChapterPeriodAuditViewBO;
+import com.roncoo.education.course.service.common.dto.auth.AuthCourseChapterPeriodAuditSaveDTO;
+import com.roncoo.education.course.service.common.dto.auth.AuthPeriodAuditListDTO;
+import com.roncoo.education.course.service.common.dto.auth.AuthPeriodAuditViewDTO;
 import com.roncoo.education.util.base.Result;
 
 import io.swagger.annotations.ApiOperation;

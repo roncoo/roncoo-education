@@ -4,8 +4,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.roncoo.education.course.common.bean.bo.ZoneBO;
-import com.roncoo.education.course.common.bean.dto.ZoneDTO;
+import com.roncoo.education.course.service.common.bo.ZoneBO;
+import com.roncoo.education.course.service.common.dto.ZoneDTO;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;
 

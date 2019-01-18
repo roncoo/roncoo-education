@@ -21,7 +21,7 @@ import com.github.abel533.echarts.series.Line;
 import com.roncoo.education.course.common.bean.qo.OrderEchartsQO;
 import com.roncoo.education.course.common.bean.qo.OrderInfoQO;
 import com.roncoo.education.course.common.bean.vo.OrderEchartsVO;
-import com.roncoo.education.course.feign.web.IBossOrderInfo;
+import com.roncoo.education.course.feign.IBossOrderInfo;
 import com.roncoo.education.user.common.bean.qo.UserExtEchartsQO;
 import com.roncoo.education.user.common.bean.vo.UserEchartsVO;
 import com.roncoo.education.user.feign.web.IBossUserExt;

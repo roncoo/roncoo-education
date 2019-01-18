@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.roncoo.education.course.feign.web.IBossCourseVideo;
+import com.roncoo.education.course.feign.IBossCourseVideo;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.config.SystemUtil;
 import com.xiaoleilu.hutool.io.FileUtil;

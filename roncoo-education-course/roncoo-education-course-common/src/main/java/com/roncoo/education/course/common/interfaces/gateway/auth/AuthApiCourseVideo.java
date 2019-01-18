@@ -4,12 +4,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoDeleteBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoSaveBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthCourseVideoUpdateBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthPeriodIdVideoBO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthCourseVideoListDTO;
+import com.roncoo.education.course.service.common.bo.auth.AuthCourseVideoBO;
+import com.roncoo.education.course.service.common.bo.auth.AuthCourseVideoDeleteBO;
+import com.roncoo.education.course.service.common.bo.auth.AuthCourseVideoSaveBO;
+import com.roncoo.education.course.service.common.bo.auth.AuthCourseVideoUpdateBO;
+import com.roncoo.education.course.service.common.bo.auth.AuthPeriodIdVideoBO;
+import com.roncoo.education.course.service.common.dto.auth.AuthCourseVideoListDTO;
 import com.roncoo.education.util.base.Result;
 
 import io.swagger.annotations.ApiOperation;

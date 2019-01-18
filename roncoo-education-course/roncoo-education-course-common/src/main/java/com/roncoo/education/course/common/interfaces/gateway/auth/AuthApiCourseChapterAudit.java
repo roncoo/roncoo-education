@@ -4,16 +4,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterAuditBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterAuditDeleteBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterAuditSaveBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterAuditSortBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterAuditUpdateBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthCourseChapterAuditViewBO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterAuditListDTO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterAuditSaveDTO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterAuditUpdateDTO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthCourseChapterAuditViewDTO;
+import com.roncoo.education.course.service.common.bo.auth.AuthCourseChapterAuditBO;
+import com.roncoo.education.course.service.common.bo.auth.AuthCourseChapterAuditDeleteBO;
+import com.roncoo.education.course.service.common.bo.auth.AuthCourseChapterAuditSaveBO;
+import com.roncoo.education.course.service.common.bo.auth.AuthCourseChapterAuditSortBO;
+import com.roncoo.education.course.service.common.bo.auth.AuthCourseChapterAuditUpdateBO;
+import com.roncoo.education.course.service.common.bo.auth.AuthCourseChapterAuditViewBO;
+import com.roncoo.education.course.service.common.dto.auth.AuthCourseChapterAuditListDTO;
+import com.roncoo.education.course.service.common.dto.auth.AuthCourseChapterAuditSaveDTO;
+import com.roncoo.education.course.service.common.dto.auth.AuthCourseChapterAuditUpdateDTO;
+import com.roncoo.education.course.service.common.dto.auth.AuthCourseChapterAuditViewDTO;
 import com.roncoo.education.util.base.Result;
 
 import io.swagger.annotations.ApiOperation;

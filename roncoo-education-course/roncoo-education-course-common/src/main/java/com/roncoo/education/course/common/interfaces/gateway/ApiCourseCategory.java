@@ -3,7 +3,7 @@ package com.roncoo.education.course.common.interfaces.gateway;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.roncoo.education.course.common.bean.dto.CourseCategoryListDTO;
+import com.roncoo.education.course.service.common.dto.CourseCategoryListDTO;
 import com.roncoo.education.util.base.Result;
 
 import io.swagger.annotations.ApiOperation;

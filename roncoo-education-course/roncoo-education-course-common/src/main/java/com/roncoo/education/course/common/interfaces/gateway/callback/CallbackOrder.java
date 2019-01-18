@@ -6,7 +6,9 @@ package com.roncoo.education.course.common.interfaces.gateway.callback;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.roncoo.education.course.common.bean.bo.callback.CallbackOrderBO;
+
+import com.roncoo.education.course.service.common.bo.callback.CallbackOrderBO;
+
 import io.swagger.annotations.ApiOperation;
 
 /**

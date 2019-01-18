@@ -4,10 +4,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.roncoo.education.course.common.bean.bo.auth.AuthCourseSignBO;
-import com.roncoo.education.course.common.bean.bo.auth.AuthCourseViewBO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthCourseSignDTO;
-import com.roncoo.education.course.common.bean.dto.auth.AuthCourseViewDTO;
+import com.roncoo.education.course.service.common.bo.auth.AuthCourseSignBO;
+import com.roncoo.education.course.service.common.bo.auth.AuthCourseViewBO;
+import com.roncoo.education.course.service.common.dto.auth.AuthCourseSignDTO;
+import com.roncoo.education.course.service.common.dto.auth.AuthCourseViewDTO;
 import com.roncoo.education.util.base.Result;
 
 import io.swagger.annotations.ApiOperation;
