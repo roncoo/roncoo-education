@@ -185,6 +185,18 @@
 				<artifactId>itextpdf</artifactId>
 				<version>5.5.13</version>
 			</dependency>
+			
+			<!-- de.codecentric -->
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-server-cloud</artifactId>
+                <version>${de.codecentric.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-server-ui</artifactId>
+                <version>${de.codecentric.version}</version>
+            </dependency>
 
 			<!-- com.roncoo -->
 			<dependency>
@@ -259,6 +271,8 @@
 		<module>roncoo-education-server-eureka</module>
 		<!-- 配置中心 -->
 		<module>roncoo-education-server-config</module>
+		<!-- 监控中心 -->
+        <module>roncoo-education-server-admin</module>
 		<!-- 公用工具 -->
 		<module>roncoo-education-util</module>
 		<!-- 系统管理 -->
