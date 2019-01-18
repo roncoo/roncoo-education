@@ -9,9 +9,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.course.common.interfaces.gateway.callback.CallbackOrder;
 import com.roncoo.education.course.service.biz.callback.CallbackOrderBiz;
 import com.roncoo.education.course.service.common.bo.OrderInfoPayNotifyBO;
 import com.roncoo.education.course.service.common.bo.callback.CallbackOrderBO;
@@ -23,13 +24,15 @@ import com.roncoo.education.util.enums.TradeStatusEnum;
 import com.roncoo.education.util.pay.MerchantApiUtil;
 import com.xiaoleilu.hutool.util.ObjectUtil;
 
+import io.swagger.annotations.ApiOperation;
+
 /**
  * 订单信息表
  *
  * @author wujing123
  */
 @RestController
-public class CallbackOrderController extends BaseController implements CallbackOrder {
+public class CallbackOrderController extends BaseController {
 
 	@Autowired
 	private CallbackOrderBiz biz;
@@ -37,7 +40,14 @@ public class CallbackOrderController extends BaseController implements CallbackO
 	@Autowired
 	private IBossSys bossSys;
 
-	@Override
+	/**
+	 * 龙果支付回调
+	 * 
+	 * @param CallbackOrderBO
+	 * @return
+	 */
+	@ApiOperation(value = "龙果支付回调接口", notes = "龙果支付回调接口")
+	@RequestMapping(value = "/callback/order/roncoo", method = { RequestMethod.POST, RequestMethod.GET })
 	public String roncooPayNotify(@ModelAttribute CallbackOrderBO callbackOrderBO) {
 		logger.info("龙果支付回调结果：{}", callbackOrderBO);
 		// sign校验

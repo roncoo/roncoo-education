@@ -2,7 +2,6 @@ package com.roncoo.education.course.service.api;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.course.common.interfaces.gateway.ApiCourseVideo;
 import com.roncoo.education.util.base.BaseController;
 
 /**
@@ -11,6 +10,6 @@ import com.roncoo.education.util.base.BaseController;
  * @author wuyun
  */
 @RestController
-public class ApiCourseVideoController extends BaseController implements ApiCourseVideo {
+public class ApiCourseVideoController extends BaseController {
 
 }

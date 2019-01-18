@@ -4,14 +4,17 @@
 package com.roncoo.education.course.service.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.roncoo.education.course.common.interfaces.gateway.ApiUpload;
 import com.roncoo.education.course.service.biz.ApiUploadBiz;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
+
+import io.swagger.annotations.ApiOperation;
 
 /**
  * 上传接口
@@ -19,22 +22,45 @@ import com.roncoo.education.util.base.Result;
  * @author wuyun
  */
 @RestController
-public class ApiUploadController extends BaseController implements ApiUpload {
+@RequestMapping(value = "/course/api/upload")
+public class ApiUploadController extends BaseController {
 
 	@Autowired
 	private ApiUploadBiz biz;
 
-	@Override
+	/**
+	 * 上传视频接口
+	 * 
+	 * @param videoFile
+	 * @author wuyun
+	 */
+	@ApiOperation(value = "上传视频接口", notes = "上传视频")
+	@RequestMapping(value = "/video", method = RequestMethod.POST)
 	public Result<String> uploadVideo(@RequestParam(value = "videoFile", required = false) MultipartFile videoFile) {
 		return biz.uploadVideo(videoFile);
 	}
 
-	@Override
+	/**
+	 * 上传图片接口
+	 * 
+	 * @param picFile
+	 * @author wuyun
+	 */
+	@ApiOperation(value = "上传图片接口", notes = "上传图片")
+	@RequestMapping(value = "/pic", method = RequestMethod.POST)
 	public Result<String> uploadPic(@RequestParam(value = "picFile", required = false) MultipartFile picFile) {
 		return biz.uploadPic(picFile);
 	}
 
-	@Override
+	/**
+	 * 上传文档接口
+	 * 
+	 * @param docFile
+	 * @param periodUploadDoc
+	 * @author wuyun
+	 */
+	@ApiOperation(value = "上传文档接口", notes = "上传文档")
+	@RequestMapping(value = "/doc", method = RequestMethod.POST)
 	public Result<String> uploadDoc(@RequestParam(name = "docFile", required = false) MultipartFile docFile) {
 		return biz.uploadDoc(docFile);
 	}
