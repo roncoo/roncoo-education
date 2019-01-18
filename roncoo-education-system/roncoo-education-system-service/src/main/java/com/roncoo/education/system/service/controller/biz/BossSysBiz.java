@@ -8,7 +8,6 @@ import com.roncoo.education.system.common.bean.vo.SysVO;
 import com.roncoo.education.system.service.dao.SysDao;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.Sys;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.SysExample;
-import com.roncoo.education.system.service.dao.impl.mapper.entity.SysExample.Criteria;
 import com.roncoo.education.util.base.BaseException;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
@@ -30,7 +29,6 @@ public class BossSysBiz {
 
 	public Page<SysVO> listForPage(SysQO qo) {
 		SysExample example = new SysExample();
-		Criteria c = example.createCriteria();
 		example.setOrderByClause(" id desc ");
 		Page<Sys> page = dao.listForPage(qo.getPageCurrent(), qo.getPageSize(), example);
 		return PageUtil.transform(page, SysVO.class);
