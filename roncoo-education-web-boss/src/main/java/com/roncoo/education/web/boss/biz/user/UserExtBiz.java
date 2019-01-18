@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.roncoo.education.system.feign.web.IBossSys;
+import com.roncoo.education.system.feign.IBossSys;
 import com.roncoo.education.user.common.bean.qo.UserExtQO;
 import com.roncoo.education.user.common.bean.vo.UserExtVO;
 import com.roncoo.education.user.feign.IBossUserExt;

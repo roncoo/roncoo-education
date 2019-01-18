@@ -29,7 +29,7 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseUserStud
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseUserStudyLog;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo;
 import com.roncoo.education.system.common.bean.vo.SysVO;
-import com.roncoo.education.system.feign.web.IBossSys;
+import com.roncoo.education.system.feign.IBossSys;
 import com.roncoo.education.user.common.bean.vo.LecturerVO;
 import com.roncoo.education.user.feign.IBossLecturer;
 import com.roncoo.education.util.base.BaseBiz;

@@ -10,7 +10,7 @@ import com.roncoo.education.course.service.dao.AdvDao;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.Adv;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.AdvExample;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.AdvExample.Criteria;
-import com.roncoo.education.system.feign.web.IBossSys;
+import com.roncoo.education.system.feign.IBossSys;
 import com.roncoo.education.util.aliyun.Aliyun;
 import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.Page;

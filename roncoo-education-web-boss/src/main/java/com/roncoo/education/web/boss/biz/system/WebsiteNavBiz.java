@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.roncoo.education.system.common.bean.qo.WebsiteNavQO;
 import com.roncoo.education.system.common.bean.vo.WebsiteNavVO;
-import com.roncoo.education.system.feign.web.IBossWebsiteNav;
+import com.roncoo.education.system.feign.IBossWebsiteNav;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
 

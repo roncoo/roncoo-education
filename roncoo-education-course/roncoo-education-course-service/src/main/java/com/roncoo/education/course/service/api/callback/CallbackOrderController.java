@@ -16,7 +16,7 @@ import com.roncoo.education.course.service.biz.callback.CallbackOrderBiz;
 import com.roncoo.education.course.service.common.bo.OrderInfoPayNotifyBO;
 import com.roncoo.education.course.service.common.bo.callback.CallbackOrderBO;
 import com.roncoo.education.system.common.bean.vo.SysVO;
-import com.roncoo.education.system.feign.web.IBossSys;
+import com.roncoo.education.system.feign.IBossSys;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.enums.OrderStatusEnum;
 import com.roncoo.education.util.enums.TradeStatusEnum;

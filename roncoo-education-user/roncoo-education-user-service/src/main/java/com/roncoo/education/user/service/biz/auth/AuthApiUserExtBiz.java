@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.roncoo.education.system.feign.web.IBossSys;
+import com.roncoo.education.system.feign.IBossSys;
 import com.roncoo.education.user.service.common.bo.auth.AuthUserExtBO;
 import com.roncoo.education.user.service.common.bo.auth.AuthUserExtViewBO;
 import com.roncoo.education.user.service.common.dto.auth.AuthUserExtDTO;

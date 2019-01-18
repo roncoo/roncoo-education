@@ -40,7 +40,7 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfoExamp
 import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfoExample.Criteria;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderPay;
 import com.roncoo.education.system.common.bean.vo.SysVO;
-import com.roncoo.education.system.feign.web.IBossSys;
+import com.roncoo.education.system.feign.IBossSys;
 import com.roncoo.education.user.common.bean.vo.LecturerVO;
 import com.roncoo.education.user.common.bean.vo.UserExtVO;
 import com.roncoo.education.user.feign.IBossLecturer;

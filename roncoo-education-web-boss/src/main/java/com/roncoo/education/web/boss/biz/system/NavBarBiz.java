@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.roncoo.education.system.common.bean.qo.NavBarQO;
 import com.roncoo.education.system.common.bean.vo.NavBarVO;
-import com.roncoo.education.system.feign.web.IBossNavBar;
+import com.roncoo.education.system.feign.IBossNavBar;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
 

@@ -11,7 +11,7 @@ import org.springframework.util.StringUtils;
 
 import com.aliyuncs.exceptions.ClientException;
 import com.roncoo.education.system.common.bean.vo.SysVO;
-import com.roncoo.education.system.feign.web.IBossSys;
+import com.roncoo.education.system.feign.IBossSys;
 import com.roncoo.education.user.service.common.bo.UserLoginCodeBO;
 import com.roncoo.education.user.service.common.bo.UserLoginPasswordBO;
 import com.roncoo.education.user.service.common.bo.UserRegisterBO;

@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.roncoo.education.course.common.bean.qo.CourseQO;
 import com.roncoo.education.course.common.bean.vo.CourseVO;
 import com.roncoo.education.course.feign.IBossCourse;
-import com.roncoo.education.system.feign.web.IBossSys;
+import com.roncoo.education.system.feign.IBossSys;
 import com.roncoo.education.util.aliyun.Aliyun;
 import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.Page;

@@ -27,6 +27,7 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAuditExample;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAuditExample.Criteria;
+import com.roncoo.education.system.feign.IBossSys;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseCategory;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapter;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterAudit;
@@ -34,7 +35,6 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterP
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriodAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduce;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduceAudit;
-import com.roncoo.education.system.feign.web.IBossSys;
 import com.roncoo.education.user.common.bean.vo.LecturerVO;
 import com.roncoo.education.user.feign.IBossLecturer;
 import com.roncoo.education.util.aliyun.Aliyun;

@@ -24,7 +24,7 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterA
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriodAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideo;
 import com.roncoo.education.system.common.bean.vo.SysVO;
-import com.roncoo.education.system.feign.web.IBossSys;
+import com.roncoo.education.system.feign.IBossSys;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.AuditStatusEnum;

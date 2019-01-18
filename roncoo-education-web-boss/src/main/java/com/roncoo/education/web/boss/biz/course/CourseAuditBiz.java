@@ -12,7 +12,7 @@ import com.roncoo.education.course.common.bean.vo.CourseAuditVO;
 import com.roncoo.education.course.common.bean.vo.CourseCategoryVO;
 import com.roncoo.education.course.feign.IBossCourseAudit;
 import com.roncoo.education.course.feign.IBossCourseCategory;
-import com.roncoo.education.system.feign.web.IBossSys;
+import com.roncoo.education.system.feign.IBossSys;
 import com.roncoo.education.util.aliyun.Aliyun;
 import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.Page;

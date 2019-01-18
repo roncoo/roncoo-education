@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.roncoo.education.course.service.dao.CourseVideoDao;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideo;
 import com.roncoo.education.system.common.bean.vo.SysVO;
-import com.roncoo.education.system.feign.web.IBossSys;
+import com.roncoo.education.system.feign.IBossSys;
 import com.roncoo.education.util.aliyun.Aliyun;
 import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.BaseBiz;
