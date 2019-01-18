@@ -23,12 +23,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
+import com.roncoo.education.user.common.bean.vo.UserVO;
+import com.roncoo.education.user.feign.web.IBossUser;
 import com.roncoo.education.util.tools.Constants;
 import com.roncoo.education.util.tools.JSONUtil;
 import com.roncoo.education.web.boss.common.bean.vo.SysMenuVO;
 import com.roncoo.education.web.boss.service.dao.SysUserDao;
 import com.roncoo.education.web.boss.service.dao.impl.mapper.entity.SysUser;
 import com.roncoo.spring.boot.autoconfigure.shiro.ShiroRealm;
+import com.xiaoleilu.hutool.crypto.DigestUtil;
 import com.xiaoleilu.hutool.util.CollectionUtil;
 import com.xiaoleilu.hutool.util.ObjectUtil;
 
@@ -53,6 +56,8 @@ class ShiroCustomRealm extends ShiroRealm {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	@Autowired
+	private IBossUser bossUser;
 	@Autowired
 	private SysUserDao sysUserDao;
 
@@ -80,8 +85,13 @@ class ShiroCustomRealm extends ShiroRealm {
 		if (ObjectUtil.isNull(sysUser)) {
 			throw new AuthenticationException("账号不存在");
 		}
-		// 密码校验
-
+		UserVO user = bossUser.getByMobile(token.getUsername());
+		if (ObjectUtil.isNull(sysUser)) {
+			throw new AuthenticationException("账号或者密码不正确");
+		}
+		if (!DigestUtil.sha1Hex(user.getMobileSalt() + String.valueOf(token.getPassword())).equals(user.getMobilePsw())) {
+			throw new AuthenticationException("账号或者密码不正确");
+		}
 		SecurityUtils.getSubject().getSession().setAttribute(Constants.Session.USER_NO, sysUser.getUserNo());
 		SecurityUtils.getSubject().getSession().setAttribute(Constants.Session.REAL_NAME, sysUser.getRealName());
 		SecurityUtils.getSubject().getSession().setAttribute(Constants.Session.USER_VO, JSONUtil.toJSONString(sysUser));
