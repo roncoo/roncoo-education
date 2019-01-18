@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.roncoo.education.user.common.bean.qo.LecturerProfitQO;
 import com.roncoo.education.user.common.bean.vo.LecturerProfitVO;
-import com.roncoo.education.user.feign.web.IBossLecturerProfit;
+import com.roncoo.education.user.feign.IBossLecturerProfit;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.enums.ProfitStatusEnum;
 import com.roncoo.education.web.boss.common.BizBoss;

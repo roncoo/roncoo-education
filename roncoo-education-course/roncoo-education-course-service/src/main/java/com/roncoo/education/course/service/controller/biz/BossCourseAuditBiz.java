@@ -36,7 +36,7 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduc
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduceAudit;
 import com.roncoo.education.system.feign.web.IBossSys;
 import com.roncoo.education.user.common.bean.vo.LecturerVO;
-import com.roncoo.education.user.feign.web.IBossLecturer;
+import com.roncoo.education.user.feign.IBossLecturer;
 import com.roncoo.education.util.aliyun.Aliyun;
 import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.BaseException;

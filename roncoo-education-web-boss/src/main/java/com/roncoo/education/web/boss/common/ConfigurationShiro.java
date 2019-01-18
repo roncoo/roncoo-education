@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
 import com.roncoo.education.user.common.bean.vo.UserVO;
-import com.roncoo.education.user.feign.web.IBossUser;
+import com.roncoo.education.user.feign.IBossUser;
 import com.roncoo.education.util.tools.Constants;
 import com.roncoo.education.util.tools.JSONUtil;
 import com.roncoo.education.web.boss.common.bean.vo.SysMenuVO;

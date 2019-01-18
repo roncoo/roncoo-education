@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.roncoo.education.user.common.bean.qo.UserLogLoginQO;
 import com.roncoo.education.user.common.bean.vo.UserLogLoginVO;
-import com.roncoo.education.user.feign.web.IBossUserLogLogin;
+import com.roncoo.education.user.feign.IBossUserLogLogin;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
 

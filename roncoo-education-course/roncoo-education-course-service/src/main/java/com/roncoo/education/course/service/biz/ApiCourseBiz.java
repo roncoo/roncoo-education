@@ -25,7 +25,7 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseExample;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseExample.Criteria;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduce;
 import com.roncoo.education.user.common.bean.vo.LecturerVO;
-import com.roncoo.education.user.feign.web.IBossLecturer;
+import com.roncoo.education.user.feign.IBossLecturer;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.base.Result;

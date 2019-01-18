@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.roncoo.education.system.feign.web.IBossSys;
 import com.roncoo.education.user.common.bean.qo.UserExtQO;
 import com.roncoo.education.user.common.bean.vo.UserExtVO;
-import com.roncoo.education.user.feign.web.IBossUserExt;
+import com.roncoo.education.user.feign.IBossUserExt;
 import com.roncoo.education.util.aliyun.Aliyun;
 import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.BaseBiz;

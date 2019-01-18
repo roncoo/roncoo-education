@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.roncoo.education.user.common.bean.qo.UserLogModifiedQO;
 import com.roncoo.education.user.common.bean.vo.UserLogModifiedVO;
-import com.roncoo.education.user.feign.web.IBossUserLogModified;
+import com.roncoo.education.user.feign.IBossUserLogModified;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
 

@@ -15,7 +15,7 @@ import com.roncoo.education.course.feign.IBossCourse;
 import com.roncoo.education.course.feign.IBossZone;
 import com.roncoo.education.course.feign.IBossZoneCourse;
 import com.roncoo.education.user.common.bean.vo.LecturerVO;
-import com.roncoo.education.user.common.interfaces.web.BossLecturer;
+import com.roncoo.education.user.common.interfaces.BossLecturer;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
 

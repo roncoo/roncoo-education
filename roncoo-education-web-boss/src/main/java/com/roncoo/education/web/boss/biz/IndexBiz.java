@@ -24,7 +24,7 @@ import com.roncoo.education.course.common.bean.vo.OrderEchartsVO;
 import com.roncoo.education.course.feign.IBossOrderInfo;
 import com.roncoo.education.user.common.bean.qo.UserExtEchartsQO;
 import com.roncoo.education.user.common.bean.vo.UserEchartsVO;
-import com.roncoo.education.user.feign.web.IBossUserExt;
+import com.roncoo.education.user.feign.IBossUserExt;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.tools.DateUtil;
 

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.roncoo.education.user.common.bean.qo.PlatformQO;
 import com.roncoo.education.user.common.bean.vo.PlatformVO;
-import com.roncoo.education.user.feign.web.IBossPlatform;
+import com.roncoo.education.user.feign.IBossPlatform;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.tools.StrUtil;

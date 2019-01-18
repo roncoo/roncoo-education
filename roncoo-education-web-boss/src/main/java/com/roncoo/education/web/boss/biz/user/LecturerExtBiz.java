@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.roncoo.education.user.common.bean.qo.LecturerExtQO;
 import com.roncoo.education.user.common.bean.vo.LecturerExtVO;
-import com.roncoo.education.user.feign.web.IBossLecturerExt;
+import com.roncoo.education.user.feign.IBossLecturerExt;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
 

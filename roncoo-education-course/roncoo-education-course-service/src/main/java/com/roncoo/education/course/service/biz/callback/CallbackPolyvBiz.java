@@ -16,7 +16,7 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapter;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriod;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo;
 import com.roncoo.education.user.common.bean.vo.UserExtVO;
-import com.roncoo.education.user.feign.web.IBossUserExt;
+import com.roncoo.education.user.feign.IBossUserExt;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.enums.IsFreeEnum;
 import com.roncoo.education.util.enums.OrderStatusEnum;

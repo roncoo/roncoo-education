@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.roncoo.education.user.common.bean.qo.RegionQO;
 import com.roncoo.education.user.common.bean.vo.RegionVO;
-import com.roncoo.education.user.feign.web.IBossRegion;
+import com.roncoo.education.user.feign.IBossRegion;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
 
