@@ -54,6 +54,8 @@
 │  │
 │  ├─roncoo-education-gateway-api --------------网关工程
 │  │
+│  ├─roncoo-education-server-admin -------------监控中心
+│  │
 │  ├─roncoo-education-server-config ------------配置中心
 │  │
 │  ├─roncoo-education-server-eureka ------------注册中心
