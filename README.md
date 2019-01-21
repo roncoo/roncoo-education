@@ -22,6 +22,9 @@
 | Freemarker        | Logback           | Hutool            | Spring IO Platform | 
 
 ### 流程图说明
+* 系统架构图
+![系统架构图](/doc/images/01.jpg)
+
 * 课程播放流程
 ![课程播放流程](/doc/images/course.png)
 
@@ -50,6 +53,8 @@
 │  ├─roncoo-education-crontab-plan -------------定时任务，处理过期订单和统计等
 │  │
 │  ├─roncoo-education-gateway-api --------------网关工程
+│  │
+│  ├─roncoo-education-server-admin -------------监控中心
 │  │
 │  ├─roncoo-education-server-config ------------配置中心
 │  │
