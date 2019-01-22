@@ -121,7 +121,7 @@ Lombok是一个可以通过简单的注解形式来帮助我们简化消除一�
 
 ![图](/doc/images/lombok1.png)
 
-### 官方QQ群
+### 官方QQ群（加群免费获取sql脚本）
 <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=7d1b7f1a78715320d09ed841c66d6bf0fa7b9105964cc327e9483e459b46abd4"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课" title="在线教育系统-领课"> 826617734</a>
 
 ## 项目推荐
