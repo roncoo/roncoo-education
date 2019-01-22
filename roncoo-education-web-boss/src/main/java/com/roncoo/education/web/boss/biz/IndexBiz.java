@@ -3,7 +3,6 @@ package com.roncoo.education.web.boss.biz;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,12 +125,12 @@ public class IndexBiz extends BaseBiz {
 	 * @author wuyun
 	 */
 	private List<String> payTime(OrderInfoQO orderInfoQO, List<String> data1) {
-		orderInfoQO.setBeginCreate(DateUtil.format(DateUtil.addDate(new Date(), -10)));
-		orderInfoQO.setEndCreate(DateUtil.format(new Date()));
+//		orderInfoQO.setBeginCreate(DateUtil.format(DateUtil.addDate(new Date(), -10)));
+//		orderInfoQO.setEndCreate(DateUtil.format(new Date()));
 		
 		// 演示需要
-		//orderInfoQO.setBeginCreate("2019-01-13");
-		//orderInfoQO.setEndCreate("2019-01-22");
+		orderInfoQO.setBeginCreate("2019-01-16");
+		orderInfoQO.setEndCreate("2019-01-25");
 		
 		Calendar tempStart = Calendar.getInstance();
 		tempStart.setTime(DateUtil.parseDate(orderInfoQO.getBeginCreate(), "yyyy-MM-dd"));
