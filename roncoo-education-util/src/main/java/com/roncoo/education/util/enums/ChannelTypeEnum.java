@@ -12,7 +12,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ChannelTypeEnum {
-	PC(1, "PC端"), APP(2, "APP端"), WEIXIN(3, "微信端"), MANUAL(4, "手工绑定");
+	PC(1, "PC端");
 
 	private Integer code;
 
