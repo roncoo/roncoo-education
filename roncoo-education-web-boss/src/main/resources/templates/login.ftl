@@ -6,6 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 <title>领课教育</title>
+<link type="image/x-icon" rel="icon" href="roncoo/images/favicon.ico" />
 <link type="text/css" rel="stylesheet" href="roncoo/css/login.css">
 </head>
 <body>
