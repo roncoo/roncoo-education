@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import com.roncoo.education.user.common.bean.qo.UserQO;
+import com.roncoo.education.user.common.bean.vo.UserVO;
+import com.roncoo.education.user.feign.IBossUser;
 import com.roncoo.education.util.base.BaseException;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
@@ -34,6 +37,9 @@ public class SysUserService {
 
 	@Autowired
 	private SysRoleUserDao sysRoleUserDao;
+	
+	@Autowired
+	private IBossUser bossUser;
 
 	public Page<SysUserVO> listForPage(SysUserQO qo) {
 		SysUserExample example = new SysUserExample();
@@ -65,6 +71,15 @@ public class SysUserService {
 	}
 
 	public int updateById(SysUserQO qo) {
+		SysUser sysUser = dao.getById(qo.getId());
+		UserVO user = bossUser.getByMobile(sysUser.getMobile());
+		if (user == null) {
+			throw new BaseException("找不到用户信息");
+		}
+		UserQO userQO = new UserQO();
+		userQO.setId(user.getId());
+		userQO.setMobile(qo.getMobile());
+		bossUser.updateById(userQO);
 		SysUser record = BeanUtil.copyProperties(qo, SysUser.class);
 		return dao.updateById(record);
 	}
