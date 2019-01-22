@@ -1,7 +1,10 @@
-# 龙果教育-领课网络在线教育系统
+# 领课教育-领课网络在线教育系统
 
 ### 项目介绍
 领课教育是基于领课团队多年的在线教育开发和运营经验的产品，打造一个全行业都适用的在线教育系统。
+
+### 配置工程
+##### roncoo-education-config：[码云地址](https://gitee.com/roncoocom/roncoo-education-config) | [Github地址](https://github.com/roncoo/roncoo-education-config)
 
 ### 功能介绍
 * 权限管理功能，多角色多用户自定义配置
