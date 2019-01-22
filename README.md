@@ -1,7 +1,15 @@
-# 龙果教育-领课网络在线教育系统
+# 领课教育-领课网络在线教育系统
 
 ### 项目介绍
 领课教育是基于领课团队多年的在线教育开发和运营经验的产品，打造一个全行业都适用的在线教育系统。
+
+### 配置工程
+##### roncoo-education-config：[码云地址](https://gitee.com/roncoocom/roncoo-education-config) | [Github地址](https://github.com/roncoo/roncoo-education-config)
+
+### 演示地址
+#### 前端演示地址：[领课教育](http://edu.os.roncoo.com/)
+#### 后台演示地址：[管理后台](http://roncoo.vicp.net/boss/login)
+
 
 ### 功能介绍
 * 权限管理功能，多角色多用户自定义配置
@@ -113,7 +121,7 @@ Lombok是一个可以通过简单的注解形式来帮助我们简化消除一�
 
 ![图](/doc/images/lombok1.png)
 
-### 官方QQ群
+### 官方QQ群（加群免费获取sql脚本）
 <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=7d1b7f1a78715320d09ed841c66d6bf0fa7b9105964cc327e9483e459b46abd4"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课" title="在线教育系统-领课"> 826617734</a>
 
 ## 项目推荐

@@ -52,7 +52,7 @@ public final class PolyvUtil {
 
 	private static final Logger logger = LoggerFactory.getLogger(PolyvUtil.class);
 
-	private static final String KEY = "roncoo-education"; // 长度为12
+	private static final String KEY = "roncoo-cloud"; // 长度为12
 	private static final String CHARSET_UTF_8 = "UTF-8";
 
 	private PolyvUtil() {
