@@ -24,7 +24,7 @@ public class AuthOrderInfoContinuePayBO implements Serializable {
     /***
      * 支付类型
      */
-    @ApiModelProperty(value = "支付方式(1微信支付，2支付宝支付，3积分支付)", required = true)
+    @ApiModelProperty(value = "支付方式：1微信支付，2支付宝支付", required = true)
     private Integer payType;
 
 }

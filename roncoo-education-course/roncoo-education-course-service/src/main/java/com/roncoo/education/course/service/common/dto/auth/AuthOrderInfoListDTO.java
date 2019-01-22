@@ -68,11 +68,11 @@ public class AuthOrderInfoListDTO implements Serializable {
 	/**
 	 * 支付方式：1微信支付，2支付宝支付，3积分支付
 	 */
-	@ApiModelProperty(value = "支付方式：1微信支付，2支付宝支付，3积分支付,4手工录单")
+	@ApiModelProperty(value = "支付方式：1微信支付，2支付宝支付")
 	private Integer payType;
 	/**
 	 * 订单状态：1待支付，2成功支付，3支付失败，4已关闭，5已退款, 6订单解绑
 	 */
-	@ApiModelProperty(value = "订单状态：1待支付，2成功支付，3支付失败，4已关闭，5已退款, 6订单解绑")
+	@ApiModelProperty(value = "订单状态：1待支付，2成功支付，3支付失败，4已关闭")
 	private Integer orderStatus;
 }

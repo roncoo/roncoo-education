@@ -11,7 +11,7 @@ public class PolyvCode implements Serializable {
 
 	private Long userNo;
 
-	private Long periodId;
+	private Long periodNo;
 
 	public Long getUserNo() {
 		return userNo;
@@ -21,12 +21,12 @@ public class PolyvCode implements Serializable {
 		this.userNo = userNo;
 	}
 
-	public Long getPeriodId() {
-		return periodId;
+	public Long getPeriodNo() {
+		return periodNo;
 	}
 
-	public void setPeriodId(Long periodId) {
-		this.periodId = periodId;
+	public void setPeriodNo(Long periodNo) {
+		this.periodNo = periodNo;
 	}
 
 }

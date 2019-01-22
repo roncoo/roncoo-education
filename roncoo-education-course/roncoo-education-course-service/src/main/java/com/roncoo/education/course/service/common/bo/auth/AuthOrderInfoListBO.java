@@ -18,9 +18,9 @@ public class AuthOrderInfoListBO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 订单状态1待支付，2成功支付，3支付失败，4已关闭，5已退款, 6订单解绑
+	 * 订单状态1待支付，2成功支付，3支付失败，4已关闭
 	 */
-	@ApiModelProperty(value = "订单状态(1待支付，2成功支付，3支付失败，4已关闭，5已退款, 6订单解绑)")
+	@ApiModelProperty(value = "订单状态(1待支付，2成功支付，3支付失败，4已关闭)")
 	private Integer orderStatus;
 
 	/**

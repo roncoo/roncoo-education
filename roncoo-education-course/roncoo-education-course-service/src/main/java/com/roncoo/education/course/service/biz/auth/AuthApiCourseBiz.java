@@ -205,7 +205,7 @@ public class AuthApiCourseBiz extends BaseBiz {
 		PolyvSignResult signResult = PolyvUtil.getSignForH5(polyvSign, sys.getPolyvUseid(), sys.getPolyvSecretkey());
 		AuthCourseSignDTO dto = BeanUtil.copyProperties(signResult, AuthCourseSignDTO.class);
 		PolyvCode polyvCode = new PolyvCode();
-		polyvCode.setPeriodId(authCourseSignBO.getPeriodId());
+		polyvCode.setPeriodNo(authCourseSignBO.getPeriodId());
 		polyvCode.setUserNo(authCourseSignBO.getUserNo());
 		dto.setCode(PolyvUtil.getPolyvCode(polyvCode));
 		return dto;
