@@ -50,6 +50,7 @@ import com.roncoo.education.util.base.BaseException;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.base.Result;
+import com.roncoo.education.util.config.SystemUtil;
 import com.roncoo.education.util.enums.IsShowEnum;
 import com.roncoo.education.util.enums.IsShowUserEnum;
 import com.roncoo.education.util.enums.OrderStatusEnum;
@@ -147,8 +148,8 @@ public class AuthApiOrderInfoBiz extends BaseBiz {
 			return Result.error("lecturerUserNo不正确");
 		}
 
-		// 判断所要购买的课程是否已经购买
-		if (!checkOrderInfo(authOrderPayBO.getUserNo(), authOrderPayBO.getCourseId())) {
+		// 判断所要购买的课程是否已经购买------(如果课程为测试支付课程，可以重复下单，不提示已经购买，去掉后面一截判断即可正常使用)
+		if (!checkOrderInfo(authOrderPayBO.getUserNo(), authOrderPayBO.getCourseId()) && !SystemUtil.TEST_COURSE.equals(course.getId().toString())) {
 			return Result.error("已经购买该课程，请勿重复购买");
 		}
 
