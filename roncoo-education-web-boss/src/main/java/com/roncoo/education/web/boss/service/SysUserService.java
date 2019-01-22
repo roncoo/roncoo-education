@@ -70,6 +70,7 @@ public class SysUserService {
 		return BeanUtil.copyProperties(record, SysUserVO.class);
 	}
 
+	@Transactional
 	public int updateById(SysUserQO qo) {
 		SysUser sysUser = dao.getById(qo.getId());
 		UserVO user = bossUser.getByMobile(sysUser.getMobile());
