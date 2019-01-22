@@ -7,7 +7,8 @@
 ##### roncoo-education-config：[码云地址](https://gitee.com/roncoocom/roncoo-education-config) | [Github地址](https://github.com/roncoo/roncoo-education-config)
 
 ### 演示地址
-#### 前端演示地址：[领课教育](http://edu.os.roncoo.com/) | 后台演示地址：[管理后台](http://roncoo.vicp.net/boss/login)
+#### 前端演示地址：[领课教育](http://edu.os.roncoo.com/)
+#### 后台演示地址：[管理后台](http://roncoo.vicp.net/boss/login)
 
 
 ### 功能介绍
