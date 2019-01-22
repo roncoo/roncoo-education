@@ -93,7 +93,7 @@ public class CallbackPolyvBiz extends BaseBiz {
 		}
 
 		// 课时校验
-		CourseChapterPeriod periodInfo = courseChapterPeriodDao.getById(polyvCode.getPeriodId());
+		CourseChapterPeriod periodInfo = courseChapterPeriodDao.getById(polyvCode.getPeriodNo());
 
 		// 章节校验
 		CourseChapter chapterInfo = courseChapterDao.getById(periodInfo.getChapterId());
