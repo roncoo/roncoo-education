@@ -23,8 +23,7 @@
               <input value="登录" type="submit">
           </form>
       </div>
-      <div class="copyright">广州市领课网络科技有限公司 版权所有©2016-<span id="y"></span> | 粤ICP备16009964号</div>
-      <script language="javascript">document.getElementById("y").innerHTML = new Date().getFullYear();</script>
+      <div class="copyright">广州市领课网络科技有限公司 版权所有©2015-2019</span> | 粤ICP备16009964号</div>
 </div>
 </body>
 </html>
