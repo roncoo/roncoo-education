@@ -4,6 +4,8 @@
 领课教育是基于领课团队多年的在线教育开发和运营经验的产品，打造一个全行业都适用的在线教育系统。
 
 ### 配置工程
+#### 前端演示地址：[领课教育](http://edu.os.roncoo.com/)
+#### 后台演示地址：[管理后台](http://roncoo.vicp.net/boss/login)
 ##### roncoo-education-config：[码云地址](https://gitee.com/roncoocom/roncoo-education-config) | [Github地址](https://github.com/roncoo/roncoo-education-config)
 
 ### 功能介绍
