@@ -49,5 +49,5 @@ public interface BossLecturerExt {
 	 * @author wuyun
 	 */
 	@RequestMapping(value = "/boss/user/lecturerExt/updateTotalIncomeByLecturerUserNo", method = RequestMethod.PUT)
-	void updateTotalIncomeByLecturerUserNo(LecturerExtQO qo);
+	void updateTotalIncomeByLecturerUserNo(@RequestBody LecturerExtQO qo);
 }
