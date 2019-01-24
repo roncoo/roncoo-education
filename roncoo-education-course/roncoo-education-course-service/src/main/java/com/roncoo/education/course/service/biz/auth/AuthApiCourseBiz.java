@@ -35,6 +35,7 @@ import com.roncoo.education.user.feign.IBossLecturer;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.base.Result;
+import com.roncoo.education.util.config.SystemUtil;
 import com.roncoo.education.util.enums.IsFreeEnum;
 import com.roncoo.education.util.enums.IsPayEnum;
 import com.roncoo.education.util.enums.OrderStatusEnum;
@@ -153,6 +154,11 @@ public class AuthApiCourseBiz extends BaseBiz {
 		// 如果课程为免费课程则设置为已付费
 		if (IsFreeEnum.FREE.getCode().equals(course.getIsFree())) {
 			dto.setIsPay(IsPayEnum.YES.getCode());
+		}
+		
+		//此处用于测试支付课程，无论怎样都是未购买
+		if (SystemUtil.TEST_COURSE.equals(course.getId().toString())) {
+			dto.setIsPay(IsPayEnum.NO.getCode());
 		}
 		
 		// 查询讲师信息

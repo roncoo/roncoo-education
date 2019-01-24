@@ -53,4 +53,6 @@ public final class SystemUtil {
 	public static final String LECTURER_DEFAULT_PROPORTION = getProperty("lecturer_default_proportion");
 	
 	public static final String CONTENT_LENGTH = getProperty("content_length");
+	
+	public static final String TEST_COURSE = getProperty("test_course");
 }
