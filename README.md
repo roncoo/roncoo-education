@@ -3,7 +3,10 @@
 ### 项目介绍
 领课教育是基于领课团队多年的在线教育开发和运营经验的产品，打造一个全行业都适用的在线教育系统。
 
-### 配置工程
+##### 如果对你有用，请给个star！
+
+### 相关工程
+##### roncoo-education-web：[码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web)
 ##### roncoo-education-config：[码云地址](https://gitee.com/roncoocom/roncoo-education-config) | [Github地址](https://github.com/roncoo/roncoo-education-config)
 
 ### 演示地址
