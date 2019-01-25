@@ -5,14 +5,12 @@
 
 ##### 如果对你有用，请给个star！
 
-### 相关工程
-##### roncoo-education-web：[码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web)
-##### roncoo-education-config：[码云地址](https://gitee.com/roncoocom/roncoo-education-config) | [Github地址](https://github.com/roncoo/roncoo-education-config)
-
-### 演示地址
+### 相关链接
+##### 前端工程（roncoo-education-web）：[码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web)
+##### 配置工程（roncoo-education-config）：[码云地址](https://gitee.com/roncoocom/roncoo-education-config) | [Github地址](https://github.com/roncoo/roncoo-education-config)
+##### 使用文档：[码云地址](https://gitee.com/roncoocom/roncoo-education/wikis/Home) | [Github地址](https://github.com/roncoo/roncoo-education/wiki)
 #### 前端演示地址：[领课教育](http://edu.os.roncoo.com/)
 #### 后台演示地址：[管理后台](http://roncoo.vicp.net/boss/login)
-
 
 ### 功能介绍
 * 权限管理功能，多角色多用户自定义配置
