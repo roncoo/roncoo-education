@@ -21,6 +21,11 @@
 * 广告管理功能，后台自定义广告设置，增加营销效果
 * 支付功能，系统无缝集成了龙果支付
 
+### TODO
+* 动态更新配置(spring cloud bus + kafka + spring cloud config)
+* 日志收集统计(kafka + Elasticsearch + Logstash + Kibana)
+* 链路追踪监控(spring cloud sleuth + kafka + zipkin)
+
 ### 技术选型
 | 核心技术框架                           | 注册中心                                  | 服务网关                                   | 负载均衡                                     |
 | ----------------- | ----------------- | ----------------- | ------------------ | 
