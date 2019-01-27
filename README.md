@@ -3,13 +3,14 @@
 ### 项目介绍
 领课教育是基于领课团队多年的在线教育开发和运营经验的产品，打造一个全行业都适用的在线教育系统。
 
-### 配置工程
-##### roncoo-education-config：[码云地址](https://gitee.com/roncoocom/roncoo-education-config) | [Github地址](https://github.com/roncoo/roncoo-education-config)
+##### 如果对你有用，请给个star！
 
-### 演示地址
+### 相关链接
+##### 前端工程（roncoo-education-web）：[码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web)
+##### 配置工程（roncoo-education-config）：[码云地址](https://gitee.com/roncoocom/roncoo-education-config) | [Github地址](https://github.com/roncoo/roncoo-education-config)
+##### 使用文档：[码云地址](https://gitee.com/roncoocom/roncoo-education/wikis/Home) | [Github地址](https://github.com/roncoo/roncoo-education/wiki)
 #### 前端演示地址：[领课教育](http://edu.os.roncoo.com/)
 #### 后台演示地址：[管理后台](http://roncoo.vicp.net/boss/login)
-
 
 ### 功能介绍
 * 权限管理功能，多角色多用户自定义配置
@@ -19,6 +20,11 @@
 * 用户登录功能，同一时间只允许同一个账号在同一个地方登录，防止账号共享
 * 广告管理功能，后台自定义广告设置，增加营销效果
 * 支付功能，系统无缝集成了龙果支付
+
+### TODO
+* 动态更新配置(spring cloud bus + kafka + spring cloud config)
+* 日志收集统计(kafka + Elasticsearch + Logstash + Kibana)
+* 链路追踪监控(spring cloud sleuth + kafka + zipkin)
 
 ### 技术选型
 | 核心技术框架                           | 注册中心                                  | 服务网关                                   | 负载均衡                                     |
@@ -92,7 +98,7 @@
 │  │  │
 │  │  ├─lombok.jar ----------------------------Eclipse使用，放到Eclipse的根目录即可
 │  │  │
-└──└──└─cloud_education.sql------------------------项目SQL脚本：带有demo数据
+└──└──└─*.sql----------------------------------项目SQL脚本：带有demo数据
 ```
 
 ### 加速maven构建
