@@ -3,8 +3,14 @@
 ### 项目介绍
 领课教育是基于领课团队多年的在线教育开发和运营经验的产品，打造一个全行业都适用的在线教育系统。
 
-###### 如果对你有用，请给个star！
-###### 商业合作可以联系QQ：297115770 
+##### 如果对你有用，请给个star！
+
+### 商业合作
+* 如果想定制开发，我们提供有偿服务支持
+* 如果想运营平台，我们云平台提供平台入驻
+##### 商业合作联系QQ：297115770 
+##### 商业合作联系QQ：513781560 
+##### 官网地址：[http://www.roncoo.net](http://www.roncoo.net/index.html)
 
 ### 相关链接
 ##### 前端工程（roncoo-education-web）：[码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web)
