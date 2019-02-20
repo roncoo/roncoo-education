@@ -41,7 +41,7 @@
 	<parent>
 		<groupId>io.spring.platform</groupId>
 		<artifactId>platform-bom</artifactId>
-		<version>Cairo-SR6</version>
+		<version>Cairo-SR7</version>
 	</parent>
 
 	<properties>
@@ -202,12 +202,12 @@
 			<dependency>
 				<groupId>com.roncoo</groupId>
 				<artifactId>roncoo-spring-boot-starter-druid</artifactId>
-				<version>1.0.5</version>
+				<version>1.0.6</version>
 			</dependency>
 			<dependency>
 				<groupId>com.roncoo</groupId>
 				<artifactId>roncoo-spring-boot-starter-shiro</artifactId>
-				<version>1.0.5</version>
+				<version>1.0.6</version>
 			</dependency>
 			<dependency>
 				<groupId>com.roncoo</groupId>
