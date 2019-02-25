@@ -5,7 +5,7 @@
 
 	<groupId>com.roncoo</groupId>
 	<artifactId>roncoo-education</artifactId>
-	<version>1.0.0</version>
+	<version>2.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>roncoo-education</name>
@@ -47,6 +47,7 @@
 	<properties>
 		<org.springframework.cloud.version>Finchley.SR2</org.springframework.cloud.version>
 		<de.codecentric.version>2.0.4</de.codecentric.version>
+        <io.zipkin.java.version>2.11.12</io.zipkin.java.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -197,6 +198,34 @@
                 <artifactId>spring-boot-admin-server-ui</artifactId>
                 <version>${de.codecentric.version}</version>
             </dependency>
+            
+            <!-- zipkin -->
+            <dependency>
+                <groupId>io.zipkin.java</groupId>
+                <artifactId>zipkin-server</artifactId>
+                <version>${io.zipkin.java.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.logging.log4j</groupId>
+                        <artifactId>log4j-slf4j-impl</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.zipkin.java</groupId>
+                <artifactId>zipkin-autoconfigure-ui</artifactId>
+                <version>${io.zipkin.java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zipkin.java</groupId>
+                <artifactId>zipkin-autoconfigure-collector-kafka</artifactId>
+                <version>${io.zipkin.java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zipkin.java</groupId>
+                <artifactId>zipkin-autoconfigure-storage-elasticsearch</artifactId>
+                <version>${io.zipkin.java.version}</version>
+            </dependency>
 
 			<!-- com.roncoo -->
 			<dependency>
@@ -273,6 +302,8 @@
 		<module>roncoo-education-server-config</module>
 		<!-- 监控中心 -->
         <module>roncoo-education-server-admin</module>
+        <!-- 链接监控 -->
+        <module>roncoo-education-server-zipkin</module>
 		<!-- 公用工具 -->
 		<module>roncoo-education-util</module>
 		<!-- 系统管理 -->
