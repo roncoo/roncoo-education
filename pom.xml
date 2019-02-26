@@ -29,12 +29,52 @@
 			<name>fengyongwei</name>
 			<email>fengyw@roncoo.com</email>
 			<organization>LingKe, Co., Ltd.</organization>
-			<organizationUrl>http://www.roncoo.com</organizationUrl>
+			<organizationUrl>http://www.roncoo.net</organizationUrl>
 			<roles>
 				<role>developer</role>
 			</roles>
 			<timezone>+8</timezone>
 		</developer>
+		<developer>
+            <name>yangzj</name>
+            <email>yangzj@roncoo.com</email>
+            <organization>LingKe, Co., Ltd.</organization>
+            <organizationUrl>http://www.roncoo.net</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+        <developer>
+            <name>wuy</name>
+            <email>wuy@roncoo.com</email>
+            <organization>LingKe, Co., Ltd.</organization>
+            <organizationUrl>http://www.roncoo.net</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+		<developer>
+            <name>liaohr</name>
+            <email>liaohr@roncoo.com</email>
+            <organization>LingKe, Co., Ltd.</organization>
+            <organizationUrl>http://www.roncoo.net</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+        <developer>
+            <name>keyh</name>
+            <email>keyh@roncoo.com</email>
+            <organization>LingKe, Co., Ltd.</organization>
+            <organizationUrl>http://www.roncoo.net</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
 	</developers>
 
 	<!-- io.spring.platform -->
