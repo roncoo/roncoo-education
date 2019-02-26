@@ -9,20 +9,13 @@
 	<packaging>pom</packaging>
 
 	<name>roncoo-education</name>
-	<description>roncoo education maven project</description>
-	<url>http://www.roncoo.com</url>
+	<description>领课教育-分布式在线教育开源系统 </description>
+	<url>http://www.roncoo.net</url>
 
 	<organization>
 		<name>LingKe, Co., Ltd.</name>
-		<url>http://www.roncoo.com</url>
+		<url>http://www.roncoo.net</url>
 	</organization>
-
-	<licenses>
-		<license>
-			<name>The Apache License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-		</license>
-	</licenses>
 
 	<developers>
 		<developer>
@@ -108,7 +101,6 @@
 				<artifactId>roncoo-education-course-feign</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>com.roncoo</groupId>
 				<artifactId>roncoo-education-system-common</artifactId>
@@ -119,7 +111,6 @@
 				<artifactId>roncoo-education-system-feign</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>com.roncoo</groupId>
 				<artifactId>roncoo-education-user-common</artifactId>
@@ -130,21 +121,19 @@
 				<artifactId>roncoo-education-user-feign</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>com.roncoo</groupId>
 				<artifactId>roncoo-education-util</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
-			<!-- fastjson -->
-			<dependency>
-				<groupId>com.alibaba</groupId>
-				<artifactId>fastjson</artifactId>
-				<version>1.2.28</version>
-			</dependency>
-
 			<!-- aliyun -->
+			<!-- fastjson -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.28</version>
+            </dependency>
 			<dependency>
 				<groupId>com.aliyun.oss</groupId>
 				<artifactId>aliyun-sdk-oss</artifactId>
