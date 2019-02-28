@@ -5,9 +5,9 @@
 <base href="${base}/">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>领课教育-运营后台</title>
-<meta name="Keywords" content="领课教育-运营后台" />
-<meta name="Description" content="领课教育-运营后台" />
+<title>鲸准微课堂-运营后台</title>
+<meta name="Keywords" content="鲸准微课堂-运营后台" />
+<meta name="Description" content="鲸准微课堂-运营后台" />
 
 <link rel="icon" href="roncoo/images/favicon.ico" type="image/x-icon" />
 
@@ -213,7 +213,7 @@
 				<button type="button" class="bjui-navbar-toggle btn-default" data-toggle="collapse" data-target="#bjui-navbar-collapse">
 					<i class="fa fa-bars"></i>
 				</button>
-				<span class="bjui-navbar-logo" style="color:#fff;"><h4>领课教育-运营后台</h4></span>
+				<span class="bjui-navbar-logo" style="color:#fff;"><h4>鲸准微课堂-运营后台</h4></span>
 			</div>
 			<nav id="bjui-navbar-collapse">
 				<ul class="bjui-navbar-right">

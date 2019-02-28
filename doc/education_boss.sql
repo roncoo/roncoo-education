@@ -1,6 +1,3 @@
-﻿#
-# Structure for table "sys_log"
-#
 
 CREATE TABLE `sys_log` (
   `id` bigint(20) unsigned NOT NULL COMMENT '主键',

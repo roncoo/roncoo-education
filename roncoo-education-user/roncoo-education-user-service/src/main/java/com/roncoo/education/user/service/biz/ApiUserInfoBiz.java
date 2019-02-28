@@ -91,6 +91,8 @@ public class ApiUserInfoBiz extends BaseBiz {
 			return Result.error("该平台状态异常，请联系管理员");
 		}
 
+		/*
+		//TODO:临时屏蔽
 		// 验证码校验
 		String redisSmsCode = redisTemplate.opsForValue().get(platform.getClientId() + userRegisterBO.getMobile());
 		if (StringUtils.isEmpty(redisSmsCode)) {
@@ -98,7 +100,7 @@ public class ApiUserInfoBiz extends BaseBiz {
 		}
 		if (!redisSmsCode.equals(userRegisterBO.getCode())) {
 			return Result.error("验证码不正确，请重新输入");
-		}
+		}*/
 
 		// 手机号重复校验
 		User user = userDao.getByMobile(userRegisterBO.getMobile());

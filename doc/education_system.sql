@@ -1,6 +1,4 @@
-﻿#
-# Structure for table "nav_bar"
-#
+
 
 CREATE TABLE `nav_bar` (
   `id` bigint(20) NOT NULL DEFAULT '0' COMMENT '主键',

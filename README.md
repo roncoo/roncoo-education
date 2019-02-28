@@ -107,36 +107,25 @@
 │  │  │
 └──└──└─*.sql----------------------------------项目SQL脚本：带有demo数据
 ```
-
-### 加速maven构建
-在maven的settings.xml 文件里配置mirrors的子节点，添加如下mirror
-```
-<mirror>
-    <id>nexus-aliyun</id>
-    <mirrorOf>*</mirrorOf>
-    <name>Nexus aliyun</name>
-    <url>http://maven.aliyun.com/nexus/content/groups/public</url>
-</mirror>
-```
-
 ### Lombok使用
 Lombok是一个可以通过简单的注解形式来帮助我们简化消除一些必须有但显得很臃肿的Java代码的工具，通过使用对应的注解，可以在编译源码的时候生成对应的方法。
 [官方地址：https://projectlombok.org/](https://projectlombok.org/)
 
-#### 1. Eclipse使用方法
-把lombok.jar放入Eclipse的根目录，在eclipse.ini配置文件的最后加上
-```
--javaagent:lombok.jar 
-```
-
-#### 2. IntelliJ IDEA使用方法
+#### 1. IntelliJ IDEA使用方法
 安装插件，如图所示
 
 ![图](/doc/images/lombok1.png)
 
-### 官方QQ群（加群免费获取sql脚本）
-<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=7d1b7f1a78715320d09ed841c66d6bf0fa7b9105964cc327e9483e459b46abd4"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课" title="在线教育系统-领课"> 826617734</a>
+#### 2.启动顺序：
+1）启动注册中心(eureka)
+2）启动配置中心(config)
+3）启动用户工程(user)
+4）启动系统工程(system)
+5）启动课程工程(course)
+6）启动网关工程(api)
+7）启动管理后台工程(boss)
+8）启动定时任务工程(plan)
 
-## 项目推荐
-##### roncoo-recharge：[码云地址](https://gitee.com/roncoocom/roncoo-recharge) | [Github地址](https://github.com/roncoo/roncoo-recharge)
-##### roncoo-jui-springboot：[码云地址](https://gitee.com/roncoocom/roncoo-jui-springboot) | [Github地址](https://github.com/roncoo/roncoo-jui-springboot)
+#### 3.管理后台账号密码
+1)普通用户：13800000000 密码：123456
+2)超级管理员：18800000000 密码：asdanEn.132reFwf

@@ -23,9 +23,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><h3 class="panel-title">地址汇总</h3></div>
                 <div class="panel-body">
-                                                         前端演示：<a href="http://edu.os.roncoo.com/" target="_blank">http://edu.os.roncoo.com/</a>
-                    <br/>
-                                                         龙果学院：<a href="https://www.roncoo.com/" target="_blank">https://www.roncoo.com/</a>
+                                                         前端演示：<a href="http://edu.bw-ai.com/" target="_blank">http://edu.bw-ai.com/</a>                    <br/>
+                                                         鲸准官网：<a href="http://bw-ai.com/" target="_blank">http://bw-ai.com/</a>
                     <br/>
                 </div>
             </div>

@@ -1,6 +1,3 @@
-﻿# Host: 192.168.1.216  (Version 5.7.18-14-log)
-# Date: 2019-01-22 15:03:55
-# Generator: MySQL-Front 6.0  (Build 2.20)
 
 
 #
