@@ -63,7 +63,7 @@
                         <pattern>
                             {
                             "severity": "%level",
-                            "service": "${springAppName:-}",
+                            "service": "${springApplicationName:-}",
                             "trace": "%X{X-B3-TraceId:-}",
                             "span": "%X{X-B3-SpanId:-}",
                             "parent": "%X{X-B3-ParentSpanId:-}",
@@ -118,7 +118,7 @@
                         <pattern>
                             {
                             "severity": "%level",
-                            "service": "${springAppName:-}",
+                            "service": "${springApplicationName:-}",
                             "trace": "%X{X-B3-TraceId:-}",
                             "span": "%X{X-B3-SpanId:-}",
                             "parent": "%X{X-B3-ParentSpanId:-}",
