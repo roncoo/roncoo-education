@@ -5,10 +5,14 @@
 
 ##### 如果对你有用，请给个star！
 
-### 相关链接
+### 其他工程
 ##### 前端工程（roncoo-education-web）：[码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web)
 ##### 配置工程（roncoo-education-config）：[码云地址](https://gitee.com/roncoocom/roncoo-education-config) | [Github地址](https://github.com/roncoo/roncoo-education-config)
-##### 使用文档：[码云地址](https://gitee.com/roncoocom/roncoo-education/wikis/Home) | [Github地址](https://github.com/roncoo/roncoo-education/wiki)
+
+### 使用文档
+##### [码云地址](https://gitee.com/roncoocom/roncoo-education/wikis/Home) | [Github地址](https://github.com/roncoo/roncoo-education/wiki)
+
+### 演示地址
 ##### 前端演示地址：[领课教育](http://edu.os.roncoo.com/)
 ##### 后台演示地址：[管理后台](http://roncoo.vicp.net/boss/login)
 
@@ -28,19 +32,33 @@
 * 广告管理功能，后台自定义广告设置，增加营销效果
 * 支付功能，系统无缝集成了龙果支付
 
+### 升级说明
+* 2019-03 集成了链路监控：roncoo-education-server-zipkin
+* 2019-02 集成了应用监控：roncoo-education-server-admin
+
 ### TODO
 * 动态更新配置(spring cloud bus + kafka + spring cloud config)
 * 日志收集统计(kafka + Elasticsearch + Logstash + Kibana)
 * 链路追踪监控(spring cloud sleuth + kafka + zipkin)
 
 ### 技术选型
-| 核心技术框架                           | 注册中心                                  | 服务网关                                   | 负载均衡                                     |
-| ----------------- | ----------------- | ----------------- | ------------------ | 
-| Spring Cloud      | Eureka            | Zuul              | Feign + Ribbon     | 
-| 断路器                                      | 持久层                                       | 连接池                                      | 缓存                                            | 
-| Hystrix           | Mybatis           | Druid             | Redis              | 
-| 模板引擎                                  | 日志框架                                   | 常用工具                                   | 版本维护                                     | 
-| Freemarker        | Logback           | Hutool            | Spring IO Platform | 
+| 技术                                                        | 说明                                       | 版本                      
+| ---------------------- | ---------------- | ----------------- |
+| Spring IO Platform     | 版本维护                                | Cairo-SR7
+| Spring Boot            | 核心技术框架                        | 2.0.8.RELEASE
+| spring-cloud-netflix   | 微服务框架                            | 2.0.2.RELEASE
+| spring-cloud-config    | 配置中心                                | 2.0.2.RELEASE
+| spring-cloud-sleuth    | 服务跟踪                                | 2.0.2.RELEASE
+| Mybatis                | 持久层框架                             | 3.4.5
+| Druid                  | 数据连接池                            | 1.1.12
+| Freemarker             | 模板引擎                                | 2.3.28
+| Hutool                 | 通用工具类                              | 2.16.2
+
+### 软件需求
+* JDK 1.8+
+* MySQL 5.6+
+* Redis 3.0+
+* Maven 3.0+
 
 ### 流程图说明
 * 系统架构图
