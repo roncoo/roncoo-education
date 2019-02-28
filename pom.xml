@@ -185,7 +185,7 @@
 			<dependency>
 				<groupId>net.logstash.logback</groupId>
 				<artifactId>logstash-logback-encoder</artifactId>
-				<version>4.11</version>
+				<version>5.2</version>
 			</dependency>
 
 			<!-- ECharts -->
