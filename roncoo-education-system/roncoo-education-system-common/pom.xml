@@ -24,8 +24,8 @@
 			<artifactId>swagger-spring-boot-starter</artifactId>
 		</dependency>
 		<dependency>
-            <groupId>com.github.caspar-chen</groupId>
-            <artifactId>swagger-ui-layer</artifactId>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>swagger-bootstrap-ui</artifactId>
         </dependency>
 
 	</dependencies>
