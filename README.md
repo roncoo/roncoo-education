@@ -39,10 +39,9 @@
 ### TODO
 * 动态更新配置(spring cloud bus + kafka + spring cloud config)
 * 日志收集统计(kafka + Elasticsearch + Logstash + Kibana)
-* 链路追踪监控(spring cloud sleuth + kafka + zipkin)
 
 ### 技术选型
-| 技术                                                        | 说明                                       | 版本                      
+| 技术框架                                                | 说明                                       | 版本                      
 | ---------------------- | ---------------- | ----------------- |
 | Spring IO Platform     | 版本维护                                | Cairo-SR7
 | Spring Boot            | 核心技术框架                        | 2.0.8.RELEASE
@@ -51,8 +50,11 @@
 | spring-cloud-sleuth    | 服务跟踪                                | 2.0.2.RELEASE
 | Mybatis                | 持久层框架                             | 3.4.5
 | Druid                  | 数据连接池                            | 1.1.12
+| Swagger                | 接口文档                                | 1.5.20
 | Freemarker             | 模板引擎                                | 2.3.28
-| Hutool                 | 通用工具类                              | 2.16.2
+| Shiro                  | 权限框架                                | 1.4.0
+| POI                    | 文档处理                                | 3.17
+| Hutool                 | 通用工具类                             | 2.16.2
 
 ### 软件需求
 * JDK 1.8+
