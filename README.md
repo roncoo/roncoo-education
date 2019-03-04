@@ -63,8 +63,8 @@
 * Maven 3.0+
 
 ### 项目截图
-![SBA](/doc/images/img_01.jpg)
-![zipkin](/doc/images/img_02.jpg)
+![SBA](/doc/images/img_01.png)
+![zipkin](/doc/images/img_02.png)
 
 ### 流程图说明
 * 系统架构图
