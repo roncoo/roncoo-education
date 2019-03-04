@@ -62,6 +62,10 @@
 * Redis 3.0+
 * Maven 3.0+
 
+### 项目截图
+![SBA](/doc/images/img_01.jpg)
+![zipkin](/doc/images/img_02.jpg)
+
 ### 流程图说明
 * 系统架构图
 ![系统架构图](/doc/images/01.jpg)
