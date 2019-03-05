@@ -11,9 +11,9 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum IsDefaultEnum {
+public enum HasNoticeEnum {
 
-	YES(1, "是"), NO(0, "否");
+	YES(1, "已提醒"), NO(0, "未提醒");
 
 	private Integer code;
 

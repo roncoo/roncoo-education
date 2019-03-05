@@ -7,13 +7,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
+ * 是否定时发送
+ * 
  * @author wuyun
+ *
  */
 @Getter
 @AllArgsConstructor
-public enum IsDefaultEnum {
+public enum IsTimeSendEnum {
 
-	YES(1, "是"), NO(0, "否");
+	YES(1, "定时发送"), NO(0, "不定时发送");
 
 	private Integer code;
 

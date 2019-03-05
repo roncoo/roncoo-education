@@ -7,13 +7,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * @author wuyun
+ * 是否是最新
+ * 
+ * @author Administrator
+ *
  */
 @Getter
 @AllArgsConstructor
-public enum IsDefaultEnum {
+public enum IsSendEnum {
 
-	YES(1, "是"), NO(0, "否");
+	YES(1, "发送"), NO(0, "待发送");
 
 	private Integer code;
 

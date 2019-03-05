@@ -1,5 +1,6 @@
 package com.roncoo.education.system.service.common;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,20 @@ public class CacheRedis {
 		if (redisTemplate.hasKey(key)) {
 			redisTemplate.delete(key);
 		}
+	}
+
+	public <T> List<T> list(Object key, Class<T> clazz) {
+		if (redisTemplate.hasKey(key)) {
+			return JSONUtil.parseArray(redisTemplate.opsForValue().get(key).toString(), clazz);
+		}
+		return null;
+	}
+
+	public boolean hasKey(Object key) {
+		if (redisTemplate.hasKey(key)) {
+			return true;
+		}
+		return false;
 	}
 
 }

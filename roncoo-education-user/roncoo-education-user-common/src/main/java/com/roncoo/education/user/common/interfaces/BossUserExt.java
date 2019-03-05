@@ -50,4 +50,12 @@ public interface BossUserExt {
 	 */
 	@RequestMapping(value = "/boss/user/userEducationInfo/sumByCounts", method = RequestMethod.POST)
 	List<UserEchartsVO> sumByCounts(@RequestBody UserExtEchartsQO userExtEchartsQO);
+
+	/**
+	 * 批量缓存用户信息,发送站内信用
+	 * 
+	 * @author wuyun
+	 */
+	@RequestMapping(value = "/boss/user/userEducationInfo/cachUserForMsg")
+	void cachUserForMsg(@RequestBody UserExtQO qo);
 }

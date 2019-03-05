@@ -7,13 +7,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * @author wuyun
+ * @author wujing
  */
 @Getter
 @AllArgsConstructor
-public enum IsDefaultEnum {
+public enum IsReadEnum {
 
-	YES(1, "是"), NO(0, "否");
+	YES(1, "已读"), NO(0, "未读");
 
 	private Integer code;
 

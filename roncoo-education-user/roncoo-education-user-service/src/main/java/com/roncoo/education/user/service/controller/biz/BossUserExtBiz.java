@@ -10,7 +10,10 @@ import org.springframework.util.StringUtils;
 import com.roncoo.education.user.common.bean.qo.UserExtEchartsQO;
 import com.roncoo.education.user.common.bean.qo.UserExtQO;
 import com.roncoo.education.user.common.bean.vo.UserEchartsVO;
+import com.roncoo.education.user.common.bean.vo.UserExtMsgVO;
 import com.roncoo.education.user.common.bean.vo.UserExtVO;
+import com.roncoo.education.user.service.common.CacheRedis;
+import com.roncoo.education.user.service.dao.UserDao;
 import com.roncoo.education.user.service.dao.UserExtDao;
 import com.roncoo.education.user.service.dao.impl.mapper.entity.UserExt;
 import com.roncoo.education.user.service.dao.impl.mapper.entity.UserExtExample;
@@ -18,6 +21,8 @@ import com.roncoo.education.user.service.dao.impl.mapper.entity.UserExtExample.C
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
+import com.roncoo.education.util.enums.RedisPreEnum;
+import com.roncoo.education.util.enums.StatusIdEnum;
 import com.roncoo.education.util.tools.BeanUtil;
 import com.roncoo.education.util.tools.DateUtil;
 
@@ -31,6 +36,11 @@ public class BossUserExtBiz extends BaseBiz {
 
 	@Autowired
 	private UserExtDao dao;
+	@Autowired
+	private UserDao userDao;
+
+	@Autowired
+	private CacheRedis cacheRedis;
 
 	public Page<UserExtVO> listForPage(UserExtQO qo) {
 		UserExtExample example = new UserExtExample();
@@ -94,5 +104,23 @@ public class BossUserExtBiz extends BaseBiz {
 		vo.setCount(countOrders);
 		list.add(vo);
 		return list;
+	}
+
+	/**
+	 * 根据状态，角色获取可用的用户信息的集合
+	 * 
+	 * @author wuyun
+	 */
+	public void cachUserForMsg(UserExtQO qo) {
+		int pageSize = 1000;
+		Page<UserExtMsgVO> page = userDao.pageByStatusIdForMsg(StatusIdEnum.YES.getCode(), 1, pageSize);
+		// 缓存key条数
+		cacheRedis.set(RedisPreEnum.SYS_MSG_SEND_NUM.getCode(), page.getTotalPage(), 120);
+		// 缓存用户
+		for (int i = 1; i < page.getTotalPage() + 1; i++) {
+			page = userDao.pageByStatusIdForMsg(StatusIdEnum.YES.getCode(), i, pageSize);
+			// 缓存，2个小时
+			cacheRedis.set(RedisPreEnum.SYS_MSG_SEND.getCode() + "_" + i, page.getList(), 120);
+		}
 	}
 }
