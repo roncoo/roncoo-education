@@ -12,7 +12,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
  *
  * @author wuyun
  */
-@Document(indexName = "es_course", type = "course")
+@Document(indexName = "edu_course", type = "edu_course")
 public class EsCourse implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -31,10 +31,6 @@ public class EsCourse implements Serializable {
 	 */
 	private Date gmtModified;
 	/**
-	 * 机构号
-	 */
-	private String orgNo;
-	/**
 	 * 排序
 	 */
 	private Integer sort;
@@ -49,7 +45,7 @@ public class EsCourse implements Serializable {
 	/**
 	 * 课程封面
 	 */
-	private String courseImg;
+	private String courselog;
 	/**
 	 * 课程名称
 	 */
@@ -61,11 +57,11 @@ public class EsCourse implements Serializable {
 	/**
 	 * 原价
 	 */
-	private BigDecimal orgPrice;
+	private BigDecimal courseOriginal;
 	/**
 	 * 优惠价
 	 */
-	private BigDecimal fabPrice;
+	private BigDecimal courseDiscount;
 	/**
 	 * 是否免费(1:免费，0:收费)
 	 */
@@ -95,28 +91,12 @@ public class EsCourse implements Serializable {
 		this.gmtModified = gmtModified;
 	}
 
-	public String getOrgNo() {
-		return orgNo;
-	}
-
-	public void setOrgNo(String orgNo) {
-		this.orgNo = orgNo;
-	}
-
 	public Integer getSort() {
 		return sort;
 	}
 
 	public void setSort(Integer sort) {
 		this.sort = sort;
-	}
-
-	public String getCourseImg() {
-		return courseImg;
-	}
-
-	public void setCourseImg(String courseImg) {
-		this.courseImg = courseImg;
 	}
 
 	public String getCourseName() {
@@ -133,22 +113,6 @@ public class EsCourse implements Serializable {
 
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
-	}
-
-	public BigDecimal getOrgPrice() {
-		return orgPrice;
-	}
-
-	public void setOrgPrice(BigDecimal orgPrice) {
-		this.orgPrice = orgPrice;
-	}
-
-	public BigDecimal getFabPrice() {
-		return fabPrice;
-	}
-
-	public void setFabPrice(BigDecimal fabPrice) {
-		this.fabPrice = fabPrice;
 	}
 
 	public Integer getIsFree() {
@@ -175,10 +139,34 @@ public class EsCourse implements Serializable {
 		this.lecturerName = lecturerName;
 	}
 
+	public String getCourselog() {
+		return courselog;
+	}
+
+	public void setCourselog(String courselog) {
+		this.courselog = courselog;
+	}
+
+	public BigDecimal getCourseOriginal() {
+		return courseOriginal;
+	}
+
+	public void setCourseOriginal(BigDecimal courseOriginal) {
+		this.courseOriginal = courseOriginal;
+	}
+
+	public BigDecimal getCourseDiscount() {
+		return courseDiscount;
+	}
+
+	public void setCourseDiscount(BigDecimal courseDiscount) {
+		this.courseDiscount = courseDiscount;
+	}
+
 	@Override
 	public String toString() {
-		return "EsCourse [id=" + id + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", orgNo=" + orgNo + ", sort=" + sort + ", lecturerName=" + lecturerName + ", courseNo=" + courseNo + ", courseName=" + courseName + ", courseImg=" + courseImg + ", courseSort=" + courseSort
-				+ ", orgPrice=" + orgPrice + ", fabPrice=" + fabPrice + ", isFree=" + isFree + "]";
+		return "EsCourse [id=" + id + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", sort=" + sort + ", lecturerName=" + lecturerName + ", courseNo=" + courseNo + ", courselog=" + courselog + ", courseName=" + courseName + ", courseSort=" + courseSort + ", courseOriginal="
+				+ courseOriginal + ", courseDiscount=" + courseDiscount + ", isFree=" + isFree + "]";
 	}
 
 }

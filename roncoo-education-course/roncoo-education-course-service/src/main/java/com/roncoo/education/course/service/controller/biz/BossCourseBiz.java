@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -28,6 +29,7 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseExample;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseExample.Criteria;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduce;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.ZoneCourse;
+import com.roncoo.education.user.feign.IBossLecturer;
 import com.roncoo.education.util.base.BaseException;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
@@ -56,6 +58,12 @@ public class BossCourseBiz {
 	private CourseCategoryDao courseCategoryDao;
 	@Autowired
 	private CourseChapterPeriodDao courseChapterPeriodDao;
+
+	@Autowired
+	private IBossLecturer bossLecturer;
+
+	@Autowired
+	private ElasticsearchTemplate elasticsearchTemplate;
 
 	public Page<CourseVO> listForPage(CourseQO qo) {
 		CourseExample example = new CourseExample();
