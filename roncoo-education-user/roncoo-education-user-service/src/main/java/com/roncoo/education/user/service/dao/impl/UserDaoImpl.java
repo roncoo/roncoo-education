@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.roncoo.education.user.common.bean.vo.UserExtMsgVO;
+import com.roncoo.education.user.service.common.AbstractBaseJdbc;
 import com.roncoo.education.user.service.dao.UserDao;
 import com.roncoo.education.user.service.dao.impl.mapper.UserMapper;
 import com.roncoo.education.user.service.dao.impl.mapper.entity.User;
@@ -14,7 +16,7 @@ import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.tools.IdWorker;
 
 @Repository
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl extends AbstractBaseJdbc implements UserDao {
 	@Autowired
 	private UserMapper userMapper;
 
@@ -70,5 +72,14 @@ public class UserDaoImpl implements UserDao {
 			return null;
 		}
 		return list.get(0);
+	}
+
+	@Override
+	public Page<UserExtMsgVO> pageByStatusIdForMsg(Integer statusId, int pageCurrent, int pageSize) {
+		StringBuffer sql = new StringBuffer("select user_no as userNo ,mobile from user_ext where 1");
+		if (statusId != null) {
+			sql.append(" and status_id =").append(statusId);
+		}
+		return queryForPage(sql.toString(), pageCurrent, pageSize, UserExtMsgVO.class);
 	}
 }

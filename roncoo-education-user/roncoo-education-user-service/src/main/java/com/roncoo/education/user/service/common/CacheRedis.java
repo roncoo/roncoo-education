@@ -26,6 +26,16 @@ public class CacheRedis {
 		return t;
 	}
 
+	/**
+	 * 单位分钟
+	 */
+	public <T> T set(Object key, T t, Integer time) {
+		if (t != null) {
+			redisTemplate.opsForValue().set(key, JSONUtil.toJSONString(t), time, TimeUnit.MINUTES);
+		}
+		return t;
+	}
+
 	public <T> T get(Object key, Class<T> clazz) {
 		if (redisTemplate.hasKey(key)) {
 			return JSONUtil.parseObject(redisTemplate.opsForValue().get(key).toString(), clazz);

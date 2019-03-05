@@ -3,7 +3,6 @@
  */
 package com.roncoo.education.web.boss.common;
 
-import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,7 +20,6 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.roncoo.education.util.base.Base;
-import com.roncoo.education.util.base.Bjui;
 import com.roncoo.education.util.tools.Constants;
 import com.roncoo.education.util.tools.JSONUtil;
 import com.roncoo.education.web.boss.common.bean.vo.SysMenuVO;
@@ -54,7 +52,8 @@ class ShiroInterceptor extends Base implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String uri = request.getServletPath();
-		if (checkUri(uri)) {
+		return true;
+		/*if (checkUri(uri)) {
 			return true;
 		}
 
@@ -67,7 +66,7 @@ class ShiroInterceptor extends Base implements HandlerInterceptor {
 		out.print(JSONUtil.toJSONString(bj));
 		out.flush();
 		out.close();
-		return false;
+		return false;*/
 	}
 
 	private static Boolean checkUri(String uri) {

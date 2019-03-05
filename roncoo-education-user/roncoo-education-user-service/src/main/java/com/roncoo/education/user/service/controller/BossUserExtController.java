@@ -63,4 +63,9 @@ public class BossUserExtController extends BaseController implements BossUserExt
 		return biz.sumByCounts(userExtEchartsQO);
 	}
 
+	@Override
+	public void cachUserForMsg(@RequestBody UserExtQO qo) {
+		biz.cachUserForMsg(qo);
+	}
+
 }
