@@ -2,18 +2,7 @@ package com.roncoo.education.course.service.biz;
 
 import java.util.List;
 
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.MultiMatchQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
-import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder.Field;
-import org.elasticsearch.search.sort.FieldSortBuilder;
-import org.elasticsearch.search.sort.SortBuilders;
-import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -27,8 +16,6 @@ import com.roncoo.education.course.service.common.dto.CourseInfoSearchPageDTO;
 import com.roncoo.education.course.service.common.dto.CourseIntroduceDTO;
 import com.roncoo.education.course.service.common.dto.CourseViewDTO;
 import com.roncoo.education.course.service.common.dto.LecturerDTO;
-import com.roncoo.education.course.service.common.es.EsCourse;
-import com.roncoo.education.course.service.common.es.EsPageUtil;
 import com.roncoo.education.course.service.common.es.ResultMapperExt;
 import com.roncoo.education.course.service.dao.CourseChapterDao;
 import com.roncoo.education.course.service.dao.CourseChapterPeriodDao;
@@ -45,7 +32,6 @@ import com.roncoo.education.user.feign.IBossLecturer;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.base.Result;
-import com.roncoo.education.util.enums.IsHfield;
 import com.roncoo.education.util.enums.IsPutawayEnum;
 import com.roncoo.education.util.enums.StatusIdEnum;
 import com.roncoo.education.util.tools.BeanUtil;
@@ -71,8 +57,8 @@ public class ApiCourseBiz {
 	@Autowired
 	private IBossLecturer bossLecturer;
 
-	@Autowired
-	private ElasticsearchTemplate elasticsearchTemplate;
+	// @Autowired
+	// private ElasticsearchTemplate elasticsearchTemplate;
 
 	@Autowired
 	private ResultMapperExt resultMapperExt;
@@ -162,44 +148,53 @@ public class ApiCourseBiz {
 	 * @author wuyun
 	 */
 	public Result<Page<CourseInfoSearchPageDTO>> searchList(CourseInfoSearchBO bo) {
-		if (StringUtils.isEmpty(bo.getOrgNo())) {
-			return Result.error("orgNo不能为空");
-		}
-		if (bo.getPageCurrent() <= 0) {
-			bo.setPageCurrent(1);
-		}
-		if (bo.getPageSize() <= 0) {
-			bo.setPageSize(20);
-		}
-
-		if (StringUtils.isEmpty(bo.getCourseName())) {
-			return Result.success(new Page<CourseInfoSearchPageDTO>());
-		}
-
-		String heightField = "courseName";
-
-		Field hfield = null;
-		if (bo.getIsHfield() != null && bo.getIsHfield().equals(IsHfield.YES.getCode())) {
-			hfield = new HighlightBuilder.Field(heightField).preTags("<mark>").postTags("</mark>");
-		}
-
-		NativeSearchQueryBuilder nsb = new NativeSearchQueryBuilder();
-		if (bo.getIsHfield() != null && bo.getIsHfield().equals(IsHfield.YES.getCode())) {
-			nsb.withHighlightFields(hfield);// 高亮字段
-		}
-		nsb.withSort(SortBuilders.scoreSort().order(SortOrder.DESC));// 评分排序（_source）
-		nsb.withSort(new FieldSortBuilder("courseSort").order(SortOrder.DESC));// 课程排序（courseSort）
-		nsb.withPageable(PageRequest.of(bo.getPageCurrent() - 1, bo.getPageSize()));
-		// 复合查询，外套boolQuery
-		BoolQueryBuilder qb = QueryBuilders.boolQuery();
-		// 精确查询termQuery不分词，must参数等价于AND
-		qb.must(QueryBuilders.termQuery("orgNo", bo.getOrgNo()));
-		// 模糊查询multiMatchQuery，最佳字段best_fields
-		qb.must(QueryBuilders.multiMatchQuery(bo.getCourseName(), "courseName", "lecturerName").type(MultiMatchQueryBuilder.Type.BEST_FIELDS));
-
-		nsb.withQuery(qb);
-
-		org.springframework.data.domain.Page<EsCourse> page = elasticsearchTemplate.queryForPage(nsb.build(), EsCourse.class, resultMapperExt);
-		return Result.success(EsPageUtil.transform(page, CourseInfoSearchPageDTO.class));
+		return null;
+		// if (StringUtils.isEmpty(bo.getOrgNo())) {
+		// return Result.error("orgNo不能为空");
+		// }
+		// if (bo.getPageCurrent() <= 0) {
+		// bo.setPageCurrent(1);
+		// }
+		// if (bo.getPageSize() <= 0) {
+		// bo.setPageSize(20);
+		// }
+		//
+		// if (StringUtils.isEmpty(bo.getCourseName())) {
+		// return Result.success(new Page<CourseInfoSearchPageDTO>());
+		// }
+		//
+		// String heightField = "courseName";
+		//
+		// Field hfield = null;
+		// if (bo.getIsHfield() != null &&
+		// bo.getIsHfield().equals(IsHfield.YES.getCode())) {
+		// hfield = new
+		// HighlightBuilder.Field(heightField).preTags("<mark>").postTags("</mark>");
+		// }
+		//
+		// NativeSearchQueryBuilder nsb = new NativeSearchQueryBuilder();
+		// if (bo.getIsHfield() != null &&
+		// bo.getIsHfield().equals(IsHfield.YES.getCode())) {
+		// nsb.withHighlightFields(hfield);// 高亮字段
+		// }
+		// nsb.withSort(SortBuilders.scoreSort().order(SortOrder.DESC));// 评分排序（_source）
+		// nsb.withSort(new FieldSortBuilder("courseSort").order(SortOrder.DESC));//
+		// 课程排序（courseSort）
+		// nsb.withPageable(PageRequest.of(bo.getPageCurrent() - 1, bo.getPageSize()));
+		// // 复合查询，外套boolQuery
+		// BoolQueryBuilder qb = QueryBuilders.boolQuery();
+		// // 精确查询termQuery不分词，must参数等价于AND
+		// qb.must(QueryBuilders.termQuery("orgNo", bo.getOrgNo()));
+		// // 模糊查询multiMatchQuery，最佳字段best_fields
+		// qb.must(QueryBuilders.multiMatchQuery(bo.getCourseName(), "courseName",
+		// "lecturerName").type(MultiMatchQueryBuilder.Type.BEST_FIELDS));
+		//
+		// nsb.withQuery(qb);
+		//
+		// org.springframework.data.domain.Page<EsCourse> page =
+		// elasticsearchTemplate.queryForPage(nsb.build(), EsCourse.class,
+		// resultMapperExt);
+		// return Result.success(EsPageUtil.transform(page,
+		// CourseInfoSearchPageDTO.class));
 	}
 }
