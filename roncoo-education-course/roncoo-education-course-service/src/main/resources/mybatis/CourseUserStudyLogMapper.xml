@@ -5,8 +5,11 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="course_name" property="courseName" jdbcType="VARCHAR" />
     <result column="chapter_id" property="chapterId" jdbcType="BIGINT" />
+    <result column="chapter_name" property="chapterName" jdbcType="VARCHAR" />
     <result column="period_id" property="periodId" jdbcType="BIGINT" />
+    <result column="period_name" property="periodName" jdbcType="VARCHAR" />
     <result column="user_no" property="userNo" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -68,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, gmt_create, course_id, chapter_id, period_id, user_no
+    id, gmt_create, course_id, course_name, chapter_id, chapter_name, period_id, period_name, 
+    user_no
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseUserStudyLogExample" >
     select
@@ -105,10 +109,12 @@
   </delete>
   <insert id="insert" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseUserStudyLog" >
     insert into course_user_study_log (id, gmt_create, course_id, 
-      chapter_id, period_id, user_no
+      course_name, chapter_id, chapter_name, 
+      period_id, period_name, user_no
       )
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{courseId,jdbcType=BIGINT}, 
-      #{chapterId,jdbcType=BIGINT}, #{periodId,jdbcType=BIGINT}, #{userNo,jdbcType=BIGINT}
+      #{courseName,jdbcType=VARCHAR}, #{chapterId,jdbcType=BIGINT}, #{chapterName,jdbcType=VARCHAR}, 
+      #{periodId,jdbcType=BIGINT}, #{periodName,jdbcType=VARCHAR}, #{userNo,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseUserStudyLog" >
@@ -123,11 +129,20 @@
       <if test="courseId != null" >
         course_id,
       </if>
+      <if test="courseName != null" >
+        course_name,
+      </if>
       <if test="chapterId != null" >
         chapter_id,
       </if>
+      <if test="chapterName != null" >
+        chapter_name,
+      </if>
       <if test="periodId != null" >
         period_id,
+      </if>
+      <if test="periodName != null" >
+        period_name,
       </if>
       <if test="userNo != null" >
         user_no,
@@ -143,11 +158,20 @@
       <if test="courseId != null" >
         #{courseId,jdbcType=BIGINT},
       </if>
+      <if test="courseName != null" >
+        #{courseName,jdbcType=VARCHAR},
+      </if>
       <if test="chapterId != null" >
         #{chapterId,jdbcType=BIGINT},
       </if>
+      <if test="chapterName != null" >
+        #{chapterName,jdbcType=VARCHAR},
+      </if>
       <if test="periodId != null" >
         #{periodId,jdbcType=BIGINT},
+      </if>
+      <if test="periodName != null" >
+        #{periodName,jdbcType=VARCHAR},
       </if>
       <if test="userNo != null" >
         #{userNo,jdbcType=BIGINT},
@@ -172,11 +196,20 @@
       <if test="record.courseId != null" >
         course_id = #{record.courseId,jdbcType=BIGINT},
       </if>
+      <if test="record.courseName != null" >
+        course_name = #{record.courseName,jdbcType=VARCHAR},
+      </if>
       <if test="record.chapterId != null" >
         chapter_id = #{record.chapterId,jdbcType=BIGINT},
       </if>
+      <if test="record.chapterName != null" >
+        chapter_name = #{record.chapterName,jdbcType=VARCHAR},
+      </if>
       <if test="record.periodId != null" >
         period_id = #{record.periodId,jdbcType=BIGINT},
+      </if>
+      <if test="record.periodName != null" >
+        period_name = #{record.periodName,jdbcType=VARCHAR},
       </if>
       <if test="record.userNo != null" >
         user_no = #{record.userNo,jdbcType=BIGINT},
@@ -191,8 +224,11 @@
     set id = #{record.id,jdbcType=BIGINT},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       course_id = #{record.courseId,jdbcType=BIGINT},
+      course_name = #{record.courseName,jdbcType=VARCHAR},
       chapter_id = #{record.chapterId,jdbcType=BIGINT},
+      chapter_name = #{record.chapterName,jdbcType=VARCHAR},
       period_id = #{record.periodId,jdbcType=BIGINT},
+      period_name = #{record.periodName,jdbcType=VARCHAR},
       user_no = #{record.userNo,jdbcType=BIGINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -207,11 +243,20 @@
       <if test="courseId != null" >
         course_id = #{courseId,jdbcType=BIGINT},
       </if>
+      <if test="courseName != null" >
+        course_name = #{courseName,jdbcType=VARCHAR},
+      </if>
       <if test="chapterId != null" >
         chapter_id = #{chapterId,jdbcType=BIGINT},
       </if>
+      <if test="chapterName != null" >
+        chapter_name = #{chapterName,jdbcType=VARCHAR},
+      </if>
       <if test="periodId != null" >
         period_id = #{periodId,jdbcType=BIGINT},
+      </if>
+      <if test="periodName != null" >
+        period_name = #{periodName,jdbcType=VARCHAR},
       </if>
       <if test="userNo != null" >
         user_no = #{userNo,jdbcType=BIGINT},
@@ -223,8 +268,11 @@
     update course_user_study_log
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       course_id = #{courseId,jdbcType=BIGINT},
+      course_name = #{courseName,jdbcType=VARCHAR},
       chapter_id = #{chapterId,jdbcType=BIGINT},
+      chapter_name = #{chapterName,jdbcType=VARCHAR},
       period_id = #{periodId,jdbcType=BIGINT},
+      period_name = #{periodName,jdbcType=VARCHAR},
       user_no = #{userNo,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>

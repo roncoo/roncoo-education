@@ -105,7 +105,7 @@ public class AuthApiCourseBiz extends BaseBiz {
 		// 免费：课时免费，章节免费，课程免费
 		if (IsFreeEnum.FREE.getCode().equals(courseChapterPeriod.getIsFree()) || IsFreeEnum.FREE.getCode().equals(courseChapter.getIsFree()) || IsFreeEnum.FREE.getCode().equals(course.getIsFree())) {
 			AuthCourseSignDTO authCourseSignDTO = getSgin(authCourseSignBO);
-			callbackExecutor.execute(new StudyLog(authCourseSignBO, courseChapterPeriod, course));
+			callbackExecutor.execute(new StudyLog(authCourseSignBO, courseChapterPeriod, course, courseChapter));
 			return Result.success(authCourseSignDTO);
 		}
 
@@ -117,7 +117,7 @@ public class AuthApiCourseBiz extends BaseBiz {
 
 		// 成功
 		AuthCourseSignDTO authCourseSignDTO = getSgin(authCourseSignBO);
-		callbackExecutor.execute(new StudyLog(authCourseSignBO, courseChapterPeriod, course));
+		callbackExecutor.execute(new StudyLog(authCourseSignBO, courseChapterPeriod, course, courseChapter));
 		return Result.success(authCourseSignDTO);
 	}
 
@@ -139,7 +139,7 @@ public class AuthApiCourseBiz extends BaseBiz {
 		// 查询课程介绍
 		CourseIntroduce courseIntroduce = courseIntroduceDao.getById(course.getIntroduceId());
 		dto.setIntroduce(BeanUtil.copyProperties(courseIntroduce, CourseIntroduceDTO.class).getIntroduce());
-		
+
 		// 先假设为收费课程且用户未付款
 		dto.setIsPay(IsPayEnum.NO.getCode());
 		// 查询订单号，查看用户是否购买了课程，是否存在订单号
@@ -155,16 +155,16 @@ public class AuthApiCourseBiz extends BaseBiz {
 		if (IsFreeEnum.FREE.getCode().equals(course.getIsFree())) {
 			dto.setIsPay(IsPayEnum.YES.getCode());
 		}
-		
-		//此处用于测试支付课程，无论怎样都是未购买
+
+		// 此处用于测试支付课程，无论怎样都是未购买
 		if (SystemUtil.TEST_COURSE.equals(course.getId().toString())) {
 			dto.setIsPay(IsPayEnum.NO.getCode());
 		}
-		
+
 		// 查询讲师信息
 		LecturerVO lecturerVO = bossLecturer.getByLecturerUserNo(dto.getLecturerUserNo());
 		dto.setLecturer(BeanUtil.copyProperties(lecturerVO, AuthLecturerDTO.class));
-		
+
 		// 查询章节信息
 		List<CourseChapter> courseChapterList = courseChapterDao.listByCourseIdAndStatusId(authCourseViewBO.getCourseId(), StatusIdEnum.YES.getCode());
 		// 如果为空就直接返回
@@ -178,7 +178,7 @@ public class AuthApiCourseBiz extends BaseBiz {
 			List<CourseChapterPeriod> courseChapterPeriodList = courseChapterPeriodDao.listByChapterId(courseChapterDTO.getId());
 			courseChapterDTO.setPeriodList(PageUtil.copyList(courseChapterPeriodList, CourseChapterPeriodDTO.class));
 		}
-		
+
 		return Result.success(dto);
 	}
 
@@ -221,8 +221,9 @@ public class AuthApiCourseBiz extends BaseBiz {
 		private AuthCourseSignBO authCourseSignBO;
 		private CourseChapterPeriod courseChapterPeriod;
 		private Course course;
+		private CourseChapter courseChapter;
 
-		public StudyLog(AuthCourseSignBO authCourseSignBO, CourseChapterPeriod courseChapterPeriod, Course course) {
+		public StudyLog(AuthCourseSignBO authCourseSignBO, CourseChapterPeriod courseChapterPeriod, Course course, CourseChapter courseChapter) {
 			this.authCourseSignBO = authCourseSignBO;
 			this.courseChapterPeriod = courseChapterPeriod;
 			this.course = course;
@@ -234,7 +235,7 @@ public class AuthApiCourseBiz extends BaseBiz {
 			updateCount(course);
 
 			// 学习日志与统计
-			studyCount(authCourseSignBO, courseChapterPeriod, course);
+			studyCount(authCourseSignBO, courseChapterPeriod, course, courseChapter);
 		}
 
 		/**
@@ -247,7 +248,7 @@ public class AuthApiCourseBiz extends BaseBiz {
 			return courseDao.updateById(record);
 		}
 
-		private void studyCount(AuthCourseSignBO authCourseSignBO, CourseChapterPeriod courseChapterPeriod, Course course) {
+		private void studyCount(AuthCourseSignBO authCourseSignBO, CourseChapterPeriod courseChapterPeriod, Course course, CourseChapter courseChapter) {
 			// 查找课程用户关联表
 			CourseUserStudy courseUserStudy = courseUserStudyDao.getByUserNoAndCourseId(authCourseSignBO.getUserNo(), courseChapterPeriod.getCourseId());
 			// 如果不存在记录
@@ -261,8 +262,11 @@ public class AuthApiCourseBiz extends BaseBiz {
 
 				CourseUserStudyLog courseUserStudyLog = new CourseUserStudyLog();
 				courseUserStudyLog.setPeriodId(courseChapterPeriod.getId());
+				courseUserStudyLog.setPeriodName(courseChapterPeriod.getPeriodName());
 				courseUserStudyLog.setChapterId(courseChapterPeriod.getChapterId());
+				courseUserStudyLog.setChapterName(courseChapter.getChapterName());
 				courseUserStudyLog.setCourseId(courseChapterPeriod.getCourseId());
+				courseUserStudyLog.setCourseName(course.getCourseName());
 				courseUserStudyLog.setUserNo(authCourseSignBO.getUserNo());
 				courseUserStudyLogDao.save(courseUserStudyLog);
 			} else {
@@ -271,8 +275,11 @@ public class AuthApiCourseBiz extends BaseBiz {
 					// 记录
 					courseUserStudyLog = new CourseUserStudyLog();
 					courseUserStudyLog.setPeriodId(courseChapterPeriod.getId());
+					courseUserStudyLog.setPeriodName(courseChapterPeriod.getPeriodName());
 					courseUserStudyLog.setChapterId(courseChapterPeriod.getChapterId());
+					courseUserStudyLog.setChapterName(courseChapter.getChapterName());
 					courseUserStudyLog.setCourseId(courseChapterPeriod.getCourseId());
+					courseUserStudyLog.setCourseName(course.getCourseName());
 					courseUserStudyLog.setUserNo(authCourseSignBO.getUserNo());
 					courseUserStudyLogDao.save(courseUserStudyLog);
 
