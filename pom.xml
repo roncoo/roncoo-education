@@ -29,45 +29,45 @@
 			<timezone>+8</timezone>
 		</developer>
 		<developer>
-            <name>yangzj</name>
-            <email>yangzj@roncoo.com</email>
-            <organization>LingKe, Co., Ltd.</organization>
-            <organizationUrl>http://www.roncoo.net</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
-        <developer>
-            <name>wuy</name>
-            <email>wuy@roncoo.com</email>
-            <organization>LingKe, Co., Ltd.</organization>
-            <organizationUrl>http://www.roncoo.net</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
+			<name>yangzj</name>
+			<email>yangzj@roncoo.com</email>
+			<organization>LingKe, Co., Ltd.</organization>
+			<organizationUrl>http://www.roncoo.net</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
 		<developer>
-            <name>liaohr</name>
-            <email>liaohr@roncoo.com</email>
-            <organization>LingKe, Co., Ltd.</organization>
-            <organizationUrl>http://www.roncoo.net</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
-        <developer>
-            <name>keyh</name>
-            <email>keyh@roncoo.com</email>
-            <organization>LingKe, Co., Ltd.</organization>
-            <organizationUrl>http://www.roncoo.net</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
+			<name>wuy</name>
+			<email>wuy@roncoo.com</email>
+			<organization>LingKe, Co., Ltd.</organization>
+			<organizationUrl>http://www.roncoo.net</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
+		<developer>
+			<name>liaohr</name>
+			<email>liaohr@roncoo.com</email>
+			<organization>LingKe, Co., Ltd.</organization>
+			<organizationUrl>http://www.roncoo.net</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
+		<developer>
+			<name>keyh</name>
+			<email>keyh@roncoo.com</email>
+			<organization>LingKe, Co., Ltd.</organization>
+			<organizationUrl>http://www.roncoo.net</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
 	</developers>
 
 	<!-- io.spring.platform -->
@@ -80,7 +80,7 @@
 	<properties>
 		<org.springframework.cloud.version>Finchley.SR2</org.springframework.cloud.version>
 		<de.codecentric.version>2.0.4</de.codecentric.version>
-        <io.zipkin.java.version>2.11.12</io.zipkin.java.version>
+		<io.zipkin.java.version>2.11.12</io.zipkin.java.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -129,11 +129,11 @@
 
 			<!-- aliyun -->
 			<!-- fastjson -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>1.2.28</version>
-            </dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>1.2.28</version>
+			</dependency>
 			<dependency>
 				<groupId>com.aliyun.oss</groupId>
 				<artifactId>aliyun-sdk-oss</artifactId>
@@ -157,28 +157,20 @@
 
 			<!-- Swagger -->
 			<dependency>
-                <groupId>com.spring4all</groupId>
-                <artifactId>swagger-spring-boot-starter</artifactId>
-                <version>1.8.0.RELEASE</version>
-                <exclusions>
-                    <exclusion>
-                        <dependency>
-                            <groupId>io.swagger</groupId>
-                            <artifactId>swagger-models</artifactId>
-                        </dependency>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
+				<groupId>com.spring4all</groupId>
+				<artifactId>swagger-spring-boot-starter</artifactId>
+				<version>1.8.0.RELEASE</version>
+			</dependency>
+			<dependency>
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-models</artifactId>
                 <version>1.5.21</version>
             </dependency>
 			<dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>swagger-bootstrap-ui</artifactId>
-                <version>1.9.0</version>
-            </dependency>
+				<groupId>com.github.xiaoymin</groupId>
+				<artifactId>swagger-bootstrap-ui</artifactId>
+				<version>1.9.0</version>
+			</dependency>
 
 			<!-- jwt -->
 			<dependency>
@@ -228,46 +220,46 @@
 				<artifactId>itextpdf</artifactId>
 				<version>5.5.13</version>
 			</dependency>
-			
+
 			<!-- de.codecentric -->
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-server-cloud</artifactId>
-                <version>${de.codecentric.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-server-ui</artifactId>
-                <version>${de.codecentric.version}</version>
-            </dependency>
-            
-            <!-- zipkin -->
-            <dependency>
-                <groupId>io.zipkin.java</groupId>
-                <artifactId>zipkin-server</artifactId>
-                <version>${io.zipkin.java.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.apache.logging.log4j</groupId>
-                        <artifactId>log4j-slf4j-impl</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>io.zipkin.java</groupId>
-                <artifactId>zipkin-autoconfigure-ui</artifactId>
-                <version>${io.zipkin.java.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zipkin.java</groupId>
-                <artifactId>zipkin-autoconfigure-collector-kafka</artifactId>
-                <version>${io.zipkin.java.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.zipkin.java</groupId>
-                <artifactId>zipkin-autoconfigure-storage-elasticsearch</artifactId>
-                <version>${io.zipkin.java.version}</version>
-            </dependency>
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-server-cloud</artifactId>
+				<version>${de.codecentric.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-server-ui</artifactId>
+				<version>${de.codecentric.version}</version>
+			</dependency>
+
+			<!-- zipkin -->
+			<dependency>
+				<groupId>io.zipkin.java</groupId>
+				<artifactId>zipkin-server</artifactId>
+				<version>${io.zipkin.java.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.apache.logging.log4j</groupId>
+						<artifactId>log4j-slf4j-impl</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>io.zipkin.java</groupId>
+				<artifactId>zipkin-autoconfigure-ui</artifactId>
+				<version>${io.zipkin.java.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.zipkin.java</groupId>
+				<artifactId>zipkin-autoconfigure-collector-kafka</artifactId>
+				<version>${io.zipkin.java.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.zipkin.java</groupId>
+				<artifactId>zipkin-autoconfigure-storage-elasticsearch</artifactId>
+				<version>${io.zipkin.java.version}</version>
+			</dependency>
 
 			<!-- com.roncoo -->
 			<dependency>
@@ -330,11 +322,11 @@
 			</properties>
 		</profile>
 		<profile>
-            <id>test</id>
-            <properties>
-                <env>test</env>
-            </properties>
-        </profile>
+			<id>test</id>
+			<properties>
+				<env>test</env>
+			</properties>
+		</profile>
 	</profiles>
 
 	<modules>
@@ -343,9 +335,9 @@
 		<!-- 配置中心 -->
 		<module>roncoo-education-server-config</module>
 		<!-- 监控中心 -->
-        <module>roncoo-education-server-admin</module>
-        <!-- 链接监控 -->
-        <module>roncoo-education-server-zipkin</module>
+		<module>roncoo-education-server-admin</module>
+		<!-- 链接监控 -->
+		<module>roncoo-education-server-zipkin</module>
 		<!-- 公用工具 -->
 		<module>roncoo-education-util</module>
 		<!-- 系统管理 -->
