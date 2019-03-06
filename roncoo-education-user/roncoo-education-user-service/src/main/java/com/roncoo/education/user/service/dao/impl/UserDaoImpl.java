@@ -76,7 +76,7 @@ public class UserDaoImpl extends AbstractBaseJdbc implements UserDao {
 
 	@Override
 	public Page<UserExtMsgVO> pageByStatusIdForMsg(Integer statusId, int pageCurrent, int pageSize) {
-		StringBuffer sql = new StringBuffer("select user_no as userNo ,mobile from user_ext where 1");
+		StringBuffer sql = new StringBuffer("select user_no as userNo ,mobile from user_ext where 1=1");
 		if (statusId != null) {
 			sql.append(" and status_id =").append(statusId);
 		}

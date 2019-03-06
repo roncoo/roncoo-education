@@ -32,11 +32,6 @@ public class BossMsgController extends BaseController implements BossMsg {
 	public int save(@RequestBody MsgQO qo) {
 		return biz.save(qo);
 	}
-	
-	/*@Override
-	public MsgVO saveAndBack(@RequestBody MsgQO qo) {
-		return biz.saveAndBack(qo);
-	}*/
 
 	@Override
 	public int deleteById(@RequestBody Long id) {
@@ -53,16 +48,6 @@ public class BossMsgController extends BaseController implements BossMsg {
 		return biz.getById(id);
 	}
 	
-	/*@Override
-	public MsgVO getByIdAndMobile(@RequestBody MsgViewQO qo) {
-		return biz.getByIdAndMobile(qo);
-	}
-    
-    @Override
-	public int updateStatusId(@RequestBody MsgQO qo) {
-		return biz.updateStatusId(qo);
-	}*/
-
 	@Override
 	public int push() {
 		return biz.push();

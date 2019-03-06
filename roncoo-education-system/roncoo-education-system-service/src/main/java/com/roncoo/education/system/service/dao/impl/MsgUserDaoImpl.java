@@ -56,4 +56,13 @@ public class MsgUserDaoImpl implements MsgUserDao {
 		c.andMsgIdEqualTo(id);
 		return this.msgUserMapper.deleteByExample(example);
 	}
+
+	@Override
+	public int countByUserNoAndIsRead(Long userNo, Integer isRead) {
+		MsgUserExample example = new MsgUserExample();
+		Criteria c = example.createCriteria();
+		c.andUserNoEqualTo(userNo);
+		c.andIsReadEqualTo(isRead);
+		return this.msgUserMapper.countByExample(example);
+	}
 }

@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.roncoo.education.web.boss.biz.course.CourseCategoryBiz;
 import com.roncoo.education.course.common.bean.qo.CourseCategoryQO;
 import com.roncoo.education.util.base.BaseController;
+import com.roncoo.education.web.boss.biz.course.CourseCategoryBiz;
 
 /**
  * 课程分类
@@ -29,6 +29,12 @@ public class CourseCategoryController extends BaseController {
 
 	@RequestMapping(value = "/list")
 	public void list(@ModelAttribute CourseCategoryQO qo, ModelMap modelMap) {
+		modelMap.put("page", biz.listForPage(qo));
+		modelMap.put("bean", qo);
+	}
+
+	@RequestMapping(value = "/listFloor")
+	public void listFloor(@ModelAttribute CourseCategoryQO qo, ModelMap modelMap) {
 		modelMap.put("page", biz.listForPage(qo));
 		modelMap.put("bean", qo);
 	}

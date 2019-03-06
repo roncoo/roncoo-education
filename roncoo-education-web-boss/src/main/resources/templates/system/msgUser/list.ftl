@@ -7,17 +7,9 @@
 			<input size="15" name="msgTitle" value="${bean.msgTitle!}"/>&nbsp;
 			<label>用户手机：<label>
 			<input size="15" name="mobile" value="${bean.mobile!}"/>&nbsp;
-			<label>状态：</label>
-			<select name="statusId" data-toggle="selectpicker" data-width="75">
-				<option value="">全部</option>
-				<#list statusIdEnums as b>
-				<option value="${b.code}"<#if bean.statusId?? && bean.statusId == b.code>selected="selected"</#if>>${b.desc!}</option>
-				</#list>
-			</select>
 			
 			<button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;
 			<a class="btn btn-orange" href="javascript:;" data-toggle="reloadsearch" data-clear-query="true" data-icon="undo">清空查询</a>
-			<a href="${base}/system/msgUser/add" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="msgUser-add" data-options="{title:'添加', height:500}">添加 </a>
 		</div>
 	</form>
 </div>
@@ -41,7 +33,7 @@
 				<td>${bean.mobile!}</td>
 				<td><#list msgTypeEnums as mm><#if bean.msgType?? && bean.msgType==mm.code>${mm.desc}</#if></#list></td>
 				<td>${bean.msgTitle!}</td>
-				<td><#list isDefaultEnum as em><#if bean.isRead?? && bean.isRead==em.code>${em.desc}</#if></#list></td>
+				<td><#list isDefaultEnums as em><#if bean.isRead?? && bean.isRead==em.code>${em.desc}</#if></#list></td>
 				<td>
 					<a href="${base}/system/msgUser/delete?id=${bean.id}" class="btn btn-red" data-toggle="doajax" data-id="msgUser-delete" data-confirm-msg="确定要删除吗？">删除</a>
 					<@shiro.hasPermission name="/system/msg/view">

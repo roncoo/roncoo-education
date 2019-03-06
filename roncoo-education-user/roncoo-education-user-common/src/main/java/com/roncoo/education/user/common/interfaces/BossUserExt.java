@@ -48,7 +48,7 @@ public interface BossUserExt {
 	 * @return
 	 * @author wuyun
 	 */
-	@RequestMapping(value = "/boss/user/userEducationInfo/sumByCounts", method = RequestMethod.POST)
+	@RequestMapping(value = "/boss/user/userExt/sumByCounts", method = RequestMethod.POST)
 	List<UserEchartsVO> sumByCounts(@RequestBody UserExtEchartsQO userExtEchartsQO);
 
 	/**
@@ -56,6 +56,6 @@ public interface BossUserExt {
 	 * 
 	 * @author wuyun
 	 */
-	@RequestMapping(value = "/boss/user/userEducationInfo/cachUserForMsg")
-	void cachUserForMsg(@RequestBody UserExtQO qo);
+	@RequestMapping(value = "/boss/user/userExt/cachUserForMsg")
+	void cachUserForMsg();
 }
