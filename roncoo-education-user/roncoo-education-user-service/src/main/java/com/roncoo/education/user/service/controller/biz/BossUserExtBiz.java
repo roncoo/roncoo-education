@@ -111,7 +111,7 @@ public class BossUserExtBiz extends BaseBiz {
 	 * 
 	 * @author wuyun
 	 */
-	public void cachUserForMsg(UserExtQO qo) {
+	public void cachUserForMsg() {
 		int pageSize = 1000;
 		Page<UserExtMsgVO> page = userDao.pageByStatusIdForMsg(StatusIdEnum.YES.getCode(), 1, pageSize);
 		// 缓存key条数

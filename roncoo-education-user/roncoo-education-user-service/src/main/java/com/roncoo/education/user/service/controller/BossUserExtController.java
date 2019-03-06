@@ -64,8 +64,8 @@ public class BossUserExtController extends BaseController implements BossUserExt
 	}
 
 	@Override
-	public void cachUserForMsg(@RequestBody UserExtQO qo) {
-		biz.cachUserForMsg(qo);
+	public void cachUserForMsg() {
+		biz.cachUserForMsg();
 	}
 
 }

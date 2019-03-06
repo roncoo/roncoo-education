@@ -18,7 +18,6 @@ import com.roncoo.education.system.service.dao.impl.mapper.entity.Msg;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.MsgExample;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.MsgExample.Criteria;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.MsgUser;
-import com.roncoo.education.user.common.bean.qo.UserExtQO;
 import com.roncoo.education.user.common.bean.vo.UserExtMsgVO;
 import com.roncoo.education.user.feign.IBossUserExt;
 import com.roncoo.education.util.base.BaseBiz;
@@ -116,7 +115,7 @@ public class BossMsgBiz extends BaseBiz {
 
 	private void pushToUserByMsgPush(MsgPushVO msgPush) {
 		// 获取缓存的条数
-		int num = getCacheNum(msgPush);
+		int num = getCacheNum();
 		for (int i = 1; i < num + 1; i++) {
 			List<UserExtMsgVO> list = cacheRedis.list(RedisPreEnum.SYS_MSG_SEND.getCode() + "_" + i, UserExtMsgVO.class);
 			if (CollectionUtil.isNotEmpty(list)) {
@@ -129,19 +128,13 @@ public class BossMsgBiz extends BaseBiz {
 
 	}
 
-	private int getCacheNum(MsgPushVO msgPush) {
+	private int getCacheNum() {
 		boolean flag = cacheRedis.hasKey(RedisPreEnum.SYS_MSG_SEND_NUM.getCode());
 		if (!flag) {// 找不到，去缓存用户信息
-			cacheUserForMsg(msgPush);
+			bossUserExt.cachUserForMsg();
 		}
 		int num = cacheRedis.get(RedisPreEnum.SYS_MSG_SEND_NUM.getCode(), int.class);
 		return num;
-	}
-
-	private void cacheUserForMsg(MsgPushVO msgPush) {
-		UserExtQO userEducationInfoQO = new UserExtQO();
-		userEducationInfoQO.setStatusId(StatusIdEnum.YES.getCode());
-		bossUserExt.cachUserForMsg(userEducationInfoQO);
 	}
 
 	private void updateMsg(Long id) {
@@ -170,7 +163,7 @@ public class BossMsgBiz extends BaseBiz {
 	public int push() {
 		List<Msg> list = dao.listByStatusIdAndIsSendAndIsTimeSendAndSendTime(StatusIdEnum.YES.getCode(), IsSendEnum.NO.getCode(), IsTimeSendEnum.YES.getCode(), new Date());
 		List<MsgPushVO> msgList = ArrayListUtil.copy(list, MsgPushVO.class);
-		if (CollectionUtil.isEmpty(msgList)) {
+		if (CollectionUtil.isNotEmpty(msgList)) {
 			for (MsgPushVO vo : msgList) {
 				// 进行推送前，将当前站内信推送状态置为已通知
 				updateMsg(vo.getId());
@@ -178,6 +171,7 @@ public class BossMsgBiz extends BaseBiz {
 				callbackExecutor.execute(new Runnable() {
 					@Override
 					public void run() {
+						System.err.println(vo);
 						pushToUserByMsgPush(vo);
 					}
 				});

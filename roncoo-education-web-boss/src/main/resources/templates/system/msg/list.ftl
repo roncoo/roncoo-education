@@ -5,13 +5,6 @@
 		<div class="bjui-searchBar">
 			<label>活动标题：<label>
 			<input size="15" name="msgTitle" value="${bean.msgTitle!}"/>&nbsp;
-			<label>状态：</label>
-			<select name="statusId" data-toggle="selectpicker" data-width="75">
-				<option value="">全部</option>
-				<#list statusIdEnums as b>
-				<option value="${b.code}"<#if bean.statusId?? && bean.statusId == b.code>selected="selected"</#if>>${b.desc!}</option>
-				</#list>
-			</select>
 			
 			<button type="submit" class="btn-default" data-icon="search">查询</button>&nbsp;
 			<a class="btn btn-orange" href="javascript:;" data-toggle="reloadsearch" data-clear-query="true" data-icon="undo">清空查询</a>
