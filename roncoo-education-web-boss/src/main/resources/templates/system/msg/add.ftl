@@ -13,7 +13,7 @@
              &nbsp;&nbsp;&nbsp;<span class="fa fa-info-circle red"> 是否开启定时发送</span>
         </div>
         </br>
-        <div class="form-group dssj" style="display:none; z-index:100">
+        <div class="form-group dssj" style="display:none; position:relative; z-index:9999">
             <label class="control-label x85">提醒时间：</label>
             <input type="text" name="sendTimeString" data-toggle="datepicker" data-pattern="yyyy-MM-dd HH:mm:ss" size="20">
         </div>
