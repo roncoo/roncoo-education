@@ -30,7 +30,7 @@ public class AuthApiMsg extends BaseController {
 	 * 课站内信详情
 	 */
 	@ApiOperation(value = "站内信详情", notes = "站内信详情接口")
-	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	@RequestMapping(value = "/view", method = RequestMethod.POST)
 	Result<MsgDTO> view(@RequestBody MsgViewBO MsgViewBO) {
 		return biz.view(MsgViewBO);
 	};
