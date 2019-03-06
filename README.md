@@ -61,6 +61,7 @@
 * MySQL 5.6+
 * Redis 3.0+
 * Maven 3.0+
+* ElasticSearch 6.5.0+
 
 ### 项目截图
 ![SBA](/doc/images/img_01.png)
