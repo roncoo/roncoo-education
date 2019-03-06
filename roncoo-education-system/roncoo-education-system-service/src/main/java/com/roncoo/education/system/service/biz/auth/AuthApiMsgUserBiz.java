@@ -2,7 +2,6 @@ package com.roncoo.education.system.service.biz.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import com.roncoo.education.system.service.common.bo.MsgReadBO;
 import com.roncoo.education.system.service.common.bo.MsgUserBO;
@@ -45,9 +44,6 @@ public class AuthApiMsgUserBiz {
 	 * @author wuyun
 	 */
 	public Result<Page<MsgUserDTO>> list(MsgUserBO bo) {
-		if (StringUtils.isEmpty(bo.getOrgNo())) {
-			return Result.error("orgNo不能为空");
-		}
 		if (bo.getUserNo() == null) {
 			return Result.error("userNo不能为空");
 		}
