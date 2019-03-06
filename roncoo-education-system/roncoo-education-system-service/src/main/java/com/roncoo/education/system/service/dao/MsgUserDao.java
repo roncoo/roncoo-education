@@ -16,4 +16,15 @@ public interface MsgUserDao {
 	Page<MsgUser> listForPage(int pageCurrent, int pageSize, MsgUserExample example);
 
 	int deleteByMsgId(Long id);
+
+	/**
+	 * 获得学员未读消息总条数
+	 * 
+	 * @param userNo
+	 * @param isRead
+	 * @return
+	 * @author wuyun
+	 */
+	int countByUserNoAndIsRead(Long userNo, Integer isRead);
+
 }

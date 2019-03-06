@@ -31,6 +31,7 @@ import com.roncoo.education.util.enums.IsPayEnum;
 import com.roncoo.education.util.enums.IsPutawayEnum;
 import com.roncoo.education.util.enums.IsSendEnum;
 import com.roncoo.education.util.enums.IsShowServiceEnum;
+import com.roncoo.education.util.enums.IsTimeSendEnum;
 import com.roncoo.education.util.enums.MsgTypeEnum;
 import com.roncoo.education.util.enums.NavEnum;
 import com.roncoo.education.util.enums.OrderStatusEnum;
@@ -96,6 +97,7 @@ public class BaseController extends Base {
 		modelMap.put("fileTypeEnums", FileTypeEnum.values());
 		modelMap.put("isDefaultEnums", IsDefaultEnum.values());
 		modelMap.put("isSendEnums", IsSendEnum.values());
+		modelMap.put("isTimeSendEnums", IsTimeSendEnum.values());
 		modelMap.put("msgTypeEnums", MsgTypeEnum.values());
 	}
 

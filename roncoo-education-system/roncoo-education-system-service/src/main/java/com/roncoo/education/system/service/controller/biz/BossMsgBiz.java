@@ -64,7 +64,7 @@ public class BossMsgBiz extends BaseBiz {
 		if (StringUtil.isNotEmpty(qo.getMsgTitle())) {
 			c.andMsgTitleLike(PageUtil.rightLike(qo.getMsgTitle()));
 		}
-		example.setOrderByClause(" status_id desc, id desc ");
+		example.setOrderByClause(" status_id desc, sort desc, id desc ");
 		Page<Msg> page = dao.listForPage(qo.getPageCurrent(), qo.getPageSize(), example);
 		return PageUtil.transform(page, MsgVO.class);
 	}

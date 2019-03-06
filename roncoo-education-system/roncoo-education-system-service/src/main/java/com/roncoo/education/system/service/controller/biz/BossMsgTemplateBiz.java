@@ -8,7 +8,6 @@ import com.roncoo.education.system.common.bean.vo.MsgTemplateVO;
 import com.roncoo.education.system.service.dao.MsgTemplateDao;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.MsgTemplate;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.MsgTemplateExample;
-import com.roncoo.education.system.service.dao.impl.mapper.entity.MsgTemplateExample.Criteria;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.tools.BeanUtil;
@@ -26,8 +25,7 @@ public class BossMsgTemplateBiz {
 
 	public Page<MsgTemplateVO> listForPage(MsgTemplateQO qo) {
 	    MsgTemplateExample example = new MsgTemplateExample();
-	    Criteria c = example.createCriteria();
-	    example.setOrderByClause(" id desc ");
+	    example.setOrderByClause(" status_id desc, sort desc, id desc ");
         Page<MsgTemplate> page = dao.listForPage(qo.getPageCurrent(), qo.getPageSize(), example);
         return PageUtil.transform(page, MsgTemplateVO.class);
 	}
