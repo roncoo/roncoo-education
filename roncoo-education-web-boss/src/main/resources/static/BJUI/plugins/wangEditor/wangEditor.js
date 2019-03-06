@@ -25,6 +25,7 @@ var initEdit = function(editEditor, url) {
 	    'undo',  // 撤销
 	    'redo'  // 重复
     ]
+    editor.customConfig.zIndex = 0;
     editor.customConfig.uploadImgServer = url;
     editor.customConfig.uploadFileName = 'descFile';
     editor.customConfig.onchange = function (html) {

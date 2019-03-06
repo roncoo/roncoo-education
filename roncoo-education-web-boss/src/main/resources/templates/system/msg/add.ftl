@@ -2,9 +2,9 @@
 <div class="bjui-pageContent">
 	<form action="${base}/system/msg/save" data-toggle="validate" method="post">
         <input type="hidden" name="msgType" value="1">
-        <div class="form-group dssj" style="display:none">
+        <div class="form-group dssj" style="display:none; z-index:100">
             <label class="control-label x85">提醒时间：</label>
-             <input type="text" name="sendTimeString" data-toggle="datepicker" data-pattern="yyyy-MM-dd HH:mm:ss" size="20">
+            <input type="text" name="sendTimeString" data-toggle="datepicker" data-pattern="yyyy-MM-dd HH:mm:ss" size="20">
         </div>
 		</br>
         <div class="form-group">

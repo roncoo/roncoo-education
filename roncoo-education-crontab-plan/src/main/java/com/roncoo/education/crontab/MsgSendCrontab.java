@@ -10,7 +10,7 @@ import com.roncoo.education.util.base.BaseController;
 /**
  * 站内信-定时发送
  * 
- * @author zkpc
+ * @author wuyun
  *
  */
 @Component
@@ -27,7 +27,7 @@ public class MsgSendCrontab extends BaseController {
 	 *
 	 * @author wuyun
 	 */
-	@Scheduled(fixedRate = 1000)
+	@Scheduled(fixedRate = 60000)
 	public void pushCancel() {
 		synchronized (KEY) {
 			if (MsgSendCrontab.taskFlag) {
