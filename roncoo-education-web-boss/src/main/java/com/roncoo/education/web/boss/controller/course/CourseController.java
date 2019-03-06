@@ -86,13 +86,4 @@ public class CourseController extends BaseController {
 		return error("修改失败");
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "/addEs")
-	public String addEs(@ModelAttribute CourseQO qo) {
-		if (biz.addEs(qo)) {
-			return ties("导入成功");
-		}
-		return error("导入失败");
-	}
-
 }

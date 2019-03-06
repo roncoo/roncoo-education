@@ -59,8 +59,4 @@ public class CourseBiz extends BizBoss {
 		return bossCourse.updateById(qo);
 	}
 
-	public boolean addEs(CourseQO qo) {
-		return bossCourse.addEs(qo);
-	}
-
 }
