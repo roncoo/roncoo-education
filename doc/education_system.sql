@@ -2,6 +2,76 @@
 # Date: 2019-03-06 16:55:00
 # Generator: MySQL-Front 6.1  (Build 1.26)
 
+#
+# Structure for table "msg"
+#
+
+CREATE TABLE `msg` (
+  `id` bigint(20) NOT NULL COMMENT '主键',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+  `status_id` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '状态(1有效, 0无效)',
+  `sort` int(11) NOT NULL DEFAULT '1' COMMENT '排序',
+  `msg_type` tinyint(3) NOT NULL DEFAULT '1' COMMENT '短信类型(1系统消息,2其他)',
+  `msg_title` varchar(255) NOT NULL COMMENT '短信标题',
+  `msg_text` text COMMENT '短信内容',
+  `is_time_send` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否定时发送（1是，0否）',
+  `send_time` datetime DEFAULT NULL COMMENT '发送时间',
+  `is_send` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否已发送(1是;0否)',
+  `is_top` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否置顶(1是;0否)',
+  `back_remark` varchar(255) DEFAULT NULL COMMENT '后台备注',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='站内信息表';
+
+#
+# Data for table "msg"
+#
+
+INSERT INTO `msg` VALUES (1103192777748422657,'2019-03-06 15:18:39','2019-03-06 15:18:39',1,1,1,'测试1','<p>测试1<br /></p>',0,NULL,0,0,NULL);
+
+#
+# Structure for table "msg_template"
+#
+
+CREATE TABLE `msg_template` (
+  `id` bigint(20) NOT NULL COMMENT '主键',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+  `status_id` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '状态(1有效, 0无效)',
+  `title` varchar(255) NOT NULL DEFAULT '' COMMENT '标题',
+  `remark` varchar(1023) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='消息模板';
+
+#
+# Data for table "msg_template"
+#
+
+INSERT INTO `msg_template` VALUES (1102813675380137986,'2019-03-05 14:12:14','2019-03-05 14:12:14',1,'','尊敬的{{name}}用户，您有一个{{courseName}}课程抵用券即将过期');
+
+#
+# Structure for table "msg_user"
+#
+
+CREATE TABLE `msg_user` (
+  `id` bigint(20) NOT NULL COMMENT '主键',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+  `status_id` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '状态(1有效, 0无效)',
+  `sort` int(11) NOT NULL DEFAULT '1' COMMENT '排序',
+  `msg_id` bigint(20) NOT NULL COMMENT '短信ID',
+  `user_no` bigint(20) NOT NULL DEFAULT '0' COMMENT '用户编号',
+  `mobile` char(11) NOT NULL DEFAULT '' COMMENT '手机号',
+  `msg_type` tinyint(3) NOT NULL DEFAULT '1' COMMENT '短信类型(1系统消息,2其他)',
+  `msg_title` varchar(255) NOT NULL COMMENT '短信标题',
+  `is_read` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否阅读(1是;0否)',
+  `is_top` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否置顶(1是;0否)',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='站内信用户记录表';
+
+#
+# Data for table "msg_user"
+#
 
 #
 # Structure for table "nav_bar"
