@@ -60,20 +60,22 @@ public class BossCourseBiz {
 	public Page<CourseVO> listForPage(CourseQO qo) {
 		CourseExample example = new CourseExample();
 		Criteria c = example.createCriteria();
-		if (CollectionUtils.isNotEmpty(qo.getNotInCourseNoList())) {
-			if (ObjectUtil.isNull(qo.getZoneId())) {
-				List<ZoneCourse> list = zoneCourseDao.listByZoneId(qo.getZoneId());
-				if (CollectionUtils.isNotEmpty(list)) {
-					List<Long> notInCourseNoList = new ArrayList<>();
-					for (ZoneCourse zoneCourse : list) {
-						notInCourseNoList.add(zoneCourse.getCourseId());
-					}
-					qo.setNotInCourseNoList(notInCourseNoList);
+		if (qo.getZoneId() != null) {
+			List<ZoneCourse> list = zoneCourseDao.listByZoneId(qo.getZoneId());
+			if (CollectionUtils.isNotEmpty(list)) {
+				List<Long> notInCourseNoList = new ArrayList<>();
+				for (ZoneCourse zoneCourse : list) {
+					notInCourseNoList.add(zoneCourse.getCourseId());
 				}
+				qo.setNotInCourseNoList(notInCourseNoList);
 			}
 		}
 		if (qo.getNotInCourseNoList() != null && !qo.getNotInCourseNoList().isEmpty()) {
 			c.andIdNotIn(qo.getNotInCourseNoList());
+		}
+
+		if (qo.getCategoryId1() != null) {
+			c.andCategoryId1EqualTo(qo.getCategoryId1());
 		}
 		if (!StringUtils.isEmpty(qo.getCourseName())) {
 			c.andCourseNameLike(PageUtil.rightLike(qo.getCourseName()));

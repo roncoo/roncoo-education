@@ -1,4 +1,9 @@
-﻿#
+﻿# Host: localhost  (Version 5.6.39)
+# Date: 2019-03-06 16:55:00
+# Generator: MySQL-Front 6.1  (Build 1.26)
+
+
+#
 # Structure for table "nav_bar"
 #
 
