@@ -93,14 +93,16 @@ public class BossCourseAuditBiz extends BaseBiz {
 	public Page<CourseAuditVO> listForPage(CourseAuditQO qo) {
 		CourseAuditExample example = new CourseAuditExample();
 		Criteria c = example.createCriteria();
-		c.andAuditStatusNotEqualTo(AuditStatusEnum.SUCCESS.getCode());
+
 		if (!StringUtils.isEmpty(qo.getCourseName())) {
 			c.andCourseNameLike(PageUtil.rightLike(qo.getCourseName()));
 		}
 		if (qo.getStatusId() != null) {
 			c.andStatusIdEqualTo(qo.getStatusId());
 		}
-		if (qo.getAuditStatus() != null) {
+		if (qo.getAuditStatus() == null) {
+			c.andAuditStatusNotEqualTo(AuditStatusEnum.SUCCESS.getCode());
+		} else {
 			c.andAuditStatusEqualTo(qo.getAuditStatus());
 		}
 		if (qo.getIsFree() != null) {
@@ -109,9 +111,7 @@ public class BossCourseAuditBiz extends BaseBiz {
 		if (qo.getIsPutaway() != null) {
 			c.andIsPutawayEqualTo(qo.getIsPutaway());
 		}
-		if (qo.getAuditStatus() != null) {
-			c.andAuditStatusEqualTo(qo.getAuditStatus());
-		}
+	
 		example.setOrderByClause(" status_id desc, is_putaway desc, sort desc, id desc ");
 		Page<CourseAudit> page = dao.listForPage(qo.getPageCurrent(), qo.getPageSize(), example);
 		Page<CourseAuditVO> CourseAuditVOList = PageUtil.transform(page, CourseAuditVO.class);
