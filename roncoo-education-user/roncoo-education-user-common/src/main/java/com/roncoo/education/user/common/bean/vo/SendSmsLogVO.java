@@ -1,4 +1,4 @@
-package com.roncoo.education.system.common.bean.vo;
+package com.roncoo.education.user.common.bean.vo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -7,13 +7,13 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
- * 消息模板
+ * 用户发送短信日志
  *
- * @author wuyun
+ * @author YZJ
  */
 @Data
 @Accessors(chain = true)
-public class MsgTemplateVO implements Serializable {
+public class SendSmsLogVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -26,20 +26,20 @@ public class MsgTemplateVO implements Serializable {
 	 */
 	private Date gmtCreate;
 	/**
-	 * 修改时间
+	 * 短信模板
 	 */
-	private Date gmtModified;
+	private String template;
 	/**
-	 * 状态(1有效, 0无效)
+	 * 手机号码
 	 */
-	private Integer statusId;
+	private String mobile;
 	/**
-	 * 标题
+	 * 验证码
 	 */
-	private String title;
+	private String smsCode;
 	/**
-	 * 备注
+	 * 是否发送成功(1发送成功，0:发送失败)
 	 */
-	private String remark;
+	private Integer isSuccess;
 
 }
