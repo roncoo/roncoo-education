@@ -1,6 +1,7 @@
-﻿# Host: localhost  (Version 5.6.39)
-# Date: 2019-03-06 16:55:00
-# Generator: MySQL-Front 6.1  (Build 1.26)
+﻿# Host: localhost  (Version 5.6.34)
+# Date: 2019-03-08 14:34:06
+# Generator: MySQL-Front 6.0  (Build 2.20)
+
 
 #
 # Structure for table "msg"
@@ -73,6 +74,7 @@ CREATE TABLE `msg_user` (
 # Data for table "msg_user"
 #
 
+
 #
 # Structure for table "nav_bar"
 #
@@ -102,7 +104,7 @@ INSERT INTO `nav_bar` VALUES (1060096588522270722,'2018-11-07 17:09:32','2018-11
 CREATE TABLE `sys` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `gmt_modified` datetime DEFAULT NULL COMMENT '修改时间',
+  `gmt_modified` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `status_id` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '状态(1有效, 0无效)',
   `sort` int(11) NOT NULL DEFAULT '1' COMMENT '排序',
   `video_type` tinyint(3) NOT NULL DEFAULT '1' COMMENT '视频存储平台（1保利威视，2七牛）',
@@ -121,14 +123,16 @@ CREATE TABLE `sys` (
   `pay_key` varchar(255) DEFAULT NULL COMMENT 'roncoo_key',
   `pay_secret` varchar(255) DEFAULT NULL COMMENT 'roncoo_secret',
   `notify_url` varchar(255) DEFAULT NULL COMMENT '回调地址',
+  `sms_code` varchar(50) DEFAULT NULL COMMENT 'sms_code',
+  `sign_name` varchar(255) DEFAULT NULL COMMENT '短信签名',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='系统配置表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统配置表';
 
 #
 # Data for table "sys"
 #
 
-INSERT INTO `sys` VALUES (1,'1899-12-30 01:00:00','1899-12-30 01:00:00',1,1,1,'','','','',1,'','','','','',1,'','','','');
+INSERT INTO `sys` VALUES (1,'1899-12-30 01:00:00','1899-12-30 01:00:00',1,1,1,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL);
 
 #
 # Structure for table "website"
