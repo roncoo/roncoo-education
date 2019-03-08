@@ -10,7 +10,7 @@
 ##### 配置工程（roncoo-education-config）：[码云地址](https://gitee.com/roncoocom/roncoo-education-config) | [Github地址](https://github.com/roncoo/roncoo-education-config)
 
 ### 使用文档
-##### [码云地址](https://gitee.com/roncoocom/roncoo-education/wikis/Home) | [Github地址](https://github.com/roncoo/roncoo-education/wiki)
+##### [部署文档](https://blog.roncoo.com/article/1103554925858197505)
 
 ### 演示地址
 ##### 前端演示地址：[领课教育](http://edu.os.roncoo.com/)
