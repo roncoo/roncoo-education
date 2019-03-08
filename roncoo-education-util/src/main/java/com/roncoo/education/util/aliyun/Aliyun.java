@@ -29,4 +29,6 @@ public class Aliyun implements Serializable {
 	private String payKey;
 	private String paySecret;
 	private String notifyUrl;
+	private String smsCode;
+	private String signName;
 }

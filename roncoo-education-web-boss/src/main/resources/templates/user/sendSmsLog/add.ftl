@@ -1,10 +1,11 @@
 <#assign base=request.contextPath />
 <div class="bjui-pageContent">
-	<form action="${base}/system/websiteNav/save" data-toggle="validate" method="post">
-	<input type="hidden" name="parentId" value="${parentId}"/>
+	<form action="${base}/user/sendSmsLog/send" data-toggle="validate" method="post">
+		<br />
+		<br />
 		<div class="form-group">
-            <label class="control-label x85">导航名称：</label>
-            <input type="text" name="navName" value="" placeholder="导航名称" size="20" required="required">
+            <label class="control-label x85">手机号：</label>
+            <input type="text" name="mobile" value="" placeholder="手机号" size="20">
         </div>
 	</form>
 </div>

@@ -171,7 +171,6 @@ public class BossMsgBiz extends BaseBiz {
 				callbackExecutor.execute(new Runnable() {
 					@Override
 					public void run() {
-						System.err.println(vo);
 						pushToUserByMsgPush(vo);
 					}
 				});
