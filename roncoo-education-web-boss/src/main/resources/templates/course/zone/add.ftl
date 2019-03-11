@@ -4,7 +4,7 @@
 		
 		<div class="form-group">
             <label class="control-label x85">专区名称：</label>
-            <input type="text" name="zoneName" value="" placeholder="专区名称" size="20">
+            <input type="text" name="zoneName" value="" placeholder="专区名称" size="20" data-rule="required">
         </div>
 		<div class="form-group">
             <label class="control-label x85">描述：</label>

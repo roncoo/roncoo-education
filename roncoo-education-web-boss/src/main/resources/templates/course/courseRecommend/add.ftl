@@ -5,7 +5,7 @@
 		<div class="form-group">
             <label class="control-label x85">课程：</label>
             <input type="text" name="courseName" data-rule="required" value="请选择课程" size="30" data-toggle="lookup" data-url="${base}/course/courseRecommend/courseList?categoryId1=${categoryId!}" data-width="1000" data-height="800">
-			<input type="hidden" id="courseId" name="courseId" />
+			<input type="hidden" id="courseId" name="courseId" data-rule="required" />
         </div>
 		
 		<div class="form-group">

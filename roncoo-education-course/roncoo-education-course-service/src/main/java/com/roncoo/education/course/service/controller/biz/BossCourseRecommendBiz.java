@@ -1,5 +1,7 @@
 package com.roncoo.education.course.service.controller.biz;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,8 +13,10 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseRecommend;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseRecommendExample;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseRecommendExample.Criteria;
+import com.roncoo.education.util.base.BaseException;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
+import com.roncoo.education.util.enums.StatusIdEnum;
 import com.roncoo.education.util.tools.BeanUtil;
 import com.xiaoleilu.hutool.util.ObjectUtil;
 
@@ -36,7 +40,7 @@ public class BossCourseRecommendBiz {
 			c.andStatusIdEqualTo(qo.getStatusId());
 		}
 		c.andCategoryIdEqualTo(qo.getCategoryId());
-		example.setOrderByClause("sort desc, id desc");
+		example.setOrderByClause("status_id desc, sort desc, id desc");
 		Page<CourseRecommend> page = dao.listForPage(qo.getPageCurrent(), qo.getPageSize(), example);
 		Page<CourseRecommendVO> listForPage = PageUtil.transform(page, CourseRecommendVO.class);
 		for (CourseRecommendVO vo : listForPage.getList()) {
@@ -49,6 +53,10 @@ public class BossCourseRecommendBiz {
 	}
 
 	public int save(CourseRecommendQO qo) {
+		List<CourseRecommend> courseRecommend = dao.listByCategoryIdAndStatusId(qo.getCategoryId(), StatusIdEnum.YES.getCode());
+		if (courseRecommend.size() >= 5) {
+			throw new BaseException("课程只展示5个");
+		}
 		CourseRecommend record = BeanUtil.copyProperties(qo, CourseRecommend.class);
 		return dao.save(record);
 	}

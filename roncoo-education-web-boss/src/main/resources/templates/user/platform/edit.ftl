@@ -5,7 +5,7 @@
 		
 		<div class="form-group">
             <label class="control-label x85">客户端名称：</label>
-            <input type="text" name="clientName" value="${bean.clientName!}" placeholder="客户端名称" size="20">
+            <input type="text" name="clientName" value="${bean.clientName!}" placeholder="客户端名称" size="20" data-rule="required">
         </div>
 		<div class="form-group">
             <label for="statusId" class="control-label x85">状态：</label>

@@ -58,7 +58,6 @@ public class BossLecturerAuditBiz extends BaseBiz {
 	public Page<LecturerAuditVO> listForPage(LecturerAuditQO qo) {
 		LecturerAuditExample example = new LecturerAuditExample();
 		Criteria c = example.createCriteria();
-		c.andAuditStatusNotEqualTo(AuditStatusEnum.SUCCESS.getCode());
 		if (StringUtils.isNotEmpty(qo.getLecturerMobile())) {
 			c.andLecturerMobileEqualTo(qo.getLecturerMobile());
 		}
@@ -67,6 +66,8 @@ public class BossLecturerAuditBiz extends BaseBiz {
 		}
 		if (qo.getAuditStatus() != null) {
 			c.andAuditStatusEqualTo(qo.getAuditStatus());
+		}else {
+			c.andAuditStatusNotEqualTo(AuditStatusEnum.SUCCESS.getCode());
 		}
 		if (qo.getStatusId() != null) {
 			c.andStatusIdEqualTo(qo.getStatusId());

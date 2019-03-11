@@ -4,11 +4,11 @@
 	<input type="hidden" name="platShow" value="${bean.platShow}"/>
 		<div class="form-group">
 			<label class="control-label x85">广告图片：</label>
-			<input type="file" id="pictureFile" name="advFile" />
+			<input type="file" id="pictureFile" name="advFile" data-rule="required"/>
 		</div>
 		<div class="form-group">
             <label class="control-label x85">广告标题：</label>
-            <input type="text" name="advTitle" value="" placeholder="广告标题" size="20" data-rule="required">
+            <input type="text" name="advTitle" value="" placeholder="广告标题" size="20" data-rule="required" data-rule="required">
         </div>
 		<div class="form-group">
             <label class="control-label x85">广告链接：</label>

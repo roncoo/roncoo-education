@@ -3,7 +3,10 @@
 	<form action="${base}/course/courseRecommend/update" data-toggle="validate" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="id" value="${bean.id}"/>
 		
-		
+		 <div class="form-group">
+            <label class="control-label x85">排序：</label>
+            <input type="text" name="sort" value="${bean.sort!}" size="20" data-toggle="spinner" data-min="0" data-max="100" data-step="1" data-rule="integer">
+        </div>
 		
 		</table>
 	</form>

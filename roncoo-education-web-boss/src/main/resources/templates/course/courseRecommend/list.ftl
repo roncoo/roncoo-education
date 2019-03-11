@@ -3,8 +3,8 @@
 	<form id="pagerForm" data-toggle="ajaxsearch" action="${base}/course/courseRecommend/list" method="post">
 		<@pageHeadr />
 		<div class="bjui-searchBar">
-		<a href="${base}/course/courseRecommend/add?categoryId=${bean.categoryId!}" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="courseCourseRecommend-add" data-options="{title:'添加', height:250}">课程添加 </a>
-		<span class="fa fa-info-circle red"> 因为展示的限制，课程只展示最前面的5个</span>
+		<a href="${base}/course/courseRecommend/add?categoryId=${bean.categoryId!}" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="courseCourseRecommend-add" data-options="{title:'添加', height:300}">课程添加 </a>
+		<span class="fa fa-info-circle red"> 因为展示的限制，课程只展示5个</span>
 		</div>
 	</form>
 </div>
@@ -30,8 +30,15 @@
 				<td>${bean.sort!}</td>
 				<td><#list statusIdEnums as em><#if bean.statusId?? && bean.statusId==em.code><span class="${em.color}">${em.desc}</span></#if></#list></td>
 				<td>
-					<a href="${base}/course/courseRecommend/edit?id=${bean.id}" class="btn btn-green" data-toggle="navtab" data-options="{title:'${bean.courseName}',id:'${bean.courseName}'}">修改</a>
 				    <a href="${base}/course/courseRecommend/delete?id=${bean.id}" class="btn btn-red" data-toggle="doajax" data-id="courseCategory-delete" data-confirm-msg="确定要删除吗？">删除</a>
+					<a href="${base}/course/courseRecommend/edit?id=${bean.id}" class="btn btn-green" data-toggle="dialog" data-options="{title:'修改', height:150,width:400,id:'course-courseRecommend'}">修改</a>
+
+					<#if bean.statusId == 1>
+					<a href="${base}/course/courseRecommend/status?id=${bean.id}&statusId=0" class="btn btn-red" data-toggle="doajax" data-id="zone-update" data-confirm-msg="确定要禁用吗？">禁用</a>
+					</#if>
+					<#if bean.statusId == 0>
+					<a href="${base}/course/courseRecommend/status?id=${bean.id}&statusId=1" class="btn btn-green" data-toggle="doajax" data-id="zone-update" data-confirm-msg="确定要启用吗？">启用</a>
+					</#if>
 
 				</td>
 			</tr>
