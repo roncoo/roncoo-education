@@ -4,7 +4,7 @@
 		<input type="hidden" name="id" value="${bean.id}"/>
 		<div class="form-group">
             <label class="control-label x85">名称：</label>
-            <input type="text" name="roleName" value="${bean.roleName!}" placeholder="名称" size="20">
+            <input type="text" name="roleName" value="${bean.roleName!}" placeholder="名称" size="20" data-rule="required">
         </div>
         <div class="form-group">
             <label class="control-label x85">备注：</label>

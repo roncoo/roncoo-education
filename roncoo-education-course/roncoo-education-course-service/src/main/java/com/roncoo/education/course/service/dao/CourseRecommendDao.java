@@ -22,7 +22,7 @@ public interface CourseRecommendDao {
 	 * 
 	 * @param categoryId
 	 * @param StatusId
-	 * @return
+	 * @author kyh
 	 */
 	List<CourseRecommend> listByCategoryIdAndStatusId(Long categoryId, Integer StatusId);
 

@@ -16,7 +16,7 @@
 			
 			<br />
 			<br />
-			<a href="${base}/system/websiteNav/add?parentId=0" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="websiteNav-add" data-options="{title:'添加', height:130, width:350}">添加 </a>
+			<a href="${base}/system/websiteNav/add?parentId=0" class="btn btn-default" data-toggle="dialog" data-icon="plus" data-id="websiteNav-add" data-options="{title:'添加', height:150, width:450}">添加 </a>
 		</div>
 	</form>
 </div>
@@ -51,7 +51,7 @@
 						<a href="${base}/system/websiteNav/updateStatusId?id=${bean.id}&statusId=1" class="btn btn-green" data-toggle="doajax" data-id="websiteNav-updateStatusId" data-confirm-msg="确定要启用吗？">启用</a>
 					</#if>
 					<#if bean.parentId == 0>
-                    	<a href="${base}/system/websiteNav/add?parentId=${bean.id}" class="btn btn-default" data-toggle="dialog" data-id="websiteNav-add" data-options="{title:'添加', height:130, width:350}">添加 </a>
+                    	<a href="${base}/system/websiteNav/add?parentId=${bean.id}" class="btn btn-default" data-toggle="dialog" data-id="websiteNav-add" data-options="{title:'添加', height:150, width:450}">添加 </a>
                 	</#if>
 				</td>
 			</tr>

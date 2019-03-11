@@ -4,7 +4,7 @@
 	<input type="hidden" name="parentId" value="${parentId}"/>
 		<div class="form-group">
             <label class="control-label x85">导航名称：</label>
-            <input type="text" name="navName" value="" placeholder="导航名称" size="20" required="required">
+            <input type="text" name="navName" value="" placeholder="导航名称" size="20" data-rule="required">
         </div>
 	</form>
 </div>
