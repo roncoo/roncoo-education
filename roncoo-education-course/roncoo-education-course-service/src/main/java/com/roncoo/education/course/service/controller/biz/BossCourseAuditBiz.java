@@ -6,14 +6,19 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.query.IndexQuery;
+import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import com.roncoo.education.course.common.bean.qo.CourseAuditQO;
 import com.roncoo.education.course.common.bean.vo.CourseAuditVO;
 import com.roncoo.education.course.common.bean.vo.CourseChapterAuditVO;
 import com.roncoo.education.course.common.bean.vo.CourseChapterPeriodAuditVO;
+import com.roncoo.education.course.service.common.es.EsCourse;
 import com.roncoo.education.course.service.dao.CourseAuditDao;
 import com.roncoo.education.course.service.dao.CourseCategoryDao;
 import com.roncoo.education.course.service.dao.CourseChapterAuditDao;
@@ -27,7 +32,6 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAuditExample;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAuditExample.Criteria;
-import com.roncoo.education.system.feign.IBossSys;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseCategory;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapter;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterAudit;
@@ -35,10 +39,12 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterP
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriodAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduce;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduceAudit;
+import com.roncoo.education.system.feign.IBossSys;
 import com.roncoo.education.user.common.bean.vo.LecturerVO;
 import com.roncoo.education.user.feign.IBossLecturer;
 import com.roncoo.education.util.aliyun.Aliyun;
 import com.roncoo.education.util.aliyun.AliyunUtil;
+import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.BaseException;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
@@ -55,7 +61,7 @@ import com.xiaoleilu.hutool.util.ObjectUtil;
  * @author wujing
  */
 @Component
-public class BossCourseAuditBiz {
+public class BossCourseAuditBiz extends BaseBiz {
 
 	@Autowired
 	private CourseAuditDao dao;
@@ -81,17 +87,22 @@ public class BossCourseAuditBiz {
 	@Autowired
 	private IBossSys bossSys;
 
+	@Autowired
+	private ElasticsearchTemplate elasticsearchTemplate;
+
 	public Page<CourseAuditVO> listForPage(CourseAuditQO qo) {
 		CourseAuditExample example = new CourseAuditExample();
 		Criteria c = example.createCriteria();
-		c.andAuditStatusNotEqualTo(AuditStatusEnum.SUCCESS.getCode());
+
 		if (!StringUtils.isEmpty(qo.getCourseName())) {
 			c.andCourseNameLike(PageUtil.rightLike(qo.getCourseName()));
 		}
 		if (qo.getStatusId() != null) {
 			c.andStatusIdEqualTo(qo.getStatusId());
 		}
-		if (qo.getAuditStatus() != null) {
+		if (qo.getAuditStatus() == null) {
+			c.andAuditStatusNotEqualTo(AuditStatusEnum.SUCCESS.getCode());
+		} else {
 			c.andAuditStatusEqualTo(qo.getAuditStatus());
 		}
 		if (qo.getIsFree() != null) {
@@ -100,9 +111,7 @@ public class BossCourseAuditBiz {
 		if (qo.getIsPutaway() != null) {
 			c.andIsPutawayEqualTo(qo.getIsPutaway());
 		}
-		if (qo.getAuditStatus() != null) {
-			c.andAuditStatusEqualTo(qo.getAuditStatus());
-		}
+	
 		example.setOrderByClause(" status_id desc, is_putaway desc, sort desc, id desc ");
 		Page<CourseAudit> page = dao.listForPage(qo.getPageCurrent(), qo.getPageSize(), example);
 		Page<CourseAuditVO> CourseAuditVOList = PageUtil.transform(page, CourseAuditVO.class);
@@ -328,7 +337,25 @@ public class BossCourseAuditBiz {
 
 		// 更改课程审核状态
 		CourseAudit audit = BeanUtil.copyProperties(qo, CourseAudit.class);
-		return dao.updateById(audit);
+		int resultNum = dao.updateById(audit);
+		if (resultNum > 0) {
+			try {
+				// 查询讲师名称并插入es
+				LecturerVO lecturerInfoVO = bossLecturer.getByLecturerUserNo(courseAudit.getLecturerUserNo());
+				// 插入es或者更新es
+				EsCourse esCourse = BeanUtil.copyProperties(courseAudit, EsCourse.class);
+				if (!ObjectUtils.isEmpty(lecturerInfoVO) && !StringUtils.isEmpty(lecturerInfoVO.getLecturerName()) && lecturerInfoVO.getStatusId().equals(StatusIdEnum.YES.getCode())) {
+					esCourse.setLecturerName(lecturerInfoVO.getLecturerName());
+				}
+				IndexQuery query = new IndexQueryBuilder().withIndexName("edu_course").withType("edu_course").withObject(esCourse).build();
+				elasticsearchTemplate.index(query);
+				elasticsearchTemplate.refresh("edu_course");
+			} catch (Exception e) {
+				logger.error("elasticsearch更新数据失败", e);
+			}
+		}
+
+		return resultNum;
 	}
 
 	/**

@@ -40,6 +40,8 @@
 					<a href="${base}/admin/sysUser/edit?id=${bean.id}" class="btn btn-green" data-toggle="dialog" data-id="sysUser-edit" data-options="{title:'修改', height:400}">修改 </a>
 					<a href="${base}/admin/sysUser/delete?id=${bean.id}" class="btn btn-red" data-toggle="doajax" data-id="sysUser-delete" data-confirm-msg="确定要删除吗？">删除</a>
 				    <a href="${base}/admin/sysRoleUser/set?userId=${bean.id}" class="btn btn-orange" data-toggle="dialog" data-id="sysUser-set" data-options="{title:'设置角色', height:350, width:800}">设置角色 </a>
+					<a href="${base}/admin/sysUser/password?userNo=${bean.userNo}" class="btn btn-green" data-toggle="dialog" data-id="sysUser-password" data-options="{title:'修改密码', height:400}">修改密码 </a>
+                	
                 	<#if bean.userType?? && bean.userType == 2>
                 	   <a href="${base}/admin/sysUser/proportion?id=${bean.id}" class="btn btn-red" data-toggle="dialog" data-id="sysUser-proportion" data-options="{title:'设置分成', height:200}">设置分成 </a>
                 	</#if>

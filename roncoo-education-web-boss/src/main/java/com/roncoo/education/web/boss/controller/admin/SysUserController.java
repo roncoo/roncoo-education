@@ -115,6 +115,20 @@ public class SysUserController extends BaseController {
 		return error("修改失败");
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/updateBypassword")
+	public String updateBypassword(@ModelAttribute SysUserQO qo) {
+		if (service.updateBypassword(qo) > 0) {
+			return success(TARGETID);
+		}
+		return error("更新失败");
+	}
+
+	@RequestMapping(value = "/password")
+	public void password(@RequestParam(value = "userNo") Long userNo, ModelMap modelMap) {
+		modelMap.put("userNo", userNo);
+	}
+
 	@RequestMapping(value = "/view")
 	public void view(@RequestParam(value = "userNo") Long userNo, @RequestParam(value = "orgNo") String orgNo, ModelMap modelMap) {
 		modelMap.put("bean", service.getByUserNoAndOrgNo(userNo, orgNo));

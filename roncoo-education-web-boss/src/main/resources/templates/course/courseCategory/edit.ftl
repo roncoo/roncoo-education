@@ -4,7 +4,7 @@
 		<input type="hidden" name="id" value="${bean.id}"/>
 		<div class="form-group">
             <label class="control-label x85">分类名称：</label>
-            <input type="text" name="categoryName" value="${bean.categoryName!}" placeholder="分类名称" size="20">
+            <input type="text" name="categoryName" value="${bean.categoryName!}" placeholder="分类名称" size="20" required="required">
         </div>
          <div class="form-group">
             <label class="control-label x85">排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序：</label>

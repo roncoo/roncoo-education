@@ -22,6 +22,8 @@ import com.roncoo.education.web.boss.service.dao.SysUserDao;
 import com.roncoo.education.web.boss.service.dao.impl.mapper.entity.SysUser;
 import com.roncoo.education.web.boss.service.dao.impl.mapper.entity.SysUserExample;
 import com.roncoo.education.web.boss.service.dao.impl.mapper.entity.SysUserExample.Criteria;
+import com.xiaoleilu.hutool.crypto.DigestUtil;
+import com.xiaoleilu.hutool.util.ObjectUtil;
 
 /**
  * 后台用户信息
@@ -31,13 +33,12 @@ import com.roncoo.education.web.boss.service.dao.impl.mapper.entity.SysUserExamp
  */
 @Component
 public class SysUserService {
-
 	@Autowired
 	private SysUserDao dao;
 
 	@Autowired
 	private SysRoleUserDao sysRoleUserDao;
-	
+
 	@Autowired
 	private IBossUser bossUser;
 
@@ -92,10 +93,41 @@ public class SysUserService {
 
 	public SysUserVO getByUserNoAndOrgNo(Long userNo, String orgNo) {
 		SysUser record = dao.getByUserNo(userNo);
-		if (record == null) {
+		if (ObjectUtil.isNull(record)) {
 			throw new BaseException("找不到用户信息");
 		}
 		return BeanUtil.copyProperties(record, SysUserVO.class);
+	}
+
+	public int updateBypassword(SysUserQO qo) {
+		if (qo.getUserNo() == null) {
+			throw new BaseException("用户编号不能为空,请重试");
+		}
+
+		if (StringUtils.isEmpty(qo.getMobilePsw())) {
+			throw new BaseException("新密码不能为空,请重试");
+		}
+		if (StringUtils.isEmpty(qo.getRePwd())) {
+			throw new BaseException("确认密码不能为空,请重试");
+		}
+
+		if (!qo.getRePwd().equals(qo.getMobilePsw())) {
+			throw new BaseException("密码不一致,请重试");
+		}
+
+		UserVO userVO = bossUser.getByUserNo(qo.getUserNo());
+		if (ObjectUtil.isNull(userVO)) {
+			throw new BaseException("找不到用户信息,请重试");
+		}
+
+		if (DigestUtil.sha1Hex(userVO.getMobileSalt(), qo.getMobilePsw()).equals(userVO.getMobilePsw())) {
+			throw new BaseException("输入的密码与原密码一致,请重试");
+		}
+
+		UserQO userQO = new UserQO();
+		userQO.setId(userVO.getId());
+		userQO.setMobilePsw(DigestUtil.sha1Hex(userVO.getMobileSalt(), qo.getMobilePsw()));
+		return bossUser.updateById(userQO);
 	}
 
 }

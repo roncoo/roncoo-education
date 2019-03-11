@@ -16,7 +16,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum IsSendEnum {
 
-	YES(1, "发送"), NO(0, "待发送");
+	YES(1, "已发送"), NO(0, "待发送");
 
 	private Integer code;
 

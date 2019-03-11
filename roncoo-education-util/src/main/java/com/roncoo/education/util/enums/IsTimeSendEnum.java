@@ -16,7 +16,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum IsTimeSendEnum {
 
-	YES(1, "定时发送"), NO(0, "不定时发送");
+	YES(1, "是"), NO(0, "否");
 
 	private Integer code;
 
