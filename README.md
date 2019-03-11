@@ -1,7 +1,7 @@
 # 领课教育-领课网络在线教育系统
 
 ### 项目介绍
-> 领课教育是基于领课团队多年的在线教育开发和运营经验打造出来的产品，致力于打造一个全行业都适用的分布式在线教育系统。
+> 领课教育是基于领课团队多年的在线教育开发和运营经验打造出来的产品，致力于打造一个全行业都适用的分布式在线教育系统。系统采用Spring Cloud为核心框架，Eureka为注册中心，Config为配置中心，SBA为应用监控，Zipkin为链路监控。
 
 ##### 如果对你有用，请给个star！
 
@@ -32,12 +32,11 @@
 * 广告管理功能，后台自定义广告设置，增加营销效果
 * 支付功能，系统无缝集成了龙果支付
 
-### 升级说明
-* 2.0.0 版本
-> 集成了链路监控：roncoo-education-server-zipkin
-> 升级swagger-models版本，因为1.5.20有个bug
-> 更换Swagger的UI为swagger-bootstrap-ui
-> 新增站内信功能，推荐课程功能，发送验证码功能，密码修改功能
+### 升级说明：2.0.0 版本
+* 集成了链路监控：roncoo-education-server-zipkin
+* 升级swagger-models版本，因为1.5.20有个bug
+* 更换Swagger的UI为swagger-bootstrap-ui
+* 新增站内信功能，推荐课程功能，发送验证码功能，密码修改功能
 
 ### TODO
 * 动态更新配置(spring cloud bus + kafka + spring cloud config)
