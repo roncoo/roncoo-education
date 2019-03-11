@@ -23,6 +23,12 @@
 * 商业合作联系QQ：513781560 
 * 官网地址：[http://www.roncoo.net](http://www.roncoo.net/index.html)
 
+### 升级说明：2.0.0 版本
+* 集成了链路监控：roncoo-education-server-zipkin
+* 新增站内信功能，推荐课程功能，发送验证码功能，密码修改功能
+* 升级swagger-models版本，因为1.5.20有个bug
+* 更换Swagger的UI为swagger-bootstrap-ui
+
 ### 功能介绍
 * 权限管理功能，多角色多用户自定义配置
 * 系统配置功能，自定义进行站点配置及第三方参数配置
@@ -31,12 +37,6 @@
 * 用户登录功能，同一时间只允许同一个账号在同一个地方登录，防止账号共享
 * 广告管理功能，后台自定义广告设置，增加营销效果
 * 支付功能，系统无缝集成了龙果支付
-
-### 升级说明：2.0.0 版本
-* 集成了链路监控：roncoo-education-server-zipkin
-* 升级swagger-models版本，因为1.5.20有个bug
-* 更换Swagger的UI为swagger-bootstrap-ui
-* 新增站内信功能，推荐课程功能，发送验证码功能，密码修改功能
 
 ### TODO
 * 动态更新配置(spring cloud bus + kafka + spring cloud config)
