@@ -99,6 +99,7 @@ public class SysController extends BaseController {
 	@AdminLog(value = "系统配置更新")
 	@RequestMapping(value = "/updateSys", method = RequestMethod.POST)
 	public String updateSys(@ModelAttribute SysQO qo) {
+		System.out.println("fffffff"+qo.getSignName());
 		// 更新站点信息
 		if (null != qo.getId()) {
 			if (biz.updateSys(qo) > 0) {

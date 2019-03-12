@@ -59,6 +59,13 @@
 	                <label class="control-label x120">ossBucket：</label>
 	                <input type="text" name="aliyunOssBucket" value="<#if bean??>${bean.aliyunOssBucket!}</#if>" placeholder="accessKeySecret" size="20">
 	            </div>
+	            <div class="form-group">
+	                <label class="control-label x150">smsCode：</label>
+	                <input type="text" name="smsCode" value="<#if bean??>${bean.smsCode!}</#if>" placeholder="smsCode" size="20">
+	                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                <label class="control-label x120">短信签名：</label>
+	                <input type="text" name="signName" value="<#if bean??>${bean.signName!}</#if>" placeholder="signName" size="20">
+	            </div>
 	            <br />
 	            <div class="form-group">
 	                <label class="control-label x150">oasVault：</label>
