@@ -139,4 +139,6 @@ public class CourseQO implements Serializable {
 	 * 课程简介
 	 */
 	private String introduce;
+	
+	private String ids;
 }

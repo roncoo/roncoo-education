@@ -1,16 +1,33 @@
 # 领课教育-领课网络在线教育系统
 
 ### 项目介绍
-领课教育是基于领课团队多年的在线教育开发和运营经验的产品，打造一个全行业都适用的在线教育系统。
+> 领课教育是基于领课团队多年的在线教育开发和运营经验打造出来的产品，致力于打造一个全行业都适用的分布式在线教育系统。系统采用Spring Cloud为核心框架，Eureka为注册中心，Config为配置中心，SBA为应用监控，Zipkin为链路监控。
 
 ##### 如果对你有用，请给个star！
 
-### 相关链接
+### 其他工程
 ##### 前端工程（roncoo-education-web）：[码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web)
 ##### 配置工程（roncoo-education-config）：[码云地址](https://gitee.com/roncoocom/roncoo-education-config) | [Github地址](https://github.com/roncoo/roncoo-education-config)
-##### 使用文档：[码云地址](https://gitee.com/roncoocom/roncoo-education/wikis/Home) | [Github地址](https://github.com/roncoo/roncoo-education/wiki)
-#### 前端演示地址：[领课教育](http://edu.os.roncoo.com/)
-#### 后台演示地址：[管理后台](http://roncoo.vicp.net/boss/login)
+
+### 使用文档
+##### [部署文档](https://blog.roncoo.com/article/1103554925858197505)
+
+### 演示地址
+##### 前端演示地址：[领课教育](http://edu.os.roncoo.com/)
+##### 后台演示地址：[管理后台](http://roncoo.vicp.net/boss/login)
+
+### 商业合作
+* 如果想定制开发，我们提供有偿服务支持
+* 如果想运营平台，我们云平台提供平台入驻
+* 商业合作联系QQ：297115770 
+* 商业合作联系QQ：513781560 
+* 官网地址：[http://www.roncoo.net](http://www.roncoo.net/index.html)
+
+### 升级说明：2.0.0 版本
+* 集成了链路监控：roncoo-education-server-zipkin
+* 新增站内信功能，推荐课程功能，发送验证码功能，密码修改功能
+* 升级swagger-models版本，因为1.5.20有个bug
+* 更换Swagger的UI为swagger-bootstrap-ui
 
 ### 功能介绍
 * 权限管理功能，多角色多用户自定义配置
@@ -24,16 +41,33 @@
 ### TODO
 * 动态更新配置(spring cloud bus + kafka + spring cloud config)
 * 日志收集统计(kafka + Elasticsearch + Logstash + Kibana)
-* 链路追踪监控(spring cloud sleuth + kafka + zipkin)
 
 ### 技术选型
-| 核心技术框架                           | 注册中心                                  | 服务网关                                   | 负载均衡                                     |
-| ----------------- | ----------------- | ----------------- | ------------------ | 
-| Spring Cloud      | Eureka            | Zuul              | Feign + Ribbon     | 
-| 断路器                                      | 持久层                                       | 连接池                                      | 缓存                                            | 
-| Hystrix           | Mybatis           | Druid             | Redis              | 
-| 模板引擎                                  | 日志框架                                   | 常用工具                                   | 版本维护                                     | 
-| Freemarker        | Logback           | Hutool            | Spring IO Platform | 
+| 技术框架                                                | 说明                                       | 版本                      
+| ---------------------- | ---------------- | ----------------- |
+| Spring IO Platform     | 版本维护                                | Cairo-SR7
+| Spring Boot            | 核心技术框架                        | 2.0.8.RELEASE
+| spring-cloud-netflix   | 微服务框架                            | 2.0.2.RELEASE
+| spring-cloud-config    | 配置中心                                | 2.0.2.RELEASE
+| spring-cloud-sleuth    | 服务跟踪                                | 2.0.2.RELEASE
+| Mybatis                | 持久层框架                             | 3.4.5
+| Druid                  | 数据连接池                            | 1.1.12
+| Swagger                | 接口文档                                | 1.5.20
+| Freemarker             | 模板引擎                                | 2.3.28
+| Shiro                  | 权限框架                                | 1.4.0
+| POI                    | 文档处理                                | 3.17
+| Hutool                 | 通用工具类                             | 2.16.2
+
+### 软件需求
+* JDK 1.8+
+* MySQL 5.6+
+* Redis 3.0+
+* Maven 3.0+
+* ElasticSearch 6.5.0+
+
+### 项目截图
+![SBA](/doc/images/img_01.png)
+![zipkin](/doc/images/img_02.png)
 
 ### 流程图说明
 * 系统架构图

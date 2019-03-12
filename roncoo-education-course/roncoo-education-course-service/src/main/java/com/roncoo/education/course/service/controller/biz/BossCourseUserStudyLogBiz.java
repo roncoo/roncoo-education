@@ -1,10 +1,11 @@
 package com.roncoo.education.course.service.controller.biz;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.roncoo.education.util.tools.DateUtil;
 import com.roncoo.education.course.common.bean.qo.CourseUserStudyLogQO;
 import com.roncoo.education.course.common.bean.vo.CourseUserStudyLogVO;
 import com.roncoo.education.course.service.dao.CourseChapterDao;
@@ -19,7 +20,9 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseUserStud
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseUserStudyLogExample.Criteria;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
+import com.roncoo.education.util.tools.ArrayListUtil;
 import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.util.tools.DateUtil;
 
 /**
  * 课程用户学习日志
@@ -85,6 +88,26 @@ public class BossCourseUserStudyLogBiz {
 	public int updateById(CourseUserStudyLogQO qo) {
 		CourseUserStudyLog record = BeanUtil.copyProperties(qo, CourseUserStudyLog.class);
 		return dao.updateById(record);
+	}
+
+	public Page<CourseUserStudyLogVO> courseList(CourseUserStudyLogQO qo) {
+		Page<CourseUserStudyLog> list = dao.courseList(qo.getPageCurrent(), qo.getPageSize(), qo.getBeginGmtCreate(), qo.getEndGmtCreate());
+		return PageUtil.transform(list, CourseUserStudyLogVO.class);
+	}
+
+	public List<CourseUserStudyLogVO> countCourseIdByGmtCreate(CourseUserStudyLogQO qo) {
+		List<CourseUserStudyLog> list = dao.countCourseIdByGmtCreate(qo.getBeginGmtCreate(), qo.getEndGmtCreate());
+		return ArrayListUtil.copy(list, CourseUserStudyLogVO.class);
+	}
+
+	public Page<CourseUserStudyLogVO> periodList(CourseUserStudyLogQO qo) {
+		Page<CourseUserStudyLog> list = dao.periodList(qo.getCourseId(), qo.getPageCurrent(), qo.getPageSize(), qo.getBeginGmtCreate(), qo.getEndGmtCreate());
+		return PageUtil.transform(list, CourseUserStudyLogVO.class);
+	}
+
+	public List<CourseUserStudyLogVO> countPeriodNoByCourseIdAndGmtCreate(CourseUserStudyLogQO qo) {
+		List<CourseUserStudyLog> list = dao.countPeriodNoByCourseIdAndGmtCreate(qo.getCourseId(), qo.getBeginGmtCreate(), qo.getEndGmtCreate());
+		return ArrayListUtil.copy(list, CourseUserStudyLogVO.class);
 	}
 
 }

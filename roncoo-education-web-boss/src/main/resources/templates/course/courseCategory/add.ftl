@@ -6,7 +6,7 @@
 		<input type="hidden" name="categoryType" value="${bean.categoryType}"/>
 		<div class="form-group">
             <label class="control-label x85">分类名称：</label>
-            <input type="text" name="categoryName" value="" placeholder="分类名称" size="20">
+            <input type="text" name="categoryName" value="" placeholder="分类名称" size="20" data-rule="required">
         </div>
         <div class="form-group">
             <label class="control-label x85">备注：</label>

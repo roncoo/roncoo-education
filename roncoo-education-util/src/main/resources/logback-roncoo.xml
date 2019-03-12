@@ -47,6 +47,37 @@
                 <pattern>${PATTERN}</pattern>
             </layout>
         </appender>
+        
+        <appender name="logstash" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${FILE_PATH}/json</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${FILE_PATH}/json.%d{yyyy-MM-dd}.gz</fileNamePattern>
+                <maxHistory>7</maxHistory>
+            </rollingPolicy>
+            <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+                <providers>
+                    <timestamp>
+                        <timeZone>UTC</timeZone>
+                    </timestamp>
+                    <pattern>
+                        <pattern>
+                            {
+                            "severity": "%level",
+                            "service": "${springApplicationName:-}",
+                            "trace": "%X{X-B3-TraceId:-}",
+                            "span": "%X{X-B3-SpanId:-}",
+                            "parent": "%X{X-B3-ParentSpanId:-}",
+                            "exportable": "%X{X-Span-Export:-}",
+                            "pid": "${PID:-}",
+                            "thread": "%thread",
+                            "class": "%logger{40}",
+                            "rest": "%message"
+                            }
+                        </pattern>
+                    </pattern>
+                </providers>
+            </encoder>
+        </appender>
 
         <logger name="com.roncoo" level="debug" />
         <logger name="org.springframework.jdbc.core.JdbcTemplate" level="debug" />
@@ -54,6 +85,7 @@
         <root level="info">
             <appender-ref ref="CONSOLE" />
             <appender-ref ref="TEST-FILE" />
+            <appender-ref ref="logstash" />
         </root>
     </springProfile>
 
@@ -71,11 +103,43 @@
             </layout>
         </appender>
         
+        <appender name="logstash" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${FILE_PATH}/json</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${FILE_PATH}/json.%d{yyyy-MM-dd}.gz</fileNamePattern>
+                <maxHistory>7</maxHistory>
+            </rollingPolicy>
+            <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+                <providers>
+                    <timestamp>
+                        <timeZone>UTC</timeZone>
+                    </timestamp>
+                    <pattern>
+                        <pattern>
+                            {
+                            "severity": "%level",
+                            "service": "${springApplicationName:-}",
+                            "trace": "%X{X-B3-TraceId:-}",
+                            "span": "%X{X-B3-SpanId:-}",
+                            "parent": "%X{X-B3-ParentSpanId:-}",
+                            "exportable": "%X{X-Span-Export:-}",
+                            "pid": "${PID:-}",
+                            "thread": "%thread",
+                            "class": "%logger{40}",
+                            "rest": "%message"
+                            }
+                        </pattern>
+                    </pattern>
+                </providers>
+            </encoder>
+        </appender>
+        
         <logger name="com.roncoo" level="warn" />
         <logger name="org.springframework.jdbc.core.JdbcTemplate" level="warn" />
 
         <root level="warn">
             <appender-ref ref="PROD_FILE" />
+            <appender-ref ref="logstash" />
         </root>
     </springProfile>
 </configuration>

@@ -37,11 +37,11 @@
 			<div class="col-md-12">
                 <blockquote class="point">
                     <#list bean.courseChapterAuditList! as chapter>
-                                                                    【${chapter_index+1}】 ${chapter.chapterName!} -【<#if chapter.isFree!?string == '1'>免费</#if><#if chapter.isFree!?string == '0'>${chapter.chapterOriginal!}元</#if>】
+                                                                    【${chapter_index+1}】 ${chapter.chapterName!}
                         <br/>
                         <br/>
                         <#list chapter.courseChapterPeriodAuditList! as period>
-                        &nbsp;&nbsp;&nbsp;&nbsp;|--课时：${period.periodName!} -【<#if period.isFree! == 1>免费</#if><#if period.isFree! == 0>${period.periodOriginal!}元</#if>】
+                        &nbsp;&nbsp;&nbsp;&nbsp;|--课时：${period.periodName!}
                         <br/>
                         <br/>
                         </#list>

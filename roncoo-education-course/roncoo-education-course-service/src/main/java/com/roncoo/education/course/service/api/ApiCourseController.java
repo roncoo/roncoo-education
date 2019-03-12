@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.roncoo.education.course.service.biz.ApiCourseBiz;
 import com.roncoo.education.course.service.common.bo.CourseInfoPageBO;
+import com.roncoo.education.course.service.common.bo.CourseInfoSearchBO;
 import com.roncoo.education.course.service.common.bo.CourseVideoBO;
 import com.roncoo.education.course.service.common.dto.CourseInfoPageDTO;
+import com.roncoo.education.course.service.common.dto.CourseInfoSearchPageDTO;
 import com.roncoo.education.course.service.common.dto.CourseViewDTO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Page;
@@ -52,5 +54,17 @@ public class ApiCourseController extends BaseController {
 	@RequestMapping(value = "/view", method = RequestMethod.POST)
 	public Result<CourseViewDTO> view(@RequestBody CourseVideoBO courseVideoBO) {
 		return biz.view(courseVideoBO);
+	}
+	
+	/**
+	 * 搜索课程接口
+	 * 
+	 * @param courseVideoBO
+	 * @return
+	 */
+	@ApiOperation(value = "课程搜索列表接口", notes = "根据课程名称，进行模糊搜索")
+	@RequestMapping(value = "/search/list", method = RequestMethod.POST)
+	public Result<Page<CourseInfoSearchPageDTO>> view(@RequestBody CourseInfoSearchBO courseInfoSearchBO) {
+		return biz.searchList(courseInfoSearchBO);
 	}
 }

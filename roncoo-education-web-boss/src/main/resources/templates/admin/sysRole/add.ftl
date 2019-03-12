@@ -3,7 +3,7 @@
 	<form action="${base}/admin/sysRole/save" data-toggle="validate" method="post">
 		<div class="form-group">
             <label class="control-label x85">名称：</label>
-            <input type="text" name="roleName" value="" placeholder="名称" size="20">
+            <input type="text" name="roleName" value="" placeholder="名称" size="20" data-rule="required">
         </div>
         <div class="form-group">
             <label class="control-label x85">备注：</label>

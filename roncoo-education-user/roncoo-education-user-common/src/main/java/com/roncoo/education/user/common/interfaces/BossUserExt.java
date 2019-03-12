@@ -48,6 +48,14 @@ public interface BossUserExt {
 	 * @return
 	 * @author wuyun
 	 */
-	@RequestMapping(value = "/boss/user/userEducationInfo/sumByCounts", method = RequestMethod.POST)
+	@RequestMapping(value = "/boss/user/userExt/sumByCounts", method = RequestMethod.POST)
 	List<UserEchartsVO> sumByCounts(@RequestBody UserExtEchartsQO userExtEchartsQO);
+
+	/**
+	 * 批量缓存用户信息,发送站内信用
+	 * 
+	 * @author wuyun
+	 */
+	@RequestMapping(value = "/boss/user/userExt/cachUserForMsg")
+	void cachUserForMsg();
 }

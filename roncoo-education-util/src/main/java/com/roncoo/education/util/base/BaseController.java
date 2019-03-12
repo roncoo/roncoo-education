@@ -24,11 +24,16 @@ import com.roncoo.education.util.enums.CourseCategoryEnum;
 import com.roncoo.education.util.enums.CourseTypeEnum;
 import com.roncoo.education.util.enums.ExtractStatusEnum;
 import com.roncoo.education.util.enums.FileTypeEnum;
+import com.roncoo.education.util.enums.IsDefaultEnum;
 import com.roncoo.education.util.enums.IsEnableStatisticsEnum;
 import com.roncoo.education.util.enums.IsFreeEnum;
 import com.roncoo.education.util.enums.IsPayEnum;
 import com.roncoo.education.util.enums.IsPutawayEnum;
+import com.roncoo.education.util.enums.IsSendEnum;
 import com.roncoo.education.util.enums.IsShowServiceEnum;
+import com.roncoo.education.util.enums.IsSuccessEnum;
+import com.roncoo.education.util.enums.IsTimeSendEnum;
+import com.roncoo.education.util.enums.MsgTypeEnum;
 import com.roncoo.education.util.enums.NavEnum;
 import com.roncoo.education.util.enums.OrderStatusEnum;
 import com.roncoo.education.util.enums.PayTypeEnum;
@@ -91,6 +96,11 @@ public class BaseController extends Base {
 		modelMap.put("videoTypeEnums", VideoTypeEnum.values());
 		modelMap.put("sysTypeEnums", SysTypeEnum.values());
 		modelMap.put("fileTypeEnums", FileTypeEnum.values());
+		modelMap.put("isDefaultEnums", IsDefaultEnum.values());
+		modelMap.put("isSendEnums", IsSendEnum.values());
+		modelMap.put("isTimeSendEnums", IsTimeSendEnum.values());
+		modelMap.put("msgTypeEnums", MsgTypeEnum.values());
+		modelMap.put("isSuccessEnums", IsSuccessEnum.values());
 	}
 
 	/**

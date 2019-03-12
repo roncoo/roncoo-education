@@ -13,38 +13,38 @@ import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Page;
 
 /**
- * 课程信息 
+ * 课程信息
  *
  * @author wujing
  */
 @RestController
-public class BossCourseController extends BaseController implements BossCourse{
+public class BossCourseController extends BaseController implements BossCourse {
 
 	@Autowired
 	private BossCourseBiz biz;
-	
+
 	@Override
-	public Page<CourseVO> listForPage(@RequestBody CourseQO qo){
+	public Page<CourseVO> listForPage(@RequestBody CourseQO qo) {
 		return biz.listForPage(qo);
 	}
 
-    @Override
-	public int save(@RequestBody CourseQO qo){
+	@Override
+	public int save(@RequestBody CourseQO qo) {
 		return biz.save(qo);
 	}
 
-    @Override	
-	public int deleteById(@PathVariable(value = "id") Long id){
+	@Override
+	public int deleteById(@PathVariable(value = "id") Long id) {
 		return biz.deleteById(id);
 	}
-	
-    @Override	
-	public int updateById(@RequestBody CourseQO qo){
+
+	@Override
+	public int updateById(@RequestBody CourseQO qo) {
 		return biz.updateById(qo);
 	}
-	
-    @Override
-	public CourseVO getById(@PathVariable(value = "id") Long id){
+
+	@Override
+	public CourseVO getById(@PathVariable(value = "id") Long id) {
 		return biz.getById(id);
 	}
 
@@ -52,4 +52,5 @@ public class BossCourseController extends BaseController implements BossCourse{
 	public CourseVO getByCourseId(@PathVariable(value = "id") Long id) {
 		return biz.getByCourseId(id);
 	}
+
 }

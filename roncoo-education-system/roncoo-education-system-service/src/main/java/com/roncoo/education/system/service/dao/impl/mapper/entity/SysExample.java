@@ -1514,6 +1514,146 @@ public class SysExample {
             addCriterion("notify_url not between", value1, value2, "notifyUrl");
             return (Criteria) this;
         }
+
+        public Criteria andSmsCodeIsNull() {
+            addCriterion("sms_code is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmsCodeIsNotNull() {
+            addCriterion("sms_code is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmsCodeEqualTo(String value) {
+            addCriterion("sms_code =", value, "smsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmsCodeNotEqualTo(String value) {
+            addCriterion("sms_code <>", value, "smsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmsCodeGreaterThan(String value) {
+            addCriterion("sms_code >", value, "smsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmsCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("sms_code >=", value, "smsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmsCodeLessThan(String value) {
+            addCriterion("sms_code <", value, "smsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmsCodeLessThanOrEqualTo(String value) {
+            addCriterion("sms_code <=", value, "smsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmsCodeLike(String value) {
+            addCriterion("sms_code like", value, "smsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmsCodeNotLike(String value) {
+            addCriterion("sms_code not like", value, "smsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmsCodeIn(List<String> values) {
+            addCriterion("sms_code in", values, "smsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmsCodeNotIn(List<String> values) {
+            addCriterion("sms_code not in", values, "smsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmsCodeBetween(String value1, String value2) {
+            addCriterion("sms_code between", value1, value2, "smsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmsCodeNotBetween(String value1, String value2) {
+            addCriterion("sms_code not between", value1, value2, "smsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNameIsNull() {
+            addCriterion("sign_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNameIsNotNull() {
+            addCriterion("sign_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNameEqualTo(String value) {
+            addCriterion("sign_name =", value, "signName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNameNotEqualTo(String value) {
+            addCriterion("sign_name <>", value, "signName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNameGreaterThan(String value) {
+            addCriterion("sign_name >", value, "signName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNameGreaterThanOrEqualTo(String value) {
+            addCriterion("sign_name >=", value, "signName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNameLessThan(String value) {
+            addCriterion("sign_name <", value, "signName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNameLessThanOrEqualTo(String value) {
+            addCriterion("sign_name <=", value, "signName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNameLike(String value) {
+            addCriterion("sign_name like", value, "signName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNameNotLike(String value) {
+            addCriterion("sign_name not like", value, "signName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNameIn(List<String> values) {
+            addCriterion("sign_name in", values, "signName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNameNotIn(List<String> values) {
+            addCriterion("sign_name not in", values, "signName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNameBetween(String value1, String value2) {
+            addCriterion("sign_name between", value1, value2, "signName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNameNotBetween(String value1, String value2) {
+            addCriterion("sign_name not between", value1, value2, "signName");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

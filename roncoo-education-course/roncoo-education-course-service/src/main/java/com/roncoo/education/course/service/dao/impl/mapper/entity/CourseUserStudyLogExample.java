@@ -305,6 +305,76 @@ public class CourseUserStudyLogExample {
             return (Criteria) this;
         }
 
+        public Criteria andCourseNameIsNull() {
+            addCriterion("course_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseNameIsNotNull() {
+            addCriterion("course_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseNameEqualTo(String value) {
+            addCriterion("course_name =", value, "courseName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseNameNotEqualTo(String value) {
+            addCriterion("course_name <>", value, "courseName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseNameGreaterThan(String value) {
+            addCriterion("course_name >", value, "courseName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseNameGreaterThanOrEqualTo(String value) {
+            addCriterion("course_name >=", value, "courseName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseNameLessThan(String value) {
+            addCriterion("course_name <", value, "courseName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseNameLessThanOrEqualTo(String value) {
+            addCriterion("course_name <=", value, "courseName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseNameLike(String value) {
+            addCriterion("course_name like", value, "courseName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseNameNotLike(String value) {
+            addCriterion("course_name not like", value, "courseName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseNameIn(List<String> values) {
+            addCriterion("course_name in", values, "courseName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseNameNotIn(List<String> values) {
+            addCriterion("course_name not in", values, "courseName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseNameBetween(String value1, String value2) {
+            addCriterion("course_name between", value1, value2, "courseName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCourseNameNotBetween(String value1, String value2) {
+            addCriterion("course_name not between", value1, value2, "courseName");
+            return (Criteria) this;
+        }
+
         public Criteria andChapterIdIsNull() {
             addCriterion("chapter_id is null");
             return (Criteria) this;
@@ -365,6 +435,76 @@ public class CourseUserStudyLogExample {
             return (Criteria) this;
         }
 
+        public Criteria andChapterNameIsNull() {
+            addCriterion("chapter_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterNameIsNotNull() {
+            addCriterion("chapter_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterNameEqualTo(String value) {
+            addCriterion("chapter_name =", value, "chapterName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterNameNotEqualTo(String value) {
+            addCriterion("chapter_name <>", value, "chapterName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterNameGreaterThan(String value) {
+            addCriterion("chapter_name >", value, "chapterName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterNameGreaterThanOrEqualTo(String value) {
+            addCriterion("chapter_name >=", value, "chapterName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterNameLessThan(String value) {
+            addCriterion("chapter_name <", value, "chapterName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterNameLessThanOrEqualTo(String value) {
+            addCriterion("chapter_name <=", value, "chapterName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterNameLike(String value) {
+            addCriterion("chapter_name like", value, "chapterName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterNameNotLike(String value) {
+            addCriterion("chapter_name not like", value, "chapterName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterNameIn(List<String> values) {
+            addCriterion("chapter_name in", values, "chapterName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterNameNotIn(List<String> values) {
+            addCriterion("chapter_name not in", values, "chapterName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterNameBetween(String value1, String value2) {
+            addCriterion("chapter_name between", value1, value2, "chapterName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChapterNameNotBetween(String value1, String value2) {
+            addCriterion("chapter_name not between", value1, value2, "chapterName");
+            return (Criteria) this;
+        }
+
         public Criteria andPeriodIdIsNull() {
             addCriterion("period_id is null");
             return (Criteria) this;
@@ -422,6 +562,76 @@ public class CourseUserStudyLogExample {
 
         public Criteria andPeriodIdNotBetween(Long value1, Long value2) {
             addCriterion("period_id not between", value1, value2, "periodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodNameIsNull() {
+            addCriterion("period_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodNameIsNotNull() {
+            addCriterion("period_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodNameEqualTo(String value) {
+            addCriterion("period_name =", value, "periodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodNameNotEqualTo(String value) {
+            addCriterion("period_name <>", value, "periodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodNameGreaterThan(String value) {
+            addCriterion("period_name >", value, "periodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodNameGreaterThanOrEqualTo(String value) {
+            addCriterion("period_name >=", value, "periodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodNameLessThan(String value) {
+            addCriterion("period_name <", value, "periodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodNameLessThanOrEqualTo(String value) {
+            addCriterion("period_name <=", value, "periodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodNameLike(String value) {
+            addCriterion("period_name like", value, "periodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodNameNotLike(String value) {
+            addCriterion("period_name not like", value, "periodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodNameIn(List<String> values) {
+            addCriterion("period_name in", values, "periodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodNameNotIn(List<String> values) {
+            addCriterion("period_name not in", values, "periodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodNameBetween(String value1, String value2) {
+            addCriterion("period_name between", value1, value2, "periodName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodNameNotBetween(String value1, String value2) {
+            addCriterion("period_name not between", value1, value2, "periodName");
             return (Criteria) this;
         }
 

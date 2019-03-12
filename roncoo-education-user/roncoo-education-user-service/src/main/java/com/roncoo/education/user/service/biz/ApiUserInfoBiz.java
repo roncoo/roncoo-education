@@ -19,17 +19,21 @@ import com.roncoo.education.user.service.common.bo.UserSendCodeBO;
 import com.roncoo.education.user.service.common.bo.auth.UserUpdateBO;
 import com.roncoo.education.user.service.common.dto.UserLoginDTO;
 import com.roncoo.education.user.service.dao.PlatformDao;
+import com.roncoo.education.user.service.dao.SendSmsLogDao;
 import com.roncoo.education.user.service.dao.UserDao;
 import com.roncoo.education.user.service.dao.UserExtDao;
 import com.roncoo.education.user.service.dao.UserLogLoginDao;
 import com.roncoo.education.user.service.dao.impl.mapper.entity.Platform;
+import com.roncoo.education.user.service.dao.impl.mapper.entity.SendSmsLog;
 import com.roncoo.education.user.service.dao.impl.mapper.entity.User;
 import com.roncoo.education.user.service.dao.impl.mapper.entity.UserExt;
 import com.roncoo.education.user.service.dao.impl.mapper.entity.UserLogLogin;
 import com.roncoo.education.util.aliyun.Aliyun;
 import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.BaseBiz;
+import com.roncoo.education.util.base.BaseException;
 import com.roncoo.education.util.base.Result;
+import com.roncoo.education.util.enums.IsSuccessEnum;
 import com.roncoo.education.util.enums.LoginStatusEnum;
 import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.enums.StatusIdEnum;
@@ -60,6 +64,8 @@ public class ApiUserInfoBiz extends BaseBiz {
 	private UserDao userDao;
 	@Autowired
 	private UserExtDao userExtDao;
+	@Autowired
+	private SendSmsLogDao sendSmsLogDao;
 	@Autowired
 	private UserLogLoginDao userLogLoginDao;
 
@@ -157,7 +163,8 @@ public class ApiUserInfoBiz extends BaseBiz {
 		dto.setToken(JWTUtil.create(user.getUserNo(), JWTUtil.DATE));
 
 		// 登录成功，存入缓存，单点登录使用
-		//redisTemplate.opsForValue().set(dto.getUserNo().toString(), dto.getToken(), 1, TimeUnit.DAYS);
+		// redisTemplate.opsForValue().set(dto.getUserNo().toString(), dto.getToken(),
+		// 1, TimeUnit.DAYS);
 
 		return Result.success(dto);
 	}
@@ -208,7 +215,8 @@ public class ApiUserInfoBiz extends BaseBiz {
 		dto.setToken(JWTUtil.create(user.getUserNo(), JWTUtil.DATE));
 
 		// 登录成功，存入缓存，单点登录使用
-		//redisTemplate.opsForValue().set(dto.getUserNo().toString(), dto.getToken(), 1, TimeUnit.DAYS);
+		// redisTemplate.opsForValue().set(dto.getUserNo().toString(), dto.getToken(),
+		// 1, TimeUnit.DAYS);
 		return Result.success(dto);
 	}
 
@@ -232,17 +240,29 @@ public class ApiUserInfoBiz extends BaseBiz {
 		if (ObjectUtil.isNull(sys)) {
 			return Result.error("找不到系统配置信息");
 		}
-		// 校验发送次数
-
-		// 获取模板
-		String code = RandomUtil.randomNumbers(6);
+		// 创建日志实例
+		SendSmsLog sendSmsLog = new SendSmsLog();
+		sendSmsLog.setMobile(userSendCodeBO.getMobile());
+		sendSmsLog.setTemplate(sys.getSmsCode());
+		// 随机生成验证码
+		sendSmsLog.setSmsCode(RandomUtil.randomNumbers(6));
 		try {
 			// 发送验证码
-			AliyunUtil.sendMsg(userSendCodeBO.getMobile(), code, BeanUtil.copyProperties(sys, Aliyun.class));
-			// 验证码存入缓存：5分钟有效
-			redisTemplate.opsForValue().set(userSendCodeBO.getClientId() + userSendCodeBO.getMobile(), code, 5, TimeUnit.MINUTES);
-			return Result.success("发送成功");
+			boolean result = AliyunUtil.sendMsg(userSendCodeBO.getMobile(), sendSmsLog.getSmsCode(), BeanUtil.copyProperties(sys, Aliyun.class));
+			// 发送成功，验证码存入缓存：5分钟有效
+			if (result) {
+				redisTemplate.opsForValue().set(userSendCodeBO.getClientId() + userSendCodeBO.getMobile(), sendSmsLog.getSmsCode(), 5, TimeUnit.MINUTES);
+				sendSmsLog.setIsSuccess(IsSuccessEnum.SUCCESS.getCode());
+				sendSmsLogDao.save(sendSmsLog);
+				return Result.success("发送成功");
+			}
+			// 发送失败
+			sendSmsLog.setIsSuccess(IsSuccessEnum.FAIL.getCode());
+			sendSmsLogDao.save(sendSmsLog);
+			throw new BaseException("发送失败");
 		} catch (ClientException e) {
+			sendSmsLog.setIsSuccess(IsSuccessEnum.FAIL.getCode());
+			sendSmsLogDao.save(sendSmsLog);
 			logger.error("发送失败，原因={}", e.getErrMsg());
 			return Result.error("发送失败");
 		}
@@ -287,7 +307,7 @@ public class ApiUserInfoBiz extends BaseBiz {
 		if (StringUtils.isEmpty(userUpdateBO.getClientId())) {
 			return Result.error("clientId不能为空");
 		}
-		
+
 		Platform platform = platformDao.getByClientId(userUpdateBO.getClientId());
 		if (null == platform) {
 			return Result.error("该平台不存在");
@@ -295,7 +315,7 @@ public class ApiUserInfoBiz extends BaseBiz {
 		if (!StatusIdEnum.YES.getCode().equals(platform.getStatusId())) {
 			return Result.error("该平台状态异常，请联系管理员");
 		}
-		
+
 		String redisCode = redisTemplate.opsForValue().get(platform.getClientId() + userUpdateBO.getMobile());
 		if (StringUtils.isEmpty(redisCode)) {
 			return Result.error("请输入验证码");
