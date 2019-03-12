@@ -46,6 +46,10 @@ public class Sys implements Serializable {
 
     private String notifyUrl;
 
+    private String smsCode;
+
+    private String signName;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -216,6 +220,22 @@ public class Sys implements Serializable {
         this.notifyUrl = notifyUrl == null ? null : notifyUrl.trim();
     }
 
+    public String getSmsCode() {
+        return smsCode;
+    }
+
+    public void setSmsCode(String smsCode) {
+        this.smsCode = smsCode == null ? null : smsCode.trim();
+    }
+
+    public String getSignName() {
+        return signName;
+    }
+
+    public void setSignName(String signName) {
+        this.signName = signName == null ? null : signName.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -243,6 +263,8 @@ public class Sys implements Serializable {
         sb.append(", payKey=").append(payKey);
         sb.append(", paySecret=").append(paySecret);
         sb.append(", notifyUrl=").append(notifyUrl);
+        sb.append(", smsCode=").append(smsCode);
+        sb.append(", signName=").append(signName);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
