@@ -16,6 +16,7 @@
 	                <#else>
 		                <input type="radio" name="videoType" value="1" data-toggle="icheck" checked="checked" data-label="保利威视" size="20">
 					    <input type="radio" name="videoType" value="2" data-toggle="icheck" data-label="七牛" size="20">
+					    <input type="radio" name="videoType" value="3" data-toggle="icheck" data-label="本地" size="20" checked="checked">
 	            	</#if>
 	            </div>
 	            <br />
@@ -49,6 +50,7 @@
 	                <#else>
 		                <input type="radio" name="fileType" value="1" data-toggle="icheck" checked="checked" data-label="阿里云" size="20">
 					    <input type="radio" name="fileType" value="2" data-toggle="icheck" data-label="七牛" size="20">
+					    <input type="radio" name="fileType" value="3" data-toggle="icheck" data-label="本地" size="20" checked="checked">
 	            	</#if>
 	            </div>
 	            <br />
@@ -59,6 +61,7 @@
 	                <label class="control-label x120">ossBucket：</label>
 	                <input type="text" name="aliyunOssBucket" value="<#if bean??>${bean.aliyunOssBucket!}</#if>" placeholder="accessKeySecret" size="20">
 	            </div>
+	            <br />
 	            <div class="form-group">
 	                <label class="control-label x150">smsCode：</label>
 	                <input type="text" name="smsCode" value="<#if bean??>${bean.smsCode!}</#if>" placeholder="smsCode" size="20">
