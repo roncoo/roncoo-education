@@ -1,6 +1,6 @@
 # 领课教育 - 领课网络在线教育系统
 
-### 项目介绍
+### 项目介绍（如果对你有用，请给个star！）
 > 领课教育（roncoo-education）是基于领课团队多年的在线教育开发和运营经验打造出来的产品，致力于打造一个全行业都适用的分布式在线教育系统。系统前台采用前后端分离模式，vue.js为核心框架，后台采用Spring Cloud为核心框架，Eureka为注册中心，Config为配置中心，SBA为应用监控，Zipkin为链路监控。
 
 ### 前台功能介绍
@@ -17,17 +17,15 @@
 * 广告管理功能，后台自定义广告设置，增加营销效果
 * 支付功能模块，系统无缝集成了龙果支付
 
-##### 如果对你有用，请给个star！
-
 ### 相关工程
 ##### 前端工程（roncoo-education-web）：[码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web)
 ##### 配置工程（roncoo-education-config）：[码云地址](https://gitee.com/roncoocom/roncoo-education-config) | [Github地址](https://github.com/roncoo/roncoo-education-config)
 
 ### 使用文档
-##### [项目介绍](https://blog.roncoo.com/article/1105321762337357826) [部署文档](https://blog.roncoo.com/article/1103554925858197505) [常见问题](https://blog.roncoo.com/article/1105309620724858882)
+##### [项目介绍](https://blog.roncoo.com/article/1105321762337357826)     [部署文档](https://blog.roncoo.com/article/1103554925858197505)      [常见问题](https://blog.roncoo.com/article/1105309620724858882)
 
 ### 演示地址
-##### 前端演示地址：[领课教育](http://edu.os.roncoo.com/) 后台演示地址：[管理后台](http://roncoo.vicp.net/boss/login)
+##### 前端演示地址：[领课教育](http://edu.os.roncoo.com/)      后台演示地址：[管理后台](http://roncoo.vicp.net/boss/login)
 
 ### 商业合作
 * 如果想定制开发，我们提供有偿服务支持
