@@ -22,10 +22,10 @@
 ##### 配置工程（roncoo-education-config）：[码云地址](https://gitee.com/roncoocom/roncoo-education-config) | [Github地址](https://github.com/roncoo/roncoo-education-config)
 
 ### 使用文档
-##### [项目介绍](https://blog.roncoo.com/article/1105321762337357826)     [部署文档](https://blog.roncoo.com/article/1103554925858197505)      [常见问题](https://blog.roncoo.com/article/1105309620724858882)
+##### [项目介绍](https://blog.roncoo.com/article/1105321762337357826) | [部署文档](https://blog.roncoo.com/article/1103554925858197505) | [常见问题](https://blog.roncoo.com/article/1105309620724858882)
 
 ### 演示地址
-##### 前端演示地址：[领课教育](http://edu.os.roncoo.com/)      后台演示地址：[管理后台](http://roncoo.vicp.net/boss/login)
+##### 前端演示地址：[领课教育](http://edu.os.roncoo.com/) | 后台演示地址：[管理后台](http://roncoo.vicp.net/boss/login)
 
 ### 商业合作
 * 如果想定制开发，我们提供有偿服务支持
