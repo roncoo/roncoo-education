@@ -36,8 +36,8 @@
 ### 升级说明：2.0.0 版本
 * 集成了链路监控：roncoo-education-server-zipkin
 * 新增站内信功能，推荐课程功能，发送验证码功能，密码修改功能
-* 升级swagger-models版本，因为1.5.20有个bug
-* 更换Swagger的UI为swagger-bootstrap-ui
+* 增加文件存储类型，修改bug若干
+* 升级swagger-models版本， 更换Swagger的UI为swagger-bootstrap-ui
 
 ### TODO
 * 动态更新配置(spring cloud bus + kafka + spring cloud config)
@@ -62,56 +62,6 @@
 
 * 下单回调流程
 ![下单回调流程](/doc/images/pay_callback.png)
-
-### 项目结构
-
-```
-├─roncoo-education -----------------------------父项目，公共依赖
-│  │
-│  ├─roncoo-education-course -------------------课程模块，包括订单模块
-│  │  │
-│  │  ├─roncoo-education-course-common ---------共用工程
-│  │  │
-│  │  ├─roncoo-education-course-feign ----------接口工程，供其他工程模块使用
-│  │  │
-│  │  └─roncoo-education-course-service --------服务工程，其他接口服务
-│  │
-│  ├─roncoo-education-crontab-plan -------------定时任务，处理过期订单和统计等
-│  │
-│  ├─roncoo-education-gateway-api --------------网关工程
-│  │
-│  ├─roncoo-education-server-admin -------------监控中心
-│  │
-│  ├─roncoo-education-server-config ------------配置中心
-│  │
-│  ├─roncoo-education-server-eureka ------------注册中心
-│  │
-│  ├─roncoo-education-system -------------------系统基础工程
-│  │  │
-│  │  ├─roncoo-education-system-common ---------共用工程
-│  │  │
-│  │  ├─roncoo-education-system-feign ----------接口工程，供其他工程模块使用
-│  │  │
-│  │  └─roncoo-education-system-service --------服务工程，其他接口服务
-│  │
-│  ├─roncoo-education-user ---------------------用户工程
-│  │  │
-│  │  ├─roncoo-education-user-common -----------共用工程
-│  │  │
-│  │  ├─roncoo-education-user-feign ------------接口工程，供其他工程模块使用
-│  │  │
-│  │  └─roncoo-education-user-service ----------服务工程，其他接口服务
-│  │
-│  ├─roncoo-education-web-boss -----------------管理后台工程
-│  │
-│  ├─doc
-│  │  │
-│  │  ├─images --------------------------------项目演示截图
-│  │  │
-│  │  ├─lombok.jar ----------------------------Eclipse使用，放到Eclipse的根目录即可
-│  │  │
-└──└──└─*.sql----------------------------------项目SQL脚本：带有demo数据
-```
 
 ### 官方QQ群（加群免费获取sql脚本）
 <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=7d1b7f1a78715320d09ed841c66d6bf0fa7b9105964cc327e9483e459b46abd4"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课" title="在线教育系统-领课"> 826617734</a>
