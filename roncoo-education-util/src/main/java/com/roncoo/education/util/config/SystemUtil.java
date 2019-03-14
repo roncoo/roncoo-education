@@ -40,7 +40,7 @@ public final class SystemUtil {
 	public static final String RONCOO_PAY_NOTIFY = getProperty("roncoo_pay_notify");
 	public static final String WEIXIN_PAY_NOTIFY = getProperty("weixin_pay_notify");
 	public static final String ALI_PAY_NOTIFY = getProperty("ali_pay_notify");
-	
+
 	public static final String POLYV_GETCATAURL = getProperty("polyv_getCataUrl");
 	public static final String POLYV_UPLOADVIDEO = getProperty("polyv_uploadVideo");
 	public static final String POLYV_CHANGECATAURL = getProperty("polyv_changeCataUrl");
@@ -51,8 +51,11 @@ public final class SystemUtil {
 	public static final String POLYV_GETTOKEN = getProperty("polyv_getToken");
 
 	public static final String LECTURER_DEFAULT_PROPORTION = getProperty("lecturer_default_proportion");
-	
+
 	public static final String CONTENT_LENGTH = getProperty("content_length");
-	
+
 	public static final String TEST_COURSE = getProperty("test_course");
+
+	public static final String DOC_STORAGE_PATH = getProperty("doc_storage_path");
+	public static final String PIC_STORAGE_PATH = getProperty("pic_storage_path");
 }

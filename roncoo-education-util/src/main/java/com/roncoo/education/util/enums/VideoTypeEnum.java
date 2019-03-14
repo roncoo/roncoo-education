@@ -15,8 +15,8 @@ public enum VideoTypeEnum {
 
 	POLYV(1, "保利威视"), QINIU(2, "七牛");
 
-    private Integer code;
+	private Integer code;
 
-    private String desc;
+	private String desc;
 
 }
