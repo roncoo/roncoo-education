@@ -17,7 +17,6 @@
     <result column="aliyun_access_key_secret" property="aliyunAccessKeySecret" jdbcType="VARCHAR" />
     <result column="aliyun_oss_url" property="aliyunOssUrl" jdbcType="VARCHAR" />
     <result column="aliyun_oss_bucket" property="aliyunOssBucket" jdbcType="VARCHAR" />
-    <result column="aliyun_oas_vault" property="aliyunOasVault" jdbcType="VARCHAR" />
     <result column="pay_type" property="payType" jdbcType="TINYINT" />
     <result column="pay_url" property="payUrl" jdbcType="VARCHAR" />
     <result column="pay_key" property="payKey" jdbcType="VARCHAR" />
@@ -87,8 +86,8 @@
   <sql id="Base_Column_List" >
     id, gmt_create, gmt_modified, status_id, sort, video_type, polyv_useid, polyv_writetoken, 
     polyv_readtoken, polyv_secretkey, file_type, aliyun_access_key_id, aliyun_access_key_secret, 
-    aliyun_oss_url, aliyun_oss_bucket, aliyun_oas_vault, pay_type, pay_url, pay_key, 
-    pay_secret, notify_url, sms_code, sign_name
+    aliyun_oss_url, aliyun_oss_bucket, pay_type, pay_url, pay_key, pay_secret, notify_url, 
+    sms_code, sign_name
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.SysExample" >
     select
@@ -129,17 +128,17 @@
       polyv_useid, polyv_writetoken, polyv_readtoken, 
       polyv_secretkey, file_type, aliyun_access_key_id, 
       aliyun_access_key_secret, aliyun_oss_url, aliyun_oss_bucket, 
-      aliyun_oas_vault, pay_type, pay_url, 
-      pay_key, pay_secret, notify_url, 
-      sms_code, sign_name)
+      pay_type, pay_url, pay_key, 
+      pay_secret, notify_url, sms_code, 
+      sign_name)
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{videoType,jdbcType=TINYINT}, 
       #{polyvUseid,jdbcType=VARCHAR}, #{polyvWritetoken,jdbcType=VARCHAR}, #{polyvReadtoken,jdbcType=VARCHAR}, 
       #{polyvSecretkey,jdbcType=VARCHAR}, #{fileType,jdbcType=TINYINT}, #{aliyunAccessKeyId,jdbcType=VARCHAR}, 
       #{aliyunAccessKeySecret,jdbcType=VARCHAR}, #{aliyunOssUrl,jdbcType=VARCHAR}, #{aliyunOssBucket,jdbcType=VARCHAR}, 
-      #{aliyunOasVault,jdbcType=VARCHAR}, #{payType,jdbcType=TINYINT}, #{payUrl,jdbcType=VARCHAR}, 
-      #{payKey,jdbcType=VARCHAR}, #{paySecret,jdbcType=VARCHAR}, #{notifyUrl,jdbcType=VARCHAR}, 
-      #{smsCode,jdbcType=VARCHAR}, #{signName,jdbcType=VARCHAR})
+      #{payType,jdbcType=TINYINT}, #{payUrl,jdbcType=VARCHAR}, #{payKey,jdbcType=VARCHAR}, 
+      #{paySecret,jdbcType=VARCHAR}, #{notifyUrl,jdbcType=VARCHAR}, #{smsCode,jdbcType=VARCHAR}, 
+      #{signName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Sys" >
     insert into sys
@@ -188,9 +187,6 @@
       </if>
       <if test="aliyunOssBucket != null" >
         aliyun_oss_bucket,
-      </if>
-      <if test="aliyunOasVault != null" >
-        aliyun_oas_vault,
       </if>
       <if test="payType != null" >
         pay_type,
@@ -259,9 +255,6 @@
       </if>
       <if test="aliyunOssBucket != null" >
         #{aliyunOssBucket,jdbcType=VARCHAR},
-      </if>
-      <if test="aliyunOasVault != null" >
-        #{aliyunOasVault,jdbcType=VARCHAR},
       </if>
       <if test="payType != null" >
         #{payType,jdbcType=TINYINT},
@@ -340,9 +333,6 @@
       <if test="record.aliyunOssBucket != null" >
         aliyun_oss_bucket = #{record.aliyunOssBucket,jdbcType=VARCHAR},
       </if>
-      <if test="record.aliyunOasVault != null" >
-        aliyun_oas_vault = #{record.aliyunOasVault,jdbcType=VARCHAR},
-      </if>
       <if test="record.payType != null" >
         pay_type = #{record.payType,jdbcType=TINYINT},
       </if>
@@ -386,7 +376,6 @@
       aliyun_access_key_secret = #{record.aliyunAccessKeySecret,jdbcType=VARCHAR},
       aliyun_oss_url = #{record.aliyunOssUrl,jdbcType=VARCHAR},
       aliyun_oss_bucket = #{record.aliyunOssBucket,jdbcType=VARCHAR},
-      aliyun_oas_vault = #{record.aliyunOasVault,jdbcType=VARCHAR},
       pay_type = #{record.payType,jdbcType=TINYINT},
       pay_url = #{record.payUrl,jdbcType=VARCHAR},
       pay_key = #{record.payKey,jdbcType=VARCHAR},
@@ -443,9 +432,6 @@
       <if test="aliyunOssBucket != null" >
         aliyun_oss_bucket = #{aliyunOssBucket,jdbcType=VARCHAR},
       </if>
-      <if test="aliyunOasVault != null" >
-        aliyun_oas_vault = #{aliyunOasVault,jdbcType=VARCHAR},
-      </if>
       <if test="payType != null" >
         pay_type = #{payType,jdbcType=TINYINT},
       </if>
@@ -486,7 +472,6 @@
       aliyun_access_key_secret = #{aliyunAccessKeySecret,jdbcType=VARCHAR},
       aliyun_oss_url = #{aliyunOssUrl,jdbcType=VARCHAR},
       aliyun_oss_bucket = #{aliyunOssBucket,jdbcType=VARCHAR},
-      aliyun_oas_vault = #{aliyunOasVault,jdbcType=VARCHAR},
       pay_type = #{payType,jdbcType=TINYINT},
       pay_url = #{payUrl,jdbcType=VARCHAR},
       pay_key = #{payKey,jdbcType=VARCHAR},

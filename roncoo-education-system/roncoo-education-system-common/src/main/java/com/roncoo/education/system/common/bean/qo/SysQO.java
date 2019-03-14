@@ -98,10 +98,6 @@ public class SysQO implements Serializable {
 	 */
 	private String aliyunOssBucket;
 	/**
-	 * oas_vault
-	 */
-	private String aliyunOasVault;
-	/**
 	 * pay_url
 	 */
 	private String payUrl;
