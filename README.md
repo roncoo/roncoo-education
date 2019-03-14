@@ -1,11 +1,25 @@
-# 领课教育-领课网络在线教育系统
+# 领课教育 - 领课网络在线教育系统
 
 ### 项目介绍
-> 领课教育是基于领课团队多年的在线教育开发和运营经验打造出来的产品，致力于打造一个全行业都适用的分布式在线教育系统。系统采用Spring Cloud为核心框架，Eureka为注册中心，Config为配置中心，SBA为应用监控，Zipkin为链路监控。
+> 领课教育（roncoo-education）是基于领课团队多年的在线教育开发和运营经验打造出来的产品，致力于打造一个全行业都适用的分布式在线教育系统。系统前台采用前后端分离模式，vue.js为核心框架，后台采用Spring Cloud为核心框架，Eureka为注册中心，Config为配置中心，SBA为应用监控，Zipkin为链路监控。
+
+### 前台功能介绍
+* 页面展示，课程程的展示和购买功能、讲师招募等功能
+* 个人中心，具有个人信息设置、密码修改、订单管理、学习记录等功能
+* 讲师中心，讲师信息管理、课程管理（课程的添加、修改）、收益管理等功能
+
+### 后台功能介绍
+* 权限管理功能，多角色多用户自定义配置
+* 系统配置功能，自定义进行站点配置及第三方参数配置
+* 讲师管理功能，讲师申请入驻，后台具有审核功能
+* 课程管理功能，讲师管理自有课程，后台具有审核功能
+* 用户登录功能，同一时间只允许同一个账号在同一个地方登录，防止账号共享
+* 广告管理功能，后台自定义广告设置，增加营销效果
+* 支付功能模块，系统无缝集成了龙果支付
 
 ##### 如果对你有用，请给个star！
 
-### 其他工程
+### 相关工程
 ##### 前端工程（roncoo-education-web）：[码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web)
 ##### 配置工程（roncoo-education-config）：[码云地址](https://gitee.com/roncoocom/roncoo-education-config) | [Github地址](https://github.com/roncoo/roncoo-education-config)
 
@@ -21,7 +35,6 @@
 ### 商业合作
 * 如果想定制开发，我们提供有偿服务支持
 * 如果想运营平台，我们云平台提供平台入驻
-* 商业合作联系QQ：297115770 
 * 商业合作联系QQ：513781560 
 * 官网地址：[http://www.roncoo.net](http://www.roncoo.net/index.html)
 
@@ -31,41 +44,9 @@
 * 升级swagger-models版本，因为1.5.20有个bug
 * 更换Swagger的UI为swagger-bootstrap-ui
 
-### 功能介绍
-* 权限管理功能，多角色多用户自定义配置
-* 系统配置功能，自定义进行站点配置及第三方参数配置
-* 讲师管理功能，讲师申请入驻，后台具有审核功能
-* 课程管理功能，讲师管理自有课程，后台具有审核功能
-* 用户登录功能，同一时间只允许同一个账号在同一个地方登录，防止账号共享
-* 广告管理功能，后台自定义广告设置，增加营销效果
-* 支付功能，系统无缝集成了龙果支付
-
 ### TODO
 * 动态更新配置(spring cloud bus + kafka + spring cloud config)
 * 日志收集统计(kafka + Elasticsearch + Logstash + Kibana)
-
-### 技术选型
-| 技术框架                                                | 说明                                       | 版本                      
-| ---------------------- | ---------------- | ----------------- |
-| Spring IO Platform     | 版本维护                                | Cairo-SR7
-| Spring Boot            | 核心技术框架                        | 2.0.8.RELEASE
-| spring-cloud-netflix   | 微服务框架                            | 2.0.2.RELEASE
-| spring-cloud-config    | 配置中心                                | 2.0.2.RELEASE
-| spring-cloud-sleuth    | 服务跟踪                                | 2.0.2.RELEASE
-| Mybatis                | 持久层框架                             | 3.4.5
-| Druid                  | 数据连接池                            | 1.1.12
-| Swagger                | 接口文档                                | 1.5.20
-| Freemarker             | 模板引擎                                | 2.3.28
-| Shiro                  | 权限框架                                | 1.4.0
-| POI                    | 文档处理                                | 3.17
-| Hutool                 | 通用工具类                             | 2.16.2
-
-### 软件需求
-* JDK 1.8+
-* MySQL 5.6+
-* Redis 3.0+
-* Maven 3.0+
-* ElasticSearch 6.5.0+
 
 ### 项目截图
 ![SBA](/doc/images/img_01.png)
@@ -136,32 +117,6 @@
 │  │  │
 └──└──└─*.sql----------------------------------项目SQL脚本：带有demo数据
 ```
-
-### 加速maven构建
-在maven的settings.xml 文件里配置mirrors的子节点，添加如下mirror
-```
-<mirror>
-    <id>nexus-aliyun</id>
-    <mirrorOf>*</mirrorOf>
-    <name>Nexus aliyun</name>
-    <url>http://maven.aliyun.com/nexus/content/groups/public</url>
-</mirror>
-```
-
-### Lombok使用
-Lombok是一个可以通过简单的注解形式来帮助我们简化消除一些必须有但显得很臃肿的Java代码的工具，通过使用对应的注解，可以在编译源码的时候生成对应的方法。
-[官方地址：https://projectlombok.org/](https://projectlombok.org/)
-
-#### 1. Eclipse使用方法
-把lombok.jar放入Eclipse的根目录，在eclipse.ini配置文件的最后加上
-```
--javaagent:lombok.jar 
-```
-
-#### 2. IntelliJ IDEA使用方法
-安装插件，如图所示
-
-![图](/doc/images/lombok1.png)
 
 ### 官方QQ群（加群免费获取sql脚本）
 <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=7d1b7f1a78715320d09ed841c66d6bf0fa7b9105964cc327e9483e459b46abd4"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课" title="在线教育系统-领课"> 826617734</a>
