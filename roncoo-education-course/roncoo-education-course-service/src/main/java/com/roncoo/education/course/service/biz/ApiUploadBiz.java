@@ -105,73 +105,48 @@ public class ApiUploadBiz extends BaseBiz {
 			callbackExecutor.execute(new Runnable() {
 				@Override
 				public void run() {
+					// 2、异步上传到保利威视
+					UploadFile uploadFile = new UploadFile();
+					uploadFile.setTitle(fileName);
+					uploadFile.setDesc(fileName);
+					uploadFile.setTag(videoFile.getOriginalFilename());
+					uploadFile.setCataid(1L);
+
 					// 获取系统配置信息
 					SysVO sys = bossSys.getSys();
-					if (ObjectUtil.isNull(sys)) {
-						Result.error("未配置系统配置表");
+
+					UploadFileResult result = PolyvUtil.uploadFile(targetFile, uploadFile, sys.getPolyvWritetoken());
+					if (result == null) {
+						// 上传异常，不再进行处理，定时任务会继续进行处理
+						return;
 					}
-					if (sys.getFileType().equals(FileTypeEnum.LOCAL.getCode())) {
-						courseVideo.setVideoStatus(VideoStatusEnum.SUCCES.getCode());
-						courseVideoDao.updateById(courseVideo);
-						// 根据视频编号、课时ID查询课程视频信息
-						CourseVideo courseVideo = courseVideoDao.getByVideoNoAndPeriodId(videoNo, Long.valueOf(0));
-						// 根据视频编号更新视频信息
-						List<CourseVideo> list = courseVideoDao.listByVideoNo(videoNo);
-						for (CourseVideo video : list) {
-							video.setVideoLength(courseVideo.getVideoLength());
-							video.setVideoVid(courseVideo.getVideoVid());
-							video.setVideoStatus(VideoStatusEnum.SUCCES.getCode());
-							video.setVideoOasId(courseVideo.getVideoOasId());
-							courseVideoDao.updateById(video);
-						}
-						FileStorage fileStorage = new FileStorage();
-						fileStorage.setFileName(videoFile.getOriginalFilename());
-						fileStorage.setFileNo(videoNo);
-						fileStorage.setFileSize(videoFile.getSize());
-						fileStorage.setFileType(FileStorageTypeEnum.VIDEO.getCode());
-						fileStorage.setFileUrl(targetFile.toString());
-						fileStorageDao.save(fileStorage);
-					} else {
-						// 2、异步上传到保利威视
-						UploadFile uploadFile = new UploadFile();
-						uploadFile.setTitle(fileName);
-						uploadFile.setDesc(fileName);
-						uploadFile.setTag(videoFile.getOriginalFilename());
-						uploadFile.setCataid(1L);
 
-						UploadFileResult result = PolyvUtil.uploadFile(targetFile, uploadFile, sys.getPolyvWritetoken());
-						if (result == null) {
-							// 上传异常，不再进行处理，定时任务会继续进行处理
-							return;
-						}
+					courseVideo.setVideoLength(result.getDuration());
+					courseVideo.setVideoVid(result.getVid());
+					courseVideo.setVideoStatus(VideoStatusEnum.SUCCES.getCode());
+					courseVideoDao.updateById(courseVideo);
 
-						courseVideo.setVideoLength(result.getDuration());
-						courseVideo.setVideoVid(result.getVid());
-						courseVideo.setVideoStatus(VideoStatusEnum.SUCCES.getCode());
-						courseVideoDao.updateById(courseVideo);
+					// 3、异步上传到阿里云
+					String videoOasId = AliyunUtil.uploadDoc(PlatformEnum.COURSE, targetFile, BeanUtil.copyProperties(sys, Aliyun.class));
+					courseVideo.setVideoOasId(videoOasId);
+					courseVideoDao.updateById(courseVideo);
 
-						// 3、异步上传到阿里云
-						String videoOasId = AliyunUtil.uploadDoc(PlatformEnum.COURSE, targetFile, BeanUtil.copyProperties(sys, Aliyun.class));
-						courseVideo.setVideoOasId(videoOasId);
-						courseVideoDao.updateById(courseVideo);
+					// 根据视频编号、课时ID查询课程视频信息
+					CourseVideo courseVideo = courseVideoDao.getByVideoNoAndPeriodId(videoNo, Long.valueOf(0));
 
-						// 根据视频编号、课时ID查询课程视频信息
-						CourseVideo courseVideo = courseVideoDao.getByVideoNoAndPeriodId(videoNo, Long.valueOf(0));
+					// 根据视频编号更新视频信息
+					List<CourseVideo> list = courseVideoDao.listByVideoNo(videoNo);
+					for (CourseVideo video : list) {
+						video.setVideoLength(courseVideo.getVideoLength());
+						video.setVideoVid(courseVideo.getVideoVid());
+						video.setVideoStatus(VideoStatusEnum.SUCCES.getCode());
+						video.setVideoOasId(courseVideo.getVideoOasId());
+						courseVideoDao.updateById(video);
+					}
 
-						// 根据视频编号更新视频信息
-						List<CourseVideo> list = courseVideoDao.listByVideoNo(videoNo);
-						for (CourseVideo video : list) {
-							video.setVideoLength(courseVideo.getVideoLength());
-							video.setVideoVid(courseVideo.getVideoVid());
-							video.setVideoStatus(VideoStatusEnum.SUCCES.getCode());
-							video.setVideoOasId(courseVideo.getVideoOasId());
-							courseVideoDao.updateById(video);
-						}
-
-						// 4、成功删除本地文件
-						if (targetFile.isFile() && targetFile.exists()) {
-							targetFile.delete();
-						}
+					// 4、成功删除本地文件
+					if (targetFile.isFile() && targetFile.exists()) {
+						targetFile.delete();
 					}
 				}
 			});
@@ -187,7 +162,7 @@ public class ApiUploadBiz extends BaseBiz {
 	 * @author wuyun
 	 */
 	public Result<String> uploadPic(MultipartFile picFile) {
-		if (ObjectUtil.isNotNull(picFile) && !picFile.isEmpty()) {
+		if (ObjectUtil.isNotNull(picFile)) {
 			// 获取系统配置信息
 			SysVO sys = bossSys.getSys();
 			if (ObjectUtil.isNull(sys)) {
@@ -227,7 +202,7 @@ public class ApiUploadBiz extends BaseBiz {
 	 * @author wuyun
 	 */
 	public Result<String> uploadDoc(MultipartFile docFile) {
-		if (ObjectUtil.isNotNull(docFile) && !docFile.isEmpty()) {
+		if (ObjectUtil.isNotNull(docFile)) {
 			// 获取系统配置信息
 			SysVO sys = bossSys.getSys();
 			if (ObjectUtil.isNull(sys)) {
