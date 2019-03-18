@@ -38,6 +38,7 @@
 * 新增站内信功能，推荐课程功能，发送验证码功能，密码修改功能
 * 增加文件存储类型，修改bug若干
 * 升级swagger-models版本， 更换Swagger的UI为swagger-bootstrap-ui
+* 优化环境配置，更方便部署
 
 ### TODO
 * 动态更新配置(spring cloud bus + kafka + spring cloud config)
