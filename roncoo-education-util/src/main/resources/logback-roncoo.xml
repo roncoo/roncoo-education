@@ -8,7 +8,7 @@
 
     <property name="PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -|   %msg%n"/>
 
-    <!-- 开发环境 -->
+    <!-- 本地环境 -->
     <springProfile name="local">
         <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
             <encoder>
@@ -25,7 +25,7 @@
         </root>
     </springProfile>
     
-    <!-- 测试环境 -->
+    <!-- 开发、测试环境 -->
     <springProfile name="dev,test">
         <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
             <encoder>
