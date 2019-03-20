@@ -120,13 +120,13 @@ public class SysUserService {
 			throw new BaseException("找不到用户信息,请重试");
 		}
 
-		if (DigestUtil.sha1Hex(userVO.getMobileSalt(), qo.getMobilePsw()).equals(userVO.getMobilePsw())) {
+		if (DigestUtil.sha1Hex(userVO.getMobileSalt() + qo.getMobilePsw()).equals(userVO.getMobilePsw())) {
 			throw new BaseException("输入的密码与原密码一致,请重试");
 		}
 
 		UserQO userQO = new UserQO();
 		userQO.setId(userVO.getId());
-		userQO.setMobilePsw(DigestUtil.sha1Hex(userVO.getMobileSalt(), qo.getMobilePsw()));
+		userQO.setMobilePsw(DigestUtil.sha1Hex(userVO.getMobileSalt() + qo.getMobilePsw()));
 		return bossUser.updateById(userQO);
 	}
 
