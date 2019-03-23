@@ -19,6 +19,9 @@
 * 广告管理功能，后台自定义广告设置，增加营销效果
 * 支付功能模块，系统无缝集成了龙果支付
 
+### 演示地址
+##### 前端演示地址：[领课教育](http://edu.os.roncoo.com/) | 后台演示地址：[管理后台](http://roncoo.vicp.net/boss/login)
+
 ### 相关工程
 ##### 前端工程（roncoo-education-web）：[码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web)
 ##### 配置工程（roncoo-education-config）：[码云地址](https://gitee.com/roncoocom/roncoo-education-config) | [Github地址](https://github.com/roncoo/roncoo-education-config)
@@ -26,17 +29,14 @@
 ### 使用文档
 ##### [项目介绍](https://blog.roncoo.com/article/1105321762337357826) | [部署文档](https://blog.roncoo.com/article/1103554925858197505) | [常见问题](https://blog.roncoo.com/article/1105309620724858882)
 
-### 演示地址
-##### 前端演示地址：[领课教育](http://edu.os.roncoo.com/) | 后台演示地址：[管理后台](http://roncoo.vicp.net/boss/login)
+### 官方QQ群（加群免费获取sql脚本）
+<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=7d1b7f1a78715320d09ed841c66d6bf0fa7b9105964cc327e9483e459b46abd4"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课" title="在线教育系统-领课"> 826617734</a>
 
 ### 商业合作
 * 如果想定制开发，我们提供有偿服务支持
 * 如果想运营平台，我们云平台提供平台入驻
 * 商业合作联系QQ：513781560 
 * 官网地址：[http://www.roncoo.net](http://www.roncoo.net/index.html)
-
-### 官方QQ群（加群免费获取sql脚本）
-<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=7d1b7f1a78715320d09ed841c66d6bf0fa7b9105964cc327e9483e459b46abd4"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课" title="在线教育系统-领课"> 826617734</a>
 
 ## 项目推荐
 ##### roncoo-recharge：[码云地址](https://gitee.com/roncoocom/roncoo-recharge) | [Github地址](https://github.com/roncoo/roncoo-recharge)
