@@ -10,7 +10,11 @@ import org.springframework.util.StringUtils;
 
 import com.roncoo.education.course.common.bean.qo.CourseVideoQO;
 import com.roncoo.education.course.common.bean.vo.CourseVideoVO;
+import com.roncoo.education.course.service.dao.CourseChapterPeriodAuditDao;
+import com.roncoo.education.course.service.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.service.dao.CourseVideoDao;
+import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriod;
+import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriodAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideo;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideoExample;
 import com.roncoo.education.system.common.bean.vo.SysVO;
@@ -34,12 +38,14 @@ import com.xiaoleilu.hutool.util.ObjectUtil;
  */
 @Component
 public class BossCourseVideoBiz {
-
-	@Autowired
-	private CourseVideoDao dao;
-
 	@Autowired
 	private IBossSys bossSys;
+	@Autowired
+	private CourseVideoDao dao;
+	@Autowired
+	private CourseChapterPeriodAuditDao courseChapterPeriodAuditDao;
+	@Autowired
+	private CourseChapterPeriodDao courseChapterPeriodDao;
 
 	public Page<CourseVideoVO> listForPage(CourseVideoQO qo) {
 		CourseVideoExample example = new CourseVideoExample();
@@ -117,6 +123,22 @@ public class BossCourseVideoBiz {
 					dao.updateById(info);
 				}
 			}
+
+			// 更新课时审核表视频信息
+			List<CourseChapterPeriodAudit> periodAuditList = courseChapterPeriodAuditDao.listByVideoNo(videoNo);
+			for (CourseChapterPeriodAudit periodAudit : periodAuditList) {
+				periodAudit.setVideoLength(result.getDuration());
+				periodAudit.setVideoVid(result.getVid());
+				courseChapterPeriodAuditDao.updateById(periodAudit);
+			}
+			// 更新课时视频信息
+			List<CourseChapterPeriod> periodList = courseChapterPeriodDao.listByVideoNo(videoNo);
+			for (CourseChapterPeriod period : periodList) {
+				period.setVideoLength(result.getDuration());
+				period.setVideoVid(result.getVid());
+				courseChapterPeriodDao.updateById(period);
+			}
+
 		}
 		// 成功删除本地文件
 		targetFile.delete();
