@@ -32,6 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
+import com.aliyun.oas.utils.StringUtil;
 import com.ning.http.util.Base64;
 import com.roncoo.education.util.config.SystemUtil;
 import com.roncoo.education.util.tools.JSONUtil;
@@ -66,7 +67,9 @@ public final class PolyvUtil {
 	 */
 	public static String getPolyvCode(PolyvCode polyvCode) {
 		try {
-			return HttpUtil.encode(Base64.encode(SecureUtil.des(Base64.decode(KEY)).encrypt(JSONUtil.toJSONString(polyvCode))), CHARSET_UTF_8);
+			return HttpUtil.encode(
+					Base64.encode(SecureUtil.des(Base64.decode(KEY)).encrypt(JSONUtil.toJSONString(polyvCode))),
+					CHARSET_UTF_8);
 		} catch (Exception e) {
 			logger.error("保利威视，加密出错", e);
 			return "";
@@ -81,7 +84,9 @@ public final class PolyvUtil {
 	 */
 	public static PolyvCode decode(String code) {
 		try {
-			return JSONUtil.parseObject(new String(SecureUtil.des(Base64.decode(KEY)).decrypt(Base64.decode(HttpUtil.decode(code, CHARSET_UTF_8)))), PolyvCode.class);
+			return JSONUtil.parseObject(new String(
+					SecureUtil.des(Base64.decode(KEY)).decrypt(Base64.decode(HttpUtil.decode(code, CHARSET_UTF_8)))),
+					PolyvCode.class);
 		} catch (Exception e) {
 			logger.error("保利威视，解密出错", e);
 			return null;
@@ -102,7 +107,9 @@ public final class PolyvUtil {
 		map.put("viewerName", bo.getUserNo());
 		map.put("extraParams", "HTML5");
 		map.put("viewerId", bo.getUserNo());
-		String concated = "extraParams" + map.get("extraParams") + "ts" + map.get("ts") + "userId" + map.get("userId") + "videoId" + map.get("videoId") + "viewerId" + map.get("viewerId") + "viewerIp" + map.get("viewerIp") + "viewerName" + map.get("viewerName");
+		String concated = "extraParams" + map.get("extraParams") + "ts" + map.get("ts") + "userId" + map.get("userId")
+				+ "videoId" + map.get("videoId") + "viewerId" + map.get("viewerId") + "viewerIp" + map.get("viewerIp")
+				+ "viewerName" + map.get("viewerName");
 		map.put("sign", MD5Util.MD5(secretkey + concated + secretkey).toUpperCase());
 		String result = post(SystemUtil.POLYV_GETTOKEN, map);
 		logger.info("保利威视，获取token接口：result={}", result);
@@ -158,9 +165,12 @@ public final class PolyvUtil {
 	public static UploadFileResult uploadFile(File file, UploadFile uploadFile, String writetoken) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("writetoken", writetoken);
-		param.put("JSONRPC", "{\"title\": \"" + uploadFile.getTitle() + "\", \"tag\": \"" + uploadFile.getTag() + "\", \"desc\": \"" + uploadFile.getDesc() + "\"}");
+		param.put("JSONRPC", "{\"title\": \"" + uploadFile.getTitle() + "\", \"tag\": \"" + uploadFile.getTag()
+				+ "\", \"desc\": \"" + uploadFile.getDesc() + "\"}");
 		param.put("cataid", uploadFile.getCataid());
-		param.put("watermark", uploadFile.getWatermark());
+		if (StringUtil.isNotBlank(uploadFile.getWatermark())) {
+			param.put("watermark", uploadFile.getWatermark());
+		}
 		String result = postFile(SystemUtil.POLYV_UPLOADVIDEO, param, file);
 		try {
 			JSONObject json = JSONObject.fromObject(result);
@@ -192,7 +202,8 @@ public final class PolyvUtil {
 		paramMap.put("sign", sign);
 		String url = SystemUtil.POLYV_DELETEVIDEO.replace("{userid}", useid);
 		HttpPost httpPost = new HttpPost(url.trim());
-		RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(10000).setConnectionRequestTimeout(3600000).setSocketTimeout(3600000).build();
+		RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(10000)
+				.setConnectionRequestTimeout(3600000).setSocketTimeout(3600000).build();
 		httpPost.setConfig(requestConfig);
 		List<BasicNameValuePair> nvps = new ArrayList<>();
 		for (Map.Entry<String, String> entry : paramMap.entrySet()) {
@@ -217,7 +228,8 @@ public final class PolyvUtil {
 		try {
 			String url = SystemUtil.POLYV_QUESTION;
 			HttpPost httpPost = new HttpPost(url.trim());
-			RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(10000).setConnectionRequestTimeout(3600000).setSocketTimeout(3600000).build();
+			RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(10000)
+					.setConnectionRequestTimeout(3600000).setSocketTimeout(3600000).build();
 			httpPost.setConfig(requestConfig);
 			JSONArray choices = new JSONArray();
 			for (String value : question.getAnswerList()) {
@@ -284,7 +296,8 @@ public final class PolyvUtil {
 		CloseableHttpClient closeableHttpClient = HttpClientBuilder.create().build();
 		try {
 			HttpPost httpPost = new HttpPost(url.trim());
-			RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(10000).setConnectionRequestTimeout(3600000).setSocketTimeout(3600000).build();
+			RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(10000)
+					.setConnectionRequestTimeout(3600000).setSocketTimeout(3600000).build();
 			httpPost.setConfig(requestConfig);
 			List<NameValuePair> list = new ArrayList<>();
 			for (Map.Entry<String, Object> m : param.entrySet()) {
@@ -308,7 +321,8 @@ public final class PolyvUtil {
 		CloseableHttpClient closeableHttpClient = HttpClientBuilder.create().build();
 		try {
 			HttpPost httpPost = new HttpPost(url.trim());
-			httpPost.setConfig(RequestConfig.custom().setConnectTimeout(10000).setConnectionRequestTimeout(3600000).setSocketTimeout(3600000).build());
+			httpPost.setConfig(RequestConfig.custom().setConnectTimeout(10000).setConnectionRequestTimeout(3600000)
+					.setSocketTimeout(3600000).build());
 			MultipartEntityBuilder entity = MultipartEntityBuilder.create();
 			entity.addPart("Filedata", new FileBody(file));
 			ContentType contentType = ContentType.create("text/plain", Charset.forName(CHARSET_UTF_8));
@@ -318,7 +332,7 @@ public final class PolyvUtil {
 			httpPost.setEntity(entity.build());
 			return EntityUtils.toString(closeableHttpClient.execute(httpPost).getEntity(), CHARSET_UTF_8);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("上传到保利威视失败，url={},param={}", url, param, e);
 		} finally {
 			try {
 				closeableHttpClient.close();
