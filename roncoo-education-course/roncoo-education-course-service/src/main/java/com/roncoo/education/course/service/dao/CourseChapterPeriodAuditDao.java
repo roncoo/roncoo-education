@@ -73,4 +73,12 @@ public interface CourseChapterPeriodAuditDao {
 	 * @author wuyun
 	 */
 	List<CourseChapterPeriodAudit> listByChapterIdAndStatusId(Long chapterId, Integer statusId);
+
+	/**
+	 * 根据视频编号获取课时信息
+	 * 
+	 * @param videoNo
+	 * @author kyh
+	 */
+	List<CourseChapterPeriodAudit> listByVideoNo(Long videoNo);
 }

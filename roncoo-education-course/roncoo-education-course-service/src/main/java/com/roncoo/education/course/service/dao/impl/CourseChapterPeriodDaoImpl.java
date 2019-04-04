@@ -48,7 +48,8 @@ public class CourseChapterPeriodDaoImpl implements CourseChapterPeriodDao {
 		int totalPage = PageUtil.countTotalPage(count, pageSize);
 		example.setLimitStart(PageUtil.countOffset(pageCurrent, pageSize));
 		example.setPageSize(pageSize);
-		return new Page<CourseChapterPeriod>(count, totalPage, pageCurrent, pageSize, this.courseChapterPeriodMapper.selectByExample(example));
+		return new Page<CourseChapterPeriod>(count, totalPage, pageCurrent, pageSize,
+				this.courseChapterPeriodMapper.selectByExample(example));
 	}
 
 	@Override
@@ -79,5 +80,13 @@ public class CourseChapterPeriodDaoImpl implements CourseChapterPeriodDao {
 			return null;
 		}
 		return list.get(0);
+	}
+
+	@Override
+	public List<CourseChapterPeriod> listByVideoNo(Long videoNo) {
+		CourseChapterPeriodExample example = new CourseChapterPeriodExample();
+		Criteria c = example.createCriteria();
+		c.andVideoNoEqualTo(videoNo);
+		return this.courseChapterPeriodMapper.selectByExample(example);
 	}
 }

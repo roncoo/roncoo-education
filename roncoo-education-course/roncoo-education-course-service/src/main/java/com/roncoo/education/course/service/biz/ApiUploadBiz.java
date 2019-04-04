@@ -11,8 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.roncoo.education.course.service.dao.CourseChapterPeriodAuditDao;
+import com.roncoo.education.course.service.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.service.dao.CourseVideoDao;
 import com.roncoo.education.course.service.dao.FileStorageDao;
+import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriod;
+import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriodAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideo;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.FileStorage;
 import com.roncoo.education.system.common.bean.vo.SysVO;
@@ -43,12 +47,16 @@ import com.xiaoleilu.hutool.util.ObjectUtil;
 public class ApiUploadBiz extends BaseBiz {
 
 	@Autowired
+	private IBossSys bossSys;
+	@Autowired
+	private CourseChapterPeriodAuditDao courseChapterPeriodAuditDao;
+	@Autowired
+	private CourseChapterPeriodDao courseChapterPeriodDao;
+
+	@Autowired
 	private CourseVideoDao courseVideoDao;
 	@Autowired
 	private FileStorageDao fileStorageDao;
-
-	@Autowired
-	private IBossSys bossSys;
 
 	/**
 	 * 上传视频接口
@@ -64,7 +72,8 @@ public class ApiUploadBiz extends BaseBiz {
 		// 获取上传文件的原名
 		String fileName = videoFile.getOriginalFilename();
 		boolean fileStatus = true;
-		List<String> fileTypes = Arrays.asList("avi", "mp4", "flv", "mpg", "mov", "asf", "3gp", "f4v", "wmv", "x-ms-wmv\n");
+		List<String> fileTypes = Arrays.asList("avi", "mp4", "flv", "mpg", "mov", "asf", "3gp", "f4v", "wmv",
+				"x-ms-wmv\n");
 		for (String filetype : fileTypes) {
 			// 上传文件的原名+小写+后缀
 			if (fileName.toLowerCase().endsWith(filetype)) {
@@ -79,7 +88,8 @@ public class ApiUploadBiz extends BaseBiz {
 		Long videoNo = IdWorker.getId(); // 当作存储到本地的文件名，方便定时任务的处理
 
 		// 1、上传到本地
-		File targetFile = new File(SystemUtil.PERIOD_VIDEO_PATH + videoNo.toString() + "." + StrUtil.getSuffix(fileName));
+		File targetFile = new File(
+				SystemUtil.PERIOD_VIDEO_PATH + videoNo.toString() + "." + StrUtil.getSuffix(fileName));
 		targetFile.setLastModified(System.currentTimeMillis());// 设置最后修改时间
 		// 判断文件目录是否存在，不存在就创建文件目录
 		if (!targetFile.getParentFile().exists()) {
@@ -127,7 +137,8 @@ public class ApiUploadBiz extends BaseBiz {
 					courseVideoDao.updateById(courseVideo);
 
 					// 3、异步上传到阿里云
-					String videoOasId = AliyunUtil.uploadDoc(PlatformEnum.COURSE, targetFile, BeanUtil.copyProperties(sys, Aliyun.class));
+					String videoOasId = AliyunUtil.uploadDoc(PlatformEnum.COURSE, targetFile,
+							BeanUtil.copyProperties(sys, Aliyun.class));
 					courseVideo.setVideoOasId(videoOasId);
 					courseVideoDao.updateById(courseVideo);
 
@@ -144,6 +155,22 @@ public class ApiUploadBiz extends BaseBiz {
 						courseVideoDao.updateById(video);
 					}
 
+					// 更新课时审核表视频信息
+					List<CourseChapterPeriodAudit> periodAuditList = courseChapterPeriodAuditDao.listByVideoNo(videoNo);
+					for (CourseChapterPeriodAudit periodAudit : periodAuditList) {
+						periodAudit.setVideoName(courseVideo.getVideoName());
+						periodAudit.setVideoLength(courseVideo.getVideoLength());
+						periodAudit.setVideoVid(courseVideo.getVideoVid());
+						courseChapterPeriodAuditDao.updateById(periodAudit);
+					}
+					// 更新课时视频信息
+					List<CourseChapterPeriod> periodList = courseChapterPeriodDao.listByVideoNo(videoNo);
+					for (CourseChapterPeriod period : periodList) {
+						period.setVideoName(courseVideo.getVideoName());
+						period.setVideoLength(courseVideo.getVideoLength());
+						period.setVideoVid(courseVideo.getVideoVid());
+						courseChapterPeriodDao.updateById(period);
+					}
 					// 4、成功删除本地文件
 					if (targetFile.isFile() && targetFile.exists()) {
 						targetFile.delete();
@@ -171,7 +198,8 @@ public class ApiUploadBiz extends BaseBiz {
 			Long fileNo = IdWorker.getId();
 			// 1、上传到本地
 			if (sys.getFileType().equals(FileTypeEnum.LOCAL.getCode())) {
-				File pic = new File(SystemUtil.PIC_STORAGE_PATH + fileNo.toString() + "." + StrUtil.getSuffix(picFile.getOriginalFilename()));
+				File pic = new File(SystemUtil.PIC_STORAGE_PATH + fileNo.toString() + "."
+						+ StrUtil.getSuffix(picFile.getOriginalFilename()));
 				try {
 					// 判断文件目录是否存在，不存在就创建文件目录
 					if (!pic.getParentFile().exists()) {
@@ -191,7 +219,8 @@ public class ApiUploadBiz extends BaseBiz {
 					return Result.error("上传文件出错，请重新上传");
 				}
 			}
-			return Result.success(AliyunUtil.uploadPic(PlatformEnum.COURSE, picFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
+			return Result.success(AliyunUtil.uploadPic(PlatformEnum.COURSE, picFile,
+					BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
 		}
 		return Result.error("请选择上传的图片");
 	}
@@ -211,7 +240,8 @@ public class ApiUploadBiz extends BaseBiz {
 			Long fileNo = IdWorker.getId();
 			// 1、上传到本地
 			if (sys.getFileType().equals(FileTypeEnum.LOCAL.getCode())) {
-				File pic = new File(SystemUtil.DOC_STORAGE_PATH + fileNo.toString() + "." + StrUtil.getSuffix(docFile.getOriginalFilename()));
+				File pic = new File(SystemUtil.DOC_STORAGE_PATH + fileNo.toString() + "."
+						+ StrUtil.getSuffix(docFile.getOriginalFilename()));
 				try {
 					// 判断文件目录是否存在，不存在就创建文件目录
 					if (!pic.getParentFile().exists()) {
@@ -231,7 +261,8 @@ public class ApiUploadBiz extends BaseBiz {
 					return Result.error("上传文件出错，请重新上传");
 				}
 			}
-			return Result.success(AliyunUtil.uploadDoc(PlatformEnum.COURSE, docFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
+			return Result.success(AliyunUtil.uploadDoc(PlatformEnum.COURSE, docFile,
+					BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
 		}
 		return Result.error("请选择上传的文件");
 

@@ -38,14 +38,16 @@ public class CourseChapterPeriodAuditDaoImpl implements CourseChapterPeriodAudit
 		return this.courseChapterPeriodAuditMapper.selectByPrimaryKey(id);
 	}
 
-	public Page<CourseChapterPeriodAudit> listForPage(int pageCurrent, int pageSize, CourseChapterPeriodAuditExample example) {
+	public Page<CourseChapterPeriodAudit> listForPage(int pageCurrent, int pageSize,
+			CourseChapterPeriodAuditExample example) {
 		int count = this.courseChapterPeriodAuditMapper.countByExample(example);
 		pageSize = PageUtil.checkPageSize(pageSize);
 		pageCurrent = PageUtil.checkPageCurrent(count, pageSize, pageCurrent);
 		int totalPage = PageUtil.countTotalPage(count, pageSize);
 		example.setLimitStart(PageUtil.countOffset(pageCurrent, pageSize));
 		example.setPageSize(pageSize);
-		return new Page<CourseChapterPeriodAudit>(count, totalPage, pageCurrent, pageSize, this.courseChapterPeriodAuditMapper.selectByExample(example));
+		return new Page<CourseChapterPeriodAudit>(count, totalPage, pageCurrent, pageSize,
+				this.courseChapterPeriodAuditMapper.selectByExample(example));
 	}
 
 	@Override
@@ -118,6 +120,14 @@ public class CourseChapterPeriodAuditDaoImpl implements CourseChapterPeriodAudit
 		c.andChapterIdEqualTo(chapterId);
 		c.andStatusIdEqualTo(statusId);
 		example.setOrderByClause("sort asc, id asc");
+		return this.courseChapterPeriodAuditMapper.selectByExample(example);
+	}
+
+	@Override
+	public List<CourseChapterPeriodAudit> listByVideoNo(Long videoNo) {
+		CourseChapterPeriodAuditExample example = new CourseChapterPeriodAuditExample();
+		Criteria c = example.createCriteria();
+		c.andVideoNoEqualTo(videoNo);
 		return this.courseChapterPeriodAuditMapper.selectByExample(example);
 	}
 }
