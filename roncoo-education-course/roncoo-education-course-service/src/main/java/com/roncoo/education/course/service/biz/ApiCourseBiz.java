@@ -71,7 +71,7 @@ public class ApiCourseBiz {
 	@Autowired
 	private IBossLecturer bossLecturer;
 
-	@Autowired
+	@Autowired(required = false)
 	private ElasticsearchTemplate elasticsearchTemplate;
 
 	@Autowired
