@@ -40,6 +40,7 @@
 <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=7d1b7f1a78715320d09ed841c66d6bf0fa7b9105964cc327e9483e459b46abd4"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课" title="在线教育系统-领课"> 826617734</a> 已满
 
 ### 商业合作
+* 如果想使用教育系统，我们商业版功能更强大！
 * 如果想定制教育系统，我们提供有偿服务支持！
 * 如果想运营教育平台，我们提供Saas云服务！
 * 支持其他合作方式，欢迎来撩！
