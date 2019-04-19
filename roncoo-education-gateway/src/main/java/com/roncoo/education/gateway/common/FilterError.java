@@ -1,7 +1,7 @@
 /**
  * Copyright 2015-现在 广州市领课网络科技有限公司
  */
-package com.roncoo.education.gateway.api.common;
+package com.roncoo.education.gateway.common;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;

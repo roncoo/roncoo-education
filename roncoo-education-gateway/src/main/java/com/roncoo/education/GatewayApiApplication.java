@@ -8,9 +8,9 @@ import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 
-import com.roncoo.education.gateway.api.common.FilterError;
-import com.roncoo.education.gateway.api.common.FilterPost;
-import com.roncoo.education.gateway.api.common.FilterPre;
+import com.roncoo.education.gateway.common.FilterError;
+import com.roncoo.education.gateway.common.FilterPost;
+import com.roncoo.education.gateway.common.FilterPre;
 
 /**
  * 服务网关

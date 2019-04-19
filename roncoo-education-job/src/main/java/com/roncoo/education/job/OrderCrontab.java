@@ -1,4 +1,4 @@
-package com.roncoo.education.crontab;
+package com.roncoo.education.job;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
