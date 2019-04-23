@@ -15,7 +15,7 @@
       <div class="login">
           <div class="login_logo"><a href="#"><img src="roncoo/images/login_logo.png"></a></div>
           <div class="login_name">
-               <p>领课-管理系统</p>
+               <p>领课教育系统 - 开源版</p>
           </div>
           <form method="post" action="${base}/login">
               <input name="username" type="text" value="13800000000" placeholder="用户名" >

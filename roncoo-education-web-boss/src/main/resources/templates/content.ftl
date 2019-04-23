@@ -2,7 +2,7 @@
 <div class="bjui-pageHeader" style="background: #FFF;">
 	<div style="padding: 0 15px;">
 		<h4 style="margin-bottom: 20px;">
-			运营后台 <small>领课提供技术支持</small>
+			<small>官网：<a href="http://edu.roncoo.net/" target="_blank">http://edu.roncoo.net/</a> | 前端演示地址：<a href="http://edu.os.roncoo.com/" target="_blank">http://edu.os.roncoo.com/</a> | 开源协议：MIT </small>
 		</h4>
 	</div>
 </div>
@@ -23,9 +23,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><h3 class="panel-title">地址汇总</h3></div>
                 <div class="panel-body">
-                                                         前端演示：<a href="http://edu.os.roncoo.com/" target="_blank">http://edu.os.roncoo.com/</a>
-                    <br/>
-                                                         龙果学院：<a href="https://www.roncoo.com/" target="_blank">https://www.roncoo.com/</a>
+                    龙果学院：<a href="https://www.roncoo.com/" target="_blank">https://www.roncoo.com/</a>
                     <br/>
                 </div>
             </div>
