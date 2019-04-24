@@ -2,7 +2,7 @@
 <div class="bjui-pageHeader" style="background: #FFF;">
 	<div style="padding: 0 15px;">
 		<h4 style="margin-bottom: 20px;">
-			<small>官网：<a href="http://edu.roncoo.net/" target="_blank">http://edu.roncoo.net/</a> | 前端演示地址：<a href="http://edu.os.roncoo.com/" target="_blank">http://edu.os.roncoo.com/</a> | 开源协议：MIT </small>
+			<small>官网：<a href="https://edu.roncoo.net/" target="_blank">https://edu.roncoo.net/</a> | 前端演示地址：<a href="http://edu.os.roncoo.com/" target="_blank">http://edu.os.roncoo.com/</a> | 开源协议：MIT </small>
 		</h4>
 	</div>
 </div>

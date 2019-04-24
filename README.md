@@ -45,7 +45,7 @@
 * 如果想运营教育平台，我们提供Saas云服务！
 * 支持其他合作方式，欢迎来撩！
 * 商业合作联系QQ：513781560 
-* 官网地址：[http://www.roncoo.net](http://www.roncoo.net/index.html)
+* 官网地址：[https://edu.roncoo.net](https://edu.roncoo.net/index.html)
 
 ## 项目推荐
 ##### roncoo-recharge：[码云地址](https://gitee.com/roncoocom/roncoo-recharge) | [Github地址](https://github.com/roncoo/roncoo-recharge)
