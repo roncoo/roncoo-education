@@ -7,3 +7,5 @@
 *.project
 *.springBeans
 *.factorypath
+*.iml
+**/.idea
