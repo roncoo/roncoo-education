@@ -9,14 +9,14 @@
     <property name="PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -|   %msg%n"/>
 
 	<!-- 开发环境 -->
-	<springProfile name="dev">
+	<springProfile name="native">
 		<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 			<encoder>
 				<pattern>${PATTERN}</pattern>
 			</encoder>
 		</appender>
 
-		<logger name="com.roncoo" level="warn" />
+		<logger name="com.roncoo" level="debug" />
 
 		<root level="warn">
 			<appender-ref ref="CONSOLE" />
@@ -24,7 +24,7 @@
 	</springProfile>
 	
 	<!-- 测试环境 -->
-    <springProfile name="test">
+    <springProfile name="dev,test">
         <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
             <encoder>
                 <pattern>${PATTERN}</pattern>
