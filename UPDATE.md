@@ -1,5 +1,13 @@
-# 领课教育 - 领课网络在线教育系统
+### 版本升级日志
 
+ ---
+###### v3.0.0 -- 2019
+1. 修复视频上传不同步问题
+2. 修复部分微服务日志不打印的问题
+3. 修改配置中心默认获取方式为本地配置，不再依赖于项目：roncoo-education-config
+4. 修改工程名称，更符合业务特性，roncoo-education-crontab-plan修改为：roncoo-education-job，roncoo-education-gateway-api修改为：roncoo-education-gateway
+5. 减少ElasticSearch的强依赖，不配置也能启动课程微服务
+6. 增加sonar插件，使代码更健壮
 
  ---
 ###### v2.0.0-RELEASE -- 2019.03.18
