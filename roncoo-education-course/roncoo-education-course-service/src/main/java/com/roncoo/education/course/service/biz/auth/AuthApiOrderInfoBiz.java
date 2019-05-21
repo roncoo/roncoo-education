@@ -331,8 +331,7 @@ public class AuthApiOrderInfoBiz extends BaseBiz {
 		OrderInfoExample.Criteria c = example.createCriteria();
 		c.andLecturerUserNoEqualTo(authOrderInfoListBO.getLecturerUserNo());
 		c.andIsShowUserEqualTo(IsShowUserEnum.YES.getCode());
-		// 收入大于0.5块才显示
-		c.andPricePaidGreaterThanOrEqualTo(new BigDecimal(0.5));
+		c.andPricePaidGreaterThanOrEqualTo(BigDecimal.valueOf(0.5));
 		// 不查找已经关闭了的订单
 		c.andOrderStatusEqualTo(OrderStatusEnum.SUCCESS.getCode());
 		example.setOrderByClause(" id desc ");
