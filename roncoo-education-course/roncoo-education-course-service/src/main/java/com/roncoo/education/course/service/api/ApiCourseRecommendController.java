@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiOperation;
  *
  */
 @RestController
-@RequestMapping(value = "course/api/course/recommend")
+@RequestMapping(value = "/course/api/course/recommend")
 public class ApiCourseRecommendController {
 
 	@Autowired

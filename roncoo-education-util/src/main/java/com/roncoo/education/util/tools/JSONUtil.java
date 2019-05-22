@@ -37,7 +37,6 @@ public final class JSONUtil {
 		try {
 			return m.readValue(jsonString, elementClasses);
 		} catch (IOException e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -48,7 +47,6 @@ public final class JSONUtil {
 		try {
 			return m.readValue(jsonString, javaType);
 		} catch (IOException e) {
-			e.printStackTrace();
 			return null;
 		}
 	}

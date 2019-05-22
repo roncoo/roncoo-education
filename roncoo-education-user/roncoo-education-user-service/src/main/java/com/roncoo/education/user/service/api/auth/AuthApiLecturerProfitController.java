@@ -22,7 +22,7 @@ import io.swagger.annotations.ApiOperation;
  * @author wuyun
  */
 @RestController
-@RequestMapping(value = "/auth/user/api/lecturer/profit")
+@RequestMapping(value = "/user/auth/lecturer/profit")
 public class AuthApiLecturerProfitController extends BaseController {
 
 	@Autowired

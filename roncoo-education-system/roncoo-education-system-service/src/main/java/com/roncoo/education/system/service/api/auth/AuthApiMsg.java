@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiOperation;
  * @author wuyun
  */
 @RestController
-@RequestMapping(value = "/auth/user/system/api/msg")
+@RequestMapping(value = "/system/auth/msg")
 public class AuthApiMsg extends BaseController {
 
 	@Autowired

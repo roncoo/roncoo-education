@@ -40,6 +40,7 @@ public class FilterPre extends ZuulFilter {
 
 	private static final Logger logger = LoggerFactory.getLogger(FilterPre.class);
 	private static final String TOKEN = "token";
+	private static final String USERNO = "userNo";
 
 	@Autowired
 	private StringRedisTemplate stringRedisTemplate;
@@ -58,21 +59,14 @@ public class FilterPre extends ZuulFilter {
 	public boolean shouldFilter() {
 		String uri = RequestContext.getCurrentContext().getRequest().getServletPath();
 
-		if (uri.startsWith("/callback")) {
+		if (uri.contains("/callback")) {
 			// 回调使用
 			return false;
 		}
-
-		if (uri.startsWith("/zuul")) {
-			// 文件上传
+		if (uri.contains("/api")) {
+			// 不鉴权
 			return false;
 		}
-
-		if (!uri.startsWith("/auth")) {
-			// 非token校验
-			return false;
-		}
-
 		return true;
 	}
 
@@ -87,7 +81,6 @@ public class FilterPre extends ZuulFilter {
 			logger.error("系统异常", e.getMessage());
 			resp(ctx, e.getMessage(), e.getCode());
 		}
-
 		// 参数封装
 		try {
 			ctx.setRequest(requestWrapper(request, userNo));
@@ -95,7 +88,6 @@ public class FilterPre extends ZuulFilter {
 			logger.error("封装参数异常", e.getMessage());
 			resp(ctx, "系统异常，请重试");
 		}
-
 		return null;
 	}
 
@@ -107,7 +99,6 @@ public class FilterPre extends ZuulFilter {
 		if (StringUtils.isEmpty(token)) { // token不存在，则从报文里面获取
 			throw new BaseException("token不存在，请重新登录");
 		}
-
 		// 解析 token
 		DecodedJWT jwt = null;
 		try {
@@ -147,32 +138,23 @@ public class FilterPre extends ZuulFilter {
 
 	private HttpServletRequestWrapper requestWrapper(HttpServletRequest request, Long userNo) throws IOException {
 		Map<String, Object> map = getParamMap(request);
-		if (null == map) {
-			map = new HashMap<>();
-		}
-		if (userNo != null) {
-			map.put("userNo", userNo);
-		}
+		map.put(USERNO, userNo);
 		String newBody = JSONUtil.toJSONString(map);
 		logger.info("转发参数={}", newBody);
 		final byte[] reqBodyBytes = newBody.getBytes();
 		return new HttpServletRequestWrapper(request) {
-
 			@Override
 			public BufferedReader getReader() throws IOException {
 				return new BufferedReader(new InputStreamReader(getInputStream()));
 			}
-
 			@Override
 			public ServletInputStream getInputStream() throws IOException {
 				return new ServletInputStreamWrapper(reqBodyBytes);
 			}
-
 			@Override
 			public int getContentLength() {
 				return reqBodyBytes.length;
 			}
-
 			@Override
 			public long getContentLengthLong() {
 				return reqBodyBytes.length;
@@ -208,12 +190,13 @@ public class FilterPre extends ZuulFilter {
 					return new TreeMap<>(JSONUtil.parseObject(t, TreeMap.class));
 				}
 			} catch (Exception e) {
-				logger.warn("获取不到任何参数");
+				logger.error("获取不到任何参数");
 			} finally {
 				if (null != in)
 					try {
 						in.close();// 关闭数据流
 					} catch (IOException e) {
+						logger.error("关闭数据流异常");
 					}
 			}
 		}
