@@ -1,5 +1,10 @@
 package com.roncoo.education.system.service.dao.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.roncoo.education.system.service.dao.SysMenuDao;
 import com.roncoo.education.system.service.dao.impl.mapper.SysMenuMapper;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.SysMenu;
@@ -7,8 +12,6 @@ import com.roncoo.education.system.service.dao.impl.mapper.entity.SysMenuExample
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.tools.IdWorker;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 @Repository
 public class SysMenuDaoImpl implements SysMenuDao {
@@ -45,4 +48,18 @@ public class SysMenuDaoImpl implements SysMenuDao {
         example.setPageSize(pageSize);
         return new Page<SysMenu>(count, totalPage, pageCurrent, pageSize, this.sysMenuMapper.selectByExample(example));
     }
+    @Override
+	public List<SysMenu> listByParentId(Long parentId) {
+		SysMenuExample example = new SysMenuExample();
+		example.createCriteria().andParentIdEqualTo(parentId);
+		example.setOrderByClause(" sort desc, id desc");
+		return this.sysMenuMapper.selectByExample(example);
+	}
+
+	@Override
+	public List<SysMenu> listAll() {
+		SysMenuExample example = new SysMenuExample();
+		example.setOrderByClause(" sort desc, id desc");
+		return this.sysMenuMapper.selectByExample(example);
+	}
 }

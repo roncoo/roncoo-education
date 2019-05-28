@@ -5,7 +5,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.roncoo.education.course.service.common.req.CourseUserStudyLogPageREQ;
+import com.roncoo.education.course.service.common.req.CourseUserStudyLogPlayREQ;
 import com.roncoo.education.course.service.common.resq.CourseUserStudyLogPageRESQ;
+import com.roncoo.education.course.service.common.resq.CourseUserStudyLogPlayRESQ;
 import com.roncoo.education.course.service.dao.CourseChapterDao;
 import com.roncoo.education.course.service.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.service.dao.CourseDao;
@@ -80,6 +82,11 @@ public class PcApiCourseUserStudyLogBiz {
 			}
 		}
 		return Result.success(listForPage);
+	}
+
+	public Result<Page<CourseUserStudyLogPlayRESQ>> play(CourseUserStudyLogPlayREQ req) {
+		Page<CourseUserStudyLog> list = dao.periodList(req.getCourseId(), req.getPageCurrent(), req.getPageSize(), req.getBeginGmtCreate(), req.getEndGmtCreate());
+		return Result.success(PageUtil.transform(list, CourseUserStudyLogPlayRESQ.class));
 	}
 
 }

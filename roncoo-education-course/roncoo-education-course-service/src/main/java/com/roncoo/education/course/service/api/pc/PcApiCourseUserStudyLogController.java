@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.roncoo.education.course.service.biz.pc.PcApiCourseUserStudyLogBiz;
 import com.roncoo.education.course.service.common.req.CourseUserStudyLogPageREQ;
+import com.roncoo.education.course.service.common.req.CourseUserStudyLogPlayREQ;
 import com.roncoo.education.course.service.common.resq.CourseUserStudyLogPageRESQ;
+import com.roncoo.education.course.service.common.resq.CourseUserStudyLogPlayRESQ;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;
@@ -37,6 +39,17 @@ public class PcApiCourseUserStudyLogController extends BaseController {
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	public Result<Page<CourseUserStudyLogPageRESQ>> list(@RequestBody CourseUserStudyLogPageREQ courseUserStudyLogREQ) {
 		return biz.list(courseUserStudyLogREQ);
+	}
+
+	/**
+	 * 课时播放量排行榜
+	 * 
+	 * @return
+	 */
+	@ApiOperation(value = "课时播放量排行榜接口", notes = "课时播放量排行榜接口")
+	@RequestMapping(value = "/play", method = RequestMethod.POST)
+	public Result<Page<CourseUserStudyLogPlayRESQ>> play(@RequestBody CourseUserStudyLogPlayREQ courseUserStudyLogPlayREQ) {
+		return biz.play(courseUserStudyLogPlayREQ);
 	}
 
 }
