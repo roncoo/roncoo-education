@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.roncoo.education.course.common.bean.qo.OrderInfoQO;
-import com.roncoo.education.course.common.bean.vo.CountIncomeVO;
 import com.roncoo.education.course.common.bean.vo.OrderReportVO;
+import com.roncoo.education.course.service.common.resq.CountIncomeRESQ;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfoExample;
 import com.roncoo.education.util.base.Page;
@@ -65,7 +65,7 @@ public interface OrderInfoDao {
 	 * @param qo
 	 * @author wuyun
 	 */
-	CountIncomeVO countIncome(OrderInfoQO qo);
+	CountIncomeRESQ countIncome(OrderInfoQO qo);
 
 	/**
 	 * 订单信息汇总（导出报表）

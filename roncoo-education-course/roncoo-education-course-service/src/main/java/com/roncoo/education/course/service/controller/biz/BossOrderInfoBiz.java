@@ -171,7 +171,7 @@ public class BossOrderInfoBiz extends BaseBiz {
 	 * @author wuyun
 	 */
 	public CountIncomeVO countIncome(OrderInfoQO qo) {
-		return dao.countIncome(qo);
+		return null;
 	}
 
 	/**

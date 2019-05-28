@@ -12,20 +12,7 @@ public enum NavEnum {
 
 	INDEX("/index", "首页"), COURSE("/list", "录播中心"), RECRUIT("/recruit", "讲师招募");
 
-	public String code;
+	private String code;
 
-	public String desc;
-
-	public static NavEnum getByDesc(String code) {
-		NavEnum tce = null;
-		for (NavEnum em : NavEnum.values()) {
-			if (em.getCode().equals(code)) {
-				tce = em;
-			}
-		}
-		if (tce == null) {
-			return null;
-		}
-		return tce;
-	}
+	private String desc;
 }

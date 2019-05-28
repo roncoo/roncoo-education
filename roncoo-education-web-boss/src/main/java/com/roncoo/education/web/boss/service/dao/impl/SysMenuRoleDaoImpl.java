@@ -64,4 +64,5 @@ public class SysMenuRoleDaoImpl implements SysMenuRoleDao {
 		example.createCriteria().andRoleIdEqualTo(roleId);
 		return this.sysMenuRoleMapper.deleteByExample(example);
 	}
+
 }
