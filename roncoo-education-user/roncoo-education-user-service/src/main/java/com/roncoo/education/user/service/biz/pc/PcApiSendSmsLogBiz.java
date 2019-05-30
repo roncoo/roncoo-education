@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.aliyuncs.exceptions.ClientException;
@@ -35,6 +36,7 @@ import com.roncoo.education.util.tools.DateUtil;
 import com.xiaoleilu.hutool.util.ObjectUtil;
 import com.xiaoleilu.hutool.util.RandomUtil;
 
+@Component
 public class PcApiSendSmsLogBiz extends BaseBiz {
 
 	private static final String REGEX_MOBILE = "^((13[0-9])|(14[5,7,9])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199)\\d{8}$";// 手机号码校验
