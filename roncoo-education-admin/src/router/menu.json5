@@ -1,0 +1,225 @@
+/**
+
+ 菜单配置项:
+ {
+ "id": 0, // 后端菜单id，在前端目前没什么用
+ "name": "首页", // 菜单的标题，用于菜单标题、多标签Tag标题的显示
+ "path": "/dashboard", // 菜单的路径，以`/`开头为本系统内部页面，如果是一个外部链接，那么将会在系统中嵌入视图显示
+ "icon": null, // 图标
+ "hidden": true, // 是否显示
+ "children": [], // 子项
+ "redirect": true, // 是否在面包屑中可点击跳转,
+ "external": true  // 是否点击新开窗口显示
+ }
+
+**/
+[
+  {
+    "id": 0,
+    "name": "首页",
+    "path": "/dashboard",
+    "icon": null,
+    "hidden": true
+  },
+  {
+    "id": 0,
+    "name": "交易管理",
+    "path": "/trade",
+    "redirect": false,
+    "icon": null,
+    "children": [
+      {
+        "id": 2,
+        "name": "交易订单管理",
+        "path": "/trade/order",
+        "icon": null
+      },
+      {
+        "id": 3,
+        "name": "交易记录管理",
+        "path": "/trade/record",
+        "icon": null
+      },
+      {
+        "id": 3,
+        "name": "当日实时统计",
+        "path": "/trade/statistics",
+        "icon": null
+      },
+      {
+        "id": 3,
+        "name": "历史收益报表",
+        "path": "/trade/profit",
+        "icon": null
+      },
+      {
+        "id": 3,
+        "name": "通道余额报表",
+        "path": "/trade/balance",
+        "icon": null
+      }
+    ]
+  },
+  {
+    "id": 0,
+    "name": "账户管理",
+    "path": "account",
+    "icon": null,
+    "children": [
+      {
+        "id": 2,
+        "name": "账户信息",
+        "path": "/account/account",
+        "icon": null,
+      },
+      {
+        "id": 2,
+        "name": "账户明细",
+        "path": "/account/detailed",
+        "icon": null,
+        "hidden": true
+      },
+      {
+        "id": 2,
+        "name": "账户历史信息",
+        "path": "/account/history",
+        "icon": null
+      },
+      {
+        "id": 2,
+        "name": "结算记录管理",
+        "path": "/account/settle",
+        "icon": null
+      },
+      {
+        "id": 2,
+        "name": "结算记录统计",
+        "path": "/account/statistics",
+        "icon": null
+      }
+    ]
+  },
+  {
+    "id": 0,
+    "name": "用户管理",
+    "path": "users",
+    "icon": null,
+    "children": [
+      {
+        "id": 2,
+        "name": "用户信息管理",
+        "path": "/users/info",
+        "icon": null,
+      },
+      {
+        "id": 2,
+        "name": "添加用户",
+        "path": "/users/add",
+        "icon": null,
+        "hidden": true
+      },
+      {
+        "id": 2,
+        "name": "查看代理信息",
+        "path": "/users/agent",
+        "icon": null,
+        "hidden": true
+      }
+    ]
+  },
+  {
+    "id": 0,
+    "name": "支付管理",
+    "path": "/pay",
+    "redirect": false,
+    "icon": null,
+    "children": [
+      {
+        "id": 2,
+        "name": "银行通道管理",
+        "path": "/bank/way",
+        "icon": null,
+      },
+      {
+        "id": 2,
+        "name": "银行渠道编码管理",
+        "path": "/bank/channelCode/list",
+        "icon": null
+      },
+      {
+        "id": 2,
+        "name": "银行渠道管理",
+        "path": "/bank/channel/list",
+        "icon": null
+      },
+      {
+        "id": 2,
+        "name": "渠道分流管理",
+        "path": "/bank/channel/flow",
+        "icon": null
+      },
+      {
+        "id": 2,
+        "name": "支付产品管理",
+        "path": "/pay/product",
+        "icon": null
+      },
+      {
+        "id": 2,
+        "name": "支付测试管理",
+        "path": "/pay/test",
+        "icon": null
+      },
+      {
+        "id": 2,
+        "name": "渠道商户余额统计",
+        "path": "/bank/channel/sum",
+        "icon": null
+      },
+      {
+        "id": 2,
+        "name": "通道交易额统计",
+        "path": "/pay/product",
+        "icon": null
+      },
+      {
+        "id": 2,
+        "name": "银行卡黑白名单",
+        "path": "/pay/product",
+        "icon": null
+      }
+    ]
+  },
+  {
+    "id": 0,
+    "name": "权限管理",
+    "path": "/pms",
+    "icon": null,
+    "children": [
+      {
+        "id": 2,
+        "name": "菜单管理",
+        "path": "/pms/menu",
+        "icon": null,
+      },
+      {
+        "id": 2,
+        "name": "权限管理",
+        "path": "/pms/pms",
+        "icon": null
+      },
+      {
+        "id": 2,
+        "name": "角色管理",
+        "path": "/pms/role",
+        "icon": null
+      },
+      {
+        "id": 2,
+        "name": "操作员管理",
+        "path": "/pms/operator",
+        "icon": null
+      }
+    ]
+  }
+]

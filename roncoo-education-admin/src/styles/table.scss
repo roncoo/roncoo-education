@@ -1,0 +1,22 @@
+.list-item-actions {
+  font-size: 0;
+  flex: 0 0 auto;
+  padding: 0;
+  list-style: none;
+  >li {
+    display: inline-block;
+    color: rgba(0,0,0,.45);
+    cursor: pointer;
+    padding: 0 8px;
+    position: relative;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+
+    .el-dropdown-link {
+      font-weight: 500;
+      cursor:pointer;
+      color:#409EFF;
+    }
+  }
+}

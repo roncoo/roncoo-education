@@ -1,0 +1,176 @@
+@import './variables.scss';
+@import './mixin.scss';
+@import './transition.scss';
+@import './element-ui.scss';
+@import './sidebar.scss';
+@import './table.scss';
+
+body {
+  height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+}
+
+label {
+  font-weight: 700;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+#app {
+  height: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  outline: none;
+  text-decoration: none;
+}
+
+div:focus {
+  outline: none;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+.clearfix {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+}
+
+// main-container全局样式
+.app-container {
+  padding: 20px;
+}
+
+.filter-container {
+  padding-bottom: 10px;
+  .filter-item {
+    &.el-date-editor .el-range-separator {
+      width: 24px;
+    }
+    margin-bottom: 10px;
+  }
+}
+
+.fr {
+  float: right;
+}
+.par40 {
+  padding-right: 40px;
+}
+.pad10 {
+  padding: 10px;
+}
+.pad20 {
+  padding: 20px;
+}
+.mgt10 {
+  margin-top: 10px;
+}
+.mgt20 {
+  margin-top: 20px;
+}
+.mgt30 {
+  margin-top: 30px;
+}
+.mgt40 {
+  margin-top: 40px;
+}
+.mgt50 {
+  margin-top: 50px;
+}
+
+.mgl10 {
+  margin-left: 10px;
+}
+.mgl20 {
+  margin-left: 20px;
+}
+.mgl30 {
+  margin-left: 30px;
+}
+.mgl40 {
+  margin-left: 40px;
+}
+
+.font_b {
+  font-weight: 700;
+}
+.font_12 {
+  font-size: 12px;
+}
+.font_14 {
+  font-size: 14px;
+}
+
+.center {
+  text-align: center;
+}
+.c_999 {
+  color: #999;
+}
+.c_red {
+  color: #d51423;
+}
+.c_blue {
+  color: blue;
+}
+.c-brand {
+  color: #409EFF;
+}
+.c-success {
+  color: #67C23A;
+}
+.c-warning {
+  color: #E6A23C;
+}
+.c-danger {
+  color: #F56C6C;
+}
+.c-info {
+  color: #909399;
+}
+.b_999 {
+  background: #f5f7f8;
+  line-height: 36px;
+}
+
+.inline_box {
+  display: inline-block;
+}
+.inline_text {
+  display: inline-block;
+  min-width: 300px;
+}
