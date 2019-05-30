@@ -51,7 +51,7 @@ public class PcApiAdvController extends BaseController {
 	 * @return
 	 */
 	@ApiOperation(value = "轮播广告添加接口", notes = "轮播广告添加接口")
-	@RequestMapping(value = "/list", method = RequestMethod.POST)
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Result<Integer> save(@RequestBody AdvSaveREQ advSaveREQ) {
 		return biz.save(advSaveREQ);
 	}
