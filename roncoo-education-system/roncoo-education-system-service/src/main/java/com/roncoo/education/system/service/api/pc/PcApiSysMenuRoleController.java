@@ -1,6 +1,7 @@
 package com.roncoo.education.system.service.api.pc;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +32,7 @@ public class PcApiSysMenuRoleController extends BaseController {
 	 */
 	@ApiOperation(value = "列出菜单角色关联信息接口", notes = "列出菜单角色关联信息接口")
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public Result<SysMenuRoleListRESQ> list(SysMenuRoleListREQ sysMenuRoleListREQ) {
+	public Result<SysMenuRoleListRESQ> list(@RequestBody SysMenuRoleListREQ sysMenuRoleListREQ) {
 		return biz.list(sysMenuRoleListREQ);
 	}
 

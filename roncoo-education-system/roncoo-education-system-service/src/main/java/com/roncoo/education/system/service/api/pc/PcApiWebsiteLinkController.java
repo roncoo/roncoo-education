@@ -1,6 +1,7 @@
 package com.roncoo.education.system.service.api.pc;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +35,7 @@ public class PcApiWebsiteLinkController extends BaseController {
 	 */
 	@ApiOperation(value = "站点友情分页列表链接接口", notes = "站点友情分页列表接口")
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public Result<Page<WebsiteLinkPageRESQ>> list(WebsiteLinkPageREQ websiteLinkPageREQ) {
+	public Result<Page<WebsiteLinkPageRESQ>> list(@RequestBody WebsiteLinkPageREQ websiteLinkPageREQ) {
 		return biz.list(websiteLinkPageREQ);
 	}
 
@@ -43,7 +44,7 @@ public class PcApiWebsiteLinkController extends BaseController {
 	 */
 	@ApiOperation(value = "站点友情保存接口", notes = "站点友情保存接口")
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public Result<Integer> save(WebsiteLinkSaveREQ websiteLinkSaveREQ) {
+	public Result<Integer> save(@RequestBody WebsiteLinkSaveREQ websiteLinkSaveREQ) {
 		return biz.save(websiteLinkSaveREQ);
 	}
 
@@ -52,7 +53,7 @@ public class PcApiWebsiteLinkController extends BaseController {
 	 */
 	@ApiOperation(value = "站点友情删除接口", notes = "站点友情删除接口")
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public Result<Integer> delete(WebsiteLinkDeleteREQ websiteLinkDeleteREQ) {
+	public Result<Integer> delete(@RequestBody WebsiteLinkDeleteREQ websiteLinkDeleteREQ) {
 		return biz.delete(websiteLinkDeleteREQ);
 	}
 
@@ -61,7 +62,7 @@ public class PcApiWebsiteLinkController extends BaseController {
 	 */
 	@ApiOperation(value = "站点友情更新接口", notes = "站点友情更新接口")
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public Result<Integer> update(WebsiteLinkUpdateREQ websiteLinkUpdateREQ) {
+	public Result<Integer> update(@RequestBody WebsiteLinkUpdateREQ websiteLinkUpdateREQ) {
 		return biz.update(websiteLinkUpdateREQ);
 	}
 
@@ -70,7 +71,7 @@ public class PcApiWebsiteLinkController extends BaseController {
 	 */
 	@ApiOperation(value = "站点友情查看接口", notes = "站点友情查看接口")
 	@RequestMapping(value = "/view", method = RequestMethod.POST)
-	public Result<WebsiteLinkViewRESQ> view(WebsiteLinkViewREQ websiteLinkViewREQ) {
+	public Result<WebsiteLinkViewRESQ> view(@RequestBody WebsiteLinkViewREQ websiteLinkViewREQ) {
 		return biz.view(websiteLinkViewREQ);
 	}
 

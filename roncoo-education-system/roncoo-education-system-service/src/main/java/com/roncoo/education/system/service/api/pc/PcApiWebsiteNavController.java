@@ -1,6 +1,7 @@
 package com.roncoo.education.system.service.api.pc;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,7 +36,7 @@ public class PcApiWebsiteNavController extends BaseController {
 	 */
 	@ApiOperation(value = "底部导航分页列表接口", notes = "底部导航分页列表接口")
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public Result<Page<WebsiteNavPageRESQ>> list(WebsiteNavPageREQ websiteNavPageREQ) {
+	public Result<Page<WebsiteNavPageRESQ>> list(@RequestBody WebsiteNavPageREQ websiteNavPageREQ) {
 		return biz.list(websiteNavPageREQ);
 	}
 
@@ -44,7 +45,7 @@ public class PcApiWebsiteNavController extends BaseController {
 	 */
 	@ApiOperation(value = "底部导航保存接口", notes = "底部导航保存接口")
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public Result<Integer> save(WebsiteNavSaveREQ websiteNavSaveREQ) {
+	public Result<Integer> save(@RequestBody WebsiteNavSaveREQ websiteNavSaveREQ) {
 		return biz.save(websiteNavSaveREQ);
 	}
 
@@ -53,7 +54,7 @@ public class PcApiWebsiteNavController extends BaseController {
 	 */
 	@ApiOperation(value = "底部导航删除接口", notes = "底部导航删除接口")
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public Result<Integer> delete(WebsiteNavDeleteREQ websiteNavDeleteREQ) {
+	public Result<Integer> delete(@RequestBody WebsiteNavDeleteREQ websiteNavDeleteREQ) {
 		return biz.delete(websiteNavDeleteREQ);
 	}
 
@@ -62,7 +63,7 @@ public class PcApiWebsiteNavController extends BaseController {
 	 */
 	@ApiOperation(value = "底部导航更新接口", notes = "底部导航更新接口")
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public Result<Integer> update(WebsiteNavUpdateREQ websiteNavUpdateREQ) {
+	public Result<Integer> update(@RequestBody WebsiteNavUpdateREQ websiteNavUpdateREQ) {
 		return biz.update(websiteNavUpdateREQ);
 	}
 
@@ -71,7 +72,7 @@ public class PcApiWebsiteNavController extends BaseController {
 	 */
 	@ApiOperation(value = "底部导航查看接口", notes = "底部导航查看接口")
 	@RequestMapping(value = "/view", method = RequestMethod.POST)
-	public Result<WebsiteNavViewRESQ> view(WebsiteNavViewREQ websiteNavViewREQ) {
+	public Result<WebsiteNavViewRESQ> view(@RequestBody WebsiteNavViewREQ websiteNavViewREQ) {
 		return biz.view(websiteNavViewREQ);
 	}
 

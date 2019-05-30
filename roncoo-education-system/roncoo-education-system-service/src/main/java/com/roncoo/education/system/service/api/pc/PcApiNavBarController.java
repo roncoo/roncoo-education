@@ -1,6 +1,7 @@
 package com.roncoo.education.system.service.api.pc;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,7 +36,7 @@ public class PcApiNavBarController extends BaseController {
 	 */
 	@ApiOperation(value = "头部导航分页列表接口", notes = "头部导航分页列表接口")
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public Result<Page<NavBarPageRESQ>> list(NavBarPageREQ navBarPageREQ) {
+	public Result<Page<NavBarPageRESQ>> list(@RequestBody NavBarPageREQ navBarPageREQ) {
 		return biz.list(navBarPageREQ);
 	}
 

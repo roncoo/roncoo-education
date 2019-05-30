@@ -1,6 +1,7 @@
 package com.roncoo.education.system.service.api.pc;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +32,7 @@ public class PcApiSysLogController extends BaseController {
 	 */
 	@ApiOperation(value = "后台操作日志分页列表接口", notes = "后台操作日志分页列表接口")
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public Result<Page<SysLogPageRESQ>> list(SysLogPageREQ sysLogPageREQ) {
+	public Result<Page<SysLogPageRESQ>> list(@RequestBody SysLogPageREQ sysLogPageREQ) {
 		return biz.list(sysLogPageREQ);
 	}
 

@@ -1,6 +1,7 @@
 package com.roncoo.education.system.service.api.pc;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +37,7 @@ public class PcApiSysRoleController extends BaseController {
 	 */
 	@ApiOperation(value = "角色分页列表接口", notes = "角色分页列表接口")
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public Result<Page<SysRolePageRESQ>> list(SysRolePageREQ sysRolePageREQ) {
+	public Result<Page<SysRolePageRESQ>> list(@RequestBody SysRolePageREQ sysRolePageREQ) {
 		return biz.list(sysRolePageREQ);
 	}
 
