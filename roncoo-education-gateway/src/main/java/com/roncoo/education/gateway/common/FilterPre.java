@@ -7,7 +7,6 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
@@ -16,7 +15,6 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
-import com.auth0.jwt.interfaces.DecodedJWT;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,7 @@ import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.StringUtils;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.http.ServletInputStreamWrapper;
@@ -64,6 +63,10 @@ public class FilterPre extends ZuulFilter {
 			return false;
 		}
 		if (uri.contains("/api")) {
+			// 不鉴权
+			return false;
+		}
+		if (uri.contains("/user/pc/user/login")) {
 			// 不鉴权
 			return false;
 		}
