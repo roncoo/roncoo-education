@@ -27,7 +27,7 @@ public class PcApiUserLoginController {
 	 * 用户密码登录接口
 	 */
 	@ApiOperation(value = "用户密码登录接口", notes = "用户密码登录")
-	@RequestMapping(value = "/login/password", method = RequestMethod.POST)
+	@RequestMapping(value = "/password", method = RequestMethod.POST)
 	public Result<UserLoginRESQ> loginPassword(@RequestBody UserLoginPasswordREQ userLoginPasswordREQ) {
 		return biz.loginPassword(userLoginPasswordREQ);
 	}
