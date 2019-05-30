@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiOperation;
  *
  */
 @RestController
-@RequestMapping(value = "/system/pc/website/nav")
+@RequestMapping(value = "/system/pc/website/nav/article")
 public class PcApiWebsiteNavArticleController extends BaseController {
 
 	@Autowired
