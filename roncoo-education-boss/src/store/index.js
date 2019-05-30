@@ -5,8 +5,6 @@ import app from './modules/app'
 import user from './modules/user'
 import tags from './modules/tags'
 import opts from './modules/opts'
-import users from './modules/users'
-import account from './modules/account'
 import getters from './getters'
 
 Vue.use(Vuex)
@@ -17,9 +15,7 @@ const store = new Vuex.Store({
     app,
     tags,
     opts,
-    user,
-    users,
-    account
+    user
   },
   getters
 })
