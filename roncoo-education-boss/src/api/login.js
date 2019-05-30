@@ -1,14 +1,15 @@
 import request from '@/utils/request'
 
-export function login(username, password, cipher) {
-  console.log(username)
+export function login(mobile, password, clientId, ip) {
+  console.log(mobile)
   const data = {
-    loginName: username,
-    loginPwd: password,
-    loginCipher: cipher
+    mobile: mobile,
+    password: password,
+    clientId: clientId,
+    ip: ip
   }
   return request({
-    url: '/login',
+    url: '/user/pc/user/login/password',
     method: 'post',
     data
   })

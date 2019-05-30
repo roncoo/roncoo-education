@@ -2,11 +2,11 @@
   <div class="login-container">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
       <h3 class="title">领课教育系统 - 开源版</h3>
-      <el-form-item prop="username">
+      <el-form-item prop="mobile">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
-        <el-input v-model="loginForm.username" name="username" type="text" auto-complete="on" placeholder="登录帐号" />
+        <el-input v-model="loginForm.mobile" name="mobile" type="text" auto-complete="on" placeholder="登录帐号" />
       </el-form-item>
       <el-form-item prop="password">
         <span class="svg-container">
@@ -29,8 +29,8 @@
         </el-button>
       </el-form-item>
       <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: admin</span>
+        <span style="margin-right:20px;">mobile: 18800000000</span>
+        <span> password: 123456</span>
       </div>
     </el-form>
   </div>
@@ -56,24 +56,15 @@ export default {
         callback()
       }
     }
-    /*// 校验暗号
-    const validateCipher = (rule, value, callback) => {
-      const reg = /^\d{6}$/
-      if (reg.test(value)) {
-        callback()
-      } else {
-        callback(new Error('请输入正确的登录暗号'))
-      }
-    }*/
     return {
       loginForm: {
-       /* cipher: '',*/
-        username: 'admin',
-        password: 'roncoo.123'
+        mobile: '13800000000',
+        password: '123456',
+        clientId: 'lkb65617f842ad4c37895a733b8de43cbb',
+        ip: 'ip'
       },
       loginRules: {
-       /* cipher: [{ required: true, trigger: 'blur', validator: validateCipher }],*/
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        mobile: [{ required: true, trigger: 'blur', validator: validateUsername }],
         password: [{ required: true, trigger: 'blur', validator: validatePass }]
       },
       loading: false,
