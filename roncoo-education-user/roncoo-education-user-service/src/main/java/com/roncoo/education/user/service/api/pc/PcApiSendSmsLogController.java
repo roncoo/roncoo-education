@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiOperation;
  * 短信记录
  */
 @RestController
-@RequestMapping(value = "/user/pc/lecturer")
+@RequestMapping(value = "/user/pc/send/sms/log")
 public class PcApiSendSmsLogController extends BaseController {
 
 	@Autowired

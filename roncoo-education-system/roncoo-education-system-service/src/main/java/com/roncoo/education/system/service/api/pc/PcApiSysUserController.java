@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiOperation;
  * @author wujing
  */
 @RestController
-@RequestMapping(value = "/system/pc/sys")
+@RequestMapping(value = "/system/pc/sys/user")
 public class PcApiSysUserController extends BaseController {
 
 	@Autowired
