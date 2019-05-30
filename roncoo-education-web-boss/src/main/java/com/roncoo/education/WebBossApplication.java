@@ -18,6 +18,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringCloudApplication
 public class WebBossApplication {
 
+	
 	public static void main(String[] args) {
 		SpringApplication.run(WebBossApplication.class, args);
 	}
