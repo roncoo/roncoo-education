@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.roncoo.education.user.service.common.req.LecturerProfitBatchREQ;
 import com.roncoo.education.user.service.common.req.LecturerProfitPageREQ;
@@ -29,6 +30,7 @@ import com.roncoo.education.util.tools.DateUtil;
 import com.roncoo.education.util.tools.SignUtil;
 import com.xiaoleilu.hutool.util.ObjectUtil;
 
+@Component
 public class PcApiLecturerProfitBiz extends BaseBiz {
 
 	@Autowired
