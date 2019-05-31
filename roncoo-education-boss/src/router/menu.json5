@@ -76,13 +76,13 @@
   },
   {
     "id": 0,
-    "name": "用户管理",
+    "name": "学员管理",
     "path": "user",
     "icon": null,
     "children": [
       {
         "id": 2,
-        "name": "用户列表",
+        "name": "学员列表",
         "path": "/user/userExt",
         "icon": null,
       }

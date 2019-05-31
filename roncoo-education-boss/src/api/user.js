@@ -8,6 +8,3 @@ export function userExtList(params, page = 1, pageSize = 20) {
     data: { pageNum: page, numPerPage: pageSize, ...params }
   })
 }
-
-
-}
