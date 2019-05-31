@@ -23,39 +23,39 @@
   },
   {
     "id": 0,
-    "name": "交易管理",
-    "path": "/trade",
+    "name": "订单管理",
+    "path": "/course",
     "redirect": false,
     "icon": null,
     "children": [
       {
         "id": 2,
-        "name": "交易订单管理",
-        "path": "/trade/order",
+        "name": "订单列表",
+        "path": "/course/orderInfo",
         "icon": null
       },
       {
         "id": 3,
         "name": "交易记录管理",
-        "path": "/trade/record",
+        "path": "/course/record",
         "icon": null
       },
       {
         "id": 3,
         "name": "当日实时统计",
-        "path": "/trade/statistics",
+        "path": "/course/statistics",
         "icon": null
       },
       {
         "id": 3,
         "name": "历史收益报表",
-        "path": "/trade/profit",
+        "path": "/course/profit",
         "icon": null
       },
       {
         "id": 3,
         "name": "通道余额报表",
-        "path": "/trade/balance",
+        "path": "/course/balance",
         "icon": null
       }
     ]

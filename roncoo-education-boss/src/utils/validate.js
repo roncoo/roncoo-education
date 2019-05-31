@@ -3,8 +3,8 @@
  */
 
 export function isvalidUsername(str) {
-  const valid_map = ['13800000000', 'editor']
-  return valid_map.indexOf(str.trim()) >= 0
+  const valid_map = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/
+  return valid_map.test(str)
 }
 
 /* 合法uri*/

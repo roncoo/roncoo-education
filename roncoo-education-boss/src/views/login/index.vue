@@ -38,7 +38,6 @@
 
 <script>
 import { isvalidUsername } from '@/utils/validate'
-
 export default {
   name: 'Login',
   data() {
@@ -61,7 +60,7 @@ export default {
         mobile: '13800000000',
         password: '123456',
         clientId: 'lkb65617f842ad4c37895a733b8de43cbb',
-        ip: 'ip'
+        ip: '127.0.0.0'
       },
       loginRules: {
         mobile: [{ required: true, trigger: 'blur', validator: validateUsername }],
