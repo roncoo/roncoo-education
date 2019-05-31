@@ -1,19 +1,20 @@
 <template>
-  <div>
+  <div class="pad20">
+    <div>
       <el-table v-loading="ctrl.load" size="medium" :data="page.recordList" stripe border style="width: 100%"> 
-        <el-table-column type="index" label="序号" width="60">
+        <el-table-column type="index" label="序号" width="40">
         </el-table-column>
-        <el-table-column prop="accountNo" label="账户编号">
+        <el-table-column prop="accountNo" label="课程名称">
         </el-table-column>
-        <el-table-column prop="userNo" label="用户编号">
+        <el-table-column prop="userNo" label="课程分类">
         </el-table-column>
-        <el-table-column prop="userName" label="用户名">
+        <el-table-column prop="userName" label="是否收费">
         </el-table-column>
-        <el-table-column prop="balance" label="账户余额">
+        <el-table-column prop="balance" label="原价">
         </el-table-column>
-        <el-table-column prop="settAmount" label="可结算余额">
+        <el-table-column prop="settAmount" label="上下架">
         </el-table-column>
-        <el-table-column prop="editTime" label="更新时间">
+        <el-table-column prop="editTime" label="排序">
         </el-table-column>
         <el-table-column prop="address" width="120" label="操作">
            <template slot-scope="scope">

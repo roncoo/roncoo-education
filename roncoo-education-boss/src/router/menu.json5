@@ -63,7 +63,7 @@
   {
     "id": 0,
     "name": "课程管理",
-    "path": "course",
+    "path": "/course",
     "icon": null,
     "children": [
       {
