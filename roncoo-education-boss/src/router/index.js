@@ -21,9 +21,18 @@ export const asyncRouterMap = [
         component: () => import('@/views/course/course')
       }
     ]
+  },
+  {
+    path: 'user',
+    component: () => import('@/views/user'),
+    children: [
+      {
+        path: 'userExt',
+        component: () => import('@/views/user/userExt')
+      }
+    ]
   }
 ]
-
 export const constantRouterMap = [
   { path: '/login', component: () => import('@/views/login/index') },
   { path: '*', component: () => import('@/views/404') },
