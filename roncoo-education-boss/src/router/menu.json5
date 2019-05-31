@@ -62,40 +62,15 @@
   },
   {
     "id": 0,
-    "name": "账户管理",
-    "path": "account",
+    "name": "课程管理",
+    "path": "course",
     "icon": null,
     "children": [
       {
         "id": 2,
-        "name": "账户信息",
-        "path": "/account/account",
+        "name": "课程审核列表",
+        "path": "/course/course",
         "icon": null,
-      },
-      {
-        "id": 2,
-        "name": "账户明细",
-        "path": "/account/detailed",
-        "icon": null,
-        "hidden": true
-      },
-      {
-        "id": 2,
-        "name": "账户历史信息",
-        "path": "/account/history",
-        "icon": null
-      },
-      {
-        "id": 2,
-        "name": "结算记录管理",
-        "path": "/account/settle",
-        "icon": null
-      },
-      {
-        "id": 2,
-        "name": "结算记录统计",
-        "path": "/account/statistics",
-        "icon": null
       }
     ]
   },
@@ -124,69 +99,6 @@
         "path": "/users/agent",
         "icon": null,
         "hidden": true
-      }
-    ]
-  },
-  {
-    "id": 0,
-    "name": "支付管理",
-    "path": "/pay",
-    "redirect": false,
-    "icon": null,
-    "children": [
-      {
-        "id": 2,
-        "name": "银行通道管理",
-        "path": "/bank/way",
-        "icon": null,
-      },
-      {
-        "id": 2,
-        "name": "银行渠道编码管理",
-        "path": "/bank/channelCode/list",
-        "icon": null
-      },
-      {
-        "id": 2,
-        "name": "银行渠道管理",
-        "path": "/bank/channel/list",
-        "icon": null
-      },
-      {
-        "id": 2,
-        "name": "渠道分流管理",
-        "path": "/bank/channel/flow",
-        "icon": null
-      },
-      {
-        "id": 2,
-        "name": "支付产品管理",
-        "path": "/pay/product",
-        "icon": null
-      },
-      {
-        "id": 2,
-        "name": "支付测试管理",
-        "path": "/pay/test",
-        "icon": null
-      },
-      {
-        "id": 2,
-        "name": "渠道商户余额统计",
-        "path": "/bank/channel/sum",
-        "icon": null
-      },
-      {
-        "id": 2,
-        "name": "通道交易额统计",
-        "path": "/pay/product",
-        "icon": null
-      },
-      {
-        "id": 2,
-        "name": "银行卡黑白名单",
-        "path": "/pay/product",
-        "icon": null
       }
     ]
   },
