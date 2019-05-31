@@ -77,28 +77,14 @@
   {
     "id": 0,
     "name": "用户管理",
-    "path": "users",
+    "path": "user",
     "icon": null,
     "children": [
       {
         "id": 2,
-        "name": "用户信息管理",
-        "path": "/users/info",
+        "name": "用户列表",
+        "path": "/user/userExt",
         "icon": null,
-      },
-      {
-        "id": 2,
-        "name": "添加用户",
-        "path": "/users/add",
-        "icon": null,
-        "hidden": true
-      },
-      {
-        "id": 2,
-        "name": "查看代理信息",
-        "path": "/users/agent",
-        "icon": null,
-        "hidden": true
       }
     ]
   },

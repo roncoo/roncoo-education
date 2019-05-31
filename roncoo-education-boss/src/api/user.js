@@ -1,12 +1,13 @@
 import request from '@/utils/request'
 
-// 用户密码登录
-export function userLogin(data = {}) {
+// 学员分页列表接口
+export function userExtList(params, page = 1, pageSize = 20) {
   return request({
-    url: `/user/pc/user/login/password`,
+    url: '/user/pc/user/ext/list',
     method: 'post',
-    data: data
+    data: { pageNum: page, numPerPage: pageSize, ...params }
   })
+}
 
 
 }
