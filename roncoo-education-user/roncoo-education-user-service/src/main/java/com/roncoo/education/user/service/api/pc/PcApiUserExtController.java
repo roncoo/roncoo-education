@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiOperation;
  *
  */
 @RestController
-@RequestMapping(value = " ")
+@RequestMapping(value = "/user/pc/user/ext")
 public class PcApiUserExtController extends BaseController {
 
 	@Autowired
