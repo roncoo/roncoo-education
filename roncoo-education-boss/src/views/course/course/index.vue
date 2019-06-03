@@ -1,6 +1,5 @@
 <template>
   <div class="pad20">
-    <div>
       <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
         <el-table-column type="index" label="序号" width="50">
         </el-table-column>
@@ -31,17 +30,16 @@
         <el-table-column prop="address" width="120" label="操作">
         </el-table-column>
       </el-table>
-    </div>
-    <el-pagination
-    	background
-    	style="float: right;margin-top: 20px"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :page-size="page.pageSize"
-      :page-sizes="[20, 50, 100, 200, 500, 1000]"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="page.totalCount">
-    </el-pagination>
+      <el-pagination
+	    	background
+	    	style="float: right;margin-top: 20px; margin-bottom: 22px"
+	      @size-change="handleSizeChange"
+	      @current-change="handleCurrentChange"
+	      :page-size="page.pageSize"
+	      :page-sizes="[20, 50, 100, 200, 500, 1000]"
+	      layout="total, sizes, prev, pager, next, jumper"
+	      :total="page.totalCount">
+	    </el-pagination>
   </div>
 </template>
 <script>
