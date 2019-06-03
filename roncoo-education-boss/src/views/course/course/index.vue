@@ -33,6 +33,8 @@
       </el-table>
     </div>
     <el-pagination
+    	background
+    	style="float: right;margin-top: 20px"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :page-size="page.pageSize"
