@@ -33,15 +33,12 @@
       </el-table>
     </div>
     <el-pagination
-      background
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      style="float: right;margin-top: 20px"
-      :current-page="page.currentPage"
-      :page-sizes="page.pageSizesArr"
-      :page-size="page.pageNum"
+      :page-size="page.pageSize"
+      :page-sizes="[20, 50, 100, 200, 500, 1000]"
       layout="total, sizes, prev, pager, next, jumper"
-      :total="page.totalNum">
+      :total="page.totalCount">
     </el-pagination>
   </div>
 </template>
@@ -53,15 +50,18 @@ export default {
       ctrl: {
         load: false
       },
+      map: {
+        isFree: ''
+      },
       formLabelWidth: '120px',
       list: [],
       page: {
-        pageNow: 0,
-        pages: 0, //总页数
-        pageNum: 20, //每页显示的个数
-        totalNum: 0, //总条目数
-        pageSizesArr: [20, 50, 100, 200],
-        currentPage: 1 //当前页数
+        beginPageIndex: 1,
+        currentPage: 1,
+        endPageIndex: 8,
+        pageSize: 20,
+        totalCount: 0,
+        totalPage: 0
       },
       textIsFree: {
         1: '免费',
@@ -77,26 +77,26 @@ export default {
     this.getList()
   },
   methods: {
-    getList(page) {
+    getList() {
       this.ctrl.load = true
-      courseApis.getCourseAuditList(page, this.page.pageNum).then(res => {
-      console.log("=========" + res)
-      this.ctrl.load = false
-      this.list = res.data.list
-      this.page.currentPage = res.data.currentPage
-      this.page.totalNum = res.data.totalCount
+      courseApis.getCourseAuditList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
+        this.ctrl.load = false
+        this.list = res.data.list
+        this.page.pageSize = res.data.pageSize
+        this.page.totalCount = res.data.totalCount
       }).catch(() => {
         this.ctrl.load = false
       })
     },
-    // currentPage 当前页数改变时会触发
-    handleCurrentChange(page) {
-      this.getList(page);
+    handleSizeChange(val) {
+      // console.log(`每页 ${val} 条`)
+      this.page.pageSize = val
+      this.getList()
     },
-    // pageSize 每页条数改变时会触发
-    handleSizeChange(pageSize) {
-      this.page.pageNum = pageSize;
-      this.getList(this.page.currentPage);
+    handleCurrentChange(val) {
+      // console.log(`当前页: ${val}`)
+      this.page.pageCurrent = val
+      this.getList()
     },
     textClass(isFree) {
       return {
