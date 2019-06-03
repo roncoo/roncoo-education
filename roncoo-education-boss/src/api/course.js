@@ -1,9 +1,9 @@
 import request from '@/utils/request'
 
 // 订单分页列表接口
-export function orderInfoList(params, page = 1, pageSize = 20) {
+export function getCourseAuditList(params, page = 1, pageSize = 20) {
   return request({
-    url: '/course/pc/order/info/list',
+    url: '/course/pc/course/audit/list',
     method: 'post',
     data: { pageNum: page, numPerPage: pageSize, ...params }
   })

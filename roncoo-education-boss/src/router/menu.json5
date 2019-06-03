@@ -23,45 +23,6 @@
   },
   {
     "id": 0,
-    "name": "订单管理",
-    "path": "/course",
-    "redirect": false,
-    "icon": null,
-    "children": [
-      {
-        "id": 2,
-        "name": "订单列表",
-        "path": "/course/orderInfo",
-        "icon": null
-      },
-      {
-        "id": 3,
-        "name": "交易记录管理",
-        "path": "/course/record",
-        "icon": null
-      },
-      {
-        "id": 3,
-        "name": "当日实时统计",
-        "path": "/course/statistics",
-        "icon": null
-      },
-      {
-        "id": 3,
-        "name": "历史收益报表",
-        "path": "/course/profit",
-        "icon": null
-      },
-      {
-        "id": 3,
-        "name": "通道余额报表",
-        "path": "/course/balance",
-        "icon": null
-      }
-    ]
-  },
-  {
-    "id": 0,
     "name": "课程管理",
     "path": "/course",
     "icon": null,
