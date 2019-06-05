@@ -1,10 +1,10 @@
-import { enumList } from '@/api/role'
+import { enumList } from '@/api/system'
 import { getSession, setSession } from '@/utils/storage'
 
 function toObj(arr) {
   const obj = {}
   for (var i = 0; i < arr.length; i++) {
-    obj[arr[i].name] = arr[i].desc
+    obj[arr[i].code] = arr[i].desc
   }
   return obj
 }
@@ -32,8 +32,8 @@ const opts = {
       commit('CLOSE_SIDEBAR', withoutAnimation)
     },
     // type为返回数据类型,obj、arr
-    GetOpts({ commit }, { name, type = 'arr' }) {
-      const sessData = getSession(name)
+    GetOpts({ commit }, { enumName, type = 'arr' }) {
+      const sessData = getSession(enumName)
       if (sessData) {
         if (type === 'obj') {
           return toObj(sessData)
@@ -41,10 +41,10 @@ const opts = {
         return sessData
       }
       return new Promise((resolve, reject) => {
-        enumList(name).then(response => {
+        enumList(enumName).then(response => {
           if (response.code === 200) {
             let resData = response.data
-            setSession(name, response.data)
+            setSession(enumName, response.data)
             if (type === 'obj') {
               resData = toObj(response.data)
             }

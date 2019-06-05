@@ -65,13 +65,6 @@ export function linkageEnumList(params) {
   })
 }
 
-export function enumList(params) {
-  return request({
-    url: `/system/enum/list?enumName=${params}`,
-    method: 'post'
-  })
-}
-
 export function getMenuAll(params) {
   console.log(params)
   return request({
