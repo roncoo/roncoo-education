@@ -1,4 +1,4 @@
-package com.roncoo.education.system.service.api;
+package com.roncoo.education.system.service.api.pc;
 
 import java.util.ArrayList;
 
@@ -20,10 +20,11 @@ import io.swagger.annotations.ApiOperation;
  *
  */
 @RestController
-public class ApiSysEnumController extends BaseController {
+@RequestMapping(value = "/system/pc/sys/enum")
+public class PcApiSysEnumController extends BaseController {
 
 	@ApiOperation(value = "获取枚举信息", notes = "获取枚举信息")
-	@RequestMapping(value = "/system/api/sys/enum", method = RequestMethod.POST)
+	@RequestMapping(value = "/list", method = RequestMethod.POST)
     public Result<ArrayList> getEnumInfo(@RequestBody SysEnumBO sysEnumBO) {
        if (sysEnumBO.getEnumName() == null) {
             return Result.error("枚举[" + sysEnumBO.getEnumName() + "]不存在");
