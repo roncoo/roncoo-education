@@ -188,6 +188,7 @@
         const timeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
         return timeString
       },
+      // 查询条件
        handleCheck() {
         this.page.pageCurrent = 1
         this.userExtList()
@@ -197,6 +198,7 @@
         this.params = {}
         this.userExtList()
       },
+      // 分页列出用户信息
       userExtList() {
         this.ctrl.loading = true
         userApi.userExtList(this.params, this.page.pageCurrent, this.page.pageSize).then(res => {
@@ -217,8 +219,10 @@
       },
       // 关闭编辑弹窗回调
       closeCllback() {
-        this.ctrl.dialogVisible = false
+        this.ctrl.dialogVisible = false;
+        this.reload()
       },
+      // 跳修改页面操作
       handleEdit(row) {
         this.formdata = row
         this.ctrl.dialogTitle = '编辑'
@@ -233,14 +237,15 @@
           type: 'warning'
         }).then(() => {
           this.changeStatus(row, command)
+          this.reload()
         }).catch(() => {
           this.reload()
         })
       },
+      // 请求更新用户方法
       changeStatus(row, command) {
         this.params.id === row.id
         this.params.statusId === command
-        console.log('传入参数', this.params)
         userApi.userExtUpdate({ id: row.id, statusId: command }).then(() => {
           const msg = { 0: '禁用成功', 1: '启用成功' }
           this.$message({
@@ -249,7 +254,11 @@
           });
           // this.reload()
         })
-      }
+      },
+      // 重新路由到当前页面
+      reload() {
+        this.userExtList()
+      },
     }
   }
 </script>
