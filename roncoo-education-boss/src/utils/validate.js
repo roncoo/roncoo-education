@@ -1,7 +1,7 @@
 /**
  * Created by jiachenpan on 16/11/18.
  */
-
+// 校验手机号是否合法
 export function isvalidUsername(str) {
   const valid_map = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/
   return valid_map.test(str)

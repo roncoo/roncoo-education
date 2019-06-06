@@ -220,6 +220,7 @@
       // 关闭编辑弹窗回调
       closeCllback() {
         this.ctrl.dialogVisible = false;
+        this.ctrl.viewDialogVisible = false;
         this.reload()
       },
       // 跳修改页面操作
@@ -252,13 +253,13 @@
             type: 'success',
             message: msg[command]
           });
-          // this.reload()
+            this.reload()
         })
       },
-      // 重新路由到当前页面
+      // 刷新当前页面
       reload() {
         this.userExtList()
-      },
+      }
     }
   }
 </script>

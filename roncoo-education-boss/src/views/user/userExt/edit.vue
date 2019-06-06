@@ -5,14 +5,10 @@
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form ref="formData" :model="formData" label-width="80px">
-      <el-form-item label="用户手机">
-      <el-input :disabled="true" v-model="formData.mobile" ></el-input>
-    </el-form-item>
-
     <el-form-item label="头像">
       <el-upload
         class="upload-demo"
-        action="http://192.168.31.134:5840/course/pc/upload/pic"
+        action="http://192.168.31.134:5840/course/pc/upload/pic/{USER}"
         :on-preview="handlePreview"
         :on-remove="handleRemove"
         :before-remove="beforeRemove"
@@ -25,7 +21,9 @@
         <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
       </el-upload>
     </el-form-item>
-
+    <el-form-item label="用户手机">
+      <el-input :disabled="true" v-model="formData.mobile" ></el-input>
+    </el-form-item>
     <el-form-item label="昵称">
       <el-input v-model="formData.nickname"></el-input>
     </el-form-item>
@@ -50,7 +48,7 @@
     name: 'Edit',
     data() {
       return {
-        fileList: [{}],
+        fileList: [],
         ctrl: {
           dialogVisible: true
         }
@@ -72,6 +70,9 @@
       }
     },
     methods: {
+      handleChange(value) {
+        console.log(value);
+      },
       handleRemove(file, fileList) {
         console.log(file, fileList)
       },
