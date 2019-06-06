@@ -53,9 +53,20 @@
         </el-table-column>
         <el-table-column prop="nickname" label="昵称">
         </el-table-column>
-        <el-table-column label="状态" width="120">
+        <el-table-column
+          label="状态"
+          prop="statusId"
+          align="center"
+          width="200">
           <template slot-scope="scope">
-            <span :class="textClass(scope.row.statusId)">{{textuStatusId[scope.row.statusId]}}</span>
+            <el-switch
+              @change="handleChangeStatus(scope.row, $event)"
+              v-model="scope.row.statusId"
+              :inactive-value="1"
+              :active-value="0"
+              inactive-text="正常"
+              active-text="禁用">
+            </el-switch>
           </template>
         </el-table-column>
         <el-table-column prop="gmtCreate" label="注册时间">
@@ -68,8 +79,6 @@
           <ul class="list-item-actions">
             <li>
               <el-button type="primary" @click="handleEdit(scope.row)" size="mini">修改</el-button>
-              <el-button @click.native="changeStatus(scope.row)" size="mini" type="danger" class="mgl10" v-if="scope.row.status !== '1'">启用</el-button>
-            <el-button @click.native="changeStatus(scope.row)" size="mini" type="primary" class="mgl10" v-else>禁用</el-button>
             </li>
           </ul>
         </template>
@@ -190,7 +199,6 @@
       },
       userExtList() {
         this.ctrl.loading = true
-        console.log(this.params)
         userApi.userExtList(this.params, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.list = res.data.list
           this.page.pageCurrent = res.data.pageCurrent
@@ -215,6 +223,32 @@
         this.formdata = row
         this.ctrl.dialogTitle = '编辑'
         this.ctrl.dialogVisible = true
+      },
+      // 修改状态
+      handleChangeStatus(row, command) {
+        const title = { 0: '禁用', 1: '启用' }
+        this.$confirm(`确定${title[command]},名称为${row.mobile}?`, title[command] + '此项', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.changeStatus(row, command)
+        }).catch(() => {
+          this.reload()
+        })
+      },
+      changeStatus(row, command) {
+        this.params.id === row.id
+        this.params.statusId === command
+        console.log('传入参数', this.params)
+        userApi.userExtUpdate({ id: row.id, statusId: command }).then(() => {
+          const msg = { 0: '禁用成功', 1: '启用成功' }
+          this.$message({
+            type: 'success',
+            message: msg[command]
+          });
+          // this.reload()
+        })
       }
     }
   }
