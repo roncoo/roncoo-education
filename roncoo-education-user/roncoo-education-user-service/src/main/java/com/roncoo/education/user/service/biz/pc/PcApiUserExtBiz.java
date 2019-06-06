@@ -45,6 +45,9 @@ public class PcApiUserExtBiz {
 		if (StringUtils.hasText(req.getNickname())) {
 			c.andNicknameLike(PageUtil.like(req.getNickname()));
 		}
+		if (req.getStatusId() != null) {
+			c.andStatusIdEqualTo(req.getStatusId());
+		}
 		if (StringUtils.hasText(req.getBeginGmtCreate())) {
 			c.andGmtCreateGreaterThanOrEqualTo(DateUtil.parseDate(req.getBeginGmtCreate(), "yyyy-MM-dd"));
 		}

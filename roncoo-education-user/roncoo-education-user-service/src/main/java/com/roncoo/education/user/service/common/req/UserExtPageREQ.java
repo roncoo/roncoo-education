@@ -33,6 +33,11 @@ public class UserExtPageREQ implements Serializable {
 	@ApiModelProperty(value = "手机号码", required = false)
 	private String mobile;
 	/**
+	 * 状态(1:正常，0:禁用)
+	 */
+	@ApiModelProperty(value = "状态(1:正常，0:禁用)", required = false)
+	private Integer statusId;
+	/**
 	 * 昵称
 	 */
 	@ApiModelProperty(value = "昵称", required = false)
