@@ -44,7 +44,10 @@
         </el-table-column>
         <el-table-column prop="userNo" label="用户编号">
         </el-table-column>
-        <el-table-column prop="mobile" label="用户手机">
+        <el-table-column label="用户手机">
+           <template slot-scope="scope">
+            <el-button type="text" @click="handleView(scope.row.id)">{{scope.row.mobile}}</el-button>
+          </template>
         </el-table-column>
         <el-table-column label="用户类型"  width="120">
           <template slot-scope="scope">
@@ -53,19 +56,23 @@
         </el-table-column>
         <el-table-column prop="nickname" label="昵称">
         </el-table-column>
+        <el-table-column prop="sex" label="性别">
+        </el-table-column>
         <el-table-column
-          label="状态"
+          width="150"
           prop="statusId"
-          align="center"
-          width="200">
+          label="状态"
+          align="center">
           <template slot-scope="scope">
             <el-switch
-              @change="handleChangeStatus(scope.row, $event)"
               v-model="scope.row.statusId"
-              :inactive-value="1"
+              @change="handleChangeStatus(scope.row, $event)"
               :active-value="0"
-              inactive-text="正常"
-              active-text="禁用">
+              :inactive-value="1"
+              active-color="#ff4949"
+              inactive-color="#13ce66"
+              active-text="禁用"
+              inactive-text="正常">
             </el-switch>
           </template>
         </el-table-column>
@@ -96,21 +103,24 @@
         :total="page.totalCount">
       </el-pagination>
       <edit :visible="ctrl.dialogVisible" :formData="formdata" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
+      <view-user :visible="ctrl.viewVisible" :formData="viewData" @close-cllback="closeViewFind"></view-user>
   </div>
 </template>
 <script>
   import * as userApi from '@/api/user'
   import Edit from './edit'
+  import viewUser from './view'
   export default {
-    components: { Edit },
+    components: { Edit, viewUser },
     data() {
       return {
-        params: {
-        },
+        params: {},
+        map: {},
         ctrl: {
           load: false,
           remoteAuthorLoading: false,
-          dialogVisible: false
+          dialogVisible: false,
+          viewVisible: false
         },
         list: [],
         opts: {
@@ -148,6 +158,7 @@
           }]
         },
         formdata: {},
+        viewData: {},
         gmtCreate: ''
       }
     },
@@ -220,10 +231,9 @@
       // 关闭编辑弹窗回调
       closeCllback() {
         this.ctrl.dialogVisible = false;
-        this.ctrl.viewDialogVisible = false;
         this.reload()
       },
-      // 跳修改页面操作
+      // 跳页面操作
       handleEdit(row) {
         this.formdata = row
         this.ctrl.dialogTitle = '编辑'
@@ -232,7 +242,7 @@
       // 修改状态
       handleChangeStatus(row, command) {
         const title = { 0: '禁用', 1: '启用' }
-        this.$confirm(`确定${title[command]},名称为${row.mobile}?`, title[command] + '此项', {
+        this.$confirm(`确定要${title[command]}吗?`, {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
@@ -255,6 +265,20 @@
           });
             this.reload()
         })
+      },
+      handleView(id) {
+        console.log("用户id" + id)
+        userApi.userExtView({ id: id }).then(res => {
+          this.viewData = res.data
+          this.ctrl.loading = false
+        }).catch(() => {
+            this.ctrl.loading = false
+          })
+        this.ctrl.viewVisible = true
+      },
+      // 关闭查看弹窗回调
+      closeViewFind() {
+        this.ctrl.viewVisible = false;
       },
       // 刷新当前页面
       reload() {

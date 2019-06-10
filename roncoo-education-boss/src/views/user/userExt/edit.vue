@@ -5,41 +5,46 @@
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form ref="formData" :model="formData" label-width="80px">
-    <el-form-item label="头像">
-      <el-upload
-        class="upload-demo"
-        action="http://192.168.31.134:5840/course/pc/upload/pic/{USER}"
-        :on-preview="handlePreview"
-        :on-remove="handleRemove"
-        :before-remove="beforeRemove"
-        multiple
-        :limit="1"
-        :on-exceed="handleExceed"
-        :on-success="success"
-        :file-list="fileList">
-        <el-button size="small" type="primary">点击上传</el-button>
-        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-      </el-upload>
-    </el-form-item>
-    <el-form-item label="用户手机">
-      <el-input :disabled="true" v-model="formData.mobile" ></el-input>
-    </el-form-item>
-    <el-form-item label="昵称">
-      <el-input v-model="formData.nickname"></el-input>
-    </el-form-item>
-    <el-form-item label="性别">
-      <el-radio v-model="formData.sex" border size="small" label="1">男</el-radio>
-      <el-radio v-model="formData.sex" border size="small" label="2">女</el-radio>
-      <el-radio v-model="formData.sex" border size="small" label="3">保密</el-radio>
-    </el-form-item>
-    <el-form-item label="备注">
-      <el-input type="textarea" v-model="formData.remark"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click="submitForm('formData')">修改</el-button>
-      <el-button @click="handleClose">取 消</el-button>
-    </el-form-item>
-  </el-form>
+      <el-form-item label="头像">
+        <el-upload
+          class="upload-demo"
+          action="http://192.168.31.134:5840/course/pc/upload/pic/{USER}"
+          :on-preview="handlePreview"
+          :on-remove="handleRemove"
+          :before-remove="beforeRemove"
+           multiple
+          :limit="1"
+          :on-exceed="handleExceed"
+          :on-success="success"
+          :file-list="fileList">
+          <el-button size="small" type="primary">点击上传</el-button>
+          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+        </el-upload>
+      </el-form-item>
+      <el-form-item label="用户手机">
+        <el-input :disabled="true" v-model="formData.mobile"></el-input>
+      </el-form-item>
+      <el-form-item label="昵称">
+        <el-input v-model="formData.nickname"></el-input>
+      </el-form-item>
+      <el-form-item label="性别">
+        <el-radio-group v-model="formData.sex">
+          <el-radio border size="small" :label="1">男</el-radio>
+          <el-radio border size="small" :label="2">女</el-radio>
+          <el-radio border size="small" :label="3">保密</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="年龄">
+        <el-input v-model="formData.age"></el-input>
+      </el-form-item>
+      <el-form-item label="备注">
+        <el-input type="textarea" v-model="formData.remark"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm('formData')">提交</el-button>
+        <el-button type="danger" plain @click="handleClose">取 消</el-button>
+      </el-form-item>
+    </el-form>
   </el-dialog>
 </template>
 <script>
