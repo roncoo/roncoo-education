@@ -125,3 +125,8 @@
     }
   }
 </script>
+<style scoped>
+  .cancel {
+    text-align: center;
+  }
+</style>

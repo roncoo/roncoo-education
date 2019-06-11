@@ -267,7 +267,6 @@
         })
       },
       handleView(id) {
-        console.log("用户id" + id)
         userApi.userExtView({ id: id }).then(res => {
           this.viewData = res.data
           this.ctrl.loading = false
