@@ -53,12 +53,12 @@
    </div>
 
     <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
-      <el-table-column type="index" label="序号" width="50">
+      <el-table-column type="index" label="序号">
       </el-table-column>
       <el-table-column prop="courseName" label="课程名称">
-        <template slot-scope="scope">
+        <!-- <template slot-scope="scope">
           <el-button type="text" @click="handleView(scope.row)" >{{scope.row.courseName}}</el-button>
-        </template>
+        </template> -->
       </el-table-column>>
 
       <el-table-column label="课程分类">
@@ -76,18 +76,53 @@
           {{scope.row.courseOriginal.toFixed(2)}}
         </template>
       </el-table-column>
-      <el-table-column label="上下架">
+      <el-table-column
+        width="150"
+        prop="isPutaway"
+        label="上下架"
+        align="center">
         <template slot-scope="scope">
-          <span :class="textClass(scope.row.isPutaway)">{{textIsPutaway[scope.row.isPutaway]}}</span>
+          <el-switch
+            v-model="scope.row.isPutaway"
+            @change="handleChangeIsPutaway(scope.row, $event)"
+            :active-value="0"
+            :inactive-value="1"
+            active-color="#ff4949"
+            inactive-color="#13ce66"
+            active-text="下架"
+            inactive-text="上架">
+          </el-switch>
         </template>
       </el-table-column>
       <el-table-column prop="sort" label="排序">
       </el-table-column>
+
+
       <el-table-column label="状态">
         <template slot-scope="scope">
           <span :class="textClass(scope.row.statusId)">{{textStatusId[scope.row.statusId]}}</span>
         </template>
       </el-table-column>
+
+      <el-table-column
+        width="150"
+        prop="statusId"
+        label="状态"
+        align="center">
+        <template slot-scope="scope">
+          <el-switch
+            v-model="scope.row.statusId"
+            @change="handleChangeStatusId(scope.row)"
+            :active-value="0"
+            :inactive-value="1"
+            active-color="#ff4949"
+            inactive-color="#13ce66"
+            active-text="禁用"
+            inactive-text="正常">
+          </el-switch>
+        </template>
+      </el-table-column>
+
       <el-table-column label="审核状态">
         <template slot-scope="scope">
           <span :class="textAuditStatusClass(scope.row.auditStatus)">{{textAuditStatus[scope.row.auditStatus]}}</span>
@@ -107,14 +142,14 @@
       layout="total, sizes, prev, pager, next, jumper"
       :total="page.totalCount">
     </el-pagination>
-    <view-course :visible="ctrl.dialogVisible" :formData="formdata" @close-cllback="closeCllback"></view-course>
+    <!-- <view-course :visible="ctrl.dialogVisible" :formData="formdata" @close-cllback="closeCllback"></view-course> -->
   </div>
 </template>
 <script>
 import * as courseApis from '@/api/course'
-import ViewCourse from './view'
+//import ViewCourse from './view'
 export default {
-  components: { ViewCourse },
+  //components: { ViewCourse },
   data() {
     return {
       ctrl: {
@@ -146,10 +181,6 @@ export default {
       textIsFree: {
         1: '免费',
         0: '收费'
-      },
-      textIsPutaway: {
-        1: '上架',
-        0: '下架'
       },
       textStatusId: {
         1: '正常',
@@ -198,7 +229,37 @@ export default {
       this.ctrl.dialogVisible = false;
       this.ctrl.viewDialogVisible = false;
     },
-    handleView(data) {
+    // 修改上下架状态
+    handleChangeIsPutaway(row, command ) {
+      console.log("=======" + row)
+      const title = { 0: '下架', 1: '上下架' }
+      this.$confirm(`确定要${title[command]}吗?`, {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.changeIsPutaway(row, command)
+        this.reload()
+      }).catch(() => {
+        this.reload()
+      })
+    },
+    // 请求更新上下架方法
+    changeIsPutaway(row, command) {
+      courseApis.courseUpdate({ id: row.id, isPutaway: command }).then(res => {
+        const msg = { 0: '下架成功', 1: '上架成功' }
+        this.$message({
+          type: 'success',
+          message: msg[command]
+        });
+          this.reload()
+      })
+    },
+    // 刷新当前页面
+    reload() {
+      this.getList()
+    },
+    /*handleView(data) {
       this.ctrl.load = true
       courseApis.courseAuditView(data.id).then(res => {
         this.ctrl.load = false
@@ -207,7 +268,7 @@ export default {
       }).catch(() => {
         this.ctrl.load = false
       })
-    },
+    },*/
     // 重置查询条件
     handleReset() {
       this.map = {}

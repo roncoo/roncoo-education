@@ -17,3 +17,12 @@ export function courseAuditView(id) {
     data: { id: id }
   })
 }
+
+// 审核课程详情接口
+export function courseUpdate(data = {}) {
+  return request({
+    url: '/course/pc/course/audit/update',
+    method: 'post',
+    data: data
+  })
+}
