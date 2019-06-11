@@ -157,23 +157,23 @@ public class PcApiCourseAuditBiz {
 		CourseAudit record = BeanUtil.copyProperties(req, CourseAudit.class);
 		record.setAuditStatus(AuditStatusEnum.WAIT.getCode());
 		int result = dao.updateById(record);
-		if (result < 1) {
-			return Result.error("课程信息表更新失败");
+		if (result < 0) {
+			return Result.error(ResultEnum.COURSE_UPDATE_FAIL);
 		}
-		// 查询课程简介
-		CourseIntroduceAudit courseIntroduceAudit = courseIntroduceAuditDao.getById(courseAudit.getIntroduceId());
-		if (ObjectUtil.isNull(courseIntroduceAudit)) {
-			return Result.error("找不到课程简介信息");
+		if (StringUtils.hasText(req.getIntroduce())) {
+			// 查询课程简介
+			CourseIntroduceAudit courseIntroduceAudit = courseIntroduceAuditDao.getById(courseAudit.getIntroduceId());
+			if (ObjectUtil.isNull(courseIntroduceAudit)) {
+				return Result.error("找不到课程简介信息");
+			}
+			// 更新课程简介
+			courseIntroduceAudit.setIntroduce(req.getIntroduce());
+			int courseIntroduceResult = courseIntroduceAuditDao.updateById(courseIntroduceAudit);
+			if (courseIntroduceResult < 0) {
+				return Result.error(ResultEnum.COURSE_UPDATE_FAIL);
+			}
 		}
-		// 更新课程简介
-		CourseIntroduceAudit introduceAudit = new CourseIntroduceAudit();
-		introduceAudit.setId(courseAudit.getIntroduceId());
-		introduceAudit.setIntroduce(req.getIntroduce());
-		int courseIntroduceResult = courseIntroduceAuditDao.updateById(introduceAudit);
-		if (courseIntroduceResult < 1) {
-			return Result.error("课程信息表更新失败");
-		}
-		return Result.success(courseIntroduceResult);
+		return Result.success(result);
 	}
 
 	/**
@@ -282,7 +282,7 @@ public class PcApiCourseAuditBiz {
 		if (ObjectUtil.isNull(courseAudit)) {
 			return Result.error("课程不存在");
 		}
-		
+
 		Course course = courseDao.getById(courseAudit.getId());
 
 		// 根据课程ID查询课时信息集合
