@@ -30,7 +30,7 @@
       {
         "id": 2,
         "name": "课程审核列表",
-        "path": "/course/course",
+        "path": "/course/audit",
         "icon": null,
       }
     ]

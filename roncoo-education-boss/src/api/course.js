@@ -1,10 +1,19 @@
 import request from '@/utils/request'
 
-// 订单分页列表接口
+// 审核课程分页列表接口
 export function getCourseAuditList(params, page = 1, pageSize = 20) {
   return request({
     url: '/course/pc/course/audit/list',
     method: 'post',
     data: { pageCurrent: page, pageSize: pageSize, ...params }
+  })
+}
+
+// 审核课程详情接口
+export function courseAuditView(id) {
+  return request({
+    url: '/course/pc/course/audit/view',
+    method: 'post',
+    data: { id: id }
   })
 }

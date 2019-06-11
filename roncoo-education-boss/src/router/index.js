@@ -17,8 +17,8 @@ export const asyncRouterMap = [
     component: () => import('@/views/course'),
     children: [
       {
-        path: 'course',
-        component: () => import('@/views/course/course')
+        path: 'audit',
+        component: () => import('@/views/course/audit')
       }
     ]
   },
