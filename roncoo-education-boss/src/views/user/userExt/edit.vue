@@ -29,9 +29,9 @@
       </el-form-item>
       <el-form-item label="性别">
         <el-radio-group v-model="formData.sex">
-          <el-radio border size="small" :label="1">男</el-radio>
-          <el-radio border size="small" :label="2">女</el-radio>
-          <el-radio border size="small" :label="3">保密</el-radio>
+          <el-radio :label="1">男</el-radio>
+          <el-radio :label="2">女</el-radio>
+          <el-radio :label="3">保密</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="年龄">

@@ -2,14 +2,14 @@
   <div class="pad20">
     <div>
       <el-form :inline="true" size="mini">
-      <el-form-item label="用户手机">
-        <el-input v-model="params.mobile"></el-input>
+      <el-form-item label="讲师名称">
+        <el-input v-model="map.lecturerName"></el-input>
       </el-form-item>
-      <el-form-item label="昵称">
-        <el-input v-model="params.nickname"></el-input>
+      <el-form-item label="手机号">
+        <el-input v-model="map.lecturerMobile"></el-input>
       </el-form-item>
       <el-form-item label="状态:" >
-        <el-select v-model="params.statusId" class="auto-width" clearable filterable placeholder="状态" style="width: 85px">
+        <el-select v-model="map.statusId" class="auto-width" clearable filterable placeholder="状态" style="width: 85px">
           <el-option
             v-for="item in opts.statusIdList"
             :key="item.code"
@@ -17,19 +17,6 @@
             :value="item.code">
           </el-option>
         </el-select>
-      </el-form-item>
-      <el-form-item label="注册时间">
-        <el-date-picker
-        v-model="gmtCreate"
-        type="datetimerange"
-        :picker-options="timeData"
-        range-separator="至"
-        start-placeholder="开始日期"
-        end-placeholder="结束日期"
-        :default-time="['00:00:00', '23:59:59']"
-        align="center"
-        @change="changeTime">
-      </el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" :loading="ctrl.load" @click="handleCheck">查询</el-button>
@@ -42,19 +29,14 @@
       <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
         <el-table-column type="index" label="序号" width="40">
         </el-table-column>
-        <el-table-column prop="userNo" label="用户编号">
-        </el-table-column>
-        <el-table-column label="用户手机">
+        <el-table-column label="手机号">
            <template slot-scope="scope">
-            <el-button type="text" @click="handleView(scope.row.id)">{{scope.row.mobile}}</el-button>
+            <el-button type="text" @click="handleView(scope.row.id)">{{scope.row.lecturerMobile}}</el-button>
           </template>
         </el-table-column>
-        <el-table-column label="用户类型"  width="120">
-          <template slot-scope="scope">
-            <span :class="textClass(scope.row.userType)">{{textuUserType[scope.row.userType]}}</span>
-          </template>
+        <el-table-column prop="lecturerName" label="讲师名称">
         </el-table-column>
-        <el-table-column prop="nickname" label="昵称">
+        <el-table-column prop="lecturerEmail" label="邮箱">
         </el-table-column>
         <el-table-column
           width="150"
@@ -74,7 +56,10 @@
             </el-switch>
           </template>
         </el-table-column>
-        <el-table-column prop="gmtCreate" label="注册时间">
+        <el-table-column label="分成比例">
+          <template slot-scope="scope">
+             [ 讲师: {{scope.row.lecturerProportion*100}}%]
+          </template>
         </el-table-column>
         <el-table-column
         fixed="right"
@@ -83,7 +68,7 @@
         <template slot-scope="scope">
           <ul class="list-item-actions">
             <li>
-              <el-button type="primary" @click="handleEdit(scope.row)" size="mini">修改</el-button>
+              <el-button type="primary" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
             </li>
           </ul>
         </template>
@@ -100,30 +85,26 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="page.totalCount">
       </el-pagination>
-      <edit :visible="ctrl.dialogVisible" :formData="formdata" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
-      <view-user :visible="ctrl.viewVisible" :formData="viewData" @close-cllback="closeViewFind"></view-user>
+      <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
   </div>
 </template>
 <script>
   import * as userApi from '@/api/user'
   import Edit from './edit'
-  import viewUser from './view'
   export default {
-    components: { Edit, viewUser },
+    components: { Edit },
     data() {
       return {
-        params: {},
         map: {},
+        formData: {},
         ctrl: {
           load: false,
-          remoteAuthorLoading: false,
-          dialogVisible: false,
-          viewVisible: false
+          dialogVisible: false
         },
-        list: [],
         opts: {
           statusIdList: []
         },
+        list: [],
         page: {
           beginPageIndex: 1,
           pageCurrent: 1,
@@ -132,85 +113,42 @@
           totalCount: 0,
           totalPage: 0
         },
-        textuUserType: {
-          1: '用户',
-          2: '讲师'
-        },
         textuStatusId: {
           0: '禁用',
           1: '正常'
-        },
-        timeData: {
-          shortcuts: [{
-            text: '今天',
-            onClick: picker => {
-              const now = this.getNow('now')
-              picker.$emit('pick', now)
-            }
-          }, {
-            text: '昨天',
-            onClick: picker => {
-              const now = this.getNow('before')
-              picker.$emit('pick', now)
-            }
-          }]
-        },
-        formdata: {},
-        viewData: {},
-        gmtCreate: ''
+        }
       }
     },
     mounted() {
       this.$store.dispatch('GetOpts', { enumName: "StatusIdEnum", type: 'arr' }).then(res => {
         this.opts.statusIdList = res
       })
-      this.userExtList(1)
+      this.lecturerList(1)
     },
     methods: {
-      handleSizeChange(val) {
+       handleSizeChange(val) {
         // console.log(`每页 ${val} 条`)
         this.page.pageSize = val
-        this.userExtList()
+        this.lecturerList()
       },
       handleCurrentChange(val) {
         this.page.pageCurrent = val
-        this.userExtList()
+        this.lecturerList()
         // console.log(`当前页: ${val}`)
-      },
-      // 注册时间段查询条件
-      changeTime() {
-        if (this.gmtCreate.length) {
-          this.params.beginGmtCreate = this.dateToString(this.gmtCreate[0])
-          this.params.endGmtCreate = this.dateToString(this.gmtCreate[1])
-        } else {
-          this.params.beginGmtCreate = ''
-          this.params.endTime = ''
-        }
-      },
-      dateToString(date) {
-        const year = date.getFullYear()
-        const month = (date.getMonth() + 1).toString().padStart(2, '0')
-        const day = date.getDate().toString().padStart(2, '0')
-        const hours = date.getHours().toString().padStart(2, '0')
-        const minutes = date.getMinutes().toString().padStart(2, '0')
-        const seconds = date.getSeconds().toString().padStart(2, '0')
-        const timeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
-        return timeString
       },
       // 查询条件
        handleCheck() {
         this.page.pageCurrent = 1
-        this.userExtList()
+        this.lecturerList()
       },
       // 重置查询条件
       handleReset() {
         this.params = {}
-        this.userExtList()
+        this.lecturerList()
       },
-      // 分页列出用户信息
-      userExtList() {
-        this.ctrl.loading = true
-        userApi.userExtList(this.params, this.page.pageCurrent, this.page.pageSize).then(res => {
+      lecturerList() {
+        this.load === true
+        userApi.lecturerList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.list = res.data.list
           this.page.pageCurrent = res.data.pageCurrent
           this.page.totalCount = res.data.totalCount
@@ -219,23 +157,6 @@
         }).catch(() => {
           this.ctrl.loading = false
         })
-      },
-      textClass(userType) {
-        return {
-          c_red: userType === 0,
-          c_blue: userType === 2
-        }
-      },
-      // 关闭编辑弹窗回调
-      closeCllback() {
-        this.ctrl.dialogVisible = false;
-        this.reload()
-      },
-      // 跳页面操作
-      handleEdit(row) {
-        this.formdata = row
-        this.ctrl.dialogTitle = '编辑'
-        this.ctrl.dialogVisible = true
       },
       // 修改状态
       handleChangeStatus(id, statusId) {
@@ -253,7 +174,7 @@
       },
       // 请求更新用户方法
       changeStatus(id, statusId) {
-        userApi.userExtUpdate({ id: id, statusId: statusId }).then(() => {
+        userApi.lecturerUpdate({ id: id, statusId: statusId }).then(() => {
           const msg = { 0: '禁用成功', 1: '启用成功' }
           this.$message({
             type: 'success',
@@ -262,22 +183,28 @@
             this.reload()
         })
       },
-      handleView(id) {
-        userApi.userExtView({ id: id }).then(res => {
-          this.viewData = res.data
+       // 关闭编辑弹窗回调
+      closeCllback() {
+        this.ctrl.dialogVisible = false;
+        this.reload()
+      },
+      // 跳页面操作
+      handleEdit(id) {
+        this.load === true
+        console.log("修改查询讲师id", id)
+        userApi.lecturerView({ id: id }).then(row => {
+          console.log("查询讲师信息", row.data)
+          this.formData = row.data
           this.ctrl.loading = false
         }).catch(() => {
-            this.ctrl.loading = false
-          })
-        this.ctrl.viewVisible = true
-      },
-      // 关闭查看弹窗回调
-      closeViewFind() {
-        this.ctrl.viewVisible = false;
+          this.ctrl.loading = false
+        })
+        this.ctrl.dialogTitle = '编辑'
+        this.ctrl.dialogVisible = true
       },
       // 刷新当前页面
       reload() {
-        this.userExtList()
+        this.lecturerList()
       }
     }
   }

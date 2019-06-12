@@ -23,6 +23,20 @@ export const asyncRouterMap = [
     ]
   },
   {
+    path: 'lecturer',
+    component: () => import('@/views/lecturer'),
+    children: [
+      {
+        path: 'lecturer',
+        component: () => import('@/views/lecturer/lecturer')
+      },
+      {
+        path: 'audit',
+        component: () => import('@/views/lecturer/audit')
+      }
+    ]
+  },
+  {
     path: 'user',
     component: () => import('@/views/user'),
     children: [

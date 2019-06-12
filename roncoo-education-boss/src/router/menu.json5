@@ -37,6 +37,26 @@
   },
   {
     "id": 0,
+    "name": "讲师管理",
+    "path": "lecturer",
+    "icon": null,
+    "children": [
+      {
+        "id": 2,
+        "name": "讲师列表",
+        "path": "/lecturer/lecturer",
+        "icon": null,
+      },
+      {
+        "id": 2,
+        "name": "讲师审核列表",
+        "path": "/lecturer/audit",
+        "icon": null,
+      }
+    ]
+  },
+  {
+    "id": 0,
     "name": "学员管理",
     "path": "user",
     "icon": null,
