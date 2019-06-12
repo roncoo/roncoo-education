@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.roncoo.education.user.service.common.req.LecturerPageREQ;
-import com.roncoo.education.user.service.common.req.LecturerViewREQ;
 import com.roncoo.education.user.service.common.req.LecturerUpdateREQ;
+import com.roncoo.education.user.service.common.req.LecturerViewREQ;
 import com.roncoo.education.user.service.common.resq.LecturerExtViewRESQ;
 import com.roncoo.education.user.service.common.resq.LecturerPageRESQ;
 import com.roncoo.education.user.service.common.resq.LecturerViewRESQ;
@@ -105,7 +105,7 @@ public class PcApiLecturerBiz {
 			throw new BaseException("讲师信息表更新失败");
 		}
 		int results = lecturerAuditDao.updateById(BeanUtil.copyProperties(record, LecturerAudit.class));
-		if (results > 0) {
+		if (results < 0) {
 			return Result.error(ResultEnum.USER_UPDATE_FAIL);
 		}
 		return Result.success(results);
