@@ -272,6 +272,12 @@ public class PcApiCourseAuditBiz {
 	}
 
 	public Result<Integer> audit(CourseAuditAuditStatusREQ req) {
+		if (req.getId() == null) {
+			return Result.error("课程ID");
+		}
+		if (req.getAuditStatus() == null) {
+			return Result.error("审核状态不能为空");
+		}
 		// 不成功
 		if (!AuditStatusEnum.SUCCESS.getCode().equals(req.getAuditStatus())) {
 			CourseAudit audit = BeanUtil.copyProperties(req, CourseAudit.class);
@@ -284,6 +290,9 @@ public class PcApiCourseAuditBiz {
 		}
 
 		Course course = courseDao.getById(courseAudit.getId());
+		if (ObjectUtil.isNull(course)) {
+			return Result.error("课程不存在");
+		}
 
 		// 根据课程ID查询课时信息集合
 		List<CourseChapterPeriodAudit> periodAuditList = courseChapterPeriodAuditDao.listByCourseId(courseAudit.getId());
@@ -354,6 +363,9 @@ public class PcApiCourseAuditBiz {
 		for (CourseChapterAudit courseChapterAudit : courseChapterAuditList) {
 			// 根据章节编号查找章节审核信息
 			CourseChapterAudit infoAudit = courseChapterAuditDao.getById(courseChapterAudit.getId());
+			if (ObjectUtil.isNull(infoAudit)) {
+				throw new BaseException("找不到章节审核信息");
+			}
 			// 查找章节信息表是否存在该课时信息
 			CourseChapter chapter = courseChapterDao.getById(courseChapterAudit.getId());
 			// 存在就更新章节信息表数据
@@ -385,6 +397,9 @@ public class PcApiCourseAuditBiz {
 		for (CourseChapterPeriodAudit courseChapterPeriodAudit : courseChapterPeriodAuditList) {
 			// 根据课时编号查找课时审核信息
 			CourseChapterPeriodAudit chapterperiodAudit = courseChapterPeriodAuditDao.getById(courseChapterPeriodAudit.getId());
+			if (ObjectUtil.isNull(chapterperiodAudit)) {
+				throw new BaseException("找不到课时审核信息");
+			}
 			// 根据课时编号查找课时信息
 			CourseChapterPeriod chapterPeriod = courseChapterPeriodDao.getById(courseChapterPeriodAudit.getId());
 			// 如果信息表存在就更新信息表信息
