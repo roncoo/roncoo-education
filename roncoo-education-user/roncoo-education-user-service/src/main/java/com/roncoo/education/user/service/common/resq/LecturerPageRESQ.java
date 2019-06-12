@@ -28,6 +28,11 @@ public class LecturerPageRESQ implements Serializable {
 	@JsonSerialize(using = ToStringSerializer.class)
 	private Long id;
 	/**
+	 * 状态(1:正常，0:禁用)
+	 */
+	@ApiModelProperty(value = "状态(1:正常，0:禁用)")
+	private Integer statusId;
+	/**
 	 * 讲师编号
 	 */
 	@ApiModelProperty(value = "讲师编号")
