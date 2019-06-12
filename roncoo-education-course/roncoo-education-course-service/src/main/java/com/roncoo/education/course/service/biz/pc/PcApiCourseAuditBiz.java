@@ -338,7 +338,7 @@ public class PcApiCourseAuditBiz {
 		// 更改课程审核状态
 		CourseAudit audit = BeanUtil.copyProperties(req, CourseAudit.class);
 		int resultNum = dao.updateById(audit);
-		if (resultNum > 0) {
+		if (resultNum < 0) {
 			return Result.error(ResultEnum.COURSE_AUDIT_FAIL);
 		}
 		return Result.success(resultNum);
