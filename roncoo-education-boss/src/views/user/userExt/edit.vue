@@ -1,6 +1,7 @@
 <template>
   <!--弹窗-->
   <el-dialog
+    width="35%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
@@ -40,9 +41,9 @@
       <el-form-item label="备注">
         <el-input type="textarea" v-model="formData.remark"></el-input>
       </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm('formData')">提交</el-button>
-        <el-button type="danger" plain @click="handleClose">取 消</el-button>
+      <el-form-item class="cancel">
+        <el-button class="button" type="primary" @click="submitForm('formData')">提交</el-button>
+        <el-button class="button" type="danger" plain @click="handleClose">取 消</el-button>
       </el-form-item>
     </el-form>
   </el-dialog>
@@ -127,6 +128,9 @@
 </script>
 <style scoped>
   .cancel {
-    text-align: center;
+    text-align: right;
+  }
+  .button {
+    padding: 5px 10px;
   }
 </style>

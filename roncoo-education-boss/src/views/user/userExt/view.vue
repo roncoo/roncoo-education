@@ -85,7 +85,7 @@
     </el-form>
     <br/>
     <el-row class="cancel">
-      <el-button @click="handleClose">取 消</el-button>
+      <el-button class="button" type="danger" plain @click="handleClose">取 消</el-button>
     </el-row>
   </el-dialog>
 </template>
@@ -139,6 +139,9 @@
 <style scoped>
   .cancel {
     text-align: right;
+  }
+  .button {
+    padding: 5px 10px;
   }
 </style>
 

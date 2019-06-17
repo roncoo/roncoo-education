@@ -12,28 +12,31 @@
           <br/>
           <el-row>
             <el-col :span="12"><div>
-              <el-form-item label="用户手机">
+              <el-form-item label="用户手机:">
                 <el-input :disabled="true" v-model="formData.lecturerMobile"></el-input>
               </el-form-item>
             </div></el-col>
             <el-col :span="12"><div>
-              <el-form-item label="讲师名称">
+              <el-form-item label="讲师名称:">
                 <el-input v-model="formData.lecturerName"></el-input>
               </el-form-item>
             </div></el-col>
           </el-row>
           <el-row>
             <el-col :span="12"><div>
-              <el-form-item label="邮箱">
-                <el-input :disabled="true" v-model="formData.lecturerEmail"></el-input>
+              <el-form-item label="邮箱:">
+                <el-input v-model="formData.lecturerEmail"></el-input>
               </el-form-item>
             </div></el-col>
             <el-col :span="12"><div>
-              <el-form-item label="排序">
+              <el-form-item label="排序:">
                 <el-input v-model="formData.sort"></el-input>
               </el-form-item>
             </div></el-col>
           </el-row>
+          <el-form-item label="讲师简介:">
+            <el-input v-model="formData.introduce"></el-input>
+          </el-form-item>
         </div>
       </div>
       <div>二、讲师分成及银行信息
@@ -41,36 +44,36 @@
           <br/>
           <el-row>
             <el-col :span="12"><div>
-              <el-form-item label="银行名称">
+              <el-form-item label="银行名称:">
                 <el-input :disabled="true" v-model="formData.bankName"></el-input>
               </el-form-item>
             </div></el-col>
             <el-col :span="12"><div>
-              <el-form-item label="银行卡号">
+              <el-form-item label="银行卡号:">
                 <el-input v-model="formData.bankCardNo"></el-input>
               </el-form-item>
             </div></el-col>
           </el-row>
           <el-row>
             <el-col :span="12"><div>
-              <el-form-item label="开户名称">
+              <el-form-item label="开户名称:">
                 <el-input :disabled="true" v-model="formData.bankUserName"></el-input>
               </el-form-item>
             </div></el-col>
             <el-col :span="12"><div>
-              <el-form-item label="银行卡号">
+              <el-form-item label="银行卡号:">
                 <el-input v-model="formData.bankIdCardNo"></el-input>
               </el-form-item>
             </div></el-col>
           </el-row>
-          <el-form-item label="支行名称">
+          <el-form-item label="支行名称:">
             <el-input :disabled="true" v-model="formData.bankBranchName"></el-input>
           </el-form-item>
         </div>
       </div>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm('formData')">提交</el-button>
-        <el-button type="danger" plain @click="handleClose">取 消</el-button>
+      <el-form-item class="cancel">
+        <el-button class="button" type="primary" @click="submitForm('formData')">提交</el-button>
+        <el-button class="button" type="danger" plain @click="handleClose">取 消</el-button>
       </el-form-item>
     </el-form>
   </el-dialog>
@@ -137,7 +140,9 @@
 </script>
 <style scoped>
   .cancel {
-    width: 600px
+    text-align: right;
+  }
+  .button {
+    padding: 5px 10px;
   }
 </style>
-

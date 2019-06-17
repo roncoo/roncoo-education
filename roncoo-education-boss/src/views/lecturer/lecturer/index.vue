@@ -86,20 +86,25 @@
         :total="page.totalCount">
       </el-pagination>
       <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
+      <view-lecturer :visible="ctrl.viewVisible" :formData="viewData" :lecturerView="lecturerView" @close-cllback="closeViewFind"></view-lecturer>
   </div>
 </template>
 <script>
   import * as userApi from '@/api/user'
   import Edit from './edit'
+  import viewLecturer from './view'
   export default {
-    components: { Edit },
+    components: { Edit, viewLecturer },
     data() {
       return {
         map: {},
         formData: {},
+        viewData: {},
+        lecturerView: {},
         ctrl: {
           load: false,
-          dialogVisible: false
+          dialogVisible: false,
+          viewVisible: false
         },
         opts: {
           statusIdList: []
@@ -112,10 +117,6 @@
           pageSize: 20,
           totalCount: 0,
           totalPage: 0
-        },
-        textuStatusId: {
-          0: '禁用',
-          1: '正常'
         }
       }
     },
@@ -143,7 +144,7 @@
       },
       // 重置查询条件
       handleReset() {
-        this.params = {}
+        this.map = {}
         this.lecturerList()
       },
       lecturerList() {
@@ -153,9 +154,9 @@
           this.page.pageCurrent = res.data.pageCurrent
           this.page.totalCount = res.data.totalCount
           this.page.pageSize = res.data.pageSize
-          this.ctrl.loading = false
+          this.ctrl.load = false
         }).catch(() => {
-          this.ctrl.loading = false
+          this.ctrl.load = false
         })
       },
       // 修改状态
@@ -183,24 +184,42 @@
             this.reload()
         })
       },
-       // 关闭编辑弹窗回调
+      // 修改跳页面操作
+      handleEdit(id) {
+        this.load === true
+        userApi.lecturerView({ id: id }).then(row => {
+          this.formData = row.data
+          this.ctrl.load = false
+        }).catch(() => {
+          this.ctrl.load = false
+        })
+        this.ctrl.dialogTitle = '编辑'
+        this.ctrl.dialogVisible = true
+      },
+      // 关闭编辑弹窗回调
       closeCllback() {
         this.ctrl.dialogVisible = false;
         this.reload()
       },
-      // 跳页面操作
-      handleEdit(id) {
+      // 查看跳页面设置
+      handleView(id) {
         this.load === true
-        console.log("修改查询讲师id", id)
-        userApi.lecturerView({ id: id }).then(row => {
-          console.log("查询讲师信息", row.data)
-          this.formData = row.data
-          this.ctrl.loading = false
+        userApi.lecturerView({ id: id }).then(res => {
+          this.viewData = res.data
+          if (JSON.stringify(res.data.lecturerExt) !== '{}') {
+            this.lecturerView = res.data.lecturerExt
+          }
+          this.ctrl.load = false
+          this.ctrl.dialogTitle = res.data.lecturerMobile
         }).catch(() => {
-          this.ctrl.loading = false
+          this.ctrl.load = true
         })
-        this.ctrl.dialogTitle = '编辑'
-        this.ctrl.dialogVisible = true
+        this.ctrl.viewVisible = true
+      },
+      // 关闭查看弹窗回调
+      closeViewFind() {
+        this.ctrl.viewVisible = false;
+        this.reload()
       },
       // 刷新当前页面
       reload() {

@@ -209,15 +209,15 @@
       },
       // 分页列出用户信息
       userExtList() {
-        this.ctrl.loading = true
+        this.ctrl.load = true
         userApi.userExtList(this.params, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.list = res.data.list
           this.page.pageCurrent = res.data.pageCurrent
           this.page.totalCount = res.data.totalCount
           this.page.pageSize = res.data.pageSize
-          this.ctrl.loading = false
+          this.ctrl.load = false
         }).catch(() => {
-          this.ctrl.loading = false
+          this.ctrl.load = false
         })
       },
       textClass(userType) {
@@ -263,11 +263,12 @@
         })
       },
       handleView(id) {
+        this.ctrl.load = true
         userApi.userExtView({ id: id }).then(res => {
           this.viewData = res.data
-          this.ctrl.loading = false
+          this.ctrl.load = false
         }).catch(() => {
-            this.ctrl.loading = false
+            this.ctrl.load = false
           })
         this.ctrl.viewVisible = true
       },
