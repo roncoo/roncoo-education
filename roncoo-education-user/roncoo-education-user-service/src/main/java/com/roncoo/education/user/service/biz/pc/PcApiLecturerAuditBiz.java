@@ -275,7 +275,7 @@ public class PcApiLecturerAuditBiz extends BaseBiz {
         UserExt userExt = userExtDao.getByMobile(mobile);
         // 1、用户不存在，注册用户
         if (ObjectUtil.isNull(userExt)) {
-            return Result.error(ResultEnum.LECTURER_REQUISITION_REGISTERED);
+            return Result.success(501);
         }
         // 2、添加讲师
         LecturerAudit lecturerAudit = lecturerAuditDao.getByLecturerUserNo(userExt.getUserNo());
@@ -284,12 +284,12 @@ public class PcApiLecturerAuditBiz extends BaseBiz {
             // 讲师存在
             if (AuditStatusEnum.SUCCESS.getCode().equals(lecturerAudit.getAuditStatus())) {
                 // 审核成功
-                return Result.error(ResultEnum.LECTURER_REQUISITION_YET);
+                return Result.success(503);
             } else if (AuditStatusEnum.WAIT.getCode().equals(lecturerAudit.getAuditStatus())) {
                 // 待审核
-                return Result.error(ResultEnum.LECTURER_REQUISITION_WAIT);
+                return Result.success(502);
             } else {
-                return Result.error(ResultEnum.LECTURER_REQUISITION_FAIL);
+                return Result.success(506);
             }
         }
         // 讲师不存在
