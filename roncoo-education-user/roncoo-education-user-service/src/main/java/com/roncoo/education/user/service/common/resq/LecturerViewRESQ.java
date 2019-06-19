@@ -1,6 +1,7 @@
 package com.roncoo.education.user.service.common.resq;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -82,7 +83,7 @@ public class LecturerViewRESQ implements Serializable {
 	 * 讲师分成比例
 	 */
 	@ApiModelProperty(value = "讲师分成比例")
-	private String lecturerProportion;
+	private BigDecimal lecturerProportion;
 
 	/**
 	 * 讲师账户
