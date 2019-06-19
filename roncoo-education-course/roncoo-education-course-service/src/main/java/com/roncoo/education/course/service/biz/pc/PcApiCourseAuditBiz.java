@@ -101,7 +101,7 @@ public class PcApiCourseAuditBiz {
 		} else {
 			c.andAuditStatusEqualTo(req.getAuditStatus());
 		}
-		if (req.getIsFree() != null) {
+		if (req.getIsFree() != null) { 
 			c.andIsFreeEqualTo(req.getIsFree());
 		}
 		if (req.getIsPutaway() != null) {
