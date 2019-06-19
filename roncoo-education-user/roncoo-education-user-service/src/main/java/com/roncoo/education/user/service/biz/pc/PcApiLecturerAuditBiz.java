@@ -153,6 +153,7 @@ public class PcApiLecturerAuditBiz extends BaseBiz {
         return Result.success(results);
     }
 
+    @Transactional
     public Result<Integer> audit(LecturerAuditAuditREQ req) {
         if (StringUtils.isEmpty(req.getId())) {
             return Result.error("ID不能为空");
