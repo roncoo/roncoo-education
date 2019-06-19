@@ -52,6 +52,12 @@
         "name": "讲师审核列表",
         "path": "/lecturer/audit",
         "icon": null,
+      },
+      {
+        "id": 2,
+        "name": "分润列表",
+        "path": "/lecturer/profit",
+        "icon": null,
       }
     ]
   },

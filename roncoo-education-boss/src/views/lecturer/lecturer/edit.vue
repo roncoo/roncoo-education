@@ -6,7 +6,7 @@
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form ref="formData" :model="formData" label-width="80px">
-      <div>一、讲师基本信息
+      <el-alert class="title" :closable="false" title="讲师个人信息" type="info" />
         <br/>
         <div>
           <br/>
@@ -38,8 +38,7 @@
             <el-input v-model="formData.introduce"></el-input>
           </el-form-item>
         </div>
-      </div>
-      <div>二、讲师分成及银行信息
+      <el-alert class="title" :closable="false" title="讲师分成及银行信息" type="info" />
         <div>
           <br/>
           <el-row>
@@ -50,7 +49,7 @@
             </div></el-col>
             <el-col :span="12"><div>
               <el-form-item label="银行卡号:">
-                <el-input v-model="formData.bankCardNo"></el-input>
+                <el-input :disabled="true" v-model="formData.bankCardNo"></el-input>
               </el-form-item>
             </div></el-col>
           </el-row>
@@ -62,7 +61,7 @@
             </div></el-col>
             <el-col :span="12"><div>
               <el-form-item label="银行卡号:">
-                <el-input v-model="formData.bankIdCardNo"></el-input>
+                <el-input :disabled="true" v-model="formData.bankIdCardNo"></el-input>
               </el-form-item>
             </div></el-col>
           </el-row>
@@ -70,12 +69,11 @@
             <el-input :disabled="true" v-model="formData.bankBranchName"></el-input>
           </el-form-item>
         </div>
-      </div>
-      <el-form-item class="cancel">
-        <el-button class="button" type="primary" @click="submitForm('formData')">提交</el-button>
-        <el-button class="button" type="danger" plain @click="handleClose">取 消</el-button>
-      </el-form-item>
     </el-form>
+    <div slot="footer" class="dialog-footer">
+      <el-button class="button" type="primary" @click="submitForm('formData')">确 定</el-button>
+      <el-button class="button" type="danger" plain @click="handleClose">取 消</el-button>
+    </div>
   </el-dialog>
 </template>
 <script>
@@ -119,17 +117,17 @@
         })
       },
      async handleConfirm() {
-        this.ctrl.loading = true
+        this.ctrl.load = true
         let res = {}
         if (this.formData.id === undefined) {
           this.$alert(res.msg || '提交失败')
         } else {
-          res = await userApi.userExtUpdate(this.formData)
-          // this.tips('成功', 'success')
+          res = await userApi.lecturerUpdate(this.formData)
         }
-        this.ctrl.loading = false
-        if (res.code === 200) {
+        this.ctrl.load = false
+        if (res.code === 200 && res.data > 0) {
           // 提交成功, 关闭窗口, 刷新列表
+          this.tips('成功', 'success')
           this.$emit('close-cllback')
         } else {
           this.$alert(res.msg || '提交失败')

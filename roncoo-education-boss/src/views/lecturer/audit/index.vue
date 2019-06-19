@@ -30,8 +30,8 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" :loading="ctrl.load" @click="handleCheck">查询</el-button>
-        <el-button class="filter-item" @click="handleReset">重置
-        </el-button>
+        <el-button class="filter-item" @click="handleReset">重置</el-button>
+        <el-button type="primary" size="mini" icon="el-icon-circle-plus-outline" @click.native="add(false)">添加讲师</el-button>
       </el-form-item>
       </el-form>
     </div>
@@ -72,19 +72,20 @@
           </template>
         </el-table-column>
         <el-table-column label="审核状态">
-        <template slot-scope="scope">
-          <span :class="textAuditStatusClass(scope.row.auditStatus)">{{textAuditStatus[scope.row.auditStatus]}}</span>
-        </template>
-      </el-table-column>
+          <template slot-scope="scope">
+            <span :class="textAuditStatusClass(scope.row.auditStatus)">{{textAuditStatus[scope.row.auditStatus]}}</span>
+          </template>
+        </el-table-column>
         <el-table-column
         fixed="right"
         label="操作"
         width="200">
         <template slot-scope="scope">
           <ul class="list-item-actions">
-            <!-- <li>
-              <el-button type="primary" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
-            </li> -->
+            <li>
+              <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
+              <el-button type="primary" @click="handleAudit(scope.row)" size="mini">审核</el-button>
+            </li>
           </ul>
         </template>
         </el-table-column>
@@ -100,19 +101,35 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="page.totalCount">
       </el-pagination>
-  </div>
+      <add :visible="ctrl.addDialogVisible" :title="ctrl.addDialogTitle" @close-cllback="addCloseCllback"></add>
+      <edit :visible="ctrl.editDialogVisible" :formData="formData" :title="ctrl.editDialogTitle" @close-cllback="editCloseCllback"></edit>
+      <view-lecturer :visible="ctrl.viewVisible" :formData="viewData" :title="ctrl.ViewDialogTitle" :lecturerView="lecturerView" @close-cllback="viewCloseCllback"></view-lecturer>
+      <audit :visible="ctrl.auditDialogVisible" :formData="auditMap" :title="ctrl.auditDialogTitle" @close-cllback="auditCloseCllback"></audit>
+    </div>
 </template>
 <script>
   import * as userApi from '@/api/user'
-  /*import Edit from './edit'
-  import viewLecturer from './view'*/
+  import Add from './add'
+  import Edit from './edit'
+  import viewLecturer from './view'
+  import Audit from './audit'
   export default {
+    components: { Add, Edit, viewLecturer, Audit },
     data() {
       return {
         map: {},
+        viewData: {},
+        formData: {},
+        lecturerView: {},
+        auditMap: {
+          id: '',
+          auditStatus: 1
+        },
         ctrl: {
           load: false,
-          dialogVisible: false,
+          addDialogVisible: false,
+          editDialogVisible: false,
+          auditDialogVisible: false,
           viewVisible: false
         },
         opts: {
@@ -193,14 +210,82 @@
       },
       // 请求更新用户方法
       changeStatus(id, statusId) {
-        userApi.lecturerAuditUpdate({ id: id, statusId: statusId }).then(() => {
-          const msg = { 0: '禁用成功', 1: '启用成功' }
-          this.$message({
-            type: 'success',
-            message: msg[statusId]
-          });
-            this.reload()
+        userApi.lecturerAuditUpdate({ id: id, statusId: statusId }).then(res => {
+          if (res.code === 200 && res.data > 0) {
+            const msg = { 0: '禁用成功', 1: '启用成功' }
+              this.$message({
+                type: 'success',
+                message: msg[statusId]
+              });
+                this.reload()
+          } else {
+            const msg = { 0: '禁用失败', 1: '启用失败' }
+              this.$message({
+                type: 'error',
+                message: msg[statusId]
+              });
+                this.reload()
+          }
         })
+      },
+      // 跳添加讲师弹窗
+      add() {
+        this.ctrl.addDialogTitle = '添加'
+        this.ctrl.addDialogVisible = true
+      },
+      // 关闭添加讲师弹窗回调
+      addCloseCllback() {
+        this.ctrl.addDialogVisible = false;
+        this.reload()
+      },
+      // 修改跳页面操作
+      handleEdit(id) {
+        this.load === true
+        userApi.lecturerAuditView({ id: id }).then(row => {
+          this.formData = row.data
+          this.ctrl.load = false
+        }).catch(() => {
+          this.ctrl.load = false
+        })
+        this.ctrl.editDialogTitle = '编辑'
+        this.ctrl.editDialogVisible = true
+      },
+      // 关闭编辑弹窗回调
+      editCloseCllback() {
+        this.formData = {}
+        this.ctrl.editDialogVisible = false
+        this.reload()
+      },
+      // 审核页面弹窗
+      handleAudit(row) {
+        this.auditMap.id = row.id
+        this.ctrl.auditDialogTitle = row.lecturerMobile
+        this.ctrl.auditDialogVisible = true
+      },
+      // 关闭编辑弹窗回调
+      auditCloseCllback() {
+        this.ctrl.auditDialogVisible = false
+        this.reload()
+      },
+      // 跳查看讲师弹窗
+      handleView(id) {
+        this.load === true
+        userApi.lecturerAuditView({ id: id }).then(res => {
+          this.viewData = res.data
+          if (JSON.stringify(res.data.lecturerExt) !== '{}') {
+            this.lecturerView = res.data.lecturerExt
+            this.ctrl.ViewDialogTitle = res.data.lecturerMobile
+          }
+          this.ctrl.load = false
+        }).catch(() => {
+          this.ctrl.load = true
+        })
+        this.ctrl.viewVisible = true
+      },
+      // 关闭查看讲师弹窗回调
+      viewCloseCllback() {
+        this.ctrl.viewVisible = false;
+        this.reload()
       },
       textAuditStatusClass(auditStatus) {
         return {

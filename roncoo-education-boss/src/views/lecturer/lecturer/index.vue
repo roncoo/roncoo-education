@@ -68,7 +68,7 @@
         <template slot-scope="scope">
           <ul class="list-item-actions">
             <li>
-              <el-button type="primary" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
+              <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
             </li>
           </ul>
         </template>
@@ -86,7 +86,7 @@
         :total="page.totalCount">
       </el-pagination>
       <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
-      <view-lecturer :visible="ctrl.viewVisible" :formData="viewData" :lecturerView="lecturerView" @close-cllback="closeViewFind"></view-lecturer>
+      <view-lecturer :visible="ctrl.viewVisible" :formData="viewData" :lecturerView="lecturerView" :title="ctrl.viewDialogTitle" @close-cllback="closeViewFind"></view-lecturer>
   </div>
 </template>
 <script>
@@ -175,13 +175,22 @@
       },
       // 请求更新用户方法
       changeStatus(id, statusId) {
-        userApi.lecturerUpdate({ id: id, statusId: statusId }).then(() => {
-          const msg = { 0: '禁用成功', 1: '启用成功' }
-          this.$message({
-            type: 'success',
-            message: msg[statusId]
-          });
-            this.reload()
+        userApi.lecturerUpdate({ id: id, statusId: statusId }).then(res => {
+          if (res.code === 200 && res.data > 0) {
+            const msg = { 0: '禁用成功', 1: '启用成功' }
+              this.$message({
+                type: 'success',
+                message: msg[statusId]
+              });
+                this.reload()
+          } else {
+            const msg = { 0: '禁用失败', 1: '启用失败' }
+              this.$message({
+                type: 'error',
+                message: msg[statusId]
+              });
+                this.reload()
+          }
         })
       },
       // 修改跳页面操作
@@ -210,7 +219,7 @@
             this.lecturerView = res.data.lecturerExt
           }
           this.ctrl.load = false
-          this.ctrl.dialogTitle = res.data.lecturerMobile
+          this.ctrl.viewDialogTitle = res.data.lecturerMobile
         }).catch(() => {
           this.ctrl.load = true
         })

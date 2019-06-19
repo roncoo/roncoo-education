@@ -71,10 +71,28 @@ export function lecturerAuditList(params, pageCurrent = 1, pageSize = 20) {
   })
 }
 
+// 添加讲师审核信息
+export function lecturerAuditSave(data = {}) {
+  return request({
+    url: `/user/pc/lecturer/audit/save`,
+    method: 'post',
+    data: data
+  })
+}
+
 // 更新讲师审核信息
 export function lecturerAuditUpdate(data = {}) {
   return request({
     url: `/user/pc/lecturer/audit/update`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 讲师审核
+export function lecturerAudit(data = {}) {
+  return request({
+    url: `/user/pc/lecturer/audit/audit`,
     method: 'post',
     data: data
   })
@@ -86,5 +104,23 @@ export function lecturerAuditView(data = {}) {
     url: `/user/pc/lecturer/audit/view`,
     method: 'post',
     data: data
+  })
+}
+
+// 校验手机号是否已注册成为用户或已申请成为讲师
+export function lecturerAuditCheck(data = {}) {
+  return request({
+    url: `/user/pc/lecturer/audit/check`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 讲师分润分页列表接口
+export function lecturerProfitList(params, pageCurrent = 1, pageSize = 20) {
+  return request({
+    url: '/user/pc/lecturer/profit/list',
+    method: 'post',
+    data: { pageCurrent: pageCurrent, pageSize: pageSize, ...params }
   })
 }

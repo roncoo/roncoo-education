@@ -22,24 +22,34 @@ export const asyncRouterMap = [
       }
     ]
   },
+  // 讲师管理
   {
     path: 'lecturer',
     component: () => import('@/views/lecturer'),
     children: [
+    // 讲师列表
       {
         path: 'lecturer',
         component: () => import('@/views/lecturer/lecturer')
       },
+      // 讲师审核列表
       {
         path: 'audit',
         component: () => import('@/views/lecturer/audit')
+      },
+      // 分润列表
+      {
+        path: 'profit',
+        component: () => import('@/views/lecturer/profit')
       }
     ]
   },
+  // 用户管理
   {
     path: 'user',
     component: () => import('@/views/user'),
     children: [
+    // 学员列表
       {
         path: 'userExt',
         component: () => import('@/views/user/userExt')

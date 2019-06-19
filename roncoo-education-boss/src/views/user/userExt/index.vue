@@ -83,7 +83,7 @@
         <template slot-scope="scope">
           <ul class="list-item-actions">
             <li>
-              <el-button type="primary" @click="handleEdit(scope.row)" size="mini">修改</el-button>
+              <el-button type="success" @click="handleEdit(scope.row)" size="mini">修改</el-button>
             </li>
           </ul>
         </template>
@@ -253,13 +253,22 @@
       },
       // 请求更新用户方法
       changeStatus(id, statusId) {
-        userApi.userExtUpdate({ id: id, statusId: statusId }).then(() => {
-          const msg = { 0: '禁用成功', 1: '启用成功' }
-          this.$message({
-            type: 'success',
-            message: msg[statusId]
-          });
-            this.reload()
+        userApi.userExtUpdate({ id: id, statusId: statusId }).then(res => {
+          if (res.code === 200 && res.data > 0) {
+            const msg = { 0: '禁用成功', 1: '启用成功' }
+            this.$message({
+              type: 'success',
+              message: msg[statusId]
+            });
+              this.reload()
+          } else {
+            const msg = { 0: '禁用失败', 1: '启用失败' }
+            this.$message({
+              type: 'error',
+              message: msg[statusId]
+            });
+              this.reload()
+          }
         })
       },
       handleView(id) {
@@ -278,6 +287,7 @@
       },
       // 刷新当前页面
       reload() {
+        this.page.pageCurrent = 1
         this.userExtList()
       }
     }
