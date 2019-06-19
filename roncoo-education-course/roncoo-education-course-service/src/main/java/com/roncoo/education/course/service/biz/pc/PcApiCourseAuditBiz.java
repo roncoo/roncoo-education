@@ -97,7 +97,7 @@ public class PcApiCourseAuditBiz {
 			c.andStatusIdEqualTo(req.getStatusId());
 		}
 		if (req.getAuditStatus() == null) {
-			c.andAuditStatusNotEqualTo(AuditStatusEnum.SUCCESS.getCode());
+			c.andAuditStatusNotEqualTo(AuditStatusEnum.WAIT.getCode());
 		} else {
 			c.andAuditStatusEqualTo(req.getAuditStatus());
 		}
