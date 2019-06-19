@@ -157,6 +157,9 @@ public class PcApiLecturerAuditBiz extends BaseBiz {
         if (StringUtils.isEmpty(req.getId())) {
             return Result.error("ID不能为空");
         }
+        if (StringUtils.isEmpty(req.getAuditStatus())) {
+            return Result.error("auditStatus不能为空");
+        }
         LecturerAudit lecturerAudit = lecturerAuditDao.getById(req.getId());
         if (ObjectUtil.isNull(lecturerAudit)) {
             return Result.error("找不到讲师信息");
