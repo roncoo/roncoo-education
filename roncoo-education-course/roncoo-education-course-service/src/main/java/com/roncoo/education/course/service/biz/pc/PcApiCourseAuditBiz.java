@@ -97,7 +97,7 @@ public class PcApiCourseAuditBiz {
 			c.andStatusIdEqualTo(req.getStatusId());
 		}
 		if (req.getAuditStatus() == null) {
-			c.andAuditStatusNotEqualTo(AuditStatusEnum.WAIT.getCode());
+			c.andAuditStatusNotEqualTo(AuditStatusEnum.SUCCESS.getCode());
 		} else {
 			c.andAuditStatusEqualTo(req.getAuditStatus());
 		}
@@ -288,6 +288,7 @@ public class PcApiCourseAuditBiz {
 		if (ObjectUtil.isNull(courseAudit)) {
 			return Result.error("课程不存在");
 		}
+
 		// 根据课程ID查询课时信息集合
 		List<CourseChapterPeriodAudit> periodAuditList = courseChapterPeriodAuditDao.listByCourseId(courseAudit.getId());
 
