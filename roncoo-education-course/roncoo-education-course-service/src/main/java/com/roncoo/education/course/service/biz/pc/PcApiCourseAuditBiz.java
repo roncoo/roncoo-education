@@ -288,15 +288,10 @@ public class PcApiCourseAuditBiz {
 		if (ObjectUtil.isNull(courseAudit)) {
 			return Result.error("课程不存在");
 		}
-
-		Course course = courseDao.getById(courseAudit.getId());
-		if (ObjectUtil.isNull(course)) {
-			return Result.error("课程不存在");
-		}
-
 		// 根据课程ID查询课时信息集合
 		List<CourseChapterPeriodAudit> periodAuditList = courseChapterPeriodAuditDao.listByCourseId(courseAudit.getId());
 
+		Course course = courseDao.getById(courseAudit.getId());
 		// 1、对课程操作
 		// 如果课程信息表里面有数据就进行更新
 		if (ObjectUtil.isNotNull(course)) {
