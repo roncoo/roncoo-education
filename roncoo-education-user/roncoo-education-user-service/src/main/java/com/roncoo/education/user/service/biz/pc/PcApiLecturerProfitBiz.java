@@ -79,6 +79,7 @@ public class PcApiLecturerProfitBiz extends BaseBiz {
 				Lecturer lecturer = lecturerDao.getByLecturerUserNo(resq.getLecturerUserNo());
 				if (ObjectUtil.isNotNull(lecturer)) {
 					resq.setLecturerName(lecturer.getLecturerName());
+					resq.setLecturerMobile(lecturer.getLecturerMobile());
 				}
 			}
 		}
