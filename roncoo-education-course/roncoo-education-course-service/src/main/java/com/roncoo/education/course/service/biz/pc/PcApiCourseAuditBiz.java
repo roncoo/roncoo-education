@@ -108,7 +108,7 @@ public class PcApiCourseAuditBiz {
 			c.andIsPutawayEqualTo(req.getIsPutaway());
 		}
 
-		example.setOrderByClause(" status_id desc, is_putaway desc, sort desc, id desc ");
+		example.setOrderByClause(" audit_status asc, status_id desc, is_putaway desc, sort desc, id desc ");
 		Page<CourseAudit> page = dao.listForPage(req.getPageCurrent(), req.getPageSize(), example);
 		Page<CourseAuditPageRESQ> listForPage = PageUtil.transform(page, CourseAuditPageRESQ.class);
 		// 获取分类名称
