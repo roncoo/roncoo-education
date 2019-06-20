@@ -26,11 +26,10 @@ export function userExtView(data = {}) {
   })
 }
 // 上传图片
-export function uploadPic(platformEnum, data = {}) {
+export function uploadPic(data = {}) {
   return request({
     url: `/course/pc/upload/pic`,
     method: 'post',
-    params: platformEnum,
     data: data
   })
 }
