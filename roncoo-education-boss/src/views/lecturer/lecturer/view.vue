@@ -80,53 +80,53 @@
           </div></el-col>
           <el-col :span="8"><div>
             <el-form-item label="累计总收入:">
-              <span>{{lecturerView.totalIncome}}元</span>
+              <span>{{lecturerExt.totalIncome}}元</span>
             </el-form-item>
           </div></el-col>
         </el-row>
         <el-row>
           <el-col :span="8"><div>
             <el-form-item label="已提现金额:">
-              <span >{{lecturerView.historyMoney}}元</span>
+              <span >{{lecturerExt.historyMoney}}元</span>
             </el-form-item>
           </div></el-col>
           <el-col :span="8"><div>
             <el-form-item label="可提现金额:">
-              <span >{{lecturerView.enableBalances}}元</span>
+              <span >{{lecturerExt.enableBalances}}元</span>
             </el-form-item>
           </div></el-col>
           <el-col :span="8"><div>
             <el-form-item label="冻结金额:">
-              <span >{{lecturerView.freezeBalances}}元</span>
+              <span >{{lecturerExt.freezeBalances}}元</span>
             </el-form-item>
           </div></el-col>
         </el-row>
         <el-row>
           <el-col :span="8"><div>
             <el-form-item label="银行卡号:">
-              <span >{{lecturerView.bankCardNo}}</span>
+              <span >{{lecturerExt.bankCardNo}}</span>
             </el-form-item>
           </div></el-col>
           <el-col :span="8"><div>
             <el-form-item label="银行名称:">
-              <span >{{lecturerView.bankName}}</span>
+              <span >{{lecturerExt.bankName}}</span>
             </el-form-item>
           </div></el-col>
           <el-col :span="8"><div>
             <el-form-item label="支行名称:">
-              <span >{{lecturerView.bankBranchName}}</span>
+              <span >{{lecturerExt.bankBranchName}}</span>
             </el-form-item>
           </div></el-col>
         </el-row>
         <el-row>
           <el-col :span="8"><div>
             <el-form-item label="开户姓名:">
-              <span >{{lecturerView.bankUserName}}</span>
+              <span >{{lecturerExt.bankUserName}}</span>
             </el-form-item>
           </div></el-col>
           <el-col :span="8"><div>
             <el-form-item label="身份证号:">
-              <span >{{lecturerView.bankIdCardNo}}</span>
+              <span >{{lecturerExt.bankIdCardNo}}</span>
             </el-form-item>
           </div></el-col>
         </el-row>
@@ -155,7 +155,7 @@
         type: Object,
         default: () => {}
       },
-      lecturerView: {
+      lecturerExt: {
         type: Object,
         default: () => {}
       },
@@ -166,11 +166,6 @@
       title: {
         type: String,
         default: ''
-      }
-    },
-    mounted() {
-      if (JSON.stringify(this.formData.lecturerExt) === '{}') {
-        this.lecturerExt = this.formData.lecturerExt
       }
     },
     methods: {

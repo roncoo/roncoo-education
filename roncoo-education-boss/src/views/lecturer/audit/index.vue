@@ -101,10 +101,10 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="page.totalCount">
       </el-pagination>
-      <add :visible="ctrl.addDialogVisible" :title="ctrl.addDialogTitle" @close-cllback="addCloseCllback"></add>
-      <edit :visible="ctrl.editDialogVisible" :formData="formData" :title="ctrl.editDialogTitle" @close-cllback="editCloseCllback"></edit>
-      <view-lecturer :visible="ctrl.viewVisible" :formData="viewData" :title="ctrl.ViewDialogTitle" :lecturerView="lecturerView" @close-cllback="viewCloseCllback"></view-lecturer>
-      <audit :visible="ctrl.auditDialogVisible" :formData="auditMap" :title="ctrl.auditDialogTitle" @close-cllback="auditCloseCllback"></audit>
+      <add :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></add>
+      <edit :visible="ctrl.editDialogVisible" :formData="formData" :lecturerExt="lecturerExt" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
+      <view-lecturer :visible="ctrl.viewVisible" :formData="formData" :lecturerExt="lecturerExt" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></view-lecturer>
+      <audit :visible="ctrl.auditDialogVisible" :formData="auditMap" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></audit>
     </div>
 </template>
 <script>
@@ -117,10 +117,6 @@
     components: { Add, Edit, viewLecturer, Audit },
     data() {
       return {
-        map: {},
-        viewData: {},
-        formData: {},
-        lecturerView: {},
         auditMap: {
           id: '',
           auditStatus: 1
@@ -137,6 +133,10 @@
           auditStatusList: []
         },
         list: [],
+        map: {},
+        formData: {},
+        lecturerExt: {},
+        title: '',
         page: {
           beginPageIndex: 1,
           pageCurrent: 1,
@@ -146,10 +146,10 @@
           totalPage: 0
         },
         textAuditStatus: {
-        0: '待审核',
-        1: '审核通过',
-        2: '审核不通过'
-      }
+          0: '待审核',
+          1: '审核通过',
+          2: '审核不通过'
+        }
       }
     },
     mounted() {
@@ -179,8 +179,7 @@
       },
       // 重置查询条件
       handleReset() {
-        this.map = {}
-        this.lecturerAuditList()
+        this.reload()
       },
       lecturerAuditList() {
         this.load === true
@@ -230,62 +229,49 @@
       },
       // 跳添加讲师弹窗
       add() {
-        this.ctrl.addDialogTitle = '添加'
+        this.ctrl.dialogTitle = '添加'
         this.ctrl.addDialogVisible = true
-      },
-      // 关闭添加讲师弹窗回调
-      addCloseCllback() {
-        this.ctrl.addDialogVisible = false;
-        this.reload()
       },
       // 修改跳页面操作
       handleEdit(id) {
-        this.load === true
-        userApi.lecturerAuditView({ id: id }).then(row => {
-          this.formData = row.data
-          this.ctrl.load = false
-        }).catch(() => {
-          this.ctrl.load = false
-        })
-        this.ctrl.editDialogTitle = '编辑'
+        this.title = '信息修改'
+        this.getById(id, this.title)
         this.ctrl.editDialogVisible = true
-      },
-      // 关闭编辑弹窗回调
-      editCloseCllback() {
-        this.formData = {}
-        this.ctrl.editDialogVisible = false
-        this.reload()
       },
       // 审核页面弹窗
       handleAudit(row) {
         this.auditMap.id = row.id
-        this.ctrl.auditDialogTitle = row.lecturerMobile
+        this.ctrl.dialogTitle = '审核'
         this.ctrl.auditDialogVisible = true
-      },
-      // 关闭编辑弹窗回调
-      auditCloseCllback() {
-        this.ctrl.auditDialogVisible = false
-        this.reload()
       },
       // 跳查看讲师弹窗
       handleView(id) {
+        this.title = '查看详情'
+        this.getById(id, this.title)
+        this.ctrl.viewVisible = true
+      },
+      // 关闭弹窗回调
+      closeCllback() {
+        this.ctrl.addDialogVisible = false;
+        this.ctrl.editDialogVisible = false
+        this.ctrl.viewVisible = false;
+        this.ctrl.auditDialogVisible = false
+        this.reload()
+      },
+      //查看讲师审核信息
+      getById(id, title) {
         this.load === true
         userApi.lecturerAuditView({ id: id }).then(res => {
-          this.viewData = res.data
+          this.formData = res.data
           if (JSON.stringify(res.data.lecturerExt) !== '{}') {
-            this.lecturerView = res.data.lecturerExt
-            this.ctrl.ViewDialogTitle = res.data.lecturerMobile
+            this.lecturerExt = res.data.lecturerExt
           }
+          console.log(res.data.lecturerMobile)
+          this.ctrl.dialogTitle = res.data.lecturerMobile + '-' + title
           this.ctrl.load = false
         }).catch(() => {
           this.ctrl.load = true
         })
-        this.ctrl.viewVisible = true
-      },
-      // 关闭查看讲师弹窗回调
-      viewCloseCllback() {
-        this.ctrl.viewVisible = false;
-        this.reload()
       },
       textAuditStatusClass(auditStatus) {
         return {
@@ -296,6 +282,9 @@
       },
       // 刷新当前页面
       reload() {
+        this.map = {}
+        this.formData = {}
+        this.lecturerExt = {}
         this.lecturerAuditList()
       }
     }

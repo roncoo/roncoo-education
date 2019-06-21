@@ -85,8 +85,8 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="page.totalCount">
       </el-pagination>
-      <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
-      <view-lecturer :visible="ctrl.viewVisible" :formData="viewData" :lecturerView="lecturerView" :title="ctrl.viewDialogTitle" @close-cllback="closeViewFind"></view-lecturer>
+      <edit :visible="ctrl.dialogVisible" :formData="formData" :lecturerExt="lecturerExt" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
+      <view-lecturer :visible="ctrl.viewVisible" :formData="formData" :lecturerExt="lecturerExt" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></view-lecturer>
   </div>
 </template>
 <script>
@@ -97,10 +97,11 @@
     components: { Edit, viewLecturer },
     data() {
       return {
+        list: [],
         map: {},
         formData: {},
-        viewData: {},
-        lecturerView: {},
+        lecturerExt: {},
+        title: '',
         ctrl: {
           load: false,
           dialogVisible: false,
@@ -109,7 +110,6 @@
         opts: {
           statusIdList: []
         },
-        list: [],
         page: {
           beginPageIndex: 1,
           pageCurrent: 1,
@@ -144,8 +144,7 @@
       },
       // 重置查询条件
       handleReset() {
-        this.map = {}
-        this.lecturerList()
+        this.reload()
       },
       lecturerList() {
         this.load === true
@@ -195,44 +194,41 @@
       },
       // 修改跳页面操作
       handleEdit(id) {
-        this.load === true
-        userApi.lecturerView({ id: id }).then(row => {
-          this.formData = row.data
-          this.ctrl.load = false
-        }).catch(() => {
-          this.ctrl.load = false
-        })
-        this.ctrl.dialogTitle = '编辑'
+        this.title = '信息修改'
+        this.getById(id, this.title)
         this.ctrl.dialogVisible = true
-      },
-      // 关闭编辑弹窗回调
-      closeCllback() {
-        this.ctrl.dialogVisible = false;
-        this.reload()
       },
       // 查看跳页面设置
       handleView(id) {
-        this.load === true
-        userApi.lecturerView({ id: id }).then(res => {
-          this.viewData = res.data
-          if (JSON.stringify(res.data.lecturerExt) !== '{}') {
-            this.lecturerView = res.data.lecturerExt
-          }
-          this.ctrl.load = false
-          this.ctrl.viewDialogTitle = res.data.lecturerMobile
-        }).catch(() => {
-          this.ctrl.load = true
-        })
+        this.title = '查看详情'
+        this.getById(id, this.title)
         this.ctrl.viewVisible = true
       },
-      // 关闭查看弹窗回调
-      closeViewFind() {
+      // 关闭弹窗回调
+      closeCllback() {
         this.ctrl.viewVisible = false;
+        this.ctrl.dialogVisible = false;
         this.reload()
       },
       // 刷新当前页面
       reload() {
+        this.map = {}
+        this.formData = {}
+        this.lecturerExt = {}
         this.lecturerList()
+      },
+      // 查看信息
+      getById(id, title) {
+        userApi.lecturerView({ id: id }).then(res => {
+          this.formData = res.data
+          if (JSON.stringify(res.data.lecturerExt) !== '{}') {
+            this.lecturerExt = res.data.lecturerExt
+          }
+          this.ctrl.dialogTitle = res.data.lecturerMobile + '-' + title
+          this.ctrl.load = false
+        }).catch(() => {
+          this.ctrl.load = true
+        })
       }
     }
   }

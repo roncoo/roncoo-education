@@ -3,13 +3,13 @@
     <div>
       <el-form :inline="true" size="mini">
       <el-form-item label="用户手机">
-        <el-input v-model="params.mobile"></el-input>
+        <el-input v-model="map.mobile"></el-input>
       </el-form-item>
       <el-form-item label="昵称">
-        <el-input v-model="params.nickname"></el-input>
+        <el-input v-model="map.nickname"></el-input>
       </el-form-item>
       <el-form-item label="状态:" >
-        <el-select v-model="params.statusId" class="auto-width" clearable filterable placeholder="状态" style="width: 85px">
+        <el-select v-model="map.statusId" class="auto-width" clearable filterable placeholder="状态" style="width: 85px">
           <el-option
             v-for="item in opts.statusIdList"
             :key="item.code"
@@ -100,8 +100,8 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="page.totalCount">
       </el-pagination>
-      <edit :visible="ctrl.dialogVisible" :formData="formdata" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
-      <view-user :visible="ctrl.viewVisible" :formData="viewData" @close-cllback="closeViewFind"></view-user>
+      <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
+      <view-user :visible="ctrl.viewVisible" :formData="formData" @close-cllback="closeViewFind"></view-user>
   </div>
 </template>
 <script>
@@ -112,7 +112,6 @@
     components: { Edit, viewUser },
     data() {
       return {
-        params: {},
         map: {},
         ctrl: {
           load: false,
@@ -155,8 +154,7 @@
             }
           }]
         },
-        formdata: {},
-        viewData: {},
+        formData: {},
         gmtCreate: ''
       }
     },
@@ -179,12 +177,12 @@
       },
       // 注册时间段查询条件
       changeTime() {
-        if (this.gmtCreate.length) {
-          this.params.beginGmtCreate = this.dateToString(this.gmtCreate[0])
-          this.params.endGmtCreate = this.dateToString(this.gmtCreate[1])
+        if (this.gmtCreate !== null && this.gmtCreate.length) {
+          this.map.beginGmtCreate = this.dateToString(this.gmtCreate[0])
+          this.map.endGmtCreate = this.dateToString(this.gmtCreate[1])
         } else {
-          this.params.beginGmtCreate = ''
-          this.params.endTime = ''
+          this.map.beginGmtCreate = ''
+          this.map.endGmtCreate = ''
         }
       },
       dateToString(date) {
@@ -204,13 +202,12 @@
       },
       // 重置查询条件
       handleReset() {
-        this.params = {}
-        this.userExtList()
+        this.reload()
       },
       // 分页列出用户信息
       userExtList() {
         this.ctrl.load = true
-        userApi.userExtList(this.params, this.page.pageCurrent, this.page.pageSize).then(res => {
+        userApi.userExtList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.list = res.data.list
           this.page.pageCurrent = res.data.pageCurrent
           this.page.totalCount = res.data.totalCount
@@ -220,20 +217,15 @@
           this.ctrl.load = false
         })
       },
-      textClass(userType) {
-        return {
-          c_red: userType === 0,
-          c_blue: userType === 2
-        }
-      },
       // 关闭编辑弹窗回调
       closeCllback() {
-        this.ctrl.dialogVisible = false;
+        this.formData = {}
+        this.ctrl.dialogVisible = false
         this.reload()
       },
-      // 跳页面操作
+      // 跳修改弹窗页面
       handleEdit(row) {
-        this.formdata = row
+        this.formData = row
         this.ctrl.dialogTitle = '编辑'
         this.ctrl.dialogVisible = true
       },
@@ -271,10 +263,11 @@
           }
         })
       },
+      // 查看弹窗
       handleView(id) {
         this.ctrl.load = true
         userApi.userExtView({ id: id }).then(res => {
-          this.viewData = res.data
+          this.formData = res.data
           this.ctrl.load = false
         }).catch(() => {
             this.ctrl.load = false
@@ -283,12 +276,20 @@
       },
       // 关闭查看弹窗回调
       closeViewFind() {
-        this.ctrl.viewVisible = false;
+        this.formData = {}
+        this.ctrl.viewVisible = false
       },
       // 刷新当前页面
       reload() {
-        this.page.pageCurrent = 1
+        this.map = {}
+        this.gmtCreate = ''
         this.userExtList()
+      },
+      textClass(userType) {
+        return {
+          c_red: userType === 0,
+          c_blue: userType === 2
+        }
       }
     }
   }

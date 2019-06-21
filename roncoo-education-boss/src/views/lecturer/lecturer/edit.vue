@@ -35,7 +35,7 @@
             </div></el-col>
           </el-row>
           <el-form-item label="讲师简介:">
-            <el-input v-model="formData.introduce"></el-input>
+             <div id="introduce"></div>
           </el-form-item>
         </div>
       <el-alert class="title" :closable="false" title="讲师分成及银行信息" type="info" />
@@ -44,29 +44,29 @@
           <el-row>
             <el-col :span="12"><div>
               <el-form-item label="银行名称:">
-                <el-input :disabled="true" v-model="formData.bankName"></el-input>
+                <el-input :disabled="true" v-model="lecturerExt.bankName"></el-input>
               </el-form-item>
             </div></el-col>
             <el-col :span="12"><div>
               <el-form-item label="银行卡号:">
-                <el-input :disabled="true" v-model="formData.bankCardNo"></el-input>
+                <el-input :disabled="true" v-model="lecturerExt.bankCardNo"></el-input>
               </el-form-item>
             </div></el-col>
           </el-row>
           <el-row>
             <el-col :span="12"><div>
               <el-form-item label="开户名称:">
-                <el-input :disabled="true" v-model="formData.bankUserName"></el-input>
+                <el-input :disabled="true" v-model="lecturerExt.bankUserName"></el-input>
               </el-form-item>
             </div></el-col>
             <el-col :span="12"><div>
               <el-form-item label="银行卡号:">
-                <el-input :disabled="true" v-model="formData.bankIdCardNo"></el-input>
+                <el-input :disabled="true" v-model="lecturerExt.bankIdCardNo"></el-input>
               </el-form-item>
             </div></el-col>
           </el-row>
           <el-form-item label="支行名称:">
-            <el-input :disabled="true" v-model="formData.bankBranchName"></el-input>
+            <el-input :disabled="true" v-model="lecturerExt.bankBranchName"></el-input>
           </el-form-item>
         </div>
     </el-form>
@@ -94,6 +94,10 @@
         type: Object,
         default: () => {}
       },
+      lecturerExt: {
+        type: Object,
+        default: () => {}
+      },
       visible: {
         type: Boolean,
         default: false
@@ -101,6 +105,19 @@
       title: {
         type: String,
         default: ''
+      }
+    },
+    watch: {
+      visible: function(val) {
+        if (val) {
+          console.log('加载富文本框=============')
+          const E = require('wangeditor')
+          this.editor2 = new E('#introduce')
+          this.editor2.customConfig.uploadImgMaxLength = 1
+          editor.customConfig.uploadImgMaxSize = 3 * 1024 *1024;
+         /* this.editor2.customConfig.customUploadImg = this.editorUpload*/
+          this.editor2.create();
+        }
       }
     },
     methods: {
