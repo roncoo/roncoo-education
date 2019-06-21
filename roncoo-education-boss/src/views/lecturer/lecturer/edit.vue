@@ -34,10 +34,13 @@
               </el-form-item>
             </div></el-col>
           </el-row>
-          <el-form-item label="讲师简介:">
-             <div id="introduce"></div>
-          </el-form-item>
         </div>
+      <el-alert class="title" :closable="false" title="讲师简介" type="info" />
+        <br/>
+        <div>
+          <div id="introduce"></div>
+        </div>
+        <br/>
       <el-alert class="title" :closable="false" title="讲师分成及银行信息" type="info" />
         <div>
           <br/>
@@ -82,7 +85,6 @@
     name: 'Edit',
     data() {
       return {
-        fileList: [],
         ctrl: {
           dialogVisible: true
         }
@@ -98,6 +100,10 @@
         type: Object,
         default: () => {}
       },
+      introduce: {
+        type: String,
+        default: ''
+      },
       visible: {
         type: Boolean,
         default: false
@@ -110,13 +116,13 @@
     watch: {
       visible: function(val) {
         if (val) {
-          console.log('加载富文本框=============')
           const E = require('wangeditor')
           this.editor2 = new E('#introduce')
           this.editor2.customConfig.uploadImgMaxLength = 1
-          editor.customConfig.uploadImgMaxSize = 3 * 1024 *1024;
          /* this.editor2.customConfig.customUploadImg = this.editorUpload*/
           this.editor2.create();
+          console.log(this.formData)
+          this.editor2.txt.html(this.introduce)
         }
       }
     },
@@ -136,6 +142,7 @@
      async handleConfirm() {
         this.ctrl.load = true
         let res = {}
+        console.log(this.formData)
         if (this.formData.id === undefined) {
           this.$alert(res.msg || '提交失败')
         } else {
