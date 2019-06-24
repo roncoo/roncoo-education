@@ -68,7 +68,7 @@
         <template slot-scope="scope">
           <ul class="list-item-actions">
             <li>
-              <el-button type="primary" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
+              <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
             </li>
           </ul>
         </template>
@@ -85,26 +85,32 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="page.totalCount">
       </el-pagination>
-      <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
+      <edit :visible="ctrl.dialogVisible" :formData="formData" :introduce="introduce" :lecturerExt="lecturerExt" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
+      <view-lecturer :visible="ctrl.viewVisible" :formData="formData" :lecturerExt="lecturerExt" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></view-lecturer>
   </div>
 </template>
 <script>
   import * as userApi from '@/api/user'
   import Edit from './edit'
+  import viewLecturer from './view'
   export default {
-    components: { Edit },
+    components: { Edit, viewLecturer },
     data() {
       return {
+        list: [],
         map: {},
         formData: {},
+        lecturerExt: {},
+        title: '',
+        introduce: '',
         ctrl: {
           load: false,
-          dialogVisible: false
+          dialogVisible: false,
+          viewVisible: false
         },
         opts: {
           statusIdList: []
         },
-        list: [],
         page: {
           beginPageIndex: 1,
           pageCurrent: 1,
@@ -112,10 +118,6 @@
           pageSize: 20,
           totalCount: 0,
           totalPage: 0
-        },
-        textuStatusId: {
-          0: '禁用',
-          1: '正常'
         }
       }
     },
@@ -143,8 +145,7 @@
       },
       // 重置查询条件
       handleReset() {
-        this.params = {}
-        this.lecturerList()
+        this.reload()
       },
       lecturerList() {
         this.load === true
@@ -153,9 +154,9 @@
           this.page.pageCurrent = res.data.pageCurrent
           this.page.totalCount = res.data.totalCount
           this.page.pageSize = res.data.pageSize
-          this.ctrl.loading = false
+          this.ctrl.load = false
         }).catch(() => {
-          this.ctrl.loading = false
+          this.ctrl.load = false
         })
       },
       // 修改状态
@@ -174,37 +175,62 @@
       },
       // 请求更新用户方法
       changeStatus(id, statusId) {
-        userApi.lecturerUpdate({ id: id, statusId: statusId }).then(() => {
-          const msg = { 0: '禁用成功', 1: '启用成功' }
-          this.$message({
-            type: 'success',
-            message: msg[statusId]
-          });
-            this.reload()
+        userApi.lecturerUpdate({ id: id, statusId: statusId }).then(res => {
+          if (res.code === 200 && res.data > 0) {
+            const msg = { 0: '禁用成功', 1: '启用成功' }
+              this.$message({
+                type: 'success',
+                message: msg[statusId]
+              });
+                this.reload()
+          } else {
+            const msg = { 0: '禁用失败', 1: '启用失败' }
+              this.$message({
+                type: 'error',
+                message: msg[statusId]
+              });
+                this.reload()
+          }
         })
       },
-       // 关闭编辑弹窗回调
+      // 修改跳页面操作
+      handleEdit(id) {
+        this.title = '信息修改'
+        this.getById(id, this.title)
+        this.ctrl.dialogVisible = true
+      },
+      // 查看跳页面设置
+      handleView(id) {
+        this.title = '查看详情'
+        this.getById(id, this.title)
+        this.ctrl.viewVisible = true
+      },
+      // 关闭弹窗回调
       closeCllback() {
+        this.ctrl.viewVisible = false;
         this.ctrl.dialogVisible = false;
         this.reload()
       },
-      // 跳页面操作
-      handleEdit(id) {
-        this.load === true
-        console.log("修改查询讲师id", id)
-        userApi.lecturerView({ id: id }).then(row => {
-          console.log("查询讲师信息", row.data)
-          this.formData = row.data
-          this.ctrl.loading = false
-        }).catch(() => {
-          this.ctrl.loading = false
-        })
-        this.ctrl.dialogTitle = '编辑'
-        this.ctrl.dialogVisible = true
-      },
       // 刷新当前页面
       reload() {
+        this.map = {}
+        this.formData = {}
+        this.lecturerExt = {}
         this.lecturerList()
+      },
+      // 查看信息
+      getById(id, title) {
+        userApi.lecturerView({ id: id }).then(res => {
+          this.formData = res.data
+          if (JSON.stringify(res.data.lecturerExt) !== '{}') {
+            this.lecturerExt = res.data.lecturerExt
+          }
+          this.introduce = res.data.introduce
+          this.ctrl.dialogTitle = res.data.lecturerMobile + '-' + title
+          this.ctrl.load = false
+        }).catch(() => {
+          this.ctrl.load = true
+        })
       }
     }
   }

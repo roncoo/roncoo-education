@@ -42,12 +42,8 @@ public class PcApiUploadBiz extends BaseBiz {
 	/**
 	 * 上传图片接口
 	 * 
-	 * @param platformEnum
 	 */
-	public Result<String> uploadPic(MultipartFile picFile, String platformEnum) {
-		if (StringUtils.isEmpty(platformEnum)) {
-			Result.error("工程类型不能为空");
-		}
+	public Result<String> uploadPic(MultipartFile picFile) {
 		if (ObjectUtil.isNotNull(picFile)) {
 			// 获取系统配置信息
 			SysVO sys = bossSys.getSys();
@@ -77,26 +73,16 @@ public class PcApiUploadBiz extends BaseBiz {
 					return Result.error("上传文件出错，请重新上传");
 				}
 			}
-			if (platformEnum.equals("COURSE")) {
-				return Result.success(AliyunUtil.uploadPic(PlatformEnum.COURSE, picFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
-			} else if (platformEnum.equals("USER")) {
-				return Result.success(AliyunUtil.uploadPic(PlatformEnum.USER, picFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
-			} else {
-				return Result.success(AliyunUtil.uploadPic(PlatformEnum.SYSTEM, picFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
-			}
+			return Result.success(AliyunUtil.uploadPic(PlatformEnum.COURSE, picFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
 		}
 		return Result.error("请选择上传的图片");
 	}
 
 	/**
 	 * 上传文档接口
-	 * 
-	 * @param platformEnum
+	 *
 	 */
-	public Result<String> uploadDoc(MultipartFile docFile, String platformEnum) {
-		if (StringUtils.isEmpty(platformEnum)) {
-			Result.error("工程类型不能为空");
-		}
+	public Result<String> uploadDoc(MultipartFile docFile) {
 		if (ObjectUtil.isNotNull(docFile)) {
 			// 获取系统配置信息
 			SysVO sys = bossSys.getSys();
@@ -126,13 +112,7 @@ public class PcApiUploadBiz extends BaseBiz {
 					return Result.error("上传文件出错，请重新上传");
 				}
 			}
-			if (platformEnum.equals("COURSE")) {
-				return Result.success(AliyunUtil.uploadDoc(PlatformEnum.COURSE, docFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
-			} else if (platformEnum.equals("USER")) {
-				return Result.success(AliyunUtil.uploadDoc(PlatformEnum.USER, docFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
-			} else {
-				return Result.success(AliyunUtil.uploadDoc(PlatformEnum.SYSTEM, docFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
-			}
+			return Result.success(AliyunUtil.uploadDoc(PlatformEnum.COURSE, docFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
 		}
 		return Result.error("请选择上传的文件");
 

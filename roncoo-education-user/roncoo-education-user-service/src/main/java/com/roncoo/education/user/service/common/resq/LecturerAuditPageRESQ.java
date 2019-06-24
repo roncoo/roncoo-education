@@ -42,6 +42,11 @@ public class LecturerAuditPageRESQ implements Serializable {
 	@ApiModelProperty(value = "审核状态(0:待审核,1:审核通过,2:审核不通过)")
 	private Integer auditStatus;
 	/**
+	 * 审核意见
+	 */
+	@ApiModelProperty(value = "审核意见")
+	private String auditOpinion;
+	/**
 	 * 讲师编号
 	 */
 	@ApiModelProperty(value = "讲师编号")

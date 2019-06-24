@@ -47,6 +47,11 @@ public class LecturerProfitPageRESQ implements Serializable {
 	@ApiModelProperty(value = "讲师名称")
 	private String lecturerName;
 	/**
+	 * 讲师手机号
+	 */
+	@ApiModelProperty(value = "讲师手机号")
+	private String lecturerMobile;
+	/**
 	 * 银行卡号
 	 */
 	@ApiModelProperty(value = "银行卡号")

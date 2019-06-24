@@ -34,21 +34,20 @@ public class PcApiUploadController extends BaseController {
 	 * @param picFile
 	 */
 	@ApiOperation(value = "上传图片接口", notes = "上传图片")
-	@RequestMapping(value = "/pic/{platformEnum}", method = RequestMethod.POST)
-	public Result<String> uploadPic(@RequestParam(value = "picFile", required = false) MultipartFile picFile, @PathVariable(name = "platformEnum") String platformEnum) {
-		return biz.uploadPic(picFile, platformEnum);
+	@RequestMapping(value = "/pic", method = RequestMethod.POST)
+	public Result<String> uploadPic(@RequestParam(value = "picFile", required = false) MultipartFile picFile) {
+		return biz.uploadPic(picFile);
 	}
 
 	/**
 	 * 上传文档接口
 	 * 
 	 * @param docFile
-	 * @param periodUploadDoc
 	 */
 	@ApiOperation(value = "上传文档接口", notes = "上传文档")
-	@RequestMapping(value = "/doc/{platformEnum}", method = RequestMethod.POST)
-	public Result<String> uploadDoc(@RequestParam(name = "docFile", required = false) MultipartFile docFile, @PathVariable(name = "platformEnum") String platformEnum) {
-		return biz.uploadDoc(docFile, platformEnum);
+	@RequestMapping(value = "/doc", method = RequestMethod.POST)
+	public Result<String> uploadDoc(@RequestParam(name = "docFile", required = false) MultipartFile docFile) {
+		return biz.uploadDoc(docFile);
 	}
 
 }

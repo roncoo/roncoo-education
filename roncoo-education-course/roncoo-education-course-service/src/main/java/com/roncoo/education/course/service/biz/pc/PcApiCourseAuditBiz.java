@@ -101,14 +101,14 @@ public class PcApiCourseAuditBiz {
 		} else {
 			c.andAuditStatusEqualTo(req.getAuditStatus());
 		}
-		if (req.getIsFree() != null) {
+		if (req.getIsFree() != null) { 
 			c.andIsFreeEqualTo(req.getIsFree());
 		}
 		if (req.getIsPutaway() != null) {
 			c.andIsPutawayEqualTo(req.getIsPutaway());
 		}
 
-		example.setOrderByClause(" status_id desc, is_putaway desc, sort desc, id desc ");
+		example.setOrderByClause(" audit_status asc, status_id desc, is_putaway desc, sort desc, id desc ");
 		Page<CourseAudit> page = dao.listForPage(req.getPageCurrent(), req.getPageSize(), example);
 		Page<CourseAuditPageRESQ> listForPage = PageUtil.transform(page, CourseAuditPageRESQ.class);
 		// 获取分类名称
@@ -289,14 +289,10 @@ public class PcApiCourseAuditBiz {
 			return Result.error("课程不存在");
 		}
 
-		Course course = courseDao.getById(courseAudit.getId());
-		if (ObjectUtil.isNull(course)) {
-			return Result.error("课程不存在");
-		}
-
 		// 根据课程ID查询课时信息集合
 		List<CourseChapterPeriodAudit> periodAuditList = courseChapterPeriodAuditDao.listByCourseId(courseAudit.getId());
 
+		Course course = courseDao.getById(courseAudit.getId());
 		// 1、对课程操作
 		// 如果课程信息表里面有数据就进行更新
 		if (ObjectUtil.isNotNull(course)) {

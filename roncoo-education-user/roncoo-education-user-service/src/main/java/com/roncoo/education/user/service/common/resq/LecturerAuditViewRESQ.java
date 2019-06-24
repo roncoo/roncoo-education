@@ -1,7 +1,10 @@
 package com.roncoo.education.user.service.common.resq;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
@@ -26,6 +29,11 @@ public class LecturerAuditViewRESQ implements Serializable {
 	@JsonSerialize(using = ToStringSerializer.class)
 	private Long id;
 	/**
+	 * 创建时间
+	 */
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date gmtCreate;
+	/**
 	 * 状态(1:正常，0:禁用)
 	 */
 	@ApiModelProperty(value = "状态(1:正常，0:禁用)")
@@ -40,6 +48,11 @@ public class LecturerAuditViewRESQ implements Serializable {
 	 */
 	@ApiModelProperty(value = "审核状态(0:待审核,1:审核通过,2:审核不通过)")
 	private Integer auditStatus;
+	/**
+	 * 审核意见
+	 */
+	@ApiModelProperty(value = "审核意见")
+	private String auditOpinion;
 	/**
 	 * 讲师编号
 	 */
@@ -62,10 +75,15 @@ public class LecturerAuditViewRESQ implements Serializable {
 	@ApiModelProperty(value = "邮箱")
 	private String lecturerEmail;
 	/**
+	 * 讲师简介
+	 */
+	@ApiModelProperty(value = "讲师简介")
+	private String introduce;
+	/**
 	 * 讲师分成比例
 	 */
 	@ApiModelProperty(value = "讲师分成比例")
-	private String lecturerProportion;
+	private BigDecimal lecturerProportion;
 	/**
 	 * 讲师账户信息
 	 */
