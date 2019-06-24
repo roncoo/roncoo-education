@@ -3,6 +3,7 @@ package com.roncoo.education.course.service.controller.biz;
 import java.io.File;
 import java.util.List;
 
+import com.roncoo.education.util.base.BaseException;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -93,20 +94,10 @@ public class BossCourseVideoBiz {
 
 		SysVO sys = bossSys.getSys();
 		if (ObjectUtil.isNull(sys)) {
-			try {
-				throw new Exception("找不到系统配置信息");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			throw new BaseException("找不到系统配置信息");
 		}
 		if (StringUtils.isEmpty(sys.getPolyvWritetoken())) {
-			try {
-				throw new Exception("writetoken没配置");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			throw new BaseException("writetoken没配置");
 		}
 		UploadFileResult result = PolyvUtil.uploadFile(targetFile, uploadFile, sys.getPolyvWritetoken());
 
