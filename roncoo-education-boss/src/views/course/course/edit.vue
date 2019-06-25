@@ -135,7 +135,7 @@ export default {
       if (this.formData.id === undefined) {
         this.$alert(res.msg || '修改失败')
       } else {
-        res = await courseApis.courseAuditUpdate(this.formData)
+        res = await courseApis.courseUpdate(this.formData)
       }
       this.ctrl.load = false
       if (res.code === 200 && res.data > 0) {

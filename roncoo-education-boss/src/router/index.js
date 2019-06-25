@@ -19,6 +19,10 @@ export const asyncRouterMap = [
       {
         path: 'audit',
         component: () => import('@/views/course/audit')
+      },
+      {
+        path: 'course',
+        component: () => import('@/views/course/course')
       }
     ]
   },

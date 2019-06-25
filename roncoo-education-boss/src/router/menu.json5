@@ -32,6 +32,12 @@
         "name": "课程审核列表",
         "path": "/course/audit",
         "icon": null,
+      },
+      {
+        "id": 2,
+        "name": "课程信息列表",
+        "path": "/course/course",
+        "icon": null,
       }
     ]
   },
