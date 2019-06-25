@@ -63,6 +63,28 @@ export const asyncRouterMap = [
         component: () => import('@/views/user/userExt')
       }
     ]
+  },
+  // 权限管理
+  {
+    path: 'pms',
+    component: () => import('@/views/pms'),
+    children: [
+    // 用户列表
+      {
+        path: 'user',
+        component: () => import('@/views/pms/user')
+      },
+      // 角色列表
+      {
+        path: 'role',
+        component: () => import('@/views/pms/role')
+      },
+      // 菜单列表
+      {
+        path: 'menu',
+        component: () => import('@/views/pms/menu')
+      }
+    ]
   }
 ]
 export const constantRouterMap = [

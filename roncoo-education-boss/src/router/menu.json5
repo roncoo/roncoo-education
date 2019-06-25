@@ -109,20 +109,14 @@
       },
       {
         "id": 2,
-        "name": "权限管理",
-        "path": "/pms/pms",
-        "icon": null
-      },
-      {
-        "id": 2,
         "name": "角色管理",
         "path": "/pms/role",
         "icon": null
       },
       {
         "id": 2,
-        "name": "操作员管理",
-        "path": "/pms/operator",
+        "name": "用户管理",
+        "path": "/pms/user",
         "icon": null
       }
     ]
