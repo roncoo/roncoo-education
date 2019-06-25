@@ -85,7 +85,7 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="page.totalCount">
       </el-pagination>
-      <edit :visible="ctrl.dialogVisible" :formData="formData" :introduce="introduce" :lecturerExt="lecturerExt" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
+      <edit :visible="ctrl.dialogVisible" :formData="formData" :lecturerExt="lecturerExt" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
       <view-lecturer :visible="ctrl.viewVisible" :formData="formData" :lecturerExt="lecturerExt" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></view-lecturer>
   </div>
 </template>
@@ -102,7 +102,6 @@
         formData: {},
         lecturerExt: {},
         title: '',
-        introduce: '',
         ctrl: {
           load: false,
           dialogVisible: false,

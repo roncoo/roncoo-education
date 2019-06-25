@@ -33,7 +33,7 @@
           </div></el-col>
         </el-row>
         <el-form-item label="讲师简介:">
-          <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="formData.introduce"></el-input>
+          <div id="introduce"></div>
         </el-form-item>
       <el-alert class="title" :closable="false" title="二、讲师分成及银行信息" type="info" />
         <br/>
@@ -77,7 +77,7 @@
     name: 'Edit',
     data() {
       return {
-        fileList: [],
+        editor: {},
         ctrl: {
           dialogVisible: true
         }
@@ -102,13 +102,57 @@
         default: ''
       }
     },
+    watch: {
+      formData: function(val) {
+        if (val !== undefined) {
+          setTimeout(() => {
+            this.editor.customConfig.customUploadImg = this.editorUpload
+              this.editor.create();
+              if (this.formData.introduce !== undefined && this.formData.introduce !== '' && this.formData.introduce !== null) {
+                this.editor.txt.html(this.formData.introduce)
+              } else {
+                this.editor.txt.html('')
+              }
+          }, 200)
+        }
+      }
+    },
+    mounted() {
+      this.createEdit();
+    },
     methods: {
+      // 编辑器上传图片
+      editorUpload(files, insert) {
+        console.log(files)
+        const file = files[0];
+        const param = new FormData();
+        param.append('picFile', file, file.name);
+        userApi.uploadPic(param).then(res => {
+          console.log(res.code)
+          console.log('load=======')
+          if (res.code === 200) {
+            const imgUrl = res.data
+            insert(imgUrl)
+          }
+        }).catch(() => {
+          this.$message({
+            type: 'error',
+            message: '上传图片出错，请稍后重试'
+          })
+        })
+      },
+      createEdit() {
+        const E = require('wangeditor')
+        this.editor = new E('#introduce')
+      },
       handleClose(done) {
+        this.editor.txt.clear()
         this.$emit('close-cllback')
       },
       submitForm(formData) {
         this.$refs[formData].validate((valid) => {
           if (valid) {
+            this.formData.introduce = this.editor.txt.html()
             this.handleConfirm()
           } else {
             return false;

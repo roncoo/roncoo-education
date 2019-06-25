@@ -34,13 +34,10 @@
               </el-form-item>
             </div></el-col>
           </el-row>
+          <el-form-item label="讲师简介:">
+             <div id="introduce"></div>
+          </el-form-item>
         </div>
-      <el-alert class="title" :closable="false" title="讲师简介" type="info" />
-        <br/>
-        <div>
-          <div id="introduce"></div>
-        </div>
-        <br/>
       <el-alert class="title" :closable="false" title="讲师分成及银行信息" type="info" />
         <div>
           <br/>
@@ -85,6 +82,7 @@
     name: 'Edit',
     data() {
       return {
+        editor: {},
         ctrl: {
           dialogVisible: true
         }
@@ -100,10 +98,6 @@
         type: Object,
         default: () => {}
       },
-      introduce: {
-        type: String,
-        default: ''
-      },
       visible: {
         type: Boolean,
         default: false
@@ -114,25 +108,36 @@
       }
     },
     watch: {
-      visible: function(val) {
-        if (val) {
-          const E = require('wangeditor')
-          this.editor2 = new E('#introduce')
-          this.editor2.customConfig.uploadImgMaxLength = 1
-         /* this.editor2.customConfig.customUploadImg = this.editorUpload*/
-          this.editor2.create();
-          console.log(this.formData)
-          this.editor2.txt.html(this.introduce)
+      formData: function(val) {
+        if (val !== undefined) {
+          setTimeout(() => {
+            this.editor.create();
+            this.editor.customConfig.customUploadImg = this.editorUpload
+            if (this.formData.introduce !== undefined && this.formData.introduce !== '' && this.formData.introduce !== null) {
+              this.editor.txt.html(this.formData.introduce)
+            } else {
+              this.editor.txt.html('')
+            }
+          }, 100)
         }
       }
     },
+    mounted() {
+      this.createEdit();
+    },
     methods: {
+      createEdit() {
+        const E = require('wangeditor')
+        this.editor = new E('#introduce')
+      },
       handleClose(done) {
+        this.editor.txt.clear()
         this.$emit('close-cllback')
       },
       submitForm(formData) {
         this.$refs[formData].validate((valid) => {
           if (valid) {
+            this.formData.introduce = this.editor.txt.html()
             this.handleConfirm()
           } else {
             return false;
@@ -142,7 +147,6 @@
      async handleConfirm() {
         this.ctrl.load = true
         let res = {}
-        console.log(this.formData)
         if (this.formData.id === undefined) {
           this.$alert(res.msg || '提交失败')
         } else {
@@ -156,6 +160,26 @@
         } else {
           this.$alert(res.msg || '提交失败')
         }
+      },
+      // 编辑器上传图片
+      editorUpload(files, insert) {
+        console.log(files)
+        const file = files[0];
+        const param = new FormData();
+        param.append('picFile', file, file.name);
+        userApi.uploadPic(param).then(res => {
+          console.log(res.code)
+          console.log('load=======')
+          if (res.code === 200) {
+            const imgUrl = res.data
+            insert(imgUrl)
+          }
+        }).catch(() => {
+          this.$message({
+            type: 'error',
+            message: '上传图片出错，请稍后重试'
+          })
+        })
       }
     }
   }

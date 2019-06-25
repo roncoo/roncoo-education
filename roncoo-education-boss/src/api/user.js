@@ -123,3 +123,21 @@ export function lecturerProfitList(params, pageCurrent = 1, pageSize = 20) {
     data: { pageCurrent: pageCurrent, pageSize: pageSize, ...params }
   })
 }
+
+// 讲师提现更新提现状态接口
+export function lecturerProfitUpdate(data = {}) {
+  return request({
+    url: `/user/pc/lecturer/profit/update`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 讲师提现批量更新提现状态接口
+export function lecturerProfitBatch(data = {}) {
+  return request({
+    url: `/user/pc/lecturer/profit/batch`,
+    method: 'post',
+    data: data
+  })
+}

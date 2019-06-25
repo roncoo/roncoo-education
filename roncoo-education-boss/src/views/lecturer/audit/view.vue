@@ -74,8 +74,7 @@
         </el-row>
       <el-alert class="title" :closable="false" title="简介" type="info" />
       <br/>
-        <el-form-item class="button">
-          <span >{{formData.introduce}}</span>
+        <el-form-item v-html="formData.introduce">
         </el-form-item>
       <el-alert class="title" :closable="false" title="分成情况" type="info" />
       <br/>

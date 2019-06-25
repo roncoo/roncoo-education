@@ -59,7 +59,7 @@
         <template slot-scope="scope">
           <ul class="list-item-actions">
             <li>
-              <!-- <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button> -->
+              <el-button type="success" @click="handleEdit(scope.row)" size="mini">打款</el-button>
             </li>
           </ul>
         </template>
@@ -76,14 +76,18 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="page.totalCount">
       </el-pagination>
+      <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
   </div>
 </template>
 <script>
   import * as userApi from '@/api/user'
+  import Edit from './edit'
   export default {
+    components: { Edit },
     data() {
       return {
         ctrl: {
+          dialogVisible: false,
           load: false
         },
         textProfitStatus: {
@@ -106,6 +110,7 @@
             }
           }]
         },
+        formData: {},
         map: {},
         list: [],
         profitStatusList: [],
@@ -181,6 +186,18 @@
         }).catch(() => {
           this.ctrl.load = false
         })
+      },
+      // 打款跳页面操作
+      handleEdit(row) {
+        this.formData.id = row.id
+        this.formData.profitStatus = row.profitStatus
+        this.ctrl.dialogTitle = '打款进度'
+        this.ctrl.dialogVisible = true
+      },
+      // 关闭弹窗回调
+      closeCllback() {
+        this.ctrl.dialogVisible = false;
+        this.handleReset()
       },
       handleSelectionChange(val) {
         console.log('id集合', val)

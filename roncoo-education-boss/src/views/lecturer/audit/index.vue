@@ -266,7 +266,6 @@
           if (JSON.stringify(res.data.lecturerExt) !== '{}') {
             this.lecturerExt = res.data.lecturerExt
           }
-          console.log(res.data.lecturerMobile)
           this.ctrl.dialogTitle = res.data.lecturerMobile + '-' + title
           this.ctrl.load = false
         }).catch(() => {
