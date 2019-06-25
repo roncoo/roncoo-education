@@ -88,22 +88,16 @@ public class PcApiSysUserBiz {
 		return Result.success(dao.deleteById(req.getId()));
 	}
 
-	@Transactional
 	public Result<Integer> update(SysUserUpdateREQ req) {
 		if (req.getId() == null) {
 			return Result.error("主键ID不能为空");
 		}
 		SysUser sysUser = dao.getById(req.getId());
-		UserVO user = bossUser.getByMobile(sysUser.getMobile());
-		if (user == null) {
-			throw new BaseException("找不到用户信息");
+		if (ObjectUtil.isNull(sysUser)) {
+			return Result.error("找不到管理员信息");
 		}
 		SysUser record = BeanUtil.copyProperties(req, SysUser.class);
-		dao.updateById(record);
-		UserQO userQO = new UserQO();
-		userQO.setId(user.getId());
-		userQO.setMobile(req.getMobile());
-		int results = bossUser.updateById(userQO);
+		int results = dao.updateById(record);
 		if (results > 0) {
 			return Result.success(results);
 		}

@@ -8,7 +8,7 @@
       <el-form-item>
         <el-button type="primary" :loading="ctrl.load" @click="handleCheck">查询</el-button>
         <el-button class="filter-item" @click="handleReset">重置</el-button>
-        <el-button type="success" @click="handleAdd()" size="mini">添加</el-button>
+        <el-button type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAdd()">添加</el-button>
       </el-form-item>
       </el-form>
     </div>
@@ -134,6 +134,7 @@
       adminUserList() {
         this.ctrl.load = true
         api.userList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
+          console.log(res)
           this.list = res.data.list
           this.page.pageCurrent = res.data.pageCurrent
           this.page.totalCount = res.data.totalCount
