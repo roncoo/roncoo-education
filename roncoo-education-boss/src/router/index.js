@@ -13,6 +13,10 @@ export const asyncRouterMap = [
     meta: { title: '首页' }
   },
   {
+    path: 'order',
+    component: () => import('@/views/order')
+  },
+  {
     path: 'course',
     component: () => import('@/views/course'),
     children: [

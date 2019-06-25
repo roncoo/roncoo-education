@@ -23,6 +23,20 @@
   },
   {
     "id": 0,
+    "name": "订单管理",
+    "path": "/order",
+    "icon": null,
+    "children": [
+      {
+        "id": 2,
+        "name": "订单列表",
+        "path": "/order",
+        "icon": null,
+      }
+    ]
+  },
+  {
+    "id": 0,
     "name": "课程管理",
     "path": "/course",
     "icon": null,
