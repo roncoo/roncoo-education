@@ -29,93 +29,90 @@ import com.xiaoleilu.hutool.util.ObjectUtil;
 
 /**
  * 上传接口
- * 
  */
 @Component
 public class PcApiUploadBiz extends BaseBiz {
 
-	@Autowired
-	private IBossSys bossSys;
-	@Autowired
-	private FileStorageDao fileStorageDao;
+    @Autowired
+    private IBossSys bossSys;
+    @Autowired
+    private FileStorageDao fileStorageDao;
 
-	/**
-	 * 上传图片接口
-	 * 
-	 */
-	public Result<String> uploadPic(MultipartFile picFile) {
-		if (ObjectUtil.isNotNull(picFile)) {
-			// 获取系统配置信息
-			SysVO sys = bossSys.getSys();
-			if (ObjectUtil.isNull(sys)) {
-				Result.error("未配置系统配置表");
-			}
-			Long fileNo = IdWorker.getId();
-			// 1、上传到本地
-			if (sys.getFileType().equals(FileTypeEnum.LOCAL.getCode())) {
-				File pic = new File(SystemUtil.PIC_STORAGE_PATH + fileNo.toString() + "." + StrUtil.getSuffix(picFile.getOriginalFilename()));
-				try {
-					// 判断文件目录是否存在，不存在就创建文件目录
-					if (!pic.getParentFile().exists()) {
-						pic.getParentFile().mkdirs();// 创建父级文件路径
-					}
-					picFile.transferTo(pic);
-					FileStorage fileStorage = new FileStorage();
-					fileStorage.setFileName(picFile.getOriginalFilename());
-					fileStorage.setFileNo(fileNo);
-					fileStorage.setFileSize(picFile.getSize());
-					fileStorage.setFileType(FileStorageTypeEnum.PICTURE.getCode());
-					fileStorage.setFileUrl(pic.toString());
-					fileStorageDao.save(fileStorage);
-					return Result.success(pic.toString());
-				} catch (Exception e) {
-					logger.error("上传到本地失败", e);
-					return Result.error("上传文件出错，请重新上传");
-				}
-			}
-			return Result.success(AliyunUtil.uploadPic(PlatformEnum.COURSE, picFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
-		}
-		return Result.error("请选择上传的图片");
-	}
+    /**
+     * 上传图片接口
+     */
+    public Result<String> uploadPic(MultipartFile picFile) {
+        if (ObjectUtil.isNotNull(picFile)) {
+            // 获取系统配置信息
+            SysVO sys = bossSys.getSys();
+            if (ObjectUtil.isNull(sys)) {
+                Result.error("未配置系统配置表");
+            }
+            Long fileNo = IdWorker.getId();
+            // 1、上传到本地
+            if (sys.getFileType().equals(FileTypeEnum.LOCAL.getCode())) {
+                File pic = new File(SystemUtil.PIC_STORAGE_PATH + fileNo.toString() + "." + StrUtil.getSuffix(picFile.getOriginalFilename()));
+                try {
+                    // 判断文件目录是否存在，不存在就创建文件目录
+                    if (!pic.getParentFile().exists()) {
+                        pic.getParentFile().mkdirs();// 创建父级文件路径
+                    }
+                    picFile.transferTo(pic);
+                    FileStorage fileStorage = new FileStorage();
+                    fileStorage.setFileName(picFile.getOriginalFilename());
+                    fileStorage.setFileNo(fileNo);
+                    fileStorage.setFileSize(picFile.getSize());
+                    fileStorage.setFileType(FileStorageTypeEnum.PICTURE.getCode());
+                    fileStorage.setFileUrl(pic.toString());
+                    fileStorageDao.save(fileStorage);
+                    return Result.success(pic.toString());
+                } catch (Exception e) {
+                    logger.error("上传到本地失败", e);
+                    return Result.error("上传文件出错，请重新上传");
+                }
+            }
+            return Result.success(AliyunUtil.uploadPic(PlatformEnum.COURSE, picFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
+        }
+        return Result.error("请选择上传的图片");
+    }
 
-	/**
-	 * 上传文档接口
-	 *
-	 */
-	public Result<String> uploadDoc(MultipartFile docFile) {
-		if (ObjectUtil.isNotNull(docFile)) {
-			// 获取系统配置信息
-			SysVO sys = bossSys.getSys();
-			if (ObjectUtil.isNull(sys)) {
-				Result.error("未配置系统配置表");
-			}
-			Long fileNo = IdWorker.getId();
-			// 1、上传到本地
-			if (sys.getFileType().equals(FileTypeEnum.LOCAL.getCode())) {
-				File pic = new File(SystemUtil.DOC_STORAGE_PATH + fileNo.toString() + "." + StrUtil.getSuffix(docFile.getOriginalFilename()));
-				try {
-					// 判断文件目录是否存在，不存在就创建文件目录
-					if (!pic.getParentFile().exists()) {
-						pic.getParentFile().mkdirs();// 创建父级文件路径
-					}
-					docFile.transferTo(pic);
-					FileStorage fileStorage = new FileStorage();
-					fileStorage.setFileName(docFile.getOriginalFilename());
-					fileStorage.setFileNo(fileNo);
-					fileStorage.setFileSize(docFile.getSize());
-					fileStorage.setFileType(FileStorageTypeEnum.DOC.getCode());
-					fileStorage.setFileUrl(pic.toString());
-					fileStorageDao.save(fileStorage);
-					return Result.success(pic.toString());
-				} catch (Exception e) {
-					logger.error("上传到本地失败", e);
-					return Result.error("上传文件出错，请重新上传");
-				}
-			}
-			return Result.success(AliyunUtil.uploadDoc(PlatformEnum.COURSE, docFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
-		}
-		return Result.error("请选择上传的文件");
+    /**
+     * 上传文档接口
+     */
+    public Result<String> uploadDoc(MultipartFile docFile) {
+        if (ObjectUtil.isNotNull(docFile)) {
+            // 获取系统配置信息
+            SysVO sys = bossSys.getSys();
+            if (ObjectUtil.isNull(sys)) {
+                Result.error("未配置系统配置表");
+            }
+            Long fileNo = IdWorker.getId();
+            // 1、上传到本地
+            if (sys.getFileType().equals(FileTypeEnum.LOCAL.getCode())) {
+                File pic = new File(SystemUtil.DOC_STORAGE_PATH + fileNo.toString() + "." + StrUtil.getSuffix(docFile.getOriginalFilename()));
+                try {
+                    // 判断文件目录是否存在，不存在就创建文件目录
+                    if (!pic.getParentFile().exists()) {
+                        pic.getParentFile().mkdirs();// 创建父级文件路径
+                    }
+                    docFile.transferTo(pic);
+                    FileStorage fileStorage = new FileStorage();
+                    fileStorage.setFileName(docFile.getOriginalFilename());
+                    fileStorage.setFileNo(fileNo);
+                    fileStorage.setFileSize(docFile.getSize());
+                    fileStorage.setFileType(FileStorageTypeEnum.DOC.getCode());
+                    fileStorage.setFileUrl(pic.toString());
+                    fileStorageDao.save(fileStorage);
+                    return Result.success(pic.toString());
+                } catch (Exception e) {
+                    logger.error("上传到本地失败", e);
+                    return Result.error("上传文件出错，请重新上传");
+                }
+            }
+            return Result.success(AliyunUtil.uploadDoc(PlatformEnum.COURSE, docFile, BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
+        }
+        return Result.error("请选择上传的文件");
 
-	}
+    }
 
 }

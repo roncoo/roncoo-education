@@ -25,6 +25,7 @@ import com.roncoo.education.web.boss.service.SysMenuService;
 @Controller
 public class IndexController extends BaseController {
 
+
 	@Autowired
 	private SysMenuService sysMenuService;
 	
