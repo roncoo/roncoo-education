@@ -30,8 +30,8 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" :loading="ctrl.load" @click="handleCheck">查询</el-button>
-        <el-button class="filter-item" @click="handleReset">重置
-        </el-button>
+        <el-button class="filter-item" @click="handleReset">重置</el-button>
+        <el-button type="success" @click="handleBatch()" size="mini">标记为已打款</el-button>
       </el-form-item>
       </el-form>
     </div>
@@ -114,7 +114,7 @@
         map: {},
         list: [],
         profitStatusList: [],
-        multipleSelection: [],
+        id: [],
         gmtCreate: '',
         page: {
           beginPageIndex: 1,
@@ -171,6 +171,7 @@
       // 重置查询条件
       handleReset() {
         this.map = {}
+        this.formData = {}
         this.gmtCreate = ''
         this.listForPage()
       },
@@ -179,6 +180,7 @@
         this.ctrl.load = true
         userApi.lecturerProfitList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.list = res.data.list
+
           this.page.pageCurrent = res.data.pageCurrent
           this.page.totalCount = res.data.totalCount
           this.page.pageSize = res.data.pageSize
@@ -190,7 +192,6 @@
       // 打款跳页面操作
       handleEdit(row) {
         this.formData.id = row.id
-        this.formData.profitStatus = row.profitStatus
         this.ctrl.dialogTitle = '打款进度'
         this.ctrl.dialogVisible = true
       },
@@ -199,9 +200,45 @@
         this.ctrl.dialogVisible = false;
         this.handleReset()
       },
-      handleSelectionChange(val) {
-        console.log('id集合', val)
-        this.multipleSelection = val
+      // 选择标记打款讲师
+      handleSelectionChange(list) {
+        const sort = []
+        for (var i = 0; i < list.length; i++) {
+          sort.push(this.list[i].id)
+        }
+        console.log('id集合', sort)
+        this.id = sort
+      },
+      // 标记为已打款
+      handleBatch() {
+        this.$confirm(`确定要将选中项标记为成功吗？`, {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.changeStatus()
+          this.handleReset()
+        }).catch(() => {
+          this.handleReset()
+        })
+      },
+      // 请求批量更新标记为已打款
+      changeStatus() {
+        userApi.lecturerProfitBatch({ id: this.id, profitStatus: 2 }).then(res => {
+          if (res.code === 200 && res.data > 0) {
+              this.$message({
+                type: 'success',
+                message: '操作成功'
+              });
+                this.handleReset()
+          } else {
+              this.$message({
+                type: 'error',
+                message: '操作失败'
+              });
+                this.handleReset()
+          }
+        })
       }
     }
   }

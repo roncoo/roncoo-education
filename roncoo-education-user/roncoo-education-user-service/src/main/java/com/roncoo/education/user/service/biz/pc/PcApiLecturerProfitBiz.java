@@ -167,7 +167,9 @@ public class PcApiLecturerProfitBiz extends BaseBiz {
 					return Result.error("讲师账户信息更新失败");
 				}
 			}
-			dao.updateById(BeanUtil.copyProperties(req, LecturerProfit.class));
+			LecturerProfit record = BeanUtil.copyProperties(req, LecturerProfit.class);
+			record.setId(id);
+			dao.updateById(record);
 		}
 
 		return Result.success(1);

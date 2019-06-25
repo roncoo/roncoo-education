@@ -1,13 +1,13 @@
 <template>
   <!--弹窗-->
   <el-dialog
-    width="40%"
+    width="25%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form ref="formData" :model="formData" label-width="80px">
-      <el-form-item label="分润状态:" >
-        <el-select v-model="formData.profitStatus" class="auto-width" clearable filterable placeholder="分润状态" style="width: 95px">
+      <el-form-item label="分润状态:" prop="profitStatus" >
+        <el-select v-model="formData.profitStatus" class="auto-width" clearable filterable placeholder="分润状态" style="width: 110px">
           <el-option
             v-for="item in profitStatusList"
             :key="item.code"
@@ -32,6 +32,11 @@
         profitStatusList: [],
         ctrl: {
           dialogVisible: true
+        },
+        rules: {
+          profitStatus: [
+            { required: true, message: '请选择分润状态', trigger: 'blur' }
+          ]
         }
       }
     },
@@ -60,6 +65,13 @@
         this.$emit('close-cllback')
       },
       submitForm(formData) {
+        if (!this.formData.profitStatus) {
+          this.$message({
+            type: 'error',
+            message: '请选择分润状态'
+          });
+          return false
+        }
         this.$refs[formData].validate((valid) => {
           if (valid) {
             this.handleConfirm()
