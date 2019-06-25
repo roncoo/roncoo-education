@@ -37,28 +37,38 @@
             <el-input type="text" style="width: 120px" placeholder="请输入价格" v-model="formData.courseOriginal"></el-input> 元
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <!-- <el-col :span="12">
           <el-form-item label="优惠价：">
             <el-input type="text" style="width: 120px" placeholder="请输入价格" v-model="formData.courseDiscount"></el-input> 元
           </el-form-item>
-        </el-col>
+        </el-col> -->
       </el-row>
-
       <el-form-item label="排序：">
         <el-input v-model="formData.sort"></el-input>
       </el-form-item>
-
+      <el-form-item label="课程简介:">
+             <div id="introduce"></div>
+          </el-form-item>
       <el-row style="margin-top:17px; ">
         <el-button style="float:right;margin-left:6px;" size="mini" type="danger" plain @click="handleClose">取 消</el-button>
-        <el-button style="float:right" size="mini" type="primary" @click="submitForm('map')">确定</el-button>
+        <el-button style="float:right" size="mini" type="primary" @click="submitForm('formData')">确定</el-button>
       </el-row>
     </el-form>
   </el-dialog>
 </template>
 <script>
-//import * as courseApis from '@/api/course'
+import * as courseApis from '@/api/course'
+import * as userApi from '@/api/user'
 export default {
   name: 'Edit',
+  data() {
+      return {
+        editor: {},
+        ctrl: {
+          dialogVisible: true
+        }
+      }
+    },
   props: {
     // route object
     formData: {
@@ -74,7 +84,85 @@ export default {
     default: ''
     }
   },
+  watch: {
+    formData: function(val) {
+      if (val !== undefined) {
+        setTimeout(() => {
+          this.editor.create();
+          this.editor.customConfig.customUploadImg = this.editorUpload
+          if (this.formData.introduce !== undefined && this.formData.introduce !== '' && this.formData.introduce !== null) {
+            this.editor.txt.html(this.formData.introduce)
+          } else {
+            this.editor.txt.html('')
+          }
+        }, 100)
+      }
+    }
+  },
+  mounted() {
+    this.createEdit();
+  },
   methods: {
+   createEdit() {
+      const E = require('wangeditor')
+      this.editor = new E('#introduce')
+    },
+    submitForm(formData) {
+      if (parseInt(this.formData.isFree) !== 1) {
+        if (!this.formData.courseOriginal) {
+          this.$alert('请输入课程原价')
+          return false;
+        }
+        if (this.formData.courseOriginal <= 0) {
+          this.$alert('请输入正确的课程原价')
+          return false;
+        }
+      } else {
+        this.formData.courseOriginal = 0;
+      }
+      this.$refs[formData].validate((valid) => {
+        if (valid) {
+          this.formData.introduce = this.editor.txt.html()
+          this.handleConfirm()
+        } else {
+          return false;
+        }
+      })
+    },
+   async handleConfirm() {
+      this.ctrl.load = true
+      let res = {}
+      if (this.formData.id === undefined) {
+        this.$alert(res.msg || '修改失败')
+      } else {
+        res = await courseApis.courseUpdate(this.formData)
+      }
+      this.ctrl.load = false
+      if (res.code === 200 && res.data > 0) {
+        // 提交成功, 关闭窗口, 刷新列表
+        this.tips('成功', 'success')
+        this.$emit('close-cllback')
+      } else {
+        this.$alert(res.msg || '修改失败')
+      }
+    },
+    // 编辑器上传图片
+    editorUpload(files, insert) {
+      const file = files[0];
+      const param = new FormData();
+      param.append('picFile', file, file.name);
+      userApi.uploadPic(param).then(res => {
+        if (res.code === 200) {
+          const imgUrl = res.data
+          insert(imgUrl)
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'error',
+          message: '上传图片出错，请稍后重试'
+        })
+      })
+    },
     handleClose(done) {
       this.$emit('close-cllback')
     }

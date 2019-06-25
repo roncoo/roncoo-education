@@ -225,6 +225,7 @@ export default {
     closeCllback() {
       this.ctrl.dialogVisible = false;
       this.ctrl.editVisible = false;
+      this.reload()
     },
     // 修改上下架状态
     handleChangeIsPutaway(row, command) {
