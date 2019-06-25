@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.roncoo.education.user.service.common.req.LecturerProfitBatchREQ;
 import com.roncoo.education.user.service.common.req.LecturerProfitPageREQ;
@@ -131,6 +132,7 @@ public class PcApiLecturerProfitBiz extends BaseBiz {
 	 * @param req
 	 * @return
 	 */
+	@Transactional
 	public Result<Integer> batch(LecturerProfitBatchREQ req) {
 
 		if (req.getId().isEmpty()) {
