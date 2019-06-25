@@ -53,7 +53,7 @@
    </div>
 
     <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
-      <el-table-column type="index" label="序号">
+      <el-table-column type="index" label="序号" width="40">
       </el-table-column>
       <el-table-column prop="courseName" label="课程名称">
         <!-- <template slot-scope="scope">
@@ -61,17 +61,17 @@
         </template> -->
       </el-table-column>>
 
-      <el-table-column label="课程分类">
+      <el-table-column label="课程分类" width="180">
         <template slot-scope="scope">
         {{scope.row.categoryName1}}/{{scope.row.categoryName2}}/{{scope.row.categoryName3}}
         </template>
       </el-table-column>
-      <el-table-column label="是否收费">
+      <el-table-column label="是否收费" width="90">
         <template slot-scope="scope">
           <span :class="textClass(scope.row.isFree)">{{textIsFree[scope.row.isFree]}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="原价">
+      <el-table-column label="原价" width="100">
         <template slot-scope="scope">
           {{scope.row.courseOriginal.toFixed(2)}}
         </template>
@@ -94,16 +94,6 @@
           </el-switch>
         </template>
       </el-table-column>
-      <el-table-column prop="sort" label="排序">
-      </el-table-column>
-
-
-      <el-table-column label="状态">
-        <template slot-scope="scope">
-          <span :class="textClass(scope.row.statusId)">{{textStatusId[scope.row.statusId]}}</span>
-        </template>
-      </el-table-column>
-
       <el-table-column
         width="150"
         prop="statusId"
@@ -112,7 +102,7 @@
         <template slot-scope="scope">
           <el-switch
             v-model="scope.row.statusId"
-            @change="handleChangeStatusId(scope.row)"
+            @change="handleChangeStatusId(scope.row, $event)"
             :active-value="0"
             :inactive-value="1"
             active-color="#ff4949"
@@ -122,16 +112,20 @@
           </el-switch>
         </template>
       </el-table-column>
-
-      <el-table-column label="审核状态">
+      <el-table-column prop="sort" label="排序" width="70">
+      </el-table-column>
+      <el-table-column label="审核状态" width="110">
         <template slot-scope="scope">
           <span :class="textAuditStatusClass(scope.row.auditStatus)">{{textAuditStatus[scope.row.auditStatus]}}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="address" width="120" label="操作">
+      <el-table-column width="150" label="操作">
+        <template slot-scope="scope">
+          <el-button type="primary" @click="handleAudit(scope.row)" size="mini">审核</el-button>
+          <el-button type="success" @click="handleEdit(scope.row)" size="mini">修改</el-button>
+        </template>
       </el-table-column>
     </el-table>
-
     <el-pagination
       background
       style="float: right;margin-top: 20px; margin-bottom: 22px"
@@ -142,19 +136,22 @@
       layout="total, sizes, prev, pager, next, jumper"
       :total="page.totalCount">
     </el-pagination>
-    <!-- <view-course :visible="ctrl.dialogVisible" :formData="formdata" @close-cllback="closeCllback"></view-course> -->
+    <course-audit :visible="ctrl.dialogVisible" :formData="formdata" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></course-audit>
+    <edit :visible="ctrl.editVisible" :formData="formdata" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
   </div>
 </template>
 <script>
 import * as courseApis from '@/api/course'
-//import ViewCourse from './view'
+import CourseAudit from './audit'
+import Edit from './edit'
 export default {
-  //components: { ViewCourse },
+  components: { CourseAudit, Edit },
   data() {
     return {
       ctrl: {
         load: false,
-        dialogVisible: false
+        dialogVisible: false,
+        editVisible: false
       },
       map: {
         isFree: '',
@@ -227,11 +224,10 @@ export default {
     // 关闭编辑弹窗回调
     closeCllback() {
       this.ctrl.dialogVisible = false;
-      this.ctrl.viewDialogVisible = false;
+      this.ctrl.editVisible = false;
     },
     // 修改上下架状态
-    handleChangeIsPutaway(row, command ) {
-      console.log("=======" + row)
+    handleChangeIsPutaway(row, command) {
       const title = { 0: '下架', 1: '上下架' }
       this.$confirm(`确定要${title[command]}吗?`, {
         confirmButtonText: '确定',
@@ -255,20 +251,56 @@ export default {
           this.reload()
       })
     },
+    // 修改状态
+    handleChangeStatusId(row, command) {
+      const title = { 0: '正常', 1: '禁用' }
+      this.$confirm(`确定要${title[command]}吗?`, {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.changeStatusId(row, command)
+        this.reload()
+      }).catch(() => {
+        this.reload()
+      })
+    },
+    // 请求更新状态方法
+    changeStatusId(row, command) {
+      courseApis.courseUpdate({ id: row.id, statusId: command }).then(res => {
+        const msg = { 0: '禁用成功', 1: '启用成功' }
+        this.$message({
+          type: 'success',
+          message: msg[command]
+        });
+          this.reload()
+      })
+    },
     // 刷新当前页面
     reload() {
       this.getList()
     },
-    /*handleView(data) {
+    handleAudit(data) {
       this.ctrl.load = true
       courseApis.courseAuditView(data.id).then(res => {
         this.ctrl.load = false
-        this.formdata = res
+        this.formdata = res.data
         this.ctrl.dialogVisible = true
       }).catch(() => {
         this.ctrl.load = false
       })
-    },*/
+    },
+    handleEdit(data) {
+      this.ctrl.load = true
+      courseApis.courseAuditView(data.id).then(res => {
+        this.ctrl.load = false
+        this.formdata = res.data
+        this.ctrl.dialogTitle = "编辑"
+        this.ctrl.editVisible = true
+      }).catch(() => {
+        this.ctrl.load = false
+      })
+    },
     // 重置查询条件
     handleReset() {
       this.map = {}

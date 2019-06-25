@@ -8,8 +8,8 @@
   <el-form ref="map" :model="map">
     <el-row>
       审核状态：
-      <el-radio v-model="map.auditSatusId" label="1">通过</el-radio>
-      <el-radio v-model="map.auditSatusId" label="2">不通过</el-radio>
+      <el-radio v-model="map.auditStatus" label="1">通过</el-radio>
+      <el-radio v-model="map.auditStatus" label="2">不通过</el-radio>
     </el-row>
     <el-row style="margin-top:15px;">
       <el-col>审核意见：</el-col>
@@ -35,7 +35,7 @@ export default {
       },
       map: {
         id: '',
-        auditSatusId: '1',
+        auditStatus: '1',
         auditOpinion: ''
       },
       head: '',
@@ -60,7 +60,7 @@ export default {
   watch: {
     'visible': function(newValue) {
       this.vb = newValue
-      this.head = this.title + " —— 信息审核"
+      this.head = this.formData.courseName + " —— 信息审核"
     }
   },
   methods: {
@@ -80,11 +80,9 @@ export default {
       if (this.map.auditOpinion === '') {
         this.map.auditOpinion = "系统默认通过"
       }
-      this.map.id = this.formData.data.id
-      console.log(this.map)
+      this.map.id = this.formData.id
       this.ctrl.load = true
       courseApis.courseAudit(this.map).then(res => {
-        console.log("审核状态============" + res.code)
         this.tips('审核成功', 'success')
         this.$emit('close-cllback')
         this.ctrl.load = false

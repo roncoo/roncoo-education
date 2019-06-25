@@ -18,10 +18,19 @@ export function courseAuditView(id) {
   })
 }
 
-// 审核课程详情接口
+// 审核课程更新接口
 export function courseUpdate(data = {}) {
   return request({
     url: '/course/pc/course/audit/update',
+    method: 'post',
+    data: data
+  })
+}
+
+// 审核课程审核接口
+export function courseAudit(data = {}) {
+  return request({
+    url: '/course/pc/course/audit/audit',
     method: 'post',
     data: data
   })
