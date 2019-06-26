@@ -1,6 +1,7 @@
 package com.roncoo.education.system.service.api.pc;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,7 +44,7 @@ public class PcApiSysMenuController extends BaseController {
 	 */
 	@ApiOperation(value = "菜单信息保存接口", notes = "菜单信息保存接口")
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public Result<Integer> save(SysMenuSaveREQ sysMenuSaveREQ) {
+	public Result<Integer> save(@RequestBody SysMenuSaveREQ sysMenuSaveREQ) {
 		return biz.save(sysMenuSaveREQ);
 	}
 
@@ -52,7 +53,7 @@ public class PcApiSysMenuController extends BaseController {
 	 */
 	@ApiOperation(value = "菜单信息删除接口", notes = "菜单信息删除接口")
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public Result<Integer> delete(SysMenuDeleteREQ sysMenuDeleteREQ) {
+	public Result<Integer> delete(@RequestBody SysMenuDeleteREQ sysMenuDeleteREQ) {
 		return biz.delete(sysMenuDeleteREQ);
 	}
 
@@ -61,7 +62,7 @@ public class PcApiSysMenuController extends BaseController {
 	 */
 	@ApiOperation(value = "菜单信息更新接口", notes = "菜单信息更新接口")
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public Result<Integer> update(SysMenuUpdateREQ sysMenuUpdateREQ) {
+	public Result<Integer> update(@RequestBody SysMenuUpdateREQ sysMenuUpdateREQ) {
 		return biz.update(sysMenuUpdateREQ);
 	}
 
@@ -70,7 +71,7 @@ public class PcApiSysMenuController extends BaseController {
 	 */
 	@ApiOperation(value = "菜单信息查看接口", notes = "菜单信息查看接口")
 	@RequestMapping(value = "/view", method = RequestMethod.POST)
-	public Result<SysMenuViewRESQ> view(SysMenuViewREQ sysMenuViewREQ) {
+	public Result<SysMenuViewRESQ> view(@RequestBody SysMenuViewREQ sysMenuViewREQ) {
 		return biz.view(sysMenuViewREQ);
 	}
 

@@ -41,7 +41,7 @@ public class PcApiSysMenuRoleController extends BaseController {
 	 */
 	@ApiOperation(value = "添加角色菜单关联信息接口", notes = "添加角色菜单关联信息接口")
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public Result<Integer> save(SysMenuRoleSaveREQ sysMenuRoleSaveREQ) {
+	public Result<Integer> save(@RequestBody SysMenuRoleSaveREQ sysMenuRoleSaveREQ) {
 		return biz.save(sysMenuRoleSaveREQ);
 	}
 

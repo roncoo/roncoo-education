@@ -17,8 +17,8 @@
       </el-form-item>
         <el-form-item>
           <el-button type="primary" :loading="ctrl.load" @click="handleCheck">查询</el-button>
-          <el-button class="filter-item" @click="handleReset">重置
-          </el-button>
+          <el-button class="filter-item" @click="handleReset">重置</el-button>
+          <el-button type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAdd()">添加</el-button>
         </el-form-item>
         </el-form>
       </div>
@@ -74,21 +74,23 @@
             layout="total, sizes, prev, pager, next, jumper"
             :total="page.totalCount">
           </el-pagination>
+          <add :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></add>
         </div>
-        <br/>
-        <br/>
     </div>
 </template>
 <script>
   import * as api from '@/api/system'
+  import Add from './add'
   export default {
+    components: { Add },
     data() {
       return {
         map: {},
         formData: {},
         list: [],
         ctrl: {
-          load: false
+          load: false,
+          addDialogVisible: false
         },
         opts: {
           statusIdList: []
@@ -121,30 +123,30 @@
       this.$store.dispatch('GetOpts', { enumName: "StatusIdEnum", type: 'arr' }).then(res => {
         this.opts.statusIdList = res
       })
-      this.userExtList(1)
+      this.roleList(1)
     },
     methods: {
       handleSizeChange(val) {
         // console.log(`每页 ${val} 条`)
         this.page.pageSize = val
-        this.userExtList()
+        this.roleList()
       },
       handleCurrentChange(val) {
         this.page.pageCurrent = val
-        this.userExtList()
+        this.roleList()
         // console.log(`当前页: ${val}`)
       },
       // 查询条件
        handleCheck() {
         this.page.pageCurrent = 1
-        this.userExtList()
+        this.roleList()
       },
       // 重置查询条件
       handleReset() {
         this.reload()
       },
       // 角色分页列表信息
-      userExtList() {
+      roleList() {
         this.ctrl.load = true
         api.roleList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.list = res.data.list
@@ -191,10 +193,20 @@
           }
         })
       },
+      // 角色添加弹窗
+      handleAdd() {
+        this.ctrl.addDialogVisible = true
+        this.dialogTitle = "添加"
+      },
+      // 关闭弹窗回调
+      closeCllback() {
+        this.ctrl.addDialogVisible = false
+        this.reload()
+      },
       // 刷新当前页面
       reload() {
         this.map = {}
-        this.userExtList()
+        this.roleList()
       },
       textClass(userType) {
         return {
