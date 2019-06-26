@@ -88,3 +88,21 @@ export function roleUpdate(data = {}) {
     data: data
   })
 }
+
+// 列出菜单角色关联信息接口
+export function menuRoleList(data = {}) {
+  return request({
+    url: `/system/pc/menu/role/list`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 添加角色菜单关联信息接口
+export function menuRoleSave(data = {}) {
+  return request({
+    url: `/system/pc/menu/role/save`,
+    method: 'post',
+    data: data
+  })
+}

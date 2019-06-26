@@ -172,6 +172,7 @@
         this.ctrl.passwordDialogVisible = false
         this.reload()
       },
+      // 删除
       handleDelete(id) {
         this.$confirm(`确定要删除吗?`, {
           confirmButtonText: '确定',

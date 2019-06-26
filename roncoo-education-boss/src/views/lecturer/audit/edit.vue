@@ -77,10 +77,7 @@
     name: 'Edit',
     data() {
       return {
-        editor: {},
-        ctrl: {
-          dialogVisible: true
-        }
+        editor: {}
       }
     },
     props: {
@@ -123,13 +120,10 @@
     methods: {
       // 编辑器上传图片
       editorUpload(files, insert) {
-        console.log(files)
         const file = files[0];
         const param = new FormData();
         param.append('picFile', file, file.name);
         userApi.uploadPic(param).then(res => {
-          console.log(res.code)
-          console.log('load=======')
           if (res.code === 200) {
             const imgUrl = res.data
             insert(imgUrl)
@@ -160,14 +154,14 @@
         })
       },
      async handleConfirm() {
-        this.ctrl.load = true
+        this.load = true
         let res = {}
         if (this.formData.id === undefined) {
           this.$alert(res.msg || '提交失败')
         } else {
           res = await userApi.lecturerAuditUpdate(this.formData)
         }
-        this.ctrl.load = false
+        this.load = false
         if (res.code === 200 && res.data > 0) {
           // 提交成功, 关闭窗口, 刷新列表
           this.tips('成功', 'success')

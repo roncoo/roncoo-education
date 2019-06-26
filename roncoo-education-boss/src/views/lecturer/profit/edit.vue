@@ -30,9 +30,6 @@
     data() {
       return {
         profitStatusList: [],
-        ctrl: {
-          dialogVisible: true
-        },
         rules: {
           profitStatus: [
             { required: true, message: '请选择分润状态', trigger: 'blur' }
@@ -81,14 +78,14 @@
         })
       },
      async handleConfirm() {
-        this.ctrl.load = true
+        this.load = true
         let res = {}
         if (this.formData.id === undefined) {
           this.$alert(res.msg || '提交失败')
         } else {
           res = await userApi.lecturerProfitUpdate(this.formData)
         }
-        this.ctrl.load = false
+        this.load = false
         if (res.code === 200 && res.data > 0) {
           // 提交成功, 关闭窗口, 刷新列表
           this.tips('成功', 'success')

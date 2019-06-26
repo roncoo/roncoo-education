@@ -53,10 +53,13 @@
           <el-table-column
           fixed="right"
           label="操作"
-          width="100">
+          width="270">
           <template slot-scope="scope">
             <ul class="list-item-actions">
               <li>
+                <el-button type="danger" @click="handleDelete(scope.row.id)" size="mini">删除</el-button>
+                <el-button type="success" @click="handleEdit(scope.row)" size="mini">修改</el-button>
+                <el-button type="success" @click="handlePms(scope.row.id, scope.row.roleName)" size="mini">设置权限</el-button>
               </li>
             </ul>
           </template>
@@ -75,14 +78,18 @@
             :total="page.totalCount">
           </el-pagination>
           <add :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></add>
+          <edit :visible="ctrl.editDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
+          <pms :visible="ctrl.pmsDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></pms>
         </div>
     </div>
 </template>
 <script>
   import * as api from '@/api/system'
   import Add from './add'
+  import Edit from './edit'
+  import Pms from './pms'
   export default {
-    components: { Add },
+    components: { Add, Edit, Pms },
     data() {
       return {
         map: {},
@@ -90,7 +97,8 @@
         list: [],
         ctrl: {
           load: false,
-          addDialogVisible: false
+          addDialogVisible: false,
+          pmsDialogVisible: false
         },
         opts: {
           statusIdList: []
@@ -193,19 +201,58 @@
           }
         })
       },
+      // 删除
+      handleDelete(id) {
+        this.$confirm(`确定要删除吗?`, {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          api.roleDelete({ id: id }).then(res => {
+          if (res.code === 200 && res.data > 0) {
+            this.$message({
+              type: 'success',
+              message: "删除成功"
+            });
+              this.reload()
+          } else {
+            this.$message({
+              type: 'error',
+              message: "删除失败"
+            });
+              this.reload()
+          }
+        })
+        }).catch(() => {
+          this.reload()
+        })
+      },
       // 角色添加弹窗
       handleAdd() {
         this.ctrl.addDialogVisible = true
         this.dialogTitle = "添加"
       },
+      // 角色修改弹窗
+      handleEdit(res) {
+        this.formData = res
+        this.ctrl.editDialogVisible = true
+        this.dialogTitle = res.roleName + '-' + "修改"
+      },
+      handlePms(id, roleName) {
+        this.ctrl.pmsDialogVisible = true
+        this.dialogTitle = roleName + '-' + "设置权限"
+      },
       // 关闭弹窗回调
       closeCllback() {
         this.ctrl.addDialogVisible = false
+        this.ctrl.editDialogVisible = false
+        this.ctrl.pmsDialogVisible = false
         this.reload()
       },
       // 刷新当前页面
       reload() {
         this.map = {}
+        this.formData = {}
         this.roleList()
       },
       textClass(userType) {

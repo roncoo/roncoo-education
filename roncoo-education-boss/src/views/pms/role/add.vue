@@ -1,19 +1,13 @@
 <template>
   <!--弹窗-->
-  <div>
   <el-dialog
     width="35%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form ref="form" :model="form" :rules="rules" label-width="100px">
-      <el-form-item label="手机:" prop="mobile">
-        <el-input placeholder="请输入内容" v-model="form.mobile" class="input-with-select">
-          <el-button slot="append" icon="el-icon-search" @click="userList()"></el-button>
-        </el-input>
-     </el-form-item>
-      <el-form-item label="名称:" prop="realName">
-        <el-input v-model="form.realName"></el-input>
+      <el-form-item label="名称:" prop="roleName">
+        <el-input v-model="form.roleName"></el-input>
       </el-form-item>
       <el-form-item label="备注:">
         <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="form.remark">
@@ -25,27 +19,16 @@
       <el-button class="button" type="danger" plain @click="handleClose">取 消</el-button>
     </div>
   </el-dialog>
-    <list-user :visible="ctrl.dialogVisible" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></list-user>
-  </div>
 </template>
 <script>
-import { isvalidMobile } from '@/utils/validate'
 import * as api from '@/api/system'
-import listUser from './list'
 export default {
-  components: { listUser },
   name: 'Add',
   data() {
     return {
       form: {},
-      ctrl: {
-        dialogVisible: false
-      },
       rules: {
-        mobile: [
-          { required: true, message: '请选择用户', trigger: 'blur' }
-        ],
-        realName: [
+        roleName: [
           { required: true, message: '请输入名称', trigger: 'blur' }
         ]
       }
@@ -62,35 +45,12 @@ export default {
     }
   },
   methods: {
-    userList() {
-      this.ctrl.dialogVisible = true
-    },
-    // 关闭编辑弹窗回调
-    closeCllback(res) {
-      this.form.userNo = res.userNo
-      this.form.mobile = res.mobile
-      this.ctrl.dialogVisible = false
-    },
     // 保存管理员信息
     submitForm(form) {
-      if (!this.form.realName) {
+      if (!this.form.roleName) {
         this.$message({
           type: 'error',
           message: '请输入名称'
-        });
-        return false
-      }
-      if (!this.form.mobile) {
-        this.$message({
-          type: 'error',
-          message: '请输入手机号码'
-        });
-        return false
-      }
-      if (!isvalidMobile(this.form.mobile)) {
-        this.$message({
-          type: 'error',
-          message: '请输入正确的手机号'
         });
         return false
       }
@@ -102,14 +62,14 @@ export default {
         }
       })
     },
-    //异步保存管理员信息
+    //异步保存角色信息
     async handleConfirm() {
       this.load = true
       let res = {}
       if (this.form === undefined) {
         this.$alert(res.msg || '提交失败')
       } else {
-        res = await api.userSave(this.form)
+        res = await api.roleSave(this.form)
         // this.tips('成功', 'success')
       }
       this.load = false

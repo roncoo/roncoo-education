@@ -42,9 +42,6 @@ export default {
       newUser: 1,
       check: 1,
       form: {},
-      ctrl: {
-        addDialogVisible: true
-      },
       rules: {
         lecturerMobile: [
           { required: true, message: '请输入手机号码', trigger: 'blur' }
@@ -118,7 +115,7 @@ export default {
           this.check = 2
         }
       }).catch(() => {
-          this.ctrl.load = false
+          this.load = false
         })
     },
     // 保存讲师信息
@@ -161,7 +158,7 @@ export default {
     },
     //异步保存讲师信息
     async handleConfirm() {
-      this.ctrl.load = true
+      this.load = true
       let res = {}
       if (this.form === undefined) {
         this.$alert(res.msg || '提交失败')
@@ -169,7 +166,7 @@ export default {
         res = await userApi.lecturerAuditSave(this.form)
         // this.tips('成功', 'success')
       }
-      this.ctrl.load = false
+      this.load = false
       if (res.code === 200 && res.data > 0) {
         // 提交成功, 关闭窗口, 刷新列表
         this.$emit('close-cllback')

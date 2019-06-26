@@ -1,16 +1,13 @@
 <template>
   <!--弹窗-->
   <el-dialog
-    width="45%"
+    width="30%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
-    <el-form ref="formData" :model="formData" label-width="80px">
-      <el-form-item label="用户手机:">
-        <el-input :disabled="true" v-model="formData.mobile"></el-input>
-      </el-form-item>
-      <el-form-item label="名称:">
-        <el-input v-model="formData.realName"></el-input>
+    <el-form ref="formData" :model="formData" :rules="rules" label-width="80px">
+      <el-form-item label="名称:" prop="roleName">
+        <el-input v-model="formData.roleName"></el-input>
       </el-form-item>
       <el-form-item label="排序:">
         <el-input v-model="formData.sort"></el-input>
@@ -31,6 +28,11 @@
     name: 'Edit',
     data() {
       return {
+        rules: {
+        roleName: [
+          { required: true, message: '请输入名称', trigger: 'blur' }
+        ]
+      }
       }
     },
     props: {
@@ -67,7 +69,7 @@
         if (this.formData.id === undefined) {
           this.$alert(res.msg || '提交失败')
         } else {
-          res = await api.userUpdate(this.formData)
+          res = await api.roleUpdate(this.formData)
           // this.tips('成功', 'success')
         }
         this.load = false

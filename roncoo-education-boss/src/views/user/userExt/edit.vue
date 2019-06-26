@@ -54,10 +54,7 @@
     name: 'Edit',
     data() {
       return {
-        fileList: [],
-        ctrl: {
-          dialogVisible: true
-        }
+        fileList: []
       }
     },
     props: {
@@ -107,7 +104,7 @@
         })
       },
      async handleConfirm() {
-        this.ctrl.loading = true
+        this.load = true
         let res = {}
         if (this.formData.id === undefined) {
           this.$alert(res.msg || '提交失败')
@@ -115,7 +112,7 @@
           res = await userApi.userExtUpdate(this.formData)
           // this.tips('成功', 'success')
         }
-        this.ctrl.loading = false
+        this.load = false
         if (res.code === 200 && res.data > 0) {
           // 提交成功, 关闭窗口, 刷新列表
           this.tips('成功', 'success')
