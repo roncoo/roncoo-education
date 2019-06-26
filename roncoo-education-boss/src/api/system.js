@@ -9,7 +9,7 @@ export function enumList(enumName) {
 }
 
 // 后台管理员分页列表接口
-export function userList(params, pageCurrent = 1, pageSize = 20) {
+export function sysUserList(params, pageCurrent = 1, pageSize = 20) {
   return request({
     url: '/system/pc/sys/user/list',
     method: 'post',
@@ -53,10 +53,37 @@ export function updatePassword(data = {}) {
   })
 }
 
-// 后台管理员查看接口
-export function userView(data = {}) {
+// 角色分页列表接口
+export function roleList(params, pageCurrent = 1, pageSize = 20) {
   return request({
-    url: `/system/pc/sys/user/view`,
+    url: '/system/pc/sys/role/list',
+    method: 'post',
+    data: { pageCurrent: pageCurrent, pageSize: pageSize, ...params }
+  })
+}
+
+// 角色添加接口
+export function roleSave(data = {}) {
+  return request({
+    url: `/system/pc/sys/role/save`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 角色删除接口
+export function roleDelete(data = {}) {
+  return request({
+    url: `/system/pc/sys/role/delete`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 角色更新接口
+export function roleUpdate(data = {}) {
+  return request({
+    url: `/system/pc/sys/role/update`,
     method: 'post',
     data: data
   })

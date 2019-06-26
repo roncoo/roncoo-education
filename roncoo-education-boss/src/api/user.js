@@ -1,5 +1,14 @@
 import request from '@/utils/request'
 
+// 用戶分页列出接口
+export function userList(params, pageCurrent = 1, pageSize = 20) {
+  return request({
+    url: '/user/pc/user/list',
+    method: 'post',
+    data: { pageCurrent: pageCurrent, pageSize: pageSize, ...params }
+  })
+}
+
 // 学员分页列表接口
 export function userExtList(params, pageCurrent = 1, pageSize = 20) {
   return request({

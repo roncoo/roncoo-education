@@ -80,7 +80,7 @@ public class PcApiSysRoleBiz {
 	}
 
 	public Result<Integer> update(SysRoleUpdateREQ req) {
-		if (StringUtils.isEmpty(req.getId())) {
+		if (req.getId() == null) {
 			return Result.error("角色ID不能为空");
 		}
 		SysRole record = BeanUtil.copyProperties(req, SysRole.class);
@@ -92,7 +92,7 @@ public class PcApiSysRoleBiz {
 	}
 
 	public Result<SysRoleViewRESQ> view(SysRoleViewREQ req) {
-		if (StringUtils.isEmpty(req.getId())) {
+		if (req.getId() == null) {
 			return Result.error("角色ID不能为空");
 		}
 		SysRole record = dao.getById(req.getId());

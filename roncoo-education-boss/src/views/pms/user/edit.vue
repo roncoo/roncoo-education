@@ -9,18 +9,11 @@
       <el-form-item label="用户手机:">
         <el-input :disabled="true" v-model="formData.mobile"></el-input>
       </el-form-item>
-      <el-form-item label="昵称:">
-        <el-input v-model="formData.nickname"></el-input>
+      <el-form-item label="名称:">
+        <el-input v-model="formData.realName"></el-input>
       </el-form-item>
-      <el-form-item label="性别:">
-        <el-radio-group v-model="formData.sex">
-          <el-radio :label="1">男</el-radio>
-          <el-radio :label="2">女</el-radio>
-          <el-radio :label="3">保密</el-radio>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="年龄:">
-        <el-input v-model="formData.age"></el-input>
+      <el-form-item label="排序:">
+        <el-input v-model="formData.sort"></el-input>
       </el-form-item>
       <el-form-item label="备注:">
         <el-input type="textarea" v-model="formData.remark"></el-input>

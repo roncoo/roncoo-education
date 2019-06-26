@@ -45,11 +45,13 @@
         <el-table-column
         fixed="right"
         label="操作"
-        width="200">
+        width="300">
         <template slot-scope="scope">
           <ul class="list-item-actions">
             <li>
+              <el-button type="danger" @click="handleDelete(scope.row.id)" size="mini">删除</el-button>
               <el-button type="success" @click="handleEdit(scope.row)" size="mini">修改</el-button>
+              <el-button type="success" @click="handlePassword(scope.row.userNo)" size="mini">密码修改</el-button>
             </li>
           </ul>
         </template>
@@ -66,16 +68,18 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="page.totalCount">
       </el-pagination>
-      <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
       <add :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></add>
+      <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
+      <password :visible="ctrl.passwordDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></password>
   </div>
 </template>
 <script>
   import * as api from '@/api/system'
   import Edit from './edit'
   import Add from './add'
+  import Password from './password'
   export default {
-    components: { Edit, Add },
+    components: { Edit, Add, Password },
     data() {
       return {
         map: {},
@@ -85,6 +89,7 @@
           load: false,
           dialogVisible: false,
           addDialogVisible: false,
+          passwordDialogVisible: false,
           viewVisible: false
         },
         opts: {
@@ -133,8 +138,7 @@
       // 后台管理员分页列表接口
       adminUserList() {
         this.ctrl.load = true
-        api.userList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
-          console.log(res)
+        api.sysUserList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.list = res.data.list
           this.page.pageCurrent = res.data.pageCurrent
           this.page.totalCount = res.data.totalCount
@@ -146,7 +150,7 @@
       },
       // 添加管理员
       handleAdd() {
-        this.addDialogVisible = true
+        this.ctrl.addDialogVisible = true
         this.dialogTitle = '添加'
       },
       // 跳修改弹窗页面
@@ -155,11 +159,43 @@
         this.ctrl.dialogVisible = true
         this.ctrl.dialogTitle = '编辑-' + row.mobile
       },
+      // 跳出修改密码弹窗
+      handlePassword(row) {
+        this.formData.userNo = row
+        this.ctrl.passwordDialogVisible = true
+        this.ctrl.dialogTitle = '密码修改-' + row.mobile
+      },
       // 关闭弹窗回调
       closeCllback() {
+        this.ctrl.addDialogVisible = false
         this.ctrl.dialogVisible = false
-        this.addDialogVisible = false
+        this.ctrl.passwordDialogVisible = false
         this.reload()
+      },
+      handleDelete(id) {
+        this.$confirm(`确定要删除吗?`, {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          api.userDelete({ id: id }).then(res => {
+          if (res.code === 200 && res.data > 0) {
+            this.$message({
+              type: 'success',
+              message: "删除成功"
+            });
+              this.reload()
+          } else {
+            this.$message({
+              type: 'error',
+              message: "删除失败"
+            });
+              this.reload()
+          }
+        })
+        }).catch(() => {
+          this.reload()
+        })
       },
       // 修改状态
       handleChangeStatus(id, statusId) {

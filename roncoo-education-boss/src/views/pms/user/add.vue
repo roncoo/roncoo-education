@@ -1,16 +1,23 @@
 <template>
   <!--弹窗-->
+  <div>
   <el-dialog
-    width="50%"
+    width="35%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form ref="form" :model="form" :rules="rules" label-width="100px">
+      <el-form-item label="手机:" prop="mobile">
+        <el-input placeholder="请输入内容" v-model="form.mobile" class="input-with-select">
+          <el-button slot="append" icon="el-icon-search" @click="userList()"></el-button>
+        </el-input>
+     </el-form-item>
       <el-form-item label="名称:" prop="realName">
         <el-input v-model="form.realName"></el-input>
       </el-form-item>
       <el-form-item label="备注:">
-        <el-input v-model="form.remark"></el-input>
+        <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="form.remark">
+        </el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -18,11 +25,15 @@
       <el-button class="button" type="danger" plain @click="handleClose">取 消</el-button>
     </div>
   </el-dialog>
+    <list-user :visible="ctrl.dialogVisible" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></list-user>
+  </div>
 </template>
 <script>
 import { isvalidMobile } from '@/utils/validate'
 import * as api from '@/api/system'
+import listUser from './list'
 export default {
+  components: { listUser },
   name: 'Add',
   data() {
     return {
@@ -30,9 +41,12 @@ export default {
       check: 1,
       form: {},
       ctrl: {
-        addDialogVisible: true
+        dialogVisible: false
       },
       rules: {
+        mobile: [
+          { required: true, message: '请选择用户', trigger: 'blur' }
+        ],
         realName: [
           { required: true, message: '请输入名称', trigger: 'blur' }
         ]
@@ -50,10 +64,14 @@ export default {
     }
   },
   methods: {
-    // 关闭弹窗
-    handleClose(done) {
-      this.form = {}
-      this.$emit('close-cllback')
+    userList() {
+      this.ctrl.dialogVisible = true
+    },
+    // 关闭编辑弹窗回调
+    closeCllback(res) {
+      this.form.userNo = res.userNo
+      this.form.mobile = res.mobile
+      this.ctrl.dialogVisible = false
     },
     // 保存管理员信息
     submitForm(form) {
@@ -103,6 +121,11 @@ export default {
       } else {
         this.$alert(res.msg || '提交失败')
       }
+    },
+    // 关闭弹窗
+    handleClose(done) {
+      this.form = {}
+      this.$emit('close-cllback')
     }
   }
 }
