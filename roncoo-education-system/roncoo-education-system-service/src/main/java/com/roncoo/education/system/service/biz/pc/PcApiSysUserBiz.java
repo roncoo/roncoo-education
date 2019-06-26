@@ -117,29 +117,24 @@ public class PcApiSysUserBiz {
 
 	public Result<Integer> updatePassword(SysUserUpdatePasswordREQ req) {
 		if (req.getUserNo() == null) {
-			throw new BaseException("用户编号不能为空,请重试");
+			return Result.error("用户编号不能为空,请重试");
 		}
-
 		if (StringUtils.isEmpty(req.getMobilePsw())) {
-			throw new BaseException("新密码不能为空,请重试");
+			return Result.error("新密码不能为空,请重试");
 		}
 		if (StringUtils.isEmpty(req.getRePwd())) {
-			throw new BaseException("确认密码不能为空,请重试");
+			return Result.error("确认密码不能为空,请重试");
 		}
-
 		if (!req.getRePwd().equals(req.getMobilePsw())) {
-			throw new BaseException("密码不一致,请重试");
+			return Result.error("密码不一致,请重试");
 		}
-
 		UserVO userVO = bossUser.getByUserNo(req.getUserNo());
 		if (ObjectUtil.isNull(userVO)) {
-			throw new BaseException("找不到用户信息,请重试");
+			return Result.error("找不到用户信息,请重试");
 		}
-
 		if (DigestUtil.sha1Hex(userVO.getMobileSalt() + req.getMobilePsw()).equals(userVO.getMobilePsw())) {
-			throw new BaseException("输入的密码与原密码一致,请重试");
+			return Result.error("输入的密码与原密码一致,请重试");
 		}
-
 		UserQO userQO = new UserQO();
 		userQO.setId(userVO.getId());
 		userQO.setMobilePsw(DigestUtil.sha1Hex(userVO.getMobileSalt() + req.getMobilePsw()));
