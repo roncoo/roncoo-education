@@ -112,7 +112,7 @@ public class PcApiSysUserBiz {
 		if (ObjectUtil.isNull(sysUser)) {
 			return Result.error("管理员不存在");
 		}
-		return Result.success(BeanUtil.copyProperties(req, SysUserViewRESQ.class));
+		return Result.success(BeanUtil.copyProperties(sysUser, SysUserViewRESQ.class));
 	}
 
 	public Result<Integer> updatePassword(SysUserUpdatePasswordREQ req) {
