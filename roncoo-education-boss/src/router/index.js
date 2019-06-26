@@ -12,10 +12,18 @@ export const asyncRouterMap = [
     // 当菜单文件中没有该页面配置时，在标签栏显示的就是这里配置的标题
     meta: { title: '首页' }
   },
+  //订单管理
   {
     path: 'order',
-    component: () => import('@/views/order')
+    component: () => import('@/views/order'),
+    children: [
+      {
+        path: 'order',
+        component: () => import('@/views/order')
+      }
+    ]
   },
+  //课程管理
   {
     path: 'course',
     component: () => import('@/views/course'),

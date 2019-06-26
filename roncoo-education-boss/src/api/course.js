@@ -71,3 +71,12 @@ export function courseViewForEdit(id) {
     data: { id: id }
   })
 }
+
+// 订单分页列表接口
+export function orderList(params, page = 1, pageSize = 20) {
+  return request({
+    url: '/course/pc/order/info/list',
+    method: 'post',
+    data: { pageCurrent: page, pageSize: pageSize, ...params }
+  })
+}
