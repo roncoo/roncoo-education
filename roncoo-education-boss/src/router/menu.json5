@@ -30,7 +30,7 @@
       {
         "id": 2,
         "name": "订单列表",
-        "path": "/order",
+        "path": "",
         "icon": null,
       }
     ]
