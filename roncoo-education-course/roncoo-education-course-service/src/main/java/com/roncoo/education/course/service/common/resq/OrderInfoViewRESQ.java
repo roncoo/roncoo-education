@@ -19,7 +19,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class OrderInfoViewRESQ implements Serializable {
+public class OrderInfoViewRESQ implements Serializable { 
 
 	private static final long serialVersionUID = 1L;
 	
