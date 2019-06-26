@@ -2,6 +2,7 @@ package com.roncoo.education.user.service.biz.pc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import com.roncoo.education.user.service.common.req.UserPageREQ;
 import com.roncoo.education.user.service.common.resq.UserPageRESQ;
@@ -28,11 +29,14 @@ public class PcApiUserBiz {
 	 * @param userPageREQ
 	 * @return
 	 */
-	public Result<Page<UserPageRESQ>> listForPage(UserPageREQ userPageREQ) {
+	public Result<Page<UserPageRESQ>> listForPage(UserPageREQ req) {
 		UserExample example = new UserExample();
 		Criteria c = example.createCriteria();
+		if (StringUtils.hasText(req.getMobile())) {
+			c.andMobileLike(PageUtil.like(req.getMobile()));
+		}
 		example.setOrderByClause(" status_id desc, id desc ");
-		Page<User> page = dao.listForPage(userPageREQ.getPageCurrent(), userPageREQ.getPageSize(), example);
+		Page<User> page = dao.listForPage(req.getPageCurrent(), req.getPageSize(), example);
 		return Result.success(PageUtil.transform(page, UserPageRESQ.class));
 	}
 }
