@@ -1,5 +1,6 @@
 package com.roncoo.education.system.service.biz.pc;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -10,14 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.roncoo.education.system.service.common.req.SysMenuRoleListREQ;
 import com.roncoo.education.system.service.common.req.SysMenuRoleSaveREQ;
 import com.roncoo.education.system.service.common.resq.SysMenuRoleListRESQ;
-import com.roncoo.education.system.service.common.resq.SysMenuRoleRESQ;
 import com.roncoo.education.system.service.dao.SysMenuDao;
 import com.roncoo.education.system.service.dao.SysMenuRoleDao;
-import com.roncoo.education.system.service.dao.impl.mapper.entity.SysMenu;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.SysMenuRole;
-import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.base.Result;
-import com.xiaoleilu.hutool.util.ObjectUtil;
 
 /**
  * 菜单角色关联表
@@ -44,16 +41,12 @@ public class PcApiSysMenuRoleBiz {
 		}
 		SysMenuRoleListRESQ resq = new SysMenuRoleListRESQ();
 		List<SysMenuRole> list = dao.listByRoleId(req.getRoleId());
+		List<Long> roleIdList = new ArrayList<>();
 		if (CollectionUtils.isNotEmpty(list)) {
-			List<SysMenuRoleRESQ> menuRoleRList = PageUtil.copyList(list, SysMenuRoleRESQ.class);
-			for (SysMenuRoleRESQ sysMenuRoleRESQ : menuRoleRList) {
-				// 查找菜单
-				SysMenu sysMenu = sysMenuDao.getById(sysMenuRoleRESQ.getMenuId());
-				if (ObjectUtil.isNotNull(sysMenu)) {
-					sysMenuRoleRESQ.setMenuName(sysMenu.getMenuName());
-				}
+			for (SysMenuRole sysMenuRole : list) {
+				roleIdList.add(sysMenuRole.getRoleId());
 			}
-			resq.setMenuRoleRList(menuRoleRList);
+			resq.setList(roleIdList);
 		}
 		return Result.success(resq);
 	}
