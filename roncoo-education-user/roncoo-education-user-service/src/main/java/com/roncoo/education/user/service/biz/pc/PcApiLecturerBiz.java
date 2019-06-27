@@ -26,6 +26,7 @@ import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.ResultEnum;
+import com.roncoo.education.util.enums.StatusIdEnum;
 import com.roncoo.education.util.tools.BeanUtil;
 import com.xiaoleilu.hutool.util.ObjectUtil;
 
@@ -73,7 +74,7 @@ public class PcApiLecturerBiz {
 		}
 		
 		if (req.getLecturerUserNo() != null) {
-			record = lecturerDao.getById(req.getId());
+			record = lecturerDao.getByLecturerUserNoAndStatusId(req.getLecturerUserNo(), StatusIdEnum.YES.getCode());
 		}
 		
 		if (ObjectUtil.isNull(record)) {
