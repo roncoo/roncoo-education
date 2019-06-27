@@ -1,6 +1,7 @@
 package com.roncoo.education.system.service.common.resq;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -47,6 +48,12 @@ public class SysMenuRESQ implements Serializable {
 	 */
 	@ApiModelProperty(value = "菜单名称")
 	private String menuName;
+
+	/**
+	 * 菜单名称(Tree 树形控件规范)
+	 */
+	@ApiModelProperty(value = "菜单名称")
+	private String label;
 	/**
 	 * 菜单路径
 	 */
@@ -67,4 +74,8 @@ public class SysMenuRESQ implements Serializable {
 	 */
 	@ApiModelProperty(value = "备注")
 	private String remark;
+	/**
+	 * 下级菜单集合
+	 */
+	private List<SysMenuRESQ> children;
 }
