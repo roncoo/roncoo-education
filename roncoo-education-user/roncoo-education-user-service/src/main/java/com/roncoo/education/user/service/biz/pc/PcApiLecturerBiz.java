@@ -67,12 +67,17 @@ public class PcApiLecturerBiz {
 	 * @param req
 	 */
 	public Result<LecturerViewRESQ> view(LecturerViewREQ req) {
-		if (null == req.getId()) {
-			return Result.error("讲师编号不能为空");
+		Lecturer record = new Lecturer();
+		if (req.getId() != null) {
+			record = lecturerDao.getById(req.getId());
 		}
-		Lecturer record = lecturerDao.getById(req.getId());
+		
+		if (req.getLecturerUserNo() != null) {
+			record = lecturerDao.getById(req.getId());
+		}
+		
 		if (ObjectUtil.isNull(record)) {
-			return Result.error("找不到该讲师");
+			return Result.error("找不到该讲师信息");
 		}
 		LecturerViewRESQ vo = BeanUtil.copyProperties(record, LecturerViewRESQ.class);
 		// 讲师账户信息

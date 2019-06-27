@@ -20,7 +20,11 @@ public class LecturerViewREQ implements Serializable {
 	/**
 	 * 主键
 	 */
-	@ApiModelProperty(value = "主键", required = true)
+	@ApiModelProperty(value = "主键")
 	private Long id;
-
+	/**
+	 * 讲师编号
+	 */
+	@ApiModelProperty(value = "讲师编号")
+	private Long lecturerUserNo;
 }
