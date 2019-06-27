@@ -44,7 +44,7 @@ public class PcApiSysMenuRoleBiz {
 		List<Long> roleIdList = new ArrayList<>();
 		if (CollectionUtils.isNotEmpty(list)) {
 			for (SysMenuRole sysMenuRole : list) {
-				roleIdList.add(sysMenuRole.getRoleId());
+				roleIdList.add(sysMenuRole.getMenuId());
 			}
 			resq.setList(roleIdList);
 		}
