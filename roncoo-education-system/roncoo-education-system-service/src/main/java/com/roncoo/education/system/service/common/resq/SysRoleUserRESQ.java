@@ -22,10 +22,11 @@ public class SysRoleUserRESQ implements Serializable {
 	/**
 	 * 主键
 	 */
-	@ApiModelProperty(value = "主键id")
+	@ApiModelProperty(value = "主键")
 	@JsonSerialize(using = ToStringSerializer.class)
 	private Long id;
 	/**
+	 * 
 	 * 状态(1:正常，0:禁用)
 	 */
 	@ApiModelProperty(value = "状态(1:正常，0:禁用)")
@@ -36,15 +37,13 @@ public class SysRoleUserRESQ implements Serializable {
 	@ApiModelProperty(value = "排序")
 	private Integer sort;
 	/**
-	 * 角色ID
+	 * 名称
 	 */
-	@ApiModelProperty(value = "角色ID")
-	@JsonSerialize(using = ToStringSerializer.class)
-	private Long roleId;
+	@ApiModelProperty(value = "名称")
+	private String roleName;
 	/**
-	 * 用户ID
+	 * 备注
 	 */
-	@ApiModelProperty(value = "用户ID")
-	@JsonSerialize(using = ToStringSerializer.class)
-	private Long userId;
+	@ApiModelProperty(value = "备注")
+	private String remark;
 }
