@@ -51,6 +51,9 @@ public class PcApiCourseCategoryBiz {
 		if (req.getCategoryType() != null) {
 			c.andCategoryTypeEqualTo(req.getCategoryType());
 		}
+		if (req.getParentId() != null) {
+			c.andParentIdEqualTo(req.getParentId());
+		}
 		if (StringUtils.hasText(req.getCategoryName())) {
 			c.andCategoryNameLike(PageUtil.rightLike(req.getCategoryName()));
 		}
