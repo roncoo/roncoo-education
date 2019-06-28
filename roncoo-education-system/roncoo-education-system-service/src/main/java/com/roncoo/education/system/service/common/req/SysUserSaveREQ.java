@@ -20,7 +20,7 @@ public class SysUserSaveREQ implements Serializable {
 	 * 用户编号
 	 */
 	@ApiModelProperty(value = "用户编号", required = true)
-	private Long userNo;
+	private Long adminUserNo;
 	/**
 	 * 手机
 	 */

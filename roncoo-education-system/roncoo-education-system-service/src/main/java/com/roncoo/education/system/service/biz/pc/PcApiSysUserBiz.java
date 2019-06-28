@@ -58,18 +58,19 @@ public class PcApiSysUserBiz {
 	}
 
 	public Result<Integer> save(SysUserSaveREQ req) {
-		if (req.getUserNo() == null) {
+		if (req.getAdminUserNo()== null) {
 			return Result.error("userNo不能为空");
 		}
-		UserVO userVO = bossUser.getByUserNo(req.getUserNo());
+		UserVO userVO = bossUser.getByUserNo(req.getAdminUserNo());
 		if (ObjectUtil.isNull(userVO)) {
 			throw new BaseException("找不到用户信息,请重试");
 		}
-		SysUser sysUser = dao.getByUserNo(req.getUserNo());
+		SysUser sysUser = dao.getByUserNo(req.getAdminUserNo());
 		if (ObjectUtil.isNotNull(sysUser)) {
 			return Result.error("用户已添加成管理员");
 		}
 		SysUser record = BeanUtil.copyProperties(req, SysUser.class);
+		record.setUserNo(req.getAdminUserNo());
 		int results = dao.save(record);
 		if (results > 0) {
 			return Result.success(results);
