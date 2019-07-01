@@ -43,7 +43,7 @@ export const asyncRouterMap = [
     path: 'lecturer',
     component: () => import('@/views/lecturer'),
     children: [
-    // 讲师列表
+      // 讲师列表
       {
         path: 'lecturer',
         component: () => import('@/views/lecturer/lecturer')
@@ -65,19 +65,69 @@ export const asyncRouterMap = [
     path: 'user',
     component: () => import('@/views/user'),
     children: [
-    // 学员列表
+      // 学员列表
       {
         path: 'userExt',
         component: () => import('@/views/user/userExt')
       }
     ]
   },
-  // 权限管理
+  //首页管理
+  {
+    path: 'index',
+    component: () => import('@/views/index'),
+    children: [
+      {
+        path: 'course',
+        component: () => import('@/views/index/course'),
+        children: [
+          {
+            path: 'adv',
+            component: () => import('@/views/index/course/adv')
+          },
+          {
+            path: 'zone',
+            component: () => import('@/views/index/course/zone')
+          },
+          {
+            path: 'courseCategory',
+            component: () => import('@/views/index/course/courseCategory'),
+            children: [
+              {
+                path: 'recommendCourse',
+                name: 'recommendCourse',
+                component: () => import('@/views/index/course/courseCategory/recommendCourse')
+              }
+            ]
+          }
+        ]
+      },
+      {
+        path: 'system',
+        component: () => import('@/views/index/system'),
+        children: [
+          {
+            path: 'navBar',
+            component: () => import('@/views/index/system/navBar')
+          },
+          {
+            path: 'websiteLink',
+            component: () => import('@/views/index/system/websiteLink')
+          },
+          {
+            path: 'websiteNav',
+            component: () => import('@/views/index/system/websiteNav')
+          }
+        ]
+      }
+    ]
+  },
+      // 权限管理
   {
     path: 'pms',
     component: () => import('@/views/pms'),
     children: [
-    // 用户列表
+      // 用户列表
       {
         path: 'user',
         component: () => import('@/views/pms/user')
@@ -95,6 +145,7 @@ export const asyncRouterMap = [
     ]
   }
 ]
+
 export const constantRouterMap = [
   { path: '/login', component: () => import('@/views/login/index') },
   { path: '*', component: () => import('@/views/404') },
