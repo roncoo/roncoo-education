@@ -53,6 +53,24 @@ export function updatePassword(data = {}) {
   })
 }
 
+// 列出角色用户关联信息接口
+export function roleUserList(data = {}) {
+  return request({
+    url: `/system/pc/sys/role/user/list`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 添加用户角色信息接口
+export function roleUserSave(data = {}) {
+  return request({
+    url: `/system/pc/sys/role/user/save`,
+    method: 'post',
+    data: data
+  })
+}
+
 // 角色分页列表接口
 export function roleList(params, pageCurrent = 1, pageSize = 20) {
   return request({
@@ -102,6 +120,15 @@ export function menuRoleList(data = {}) {
 export function menuRoleSave(data = {}) {
   return request({
     url: `/system/pc/menu/role/save`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 菜单信息列出信息接口
+export function menuList(data = {}) {
+  return request({
+    url: `/system/pc/menu/list`,
     method: 'post',
     data: data
   })

@@ -67,7 +67,7 @@ export default {
     },
     // 关闭编辑弹窗回调
     closeCllback(res) {
-      this.form.userNo = res.userNo
+      this.form.adminUserNo = res.userNo
       this.form.mobile = res.mobile
       this.ctrl.dialogVisible = false
     },

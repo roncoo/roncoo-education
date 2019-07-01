@@ -175,12 +175,11 @@
         this.gmtCreate = ''
         this.listForPage()
       },
-      // 分页列出用户信息
+      // 分页列出打款信息
       listForPage() {
         this.ctrl.load = true
         userApi.lecturerProfitList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.list = res.data.list
-
           this.page.pageCurrent = res.data.pageCurrent
           this.page.totalCount = res.data.totalCount
           this.page.pageSize = res.data.pageSize
@@ -206,7 +205,6 @@
         for (var i = 0; i < list.length; i++) {
           sort.push(this.list[i].id)
         }
-        console.log('id集合', sort)
         this.id = sort
       },
       // 标记为已打款

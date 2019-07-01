@@ -225,7 +225,7 @@
             this.lecturerExt = res.data.lecturerExt
           }
           this.introduce = res.data.introduce
-          this.ctrl.dialogTitle = res.data.lecturerMobile + '-' + title
+          this.ctrl.dialogTitle = res.data.lecturerMobile + '——' + title
           this.ctrl.load = false
         }).catch(() => {
           this.ctrl.load = true

@@ -29,10 +29,10 @@
     data() {
       return {
         rules: {
-        roleName: [
-          { required: true, message: '请输入名称', trigger: 'blur' }
-        ]
-      }
+          roleName: [
+            { required: true, message: '请输入名称', trigger: 'blur' }
+          ]
+        }
       }
     },
     props: {
