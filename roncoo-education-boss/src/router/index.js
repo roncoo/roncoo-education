@@ -37,7 +37,7 @@ export const asyncRouterMap = [
     path: 'index',
     component: () => import('@/views/index'),
     children: [
-      {
+       {
         path: 'course',
         component: () => import('@/views/index/course'),
         children: [
@@ -58,7 +58,7 @@ export const asyncRouterMap = [
                 name: 'recommendCourse',
                 component: () => import('@/views/index/course/courseCategory/recommendCourse')
               }
-            ]
+              ]
           }
         ]
       },
@@ -80,6 +80,8 @@ export const asyncRouterMap = [
           }
         ]
       }
+    ]
+  }
 ]
 export const constantRouterMap = [
   { path: '/login', component: () => import('@/views/login/index') },

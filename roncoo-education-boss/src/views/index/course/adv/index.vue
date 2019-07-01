@@ -39,8 +39,8 @@
             <el-switch
               @change="handleChangeStatus(scope.$index, scope.row, $event)"
               v-model="scope.row.statusId"
-              active-value="1"
-              inactive-value="0"
+              :active-value="1"
+              :inactive-value="0"
               active-text="禁用"
               inactive-text="启用">
             </el-switch>

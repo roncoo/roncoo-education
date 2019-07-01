@@ -4,7 +4,7 @@
       <el-form :inline="true" size="mini">
         <el-form-item>
           <el-button class="filter-item" type="success" @click="handleAddRow">
-            新增
+                 新增
           </el-button>
         </el-form-item>
       <el-form-item label="专区名称">
@@ -36,8 +36,8 @@
             <el-switch
               @change="handleChangeStatus(scope.$index, scope.row, $event)"
               v-model="scope.row.statusId"
-              active-value="1"
-              inactive-value="0"
+              :active-value="1"
+              :inactive-value="0"
               active-text="启用"
               inactive-text="禁用">
             </el-switch>

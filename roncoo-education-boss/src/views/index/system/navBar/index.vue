@@ -5,6 +5,18 @@
       <el-form-item label="导航标题">
         <el-input v-model="map.navTitle"></el-input>
       </el-form-item>
+        <el-form-item label="状态">
+          <template>
+            <el-select v-model="map.statusId" placeholder="全部">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </template>
+        </el-form-item>
       <el-form-item>
         <el-button type="primary" :loading="ctrl.loading" @click="handleCheck">查询</el-button>
         <el-button class="filter-item" @click="handleReset">重置
@@ -39,8 +51,8 @@
             <el-switch
               @change="handleChangeStatus(scope.$index, scope.row, $event)"
               v-model="scope.row.statusId"
-              active-value="1"
-              inactive-value="0"
+              :active-value="1"
+              :inactive-value="0"
               active-text="启用"
               inactive-text="禁用">
             </el-switch>
@@ -81,12 +93,17 @@
    components: { Edit },
     data() {
       return {
+        //状态
+        options: [{
+          value: '1',
+          label: '启用'
+        }, {
+          value: '0',
+          label: '禁用'
+        }],
         map: {
           id: undefined,
           navTitle: undefined
-        },
-        params: {
-          PerPage: 20
         },
         ctrl: {
           loading: false
@@ -152,12 +169,12 @@
         })
       },
        handleCheck() {
-        this.params.pageNum = 1
+        this.map.pageNum = 1
         this.getList()
       },
       // 重置查询条件
       handleReset() {
-        this.params = {}
+        this.map = {}
         this.getList()
       },
       //编辑
