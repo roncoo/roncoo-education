@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.roncoo.education.user.service.common.req.LecturerPageREQ;
-import com.roncoo.education.user.service.common.req.LecturerViewREQ;
 import com.roncoo.education.user.service.common.req.LecturerUpdateREQ;
+import com.roncoo.education.user.service.common.req.LecturerViewREQ;
 import com.roncoo.education.user.service.common.resq.LecturerExtViewRESQ;
 import com.roncoo.education.user.service.common.resq.LecturerPageRESQ;
 import com.roncoo.education.user.service.common.resq.LecturerViewRESQ;
@@ -26,6 +26,7 @@ import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.ResultEnum;
+import com.roncoo.education.util.enums.StatusIdEnum;
 import com.roncoo.education.util.tools.BeanUtil;
 import com.xiaoleilu.hutool.util.ObjectUtil;
 
@@ -67,12 +68,17 @@ public class PcApiLecturerBiz {
 	 * @param req
 	 */
 	public Result<LecturerViewRESQ> view(LecturerViewREQ req) {
-		if (null == req.getId()) {
-			return Result.error("讲师编号不能为空");
+		Lecturer record = new Lecturer();
+		if (req.getId() != null) {
+			record = lecturerDao.getById(req.getId());
 		}
-		Lecturer record = lecturerDao.getById(req.getId());
+		
+		if (req.getLecturerUserNo() != null) {
+			record = lecturerDao.getByLecturerUserNoAndStatusId(req.getLecturerUserNo(), StatusIdEnum.YES.getCode());
+		}
+		
 		if (ObjectUtil.isNull(record)) {
-			return Result.error("找不到该讲师");
+			return Result.error("找不到该讲师信息");
 		}
 		LecturerViewRESQ vo = BeanUtil.copyProperties(record, LecturerViewRESQ.class);
 		// 讲师账户信息
@@ -105,7 +111,7 @@ public class PcApiLecturerBiz {
 			throw new BaseException("讲师信息表更新失败");
 		}
 		int results = lecturerAuditDao.updateById(BeanUtil.copyProperties(record, LecturerAudit.class));
-		if (results > 0) {
+		if (results < 0) {
 			return Result.error(ResultEnum.USER_UPDATE_FAIL);
 		}
 		return Result.success(results);

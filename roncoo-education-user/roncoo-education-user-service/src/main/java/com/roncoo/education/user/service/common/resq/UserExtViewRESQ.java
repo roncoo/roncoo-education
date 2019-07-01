@@ -3,6 +3,7 @@ package com.roncoo.education.user.service.common.resq;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
@@ -26,11 +27,13 @@ public class UserExtViewRESQ implements Serializable {
 	 * 创建时间
 	 */
 	@ApiModelProperty(value = "创建时间")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date gmtCreate;
 	/**
 	 * 修改时间
 	 */
 	@ApiModelProperty(value = "修改时间")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date gmtModified;
 	/**
 	 * 状态(1:正常，0:禁用)

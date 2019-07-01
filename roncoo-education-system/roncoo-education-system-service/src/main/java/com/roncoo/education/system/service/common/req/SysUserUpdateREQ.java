@@ -22,6 +22,11 @@ public class SysUserUpdateREQ implements Serializable {
 	@ApiModelProperty(value = "主键", required = true)
 	private Long id;
 	/**
+	 * 状态(1:正常，0:禁用)
+	 */
+	@ApiModelProperty(value = "状态(1:正常，0:禁用)")
+	private Integer statusId;
+	/**
 	 * 手机
 	 */
 	@ApiModelProperty(value = "手机", required = true)

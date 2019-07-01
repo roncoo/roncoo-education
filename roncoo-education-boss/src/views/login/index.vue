@@ -29,7 +29,7 @@
         </el-button>
       </el-form-item>
       <div class="tips">
-        <span style="margin-right:20px;">mobile: 18800000000</span>
+        <span style="margin-right:20px;">mobile: 13800000000</span>
         <span> password: 123456</span>
       </div>
     </el-form>
@@ -37,13 +37,13 @@
 </template>
 
 <script>
-import { isvalidUsername } from '@/utils/validate'
+import { isvalidMobile } from '@/utils/validate'
 export default {
   name: 'Login',
   data() {
-    const validateUsername = (rule, value, callback) => {
-      if (!isvalidUsername(value)) {
-        callback(new Error('请输入正确的用户名'))
+    const validateMobile = (rule, value, callback) => {
+      if (!isvalidMobile(value)) {
+        callback(new Error('请输入正确的手机号'))
       } else {
         callback()
       }
@@ -63,7 +63,7 @@ export default {
         ip: '127.0.0.0'
       },
       loginRules: {
-        mobile: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        mobile: [{ required: true, trigger: 'blur', validator: validateMobile }],
         password: [{ required: true, trigger: 'blur', validator: validatePass }]
       },
       loading: false,
@@ -98,7 +98,6 @@ export default {
             this.loading = false
           })
         } else {
-          console.log('error submit!!')
           return false
         }
       })

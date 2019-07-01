@@ -24,6 +24,11 @@ public class LecturerAuditUpdateREQ implements Serializable {
 	@ApiModelProperty(value = "主键ID", required = true)
 	private Long id;
 	/**
+	 * 状态(1:正常，0:禁用)
+	 */
+	@ApiModelProperty(value = "状态(1:正常，0:禁用)", required = false)
+	private Integer statusId;
+	/**
 	 * 讲师名称
 	 */
 	@ApiModelProperty(value = "讲师名称", required = false)

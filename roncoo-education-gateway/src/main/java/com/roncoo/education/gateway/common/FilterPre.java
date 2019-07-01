@@ -70,6 +70,10 @@ public class FilterPre extends ZuulFilter {
 			// 不鉴权
 			return false;
 		}
+		if (uri.contains("/course/pc/upload/pic")) {
+			// 不鉴权
+			return false;
+		}
 		return true;
 	}
 

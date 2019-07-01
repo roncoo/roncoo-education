@@ -1,5 +1,6 @@
 package com.roncoo.education.system.service.biz.pc;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -16,7 +17,6 @@ import com.roncoo.education.system.service.common.resq.SysMenuRESQ;
 import com.roncoo.education.system.service.common.resq.SysMenuViewRESQ;
 import com.roncoo.education.system.service.dao.SysMenuDao;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.SysMenu;
-import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.tools.BeanUtil;
@@ -36,11 +36,28 @@ public class PcApiSysMenuBiz {
 
 	public Result<SysMenuListRESQ> list() {
 		SysMenuListRESQ resq = new SysMenuListRESQ();
-		List<SysMenu> list = dao.listAll();
+		List<SysMenuRESQ> list = recursion(0L);
 		if (CollectionUtils.isNotEmpty(list)) {
-			resq.setSysMenu(PageUtil.copyList(list, SysMenuRESQ.class));
+			resq.setSysMenu(list);
 		}
 		return Result.success(resq);
+	}
+	
+	/**
+	 * 递归显示菜单(角色关联菜单)
+	 */
+	private List<SysMenuRESQ> recursion(Long parentId) {
+		List<SysMenuRESQ> lists = new ArrayList<>();
+		List<SysMenu> list = dao.listByParentId(parentId);
+		if (CollectionUtil.isNotEmpty(list)) {
+			for (SysMenu m : list) {
+				SysMenuRESQ resq = BeanUtil.copyProperties(m, SysMenuRESQ.class);
+				resq.setLabel(resq.getMenuName());
+				resq.setChildren(recursion(m.getId()));
+				lists.add(resq);
+			}
+		}
+		return lists;
 	}
 
 	public Result<Integer> save(SysMenuSaveREQ req) {

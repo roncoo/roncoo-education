@@ -101,14 +101,14 @@ public class PcApiCourseAuditBiz {
 		} else {
 			c.andAuditStatusEqualTo(req.getAuditStatus());
 		}
-		if (req.getIsFree() != null) {
+		if (req.getIsFree() != null) { 
 			c.andIsFreeEqualTo(req.getIsFree());
 		}
 		if (req.getIsPutaway() != null) {
 			c.andIsPutawayEqualTo(req.getIsPutaway());
 		}
 
-		example.setOrderByClause(" status_id desc, is_putaway desc, sort desc, id desc ");
+		example.setOrderByClause(" audit_status asc, status_id desc, is_putaway desc, sort desc, id desc ");
 		Page<CourseAudit> page = dao.listForPage(req.getPageCurrent(), req.getPageSize(), example);
 		Page<CourseAuditPageRESQ> listForPage = PageUtil.transform(page, CourseAuditPageRESQ.class);
 		// 获取分类名称
@@ -157,23 +157,23 @@ public class PcApiCourseAuditBiz {
 		CourseAudit record = BeanUtil.copyProperties(req, CourseAudit.class);
 		record.setAuditStatus(AuditStatusEnum.WAIT.getCode());
 		int result = dao.updateById(record);
-		if (result < 1) {
-			return Result.error("课程信息表更新失败");
+		if (result < 0) {
+			return Result.error(ResultEnum.COURSE_UPDATE_FAIL);
 		}
-		// 查询课程简介
-		CourseIntroduceAudit courseIntroduceAudit = courseIntroduceAuditDao.getById(courseAudit.getIntroduceId());
-		if (ObjectUtil.isNull(courseIntroduceAudit)) {
-			return Result.error("找不到课程简介信息");
+		if (StringUtils.hasText(req.getIntroduce())) {
+			// 查询课程简介
+			CourseIntroduceAudit courseIntroduceAudit = courseIntroduceAuditDao.getById(courseAudit.getIntroduceId());
+			if (ObjectUtil.isNull(courseIntroduceAudit)) {
+				return Result.error("找不到课程简介信息");
+			}
+			// 更新课程简介
+			courseIntroduceAudit.setIntroduce(req.getIntroduce());
+			int courseIntroduceResult = courseIntroduceAuditDao.updateById(courseIntroduceAudit);
+			if (courseIntroduceResult < 0) {
+				return Result.error(ResultEnum.COURSE_UPDATE_FAIL);
+			}
 		}
-		// 更新课程简介
-		CourseIntroduceAudit introduceAudit = new CourseIntroduceAudit();
-		introduceAudit.setId(courseAudit.getIntroduceId());
-		introduceAudit.setIntroduce(req.getIntroduce());
-		int courseIntroduceResult = courseIntroduceAuditDao.updateById(introduceAudit);
-		if (courseIntroduceResult < 1) {
-			return Result.error("课程信息表更新失败");
-		}
-		return Result.success(courseIntroduceResult);
+		return Result.success(result);
 	}
 
 	/**
@@ -272,6 +272,12 @@ public class PcApiCourseAuditBiz {
 	}
 
 	public Result<Integer> audit(CourseAuditAuditStatusREQ req) {
+		if (req.getId() == null) {
+			return Result.error("课程ID");
+		}
+		if (req.getAuditStatus() == null) {
+			return Result.error("审核状态不能为空");
+		}
 		// 不成功
 		if (!AuditStatusEnum.SUCCESS.getCode().equals(req.getAuditStatus())) {
 			CourseAudit audit = BeanUtil.copyProperties(req, CourseAudit.class);
@@ -282,12 +288,11 @@ public class PcApiCourseAuditBiz {
 		if (ObjectUtil.isNull(courseAudit)) {
 			return Result.error("课程不存在");
 		}
-		
-		Course course = courseDao.getById(courseAudit.getId());
 
 		// 根据课程ID查询课时信息集合
 		List<CourseChapterPeriodAudit> periodAuditList = courseChapterPeriodAuditDao.listByCourseId(courseAudit.getId());
 
+		Course course = courseDao.getById(courseAudit.getId());
 		// 1、对课程操作
 		// 如果课程信息表里面有数据就进行更新
 		if (ObjectUtil.isNotNull(course)) {
@@ -338,7 +343,7 @@ public class PcApiCourseAuditBiz {
 		// 更改课程审核状态
 		CourseAudit audit = BeanUtil.copyProperties(req, CourseAudit.class);
 		int resultNum = dao.updateById(audit);
-		if (resultNum > 0) {
+		if (resultNum < 0) {
 			return Result.error(ResultEnum.COURSE_AUDIT_FAIL);
 		}
 		return Result.success(resultNum);
@@ -354,6 +359,9 @@ public class PcApiCourseAuditBiz {
 		for (CourseChapterAudit courseChapterAudit : courseChapterAuditList) {
 			// 根据章节编号查找章节审核信息
 			CourseChapterAudit infoAudit = courseChapterAuditDao.getById(courseChapterAudit.getId());
+			if (ObjectUtil.isNull(infoAudit)) {
+				throw new BaseException("找不到章节审核信息");
+			}
 			// 查找章节信息表是否存在该课时信息
 			CourseChapter chapter = courseChapterDao.getById(courseChapterAudit.getId());
 			// 存在就更新章节信息表数据
@@ -385,6 +393,9 @@ public class PcApiCourseAuditBiz {
 		for (CourseChapterPeriodAudit courseChapterPeriodAudit : courseChapterPeriodAuditList) {
 			// 根据课时编号查找课时审核信息
 			CourseChapterPeriodAudit chapterperiodAudit = courseChapterPeriodAuditDao.getById(courseChapterPeriodAudit.getId());
+			if (ObjectUtil.isNull(chapterperiodAudit)) {
+				throw new BaseException("找不到课时审核信息");
+			}
 			// 根据课时编号查找课时信息
 			CourseChapterPeriod chapterPeriod = courseChapterPeriodDao.getById(courseChapterPeriodAudit.getId());
 			// 如果信息表存在就更新信息表信息

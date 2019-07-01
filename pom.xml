@@ -176,10 +176,10 @@
 			<dependency>
 				<groupId>com.auth0</groupId>
 				<artifactId>java-jwt</artifactId>
-				<version>3.1.0</version>
+				<version>3.2.0</version>
 			</dependency>
 
-			<!-- mybatis -->
+			<!-- mybatis  -->
 			<dependency>
 				<groupId>org.mybatis.spring.boot</groupId>
 				<artifactId>mybatis-spring-boot-starter</artifactId>

@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.roncoo.education.user.service.common.req.LecturerProfitBatchREQ;
 import com.roncoo.education.user.service.common.req.LecturerProfitPageREQ;
@@ -79,6 +80,7 @@ public class PcApiLecturerProfitBiz extends BaseBiz {
 				Lecturer lecturer = lecturerDao.getByLecturerUserNo(resq.getLecturerUserNo());
 				if (ObjectUtil.isNotNull(lecturer)) {
 					resq.setLecturerName(lecturer.getLecturerName());
+					resq.setLecturerMobile(lecturer.getLecturerMobile());
 				}
 			}
 		}
@@ -130,6 +132,7 @@ public class PcApiLecturerProfitBiz extends BaseBiz {
 	 * @param req
 	 * @return
 	 */
+	@Transactional
 	public Result<Integer> batch(LecturerProfitBatchREQ req) {
 
 		if (req.getId().isEmpty()) {
@@ -166,7 +169,9 @@ public class PcApiLecturerProfitBiz extends BaseBiz {
 					return Result.error("讲师账户信息更新失败");
 				}
 			}
-			dao.updateById(BeanUtil.copyProperties(req, LecturerProfit.class));
+			LecturerProfit record = BeanUtil.copyProperties(req, LecturerProfit.class);
+			record.setId(id);
+			dao.updateById(record);
 		}
 
 		return Result.success(1);

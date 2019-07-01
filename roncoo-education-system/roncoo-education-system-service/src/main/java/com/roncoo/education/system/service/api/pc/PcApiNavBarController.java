@@ -45,7 +45,7 @@ public class PcApiNavBarController extends BaseController {
 	 */
 	@ApiOperation(value = "头部导航保存接口", notes = "头部导航保存接口")
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public Result<Integer> save(NavBarSaveREQ navBarSaveREQ) {
+	public Result<Integer> save(@RequestBody NavBarSaveREQ navBarSaveREQ) {
 		return biz.save(navBarSaveREQ);
 	}
 
@@ -54,7 +54,7 @@ public class PcApiNavBarController extends BaseController {
 	 */
 	@ApiOperation(value = "头部导航删除接口", notes = "头部导航删除接口")
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public Result<Integer> delete(NavBarDeleteREQ navBarDeleteREQ) {
+	public Result<Integer> delete(@RequestBody NavBarDeleteREQ navBarDeleteREQ) {
 		return biz.delete(navBarDeleteREQ);
 	}
 

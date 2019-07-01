@@ -46,7 +46,7 @@ public class PcApiSysRoleController extends BaseController {
 	 */
 	@ApiOperation(value = "角色添加接口", notes = "角色添加接口")
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public Result<Integer> save(SysRoleSaveREQ sysRoleSaveREQ) {
+	public Result<Integer> save(@RequestBody SysRoleSaveREQ sysRoleSaveREQ) {
 		return biz.save(sysRoleSaveREQ);
 	}
 
@@ -55,7 +55,7 @@ public class PcApiSysRoleController extends BaseController {
 	 */
 	@ApiOperation(value = "角色删除接口", notes = "角色删除接口")
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public Result<Integer> delete(SysRoleDeleteREQ sysRoleDeleteREQ) {
+	public Result<Integer> delete(@RequestBody SysRoleDeleteREQ sysRoleDeleteREQ) {
 		return biz.delete(sysRoleDeleteREQ);
 	}
 
@@ -64,7 +64,7 @@ public class PcApiSysRoleController extends BaseController {
 	 */
 	@ApiOperation(value = "角色更新接口", notes = "角色更新接口")
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public Result<Integer> update(SysRoleUpdateREQ sysRoleUpdateREQ) {
+	public Result<Integer> update(@RequestBody SysRoleUpdateREQ sysRoleUpdateREQ) {
 		return biz.update(sysRoleUpdateREQ);
 	}
 

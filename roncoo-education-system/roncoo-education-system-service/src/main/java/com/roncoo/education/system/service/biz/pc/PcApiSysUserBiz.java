@@ -58,18 +58,19 @@ public class PcApiSysUserBiz {
 	}
 
 	public Result<Integer> save(SysUserSaveREQ req) {
-		if (req.getUserNo() == null) {
+		if (req.getAdminUserNo()== null) {
 			return Result.error("userNo不能为空");
 		}
-		UserVO userVO = bossUser.getByUserNo(req.getUserNo());
+		UserVO userVO = bossUser.getByUserNo(req.getAdminUserNo());
 		if (ObjectUtil.isNull(userVO)) {
 			throw new BaseException("找不到用户信息,请重试");
 		}
-		SysUser sysUser = dao.getByUserNo(req.getUserNo());
+		SysUser sysUser = dao.getByUserNo(req.getAdminUserNo());
 		if (ObjectUtil.isNotNull(sysUser)) {
 			return Result.error("用户已添加成管理员");
 		}
 		SysUser record = BeanUtil.copyProperties(req, SysUser.class);
+		record.setUserNo(req.getAdminUserNo());
 		int results = dao.save(record);
 		if (results > 0) {
 			return Result.success(results);
@@ -88,22 +89,16 @@ public class PcApiSysUserBiz {
 		return Result.success(dao.deleteById(req.getId()));
 	}
 
-	@Transactional
 	public Result<Integer> update(SysUserUpdateREQ req) {
 		if (req.getId() == null) {
 			return Result.error("主键ID不能为空");
 		}
 		SysUser sysUser = dao.getById(req.getId());
-		UserVO user = bossUser.getByMobile(sysUser.getMobile());
-		if (user == null) {
-			throw new BaseException("找不到用户信息");
+		if (ObjectUtil.isNull(sysUser)) {
+			return Result.error("找不到管理员信息");
 		}
 		SysUser record = BeanUtil.copyProperties(req, SysUser.class);
-		dao.updateById(record);
-		UserQO userQO = new UserQO();
-		userQO.setId(user.getId());
-		userQO.setMobile(req.getMobile());
-		int results = bossUser.updateById(userQO);
+		int results = dao.updateById(record);
 		if (results > 0) {
 			return Result.success(results);
 		}
@@ -118,34 +113,29 @@ public class PcApiSysUserBiz {
 		if (ObjectUtil.isNull(sysUser)) {
 			return Result.error("管理员不存在");
 		}
-		return Result.success(BeanUtil.copyProperties(req, SysUserViewRESQ.class));
+		return Result.success(BeanUtil.copyProperties(sysUser, SysUserViewRESQ.class));
 	}
 
 	public Result<Integer> updatePassword(SysUserUpdatePasswordREQ req) {
 		if (req.getUserNo() == null) {
-			throw new BaseException("用户编号不能为空,请重试");
+			return Result.error("用户编号不能为空,请重试");
 		}
-
 		if (StringUtils.isEmpty(req.getMobilePsw())) {
-			throw new BaseException("新密码不能为空,请重试");
+			return Result.error("新密码不能为空,请重试");
 		}
 		if (StringUtils.isEmpty(req.getRePwd())) {
-			throw new BaseException("确认密码不能为空,请重试");
+			return Result.error("确认密码不能为空,请重试");
 		}
-
 		if (!req.getRePwd().equals(req.getMobilePsw())) {
-			throw new BaseException("密码不一致,请重试");
+			return Result.error("密码不一致,请重试");
 		}
-
 		UserVO userVO = bossUser.getByUserNo(req.getUserNo());
 		if (ObjectUtil.isNull(userVO)) {
-			throw new BaseException("找不到用户信息,请重试");
+			return Result.error("找不到用户信息,请重试");
 		}
-
 		if (DigestUtil.sha1Hex(userVO.getMobileSalt() + req.getMobilePsw()).equals(userVO.getMobilePsw())) {
-			throw new BaseException("输入的密码与原密码一致,请重试");
+			return Result.error("输入的密码与原密码一致,请重试");
 		}
-
 		UserQO userQO = new UserQO();
 		userQO.setId(userVO.getId());
 		userQO.setMobilePsw(DigestUtil.sha1Hex(userVO.getMobileSalt() + req.getMobilePsw()));

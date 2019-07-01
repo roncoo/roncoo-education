@@ -23,6 +23,20 @@
   },
   {
     "id": 0,
+    "name": "订单管理",
+    "path": "/order",
+    "icon": null,
+    "children": [
+      {
+        "id": 2,
+        "name": "订单列表",
+        "path": "",
+        "icon": null,
+      }
+    ]
+  },
+  {
+    "id": 0,
     "name": "课程管理",
     "path": "/course",
     "icon": null,
@@ -30,7 +44,39 @@
       {
         "id": 2,
         "name": "课程审核列表",
+        "path": "/course/audit",
+        "icon": null,
+      },
+      {
+        "id": 2,
+        "name": "课程信息列表",
         "path": "/course/course",
+        "icon": null,
+      }
+    ]
+  },
+  {
+    "id": 0,
+    "name": "讲师管理",
+    "path": "lecturer",
+    "icon": null,
+    "children": [
+      {
+        "id": 2,
+        "name": "讲师列表",
+        "path": "/lecturer/lecturer",
+        "icon": null,
+      },
+      {
+        "id": 2,
+        "name": "讲师审核列表",
+        "path": "/lecturer/audit",
+        "icon": null,
+      },
+      {
+        "id": 2,
+        "name": "分润列表",
+        "path": "/lecturer/profit",
         "icon": null,
       }
     ]
@@ -63,20 +109,14 @@
       },
       {
         "id": 2,
-        "name": "权限管理",
-        "path": "/pms/pms",
-        "icon": null
-      },
-      {
-        "id": 2,
         "name": "角色管理",
         "path": "/pms/role",
         "icon": null
       },
       {
         "id": 2,
-        "name": "操作员管理",
-        "path": "/pms/operator",
+        "name": "用户管理",
+        "path": "/pms/user",
         "icon": null
       }
     ]

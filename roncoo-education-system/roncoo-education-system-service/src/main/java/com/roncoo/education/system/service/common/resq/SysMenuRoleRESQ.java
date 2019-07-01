@@ -43,6 +43,11 @@ public class SysMenuRoleRESQ implements Serializable {
 	@JsonSerialize(using = ToStringSerializer.class)
 	private Long menuId;
 	/**
+	 * 菜单名称
+	 */
+	@ApiModelProperty(value = "菜单名称")
+	private String menuName;
+	/**
 	 * 角色ID
 	 */
 	@ApiModelProperty(value = "角色ID")

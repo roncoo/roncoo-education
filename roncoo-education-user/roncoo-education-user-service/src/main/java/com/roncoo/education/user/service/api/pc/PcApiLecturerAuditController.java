@@ -1,5 +1,6 @@
 package com.roncoo.education.user.service.api.pc;
 
+import com.roncoo.education.user.service.common.req.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,11 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.roncoo.education.user.service.biz.pc.PcApiLecturerAuditBiz;
-import com.roncoo.education.user.service.common.req.LecturerAuditAuditREQ;
-import com.roncoo.education.user.service.common.req.LecturerAuditPageREQ;
-import com.roncoo.education.user.service.common.req.LecturerAuditSaveREQ;
-import com.roncoo.education.user.service.common.req.LecturerAuditUpdateREQ;
-import com.roncoo.education.user.service.common.req.LecturerAuditViewREQ;
 import com.roncoo.education.user.service.common.resq.LecturerAuditPageRESQ;
 import com.roncoo.education.user.service.common.resq.LecturerAuditViewRESQ;
 import com.roncoo.education.util.base.BaseController;
@@ -68,7 +64,7 @@ public class PcApiLecturerAuditController extends BaseController {
 	/**
 	 * 讲师信息-审核接口
 	 * 
-	 * @param lecturerAuditUpdateREQ
+	 * @param lecturerAuditAuditREQ
 	 */
 	@ApiOperation(value = "讲师信息-审核接口", notes = "讲师信息-审核接口")
 	@RequestMapping(value = "/audit", method = RequestMethod.POST)
@@ -85,6 +81,17 @@ public class PcApiLecturerAuditController extends BaseController {
 	@RequestMapping(value = "/view", method = RequestMethod.POST)
 	public Result<LecturerAuditViewRESQ> view(@RequestBody LecturerAuditViewREQ lecturerAuditViewREQ) {
 		return biz.view(lecturerAuditViewREQ);
+	}
+
+	/**
+	 * 讲师信息-审核校验手机号接口
+	 *
+	 * @param lecturerAuditCheckMobileREQ
+	 */
+	@ApiOperation(value = "讲师信息-审核校验手机号接口", notes = "讲师信息-审核校验手机号接口")
+	@RequestMapping(value = "/check", method = RequestMethod.POST)
+	public Result<Integer> check(@RequestBody LecturerAuditCheckMobileREQ lecturerAuditCheckMobileREQ) {
+		return biz.check(lecturerAuditCheckMobileREQ);
 	}
 
 }

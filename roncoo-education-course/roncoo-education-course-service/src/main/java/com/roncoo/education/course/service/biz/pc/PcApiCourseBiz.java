@@ -140,25 +140,29 @@ public class PcApiCourseBiz {
 		}
 		Course record = BeanUtil.copyProperties(req, Course.class);
 		int result = dao.updateById(record);
-		if (result < 1) {
+		if (result > 0) {
 			// 同步更新审核表
 			CourseAudit courseAudit = BeanUtil.copyProperties(req, CourseAudit.class);
 			courseAudit.setGmtCreate(null);
 			courseAudit.setGmtModified(null);
-			courseAuditDao.updateById(courseAudit);
-			return Result.error(ResultEnum.COURSE_UPDATE_FAIL);
+			int recordAudit = courseAuditDao.updateById(courseAudit);
+			if (recordAudit < 0) {
+				return Result.error(ResultEnum.COURSE_UPDATE_FAIL);
+			}
 		}
 
-		// 更新课程介绍
-
-		CourseIntroduce courseIntroduce = courseIntroduceDao.getById(course.getIntroduceId());
-		if (ObjectUtil.isNull(courseIntroduce)) {
-			return Result.error("找不到课程简介信息");
-		}
-		courseIntroduce.setId(course.getIntroduceId());
-		courseIntroduce.setIntroduce(req.getIntroduce());
-		int results = courseIntroduceDao.updateById(courseIntroduce);
-		if (results > 0) {
+		if (StringUtils.hasText(req.getIntroduce())) {
+			// 更新课程介绍
+			CourseIntroduce courseIntroduce = courseIntroduceDao.getById(course.getIntroduceId());
+			if (ObjectUtil.isNull(courseIntroduce)) {
+				return Result.error("找不到课程简介信息");
+			}
+			courseIntroduce.setId(course.getIntroduceId());
+			courseIntroduce.setIntroduce(req.getIntroduce());
+			int results = courseIntroduceDao.updateById(courseIntroduce);
+			if (results < 0) {
+				return Result.error(ResultEnum.COURSE_UPDATE_FAIL);
+			}
 			// 同步更新审核表
 			CourseIntroduceAudit courseIntroduceAudit = courseIntroduceAuditDao.getById(course.getIntroduceId());
 			if (ObjectUtil.isNull(courseIntroduceAudit)) {
@@ -169,9 +173,8 @@ public class PcApiCourseBiz {
 			courseIntroduceAudit.setId(course.getIntroduceId());
 			courseIntroduceAudit.setIntroduce(req.getIntroduce());
 			courseIntroduceAuditDao.updateById(courseIntroduceAudit);
-			return Result.success(results);
 		}
-		return Result.error(ResultEnum.COURSE_UPDATE_FAIL);
+		return Result.success(result);
 	}
 
 	/**
