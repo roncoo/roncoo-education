@@ -80,3 +80,22 @@ export function orderList(params, page = 1, pageSize = 20) {
     data: { pageCurrent: page, pageSize: pageSize, ...params }
   })
 }
+
+// 订单后台备注更新接口
+export function orderUpdate(data = {}) {
+  return request({
+    url: '/course/pc/order/info/update',
+    method: 'post',
+    data: data
+  })
+}
+
+// 订单查看接口
+export function orderView(id) {
+  return request({
+    url: '/course/pc/order/info/view',
+    method: 'post',
+    data: { id: id }
+  })
+}
+
