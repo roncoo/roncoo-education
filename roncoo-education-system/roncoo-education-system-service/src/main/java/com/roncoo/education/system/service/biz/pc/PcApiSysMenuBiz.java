@@ -7,8 +7,10 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.roncoo.education.system.service.common.req.SysMenuDeleteREQ;
+import com.roncoo.education.system.service.common.req.SysMenuListREQ;
 import com.roncoo.education.system.service.common.req.SysMenuSaveREQ;
 import com.roncoo.education.system.service.common.req.SysMenuUpdateREQ;
 import com.roncoo.education.system.service.common.req.SysMenuViewREQ;
@@ -34,15 +36,30 @@ public class PcApiSysMenuBiz {
 	@Autowired
 	private SysMenuDao dao;
 
-	public Result<SysMenuListRESQ> list() {
+	public Result<SysMenuListRESQ> list(SysMenuListREQ req) {
 		SysMenuListRESQ resq = new SysMenuListRESQ();
-		List<SysMenuRESQ> list = recursion(0L);
+		List<SysMenuRESQ> list = new ArrayList<>();
+		if (StringUtils.isEmpty(req.getMenuName())) {
+			list = recursion(0L);
+		} else {
+			// 模糊查询
+			List<SysMenu> sysMenuList = dao.listByMenuName(req.getMenuName());
+			if (CollectionUtil.isEmpty(sysMenuList)) {
+				for (SysMenu sysMenu : sysMenuList) {
+					SysMenuRESQ sysMenuRESQ = BeanUtil.copyProperties(sysMenu, SysMenuRESQ.class);
+					sysMenuRESQ.setLabel(sysMenu.getMenuName());
+					sysMenuRESQ.setChildren(recursion(sysMenu.getId()));
+					list.add(sysMenuRESQ);
+				}
+			}
+		}
+
 		if (CollectionUtils.isNotEmpty(list)) {
 			resq.setSysMenu(list);
 		}
 		return Result.success(resq);
 	}
-	
+
 	/**
 	 * 递归显示菜单(角色关联菜单)
 	 */
