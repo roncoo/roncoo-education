@@ -44,7 +44,7 @@ public class PcApiSysMenuBiz {
 		} else {
 			// 模糊查询
 			List<SysMenu> sysMenuList = dao.listByMenuName(req.getMenuName());
-			if (CollectionUtil.isEmpty(sysMenuList)) {
+			if (CollectionUtil.isNotEmpty(sysMenuList)) {
 				for (SysMenu sysMenu : sysMenuList) {
 					SysMenuRESQ sysMenuRESQ = BeanUtil.copyProperties(sysMenu, SysMenuRESQ.class);
 					sysMenuRESQ.setLabel(sysMenu.getMenuName());
