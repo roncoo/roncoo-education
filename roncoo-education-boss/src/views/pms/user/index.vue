@@ -20,7 +20,7 @@
         </el-table-column>
         <el-table-column prop="realName" label="名称">
         </el-table-column>
-        <el-table-column prop="sort" label="排序">
+        <el-table-column prop="sort" width="50" label="排序">
         </el-table-column>
         <el-table-column
           width="150"
@@ -45,13 +45,14 @@
         <el-table-column
         fixed="right"
         label="操作"
-        width="300">
+        width="370">
         <template slot-scope="scope">
           <ul class="list-item-actions">
             <li>
               <el-button type="danger" @click="handleDelete(scope.row.id)" size="mini">删除</el-button>
               <el-button type="success" @click="handleEdit(scope.row)" size="mini">修改</el-button>
-              <el-button type="success" @click="handlePassword(scope.row.userNo)" size="mini">密码修改</el-button>
+              <el-button type="success" @click="handleUserRole(scope.row.id, scope.row.realName)" size="mini">设置角色</el-button>
+              <el-button type="success" @click="handlePassword(scope.row.userNo, scope.row.realName)" size="mini">密码修改</el-button>
             </li>
           </ul>
         </template>
@@ -71,6 +72,7 @@
       <add :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></add>
       <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
       <password :visible="ctrl.passwordDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></password>
+      <role :visible="ctrl.serRoleDialogVisible" :userId="id" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></role>
   </div>
 </template>
 <script>
@@ -78,19 +80,22 @@
   import Edit from './edit'
   import Add from './add'
   import Password from './password'
+  import Role from './role'
   export default {
-    components: { Edit, Add, Password },
+    components: { Edit, Add, Password, Role },
     data() {
       return {
         map: {},
         formData: {},
         list: [],
+        id: '',
         ctrl: {
           load: false,
           dialogVisible: false,
           addDialogVisible: false,
           passwordDialogVisible: false,
-          viewVisible: false
+          viewVisible: false,
+          serRoleDialogVisible: false
         },
         opts: {
           statusIdList: []
@@ -157,19 +162,27 @@
       handleEdit(row) {
         this.formData = row
         this.ctrl.dialogVisible = true
-        this.ctrl.dialogTitle = '编辑-' + row.mobile
+        this.ctrl.dialogTitle = row.realName + '——编辑'
       },
       // 跳出修改密码弹窗
-      handlePassword(row) {
-        this.formData.userNo = row
+      handlePassword(userNo, realName) {
+        this.formData.userNo = userNo
         this.ctrl.passwordDialogVisible = true
-        this.ctrl.dialogTitle = '密码修改-' + row.mobile
+        this.ctrl.dialogTitle = realName + '——密码修改'
+      },
+      // 跳出设置角色弹窗
+      handleUserRole(id, realName) {
+        this.id = id
+        this.ctrl.serRoleDialogVisible = true
+        this.ctrl.dialogTitle = realName + '——设置角色'
       },
       // 关闭弹窗回调
       closeCllback() {
         this.ctrl.addDialogVisible = false
         this.ctrl.dialogVisible = false
         this.ctrl.passwordDialogVisible = false
+        this.ctrl.serRoleDialogVisible = false
+        this.id = ''
         this.reload()
       },
       // 删除

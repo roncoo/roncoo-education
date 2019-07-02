@@ -54,9 +54,9 @@ public class PcApiSysRoleUserBiz {
 		if (req.getUserId() == null) {
 			return Result.error("用户ID不能为空");
 		}
+		// 先删除旧的，再添加新的
+		dao.deleteByUserId(req.getUserId());
 		if (CollectionUtils.isNotEmpty(req.getRoleId())) {
-			// 先删除旧的，再添加新的
-			dao.deleteByUserId(req.getUserId());
 			// 拆分角色和平台拼接ID
 			for (Long roleId : req.getRoleId()) {
 				SysRoleUser sysRoleUser = new SysRoleUser();
