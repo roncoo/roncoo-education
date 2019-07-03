@@ -181,7 +181,6 @@
       // 选择添加的角色
       handleSelectionChange(val) {
         this.userRoleList = val;
-        console.log(val)
       },
       // 用户添加角色
       handleBatch() {
@@ -196,7 +195,7 @@
       },
       changeStatus() {
         const idlist = [];
-        this.userRoleList.map(item => {
+        this.userRoleList.map(item => { // 遍历获取已选中的角色id
           idlist.push(item.id)
         })
         api.roleUserSave({ userId: this.userId, roleId: idlist }).then(res => {

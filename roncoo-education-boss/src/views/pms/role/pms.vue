@@ -5,7 +5,7 @@
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
-    <el-form label-width="80px">
+    <el-form v-loading="ctrl.load" label-width="80px">
       <div>
         <el-tree
         ref="tree"
@@ -31,6 +31,9 @@
     data() {
       return {
         menus: [],
+        ctrl: {
+          load: false
+        },
         defaultProps: {
           children: 'children',
           label: 'label'
@@ -64,33 +67,27 @@
     },
     methods: {
       menusList() {
-        this.load = true
+        this.ctrl.load = true
         api.menuList({}).then(res => {
           this.menus = res.data.sysMenu
           this.rolemenu(this.id)
-          console.log(this.menus)
+          this.ctrl.load = false
         }).catch(() => {
-          this.load = false
+          this.ctrl.load = false
         })
       },
       rolemenu(roleId) {
-        this.load = true
         api.menuRoleList({ roleId: roleId }).then(res => {
-          console.log(res)
           this.menuIds = res.data.list
-          console.log('关联集合', this.menuIds)
         }).catch(() => {
-          this.load = false
         })
       },
       // 保存角色菜单信息
       saveRoleMenu() {
-        this.load = true
         const role = { roleId: this.id, menuId: [] }
         this.$refs.tree.getCheckedKeys().forEach(function(data, index) {
           role.menuId.push(data)
         })
-        console.log(role)
         this.handleConfirm(role)
       },
       //异步保存角色信息
@@ -101,9 +98,7 @@
           } else {
             this.$alert(res.msg || '提交失败')
           }
-          this.load = false
         }).catch(() => {
-          this.load = false
         })
       },
       handleClose(done) {

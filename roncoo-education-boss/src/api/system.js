@@ -295,3 +295,30 @@ export function menuList(data = {}) {
     data: data
   })
 }
+
+// 菜单信息保存接口
+export function menuSave(data = {}) {
+  return request({
+    url: `/system/pc/menu/save`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 菜单信息删除接口
+export function menuDelete(data = {}) {
+  return request({
+    url: `/system/pc/menu/delete`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 菜单信息更新接口
+export function menuUpdate(data = {}) {
+  return request({
+    url: `/system/pc/menu/update`,
+    method: 'post',
+    data: data
+  })
+}

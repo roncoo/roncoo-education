@@ -47,4 +47,9 @@ public class SysMenuSaveREQ implements Serializable {
 	 */
 	@ApiModelProperty(value = "备注")
 	private String remark;
+	/**
+	 * 排序
+	 */
+	@ApiModelProperty(value = "排序")
+	private Integer sort;
 }
