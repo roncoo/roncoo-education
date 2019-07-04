@@ -53,13 +53,13 @@ public class AdvDaoImpl implements AdvDao {
 	}
 
 	@Override
-	public List<Adv> listByPlatShowAndStatusId(Integer platShow, Integer statusId) {
+	public List<Adv> listByPlatShowAndStatusIdAndBeginTimeAndEndTime(Integer platShow, Integer statusId, Date beginTime, Date endTime) {
 		AdvExample example = new AdvExample();
 		Criteria c = example.createCriteria();
 		c.andPlatShowEqualTo(platShow);
 		c.andStatusIdEqualTo(statusId);
-		c.andBeginTimeLessThan(new Date());
-		c.andEndTimeGreaterThan(new Date());
+		c.andBeginTimeLessThan(beginTime);
+		c.andEndTimeGreaterThan(endTime);
 		return this.advMapper.selectByExample(example);
 	}
 }
