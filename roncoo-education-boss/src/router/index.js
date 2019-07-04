@@ -122,25 +122,30 @@ export const asyncRouterMap = [
       }
     ]
   },
-      // 权限管理
+      // 系统管理
   {
-    path: 'pms',
-    component: () => import('@/views/pms'),
+    path: 'sys',
+    component: () => import('@/views/sys'),
     children: [
       // 用户列表
       {
         path: 'user',
-        component: () => import('@/views/pms/user')
+        component: () => import('@/views/sys/user')
       },
       // 角色列表
       {
         path: 'role',
-        component: () => import('@/views/pms/role')
+        component: () => import('@/views/sys/role')
       },
       // 菜单列表
       {
         path: 'menu',
-        component: () => import('@/views/pms/menu')
+        component: () => import('@/views/sys/menu')
+      },
+      // 站点设置
+      {
+        path: 'website',
+        component: () => import('@/views/sys/website')
       }
     ]
   }

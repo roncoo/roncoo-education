@@ -322,3 +322,21 @@ export function menuUpdate(data = {}) {
     data: data
   })
 }
+
+// 获取站点信息接口
+export function websiteView(data = {}) {
+  return request({
+    url: `/system/pc/website/view`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 更新站点信息接口
+export function websiteUpdate(data = {}) {
+  return request({
+    url: `/system/pc/website/update`,
+    method: 'post',
+    data: data
+  })
+}
