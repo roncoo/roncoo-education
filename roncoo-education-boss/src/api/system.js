@@ -215,6 +215,24 @@ export function updatePassword(data = {}) {
   })
 }
 
+// 列出角色用户关联信息接口
+export function roleUserList(data = {}) {
+  return request({
+    url: `/system/pc/sys/role/user/list`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 添加用户角色信息接口
+export function roleUserSave(data = {}) {
+  return request({
+    url: `/system/pc/sys/role/user/save`,
+    method: 'post',
+    data: data
+  })
+}
+
 // 角色分页列表接口
 export function roleList(params, pageCurrent = 1, pageSize = 20) {
   return request({
@@ -264,6 +282,60 @@ export function menuRoleList(data = {}) {
 export function menuRoleSave(data = {}) {
   return request({
     url: `/system/pc/menu/role/save`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 菜单信息列出信息接口
+export function menuList(data = {}) {
+  return request({
+    url: `/system/pc/menu/list`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 菜单信息保存接口
+export function menuSave(data = {}) {
+  return request({
+    url: `/system/pc/menu/save`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 菜单信息删除接口
+export function menuDelete(data = {}) {
+  return request({
+    url: `/system/pc/menu/delete`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 菜单信息更新接口
+export function menuUpdate(data = {}) {
+  return request({
+    url: `/system/pc/menu/update`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 获取站点信息接口
+export function websiteView(data = {}) {
+  return request({
+    url: `/system/pc/website/view`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 更新站点信息接口
+export function websiteUpdate(data = {}) {
+  return request({
+    url: `/system/pc/website/update`,
     method: 'post',
     data: data
   })

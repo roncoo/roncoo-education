@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.roncoo.education.system.service.biz.pc.PcApiSysMenuBiz;
 import com.roncoo.education.system.service.common.req.SysMenuDeleteREQ;
+import com.roncoo.education.system.service.common.req.SysMenuListREQ;
 import com.roncoo.education.system.service.common.req.SysMenuSaveREQ;
 import com.roncoo.education.system.service.common.req.SysMenuUpdateREQ;
 import com.roncoo.education.system.service.common.req.SysMenuViewREQ;
@@ -35,8 +36,8 @@ public class PcApiSysMenuController extends BaseController {
 	 */
 	@ApiOperation(value = "菜单信息列出信息接口", notes = "菜单信息列出信息")
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public Result<SysMenuListRESQ> list() {
-		return biz.list();
+	public Result<SysMenuListRESQ> list(@RequestBody SysMenuListREQ sysMenuListREQ) {
+		return biz.list(sysMenuListREQ);
 	}
 
 	/**

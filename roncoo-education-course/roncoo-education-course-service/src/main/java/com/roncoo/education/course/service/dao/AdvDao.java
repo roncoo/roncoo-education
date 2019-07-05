@@ -1,5 +1,6 @@
 package com.roncoo.education.course.service.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.roncoo.education.course.service.dao.impl.mapper.entity.Adv;
@@ -24,5 +25,5 @@ public interface AdvDao {
 	 * @param statusId
 	 * @author wuyun
 	 */
-	List<Adv> listByPlatShowAndStatusId(Integer platShow, Integer statusId);
+	List<Adv> listByPlatShowAndStatusIdAndBeginTimeAndEndTime(Integer platShow, Integer statusId, Date beginTime, Date endTime);
 }

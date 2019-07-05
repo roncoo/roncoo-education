@@ -33,4 +33,12 @@ public interface SysMenuDao {
 	 * @return
 	 */
 	List<SysMenu> listAll();
+
+	/**
+	 * 根据菜单名称列出菜单信息(模糊查询)
+	 * 
+	 * @param menuName
+	 * @return
+	 */
+	List<SysMenu> listByMenuName(String menuName);
 }

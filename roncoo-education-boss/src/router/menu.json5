@@ -24,13 +24,13 @@
   {
     "id": 0,
     "name": "订单管理",
-    "path": "/order",
+    "path": "",
     "icon": null,
     "children": [
       {
         "id": 2,
         "name": "订单列表",
-        "path": "",
+        "path": "/order",
         "icon": null,
       }
     ]
@@ -97,27 +97,33 @@
   },
   {
     "id": 0,
-    "name": "权限管理",
-    "path": "/pms",
+    "name": "系统管理",
+    "path": "/sys",
     "icon": null,
     "children": [
       {
         "id": 2,
-        "name": "菜单管理",
-        "path": "/pms/menu",
-        "icon": null,
+        "name": "用户管理",
+        "path": "/sys/user",
+        "icon": null
       },
       {
         "id": 2,
         "name": "角色管理",
-        "path": "/pms/role",
+        "path": "/sys/role",
         "icon": null
       },
       {
         "id": 2,
-        "name": "用户管理",
-        "path": "/pms/user",
-        "icon": null
+        "name": "菜单管理",
+        "path": "/sys/menu",
+        "icon": null,
+      },
+      {
+        "id": 2,
+        "name": "站点设置",
+        "path": "/sys/website",
+        "icon": null,
       }
     ]
   },

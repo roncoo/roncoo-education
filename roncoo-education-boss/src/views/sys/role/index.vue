@@ -79,7 +79,7 @@
           </el-pagination>
           <add :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></add>
           <edit :visible="ctrl.editDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
-          <pms :visible="ctrl.pmsDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></pms>
+          <pms :visible="ctrl.pmsDialogVisible" :id="id" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></pms>
         </div>
     </div>
 </template>
@@ -95,6 +95,7 @@
         map: {},
         formData: {},
         list: [],
+        id: '',
         ctrl: {
           load: false,
           addDialogVisible: false,
@@ -230,17 +231,18 @@
       // 角色添加弹窗
       handleAdd() {
         this.ctrl.addDialogVisible = true
-        this.dialogTitle = "添加"
+        this.ctrl.dialogTitle = "添加"
       },
       // 角色修改弹窗
       handleEdit(res) {
         this.formData = res
         this.ctrl.editDialogVisible = true
-        this.dialogTitle = res.roleName + '-' + "修改"
+        this.ctrl.dialogTitle = res.roleName + "——修改"
       },
       handlePms(id, roleName) {
+        this.id = id
         this.ctrl.pmsDialogVisible = true
-        this.dialogTitle = roleName + '-' + "设置权限"
+        this.ctrl.dialogTitle = roleName + "——设置权限"
       },
       // 关闭弹窗回调
       closeCllback() {
@@ -251,6 +253,7 @@
       },
       // 刷新当前页面
       reload() {
+        this.id = ''
         this.map = {}
         this.formData = {}
         this.roleList()

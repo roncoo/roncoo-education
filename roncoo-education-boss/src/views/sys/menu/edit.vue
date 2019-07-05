@@ -6,8 +6,14 @@
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form ref="formData" :model="formData" :rules="rules" label-width="80px">
-      <el-form-item label="名称:" prop="roleName">
-        <el-input v-model="formData.roleName"></el-input>
+      <el-form-item label="菜单名称:" prop="menuName">
+        <el-input v-model="formData.menuName"></el-input>
+      </el-form-item>
+      <el-form-item label="菜单路径:" prop="menuUrl">
+        <el-input v-model="formData.menuUrl"></el-input>
+      </el-form-item>
+      <el-form-item label="目标名称:" prop="menuUrl">
+        <el-input v-model="formData.menuUrl"></el-input>
       </el-form-item>
       <el-form-item label="排序:">
         <el-input v-model="formData.sort"></el-input>
@@ -29,10 +35,10 @@
     data() {
       return {
         rules: {
-        roleName: [
-          { required: true, message: '请输入名称', trigger: 'blur' }
-        ]
-      }
+          roleName: [
+            { required: true, message: '请输入名称', trigger: 'blur' }
+          ]
+        }
       }
     },
     props: {
