@@ -79,7 +79,7 @@
         </el-pagination>
     </div>
     </div>
-    <edit :visible="ctrl.dialogVisible" :formData="form" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
+    <edit :visible="ctrl.dialogVisible" :formData="formdata" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
 </div>
 </template>
 <script>
@@ -110,7 +110,7 @@
           dialogVisible: false
         },
         // 表单数据, 例如新增编辑子项，页面表单
-        form: {},
+        formdata: {},
         tableData: [],
         page: {
           beginPageIndex: 1,
@@ -167,20 +167,20 @@
       },
       //新增
       handleAddRow() {
-        this.form = {}
+        this.formdata = {}
         this.ctrl.dialogTitle = '新增'
         this.ctrl.dialogVisible = true
       },
       //编辑
       handleUpdateRow(data) {
-       this.form = data
+       this.formdata = data
        this.ctrl.dialogTitle = '编辑权限'
        this.ctrl.dialogVisible = true
       },
       handleChangeStatus(index, row, command) {
         console.log('handleCommand ------>> ', index, row, command)
 
-        const txt = { 0: '启用', 1: '禁用' }
+        const txt = { 1: '启用', 0: '禁用' }
 
         this.$confirm(`确定${txt[command]}友情链接：${row.linkName}?`, txt[command] + '此项', {
           confirmButtonText: '确定',

@@ -69,7 +69,7 @@
         </el-pagination>
     </div>
     </div>
-    <edit :visible="ctrl.dialogVisible" :formData="form" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
+    <edit :visible="ctrl.dialogVisible" :formData="formdata" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
 </div>
 </template>
 <script>
@@ -86,7 +86,7 @@
           loading: false
         },
         // 表单数据, 例如新增编辑子项，页面表单
-        form: {},
+        formdata: {},
         tableData: [],
         page: {
           beginPageIndex: 1,
@@ -143,7 +143,7 @@
       },
       //新增
       handleAddRow() {
-        this.form = {}
+        this.formdata = {}
         this.ctrl.dialogTitle = '新增'
         this.ctrl.dialogVisible = true
       },

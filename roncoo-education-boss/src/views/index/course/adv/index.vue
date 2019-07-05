@@ -41,8 +41,8 @@
               v-model="scope.row.statusId"
               :active-value="1"
               :inactive-value="0"
-              active-text="禁用"
-              inactive-text="启用">
+              active-text="启用"
+              inactive-text="禁用">
             </el-switch>
           </template>
         </el-table-column>
@@ -75,7 +75,7 @@
         </el-pagination>
     </div>
     </div>
-    <edit :visible="ctrl.dialogVisible" :formData="form" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
+    <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
 </div>
 </template>
 <script>
@@ -97,7 +97,7 @@
           dialogVisible: false
         },
         // 表单数据, 例如新增编辑子项，页面表单
-        form: {},
+        formData: {},
         tableData: [],
         page: {
           beginPageIndex: 1,
@@ -129,7 +129,7 @@
       handleChangeStatus(index, row, command) {
         console.log('handleCommand ------>> ', index, row, command)
 
-        const txt = { 0: '启用', 1: '禁用' }
+        const txt = { 1: '启用', 0: '禁用' }
 
           this.$confirm(`确定${txt[command]}友情链接：${row.advTitle}?`, txt[command] + '此项', {
           confirmButtonText: '确定',
@@ -159,7 +159,7 @@
       },
       //新增
       handleAddRow() {
-        this.form = {}
+        this.formData = {}
         this.ctrl.dialogTitle = '新增'
         this.ctrl.dialogVisible = true
       },
@@ -179,9 +179,38 @@
       },
       //编辑
       handleUpdateRow(data) {
-       this.formdata = data
+       this.formData = data
        this.ctrl.dialogTitle = '编辑权限'
        this.ctrl.dialogVisible = true
+      },
+      //删除
+      handleDelRow(data) {
+        console.log('handleCommand ------>> ', data)
+        this.$confirm(`确定删除这条数据?`, '我要删除', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.map = {
+            id: data.id
+          }
+          this.loading.show()
+          apis.coursePcAdvDelete(this.map).then(res => {
+            console.log(res)
+            if (res.code === 200) {
+              this.$message({
+                type: 'success',
+                message: '删除成功'
+              });
+              //刪除成功后刷新列表
+              this.closeCallback()
+            } else {
+              this.$alert(res.msg)
+            }
+            this.loading.hide()
+          })
+        }).catch(() => {
+        })
       },
       // 关闭编辑弹窗回调
       closeCallback() {

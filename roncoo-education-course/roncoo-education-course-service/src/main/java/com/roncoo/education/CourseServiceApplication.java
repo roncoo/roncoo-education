@@ -20,7 +20,7 @@ import com.spring4all.swagger.EnableSwagger2Doc;
 @ServletComponentScan
 @SpringCloudApplication
 public class CourseServiceApplication {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(CourseServiceApplication.class, args);
 	}

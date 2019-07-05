@@ -2,9 +2,9 @@
   <div class="pad20">
     <div>
       <el-form :inline="true" size="mini">
-      <el-form-item label="导航标题">
-        <el-input v-model="map.navTitle"></el-input>
-      </el-form-item>
+        <el-form-item label="导航标3题">
+          <el-input v-model="map.navTitle"></el-input>
+        </el-form-item>
         <el-form-item label="状态">
           <template>
             <el-select v-model="map.statusId" placeholder="全部">
@@ -17,11 +17,11 @@
             </el-select>
           </template>
         </el-form-item>
-      <el-form-item>
-        <el-button type="primary" :loading="ctrl.loading" @click="handleCheck">查询</el-button>
-        <el-button class="filter-item" @click="handleReset">重置
-        </el-button>
-      </el-form-item>
+        <el-form-item>
+          <el-button type="primary" :loading="ctrl.loading" @click="handleCheck">查询</el-button>
+          <el-button class="filter-item" @click="handleReset">重置
+          </el-button>
+        </el-form-item>
       </el-form>
     </div>
     <div>
@@ -58,19 +58,19 @@
             </el-switch>
           </template>
         </el-table-column>
-       <el-table-column
-        fixed="right"
-        label="操作"
-        width="170">
-        <template slot-scope="scope">
-          <ul class="list-item-actions">
-            <li>
-              <el-button type="primary" @click="handleUpdateRow(scope.row)" size="mini">修改</el-button>
-              <el-button type="warning" @click="handleDelRow(scope.row)" size="mini">删除</el-button>
-            </li>
-          </ul>
-        </template>
-      </el-table-column>
+        <el-table-column
+          fixed="right"
+          label="操作"
+          width="170">
+          <template slot-scope="scope">
+            <ul class="list-item-actions">
+              <li>
+                <el-button type="primary" @click="handleUpdateRow(scope.row)" size="mini">修改</el-button>
+                <el-button type="warning" @click="handleDelRow(scope.row)" size="mini">删除</el-button>
+              </li>
+            </ul>
+          </template>
+        </el-table-column>
       </el-table>
       <div class="mgt20">
         <el-pagination
@@ -81,16 +81,16 @@
           layout="total, sizes, prev, pager, next, jumper"
           :total="page.totalCount">
         </el-pagination>
-    </div>
+      </div>
     </div>
     <edit :visible="ctrl.dialogVisible" :formData="formdata" :title="ctrl.dialogTitle" @close-cllback="closeCallback"></edit>
-</div>
+  </div>
 </template>
 <script>
   import * as apis from '@/api/system'
   import Edit from './edit'
   export default {
-   components: { Edit },
+    components: { Edit },
     data() {
       return {
         //状态
@@ -168,7 +168,7 @@
           this.reload()
         })
       },
-       handleCheck() {
+      handleCheck() {
         this.map.pageNum = 1
         this.getList()
       },
@@ -180,14 +180,17 @@
       //编辑
       handleUpdateRow(row) {
         console.log(row)
-       this.formdata = row
-       this.ctrl.dialogTitle = '编辑'
-       this.ctrl.dialogVisible = true
+        this.formdata = row
+        this.ctrl.dialogTitle = '编辑'
+        this.ctrl.dialogVisible = true
       },
       getList() {
+        //获取路由带过来的参数
+        var routerParams = this.$route.params
+        console.log(routerParams)
         this.ctrl.loading = true
         console.log(this.params)
-          apis.navBarList(this.params).then(res => {
+        apis.navBarList(this.params).then(res => {
           this.page = res.data
           this.page.numPerPage = res.data.pageSize
           this.list = res.data.list

@@ -4,14 +4,9 @@
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
-
-    <el-form :model="formData" :rules="rules" ref="formData">
-      <el-form-item label="导航标题" prop="permission">
-        <el-input v-model="formData.permission" :disabled="!!formData.id"></el-input>
-        <el-tag type="danger" v-if="!formData.id">提示：权限标识添加后将不可修改，请确保准确性！</el-tag>
-      </el-form-item>
-      <el-form-item label="权限描述" prop="remark">
-        <el-input v-model="formData.remark" type="textarea"></el-input>
+    <el-form :model="addMap" :rules="rules" ref="addMap">
+      <el-form-item label="名称" prop="navName">
+        <el-input v-model="formData.navName"></el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -23,7 +18,7 @@
 <script>
   import * as apis from '@/api/system'
   export default {
-    name: 'Edit',
+    name: 'NavTitle',
     data() {
       return {
         ctrl: {

@@ -23,6 +23,12 @@ public class AdvUpdateREQ implements Serializable {
 	 */
 	@ApiModelProperty(value = "主键", required = true)
 	private Long id;
+	
+	/**
+	 * 状态
+	 */
+	@ApiModelProperty(value = "状态", required = true)
+	private int statusId;
 
 	/**
 	 * 广告标题

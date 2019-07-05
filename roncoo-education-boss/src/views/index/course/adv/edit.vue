@@ -6,15 +6,40 @@
     :before-close="handleClose">
 
     <el-form :model="formData" :rules="rules" ref="formData">
-      <el-form-item label="广告图片" prop="permissionName">
-        <el-input v-model="formData.advImg"></el-input>
+      <el-form-item label="广告图片">
+        <el-upload
+          class="upload-demo"
+          action="http://192.168.31.134:5840/course/pc/upload/pic/{COURSE}"
+          :on-preview="handlePreview"
+          :on-remove="handleRemove"
+          :before-remove="beforeRemove"
+          multiple
+          :limit="1"
+          :on-exceed="handleExceed"
+          :on-success="success"
+          :file-list="fileList">
+          <el-button size="small" type="primary">点击上传</el-button>
+          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+        </el-upload>
       </el-form-item>
-      <el-form-item label="广告标题" prop="permission">
-        <el-input v-model="formData.advTitle" :disabled="!!formData.id"></el-input>
+      <el-form-item label="广告标题" prop="advTitle">
+        <el-input v-model="formData.advTitle" ></el-input>
       </el-form-item>
-      <el-form-item label="广告状态" prop="statusId">
-        <el-input v-model="formData.statusId" ></el-input>
+      <el-form-item label="广告排序" prop="sort">
+        <el-input v-model="formData.sort" ></el-input>
       </el-form-item>
+      <el-form-item label="广告状态">
+        <el-radio-group v-model="formData.statusId">
+          <el-radio :label="0">禁用</el-radio>
+          <el-radio :label="1">正常</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item prop="beginTime" label="开始时间">
+        <el-date-picker v-model="formData.beginTime" ></el-date-picker>
+      </el-form-item>
+      <el-form-item prop="endTime" label="结束时间">
+        <el-date-picker v-model="formData.endTime" ></el-date-picker>
+        </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="handleClose">取 消</el-button>
@@ -33,6 +58,7 @@
           dialogVisible: true
         },
         form: {},
+        fileList: [],
         rules: {
           advImg: [
             { required: true, message: '请输入广告图片', trigger: 'blur', autocomplete: 'on' }
@@ -70,6 +96,18 @@
     methods: {
       handleClose(done) {
         this.$emit('close-callback')
+      },
+      handleRemove(file, fileList) {
+        console.log(file, fileList)
+      },
+      handlePreview(file) {
+        console.log(file)
+      },
+      handleExceed(files, fileList) {
+        this.$message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件`);
+      },
+      beforeRemove(file, fileList) {
+        return this.$confirm(`确定移除${file.name}？`);
       },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {

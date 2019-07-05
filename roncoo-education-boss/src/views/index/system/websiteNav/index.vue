@@ -79,14 +79,16 @@
         </el-pagination>
     </div>
     </div>
-    <edit :visible="ctrl.dialogVisible" :formData="form" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
+    <edit :visible="ctrl.dialogVisible" :formData="formdata" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
+    <nav-title :visible="ctrl.navTitleVisible" :formData="addMap" :title="ctrl.dialogTitle" @close-callback="closeCallback"></nav-title>
 </div>
 </template>
 <script>
   import * as apis from '@/api/system'
   import Edit from './edit'
+  import NavTitle from './navTitle'
   export default {
-   components: { Edit },
+   components: { Edit, NavTitle },
    filters: {
      statusFilter(status) {
        const statusMap = {
@@ -114,14 +116,16 @@
           statusId: undefined,
           parentId: undefined
         },
+        addMap: { },
         // 页面控制数据，例如形式弹窗，显示加载中等
         ctrl: {
           loading: false,
           remoteAuthorLoading: false,
-          dialogVisible: false
+          dialogVisible: false,
+          navTitleVisible: false
         },
         // 表单数据, 例如新增编辑子项，页面表单
-        form: {},
+        formdata: {},
         tableData: [],
         page: {
           beginPageIndex: 1,
@@ -154,6 +158,12 @@
         this.params.pageSize = val
         this.websiteNavList()
       },
+      //跳转到底部导航文章添加页面
+      handleAddSubclass(data) {
+        this.addMap = data
+        this.ctrl.dialogTitle = '添加导航标题'
+        this.ctrl.navTitleVisible = true
+      },
       handleCurrentChange(val) {
         this.params.pageCurrent = val
         this.websiteNavList()
@@ -166,6 +176,7 @@
       // 关闭编辑弹窗回调
       closeCallback() {
         this.ctrl.dialogVisible = false
+        this.ctrl.navTitleVisible = false
         this.reload()
       },
       reload() {
@@ -173,13 +184,13 @@
       },
       //新增
       handleAddRow() {
-        this.form = {}
+        this.formdata = {}
         this.ctrl.dialogTitle = '新增'
         this.ctrl.dialogVisible = true
       },
       // 重置查询条件
       handleReset() {
-        this.map  = {}
+        this.map = {}
         this.websiteNavList()
       },
       //删除
@@ -237,7 +248,7 @@
       },
       //编辑
       handleUpdateRow(data) {
-       this.form = data
+       this.formdata = data
        this.ctrl.dialogTitle = '编辑权限'
        this.ctrl.dialogVisible = true
       },

@@ -115,8 +115,18 @@ export const asyncRouterMap = [
             component: () => import('@/views/index/system/websiteLink')
           },
           {
+            path: 'navArticle',
+            component: () => import('@/views/index/system/navArticle')
+          },
+          {
             path: 'websiteNav',
-            component: () => import('@/views/index/system/websiteNav')
+            component: () => import('@/views/index/system/websiteNav'),
+            children: [
+              {
+                path: 'article',
+                component: () => import('@/views/index/system/websiteNav/article')
+              }
+            ]
           }
         ]
       }
