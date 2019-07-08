@@ -159,7 +159,7 @@
       },
       //改变状态
       changeStatus(id, statusId) {
-        apis.websiteLinkUpdate({ id, statusId }).then(res => {
+        apis.navBarUpdate({ id, statusId }).then(res => {
           const msg = { 0: '禁用成功', 1: '启用成功' }
           this.$message({
             type: 'success',

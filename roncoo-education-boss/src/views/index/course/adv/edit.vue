@@ -103,6 +103,9 @@
       handlePreview(file) {
         console.log(file)
       },
+      success(response, file, fileList) {
+        console.log("成功" + fileList)
+      },
       handleExceed(files, fileList) {
         this.$message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件`);
       },
