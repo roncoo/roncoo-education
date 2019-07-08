@@ -23,55 +23,6 @@ export const asyncRouterMap = [
       }
     ]
   },
-  //课程管理
-  {
-    path: 'course',
-    component: () => import('@/views/course'),
-    children: [
-      {
-        path: 'audit',
-        component: () => import('@/views/course/audit')
-      },
-      {
-        path: 'course',
-        component: () => import('@/views/course/course')
-      }
-    ]
-  },
-  // 讲师管理
-  {
-    path: 'lecturer',
-    component: () => import('@/views/lecturer'),
-    children: [
-      // 讲师列表
-      {
-        path: 'lecturer',
-        component: () => import('@/views/lecturer/lecturer')
-      },
-      // 讲师审核列表
-      {
-        path: 'audit',
-        component: () => import('@/views/lecturer/audit')
-      },
-      // 分润列表
-      {
-        path: 'profit',
-        component: () => import('@/views/lecturer/profit')
-      }
-    ]
-  },
-  // 用户管理
-  {
-    path: 'user',
-    component: () => import('@/views/user'),
-    children: [
-      // 学员列表
-      {
-        path: 'userExt',
-        component: () => import('@/views/user/userExt')
-      }
-    ]
-  },
   //首页管理
   {
     path: 'index',
@@ -122,7 +73,56 @@ export const asyncRouterMap = [
       }
     ]
   },
-      // 系统管理
+  //课程管理
+  {
+    path: 'course',
+    component: () => import('@/views/course'),
+    children: [
+      {
+        path: 'audit',
+        component: () => import('@/views/course/audit')
+      },
+      {
+        path: 'course',
+        component: () => import('@/views/course/course')
+      }
+    ]
+  },
+  // 讲师管理
+  {
+    path: 'lecturer',
+    component: () => import('@/views/lecturer'),
+    children: [
+      // 讲师列表
+      {
+        path: 'lecturer',
+        component: () => import('@/views/lecturer/lecturer')
+      },
+      // 讲师审核列表
+      {
+        path: 'audit',
+        component: () => import('@/views/lecturer/audit')
+      },
+      // 分润列表
+      {
+        path: 'profit',
+        component: () => import('@/views/lecturer/profit')
+      }
+    ]
+  },
+  // 用户管理
+  {
+    path: 'user',
+    component: () => import('@/views/user'),
+    children: [
+      // 学员列表
+      {
+        path: 'userExt',
+        component: () => import('@/views/user/userExt')
+      }
+    ]
+  },
+  // 系统管理
   {
     path: 'sys',
     component: () => import('@/views/sys'),
@@ -142,10 +142,20 @@ export const asyncRouterMap = [
         path: 'menu',
         component: () => import('@/views/sys/menu')
       },
+      // 站内消息
+      {
+        path: 'msg',
+        component: () => import('@/views/sys/msg')
+      },
       // 站点设置
       {
         path: 'website',
         component: () => import('@/views/sys/website')
+      },
+      // 系统设置
+      {
+        path: 'sys',
+        component: () => import('@/views/sys/sys')
       }
     ]
   }

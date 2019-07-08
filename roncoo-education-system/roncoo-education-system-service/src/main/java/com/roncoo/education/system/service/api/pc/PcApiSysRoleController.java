@@ -73,7 +73,7 @@ public class PcApiSysRoleController extends BaseController {
 	 */
 	@ApiOperation(value = "角色查看接口", notes = "角色查看接口")
 	@RequestMapping(value = "/view", method = RequestMethod.POST)
-	public Result<SysRoleViewRESQ> view(SysRoleViewREQ sysRoleViewREQ) {
+	public Result<SysRoleViewRESQ> view(@RequestBody SysRoleViewREQ sysRoleViewREQ) {
 		return biz.view(sysRoleViewREQ);
 	}
 

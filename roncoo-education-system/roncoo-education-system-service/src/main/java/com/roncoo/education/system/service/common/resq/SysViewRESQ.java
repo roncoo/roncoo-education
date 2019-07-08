@@ -65,18 +65,48 @@ public class SysViewRESQ implements Serializable {
 	@ApiModelProperty(value = "access_key_secret")
 	private String aliyunAccessKeySecret;
 	/**
+	 * aliyunOssUrl
+	 */
+	@ApiModelProperty(value = "aliyunOssUrl")
+	private String aliyunOssUrl;
+	/**
+	 * aliyunOssBucket
+	 */
+	@ApiModelProperty(value = "aliyunOssBucket")
+	private String aliyunOssBucket;
+	/**
+	 * smsCode
+	 */
+	@ApiModelProperty(value = "smsCode")
+	private String smsCode;
+	/**
+	 * 短信签名
+	 */
+	@ApiModelProperty(value = "短信签名")
+	private String signName;
+	/**
 	 * 支付通道（1龙果支付，2其他）
 	 */
 	@ApiModelProperty(value = "支付通道（1龙果支付，2其他）")
 	private Integer payType;
 	/**
-	 * roncoo_key
+	 * roncooKey
 	 */
-	@ApiModelProperty(value = "roncoo_key")
-	private String roncooKey;
+	@ApiModelProperty(value = "roncooKey")
+	private String payKey;
 	/**
-	 * roncoo_secret
+	 * roncooSecret
 	 */
-	@ApiModelProperty(value = "roncoo_secret")
-	private String roncooSecret;
+	@ApiModelProperty(value = "roncooSecret")
+	private String paySecret;
+	/**
+	 * 支付请求
+	 */
+	@ApiModelProperty(value = "支付请求")
+	private String payUrl;
+	/**
+	 * 回调地址
+	 */
+	@ApiModelProperty(value = "回调地址")
+	private String notifyUrl;
 }
