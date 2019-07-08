@@ -11,26 +11,26 @@
             </el-radio-group>
           </el-form-item>
           <el-row>
-            <el-col :span="10"><div>
+            <el-col :span="11"><div>
               <el-form-item label="useid:">
-                <el-input style="width:400px;" v-model="formData.polyvUseid" placeholder="请输入useid"></el-input>
+                <el-input style="width:450px;" v-model="formData.polyvUseid" placeholder="请输入useid"></el-input>
               </el-form-item>
             </div></el-col>
-            <el-col :span="10"><div>
+            <el-col :span="11"><div>
               <el-form-item label="secretkey:">
-                <el-input style="width:400px;" v-model="formData.polyvSecretkey" placeholder="请输入secretkey" ></el-input>
+                <el-input style="width:450px;" v-model="formData.polyvSecretkey" placeholder="请输入secretkey" ></el-input>
               </el-form-item>
             </div></el-col>
           </el-row>
           <el-row>
-            <el-col :span="10"><div>
+            <el-col :span="11"><div>
               <el-form-item label="readtoken:">
-                <el-input style="width:400px;" v-model="formData.polyvReadtoken" placeholder="请输入readtoken"></el-input>
+                <el-input style="width:450px;" v-model="formData.polyvReadtoken" placeholder="请输入readtoken"></el-input>
               </el-form-item>
             </div></el-col>
-            <el-col :span="10"><div>
+            <el-col :span="11"><div>
               <el-form-item label="writetoken:">
-                <el-input style="width:400px;" v-model="formData.polyvWritetoken" placeholder="请输入writetoken"></el-input>
+                <el-input style="width:450px;" v-model="formData.polyvWritetoken" placeholder="请输入writetoken"></el-input>
               </el-form-item>
             </div></el-col>
           </el-row>
@@ -44,38 +44,38 @@
               </el-radio-group>
             </el-form-item>
             <el-row>
-              <el-col :span="10"><div>
+              <el-col :span="11"><div>
                 <el-form-item label="accessKeyId:">
-                  <el-input style="width:400px;" v-model="formData.aliyunAccessKeyId" placeholder="请输入accessKeyId"></el-input>
+                  <el-input style="width:450px;" v-model="formData.aliyunAccessKeyId" placeholder="请输入accessKeyId"></el-input>
                 </el-form-item>
               </div></el-col>
-              <el-col :span="10"><div>
+              <el-col :span="11"><div>
                 <el-form-item label="accessKeySecret:">
-                  <el-input style="width:400px;" v-model="formData.aliyunAccessKeySecret" placeholder="请输入accessKeySecret"></el-input>
+                  <el-input style="width:450px;" v-model="formData.aliyunAccessKeySecret" placeholder="请输入accessKeySecret"></el-input>
                 </el-form-item>
               </div></el-col>
             </el-row>
             <el-row>
-              <el-col :span="10"><div>
+              <el-col :span="11"><div>
                 <el-form-item label="ossUrl:">
-                  <el-input style="width:400px;" v-model="formData.aliyunOssUrl" placeholder="请输入ossUrl"></el-input>
+                  <el-input style="width:450px;" v-model="formData.aliyunOssUrl" placeholder="请输入ossUrl"></el-input>
                 </el-form-item>
               </div></el-col>
-              <el-col :span="10"><div>
+              <el-col :span="11"><div>
                 <el-form-item label="ossBucket:">
-                  <el-input style="width:400px;" v-model="formData.aliyunOssBucket" placeholder="请输入ossBucket"></el-input>
+                  <el-input style="width:450px;" v-model="formData.aliyunOssBucket" placeholder="请输入ossBucket"></el-input>
                 </el-form-item>
               </div></el-col>
             </el-row>
             <el-row>
-              <el-col :span="10"><div>
+              <el-col :span="11"><div>
                 <el-form-item label="smsCode:">
-                  <el-input style="width:400px;" v-model="formData.smsCode" placeholder="请输入smsCode"></el-input>
+                  <el-input style="width:450px;" v-model="formData.smsCode" placeholder="请输入smsCode"></el-input>
                 </el-form-item>
               </div></el-col>
-              <el-col :span="10"><div>
+              <el-col :span="11"><div>
                 <el-form-item label="短信签名:">
-                  <el-input style="width:400px;" v-model="formData.signName" placeholder="请输入短信签名"></el-input>
+                  <el-input style="width:450px;" v-model="formData.signName" placeholder="请输入短信签名"></el-input>
                 </el-form-item>
               </div></el-col>
           </el-row>
@@ -88,26 +88,26 @@
             </el-radio-group>
           </el-form-item>
           <el-row>
-            <el-col :span="10"><div>
+            <el-col :span="11"><div>
               <el-form-item label="payKey:">
-                <el-input style="width:400px;" v-model="formData.payKey" placeholder="请输入payKey"></el-input>
+                <el-input style="width:450px;" v-model="formData.payKey" placeholder="请输入payKey"></el-input>
               </el-form-item>
             </div></el-col>
-            <el-col :span="10"><div>
+            <el-col :span="11"><div>
               <el-form-item label="paySecret:">
-                <el-input style="width:400px;" v-model="formData.paySecret" placeholder="请输入paySecret"></el-input>
+                <el-input style="width:450px;" v-model="formData.paySecret" placeholder="请输入paySecret"></el-input>
               </el-form-item>
             </div></el-col>
           </el-row>
           <el-row>
-            <el-col :span="10"><div>
+            <el-col :span="11"><div>
               <el-form-item label="支付请求:">
-                <el-input style="width:400px;" v-model="formData.payUrl" placeholder="请输入支付请求"></el-input>
+                <el-input style="width:450px;" v-model="formData.payUrl" placeholder="请输入支付请求"></el-input>
               </el-form-item>
             </div></el-col>
-            <el-col :span="10"><div>
+            <el-col :span="11"><div>
               <el-form-item label="回调地址:">
-                <el-input style="width:400px;" v-model="formData.notifyUrl" placeholder="请输入回调地址"></el-input>
+                <el-input style="width:450px;" v-model="formData.notifyUrl" placeholder="请输入回调地址"></el-input>
               </el-form-item>
             </div></el-col>
           </el-row>
@@ -115,7 +115,7 @@
       </el-form>
     </div>
       <div style="float:right">
-        <el-button size="mini" type="primary" @click="submitForm('formData')">确 定</el-button>
+        <el-button size="mini" type="primary" @click="submitForm('formData')">确 定 </el-button>
       </div>
       <br/>
       <br/>
@@ -170,6 +170,6 @@
 </script>
 <style scoped>
   .button {
-    padding: 5px 10px;
+    padding: 5px 11px;
   }
 </style>

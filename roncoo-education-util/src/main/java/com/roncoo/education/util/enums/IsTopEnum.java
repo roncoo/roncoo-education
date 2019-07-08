@@ -9,8 +9,6 @@ import lombok.Getter;
 /**
  * 是否置顶
  * 
- * @author Administrator
- *
  */
 @Getter
 @AllArgsConstructor
