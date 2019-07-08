@@ -63,7 +63,7 @@ public class PcApiNavBarController extends BaseController {
 	 */
 	@ApiOperation(value = "头部导航更新接口", notes = "头部导航更新接口")
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public Result<Integer> update(NavBarUpdateREQ navBarUpdateREQ) {
+	public Result<Integer> update(@RequestBody NavBarUpdateREQ navBarUpdateREQ) {
 		return biz.update(navBarUpdateREQ);
 	}
 
@@ -72,7 +72,7 @@ public class PcApiNavBarController extends BaseController {
 	 */
 	@ApiOperation(value = "头部导航查看接口", notes = "头部导航查看接口")
 	@RequestMapping(value = "/view", method = RequestMethod.POST)
-	public Result<NavBarViewRESQ> view(NavBarViewREQ navBarViewREQ) {
+	public Result<NavBarViewRESQ> view(@RequestBody NavBarViewREQ navBarViewREQ) {
 		return biz.view(navBarViewREQ);
 	}
 

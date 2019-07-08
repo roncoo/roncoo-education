@@ -16,7 +16,6 @@ import com.roncoo.education.system.service.dao.impl.mapper.entity.NavBar;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.NavBarExample;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.NavBarExample.Criteria;
 import com.roncoo.education.util.base.Base;
-import com.roncoo.education.util.base.BaseException;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.base.Result;
@@ -64,14 +63,14 @@ public class PcApiNavBarBiz {
 	 */
 	public Result<Integer> save(NavBarSaveREQ req) {
 		if (StringUtils.isEmpty(req.getNavUrl())) {
-			throw new BaseException("导航链接不能为空");
+			return Result.error("导航链接不能为空");
 		}
 		if (StringUtils.isEmpty(req.getTarget())) {
-			throw new BaseException("跳转方式不能为空");
+			return Result.error("跳转方式不能为空");
 		}
 		NavBar navBar = dao.getByNavUrl(req.getNavUrl());
 		if (ObjectUtil.isNotNull(navBar)) {
-			throw new BaseException("已经添加该导航");
+			return Result.error("已经添加该导航");
 		}
 		NavBar record = BeanUtil.copyProperties(req, NavBar.class);
 		int results = dao.save(record);
