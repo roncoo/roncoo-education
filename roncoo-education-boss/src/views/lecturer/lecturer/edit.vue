@@ -70,10 +70,10 @@
           </el-form-item>
         </div>
     </el-form>
-    <div slot="footer" class="dialog-footer">
-      <el-button class="button" type="primary" @click="submitForm('formData')">确 定</el-button>
-      <el-button class="button" type="danger" plain @click="handleClose">取 消</el-button>
-    </div>
+    <el-row style="margin-top:17px; ">
+        <el-button style="float:right" size="mini" type="primary" @click="submitForm('formData')">确 定</el-button>
+        <el-button style="float:right;margin-left:6px;" size="mini" type="danger" plain @click="handleClose">取 消</el-button>
+    </el-row>
   </el-dialog>
 </template>
 <script>

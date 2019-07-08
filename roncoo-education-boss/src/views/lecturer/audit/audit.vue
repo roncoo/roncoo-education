@@ -13,13 +13,13 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="审核意见:">
-        <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="formData.auditOpinion"></el-input>
+        <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="系统默认通过" v-model="formData.auditOpinion"></el-input>
       </el-form-item>
     </el-form>
-    <div slot="footer" class="dialog-footer">
-      <el-button class="button" type="primary" @click="submitForm('formData')">确 定</el-button>
-      <el-button class="button" type="danger" plain @click="handleClose">取 消</el-button>
-    </div>
+    <el-row style="margin-top:17px; ">
+        <el-button style="float:right" size="mini" type="primary" @click="submitForm('formData')">确 定</el-button>
+        <el-button style="float:right;margin-left:6px;" size="mini" type="danger" plain @click="handleClose">取 消</el-button>
+    </el-row>
   </el-dialog>
 </template>
 <script>
@@ -48,6 +48,9 @@
       submitForm(formData) {
         this.$refs[formData].validate((valid) => {
           if (valid) {
+            if (this.formData.auditOpinion === '') {
+              this.formData.auditOpinion = "系统默认通过"
+            }
             this.handleConfirm()
           } else {
             return false;

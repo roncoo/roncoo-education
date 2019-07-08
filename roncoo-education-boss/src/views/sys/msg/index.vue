@@ -6,7 +6,7 @@
         <el-input v-model="map.msgTitle"></el-input>
       </el-form-item>
       <el-form-item label="是否发送:">
-        <el-select v-model="map.isSend" class="auto-width" clearable filterable placeholder="是否发送" style="width: 85px">
+        <el-select v-model="map.isSend" class="auto-width" clearable filterable placeholder="是否发送" style="width: 100px">
           <el-option
             v-for="item in opts.isSendList"
             :key="item.code"
@@ -16,7 +16,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="是否置顶:">
-        <el-select v-model="map.isTop" class="auto-width" clearable filterable placeholder="是否置顶" style="width: 85px">
+        <el-select v-model="map.isTop" class="auto-width" clearable filterable placeholder="是否置顶" style="width: 100px">
           <el-option
             v-for="item in opts.isTopList"
             :key="item.code"
@@ -63,7 +63,7 @@
           <ul class="list-item-actions">
             <li>
               <el-button type="danger" @click="handleDelete(scope.row.id)" size="mini">删除</el-button>
-              <el-button type="success" @click="handleEdit(scope.row)" size="mini">修改</el-button>
+              <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
               <el-button type="success" @click="handleSend(scope.row.id)" size="mini">发送</el-button>
             </li>
           </ul>
@@ -174,7 +174,7 @@
       // 添加管理员
       handleAdd() {
         this.ctrl.addDialogVisible = true
-        this.dialogTitle = '添加'
+        this.ctrl.dialogTitle = '添加'
       },
       // 发送消息
       handleSend(row) {
@@ -204,9 +204,15 @@
       },
       // 跳修改弹窗页面
       handleEdit(row) {
-        this.formData = row
+        this.load === true
+        api.msgView({ id: row }).then(res => {
+          this.formData = res.data
+          this.ctrl.dialogTitle = res.data.msgTitle + '——编辑'
+          this.ctrl.load = false
+        }).catch(() => {
+          this.ctrl.load = true
+        })
         this.ctrl.dialogVisible = true
-        this.ctrl.dialogTitle = row.realName + '——编辑'
       },
       // 关闭弹窗回调
       closeCllback() {

@@ -69,9 +69,9 @@
         <br/>
       </el-form>
     </div>
-      <div style="float:right">
-        <el-button size="mini" type="primary" @click="submitForm('formData')">确 定</el-button>
-      </div>
+      <el-row style="margin-top:17px; ">
+          <el-button style="float:right" size="mini" type="primary" @click="submitForm('formData')">确 定</el-button>
+      </el-row>
       <br/>
       <br/>
   </div>
@@ -95,7 +95,8 @@
         this.editor = new E('#userAgreement')
         this.editor1 = new E('#recruitInfo')
         this.editor2 = new E('#entryAgreement')
-        setTimeout(() => {
+        if (this.formData !== undefined) {
+          setTimeout(() => {
           this.editor.create(); // 创建用户协议富文本编辑器
           this.editor.customConfig.customUploadImg = this.editorUpload
           if (this.formData.userAgreement !== undefined && this.formData.userAgreement !== '' && this.formData.userAgreement !== null) {
@@ -118,6 +119,7 @@
             this.editor2.txt.html('')
           }
         }, 100)
+        }
       },
       getWebsite() {
         api.websiteView({}).then(res => {

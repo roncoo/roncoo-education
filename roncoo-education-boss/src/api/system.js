@@ -395,6 +395,15 @@ export function msgUpdate(data = {}) {
   })
 }
 
+// 站内信消息查看接口
+export function msgView(data = {}) {
+  return request({
+    url: `/system/pc/msg/view`,
+    method: 'post',
+    data: data
+  })
+}
+
 // 站内信消息手动发送接口
 export function msgPush(data = {}) {
   return request({

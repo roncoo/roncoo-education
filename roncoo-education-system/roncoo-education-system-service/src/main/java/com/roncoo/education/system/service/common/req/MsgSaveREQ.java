@@ -50,6 +50,6 @@ public class MsgSaveREQ implements Serializable {
 	 * 发送时间
 	 */
 	@ApiModelProperty(value = "发送时间", required = false)
-	private Date sendTimeString;
+	private Date sendTime;
 
 }
