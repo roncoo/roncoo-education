@@ -340,3 +340,21 @@ export function websiteUpdate(data = {}) {
     data: data
   })
 }
+
+// 获取系统配置信息
+export function sysView(data = {}) {
+  return request({
+    url: `/system/pc/sys/view`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 更新系统配置信息接口
+export function sysUpdate(data = {}) {
+  return request({
+    url: `/system/pc/sys/update`,
+    method: 'post',
+    data: data
+  })
+}

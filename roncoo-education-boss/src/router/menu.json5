@@ -37,6 +37,82 @@
   },
   {
     "id": 0,
+    "name": "首页管理",
+    "path": "/index",
+    "icon": null,
+    "children": [
+      {
+        "id": 2,
+        "name": "首页轮播",
+        "path": "/course",
+        "icon": null,
+        "children": [
+        {
+        "id": 2,
+        "name": "PC端设置",
+        "path": "/index/course/adv",
+        "icon": null,
+        }
+        ]
+      },
+      {
+        "id": 2,
+         "name": "专区管理",
+         "path": "/course",
+          "icon": null,
+          "children": [
+           {
+           "id": 2,
+           "name": "PC端设置",
+           "path": "/index/course/zone",
+           "icon": null,
+           }
+           ]
+       },
+      {
+          "id": 2,
+          "name": "站点管理",
+          "path": "/system",
+          "icon": null,
+          "children": [
+          {
+           "id": 2,
+           "name": "头部导航",
+           "path": "/index/system/navBar",
+           "icon": null,
+           },
+           {
+           "id": 2,
+           "name": "底部导航",
+           "path": "/index/system/websiteNav",
+           "icon": null,
+           },
+           {
+           "id": 2,
+           "name": "友情链接",
+           "path": "/index/system/websiteLink",
+           "icon": null,
+           },
+           ]
+      },
+      {
+           "id": 2,
+           "name": "分类推荐",
+           "path": "/course",
+           "icon": null,
+           "children": [
+           {
+           "id": 2,
+           "name": "PC端设置",
+           "path": "/index/course/courseCategory",
+           "icon": null,
+           }
+           ]
+      },
+    ]
+  },
+  {
+    "id": 0,
     "name": "课程管理",
     "path": "/course",
     "icon": null,
@@ -124,83 +200,13 @@
         "name": "站点设置",
         "path": "/sys/website",
         "icon": null,
+      },
+      {
+        "id": 2,
+        "name": "系统设置",
+        "path": "/sys/sys",
+        "icon": null,
       }
     ]
-  },
-  {
-      "id": 0,
-      "name": "首页管理",
-      "path": "/index",
-      "icon": null,
-      "children": [
-        {
-          "id": 2,
-          "name": "首页轮播",
-          "path": "/course",
-          "icon": null,
-          "children": [
-          {
-          "id": 2,
-          "name": "PC端设置",
-          "path": "/index/course/adv",
-          "icon": null,
-          }
-          ]
-        },
-        {
-          "id": 2,
-           "name": "专区管理",
-           "path": "/course",
-            "icon": null,
-            "children": [
-             {
-             "id": 2,
-             "name": "PC端设置",
-             "path": "/index/course/zone",
-             "icon": null,
-             }
-             ]
-         },
-        {
-            "id": 2,
-            "name": "站点管理",
-            "path": "/system",
-            "icon": null,
-            "children": [
-            {
-             "id": 2,
-             "name": "头部导航",
-             "path": "/index/system/navBar",
-             "icon": null,
-             },
-             {
-             "id": 2,
-             "name": "底部导航",
-             "path": "/index/system/websiteNav",
-             "icon": null,
-             },
-             {
-             "id": 2,
-             "name": "友情链接",
-             "path": "/index/system/websiteLink",
-             "icon": null,
-             },
-             ]
-        },
-        {
-             "id": 2,
-             "name": "分类推荐",
-             "path": "/course",
-             "icon": null,
-             "children": [
-             {
-             "id": 2,
-             "name": "PC端设置",
-             "path": "/index/course/courseCategory",
-             "icon": null,
-             }
-             ]
-        },
-      ]
-    }
+  }
 ]
