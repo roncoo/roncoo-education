@@ -1,6 +1,7 @@
 package com.roncoo.education.system.service.common.req;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -45,5 +46,10 @@ public class MsgSaveREQ implements Serializable {
 	 */
 	@ApiModelProperty(value = "是否置顶(1是;0否)", required = false)
 	private Integer isTop;
+	/**
+	 * 发送时间
+	 */
+	@ApiModelProperty(value = "发送时间", required = false)
+	private Date sendTimeString;
 
 }
