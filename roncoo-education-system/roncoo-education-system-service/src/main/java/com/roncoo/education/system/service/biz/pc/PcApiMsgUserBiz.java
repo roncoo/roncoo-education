@@ -1,6 +1,7 @@
 package com.roncoo.education.system.service.biz.pc;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.aliyun.oas.utils.StringUtil;
@@ -20,6 +21,11 @@ import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.tools.BeanUtil;
 import com.xiaoleilu.hutool.util.ObjectUtil;
 
+/**
+ * 站内信用户记录
+ * 
+ */
+@Component
 public class PcApiMsgUserBiz {
 
 	@Autowired
