@@ -358,3 +358,48 @@ export function sysUpdate(data = {}) {
     data: data
   })
 }
+
+// 站内信消息分页列表接口
+export function msgList(data = {}) {
+  return request({
+    url: `/system/pc/msg/list`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 站内信消息保存接口
+export function msgSave(data = {}) {
+  return request({
+    url: `/system/pc/msg/save`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 站内信消息删除接口
+export function msgDelete(data = {}) {
+  return request({
+    url: `/system/pc/msg/delete`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 站内信消息更新接口
+export function msgUpdate(data = {}) {
+  return request({
+    url: `/system/pc/msg/update`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 站内信消息手动发送接口
+export function msgPush(data = {}) {
+  return request({
+    url: `/system/pc/msg/push`,
+    method: 'post',
+    data: data
+  })
+}

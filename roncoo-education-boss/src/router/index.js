@@ -142,6 +142,11 @@ export const asyncRouterMap = [
         path: 'menu',
         component: () => import('@/views/sys/menu')
       },
+      // 站内消息
+      {
+        path: 'msg',
+        component: () => import('@/views/sys/msg')
+      },
       // 站点设置
       {
         path: 'website',

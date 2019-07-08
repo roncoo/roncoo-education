@@ -197,6 +197,12 @@
       },
       {
         "id": 2,
+        "name": "站内消息",
+        "path": "/sys/msg",
+        "icon": null,
+      },
+      {
+        "id": 2,
         "name": "站点设置",
         "path": "/sys/website",
         "icon": null,
