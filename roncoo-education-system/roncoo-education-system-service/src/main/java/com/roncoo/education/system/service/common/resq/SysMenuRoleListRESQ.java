@@ -27,5 +27,5 @@ public class SysMenuRoleListRESQ implements Serializable {
 	 */
 	@ApiModelProperty(value = "菜单角色关联菜单ID集合")
 	@JsonSerialize(using = ToStringSerializer.class)
-	private List<Long> list = new ArrayList<>();
+	private List<String> list = new ArrayList<>();
 }
