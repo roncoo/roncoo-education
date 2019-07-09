@@ -412,3 +412,30 @@ export function msgPush(data = {}) {
     data: data
   })
 }
+
+// 用户消息删除接口
+export function msgUserDelete(data = {}) {
+  return request({
+    url: `/system/pc/msg/user/delete`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 用户消息分页列表接口
+export function msgUserList(data = {}) {
+  return request({
+    url: `/system/pc/msg/user/list`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 用户消息查看接口
+export function msgUserView(data = {}) {
+  return request({
+    url: `/system/pc/msg/user/view`,
+    method: 'post',
+    data: data
+  })
+}

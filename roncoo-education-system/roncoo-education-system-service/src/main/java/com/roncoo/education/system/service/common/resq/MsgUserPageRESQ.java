@@ -39,6 +39,7 @@ public class MsgUserPageRESQ implements Serializable {
 	 * 短信ID
 	 */
 	@ApiModelProperty(value = "短信ID")
+	@JsonSerialize(using = ToStringSerializer.class)
 	private Long msgId;
 	/**
 	 * 手机号

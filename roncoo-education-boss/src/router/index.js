@@ -147,6 +147,11 @@ export const asyncRouterMap = [
         path: 'msg',
         component: () => import('@/views/sys/msg')
       },
+      // 用户消息
+      {
+        path: 'msgUser',
+        component: () => import('@/views/sys/msgUser')
+      },
       // 站点设置
       {
         path: 'website',
