@@ -64,7 +64,10 @@
     <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
       <el-table-column type="index" label="序号" width="40">
       </el-table-column>
-      <el-table-column prop="orderNo" label="订单号" width="153">
+      <el-table-column label="订单号" width="157">
+        <template slot-scope="scope">
+          <el-button type="text" @click="handleView(scope.row.id)">{{scope.row.orderNo}}</el-button>
+        </template>
       </el-table-column>
       <el-table-column prop="courseName" label="课程信息">
       </el-table-column>
@@ -118,20 +121,24 @@
     </el-pagination>
     <remark :visible="ctrl.remarkVisible" :formData="formdata" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></remark>
     <view-lecturer :visible="ctrl.lecturerViewVisible" :formData="formdata" :lecturerExt="lecturerExt" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></view-lecturer>
+    <order-view :visible="ctrl.viewVisible" :formData="formdata" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></order-view>
   </div>
 </template>
 <script>
 import * as courseApis from '@/api/course'
-import Remark from './remark'
 import * as userApi from '@/api/user'
+import Remark from './remark'
 import ViewLecturer from '@/views/lecturer/lecturer/view'
+import OrderView from './view'
 export default {
-  components: { Remark, ViewLecturer },
+  components: { Remark, ViewLecturer, OrderView },
   data() {
     return {
       ctrl: {
         load: false,
-        lecturerViewVisible: false
+        lecturerViewVisible: false,
+        remarkVisible: false,
+        viewVisible: false
       },
       page: {
         beginPageIndex: 1,
@@ -186,7 +193,6 @@ export default {
     getList() {
       this.ctrl.load = true
       courseApis.orderList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
-        console.log(this.gmtCreate)
         this.ctrl.load = false
         this.list = res.data.list
         this.page.pageSize = res.data.pageSize
@@ -223,11 +229,24 @@ export default {
         this.ctrl.load = false
       })
     },
+    //跳转订单详情页面
+    handleView(id) {
+      this.ctrl.load = true
+      courseApis.orderView(id).then(res => {
+        this.ctrl.load = false
+        this.formdata = res.data
+        this.ctrl.dialogTitle = '订单详情'
+        this.ctrl.viewVisible = true
+      }).catch(() => {
+        this.ctrl.load = false
+      })
+    },
     // 关闭编辑弹窗回调
     closeCllback() {
       this.ctrl.dialogVisible = false;
       this.ctrl.remarkVisible = false;
       this.ctrl.lecturerViewVisible = false;
+      this.ctrl.viewVisible = false;
       this.reload()
     },
     handleSizeChange(val) {
