@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -26,6 +23,5 @@ public class SysMenuRoleListRESQ implements Serializable {
 	 * 菜单角色关联表集合
 	 */
 	@ApiModelProperty(value = "菜单角色关联菜单ID集合")
-	@JsonSerialize(using = ToStringSerializer.class)
 	private List<String> list = new ArrayList<>();
 }
