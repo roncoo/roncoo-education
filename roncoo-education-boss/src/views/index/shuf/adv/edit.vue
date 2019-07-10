@@ -26,7 +26,7 @@
         <el-input v-model="formData.advTitle" ></el-input>
       </el-form-item>
       <el-form-item label="广告排序" prop="sort">
-        <el-input v-model="formData.sort" ></el-input>
+        <el-input  v-model="formData.sort" ></el-input>
       </el-form-item>
       <el-form-item label="广告状态">
         <el-radio-group v-model="formData.statusId">

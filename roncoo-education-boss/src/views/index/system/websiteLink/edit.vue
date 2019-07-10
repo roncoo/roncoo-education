@@ -7,8 +7,8 @@
 
     <el-form :model="formData" :rules="rules" ref="formData">
       <el-form-item label="链接地址" prop="linkUrl">
-        <el-input v-model="formData.linkUrl"></el-input>
-      </el-form-item>
+      <el-input v-model="formData.linkUrl"></el-input>
+    </el-form-item>
       <el-form-item label="链接名称" prop="linkName">
         <el-input v-model="formData.linkName" ></el-input>
       </el-form-item>
@@ -18,7 +18,6 @@
           <el-radio v-model="formData.linkTarget" label="_self">同窗口打开</el-radio>
         </template>
       </el-form-item>
-
       <el-form-item label="排序" prop="sort" >
         <el-input v-model="formData.sort" ></el-input>
       </el-form-item>

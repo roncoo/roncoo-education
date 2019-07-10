@@ -6,13 +6,16 @@
     :before-close="handleClose">
 
     <el-form :model="formData" :rules="rules" ref="formData">
-      <el-form-item label="导航标题" prop="navTitle">
-        <el-input v-model="formData.navTitle"></el-input>
+      <el-form-item label="链接地址" prop="linkUrl">
+      <el-input v-model="formData.linkUrl"></el-input>
+    </el-form-item>
+      <el-form-item label="链接名称" prop="linkName">
+        <el-input v-model="formData.linkName" ></el-input>
       </el-form-item>
       <el-form-item label="打开方式" prop="linkTarget"  width="200">
         <template>
-          <el-radio v-model="formData.target" label="_blank">新窗口打开</el-radio>
-          <el-radio v-model="formData.target" label="_self">同窗口打开</el-radio>
+          <el-radio v-model="formData.linkTarget" label="_blank">新窗口打开</el-radio>
+          <el-radio v-model="formData.linkTarget" label="_self">同窗口打开</el-radio>
         </template>
       </el-form-item>
       <el-form-item label="排序" prop="sort" >
@@ -25,8 +28,9 @@
     </div>
   </el-dialog>
 </template>
+
 <script>
-  import * as apis from '@/api/system'
+import * as apis from '@/api/system'
   export default {
     name: 'Edit',
     data() {
@@ -36,11 +40,14 @@
         },
         form: { },
         rules: {
-          navName: [
-            { required: true, message: '请输入导航名称', trigger: 'blur', autocomplete: 'on' }
+          linkUrl: [
+            { required: true, message: '请输入链接地址', trigger: 'blur', autocomplete: 'on' }
+          ],
+          linkName: [
+            { required: true, message: '请输入链接名称', trigger: 'blur' }
           ],
           sort: [
-            { required: true, message: '请输入导航排序', trigger: 'blur' }
+            { required: true, message: '请输入链接排序', trigger: 'blur' }
           ]
         }
       }
@@ -78,12 +85,10 @@
         this.loading.show()
         let res = {}
         if (this.formData.id === undefined) {
-          //新增底部导航栏，给父ID赋值
-          this.formData.parentId = 0
-          res = await apis.navBarSave(this.formData)
+         res = await apis.websiteLinkSave(this.formData)
         } else {
           // 编辑
-          res = await apis.navBarUpdate(this.formData)
+         res = await apis.websiteLinkUpdate(this.formData)
         }
         this.loading.hide()
         if (res.code === 200) {
@@ -96,3 +101,7 @@
     }
   }
 </script>
+
+<style scoped>
+
+</style>

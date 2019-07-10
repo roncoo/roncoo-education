@@ -4,19 +4,15 @@
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
-
     <el-form :model="formData" :rules="rules" ref="formData">
-      <el-form-item label="导航标题" prop="navTitle">
-        <el-input v-model="formData.navTitle"></el-input>
+      <el-form-item label="专区名称" prop="zoneName">
+        <el-input v-model="formData.zoneName" ></el-input>
       </el-form-item>
-      <el-form-item label="打开方式" prop="linkTarget"  width="200">
-        <template>
-          <el-radio v-model="formData.target" label="_blank">新窗口打开</el-radio>
-          <el-radio v-model="formData.target" label="_self">同窗口打开</el-radio>
-        </template>
+      <el-form-item label="专区排序" prop="sort">
+        <el-input v-model="formData.sort" ></el-input>
       </el-form-item>
-      <el-form-item label="排序" prop="sort" >
-        <el-input  v-model="formData.sort" ></el-input>
+      <el-form-item label="专区描述" prop="zoneDesc">
+        <el-input v-model="formData.zoneDesc" type="textarea"></el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -25,8 +21,9 @@
     </div>
   </el-dialog>
 </template>
+
 <script>
-  import * as apis from '@/api/system'
+  import * as apis from '@/api/zone'
   export default {
     name: 'Edit',
     data() {
@@ -34,13 +31,16 @@
         ctrl: {
           dialogVisible: true
         },
-        form: { },
+        form: {},
         rules: {
-          navName: [
-            { required: true, message: '请输入导航名称', trigger: 'blur', autocomplete: 'on' }
+          zoneName: [
+            { required: true, message: '请输入专区名称', trigger: 'blur', autocomplete: 'on' }
           ],
           sort: [
-            { required: true, message: '请输入导航排序', trigger: 'blur' }
+            { required: true, message: '请输入专区排序', trigger: 'blur', autocomplete: 'on' }
+          ],
+          zoneDesc: [
+            { required: false, message: '请输入专区描述', trigger: 'blur' }
           ]
         }
       }
@@ -78,12 +78,11 @@
         this.loading.show()
         let res = {}
         if (this.formData.id === undefined) {
-          //新增底部导航栏，给父ID赋值
-          this.formData.parentId = 0
-          res = await apis.navBarSave(this.formData)
+          res = await apis.coursePcZoneSave(this.formData)
         } else {
           // 编辑
-          res = await apis.navBarUpdate(this.formData)
+          res = await apis.coursePcZoneUpdate(this.formData)
+          // this.tips('成功', 'success')
         }
         this.loading.hide()
         if (res.code === 200) {
@@ -96,3 +95,7 @@
     }
   }
 </script>
+
+<style scoped>
+
+</style>

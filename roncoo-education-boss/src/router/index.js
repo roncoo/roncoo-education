@@ -29,27 +29,32 @@ export const asyncRouterMap = [
     component: () => import('@/views/index'),
     children: [
       {
-        path: 'course',
-        component: () => import('@/views/index/course'),
+        path: 'recommend',
+        component: () => import('@/views/index/recommend'),
+        children: [
+          {
+            path: 'courseCategory',
+            component: () => import('@/views/index/recommend/courseCategory')
+          }
+        ]
+      },
+      {
+        path: 'zone',
+        component: () => import('@/views/index/zone'),
+        children: [
+          {
+            path: 'zoneSet',
+            component: () => import('@/views/index/zone/zoneSet')
+          }
+         ]
+      },
+      {
+        path: 'shuf',
+        component: () => import('@/views/index/shuf'),
         children: [
           {
             path: 'adv',
-            component: () => import('@/views/index/course/adv')
-          },
-          {
-            path: 'zone',
-            component: () => import('@/views/index/course/zone')
-          },
-          {
-            path: 'courseCategory',
-            component: () => import('@/views/index/course/courseCategory'),
-            children: [
-              {
-                path: 'recommendCourse',
-                name: 'recommendCourse',
-                component: () => import('@/views/index/course/courseCategory/recommendCourse')
-              }
-            ]
+            component: () => import('@/views/index/shuf/adv')
           }
         ]
       },

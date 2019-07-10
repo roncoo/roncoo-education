@@ -44,13 +44,13 @@
       {
         "id": 2,
         "name": "首页轮播",
-        "path": "/course",
+        "path": "/shuf",
         "icon": null,
         "children": [
         {
         "id": 2,
         "name": "PC端设置",
-        "path": "/index/course/adv",
+        "path": "/index/shuf/adv",
         "icon": null,
         }
         ]
@@ -58,13 +58,13 @@
       {
         "id": 2,
          "name": "专区管理",
-         "path": "/course",
+         "path": "/zone",
           "icon": null,
           "children": [
            {
            "id": 2,
            "name": "PC端设置",
-           "path": "/index/course/zone",
+           "path": "/index/zone/zoneSet",
            "icon": null,
            }
            ]
@@ -98,13 +98,13 @@
       {
            "id": 2,
            "name": "分类推荐",
-           "path": "/course",
+           "path": "/recommend",
            "icon": null,
            "children": [
            {
            "id": 2,
            "name": "PC端设置",
-           "path": "/index/course/courseCategory",
+           "path": "/index/recommend/courseCategory",
            "icon": null,
            }
            ]
