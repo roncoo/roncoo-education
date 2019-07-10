@@ -2,22 +2,28 @@
   <!--弹窗-->
   <div>
   <el-dialog
-    width="80%"
+    width="60%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
-    <el-form ref="form" :model="form" :rules="rules" label-width="100px">
+    <el-form ref="formData" :model="formData" :rules="rules" label-width="100px">
       <el-form-item label="标题:" prop="msgTitle">
-        <el-input v-model="form.msgTitle"></el-input>
+        <el-input v-model="formData.msgTitle"></el-input>
       </el-form-item>
-      <el-form-item label="内容:" style="width:80%">
-         <div id="msgText" style="height:400px;max-height:500px;"></div>
+      <el-form-item label="是否置顶:">
+        <el-radio-group v-model="formData.isTop">
+          <el-radio :label="1">是</el-radio>
+          <el-radio :label="0">否</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="内容:">
+         <div id="msgText"></div>
       </el-form-item>
     </el-form>
-    <div slot="footer" class="dialog-footer">
-      <el-button class="button" type="primary" @click="submitForm('form')">确 定</el-button>
-      <el-button class="button" type="danger" plain @click="handleClose">取 消</el-button>
-    </div>
+    <el-row style="margin-top:17px; ">
+        <el-button style="float:right" size="mini" type="primary" @click="submitForm('formData')">确 定</el-button>
+        <el-button style="float:right;margin-left:6px;" size="mini" type="danger" plain @click="handleClose">取 消</el-button>
+    </el-row>
   </el-dialog>
   </div>
 </template>
@@ -28,7 +34,6 @@ export default {
   name: 'Add',
   data() {
     return {
-      form: {},
       rules: {
         msgTitle: [
           { required: true, message: '请选择标题', trigger: 'blur' }
@@ -37,6 +42,10 @@ export default {
     }
   },
   props: {
+    formData: {
+        type: Object,
+        default: () => {}
+      },
     visible: {
       type: Boolean,
       default: false
@@ -47,12 +56,16 @@ export default {
     }
   },
   watch: {
-    visible: function(val) {
-      console.log(console)
-      if (val !== false) {
+    formData: function(val) {
+      if (val !== undefined) {
         setTimeout(() => {
           this.editor.create();
           this.editor.customConfig.customUploadImg = this.editorUpload
+          if (this.formData.msgText !== undefined && this.formData.msgText !== '' && this.formData.msgText !== null) {
+            this.editor.txt.html(this.formData.msgText)
+          } else {
+            this.editor.txt.html('')
+          }
         }, 100)
       }
     }
@@ -67,7 +80,7 @@ export default {
     },
     // 保存管理员信息
     submitForm(form) {
-      if (!this.form.msgTitle) {
+      if (!this.formData.msgTitle) {
         this.$message({
           type: 'error',
           message: '请输入标题'
@@ -83,21 +96,23 @@ export default {
         }
       })
     },
-    //异步保存管理员信息
+    //异步更新管理员信息
     async handleConfirm() {
       this.load = true
       let res = {}
-      if (this.form === undefined) {
+      if (this.formData === undefined) {
         this.$alert(res.msg || '提交失败')
       } else {
-        res = await api.msgSave(this.form)
+        res = await api.msgUpdate(this.formData)
         // this.tips('成功', 'success')
       }
       this.load = false
       if (res.code === 200 && res.data > 0) {
         // 提交成功, 关闭窗口, 刷新列表
+        this.editor.txt.clear()
         this.$emit('close-cllback')
       } else {
+        this.editor.txt.clear()
         this.$alert(res.msg || '提交失败')
       }
     },

@@ -203,6 +203,12 @@
       },
       {
         "id": 2,
+        "name": "用户消息",
+        "path": "/sys/msgUser",
+        "icon": null,
+      },
+      {
+        "id": 2,
         "name": "站点设置",
         "path": "/sys/website",
         "icon": null,

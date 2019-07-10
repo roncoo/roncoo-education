@@ -130,9 +130,9 @@
           </div></el-col>
         </el-row>
     </el-form>
-    <div slot="footer" class="dialog-footer">
-      <el-button class="button" type="danger" plain @click="handleClose">取 消</el-button>
-    </div>
+    <el-row style="margin-top:17px; ">
+        <el-button style="float:right;margin-left:6px;" size="mini" type="danger" plain @click="handleClose">取 消</el-button>
+    </el-row>
   </el-dialog>
 </template>
 <script>

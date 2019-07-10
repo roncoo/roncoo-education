@@ -395,10 +395,46 @@ export function msgUpdate(data = {}) {
   })
 }
 
+// 站内信消息查看接口
+export function msgView(data = {}) {
+  return request({
+    url: `/system/pc/msg/view`,
+    method: 'post',
+    data: data
+  })
+}
+
 // 站内信消息手动发送接口
 export function msgPush(data = {}) {
   return request({
     url: `/system/pc/msg/push`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 用户消息删除接口
+export function msgUserDelete(data = {}) {
+  return request({
+    url: `/system/pc/msg/user/delete`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 用户消息分页列表接口
+export function msgUserList(data = {}) {
+  return request({
+    url: `/system/pc/msg/user/list`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 用户消息查看接口
+export function msgUserView(data = {}) {
+  return request({
+    url: `/system/pc/msg/user/view`,
     method: 'post',
     data: data
   })

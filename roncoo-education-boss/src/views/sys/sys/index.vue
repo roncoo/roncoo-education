@@ -114,9 +114,9 @@
         <br/>
       </el-form>
     </div>
-      <div style="float:right">
-        <el-button size="mini" type="primary" @click="submitForm('formData')">确 定 </el-button>
-      </div>
+      <el-row style="margin-top:17px; ">
+          <el-button style="float:right" size="mini" type="primary" @click="submitForm('formData')">确 定</el-button>
+      </el-row>
       <br/>
       <br/>
   </div>

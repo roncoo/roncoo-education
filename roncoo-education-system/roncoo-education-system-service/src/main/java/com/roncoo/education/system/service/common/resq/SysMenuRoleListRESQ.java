@@ -23,5 +23,5 @@ public class SysMenuRoleListRESQ implements Serializable {
 	 * 菜单角色关联表集合
 	 */
 	@ApiModelProperty(value = "菜单角色关联菜单ID集合")
-	private List<Long> list = new ArrayList<>();
+	private List<String> list = new ArrayList<>();
 }

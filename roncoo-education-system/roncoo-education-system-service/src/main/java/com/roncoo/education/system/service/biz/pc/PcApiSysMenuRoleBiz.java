@@ -41,10 +41,10 @@ public class PcApiSysMenuRoleBiz {
 		}
 		SysMenuRoleListRESQ resq = new SysMenuRoleListRESQ();
 		List<SysMenuRole> list = dao.listByRoleId(req.getRoleId());
-		List<Long> roleIdList = new ArrayList<>();
+		List<String> roleIdList = new ArrayList<>();
 		if (CollectionUtils.isNotEmpty(list)) {
 			for (SysMenuRole sysMenuRole : list) {
-				roleIdList.add(sysMenuRole.getMenuId());
+				roleIdList.add(String.valueOf(sysMenuRole.getMenuId()));
 			}
 			resq.setList(roleIdList);
 		}
