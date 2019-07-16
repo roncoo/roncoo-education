@@ -7,23 +7,15 @@
       <el-form-item label="课程名称:">
         <el-input v-model="map.courseName"></el-input>
       </el-form-item>
-      <el-form-item label="订单编号:">
-        <el-input v-model="map.orderNo"></el-input>
-      </el-form-item>
-      <el-form-item label="后台备注:">
-        <el-input v-model="map.remark"></el-input>
-      </el-form-item>
-      <el-form-item label="讲师名称:">
-        <el-input v-model="map.lecturerName"></el-input>
-      </el-form-item>
-      <el-form-item label="日期:">
+      <el-form-item label="支付时间:">
         <el-date-picker
-        v-model="gmtCreate"
+        v-model="payTime"
         type="daterange"
         range-separator="至"
         start-placeholder="开始日期"
         end-placeholder="结束日期"
-        align="center">
+        align="center"
+        @change="changeTime">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="订单状态:">
@@ -35,6 +27,15 @@
             :value="item.code">
           </el-option>
         </el-select>
+      </el-form-item>
+      <el-form-item label="订单编号:">
+        <el-input v-model="map.orderNo"></el-input>
+      </el-form-item>
+      <el-form-item label="后台备注:">
+        <el-input v-model="map.remark"></el-input>
+      </el-form-item>
+      <el-form-item label="讲师名称:">
+        <el-input v-model="map.lecturerName"></el-input>
       </el-form-item>
       <el-form-item label="购买渠道:">
         <el-select v-model="map.channelType" class="auto-width" clearable filterable placeholder="购买渠道" style="width: 100px">
@@ -56,10 +57,28 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item style="float:right" >
-          <el-button type="primary" :loading="ctrl.loading" @click="handleCheck">查询</el-button>
-          <el-button class="filter-item" @click="handleReset">重置</el-button>
-        </el-form-item>
+      <br/>
+      <el-form-item >
+        <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
+        <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
+      </el-form-item>
+      <el-form-item >
+        <div>
+          <span>平台收入: 【{{platformProfit}}元】</span>
+        </div>
+      </el-form-item>
+      <el-form-item >
+        <el-divider direction="vertical"></el-divider>
+      </el-form-item>
+      <el-form-item >
+        <span>订单收入: 【{{totalProfit}}元】</span>
+      </el-form-item>
+      <el-form-item >
+        <el-divider direction="vertical"></el-divider>
+      </el-form-item>
+      <el-form-item >
+        <span>讲师收入: 【{{lecturerProfit}}元】</span>
+      </el-form-item>
     </el-form>
     <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
       <el-table-column type="index" label="序号" width="40">
@@ -69,21 +88,22 @@
           <el-button type="text" @click="handleView(scope.row.id)">{{scope.row.orderNo}}</el-button>
         </template>
       </el-table-column>
-      <el-table-column prop="courseName" label="课程信息">
+      <el-table-column prop="courseName" label="课程信息" width="120">
       </el-table-column>
-      <el-table-column label="讲师信息">
+      <el-table-column label="讲师信息" width="100">
         <template slot-scope="scope">
           <el-button type="text" @click="handleLecturerView(scope.row.lecturerUserNo)">{{scope.row.lecturerName}}</el-button>
         </template>
       </el-table-column>
-      <el-table-column prop="mobile" label="用户信息">
+      <el-table-column prop="mobile" label="用户信息" width="120">
+        <!-- <el-button type="text" @click="handleUserView(scope.userNo)">{{scope.row.mobile}}</el-button> -->
       </el-table-column>
       <el-table-column label="交易类型" width="83">
         <template slot-scope="scope">
           <span>{{textTradeType[scope.row.tradeType]}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="支付方式 / 价格(元)" width="146">
+      <el-table-column label="支付方式 / 价格(元)" width="110">
         <template slot-scope="scope">
           <el-row>{{textPayType[scope.row.payType]}}</el-row>
           <el-row>价格:【{{scope.row.pricePaid.toFixed(2)}}】</el-row>
@@ -103,7 +123,7 @@
       </el-table-column>
       <el-table-column prop="payTime" label="支付时间" width="153">
       </el-table-column>
-      <el-table-column label="操作">
+      <el-table-column label="操作" width="200">
         <template slot-scope="scope">
           <el-button type="success" @click="handleRemark(scope.row)" size="mini">备注</el-button>
         </template>
@@ -128,7 +148,7 @@
 import * as courseApis from '@/api/course'
 import * as userApi from '@/api/user'
 import Remark from './remark'
-import ViewLecturer from '@/views/lecturer/lecturer/view'
+import ViewLecturer from '@/views/lecturer/manage/lecturer/view'
 import OrderView from './view'
 export default {
   components: { Remark, ViewLecturer, OrderView },
@@ -149,7 +169,10 @@ export default {
         totalPage: 0
       },
       map: {},
-      gmtCreate: [],
+      payTime: '',
+      totalProfit: '', // 订单收入
+      platformProfit: '', // 平台收入
+      lecturerProfit: '', //讲师收入
       formdata: {},
       list: [],
       lecturerExt: {},
@@ -190,13 +213,21 @@ export default {
     })
   },
   methods: {
+    statistical() {
+      courseApis.orderStatistical(this.map).then(res => {
+        this.totalProfit = res.data.totalProfit.toFixed(2)
+        this.platformProfit = res.data.platformProfit.toFixed(2)
+        this.lecturerProfit = res.data.lecturerProfit.toFixed(2)
+      })
+    },
     getList() {
       this.ctrl.load = true
       courseApis.orderList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
-        this.ctrl.load = false
         this.list = res.data.list
         this.page.pageSize = res.data.pageSize
         this.page.totalCount = res.data.totalCount
+        this.statistical()
+        this.ctrl.load = false
       }).catch(() => {
         this.ctrl.load = false
       })
@@ -220,11 +251,11 @@ export default {
     handleLecturerView(lecturerUserNo) {
       this.ctrl.load = true
       userApi.lecturerView({ lecturerUserNo: lecturerUserNo }).then(res => {
-        this.ctrl.load = false
         this.formdata = res.data
         this.lecturerExt = res.data.lecturerExt
         this.ctrl.dialogTitle = res.data.lecturerName + '-' + '查看详情'
         this.ctrl.lecturerViewVisible = true
+        this.ctrl.load = false
       }).catch(() => {
         this.ctrl.load = false
       })
@@ -240,6 +271,24 @@ export default {
       }).catch(() => {
         this.ctrl.load = false
       })
+    },
+    // 注册时间段查询条件
+    changeTime() {
+      console.log("payTime=>", this.payTime)
+      if (this.payTime !== null && this.payTime.length) {
+        this.map.beginPayTime = this.dateToString(this.payTime[0])
+        this.map.endPayTime = this.dateToString(this.payTime[1])
+      } else {
+        this.map.beginPayTime = ''
+        this.map.endPayTime = ''
+      }
+    },
+    dateToString(date) {
+      const year = date.getFullYear()
+      const month = (date.getMonth() + 1).toString().padStart(2, '0')
+      const day = date.getDate().toString().padStart(2, '0')
+      const timeString = `${year}-${month}-${day}`
+      return timeString
     },
     // 关闭编辑弹窗回调
     closeCllback() {

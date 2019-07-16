@@ -73,7 +73,7 @@
 </div>
 </template>
 <script>
-  import * as apis from '@/api/zone'
+  import * as apis from '@/api/course'
   import Edit from './edit'
   export default {
    components: { Edit },

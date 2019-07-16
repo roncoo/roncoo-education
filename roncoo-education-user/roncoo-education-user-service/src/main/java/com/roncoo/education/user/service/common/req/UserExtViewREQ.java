@@ -19,7 +19,12 @@ public class UserExtViewREQ implements Serializable {
 	/**
 	 * 用户主键
 	 */
-	@ApiModelProperty(value = "用户主键", required = true)
+	@ApiModelProperty(value = "用户主键")
 	private Long id;
+	/**
+	 * 用户编号
+	 */
+	@ApiModelProperty(value = "用户编号")
+	private Long userNo;
 
 }

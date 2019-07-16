@@ -138,22 +138,38 @@
     "icon": null,
     "children": [
       {
-        "id": 2,
-        "name": "讲师列表",
-        "path": "/lecturer/lecturer",
-        "icon": null,
+          "id": 2,
+          "name": "讲师管理",
+          "path": "/manage",
+          "icon": null,
+          "children": [
+            {
+            "id": 2,
+            "name": "讲师列表",
+            "path": "/lecturer/manage/lecturer",
+            "icon": null,
+            },
+            {
+            "id": 2,
+            "name": "讲师审核列表",
+            "path": "/lecturer/manage/audit",
+            "icon": null,
+            }
+          ]
       },
       {
-        "id": 2,
-        "name": "讲师审核列表",
-        "path": "/lecturer/audit",
-        "icon": null,
-      },
-      {
-        "id": 2,
-        "name": "分润列表",
-        "path": "/lecturer/profit",
-        "icon": null,
+          "id": 2,
+          "name": "讲师分润",
+          "path": "/lecturerProfit",
+          "icon": null,
+          "children": [
+            {
+            "id": 2,
+            "name": "分润列表",
+            "path": "/lecturer/lecturerProfit/profit",
+            "icon": null,
+            }
+          ]
       }
     ]
   },
@@ -164,10 +180,18 @@
     "icon": null,
     "children": [
       {
-        "id": 2,
-        "name": "学员列表",
-        "path": "/user/userExt",
-        "icon": null,
+          "id": 2,
+          "name": "学员管理",
+          "path": "/manage",
+          "icon": null,
+          "children": [
+            {
+            "id": 2,
+            "name": "学员列表",
+            "path": "/user/manage/userExt",
+            "icon": null,
+            }
+          ]
       }
     ]
   },
@@ -179,45 +203,75 @@
     "children": [
       {
         "id": 2,
-        "name": "用户管理",
-        "path": "/sys/user",
-        "icon": null
-      },
-      {
-        "id": 2,
-        "name": "角色管理",
-        "path": "/sys/role",
-        "icon": null
-      },
-      {
-        "id": 2,
-        "name": "菜单管理",
-        "path": "/sys/menu",
+        "name": "权限管理",
+        "path": "/pms",
         "icon": null,
+        "children": [
+            {
+            "id": 2,
+            "name": "用户管理",
+            "path": "/sys/pms/user",
+            "icon": null,
+            },
+            {
+            "id": 2,
+            "name": "角色管理",
+            "path": "/sys/pms/role",
+            "icon": null,
+            },
+            {
+            "id": 2,
+            "name": "菜单管理",
+            "path": "/sys/pms/menu",
+            "icon": null,
+            }
+        ]
       },
       {
         "id": 2,
-        "name": "站内消息",
-        "path": "/sys/msg",
-        "icon": null,
-      },
+         "name": "消息管理",
+         "path": "/msg",
+          "icon": null,
+          "children": [
+               {
+               "id": 2,
+               "name": "消息模板",
+               "path": "/sys/msg/template",
+               "icon": null,
+               },
+               {
+               "id": 2,
+               "name": "用户消息",
+               "path": "/sys/msg/msgUser",
+               "icon": null,
+               },
+               {
+               "id": 2,
+               "name": "站内消息",
+               "path": "/sys/msg/msg",
+               "icon": null,
+               }
+           ]
+       },
       {
-        "id": 2,
-        "name": "用户消息",
-        "path": "/sys/msgUser",
-        "icon": null,
-      },
-      {
-        "id": 2,
-        "name": "站点设置",
-        "path": "/sys/website",
-        "icon": null,
-      },
-      {
-        "id": 2,
-        "name": "系统设置",
-        "path": "/sys/sys",
-        "icon": null,
+          "id": 2,
+          "name": "站点管理",
+          "path": "/website",
+          "icon": null,
+          "children": [
+              {
+                "id": 2,
+                "name": "站点设置",
+                "path": "/sys/website/website",
+                "icon": null,
+              },
+              {
+                "id": 2,
+                "name": "系统设置",
+                "path": "/sys/website/sys",
+                "icon": null,
+              }
+           ]
       }
     ]
   }

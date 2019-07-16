@@ -9,8 +9,8 @@
         <el-input v-model="map.mobile"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" :loading="ctrl.load" @click="handleCheck">查询</el-button>
-        <el-button class="filter-item" @click="handleReset">重置</el-button>
+        <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
+        <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
       </el-form-item>
       </el-form>
     </div>
@@ -20,7 +20,7 @@
         </el-table-column>
         <el-table-column label="用户手机">
            <template slot-scope="scope">
-            <el-button type="text" @click="handleView(scope.row.msgId)">{{scope.row.mobile}}</el-button>
+            <el-button type="text" @click="handleView(scope.row.msgId, scope.row.mobile)">{{scope.row.mobile}}</el-button>
           </template>
         </el-table-column>
         <el-table-column label="是否置顶" width="90">
@@ -61,7 +61,7 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="page.totalCount">
       </el-pagination>
-      <view-user :visible="ctrl.dialogVisible" :formData="formData" @close-cllback="closeViewFind"></view-user>
+      <view-user :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeViewFind"></view-user>
   </div>
 </template>
 <script>
@@ -160,11 +160,11 @@
           this.reload()
         })
       },
-      handleView(row) {
-        console.log(row)
+      handleView(row, mobile) {
         api.msgView({ id: row }).then(res => {
           if (res.code === 200) {
             this.formData.msgTitle = res.data.msgTitle
+            this.ctrl.dialogTitle = mobile + '——查看'
             this.ctrl.dialogVisible = true
           }
           })

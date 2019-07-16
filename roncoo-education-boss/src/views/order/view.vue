@@ -97,7 +97,7 @@
 </template>
 <script>
   export default {
-    name: 'View',
+    name: 'OrderView',
     data() {
       return {
         textTradeType: {

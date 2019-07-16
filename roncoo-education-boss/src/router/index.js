@@ -98,20 +98,29 @@ export const asyncRouterMap = [
     path: 'lecturer',
     component: () => import('@/views/lecturer'),
     children: [
-      // 讲师列表
       {
-        path: 'lecturer',
-        component: () => import('@/views/lecturer/lecturer')
+        path: 'manage',
+        component: () => import('@/views/lecturer/manage'),
+        children: [
+          {// 讲师列表
+            path: 'lecturer',
+            component: () => import('@/views/lecturer/manage/lecturer')
+          },
+          {
+            path: 'audit',
+            component: () => import('@/views/lecturer/manage/audit')
+          }
+        ]
       },
-      // 讲师审核列表
       {
-        path: 'audit',
-        component: () => import('@/views/lecturer/audit')
-      },
-      // 分润列表
-      {
-        path: 'profit',
-        component: () => import('@/views/lecturer/profit')
+        path: 'lecturerProfit',
+        component: () => import('@/views/lecturer/lecturerProfit'),
+        children: [
+          {
+            path: 'profit',
+            component: () => import('@/views/lecturer/lecturerProfit/profit')
+          }
+        ]
       }
     ]
   },
@@ -120,52 +129,74 @@ export const asyncRouterMap = [
     path: 'user',
     component: () => import('@/views/user'),
     children: [
-      // 学员列表
+    // 学员管理
       {
-        path: 'userExt',
-        component: () => import('@/views/user/userExt')
+        path: 'manage',
+        component: () => import('@/views/user/manage'),
+        children: [
+        // 学员列表
+          {
+            path: 'userExt',
+            component: () => import('@/views/user/manage/userExt')
+          }
+        ]
       }
     ]
   },
-  // 系统管理
+  //系统管理
   {
     path: 'sys',
     component: () => import('@/views/sys'),
     children: [
-      // 用户列表
       {
-        path: 'user',
-        component: () => import('@/views/sys/user')
+        path: 'pms',
+        component: () => import('@/views/sys/pms'),
+        children: [
+          {
+            path: 'user',
+            component: () => import('@/views/sys/pms/user')
+          },
+          {
+            path: 'role',
+            component: () => import('@/views/sys/pms/role')
+          },
+          {
+            path: 'menu',
+            component: () => import('@/views/sys/pms/menu')
+          }
+        ]
       },
-      // 角色列表
-      {
-        path: 'role',
-        component: () => import('@/views/sys/role')
-      },
-      // 菜单列表
-      {
-        path: 'menu',
-        component: () => import('@/views/sys/menu')
-      },
-      // 站内消息
-      {
+      {// 消息管理
         path: 'msg',
-        component: () => import('@/views/sys/msg')
+        component: () => import('@/views/sys/msg'),
+        children: [
+          {
+            path: 'template',
+            component: () => import('@/views/sys/msg/template')
+          },
+          {
+            path: 'msgUser',
+            component: () => import('@/views/sys/msg/msgUser')
+          },
+          {
+            path: 'msg',
+            component: () => import('@/views/sys/msg/msg')
+          }
+         ]
       },
-      // 用户消息
-      {
-        path: 'msgUser',
-        component: () => import('@/views/sys/msgUser')
-      },
-      // 站点设置
-      {
+      {// 站点管理
         path: 'website',
-        component: () => import('@/views/sys/website')
-      },
-      // 系统设置
-      {
-        path: 'sys',
-        component: () => import('@/views/sys/sys')
+        component: () => import('@/views/sys/website'),
+        children: [
+          {
+            path: 'website',
+            component: () => import('@/views/sys/website/website')
+          },
+          {
+            path: 'sys',
+            component: () => import('@/views/sys/website/sys')
+          }
+        ]
       }
     ]
   }

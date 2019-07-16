@@ -1,11 +1,14 @@
 <template>
   <!--弹窗-->
   <el-dialog
+    width="40%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
      <el-form :inline="true">
-      <el-form-item label="内容:" v-html="formData.introduce">
+      <el-alert class="title" :closable="false" title="内容" type="info" />
+      <br/><br/>
+      <el-form-item v-html="formData.msgTitle">
       </el-form-item>
     </el-form>
     <br/>
@@ -18,19 +21,6 @@
   export default {
     data() {
       return {
-        textStatusId: {
-          1: '正常',
-          0: '禁用'
-        },
-        textUserType: {
-          1: '用户',
-          2: '讲师'
-        },
-        textUex: {
-          1: '男',
-          2: '女',
-          3: '保密'
-        }
       }
     },
      props: {
@@ -49,12 +39,6 @@
       }
     },
     methods: {
-      textClass(isFree) {
-        return {
-          c_red: isFree === 0,
-          c_blue: isFree === 2
-        }
-      },
       handleClose(done) {
         this.$emit('close-cllback')
       }

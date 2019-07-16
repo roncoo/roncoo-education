@@ -30,7 +30,7 @@
       </el-form>
     </div>
     <div>
-      <el-table v-loading="ctrl.loading" size="medium" :data="page.list" stripe border style="width: 100%">
+      <el-table v-loading="ctrl.loading" size="medium" :data="list" stripe border style="width: 100%">
         <el-table-column type="index" label="序号" width="40">
         </el-table-column>
         <el-table-column prop="categoryName" label="分类名称">
@@ -87,7 +87,7 @@
   </div>
 </template>
 <script>
-  import * as apis from '@/api/courseCategory'
+  import * as apis from '@/api/course'
   import Edit from './edit'
   export default {
     components: { Edit },
@@ -129,14 +129,14 @@
         // 表单数据, 例如新增编辑子项，页面表单
         formdata: {},
         tableData: [],
+        list: [],
         page: {
           beginPageIndex: 1,
           currentPage: 1,
           endPageIndex: 8,
           numPerPage: 20,
           totalCount: 0,
-          totalPage: 0,
-          list: []
+          totalPage: 0
         }
       }
     },
@@ -148,7 +148,7 @@
         this.ctrl.load = true
         apis.categoryList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.ctrl.load = false
-          this.page.list = res.data.list
+          this.list = res.data.list
           this.page.pageSize = res.data.pageSize
           this.page.totalCount = res.data.totalCount
         }).catch(() => {
@@ -158,7 +158,7 @@
       handleSizeChange(val) {
         // console.log(`每页 ${val} 条`)
         this.params.pageSize = val
-        this.websiteNavList()
+        this.getList()
       },
       //跳转到底部导航文章添加页面
       handleAddSubclass(data) {
@@ -168,7 +168,7 @@
       },
       handleCurrentChange(val) {
         this.params.pageCurrent = val
-        this.websiteNavList()
+        this.getList()
         // console.log(`当前页: ${val}`)
       },
       handleCheck() {
@@ -193,7 +193,7 @@
       // 重置查询条件
       handleReset() {
         this.map = {}
-        this.websiteNavList()
+        this.getList()
       },
       //删除
       handleDelRow(data) {
@@ -237,34 +237,11 @@
           this.reload()
         })
       },
-      //改变状态
-      changeStatus(id, statusId) {
-        apis.websiteNavUpate({ id, statusId }).then(res => {
-          const msg = { 0: '禁用成功', 1: '启用成功' }
-          this.$message({
-            type: 'success',
-            message: msg[statusId]
-          });
-          this.reload()
-        })
-      },
       //编辑
       handleUpdateRow(data) {
         this.formdata = data
         this.ctrl.dialogTitle = '编辑权限'
         this.ctrl.dialogVisible = true
-      },
-      websiteNavList() {
-        this.ctrl.loading = true
-        console.log(this.map)
-        apis.websiteNavList(this.map).then(res => {
-          this.page = res.data
-          this.page.numPerPage = res.data.pageSize
-          console.log(this.page)
-          this.ctrl.loading = false
-        }).catch(() => {
-          this.ctrl.loading = false
-        })
       }
     }
   }

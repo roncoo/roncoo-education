@@ -2,12 +2,32 @@
   <div class="pad20">
     <div>
       <el-form :inline="true" size="mini">
-      <el-form-item label="手机号">
-        <el-input v-model="map.mobile"></el-input>
+      <el-form-item label="短信标题">
+        <el-input v-model="map.msgTitle"></el-input>
+      </el-form-item>
+      <el-form-item label="是否发送:">
+        <el-select v-model="map.isSend" class="auto-width" clearable filterable placeholder="是否发送" style="width: 100px">
+          <el-option
+            v-for="item in opts.isSendList"
+            :key="item.code"
+            :label="item.desc"
+            :value="item.code">
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="是否置顶:">
+        <el-select v-model="map.isTop" class="auto-width" clearable filterable placeholder="是否置顶" style="width: 100px">
+          <el-option
+            v-for="item in opts.isTopList"
+            :key="item.code"
+            :label="item.desc"
+            :value="item.code">
+          </el-option>
+        </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" :loading="ctrl.load" @click="handleCheck">查询</el-button>
-        <el-button class="filter-item" @click="handleReset">重置</el-button>
+        <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
+        <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
         <el-button type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAdd()">添加</el-button>
       </el-form-item>
       </el-form>
@@ -16,31 +36,24 @@
       <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
         <el-table-column type="index" label="序号" width="40">
         </el-table-column>
-        <el-table-column prop="mobile" label="手机号">
+        <el-table-column prop="msgTitle" label="短信标题">
         </el-table-column>
-        <el-table-column prop="realName" label="名称">
-        </el-table-column>
-        <el-table-column prop="sort" width="50" label="排序">
-        </el-table-column>
-        <el-table-column
-          width="150"
-          prop="statusId"
-          label="状态"
-          align="center">
+        <el-table-column label="是否置顶" width="90">
           <template slot-scope="scope">
-            <el-switch
-              v-model="scope.row.statusId"
-              @change="handleChangeStatus(scope.row.id, scope.row.statusId)"
-              :active-value="0"
-              :inactive-value="1"
-              active-color="#ff4949"
-              inactive-color="#13ce66"
-              active-text="禁用"
-              inactive-text="正常">
-            </el-switch>
+            <span :class="textClass(scope.row.isTop)">{{textIsTop[scope.row.isTop]}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="remark" label="备注">
+        <el-table-column label="发送状态" width="90">
+          <template slot-scope="scope">
+            <span :class="textClass(scope.row.isSend)">{{textIsSend[scope.row.isSend]}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="定时发送" width="90">
+          <template slot-scope="scope">
+            <span :class="textClass(scope.row.isTimeSend)">{{textIsTimeSend[scope.row.isTimeSend]}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="sendTime" label="发送时间">
         </el-table-column>
         <el-table-column
         fixed="right"
@@ -50,9 +63,8 @@
           <ul class="list-item-actions">
             <li>
               <el-button type="danger" @click="handleDelete(scope.row.id)" size="mini">删除</el-button>
-              <el-button type="success" @click="handleEdit(scope.row)" size="mini">修改</el-button>
-              <el-button type="success" @click="handleUserRole(scope.row.id, scope.row.realName)" size="mini">设置角色</el-button>
-              <el-button type="success" @click="handlePassword(scope.row.userNo, scope.row.realName)" size="mini">密码修改</el-button>
+              <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
+              <el-button type="success" @click="handleSend(scope.row.id)" size="mini">发送</el-button>
             </li>
           </ul>
         </template>
@@ -71,34 +83,25 @@
       </el-pagination>
       <add :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></add>
       <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
-      <password :visible="ctrl.passwordDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></password>
-      <role :visible="ctrl.serRoleDialogVisible" :userId="id" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></role>
   </div>
 </template>
 <script>
   import * as api from '@/api/system'
   import Edit from './edit'
   import Add from './add'
-  import Password from './password'
-  import Role from './role'
   export default {
-    components: { Edit, Add, Password, Role },
+    components: { Edit, Add },
     data() {
       return {
         map: {},
         formData: {},
         list: [],
-        id: '',
         ctrl: {
           load: false,
           dialogVisible: false,
           addDialogVisible: false,
           passwordDialogVisible: false,
-          viewVisible: false,
-          serRoleDialogVisible: false
-        },
-        opts: {
-          statusIdList: []
+          viewVisible: false
         },
         page: {
           beginPageIndex: 1,
@@ -108,42 +111,57 @@
           totalCount: 0,
           totalPage: 0
         },
-        textuStatusId: {
-          0: '禁用',
-          1: '正常'
+        opts: {
+          isSendList: [],
+          isTopList: []
+        },
+        textIsSend: {
+          1: '是',
+          0: '否'
+        },
+        textIsTop: {
+          1: '是',
+          0: '否'
+        },
+        textIsTimeSend: {
+          1: '是',
+          0: '否'
         }
       }
     },
     mounted() {
-      this.$store.dispatch('GetOpts', { enumName: "StatusIdEnum", type: 'arr' }).then(res => {
-        this.opts.statusIdList = res
+      this.$store.dispatch('GetOpts', { enumName: "IsSendEnum", type: 'arr' }).then(res => {
+        this.opts.isSendList = res
       })
-      this.adminUserList(1)
+      this.$store.dispatch('GetOpts', { enumName: "IsTopEnum", type: 'arr' }).then(res => {
+        this.opts.isTopList = res
+      })
+      this.msgList(1)
     },
     methods: {
       handleSizeChange(val) {
         // console.log(`每页 ${val} 条`)
         this.page.pageSize = val
-        this.adminUserList()
+        this.msgList()
       },
       handleCurrentChange(val) {
         this.page.pageCurrent = val
-        this.adminUserList()
+        this.msgList()
         // console.log(`当前页: ${val}`)
       },
       // 查询条件
        handleCheck() {
         this.page.pageCurrent = 1
-        this.adminUserList()
+        this.msgList()
       },
       // 重置查询条件
       handleReset() {
         this.reload()
       },
       // 后台管理员分页列表接口
-      adminUserList() {
+      msgList() {
         this.ctrl.load = true
-        api.sysUserList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
+        api.msgList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.list = res.data.list
           this.page.pageCurrent = res.data.pageCurrent
           this.page.totalCount = res.data.totalCount
@@ -156,33 +174,50 @@
       // 添加管理员
       handleAdd() {
         this.ctrl.addDialogVisible = true
-        this.dialogTitle = '添加'
+        this.ctrl.dialogTitle = '添加'
+      },
+      // 发送消息
+      handleSend(row) {
+        this.$confirm(`确定要发送吗?`, {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          api.msgPush({ id: row }).then(res => {
+          if (res.code === 200 && res.data > 0) {
+            this.$message({
+              type: 'success',
+              message: "发送成功"
+            });
+              this.reload()
+          } else {
+            this.$message({
+              type: 'error',
+              message: "发送失败"
+            });
+              this.reload()
+          }
+        })
+        }).catch(() => {
+          this.reload()
+        })
       },
       // 跳修改弹窗页面
       handleEdit(row) {
-        this.formData = row
+        this.load === true
+        api.msgView({ id: row }).then(res => {
+          this.formData = res.data
+          this.ctrl.dialogTitle = res.data.msgTitle + '——编辑'
+          this.ctrl.load = false
+        }).catch(() => {
+          this.ctrl.load = true
+        })
         this.ctrl.dialogVisible = true
-        this.ctrl.dialogTitle = row.realName + '——编辑'
-      },
-      // 跳出修改密码弹窗
-      handlePassword(userNo, realName) {
-        this.formData.userNo = userNo
-        this.ctrl.passwordDialogVisible = true
-        this.ctrl.dialogTitle = realName + '——密码修改'
-      },
-      // 跳出设置角色弹窗
-      handleUserRole(id, realName) {
-        this.id = id
-        this.ctrl.serRoleDialogVisible = true
-        this.ctrl.dialogTitle = realName + '——设置角色'
       },
       // 关闭弹窗回调
       closeCllback() {
         this.ctrl.addDialogVisible = false
         this.ctrl.dialogVisible = false
-        this.ctrl.passwordDialogVisible = false
-        this.ctrl.serRoleDialogVisible = false
-        this.id = ''
         this.reload()
       },
       // 删除
@@ -192,7 +227,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          api.userDelete({ id: id }).then(res => {
+          api.msgDelete({ id: id }).then(res => {
           if (res.code === 200 && res.data > 0) {
             this.$message({
               type: 'success',
@@ -211,51 +246,16 @@
           this.reload()
         })
       },
-      // 修改状态
-      handleChangeStatus(id, statusId) {
-        const title = { 0: '禁用', 1: '启用' }
-        this.$confirm(`确定要${title[statusId]}吗?`, {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          this.changeStatus(id, statusId)
-          this.reload()
-        }).catch(() => {
-          this.reload()
-        })
-      },
-      // 请求更新用户方法
-      changeStatus(id, statusId) {
-        api.userUpdate({ id: id, statusId: statusId }).then(res => {
-          if (res.code === 200 && res.data > 0) {
-            const msg = { 0: '禁用成功', 1: '启用成功' }
-            this.$message({
-              type: 'success',
-              message: msg[statusId]
-            });
-              this.reload()
-          } else {
-            const msg = { 0: '禁用失败', 1: '启用失败' }
-            this.$message({
-              type: 'error',
-              message: msg[statusId]
-            });
-              this.reload()
-          }
-        })
-      },
       // 刷新当前页面
       reload() {
         this.map = {}
         this.formData = {}
-        this.gmtCreate = ''
-        this.adminUserList()
+        this.msgList()
       },
-      textClass(userType) {
+      textClass(isFree) {
         return {
-          c_red: userType === 0,
-          c_blue: userType === 2
+          c_red: isFree === 0,
+          c_blue: isFree === 1
         }
       }
     }

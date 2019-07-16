@@ -88,10 +88,13 @@ public class PcApiUserExtBiz {
 	 * @return
 	 */
 	public Result<UserExtViewRESQ> view(UserExtViewREQ req) {
-		if (StringUtils.isEmpty(req.getId())) {
-			return Result.error("主键不能为空");
+		UserExt record = new UserExt();
+		if (req.getId() != null) {
+			record = dao.getById(req.getId());
 		}
-		UserExt record = dao.getById(req.getId());
+		if (req.getUserNo() != null) {
+			record = dao.getByUserNo(req.getUserNo());
+		}
 		if (ObjectUtil.isNull(record)) {
 			return Result.error("找不到用户信息");
 		}

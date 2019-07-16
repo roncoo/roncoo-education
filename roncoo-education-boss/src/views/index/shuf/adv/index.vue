@@ -22,7 +22,7 @@
         <el-table-column type="index" label="序号" width="40">
         </el-table-column>
        <el-table-column  label="广告图片">
-         <template scope="scope">
+         <template slot-scope="scope">
            <img :src="scope.row.advImg" width="80" height="60"/>
          </template>
         </el-table-column>

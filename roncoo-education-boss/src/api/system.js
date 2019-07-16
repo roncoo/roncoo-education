@@ -360,11 +360,11 @@ export function sysUpdate(data = {}) {
 }
 
 // 站内信消息分页列表接口
-export function msgList(data = {}) {
+export function msgList(params, pageCurrent = 1, pageSize = 20) {
   return request({
-    url: `/system/pc/msg/list`,
+    url: '/system/pc/msg/list',
     method: 'post',
-    data: data
+    data: { pageCurrent: pageCurrent, pageSize: pageSize, ...params }
   })
 }
 
@@ -423,11 +423,11 @@ export function msgUserDelete(data = {}) {
 }
 
 // 用户消息分页列表接口
-export function msgUserList(data = {}) {
+export function msgUserList(params, pageCurrent = 1, pageSize = 20) {
   return request({
-    url: `/system/pc/msg/user/list`,
+    url: '/system/pc/msg/user/list',
     method: 'post',
-    data: data
+    data: { pageCurrent: pageCurrent, pageSize: pageSize, ...params }
   })
 }
 
@@ -435,6 +435,42 @@ export function msgUserList(data = {}) {
 export function msgUserView(data = {}) {
   return request({
     url: `/system/pc/msg/user/view`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 消息模板分页列表接口
+export function templateList(params, pageCurrent = 1, pageSize = 20) {
+  return request({
+    url: '/system/pc/msg/template/list',
+    method: 'post',
+    data: { pageCurrent: pageCurrent, pageSize: pageSize, ...params }
+  })
+}
+
+// 消息模板删除接口
+export function templateDelete(data = {}) {
+  return request({
+    url: `/system/pc/msg/template/delete`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 消息模板保存接口
+export function templateSave(data = {}) {
+  return request({
+    url: `/system/pc/msg/template/save`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 消息模板更新接口
+export function templateUpdate(data = {}) {
+  return request({
+    url: `/system/pc/msg/template/update`,
     method: 'post',
     data: data
   })

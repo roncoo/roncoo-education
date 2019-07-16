@@ -14,7 +14,7 @@
         :props="defaultProps"
         accordion
         show-checkbox
-        :check-strictly="true"
+        highlight-current
         node-key="id"/>
       </div>
     </el-form>
@@ -30,7 +30,6 @@
     name: 'Pms',
     data() {
       return {
-        menus: [],
         ctrl: {
           load: false
         },
@@ -38,6 +37,7 @@
           children: 'children',
           label: 'label'
         },
+        menus: [],
         menuIds: []
       }
     },
@@ -59,9 +59,7 @@
     watch: {
       visible: function(val) {
         if (val) {
-          setTimeout(() => {
-            this.menusList()
-          }, 500)
+          this.menusList()
         }
       }
     },
@@ -79,16 +77,42 @@
       rolemenu(roleId) {
         api.menuRoleList({ roleId: roleId }).then(res => {
           this.menuIds = res.data.list
+          // 过滤非全选的父级菜单
+          this.menus.forEach(item => {
+            if (this.setChecked(item)) {
+            this.menuIds.splice(this.menuIds.indexOf(item.id), 1)
+            }
+          })
         }).catch(() => {
         })
       },
+       // 过滤非全选的父级菜单
+      setChecked(row) {
+        if (this.menuIds.indexOf(row.id) !== -1) {
+          let int = 0;
+          row.children.forEach(item => {
+            if (this.setChecked(item)) {
+              this.menuIds.splice(this.menuIds.indexOf(item.id), 1)
+            }
+            if (this.menuIds.indexOf(item.id) !== -1) {
+              int += 1
+            }
+          })
+          if (int < row.children.length) {
+            return true
+          } else {
+            return false
+          }
+        }
+       },
       // 保存角色菜单信息
       saveRoleMenu() {
         const role = { roleId: this.id, menuId: [] }
-        this.$refs.tree.getCheckedKeys().forEach(function(data, index) {
+        // 获取目前被选中的节点的 key 所组成的数组 与 获取半选中的节点的 key 所组成的数组
+         this.$refs.tree.getCheckedKeys().concat(this.$refs.tree.getHalfCheckedKeys()).forEach(function(data, index) {
           role.menuId.push(data)
         })
-        this.handleConfirm(role)
+         // this.handleConfirm(role)
       },
       //异步保存角色信息
       async handleConfirm(role) {
@@ -103,6 +127,7 @@
       },
       handleClose(done) {
         this.menuIds = []
+        this.menuList = []
         this.menus = []
         this.$emit('close-cllback')
       }

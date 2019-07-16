@@ -21,20 +21,17 @@
       <el-form-item label="注册时间">
         <el-date-picker
         v-model="gmtCreate"
-        type="datetimerange"
-        :picker-options="timeData"
+        type="daterange"
         range-separator="至"
         start-placeholder="开始日期"
         end-placeholder="结束日期"
-        :default-time="['00:00:00', '23:59:59']"
         align="center"
         @change="changeTime">
       </el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" :loading="ctrl.load" @click="handleCheck">查询</el-button>
-        <el-button class="filter-item" @click="handleReset">重置
-        </el-button>
+        <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
+        <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
       </el-form-item>
       </el-form>
     </div>
@@ -83,7 +80,7 @@
         <template slot-scope="scope">
           <ul class="list-item-actions">
             <li>
-              <el-button type="success" @click="handleEdit(scope.row)" size="mini">修改</el-button>
+              <el-button type="success" @click="handleEdit(scope.row)" size="mini">编辑</el-button>
             </li>
           </ul>
         </template>
@@ -139,21 +136,6 @@
           0: '禁用',
           1: '正常'
         },
-        timeData: {
-          shortcuts: [{
-            text: '今天',
-            onClick: picker => {
-              const now = this.getNow('now')
-              picker.$emit('pick', now)
-            }
-          }, {
-            text: '昨天',
-            onClick: picker => {
-              const now = this.getNow('before')
-              picker.$emit('pick', now)
-            }
-          }]
-        },
         formData: {},
         gmtCreate: ''
       }
@@ -189,10 +171,7 @@
         const year = date.getFullYear()
         const month = (date.getMonth() + 1).toString().padStart(2, '0')
         const day = date.getDate().toString().padStart(2, '0')
-        const hours = date.getHours().toString().padStart(2, '0')
-        const minutes = date.getMinutes().toString().padStart(2, '0')
-        const seconds = date.getSeconds().toString().padStart(2, '0')
-        const timeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
+        const timeString = `${year}-${month}-${day}`
         return timeString
       },
       // 查询条件

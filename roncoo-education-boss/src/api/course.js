@@ -72,6 +72,87 @@ export function courseViewForEdit(id) {
   })
 }
 
+// 课程分类推荐分页列表接口
+export function categoryList(params, page = 1, pageSize = 20) {
+  return request({
+    url: '/course/pc/course/category/list',
+    method: 'post',
+    data: { pageNum: page, numPerPage: pageSize, ...params }
+  })
+}
+
+// 课程分类保存接口
+export function categorySave(data = {}) {
+  return request({
+    url: '/course/pc/course/category/save',
+    method: 'post',
+    data: data
+  })
+}
+
+// 课程分类更新接口
+export function categoryUpdate(data = {}) {
+  return request({
+    url: '/course/pc/course/category/update',
+    method: 'post',
+    data: data
+  })
+}
+
+// 课程分类删除接口
+export function categoryDelete(data = {}) {
+  return request({
+    url: '/course/pc/course/category/delete',
+    method: 'post',
+    data: data
+  })
+}
+
+// 首页专区PC端分页列表接口
+export function coursePcZoneList(params, page = 1, pageSize = 20) {
+  return request({
+    url: '/course/pc/zone/list',
+    method: 'post',
+    data: { pageNum: page, numPerPage: pageSize, ...params }
+  })
+}
+
+// 专区添加接口
+export function coursePcZoneSave(params) {
+  return request({
+    url: '/course/pc/zone/save',
+    method: 'post',
+    data: params
+  })
+}
+
+// 专区删除接口
+export function coursePcZoneDelete(params) {
+  return request({
+    url: '/course/pc/zone/delete',
+    method: 'post',
+    data: params
+  })
+}
+
+// 专区更新接口
+export function coursePcZoneUpdate(params) {
+  return request({
+    url: '/course/pc/zone/update',
+    method: 'post',
+    data: params
+  })
+}
+
+// 专区查看接口
+export function coursePcZoneView(params) {
+  return request({
+    url: '/course/pc/zone/view',
+    method: 'post',
+    data: params
+  })
+}
+
 // 订单分页列表接口
 export function orderList(params, page = 1, pageSize = 20) {
   return request({
@@ -99,3 +180,11 @@ export function orderView(id) {
   })
 }
 
+// 统计订单收入情况接口
+export function orderStatistical(data = {}) {
+  return request({
+    url: '/course/pc/order/info/statistical',
+    method: 'post',
+    data: data
+  })
+}

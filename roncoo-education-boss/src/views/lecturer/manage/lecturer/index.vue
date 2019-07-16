@@ -18,20 +18,9 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="审核情况:" >
-        <el-select v-model="map.auditStatus" class="auto-width" clearable filterable placeholder="审核情况" style="width: 85px">
-          <el-option
-            v-for="item in opts.auditStatusList"
-            :key="item.code"
-            :label="item.desc"
-            :value="item.code">
-          </el-option>
-        </el-select>
-      </el-form-item>
       <el-form-item>
-        <el-button type="primary" :loading="ctrl.load" @click="handleCheck">查询</el-button>
-        <el-button class="filter-item" @click="handleReset">重置</el-button>
-        <el-button type="primary" size="mini" icon="el-icon-circle-plus-outline" @click.native="add(false)">添加讲师</el-button>
+        <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
+        <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
       </el-form-item>
       </el-form>
     </div>
@@ -71,11 +60,6 @@
              [ 讲师: {{scope.row.lecturerProportion*100}}%]
           </template>
         </el-table-column>
-        <el-table-column label="审核状态">
-          <template slot-scope="scope">
-            <span :class="textAuditStatusClass(scope.row.auditStatus)">{{textAuditStatus[scope.row.auditStatus]}}</span>
-          </template>
-        </el-table-column>
         <el-table-column
         fixed="right"
         label="操作"
@@ -84,7 +68,6 @@
           <ul class="list-item-actions">
             <li>
               <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
-              <el-button type="primary" @click="handleAudit(scope.row)" size="mini">审核</el-button>
             </li>
           </ul>
         </template>
@@ -101,42 +84,31 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="page.totalCount">
       </el-pagination>
-      <add :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></add>
-      <edit :visible="ctrl.editDialogVisible" :formData="formData" :lecturerExt="lecturerExt" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
+      <edit :visible="ctrl.dialogVisible" :formData="formData" :lecturerExt="lecturerExt" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
       <view-lecturer :visible="ctrl.viewVisible" :formData="formData" :lecturerExt="lecturerExt" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></view-lecturer>
-      <audit :visible="ctrl.auditDialogVisible" :formData="auditMap" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></audit>
-    </div>
+  </div>
 </template>
 <script>
   import * as userApi from '@/api/user'
-  import Add from './add'
   import Edit from './edit'
   import viewLecturer from './view'
-  import Audit from './audit'
   export default {
-    components: { Add, Edit, viewLecturer, Audit },
+    components: { Edit, viewLecturer },
     data() {
       return {
-        auditMap: {
-          id: '',
-          auditStatus: 1
-        },
-        ctrl: {
-          load: false,
-          addDialogVisible: false,
-          editDialogVisible: false,
-          auditDialogVisible: false,
-          viewVisible: false
-        },
-        opts: {
-          statusIdList: [],
-          auditStatusList: []
-        },
         list: [],
         map: {},
         formData: {},
         lecturerExt: {},
         title: '',
+        ctrl: {
+          load: false,
+          dialogVisible: false,
+          viewVisible: false
+        },
+        opts: {
+          statusIdList: []
+        },
         page: {
           beginPageIndex: 1,
           pageCurrent: 1,
@@ -144,11 +116,6 @@
           pageSize: 20,
           totalCount: 0,
           totalPage: 0
-        },
-        textAuditStatus: {
-          0: '待审核',
-          1: '审核通过',
-          2: '审核不通过'
         }
       }
     },
@@ -156,34 +123,31 @@
       this.$store.dispatch('GetOpts', { enumName: "StatusIdEnum", type: 'arr' }).then(res => {
         this.opts.statusIdList = res
       })
-      this.$store.dispatch('GetOpts', { enumName: "AuditStatusEnum", type: 'arr' }).then(res => {
-        this.opts.auditStatusList = res
-      })
-      this.lecturerAuditList(1)
+      this.lecturerList(1)
     },
     methods: {
-      handleSizeChange(val) {
+       handleSizeChange(val) {
         // console.log(`每页 ${val} 条`)
         this.page.pageSize = val
-        this.lecturerAuditList()
+        this.lecturerList()
       },
       handleCurrentChange(val) {
         this.page.pageCurrent = val
-        this.lecturerAuditList()
+        this.lecturerList()
         // console.log(`当前页: ${val}`)
       },
       // 查询条件
-      handleCheck() {
+       handleCheck() {
         this.page.pageCurrent = 1
-        this.lecturerAuditList()
+        this.lecturerList()
       },
       // 重置查询条件
       handleReset() {
         this.reload()
       },
-      lecturerAuditList() {
+      lecturerList() {
         this.load === true
-        userApi.lecturerAuditList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
+        userApi.lecturerList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.list = res.data.list
           this.page.pageCurrent = res.data.pageCurrent
           this.page.totalCount = res.data.totalCount
@@ -209,7 +173,7 @@
       },
       // 请求更新用户方法
       changeStatus(id, statusId) {
-        userApi.lecturerAuditUpdate({ id: id, statusId: statusId }).then(res => {
+        userApi.lecturerUpdate({ id: id, statusId: statusId }).then(res => {
           if (res.code === 200 && res.data > 0) {
             const msg = { 0: '禁用成功', 1: '启用成功' }
               this.$message({
@@ -227,24 +191,13 @@
           }
         })
       },
-      // 跳添加讲师弹窗
-      add() {
-        this.ctrl.dialogTitle = '添加'
-        this.ctrl.addDialogVisible = true
-      },
       // 修改跳页面操作
       handleEdit(id) {
         this.title = '信息修改'
         this.getById(id, this.title)
-        this.ctrl.editDialogVisible = true
+        this.ctrl.dialogVisible = true
       },
-      // 审核页面弹窗
-      handleAudit(row) {
-        this.auditMap.id = row.id
-        this.ctrl.dialogTitle = '审核'
-        this.ctrl.auditDialogVisible = true
-      },
-      // 跳查看讲师弹窗
+      // 查看跳页面设置
       handleView(id) {
         this.title = '查看详情'
         this.getById(id, this.title)
@@ -252,39 +205,30 @@
       },
       // 关闭弹窗回调
       closeCllback() {
-        this.ctrl.addDialogVisible = false;
-        this.ctrl.editDialogVisible = false
         this.ctrl.viewVisible = false;
-        this.ctrl.auditDialogVisible = false
+        this.ctrl.dialogVisible = false;
         this.reload()
-      },
-      //查看讲师审核信息
-      getById(id, title) {
-        this.load === true
-        userApi.lecturerAuditView({ id: id }).then(res => {
-          this.formData = res.data
-          if (JSON.stringify(res.data.lecturerExt) !== '{}') {
-            this.lecturerExt = res.data.lecturerExt
-          }
-          this.ctrl.dialogTitle = res.data.lecturerMobile + '——' + title
-          this.ctrl.load = false
-        }).catch(() => {
-          this.ctrl.load = true
-        })
-      },
-      textAuditStatusClass(auditStatus) {
-        return {
-          c_red: auditStatus === 2,
-          c_green: auditStatus === 1,
-          c_blue: auditStatus === 0
-        }
       },
       // 刷新当前页面
       reload() {
         this.map = {}
         this.formData = {}
         this.lecturerExt = {}
-        this.lecturerAuditList()
+        this.lecturerList()
+      },
+      // 查看信息
+      getById(id, title) {
+        userApi.lecturerView({ id: id }).then(res => {
+          this.formData = res.data
+          if (JSON.stringify(res.data.lecturerExt) !== '{}') {
+            this.lecturerExt = res.data.lecturerExt
+          }
+          this.introduce = res.data.introduce
+          this.ctrl.dialogTitle = res.data.lecturerMobile + '——' + title
+          this.ctrl.load = false
+        }).catch(() => {
+          this.ctrl.load = true
+        })
       }
     }
   }

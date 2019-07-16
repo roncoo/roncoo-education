@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import * as apis from '@/api/zone'
+  import * as apis from '@/api/course'
   export default {
     name: 'Edit',
     data() {

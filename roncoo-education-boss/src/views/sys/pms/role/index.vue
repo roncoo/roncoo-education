@@ -16,8 +16,8 @@
         </el-select>
       </el-form-item>
         <el-form-item>
-          <el-button type="primary" :loading="ctrl.load" @click="handleCheck">查询</el-button>
-          <el-button class="filter-item" @click="handleReset">重置</el-button>
+          <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
+          <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
           <el-button type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAdd()">添加</el-button>
         </el-form-item>
         </el-form>
