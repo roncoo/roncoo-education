@@ -56,32 +56,16 @@ public class PcApiCourseCategoryBiz {
 		}
 		if (StringUtils.hasText(req.getCategoryName())) {
 			c.andCategoryNameLike(PageUtil.rightLike(req.getCategoryName()));
+		} else {
+			c.andFloorEqualTo(1);
 		}
 		example.setOrderByClause(" status_id desc, sort desc, id desc ");
 		Page<CourseCategory> page = dao.listForPage(req.getPageCurrent(), req.getPageSize(), example);
 		Page<CourseCategoryPageRESQ> listForPage = PageUtil.transform(page, CourseCategoryPageRESQ.class);
 		for (CourseCategoryPageRESQ resq : listForPage.getList()) {
-			resq.setList(recursionList(resq.getId()));
+			resq.setChildren(recursionList(resq.getId()));
 		}
 		return Result.success(listForPage);
-	}
-
-	/**
-	 * 递归展示分类
-	 * 
-	 * @author WY
-	 */
-	private List<CourseCategoryPageRESQ> recursionList(Long parentId) {
-		List<CourseCategoryPageRESQ> list = new ArrayList<>();
-		List<CourseCategory> CourseCategoryList = dao.listByParentId(parentId);
-		if (CollectionUtils.isNotEmpty(CourseCategoryList)) {
-			for (CourseCategory courseCategory : CourseCategoryList) {
-				CourseCategoryPageRESQ resq = BeanUtil.copyProperties(courseCategory, CourseCategoryPageRESQ.class);
-				resq.setList(recursionList(courseCategory.getId()));
-				list.add(resq);
-			}
-		}
-		return list;
 	}
 
 	public Result<Integer> save(CourseCategorySaveREQ req) {
@@ -150,5 +134,23 @@ public class PcApiCourseCategoryBiz {
 			return Result.error("找不到父分类信息");
 		}
 		return Result.success(BeanUtil.copyProperties(parentCategory, CourseCategoryViewRESQ.class));
+	}
+
+	/**
+	 * 递归展示分类
+	 * 
+	 * @author WY
+	 */
+	private List<CourseCategoryPageRESQ> recursionList(Long parentId) {
+		List<CourseCategoryPageRESQ> list = new ArrayList<>();
+		List<CourseCategory> CourseCategoryList = dao.listByParentId(parentId);
+		if (CollectionUtils.isNotEmpty(CourseCategoryList)) {
+			for (CourseCategory courseCategory : CourseCategoryList) {
+				CourseCategoryPageRESQ resq = BeanUtil.copyProperties(courseCategory, CourseCategoryPageRESQ.class);
+				resq.setChildren(recursionList(courseCategory.getId()));
+				list.add(resq);
+			}
+		}
+		return list;
 	}
 }

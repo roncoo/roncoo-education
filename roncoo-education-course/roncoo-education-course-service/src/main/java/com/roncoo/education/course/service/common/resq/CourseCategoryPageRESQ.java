@@ -67,5 +67,5 @@ public class CourseCategoryPageRESQ implements Serializable {
 	 * 课程分类集合
 	 */
 	@ApiModelProperty(value = "课程分类集合")
-	private List<CourseCategoryPageRESQ> list;
+	private List<CourseCategoryPageRESQ> children;
 }
