@@ -19,10 +19,10 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class OrderInfoViewRESQ implements Serializable { 
+public class OrderInfoViewRESQ implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 主键
 	 */
@@ -39,6 +39,12 @@ public class OrderInfoViewRESQ implements Serializable {
 	 */
 	@ApiModelProperty(value = "用户电话")
 	private String mobile;
+	/**
+	 * 用户编号
+	 */
+	@ApiModelProperty(value = "用户编号")
+	@JsonSerialize(using = ToStringSerializer.class)
+	private Long userNo;
 	/**
 	 * 用户注册时间
 	 */
