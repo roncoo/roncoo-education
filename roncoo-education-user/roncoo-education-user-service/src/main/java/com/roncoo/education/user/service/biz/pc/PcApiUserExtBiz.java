@@ -92,8 +92,8 @@ public class PcApiUserExtBiz {
 		if (req.getId() != null) {
 			record = dao.getById(req.getId());
 		}
-		if (req.getUserNo() != null) {
-			record = dao.getByUserNo(req.getUserNo());
+		if (req.getOrderUserNo() != null) {
+			record = dao.getByUserNo(req.getOrderUserNo());
 		}
 		if (ObjectUtil.isNull(record)) {
 			return Result.error("找不到用户信息");

@@ -26,7 +26,7 @@ export function userExtUpdate(data = {}) {
   })
 }
 
-// 根据用户id查看用户信息
+// 根据用户id或用户编号查看用户信息
 export function userExtView(data = {}) {
   return request({
     url: `/user/pc/user/ext/view`,
@@ -61,7 +61,7 @@ export function lecturerUpdate(data = {}) {
   })
 }
 
-// 根据讲师id查看讲师信息
+// 根据讲师id或用户编号查看讲师信息
 export function lecturerView(data = {}) {
   return request({
     url: `/user/pc/lecturer/view`,

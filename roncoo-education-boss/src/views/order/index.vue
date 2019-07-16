@@ -95,8 +95,10 @@
           <el-button type="text" @click="handleLecturerView(scope.row.lecturerUserNo)">{{scope.row.lecturerName}}</el-button>
         </template>
       </el-table-column>
-      <el-table-column prop="mobile" label="用户信息" width="120">
-        <!-- <el-button type="text" @click="handleUserView(scope.userNo)">{{scope.row.mobile}}</el-button> -->
+      <el-table-column label="用户信息" width="120">
+         <template slot-scope="scope">
+          <el-button type="text" @click="handleUserView(scope.row.userNo)">{{scope.row.mobile}}</el-button>
+        </template>
       </el-table-column>
       <el-table-column label="交易类型" width="83">
         <template slot-scope="scope">
@@ -141,6 +143,7 @@
     </el-pagination>
     <remark :visible="ctrl.remarkVisible" :formData="formdata" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></remark>
     <view-lecturer :visible="ctrl.lecturerViewVisible" :formData="formdata" :lecturerExt="lecturerExt" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></view-lecturer>
+    <view-user :visible="ctrl.userViewVisible" :formData="formdata" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></view-user>
     <order-view :visible="ctrl.viewVisible" :formData="formdata" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></order-view>
   </div>
 </template>
@@ -149,16 +152,18 @@ import * as courseApis from '@/api/course'
 import * as userApi from '@/api/user'
 import Remark from './remark'
 import ViewLecturer from '@/views/lecturer/manage/lecturer/view'
+import viewUser from '@/views/user/manage/userExt/view'
 import OrderView from './view'
 export default {
-  components: { Remark, ViewLecturer, OrderView },
+  components: { Remark, ViewLecturer, OrderView, viewUser },
   data() {
     return {
       ctrl: {
         load: false,
         lecturerViewVisible: false,
         remarkVisible: false,
-        viewVisible: false
+        viewVisible: false,
+        userViewVisible: false
       },
       page: {
         beginPageIndex: 1,
@@ -247,6 +252,19 @@ export default {
         this.ctrl.load = false
       })
     },
+    handleUserView(userNo) {
+      console.log(userNo)
+      this.ctrl.load = true
+      userApi.userExtView({ orderUserNo: userNo }).then(res => {
+        console.log(res.data)
+        this.formdata = res.data
+        this.ctrl.dialogTitle = res.data.nickname + '-' + '查看详情'
+        this.ctrl.userViewVisible = true
+        this.ctrl.load = false
+      }).catch(() => {
+        this.ctrl.load = false
+      })
+    },
     //跳转讲师详情页面
     handleLecturerView(lecturerUserNo) {
       this.ctrl.load = true
@@ -272,7 +290,7 @@ export default {
         this.ctrl.load = false
       })
     },
-    // 注册时间段查询条件
+    // 支付时间段查询条件
     changeTime() {
       console.log("payTime=>", this.payTime)
       if (this.payTime !== null && this.payTime.length) {
@@ -296,7 +314,8 @@ export default {
       this.ctrl.remarkVisible = false;
       this.ctrl.lecturerViewVisible = false;
       this.ctrl.viewVisible = false;
-      this.reload()
+      this.ctrl.userViewVisible = false;
+      this.handleReset()
     },
     handleSizeChange(val) {
       // console.log(`每页 ${val} 条`)
@@ -315,6 +334,8 @@ export default {
     // 重置查询条件
     handleReset() {
       this.map = {}
+      this.formdata = {}
+      this.lecturerExt = {}
       this.getList()
     },
     textClass(code) {

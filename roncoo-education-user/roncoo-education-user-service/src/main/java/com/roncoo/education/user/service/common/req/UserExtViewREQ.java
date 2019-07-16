@@ -25,6 +25,6 @@ public class UserExtViewREQ implements Serializable {
 	 * 用户编号
 	 */
 	@ApiModelProperty(value = "用户编号")
-	private Long userNo;
+	private Long orderUserNo;
 
 }
