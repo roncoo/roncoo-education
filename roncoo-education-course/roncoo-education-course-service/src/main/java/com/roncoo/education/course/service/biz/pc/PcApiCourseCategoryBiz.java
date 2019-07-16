@@ -81,16 +81,17 @@ public class PcApiCourseCategoryBiz {
 		if (StringUtils.isEmpty(req.getCategoryType())) {
 			return Result.error("分类类型不能为空");
 		}
-		CourseCategory parentCategory = dao.getById(req.getParentId());
-		if (ObjectUtil.isNull(parentCategory)) {
-			return Result.error("找不到父分类信息");
+
+		if (req.getParentId() == 0 && req.getFloor() == 1) {
+			req.setFloor(1);
+		} else {
+			CourseCategory parentCategory = dao.getById(req.getParentId());
+			if (ObjectUtil.isNull(parentCategory)) {
+				return Result.error("找不到父分类信息");
+			}
+			req.setFloor(req.getFloor() + 1);
 		}
 		CourseCategory record = BeanUtil.copyProperties(req, CourseCategory.class);
-		if (req.getParentId() == 0 && req.getFloor() == 1) {
-			record.setFloor(1);
-		} else {
-			record.setFloor(req.getFloor() + 1);
-		}
 		int results = dao.save(record);
 		if (results > 0) {
 			return Result.success(results);
