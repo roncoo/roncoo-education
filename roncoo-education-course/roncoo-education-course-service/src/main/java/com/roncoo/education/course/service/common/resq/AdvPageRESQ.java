@@ -53,6 +53,11 @@ public class AdvPageRESQ implements Serializable {
 	@ApiModelProperty(value = "广告链接")
 	private String advUrl;
 	/**
+	 * 跳转方式（_blank：新窗口打开；_self：同窗口打开）
+	 */
+	@ApiModelProperty(value = "跳转方式（_blank：新窗口打开；_self：同窗口打开）")
+	private String advTarget;
+	/**
 	 * 开始时间
 	 */
 	@ApiModelProperty(value = "开始时间")

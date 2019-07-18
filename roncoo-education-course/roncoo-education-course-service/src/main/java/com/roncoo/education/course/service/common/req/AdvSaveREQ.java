@@ -22,7 +22,6 @@ public class AdvSaveREQ implements Serializable {
 	 */
 	@ApiModelProperty(value = "位置(0电脑端，1微信端)", required = false)
 	private Integer platShow;
-
 	/**
 	 * 广告标题
 	 */
