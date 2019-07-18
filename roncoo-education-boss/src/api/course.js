@@ -197,3 +197,12 @@ export function studyLoglist(params, page = 1, pageSize = 20) {
     data: { pageCurrent: page, pageSize: pageSize, ...params }
   })
 }
+
+// 支付记录分页列表接口
+export function orderPaylist(params, page = 1, pageSize = 20) {
+  return request({
+    url: '/course/pc/order/pay/list',
+    method: 'post',
+    data: { pageCurrent: page, pageSize: pageSize, ...params }
+  })
+}

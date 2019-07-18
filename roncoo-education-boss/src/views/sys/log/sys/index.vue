@@ -23,7 +23,7 @@
       </el-form>
     </div>
     <div>
-      <el-table @selection-change="handleSelectionChange" v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
+      <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
         <el-table-column type="index" label="序号" width="40"></el-table-column>
         <el-table-column width="100" prop="realName" label="操作人"></el-table-column>
         <el-table-column width="200" prop="ip" label="ip"></el-table-column>

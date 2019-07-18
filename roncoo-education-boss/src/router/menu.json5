@@ -296,6 +296,20 @@
       },
       {
           "id": 2,
+          "name": "平台管理",
+          "path": "/platform",
+          "icon": null,
+          "children": [
+              {
+                "id": 2,
+                "name": "应用管理",
+                "path": "/sys/platform/platform",
+                "icon": null,
+              }
+           ]
+      },
+      {
+          "id": 2,
           "name": "日志查看",
           "path": "/log",
           "icon": null,
@@ -309,7 +323,7 @@
               {
                 "id": 2,
                 "name": "支付日志",
-                "path": "/sys/log/sys",
+                "path": "/sys/log/orderPay",
                 "icon": null,
               }
            ]

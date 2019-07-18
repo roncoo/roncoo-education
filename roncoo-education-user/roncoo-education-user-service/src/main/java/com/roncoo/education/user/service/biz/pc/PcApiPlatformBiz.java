@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.roncoo.education.user.service.common.req.PlatformPageREQ;
+import com.roncoo.education.user.service.common.req.PlatformSaveREQ;
 import com.roncoo.education.user.service.common.req.PlatformUpdateREQ;
 import com.roncoo.education.user.service.common.req.PlatformViewREQ;
 import com.roncoo.education.user.service.common.resq.PlatformPageRESQ;
@@ -18,6 +19,7 @@ import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.util.tools.StrUtil;
 import com.xiaoleilu.hutool.util.ObjectUtil;
 
 /**
@@ -40,13 +42,30 @@ public class PcApiPlatformBiz {
 		return Result.success(PageUtil.transform(page, PlatformPageRESQ.class));
 	}
 
+	public Result<Integer> save(PlatformSaveREQ req) {
+		if (StringUtils.isEmpty(req.getClientName())) {
+			return Result.error("客户端名称不能为空");
+		}
+		Platform platform = dao.getByClientName(req.getClientName());
+		if (ObjectUtil.isNotNull(platform)) {
+			return Result.error("客户端名称已添加");
+		}
+		Platform record = BeanUtil.copyProperties(req, Platform.class);
+		record.setClientId("lk" + StrUtil.get32UUID());
+		record.setClientSecret(StrUtil.get32UUID());
+		int results = dao.save(record);
+		if (results < 0) {
+			return Result.error(ResultEnum.USER_UPDATE_FAIL);
+		}
+		return Result.success(results);
+	}
+
 	public Result<Integer> update(PlatformUpdateREQ req) {
 		if (req.getId() == null) {
 			return Result.error("ID不能为空");
 		}
 		Platform record = BeanUtil.copyProperties(req, Platform.class);
 		int results = dao.updateById(record);
-	
 		if (results < 0) {
 			return Result.error(ResultEnum.USER_UPDATE_FAIL);
 		}

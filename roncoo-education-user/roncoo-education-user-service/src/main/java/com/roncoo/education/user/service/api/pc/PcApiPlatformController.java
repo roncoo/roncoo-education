@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.roncoo.education.user.service.biz.pc.PcApiPlatformBiz;
 import com.roncoo.education.user.service.common.req.PlatformPageREQ;
+import com.roncoo.education.user.service.common.req.PlatformSaveREQ;
 import com.roncoo.education.user.service.common.req.PlatformUpdateREQ;
 import com.roncoo.education.user.service.common.req.PlatformViewREQ;
 import com.roncoo.education.user.service.common.resq.PlatformPageRESQ;
@@ -39,6 +40,16 @@ public class PcApiPlatformController extends BaseController {
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	public Result<Page<PlatformPageRESQ>> listForPage(@RequestBody PlatformPageREQ platformPageREQ) {
 		return biz.listForPage(platformPageREQ);
+	}
+
+	/**
+	 * 保存平台信息接口
+	 * 
+	 */
+	@ApiOperation(value = "保存平台信息接口", notes = "保存平台信息接口")
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public Result<Integer> save(@RequestBody PlatformSaveREQ platformSaveREQ) {
+		return biz.save(platformSaveREQ);
 	}
 
 	/**

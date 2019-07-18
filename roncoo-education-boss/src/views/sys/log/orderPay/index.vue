@@ -5,17 +5,6 @@
       <el-form-item label="订单号">
         <el-input v-model="map.orderNo"></el-input>
       </el-form-item>
-      <el-form-item label="时间">
-        <el-date-picker
-          v-model="gmtCreate"
-          type="daterange"
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-          align="center"
-          @change="changeTime">
-        </el-date-picker>
-      </el-form-item>
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
         <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
@@ -23,11 +12,11 @@
       </el-form>
     </div>
     <div>
-      <el-table @selection-change="handleSelectionChange" v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
+      <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
         <el-table-column type="index" label="序号" width="40"></el-table-column>
-        <el-table-column width="100" prop="orderNo" label="订单号"></el-table-column>
-        <el-table-column width="150" prop="serialMumber" label="流水号"></el-table-column>
-        <el-table-column width="170" label="订单状态">
+        <el-table-column width="300" prop="orderNo" label="订单号"></el-table-column>
+        <el-table-column width="300" prop="serialMumber" label="流水号"></el-table-column>
+        <el-table-column width="150" label="订单状态">
           <template slot-scope="scope">
             <span>{{textOrderStatus[scope.row.orderStatus]}}</span>
           </template>
@@ -38,8 +27,8 @@
             <span>{{textPayType[scope.row.payType]}}</span>
           </template>
         </el-table-column>
-        <el-table-column width="170" prop="gmtCreate" label="下单时间"></el-table-column>
-        <el-table-column width="170" prop="payTime" label="支付时间"></el-table-column>
+        <el-table-column width="200" prop="gmtCreate" label="下单时间"></el-table-column>
+        <el-table-column width="200" prop="payTime" label="支付时间"></el-table-column>
       </el-table>
     </div>
       <el-pagination
@@ -55,7 +44,7 @@
   </div>
 </template>
 <script>
-  import * as api from '@/api/system'
+  import * as api from '@/api/course'
   export default {
     data() {
       return {
@@ -149,10 +138,10 @@
         this.gmtCreate = ''
         this.listForPage()
       },
-      // 后台操作日志分页列表接口
+      // 支付记录分页列表接口
       listForPage() {
         this.ctrl.load = true
-        api.sysLogList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
+        api.orderPaylist(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.list = res.data.list
           this.page.pageCurrent = res.data.pageCurrent
           this.page.totalCount = res.data.totalCount

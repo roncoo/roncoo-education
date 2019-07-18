@@ -214,6 +214,16 @@ export const asyncRouterMap = [
           }
         ]
       },
+      {// 平台管理
+        path: 'platform',
+        component: () => import('@/views/sys/platform'),
+        children: [
+          {
+            path: 'platform',
+            component: () => import('@/views/sys/platform/platform')
+          }
+        ]
+      },
       {// 日志查看
         path: 'log',
         component: () => import('@/views/sys/log'),

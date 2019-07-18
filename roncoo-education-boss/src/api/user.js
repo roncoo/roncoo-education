@@ -150,3 +150,30 @@ export function lecturerProfitBatch(data = {}) {
     data: data
   })
 }
+
+// 平台信息分页列表接口
+export function platformList(params, pageCurrent = 1, pageSize = 20) {
+  return request({
+    url: '/user/pc/platform/list',
+    method: 'post',
+    data: { pageCurrent: pageCurrent, pageSize: pageSize, ...params }
+  })
+}
+
+// 更新平台信息接口
+export function platformUpdate(data = {}) {
+  return request({
+    url: `/user/pc/platform/update`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 平台信息查看接口
+export function platformView(data = {}) {
+  return request({
+    url: `/user/pc/platform/view`,
+    method: 'post',
+    data: data
+  })
+}
