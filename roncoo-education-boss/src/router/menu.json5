@@ -19,7 +19,6 @@
     "name": "首页",
     "path": "/dashboard",
     "icon": null,
-    "hidden": true
   },
   {
     "id": 0,
@@ -114,20 +113,42 @@
   {
     "id": 0,
     "name": "课程管理",
-    "path": "/course",
+    "path": "course",
     "icon": null,
     "children": [
       {
-        "id": 2,
-        "name": "课程审核列表",
-        "path": "/course/audit",
-        "icon": null,
+          "id": 2,
+          "name": "课程管理",
+          "path": "/course",
+          "icon": null,
+          "children": [
+            {
+            "id": 2,
+            "name": "课程列表",
+            "path": "/course/course/course",
+            "icon": null,
+            },
+            {
+            "id": 2,
+            "name": "课程审核列表",
+            "path": "/course/course/audit",
+            "icon": null,
+            }
+          ]
       },
       {
-        "id": 2,
-        "name": "课程信息列表",
-        "path": "/course/course",
-        "icon": null,
+          "id": 2,
+          "name": "分类管理",
+          "path": "/category",
+          "icon": null,
+          "children": [
+            {
+            "id": 2,
+            "name": "分类列表",
+            "path": "/course/category/category",
+            "icon": null,
+            }
+          ]
       }
     ]
   },
@@ -269,6 +290,26 @@
                 "id": 2,
                 "name": "系统设置",
                 "path": "/sys/website/sys",
+                "icon": null,
+              }
+           ]
+      },
+      {
+          "id": 2,
+          "name": "日志查看",
+          "path": "/log",
+          "icon": null,
+          "children": [
+              {
+                "id": 2,
+                "name": "操作日志",
+                "path": "/sys/log/sys",
+                "icon": null,
+              },
+              {
+                "id": 2,
+                "name": "支付日志",
+                "path": "/sys/log/sys",
                 "icon": null,
               }
            ]

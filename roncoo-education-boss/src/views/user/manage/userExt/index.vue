@@ -20,14 +20,14 @@
       </el-form-item>
       <el-form-item label="注册时间">
         <el-date-picker
-        v-model="gmtCreate"
-        type="daterange"
-        range-separator="至"
-        start-placeholder="开始日期"
-        end-placeholder="结束日期"
-        align="center"
-        @change="changeTime">
-      </el-date-picker>
+          v-model="gmtCreate"
+          type="daterange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          align="center"
+          @change="changeTime">
+        </el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
@@ -81,6 +81,7 @@
           <ul class="list-item-actions">
             <li>
               <el-button type="success" @click="handleEdit(scope.row)" size="mini">编辑</el-button>
+              <el-button type="success" @click="handleStudy(scope.row.userNo)" size="mini">学习记录</el-button>
             </li>
           </ul>
         </template>
@@ -98,15 +99,17 @@
         :total="page.totalCount">
       </el-pagination>
       <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
-      <view-user :visible="ctrl.viewVisible" :formData="formData" @close-cllback="closeViewFind"></view-user>
+      <view-user :visible="ctrl.viewVisible" :formData="formData" @close-cllback="closeCllback"></view-user>
+      <study :visible="ctrl.studyVisible" :userNo="userNo" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></study>
   </div>
 </template>
 <script>
   import * as userApi from '@/api/user'
   import Edit from './edit'
   import viewUser from './view'
+  import study from './listStudy'
   export default {
-    components: { Edit, viewUser },
+    components: { Edit, viewUser, study },
     data() {
       return {
         map: {},
@@ -114,9 +117,11 @@
           load: false,
           remoteAuthorLoading: false,
           dialogVisible: false,
-          viewVisible: false
+          viewVisible: false,
+          studyVisible: false
         },
         list: [],
+        userNo: '',
         opts: {
           statusIdList: []
         },
@@ -147,6 +152,76 @@
       this.userExtList(1)
     },
     methods: {
+      handleStudy(row) {
+        this.userNo = row
+        this.ctrl.studyVisible = true
+        this.ctrl.dialogTitle = '学习记录'
+      },
+      // 跳修改弹窗页面
+      handleEdit(row) {
+        this.formData = row
+        this.ctrl.dialogTitle = '编辑'
+        this.ctrl.dialogVisible = true
+      },
+      // 查看弹窗
+      handleView(id) {
+        this.ctrl.load = true
+        userApi.userExtView({ id: id }).then(res => {
+          this.formData = res.data
+          this.ctrl.load = false
+        }).catch(() => {
+            this.ctrl.load = false
+          })
+        this.ctrl.viewVisible = true
+      },
+      // 关闭弹窗回调
+      closeCllback() {
+        this.formData = {}
+        this.ctrl.dialogVisible = false
+        this.ctrl.viewVisible = false
+        this.ctrl.studyVisible = false
+        this.reload()
+      },
+      // 修改状态
+      handleChangeStatus(id, statusId) {
+        const title = { 0: '禁用', 1: '启用' }
+        this.$confirm(`确定要${title[statusId]}吗?`, {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.changeStatus(id, statusId)
+          this.reload()
+        }).catch(() => {
+          this.reload()
+        })
+      },
+      // 请求更新用户方法
+      changeStatus(id, statusId) {
+        userApi.userExtUpdate({ id: id, statusId: statusId }).then(res => {
+          if (res.code === 200 && res.data > 0) {
+            const msg = { 0: '禁用成功', 1: '启用成功' }
+            this.$message({
+              type: 'success',
+              message: msg[statusId]
+            });
+              this.reload()
+          } else {
+            const msg = { 0: '禁用失败', 1: '启用失败' }
+            this.$message({
+              type: 'error',
+              message: msg[statusId]
+            });
+              this.reload()
+          }
+        })
+      },
+      // 刷新当前页面
+      reload() {
+        this.map = {}
+        this.gmtCreate = ''
+        this.userExtList()
+      },
       handleSizeChange(val) {
         // console.log(`每页 ${val} 条`)
         this.page.pageSize = val
@@ -195,74 +270,6 @@
         }).catch(() => {
           this.ctrl.load = false
         })
-      },
-      // 关闭编辑弹窗回调
-      closeCllback() {
-        this.formData = {}
-        this.ctrl.dialogVisible = false
-        this.reload()
-      },
-      // 跳修改弹窗页面
-      handleEdit(row) {
-        this.formData = row
-        this.ctrl.dialogTitle = '编辑'
-        this.ctrl.dialogVisible = true
-      },
-      // 修改状态
-      handleChangeStatus(id, statusId) {
-        const title = { 0: '禁用', 1: '启用' }
-        this.$confirm(`确定要${title[statusId]}吗?`, {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          this.changeStatus(id, statusId)
-          this.reload()
-        }).catch(() => {
-          this.reload()
-        })
-      },
-      // 请求更新用户方法
-      changeStatus(id, statusId) {
-        userApi.userExtUpdate({ id: id, statusId: statusId }).then(res => {
-          if (res.code === 200 && res.data > 0) {
-            const msg = { 0: '禁用成功', 1: '启用成功' }
-            this.$message({
-              type: 'success',
-              message: msg[statusId]
-            });
-              this.reload()
-          } else {
-            const msg = { 0: '禁用失败', 1: '启用失败' }
-            this.$message({
-              type: 'error',
-              message: msg[statusId]
-            });
-              this.reload()
-          }
-        })
-      },
-      // 查看弹窗
-      handleView(id) {
-        this.ctrl.load = true
-        userApi.userExtView({ id: id }).then(res => {
-          this.formData = res.data
-          this.ctrl.load = false
-        }).catch(() => {
-            this.ctrl.load = false
-          })
-        this.ctrl.viewVisible = true
-      },
-      // 关闭查看弹窗回调
-      closeViewFind() {
-        this.formData = {}
-        this.ctrl.viewVisible = false
-      },
-      // 刷新当前页面
-      reload() {
-        this.map = {}
-        this.gmtCreate = ''
-        this.userExtList()
       },
       textClass(userType) {
         return {

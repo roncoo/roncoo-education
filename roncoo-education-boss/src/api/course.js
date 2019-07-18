@@ -72,7 +72,7 @@ export function courseViewForEdit(id) {
   })
 }
 
-// 课程分类推荐分页列表接口
+// 课程分类分页列表接口
 export function categoryList(params, page = 1, pageSize = 20) {
   return request({
     url: '/course/pc/course/category/list',
@@ -186,5 +186,14 @@ export function orderStatistical(data = {}) {
     url: '/course/pc/order/info/statistical',
     method: 'post',
     data: data
+  })
+}
+
+// 用户学习日志分页列表接口
+export function studyLoglist(params, page = 1, pageSize = 20) {
+  return request({
+    url: '/course/pc/course/user/study/log/list',
+    method: 'post',
+    data: { pageCurrent: page, pageSize: pageSize, ...params }
   })
 }

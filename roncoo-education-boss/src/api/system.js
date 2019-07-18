@@ -475,3 +475,12 @@ export function templateUpdate(data = {}) {
     data: data
   })
 }
+
+// 后台操作日志分页列表接口
+export function sysLogList(params, pageCurrent = 1, pageSize = 20) {
+  return request({
+    url: '/system/pc/sys/log/list',
+    method: 'post',
+    data: { pageCurrent: pageCurrent, pageSize: pageSize, ...params }
+  })
+}

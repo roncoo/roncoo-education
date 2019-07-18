@@ -84,12 +84,28 @@ export const asyncRouterMap = [
     component: () => import('@/views/course'),
     children: [
       {
-        path: 'audit',
-        component: () => import('@/views/course/audit')
+        path: 'course',
+        component: () => import('@/views/course/course'),
+        children: [
+          {// 讲师列表
+            path: 'course',
+            component: () => import('@/views/course/course/course')
+          },
+          {
+            path: 'audit',
+            component: () => import('@/views/course/course/audit')
+          }
+        ]
       },
       {
-        path: 'course',
-        component: () => import('@/views/course/course')
+        path: 'category',
+        component: () => import('@/views/course/category'),
+        children: [
+          {
+            path: 'category',
+            component: () => import('@/views/course/category/category')
+          }
+        ]
       }
     ]
   },
@@ -195,6 +211,20 @@ export const asyncRouterMap = [
           {
             path: 'sys',
             component: () => import('@/views/sys/website/sys')
+          }
+        ]
+      },
+      {// 日志查看
+        path: 'log',
+        component: () => import('@/views/sys/log'),
+        children: [
+          {
+            path: 'sys',
+            component: () => import('@/views/sys/log/sys')
+          },
+          {
+            path: 'orderPay',
+            component: () => import('@/views/sys/log/orderPay')
           }
         ]
       }

@@ -22,6 +22,12 @@ public class OrderPayPageRESQ implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	/**
+	 * 创建时间
+	 */
+	@ApiModelProperty(value = "创建时间")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date gmtCreate;
+	/**
 	 * 订单号
 	 */
 	@ApiModelProperty(value = "订单号")
@@ -45,7 +51,7 @@ public class OrderPayPageRESQ implements Serializable {
 	/**
 	 * 支付时间
 	 */
-	@ApiModelProperty(value = "创建时间")
+	@ApiModelProperty(value = "支付时间")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date payTime;
 

@@ -253,10 +253,8 @@ export default {
       })
     },
     handleUserView(userNo) {
-      console.log(userNo)
       this.ctrl.load = true
       userApi.userExtView({ orderUserNo: userNo }).then(res => {
-        console.log(res.data)
         this.formdata = res.data
         this.ctrl.dialogTitle = res.data.nickname + '-' + '查看详情'
         this.ctrl.userViewVisible = true
