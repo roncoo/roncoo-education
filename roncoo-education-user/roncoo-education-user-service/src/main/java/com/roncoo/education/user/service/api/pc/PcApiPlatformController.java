@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.roncoo.education.user.service.biz.pc.PcApiPlatformBiz;
+import com.roncoo.education.user.service.common.req.PlatformDeleteREQ;
 import com.roncoo.education.user.service.common.req.PlatformPageREQ;
 import com.roncoo.education.user.service.common.req.PlatformSaveREQ;
 import com.roncoo.education.user.service.common.req.PlatformUpdateREQ;
@@ -50,6 +51,16 @@ public class PcApiPlatformController extends BaseController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Result<Integer> save(@RequestBody PlatformSaveREQ platformSaveREQ) {
 		return biz.save(platformSaveREQ);
+	}
+	
+	/**
+	 * 删除平台信息接口
+	 * 
+	 */
+	@ApiOperation(value = "删除平台信息接口", notes = "删除平台信息接口")
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public Result<Integer> delete(@RequestBody PlatformDeleteREQ platformDeleteREQ) {
+		return biz.delete(platformDeleteREQ);
 	}
 
 	/**

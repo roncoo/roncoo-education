@@ -73,21 +73,23 @@ export default {
       this.load = true
       let res = {}
       if (this.form === undefined) {
+        this.form = {}
         this.$alert(res.msg || '提交失败')
       } else {
-        res = await api.userSave(this.form)
+        res = await api.platformSave(this.form)
         // this.tips('成功', 'success')
       }
       this.load = false
       if (res.code === 200 && res.data > 0) {
         // 提交成功, 关闭窗口, 刷新列表
-        this.$emit('close-cllback')
+        this.handleClose('close-cllback')
       } else {
+        this.form = {}
         this.$alert(res.msg || '提交失败')
       }
     },
     // 关闭弹窗
-    handleClose(done) {
+    handleClose() {
       this.form = {}
       this.$emit('close-cllback')
     }

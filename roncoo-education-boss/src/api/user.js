@@ -177,3 +177,12 @@ export function platformView(data = {}) {
     data: data
   })
 }
+
+// 平台信息保存接口
+export function platformSave(data = {}) {
+  return request({
+    url: `/user/pc/platform/save`,
+    method: 'post',
+    data: data
+  })
+}

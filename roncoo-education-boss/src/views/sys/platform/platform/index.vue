@@ -65,7 +65,7 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="page.totalCount">
       </el-pagination>
-      <add-platform :visible="ctrl.viewVisible" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></add-platform>
+      <add-platform :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></add-platform>
       <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
       <view-platform :visible="ctrl.viewVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></view-platform>
   </div>

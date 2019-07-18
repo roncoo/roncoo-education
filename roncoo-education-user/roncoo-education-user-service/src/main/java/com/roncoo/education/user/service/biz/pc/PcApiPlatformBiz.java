@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import com.roncoo.education.user.service.common.req.PlatformDeleteREQ;
 import com.roncoo.education.user.service.common.req.PlatformPageREQ;
 import com.roncoo.education.user.service.common.req.PlatformSaveREQ;
 import com.roncoo.education.user.service.common.req.PlatformUpdateREQ;
@@ -55,7 +56,7 @@ public class PcApiPlatformBiz {
 		record.setClientSecret(StrUtil.get32UUID());
 		int results = dao.save(record);
 		if (results < 0) {
-			return Result.error(ResultEnum.USER_UPDATE_FAIL);
+			return Result.error(ResultEnum.USER_SAVE_FAIL);
 		}
 		return Result.success(results);
 	}
@@ -81,6 +82,17 @@ public class PcApiPlatformBiz {
 			return Result.error("找不到平台信息");
 		}
 		return Result.success(BeanUtil.copyProperties(record, PlatformViewRESQ.class));
+	}
+
+	public Result<Integer> delete(PlatformDeleteREQ req) {
+		if (req.getId() == null) {
+			return Result.error("ID不能为空");
+		}
+		int results = dao.deleteById(req.getId());
+		if (results < 0) {
+			return Result.error(ResultEnum.USER_DELETE_FAIL);
+		}
+		return Result.success(results);
 	}
 
 }
