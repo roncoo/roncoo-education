@@ -52,4 +52,9 @@ public class CoursePageREQ implements Serializable {
 	 */
 	@ApiModelProperty(value = "是否免费：1免费，0收费", required = false)
 	private Integer isFree;
+	/**
+	 * 专区编号
+	 */
+	@ApiModelProperty(value = "专区编号", required = false)
+	private Long zoneId;
 }

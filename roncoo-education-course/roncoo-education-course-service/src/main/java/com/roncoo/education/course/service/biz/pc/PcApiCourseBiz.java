@@ -25,6 +25,7 @@ import com.roncoo.education.course.service.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.service.dao.CourseDao;
 import com.roncoo.education.course.service.dao.CourseIntroduceAuditDao;
 import com.roncoo.education.course.service.dao.CourseIntroduceDao;
+import com.roncoo.education.course.service.dao.ZoneCourseDao;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseCategory;
@@ -34,6 +35,7 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseExample;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseExample.Criteria;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduce;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduceAudit;
+import com.roncoo.education.course.service.dao.impl.mapper.entity.ZoneCourse;
 import com.roncoo.education.user.common.bean.vo.LecturerVO;
 import com.roncoo.education.user.feign.IBossLecturer;
 import com.roncoo.education.util.base.Page;
@@ -54,6 +56,8 @@ public class PcApiCourseBiz {
 	@Autowired
 	private IBossLecturer bossLecturer;
 
+	@Autowired
+	private ZoneCourseDao zoneCourseDao;
 	@Autowired
 	private CourseDao dao;
 	@Autowired
@@ -78,7 +82,6 @@ public class PcApiCourseBiz {
 	public Result<Page<CoursePageRESQ>> list(CoursePageREQ req) {
 		CourseExample example = new CourseExample();
 		Criteria c = example.createCriteria();
-
 		if (req.getCategoryId1() != null) {
 			c.andCategoryId1EqualTo(req.getCategoryId1());
 		}
@@ -99,6 +102,17 @@ public class PcApiCourseBiz {
 		Page<CoursePageRESQ> listForPage = PageUtil.transform(page, CoursePageRESQ.class);
 		// 获取分类名称
 		for (CoursePageRESQ resq : listForPage.getList()) {
+			if (req.getZoneId() != null) {
+				// 校验专区是否存在课程
+				ZoneCourse zoneCourse = zoneCourseDao.getZoneIdAndCourseId(resq.getId(), req.getZoneId());
+				if (ObjectUtil.isNull(zoneCourse)) {
+					// 不存在
+					resq.setIsAddZoneCourse(0);
+				} else {
+					// 存在
+					resq.setIsAddZoneCourse(1);
+				}
+			}
 			LecturerVO lecturer = bossLecturer.getByLecturerUserNo(resq.getLecturerUserNo());
 			if (ObjectUtil.isNotNull(lecturer)) {
 				resq.setLecturerName(lecturer.getLecturerName());
@@ -240,13 +254,17 @@ public class PcApiCourseBiz {
 			resq.setCategoryName3(courseCategory.getCategoryName());
 		}
 		// 章节
-		List<CourseChapter> ChapterList = courseChapterDao.listByCourseIdAndStatusId(resq.getId(), StatusIdEnum.YES.getCode());
+		List<CourseChapter> ChapterList = courseChapterDao.listByCourseIdAndStatusId(resq.getId(),
+				StatusIdEnum.YES.getCode());
 		if (CollectionUtils.isNotEmpty(ChapterList)) {
-			List<CourseChapterViewRESQ> courseChapterVOList = PageUtil.copyList(ChapterList, CourseChapterViewRESQ.class);
+			List<CourseChapterViewRESQ> courseChapterVOList = PageUtil.copyList(ChapterList,
+					CourseChapterViewRESQ.class);
 			for (CourseChapterViewRESQ courseChapter : courseChapterVOList) {
 				// 课时
-				List<CourseChapterPeriod> periodList = courseChapterPeriodDao.listByChapterIdAndStatusId(courseChapter.getId(), StatusIdEnum.YES.getCode());
-				courseChapter.setCourseChapterPeriodList(PageUtil.copyList(periodList, CourseChapterPeriodViewRESQ.class));
+				List<CourseChapterPeriod> periodList = courseChapterPeriodDao
+						.listByChapterIdAndStatusId(courseChapter.getId(), StatusIdEnum.YES.getCode());
+				courseChapter
+						.setCourseChapterPeriodList(PageUtil.copyList(periodList, CourseChapterPeriodViewRESQ.class));
 			}
 			resq.setCourseChapterList(courseChapterVOList);
 		}

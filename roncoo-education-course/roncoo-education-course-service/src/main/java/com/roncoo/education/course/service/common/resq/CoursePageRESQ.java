@@ -118,4 +118,9 @@ public class CoursePageRESQ implements Serializable {
 	 */
 	@ApiModelProperty(value = "是否上架(1:上架，0:下架)")
 	private Integer isPutaway;
+	/**
+	 * 是否已添加专区课程(1:存在，0:不存在)
+	 */
+	@ApiModelProperty(value = "是否已添加专区课程(1:存在，0:不存在)")
+	private Integer isAddZoneCourse;
 }
