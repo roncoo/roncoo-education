@@ -29,22 +29,16 @@ export const asyncRouterMap = [
     component: () => import('@/views/index'),
     children: [
       {
-        path: 'recommend',
-        component: () => import('@/views/index/recommend'),
-        children: [
-          {
-            path: 'courseCategory',
-            component: () => import('@/views/index/recommend/courseCategory')
-          }
-        ]
-      },
-      {
         path: 'zone',
         component: () => import('@/views/index/zone'),
         children: [
           {
-            path: 'zoneSet',
-            component: () => import('@/views/index/zone/zoneSet')
+            path: 'zone',
+            component: () => import('@/views/index/zone/zone')
+          },
+          {
+            path: 'course',
+            component: () => import('@/views/index/zone/course')
           }
          ]
       },

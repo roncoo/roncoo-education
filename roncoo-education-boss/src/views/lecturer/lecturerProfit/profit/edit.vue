@@ -59,7 +59,7 @@
     },
     methods: {
       handleClose(done) {
-        this.$emit('close-cllback')
+        this.$emit('close-callback')
       },
       submitForm(formData) {
         if (!this.formData.profitStatus) {
@@ -71,37 +71,33 @@
         }
         this.$refs[formData].validate((valid) => {
           if (valid) {
-            this.handleConfirm()
+            this.loading.show()
+            if (this.formData.id === undefined) {
+              this.$message({
+                type: 'error',
+                message: "提交失败"
+              });
+            } else {
+              userApi.lecturerProfitUpdate(this.formData).then(res => {
+                this.loading.hide()
+                if (res.code === 200 && res.data > 0) {
+                    this.$emit('close-callback')
+                } else {
+                  this.$message({
+                    type: 'error',
+                    message: "提交失败"
+                  });
+                }
+              })
+            }
           } else {
-            return false;
+            this.$message({
+              type: 'error',
+              message: "提交失败"
+            });
           }
         })
-      },
-     async handleConfirm() {
-        this.load = true
-        let res = {}
-        if (this.formData.id === undefined) {
-          this.$alert(res.msg || '提交失败')
-        } else {
-          res = await userApi.lecturerProfitUpdate(this.formData)
-        }
-        this.load = false
-        if (res.code === 200 && res.data > 0) {
-          // 提交成功, 关闭窗口, 刷新列表
-          this.tips('成功', 'success')
-          this.$emit('close-cllback')
-        } else {
-          this.$alert(res.msg || '提交失败')
-        }
       }
     }
   }
 </script>
-<style scoped>
-  .cancel {
-    text-align: right;
-  }
-  .button {
-    padding: 5px 10px;
-  }
-</style>

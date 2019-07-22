@@ -46,12 +46,12 @@
         "path": "/shuf",
         "icon": null,
         "children": [
-        {
-        "id": 2,
-        "name": "PC端设置",
-        "path": "/index/shuf/adv",
-        "icon": null,
-        }
+          {
+            "id": 2,
+            "name": "PC端设置",
+            "path": "/index/shuf/adv",
+            "icon": null,
+          }
         ]
       },
       {
@@ -61,12 +61,19 @@
           "icon": null,
           "children": [
            {
-           "id": 2,
-           "name": "PC端设置",
-           "path": "/index/zone/zoneSet",
-           "icon": null,
-           }
-           ]
+             "id": 2,
+             "name": "PC端设置",
+             "path": "/index/zone/zone",
+             "icon": null,
+            },
+            {
+             "id": 2,
+             "name": "专区课程",
+             "path": "/index/zone/course",
+             "icon": null,
+             "hidden": true,
+            }
+          ]
        },
       {
           "id": 2,
@@ -74,40 +81,26 @@
           "path": "/system",
           "icon": null,
           "children": [
-          {
-           "id": 2,
-           "name": "头部导航",
-           "path": "/index/system/navBar",
-           "icon": null,
-           },
-           {
-           "id": 2,
-           "name": "底部导航",
-           "path": "/index/system/websiteNav",
-           "icon": null,
-           },
-           {
-           "id": 2,
-           "name": "友情链接",
-           "path": "/index/system/websiteLink",
-           "icon": null,
-           },
+            {
+               "id": 2,
+               "name": "头部导航",
+               "path": "/index/system/navBar",
+               "icon": null,
+             },
+             {
+               "id": 2,
+               "name": "底部导航",
+               "path": "/index/system/websiteNav",
+               "icon": null,
+             },
+             {
+               "id": 2,
+               "name": "友情链接",
+               "path": "/index/system/websiteLink",
+               "icon": null,
+             },
            ]
-      },
-      {
-           "id": 2,
-           "name": "分类推荐",
-           "path": "/recommend",
-           "icon": null,
-           "children": [
-           {
-           "id": 2,
-           "name": "PC端设置",
-           "path": "/index/recommend/courseCategory",
-           "icon": null,
-           }
-           ]
-      },
+      }
     ]
   },
   {

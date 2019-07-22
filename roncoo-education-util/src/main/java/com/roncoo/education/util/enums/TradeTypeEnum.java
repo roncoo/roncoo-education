@@ -12,11 +12,11 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum TradeTypeEnum {
-    
-    ONLINE(1, "线上支付"), OFFLINE(2, "线下支付");
 
-    private Integer code;
+	ONLINE(1, "线上支付"), OFFLINE(2, "线下支付");
 
-    private String desc;
+	private Integer code;
+
+	private String desc;
 
 }

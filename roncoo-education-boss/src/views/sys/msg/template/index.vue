@@ -20,7 +20,7 @@
         </el-table-column>
         <el-table-column prop="remark" label="模板">
         </el-table-column>
-        <el-table-column label="状态" width="90">
+        <el-table-column label="状态" width="100">
           <template slot-scope="scope">
             <span :class="textClass(scope.row.statusId)">{{textStatusId[scope.row.statusId]}}</span>
           </template>
@@ -28,7 +28,7 @@
         <el-table-column
         fixed="right"
         label="操作"
-        width="370">
+        width="200">
         <template slot-scope="scope">
           <ul class="list-item-actions">
             <li>
@@ -50,8 +50,8 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="page.totalCount">
       </el-pagination>
-      <add :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></add>
-      <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
+      <add :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-callback="closeCallback"></add>
+      <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
   </div>
 </template>
 <script>
@@ -156,7 +156,7 @@
         this.ctrl.dialogVisible = true
       },
       // 关闭弹窗回调
-      closeCllback() {
+      closeCallback() {
         this.ctrl.addDialogVisible = false
         this.ctrl.dialogVisible = false
         this.reload()

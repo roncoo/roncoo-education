@@ -30,7 +30,7 @@
             </div></el-col>
             <el-col :span="12"><div>
               <el-form-item label="排序:">
-                <el-input v-model="formData.sort"></el-input>
+                <el-input-number style="width: 300px;"  v-model="formData.sort" @change="handleChange" :min="1" :max="10000"></el-input-number>
               </el-form-item>
             </div></el-col>
           </el-row>
@@ -130,6 +130,9 @@
       handleClose(done) {
         this.editor.txt.clear()
         this.$emit('close-cllback')
+      },
+      handleChange(value) {
+        this.formData.sort = value
       },
       submitForm(formData) {
         this.$refs[formData].validate((valid) => {

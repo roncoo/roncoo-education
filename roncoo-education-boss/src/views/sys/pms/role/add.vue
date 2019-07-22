@@ -56,34 +56,33 @@ export default {
       }
       this.$refs[form].validate((valid) => {
         if (valid) {
-          this.handleConfirm()
+          this.loading.show()
+          // 保存角色信息
+          api.roleSave(this.form).then(res => {
+            this.loading.hide()
+            if (res.code === 200 && res.data > 0) {
+              // 提交成功, 关闭窗口, 刷新列表
+              this.tips('操作成功', 'success')
+              this.$emit('close-callback')
+            } else {
+              this.$message({
+                type: 'error',
+                message: "提交失败"
+              });
+            }
+          })
         } else {
-          return false;
+          this.$message({
+            type: 'error',
+            message: "提交失败"
+          });
         }
       })
-    },
-    //异步保存角色信息
-    async handleConfirm() {
-      this.load = true
-      let res = {}
-      if (this.form === undefined) {
-        this.$alert(res.msg || '提交失败')
-      } else {
-        res = await api.roleSave(this.form)
-        // this.tips('成功', 'success')
-      }
-      this.load = false
-      if (res.code === 200 && res.data > 0) {
-        // 提交成功, 关闭窗口, 刷新列表
-        this.$emit('close-cllback')
-      } else {
-        this.$alert(res.msg || '提交失败')
-      }
     },
     // 关闭弹窗
     handleClose(done) {
       this.form = {}
-      this.$emit('close-cllback')
+      this.$emit('close-callback')
     }
   }
 }

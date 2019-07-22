@@ -77,9 +77,9 @@
             layout="total, sizes, prev, pager, next, jumper"
             :total="page.totalCount">
           </el-pagination>
-          <add :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></add>
-          <edit :visible="ctrl.editDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
-          <pms :visible="ctrl.pmsDialogVisible" :id="id" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></pms>
+          <add :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-callback="closeCallback"></add>
+          <edit :visible="ctrl.editDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
+          <pms :visible="ctrl.pmsDialogVisible" :id="id" :title="ctrl.dialogTitle" @close-callback="closeCallback"></pms>
         </div>
     </div>
 </template>
@@ -175,6 +175,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
+          this.ctrl.load = true
           this.changeStatus(id, statusId)
           this.reload()
         }).catch(() => {
@@ -183,8 +184,8 @@
       },
       // 请求更新用户方法
       changeStatus(id, statusId) {
-        console.log(id)
         api.roleUpdate({ id: id, statusId: statusId }).then(res => {
+          this.ctrl.load = false
           if (res.code === 200 && res.data > 0) {
             const msg = { 0: '禁用成功', 1: '启用成功' }
             this.$message({
@@ -209,21 +210,23 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
+          this.ctrl.load = true
           api.roleDelete({ id: id }).then(res => {
-          if (res.code === 200 && res.data > 0) {
-            this.$message({
-              type: 'success',
-              message: "删除成功"
-            });
-              this.reload()
-          } else {
-            this.$message({
-              type: 'error',
-              message: "删除失败"
-            });
-              this.reload()
-          }
-        })
+            this.ctrl.load = false
+            if (res.code === 200 && res.data > 0) {
+              this.$message({
+                type: 'success',
+                message: "删除成功"
+              });
+                this.reload()
+            } else {
+              this.$message({
+                type: 'error',
+                message: "删除失败"
+              });
+                this.reload()
+            }
+          })
         }).catch(() => {
           this.reload()
         })
@@ -245,7 +248,7 @@
         this.ctrl.dialogTitle = roleName + "——设置权限"
       },
       // 关闭弹窗回调
-      closeCllback() {
+      closeCallback() {
         this.ctrl.addDialogVisible = false
         this.ctrl.editDialogVisible = false
         this.ctrl.pmsDialogVisible = false

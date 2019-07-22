@@ -71,10 +71,12 @@ export default {
           if (this.form === undefined) {
             this.$alert('提交失败')
           } else {
+            this.loading.show()
             api.templateSave(this.form).then(res => {
+              this.loading.hide()
               if (res.code === 200 && res.data > 0) {
                 // 提交成功, 关闭窗口, 刷新列表
-                this.$emit('close-cllback')
+                this.$emit('close-callback')
               } else {
                 this.$alert('提交失败')
               }
@@ -89,7 +91,7 @@ export default {
     // 关闭弹窗
     handleClose(done) {
       this.form = {}
-      this.$emit('close-cllback')
+      this.$emit('close-callback')
     }
   }
 }

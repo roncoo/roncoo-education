@@ -45,12 +45,6 @@ export default {
     }
   },
   methods: {
-    // 关闭编辑弹窗回调
-    closeCllback(res) {
-      this.form.adminUserNo = res.userNo
-      this.form.mobile = res.mobile
-      this.ctrl.dialogVisible = false
-    },
     // 保存信息
     submitForm(form) {
       if (!this.form.clientName) {
@@ -60,48 +54,34 @@ export default {
         });
         return false
       }
-      this.$refs[form].validate((valid) => {
-        if (valid) {
-          this.handleConfirm()
-        } else {
-          return false;
-        }
-      })
-    },
-    //异步保存
-    async handleConfirm() {
-      this.load = true
-      let res = {}
       if (this.form === undefined) {
-        this.form = {}
-        this.$alert(res.msg || '提交失败')
+        this.$message({
+          showClose: true,
+          message: '提交失败',
+          type: 'error'
+        });
       } else {
-        res = await api.platformSave(this.form)
-        // this.tips('成功', 'success')
-      }
-      this.load = false
-      if (res.code === 200 && res.data > 0) {
-        // 提交成功, 关闭窗口, 刷新列表
-        this.handleClose('close-cllback')
-      } else {
-        this.form = {}
-        this.$alert(res.msg || '提交失败')
+        this.loading.show()
+        api.platformSave(this.form).then(res => {
+          this.loading.hide()
+          if (res.code === 200 && res.data > 0) {
+            // 提交成功, 关闭窗口, 刷新列表
+            this.tips('操作成功', 'success')
+            this.handleClose()
+          } else {
+            this.$message({
+              type: 'error',
+              message: "提交失败"
+            });
+          }
+        })
       }
     },
     // 关闭弹窗
     handleClose() {
       this.form = {}
-      this.$emit('close-cllback')
+      this.$emit('close-callback')
     }
   }
 }
 </script>
-<style scoped>
-  .cancel {
-    text-align: right;
-  }
-  .button {
-    padding: 5px 10px;
-  }
-</style>
-

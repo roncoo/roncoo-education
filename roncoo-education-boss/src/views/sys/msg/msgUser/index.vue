@@ -61,7 +61,7 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="page.totalCount">
       </el-pagination>
-      <view-user :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeViewFind"></view-user>
+      <view-user :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCallback"></view-user>
   </div>
 </template>
 <script>
@@ -170,7 +170,7 @@
           })
       },
       // 关闭查看弹窗回调
-      closeViewFind() {
+      closeCallback() {
         this.formData = {}
         this.ctrl.dialogVisible = false
       },

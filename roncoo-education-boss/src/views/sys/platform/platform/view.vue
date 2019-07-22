@@ -45,17 +45,9 @@
     },
     methods: {
       handleClose(done) {
-        this.$emit('close-cllback')
+        this.$emit('close-callback')
       }
     }
   }
 </script>
 <style scoped>
-  .cancel {
-    text-align: right;
-  }
-  .button {
-    padding: 5px 10px;
-  }
-</style>
-

@@ -7,7 +7,7 @@
         </el-form-item>
         <el-form-item>
           <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
-        <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
+          <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
           <el-button type="primary" size="mini" icon="el-icon-circle-plus-outline" @click="addSubMmenu(0)">添加</el-button>
         </el-form-item>
       </el-form>
@@ -53,8 +53,8 @@
         </el-table-column>
       </el-table>
     </div>
-    <add :visible="ctrl.addDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></add>
-    <edit :visible="ctrl.editDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
+    <add :visible="ctrl.addDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCallback"></add>
+    <edit :visible="ctrl.editDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
   </div>
 </template>
 <script>
@@ -119,7 +119,7 @@
         this.ctrl.editDialogVisible = true
       },
       // 关闭弹窗回调
-      closeCllback() {
+      closeCallback() {
         this.ctrl.addDialogVisible = false
         this.ctrl.editDialogVisible = false
         this.reload()
@@ -131,8 +131,10 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
+          this.ctrl.load = true
           api.menuDelete({ id: id }).then(res => {
           if (res.code === 200 && res.data > 0) {
+            this.ctrl.load = false
             this.$message({
               type: 'success',
               message: "删除成功"

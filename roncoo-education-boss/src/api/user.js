@@ -186,3 +186,12 @@ export function platformSave(data = {}) {
     data: data
   })
 }
+
+// 平台信息删除接口
+export function platformDelete(data = {}) {
+  return request({
+    url: `/user/pc/platform/delete`,
+    method: 'post',
+    data: data
+  })
+}

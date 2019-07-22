@@ -98,9 +98,9 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="page.totalCount">
       </el-pagination>
-      <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
-      <view-user :visible="ctrl.viewVisible" :formData="formData" @close-cllback="closeCllback"></view-user>
-      <study :visible="ctrl.studyVisible" :userNo="userNo" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></study>
+      <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
+      <view-user :visible="ctrl.viewVisible" :formData="formData" @close-callback="closeCallback"></view-user>
+      <study :visible="ctrl.studyVisible" :userNo="userNo" :title="ctrl.dialogTitle" @close-callback="closeCallback"></study>
   </div>
 </template>
 <script>
@@ -112,7 +112,11 @@
     components: { Edit, viewUser, study },
     data() {
       return {
+        list: [],
         map: {},
+        formData: {},
+        gmtCreate: '',
+        userNo: '',
         ctrl: {
           load: false,
           remoteAuthorLoading: false,
@@ -120,8 +124,6 @@
           viewVisible: false,
           studyVisible: false
         },
-        list: [],
-        userNo: '',
         opts: {
           statusIdList: []
         },
@@ -140,9 +142,7 @@
         textuStatusId: {
           0: '禁用',
           1: '正常'
-        },
-        formData: {},
-        gmtCreate: ''
+        }
       }
     },
     mounted() {
@@ -175,7 +175,7 @@
         this.ctrl.viewVisible = true
       },
       // 关闭弹窗回调
-      closeCllback() {
+      closeCallback() {
         this.formData = {}
         this.ctrl.dialogVisible = false
         this.ctrl.viewVisible = false
@@ -190,6 +190,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
+          this.ctrl.load = true
           this.changeStatus(id, statusId)
           this.reload()
         }).catch(() => {
@@ -199,6 +200,7 @@
       // 请求更新用户方法
       changeStatus(id, statusId) {
         userApi.userExtUpdate({ id: id, statusId: statusId }).then(res => {
+          this.ctrl.load = false
           if (res.code === 200 && res.data > 0) {
             const msg = { 0: '禁用成功', 1: '启用成功' }
             this.$message({
@@ -215,22 +217,6 @@
               this.reload()
           }
         })
-      },
-      // 刷新当前页面
-      reload() {
-        this.map = {}
-        this.gmtCreate = ''
-        this.userExtList()
-      },
-      handleSizeChange(val) {
-        // console.log(`每页 ${val} 条`)
-        this.page.pageSize = val
-        this.userExtList()
-      },
-      handleCurrentChange(val) {
-        this.page.pageCurrent = val
-        this.userExtList()
-        // console.log(`当前页: ${val}`)
       },
       // 注册时间段查询条件
       changeTime() {
@@ -257,6 +243,22 @@
       // 重置查询条件
       handleReset() {
         this.reload()
+      },
+       // 刷新当前页面
+      reload() {
+        this.map = {}
+        this.gmtCreate = ''
+        this.userExtList()
+      },
+      handleSizeChange(val) {
+        // console.log(`每页 ${val} 条`)
+        this.page.pageSize = val
+        this.userExtList()
+      },
+      handleCurrentChange(val) {
+        this.page.pageCurrent = val
+        this.userExtList()
+        // console.log(`当前页: ${val}`)
       },
       // 分页列出用户信息
       userExtList() {

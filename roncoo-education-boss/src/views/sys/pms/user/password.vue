@@ -57,9 +57,9 @@ export default {
   methods: {
     // 关闭弹窗
     handleClose(done) {
-      this.$emit('close-cllback')
+      this.$emit('close-callback')
     },
-    // 保存管理员信息
+    // 更新管理员密码
     submitForm(formData) {
       if (!this.formData.mobilePsw) {
         this.$message({
@@ -84,39 +84,30 @@ export default {
       }
       this.$refs[formData].validate((valid) => {
         if (valid) {
-          this.handleConfirm()
+          this.loading.show()
+          // 更新管理员密码
+          api.updatePassword(this.formData).then(res => {
+            this.loading.hide()
+            if (res.code === 200 && res.data > 0) {
+              // 提交成功, 关闭窗口, 刷新列表
+              this.tips('成功', 'success')
+              this.$emit('close-callback')
+            } else {
+              this.$message({
+                type: 'error',
+                message: "提交失败"
+              });
+            }
+          })
         } else {
-          return false;
+          this.$message({
+            type: 'error',
+            message: "提交失败"
+          });
         }
       })
-    },
-    //异步保存讲师信息
-    async handleConfirm() {
-      this.ctrl.load = true
-      let res = {}
-      if (this.formData === undefined) {
-        this.$alert(res.msg || '提交失败')
-      } else {
-        res = await api.updatePassword(this.formData)
-        // this.tips('成功', 'success')
-      }
-      this.ctrl.load = false
-      if (res.code === 200 && res.data > 0) {
-        // 提交成功, 关闭窗口, 刷新列表
-        this.$emit('close-cllback')
-      } else {
-        this.$alert(res.msg || '提交失败')
-      }
     }
   }
 }
 </script>
 <style scoped>
-  .cancel {
-    text-align: right;
-  }
-  .button {
-    padding: 5px 10px;
-  }
-</style>
-

@@ -1,12 +1,12 @@
 <template>
   <!--弹窗-->
   <el-dialog
+    width="35%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
-
-    <el-form :model="formData" :rules="rules" ref="formData">
-      <el-form-item label="广告图片">
+    <el-form :model="formData" :rules="rules" ref="formData" label-width="100px">
+      <el-form-item label="广告图片:">
         <el-upload
           class="upload-demo"
           action="http://192.168.31.134:5840/course/pc/upload/pic/{COURSE}"
@@ -22,29 +22,44 @@
           <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
         </el-upload>
       </el-form-item>
-      <el-form-item label="广告标题" prop="advTitle">
+      <el-form-item label="广告标题:" prop="advTitle">
         <el-input v-model="formData.advTitle" ></el-input>
       </el-form-item>
-      <el-form-item label="广告排序" prop="sort">
-        <el-input  v-model="formData.sort" ></el-input>
+      <el-form-item label="广告链接:" prop="advUrl">
+        <el-input v-model="formData.advUrl" ></el-input>
       </el-form-item>
-      <el-form-item label="广告状态">
-        <el-radio-group v-model="formData.statusId">
-          <el-radio :label="0">禁用</el-radio>
-          <el-radio :label="1">正常</el-radio>
-        </el-radio-group>
+      <el-form-item label="广告排序:" prop="sort">
+        <el-input-number style="width: 300px;" v-model="formData.sort" @change="handleChange" :min="1" :max="1000" label="描述文字"></el-input-number>
       </el-form-item>
-      <el-form-item prop="beginTime" label="开始时间">
-        <el-date-picker v-model="formData.beginTime" ></el-date-picker>
+      <el-form-item label="跳转方式:" >
+        <el-select v-model="formData.advTarget" class="auto-width" clearable filterable placeholder="跳转方式" style="width: 300px">
+          <el-option
+            v-for="item in opts.advTargetList"
+            :key="item.code"
+            :label="item.desc"
+            :value="item.code">
+          </el-option>
+        </el-select>
       </el-form-item>
-      <el-form-item prop="endTime" label="结束时间">
-        <el-date-picker v-model="formData.endTime" ></el-date-picker>
-        </el-form-item>
+      <el-form-item label="开始时间:">
+        <el-date-picker
+          v-model="formData.beginTime"
+          type="datetime"
+          placeholder="选择日期时间">
+        </el-date-picker>
+      </el-form-item>
+      <el-form-item label="结束时间:">
+        <el-date-picker
+          v-model="formData.endTime"
+          type="datetime"
+          placeholder="选择日期时间">
+        </el-date-picker>
+      </el-form-item>
     </el-form>
-    <div slot="footer" class="dialog-footer">
-      <el-button @click="handleClose">取 消</el-button>
-      <el-button type="primary" @click="submitForm('formData')">确 定</el-button>
-    </div>
+    <el-row style="margin-top:17px; ">
+        <el-button style="float:right" size="mini" type="primary" @click="submitForm('formData')">确 定</el-button>
+        <el-button style="float:right;margin-left:6px;" size="mini" type="danger" plain @click="handleClose">取 消</el-button>
+    </el-row>
   </el-dialog>
 </template>
 
@@ -57,6 +72,10 @@
         ctrl: {
           dialogVisible: true
         },
+        opts: {
+          advTargetList: []
+
+        },
         form: {},
         fileList: [],
         rules: {
@@ -65,6 +84,9 @@
           ],
           advTitle: [
             { required: true, message: '请输入广告标题', trigger: 'blur' }
+          ],
+          advUrl: [
+            { required: true, message: '请输入广告链接', trigger: 'blur' }
           ],
           sort: [
             { required: true, message: '请输入广告排序', trigger: 'blur' }
@@ -93,12 +115,20 @@
         default: ''
       }
     },
+    mounted() {
+      this.$store.dispatch('GetOpts', { enumName: "AdvTargetEnum", type: 'arr' }).then(res => {
+        this.opts.advTargetList = res
+      })
+    },
     methods: {
+      handleChange(value) {
+        this.formData.sort = value
+      },
       handleClose(done) {
         this.$emit('close-callback')
       },
       handleRemove(file, fileList) {
-        console.log(file, fileList)
+        console.log("fileList<<<<<<<<<<<", file, fileList)
       },
       handlePreview(file) {
         console.log(file)
@@ -113,37 +143,47 @@
         return this.$confirm(`确定移除${file.name}？`);
       },
       submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            this.handleConfirm()
+        if (this.form === undefined) {
+          this.$message({
+            showClose: true,
+            message: '提交失败',
+            type: 'error'
+          });
+        } else {
+          this.load = true
+          if (this.formData.id === undefined) {
+            // 新增
+            apis.coursePcAdvSave(this.formData).then(res => {
+              this.load = false
+              if (res.code === 200 && res.data > 0) {
+                // 提交成功, 关闭窗口, 刷新列表
+                this.handleClose('close-callback')
+              } else {
+                this.$message({
+                  showClose: true,
+                  message: '提交失败',
+                  type: 'error'
+                });
+              }
+            })
           } else {
-            console.log('error submit!!');
-            return false;
+            // 编辑
+            apis.coursePcAdvUpdate(this.formData).then(res => {
+              this.load = false
+              if (res.code === 200 && res.data > 0) {
+                // 提交成功, 关闭窗口, 刷新列表
+                this.handleClose('close-callback')
+              } else {
+                this.$message({
+                  showClose: true,
+                  message: '提交失败',
+                  type: 'error'
+                });
+              }
+            })
           }
-        });
-      },
-      async handleConfirm() {
-        this.loading.show()
-        let res = {}
-        if (this.formData.id === undefined) {
-          res = await apis.coursePcAdvSave(this.formData)
-        } else {
-          // 编辑
-          res = await apis.coursePcAdvUpdate(this.formData)
-          // this.tips('成功', 'success')
-        }
-        this.loading.hide()
-        if (res.code === 200) {
-          // 提交成功, 关闭窗口, 刷新列表
-          this.$emit('close-callback')
-        } else {
-          this.$alert(res.msg || '提交失败')
         }
       }
     }
   }
 </script>
-
-<style scoped>
-
-</style>

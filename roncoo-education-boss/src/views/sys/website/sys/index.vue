@@ -134,22 +134,23 @@
     },
     methods: {
       getSys() {
+        this.loading.show()
         api.sysView({}).then(res => {
-        if (res.code === 200) {
-          this.formData = res.data
-        }
+          this.loading.hide()
+          if (res.code === 200) {
+            this.formData = res.data
+          }
       }).catch(() => {
         })
       },
       submitForm(formData) {
         this.$refs[formData].validate((valid) => {
           if (valid) {
+            this.loading.show()
             api.sysUpdate(this.formData).then(res => {
+              this.loading.hide()
               if (res.code === 200 && res.data > 0) {
-                this.$message({
-                  type: 'success',
-                  message: "更新成功"
-                });
+                this.tips('操作成功', 'success')
               } else {
                 this.$message({
                   type: 'error',

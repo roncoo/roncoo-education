@@ -86,8 +86,10 @@
       }
     },
     mounted() {
+      this.loading.show()
       this.getWebsite()
       this.createEdit();
+      this.loading.hide()
     },
     methods: {
       createEdit() {
@@ -152,12 +154,11 @@
         this.formData.entryAgreement = this.editor2.txt.html() // 获取富文本编辑器入驻协议内容
         this.$refs[formData].validate((valid) => {
           if (valid) {
+            this.loading.show()
             api.websiteUpdate(this.formData).then(res => {
+              this.loading.hide()
               if (res.code === 200 && res.data > 0) {
-                this.$message({
-                  type: 'success',
-                  message: "更新成功"
-                });
+                this.tips('操作成功', 'success')
               } else {
                 this.$message({
                   type: 'error',

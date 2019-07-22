@@ -189,6 +189,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
+          this.loading.show()
           this.changeStatus()
         }).catch(() => {
           })
@@ -199,15 +200,20 @@
           idlist.push(item.id)
         })
         api.roleUserSave({ userId: this.userId, roleId: idlist }).then(res => {
+          this.loading.hide()
           if (res.code === 200 && res.data > 0) {
-              this.$emit('close-cllback')
+             this.tips('操作成功', 'success')
+              this.handleClose()
           } else {
-            this.$alert(res.msg || '提交失败')
+            this.$message({
+              type: 'error',
+              message: "提交失败"
+            });
           }
         })
       },
       handleClose(done) {
-        this.$emit('close-cllback')
+        this.$emit('close-callback')
       },
       textClass(userType) {
         return {

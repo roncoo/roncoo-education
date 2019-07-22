@@ -32,6 +32,11 @@ public class SysUserUpdateREQ implements Serializable {
 	@ApiModelProperty(value = "手机", required = true)
 	private String mobile;
 	/**
+	 * 排序
+	 */
+	@ApiModelProperty(value = "排序", required = false)
+	private Integer sort;
+	/**
 	 * 真实姓名
 	 */
 	@ApiModelProperty(value = "真实姓名", required = true)

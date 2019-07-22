@@ -20,7 +20,7 @@
         </el-table-column>
         <el-table-column prop="realName" label="名称">
         </el-table-column>
-        <el-table-column prop="sort" width="50" label="排序">
+        <el-table-column prop="sort" width="100" label="排序">
         </el-table-column>
         <el-table-column
           width="150"
@@ -45,7 +45,7 @@
         <el-table-column
         fixed="right"
         label="操作"
-        width="370">
+        width="360">
         <template slot-scope="scope">
           <ul class="list-item-actions">
             <li>
@@ -69,10 +69,10 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="page.totalCount">
       </el-pagination>
-      <add :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></add>
-      <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
-      <password :visible="ctrl.passwordDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></password>
-      <role :visible="ctrl.serRoleDialogVisible" :userId="id" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></role>
+      <add :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-callback="closeCallback"></add>
+      <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
+      <password :visible="ctrl.passwordDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCallback"></password>
+      <role :visible="ctrl.serRoleDialogVisible" :userId="id" :title="ctrl.dialogTitle" @close-callback="closeCallback"></role>
   </div>
 </template>
 <script>
@@ -121,6 +121,102 @@
       this.adminUserList(1)
     },
     methods: {
+      // 添加管理员
+      handleAdd() {
+        this.ctrl.addDialogVisible = true
+        this.dialogTitle = '添加'
+      },
+      // 跳修改弹窗页面
+      handleEdit(row) {
+        this.formData = row
+        this.ctrl.dialogVisible = true
+        this.ctrl.dialogTitle = row.realName + '——编辑'
+      },
+      // 跳出修改密码弹窗
+      handlePassword(userNo, realName) {
+        this.formData.userNo = userNo
+        this.ctrl.passwordDialogVisible = true
+        this.ctrl.dialogTitle = realName + '——密码修改'
+      },
+      // 跳出设置角色弹窗
+      handleUserRole(id, realName) {
+        this.id = id
+        this.ctrl.serRoleDialogVisible = true
+        this.ctrl.dialogTitle = realName + '——设置角色'
+      },
+      // 关闭弹窗回调
+      closeCallback() {
+        this.ctrl.addDialogVisible = false
+        this.ctrl.dialogVisible = false
+        this.ctrl.passwordDialogVisible = false
+        this.ctrl.serRoleDialogVisible = false
+        this.id = ''
+        this.reload()
+      },
+      // 删除
+      handleDelete(id) {
+        this.$confirm(`确定要删除吗?`, {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.ctrl.load = true
+          api.userDelete({ id: id }).then(res => {
+            this.ctrl.load = false
+          if (res.code === 200 && res.data > 0) {
+            this.$message({
+              type: 'success',
+              message: "删除成功"
+            });
+              this.reload()
+          } else {
+            this.$message({
+              type: 'error',
+              message: "删除失败"
+            });
+              this.reload()
+          }
+        })
+        }).catch(() => {
+          this.reload()
+        })
+      },
+      // 修改状态
+      handleChangeStatus(id, statusId) {
+        const title = { 0: '禁用', 1: '启用' }
+        this.$confirm(`确定要${title[statusId]}吗?`, {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.ctrl.load = true
+          this.changeStatus(id, statusId)
+          this.reload()
+        }).catch(() => {
+          this.reload()
+        })
+      },
+      // 请求更新用户方法
+      changeStatus(id, statusId) {
+        api.userUpdate({ id: id, statusId: statusId }).then(res => {
+          this.ctrl.load = false
+          if (res.code === 200 && res.data > 0) {
+            const msg = { 0: '禁用成功', 1: '启用成功' }
+            this.$message({
+              type: 'success',
+              message: msg[statusId]
+            });
+              this.reload()
+          } else {
+            const msg = { 0: '禁用失败', 1: '启用失败' }
+            this.$message({
+              type: 'error',
+              message: msg[statusId]
+            });
+              this.reload()
+          }
+        })
+      },
       handleSizeChange(val) {
         // console.log(`每页 ${val} 条`)
         this.page.pageSize = val
@@ -151,98 +247,6 @@
           this.ctrl.load = false
         }).catch(() => {
           this.ctrl.load = false
-        })
-      },
-      // 添加管理员
-      handleAdd() {
-        this.ctrl.addDialogVisible = true
-        this.dialogTitle = '添加'
-      },
-      // 跳修改弹窗页面
-      handleEdit(row) {
-        this.formData = row
-        this.ctrl.dialogVisible = true
-        this.ctrl.dialogTitle = row.realName + '——编辑'
-      },
-      // 跳出修改密码弹窗
-      handlePassword(userNo, realName) {
-        this.formData.userNo = userNo
-        this.ctrl.passwordDialogVisible = true
-        this.ctrl.dialogTitle = realName + '——密码修改'
-      },
-      // 跳出设置角色弹窗
-      handleUserRole(id, realName) {
-        this.id = id
-        this.ctrl.serRoleDialogVisible = true
-        this.ctrl.dialogTitle = realName + '——设置角色'
-      },
-      // 关闭弹窗回调
-      closeCllback() {
-        this.ctrl.addDialogVisible = false
-        this.ctrl.dialogVisible = false
-        this.ctrl.passwordDialogVisible = false
-        this.ctrl.serRoleDialogVisible = false
-        this.id = ''
-        this.reload()
-      },
-      // 删除
-      handleDelete(id) {
-        this.$confirm(`确定要删除吗?`, {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          api.userDelete({ id: id }).then(res => {
-          if (res.code === 200 && res.data > 0) {
-            this.$message({
-              type: 'success',
-              message: "删除成功"
-            });
-              this.reload()
-          } else {
-            this.$message({
-              type: 'error',
-              message: "删除失败"
-            });
-              this.reload()
-          }
-        })
-        }).catch(() => {
-          this.reload()
-        })
-      },
-      // 修改状态
-      handleChangeStatus(id, statusId) {
-        const title = { 0: '禁用', 1: '启用' }
-        this.$confirm(`确定要${title[statusId]}吗?`, {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          this.changeStatus(id, statusId)
-          this.reload()
-        }).catch(() => {
-          this.reload()
-        })
-      },
-      // 请求更新用户方法
-      changeStatus(id, statusId) {
-        api.userUpdate({ id: id, statusId: statusId }).then(res => {
-          if (res.code === 200 && res.data > 0) {
-            const msg = { 0: '禁用成功', 1: '启用成功' }
-            this.$message({
-              type: 'success',
-              message: msg[statusId]
-            });
-              this.reload()
-          } else {
-            const msg = { 0: '禁用失败', 1: '启用失败' }
-            this.$message({
-              type: 'error',
-              message: msg[statusId]
-            });
-              this.reload()
-          }
         })
       },
       // 刷新当前页面

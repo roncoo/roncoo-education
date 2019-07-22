@@ -13,7 +13,7 @@
         <el-input v-model="formData.realName"></el-input>
       </el-form-item>
       <el-form-item label="排序:">
-        <el-input v-model="formData.sort"></el-input>
+        <el-input-number style="width: 300px;" v-model="formData.sort" @change="handleChange" :min="1" :max="10000"></el-input-number>
       </el-form-item>
       <el-form-item label="备注:">
         <el-input type="textarea" v-model="formData.remark"></el-input>
@@ -50,43 +50,37 @@
     },
     methods: {
       handleClose(done) {
-        this.$emit('close-cllback')
+        this.$emit('close-callback')
+      },
+      handleChange(value) {
+        this.formData.sort = value
       },
       submitForm(formData) {
         this.$refs[formData].validate((valid) => {
           if (valid) {
-            this.handleConfirm()
+            this.loading.show()
+            api.userUpdate(this.formData).then(res => {
+              this.loading.hide()
+              if (res.code === 200 && res.data > 0) {
+                // 提交成功, 关闭窗口, 刷新列表
+                this.tips('操作成功', 'success')
+                this.$emit('close-callback')
+              } else {
+                this.$message({
+                  type: 'error',
+                  message: "提交失败"
+                });
+              }
+            })
           } else {
-            return false;
+            this.$message({
+              type: 'error',
+              message: "提交失败"
+            });
           }
         })
-      },
-     async handleConfirm() {
-        this.load = true
-        let res = {}
-        if (this.formData.id === undefined) {
-          this.$alert(res.msg || '提交失败')
-        } else {
-          res = await api.userUpdate(this.formData)
-          // this.tips('成功', 'success')
-        }
-        this.load = false
-        if (res.code === 200 && res.data > 0) {
-          // 提交成功, 关闭窗口, 刷新列表
-          this.tips('成功', 'success')
-          this.$emit('close-cllback')
-        } else {
-          this.$alert(res.msg || '提交失败')
-        }
       }
     }
   }
 </script>
 <style scoped>
-  .cancel {
-    text-align: right;
-  }
-  .button {
-    padding: 5px 10px;
-  }
-</style>

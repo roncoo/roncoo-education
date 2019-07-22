@@ -8,7 +8,7 @@
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
         <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
-        <el-button type="primary" size="mini" icon="el-icon-circle-plus-outline" @click.native="add(false)">添加</el-button>
+        <el-button type="primary" size="mini" icon="el-icon-circle-plus-outline" @click.native="add(false)">新增</el-button>
       </el-form-item>
       </el-form>
     </div>
@@ -48,6 +48,7 @@
           <template slot-scope="scope">
             <ul class="list-item-actions">
               <li>
+                <el-button type="danger" @click="handleDelete(scope.row.id)" size="mini">删除</el-button>
                 <el-button type="success" @click="handleEdit(scope.row)" size="mini">编辑</el-button>
               </li>
             </ul>
@@ -65,9 +66,9 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="page.totalCount">
       </el-pagination>
-      <add-platform :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></add-platform>
-      <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
-      <view-platform :visible="ctrl.viewVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></view-platform>
+      <add-platform :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-callback="closeCallback"></add-platform>
+      <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
+      <view-platform :visible="ctrl.viewVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCallback"></view-platform>
   </div>
 </template>
 <script>
@@ -127,6 +128,34 @@
       this.listForPage()
     },
     methods: {
+      // 删除
+      handleDelete(id) {
+        this.$confirm(`确定要删除吗?`, {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.ctrl.load = true
+          api.platformDelete({ id: id }).then(res => {
+            this.ctrl.load = false
+          if (res.code === 200 && res.data > 0) {
+            this.$message({
+              type: 'success',
+              message: "删除成功"
+            });
+              this.handleReset()
+          } else {
+            this.$message({
+              type: 'error',
+              message: "删除失败"
+            });
+              this.handleReset()
+          }
+        })
+        }).catch(() => {
+          this.handleReset()
+        })
+      },
       // 跳添加弹窗
       add() {
         this.ctrl.dialogTitle = '添加'
@@ -149,7 +178,7 @@
         this.ctrl.dialogVisible = true
       },
       // 关闭弹窗回调
-      closeCllback() {
+      closeCallback() {
         this.formData = {}
         this.ctrl.dialogVisible = false
         this.ctrl.viewVisible = false
@@ -164,6 +193,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
+          this.ctrl.load = true
           this.changeStatus(id, statusId)
           this.handleReset()
         }).catch(() => {
@@ -173,6 +203,7 @@
       // 请求更新用户方法
       changeStatus(id, statusId) {
         api.platformUpdate({ id: id, statusId: statusId }).then(res => {
+          this.ctrl.load = false
           if (res.code === 200 && res.data > 0) {
             const msg = { 0: '禁用成功', 1: '启用成功' }
             this.$message({
@@ -190,16 +221,6 @@
           }
         })
       },
-      handleSizeChange(val) {
-        // console.log(`每页 ${val} 条`)
-        this.page.pageSize = val
-        this.listForPage()
-      },
-      handleCurrentChange(val) {
-        this.page.pageCurrent = val
-        this.listForPage()
-        // console.log(`当前页: ${val}`)
-      },
       // 注册时间段查询条件
       changeTime() {
         if (this.gmtCreate !== null && this.gmtCreate.length) {
@@ -216,6 +237,16 @@
         const day = date.getDate().toString().padStart(2, '0')
         const timeString = `${year}-${month}-${day}`
         return timeString
+      },
+      handleSizeChange(val) {
+        // console.log(`每页 ${val} 条`)
+        this.page.pageSize = val
+        this.listForPage()
+      },
+      handleCurrentChange(val) {
+        this.page.pageCurrent = val
+        this.listForPage()
+        // console.log(`当前页: ${val}`)
       },
       // 查询条件
        handleCheck() {

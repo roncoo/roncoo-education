@@ -120,7 +120,7 @@
         this.map = {}
         this.list = []
         this.gmtCreate = ''
-        this.$emit('close-cllback')
+        this.$emit('close-callback')
       },
       handleSizeChange(val) {
         // console.log(`每页 ${val} 条`)

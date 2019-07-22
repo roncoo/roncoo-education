@@ -89,32 +89,26 @@ export default {
       }
       this.$refs[form].validate((valid) => {
         if (valid) {
+          this.loading.show()
           this.formData.msgText = this.editor.txt.html()
-          this.handleConfirm()
+          api.msgUpdate(this.formData).then(res => {
+            this.loading.hide()
+            if (res.code === 200 && res.data > 0) {
+                this.$emit('close-callback')
+            } else {
+              this.$message({
+                type: 'error',
+                message: "提交失败"
+              });
+            }
+          })
         } else {
-          return false;
+          this.$message({
+            type: 'error',
+            message: "提交失败"
+          });
         }
       })
-    },
-    //异步更新管理员信息
-    async handleConfirm() {
-      this.load = true
-      let res = {}
-      if (this.formData === undefined) {
-        this.$alert(res.msg || '提交失败')
-      } else {
-        res = await api.msgUpdate(this.formData)
-        // this.tips('成功', 'success')
-      }
-      this.load = false
-      if (res.code === 200 && res.data > 0) {
-        // 提交成功, 关闭窗口, 刷新列表
-        this.editor.txt.clear()
-        this.$emit('close-cllback')
-      } else {
-        this.editor.txt.clear()
-        this.$alert(res.msg || '提交失败')
-      }
     },
     // 编辑器上传图片
     editorUpload(files, insert) {
@@ -137,7 +131,7 @@ export default {
     handleClose(done) {
       this.form = {}
       this.editor.txt.clear()
-      this.$emit('close-cllback')
+      this.$emit('close-callback')
     }
   }
 }

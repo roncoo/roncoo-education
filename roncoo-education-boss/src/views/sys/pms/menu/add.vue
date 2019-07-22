@@ -18,8 +18,8 @@
       <el-form-item label="图标:" prop="menuIcon">
         <el-input v-model="formData.menuIcon"></el-input>
       </el-form-item>
-      <el-form-item label="排序:" prop="roleName">
-        <el-input v-model="formData.roleName"></el-input>
+      <el-form-item label="排序:">
+        <el-input-number style="width: 300px;" v-model="sort" @change="handleChange" :min="1" :max="10000"></el-input-number>
       </el-form-item>
       <el-form-item label="备注:">
         <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="formData.remark">
@@ -38,6 +38,7 @@ export default {
   name: 'Add',
   data() {
     return {
+      sort: 1,
       rules: {
         menuName: [
           { required: true, message: '请输入菜单名称', trigger: 'blur' }
@@ -64,6 +65,9 @@ export default {
     }
   },
   methods: {
+    handleChange(value) {
+      this.formData.sort = value
+    },
     // 保存管理员信息
     submitForm(formData) {
       if (!this.formData.menuName) {
@@ -82,42 +86,38 @@ export default {
       }
       this.$refs[formData].validate((valid) => {
         if (valid) {
+          this.loading.show()
+          api.menuSave(this.formData).then(res => {
+            this.loading.hide()
+            if (res.code === 200 && res.data > 0) {
+              // 提交成功, 关闭窗口, 刷新列表
+              this.tips('操作成功', 'success')
+              this.handleClose()
+            } else {
+              this.$message({
+                type: 'error',
+                message: "提交失败"
+              });
+            }
+          })
+        } else {
+          this.$message({
+            type: 'error',
+            message: "提交失败"
+          });
+        }
+        if (valid) {
           this.handleConfirm()
         } else {
           return false;
         }
       })
     },
-    //异步保存角色信息
-    async handleConfirm() {
-      this.load = true
-      let res = {}
-      if (this.formData === undefined) {
-        this.$alert(res.msg || '提交失败')
-      } else {
-        res = await api.menuSave(this.formData)
-        // this.tips('成功', 'success')
-      }
-      this.load = false
-      if (res.code === 200 && res.data > 0) {
-        // 提交成功, 关闭窗口, 刷新列表
-        this.$emit('close-cllback')
-      } else {
-        this.$alert(res.msg || '提交失败')
-      }
-    },
     // 关闭弹窗
     handleClose(done) {
-      this.$emit('close-cllback')
+      this.$emit('close-callback')
     }
   }
 }
 </script>
 <style scoped>
-  .cancel {
-    text-align: right;
-  }
-  .button {
-    padding: 5px 10px;
-  }
-</style>

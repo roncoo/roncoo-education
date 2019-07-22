@@ -6,7 +6,7 @@
         <el-input v-model="map.lecturerName"></el-input>
       </el-form-item>
       <el-form-item label="分润状态:" >
-        <el-select v-model="map.profitStatus" class="auto-width" clearable filterable placeholder="分润状态" style="width: 85px">
+        <el-select v-model="map.profitStatus" class="auto-width" clearable filterable placeholder="分润状态" style="width: 100px">
           <el-option
             v-for="item in profitStatusList"
             :key="item.code"
@@ -38,13 +38,13 @@
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column type="index" label="序号" width="40"></el-table-column>
         <el-table-column width="100" prop="lecturerName" label="讲师名称"></el-table-column>
-        <el-table-column width="150" prop="lecturerMobile" label="讲师手机"></el-table-column>
-        <el-table-column width="170" prop="bankCardNo" label="银行卡号"></el-table-column>
-        <el-table-column width="150" prop="bankName" label="银行名称"></el-table-column>
+        <el-table-column width="120" prop="lecturerMobile" label="讲师手机"></el-table-column>
+        <el-table-column width="200" prop="bankCardNo" label="银行卡号"></el-table-column>
+        <el-table-column prop="bankName" label="银行名称"></el-table-column>
         <el-table-column prop="bankUserName" label="开户名"></el-table-column>
         <el-table-column prop="lecturerProfit" label="讲师收入"></el-table-column>
         <el-table-column prop="platformProfit" label="平台收入"></el-table-column>
-        <el-table-column label="审核状态">
+        <el-table-column label="审核状态" width="80">
           <template slot-scope="scope">
             <span>{{textProfitStatus[scope.row.profitStatus]}}</span>
           </template>
@@ -74,7 +74,7 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="page.totalCount">
       </el-pagination>
-      <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
+      <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCllback"></edit>
   </div>
 </template>
 <script>
@@ -210,14 +210,15 @@
           type: 'warning'
         }).then(() => {
           this.changeStatus()
-          this.handleReset()
         }).catch(() => {
           this.handleReset()
         })
       },
       // 请求批量更新标记为已打款
       changeStatus() {
+        this.ctrl.load = true
         userApi.lecturerProfitBatch({ id: this.id, profitStatus: 2 }).then(res => {
+          this.ctrl.load = false
           if (res.code === 200 && res.data > 0) {
               this.$message({
                 type: 'success',

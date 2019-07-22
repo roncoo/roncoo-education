@@ -46,11 +46,11 @@ export function websiteLinkView(params) {
 }
 
 // 头部导航分页列表接口
-export function navBarList(params, page = 1, pageSize = 20) {
+export function navBarList(params, pageCurrent = 1, pageSize = 20) {
   return request({
     url: '/system/pc/nav/bar/list',
     method: 'post',
-    data: { pageNum: page, numPerPage: pageSize, ...params }
+    data: { pageCurrent: pageCurrent, pageSize: pageSize, ...params }
   })
 }
 
@@ -91,11 +91,11 @@ export function navBarView(params) {
 }
 
 // 底部导航分页列表接口
-export function websiteNavList(params, page = 1, pageSize = 20) {
+export function websiteNavList(params, pageCurrent = 1, pageSize = 20) {
   return request({
     url: '/system/pc/website/nav/list',
     method: 'post',
-    data: { pageNum: page, numPerPage: pageSize, ...params }
+    data: { pageCurrent: pageCurrent, pageSize: pageSize, ...params }
   })
 }
 

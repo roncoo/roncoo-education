@@ -107,18 +107,18 @@
        },
       // 保存角色菜单信息
       saveRoleMenu() {
+        this.ctrl.load = true
         const role = { roleId: this.id, menuId: [] }
         // 获取目前被选中的节点的 key 所组成的数组 与 获取半选中的节点的 key 所组成的数组
          this.$refs.tree.getCheckedKeys().concat(this.$refs.tree.getHalfCheckedKeys()).forEach(function(data, index) {
           role.menuId.push(data)
         })
-         // this.handleConfirm(role)
-      },
-      //异步保存角色信息
-      async handleConfirm(role) {
-        api.menuRoleSave(role).then(res => {
+         // 保存角色信息
+         api.menuRoleSave(role).then(res => {
+          this.ctrl.load = false
           if (res.code === 200 && res.data > 0) {
-            this.$emit('close-cllback')
+            this.tips('保存成功', 'success')
+            this.handleClose()
           } else {
             this.$alert(res.msg || '提交失败')
           }
@@ -129,7 +129,7 @@
         this.menuIds = []
         this.menuList = []
         this.menus = []
-        this.$emit('close-cllback')
+        this.$emit('close-callback')
       }
     }
   }

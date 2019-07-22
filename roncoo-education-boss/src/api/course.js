@@ -1,11 +1,11 @@
 import request from '@/utils/request'
 
 // 审核课程分页列表接口
-export function getCourseAuditList(params, page = 1, pageSize = 20) {
+export function getCourseAuditList(params, pageCurrent = 1, pageSize = 20) {
   return request({
     url: '/course/pc/course/audit/list',
     method: 'post',
-    data: { pageCurrent: page, pageSize: pageSize, ...params }
+    data: { pageCurrent: pageCurrent, pageSize: pageSize, ...params }
   })
 }
 
@@ -37,11 +37,11 @@ export function courseAudit(data = {}) {
 }
 
 // 课程分页列表接口
-export function courseList(params, page = 1, pageSize = 20) {
+export function courseList(params, pageCurrent = 1, pageSize = 20) {
   return request({
     url: '/course/pc/course/list',
     method: 'post',
-    data: { pageCurrent: page, pageSize: pageSize, ...params }
+    data: { pageCurrent: pageCurrent, pageSize: pageSize, ...params }
   })
 }
 
@@ -73,11 +73,11 @@ export function courseViewForEdit(id) {
 }
 
 // 课程分类分页列表接口
-export function categoryList(params, page = 1, pageSize = 20) {
+export function categoryList(params, pageCurrent = 1, pageSize = 20) {
   return request({
     url: '/course/pc/course/category/list',
     method: 'post',
-    data: { pageNum: page, numPerPage: pageSize, ...params }
+    data: { pageCurrent: pageCurrent, pageSize: pageSize, ...params }
   })
 }
 
@@ -109,11 +109,11 @@ export function categoryDelete(data = {}) {
 }
 
 // 首页专区PC端分页列表接口
-export function coursePcZoneList(params, page = 1, pageSize = 20) {
+export function coursePcZoneList(params, pageCurrent = 1, pageSize = 20) {
   return request({
     url: '/course/pc/zone/list',
     method: 'post',
-    data: { pageNum: page, numPerPage: pageSize, ...params }
+    data: { pageCurrent: pageCurrent, pageSize: pageSize, ...params }
   })
 }
 
@@ -154,11 +154,11 @@ export function coursePcZoneView(params) {
 }
 
 // 订单分页列表接口
-export function orderList(params, page = 1, pageSize = 20) {
+export function orderList(params, pageCurrent = 1, pageSize = 20) {
   return request({
     url: '/course/pc/order/info/list',
     method: 'post',
-    data: { pageCurrent: page, pageSize: pageSize, ...params }
+    data: { pageCurrent: pageCurrent, pageSize: pageSize, ...params }
   })
 }
 
@@ -190,19 +190,55 @@ export function orderStatistical(data = {}) {
 }
 
 // 用户学习日志分页列表接口
-export function studyLoglist(params, page = 1, pageSize = 20) {
+export function studyLoglist(params, pageCurrent = 1, pageSize = 20) {
   return request({
     url: '/course/pc/course/user/study/log/list',
     method: 'post',
-    data: { pageCurrent: page, pageSize: pageSize, ...params }
+    data: { pageCurrent: pageCurrent, pageSize: pageSize, ...params }
   })
 }
 
 // 支付记录分页列表接口
-export function orderPaylist(params, page = 1, pageSize = 20) {
+export function orderPaylist(params, pageCurrent = 1, pageSize = 20) {
   return request({
     url: '/course/pc/order/pay/list',
     method: 'post',
-    data: { pageCurrent: page, pageSize: pageSize, ...params }
+    data: { pageCurrent: pageCurrent, pageSize: pageSize, ...params }
+  })
+}
+
+// 分页列出专区课程信息
+export function zoneCourselist(params, pageCurrent = 1, pageSize = 20) {
+  return request({
+    url: '/course/pc/zone/course/list',
+    method: 'post',
+    data: { pageCurrent: pageCurrent, pageSize: pageSize, ...params }
+  })
+}
+
+// 删除专区课程信息
+export function zoneCourseDelete(data = {}) {
+  return request({
+    url: '/course/pc/zone/course/delete',
+    method: 'post',
+    data: data
+  })
+}
+
+// 更新专区课程信息
+export function zoneCourseUpdate(data = {}) {
+  return request({
+    url: '/course/pc/zone/course/update',
+    method: 'post',
+    data: data
+  })
+}
+
+// 添加专区课程信息
+export function zoneCourseSave(data = {}) {
+  return request({
+    url: '/course/pc/zone/course/save',
+    method: 'post',
+    data: data
   })
 }

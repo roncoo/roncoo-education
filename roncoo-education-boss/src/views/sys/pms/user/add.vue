@@ -25,7 +25,7 @@
         <el-button style="float:right;margin-left:6px;" size="mini" type="danger" plain @click="handleClose">取 消</el-button>
     </el-row>
   </el-dialog>
-    <list-user :visible="ctrl.dialogVisible" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></list-user>
+    <list-user :visible="ctrl.dialogVisible" :title="ctrl.dialogTitle" @close-callback="closeCallback"></list-user>
   </div>
 </template>
 <script>
@@ -66,7 +66,7 @@ export default {
       this.ctrl.dialogVisible = true
     },
     // 关闭编辑弹窗回调
-    closeCllback(res) {
+    closeCallback(res) {
       this.form.adminUserNo = res.userNo
       this.form.mobile = res.mobile
       this.ctrl.dialogVisible = false
@@ -96,44 +96,33 @@ export default {
       }
       this.$refs[form].validate((valid) => {
         if (valid) {
-          this.handleConfirm()
+          this.loading.show()
+          api.userSave(this.form).then(res => {
+            this.loading.hide()
+            if (res.code === 200 && res.data > 0) {
+              // 提交成功, 关闭窗口, 刷新列表
+              this.tips('操作成功', 'success')
+              this.$emit('close-callback')
+            } else {
+              this.$message({
+                type: 'error',
+                message: "提交失败"
+              });
+            }
+          })
         } else {
-          return false;
+          this.$message({
+            type: 'error',
+            message: "提交失败"
+          });
         }
       })
-    },
-    //异步保存管理员信息
-    async handleConfirm() {
-      this.load = true
-      let res = {}
-      if (this.form === undefined) {
-        this.$alert(res.msg || '提交失败')
-      } else {
-        res = await api.userSave(this.form)
-        // this.tips('成功', 'success')
-      }
-      this.load = false
-      if (res.code === 200 && res.data > 0) {
-        // 提交成功, 关闭窗口, 刷新列表
-        this.$emit('close-cllback')
-      } else {
-        this.$alert(res.msg || '提交失败')
-      }
     },
     // 关闭弹窗
     handleClose(done) {
       this.form = {}
-      this.$emit('close-cllback')
+      this.$emit('close-callback')
     }
   }
 }
 </script>
-<style scoped>
-  .cancel {
-    text-align: right;
-  }
-  .button {
-    padding: 5px 10px;
-  }
-</style>
-

@@ -188,7 +188,7 @@
         this.handleClose(this.formData)
       },
       handleClose(done) {
-        this.$emit('close-cllback', done)
+        this.$emit('close-callback', done)
       },
       textClass(userType) {
         return {

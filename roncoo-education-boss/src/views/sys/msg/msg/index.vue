@@ -81,8 +81,8 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="page.totalCount">
       </el-pagination>
-      <add :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></add>
-      <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
+      <add :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-callback="closeCallback"></add>
+      <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
   </div>
 </template>
 <script>
@@ -215,7 +215,7 @@
         this.ctrl.dialogVisible = true
       },
       // 关闭弹窗回调
-      closeCllback() {
+      closeCallback() {
         this.ctrl.addDialogVisible = false
         this.ctrl.dialogVisible = false
         this.reload()

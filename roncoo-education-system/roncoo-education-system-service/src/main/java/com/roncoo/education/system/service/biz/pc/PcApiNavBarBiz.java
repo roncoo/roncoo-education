@@ -19,6 +19,7 @@ import com.roncoo.education.util.base.Base;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.base.Result;
+import com.roncoo.education.util.enums.NavEnum;
 import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.tools.BeanUtil;
 import com.xiaoleilu.hutool.util.ObjectUtil;
@@ -48,7 +49,7 @@ public class PcApiNavBarBiz {
 			c.andStatusIdLessThan(Base.FREEZE);
 		}
 		if (StringUtils.isNotEmpty(req.getNavTitle())) {
-			c.andNavTitleLike(PageUtil.rightLike(req.getNavTitle()));
+			c.andNavTitleLike(PageUtil.like(req.getNavTitle()));
 		}
 		example.setOrderByClause(" status_id desc, sort desc, id desc  ");
 		Page<NavBar> page = dao.listForPage(req.getPageCurrent(), req.getPageSize(), example);
@@ -73,6 +74,13 @@ public class PcApiNavBarBiz {
 			return Result.error("已经添加该导航");
 		}
 		NavBar record = BeanUtil.copyProperties(req, NavBar.class);
+		if (NavEnum.INDEX.getCode().equals(req.getNavUrl())) {
+			record.setNavTitle(NavEnum.INDEX.getDesc());
+		}else if (NavEnum.COURSE.getCode().equals(req.getNavUrl())) {
+			record.setNavTitle(NavEnum.COURSE.getDesc());
+		}else {
+			record.setNavTitle(NavEnum.RECRUIT.getDesc());
+		}
 		int results = dao.save(record);
 		if (results > 0) {
 			return Result.success(results);

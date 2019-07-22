@@ -1,27 +1,27 @@
 <template>
   <!--弹窗-->
   <el-dialog
+     width="30%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
-    <el-form :model="formData" :rules="rules" ref="formData">
+    <el-form :model="formData" :rules="rules" ref="formData" label-width="100px">
       <el-form-item label="专区名称" prop="zoneName">
         <el-input v-model="formData.zoneName" ></el-input>
       </el-form-item>
       <el-form-item label="专区排序" prop="sort">
-        <el-input v-model="formData.sort" ></el-input>
+        <el-input-number style="width: 300px;" v-model="formData.sort" @change="handleChange" :min="1" :max="10000"></el-input-number>
       </el-form-item>
       <el-form-item label="专区描述" prop="zoneDesc">
         <el-input v-model="formData.zoneDesc" type="textarea"></el-input>
       </el-form-item>
     </el-form>
-    <div slot="footer" class="dialog-footer">
-      <el-button @click="handleClose">取 消</el-button>
-      <el-button type="primary" @click="submitForm('formData')">确 定</el-button>
-    </div>
+    <el-row style="margin-top:17px; ">
+        <el-button style="float:right" size="mini" type="primary" @click="submitForm('formData')">确 定</el-button>
+        <el-button style="float:right;margin-left:6px;" size="mini" type="danger" plain @click="handleClose">取 消</el-button>
+    </el-row>
   </el-dialog>
 </template>
-
 <script>
   import * as apis from '@/api/course'
   export default {
@@ -64,38 +64,47 @@
       handleClose(done) {
         this.$emit('close-callback')
       },
+      handleChange(value) {
+        this.formData.sort = value
+      },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.handleConfirm()
+            this.loading.show()
+            if (this.formData.id === undefined) {
+              apis.coursePcZoneSave(this.formData).then(res => {
+                this.loading.hide()
+                if (res.code === 200 && res.data > 0) {
+                    this.$emit('close-callback')
+                } else {
+                  this.$message({
+                    type: 'error',
+                    message: "提交失败"
+                  });
+                }
+              })
+            } else {
+              // 编辑
+              apis.coursePcZoneUpdate(this.formData).then(res => {
+                this.loading.hide()
+                if (res.code === 200 && res.data > 0) {
+                    this.$emit('close-callback')
+                } else {
+                  this.$message({
+                    type: 'error',
+                    message: "提交失败"
+                  });
+                }
+              })
+            }
           } else {
-            console.log('error submit!!');
-            return false;
+            this.$message({
+              type: 'error',
+              message: "提交失败"
+            });
           }
         });
-      },
-      async handleConfirm() {
-        this.loading.show()
-        let res = {}
-        if (this.formData.id === undefined) {
-          res = await apis.coursePcZoneSave(this.formData)
-        } else {
-          // 编辑
-          res = await apis.coursePcZoneUpdate(this.formData)
-          // this.tips('成功', 'success')
-        }
-        this.loading.hide()
-        if (res.code === 200) {
-          // 提交成功, 关闭窗口, 刷新列表
-          this.$emit('close-callback')
-        } else {
-          this.$alert(res.msg || '提交失败')
-        }
       }
     }
   }
 </script>
-
-<style scoped>
-
-</style>
