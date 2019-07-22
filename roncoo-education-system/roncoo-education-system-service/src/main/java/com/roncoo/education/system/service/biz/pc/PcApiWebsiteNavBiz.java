@@ -82,7 +82,7 @@ public class PcApiWebsiteNavBiz {
 					websiteNavV2.setIsArticle(0);
 				}
 			}
-			resq.setWebsiteNavList(websiteNavList);
+			resq.setChildren(websiteNavList);
 		}
 		return resq;
 

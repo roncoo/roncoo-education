@@ -150,11 +150,11 @@
             type: 'error'
           });
         } else {
-          this.load = true
+          this.loading.show()
           if (this.formData.id === undefined) {
             // 新增
             apis.coursePcAdvSave(this.formData).then(res => {
-              this.load = false
+              this.loading.hide()
               if (res.code === 200 && res.data > 0) {
                 // 提交成功, 关闭窗口, 刷新列表
                 this.handleClose('close-callback')
@@ -168,7 +168,9 @@
             })
           } else {
             // 编辑
+            this.loading.show()
             apis.coursePcAdvUpdate(this.formData).then(res => {
+              this.loading.hide()
               this.load = false
               if (res.code === 200 && res.data > 0) {
                 // 提交成功, 关闭窗口, 刷新列表

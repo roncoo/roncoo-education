@@ -60,7 +60,7 @@
         <template slot-scope="scope">
           <ul class="list-item-actions">
             <li>
-              <el-button type="danger" @click="handleUpdateRow(scope.row.id)" size="mini">删除</el-button>
+              <el-button type="danger" @click="handleDelRow(scope.row.id)" size="mini">删除</el-button>
               <el-button type="success" @click="handleEdit(scope.row)" size="mini">修改</el-button>
             </li>
           </ul>
@@ -94,7 +94,6 @@
       return {
         // 表单数据, 例如新增编辑子项，页面表单
         formData: {},
-        tableData: [],
         list: [],
         map: {},
         ctrl: {
@@ -144,29 +143,32 @@
         this.reload()
       },
       //删除
-      handleDelRow(data) {
+      handleDelRow(id) {
         this.$confirm(`确定删除这条数据?`, '我要删除', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
           this.map = {
-            id: data.id
+            id: id
           }
-          this.loading.show()
+          this.ctrl.loading = true
           apis.navBarDelete(this.map).then(res => {
-            console.log(res)
-            if (res.code === 200) {
+            this.ctrl.loading = false
+            if (res.code === 200 && res.data > 0) {
               this.$message({
                 type: 'success',
                 message: '删除成功'
               });
               //刪除成功后刷新列表
-              this.closeCallback()
+                this.reload()
             } else {
-              this.$alert(res.msg)
+              this.$message({
+                type: 'error',
+                message: "删除失败"
+              });
+                this.reload()
             }
-            this.loading.hide()
           })
         }).catch(() => {
         })
@@ -217,6 +219,7 @@
        // 刷新当前页面
       reload() {
         this.map = {}
+        this.formData = {}
         this.getList()
       },
       handleSizeChange(val) {

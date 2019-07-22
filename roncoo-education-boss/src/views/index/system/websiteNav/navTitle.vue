@@ -4,14 +4,14 @@
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
-    <el-form :model="addMap" :rules="rules" ref="addMap">
+    <el-form :model="formData" :rules="rules" ref="formData">
       <el-form-item label="名称" prop="navName">
-        <el-input v-model="addMap.navName"></el-input>
+        <el-input v-model="formData.navName"></el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="handleClose">取 消</el-button>
-      <el-button type="primary" @click="submitForm('addMap')">确 定</el-button>
+      <el-button type="primary" @click="submitForm('formData')">确 定</el-button>
     </div>
   </el-dialog>
 </template>

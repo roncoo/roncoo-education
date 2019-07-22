@@ -81,40 +81,21 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            if (this.formData.id === undefined) {
-              //新增底部导航栏，给父ID赋值
-              this.formData.parentId = 0
-              console.log("value", this.formData);
-              api.navBarSave().then(res => {
-                this.loading.hide()
-                if (res.code === 200 && res.data > 0) {
-                  // 提交成功, 关闭窗口, 刷新列表
-                  this.tips('操作成功', 'success')
-                  this.handleClose()
-                } else {
-                  this.$message({
-                    type: 'error',
-                    message: "提交失败"
-                  });
-                }
-              })
-            } else {
-              // 编辑
-              api.navBarUpdate(this.formData).then(res => {
-                this.loading.hide()
-                console.log('handleCommand ------>> ', res)
-                if (res.code === 200 && res.data > 0) {
-                  // 提交成功, 关闭窗口, 刷新列表
-                  this.tips('操作成功', 'success')
-                  this.handleClose()
-                } else {
-                  this.$message({
-                    type: 'error',
-                    message: "提交失败"
-                  });
-                }
-              })
-            }
+            // 编辑
+            this.loading.show()
+            api.navBarUpdate(this.formData).then(res => {
+              this.loading.hide()
+              if (res.code === 200 && res.data > 0) {
+                // 提交成功, 关闭窗口, 刷新列表
+                this.tips('操作成功', 'success')
+                this.handleClose()
+              } else {
+                this.$message({
+                  type: 'error',
+                  message: "提交失败"
+                });
+              }
+            })
           } else {
             this.$message({
               type: 'error',

@@ -7,7 +7,7 @@
     :before-close="handleClose">
     <el-form :model="formData" :rules="rules" ref="formData" label-width="100px">
       <el-form-item label="导航标题:">
-        <el-select v-model="formData.navUrl" @change="changeValue" class="auto-width" clearable filterable placeholder="导航标题" style="width: 200px">
+        <el-select v-model="formData.navUrl" @change="changeValue" class="auto-width" clearable filterable placeholder="导航标题" style="width: 150px">
           <el-option
             v-for="item in opts.navList"
             :key="item.code"
@@ -16,15 +16,10 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="打开方式:" width="200">
+      <el-form-item label="打开方式:" prop="target" width="200">
         <template>
-          <el-radio-group v-model="formData.tradeType">
-            <el-radio
-            v-for="item in opts.targetList"
-            :key="item.code"
-            :label="item.desc"
-            :value="item.code"></el-radio>
-          </el-radio-group>
+          <el-radio v-model="formData.target" label="_blank">新窗口打开</el-radio>
+          <el-radio v-model="formData.target" label="_self">同窗口打开</el-radio>
         </template>
       </el-form-item>
     </el-form>
@@ -41,12 +36,12 @@
     data() {
       return {
         opts: {
-          navList: [],
-          targetList: []
+          navList: []
         },
         ada: {},
-        navTitle: '',
-        formData: {},
+        formData: {
+          target: '_blank'
+        },
         rules: {
           target: [
             { required: true, message: '请选择打开方式', trigger: 'blur' }
@@ -71,12 +66,10 @@
       this.$store.dispatch('GetOpts', { enumName: "NavEnum", type: 'arr' }).then(res => {
         this.opts.navList = res
       })
-      this.$store.dispatch('GetOpts', { enumName: "TargetEnum", type: 'arr' }).then(res => {
-        this.opts.targetList = res
-      })
     },
     methods: {
       handleClose(done) {
+        this.formData = {}
         this.$emit('close-callback')
       },
       // 获取选中的导航标题
@@ -96,8 +89,8 @@
           if (valid) {
             //新增底部导航栏，给父ID赋值
             this.formData.parentId = 0
-            console.log("value", this.formData);
-            api.navBarSave().then(res => {
+            this.loading.show()
+            api.navBarSave(this.formData).then(res => {
               this.loading.hide()
               if (res.code === 200 && res.data > 0) {
                 // 提交成功, 关闭窗口, 刷新列表
