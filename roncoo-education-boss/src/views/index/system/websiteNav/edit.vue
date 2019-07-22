@@ -1,23 +1,26 @@
 <template>
   <!--弹窗-->
   <el-dialog
+    width="30%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
-
-    <el-form :model="formData" :rules="rules" ref="formData">
-      <el-form-item label="名称" prop="navName">
-        <el-input v-model="formData.navName"></el-input>
+    <el-form :model="formData" :rules="rules" ref="formData" label-width="100px">
+      <el-form-item label="导航名称" prop="navName">
+        <el-input v-model="formData.navName" placeholder="请输入导航名称"></el-input>
+      </el-form-item>
+      <el-form-item label="排序:">
+        <el-input-number style="width: 300px;" v-model="formData.sort" @change="handleChange" :min="1" :max="10000"></el-input-number>
       </el-form-item>
     </el-form>
-    <div slot="footer" class="dialog-footer">
-      <el-button @click="handleClose">取 消</el-button>
-      <el-button type="primary" @click="submitForm('formData')">确 定</el-button>
-    </div>
+    <el-row style="margin-top:17px; ">
+        <el-button style="float:right" size="mini" type="primary" @click="submitForm('formData')">确 定</el-button>
+        <el-button style="float:right;margin-left:6px;" size="mini" type="danger" plain @click="handleClose">取 消</el-button>
+    </el-row>
   </el-dialog>
 </template>
 <script>
-import * as apis from '@/api/system'
+import * as api from '@/api/system'
 export default {
    name: 'Edit',
   data() {
@@ -49,37 +52,49 @@ export default {
     }
   },
   methods: {
+    handleChange(value) {
+      this.formData.sort = value
+    },
     handleClose(done) {
       this.$emit('close-callback')
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
-        if (valid) {
-          this.handleConfirm()
-        } else {
-          console.log('error submit!!');
-          return false;
+        if (!this.formData.navName) {
+          this.$message({
+            type: 'error',
+            message: '请输入导航名称'
+          });
+          return false
         }
-      });
-    },
-    async handleConfirm() {
-      this.loading.show()
-      let res = {}
-      if (this.formData.id === undefined) {
-        //新增底部导航栏，给父ID赋值
-        this.formData.parentId = 0
-        res = await apis.websiteNavSave(this.formData)
-      } else {
-        // 编辑
-        res = await apis.websiteNavUpate(this.formData)
-      }
-      this.loading.hide()
-      if (res.code === 200) {
-        // 提交成功, 关闭窗口, 刷新列表
-        this.$emit('close-callback')
-      } else {
-        this.$alert(res.msg || '提交失败')
-      }
+        if (valid) {
+          if (this.formData.id === undefined) {
+            this.$message({
+              type: 'error',
+              message: 'id不能为空'
+            });
+            return false
+          }
+          this.loading.show()
+          api.websiteNavUpate(this.formData).then(res => {
+            this.loading.hide()
+            if (res.code === 200 && res.data > 0) {
+              this.tips('操作成功', 'success')
+              this.handleClose()
+            } else {
+              this.$message({
+                type: 'error',
+                message: "提交失败"
+              });
+            }
+          })
+        } else {
+          this.$message({
+            type: 'error',
+            message: "提交失败"
+          });
+        }
+      })
     }
   }
 }

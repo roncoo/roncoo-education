@@ -2,30 +2,23 @@
   <div class="pad20">
     <div>
       <el-form :inline="true" size="mini">
-        <el-form-item>
-        <el-button class="filter-item" type="success" @click="handleAddRow">
-          新增
-        </el-button>
-        </el-form-item>
       <el-form-item label="链接名称">
         <el-input v-model="map.linkName"></el-input>
       </el-form-item>
-        <el-form-item label="状态">
-          <template>
-            <el-select v-model="map.statusId" placeholder="全部">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
-          </template>
-        </el-form-item>
+      <el-form-item label="状态:" >
+        <el-select v-model="map.statusId" class="auto-width" clearable filterable placeholder="状态" style="width: 85px">
+          <el-option
+            v-for="item in opts.statusIdList"
+            :key="item.code"
+            :label="item.desc"
+            :value="item.code">
+          </el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item>
-        <el-button type="primary" :loading="ctrl.loading" @click="handleCheck">查询</el-button>
-        <el-button class="filter-item" @click="handleReset">重置
-        </el-button>
+        <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
+        <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
+          <el-button type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAddRow()">添加</el-button>
       </el-form-item>
      </el-form>
     </div>
@@ -34,23 +27,25 @@
         <el-table-column type="index" label="序号" width="40">
         </el-table-column>
         <el-table-column prop="linkName,linkUrl" label="链接名称/链接地址">
-          <template slot-scope="scope">{{scope.row.linkName}} 【{{scope.row.linkUrl}}】</template>
+          <template slot-scope="scope"><el-link type="primary" @click="jumpUrl(scope.row.linkUrl)" target="_blank">{{scope.row.linkName}}</el-link> 【{{scope.row.linkUrl}}】</template>
         </el-table-column>
         <el-table-column prop="sort" label="排序">
         </el-table-column>
         <el-table-column
-          label="状态"
+          width="170"
           prop="statusId"
-          align="center"
-          width="200">
+          label="状态"
+          align="center">
           <template slot-scope="scope">
             <el-switch
-              @change="handleChangeStatus(scope.$index, scope.row, $event)"
               v-model="scope.row.statusId"
-              :active-value="1"
-              :inactive-value="0"
-              active-text="启用"
-              inactive-text="禁用">
+              @change="handleChangeStatus(scope.row.id, scope.row.statusId)"
+              :active-value="0"
+              :inactive-value="1"
+              active-color="#ff4949"
+              inactive-color="#13ce66"
+              active-text="禁用"
+              inactive-text="正常">
             </el-switch>
           </template>
         </el-table-column>
@@ -61,8 +56,8 @@
         <template slot-scope="scope">
           <ul class="list-item-actions">
             <li>
-              <el-button type="primary" @click="handleUpdateRow(scope.row)" size="mini">修改</el-button>
-              <el-button type="danger" @click="handleDelRow(scope.row)" size="mini">删除</el-button>
+              <el-button type="danger" @click="handleDelRow(scope.row.id)" size="mini">删除</el-button>
+              <el-button type="success" @click="handleUpdateRow(scope.row)" size="mini">修改</el-button>
             </li>
           </ul>
         </template>
@@ -79,157 +74,169 @@
         </el-pagination>
     </div>
     </div>
-    <edit :visible="ctrl.dialogVisible" :formData="formdata" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
+    <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
+    <add :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-callback="closeCallback"></add>
 </div>
 </template>
 <script>
-  import * as systemApi from '@/api/system'
+  import * as api from '@/api/system'
   import Edit from './edit'
+  import Add from './add'
   export default {
-   components: { Edit },
+   components: { Edit, Add },
     data() {
       return {
-        //状态
-        options: [{
-          value: '1',
-          label: '启用'
-        }, {
-          value: '0',
-          label: '禁用'
-        }],
-        // 条件筛选参数
-        map: {
-          id: undefined,
-          linkName: undefined,
-          statusId: undefined
+        opts: {
+          statusIdList: []
         },
         // 页面控制数据，例如形式弹窗，显示加载中等
         ctrl: {
           loading: false,
-          remoteAuthorLoading: false,
+          addDialogVisible: false,
           dialogVisible: false
         },
         // 表单数据, 例如新增编辑子项，页面表单
-        formdata: {},
-        tableData: [],
+        // 条件筛选参数
+        map: {},
+        formData: {},
+        list: [],
         page: {
           beginPageIndex: 1,
-          currentPage: 1,
+          pageCurrent: 1,
           endPageIndex: 8,
-          numPerPage: 20,
+          pageSize: 20,
           totalCount: 0,
-          totalPage: 0,
-          list: []
+          totalPage: 0
         }
       }
     },
     mounted() {
+      this.$store.dispatch('GetOpts', { enumName: "StatusIdEnum", type: 'arr' }).then(res => {
+        this.opts.statusIdList = res
+      })
       this.getList()
     },
     methods: {
-      getList() {
-        this.ctrl.load = true
-        systemApi.websiteLinkList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
-          this.ctrl.load = false
-          this.list = res.data.list
-          this.page.pageSize = res.data.pageSize
-          this.page.totalCount = res.data.totalCount
-        }).catch(() => {
-          this.ctrl.load = false
-        })
+      // 友情链接跳转
+      jumpUrl(url) {
+        window.open(url)
       },
       // 关闭编辑弹窗回调
       closeCallback() {
         this.ctrl.dialogVisible = false;
+        this.ctrl.addDialogVisible = false
         this.reload()
-      },
-      reload() {
-        this.getList(this.currentPage)
-      },
-      handleSizeChange(val) {
-        // console.log(`每页 ${val} 条`)
-        this.map.pageSize = val
-        this.getList()
-      },
-      handleCurrentChange(val) {
-        this.map.pageCurrent = val
-        this.getList()
-        // console.log(`当前页: ${val}`)
-      },
-       handleCheck() {
-         this.map.pageNum = 1
-         this.getList()
-      },
-      // 重置查询条件
-      handleReset() {
-        this.map = { }
-        this.getList()
       },
       //新增
       handleAddRow() {
-        this.formdata = {}
         this.ctrl.dialogTitle = '新增'
-        this.ctrl.dialogVisible = true
+        this.ctrl.addDialogVisible = true
       },
       //编辑
       handleUpdateRow(data) {
-       this.formdata = data
-       this.ctrl.dialogTitle = '编辑权限'
+       this.formData = data
+       this.ctrl.dialogTitle = data.linkName + '——编辑'
        this.ctrl.dialogVisible = true
       },
-      handleChangeStatus(index, row, command) {
-        console.log('handleCommand ------>> ', index, row, command)
-
-        const txt = { 1: '启用', 0: '禁用' }
-
-        this.$confirm(`确定${txt[command]}友情链接：${row.linkName}?`, txt[command] + '此项', {
+      handleChangeStatus(id, statusId) {
+        const title = { 0: '禁用', 1: '启用' }
+        this.$confirm(`确定要${title[statusId]}吗?`, {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.changeStatus(row.id, command)
+          this.ctrl.loading = true
+          this.changeStatus(id, statusId)
         }).catch(() => {
           this.reload()
         })
       },
       //改变状态
       changeStatus(id, statusId) {
-        systemApi.websiteLinkUpdate({ id, statusId }).then(res => {
-          const msg = { 0: '禁用成功', 1: '启用成功' }
-          this.$message({
-            type: 'success',
-            message: msg[statusId]
-          });
-          this.reload()
+        api.websiteLinkUpdate({ id, statusId }).then(res => {
+           this.ctrl.loading = false
+          if (res.code === 200 && res.data > 0) {
+            const msg = { 0: '禁用成功', 1: '启用成功' }
+            this.$message({
+              type: 'success',
+              message: msg[statusId]
+            });
+              this.reload()
+          } else {
+            const msg = { 0: '禁用失败', 1: '启用失败' }
+            this.$message({
+              type: 'error',
+              message: msg[statusId]
+            });
+              this.reload()
+          }
+        }).catch(() => {
+          this.ctrl.loading = false
         })
       },
       //删除
-      handleDelRow(data) {
-        console.log('handleCommand ------>> ', data)
+      handleDelRow(id) {
         this.$confirm(`确定删除这条数据?`, '我要删除', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.map = {
-            id: data.id
-          }
-          this.loading.show()
-          systemApi.websiteLinkDelete(this.map).then(res => {
-            console.log(res)
-            if (res.code === 200) {
+          this.ctrl.loading = true
+          api.websiteLinkDelete({ id: id }).then(res => {
+            this.ctrl.loading = false
+            if (res.code === 200 && res.data > 0) {
               this.$message({
                 type: 'success',
                 message: '删除成功'
               });
               //刪除成功后刷新列表
-              this.closeCallback()
+                this.reload()
             } else {
-              this.$alert(res.msg)
+              this.$message({
+                type: 'error',
+                message: "删除失败"
+              });
+                this.reload()
             }
-            this.loading.hide()
           })
         }).catch(() => {
+          this.ctrl.loading = false
+        })
+      },
+      // 查询条件
+       handleCheck() {
+        this.page.pageCurrent = 1
+        this.getList()
+      },
+      // 重置查询条件
+      handleReset() {
+        this.reload()
+      },
+       // 刷新当前页面
+      reload() {
+        this.formData = {}
+        this.map = {}
+        this.getList()
+      },
+      handleSizeChange(val) {
+        // console.log(`每页 ${val} 条`)
+        this.page.pageSize = val
+        this.getList()
+      },
+      handleCurrentChange(val) {
+        this.page.pageCurrent = val
+        this.getList()
+        // console.log(`当前页: ${val}`)
+      },
+      getList() {
+        this.ctrl.loading = true
+        api.websiteLinkList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
+          this.ctrl.loading = false
+          this.list = res.data.list
+          this.page.pageSize = res.data.pageSize
+          this.page.totalCount = res.data.totalCount
+        }).catch(() => {
+          this.ctrl.loading = false
         })
       }
     }

@@ -41,7 +41,7 @@ public class PcApiWebsiteLinkBiz {
 		WebsiteLinkExample example = new WebsiteLinkExample();
 		Criteria c = example.createCriteria();
 		if (StringUtils.hasText(req.getLinkName())) {
-			c.andLinkNameLike(PageUtil.rightLike(req.getLinkName()));
+			c.andLinkNameLike(PageUtil.like(req.getLinkName()));
 		}
 		if (req.getStatusId() != null) {
 			c.andStatusIdEqualTo(req.getStatusId());

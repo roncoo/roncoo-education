@@ -50,7 +50,7 @@ public class PcApiWebsiteNavBiz {
 		WebsiteNavExample example = new WebsiteNavExample();
 		Criteria c = example.createCriteria();
 		if (StringUtils.isNotEmpty(req.getNavName())) {
-			c.andNavNameLike(PageUtil.rightLike(req.getNavName()));
+			c.andNavNameLike(PageUtil.like(req.getNavName()));
 		} else {
 			c.andParentIdEqualTo(Long.valueOf(0));
 		}
@@ -89,6 +89,15 @@ public class PcApiWebsiteNavBiz {
 	}
 
 	public Result<Integer> save(WebsiteNavSaveREQ req) {
+		if (StringUtils.isEmpty(req.getNavName())) {
+			return Result.error("ID不能为空");
+		}
+		if (req.getParentId() != null && !req.getParentId().equals(0L)) {
+			WebsiteNav websiteNav = dao.getById(req.getParentId());
+			if (ObjectUtil.isNull(websiteNav)) {
+				return Result.error("找不到父级导航信息");
+			}
+		}
 		WebsiteNav record = BeanUtil.copyProperties(req, WebsiteNav.class);
 		int results = dao.save(record);
 		if (results > 0) {

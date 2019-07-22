@@ -149,11 +149,8 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.map = {
-            id: id
-          }
           this.ctrl.loading = true
-          apis.navBarDelete(this.map).then(res => {
+          apis.navBarDelete({ id: id }).then(res => {
             this.ctrl.loading = false
             if (res.code === 200 && res.data > 0) {
               this.$message({
