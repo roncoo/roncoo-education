@@ -57,6 +57,6 @@ public class WebsiteNavPageRESQ implements Serializable {
 	 * 底部导航集合
 	 */
 	@ApiModelProperty(value = "底部导航集合")
-	private List<WebsiteNavPageRESQ> websiteNavList;
+	private List<WebsiteNavPageRESQ> children;
 
 }
