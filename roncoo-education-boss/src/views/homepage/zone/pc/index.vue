@@ -174,7 +174,7 @@
        this.ctrl.dialogVisible = true
       },
       handleCourseRow(id) {
-        this.$router.push({ path: '/index/zone/course', query: { zoneId: id }});
+        this.$router.push({ path: '/homepage/zone/course', query: { zoneId: id }});
       },
       // 查询条件
        handleCheck() {

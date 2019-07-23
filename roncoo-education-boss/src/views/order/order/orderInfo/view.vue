@@ -136,7 +136,7 @@
     },
     methods: {
       handleClose(done) {
-        this.$emit('close-cllback')
+        this.$emit('close-callback')
       }
     }
   }

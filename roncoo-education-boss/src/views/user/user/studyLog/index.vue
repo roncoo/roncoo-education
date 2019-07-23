@@ -1,52 +1,44 @@
 <template>
-  <el-dialog
-     width="80%"
-    :title="title"
-    :visible.sync="visible"
-    :before-close="handleClose">
-    <div class="pad20">
-      <div>
-        <el-form :inline="true" size="mini">
-        <el-form-item label="时间">
-          <el-date-picker
-            v-model="gmtCreate"
-            type="daterange"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            align="center"
-            @change="changeTime">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item>
-          <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
-          <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
-        </el-form-item>
-        </el-form>
-      </div>
-      <div>
-        <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
-          <el-table-column type="index" label="序号" width="40"></el-table-column>
-          <el-table-column prop="courseName" label="课程名称"></el-table-column>
-          <el-table-column prop="chapterName" label="章节名称"></el-table-column>
-          <el-table-column prop="periodName" label="课时名称"></el-table-column>
-          <el-table-column prop="gmtCreate" label="时间" width="170"></el-table-column>
-        </el-table>
-      </div>
-        <el-pagination
-          background
-          style="float: right;margin-top: 20px; margin-bottom: 22px"
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :page-size="page.pageSize"
-          :page-sizes="[20, 50, 100, 200, 500, 1000]"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="page.totalCount">
-        </el-pagination>
-        <br/>
-        <br/>
+  <div class="pad20">
+    <div>
+      <el-form :inline="true" size="mini">
+      <el-form-item label="时间">
+        <el-date-picker
+          v-model="gmtCreate"
+          type="daterange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          align="center"
+          @change="changeTime">
+        </el-date-picker>
+      </el-form-item>
+      <el-form-item>
+        <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
+        <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
+      </el-form-item>
+      </el-form>
     </div>
-  </el-dialog>
+    <div>
+      <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
+        <el-table-column type="index" label="序号" width="40"></el-table-column>
+        <el-table-column prop="courseName" label="课程名称"></el-table-column>
+        <el-table-column prop="chapterName" label="章节名称"></el-table-column>
+        <el-table-column prop="periodName" label="课时名称"></el-table-column>
+        <el-table-column prop="gmtCreate" label="时间" width="170"></el-table-column>
+      </el-table>
+    </div>
+      <el-pagination
+        background
+        style="float: right;margin-top: 20px; margin-bottom: 22px"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :page-size="page.pageSize"
+        :page-sizes="[20, 50, 100, 200, 500, 1000]"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="page.totalCount">
+      </el-pagination>
+  </div>
 </template>
 <script>
   import * as api from '@/api/course'
@@ -90,38 +82,11 @@
         }
       }
     },
-    props: {
-      // route object
-      userNo: {
-        type: String,
-        default: ''
-      },
-      visible: {
-        type: Boolean,
-        default: false
-      },
-      title: {
-        type: String,
-        default: ''
-      }
-    },
-    watch: {
-      userNo: function(val) {
-        if (val !== undefined) {
-          setTimeout(() => {
-            this.map.userNo = this.userNo
-            this.listForPage()
-          }, 500)
-        }
-      }
+    mounted() {
+      this.map.userNo = this.$route.query.userNo
+      this.listForPage()
     },
     methods: {
-      handleClose(done) {
-        this.map = {}
-        this.list = []
-        this.gmtCreate = ''
-        this.$emit('close-callback')
-      },
       handleSizeChange(val) {
         // console.log(`每页 ${val} 条`)
         this.page.pageSize = val
@@ -157,7 +122,7 @@
       // 重置查询条件
       handleReset() {
         this.map = {}
-        this.map.userNo = this.userNo
+        this.map.userNo = this.$route.query.userNo
         this.gmtCreate = ''
         this.listForPage()
       },

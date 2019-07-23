@@ -121,7 +121,7 @@
       //编辑
       handleUpdateRow(data) {
        this.formData = data
-       this.ctrl.dialogTitle = '编辑权限'
+       this.ctrl.dialogTitle = '编辑'
        this.ctrl.dialogVisible = true
       },
       // 关闭编辑弹窗回调

@@ -23,33 +23,41 @@
   {
     "id": 0,
     "name": "订单管理",
-    "path": "",
+    "path": "order",
     "icon": null,
     "children": [
       {
         "id": 2,
-        "name": "订单列表",
+        "name": "订单管理",
         "path": "/order",
         "icon": null,
+        "children": [
+          {
+            "id": 2,
+            "name": "订单列表",
+            "path": "/order/order/orderInfo",
+            "icon": null,
+          }
+        ]
       }
     ]
   },
   {
     "id": 0,
     "name": "首页管理",
-    "path": "/index",
+    "path": "/homepage",
     "icon": null,
     "children": [
       {
         "id": 2,
         "name": "首页轮播",
-        "path": "/shuf",
+        "path": "/adv",
         "icon": null,
         "children": [
           {
             "id": 2,
             "name": "PC端设置",
-            "path": "/index/shuf/adv",
+            "path": "/homepage/adv/pc",
             "icon": null,
           }
         ]
@@ -63,13 +71,13 @@
            {
              "id": 2,
              "name": "PC端设置",
-             "path": "/index/zone/zone",
+             "path": "/homepage/zone/pc",
              "icon": null,
             },
             {
              "id": 2,
              "name": "专区课程",
-             "path": "/index/zone/course",
+             "path": "/homepage/zone/course",
              "icon": null,
              "hidden": true,
             }
@@ -78,25 +86,25 @@
       {
           "id": 2,
           "name": "站点管理",
-          "path": "/system",
+          "path": "/website",
           "icon": null,
           "children": [
             {
                "id": 2,
                "name": "头部导航",
-               "path": "/index/system/navBar",
+               "path": "/homepage/website/navBar",
                "icon": null,
              },
              {
                "id": 2,
                "name": "底部导航",
-               "path": "/index/system/websiteNav",
+               "path": "/homepage/website/websiteNav",
                "icon": null,
              },
              {
                "id": 2,
                "name": "友情链接",
-               "path": "/index/system/websiteLink",
+               "path": "/homepage/website/websiteLink",
                "icon": null,
              },
            ]
@@ -154,19 +162,19 @@
       {
           "id": 2,
           "name": "讲师管理",
-          "path": "/manage",
+          "path": "/lecturer",
           "icon": null,
           "children": [
             {
             "id": 2,
             "name": "讲师列表",
-            "path": "/lecturer/manage/lecturer",
+            "path": "/lecturer/lecturer/lecturer",
             "icon": null,
             },
             {
             "id": 2,
             "name": "讲师审核列表",
-            "path": "/lecturer/manage/audit",
+            "path": "/lecturer/lecturer/audit",
             "icon": null,
             }
           ]
@@ -174,13 +182,13 @@
       {
           "id": 2,
           "name": "讲师分润",
-          "path": "/lecturerProfit",
+          "path": "/profit",
           "icon": null,
           "children": [
             {
             "id": 2,
             "name": "分润列表",
-            "path": "/lecturer/lecturerProfit/profit",
+            "path": "/lecturer/profit/profit",
             "icon": null,
             }
           ]
@@ -196,14 +204,21 @@
       {
           "id": 2,
           "name": "学员管理",
-          "path": "/manage",
+          "path": "/user",
           "icon": null,
           "children": [
             {
             "id": 2,
             "name": "学员列表",
-            "path": "/user/manage/userExt",
+            "path": "/user/user/ext",
             "icon": null,
+            },
+            {
+             "id": 2,
+             "name": "学习记录",
+             "path": "/user/user/studyLog",
+             "icon": null,
+             "hidden": true,
             }
           ]
       }

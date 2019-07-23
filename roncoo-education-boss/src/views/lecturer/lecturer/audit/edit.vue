@@ -141,7 +141,7 @@
       },
       handleClose(done) {
         this.editor.txt.clear()
-        this.$emit('close-cllback')
+        this.$emit('close-callback')
       },
       submitForm(formData) {
         this.$refs[formData].validate((valid) => {
@@ -165,7 +165,7 @@
         if (res.code === 200 && res.data > 0) {
           // 提交成功, 关闭窗口, 刷新列表
           this.tips('成功', 'success')
-          this.$emit('close-cllback')
+          this.$emit('close-callback')
         } else {
           this.$alert(res.msg || '提交失败')
         }

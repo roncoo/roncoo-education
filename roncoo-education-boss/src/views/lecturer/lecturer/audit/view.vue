@@ -27,6 +27,13 @@
               <span >{{formData.lecturerName}}</span>
             </el-form-item>
           </div></el-col>
+          <el-col :span="8"><div>
+            <el-form-item label="审核状态:">
+              <template slot-scope="scope">
+                <span :class="textClass(formData.auditStatus)">{{textAuditStatus[formData.auditStatus]}}</span>
+              </template>
+            </el-form-item>
+          </div></el-col>
           <br/><br/><br/><br/>
           <el-col :span="8"><div>
             <el-form-item label="状态:">
@@ -143,6 +150,11 @@
           1: '正常',
           0: '禁用'
         },
+        textAuditStatus: {
+          0: '待审核',
+          1: '审核通过',
+          2: '审核不通过'
+        },
         opts: {
           statusIdList: []
         }
@@ -175,7 +187,7 @@
         }
       },
       handleClose(done) {
-        this.$emit('close-cllback')
+        this.$emit('close-callback')
       }
     }
   }

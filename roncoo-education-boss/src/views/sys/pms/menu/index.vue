@@ -41,6 +41,11 @@
           label="目标名称">
         </el-table-column>
         <el-table-column
+          width="90"
+          prop="sort"
+          label="排序">
+        </el-table-column>
+        <el-table-column
           prop="remark"
           label="备注">
         </el-table-column>
@@ -48,7 +53,7 @@
           <template slot-scope="scope">
             <el-button type="primary" size="mini" icon="el-icon-circle-plus-outline" @click="addSubMmenu(scope.row.id)">添加</el-button>
             <el-button type="danger" @click="handleDelete(scope.row.id)" size="mini">删除</el-button>
-            <el-button type="success" @click="editSubMmenu(scope.row)" size="mini">更新</el-button>
+            <el-button type="success" @click="handleEdit(scope.row)" size="mini">编辑</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -87,7 +92,6 @@
         this.opts.statusIdList = res
       })
       this.menuList()
-      this.expands = [];
     },
     methods: {
       // 查询条件
@@ -113,9 +117,9 @@
         this.ctrl.dialogTitle = "添加"
         this.ctrl.addDialogVisible = true
       },
-      editSubMmenu(row) {
+      handleEdit(row) {
         this.formData = row
-        this.ctrl.dialogTitle = row.menuName + "修改"
+        this.ctrl.dialogTitle = row.menuName + "——编辑"
         this.ctrl.editDialogVisible = true
       },
       // 关闭弹窗回调

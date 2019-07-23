@@ -19,54 +19,60 @@ export const asyncRouterMap = [
     children: [
       {
         path: 'order',
-        component: () => import('@/views/order')
+        component: () => import('@/views/order/order'),
+        children: [
+          {
+            path: 'orderInfo',
+            component: () => import('@/views/order/order/orderInfo')
+          }
+         ]
       }
     ]
   },
   //首页管理
   {
-    path: 'index',
-    component: () => import('@/views/index'),
+    path: 'homepage',
+    component: () => import('@/views/homepage'),
     children: [
       {
-        path: 'zone',
-        component: () => import('@/views/index/zone'),
+        path: 'adv',
+        component: () => import('@/views/homepage/adv'),
         children: [
           {
-            path: 'zone',
-            component: () => import('@/views/index/zone/zone')
-          },
-          {
-            path: 'course',
-            component: () => import('@/views/index/zone/course')
-          }
-         ]
-      },
-      {
-        path: 'shuf',
-        component: () => import('@/views/index/shuf'),
-        children: [
-          {
-            path: 'adv',
-            component: () => import('@/views/index/shuf/adv')
+            path: 'pc',
+            component: () => import('@/views/homepage/adv/pc')
           }
         ]
       },
       {
-        path: 'system',
-        component: () => import('@/views/index/system'),
+        path: 'zone',
+        component: () => import('@/views/homepage/zone'),
+        children: [
+          {
+            path: 'pc',
+            component: () => import('@/views/homepage/zone/pc')
+          },
+          {
+            path: 'course',
+            component: () => import('@/views/homepage/zone/course')
+          }
+         ]
+      },
+      {
+        path: 'website',
+        component: () => import('@/views/homepage/website'),
         children: [
           {
             path: 'navBar',
-            component: () => import('@/views/index/system/navBar')
+            component: () => import('@/views/homepage/website/navBar')
           },
           {
             path: 'websiteLink',
-            component: () => import('@/views/index/system/websiteLink')
+            component: () => import('@/views/homepage/website/websiteLink')
           },
           {
             path: 'websiteNav',
-            component: () => import('@/views/index/system/websiteNav')
+            component: () => import('@/views/homepage/website/websiteNav')
           }
         ]
       }
@@ -109,26 +115,26 @@ export const asyncRouterMap = [
     component: () => import('@/views/lecturer'),
     children: [
       {
-        path: 'manage',
-        component: () => import('@/views/lecturer/manage'),
+        path: 'lecturer',
+        component: () => import('@/views/lecturer/lecturer'),
         children: [
           {// 讲师列表
             path: 'lecturer',
-            component: () => import('@/views/lecturer/manage/lecturer')
+            component: () => import('@/views/lecturer/lecturer/lecturer')
           },
           {
             path: 'audit',
-            component: () => import('@/views/lecturer/manage/audit')
+            component: () => import('@/views/lecturer/lecturer/audit')
           }
         ]
       },
       {
-        path: 'lecturerProfit',
-        component: () => import('@/views/lecturer/lecturerProfit'),
+        path: 'profit',
+        component: () => import('@/views/lecturer/profit'),
         children: [
           {
             path: 'profit',
-            component: () => import('@/views/lecturer/lecturerProfit/profit')
+            component: () => import('@/views/lecturer/profit/profit')
           }
         ]
       }
@@ -141,13 +147,17 @@ export const asyncRouterMap = [
     children: [
     // 学员管理
       {
-        path: 'manage',
-        component: () => import('@/views/user/manage'),
+        path: 'user',
+        component: () => import('@/views/user/user'),
         children: [
         // 学员列表
           {
-            path: 'userExt',
-            component: () => import('@/views/user/manage/userExt')
+            path: 'ext',
+            component: () => import('@/views/user/user/ext')
+          },
+          {
+            path: 'studyLog',
+            component: () => import('@/views/user/user/studyLog')
           }
         ]
       }
@@ -159,18 +169,22 @@ export const asyncRouterMap = [
     component: () => import('@/views/sys'),
     children: [
       {
+        // 权限管理
         path: 'pms',
         component: () => import('@/views/sys/pms'),
         children: [
           {
+            // 用户管理
             path: 'user',
             component: () => import('@/views/sys/pms/user')
           },
           {
+            // 角色管理
             path: 'role',
             component: () => import('@/views/sys/pms/role')
           },
           {
+            // 菜单管理
             path: 'menu',
             component: () => import('@/views/sys/pms/menu')
           }
@@ -181,14 +195,17 @@ export const asyncRouterMap = [
         component: () => import('@/views/sys/msg'),
         children: [
           {
+            // 消息管理
             path: 'template',
             component: () => import('@/views/sys/msg/template')
           },
           {
+            // 用户消息
             path: 'msgUser',
             component: () => import('@/views/sys/msg/msgUser')
           },
           {
+            // 站点消息
             path: 'msg',
             component: () => import('@/views/sys/msg/msg')
           }
@@ -199,10 +216,12 @@ export const asyncRouterMap = [
         component: () => import('@/views/sys/website'),
         children: [
           {
+            // 站点设置
             path: 'website',
             component: () => import('@/views/sys/website/website')
           },
           {
+            // 系统设置
             path: 'sys',
             component: () => import('@/views/sys/website/sys')
           }
@@ -213,6 +232,7 @@ export const asyncRouterMap = [
         component: () => import('@/views/sys/platform'),
         children: [
           {
+            // 应用管理
             path: 'platform',
             component: () => import('@/views/sys/platform/platform')
           }
@@ -223,10 +243,12 @@ export const asyncRouterMap = [
         component: () => import('@/views/sys/log'),
         children: [
           {
+            // 系统操作日志
             path: 'sys',
             component: () => import('@/views/sys/log/sys')
           },
           {
+            // 支付日志
             path: 'orderPay',
             component: () => import('@/views/sys/log/orderPay')
           }

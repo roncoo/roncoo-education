@@ -99,17 +99,14 @@ export default {
                 message: "提交失败"
               });
             }
-          })
+          }).catch(() => {
+              this.loading.hide()
+            })
         } else {
           this.$message({
             type: 'error',
             message: "提交失败"
           });
-        }
-        if (valid) {
-          this.handleConfirm()
-        } else {
-          return false;
         }
       })
     },
@@ -120,4 +117,3 @@ export default {
   }
 }
 </script>
-<style scoped>

@@ -67,7 +67,7 @@
         this.$refs[formData].validate((valid) => {
           if (valid) {
             this.loading.show()
-            api.roleUpdate(this.formData).then(res => {
+            api.menuUpdate(this.formData).then(res => {
               this.loading.hide()
               if (res.code === 200 && res.data > 0) {
                 // 提交成功, 关闭窗口, 刷新列表
@@ -79,6 +79,8 @@
                   message: "提交失败"
                 });
               }
+            }).catch(() => {
+              this.loading.hide()
             })
           } else {
             this.$message({

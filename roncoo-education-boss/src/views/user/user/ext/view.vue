@@ -47,7 +47,6 @@
             </el-form-item>
           </div></el-col>
         </el-row>
-        <br/>
         <el-alert class="title" :closable="false" title="其他信息" type="info" />
           <br/>
           <el-row>
@@ -79,7 +78,6 @@
             <span >{{formData.remark}}</span>
           </el-form-item>
     </el-form>
-    <br/>
     <el-row style="margin-top:17px; ">
         <el-button style="float:right;margin-left:6px;" size="mini" type="danger" plain @click="handleClose">取 消</el-button>
     </el-row>

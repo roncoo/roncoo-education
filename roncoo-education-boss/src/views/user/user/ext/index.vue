@@ -99,17 +99,15 @@
         :total="page.totalCount">
       </el-pagination>
       <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
-      <view-user :visible="ctrl.viewVisible" :formData="formData" @close-callback="closeCallback"></view-user>
-      <study :visible="ctrl.studyVisible" :userNo="userNo" :title="ctrl.dialogTitle" @close-callback="closeCallback"></study>
+      <view-user :visible="ctrl.viewVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCallback"></view-user>
   </div>
 </template>
 <script>
   import * as userApi from '@/api/user'
   import Edit from './edit'
   import viewUser from './view'
-  import study from './listStudy'
   export default {
-    components: { Edit, viewUser, study },
+    components: { Edit, viewUser },
     data() {
       return {
         list: [],
@@ -153,9 +151,7 @@
     },
     methods: {
       handleStudy(row) {
-        this.userNo = row
-        this.ctrl.studyVisible = true
-        this.ctrl.dialogTitle = '学习记录'
+        this.$router.push({ path: '/user/user/studyLog', query: { userNo: row }});
       },
       // 跳修改弹窗页面
       handleEdit(row) {
@@ -168,6 +164,7 @@
         this.ctrl.load = true
         userApi.userExtView({ id: id }).then(res => {
           this.formData = res.data
+          this.ctrl.dialogTitle = "查看"
           this.ctrl.load = false
         }).catch(() => {
             this.ctrl.load = false
