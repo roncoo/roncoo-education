@@ -52,7 +52,7 @@
     },
     methods: {
       handleClose(done) {
-        this.$emit('close-cllback')
+        this.$emit('close-callback')
       },
       handleChange(value) {
         this.formData.sort = value
@@ -72,7 +72,7 @@
               if (res.code === 200 && res.data > 0) {
                 // 提交成功, 关闭窗口, 刷新列表
                 this.tips('更新成功', 'success')
-                this.$emit('close-callback')
+                this.handleClose()
               } else {
                 this.$message({
                   type: 'error',

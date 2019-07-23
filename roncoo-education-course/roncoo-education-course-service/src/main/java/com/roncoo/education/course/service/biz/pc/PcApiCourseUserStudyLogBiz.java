@@ -47,17 +47,17 @@ public class PcApiCourseUserStudyLogBiz {
 	private CourseChapterPeriodDao periodDao;
 
 	public Result<Page<CourseUserStudyLogPageRESQ>> list(CourseUserStudyLogPageREQ req) {
-		if (StringUtils.isEmpty(req.getUserNo())) {
+		if (StringUtils.isEmpty(req.getUserExtNo())) {
 			return Result.error("用户编号不能为空");
 		}
 		// 获取用户信息
-		UserExtVO userExtVO = bossUserExt.getByUserNo(req.getUserNo());
+		UserExtVO userExtVO = bossUserExt.getByUserNo(req.getUserExtNo());
 		if (ObjectUtil.isNull(userExtVO)) {
 			return Result.error("找不到用户信息");
 		}
 		CourseUserStudyLogExample example = new CourseUserStudyLogExample();
 		Criteria c = example.createCriteria();
-		c.andUserNoEqualTo(req.getUserNo());
+		c.andUserNoEqualTo(req.getUserExtNo());
 		if (StringUtils.hasText(req.getBeginGmtCreate())) {
 			c.andGmtCreateGreaterThanOrEqualTo(DateUtil.parseDate(req.getBeginGmtCreate(), "yyyy-MM-dd"));
 		}

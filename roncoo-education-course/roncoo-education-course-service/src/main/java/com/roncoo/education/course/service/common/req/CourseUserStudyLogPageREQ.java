@@ -31,7 +31,7 @@ public class CourseUserStudyLogPageREQ implements Serializable {
 	 * 用户编号
 	 */
 	@ApiModelProperty(value = " 用户编号", required = true)
-	private Long userNo;
+	private Long userExtNo;
 	/**
 	 * 开始时间
 	 */

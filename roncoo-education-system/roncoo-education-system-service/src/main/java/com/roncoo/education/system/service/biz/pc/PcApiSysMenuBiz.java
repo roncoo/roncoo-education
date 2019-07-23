@@ -161,9 +161,11 @@ public class PcApiSysMenuBiz {
 		for (SysRoleUser sru : sysRoleUserList) {
 			sysMenuRoleList.addAll(sysMenuRoleDao.listByRoleId(sru.getRoleId()));
 		}
-
 		// 筛选
-		resq.setSysMenu(listByRole(sysMenuRoleList));
+		List<SysMenuUserRESQ> list = listByRole(sysMenuRoleList);
+		if (CollectionUtils.isNotEmpty(list)) {
+			resq.setSysMenu(list);
+		}
 		return Result.success(resq);
 	}
 

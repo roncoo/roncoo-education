@@ -1,5 +1,14 @@
 import request from '@/utils/request'
 
+// 列出用户菜单
+export function menuUserList(params) {
+  return request({
+    url: '/system/pc/menu/user/list',
+    method: 'post',
+    data: params
+  })
+}
+
 // 站点友情链接分页列表接口
 export function websiteLinkList(params, page = 1, pageSize = 20) {
   return request({

@@ -59,7 +59,7 @@ export default {
       loginForm: {
         mobile: '13800000000',
         password: '123456',
-        clientId: 'lkb65617f842ad4c37895a733b8de43cbb',
+        clientId: 'lkb65617f842ad4c37895a733b8de43cbb', //客户端ID
         ip: '127.0.0.0'
       },
       loginRules: {

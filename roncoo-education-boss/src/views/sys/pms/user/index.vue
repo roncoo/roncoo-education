@@ -134,7 +134,7 @@
       },
       // 跳出修改密码弹窗
       handlePassword(userNo, realName) {
-        this.formData.userNo = userNo
+        this.formData.adminUserNo = userNo
         this.ctrl.passwordDialogVisible = true
         this.ctrl.dialogTitle = realName + '——密码修改'
       },

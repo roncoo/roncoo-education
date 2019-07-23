@@ -66,19 +66,7 @@ public class FilterPre extends ZuulFilter {
 			// 不鉴权
 			return false;
 		}
-		if (uri.contains("/user/pc")) {
-			// 不鉴权
-			return false;
-		}
-		if (uri.contains("/course/pc")) {
-			// 不鉴权
-			return false;
-		}
-		if (uri.contains("/user/pc")) {
-			// 不鉴权
-			return false;
-		}
-		if (uri.contains("/system/pc")) {
+		if (uri.contains("/user/pc/user/login/password")) {
 			// 不鉴权
 			return false;
 		}

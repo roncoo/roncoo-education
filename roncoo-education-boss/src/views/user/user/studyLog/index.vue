@@ -83,7 +83,7 @@
       }
     },
     mounted() {
-      this.map.userNo = this.$route.query.userNo
+      this.map.userExtNo = this.$route.query.userNo
       this.listForPage()
     },
     methods: {
@@ -122,7 +122,7 @@
       // 重置查询条件
       handleReset() {
         this.map = {}
-        this.map.userNo = this.$route.query.userNo
+        this.map.userExtNo = this.$route.query.userNo
         this.gmtCreate = ''
         this.listForPage()
       },

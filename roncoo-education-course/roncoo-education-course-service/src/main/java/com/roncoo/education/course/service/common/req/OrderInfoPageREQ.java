@@ -44,11 +44,6 @@ public class OrderInfoPageREQ implements Serializable {
 	@ApiModelProperty(value = "讲师名称", required = false)
 	private String lecturerName;
 	/**
-	 * 用户编号
-	 */
-	@ApiModelProperty(value = "用户编号", required = false)
-	private Long userNo;
-	/**
 	 * 用户电话
 	 */
 	@ApiModelProperty(value = "用户电话", required = false)

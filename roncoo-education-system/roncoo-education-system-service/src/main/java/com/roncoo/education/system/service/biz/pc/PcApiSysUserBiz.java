@@ -117,7 +117,7 @@ public class PcApiSysUserBiz {
 	}
 
 	public Result<Integer> updatePassword(SysUserUpdatePasswordREQ req) {
-		if (req.getUserNo() == null) {
+		if (req.getAdminUserNo() == null) {
 			return Result.error("用户编号不能为空,请重试");
 		}
 		if (StringUtils.isEmpty(req.getMobilePsw())) {
@@ -129,7 +129,7 @@ public class PcApiSysUserBiz {
 		if (!req.getRePwd().equals(req.getMobilePsw())) {
 			return Result.error("密码不一致,请重试");
 		}
-		UserVO userVO = bossUser.getByUserNo(req.getUserNo());
+		UserVO userVO = bossUser.getByUserNo(req.getAdminUserNo());
 		if (ObjectUtil.isNull(userVO)) {
 			return Result.error("找不到用户信息,请重试");
 		}
