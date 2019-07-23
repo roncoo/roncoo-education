@@ -79,6 +79,8 @@
                   message: "更新失败"
                 });
               }
+            }).catch(() => {
+              this.loading.hide()
             })
           } else {
             this.$message({

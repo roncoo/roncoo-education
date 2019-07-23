@@ -70,7 +70,9 @@ export default {
                 message: "提交失败"
               });
             }
-          })
+          }).catch(() => {
+              this.loading.hide()
+            })
         } else {
           this.$message({
             type: 'error',

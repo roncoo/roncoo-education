@@ -28,7 +28,6 @@ const menu = {
   actions: {
     setMenu({ commit }) {
       return new Promise(resolve => {
-        console.log("用户信息" + commit)
         // TODO 后续续修改为从服务器获取，并且做数据处理
         commit('set_system_menu', mockMenuData)
         resolve()

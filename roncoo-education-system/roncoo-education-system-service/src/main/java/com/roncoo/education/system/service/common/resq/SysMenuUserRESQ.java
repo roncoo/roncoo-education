@@ -28,12 +28,6 @@ public class SysMenuUserRESQ implements Serializable {
 	@JsonSerialize(using = ToStringSerializer.class)
 	private Long id;
 	/**
-	 * 父ID
-	 */
-	@ApiModelProperty(value = "父ID")
-	@JsonSerialize(using = ToStringSerializer.class)
-	private Long parentId;
-	/**
 	 * 菜单名称
 	 */
 	@ApiModelProperty(value = "菜单名称")

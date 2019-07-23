@@ -210,7 +210,9 @@
               message: "提交失败"
             });
           }
-        })
+        }).catch(() => {
+            this.loading.hide()
+          })
       },
       handleClose(done) {
         this.$emit('close-callback')
