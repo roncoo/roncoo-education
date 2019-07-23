@@ -11,8 +11,10 @@ import com.roncoo.education.system.service.common.req.SysMenuDeleteREQ;
 import com.roncoo.education.system.service.common.req.SysMenuListREQ;
 import com.roncoo.education.system.service.common.req.SysMenuSaveREQ;
 import com.roncoo.education.system.service.common.req.SysMenuUpdateREQ;
+import com.roncoo.education.system.service.common.req.SysMenuUserListREQ;
 import com.roncoo.education.system.service.common.req.SysMenuViewREQ;
 import com.roncoo.education.system.service.common.resq.SysMenuListRESQ;
+import com.roncoo.education.system.service.common.resq.SysMenuUserListRESQ;
 import com.roncoo.education.system.service.common.resq.SysMenuViewRESQ;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
@@ -74,6 +76,16 @@ public class PcApiSysMenuController extends BaseController {
 	@RequestMapping(value = "/view", method = RequestMethod.POST)
 	public Result<SysMenuViewRESQ> view(@RequestBody SysMenuViewREQ sysMenuViewREQ) {
 		return biz.view(sysMenuViewREQ);
+	}
+	
+	
+	/**
+	 * 用户菜单信息列出信息接口
+	 */
+	@ApiOperation(value = "用户菜单信息列出信息接口", notes = "用户菜单信息列出信息接口")
+	@RequestMapping(value = "/user/list", method = RequestMethod.POST)
+	public Result<SysMenuUserListRESQ> list(@RequestBody SysMenuUserListREQ sysMenuUserListREQ) {
+		return biz.userList(sysMenuUserListREQ);
 	}
 
 }

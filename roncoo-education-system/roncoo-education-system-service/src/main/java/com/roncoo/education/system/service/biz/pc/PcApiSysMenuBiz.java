@@ -13,12 +13,21 @@ import com.roncoo.education.system.service.common.req.SysMenuDeleteREQ;
 import com.roncoo.education.system.service.common.req.SysMenuListREQ;
 import com.roncoo.education.system.service.common.req.SysMenuSaveREQ;
 import com.roncoo.education.system.service.common.req.SysMenuUpdateREQ;
+import com.roncoo.education.system.service.common.req.SysMenuUserListREQ;
 import com.roncoo.education.system.service.common.req.SysMenuViewREQ;
 import com.roncoo.education.system.service.common.resq.SysMenuListRESQ;
 import com.roncoo.education.system.service.common.resq.SysMenuRESQ;
+import com.roncoo.education.system.service.common.resq.SysMenuUserListRESQ;
+import com.roncoo.education.system.service.common.resq.SysMenuUserRESQ;
 import com.roncoo.education.system.service.common.resq.SysMenuViewRESQ;
 import com.roncoo.education.system.service.dao.SysMenuDao;
+import com.roncoo.education.system.service.dao.SysMenuRoleDao;
+import com.roncoo.education.system.service.dao.SysRoleUserDao;
+import com.roncoo.education.system.service.dao.SysUserDao;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.SysMenu;
+import com.roncoo.education.system.service.dao.impl.mapper.entity.SysMenuRole;
+import com.roncoo.education.system.service.dao.impl.mapper.entity.SysRoleUser;
+import com.roncoo.education.system.service.dao.impl.mapper.entity.SysUser;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.tools.BeanUtil;
@@ -35,6 +44,12 @@ public class PcApiSysMenuBiz {
 
 	@Autowired
 	private SysMenuDao dao;
+	@Autowired
+	private SysUserDao sysUserDao;
+	@Autowired
+	private SysRoleUserDao sysRoleUserDao;
+	@Autowired
+	private SysMenuRoleDao sysMenuRoleDao;
 
 	public Result<SysMenuListRESQ> list(SysMenuListREQ req) {
 		SysMenuListRESQ resq = new SysMenuListRESQ();
@@ -132,4 +147,70 @@ public class PcApiSysMenuBiz {
 		return Result.success(BeanUtil.copyProperties(record, SysMenuViewRESQ.class));
 	}
 
+	public Result<SysMenuUserListRESQ> userList(SysMenuUserListREQ req) {
+		if (req.getUserNo() == null) {
+			return Result.error("用户编不能为空");
+		}
+		SysUser sysUser = sysUserDao.getByUserNo(req.getUserNo());
+		if (ObjectUtil.isNull(sysUser)) {
+			return Result.error("用户异常");
+		}
+		SysMenuUserListRESQ resq = new SysMenuUserListRESQ();
+		List<SysMenuRole> sysMenuRoleList = new ArrayList<>();
+		List<SysRoleUser> sysRoleUserList = sysRoleUserDao.listByUserId(sysUser.getId());
+		for (SysRoleUser sru : sysRoleUserList) {
+			sysMenuRoleList.addAll(sysMenuRoleDao.listByRoleId(sru.getRoleId()));
+		}
+
+		// 筛选
+		resq.setSysMenu(listByRole(sysMenuRoleList));
+		return Result.success(resq);
+	}
+
+	private List<SysMenuUserRESQ> listByRole(List<SysMenuRole> sysMenuRoleList) {
+		List<SysMenuUserRESQ> list = userRecursion(0L);
+		List<SysMenuUserRESQ> sysMenuUserRESQList = new ArrayList<>();
+		sysMenuUserRESQList = listMenu(sysMenuUserRESQList, sysMenuRoleList, list);
+		return sysMenuUserRESQList;
+	}
+
+	private List<SysMenuUserRESQ> listMenu(List<SysMenuUserRESQ> sysMenuVOList, List<SysMenuRole> sysMenuRoleList, List<SysMenuUserRESQ> list) {
+		for (SysMenuUserRESQ mv : list) {
+			SysMenuUserRESQ v = null;
+			for (SysMenuRole vo : sysMenuRoleList) {
+				if (mv.getId().equals(vo.getMenuId())) {
+					v = BeanUtil.copyProperties(mv, SysMenuUserRESQ.class);
+					break;
+				}
+			}
+			if (ObjectUtil.isNotNull(v)) {
+				sysMenuVOList.add(v);
+				List<SysMenuUserRESQ> l = new ArrayList<>();
+				if (v != null) {
+					v.setChildren(l);
+				}
+				listMenu(l, sysMenuRoleList, mv.getChildren());
+			}
+		}
+		return sysMenuVOList;
+	}
+
+	/**
+	 * 用户递归显示菜单(角色关联菜单)
+	 */
+	private List<SysMenuUserRESQ> userRecursion(Long parentId) {
+		List<SysMenuUserRESQ> lists = new ArrayList<>();
+		List<SysMenu> list = dao.listByParentId(parentId);
+		if (CollectionUtil.isNotEmpty(list)) {
+			for (SysMenu m : list) {
+				SysMenuUserRESQ resq = BeanUtil.copyProperties(m, SysMenuUserRESQ.class);
+				resq.setName(m.getMenuName());
+				resq.setPath(m.getMenuUrl());
+				resq.setIcon(m.getMenuIcon());
+				resq.setChildren(userRecursion(m.getId()));
+				lists.add(resq);
+			}
+		}
+		return lists;
+	}
 }

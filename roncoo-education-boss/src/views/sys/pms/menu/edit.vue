@@ -1,19 +1,19 @@
 <template>
   <!--弹窗-->
   <el-dialog
-    width="30%"
+    width="35%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
-    <el-form ref="formData" :model="formData" :rules="rules" label-width="80px">
+    <el-form ref="formData" :model="formData" :rules="rules" label-width="100px">
       <el-form-item label="菜单名称:" prop="menuName">
         <el-input v-model="formData.menuName"></el-input>
       </el-form-item>
       <el-form-item label="菜单路径:" prop="menuUrl">
         <el-input v-model="formData.menuUrl"></el-input>
       </el-form-item>
-      <el-form-item label="目标名称:" prop="menuUrl">
-        <el-input v-model="formData.menuUrl"></el-input>
+      <el-form-item label="目标名称:">
+        <el-input v-model="formData.targetName"></el-input>
       </el-form-item>
       <el-form-item label="排序:">
         <el-input-number style="width: 300px;" v-model="formData.sort" @change="handleChange" :min="1" :max="10000"></el-input-number>
@@ -35,8 +35,11 @@
     data() {
       return {
         rules: {
-          roleName: [
-            { required: true, message: '请输入名称', trigger: 'blur' }
+          menuName: [
+            { required: true, message: '请输入菜单名称', trigger: 'blur' }
+          ],
+          menuUrl: [
+            { required: true, message: '请输入菜单路径', trigger: 'blur' }
           ]
         }
       }

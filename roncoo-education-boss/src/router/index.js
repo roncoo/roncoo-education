@@ -4,7 +4,6 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 import Layout from '@/views/layout/Layout'
-
 export const asyncRouterMap = [
   {
     path: 'dashboard',

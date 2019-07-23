@@ -12,7 +12,7 @@
       <el-form-item label="菜单地址:" prop="menuUrl">
         <el-input v-model="formData.menuUrl"></el-input>
       </el-form-item>
-      <el-form-item label="目标名称:" prop="targetName">
+      <el-form-item label="目标名称:">
         <el-input v-model="formData.targetName"></el-input>
       </el-form-item>
       <el-form-item label="图标:" prop="menuIcon">
