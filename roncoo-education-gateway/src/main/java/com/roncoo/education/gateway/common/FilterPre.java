@@ -76,6 +76,8 @@ public class FilterPre extends ZuulFilter {
 	@Override
 	public Object run() {
 		RequestContext ctx = RequestContext.getCurrentContext();
+		String uri = RequestContext.getCurrentContext().getRequest().getServletPath();
+		logger.info("请求地址", uri);
 		HttpServletRequest request = ctx.getRequest();
 		Long userNo = null;
 		try {
