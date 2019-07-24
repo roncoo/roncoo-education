@@ -57,6 +57,7 @@ public class FilterPre extends ZuulFilter {
 	@Override
 	public boolean shouldFilter() {
 		String uri = RequestContext.getCurrentContext().getRequest().getServletPath();
+		logger.info("请求地址", uri);
 
 		if (uri.contains("/callback")) {
 			// 回调使用
@@ -77,7 +78,7 @@ public class FilterPre extends ZuulFilter {
 	public Object run() {
 		RequestContext ctx = RequestContext.getCurrentContext();
 		String uri = RequestContext.getCurrentContext().getRequest().getServletPath();
-		logger.info("请求地址", uri);
+		logger.info("请求地址" + uri);
 		HttpServletRequest request = ctx.getRequest();
 		Long userNo = null;
 		try {
@@ -123,17 +124,11 @@ public class FilterPre extends ZuulFilter {
 		}
 
 		// 单点登录处理，注意，登录的时候必须要放入缓存
-		/*if (!stringRedisTemplate.hasKey(userNo.toString())) {
-			// 不存在，则登录异常，有效期为1小时
-			throw new BaseException(ResultEnum.TOKEN_PAST);
-		}
-
-		// 存在，判断是否token相同
-		String tk = stringRedisTemplate.opsForValue().get(userNo.toString());
-		if (!token.equals(tk)) {
-			// 不同则为不同的用户登录，这时候提示异地登录
-			throw new BaseException(ResultEnum.REMOTE_ERROR);
-		}*/
+		/*
+		 * if (!stringRedisTemplate.hasKey(userNo.toString())) { // 不存在，则登录异常，有效期为1小时 throw new BaseException(ResultEnum.TOKEN_PAST); }
+		 * 
+		 * // 存在，判断是否token相同 String tk = stringRedisTemplate.opsForValue().get(userNo.toString()); if (!token.equals(tk)) { // 不同则为不同的用户登录，这时候提示异地登录 throw new BaseException(ResultEnum.REMOTE_ERROR); }
+		 */
 
 		// 更新时间，使token不过期
 		stringRedisTemplate.opsForValue().set(userNo.toString(), token, 1, TimeUnit.HOURS);
@@ -152,14 +147,17 @@ public class FilterPre extends ZuulFilter {
 			public BufferedReader getReader() throws IOException {
 				return new BufferedReader(new InputStreamReader(getInputStream()));
 			}
+
 			@Override
 			public ServletInputStream getInputStream() throws IOException {
 				return new ServletInputStreamWrapper(reqBodyBytes);
 			}
+
 			@Override
 			public int getContentLength() {
 				return reqBodyBytes.length;
 			}
+
 			@Override
 			public long getContentLengthLong() {
 				return reqBodyBytes.length;
