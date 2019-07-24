@@ -22,7 +22,8 @@ export const asyncRouterMap = [
         children: [
           {
             path: 'orderInfo',
-            component: () => import('@/views/order/order/orderInfo')
+            component: () => import('@/views/order/order/orderInfo'),
+            meta: { requireAuth: true }
           }
          ]
       }
@@ -39,7 +40,8 @@ export const asyncRouterMap = [
         children: [
           {
             path: 'pc',
-            component: () => import('@/views/homepage/adv/pc')
+            component: () => import('@/views/homepage/adv/pc'),
+            meta: { requireAuth: true }
           }
         ]
       },
@@ -49,11 +51,13 @@ export const asyncRouterMap = [
         children: [
           {
             path: 'pc',
-            component: () => import('@/views/homepage/zone/pc')
+            component: () => import('@/views/homepage/zone/pc'),
+            meta: { requireAuth: true }
           },
           {
             path: 'course',
-            component: () => import('@/views/homepage/zone/course')
+            component: () => import('@/views/homepage/zone/course'),
+            meta: { requireAuth: true }
           }
          ]
       },
@@ -63,15 +67,18 @@ export const asyncRouterMap = [
         children: [
           {
             path: 'navBar',
-            component: () => import('@/views/homepage/website/navBar')
+            component: () => import('@/views/homepage/website/navBar'),
+            meta: { requireAuth: true }
           },
           {
             path: 'websiteLink',
-            component: () => import('@/views/homepage/website/websiteLink')
+            component: () => import('@/views/homepage/website/websiteLink'),
+            meta: { requireAuth: true }
           },
           {
             path: 'websiteNav',
-            component: () => import('@/views/homepage/website/websiteNav')
+            component: () => import('@/views/homepage/website/websiteNav'),
+            meta: { requireAuth: true }
           }
         ]
       }
@@ -86,13 +93,16 @@ export const asyncRouterMap = [
         path: 'course',
         component: () => import('@/views/course/course'),
         children: [
-          {// 讲师列表
+          {// 课程列表
             path: 'course',
-            component: () => import('@/views/course/course/course')
+            component: () => import('@/views/course/course/course'),
+            meta: { requireAuth: true }
           },
           {
+            // 课程审核列表
             path: 'audit',
-            component: () => import('@/views/course/course/audit')
+            component: () => import('@/views/course/course/audit'),
+            meta: { requireAuth: true }
           }
         ]
       },
@@ -101,8 +111,10 @@ export const asyncRouterMap = [
         component: () => import('@/views/course/category'),
         children: [
           {
+            // 课程分类列表
             path: 'category',
-            component: () => import('@/views/course/category/category')
+            component: () => import('@/views/course/category/category'),
+            meta: { requireAuth: true }
           }
         ]
       }
@@ -119,11 +131,14 @@ export const asyncRouterMap = [
         children: [
           {// 讲师列表
             path: 'lecturer',
-            component: () => import('@/views/lecturer/lecturer/lecturer')
+            component: () => import('@/views/lecturer/lecturer/lecturer'),
+            meta: { requireAuth: true }
           },
           {
+            // 讲师审核列表
             path: 'audit',
-            component: () => import('@/views/lecturer/lecturer/audit')
+            component: () => import('@/views/lecturer/lecturer/audit'),
+            meta: { requireAuth: true }
           }
         ]
       },
@@ -132,8 +147,10 @@ export const asyncRouterMap = [
         component: () => import('@/views/lecturer/profit'),
         children: [
           {
+            // 讲师分润列表
             path: 'profit',
-            component: () => import('@/views/lecturer/profit/profit')
+            component: () => import('@/views/lecturer/profit/profit'),
+            meta: { requireAuth: true }
           }
         ]
       }
@@ -152,11 +169,14 @@ export const asyncRouterMap = [
         // 学员列表
           {
             path: 'ext',
-            component: () => import('@/views/user/user/ext')
+            component: () => import('@/views/user/user/ext'),
+            meta: { requireAuth: true }
           },
           {
+            // 用户学习日志列表
             path: 'studyLog',
-            component: () => import('@/views/user/user/studyLog')
+            component: () => import('@/views/user/user/studyLog'),
+            meta: { requireAuth: true }
           }
         ]
       }
@@ -175,17 +195,20 @@ export const asyncRouterMap = [
           {
             // 用户管理
             path: 'user',
-            component: () => import('@/views/sys/pms/user')
+            component: () => import('@/views/sys/pms/user'),
+            meta: { requireAuth: true }
           },
           {
             // 角色管理
             path: 'role',
-            component: () => import('@/views/sys/pms/role')
+            component: () => import('@/views/sys/pms/role'),
+            meta: { requireAuth: true }
           },
           {
             // 菜单管理
             path: 'menu',
-            component: () => import('@/views/sys/pms/menu')
+            component: () => import('@/views/sys/pms/menu'),
+            meta: { requireAuth: true }
           }
         ]
       },
@@ -196,17 +219,20 @@ export const asyncRouterMap = [
           {
             // 消息管理
             path: 'template',
-            component: () => import('@/views/sys/msg/template')
+            component: () => import('@/views/sys/msg/template'),
+            meta: { requireAuth: true }
           },
           {
             // 用户消息
             path: 'msgUser',
-            component: () => import('@/views/sys/msg/msgUser')
+            component: () => import('@/views/sys/msg/msgUser'),
+            meta: { requireAuth: true }
           },
           {
             // 站点消息
             path: 'msg',
-            component: () => import('@/views/sys/msg/msg')
+            component: () => import('@/views/sys/msg/msg'),
+            meta: { requireAuth: true }
           }
          ]
       },
@@ -217,12 +243,14 @@ export const asyncRouterMap = [
           {
             // 站点设置
             path: 'website',
-            component: () => import('@/views/sys/website/website')
+            component: () => import('@/views/sys/website/website'),
+            meta: { requireAuth: true }
           },
           {
             // 系统设置
             path: 'sys',
-            component: () => import('@/views/sys/website/sys')
+            component: () => import('@/views/sys/website/sys'),
+            meta: { requireAuth: true }
           }
         ]
       },
@@ -233,7 +261,8 @@ export const asyncRouterMap = [
           {
             // 应用管理
             path: 'platform',
-            component: () => import('@/views/sys/platform/platform')
+            component: () => import('@/views/sys/platform/platform'),
+            meta: { requireAuth: true }
           }
         ]
       },
@@ -244,12 +273,14 @@ export const asyncRouterMap = [
           {
             // 系统操作日志
             path: 'sys',
-            component: () => import('@/views/sys/log/sys')
+            component: () => import('@/views/sys/log/sys'),
+            meta: { requireAuth: true }
           },
           {
             // 支付日志
             path: 'orderPay',
-            component: () => import('@/views/sys/log/orderPay')
+            component: () => import('@/views/sys/log/orderPay'),
+            meta: { requireAuth: true }
           }
         ]
       }

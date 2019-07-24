@@ -30,7 +30,7 @@ const menu = {
     setMenu({ commit }) {
       return new Promise(resolve => {
         api.menuUserList({}).then(res => {
-          if (res.data.sysMenu != []) {
+          if (res.data.sysMenu !== []) {
             const mockMenuList = res.data.sysMenu
             // TODO 后续续修改为从服务器获取，并且做数据处理
             commit('set_system_menu', mockMenuList)
