@@ -86,12 +86,13 @@ public class FilterPre extends ZuulFilter {
 		try {
 			userNo = getUserNoByToken(request);
 
-			if (uri.contains("/course/pc") || uri.contains("/user/pc") || uri.contains("/system/pc")) {
+			if (uri.contains("/course/pc") || uri.contains("/user/pc") || uri.contains("/system/pc") && uri.contains("/system/pc/menu/user/list")) {
 				// 不鉴权
 				if (!stringRedisTemplate.hasKey(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()))) {
 					throw new BaseException(ResultEnum.MENU_PAST);
 				}
 				String tk = stringRedisTemplate.opsForValue().get(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()));
+				logger.info("用户菜单集合" + tk);
 				List<SysMenuVO> list = JSONUtil.parseArray(tk, SysMenuVO.class);
 				logger.info("用户菜单集合" + list);
 				// 更新时间，使用户菜单不过期
