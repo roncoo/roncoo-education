@@ -1,10 +1,15 @@
 package com.roncoo.education.user.service.biz.pc;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import com.roncoo.education.system.common.bean.vo.SysMenuVO;
+import com.roncoo.education.system.common.interfaces.BossSysMenu;
 import com.roncoo.education.user.service.common.req.UserLoginPasswordREQ;
 import com.roncoo.education.user.service.common.resq.UserLoginRESQ;
 import com.roncoo.education.user.service.dao.PlatformDao;
@@ -15,9 +20,12 @@ import com.roncoo.education.user.service.dao.impl.mapper.entity.User;
 import com.roncoo.education.user.service.dao.impl.mapper.entity.UserLogLogin;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.LoginStatusEnum;
+import com.roncoo.education.util.enums.RedisPreEnum;
 import com.roncoo.education.util.enums.StatusIdEnum;
+import com.roncoo.education.util.tools.JSONUtil;
 import com.roncoo.education.util.tools.JWTUtil;
 import com.xiaoleilu.hutool.crypto.DigestUtil;
+import com.xiaoleilu.hutool.util.CollectionUtil;
 
 @Component
 public class PcApiUserLoginBiz {
@@ -28,7 +36,8 @@ public class PcApiUserLoginBiz {
 	private UserDao userDao;
 	@Autowired
 	private UserLogLoginDao userLogLoginDao;
-
+	@Autowired
+	private BossSysMenu bossSysMenu;
 	@Autowired
 	private RedisTemplate<String, String> redisTemplate;
 
@@ -63,9 +72,17 @@ public class PcApiUserLoginBiz {
 			// 放入缓存，错误次数+1
 			return Result.error("账号或者密码不正确");
 		}
+		// 获取用户菜单权限
+		List<SysMenuVO> menuList = bossSysMenu.listByUserAndMenu(user.getUserNo());
+		if (CollectionUtil.isEmpty(menuList)) {
+			return Result.error("没权限！");
+		}
 
 		// 登录日志
 		loginLog(user.getUserNo(), req.getClientId(), LoginStatusEnum.SUCCESS, req.getIp());
+
+		// 用户菜单存入缓存, 时间
+		redisTemplate.opsForValue().set(RedisPreEnum.ADMINI_MENU.getCode().concat(user.getUserNo().toString()), JSONUtil.toJSONString(menuList), 1, TimeUnit.DAYS);
 
 		UserLoginRESQ dto = new UserLoginRESQ();
 		dto.setUserNo(user.getUserNo());

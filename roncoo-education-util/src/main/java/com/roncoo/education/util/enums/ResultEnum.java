@@ -16,6 +16,8 @@ public enum ResultEnum {
 	TOKEN_PAST(301, "token过期"), TOKEN_ERROR(302, "token异常"),
 	// 登录异常
 	LOGIN_ERROR(303, "登录异常"), REMOTE_ERROR(304, "异地登录"),
+	
+	MENU_PAST(305, "菜单过期"),
 
 	// 课程异常，4开头
 	COURSE_SAVE_FAIL(403, "添加失败"), COURSE_UPDATE_FAIL(404, "更新失败"), COURSE_DELETE_FAIL(405, "删除失败"),

@@ -1,5 +1,7 @@
 package com.roncoo.education.system.common.interfaces;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -28,5 +30,8 @@ public interface BossSysMenu {
 	
 	@RequestMapping(value = "/boss/system/sysMenu/getById")
 	SysMenuVO getById(@RequestBody Long id);
+	
+	@RequestMapping(value = "/boss/system/sysMenu/listByUserAndMenu")
+	List<SysMenuVO> listByUserAndMenu(@RequestBody Long userNo);
 	
 }

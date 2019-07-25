@@ -28,6 +28,7 @@ import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.http.ServletInputStreamWrapper;
 import com.roncoo.education.util.base.BaseException;
 import com.roncoo.education.util.base.Result;
+import com.roncoo.education.util.enums.RedisPreEnum;
 import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.tools.JSONUtil;
 import com.roncoo.education.util.tools.JWTUtil;
@@ -83,6 +84,19 @@ public class FilterPre extends ZuulFilter {
 		Long userNo = null;
 		try {
 			userNo = getUserNoByToken(request);
+
+			if (uri.contains("/course/pc") || uri.contains("/user/pc") || uri.contains("/system/pc")) {
+				// 不鉴权
+				if (!stringRedisTemplate.hasKey(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()))) {
+					throw new BaseException(ResultEnum.MENU_PAST);
+				}
+				String tk = stringRedisTemplate.opsForValue().get(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()));
+				logger.info("用户菜单集合" + tk);
+
+				// 更新时间，使用户菜单不过期
+				stringRedisTemplate.opsForValue().set(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()), tk, 1, TimeUnit.HOURS);
+			}
+
 		} catch (BaseException e) {
 			logger.error("系统异常", e.getMessage());
 			resp(ctx, e.getMessage(), e.getCode());
