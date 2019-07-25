@@ -95,7 +95,6 @@ public class FilterPre extends ZuulFilter {
 					throw new BaseException(ResultEnum.MENU_PAST);
 				}
 				String tk = stringRedisTemplate.opsForValue().get(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()));
-				logger.info("用户菜单集合" + tk);
 				if (!checkUri(uri, tk)) {
 					throw new BaseException(ResultEnum.MENU_NO);
 				}
@@ -229,6 +228,7 @@ public class FilterPre extends ZuulFilter {
 	private static Boolean checkUri(String uri, String tk) {
 		Set<String> menuSet = new HashSet<>();
 		List<SysMenuVO> menuVOList = JSONUtil.parseArray(tk, SysMenuVO.class);
+		logger.info("用户菜单集合" + menuVOList);
 		listMenu(menuSet, menuVOList);
 		if (StringUtils.hasText(uri) && uri.endsWith("/")) {
 			uri = uri.substring(0, uri.length() - 1);
