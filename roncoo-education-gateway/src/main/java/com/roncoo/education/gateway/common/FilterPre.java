@@ -95,9 +95,9 @@ public class FilterPre extends ZuulFilter {
 					throw new BaseException(ResultEnum.MENU_PAST);
 				}
 				String tk = stringRedisTemplate.opsForValue().get(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()));
-				if (!checkUri(uri, tk)) {
-					throw new BaseException(ResultEnum.MENU_NO);
-				}
+				/*
+				 * if (!checkUri(uri, tk)) { throw new BaseException(ResultEnum.MENU_NO); }
+				 */
 				// 更新时间，使用户菜单不过期
 				stringRedisTemplate.opsForValue().set(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()), tk, 1, TimeUnit.HOURS);
 			}
