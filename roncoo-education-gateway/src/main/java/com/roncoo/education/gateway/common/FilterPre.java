@@ -7,8 +7,10 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
@@ -33,6 +35,7 @@ import com.roncoo.education.util.enums.RedisPreEnum;
 import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.tools.JSONUtil;
 import com.roncoo.education.util.tools.JWTUtil;
+import com.xiaoleilu.hutool.util.CollectionUtil;
 
 /**
  * 请求开始前执行
@@ -93,8 +96,9 @@ public class FilterPre extends ZuulFilter {
 				}
 				String tk = stringRedisTemplate.opsForValue().get(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()));
 				logger.info("用户菜单集合" + tk);
-				List<SysMenuVO> list = JSONUtil.parseArray(tk, SysMenuVO.class);
-				logger.info("用户菜单集合" + list);
+				if (!checkUri(uri, tk)) {
+					throw new BaseException(ResultEnum.MENU_NO);
+				}
 				// 更新时间，使用户菜单不过期
 				stringRedisTemplate.opsForValue().set(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()), tk, 1, TimeUnit.HOURS);
 			}
@@ -220,6 +224,36 @@ public class FilterPre extends ZuulFilter {
 			}
 		}
 		return paramMap;
+	}
+
+	private static Boolean checkUri(String uri, String tk) {
+		Set<String> menuSet = new HashSet<>();
+		List<SysMenuVO> menuVOList = JSONUtil.parseArray(tk, SysMenuVO.class);
+		listMenu(menuSet, menuVOList);
+		if (StringUtils.hasText(uri) && uri.endsWith("/")) {
+			uri = uri.substring(0, uri.length() - 1);
+		}
+		for (String s : menuSet) {
+			if (s.contains(uri)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * @param list
+	 * @return
+	 */
+	private static void listMenu(Set<String> menuSet, List<SysMenuVO> menuVOList) {
+		if (CollectionUtil.isNotEmpty(menuVOList)) {
+			for (SysMenuVO sm : menuVOList) {
+				if (StringUtils.hasText(sm.getMenuUrl())) {
+					menuSet.add(sm.getMenuUrl());
+				}
+				listMenu(menuSet, sm.getList());
+			}
+		}
 	}
 
 }
