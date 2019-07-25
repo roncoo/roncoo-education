@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
@@ -91,8 +92,8 @@ public class FilterPre extends ZuulFilter {
 					throw new BaseException(ResultEnum.MENU_PAST);
 				}
 				String tk = stringRedisTemplate.opsForValue().get(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()));
-				logger.info("用户菜单集合" + tk);
-
+				List<SysMenuVO> list = JSONUtil.parseArray(tk, SysMenuVO.class);
+				logger.info("用户菜单集合" + list);
 				// 更新时间，使用户菜单不过期
 				stringRedisTemplate.opsForValue().set(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()), tk, 1, TimeUnit.HOURS);
 			}

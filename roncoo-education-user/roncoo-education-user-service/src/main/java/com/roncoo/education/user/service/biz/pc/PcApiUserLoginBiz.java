@@ -82,6 +82,7 @@ public class PcApiUserLoginBiz {
 		loginLog(user.getUserNo(), req.getClientId(), LoginStatusEnum.SUCCESS, req.getIp());
 
 		// 用户菜单存入缓存, 时间
+		
 		redisTemplate.opsForValue().set(RedisPreEnum.ADMINI_MENU.getCode().concat(user.getUserNo().toString()), JSONUtil.toJSONString(menuList), 1, TimeUnit.DAYS);
 
 		UserLoginRESQ dto = new UserLoginRESQ();
