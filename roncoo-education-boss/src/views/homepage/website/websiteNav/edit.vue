@@ -6,10 +6,10 @@
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form :model="formData" :rules="rules" ref="formData" label-width="100px">
-      <el-form-item label="导航名称" prop="navName">
+      <el-form-item label="导航名称：" prop="navName">
         <el-input v-model="formData.navName" placeholder="请输入导航名称"></el-input>
       </el-form-item>
-      <el-form-item label="排序:">
+      <el-form-item label="排序：">
         <el-input-number style="width: 300px;" v-model="formData.sort" @change="handleChange" :min="1" :max="10000"></el-input-number>
       </el-form-item>
     </el-form>
@@ -20,7 +20,7 @@
   </el-dialog>
 </template>
 <script>
-import * as api from '@/api/system'
+import * as api from '@/api/homepage'
 export default {
    name: 'Edit',
   data() {
@@ -87,7 +87,13 @@ export default {
                 message: "提交失败"
               });
             }
-          })
+          }).catch(() => {
+              this.loading.hide()
+              this.$message({
+                type: 'error',
+                message: "提交失败"
+              });
+            })
         } else {
           this.$message({
             type: 'error',

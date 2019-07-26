@@ -8,6 +8,7 @@ export function login(mobile, password, clientId, ip) {
     clientId: clientId,
     ip: ip
   }
+  // 密码登录接口
   return request({
     url: '/user/pc/user/login/password',
     method: 'post',

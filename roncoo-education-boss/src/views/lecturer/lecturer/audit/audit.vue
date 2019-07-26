@@ -23,7 +23,7 @@
   </el-dialog>
 </template>
 <script>
-  import * as userApi from '@/api/user'
+  import * as api from '@/api/lecturer'
   export default {
     name: 'Audit',
     props: {
@@ -63,7 +63,7 @@
         if (this.formData.id === undefined) {
           this.$alert(res.msg || '审核失败')
         } else {
-          res = await userApi.lecturerAudit(this.formData)
+          res = await api.lecturerAudit(this.formData)
           this.tips('成功', 'success')
         }
         this.load = false

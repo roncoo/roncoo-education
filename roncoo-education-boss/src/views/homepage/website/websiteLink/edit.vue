@@ -6,19 +6,19 @@
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form :model="formData" :rules="rules" ref="formData" label-width="100px">
-      <el-form-item label="链接地址" prop="linkUrl">
+      <el-form-item label="链接地址：" prop="linkUrl">
       <el-input v-model="formData.linkUrl"></el-input>
     </el-form-item>
-      <el-form-item label="链接名称" prop="linkName">
+      <el-form-item label="链接名称：" prop="linkName">
         <el-input v-model="formData.linkName" ></el-input>
       </el-form-item>
-      <el-form-item label="打开方式" prop="linkTarget"  width="200">
+      <el-form-item label="打开方式：" prop="linkTarget"  width="200">
         <template>
           <el-radio v-model="formData.linkTarget" label="_blank">新窗口打开</el-radio>
           <el-radio v-model="formData.linkTarget" label="_self">同窗口打开</el-radio>
         </template>
       </el-form-item>
-      <el-form-item label="排序:">
+      <el-form-item label="排序：">
         <el-input-number style="width: 300px;" v-model="formData.sort" @change="handleChange" :min="1" :max="10000"></el-input-number>
       </el-form-item>
     </el-form>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import * as api from '@/api/system'
+import * as api from '@/api/homepage'
   export default {
     name: 'Edit',
     data() {

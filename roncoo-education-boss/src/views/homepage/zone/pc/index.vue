@@ -74,7 +74,7 @@
 </div>
 </template>
 <script>
-  import * as api from '@/api/course'
+  import * as api from '@/api/homepage'
   import Edit from './edit'
   export default {
    components: { Edit },
@@ -116,14 +116,30 @@
       },
       //改变状态
       changeStatus(id, statusId) {
-        api.coursePcZoneUpdate({ id, statusId }).then(res => {
+        api.pcZoneUpdate({ id, statusId }).then(res => {
           this.ctrl.loading = false
-          const msg = { 0: '禁用成功', 1: '启用成功' }
-          this.$message({
-            type: 'success',
-            message: msg[statusId]
-          });
-          this.reload()
+          if (res.code === 200 && res.data > 0) {
+            const msg = { 0: '禁用成功', 1: '启用成功' }
+            this.$message({
+              type: 'success',
+              message: msg[statusId]
+            });
+              this.reload()
+          } else {
+            const msg = { 0: '禁用失败', 1: '启用失败' }
+            this.$message({
+              type: 'error',
+              message: msg[statusId]
+            });
+          }
+        }).catch(() => {
+          this.ctrl.loading = false
+          const msg = { 0: '禁用失败', 1: '启用失败' }
+            this.$message({
+              type: 'error',
+              message: msg[statusId]
+            });
+            this.reload()
         })
       },
       //新增
@@ -143,7 +159,7 @@
             id: data.id
           }
           this.ctrl.loading = true
-          api.coursePcZoneDelete(this.map).then(res => {
+          api.pcZoneDelete(this.map).then(res => {
             this.ctrl.loading = false
             if (res.code === 200 && res.data > 0) {
               this.$message({
@@ -156,10 +172,14 @@
                 type: 'error',
                 message: "删除失败"
               });
-                this.reload()
             }
-          })
-        }).catch(() => {
+          }).catch(() => {
+            this.ctrl.loading = false
+            this.$message({
+              type: 'error',
+              message: "删除失败"
+            });
+            })
         })
       },
       // 关闭编辑弹窗回调
@@ -203,7 +223,7 @@
       },
       getList() {
         this.ctrl.loading = true
-        api.coursePcZoneList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
+        api.pcZoneList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.list = res.data.list
           this.page.pageCurrent = res.data.pageCurrent
           this.page.totalCount = res.data.totalCount

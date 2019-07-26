@@ -23,7 +23,7 @@
   </el-dialog>
 </template>
 <script>
-  import * as apis from '@/api/course'
+  import * as api from '@/api/homepage'
   export default {
     name: 'Edit',
     data() {
@@ -61,6 +61,7 @@
       }
     },
     methods: {
+      //关闭弹窗
       handleClose(done) {
         this.$emit('close-callback')
       },
@@ -72,29 +73,39 @@
           if (valid) {
             this.loading.show()
             if (this.formData.id === undefined) {
-              apis.coursePcZoneSave(this.formData).then(res => {
+              api.pcZoneSave(this.formData).then(res => {
                 this.loading.hide()
                 if (res.code === 200 && res.data > 0) {
-                    this.$emit('close-callback')
+                    this.handleClose()
                 } else {
                   this.$message({
                     type: 'error',
                     message: "提交失败"
                   });
                 }
+              }).catch(() => {
+                this.$message({
+                    type: 'error',
+                    message: "提交失败"
+                  });
               })
             } else {
               // 编辑
-              apis.coursePcZoneUpdate(this.formData).then(res => {
+              api.pcZoneUpdate(this.formData).then(res => {
                 this.loading.hide()
                 if (res.code === 200 && res.data > 0) {
-                    this.$emit('close-callback')
+                    this.handleClose()
                 } else {
                   this.$message({
                     type: 'error',
                     message: "提交失败"
                   });
                 }
+              }).catch(() => {
+                this.$message({
+                    type: 'error',
+                    message: "提交失败"
+                  });
               })
             }
           } else {

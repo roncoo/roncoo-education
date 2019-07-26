@@ -58,7 +58,7 @@
 </template>
 <script>
 import * as courseApis from '@/api/course'
-import * as userApi from '@/api/user'
+import * as commonalityApi from '@/api/commonality'
 export default {
   name: 'Edit',
   data() {
@@ -151,7 +151,7 @@ export default {
       const file = files[0];
       const param = new FormData();
       param.append('picFile', file, file.name);
-      userApi.uploadPic(param).then(res => {
+      commonalityApi.uploadPic(param).then(res => {
         if (res.code === 200) {
           const imgUrl = res.data
           insert(imgUrl)

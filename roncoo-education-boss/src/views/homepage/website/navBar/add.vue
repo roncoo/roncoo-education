@@ -30,7 +30,7 @@
   </el-dialog>
 </template>
 <script>
-  import * as api from '@/api/system'
+  import * as api from '@/api/homepage'
   export default {
     name: 'Edit',
     data() {

@@ -1,4 +1,4 @@
-import { enumList } from '@/api/system'
+import { enumList } from '@/api/commonality'
 import { getSession, setSession } from '@/utils/storage'
 
 function toObj(arr) {

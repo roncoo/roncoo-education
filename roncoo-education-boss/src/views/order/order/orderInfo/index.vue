@@ -148,8 +148,9 @@
   </div>
 </template>
 <script>
-import * as courseApis from '@/api/course'
+import * as orderApi from '@/api/order'
 import * as userApi from '@/api/user'
+import * as lecturerApi from '@/api/lecturer'
 import Remark from './remark'
 import ViewLecturer from '@/views/lecturer/lecturer/lecturer/view'
 import viewUser from '@/views/user/user/ext/view'
@@ -219,7 +220,7 @@ export default {
   },
   methods: {
     statistical() {
-      courseApis.orderStatistical(this.map).then(res => {
+      orderApi.orderStatistical(this.map).then(res => {
         this.totalProfit = res.data.totalProfit.toFixed(2)
         this.platformProfit = res.data.platformProfit.toFixed(2)
         this.lecturerProfit = res.data.lecturerProfit.toFixed(2)
@@ -227,7 +228,7 @@ export default {
     },
     getList() {
       this.ctrl.load = true
-      courseApis.orderList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
+      orderApi.orderList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
         this.list = res.data.list
         this.page.pageSize = res.data.pageSize
         this.page.totalCount = res.data.totalCount
@@ -243,7 +244,7 @@ export default {
     //跳转订单备注页面
     handleRemark(data) {
       this.ctrl.load = true
-      courseApis.orderView(data.id).then(res => {
+      orderApi.orderView(data.id).then(res => {
         this.ctrl.load = false
         this.formdata = res.data
         this.ctrl.dialogTitle = "订单备注"
@@ -266,7 +267,7 @@ export default {
     //跳转讲师详情页面
     handleLecturerView(lecturerUserNo) {
       this.ctrl.load = true
-      userApi.lecturerView({ lecturerUserNo: lecturerUserNo }).then(res => {
+      lecturerApi.lecturerView({ lecturerUserNo: lecturerUserNo }).then(res => {
         this.formdata = res.data
         this.lecturerExt = res.data.lecturerExt
         this.ctrl.dialogTitle = res.data.lecturerName + '-' + '查看详情'
@@ -279,7 +280,7 @@ export default {
     //跳转订单详情页面
     handleView(id) {
       this.ctrl.load = true
-      courseApis.orderView(id).then(res => {
+      orderApi.orderView(id).then(res => {
         this.ctrl.load = false
         this.formdata = res.data
         this.ctrl.dialogTitle = '订单详情'
@@ -290,7 +291,6 @@ export default {
     },
     // 支付时间段查询条件
     changeTime() {
-      console.log("payTime=>", this.payTime)
       if (this.payTime !== null && this.payTime.length) {
         this.map.beginPayTime = this.dateToString(this.payTime[0])
         this.map.endPayTime = this.dateToString(this.payTime[1])

@@ -29,13 +29,12 @@
         </el-button>
       </el-form-item>
       <div class="tips">
-        <span style="margin-right:20px;">mobile: 13800000000</span>
-        <span> password: 123456</span>
+        <span style="margin-right:20px;">mobile: 18800000000</span>
+        <span> password: isjfodFEdfDIDJ.45t592834</span>
       </div>
     </el-form>
   </div>
 </template>
-
 <script>
 import { isvalidMobile } from '@/utils/validate'
 export default {
@@ -57,8 +56,8 @@ export default {
     }
     return {
       loginForm: {
-        mobile: '13800000000',
-        password: '123456',
+        mobile: '18800000000',
+        password: 'isjfodFEdfDIDJ.45t592834',
         clientId: 'lkb65617f842ad4c37895a733b8de43cbb', //客户端ID
         ip: '127.0.0.0'
       },

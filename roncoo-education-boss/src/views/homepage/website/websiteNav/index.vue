@@ -64,6 +64,7 @@
               <el-button type="danger" @click="handleDelRow(scope.row.id)" size="mini">删除</el-button>
               <el-button type="primary" @click="handleUpdateRow(scope.row)" size="mini">修改</el-button>
               <el-button type="primary" icon="el-icon-circle-plus-outline" size="mini" v-if="scope.row.parentId == 0" @click="handleAddSubclass(scope.row.id)">添加</el-button>
+              <el-button type="primary" size="mini" v-if="scope.row.parentId !== 0" @click="handleArticala(scope.row.id)">文章管理</el-button>
             </li>
           </ul>
         </template>
@@ -87,7 +88,7 @@
 </div>
 </template>
 <script>
-  import * as api from '@/api/system'
+  import * as api from '@/api/homepage'
   import Edit from './edit'
   import Add from './add'
   export default {
@@ -127,6 +128,9 @@
       this.getList()
     },
     methods: {
+      handleArticala(id) {
+        this.$router.push({ path: '/homepage/website/websiteNavArticle', query: { navId: id }});
+      },
       //新增
       handleAddSubclass(id) {
         this.formData.parentId = id
@@ -153,9 +157,9 @@
           type: 'warning'
         }).then(() => {
           this.map.id = id
-          this.ctrl.load = true
+          this.ctrl.loading = true
           api.websiteNavDelete(this.map).then(res => {
-            this.ctrl.load = false
+            this.ctrl.loading = false
             if (res.code === 200) {
               this.$message({
                 type: 'success',

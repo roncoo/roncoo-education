@@ -64,19 +64,15 @@
 </template>
 
 <script>
-  import * as apis from '@/api/adv'
+  import * as api from '@/api/homepage'
   export default {
     name: 'Edit',
     data() {
       return {
-        ctrl: {
-          dialogVisible: true
-        },
         opts: {
           advTargetList: []
 
         },
-        form: {},
         fileList: [],
         rules: {
           advImg: [
@@ -143,7 +139,7 @@
         return this.$confirm(`确定移除${file.name}？`);
       },
       submitForm(formName) {
-        if (this.form === undefined) {
+        if (this.formData === undefined) {
           this.$message({
             showClose: true,
             message: '提交失败',
@@ -153,7 +149,7 @@
           this.loading.show()
           if (this.formData.id === undefined) {
             // 新增
-            apis.coursePcAdvSave(this.formData).then(res => {
+            api.advSave(this.formData).then(res => {
               this.loading.hide()
               if (res.code === 200 && res.data > 0) {
                 // 提交成功, 关闭窗口, 刷新列表
@@ -165,11 +161,13 @@
                   type: 'error'
                 });
               }
-            })
+            }).catch(() => {
+              this.loading.hide()
+              })
           } else {
             // 编辑
             this.loading.show()
-            apis.coursePcAdvUpdate(this.formData).then(res => {
+            api.advUpdate(this.formData).then(res => {
               this.loading.hide()
               this.load = false
               if (res.code === 200 && res.data > 0) {
@@ -182,7 +180,9 @@
                   type: 'error'
                 });
               }
-            })
+            }).catch(() => {
+              this.loading.hide()
+              })
           }
         }
       }

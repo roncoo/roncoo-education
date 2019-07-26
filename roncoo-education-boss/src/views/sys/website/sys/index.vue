@@ -122,7 +122,7 @@
   </div>
 </template>
 <script>
-  import * as api from '@/api/system'
+  import * as api from '@/api/sys'
   export default {
     data() {
       return {
@@ -169,8 +169,3 @@
     }
   }
 </script>
-<style scoped>
-  .button {
-    padding: 5px 11px;
-  }
-</style>

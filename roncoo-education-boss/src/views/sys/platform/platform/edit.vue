@@ -23,7 +23,7 @@
   </el-dialog>
 </template>
 <script>
-  import * as api from '@/api/user'
+  import * as api from '@/api/sys'
   export default {
     name: 'Edit',
     data() {

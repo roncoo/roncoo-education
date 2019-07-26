@@ -79,6 +79,11 @@ export const asyncRouterMap = [
             path: 'websiteNav',
             component: () => import('@/views/homepage/website/websiteNav'),
             meta: { requireAuth: true }
+          },
+          {
+            path: 'websiteNavArticle',
+            component: () => import('@/views/homepage/website/websiteNavArticle'),
+            meta: { requireAuth: true }
           }
         ]
       }

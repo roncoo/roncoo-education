@@ -78,7 +78,7 @@
   </div>
 </template>
 <script>
-  import * as userApi from '@/api/user'
+  import * as api from '@/api/lecturer'
   import Edit from './edit'
   export default {
     components: { Edit },
@@ -173,7 +173,7 @@
       // 分页列出打款信息
       listForPage() {
         this.ctrl.load = true
-        userApi.lecturerProfitList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
+        api.lecturerProfitList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.list = res.data.list
           this.page.pageCurrent = res.data.pageCurrent
           this.page.totalCount = res.data.totalCount
@@ -217,7 +217,7 @@
       // 请求批量更新标记为已打款
       changeStatus() {
         this.ctrl.load = true
-        userApi.lecturerProfitBatch({ id: this.id, profitStatus: 2 }).then(res => {
+        api.lecturerProfitBatch({ id: this.id, profitStatus: 2 }).then(res => {
           this.ctrl.load = false
           if (res.code === 200 && res.data > 0) {
               this.$message({

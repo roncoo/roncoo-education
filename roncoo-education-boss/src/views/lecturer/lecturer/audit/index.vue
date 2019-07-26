@@ -108,7 +108,7 @@
     </div>
 </template>
 <script>
-  import * as userApi from '@/api/user'
+  import * as api from '@/api/lecturer'
   import Add from './add'
   import Edit from './edit'
   import viewLecturer from './view'
@@ -183,7 +183,7 @@
       },
       lecturerAuditList() {
         this.load === true
-        userApi.lecturerAuditList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
+        api.lecturerAuditList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.list = res.data.list
           this.page.pageCurrent = res.data.pageCurrent
           this.page.totalCount = res.data.totalCount
@@ -209,7 +209,7 @@
       },
       // 请求更新用户方法
       changeStatus(id, statusId) {
-        userApi.lecturerAuditUpdate({ id: id, statusId: statusId }).then(res => {
+        api.lecturerAuditUpdate({ id: id, statusId: statusId }).then(res => {
           if (res.code === 200 && res.data > 0) {
             const msg = { 0: '禁用成功', 1: '启用成功' }
               this.$message({
@@ -261,7 +261,7 @@
       //查看讲师审核信息
       getById(id, title) {
         this.load === true
-        userApi.lecturerAuditView({ id: id }).then(res => {
+        api.lecturerAuditView({ id: id }).then(res => {
           this.formData = res.data
           if (JSON.stringify(res.data.lecturerExt) !== '{}') {
             this.lecturerExt = res.data.lecturerExt

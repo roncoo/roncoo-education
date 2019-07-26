@@ -65,7 +65,7 @@
   </div>
 </template>
 <script>
-  import * as api from '@/api/system'
+  import * as api from '@/api/sys'
   import viewUser from './view'
   export default {
     components: { viewUser },
@@ -141,7 +141,9 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
+          this.ctrl.load = true
           api.msgUserDelete({ id: id }).then(res => {
+            this.ctrl.load = false
           if (res.code === 200 && res.data > 0) {
             this.$message({
               type: 'success',
@@ -155,6 +157,8 @@
             });
               this.reload()
           }
+        }).catch(() => {
+          this.ctrl.load = false
         })
         }).catch(() => {
           this.reload()

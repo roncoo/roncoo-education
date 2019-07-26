@@ -85,7 +85,7 @@
 </div>
 </template>
 <script>
-  import * as apis from '@/api/system'
+  import * as api from '@/api/homepage'
   import Edit from './edit'
   import Add from './add'
   export default {
@@ -150,7 +150,7 @@
           type: 'warning'
         }).then(() => {
           this.ctrl.loading = true
-          apis.navBarDelete({ id: id }).then(res => {
+          api.navBarDelete({ id: id }).then(res => {
             this.ctrl.loading = false
             if (res.code === 200 && res.data > 0) {
               this.$message({
@@ -164,10 +164,13 @@
                 type: 'error',
                 message: "删除失败"
               });
-                this.reload()
             }
-          })
-        }).catch(() => {
+          }).catch(() => {
+            this.$message({
+              type: 'error',
+              message: "删除失败"
+            });
+            })
         })
       },
       handleChangeStatus(id, statusId) {
@@ -179,13 +182,12 @@
         }).then(() => {
           this.changeStatus(id, statusId)
         }).catch(() => {
-          this.reload()
         })
       },
       //改变状态
       changeStatus(id, statusId) {
         this.ctrl.loading = true
-        apis.navBarUpdate({ id, statusId }).then(res => {
+        api.navBarUpdate({ id, statusId }).then(res => {
           this.ctrl.loading = false
           if (res.code === 200 && res.data > 0) {
             const msg = { 0: '禁用成功', 1: '启用成功' }
@@ -200,8 +202,15 @@
               type: 'error',
               message: msg[statusId]
             });
-              this.reload()
           }
+        }).catch(() => {
+          this.ctrl.loading = false
+          const msg = { 0: '禁用失败', 1: '启用失败' }
+          this.$message({
+            type: 'error',
+            message: msg[statusId]
+          });
+          this.reload()
         })
       },
       // 查询条件
@@ -231,7 +240,7 @@
       },
       getList() {
         this.ctrl.loading = true
-          apis.navBarList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
+          api.navBarList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.list = res.data.list
           this.page.pageCurrent = res.data.pageCurrent
           this.page.totalCount = res.data.totalCount

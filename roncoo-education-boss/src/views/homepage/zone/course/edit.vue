@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import * as api from '@/api/course'
+  import * as api from '@/api/homepage'
   export default {
     name: 'Edit',
     data() {
@@ -54,14 +54,19 @@
             api.zoneCourseUpdate(this.formData).then(res => {
               this.loading.hide()
               if (res.code === 200 && res.data > 0) {
-                  this.$emit('close-callback')
+                  this.handleClose()
               } else {
                 this.$message({
                   type: 'error',
                   message: "更新失败"
                 });
               }
-            })
+            }).catch(() => {
+                this.$message({
+                    type: 'error',
+                    message: "提交失败"
+                  });
+              })
           } else {
             this.$message({
               type: 'error',
@@ -73,7 +78,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>

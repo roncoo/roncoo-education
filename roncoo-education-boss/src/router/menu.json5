@@ -103,6 +103,13 @@
              },
              {
                "id": 2,
+               "name": "文章管理",
+               "path": "/homepage/website/websiteNavArticle",
+               "icon": null,
+               "hidden": true,
+             },
+             {
+               "id": 2,
                "name": "友情链接",
                "path": "/homepage/website/websiteLink",
                "icon": null,

@@ -80,7 +80,8 @@
   </el-dialog>
 </template>
 <script>
-  import * as api from '@/api/course'
+  import * as api from '@/api/homepage'
+  import * as courseApi from '@/api/course'
   export default {
     data() {
       return {
@@ -155,7 +156,7 @@
       // 分页列出课程信息
       pageList() {
         this.ctrl.load = true
-        api.courseList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
+        courseApi.courseList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.list = res.data.list
           this.page.pageCurrent = res.data.pageCurrent
           this.page.totalCount = res.data.totalCount
@@ -188,7 +189,12 @@
               message: "保存失败"
             });
           }
-        })
+        }).catch(() => {
+            this.$message({
+                type: 'error',
+                message: "提交失败"
+              });
+          })
       },
       handleClose() {
         this.$emit('close-callback')

@@ -63,7 +63,7 @@
   </div>
 </template>
 <script>
-  import * as api from '@/api/system'
+  import * as api from '@/api/sys'
   import Add from './add'
   import Edit from './edit'
   export default {

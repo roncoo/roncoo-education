@@ -86,7 +86,7 @@
   </div>
 </template>
 <script>
-  import * as api from '@/api/system'
+  import * as api from '@/api/sys'
   import Edit from './edit'
   import Add from './add'
   export default {

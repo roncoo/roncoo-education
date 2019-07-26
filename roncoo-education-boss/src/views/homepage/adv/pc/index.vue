@@ -78,7 +78,7 @@
 </div>
 </template>
 <script>
-  import * as apis from '@/api/adv'
+  import * as api from '@/api/homepage'
   import Edit from './edit'
   export default {
    components: { Edit },
@@ -144,7 +144,7 @@
       },
       //改变状态
       changeStatus(id, statusId) {
-        apis.coursePcAdvUpdate({ id: id, statusId: statusId }).then(res => {
+        api.advUpdate({ id: id, statusId: statusId }).then(res => {
           this.ctrl.loading = false
           if (res.code === 200 && res.data > 0) {
             const msg = { 0: '禁用成功', 1: '启用成功' }
@@ -159,9 +159,17 @@
               type: 'error',
               message: msg[statusId]
             });
-              this.reload()
+            this.reload()
           }
-        })
+        }).catch(() => {
+          this.ctrl.loading = false
+          const msg = { 0: '禁用失败', 1: '启用失败' }
+            this.$message({
+              type: 'error',
+              message: msg[statusId]
+            });
+            this.reload()
+          })
       },
       //删除
       handleDelRow(id) {
@@ -171,7 +179,7 @@
           type: 'warning'
         }).then(() => {
           this.ctrl.loading = true
-          apis.coursePcAdvDelete({ id: id }).then(res => {
+          api.advDelete({ id: id }).then(res => {
             this.ctrl.loading = false
             console.log(res)
             if (res.code === 200 && res.data > 0) {
@@ -179,19 +187,21 @@
                 type: 'success',
                 message: "删除成功"
               });
-                this.handleReset()
+                this.reload()
             } else {
               this.$message({
                 type: 'error',
                 message: "删除失败"
               });
-                this.handleReset()
             }
           })
         }).catch(() => {
         })
       },
+      // 刷新页面
       reload() {
+        this.map = {}
+        this.formData = {}
         this.getList()
       },
       handleSizeChange(val) {
@@ -211,14 +221,12 @@
       },
       // 重置查询条件
       handleReset() {
-        this.map = {}
-        this.formData = {}
-        this.getList()
+        this.reload()
       },
       //轮播广告列表
       getList() {
         this.ctrl.loading = true
-        apis.coursePcAdvList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
+        api.advList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.ctrl.loading = false
           this.list = res.data.list
           this.page.pageCurrent = res.data.pageCurrent

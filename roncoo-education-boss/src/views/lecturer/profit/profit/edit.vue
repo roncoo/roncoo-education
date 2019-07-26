@@ -24,7 +24,7 @@
   </el-dialog>
 </template>
 <script>
-  import * as userApi from '@/api/user'
+  import * as api from '@/api/lecturer'
   export default {
     name: 'Edit',
     data() {
@@ -78,7 +78,7 @@
                 message: "提交失败"
               });
             } else {
-              userApi.lecturerProfitUpdate(this.formData).then(res => {
+              api.lecturerProfitUpdate(this.formData).then(res => {
                 this.loading.hide()
                 if (res.code === 200 && res.data > 0) {
                     this.$emit('close-callback')

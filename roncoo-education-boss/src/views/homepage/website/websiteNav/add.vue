@@ -17,7 +17,7 @@
   </el-dialog>
 </template>
 <script>
-  import * as api from '@/api/system'
+  import * as api from '@/api/homepage'
   export default {
     name: 'Add',
     data() {
@@ -74,6 +74,12 @@
                   message: "提交失败"
                 });
               }
+            }).catch(() => {
+              this.loading.hide()
+              this.$message({
+                type: 'error',
+                message: "提交失败"
+              });
             })
           } else {
             this.$message({

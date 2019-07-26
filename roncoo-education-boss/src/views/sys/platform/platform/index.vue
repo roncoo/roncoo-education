@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div class="pad20">
     <div>
       <el-form :inline="true" size="mini">
@@ -72,7 +72,7 @@
   </div>
 </template>
 <script>
-  import * as api from '@/api/user'
+  import * as api from '@/api/sys'
   import Edit from './edit'
   import ViewPlatform from './view'
   import AddPlatform from './add'

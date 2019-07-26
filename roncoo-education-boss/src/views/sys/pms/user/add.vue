@@ -30,7 +30,7 @@
 </template>
 <script>
 import { isvalidMobile } from '@/utils/validate'
-import * as api from '@/api/system'
+import * as api from '@/api/sys'
 import listUser from './list'
 export default {
   components: { listUser },
@@ -102,7 +102,7 @@ export default {
             if (res.code === 200 && res.data > 0) {
               // 提交成功, 关闭窗口, 刷新列表
               this.tips('操作成功', 'success')
-              this.$emit('close-callback')
+              this.handleClose()
             } else {
               this.$message({
                 type: 'error',

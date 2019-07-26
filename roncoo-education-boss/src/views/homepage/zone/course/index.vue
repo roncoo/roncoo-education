@@ -84,7 +84,7 @@
   </div>
 </template>
 <script>
-  import * as api from '@/api/course'
+  import * as api from '@/api/homepage'
   import Add from './add'
   import Edit from './edit'
   export default {
@@ -137,11 +137,28 @@
       changeStatus(id, statusId) {
         api.zoneCourseUpdate({ id, statusId }).then(res => {
           this.ctrl.loading = false
-          const msg = { 0: '禁用成功', 1: '启用成功' }
-          this.$message({
-            type: 'success',
-            message: msg[statusId]
-          });
+          if (res.code === 200 && res.data > 0) {
+            const msg = { 0: '禁用成功', 1: '启用成功' }
+            this.$message({
+              type: 'success',
+              message: msg[statusId]
+            });
+              this.reload()
+          } else {
+            const msg = { 0: '禁用失败', 1: '启用失败' }
+            this.$message({
+              type: 'error',
+              message: msg[statusId]
+            });
+          }
+          this.reload()
+        }).catch(() => {
+          this.ctrl.loading = false
+          const msg = { 0: '禁用失败', 1: '启用失败' }
+            this.$message({
+              type: 'error',
+              message: msg[statusId]
+            });
           this.reload()
         })
       },
@@ -175,10 +192,13 @@
                 type: 'error',
                 message: "删除失败"
               });
-                this.reload()
             }
+          }).catch(() => {
+            this.$message({
+                type: 'error',
+                message: "删除失败"
+              });
           })
-        }).catch(() => {
         })
       },
       // 关闭编辑弹窗回调

@@ -31,6 +31,11 @@ public class WebsiteNavArticleUpdateREQ implements Serializable {
 	@ApiModelProperty(value = "文章标题", required = true)
 	private String artTitle;
 	/**
+	 * 排序
+	 */
+	@ApiModelProperty(value = "排序", required = true)
+	private Integer sort;
+	/**
 	 * 文章图片
 	 */
 	@ApiModelProperty(value = "文章图片", required = true)

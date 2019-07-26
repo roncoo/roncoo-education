@@ -41,7 +41,7 @@
   </div>
 </template>
 <script>
-  import * as api from '@/api/course'
+  import * as api from '@/api/user'
   export default {
     data() {
       return {

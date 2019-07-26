@@ -1,5 +1,5 @@
 import mockMenuData from '@/router/menu.json5'
-import * as api from '@/api/system'
+import * as api from '@/api/commonality'
 import _ from 'lodash'
 
 function flattenMenu(menu, parents = []) {
@@ -39,6 +39,9 @@ const menu = {
             commit('set_system_menu', mockMenuData)
           }
           resolve()
+        }).catch(() => {
+          // 如果没有权限默认初始化首页权限页路由
+            commit('set_system_menu', mockMenuData)
         })
       })
     }

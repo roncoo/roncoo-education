@@ -19,7 +19,7 @@
   </el-dialog>
 </template>
 <script>
-import * as courseApis from '@/api/course'
+import * as orderApi from '@/api/order'
 export default {
   name: 'Remark',
   props: {
@@ -49,7 +49,7 @@ export default {
     },
     async handleConfirm() {
       let res = {}
-      res = await courseApis.orderUpdate(this.formData)
+      res = await orderApi.orderUpdate(this.formData)
       this.tips('成功', 'success')
       if (res.code === 200 && res.data > 0) {
         // 提交成功, 关闭窗口, 刷新列表

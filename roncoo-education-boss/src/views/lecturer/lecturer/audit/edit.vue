@@ -72,7 +72,8 @@
   </el-dialog>
 </template>
 <script>
-  import * as userApi from '@/api/user'
+  import * as commonalityApi from '@/api/commonality'
+  import * as api from '@/api/lecturer'
   export default {
     name: 'Edit',
     data() {
@@ -123,7 +124,7 @@
         const file = files[0];
         const param = new FormData();
         param.append('picFile', file, file.name);
-        userApi.uploadPic(param).then(res => {
+        commonalityApi.uploadPic(param).then(res => {
           if (res.code === 200) {
             const imgUrl = res.data
             insert(imgUrl)
@@ -159,7 +160,7 @@
         if (this.formData.id === undefined) {
           this.$alert(res.msg || '提交失败')
         } else {
-          res = await userApi.lecturerAuditUpdate(this.formData)
+          res = await api.lecturerAuditUpdate(this.formData)
         }
         this.load = false
         if (res.code === 200 && res.data > 0) {
