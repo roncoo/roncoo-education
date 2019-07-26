@@ -48,11 +48,6 @@ public class SysMenuUserRESQ implements Serializable {
 	@ApiModelProperty(value = "菜单图标")
 	private String icon;
 	/**
-	 * 是否显示(true: 显示；false:不显示)
-	 */
-	@ApiModelProperty(value = "是否显示(true: 显示；false:不显示)")
-	private String hidden;
-	/**
 	 * 下级菜单集合
 	 */
 	private List<SysMenuUserRESQ> children;
