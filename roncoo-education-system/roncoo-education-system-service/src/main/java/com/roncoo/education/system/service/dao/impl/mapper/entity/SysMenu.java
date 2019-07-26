@@ -26,7 +26,7 @@ public class SysMenu implements Serializable {
 
     private String remark;
 
-    private String hidden;
+    private Integer hiddenType;
 
     private static final long serialVersionUID = 1L;
 
@@ -118,12 +118,12 @@ public class SysMenu implements Serializable {
         this.remark = remark == null ? null : remark.trim();
     }
 
-    public String getHidden() {
-        return hidden;
+    public Integer getHiddenType() {
+        return hiddenType;
     }
 
-    public void setHidden(String hidden) {
-        this.hidden = hidden == null ? null : hidden.trim();
+    public void setHiddenType(Integer hiddenType) {
+        this.hiddenType = hiddenType;
     }
 
     @Override
@@ -143,7 +143,7 @@ public class SysMenu implements Serializable {
         sb.append(", apiUrl=").append(apiUrl);
         sb.append(", menuIcon=").append(menuIcon);
         sb.append(", remark=").append(remark);
-        sb.append(", hidden=").append(hidden);
+        sb.append(", hiddenType=").append(hiddenType);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

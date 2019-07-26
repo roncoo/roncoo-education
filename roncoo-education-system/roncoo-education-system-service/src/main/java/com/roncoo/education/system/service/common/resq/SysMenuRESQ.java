@@ -75,10 +75,10 @@ public class SysMenuRESQ implements Serializable {
 	@ApiModelProperty(value = "备注")
 	private String remark;
 	/**
-	 * 是否显示(true: 显示；false:不显示)
+	 * 是否显示(1: 显示；0:不显示)
 	 */
-	@ApiModelProperty(value = "是否显示(true: 显示；false:不显示)")
-	private String hidden;
+	@ApiModelProperty(value = "是否显示(1: 显示；0:不显示)")
+	private Integer hiddenType;
 	/**
 	 * 下级菜单集合
 	 */

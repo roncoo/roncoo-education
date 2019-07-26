@@ -65,10 +65,10 @@ public class SysMenuVO implements Serializable {
 	 */
 	private String remark;
 	/**
-	 * 是否显示(true: 显示；false:不显示)
+	 * 是否显示(1: 显示；0:不显示)
 	 */
-	@ApiModelProperty(value = "是否显示(true: 显示；false:不显示)")
-	private String hidden;
+	@ApiModelProperty(value = "是否显示(1: 显示；0:不显示)")
+	private Integer hiddenType;
 	/**
 	 * 菜单集合
 	 */

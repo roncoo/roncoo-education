@@ -29,6 +29,7 @@ import com.roncoo.education.system.service.dao.impl.mapper.entity.SysMenuRole;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.SysRoleUser;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.SysUser;
 import com.roncoo.education.util.base.Result;
+import com.roncoo.education.util.enums.HiddenTypeEnum;
 import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.tools.BeanUtil;
 import com.xiaoleilu.hutool.util.CollectionUtil;
@@ -206,6 +207,11 @@ public class PcApiSysMenuBiz {
 		if (CollectionUtil.isNotEmpty(list)) {
 			for (SysMenu m : list) {
 				SysMenuUserRESQ resq = BeanUtil.copyProperties(m, SysMenuUserRESQ.class);
+				if (HiddenTypeEnum.YES.getCode().equals(m.getHiddenType())) {
+					resq.setHidden(false);
+				} else {
+					resq.setHidden(true);
+				}
 				resq.setName(m.getMenuName());
 				resq.setPath(m.getMenuUrl());
 				resq.setIcon(m.getMenuIcon());

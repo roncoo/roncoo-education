@@ -51,7 +51,7 @@ public class SysMenuUserRESQ implements Serializable {
 	 * 是否显示(true: 显示；false:不显示)
 	 */
 	@ApiModelProperty(value = "是否显示(true: 显示；false:不显示)")
-	private String hidden;
+	private boolean hidden;
 	/**
 	 * 下级菜单集合
 	 */
