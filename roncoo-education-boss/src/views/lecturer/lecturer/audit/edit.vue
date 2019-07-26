@@ -146,39 +146,42 @@
       },
       submitForm(formData) {
         this.$refs[formData].validate((valid) => {
-          if (valid) {
-            this.formData.introduce = this.editor.txt.html()
-            this.handleConfirm()
-          } else {
-            return false;
+        if (valid) {
+          this.formData.introduce = this.editor.txt.html()
+          if (this.formData.id === undefined) {
+            this.$message({
+              type: 'error',
+              message: "提交失败"
+            });
           }
-        })
-      },
-     async handleConfirm() {
-        this.load = true
-        let res = {}
-        if (this.formData.id === undefined) {
-          this.$alert(res.msg || '提交失败')
+          this.loading.show()
+          api.lecturerAuditUpdate(this.formData).then(res => {
+            this.loading.hide()
+            if (res.code === 200 && res.data > 0) {
+              // 提交成功, 关闭窗口, 刷新列表
+              this.tips('操作成功', 'success')
+              this.handleClose()
+            } else {
+              this.$message({
+                type: 'error',
+                message: "提交失败"
+              });
+            }
+          }).catch(() => {
+            this.$message({
+              type: 'error',
+              message: "提交失败"
+            });
+            this.loading.hide()
+          })
         } else {
-          res = await api.lecturerAuditUpdate(this.formData)
+          this.$message({
+            type: 'error',
+            message: "提交失败"
+          });
         }
-        this.load = false
-        if (res.code === 200 && res.data > 0) {
-          // 提交成功, 关闭窗口, 刷新列表
-          this.tips('成功', 'success')
-          this.$emit('close-callback')
-        } else {
-          this.$alert(res.msg || '提交失败')
-        }
+      })
       }
     }
   }
 </script>
-<style scoped>
-  .cancel {
-    text-align: right;
-  }
-  .button {
-    padding: 5px 10px;
-  }
-</style>

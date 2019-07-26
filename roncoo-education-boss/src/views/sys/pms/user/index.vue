@@ -174,11 +174,10 @@
               type: 'error',
               message: "删除失败"
             });
-              this.reload()
           }
-        })
         }).catch(() => {
-          this.reload()
+          this.ctrl.load = true
+        })
         })
       },
       // 修改状态
@@ -215,6 +214,13 @@
             });
               this.reload()
           }
+        }).catch(() => {
+          const msg = { 0: '禁用失败', 1: '启用失败' }
+            this.$message({
+              type: 'error',
+              message: msg[statusId]
+            });
+              this.reload()
         })
       },
       handleSizeChange(val) {

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -51,17 +52,23 @@ public class SysMenuVO implements Serializable {
 	 */
 	private String menuUrl;
 	/**
+	 * 接口URL
+	 */
+	@ApiModelProperty(value = "接口URL")
+	private String apiUrl;
+	/**
 	 * 菜单图标
 	 */
 	private String menuIcon;
 	/**
-	 * 目标名称
-	 */
-	private String targetName;
-	/**
 	 * 备注
 	 */
 	private String remark;
+	/**
+	 * 是否显示(true: 显示；false:不显示)
+	 */
+	@ApiModelProperty(value = "是否显示(true: 显示；false:不显示)")
+	private String hidden;
 	/**
 	 * 菜单集合
 	 */

@@ -25,7 +25,7 @@
       </el-form>
     </div>
     <div>
-      <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
+      <el-table v-loading="ctrl.loading" size="medium" :data="list" stripe border style="width: 100%">
         <el-table-column type="index" label="序号" width="40">
         </el-table-column>
         <el-table-column label="手机号">
@@ -102,7 +102,7 @@
         lecturerExt: {},
         title: '',
         ctrl: {
-          load: false,
+          loading: false,
           dialogVisible: false,
           viewVisible: false
         },
@@ -146,15 +146,15 @@
         this.reload()
       },
       lecturerList() {
-        this.load === true
+        this.ctrl.loading === true
         api.lecturerList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.list = res.data.list
           this.page.pageCurrent = res.data.pageCurrent
           this.page.totalCount = res.data.totalCount
           this.page.pageSize = res.data.pageSize
-          this.ctrl.load = false
+          this.ctrl.loading = false
         }).catch(() => {
-          this.ctrl.load = false
+          this.ctrl.loading = false
         })
       },
       // 修改状态
@@ -173,7 +173,9 @@
       },
       // 请求更新用户方法
       changeStatus(id, statusId) {
+        this.ctrl.loading === true
         api.lecturerUpdate({ id: id, statusId: statusId }).then(res => {
+          this.ctrl.loading = false
           if (res.code === 200 && res.data > 0) {
             const msg = { 0: '禁用成功', 1: '启用成功' }
               this.$message({
@@ -183,12 +185,20 @@
                 this.reload()
           } else {
             const msg = { 0: '禁用失败', 1: '启用失败' }
-              this.$message({
-                type: 'error',
-                message: msg[statusId]
-              });
-                this.reload()
+            this.$message({
+              type: 'error',
+              message: msg[statusId]
+            });
+            this.reload()
           }
+        }).catch(() => {
+          this.ctrl.loading = false
+          const msg = { 0: '禁用失败', 1: '启用失败' }
+            this.$message({
+              type: 'error',
+              message: msg[statusId]
+            });
+            this.reload()
         })
       },
       // 修改跳页面操作
@@ -218,6 +228,7 @@
       },
       // 查看信息
       getById(id, title) {
+        this.ctrl.loading === true
         api.lecturerView({ id: id }).then(res => {
           this.formData = res.data
           if (JSON.stringify(res.data.lecturerExt) !== '{}') {
@@ -225,9 +236,9 @@
           }
           this.introduce = res.data.introduce
           this.ctrl.dialogTitle = res.data.lecturerMobile + '——' + title
-          this.ctrl.load = false
+          this.ctrl.loading = false
         }).catch(() => {
-          this.ctrl.load = true
+          this.ctrl.loading = true
         })
       }
     }

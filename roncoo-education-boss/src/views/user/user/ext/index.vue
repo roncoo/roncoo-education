@@ -103,7 +103,7 @@
   </div>
 </template>
 <script>
-  import * as userApi from '@/api/user'
+  import * as api from '@/api/user'
   import Edit from './edit'
   import viewUser from './view'
   export default {
@@ -162,7 +162,7 @@
       // 查看弹窗
       handleView(id) {
         this.ctrl.load = true
-        userApi.userExtView({ id: id }).then(res => {
+        api.userExtView({ id: id }).then(res => {
           this.formData = res.data
           this.ctrl.dialogTitle = "查看"
           this.ctrl.load = false
@@ -196,7 +196,7 @@
       },
       // 请求更新用户方法
       changeStatus(id, statusId) {
-        userApi.userExtUpdate({ id: id, statusId: statusId }).then(res => {
+        api.userExtUpdate({ id: id, statusId: statusId }).then(res => {
           this.ctrl.load = false
           if (res.code === 200 && res.data > 0) {
             const msg = { 0: '禁用成功', 1: '启用成功' }
@@ -213,6 +213,14 @@
             });
               this.reload()
           }
+        }).catch(() => {
+          this.ctrl.load = false
+          const msg = { 0: '禁用失败', 1: '启用失败' }
+            this.$message({
+              type: 'error',
+              message: msg[statusId]
+            });
+          this.reload()
         })
       },
       // 注册时间段查询条件
@@ -260,7 +268,7 @@
       // 分页列出用户信息
       userExtList() {
         this.ctrl.load = true
-        userApi.userExtList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
+        api.userExtList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.list = res.data.list
           this.page.pageCurrent = res.data.pageCurrent
           this.page.totalCount = res.data.totalCount

@@ -65,15 +65,20 @@ public class SysMenuRESQ implements Serializable {
 	@ApiModelProperty(value = "菜单图标")
 	private String menuIcon;
 	/**
-	 * 目标名称
+	 * 接口URL
 	 */
-	@ApiModelProperty(value = "目标名称")
-	private String targetName;
+	@ApiModelProperty(value = "接口URL")
+	private String apiUrl;
 	/**
 	 * 备注
 	 */
 	@ApiModelProperty(value = "备注")
 	private String remark;
+	/**
+	 * 是否显示(true: 显示；false:不显示)
+	 */
+	@ApiModelProperty(value = "是否显示(true: 显示；false:不显示)")
+	private String hidden;
 	/**
 	 * 下级菜单集合
 	 */

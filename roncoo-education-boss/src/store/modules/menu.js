@@ -29,6 +29,7 @@ const menu = {
   actions: {
     setMenu({ commit }) {
       return new Promise(resolve => {
+        commit('set_system_menu', mockMenuData)
         api.menuUserList({}).then(res => {
           if (res.data.sysMenu !== []) {
             const mockMenuList = res.data.sysMenu

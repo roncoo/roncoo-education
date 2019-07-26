@@ -232,6 +232,12 @@
               });
                 this.handleReset()
           }
+        }).catch(() => {
+          this.ctrl.load = false
+          this.$message({
+            type: 'error',
+            message: '操作失败'
+          });
         })
       }
     }

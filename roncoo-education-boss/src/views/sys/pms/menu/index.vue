@@ -28,26 +28,28 @@
         </el-table-column>
         <el-table-column
           prop="menuIcon"
-          label="菜单图标">
+          label="菜单图标"
+          width="100">
         </el-table-column>
         <el-table-column
           prop="menuUrl"
-          label="菜单路径"
+          label="路由地址"
           sortable
-          width="180">
+          width="250">
         </el-table-column>
         <el-table-column
           prop="targetName"
           label="目标名称">
         </el-table-column>
         <el-table-column
-          width="90"
+          width="80"
           prop="sort"
           label="排序">
         </el-table-column>
         <el-table-column
           prop="remark"
-          label="备注">
+          label="备注"
+          width="200">
         </el-table-column>
         <el-table-column label="操作" width="240">
           <template slot-scope="scope">
@@ -149,8 +151,9 @@
               type: 'error',
               message: "删除失败"
             });
-              this.reload()
           }
+        }).catch(() => {
+          this.ctrl.load = true
         })
         }).catch(() => {
           this.reload()

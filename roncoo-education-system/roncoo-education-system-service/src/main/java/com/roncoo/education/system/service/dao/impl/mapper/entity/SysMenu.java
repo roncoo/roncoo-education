@@ -20,11 +20,13 @@ public class SysMenu implements Serializable {
 
     private String menuUrl;
 
+    private String apiUrl;
+
     private String menuIcon;
 
-    private String targetName;
-
     private String remark;
+
+    private String hidden;
 
     private static final long serialVersionUID = 1L;
 
@@ -92,6 +94,14 @@ public class SysMenu implements Serializable {
         this.menuUrl = menuUrl == null ? null : menuUrl.trim();
     }
 
+    public String getApiUrl() {
+        return apiUrl;
+    }
+
+    public void setApiUrl(String apiUrl) {
+        this.apiUrl = apiUrl == null ? null : apiUrl.trim();
+    }
+
     public String getMenuIcon() {
         return menuIcon;
     }
@@ -100,20 +110,20 @@ public class SysMenu implements Serializable {
         this.menuIcon = menuIcon == null ? null : menuIcon.trim();
     }
 
-    public String getTargetName() {
-        return targetName;
-    }
-
-    public void setTargetName(String targetName) {
-        this.targetName = targetName == null ? null : targetName.trim();
-    }
-
     public String getRemark() {
         return remark;
     }
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public String getHidden() {
+        return hidden;
+    }
+
+    public void setHidden(String hidden) {
+        this.hidden = hidden == null ? null : hidden.trim();
     }
 
     @Override
@@ -130,9 +140,10 @@ public class SysMenu implements Serializable {
         sb.append(", parentId=").append(parentId);
         sb.append(", menuName=").append(menuName);
         sb.append(", menuUrl=").append(menuUrl);
+        sb.append(", apiUrl=").append(apiUrl);
         sb.append(", menuIcon=").append(menuIcon);
-        sb.append(", targetName=").append(targetName);
         sb.append(", remark=").append(remark);
+        sb.append(", hidden=").append(hidden);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
