@@ -28,6 +28,8 @@ public class SysMenu implements Serializable {
 
     private Integer hiddenType;
 
+    private Integer menuType;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -126,6 +128,14 @@ public class SysMenu implements Serializable {
         this.hiddenType = hiddenType;
     }
 
+    public Integer getMenuType() {
+        return menuType;
+    }
+
+    public void setMenuType(Integer menuType) {
+        this.menuType = menuType;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -144,6 +154,7 @@ public class SysMenu implements Serializable {
         sb.append(", menuIcon=").append(menuIcon);
         sb.append(", remark=").append(remark);
         sb.append(", hiddenType=").append(hiddenType);
+        sb.append(", menuType=").append(menuType);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

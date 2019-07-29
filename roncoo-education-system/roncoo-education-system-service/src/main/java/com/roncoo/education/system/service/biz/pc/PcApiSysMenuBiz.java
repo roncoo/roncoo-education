@@ -30,6 +30,7 @@ import com.roncoo.education.system.service.dao.impl.mapper.entity.SysRoleUser;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.SysUser;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.HiddenTypeEnum;
+import com.roncoo.education.util.enums.MenuTypeEnum;
 import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.tools.BeanUtil;
 import com.xiaoleilu.hutool.util.CollectionUtil;
@@ -203,7 +204,7 @@ public class PcApiSysMenuBiz {
 	 */
 	private List<SysMenuUserRESQ> userRecursion(Long parentId) {
 		List<SysMenuUserRESQ> lists = new ArrayList<>();
-		List<SysMenu> list = dao.listByParentId(parentId);
+		List<SysMenu> list = dao.listByParentIdAndNotMenuType(parentId, MenuTypeEnum.BUTTON.getCode());
 		if (CollectionUtil.isNotEmpty(list)) {
 			for (SysMenu m : list) {
 				SysMenuUserRESQ resq = BeanUtil.copyProperties(m, SysMenuUserRESQ.class);

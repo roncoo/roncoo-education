@@ -9,6 +9,7 @@ import com.roncoo.education.system.service.dao.SysMenuDao;
 import com.roncoo.education.system.service.dao.impl.mapper.SysMenuMapper;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.SysMenu;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.SysMenuExample;
+import com.roncoo.education.system.service.dao.impl.mapper.entity.SysMenuExample.Criteria;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.tools.IdWorker;
@@ -53,6 +54,18 @@ public class SysMenuDaoImpl implements SysMenuDao {
 	public List<SysMenu> listByParentId(Long parentId) {
 		SysMenuExample example = new SysMenuExample();
 		example.createCriteria().andParentIdEqualTo(parentId);
+		example.setOrderByClause(" sort desc, id desc");
+		return this.sysMenuMapper.selectByExample(example);
+	}
+
+	@Override
+	public List<SysMenu> listByParentIdAndNotMenuType(Long parentId, Integer menuType) {
+		SysMenuExample example = new SysMenuExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andParentIdEqualTo(parentId);
+		if (menuType != null) {
+			criteria.andMenuTypeNotEqualTo(menuType);
+		}
 		example.setOrderByClause(" sort desc, id desc");
 		return this.sysMenuMapper.selectByExample(example);
 	}

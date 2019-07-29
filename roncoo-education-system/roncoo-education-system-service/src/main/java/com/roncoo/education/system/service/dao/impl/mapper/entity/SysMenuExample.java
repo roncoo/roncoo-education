@@ -894,6 +894,66 @@ public class SysMenuExample {
             addCriterion("hidden_type not between", value1, value2, "hiddenType");
             return (Criteria) this;
         }
+
+        public Criteria andMenuTypeIsNull() {
+            addCriterion("menu_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuTypeIsNotNull() {
+            addCriterion("menu_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuTypeEqualTo(Integer value) {
+            addCriterion("menu_type =", value, "menuType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuTypeNotEqualTo(Integer value) {
+            addCriterion("menu_type <>", value, "menuType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuTypeGreaterThan(Integer value) {
+            addCriterion("menu_type >", value, "menuType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("menu_type >=", value, "menuType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuTypeLessThan(Integer value) {
+            addCriterion("menu_type <", value, "menuType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("menu_type <=", value, "menuType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuTypeIn(List<Integer> values) {
+            addCriterion("menu_type in", values, "menuType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuTypeNotIn(List<Integer> values) {
+            addCriterion("menu_type not in", values, "menuType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuTypeBetween(Integer value1, Integer value2) {
+            addCriterion("menu_type between", value1, value2, "menuType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("menu_type not between", value1, value2, "menuType");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

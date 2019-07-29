@@ -80,6 +80,11 @@ public class SysMenuRESQ implements Serializable {
 	@ApiModelProperty(value = "是否显示(1: 显示；0:不显示)")
 	private Integer hiddenType;
 	/**
+	 * 菜单类型(1：目录 2：菜单 3：按钮)
+	 */
+	@ApiModelProperty(value = "菜单类型(1：目录   2：菜单   3：按钮)")
+	private Integer menuType;
+	/**
 	 * 下级菜单集合
 	 */
 	private List<SysMenuRESQ> children;
