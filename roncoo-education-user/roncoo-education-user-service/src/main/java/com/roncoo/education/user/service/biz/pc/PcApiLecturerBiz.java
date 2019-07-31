@@ -59,7 +59,11 @@ public class PcApiLecturerBiz {
 		}
 		example.setOrderByClause(" status_id desc, sort desc, id desc ");
 		Page<Lecturer> page = lecturerDao.listForPage(req.getPageCurrent(), req.getPageSize(), example);
-		return Result.success(PageUtil.transform(page, LecturerPageRESQ.class));
+		Page<LecturerPageRESQ> listPage = PageUtil.transform(page, LecturerPageRESQ.class);
+		for (LecturerPageRESQ resq : listPage.getList()) {
+			resq.setLecturerProportion(resq.getLecturerProportion().multiply(BigDecimal.valueOf(100)));
+		}
+		return Result.success(listPage);
 	}
 
 	/**
@@ -72,15 +76,16 @@ public class PcApiLecturerBiz {
 		if (req.getId() != null) {
 			record = lecturerDao.getById(req.getId());
 		}
-		
 		if (req.getLecturerUserNo() != null) {
 			record = lecturerDao.getByLecturerUserNoAndStatusId(req.getLecturerUserNo(), StatusIdEnum.YES.getCode());
 		}
-		
 		if (ObjectUtil.isNull(record)) {
 			return Result.error("找不到该讲师信息");
 		}
 		LecturerViewRESQ vo = BeanUtil.copyProperties(record, LecturerViewRESQ.class);
+		if (vo.getLecturerProportion() != null) {
+			vo.setLecturerProportion(vo.getLecturerProportion().multiply(BigDecimal.valueOf(100)));
+		}
 		// 讲师账户信息
 		LecturerExt lecturerExt = lecturerExtDao.getByLecturerUserNo(vo.getLecturerUserNo());
 		vo.setLecturerExt(BeanUtil.copyProperties(lecturerExt, LecturerExtViewRESQ.class));
