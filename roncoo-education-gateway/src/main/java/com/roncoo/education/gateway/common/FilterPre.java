@@ -89,8 +89,8 @@ public class FilterPre extends ZuulFilter {
 		try {
 			userNo = getUserNoByToken(request);
 
-			if (uri.contains("/course/pc") || uri.contains("/user/pc") || uri.contains("/system/pc") && !uri.contains("/system/pc/menu/user/list") && !uri.contains("/system/pc/sys/enum/list")) {
-				// 不鉴权
+			if (uri.contains("/pc") && !uri.contains("/system/pc/menu/user/list") && !uri.contains("/system/pc/sys/enum/list")) {
+				// 管理后台鉴权
 				if (!stringRedisTemplate.hasKey(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()))) {
 					throw new BaseException(ResultEnum.MENU_PAST);
 				}
@@ -107,6 +107,7 @@ public class FilterPre extends ZuulFilter {
 		} catch (BaseException e) {
 			logger.error("系统异常", e.getMessage());
 			resp(ctx, e.getMessage(), e.getCode());
+			return null;
 		}
 		// 参数封装
 		try {
@@ -230,7 +231,6 @@ public class FilterPre extends ZuulFilter {
 	private static Boolean checkUri(String uri, String tk) {
 		Set<String> menuSet = new HashSet<>();
 		List<SysMenuVO> menuVOList = JSONUtil.parseArray(tk, SysMenuVO.class);
-		logger.info("请求地址" + uri);
 		listMenu(menuSet, menuVOList);
 		if (StringUtils.hasText(uri) && uri.endsWith("/")) {
 			uri = uri.substring(0, uri.length() - 1);
