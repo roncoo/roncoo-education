@@ -250,7 +250,7 @@ public class FilterPre extends ZuulFilter {
 	private static void listMenu(Set<String> menuSet, List<SysMenuVO> menuVOList) {
 		if (CollectionUtil.isNotEmpty(menuVOList)) {
 			for (SysMenuVO sm : menuVOList) {
-				if (StringUtils.hasText(sm.getMenuUrl())) {
+				if (StringUtils.hasText(sm.getApiUrl())) {
 					menuSet.add(sm.getApiUrl());
 				}
 				listMenu(menuSet, sm.getList());
