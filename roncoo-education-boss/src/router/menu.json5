@@ -17,8 +17,8 @@
   {
     "id": 0,
     "name": "首页",
-    "path": "/dashboard",
-    "icon": null,
+    "path": "dashboard",
+    "icon": null
   }/*,
   {
     "id": 0,
@@ -45,7 +45,7 @@
   {
     "id": 0,
     "name": "首页管理",
-    "path": "/homepage",
+    "path": "homepage",
     "icon": null,
     "children": [
       {
@@ -234,7 +234,7 @@
   {
     "id": 0,
     "name": "系统管理",
-    "path": "/sys",
+    "path": "sys",
     "icon": null,
     "children": [
       {

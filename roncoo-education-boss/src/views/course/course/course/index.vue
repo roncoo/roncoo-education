@@ -42,7 +42,7 @@
       </el-form>
    </div>
 
-    <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
+    <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border>
       <el-table-column type="index" label="序号" width="40">
       </el-table-column>
       <el-table-column prop="courseName" label="课程名称">
@@ -56,7 +56,7 @@
         {{scope.row.categoryName1}}/{{scope.row.categoryName2}}/{{scope.row.categoryName3}}
         </template>
       </el-table-column>
-      <el-table-column label="是否收费" width="90">
+      <el-table-column label="是否收费" width="100">
         <template slot-scope="scope">
           <span :class="textClass(scope.row.isFree)">{{textIsFree[scope.row.isFree]}}</span>
         </template>
@@ -67,7 +67,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        width="150"
+        width="160"
         prop="isPutaway"
         label="上下架"
         align="center">
@@ -85,7 +85,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        width="150"
+        width="160"
         prop="statusId"
         label="状态"
         align="center">
@@ -102,11 +102,11 @@
           </el-switch>
         </template>
       </el-table-column>
-      <el-table-column prop="sort" label="排序" width="70">
+      <el-table-column prop="sort" label="排序" width="100">
       </el-table-column>
-      <el-table-column width="150" label="操作">
+      <el-table-column label="操作" width="100">
         <template slot-scope="scope">
-          <el-button type="success" @click="handleEdit(scope.row)" size="mini">修改</el-button>
+          <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -120,11 +120,11 @@
       layout="total, sizes, prev, pager, next, jumper"
       :total="page.totalCount">
     </el-pagination>
-    <edit :visible="ctrl.editVisible" :formData="formdata" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
+    <edit :visible="ctrl.editVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCllback"></edit>
   </div>
 </template>
 <script>
-import * as courseApis from '@/api/course'
+import * as api from '@/api/course'
 import Edit from './edit'
 export default {
   components: { Edit },
@@ -135,13 +135,8 @@ export default {
         dialogVisible: false,
         editVisible: false
       },
-      map: {
-        isFree: '',
-        courseName: '',
-        isPutaway: ''
-      },
-      formLabelWidth: '120px',
-      formdata: {},
+      map: {},
+      formData: {},
       list: [],
       opts: {
         isFreeList: [],
@@ -182,7 +177,7 @@ export default {
   methods: {
     getList() {
       this.ctrl.load = true
-      courseApis.courseList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
+      api.courseList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
         this.ctrl.load = false
         this.list = res.data.list
         this.page.pageSize = res.data.pageSize
@@ -192,6 +187,27 @@ export default {
       })
     },
     handleCheck() {
+      this.page.pageCurrent = 1
+      this.getList()
+    },
+    // 重置查询条件
+    handleReset() {
+      this.reload()
+    },
+    handleSizeChange(val) {
+      // console.log(`每页 ${val} 条`)
+      this.page.pageSize = val
+      this.getList()
+    },
+    handleCurrentChange(val) {
+      // console.log(`当前页: ${val}`)
+      this.page.pageCurrent = val
+      this.getList()
+    },
+    // 刷新当前页面
+    reload() {
+      this.map = {}
+      this.formData = {}
       this.getList()
     },
     // 关闭编辑弹窗回调
@@ -216,7 +232,7 @@ export default {
     },
     // 请求更新上下架方法
     changeIsPutaway(row, command) {
-      courseApis.courseUpdate({ id: row.id, isPutaway: command }).then(res => {
+      api.courseUpdate({ id: row.id, isPutaway: command }).then(res => {
         const msg = { 0: '下架成功', 1: '上架成功' }
         this.$message({
           type: 'success',
@@ -241,7 +257,9 @@ export default {
     },
     // 请求更新状态方法
     changeStatusId(row, command) {
-      courseApis.courseUpdate({ id: row.id, statusId: command }).then(res => {
+      this.ctrl.load = true
+      api.courseUpdate({ id: row.id, statusId: command }).then(res => {
+        this.ctrl.load = false
         const msg = { 0: '禁用成功', 1: '启用成功' }
         this.$message({
           type: 'success',
@@ -250,35 +268,17 @@ export default {
           this.reload()
       })
     },
-    // 刷新当前页面
-    reload() {
-      this.getList()
-    },
-    handleEdit(data) {
+    // 修改弹窗
+    handleEdit(row) {
       this.ctrl.load = true
-      courseApis.courseViewForEdit(data.id).then(res => {
+      api.courseViewForEdit({ id: row }).then(res => {
         this.ctrl.load = false
-        this.formdata = res.data
+        this.formData = res.data
         this.ctrl.dialogTitle = "编辑"
         this.ctrl.editVisible = true
       }).catch(() => {
         this.ctrl.load = false
       })
-    },
-    // 重置查询条件
-    handleReset() {
-      this.map = {}
-      this.getList()
-    },
-    handleSizeChange(val) {
-      // console.log(`每页 ${val} 条`)
-      this.page.pageSize = val
-      this.getList()
-    },
-    handleCurrentChange(val) {
-      // console.log(`当前页: ${val}`)
-      this.page.pageCurrent = val
-      this.getList()
     },
     textClass(isFree) {
       return {

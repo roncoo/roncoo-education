@@ -20,7 +20,6 @@
           <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
         </el-upload>
       </el-form-item> -->
-
       <el-form-item label="课程名称：">
         <el-input v-model="formData.courseName"></el-input>
       </el-form-item>
@@ -30,7 +29,6 @@
           <el-radio :label="1">免费</el-radio>
         </el-radio-group>
       </el-form-item>
-
       <el-row v-if="formData.isFree == 0">
         <el-col :span="12">
           <el-form-item label="原价：">
@@ -44,7 +42,7 @@
         </el-col> -->
       </el-row>
       <el-form-item label="排序：">
-        <el-input v-model="formData.sort"></el-input>
+        <el-input-number style="width: 300px;" v-model="formData.sort" @change="handleChange" :min="1" :max="100000000"></el-input-number>
       </el-form-item>
       <el-form-item label="课程简介:">
              <div id="introduce"></div>
@@ -57,16 +55,13 @@
   </el-dialog>
 </template>
 <script>
-import * as courseApis from '@/api/course'
+import * as api from '@/api/course'
 import * as commonalityApi from '@/api/commonality'
 export default {
   name: 'Edit',
   data() {
       return {
-        editor: {},
-        ctrl: {
-          dialogVisible: true
-        }
+        editor: {}
       }
     },
   props: {
@@ -85,8 +80,8 @@ export default {
     }
   },
   watch: {
-    formData: function(val) {
-      if (val !== undefined) {
+    visible: function(val) {
+      if (val) {
         setTimeout(() => {
           this.editor.create();
           this.editor.customConfig.customUploadImg = this.editorUpload
@@ -95,7 +90,7 @@ export default {
           } else {
             this.editor.txt.html('')
           }
-        }, 100)
+        }, 200)
       }
     }
   },
@@ -104,8 +99,11 @@ export default {
   },
   methods: {
    createEdit() {
-      const E = require('wangeditor')
-      this.editor = new E('#introduce')
+    const E = require('wangeditor')
+    this.editor = new E('#introduce')
+    },
+    handleChange(value) {
+      this.formData.sort = value
     },
     submitForm(formData) {
       if (parseInt(this.formData.isFree) !== 1) {
@@ -122,29 +120,36 @@ export default {
       }
       this.$refs[formData].validate((valid) => {
         if (valid) {
+          if (this.formData.id === undefined) {
+            this.$message({
+              type: 'error',
+              message: "更新失败"
+            });
+          }
+          this.loading.show()
           this.formData.introduce = this.editor.txt.html()
-          this.handleConfirm()
+          api.courseAuditUpdate(this.formData).then(res => {
+            this.loading.hide()
+            if (res.code === 200 && res.data > 0) {
+              // 提交成功, 关闭窗口, 刷新列表
+              this.tips('更新成功', 'success')
+              this.handleClose()
+            } else {
+              this.$message({
+                type: 'error',
+                message: "更新失败"
+              });
+            }
+          }).catch(() => {
+            this.loading.hide()
+          })
         } else {
-          return false;
+          this.$message({
+            type: 'error',
+            message: "更新失败"
+          });
         }
       })
-    },
-   async handleConfirm() {
-      this.ctrl.load = true
-      let res = {}
-      if (this.formData.id === undefined) {
-        this.$alert(res.msg || '修改失败')
-      } else {
-        res = await courseApis.courseAuditUpdate(this.formData)
-      }
-      this.ctrl.load = false
-      if (res.code === 200 && res.data > 0) {
-        // 提交成功, 关闭窗口, 刷新列表
-        this.tips('成功', 'success')
-        this.$emit('close-cllback')
-      } else {
-        this.$alert(res.msg || '修改失败')
-      }
     },
     // 编辑器上传图片
     editorUpload(files, insert) {
@@ -164,7 +169,8 @@ export default {
       })
     },
     handleClose(done) {
-      this.$emit('close-cllback')
+      this.editor.txt.clear()
+      this.$emit('close-callback')
     }
   }
 }

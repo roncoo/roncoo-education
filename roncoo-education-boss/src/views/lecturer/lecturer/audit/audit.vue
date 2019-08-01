@@ -13,7 +13,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="审核意见:">
-        <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="系统默认通过" v-model="formData.auditOpinion"></el-input>
+        <el-input type="textarea" :rows="3" :autosize="{ minRows: 2, maxRows: 4}" placeholder="系统默认通过" v-model="formData.auditOpinion"></el-input>
       </el-form-item>
     </el-form>
     <el-row style="margin-top:17px; ">

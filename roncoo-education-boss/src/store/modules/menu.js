@@ -29,12 +29,10 @@ const menu = {
   actions: {
     setMenu({ commit }) {
       return new Promise(resolve => {
-        commit('set_system_menu', mockMenuData)
         api.menuUserList({}).then(res => {
           if (res.data.sysMenu !== []) {
-            const mockMenuList = res.data.sysMenu
             // TODO 后续续修改为从服务器获取，并且做数据处理
-            commit('set_system_menu', mockMenuList)
+            commit('set_system_menu', res.data.sysMenu)
           } else {
             // 如果没有权限默认初始化首页权限页路由
             commit('set_system_menu', mockMenuData)

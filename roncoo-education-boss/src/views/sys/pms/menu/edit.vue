@@ -5,20 +5,33 @@
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
-    <el-form ref="formData" :model="formData" :rules="rules" label-width="100px">
-      <el-form-item label="菜单名称:" prop="menuName">
+    <el-form ref="formData" :model="formData" label-width="100px">
+      <el-form-item label="类型：">
+        <el-radio-group v-model="formData.menuType">
+          <el-radio :label="1">目录</el-radio>
+          <el-radio :label="2">菜单</el-radio>
+          <el-radio :label="3">按钮</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="菜单名称：" prop="menuName">
         <el-input v-model="formData.menuName"></el-input>
       </el-form-item>
-      <el-form-item label="菜单路径:" prop="menuUrl">
+      <el-form-item label="路由地址：" prop="menuUrl" v-if="formData.menuType != 3">
         <el-input v-model="formData.menuUrl"></el-input>
       </el-form-item>
-      <el-form-item label="目标名称:">
-        <el-input v-model="formData.targetName"></el-input>
+      <el-form-item label="接口地址：" v-if="formData.menuType == 2 || formData.menuType == 3">
+        <el-input v-model="formData.apiUrl"></el-input>
       </el-form-item>
-      <el-form-item label="排序:">
+      <el-form-item label="显示菜单：">
+        <el-radio-group v-model="formData.hiddenType">
+          <el-radio :label="1">显示</el-radio>
+          <el-radio :label="0">不显示</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="排序：">
         <el-input-number style="width: 300px;" v-model="formData.sort" @change="handleChange" :min="1" :max="10000"></el-input-number>
       </el-form-item>
-      <el-form-item label="备注:">
+      <el-form-item label="备注：">
         <el-input type="textarea" v-model="formData.remark"></el-input>
       </el-form-item>
     </el-form>
@@ -34,14 +47,6 @@
     name: 'Edit',
     data() {
       return {
-        rules: {
-          menuName: [
-            { required: true, message: '请输入菜单名称', trigger: 'blur' }
-          ],
-          menuUrl: [
-            { required: true, message: '请输入菜单路径', trigger: 'blur' }
-          ]
-        }
       }
     },
     props: {
@@ -69,6 +74,37 @@
       submitForm(formData) {
         this.$refs[formData].validate((valid) => {
           if (valid) {
+            if (!this.formData.menuName) {
+              this.$message({
+                type: 'error',
+                message: '请输入菜单名称'
+              });
+              return false
+            }
+            if (this.formData.menuType !== 3) {
+              if (!this.formData.menuUrl) {
+                this.$message({
+                  type: 'error',
+                  message: '请输入路由地址'
+                });
+                return false
+              }
+            }
+            if (this.formData.menuType === 2 || this.formData.menuType === 3) {
+              if (!this.formData.apiUrl) {
+                this.$message({
+                  type: 'error',
+                  message: '请输入接口地址'
+                });
+                return false
+              }
+            }
+            if (!this.formData.id) {
+              this.$message({
+                type: 'error',
+                message: '提交失败'
+              });
+            }
             this.loading.show()
             api.menuUpdate(this.formData).then(res => {
               this.loading.hide()

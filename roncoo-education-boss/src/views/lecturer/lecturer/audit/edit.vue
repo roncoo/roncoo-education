@@ -5,7 +5,7 @@
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
-    <el-form ref="formData" :model="formData" label-width="80px">
+    <el-form ref="formData" :model="formData" label-width="100px">
       <el-alert class="title" :closable="false" title="一、讲师基本信息" type="info" />
         <br/>
         <el-row>
@@ -28,7 +28,7 @@
           </div></el-col>
           <el-col :span="12"><div>
             <el-form-item label="排序:">
-              <el-input v-model="formData.sort"></el-input>
+              <el-input-number style="width: 300px;" v-model="formData.sort" @change="handleChange" :min="1"></el-input-number>
             </el-form-item>
           </div></el-col>
         </el-row>
@@ -101,8 +101,8 @@
       }
     },
     watch: {
-      formData: function(val) {
-        if (val !== undefined) {
+      visible: function(val) {
+        if (val) {
           setTimeout(() => {
             this.editor.customConfig.customUploadImg = this.editorUpload
               this.editor.create();
@@ -111,7 +111,7 @@
               } else {
                 this.editor.txt.html('')
               }
-          }, 200)
+          }, 100)
         }
       }
     },
@@ -144,10 +144,12 @@
         this.editor.txt.clear()
         this.$emit('close-callback')
       },
+      handleChange(value) {
+        this.formData.sort = value
+      },
       submitForm(formData) {
         this.$refs[formData].validate((valid) => {
         if (valid) {
-          this.formData.introduce = this.editor.txt.html()
           if (this.formData.id === undefined) {
             this.$message({
               type: 'error',
@@ -155,6 +157,7 @@
             });
           }
           this.loading.show()
+          this.formData.introduce = this.editor.txt.html()
           api.lecturerAuditUpdate(this.formData).then(res => {
             this.loading.hide()
             if (res.code === 200 && res.data > 0) {

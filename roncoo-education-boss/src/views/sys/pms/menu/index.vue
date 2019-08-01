@@ -21,41 +21,57 @@
       row-key="id"
       :default-expand-all="false">
         <el-table-column
+          type="index"
+          label="序号"
+          width="55">
+        </el-table-column>
+        <el-table-column
           prop="menuName"
           label="菜单名称"
           sortable
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="menuIcon"
-          label="菜单图标"
-          width="100">
+          width="210">
         </el-table-column>
         <el-table-column
           prop="menuUrl"
           label="路由地址"
           sortable
-          width="250">
+          width="170">
         </el-table-column>
         <el-table-column
-          prop="targetName"
-          label="目标名称">
+          prop="apiUrl"
+          label="接口地址">
+        </el-table-column>
+        <el-table-column
+          width="60"
+          prop="hiddenType"
+          label="类型">
+          <template slot-scope="scope">
+            <span>{{textMenuType[scope.row.menuType]}}</span>
+          </template>
         </el-table-column>
         <el-table-column
           width="80"
+          prop="hiddenType"
+          label="显示菜单">
+          <template slot-scope="scope">
+            <span>{{textHiddenType[scope.row.hiddenType]}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          width="60"
           prop="sort"
           label="排序">
         </el-table-column>
         <el-table-column
           prop="remark"
           label="备注"
-          width="200">
+          width="150">
         </el-table-column>
         <el-table-column label="操作" width="240">
           <template slot-scope="scope">
             <el-button type="primary" size="mini" icon="el-icon-circle-plus-outline" @click="addSubMmenu(scope.row.id)">添加</el-button>
             <el-button type="danger" @click="handleDelete(scope.row.id)" size="mini">删除</el-button>
-            <el-button type="success" @click="handleEdit(scope.row)" size="mini">编辑</el-button>
+            <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">编辑</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -83,6 +99,15 @@
         opts: {
           statusIdList: []
         },
+        textHiddenType: {
+          0: '不显示',
+          1: '显示'
+        },
+        textMenuType: {
+          1: '目录',
+          2: '菜单',
+          3: '按钮'
+        },
         textuStatusId: {
           0: '禁用',
           1: '正常'
@@ -104,7 +129,7 @@
       handleReset() {
         this.reload()
       },
-      // 后台管理员分页列表接口
+      // 分页列表接口
       menuList() {
         this.ctrl.load = true
         api.menuList(this.map).then(res => {
@@ -119,10 +144,16 @@
         this.ctrl.dialogTitle = "添加"
         this.ctrl.addDialogVisible = true
       },
-      handleEdit(row) {
-        this.formData = row
-        this.ctrl.dialogTitle = row.menuName + "——编辑"
-        this.ctrl.editDialogVisible = true
+      handleEdit(id) {
+        this.ctrl.load = true
+        api.menuView({ id: id }).then(res => {
+          this.ctrl.load = false
+          this.formData = res.data
+          this.ctrl.dialogTitle = res.menuName + " —— 信息编辑"
+          this.ctrl.editDialogVisible = true
+        }).catch(() => {
+          this.ctrl.load = false
+        })
       },
       // 关闭弹窗回调
       closeCallback() {

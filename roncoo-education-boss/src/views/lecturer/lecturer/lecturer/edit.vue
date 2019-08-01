@@ -1,7 +1,7 @@
 <template>
   <!--弹窗-->
   <el-dialog
-    width="60%"
+    width="70%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
@@ -12,29 +12,29 @@
           <br/>
           <el-row>
             <el-col :span="12"><div>
-              <el-form-item label="用户手机:">
+              <el-form-item label="用户手机：">
                 <el-input :disabled="true" v-model="formData.lecturerMobile"></el-input>
               </el-form-item>
             </div></el-col>
             <el-col :span="12"><div>
-              <el-form-item label="讲师名称:">
+              <el-form-item label="讲师名称：">
                 <el-input v-model="formData.lecturerName"></el-input>
               </el-form-item>
             </div></el-col>
           </el-row>
           <el-row>
             <el-col :span="12"><div>
-              <el-form-item label="邮箱:">
+              <el-form-item label="邮箱：">
                 <el-input v-model="formData.lecturerEmail"></el-input>
               </el-form-item>
             </div></el-col>
             <el-col :span="12"><div>
-              <el-form-item label="排序:">
+              <el-form-item label="排序：">
                 <el-input-number style="width: 300px;"  v-model="formData.sort" @change="handleChange" :min="1" :max="10000"></el-input-number>
               </el-form-item>
             </div></el-col>
           </el-row>
-          <el-form-item label="讲师简介:">
+          <el-form-item label="讲师简介：">
              <div id="introduce"></div>
           </el-form-item>
         </div>
@@ -43,29 +43,29 @@
           <br/>
           <el-row>
             <el-col :span="12"><div>
-              <el-form-item label="银行名称:">
+              <el-form-item label="银行名称：">
                 <el-input :disabled="true" v-model="lecturerExt.bankName"></el-input>
               </el-form-item>
             </div></el-col>
             <el-col :span="12"><div>
-              <el-form-item label="银行卡号:">
+              <el-form-item label="银行卡号：">
                 <el-input :disabled="true" v-model="lecturerExt.bankCardNo"></el-input>
               </el-form-item>
             </div></el-col>
           </el-row>
           <el-row>
             <el-col :span="12"><div>
-              <el-form-item label="开户名称:">
+              <el-form-item label="开户名称：">
                 <el-input :disabled="true" v-model="lecturerExt.bankUserName"></el-input>
               </el-form-item>
             </div></el-col>
             <el-col :span="12"><div>
-              <el-form-item label="银行卡号:">
+              <el-form-item label="银行卡号：">
                 <el-input :disabled="true" v-model="lecturerExt.bankIdCardNo"></el-input>
               </el-form-item>
             </div></el-col>
           </el-row>
-          <el-form-item label="支行名称:">
+          <el-form-item label="支行名称：">
             <el-input :disabled="true" v-model="lecturerExt.bankBranchName"></el-input>
           </el-form-item>
         </div>
@@ -106,8 +106,8 @@
       }
     },
     watch: {
-      formData: function(val) {
-        if (val !== undefined) {
+      visible: function(val) {
+        if (val) {
           setTimeout(() => {
             this.editor.create();
             this.editor.customConfig.customUploadImg = this.editorUpload
@@ -116,7 +116,7 @@
             } else {
               this.editor.txt.html('')
             }
-          }, 100)
+          }, 200)
         }
       }
     },
@@ -138,29 +138,41 @@
       submitForm(formData) {
         this.$refs[formData].validate((valid) => {
           if (valid) {
-            this.formData.introduce = this.editor.txt.html()
-            this.handleConfirm()
+            if (this.formData.id === undefined) {
+              this.$message({
+                type: 'error',
+                message: "提交失败"
+              });
+            } else {
+              this.formData.introduce = this.editor.txt.html()
+              this.loading.show()
+              api.lecturerUpdate(this.formData).then(res => {
+                this.loading.hide()
+                if (res.code === 200 && res.data > 0) {
+                  // 提交成功, 关闭窗口, 刷新列表
+                  this.tips('操作成功', 'success')
+                  this.handleClose()
+                } else {
+                  this.$message({
+                    type: 'error',
+                    message: "提交失败"
+                  });
+                }
+              }).catch(() => {
+                this.loading.hide()
+                this.$message({
+                    type: 'error',
+                    message: "提交失败"
+                  });
+              })
+            }
           } else {
-            return false;
+            this.$message({
+              type: 'error',
+              message: "提交失败"
+            });
           }
         })
-      },
-     async handleConfirm() {
-        this.load = true
-        let res = {}
-        if (this.formData.id === undefined) {
-          this.$alert(res.msg || '提交失败')
-        } else {
-          res = await api.lecturerUpdate(this.formData)
-        }
-        this.load = false
-        if (res.code === 200 && res.data > 0) {
-          // 提交成功, 关闭窗口, 刷新列表
-          this.tips('成功', 'success')
-          this.$emit('close-callback')
-        } else {
-          this.$alert(res.msg || '提交失败')
-        }
       },
       // 编辑器上传图片
       editorUpload(files, insert) {

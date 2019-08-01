@@ -19,7 +19,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="审核情况:" >
-        <el-select v-model="map.auditStatus" class="auto-width" clearable filterable placeholder="审核情况" style="width: 85px">
+        <el-select v-model="map.auditStatus" class="auto-width" clearable filterable placeholder="审核情况" style="width: 110px">
           <el-option
             v-for="item in opts.auditStatusList"
             :key="item.code"
@@ -118,7 +118,6 @@
     data() {
       return {
         auditMap: {
-          id: '',
           auditStatus: 1
         },
         ctrl: {
@@ -136,7 +135,6 @@
         map: {},
         formData: {},
         lecturerExt: {},
-        title: '',
         page: {
           beginPageIndex: 1,
           pageCurrent: 1,
@@ -182,7 +180,7 @@
         this.reload()
       },
       lecturerAuditList() {
-        this.ctrl.loading === true
+        this.ctrl.loading = true
         api.lecturerAuditList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.list = res.data.list
           this.page.pageCurrent = res.data.pageCurrent
@@ -209,7 +207,7 @@
       },
       // 请求更新用户方法
       changeStatus(id, statusId) {
-        this.ctrl.loading === true
+        this.ctrl.loading = true
         api.lecturerAuditUpdate({ id: id, statusId: statusId }).then(res => {
           this.ctrl.loading = false
           if (res.code === 200 && res.data > 0) {
@@ -244,21 +242,19 @@
       },
       // 修改跳页面操作
       handleEdit(id) {
-        this.title = '信息修改'
-        this.getById(id, this.title)
-        this.ctrl.editDialogVisible = true
+        var type = 'edit'
+        this.getById(id, type)
       },
       // 审核页面弹窗
       handleAudit(row) {
         this.auditMap.id = row.id
-        this.ctrl.dialogTitle = '审核'
+        this.ctrl.dialogTitle = row.lecturerName + ' —— 审核'
         this.ctrl.auditDialogVisible = true
       },
       // 跳查看讲师弹窗
       handleView(id) {
-        this.title = '查看详情'
-        this.getById(id, this.title)
-        this.ctrl.viewVisible = true
+        var type = 'view'
+        this.getById(id, type)
       },
       // 关闭弹窗回调
       closeCllback() {
@@ -269,14 +265,20 @@
         this.reload()
       },
       //查看讲师审核信息
-      getById(id, title) {
-        this.ctrl.loading === true
+      getById(id, type) {
+        this.ctrl.loading = true
         api.lecturerAuditView({ id: id }).then(res => {
           this.formData = res.data
           if (JSON.stringify(res.data.lecturerExt) !== '{}') {
             this.lecturerExt = res.data.lecturerExt
           }
-          this.ctrl.dialogTitle = res.data.lecturerMobile + '——' + title
+          if (type === 'edit') {
+            this.ctrl.dialogTitle = res.data.lecturerName + ' —— 信息修改'
+            this.ctrl.editDialogVisible = true
+          } else if (type === 'view') {
+            this.ctrl.dialogTitle = res.data.lecturerName + ' —— 查看详情'
+            this.ctrl.viewVisible = true
+          }
           this.ctrl.loading = false
         }).catch(() => {
           this.ctrl.loading = true

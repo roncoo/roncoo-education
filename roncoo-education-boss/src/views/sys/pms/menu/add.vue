@@ -6,17 +6,27 @@
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form ref="formData" :model="formData" :rules="rules" label-width="100px">
-      <el-form-item label="菜单名称:" prop="menuName">
+      <el-form-item label="类型:">
+        <el-radio-group v-model="menuType">
+          <el-radio :label="1">目录</el-radio>
+          <el-radio :label="2">菜单</el-radio>
+          <el-radio :label="3">按钮</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="菜单名称：" prop="menuName">
         <el-input v-model="formData.menuName"></el-input>
       </el-form-item>
-      <el-form-item label="菜单地址:" prop="menuUrl">
+      <el-form-item label="路由地址：" prop="menuUrl" v-if="menuType != 3">
         <el-input v-model="formData.menuUrl"></el-input>
       </el-form-item>
-      <el-form-item label="目标名称:">
-        <el-input v-model="formData.targetName"></el-input>
+      <el-form-item label="接口地址：" v-if="menuType == 2 || menuType == 3">
+        <el-input v-model="formData.apiUrl"></el-input>
       </el-form-item>
-      <el-form-item label="图标:" prop="menuIcon">
-        <el-input v-model="formData.menuIcon"></el-input>
+      <el-form-item label="显示菜单:">
+        <el-radio-group v-model="hiddenType">
+          <el-radio :label="1">显示</el-radio>
+          <el-radio :label="0">不显示</el-radio>
+        </el-radio-group>
       </el-form-item>
       <el-form-item label="排序:">
         <el-input-number style="width: 300px;" v-model="sort" @change="handleChange" :min="1" :max="10000"></el-input-number>
@@ -39,12 +49,11 @@ export default {
   data() {
     return {
       sort: 1,
+      hiddenType: 1,
+      menuType: 1,
       rules: {
         menuName: [
           { required: true, message: '请输入菜单名称', trigger: 'blur' }
-        ],
-        menuUrl: [
-          { required: true, message: '请输入菜单地址', trigger: 'blur' }
         ]
       }
     }
@@ -70,6 +79,7 @@ export default {
     },
     // 保存管理员信息
     submitForm(formData) {
+      this.formData.menuType = this.menuType
       if (!this.formData.menuName) {
         this.$message({
           type: 'error',
@@ -77,16 +87,29 @@ export default {
         });
         return false
       }
-      if (!this.formData.menuUrl) {
-        this.$message({
-          type: 'error',
-          message: '请输入菜单地址'
-        });
-        return false
+      if (this.formData.menuType !== 3) {
+        if (!this.formData.menuUrl) {
+          this.$message({
+            type: 'error',
+            message: '请输入路由地址'
+          });
+          return false
+        }
+      }
+      if (this.formData.menuType === 2 || this.formData.menuType === 3) {
+        if (!this.formData.apiUrl) {
+          this.$message({
+            type: 'error',
+            message: '请输入接口地址'
+          });
+          return false
+        }
       }
       this.$refs[formData].validate((valid) => {
         if (valid) {
           this.loading.show()
+          this.formData.sort = this.sort
+          this.formData.hiddenType = this.hiddenType
           api.menuSave(this.formData).then(res => {
             this.loading.hide()
             if (res.code === 200 && res.data > 0) {

@@ -1,17 +1,13 @@
 <template>
   <!--弹窗-->
   <el-dialog
-    width="35%"
+    width="30%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form ref="formData" :model="formData" :rules="rules" label-width="100px">
-      <el-form-item label="名称:" prop="title">
-        <el-input v-model="formData.title"></el-input>
-      </el-form-item>
-      <el-form-item label="模板:">
-        <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入模板" v-model="formData.remark">
-        </el-input>
+      <el-form-item label="讲师分成:">
+        <el-input v-model="formData.lecturerProportion">%</el-input>
       </el-form-item>
     </el-form>
     <el-row style="margin-top:17px; ">
@@ -21,18 +17,12 @@
   </el-dialog>
 </template>
 <script>
-import * as api from '@/api/sys'
+import * as api from '@/api/lecturer'
 export default {
-  name: 'Add',
+  name: 'Proportion',
   data() {
     return {
-      ctrl: {
-        dialogVisible: false
-      },
       rules: {
-        title: [
-          { required: true, message: '请输入标题', trigger: 'blur' }
-        ]
       }
     }
   },
@@ -51,35 +41,19 @@ export default {
     }
   },
   methods: {
-    userList() {
-      this.ctrl.dialogVisible = true
-    },
-    // 关闭编辑弹窗回调
-    closeCllback(res) {
-      this.form.adminUserNo = res.userNo
-      this.form.mobile = res.mobile
-      this.ctrl.dialogVisible = false
-    },
-    // 保存管理员信息
+    // 更新讲师分成信息
     submitForm(form) {
-      if (!this.formData.title) {
-        this.$message({
-          type: 'error',
-          message: '请输入标题'
-        });
-        return false
-      }
       this.$refs[form].validate((valid) => {
         if (valid) {
-          if (this.formData === undefined) {
+          if (this.formData.id === undefined) {
             this.$alert('提交失败')
           } else {
             this.loading.show()
-            api.templateUpdate(this.formData).then(res => {
+            api.lecturerUpdate(this.formData).then(res => {
               this.loading.hide()
               if (res.code === 200 && res.data > 0) {
                 // 提交成功, 关闭窗口, 刷新列表
-                this.$emit('close-callback')
+                this.handleClose()
               } else {
                 this.$alert('提交失败')
               }
@@ -87,7 +61,7 @@ export default {
             // this.tips('成功', 'success')
           }
         } else {
-          this.$alert('提交失败')
+          return false;
         }
       })
     },

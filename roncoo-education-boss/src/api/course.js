@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
 // 审核课程分页列表接口
-export function getCourseAuditList(params, pageCurrent = 1, pageSize = 20) {
+export function courseAuditList(params, pageCurrent = 1, pageSize = 20) {
   return request({
     url: '/course/pc/course/audit/list',
     method: 'post',
@@ -64,11 +64,11 @@ export function courseView(id) {
 }
 
 // 课程详情接口(用于修改)
-export function courseViewForEdit(id) {
+export function courseViewForEdit(data = {}) {
   return request({
     url: '/course/pc/course/get',
     method: 'post',
-    data: { id: id }
+    data: data
   })
 }
 
@@ -103,6 +103,15 @@ export function categoryUpdate(data = {}) {
 export function categoryDelete(data = {}) {
   return request({
     url: '/course/pc/course/category/delete',
+    method: 'post',
+    data: data
+  })
+}
+
+// 课程分类查看接口
+export function categoryView(data = {}) {
+  return request({
+    url: '/course/pc/course/category/view',
     method: 'post',
     data: data
   })

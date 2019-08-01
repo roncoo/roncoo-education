@@ -15,7 +15,6 @@ router.beforeEach((to, from, next) => {
       NProgress.done() // if current page is dashboard will not trigger	afterEach hook, so manually handle it
     } else {
       if (store.getters.menu.init === false) {
-        console.log('-------- init menu ---------')
         // 获取用户数据
         // store.dispatch('getUserInfo')
         // 设置菜单

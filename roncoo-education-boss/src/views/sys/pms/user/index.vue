@@ -8,7 +8,7 @@
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
         <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
-        <el-button type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAdd()">添加</el-button>
+        <el-button type="primary" perms="sys:user:add" icon="el-icon-circle-plus-outline" size="mini" @click="handleAdd()">添加</el-button>
       </el-form-item>
       </el-form>
     </div>
@@ -50,7 +50,7 @@
           <ul class="list-item-actions">
             <li>
               <el-button type="danger" @click="handleDelete(scope.row.id)" size="mini">删除</el-button>
-              <el-button type="success" @click="handleEdit(scope.row)" size="mini">修改</el-button>
+              <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
               <el-button type="success" @click="handleUserRole(scope.row.id, scope.row.realName)" size="mini">设置角色</el-button>
               <el-button type="success" @click="handlePassword(scope.row.userNo, scope.row.realName)" size="mini">密码修改</el-button>
             </li>
@@ -127,22 +127,28 @@
         this.dialogTitle = '添加'
       },
       // 跳修改弹窗页面
-      handleEdit(row) {
-        this.formData = row
-        this.ctrl.dialogVisible = true
-        this.ctrl.dialogTitle = row.realName + '——编辑'
+      handleEdit(id) {
+        this.ctrl.load = true
+        api.userView({ id: id }).then(res => {
+          this.formData = res.data
+          this.ctrl.dialogVisible = true
+          this.ctrl.dialogTitle = res.realName + ' —— 信息编辑'
+          this.ctrl.load = false
+        }).catch(() => {
+          this.ctrl.load = false
+        })
       },
       // 跳出修改密码弹窗
       handlePassword(userNo, realName) {
         this.formData.adminUserNo = userNo
         this.ctrl.passwordDialogVisible = true
-        this.ctrl.dialogTitle = realName + '——密码修改'
+        this.ctrl.dialogTitle = realName + ' —— 密码修改'
       },
       // 跳出设置角色弹窗
       handleUserRole(id, realName) {
         this.id = id
         this.ctrl.serRoleDialogVisible = true
-        this.ctrl.dialogTitle = realName + '——设置角色'
+        this.ctrl.dialogTitle = realName + ' —— 设置角色'
       },
       // 关闭弹窗回调
       closeCallback() {
@@ -177,6 +183,10 @@
           }
         }).catch(() => {
           this.ctrl.load = true
+          this.$message({
+            type: 'error',
+            message: "删除失败"
+          });
         })
         })
       },
@@ -215,6 +225,7 @@
               this.reload()
           }
         }).catch(() => {
+          this.ctrl.load = false
           const msg = { 0: '禁用失败', 1: '启用失败' }
             this.$message({
               type: 'error',

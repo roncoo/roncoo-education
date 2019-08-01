@@ -5,7 +5,7 @@
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
-    <el-form ref="formData" :model="formData" label-width="80px">
+    <el-form ref="formData" :model="formData" label-width="100px">
       <el-form-item label="头像:">
         <el-upload
           class="upload-demo"

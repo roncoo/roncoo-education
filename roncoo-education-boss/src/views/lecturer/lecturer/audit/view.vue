@@ -1,7 +1,7 @@
 <template>
   <!--弹窗-->
   <el-dialog
-     width="70%"
+     width="60%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">

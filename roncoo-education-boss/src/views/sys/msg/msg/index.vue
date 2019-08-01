@@ -183,21 +183,26 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
+          this.ctrl.load = true
           api.msgPush({ id: row }).then(res => {
-          if (res.code === 200 && res.data > 0) {
-            this.$message({
-              type: 'success',
-              message: "发送成功"
-            });
-              this.reload()
-          } else {
-            this.$message({
-              type: 'error',
-              message: "发送失败"
-            });
-              this.reload()
-          }
-        })
+            this.ctrl.load = false
+            if (res.code === 200 && res.data > 0) {
+              this.$message({
+                type: 'success',
+                message: "发送成功"
+              });
+                this.reload()
+            } else {
+              this.$message({
+                type: 'error',
+                message: "发送失败"
+              });
+                this.reload()
+            }
+          }).catch(() => {
+            this.ctrl.load = false
+            this.reload()
+          })
         }).catch(() => {
           this.reload()
         })

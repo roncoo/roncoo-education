@@ -57,36 +57,33 @@
   </el-dialog>
 </template>
 <script>
-import * as courseApis from '@/api/course'
+import * as api from '@/api/course'
 import * as commonalityApi from '@/api/commonality'
 export default {
   name: 'Edit',
   data() {
-      return {
-        editor: {},
-        ctrl: {
-          dialogVisible: true
-        }
-      }
-    },
+    return {
+      editor: {}
+    }
+  },
   props: {
     // route object
     formData: {
-    type: Object,
-    default: () => {}
+      type: Object,
+      default: () => {}
     },
     visible: {
-    type: Boolean,
-    default: false
+      type: Boolean,
+      default: false
     },
     title: {
-    type: String,
-    default: ''
+      type: String,
+      default: ''
     }
   },
   watch: {
-    formData: function(val) {
-      if (val !== undefined) {
+    visible: function(val) {
+      if (val) {
         setTimeout(() => {
           this.editor.create();
           this.editor.customConfig.customUploadImg = this.editorUpload
@@ -122,29 +119,44 @@ export default {
       }
       this.$refs[formData].validate((valid) => {
         if (valid) {
+          if (this.formData.id === undefined) {
+            this.$message({
+              type: 'error',
+              message: "更新失败"
+            });
+          }
+          this.loading.show()
+          this.formData.introduce = this.editor.txt.html()
+          api.courseUpdate(this.formData).then(res => {
+            this.loading.hide()
+            if (res.code === 200 && res.data > 0) {
+              // 提交成功, 关闭窗口, 刷新列表
+              this.tips('更新成功', 'success')
+              this.handleClose()
+            } else {
+              this.$message({
+                type: 'error',
+                message: "更新失败"
+              });
+            }
+          }).catch(() => {
+            this.loading.hide()
+          })
+        } else {
+          this.$message({
+            type: 'error',
+            message: "更新失败"
+          });
+        }
+      })
+      this.$refs[formData].validate((valid) => {
+        if (valid) {
           this.formData.introduce = this.editor.txt.html()
           this.handleConfirm()
         } else {
           return false;
         }
       })
-    },
-   async handleConfirm() {
-      this.ctrl.load = true
-      let res = {}
-      if (this.formData.id === undefined) {
-        this.$alert(res.msg || '修改失败')
-      } else {
-        res = await courseApis.courseUpdate(this.formData)
-      }
-      this.ctrl.load = false
-      if (res.code === 200 && res.data > 0) {
-        // 提交成功, 关闭窗口, 刷新列表
-        this.tips('成功', 'success')
-        this.$emit('close-cllback')
-      } else {
-        this.$alert(res.msg || '修改失败')
-      }
     },
     // 编辑器上传图片
     editorUpload(files, insert) {
@@ -164,7 +176,8 @@ export default {
       })
     },
     handleClose(done) {
-      this.$emit('close-cllback')
+      this.editor.txt.clear()
+      this.$emit('close-callback')
     }
   }
 }

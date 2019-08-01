@@ -80,7 +80,7 @@
         <template slot-scope="scope">
           <ul class="list-item-actions">
             <li>
-              <el-button type="success" @click="handleEdit(scope.row)" size="mini">编辑</el-button>
+              <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">编辑</el-button>
               <el-button type="success" @click="handleStudy(scope.row.userNo)" size="mini">学习记录</el-button>
             </li>
           </ul>
@@ -154,22 +154,14 @@
         this.$router.push({ path: '/user/user/studyLog', query: { userNo: row }});
       },
       // 跳修改弹窗页面
-      handleEdit(row) {
-        this.formData = row
-        this.ctrl.dialogTitle = '编辑'
-        this.ctrl.dialogVisible = true
+      handleEdit(id) {
+        var type = 'edit'
+        this.getExt(id, type);
       },
       // 查看弹窗
       handleView(id) {
-        this.ctrl.load = true
-        api.userExtView({ id: id }).then(res => {
-          this.formData = res.data
-          this.ctrl.dialogTitle = "查看"
-          this.ctrl.load = false
-        }).catch(() => {
-            this.ctrl.load = false
-          })
-        this.ctrl.viewVisible = true
+        var type = 'view'
+        this.getExt(id, type);
       },
       // 关闭弹窗回调
       closeCallback() {
@@ -178,6 +170,22 @@
         this.ctrl.viewVisible = false
         this.ctrl.studyVisible = false
         this.reload()
+      },
+      getExt(id, type) {
+        this.ctrl.load = true
+        api.userExtView({ id: id }).then(res => {
+          this.formData = res.data
+          if (type === 'view') {
+            this.ctrl.dialogTitle = '信息查看'
+            this.ctrl.viewVisible = true
+          } else {
+            this.ctrl.dialogTitle = '信息修改'
+            this.ctrl.dialogVisible = true
+          }
+          this.ctrl.load = false
+        }).catch(() => {
+          this.ctrl.load = false
+        })
       },
       // 修改状态
       handleChangeStatus(id, statusId) {

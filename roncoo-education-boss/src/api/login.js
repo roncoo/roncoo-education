@@ -1,7 +1,6 @@
 import request from '@/utils/request'
 
 export function login(mobile, password, clientId, ip) {
-  console.log(mobile)
   const data = {
     mobile: mobile,
     password: password,

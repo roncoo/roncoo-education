@@ -57,7 +57,7 @@
         </el-table-column>
         <el-table-column label="分成比例">
           <template slot-scope="scope">
-             [ 讲师: {{scope.row.lecturerProportion*100}}%]
+             [ 讲师: {{scope.row.lecturerProportion}}%]
           </template>
         </el-table-column>
         <el-table-column
@@ -68,6 +68,7 @@
           <ul class="list-item-actions">
             <li>
               <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
+              <el-button type="warning" @click="handleProportion(scope.row.id)" size="mini">设置分成</el-button>
             </li>
           </ul>
         </template>
@@ -85,25 +86,27 @@
         :total="page.totalCount">
       </el-pagination>
       <edit :visible="ctrl.dialogVisible" :formData="formData" :lecturerExt="lecturerExt" :title="ctrl.dialogTitle" @close-callback="closeCllback"></edit>
+      <proportion :visible="ctrl.proportionDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCllback"></proportion>
       <view-lecturer :visible="ctrl.viewVisible" :formData="formData" :lecturerExt="lecturerExt" :title="ctrl.dialogTitle" @close-callback="closeCllback"></view-lecturer>
   </div>
 </template>
 <script>
   import * as api from '@/api/lecturer'
   import Edit from './edit'
-  import viewLecturer from './view'
+  import Proportion from './proportion'
+  import ViewLecturer from './view'
   export default {
-    components: { Edit, viewLecturer },
+    components: { Edit, ViewLecturer, Proportion },
     data() {
       return {
         list: [],
         map: {},
         formData: {},
         lecturerExt: {},
-        title: '',
         ctrl: {
           loading: false,
           dialogVisible: false,
+          proportionDialogVisible: false,
           viewVisible: false
         },
         opts: {
@@ -126,36 +129,26 @@
       this.lecturerList(1)
     },
     methods: {
-       handleSizeChange(val) {
-        // console.log(`每页 ${val} 条`)
-        this.page.pageSize = val
-        this.lecturerList()
+      handleProportion(id) {
+        var type = 'proportion'
+        this.getById(id, type)
       },
-      handleCurrentChange(val) {
-        this.page.pageCurrent = val
-        this.lecturerList()
-        // console.log(`当前页: ${val}`)
+      // 修改跳页面操作
+      handleEdit(id) {
+        var type = 'edit'
+        this.getById(id, type)
       },
-      // 查询条件
-       handleCheck() {
-        this.page.pageCurrent = 1
-        this.lecturerList()
+      // 查看跳页面设置
+      handleView(id) {
+        var type = 'view'
+        this.getById(id, type)
       },
-      // 重置查询条件
-      handleReset() {
+      // 关闭弹窗回调
+      closeCllback() {
+        this.ctrl.viewVisible = false;
+        this.ctrl.proportionDialogVisible = false;
+        this.ctrl.dialogVisible = false;
         this.reload()
-      },
-      lecturerList() {
-        this.ctrl.loading === true
-        api.lecturerList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
-          this.list = res.data.list
-          this.page.pageCurrent = res.data.pageCurrent
-          this.page.totalCount = res.data.totalCount
-          this.page.pageSize = res.data.pageSize
-          this.ctrl.loading = false
-        }).catch(() => {
-          this.ctrl.loading = false
-        })
       },
       // 修改状态
       handleChangeStatus(id, statusId) {
@@ -201,22 +194,46 @@
             this.reload()
         })
       },
-      // 修改跳页面操作
-      handleEdit(id) {
-        this.title = '信息修改'
-        this.getById(id, this.title)
-        this.ctrl.dialogVisible = true
+      // 查看信息
+      getById(id, type) {
+        this.ctrl.loading = true
+        api.lecturerView({ id: id }).then(res => {
+          this.formData = res.data
+          if (JSON.stringify(res.data.lecturerExt) !== '{}') {
+            this.lecturerExt = res.data.lecturerExt
+          }
+          if (type === 'proportion') {
+            this.ctrl.dialogTitle = res.data.lecturerName + ' —— 设置分成'
+            this.ctrl.proportionDialogVisible = true
+          } else if (type === 'edit') {
+            this.ctrl.dialogTitle = res.data.lecturerName + ' —— 信息修改'
+            this.ctrl.dialogVisible = true
+          } else {
+            this.ctrl.dialogTitle = res.data.lecturerName + ' —— 信息查看'
+            this.ctrl.viewVisible = true
+          }
+          this.ctrl.loading = false
+        }).catch(() => {
+          this.ctrl.loading = true
+        })
       },
-      // 查看跳页面设置
-      handleView(id) {
-        this.title = '查看详情'
-        this.getById(id, this.title)
-        this.ctrl.viewVisible = true
+      handleSizeChange(val) {
+        // console.log(`每页 ${val} 条`)
+        this.page.pageSize = val
+        this.lecturerList()
       },
-      // 关闭弹窗回调
-      closeCllback() {
-        this.ctrl.viewVisible = false;
-        this.ctrl.dialogVisible = false;
+      handleCurrentChange(val) {
+        this.page.pageCurrent = val
+        this.lecturerList()
+        // console.log(`当前页: ${val}`)
+      },
+      // 查询条件
+       handleCheck() {
+        this.page.pageCurrent = 1
+        this.lecturerList()
+      },
+      // 重置查询条件
+      handleReset() {
         this.reload()
       },
       // 刷新当前页面
@@ -226,19 +243,16 @@
         this.lecturerExt = {}
         this.lecturerList()
       },
-      // 查看信息
-      getById(id, title) {
-        this.ctrl.loading === true
-        api.lecturerView({ id: id }).then(res => {
-          this.formData = res.data
-          if (JSON.stringify(res.data.lecturerExt) !== '{}') {
-            this.lecturerExt = res.data.lecturerExt
-          }
-          this.introduce = res.data.introduce
-          this.ctrl.dialogTitle = res.data.lecturerMobile + '——' + title
+      lecturerList() {
+        this.ctrl.loading = true
+        api.lecturerList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
+          this.list = res.data.list
+          this.page.pageCurrent = res.data.pageCurrent
+          this.page.totalCount = res.data.totalCount
+          this.page.pageSize = res.data.pageSize
           this.ctrl.loading = false
         }).catch(() => {
-          this.ctrl.loading = true
+          this.ctrl.loading = false
         })
       }
     }

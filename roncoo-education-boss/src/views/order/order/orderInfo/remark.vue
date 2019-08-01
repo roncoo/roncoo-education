@@ -41,22 +41,40 @@ export default {
     submitForm(formData) {
       this.$refs[formData].validate((valid) => {
         if (valid) {
-          this.handleConfirm()
+          if (this.formData.id === undefined) {
+            this.$message({
+              type: 'error',
+              message: "提交失败"
+            });
+          } else {
+            this.loading.show()
+            orderApi.orderUpdate(this.formData).then(res => {
+              this.loading.hide()
+              if (res.code === 200 && res.data > 0) {
+                // 提交成功, 关闭窗口, 刷新列表
+                this.tips('操作成功', 'success')
+                this.handleClose()
+              } else {
+                this.$message({
+                  type: 'error',
+                  message: "提交失败"
+                });
+              }
+            }).catch(() => {
+              this.loading.hide()
+              this.$message({
+                  type: 'error',
+                  message: "提交失败"
+                });
+            })
+          }
         } else {
-          return false;
+          this.$message({
+            type: 'error',
+            message: "提交失败"
+          });
         }
       })
-    },
-    async handleConfirm() {
-      let res = {}
-      res = await orderApi.orderUpdate(this.formData)
-      this.tips('成功', 'success')
-      if (res.code === 200 && res.data > 0) {
-        // 提交成功, 关闭窗口, 刷新列表
-        this.$emit('close-callback')
-      } else {
-        this.$alert(res.msg || '备注失败')
-      }
     },
     handleClose(done) {
       this.$emit('close-callback')

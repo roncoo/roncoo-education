@@ -1,97 +1,91 @@
 <template>
   <el-dialog
-  :title="this.head"
-  :visible.sync="vb"
-  :before-close="handleClose"
-  width="30%"
-  top="30vh">
-  <el-form ref="map" :model="map">
-    <el-row>
-      审核状态：
-      <el-radio v-model="map.auditStatus" label="1">通过</el-radio>
-      <el-radio v-model="map.auditStatus" label="2">不通过</el-radio>
-    </el-row>
-    <el-row style="margin-top:15px;">
-      <el-col>审核意见：</el-col>
-    </el-row>
-    <el-row style="margin-left:70px;">
-      <el-input type="textarea" :rows="3" placeholder="系统默认通过" v-model="map.auditOpinion"> </el-input>
-    </el-row>
-    <el-row style="margin-top:17px; ">
-      <el-button style="float:right;margin-left:6px;" size="mini" type="danger" plain @click="handleClose">取 消</el-button>
-      <el-button style="float:right" size="mini" type="primary" @click="submitForm('map')">确定</el-button>
-    </el-row>
+    :title="title"
+    :visible.sync="visible"
+    :before-close="handleClose"
+    width="30%">
+  <el-form ref="formData" :model="formData" label-width="100px">
+    <el-form-item label="审核状态：">
+      <el-radio-group v-model="auditStatus">
+        <el-radio :label="1">通过</el-radio>
+        <el-radio :label="2">不通过</el-radio>
+      </el-radio-group>
+    </el-form-item>
+    <el-form-item label="备注：">
+     <el-input type="textarea" :rows="3" placeholder="系统默认通过" v-model="formData.auditOpinion"></el-input>
+    </el-form-item>
   </el-form>
+  <el-row style="margin-top:17px; ">
+      <el-button style="float:right" size="mini" type="primary" @click="submitForm('formData')">确 定</el-button>
+      <el-button style="float:right;margin-left:6px;" size="mini" type="danger" plain @click="handleClose">取 消</el-button>
+  </el-row>
   </el-dialog>
 </template>
 <script>
-import * as courseApis from '@/api/course'
+import * as api from '@/api/course'
 export default {
-  name: 'CourseAudit',
+  name: 'Audit',
   data() {
     return {
-      ctrl: {
-        load: false
-      },
-      map: {
-        id: '',
-        auditStatus: '1',
-        auditOpinion: ''
-      },
-      head: '',
-      vb: false
+      auditStatus: 1
     }
   },
   props: {
-      // route object
-      formData: {
-        type: Object,
-        default: () => {}
-      },
-      visible: {
-        type: Boolean,
-        default: false
-      },
-      title: {
-        type: String,
-        default: ''
-      }
-  },
-  watch: {
-    'visible': function(newValue) {
-      this.vb = newValue
-      this.head = this.formData.courseName + " —— 信息审核"
+    // route object
+    formData: {
+      type: Object,
+      default: () => {}
+    },
+    visible: {
+      type: Boolean,
+      default: false
+    },
+    title: {
+      type: String,
+      default: ''
     }
   },
   methods: {
     handleClose(done) {
-      this.$emit('close-cllback')
+      this.$emit('close-callback')
     },
-    submitForm(map) {
-      this.$refs[map].validate((valid) => {
+    submitForm(formData) {
+      this.$refs[formData].validate((valid) => {
         if (valid) {
-          this.handleConfirm()
+          if (this.formData.id === undefined) {
+            this.$message({
+              type: 'error',
+              message: "审核失败"
+            });
+          }
+          if (this.formData.auditOpinion === '') {
+            this.formData.auditOpinion = "系统默认通过"
+          }
+          this.formData.auditStatus = this.auditStatus
+          this.loading.show()
+          api.courseAudit(this.formData).then(res => {
+            this.loading.hide()
+            if (res.code === 200 && res.data > 0) {
+              // 提交成功, 关闭窗口, 刷新列表
+              this.tips('审核成功', 'success')
+              this.handleClose()
+            } else {
+              this.$message({
+                type: 'error',
+                message: "审核失败"
+              });
+            }
+          }).catch(() => {
+            this.loading.hide()
+          })
         } else {
-          return false;
+          this.$message({
+            type: 'error',
+            message: "审核失败"
+          });
         }
-      })
-    },
-    async handleConfirm() {
-      if (this.map.auditOpinion === '') {
-        this.map.auditOpinion = "系统默认通过"
-      }
-      this.map.id = this.formData.id
-      this.ctrl.load = true
-      courseApis.courseAudit(this.map).then(res => {
-        this.tips('审核成功', 'success')
-        this.$emit('close-cllback')
-        this.ctrl.load = false
-      }).catch(() => {
-        this.$alert('审核失败')
       })
     }
   }
 }
 </script>
-<style scoped>
-</style>

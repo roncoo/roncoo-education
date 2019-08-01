@@ -237,10 +237,16 @@
         this.ctrl.dialogTitle = "添加"
       },
       // 角色修改弹窗
-      handleEdit(res) {
-        this.formData = res
-        this.ctrl.editDialogVisible = true
-        this.ctrl.dialogTitle = res.roleName + "——修改"
+      handleEdit(id) {
+        this.ctrl.load = true
+        api.roleView({ id: id }).then(res => {
+          this.ctrl.load = false
+          this.formData = res.data
+          this.ctrl.editDialogVisible = true
+          this.ctrl.dialogTitle = res.roleName + " —— 信息修改"
+        }).catch(() => {
+          this.ctrl.load = false
+        })
       },
       handlePms(id, roleName) {
         this.id = id
@@ -270,11 +276,3 @@
     }
   }
 </script>
-<style scoped>
-  .cancel {
-    text-align: right;
-  }
-  .button {
-    padding: 5px 10px;
-  }
-</style>

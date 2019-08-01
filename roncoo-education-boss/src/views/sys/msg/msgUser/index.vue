@@ -168,7 +168,7 @@
         api.msgView({ id: row }).then(res => {
           if (res.code === 200) {
             this.formData.msgTitle = res.data.msgTitle
-            this.ctrl.dialogTitle = mobile + '——查看'
+            this.ctrl.dialogTitle = mobile + ' —— 查看'
             this.ctrl.dialogVisible = true
           }
           })

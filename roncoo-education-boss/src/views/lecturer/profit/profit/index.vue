@@ -35,7 +35,7 @@
     </div>
     <div>
       <el-table @selection-change="handleSelectionChange" v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
-        <el-table-column type="selection" width="55"></el-table-column>
+        <el-table-column type="selection" width="40"></el-table-column>
         <el-table-column type="index" label="序号" width="40"></el-table-column>
         <el-table-column width="100" prop="lecturerName" label="讲师名称"></el-table-column>
         <el-table-column width="120" prop="lecturerMobile" label="讲师手机"></el-table-column>
@@ -185,7 +185,7 @@
       },
       // 打款跳页面操作
       handleEdit(row) {
-        this.formData.id = row.id
+        this.formData = row
         this.ctrl.dialogTitle = '打款进度'
         this.ctrl.dialogVisible = true
       },

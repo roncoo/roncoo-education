@@ -1,7 +1,7 @@
 <template>
   <!--弹窗-->
   <el-dialog
-     width="70%"
+     width="60%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
@@ -74,7 +74,7 @@
         <el-row>
           <el-col :span="8"><div>
             <el-form-item label="讲师分成情况:">
-              <span>{{formData.lecturerProportion*100}}%</span>
+              <span>{{formData.lecturerProportion}}%</span>
             </el-form-item>
           </div></el-col>
           <el-col :span="8"><div>

@@ -6,10 +6,10 @@
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form ref="formData" :model="formData" :rules="rules" label-width="100px">
-      <el-form-item label="分类名称:" prop="categoryName">
+      <el-form-item label="分类名称：" prop="categoryName">
         <el-input v-model="formData.categoryName"></el-input>
       </el-form-item>
-      <el-form-item label="备注:">
+      <el-form-item label="备注：">
         <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="formData.remark">
         </el-input>
       </el-form-item>
@@ -49,7 +49,7 @@ export default {
     }
   },
   methods: {
-    // 保存管理员信息
+    // 保存信息
     submitForm(formData) {
       if (formData.categoryName) {
         this.$message({
@@ -61,42 +61,34 @@ export default {
       this.$refs[formData].validate((valid) => {
         if (valid) {
           this.formData.categoryType = 1
-          this.handleConfirm()
+          this.loading.show()
+          api.categorySave(this.formData).then(res => {
+            this.loading.hide()
+            if (res.code === 200 && res.data > 0) {
+              // 提交成功, 关闭窗口, 刷新列表
+              this.tips('保存成功', 'success')
+              this.handleClose()
+            } else {
+              this.$message({
+                type: 'error',
+                message: "保存失败"
+              });
+            }
+          }).catch(() => {
+            this.loading.hide()
+          })
         } else {
-          return false;
+          this.$message({
+            type: 'error',
+            message: "保存失败"
+          });
         }
       })
     },
-    //异步课程分类保存
-    async handleConfirm() {
-      this.load = true
-      let res = {}
-      if (this.formData === undefined) {
-        this.$alert(res.msg || '提交失败')
-      } else {
-        res = await api.categorySave(this.formData)
-        // this.tips('成功', 'success')
-      }
-      this.load = false
-      if (res.code === 200 && res.data > 0) {
-        // 提交成功, 关闭窗口, 刷新列表
-        this.$emit('close-cllback')
-      } else {
-        this.$alert(res.msg || '提交失败')
-      }
-    },
     // 关闭弹窗
     handleClose(done) {
-      this.$emit('close-cllback')
+      this.$emit('close-callback')
     }
   }
 }
 </script>
-<style scoped>
-  .cancel {
-    text-align: right;
-  }
-  .button {
-    padding: 5px 10px;
-  }
-</style>

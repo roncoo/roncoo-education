@@ -73,8 +73,7 @@ export default {
   },
   watch: {
     visible: function(val) {
-      console.log(val)
-      if (val === true) {
+      if (val) {
         setTimeout(() => {
           this.editor.create();
           this.editor.customConfig.customUploadImg = this.editorUpload

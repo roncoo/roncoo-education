@@ -127,7 +127,9 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
+          this.ctrl.load = true
           api.templateDelete({ id: id }).then(res => {
+            this.ctrl.load = false
           if (res.code === 200 && res.data > 0) {
             this.$message({
               type: 'success',
@@ -143,6 +145,7 @@
           }
         })
         }).catch(() => {
+          this.ctrl.load = false
           this.reload()
         })
       },
@@ -150,10 +153,16 @@
         this.ctrl.addDialogVisible = true
         this.dialogTitle = '添加'
       },
-      handleEdit(res) {
-        this.formData = res
-        this.dialogTitle = res.title + '编辑'
-        this.ctrl.dialogVisible = true
+      handleEdit(id) {
+        this.ctrl.load = true
+        api.templateView({ id: id }).then(res => {
+          this.formData = res
+          this.dialogTitle = res.title + '编辑'
+          this.ctrl.dialogVisible = true
+          this.ctrl.load = false
+        }).catch(() => {
+          this.ctrl.load = false
+        })
       },
       // 关闭弹窗回调
       closeCallback() {

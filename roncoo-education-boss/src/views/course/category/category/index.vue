@@ -21,6 +21,11 @@
       row-key="id"
       :default-expand-all="false">
         <el-table-column
+        type="index"
+        label="序号"
+        width="40">
+        </el-table-column>
+        <el-table-column
           prop="categoryName"
           label="分类名称"
           sortable
@@ -48,8 +53,8 @@
           </template>
         </el-table-column>
       </el-table>
-       <add :visible="ctrl.addDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></add>
-      <edit :visible="ctrl.editDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-cllback="closeCllback"></edit>
+       <add :visible="ctrl.addDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCllback"></add>
+      <edit :visible="ctrl.editDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCllback"></edit>
       <el-pagination
         background
         style="float: right;margin-top: 20px; margin-bottom: 22px"
@@ -144,9 +149,18 @@
         this.ctrl.addDialogVisible = true
       },
       editSubMmenu(row) {
-        this.formData = row
-        this.ctrl.dialogTitle = row.categoryName + "修改"
+        this.getCategory(row.id)
         this.ctrl.editDialogVisible = true
+      },
+      getCategory(id) {
+        this.ctrl.load = true
+        api.categoryView({ id: id }).then(res => {
+          this.formData = res.data
+          this.ctrl.dialogTitle = res.data.categoryName + " —— 修改"
+          this.ctrl.load = false
+        }).catch(() => {
+          this.ctrl.load = false
+        })
       },
       // 关闭弹窗回调
       closeCllback() {

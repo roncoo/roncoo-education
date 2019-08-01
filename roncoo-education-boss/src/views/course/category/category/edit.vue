@@ -6,13 +6,13 @@
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form ref="formData" :model="formData" :rules="rules" label-width="100px">
-      <el-form-item label="分类名称:" prop="categoryName">
+      <el-form-item label="分类名称：" prop="categoryName">
         <el-input v-model="formData.categoryName"></el-input>
       </el-form-item>
-      <el-form-item label="排序:">
-        <el-input v-model="formData.sort"></el-input>
+      <el-form-item label="排序：">
+        <el-input-number style="width: 300px;" v-model="formData.sort" @change="handleChange" :min="1"></el-input-number>
       </el-form-item>
-      <el-form-item label="备注:">
+      <el-form-item label="备注：">
         <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="formData.remark"></el-input>
       </el-form-item>
     </el-form>
@@ -52,9 +52,43 @@
     },
     methods: {
       handleClose(done) {
-        this.$emit('close-cllback')
+        this.$emit('close-callback')
+      },
+      handleChange(value) {
+        this.formData.sort = value
       },
       submitForm(formData) {
+        this.$refs[formData].validate((valid) => {
+        if (valid) {
+          if (this.formData.id === undefined) {
+            this.$message({
+              type: 'error',
+              message: "提交失败"
+            });
+          }
+          this.loading.show()
+          api.categoryUpdate(this.formData).then(res => {
+            this.loading.hide()
+            if (res.code === 200 && res.data > 0) {
+              // 提交成功, 关闭窗口, 刷新列表
+              this.tips('更新成功', 'success')
+              this.handleClose()
+            } else {
+              this.$message({
+                type: 'error',
+                message: "提交失败"
+              });
+            }
+          }).catch(() => {
+            this.loading.hide()
+          })
+        } else {
+          this.$message({
+            type: 'error',
+            message: "提交失败"
+          });
+        }
+      })
         this.$refs[formData].validate((valid) => {
           if (valid) {
             this.handleConfirm()
@@ -62,33 +96,7 @@
             return false;
           }
         })
-      },
-     async handleConfirm() {
-        this.load = true
-        let res = {}
-        if (this.formData.id === undefined) {
-          this.$alert(res.msg || '提交失败')
-        } else {
-          res = await api.categoryUpdate(this.formData)
-          // this.tips('成功', 'success')
-        }
-        this.load = false
-        if (res.code === 200 && res.data > 0) {
-          // 提交成功, 关闭窗口, 刷新列表
-          this.tips('成功', 'success')
-          this.$emit('close-cllback')
-        } else {
-          this.$alert(res.msg || '提交失败')
-        }
       }
     }
   }
 </script>
-<style scoped>
-  .cancel {
-    text-align: right;
-  }
-  .button {
-    padding: 5px 10px;
-  }
-</style>

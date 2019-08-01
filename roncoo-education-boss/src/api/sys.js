@@ -135,6 +135,15 @@ export function templateUpdate(data = {}) {
   })
 }
 
+// 消息模板查看接口
+export function templateView(data = {}) {
+  return request({
+    url: `/system/pc/msg/template/view`,
+    method: 'post',
+    data: data
+  })
+}
+
 // 获取站点信息接口
 export function websiteView(data = {}) {
   return request({
@@ -252,6 +261,15 @@ export function userUpdate(data = {}) {
   })
 }
 
+// 后台管理员查看口
+export function userView(data = {}) {
+  return request({
+    url: `/system/pc/sys/user/view`,
+    method: 'post',
+    data: data
+  })
+}
+
 // 后台管理员密码接口
 export function updatePassword(data = {}) {
   return request({
@@ -315,6 +333,15 @@ export function roleUpdate(data = {}) {
   })
 }
 
+// 角色查看接口
+export function roleView(data = {}) {
+  return request({
+    url: `/system/pc/sys/role/view`,
+    method: 'post',
+    data: data
+  })
+}
+
 // 列出菜单角色关联信息接口
 export function menuRoleList(data = {}) {
   return request({
@@ -364,6 +391,15 @@ export function menuDelete(data = {}) {
 export function menuUpdate(data = {}) {
   return request({
     url: `/system/pc/menu/update`,
+    method: 'post',
+    data: data
+  })
+}
+
+// 菜单信息查看接口
+export function menuView(data = {}) {
+  return request({
+    url: `/system/pc/menu/view`,
     method: 'post',
     data: data
   })
