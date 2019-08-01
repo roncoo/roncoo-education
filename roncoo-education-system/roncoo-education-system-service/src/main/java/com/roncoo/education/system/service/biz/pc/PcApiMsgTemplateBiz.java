@@ -8,7 +8,9 @@ import com.roncoo.education.system.service.common.req.MsgTemplateDeleteREQ;
 import com.roncoo.education.system.service.common.req.MsgTemplatePageREQ;
 import com.roncoo.education.system.service.common.req.MsgTemplateSaveREQ;
 import com.roncoo.education.system.service.common.req.MsgTemplateUpdeteREQ;
+import com.roncoo.education.system.service.common.req.MsgTemplateViewREQ;
 import com.roncoo.education.system.service.common.resq.MsgTemplatePageRESQ;
+import com.roncoo.education.system.service.common.resq.MsgTemplateViewRESQ;
 import com.roncoo.education.system.service.dao.MsgTemplateDao;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.MsgTemplate;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.MsgTemplateExample;
@@ -17,6 +19,7 @@ import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.tools.BeanUtil;
+import com.xiaoleilu.hutool.util.ObjectUtil;
 
 /**
  * 消息模板
@@ -67,6 +70,18 @@ public class PcApiMsgTemplateBiz {
 			return Result.error(ResultEnum.SYSTEM_UPDATE_FAIL);
 		}
 		return Result.success(result);
+	}
+
+	public Result<MsgTemplateViewRESQ> view(MsgTemplateViewREQ req) {
+		if (req.getId() == null) {
+			return Result.error("ID不能为空");
+		}
+
+		MsgTemplate msgTemplate = dao.getById(req.getId());
+		if (ObjectUtil.isNull(msgTemplate)) {
+			return Result.error("找不到消息模板信息");
+		}
+		return Result.success(BeanUtil.copyProperties(msgTemplate, MsgTemplateViewRESQ.class));
 	}
 
 }
