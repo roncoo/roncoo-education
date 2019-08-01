@@ -89,7 +89,7 @@ public class FilterPre extends ZuulFilter {
 		try {
 			userNo = getUserNoByToken(request);
 
-			if (uri.contains("/course/pc") || uri.contains("/user/pc") || uri.contains("/system/pc") && uri.contains("/system/pc/menu/user/list")) {
+			if (uri.contains("/course/pc") || uri.contains("/user/pc") || uri.contains("/system/pc") && !uri.contains("/system/pc/menu/user/list")) {
 				// 不鉴权
 				if (!stringRedisTemplate.hasKey(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()))) {
 					throw new BaseException(ResultEnum.MENU_PAST);
