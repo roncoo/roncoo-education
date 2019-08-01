@@ -89,7 +89,7 @@ public class FilterPre extends ZuulFilter {
 		try {
 			userNo = getUserNoByToken(request);
 
-			if (uri.contains("/course/pc") || uri.contains("/user/pc") || uri.contains("/system/pc") && !uri.contains("/system/pc/menu/user/list")) {
+			if (uri.contains("/course/pc") || uri.contains("/user/pc") || uri.contains("/system/pc") && uri.contains("/system/pc/menu/user/list") && !uri.contains("/system/pc/sys/enum/list")) {
 				// 不鉴权
 				if (!stringRedisTemplate.hasKey(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()))) {
 					throw new BaseException(ResultEnum.MENU_PAST);
@@ -230,14 +230,12 @@ public class FilterPre extends ZuulFilter {
 	private static Boolean checkUri(String uri, String tk) {
 		Set<String> menuSet = new HashSet<>();
 		List<SysMenuVO> menuVOList = JSONUtil.parseArray(tk, SysMenuVO.class);
+		logger.info("用户菜单集合" + menuVOList);
 		listMenu(menuSet, menuVOList);
 		if (StringUtils.hasText(uri) && uri.endsWith("/")) {
 			uri = uri.substring(0, uri.length() - 1);
 		}
-		logger.info("请求地址地址" + uri);
-		logger.info("用户菜单集合api地址" + menuSet);
 		for (String s : menuSet) {
-			
 			if (s.contains(uri)) {
 				return true;
 			}
@@ -252,7 +250,7 @@ public class FilterPre extends ZuulFilter {
 	private static void listMenu(Set<String> menuSet, List<SysMenuVO> menuVOList) {
 		if (CollectionUtil.isNotEmpty(menuVOList)) {
 			for (SysMenuVO sm : menuVOList) {
-				if (StringUtils.hasText(sm.getApiUrl())) {
+				if (StringUtils.hasText(sm.getMenuUrl())) {
 					menuSet.add(sm.getApiUrl());
 				}
 				listMenu(menuSet, sm.getList());
