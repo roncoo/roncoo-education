@@ -234,9 +234,10 @@ public class FilterPre extends ZuulFilter {
 		if (StringUtils.hasText(uri) && uri.endsWith("/")) {
 			uri = uri.substring(0, uri.length() - 1);
 		}
+		logger.info("请求地址地址" + uri);
+		logger.info("用户菜单集合api地址" + menuSet);
 		for (String s : menuSet) {
-			logger.info("请求地址地址" + uri);
-			logger.info("用户菜单集合api地址" + s);
+			
 			if (s.contains(uri)) {
 				return true;
 			}
