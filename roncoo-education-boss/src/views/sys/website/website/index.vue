@@ -129,7 +129,8 @@
           this.formData = res.data
         }
       }).catch(() => {
-        })
+        this.loading.hide()
+      })
       },
       // 编辑器上传图片
       editorUpload(files, insert) {
@@ -165,6 +166,8 @@
                   message: "更新失败"
                 });
               }
+            }).catch(() => {
+              this.loading.hide()
             })
           } else {
             this.$message({

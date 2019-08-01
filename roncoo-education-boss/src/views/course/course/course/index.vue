@@ -232,13 +232,17 @@ export default {
     },
     // 请求更新上下架方法
     changeIsPutaway(row, command) {
+      this.ctrl.load = true
       api.courseUpdate({ id: row.id, isPutaway: command }).then(res => {
+        this.ctrl.load = false
         const msg = { 0: '下架成功', 1: '上架成功' }
         this.$message({
           type: 'success',
           message: msg[command]
         });
           this.reload()
+      }).catch(() => {
+        this.ctrl.load = false
       })
     },
     // 修改状态

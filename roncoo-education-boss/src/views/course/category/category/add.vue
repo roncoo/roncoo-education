@@ -75,7 +75,7 @@ export default {
               });
             }
           }).catch(() => {
-            this.loading.hide()
+            this.ctrl.load = true
           })
         } else {
           this.$message({

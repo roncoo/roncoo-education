@@ -22,7 +22,7 @@
       <el-form-item label="接口地址：" v-if="menuType == 2 || menuType == 3">
         <el-input v-model="formData.apiUrl"></el-input>
       </el-form-item>
-      <el-form-item label="显示菜单:">
+      <el-form-item label="显示菜单:" v-if="menuType !== 3">
         <el-radio-group v-model="hiddenType">
           <el-radio :label="1">显示</el-radio>
           <el-radio :label="0">不显示</el-radio>

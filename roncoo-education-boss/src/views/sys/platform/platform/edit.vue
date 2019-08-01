@@ -55,7 +55,7 @@
       submitForm(formData) {
         this.$refs[formData].validate((valid) => {
           if (valid) {
-          this.loading.show()
+            this.loading.show()
             api.platformUpdate(this.formData).then(res => {
               this.loading.hide()
               if (res.code === 200 && res.data > 0) {
@@ -68,6 +68,8 @@
                   message: "提交失败"
                 });
               }
+            }).catch(() => {
+              this.loading.show()
             })
           } else {
             this.$message({

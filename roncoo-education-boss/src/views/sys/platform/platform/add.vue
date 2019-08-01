@@ -74,6 +74,8 @@ export default {
               message: "提交失败"
             });
           }
+        }).catch(() => {
+          this.loading.show()
         })
       }
     },

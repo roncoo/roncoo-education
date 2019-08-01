@@ -212,7 +212,7 @@
         this.load === true
         api.msgView({ id: row }).then(res => {
           this.formData = res.data
-          this.ctrl.dialogTitle = res.data.msgTitle + '——编辑'
+          this.ctrl.dialogTitle = res.data.msgTitle + ' —— 编辑'
           this.ctrl.load = false
         }).catch(() => {
           this.ctrl.load = true
@@ -246,6 +246,8 @@
             });
               this.reload()
           }
+        }).catch(() => {
+          this.ctrl.load = true
         })
         }).catch(() => {
           this.reload()

@@ -189,6 +189,8 @@
             });
               this.reload()
           }
+        }).catch(() => {
+          this.ctrl.load = false
         })
         }).catch(() => {
           this.reload()

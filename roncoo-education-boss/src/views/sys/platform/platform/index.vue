@@ -151,6 +151,8 @@
             });
               this.handleReset()
           }
+        }).catch(() => {
+          this.ctrl.load = false
         })
         }).catch(() => {
           this.handleReset()
@@ -219,6 +221,8 @@
             });
               this.handleReset()
           }
+        }).catch(() => {
+          this.ctrl.load = false
         })
       },
       // 注册时间段查询条件

@@ -237,13 +237,17 @@ export default {
     },
     // 请求更新上下架方法
     changeIsPutaway(row, command) {
+      this.ctrl.load = true
       api.courseUpdate({ id: row.id, isPutaway: command }).then(res => {
+        this.ctrl.load = false
         const msg = { 0: '下架成功', 1: '上架成功' }
         this.$message({
           type: 'success',
           message: msg[command]
         });
           this.reload()
+      }).catch(() => {
+        this.ctrl.load = false
       })
     },
     // 修改状态
@@ -262,13 +266,17 @@ export default {
     },
     // 请求更新状态方法
     changeStatusId(row, command) {
+      this.ctrl.load = true
       api.courseUpdate({ id: row.id, statusId: command }).then(res => {
+        this.ctrl.load = false
         const msg = { 0: '禁用成功', 1: '启用成功' }
         this.$message({
           type: 'success',
           message: msg[command]
         });
           this.reload()
+      }).catch(() => {
+        this.ctrl.load = false
       })
     },
     handleAudit(data) {
@@ -282,6 +290,7 @@ export default {
       this.ctrl.editVisible = true
     },
     getCourseAudit(id, title) {
+      this.ctrl.load = true
       api.courseAuditView(id).then(res => {
         this.formData = res.data
         this.ctrl.dialogTitle = res.data.courseName + " —— " + title

@@ -29,7 +29,7 @@
           prop="menuName"
           label="菜单名称"
           sortable
-          width="210">
+          width="220">
         </el-table-column>
         <el-table-column
           prop="menuUrl"
@@ -149,7 +149,7 @@
         api.menuView({ id: id }).then(res => {
           this.ctrl.load = false
           this.formData = res.data
-          this.ctrl.dialogTitle = res.menuName + " —— 信息编辑"
+          this.ctrl.dialogTitle = res.data.menuName + " —— 信息编辑"
           this.ctrl.editDialogVisible = true
         }).catch(() => {
           this.ctrl.load = false
@@ -184,7 +184,7 @@
             });
           }
         }).catch(() => {
-          this.ctrl.load = true
+          this.ctrl.load = false
         })
         }).catch(() => {
           this.reload()

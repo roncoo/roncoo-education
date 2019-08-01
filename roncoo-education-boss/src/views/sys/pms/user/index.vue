@@ -132,7 +132,7 @@
         api.userView({ id: id }).then(res => {
           this.formData = res.data
           this.ctrl.dialogVisible = true
-          this.ctrl.dialogTitle = res.realName + ' —— 信息编辑'
+          this.ctrl.dialogTitle = res.data.realName + ' —— 信息编辑'
           this.ctrl.load = false
         }).catch(() => {
           this.ctrl.load = false
@@ -182,11 +182,7 @@
             });
           }
         }).catch(() => {
-          this.ctrl.load = true
-          this.$message({
-            type: 'error',
-            message: "删除失败"
-          });
+          this.ctrl.load = false
         })
         })
       },
@@ -226,12 +222,6 @@
           }
         }).catch(() => {
           this.ctrl.load = false
-          const msg = { 0: '禁用失败', 1: '启用失败' }
-            this.$message({
-              type: 'error',
-              message: msg[statusId]
-            });
-              this.reload()
         })
       },
       handleSizeChange(val) {

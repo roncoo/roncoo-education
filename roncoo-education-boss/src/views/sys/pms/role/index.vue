@@ -58,7 +58,7 @@
             <ul class="list-item-actions">
               <li>
                 <el-button type="danger" @click="handleDelete(scope.row.id)" size="mini">删除</el-button>
-                <el-button type="success" @click="handleEdit(scope.row)" size="mini">修改</el-button>
+                <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
                 <el-button type="success" @click="handlePms(scope.row.id, scope.row.roleName)" size="mini">设置权限</el-button>
               </li>
             </ul>
@@ -201,7 +201,9 @@
             });
               this.reload()
           }
-        })
+        }).catch(() => {
+            this.ctrl.load = false
+          })
       },
       // 删除
       handleDelete(id) {
@@ -226,6 +228,8 @@
               });
                 this.reload()
             }
+          }).catch(() => {
+            this.ctrl.load = false
           })
         }).catch(() => {
           this.reload()

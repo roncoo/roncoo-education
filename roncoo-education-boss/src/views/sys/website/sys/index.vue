@@ -140,8 +140,9 @@
           if (res.code === 200) {
             this.formData = res.data
           }
-      }).catch(() => {
-        })
+        }).catch(() => {
+          this.loading.hide()
+          })
       },
       submitForm(formData) {
         this.$refs[formData].validate((valid) => {
@@ -157,6 +158,8 @@
                   message: "更新失败"
                 });
               }
+            }).catch(() => {
+              this.loading.hide()
             })
           } else {
             this.$message({
