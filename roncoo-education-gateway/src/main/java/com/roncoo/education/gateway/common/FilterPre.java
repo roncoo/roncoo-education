@@ -230,12 +230,13 @@ public class FilterPre extends ZuulFilter {
 	private static Boolean checkUri(String uri, String tk) {
 		Set<String> menuSet = new HashSet<>();
 		List<SysMenuVO> menuVOList = JSONUtil.parseArray(tk, SysMenuVO.class);
-		logger.info("用户菜单集合" + menuVOList);
 		listMenu(menuSet, menuVOList);
 		if (StringUtils.hasText(uri) && uri.endsWith("/")) {
 			uri = uri.substring(0, uri.length() - 1);
 		}
 		for (String s : menuSet) {
+			logger.info("请求地址地址" + uri);
+			logger.info("用户菜单集合api地址" + s);
 			if (s.contains(uri)) {
 				return true;
 			}
