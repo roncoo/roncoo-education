@@ -236,10 +236,33 @@ public class PcApiSysMenuBiz {
 			sysMenuRoleList.addAll(sysMenuRoleDao.listByRoleId(sru.getRoleId()));
 		}
 		// 筛选
-		List<SysMenuUserRESQ> list = listByRole(sysMenuRoleList, null);
-		if (CollectionUtils.isNotEmpty(list)) {
-			resq.setSysMenu(list);
+		List<SysMenuUserRESQ> list = userRecursion(0L, MenuTypeEnum.BUTTON.getCode());
+		List<SysMenuUserRESQ> sysMenuUserRESQList = new ArrayList<>();
+		List<SysMenuUserRESQ> listResqs = getListMenu(sysMenuUserRESQList, sysMenuRoleList, list);
+
+		if (CollectionUtils.isNotEmpty(listResqs)) {
+			resq.setSysMenu(listResqs);
 		}
 		return Result.success(resq);
 	}
+
+	private List<SysMenuUserRESQ> getListMenu(List<SysMenuUserRESQ> sysMenuVOList, List<SysMenuRole> sysMenuRoleList, List<SysMenuUserRESQ> list) {
+		for (SysMenuUserRESQ mv : list) {
+			SysMenuUserRESQ v = new SysMenuUserRESQ();
+			for (SysMenuRole vo : sysMenuRoleList) {
+				if (mv.getId().equals(vo.getMenuId())) {
+					v.setId(mv.getId());
+					v.setApiUrl(mv.getApiUrl());
+					break;
+				}
+			}
+			if (ObjectUtil.isNotNull(v)) {
+				sysMenuVOList.add(v);
+				List<SysMenuUserRESQ> l = new ArrayList<>();
+				listMenu(l, sysMenuRoleList, mv.getChildren());
+			}
+		}
+		return sysMenuVOList;
+	}
+
 }
