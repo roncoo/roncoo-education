@@ -172,12 +172,7 @@
           }
         }).catch(() => {
           this.ctrl.loading = false
-          const msg = { 0: '禁用失败', 1: '启用失败' }
-            this.$message({
-              type: 'error',
-              message: msg[statusId]
-            });
-              this.reload()
+          this.reload()
         })
       },
       //删除
@@ -204,10 +199,6 @@
               });
             }
           }).catch(() => {
-            this.$message({
-              type: 'error',
-              message: "删除失败"
-            });
             this.ctrl.loading = false
           })
         })

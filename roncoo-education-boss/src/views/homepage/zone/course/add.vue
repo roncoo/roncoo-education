@@ -190,10 +190,7 @@
             });
           }
         }).catch(() => {
-            this.$message({
-                type: 'error',
-                message: "提交失败"
-              });
+          this.loading.hide()
           })
       },
       handleClose() {

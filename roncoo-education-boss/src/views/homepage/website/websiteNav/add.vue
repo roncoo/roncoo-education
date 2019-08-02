@@ -76,10 +76,6 @@
               }
             }).catch(() => {
               this.loading.hide()
-              this.$message({
-                type: 'error',
-                message: "提交失败"
-              });
             })
           } else {
             this.$message({

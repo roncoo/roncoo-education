@@ -173,6 +173,8 @@
                 message: '删除失败'
               });
             }
+          }).catch(() => {
+            this.ctrl.loading = false
           })
         }).catch(() => {
         })

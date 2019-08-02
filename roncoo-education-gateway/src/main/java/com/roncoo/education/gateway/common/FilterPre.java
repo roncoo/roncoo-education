@@ -90,12 +90,21 @@ public class FilterPre extends ZuulFilter {
 			userNo = getUserNoByToken(request);
 			if (uri.contains("/pc") && !uri.contains("/system/pc/menu/user/list") && !uri.contains("/system/pc/sys/enum/list")) {
 				// 管理后台鉴权
-				pcURLAuth(uri, userNo);
-
+				if (!stringRedisTemplate.hasKey(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()))) {
+					throw new BaseException(ResultEnum.MENU_PAST);
+				}
+				String tk = stringRedisTemplate.opsForValue().get(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()));
+				// 校验接口是否有权限
+				if (!checkUri(uri, tk)) {
+					throw new BaseException(ResultEnum.MENU_NO);
+				}
+				// 更新时间，使用户菜单不过期
+				stringRedisTemplate.opsForValue().set(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()), tk, 1, TimeUnit.HOURS);
 			}
 
 		} catch (BaseException e) {
 			logger.error("系统异常", e.getMessage());
+			ctx.setSendZuulResponse(false);
 			resp(ctx, e.getMessage(), e.getCode());
 			return null;
 		}
@@ -104,24 +113,12 @@ public class FilterPre extends ZuulFilter {
 			ctx.setRequest(requestWrapper(request, userNo));
 		} catch (IOException e) {
 			logger.error("封装参数异常", e.getMessage());
+			ctx.setSendZuulResponse(false);
 			resp(ctx, "系统异常，请重试");
 		}
 		return null;
 	}
 
-	// 管理管理后台URL身份认证
-	private void pcURLAuth(String uri, Long userNo) {
-		if (!stringRedisTemplate.hasKey(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()))) {
-			throw new BaseException(ResultEnum.MENU_PAST);
-		}
-		String tk = stringRedisTemplate.opsForValue().get(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()));
-		// 校验接口是否有权限
-		if (!checkUri(uri, tk)) {
-			throw new BaseException(ResultEnum.MENU_NO);
-		}
-		// 更新时间，使用户菜单不过期
-		stringRedisTemplate.opsForValue().set(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()), tk, 1, TimeUnit.HOURS);
-	}
 
 	/**
 	 * token 拦截功能
