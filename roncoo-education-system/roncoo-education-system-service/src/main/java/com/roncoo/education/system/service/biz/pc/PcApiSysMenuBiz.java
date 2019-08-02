@@ -164,15 +164,15 @@ public class PcApiSysMenuBiz {
 			sysMenuRoleList.addAll(sysMenuRoleDao.listByRoleId(sru.getRoleId()));
 		}
 		// 筛选
-		List<SysMenuUserRESQ> list = listByRole(sysMenuRoleList);
+		List<SysMenuUserRESQ> list = listByRole(sysMenuRoleList, MenuTypeEnum.BUTTON.getCode());
 		if (CollectionUtils.isNotEmpty(list)) {
 			resq.setSysMenu(list);
 		}
 		return Result.success(resq);
 	}
 
-	private List<SysMenuUserRESQ> listByRole(List<SysMenuRole> sysMenuRoleList) {
-		List<SysMenuUserRESQ> list = userRecursion(0L);
+	private List<SysMenuUserRESQ> listByRole(List<SysMenuRole> sysMenuRoleList, Integer menuType) {
+		List<SysMenuUserRESQ> list = userRecursion(0L, menuType);
 		List<SysMenuUserRESQ> sysMenuUserRESQList = new ArrayList<>();
 		sysMenuUserRESQList = listMenu(sysMenuUserRESQList, sysMenuRoleList, list);
 		return sysMenuUserRESQList;
@@ -202,9 +202,9 @@ public class PcApiSysMenuBiz {
 	/**
 	 * 用户递归显示菜单(角色关联菜单)
 	 */
-	private List<SysMenuUserRESQ> userRecursion(Long parentId) {
+	private List<SysMenuUserRESQ> userRecursion(Long parentId, Integer menuType) {
 		List<SysMenuUserRESQ> lists = new ArrayList<>();
-		List<SysMenu> list = dao.listByParentIdAndNotMenuType(parentId, MenuTypeEnum.BUTTON.getCode());
+		List<SysMenu> list = dao.listByParentIdAndNotMenuType(parentId, menuType);
 		if (CollectionUtil.isNotEmpty(list)) {
 			for (SysMenu m : list) {
 				SysMenuUserRESQ resq = BeanUtil.copyProperties(m, SysMenuUserRESQ.class);
@@ -215,11 +215,31 @@ public class PcApiSysMenuBiz {
 				}
 				resq.setName(m.getMenuName());
 				resq.setPath(m.getMenuUrl());
+				resq.setApiUrl(m.getApiUrl());
 				resq.setIcon(m.getMenuIcon());
-				resq.setChildren(userRecursion(m.getId()));
+				resq.setChildren(userRecursion(m.getId(), menuType));
 				lists.add(resq);
 			}
 		}
 		return lists;
+	}
+
+	public Result<SysMenuUserListRESQ> buttonList(SysMenuUserListREQ req) {
+		SysUser sysUser = sysUserDao.getByUserNo(req.getUserNo());
+		if (ObjectUtil.isNull(sysUser)) {
+			return Result.error("用户异常");
+		}
+		SysMenuUserListRESQ resq = new SysMenuUserListRESQ();
+		List<SysMenuRole> sysMenuRoleList = new ArrayList<>();
+		List<SysRoleUser> sysRoleUserList = sysRoleUserDao.listByUserId(sysUser.getId());
+		for (SysRoleUser sru : sysRoleUserList) {
+			sysMenuRoleList.addAll(sysMenuRoleDao.listByRoleId(sru.getRoleId()));
+		}
+		// 筛选
+		List<SysMenuUserRESQ> list = listByRole(sysMenuRoleList, null);
+		if (CollectionUtils.isNotEmpty(list)) {
+			resq.setSysMenu(list);
+		}
+		return Result.success(resq);
 	}
 }

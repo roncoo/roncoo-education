@@ -77,8 +77,7 @@ public class PcApiSysMenuController extends BaseController {
 	public Result<SysMenuViewRESQ> view(@RequestBody SysMenuViewREQ sysMenuViewREQ) {
 		return biz.view(sysMenuViewREQ);
 	}
-	
-	
+
 	/**
 	 * 用户菜单信息列出信息接口
 	 */
@@ -86,6 +85,15 @@ public class PcApiSysMenuController extends BaseController {
 	@RequestMapping(value = "/user/list", method = RequestMethod.POST)
 	public Result<SysMenuUserListRESQ> list(@RequestBody SysMenuUserListREQ sysMenuUserListREQ) {
 		return biz.userList(sysMenuUserListREQ);
+	}
+
+	/**
+	 * 用户菜单信息列出信息接口
+	 */
+	@ApiOperation(value = "用户菜单信息列出信息接口(登录用户)", notes = "用户菜单信息列出信息接口(登录用户)")
+	@RequestMapping(value = "/user/button/list", method = RequestMethod.POST)
+	public Result<SysMenuUserListRESQ> buttonList(@RequestBody SysMenuUserListREQ sysMenuUserListREQ) {
+		return biz.buttonList(sysMenuUserListREQ);
 	}
 
 }
