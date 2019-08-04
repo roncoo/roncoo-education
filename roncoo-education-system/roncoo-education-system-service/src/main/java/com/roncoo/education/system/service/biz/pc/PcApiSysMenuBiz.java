@@ -239,10 +239,10 @@ public class PcApiSysMenuBiz {
 		List<SysMenuUserRESQ> list = userRecursion(0L, null);
 		List<SysMenuUserRESQ> sysMenuUserRESQList = new ArrayList<>();
 		List<SysMenuUserRESQ> listResqs = getListMenu(sysMenuUserRESQList, sysMenuRoleList, list);
-
 		if (CollectionUtils.isNotEmpty(listResqs)) {
 			resq.setSysMenu(listResqs);
 		}
+		System.out.println(listResqs);
 		return Result.success(resq);
 	}
 
@@ -255,13 +255,14 @@ public class PcApiSysMenuBiz {
 					v.setId(mv.getId());
 					v.setName(mv.getName());
 					v.setApiUrl(mv.getApiUrl());
+					if (ObjectUtil.isNotNull(v)) {
+						sysMenuVOList.add(v);
+					}
 					break;
 				}
 			}
 			if (ObjectUtil.isNotNull(v)) {
-				sysMenuVOList.add(v);
-				List<SysMenuUserRESQ> l = new ArrayList<>();
-				listMenu(l, sysMenuRoleList, mv.getChildren());
+				getListMenu(sysMenuVOList, sysMenuRoleList, mv.getChildren());
 			}
 		}
 		return sysMenuVOList;
