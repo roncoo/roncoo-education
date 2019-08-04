@@ -87,7 +87,6 @@ public class PcApiSysMenuController extends BaseController {
 		return biz.userList(sysMenuUserListREQ);
 	}
 
-	
 	/**
 	 * 用户菜单信息列出信息接口
 	 */
