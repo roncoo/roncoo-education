@@ -13,6 +13,7 @@ import com.roncoo.education.system.service.common.req.SysMenuSaveREQ;
 import com.roncoo.education.system.service.common.req.SysMenuUpdateREQ;
 import com.roncoo.education.system.service.common.req.SysMenuUserListREQ;
 import com.roncoo.education.system.service.common.req.SysMenuViewREQ;
+import com.roncoo.education.system.service.common.resq.SysMenuButtonListRESQ;
 import com.roncoo.education.system.service.common.resq.SysMenuListRESQ;
 import com.roncoo.education.system.service.common.resq.SysMenuUserListRESQ;
 import com.roncoo.education.system.service.common.resq.SysMenuViewRESQ;
@@ -93,7 +94,7 @@ public class PcApiSysMenuController extends BaseController {
 	 */
 	@ApiOperation(value = "用户按钮菜单信息列出信息接口(按钮)", notes = "用户按钮菜单信息列出信息接口(登录用户)")
 	@RequestMapping(value = "/user/button/list", method = RequestMethod.POST)
-	public Result<SysMenuUserListRESQ> buttonList(@RequestBody SysMenuUserListREQ sysMenuUserListREQ) {
+	public Result<SysMenuButtonListRESQ> buttonList(@RequestBody SysMenuUserListREQ sysMenuUserListREQ) {
 		return biz.buttonList(sysMenuUserListREQ);
 	}
 

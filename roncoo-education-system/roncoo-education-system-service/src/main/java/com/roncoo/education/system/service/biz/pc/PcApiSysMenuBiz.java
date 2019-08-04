@@ -15,6 +15,7 @@ import com.roncoo.education.system.service.common.req.SysMenuSaveREQ;
 import com.roncoo.education.system.service.common.req.SysMenuUpdateREQ;
 import com.roncoo.education.system.service.common.req.SysMenuUserListREQ;
 import com.roncoo.education.system.service.common.req.SysMenuViewREQ;
+import com.roncoo.education.system.service.common.resq.SysMenuButtonListRESQ;
 import com.roncoo.education.system.service.common.resq.SysMenuListRESQ;
 import com.roncoo.education.system.service.common.resq.SysMenuRESQ;
 import com.roncoo.education.system.service.common.resq.SysMenuUserListRESQ;
@@ -224,12 +225,12 @@ public class PcApiSysMenuBiz {
 		return lists;
 	}
 
-	public Result<SysMenuUserListRESQ> buttonList(SysMenuUserListREQ req) {
+	public Result<SysMenuButtonListRESQ> buttonList(SysMenuUserListREQ req) {
 		SysUser sysUser = sysUserDao.getByUserNo(req.getUserNo());
 		if (ObjectUtil.isNull(sysUser)) {
 			return Result.error("用户异常");
 		}
-		SysMenuUserListRESQ resq = new SysMenuUserListRESQ();
+		SysMenuButtonListRESQ resq = new SysMenuButtonListRESQ();
 		List<SysMenuRole> sysMenuRoleList = new ArrayList<>();
 		List<SysRoleUser> sysRoleUserList = sysRoleUserDao.listByUserId(sysUser.getId());
 		for (SysRoleUser sru : sysRoleUserList) {
@@ -237,35 +238,30 @@ public class PcApiSysMenuBiz {
 		}
 		// 筛选
 		List<SysMenuUserRESQ> list = userRecursion(0L, null);
-		List<SysMenuUserRESQ> sysMenuUserRESQList = new ArrayList<>();
-		List<SysMenuUserRESQ> listResqs = getListMenu(sysMenuUserRESQList, sysMenuRoleList, list);
+		List<String> apiUrlList = new ArrayList<>();
+		List<String> listResqs = getListMenu(apiUrlList, sysMenuRoleList, list);
 		if (CollectionUtils.isNotEmpty(listResqs)) {
 			resq.setSysMenu(listResqs);
 		}
-		System.out.println(listResqs);
 		return Result.success(resq);
 	}
 
 	// 列出用户所有按钮菜单
-	private List<SysMenuUserRESQ> getListMenu(List<SysMenuUserRESQ> sysMenuVOList, List<SysMenuRole> sysMenuRoleList, List<SysMenuUserRESQ> list) {
+	private List<String> getListMenu(List<String> apiUrlList, List<SysMenuRole> sysMenuRoleList, List<SysMenuUserRESQ> list) {
 		for (SysMenuUserRESQ mv : list) {
-			SysMenuUserRESQ v = new SysMenuUserRESQ();
+			String string = "";
 			for (SysMenuRole vo : sysMenuRoleList) {
 				if (mv.getId().equals(vo.getMenuId()) && MenuTypeEnum.BUTTON.getCode().equals(mv.getMenuType())) {
-					v.setId(mv.getId());
-					v.setName(mv.getName());
-					v.setApiUrl(mv.getApiUrl());
-					if (ObjectUtil.isNotNull(v)) {
-						sysMenuVOList.add(v);
-					}
+					string = mv.getApiUrl();
+					apiUrlList.add(string);
 					break;
 				}
 			}
-			if (ObjectUtil.isNotNull(v)) {
-				getListMenu(sysMenuVOList, sysMenuRoleList, mv.getChildren());
+			if (StringUtils.hasText(string)) {
+				getListMenu(apiUrlList, sysMenuRoleList, mv.getChildren());
 			}
 		}
-		return sysMenuVOList;
+		return apiUrlList;
 	}
 
 }
