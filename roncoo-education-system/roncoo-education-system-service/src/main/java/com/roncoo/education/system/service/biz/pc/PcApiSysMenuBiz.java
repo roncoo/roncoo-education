@@ -236,7 +236,7 @@ public class PcApiSysMenuBiz {
 			sysMenuRoleList.addAll(sysMenuRoleDao.listByRoleId(sru.getRoleId()));
 		}
 		// 筛选
-		List<SysMenuUserRESQ> list = userRecursion(0L, MenuTypeEnum.BUTTON.getCode());
+		List<SysMenuUserRESQ> list = userRecursion(0L, null);
 		List<SysMenuUserRESQ> sysMenuUserRESQList = new ArrayList<>();
 		List<SysMenuUserRESQ> listResqs = getListMenu(sysMenuUserRESQList, sysMenuRoleList, list);
 
@@ -246,12 +246,14 @@ public class PcApiSysMenuBiz {
 		return Result.success(resq);
 	}
 
+	// 列出用户所有按钮菜单
 	private List<SysMenuUserRESQ> getListMenu(List<SysMenuUserRESQ> sysMenuVOList, List<SysMenuRole> sysMenuRoleList, List<SysMenuUserRESQ> list) {
 		for (SysMenuUserRESQ mv : list) {
 			SysMenuUserRESQ v = new SysMenuUserRESQ();
 			for (SysMenuRole vo : sysMenuRoleList) {
-				if (mv.getId().equals(vo.getMenuId())) {
+				if (mv.getId().equals(vo.getMenuId()) && MenuTypeEnum.BUTTON.getCode().equals(mv.getMenuType())) {
 					v.setId(mv.getId());
+					v.setName(mv.getName());
 					v.setApiUrl(mv.getApiUrl());
 					break;
 				}

@@ -90,7 +90,7 @@ public class PcApiSysMenuController extends BaseController {
 	/**
 	 * 用户菜单信息列出信息接口
 	 */
-	@ApiOperation(value = "用户菜单信息列出信息接口(登录用户)", notes = "用户菜单信息列出信息接口(登录用户)")
+	@ApiOperation(value = "用户按钮菜单信息列出信息接口(按钮)", notes = "用户按钮菜单信息列出信息接口(登录用户)")
 	@RequestMapping(value = "/user/button/list", method = RequestMethod.POST)
 	public Result<SysMenuUserListRESQ> buttonList(@RequestBody SysMenuUserListREQ sysMenuUserListREQ) {
 		return biz.buttonList(sysMenuUserListREQ);
