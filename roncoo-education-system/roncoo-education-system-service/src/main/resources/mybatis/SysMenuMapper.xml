@@ -13,7 +13,6 @@
     <result column="api_url" property="apiUrl" jdbcType="VARCHAR" />
     <result column="menu_icon" property="menuIcon" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
-    <result column="hidden_type" property="hiddenType" jdbcType="TINYINT" />
     <result column="menu_type" property="menuType" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -76,7 +75,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, gmt_create, gmt_modified, status_id, sort, parent_id, menu_name, menu_url, api_url, 
-    menu_icon, remark, hidden_type, menu_type
+    menu_icon, remark, menu_type
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.SysMenuExample" >
     select
@@ -115,13 +114,13 @@
     insert into sys_menu (id, gmt_create, gmt_modified, 
       status_id, sort, parent_id, 
       menu_name, menu_url, api_url, 
-      menu_icon, remark, hidden_type, 
-      menu_type)
+      menu_icon, remark, menu_type
+      )
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{parentId,jdbcType=BIGINT}, 
       #{menuName,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR}, #{apiUrl,jdbcType=VARCHAR}, 
-      #{menuIcon,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{hiddenType,jdbcType=TINYINT}, 
-      #{menuType,jdbcType=TINYINT})
+      #{menuIcon,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{menuType,jdbcType=TINYINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.SysMenu" >
     insert into sys_menu
@@ -158,9 +157,6 @@
       </if>
       <if test="remark != null" >
         remark,
-      </if>
-      <if test="hiddenType != null" >
-        hidden_type,
       </if>
       <if test="menuType != null" >
         menu_type,
@@ -199,9 +195,6 @@
       </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="hiddenType != null" >
-        #{hiddenType,jdbcType=TINYINT},
       </if>
       <if test="menuType != null" >
         #{menuType,jdbcType=TINYINT},
@@ -250,9 +243,6 @@
       <if test="record.remark != null" >
         remark = #{record.remark,jdbcType=VARCHAR},
       </if>
-      <if test="record.hiddenType != null" >
-        hidden_type = #{record.hiddenType,jdbcType=TINYINT},
-      </if>
       <if test="record.menuType != null" >
         menu_type = #{record.menuType,jdbcType=TINYINT},
       </if>
@@ -274,7 +264,6 @@
       api_url = #{record.apiUrl,jdbcType=VARCHAR},
       menu_icon = #{record.menuIcon,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
-      hidden_type = #{record.hiddenType,jdbcType=TINYINT},
       menu_type = #{record.menuType,jdbcType=TINYINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -313,9 +302,6 @@
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="hiddenType != null" >
-        hidden_type = #{hiddenType,jdbcType=TINYINT},
-      </if>
       <if test="menuType != null" >
         menu_type = #{menuType,jdbcType=TINYINT},
       </if>
@@ -334,7 +320,6 @@
       api_url = #{apiUrl,jdbcType=VARCHAR},
       menu_icon = #{menuIcon,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
-      hidden_type = #{hiddenType,jdbcType=TINYINT},
       menu_type = #{menuType,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
   </update>

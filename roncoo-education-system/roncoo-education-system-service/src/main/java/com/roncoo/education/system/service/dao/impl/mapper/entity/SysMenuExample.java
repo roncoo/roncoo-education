@@ -835,66 +835,6 @@ public class SysMenuExample {
             return (Criteria) this;
         }
 
-        public Criteria andHiddenTypeIsNull() {
-            addCriterion("hidden_type is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andHiddenTypeIsNotNull() {
-            addCriterion("hidden_type is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andHiddenTypeEqualTo(Integer value) {
-            addCriterion("hidden_type =", value, "hiddenType");
-            return (Criteria) this;
-        }
-
-        public Criteria andHiddenTypeNotEqualTo(Integer value) {
-            addCriterion("hidden_type <>", value, "hiddenType");
-            return (Criteria) this;
-        }
-
-        public Criteria andHiddenTypeGreaterThan(Integer value) {
-            addCriterion("hidden_type >", value, "hiddenType");
-            return (Criteria) this;
-        }
-
-        public Criteria andHiddenTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("hidden_type >=", value, "hiddenType");
-            return (Criteria) this;
-        }
-
-        public Criteria andHiddenTypeLessThan(Integer value) {
-            addCriterion("hidden_type <", value, "hiddenType");
-            return (Criteria) this;
-        }
-
-        public Criteria andHiddenTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("hidden_type <=", value, "hiddenType");
-            return (Criteria) this;
-        }
-
-        public Criteria andHiddenTypeIn(List<Integer> values) {
-            addCriterion("hidden_type in", values, "hiddenType");
-            return (Criteria) this;
-        }
-
-        public Criteria andHiddenTypeNotIn(List<Integer> values) {
-            addCriterion("hidden_type not in", values, "hiddenType");
-            return (Criteria) this;
-        }
-
-        public Criteria andHiddenTypeBetween(Integer value1, Integer value2) {
-            addCriterion("hidden_type between", value1, value2, "hiddenType");
-            return (Criteria) this;
-        }
-
-        public Criteria andHiddenTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("hidden_type not between", value1, value2, "hiddenType");
-            return (Criteria) this;
-        }
-
         public Criteria andMenuTypeIsNull() {
             addCriterion("menu_type is null");
             return (Criteria) this;
