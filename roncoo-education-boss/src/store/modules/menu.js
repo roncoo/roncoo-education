@@ -29,6 +29,11 @@ const menu = {
   actions: {
     setMenu({ commit }) {
       return new Promise(resolve => {
+        api.menuBtnList({}).then(response => {
+          // 调用递归方法获得按钮数据
+          localStorage.setItem('menuList', JSON.stringify(response.data.sysMenu));
+        })
+        // 保存菜单按钮权限数据至vuex中
         api.menuUserList({}).then(res => {
           if (res.data.sysMenu !== []) {
             // TODO 后续续修改为从服务器获取，并且做数据处理

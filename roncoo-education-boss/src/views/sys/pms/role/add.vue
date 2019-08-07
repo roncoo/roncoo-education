@@ -6,10 +6,10 @@
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form ref="formData" :model="formData" :rules="rules" label-width="100px">
-      <el-form-item label="名称:" prop="roleName">
+      <el-form-item label="名称：" prop="roleName">
         <el-input v-model="formData.roleName"></el-input>
       </el-form-item>
-      <el-form-item label="备注:">
+      <el-form-item label="备注：">
         <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="formData.remark">
         </el-input>
       </el-form-item>
@@ -84,6 +84,7 @@ export default {
     // 关闭弹窗
     handleClose(done) {
       this.formData = {}
+      this.$refs['formData'].resetFields()
       this.$emit('close-callback')
     }
   }

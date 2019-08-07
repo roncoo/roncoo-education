@@ -10,7 +10,7 @@
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
         <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
-        <el-button type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAddRow()">添加</el-button>
+        <el-button v-has="'/course/pc/zone/add'" type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAddRow()">添加</el-button>
       </el-form-item>
       </el-form>
     </div>
@@ -50,8 +50,8 @@
           <ul class="list-item-actions">
             <li>
               <el-button type="danger" @click="handleDelRow(scope.row)" size="mini">删除</el-button>
-              <el-button type="primary" @click="handleUpdateRow(scope.row)" size="mini">修改</el-button>
-              <el-button type="primary" @click="handleCourseRow(scope.row.id)" size="mini">专区课程</el-button>
+              <el-button v-has="'/course/pc/zone/view'" type="success" @click="handleUpdateRow(scope.row.id)" size="mini">修改</el-button>
+              <el-button v-has="'/course/pc/zone/course/list'" type="primary" @click="handleCourseRow(scope.row.id)" size="mini">专区课程</el-button>
             </li>
           </ul>
         </template>
@@ -70,7 +70,7 @@
       </el-pagination>
     </div>
     </div>
-    <edit :visible="ctrl.dialogVisible" :formData="formdata" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
+    <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
 </div>
 </template>
 <script>
@@ -85,7 +85,7 @@
           loading: false
         },
         // 表单数据, 例如新增编辑子项，页面表单
-        formdata: {},
+        formData: {},
         list: [],
         page: {
           beginPageIndex: 1,
@@ -139,7 +139,7 @@
       },
       //新增
       handleAddRow() {
-        this.formdata = {}
+        this.formData = {}
         this.ctrl.dialogTitle = '新增'
         this.ctrl.dialogVisible = true
       },
@@ -179,10 +179,15 @@
         this.reload()
       },
       //编辑
-      handleUpdateRow(data) {
-       this.formdata = data
-       this.ctrl.dialogTitle = '编辑权限'
-       this.ctrl.dialogVisible = true
+      handleUpdateRow(id) {
+        this.ctrl.loading = true
+        api.pcZoneView({ id: id }).then(res => {
+          this.formData = res.data
+          this.ctrl.dialogTitle = '编辑'
+          this.ctrl.dialogVisible = true
+        }).catch(() => {
+          this.ctrl.loading = false
+          })
       },
       handleCourseRow(id) {
         this.$router.push({ path: '/homepage/zone/course', query: { zoneId: id }});

@@ -26,3 +26,12 @@ export function enumList(enumName) {
     data: { enumName: enumName }
   })
 }
+
+// 列出菜单
+export function menuBtnList(data = {}) {
+  return request({
+    url: `/system/pc/menu/user/button/list`,
+    method: 'post',
+    data: data
+  })
+}

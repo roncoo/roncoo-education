@@ -6,7 +6,7 @@
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form :model="formData" :rules="rules" ref="formData" label-width="100px">
-      <el-form-item label="导航标题:">
+      <el-form-item label="导航标题：" prop="navUrl">
         <el-select v-model="formData.navUrl" @change="changeValue" class="auto-width" clearable filterable placeholder="导航标题" style="width: 150px">
           <el-option
             v-for="item in opts.navList"
@@ -16,7 +16,7 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="打开方式:" prop="target" width="200">
+      <el-form-item label="打开方式：" prop="target" width="200">
         <template>
           <el-radio v-model="formData.target" label="_blank">新窗口打开</el-radio>
           <el-radio v-model="formData.target" label="_self">同窗口打开</el-radio>
@@ -40,14 +40,15 @@
         },
         ada: {},
         formData: {
-          target: '_blank'
+          target: '_blank',
+          sort: 1
         },
         rules: {
+          navUrl: [
+            { required: true, message: '请选择导航标题', trigger: 'blur' }
+          ],
           target: [
             { required: true, message: '请选择打开方式', trigger: 'blur' }
-          ],
-          sort: [
-            { required: true, message: '请输入导航排序', trigger: 'blur' }
           ]
         }
       }
@@ -70,6 +71,7 @@
     methods: {
       handleClose(done) {
         this.formData = {}
+        this.$refs['formData'].resetFields()
         this.$emit('close-callback')
       },
       // 获取选中的导航标题
@@ -86,6 +88,20 @@
       },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
+          if (!this.formData.navUrl) {
+            this.$message({
+              type: 'error',
+              message: '请选择导航标题'
+            });
+            return false
+          }
+          if (!this.formData.target) {
+            this.$message({
+              type: 'error',
+              message: '请选择打开方式'
+            });
+            return false
+          }
           if (valid) {
             //新增底部导航栏，给父ID赋值
             this.formData.parentId = 0

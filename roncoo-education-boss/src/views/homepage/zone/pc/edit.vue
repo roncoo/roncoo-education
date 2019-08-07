@@ -1,7 +1,7 @@
 <template>
   <!--弹窗-->
   <el-dialog
-     width="30%"
+     width="35%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
@@ -9,10 +9,10 @@
       <el-form-item label="专区名称" prop="zoneName">
         <el-input v-model="formData.zoneName" ></el-input>
       </el-form-item>
-      <el-form-item label="专区排序" prop="sort">
+      <el-form-item label="专区排序">
         <el-input-number style="width: 300px;" v-model="formData.sort" @change="handleChange" :min="1" :max="10000"></el-input-number>
       </el-form-item>
-      <el-form-item label="专区描述" prop="zoneDesc">
+      <el-form-item label="专区描述">
         <el-input v-model="formData.zoneDesc" type="textarea"></el-input>
       </el-form-item>
     </el-form>
@@ -35,12 +35,6 @@
         rules: {
           zoneName: [
             { required: true, message: '请输入专区名称', trigger: 'blur', autocomplete: 'on' }
-          ],
-          sort: [
-            { required: true, message: '请输入专区排序', trigger: 'blur', autocomplete: 'on' }
-          ],
-          zoneDesc: [
-            { required: false, message: '请输入专区描述', trigger: 'blur' }
           ]
         }
       }
@@ -63,6 +57,8 @@
     methods: {
       //关闭弹窗
       handleClose(done) {
+        this.creatGroup = false;
+        this.$refs['formData'].resetFields()
         this.$emit('close-callback')
       },
       handleChange(value) {
@@ -71,6 +67,20 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
+            if (!this.formData.zoneName) {
+              this.$message({
+                type: 'error',
+                message: '请输入专区名称'
+              });
+              return false
+            }
+            if (!this.formData.zoneName) {
+              this.$message({
+                type: 'error',
+                message: '请输入专区名称'
+              });
+              return false
+            }
             this.loading.show()
             if (this.formData.id === undefined) {
               api.pcZoneSave(this.formData).then(res => {

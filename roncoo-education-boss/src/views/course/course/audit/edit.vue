@@ -42,7 +42,7 @@
         </el-col> -->
       </el-row>
       <el-form-item label="排序：">
-        <el-input-number style="width: 300px;" v-model="formData.sort" @change="handleChange" :min="1" :max="100000000"></el-input-number>
+        <el-input-number style="width: 300px;" v-model="formData.sort" @change="handleChange" :min="1"></el-input-number>
       </el-form-item>
       <el-form-item label="课程简介:">
              <div id="introduce"></div>

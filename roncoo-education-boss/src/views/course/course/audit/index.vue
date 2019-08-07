@@ -120,8 +120,8 @@
       </el-table-column>
       <el-table-column label="操作" width="160">
         <template slot-scope="scope">
-          <el-button type="primary" @click="handleAudit(scope.row)" size="mini">审核</el-button>
-          <el-button type="success" @click="handleEdit(scope.row)" size="mini">修改</el-button>
+          <el-button v-has="'/course/pc/course/audit/view'" type="success" @click="handleEdit(scope.row)" size="mini">修改</el-button>
+          <el-button v-has="'/course/pc/course/audit/view'" type="primary" @click="handleAudit(scope.row)" size="mini">审核</el-button>
         </template>
       </el-table-column>
     </el-table>

@@ -7,17 +7,17 @@
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form ref="formData" :model="formData" :rules="rules" label-width="100px">
-      <el-form-item label="标题:" prop="msgTitle">
+      <el-form-item label="标题：" prop="msgTitle">
         <el-input v-model="formData.msgTitle"></el-input>
       </el-form-item>
-      <el-form-item label="是否置顶:">
+      <el-form-item label="是否置顶：">
         <el-radio-group v-model="formData.isTop">
           <el-radio :label="1">是</el-radio>
           <el-radio :label="0">否</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="内容:">
-         <div id="msgText"></div>
+      <el-form-item label="内容：">
+         <div id="msgText1"></div>
       </el-form-item>
     </el-form>
     <el-row style="margin-top:17px; ">
@@ -56,8 +56,8 @@ export default {
     }
   },
   watch: {
-    formData: function(val) {
-      if (val !== undefined) {
+    visible: function(val) {
+      if (val) {
         setTimeout(() => {
           this.editor.create();
           this.editor.customConfig.customUploadImg = this.editorUpload
@@ -76,7 +76,7 @@ export default {
   methods: {
     createEdit() {
       const E = require('wangeditor')
-      this.editor = new E('#msgText')
+      this.editor = new E('#msgText1')
     },
     // 保存管理员信息
     submitForm(form) {
@@ -94,15 +94,17 @@ export default {
           api.msgUpdate(this.formData).then(res => {
             this.loading.hide()
             if (res.code === 200 && res.data > 0) {
-                this.$emit('close-callback')
+              // 提交成功, 关闭窗口, 刷新列表
+              this.tips('更新成功', 'success')
+              this.handleClose()
             } else {
               this.$message({
                 type: 'error',
-                message: "提交失败"
+                message: "更新失败"
               });
             }
           }).catch(() => {
-              this.loading.show()
+              this.loading.hide()
             })
         } else {
           this.$message({

@@ -28,7 +28,7 @@
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
         <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
-        <el-button type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAdd()">添加</el-button>
+        <el-button v-has="'/system/pc/msg/add'" type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAdd()">添加</el-button>
       </el-form-item>
       </el-form>
     </div>
@@ -36,35 +36,35 @@
       <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
         <el-table-column type="index" label="序号" width="40">
         </el-table-column>
-        <el-table-column prop="msgTitle" label="短信标题">
+        <el-table-column prop="msgTitle" label="短信标题" width="300">
         </el-table-column>
-        <el-table-column label="是否置顶" width="90">
+        <el-table-column label="是否置顶" width="150">
           <template slot-scope="scope">
             <span :class="textClass(scope.row.isTop)">{{textIsTop[scope.row.isTop]}}</span>
           </template>
         </el-table-column>
-        <el-table-column label="发送状态" width="90">
+        <el-table-column label="发送状态" width="150">
           <template slot-scope="scope">
             <span :class="textClass(scope.row.isSend)">{{textIsSend[scope.row.isSend]}}</span>
           </template>
         </el-table-column>
-        <el-table-column label="定时发送" width="90">
+        <el-table-column label="定时发送" width="150">
           <template slot-scope="scope">
             <span :class="textClass(scope.row.isTimeSend)">{{textIsTimeSend[scope.row.isTimeSend]}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="sendTime" label="发送时间">
+        <el-table-column prop="sendTime" label="发送时间" width="250">
         </el-table-column>
         <el-table-column
         fixed="right"
         label="操作"
-        width="370">
+        width="250">
         <template slot-scope="scope">
           <ul class="list-item-actions">
             <li>
               <el-button type="danger" @click="handleDelete(scope.row.id)" size="mini">删除</el-button>
-              <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
-              <el-button type="success" @click="handleSend(scope.row.id)" size="mini">发送</el-button>
+              <el-button v-has="'/system/pc/msg/view'" type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
+              <el-button v-has="'/system/pc/msg/push'" type="success" @click="handleSend(scope.row.id)" size="mini">发送</el-button>
             </li>
           </ul>
         </template>
@@ -98,10 +98,8 @@
         list: [],
         ctrl: {
           load: false,
-          dialogVisible: false,
           addDialogVisible: false,
-          passwordDialogVisible: false,
-          viewVisible: false
+          dialogVisible: false
         },
         page: {
           beginPageIndex: 1,
@@ -213,11 +211,11 @@
         api.msgView({ id: row }).then(res => {
           this.formData = res.data
           this.ctrl.dialogTitle = res.data.msgTitle + ' —— 编辑'
+          this.ctrl.dialogVisible = true
           this.ctrl.load = false
         }).catch(() => {
           this.ctrl.load = true
         })
-        this.ctrl.dialogVisible = true
       },
       // 关闭弹窗回调
       closeCallback() {
@@ -233,22 +231,22 @@
           type: 'warning'
         }).then(() => {
           api.msgDelete({ id: id }).then(res => {
-          if (res.code === 200 && res.data > 0) {
-            this.$message({
-              type: 'success',
-              message: "删除成功"
-            });
-              this.reload()
-          } else {
-            this.$message({
-              type: 'error',
-              message: "删除失败"
-            });
-              this.reload()
-          }
-        }).catch(() => {
-          this.ctrl.load = true
-        })
+            if (res.code === 200 && res.data > 0) {
+              this.$message({
+                type: 'success',
+                message: "删除成功"
+              });
+                this.reload()
+            } else {
+              this.$message({
+                type: 'error',
+                message: "删除失败"
+              });
+                this.reload()
+            }
+          }).catch(() => {
+            this.ctrl.load = false
+          })
         }).catch(() => {
           this.reload()
         })

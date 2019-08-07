@@ -13,11 +13,11 @@
       </el-form>
     </div>
     <div>
-      <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
+      <el-table v-loading="ctrl.loading" size="medium" :data="list" stripe border style="width: 100%">
         <el-table-column type="index" label="序号" width="40"></el-table-column>
         <el-table-column label="客户端名称">
            <template slot-scope="scope">
-            <el-button type="text" @click="handleView(scope.row.id)">{{scope.row.clientName}}</el-button>
+            <el-button v-has="'/user/pc/platform/add'" type="text" @click="handleView(scope.row.id)">{{scope.row.clientName}}</el-button>
           </template>
         </el-table-column>
         <el-table-column width="300" prop="clientId" label="客户端ID"></el-table-column>
@@ -49,7 +49,7 @@
             <ul class="list-item-actions">
               <li>
                 <el-button type="danger" @click="handleDelete(scope.row.id)" size="mini">删除</el-button>
-                <el-button type="success" @click="handleEdit(scope.row)" size="mini">编辑</el-button>
+                <el-button v-has="'/user/pc/platform/view'" type="success" @click="handleEdit(scope.row.id)" size="mini">编辑</el-button>
               </li>
             </ul>
           </template>
@@ -84,7 +84,7 @@
           dialogVisible: false,
           viewVisible: false,
           addDialogVisible: false,
-          load: false
+          loading: false
         },
         textOrderStatus: {
           1: '待支付',
@@ -135,9 +135,9 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.ctrl.load = true
+          this.ctrl.loading = true
           api.platformDelete({ id: id }).then(res => {
-            this.ctrl.load = false
+            this.ctrl.loading = false
           if (res.code === 200 && res.data > 0) {
             this.$message({
               type: 'success',
@@ -152,7 +152,7 @@
               this.handleReset()
           }
         }).catch(() => {
-          this.ctrl.load = false
+          this.ctrl.loading = false
         })
         }).catch(() => {
           this.handleReset()
@@ -165,19 +165,29 @@
       },
       // 查看弹窗
       handleView(id) {
-        this.ctrl.load = true
-        api.platformView({ id: id }).then(res => {
-          this.formData = res.data
-          this.ctrl.load = false
-        }).catch(() => {
-            this.ctrl.load = false
-          })
-        this.ctrl.viewVisible = true
+        var type = 'view'
+        this.getPlatform(id, type)
       },
        // 修改弹窗
-      handleEdit(res) {
-        this.formData = res
-        this.ctrl.dialogVisible = true
+      handleEdit(id) {
+        var type = 'edit'
+        this.getPlatform(id, type)
+      },
+      getPlatform(id, type) {
+        this.ctrl.loading = true
+        api.platformView({ id: id }).then(res => {
+          this.formData = res.data
+          if (type === 'edit') {
+            this.ctrl.dialogTitle = res.data.clientName + ' —— 编辑'
+            this.ctrl.dialogVisible = true
+          } else {
+            this.ctrl.dialogTitle = res.data.clientName + ' —— 查看'
+            this.ctrl.viewVisible = true
+          }
+          this.ctrl.loading = false
+        }).catch(() => {
+            this.ctrl.loading = false
+          })
       },
       // 关闭弹窗回调
       closeCallback() {
@@ -195,7 +205,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.ctrl.load = true
+          this.ctrl.loading = true
           this.changeStatus(id, statusId)
           this.handleReset()
         }).catch(() => {
@@ -205,7 +215,7 @@
       // 请求更新用户方法
       changeStatus(id, statusId) {
         api.platformUpdate({ id: id, statusId: statusId }).then(res => {
-          this.ctrl.load = false
+          this.ctrl.loading = false
           if (res.code === 200 && res.data > 0) {
             const msg = { 0: '禁用成功', 1: '启用成功' }
             this.$message({
@@ -222,7 +232,7 @@
               this.handleReset()
           }
         }).catch(() => {
-          this.ctrl.load = false
+          this.ctrl.loading = false
         })
       },
       // 注册时间段查询条件
@@ -265,15 +275,15 @@
       },
       // 平台信息分页列表接口
       listForPage() {
-        this.ctrl.load = true
+        this.ctrl.loading = true
         api.platformList(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.list = res.data.list
           this.page.pageCurrent = res.data.pageCurrent
           this.page.totalCount = res.data.totalCount
           this.page.pageSize = res.data.pageSize
-          this.ctrl.load = false
+          this.ctrl.loading = false
         }).catch(() => {
-          this.ctrl.load = false
+          this.ctrl.loading = false
         })
       }
     }

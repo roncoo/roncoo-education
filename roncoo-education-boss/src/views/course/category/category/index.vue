@@ -8,7 +8,7 @@
         <el-form-item>
           <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
         <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
-          <el-button type="primary" size="mini" icon="el-icon-circle-plus-outline" @click="addSubMmenu(0, 1)">添加</el-button>
+          <el-button v-has="'/course/pc/course/category/add'" type="primary" size="mini" icon="el-icon-circle-plus-outline" @click="addSubMmenu(0, 1)">添加</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -36,20 +36,32 @@
           label="备注">
         </el-table-column>
         <el-table-column
-          prop="statusId"
-          label="状态"
-          sortable
-          width="180">
-        </el-table-column>
+        width="160"
+        prop="statusId"
+        label="状态"
+        align="center">
+        <template slot-scope="scope">
+          <el-switch
+            v-model="scope.row.statusId"
+            @change="handleChangeStatusId(scope.row.id, scope.row.statusId)"
+            :active-value="0"
+            :inactive-value="1"
+            active-color="#ff4949"
+            inactive-color="#13ce66"
+            active-text="禁用"
+            inactive-text="正常">
+          </el-switch>
+        </template>
+      </el-table-column>
         <el-table-column
           prop="sort"
           label="排序">
         </el-table-column>
         <el-table-column label="操作" width="240">
           <template slot-scope="scope">
-            <el-button type="primary" size="mini" icon="el-icon-circle-plus-outline" @click="addSubMmenu(scope.row.id, scope.row.floor)">添加</el-button>
-            <el-button type="danger" @click="handleDelete(scope.row.id)" size="mini">删除</el-button>
-            <el-button type="success" @click="editSubMmenu(scope.row)" size="mini">更新</el-button>
+            <el-button v-has="'/course/pc/course/category/add'" type="primary" size="mini" icon="el-icon-circle-plus-outline" @click="addSubMmenu(scope.row.id, scope.row.floor)">添加</el-button>
+            <el-button v-has="'/course/pc/course/category/delete'" type="danger" @click="handleDelete(scope.row.id)" size="mini">删除</el-button>
+            <el-button v-has="'/course/pc/course/category/view'" type="success" @click="editSubMmenu(scope.row)" size="mini">编辑</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -128,6 +140,45 @@
       // 重置查询条件
       handleReset() {
         this.reload()
+      },
+      // 修改状态
+      handleChangeStatusId(id, statusId) {
+        const title = { 0: '正常', 1: '禁用' }
+        this.$confirm(`确定要${title[statusId]}吗?`, {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.changeStatusId(id, statusId)
+          this.reload()
+        }).catch(() => {
+          this.reload()
+        })
+      },
+      // 请求更新状态方法
+      changeStatusId(id, statusId) {
+        this.ctrl.load = true
+        api.categoryUpdate({ id: id, statusId: statusId }).then(res => {
+          this.ctrl.load = false
+          if (res.code === 200 && res.data > 0) {
+            const msg = { 0: '禁用成功', 1: '启用成功' }
+            this.$message({
+              type: 'success',
+              message: msg[statusId]
+            });
+              this.reload()
+          } else {
+            const msg = { 0: '禁用失败', 1: '启用失败' }
+            this.$message({
+              type: 'error',
+              message: msg[statusId]
+            });
+              this.reload()
+          }
+        }).catch(() => {
+            this.reload()
+            this.ctrl.load = false
+          })
       },
       // 课程分类分页列表接口
       categoryList() {

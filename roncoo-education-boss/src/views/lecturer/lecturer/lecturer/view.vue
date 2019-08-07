@@ -180,8 +180,3 @@
     }
   }
 </script>
-<style scoped>
-  .button {
-    padding: 5px 10px;
-  }
-</style>

@@ -41,7 +41,6 @@ const user = {
         })
       })
     },
-
     // 获取用户信息
     GetInfo({ commit, state }) {
       console.log('-------- 获取用户信息 ---------')

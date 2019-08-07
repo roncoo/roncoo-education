@@ -9,7 +9,7 @@
     <el-form ref="form" :model="form" :rules="rules" label-width="100px">
       <el-form-item label="手机:" prop="mobile">
         <el-input placeholder="请输入内容" v-model="form.mobile" class="input-with-select">
-          <el-button slot="append" icon="el-icon-search" @click="userList()"></el-button>
+          <el-button v-has="'/user/pc/user/list'" slot="append" icon="el-icon-search" @click="userList()"></el-button>
         </el-input>
      </el-form-item>
       <el-form-item label="名称:" prop="realName">
@@ -123,6 +123,7 @@ export default {
     // 关闭弹窗
     handleClose(done) {
       this.form = {}
+      this.$refs['form'].resetFields()
       this.$emit('close-callback')
     }
   }

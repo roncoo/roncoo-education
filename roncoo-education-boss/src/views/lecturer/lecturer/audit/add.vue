@@ -11,7 +11,7 @@
       </el-form-item>
       <el-form-item label="手机号码:" prop="lecturerMobile">
         <el-input v-model="formData.lecturerMobile"></el-input>
-        <el-button type="primary" v-if="check === 1" @click="checkMobile()">校验</el-button>
+        <el-button v-has="'/user/pc/lecturer/audit/check'" type="primary" v-if="check === 1" @click="checkMobile()">校验</el-button>
         <el-button type="success" icon="el-icon-check" v-if="check === 2"></el-button>
         <el-button type="danger" icon="el-icon-close" v-if="check === 3"></el-button>
       </el-form-item>
@@ -71,11 +71,12 @@ export default {
       this.formData = {}
       this.newUser = 1
       this.check = 1
+      this.$refs['formData'].resetFields()
       this.$emit('close-callback')
     },
     // 校验手机号是否已注册成为用户或已申请成为讲师
     checkMobile() {
-      if (!this.form.lecturerMobile) {
+      if (!this.formData.lecturerMobile) {
         this.$message({
           type: 'error',
           message: '请输入手机号码'
@@ -83,7 +84,7 @@ export default {
         return false
       }
       this.load === true
-      api.lecturerAuditCheck({ lecturerMobile: this.form.lecturerMobile }).then(res => {
+      api.lecturerAuditCheck({ lecturerMobile: this.formData.lecturerMobile }).then(res => {
         if (res.data === 501) {
           // 该手机没注册
           this.newUser = 2

@@ -7,29 +7,29 @@
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form ref="form" :model="form" :rules="rules" label-width="100px">
-      <el-form-item label="标题:" prop="msgTitle">
+      <el-form-item label="标题：" prop="msgTitle">
         <el-input v-model="form.msgTitle"></el-input>
       </el-form-item>
-      <el-form-item label="定时发送:">
+      <el-form-item label="定时发送：">
         <el-radio-group v-model="form.isTimeSend">
           <el-radio :label="1">开启</el-radio>
           <el-radio :label="0">关闭</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="提醒时间:" v-if="form.isTimeSend == 1">
+      <el-form-item label="提醒时间：" v-if="form.isTimeSend == 1">
         <el-date-picker
           v-model="form.sendTime"
           type="datetime"
           placeholder="选择日期时间">
         </el-date-picker>
       </el-form-item>
-      <el-form-item label="是否置顶:">
+      <el-form-item label="是否置顶：">
         <el-radio-group v-model="form.isTop">
           <el-radio :label="1">是</el-radio>
           <el-radio :label="0">否</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="内容:">
+      <el-form-item label="内容：">
          <div id="msgText"></div>
       </el-form-item>
     </el-form>
@@ -96,6 +96,7 @@ export default {
     // 关闭弹窗
     handleClose(done) {
       this.form = {}
+      this.$refs['form'].resetFields()
       this.editor.txt.clear()
       this.$emit('close-callback')
     },

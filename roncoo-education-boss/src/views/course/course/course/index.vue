@@ -106,7 +106,7 @@
       </el-table-column>
       <el-table-column label="操作" width="100">
         <template slot-scope="scope">
-          <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
+          <el-button v-has="'/course/pc/course/get'" type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
         </template>
       </el-table-column>
     </el-table>

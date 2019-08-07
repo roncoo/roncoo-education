@@ -22,12 +22,6 @@
       <el-form-item label="接口地址：" v-if="formData.menuType == 2 || formData.menuType == 3">
         <el-input v-model="formData.apiUrl"></el-input>
       </el-form-item>
-      <el-form-item label="显示菜单：" v-if="formData.menuType !== 3">
-        <el-radio-group v-model="formData.hiddenType">
-          <el-radio :label="1">显示</el-radio>
-          <el-radio :label="0">不显示</el-radio>
-        </el-radio-group>
-      </el-form-item>
       <el-form-item label="排序：">
         <el-input-number style="width: 300px;" v-model="formData.sort" @change="handleChange" :min="1" :max="10000"></el-input-number>
       </el-form-item>
@@ -66,6 +60,7 @@
     },
     methods: {
       handleClose(done) {
+        this.$refs['formData'].resetFields()
         this.$emit('close-callback')
       },
       handleChange(value) {

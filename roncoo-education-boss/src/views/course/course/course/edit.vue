@@ -44,11 +44,11 @@
         </el-col> -->
       </el-row>
       <el-form-item label="排序：">
-        <el-input v-model="formData.sort"></el-input>
+        <el-input-number style="width: 300px;" v-model="formData.sort" @change="handleChange" :min="1"></el-input-number>
       </el-form-item>
       <el-form-item label="课程简介:">
-             <div id="introduce"></div>
-          </el-form-item>
+         <div id="introduce"></div>
+      </el-form-item>
       <el-row style="margin-top:17px; ">
         <el-button style="float:right;margin-left:6px;" size="mini" type="danger" plain @click="handleClose">取 消</el-button>
         <el-button style="float:right" size="mini" type="primary" @click="submitForm('formData')">确定</el-button>
@@ -100,7 +100,10 @@ export default {
     this.createEdit();
   },
   methods: {
-   createEdit() {
+    handleChange(value) {
+      this.formData.sort = value
+    },
+    createEdit() {
       const E = require('wangeditor')
       this.editor = new E('#introduce')
     },

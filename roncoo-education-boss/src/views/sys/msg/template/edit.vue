@@ -79,12 +79,17 @@ export default {
               this.loading.hide()
               if (res.code === 200 && res.data > 0) {
                 // 提交成功, 关闭窗口, 刷新列表
-                this.$emit('close-callback')
+                this.tips('更新成功', 'success')
+                this.handleClose()
               } else {
-                this.$alert('提交失败')
+                this.$message({
+                  type: 'error',
+                  message: "更新失败"
+                });
               }
+            }).catch(() => {
+              this.loading.hide()
             })
-            // this.tips('成功', 'success')
           }
         } else {
           this.$alert('提交失败')
@@ -93,6 +98,7 @@ export default {
     },
     // 关闭弹窗
     handleClose(done) {
+      this.$refs['formData'].resetFields()
       this.$emit('close-callback')
     }
   }

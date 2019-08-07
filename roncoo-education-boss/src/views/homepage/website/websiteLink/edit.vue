@@ -19,7 +19,7 @@
         </template>
       </el-form-item>
       <el-form-item label="排序：">
-        <el-input-number style="width: 300px;" v-model="formData.sort" @change="handleChange" :min="1" :max="10000"></el-input-number>
+        <el-input-number style="width: 300px;" v-model="formData.sort" @change="handleChange" :min="1"></el-input-number>
       </el-form-item>
     </el-form>
     <el-row style="margin-top:17px; ">
@@ -72,6 +72,7 @@ import * as api from '@/api/homepage'
         this.formData.sort = value
       },
       handleClose(done) {
+        this.$refs['formData'].resetFields()
         this.$emit('close-callback')
       },
       submitForm(formName) {

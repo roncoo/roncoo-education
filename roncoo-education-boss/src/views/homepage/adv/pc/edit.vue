@@ -121,6 +121,7 @@
         this.formData.sort = value
       },
       handleClose(done) {
+        this.$refs['formData'].resetFields()
         this.$emit('close-callback')
       },
       handleRemove(file, fileList) {
@@ -146,6 +147,41 @@
             type: 'error'
           });
         } else {
+          if (!this.formData.advTitle) {
+            this.$message({
+              type: 'error',
+              message: '请输入广告标题'
+            });
+            return false
+          }
+          if (!this.formData.advUrl) {
+            this.$message({
+              type: 'error',
+              message: '请输入广告链接'
+            });
+            return false
+          }
+          if (!this.formData.sort) {
+            this.$message({
+              type: 'error',
+              message: '请输入广告排序'
+            });
+            return false
+          }
+          if (!this.formData.beginTime) {
+            this.$message({
+              type: 'error',
+              message: '请输入开始时间'
+            });
+            return false
+          }
+          if (!this.formData.endTime) {
+            this.$message({
+              type: 'error',
+              message: '请输入结束时间'
+            });
+            return false
+          }
           this.loading.show()
           if (this.formData.id === undefined) {
             // 新增

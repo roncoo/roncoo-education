@@ -8,7 +8,7 @@
         <el-form-item>
           <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
           <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
-          <el-button type="primary" size="mini" icon="el-icon-circle-plus-outline" @click="addSubMmenu(0)">添加</el-button>
+          <el-button v-has="'/system/pc/menu/add'" type="primary" size="mini" icon="el-icon-circle-plus-outline" @click="addSubMmenu(0)">添加</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -42,7 +42,7 @@
           label="接口地址">
         </el-table-column>
         <el-table-column
-          width="60"
+          width="100"
           prop="hiddenType"
           label="类型">
           <template slot-scope="scope">
@@ -50,15 +50,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          width="80"
-          prop="hiddenType"
-          label="显示菜单">
-          <template slot-scope="scope">
-            <span>{{textHiddenType[scope.row.hiddenType]}}</span>
-          </template>
-        </el-table-column>
-        <el-table-column
-          width="60"
+          width="100"
           prop="sort"
           label="排序">
         </el-table-column>
@@ -67,11 +59,11 @@
           label="备注"
           width="150">
         </el-table-column>
-        <el-table-column label="操作" width="240">
+        <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button type="primary" size="mini" icon="el-icon-circle-plus-outline" @click="addSubMmenu(scope.row.id)">添加</el-button>
+            <el-button v-has="'/system/pc/menu/add'" type="primary" size="mini" icon="el-icon-circle-plus-outline" @click="addSubMmenu(scope.row.id)">添加</el-button>
             <el-button type="danger" @click="handleDelete(scope.row.id)" size="mini">删除</el-button>
-            <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">编辑</el-button>
+            <el-button v-has="'/system/pc/menu/view'" type="success" @click="handleEdit(scope.row.id)" size="mini">编辑</el-button>
           </template>
         </el-table-column>
       </el-table>

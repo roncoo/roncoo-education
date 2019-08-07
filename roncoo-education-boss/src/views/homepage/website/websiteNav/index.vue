@@ -18,7 +18,7 @@
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
         <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
-          <el-button type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAddSubclass(0)">添加</el-button>
+          <el-button v-has="'/system/pc/website/nav/add'" type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAddSubclass(0)">添加</el-button>
       </el-form-item>
       </el-form>
     </div>
@@ -62,9 +62,9 @@
           <ul class="list-item-actions">
             <li>
               <el-button type="danger" @click="handleDelRow(scope.row.id)" size="mini">删除</el-button>
-              <el-button type="primary" @click="handleUpdateRow(scope.row)" size="mini">修改</el-button>
-              <el-button type="primary" icon="el-icon-circle-plus-outline" size="mini" v-if="scope.row.parentId == 0" @click="handleAddSubclass(scope.row.id)">添加</el-button>
-              <el-button type="primary" size="mini" v-if="scope.row.parentId !== 0" @click="handleArticala(scope.row.id)">文章管理</el-button>
+              <el-button v-has="'/system/pc/website/nav/edit'" type="success" @click="handleUpdateRow(scope.row)" size="mini">修改</el-button>
+              <el-button v-has="'/system/pc/website/nav/add'" type="primary" icon="el-icon-circle-plus-outline" size="mini" v-if="scope.row.parentId == 0" @click="handleAddSubclass(scope.row.id)">添加</el-button>
+              <el-button v-has="'/system/pc/website/nav/article/view'" type="primary" size="mini" v-if="scope.row.parentId !== 0" @click="handleArticala(scope.row.id)">文章管理</el-button>
             </li>
           </ul>
         </template>
@@ -140,7 +140,7 @@
       //编辑
       handleUpdateRow(data) {
        this.formData = data
-       this.ctrl.dialogTitle = data.navName + '——编辑'
+       this.ctrl.dialogTitle = data.navName + ' —— 编辑'
        this.ctrl.dialogVisible = true
       },
       // 关闭编辑弹窗回调
@@ -213,6 +213,7 @@
           }
         }).catch(() => {
           this.ctrl.loading = false
+          this.reload()
         })
       },
       // 查询条件

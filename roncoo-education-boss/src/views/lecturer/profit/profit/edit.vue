@@ -59,6 +59,7 @@
     },
     methods: {
       handleClose(done) {
+        this.$refs['formData'].resetFields()
         this.$emit('close-callback')
       },
       submitForm(formData) {
@@ -90,10 +91,6 @@
                 }
               }).catch(() => {
                 this.loading.hide()
-                this.$message({
-                  type: 'error',
-                  message: "提交失败"
-                });
               })
             }
           } else {

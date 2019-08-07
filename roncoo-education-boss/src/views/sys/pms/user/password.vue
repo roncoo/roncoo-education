@@ -1,15 +1,15 @@
 <template>
   <!--弹窗-->
   <el-dialog
-    width="50%"
+    width="35%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form ref="formData" :model="formData" :rules="rules" label-width="100px">
-      <el-form-item label="新密码:" prop="mobilePsw">
+      <el-form-item label="新密码：" prop="mobilePsw">
         <el-input placeholder="请输入新密码" v-model="formData.mobilePsw" show-password></el-input>
       </el-form-item>
-      <el-form-item label="确认密码:" prop="rePwd">
+      <el-form-item label="确认密码：" prop="rePwd">
         <el-input placeholder="请输入确认密码" v-model="formData.rePwd" show-password></el-input>
       </el-form-item>
     </el-form>
@@ -57,6 +57,7 @@ export default {
   methods: {
     // 关闭弹窗
     handleClose(done) {
+      this.$refs['formData'].resetFields()
       this.$emit('close-callback')
     },
     // 更新管理员密码

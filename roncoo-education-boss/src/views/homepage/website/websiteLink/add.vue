@@ -13,10 +13,10 @@
         <el-input v-model="formData.linkName" placeholder="请输入链接名称"></el-input>
       </el-form-item>
       <el-form-item label="打开方式：" width="200">
-        <template>
-          <el-radio v-model="formData.linkTarget" label="_blank">新窗口打开</el-radio>
-          <el-radio v-model="formData.linkTarget" label="_self">同窗口打开</el-radio>
-        </template>
+        <el-radio-group v-model="formData.linkTarget">
+          <el-radio label="_blank">新窗口打开</el-radio>
+          <el-radio label="_self">同窗口打开</el-radio>
+        </el-radio-group>
       </el-form-item>
     </el-form>
     <el-row style="margin-top:17px; ">
@@ -60,6 +60,7 @@ import * as api from '@/api/homepage'
     methods: {
       handleClose(done) {
         this.formData = {}
+        this.$refs['formData'].resetFields()
         this.$emit('close-callback')
       },
       submitForm(formName) {

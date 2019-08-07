@@ -68,10 +68,6 @@
               });
             }
           }).catch(() => {
-            this.$message({
-              type: 'error',
-              message: "审核失败"
-            });
             this.loading.hide()
           })
         } else {

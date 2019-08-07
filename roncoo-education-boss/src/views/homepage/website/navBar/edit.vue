@@ -6,16 +6,16 @@
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form :model="formData" :rules="rules" ref="formData" label-width="100px">
-      <el-form-item label="导航标题:" prop="navTitle">
+      <el-form-item label="导航标题：" prop="navTitle">
         <el-input v-model="formData.navTitle"></el-input>
       </el-form-item>
-      <el-form-item label="打开方式:" prop="target" width="200">
+      <el-form-item label="打开方式：" prop="target" width="200">
         <template>
           <el-radio v-model="formData.target" label="_blank">新窗口打开</el-radio>
           <el-radio v-model="formData.target" label="_self">同窗口打开</el-radio>
         </template>
       </el-form-item>
-      <el-form-item label="排序:">
+      <el-form-item label="排序：">
         <el-input-number style="width: 300px;" v-model="formData.sort" @change="handleChange" :min="1" :max="10000"></el-input-number>
       </el-form-item>
     </el-form>
@@ -40,13 +40,10 @@
         form: { },
         rules: {
           navTitle: [
-            { required: true, message: '请选择导航标题', trigger: 'blur' }
+            { required: true, message: '请输入导航标题', trigger: 'blur' }
           ],
           target: [
             { required: true, message: '请选择打开方式', trigger: 'blur' }
-          ],
-          sort: [
-            { required: true, message: '请输入导航排序', trigger: 'blur' }
           ]
         }
       }
@@ -73,6 +70,7 @@
     },
     methods: {
       handleClose(done) {
+        this.$refs['formData'].resetFields()
         this.$emit('close-callback')
       },
       handleChange(value) {
@@ -80,7 +78,21 @@
       },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
-          if (valid) {
+          if (!this.formData.navTitle) {
+            this.$message({
+              type: 'error',
+              message: '请输入导航标题'
+            });
+            return false
+          }
+          if (!this.formData.target) {
+            this.$message({
+              type: 'error',
+              message: '请选择打开方式'
+            });
+            return false
+          }
+          if (this.formData.id !== undefined) {
             // 编辑
             this.loading.show()
             api.navBarUpdate(this.formData).then(res => {

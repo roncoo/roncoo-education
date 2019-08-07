@@ -8,7 +8,7 @@
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
         <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
-        <el-button type="primary" perms="sys:user:add" icon="el-icon-circle-plus-outline" size="mini" @click="handleAdd()">添加</el-button>
+        <el-button v-has="'/system/pc/sys/user/add'" type="primary" perms="sys:user:add" icon="el-icon-circle-plus-outline" size="mini" @click="handleAdd()">添加</el-button>
       </el-form-item>
       </el-form>
     </div>
@@ -16,9 +16,9 @@
       <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
         <el-table-column type="index" label="序号" width="40">
         </el-table-column>
-        <el-table-column prop="mobile" label="手机号">
+        <el-table-column prop="mobile" label="手机号" width="170">
         </el-table-column>
-        <el-table-column prop="realName" label="名称">
+        <el-table-column prop="realName" label="名称" width="250">
         </el-table-column>
         <el-table-column prop="sort" width="100" label="排序">
         </el-table-column>
@@ -40,19 +40,18 @@
             </el-switch>
           </template>
         </el-table-column>
-        <el-table-column prop="remark" label="备注">
+        <el-table-column prop="remark" label="备注" width="220">
         </el-table-column>
         <el-table-column
         fixed="right"
-        label="操作"
-        width="360">
+        label="操作">
         <template slot-scope="scope">
           <ul class="list-item-actions">
             <li>
               <el-button type="danger" @click="handleDelete(scope.row.id)" size="mini">删除</el-button>
-              <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
-              <el-button type="success" @click="handleUserRole(scope.row.id, scope.row.realName)" size="mini">设置角色</el-button>
-              <el-button type="success" @click="handlePassword(scope.row.userNo, scope.row.realName)" size="mini">密码修改</el-button>
+              <el-button v-has="'/system/pc/sys/user/view'" type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
+              <el-button v-has="'/system/pc/sys/role/list'" type="primary" @click="handleUserRole(scope.row.id, scope.row.realName)" size="mini">设置角色</el-button>
+              <el-button v-has="'/system/pc/sys/user/password'" type="success" @click="handlePassword(scope.row.userNo, scope.row.realName)" size="mini">密码修改</el-button>
             </li>
           </ul>
         </template>

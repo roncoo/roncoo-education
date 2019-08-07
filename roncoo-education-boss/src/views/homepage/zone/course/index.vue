@@ -10,7 +10,7 @@
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
         <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
-        <el-button type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAddRow()">添加</el-button>
+        <el-button v-has="'/course/pc/course/list'" type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAddRow()">添加</el-button>
       </el-form-item>
       </el-form>
     </div>
@@ -60,7 +60,7 @@
             <ul class="list-item-actions">
               <li>
                 <el-button type="danger" @click="handleDelRow(scope.row)" size="mini">删除</el-button>
-                <el-button type="primary" @click="handleUpdateRow(scope.row)" size="mini">排序</el-button>
+                <el-button v-has="'/course/pc/zone/course/edit'" type="success" @click="handleUpdateRow(scope.row)" size="mini">排序</el-button>
               </li>
             </ul>
           </template>

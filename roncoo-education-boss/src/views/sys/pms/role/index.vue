@@ -18,7 +18,7 @@
         <el-form-item>
           <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
           <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
-          <el-button type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAdd()">添加</el-button>
+          <el-button v-has="'/system/pc/sys/role/add'" type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAdd()">添加</el-button>
         </el-form-item>
         </el-form>
       </div>
@@ -30,10 +30,10 @@
           </el-table-column>
           <el-table-column prop="remark" label="备注">
           </el-table-column>
-          <el-table-column prop="sort" label="排序">
+          <el-table-column prop="sort" label="排序" width="100">
           </el-table-column>
           <el-table-column
-          width="150"
+          width="170"
           prop="statusId"
           label="状态"
           align="center">
@@ -58,8 +58,8 @@
             <ul class="list-item-actions">
               <li>
                 <el-button type="danger" @click="handleDelete(scope.row.id)" size="mini">删除</el-button>
-                <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
-                <el-button type="success" @click="handlePms(scope.row.id, scope.row.roleName)" size="mini">设置权限</el-button>
+                <el-button v-has="'/system/pc/sys/role/view'" type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
+                <el-button v-has="'/system/pc/menu/list'" type="success" @click="handlePms(scope.row.id, scope.row.roleName)" size="mini">设置权限</el-button>
               </li>
             </ul>
           </template>

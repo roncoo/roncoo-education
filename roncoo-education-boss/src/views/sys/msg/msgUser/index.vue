@@ -20,17 +20,17 @@
         </el-table-column>
         <el-table-column label="用户手机">
            <template slot-scope="scope">
-            <el-button type="text" @click="handleView(scope.row.msgId, scope.row.mobile)">{{scope.row.mobile}}</el-button>
+            <el-button v-has="'/system/pc/msg/view'" type="text" @click="handleView(scope.row.msgId, scope.row.mobile)">{{scope.row.mobile}}</el-button>
           </template>
         </el-table-column>
-        <el-table-column label="是否置顶" width="90">
+        <el-table-column label="是否置顶" width="100">
           <template slot-scope="scope">
             <span :class="textClass(scope.row.msgType)">{{textMsgType[scope.row.msgType]}}</span>
           </template>
         </el-table-column>
         <el-table-column prop="msgTitle" label="短信标题">
         </el-table-column>
-        <el-table-column label="定时发送" width="90">
+        <el-table-column label="定时发送" width="100">
           <template slot-scope="scope">
             <span :class="textClass(scope.row.isRead)">{{textIsRead[scope.row.isRead]}}</span>
           </template>
@@ -39,8 +39,7 @@
         </el-table-column>
         <el-table-column
         fixed="right"
-        label="操作"
-        width="370">
+        label="操作">
         <template slot-scope="scope">
           <ul class="list-item-actions">
             <li>

@@ -18,7 +18,7 @@
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
         <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
-        <el-button type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAdd()">添加</el-button>
+        <el-button v-has="'/system/pc/nav/bar/add'" type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAdd()">添加</el-button>
       </el-form-item>
       </el-form>
     </div>
@@ -61,7 +61,7 @@
           <ul class="list-item-actions">
             <li>
               <el-button type="danger" @click="handleDelRow(scope.row.id)" size="mini">删除</el-button>
-              <el-button type="success" @click="handleEdit(scope.row)" size="mini">修改</el-button>
+              <el-button v-has="'/system/pc/nav/bar/edit'" type="success" @click="handleEdit(scope.row)" size="mini">修改</el-button>
             </li>
           </ul>
         </template>
@@ -133,7 +133,7 @@
       //编辑弹窗
       handleEdit(row) {
        this.formData = row
-       this.ctrl.dialogTitle = row.navTitle + '——编辑'
+       this.ctrl.dialogTitle = row.navTitle + ' —— 编辑'
        this.ctrl.dialogVisible = true
       },
       // 关闭编辑弹窗回调

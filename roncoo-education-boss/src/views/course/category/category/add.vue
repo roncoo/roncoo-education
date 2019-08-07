@@ -87,6 +87,7 @@ export default {
     },
     // 关闭弹窗
     handleClose(done) {
+      this.$refs['formData'].resetFields()
       this.$emit('close-callback')
     }
   }

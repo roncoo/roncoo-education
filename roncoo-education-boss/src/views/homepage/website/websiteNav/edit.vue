@@ -1,7 +1,7 @@
 <template>
   <!--弹窗-->
   <el-dialog
-    width="30%"
+    width="35%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
@@ -56,6 +56,7 @@ export default {
       this.formData.sort = value
     },
     handleClose(done) {
+      this.$refs['formData'].resetFields()
       this.$emit('close-callback')
     },
     submitForm(formName) {
@@ -67,14 +68,7 @@ export default {
           });
           return false
         }
-        if (valid) {
-          if (this.formData.id === undefined) {
-            this.$message({
-              type: 'error',
-              message: 'id不能为空'
-            });
-            return false
-          }
+        if (this.formData.id !== undefined) {
           this.loading.show()
           api.websiteNavUpate(this.formData).then(res => {
             this.loading.hide()

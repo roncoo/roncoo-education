@@ -30,7 +30,7 @@
         </el-table-column>
         <el-table-column label="手机号">
            <template slot-scope="scope">
-            <el-button type="text" @click="handleView(scope.row.id)">{{scope.row.lecturerMobile}}</el-button>
+            <el-button v-has="'/user/pc/lecturer/view'" type="text" @click="handleView(scope.row.id)">{{scope.row.lecturerMobile}}</el-button>
           </template>
         </el-table-column>
         <el-table-column prop="lecturerName" label="讲师名称">
@@ -67,8 +67,8 @@
         <template slot-scope="scope">
           <ul class="list-item-actions">
             <li>
-              <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
-              <el-button type="warning" @click="handleProportion(scope.row.id)" size="mini">设置分成</el-button>
+              <el-button v-has="'/user/pc/lecturer/view'" type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
+              <el-button v-has="'/user/pc/lecturer/view'" type="primary" @click="handleProportion(scope.row.id)" size="mini">设置分成</el-button>
             </li>
           </ul>
         </template>
@@ -186,12 +186,7 @@
           }
         }).catch(() => {
           this.ctrl.loading = false
-          const msg = { 0: '禁用失败', 1: '启用失败' }
-            this.$message({
-              type: 'error',
-              message: msg[statusId]
-            });
-            this.reload()
+          this.reload()
         })
       },
       // 查看信息

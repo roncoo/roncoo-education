@@ -8,7 +8,7 @@
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
         <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
-        <el-button type="primary" size="mini" icon="el-icon-circle-plus-outline" @click="handleAddRow()">添加</el-button>
+        <el-button v-has="'/course/pc/adv/add'" type="primary" size="mini" icon="el-icon-circle-plus-outline" @click="handleAddRow()">添加</el-button>
       </el-form-item>
       </el-form>
     </div>
@@ -55,7 +55,7 @@
           <ul class="list-item-actions">
             <li>
               <el-button type="danger" @click="handleDelRow(scope.row.id)" size="mini">删除</el-button>
-              <el-button type="success" @click="handleUpdateRow(scope.row)" size="mini">编辑</el-button>
+              <el-button v-has="'/course/pc/adv/edit'" type="success" @click="handleUpdateRow(scope.row)" size="mini">编辑</el-button>
             </li>
           </ul>
         </template>
@@ -176,7 +176,6 @@
           this.ctrl.loading = true
           api.advDelete({ id: id }).then(res => {
             this.ctrl.loading = false
-            console.log(res)
             if (res.code === 200 && res.data > 0) {
               this.$message({
                 type: 'success',

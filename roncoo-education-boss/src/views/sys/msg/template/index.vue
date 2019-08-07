@@ -8,7 +8,7 @@
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
         <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
-        <el-button type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAdd()">添加</el-button>
+        <el-button v-has="'/system/pc/msg/template/add'" type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAdd()">添加</el-button>
       </el-form-item>
       </el-form>
     </div>
@@ -33,7 +33,7 @@
           <ul class="list-item-actions">
             <li>
               <el-button type="danger" @click="handleDelete(scope.row.id)" size="mini">删除</el-button>
-              <el-button type="success" @click="handleEdit(scope.row)" size="mini">修改</el-button>
+              <el-button v-has="'/system/pc/msg/template/view'" type="success" @click="handleEdit(scope.row.id)" size="mini">修改</el-button>
             </li>
           </ul>
         </template>
@@ -143,21 +143,21 @@
             });
               this.reload()
           }
-        })
         }).catch(() => {
           this.ctrl.load = false
-          this.reload()
+        })
+        }).catch(() => {
         })
       },
       handleAdd() {
         this.ctrl.addDialogVisible = true
-        this.dialogTitle = '添加'
+        this.ctrl.dialogTitle = '添加'
       },
       handleEdit(id) {
         this.ctrl.load = true
         api.templateView({ id: id }).then(res => {
-          this.formData = res
-          this.dialogTitle = res.title + '编辑'
+          this.formData = res.data
+          this.ctrl.dialogTitle = res.data.title + ' —— 编辑'
           this.ctrl.dialogVisible = true
           this.ctrl.load = false
         }).catch(() => {

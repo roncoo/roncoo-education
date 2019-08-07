@@ -18,7 +18,7 @@
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
         <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
-          <el-button type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAddRow()">添加</el-button>
+          <el-button v-has="'/system/pc/website/link/add'" type="primary" icon="el-icon-circle-plus-outline" size="mini" @click="handleAddRow()">添加</el-button>
       </el-form-item>
      </el-form>
     </div>
@@ -26,7 +26,7 @@
       <el-table v-loading="ctrl.loading" size="medium" :data="list" stripe border style="width: 100%">
         <el-table-column type="index" label="序号" width="40">
         </el-table-column>
-        <el-table-column prop="linkName,linkUrl" label="链接名称/链接地址">
+        <el-table-column prop="linkName,linkUrl" label="链接名称/链接地址" width="400">
           <template slot-scope="scope"><el-link type="primary" @click="jumpUrl(scope.row.linkUrl)" target="_blank">{{scope.row.linkName}}</el-link> 【{{scope.row.linkUrl}}】</template>
         </el-table-column>
         <el-table-column prop="sort" label="排序">
@@ -57,7 +57,7 @@
           <ul class="list-item-actions">
             <li>
               <el-button type="danger" @click="handleDelRow(scope.row.id)" size="mini">删除</el-button>
-              <el-button type="success" @click="handleUpdateRow(scope.row)" size="mini">修改</el-button>
+              <el-button v-has="'/system/pc/website/link/edit'" type="success" @click="handleUpdateRow(scope.row)" size="mini">修改</el-button>
             </li>
           </ul>
         </template>
@@ -65,14 +65,16 @@
       </el-table>
       <div class="mgt20">
         <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :page-size="page.numPerPage"
-          :page-sizes="[20, 50, 100, 200, 500, 1000]"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="page.totalCount">
+        background
+        style="float: right;margin-top: 20px; margin-bottom: 22px"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :page-size="page.pageSize"
+        :page-sizes="[20, 50, 100, 200, 500, 1000]"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="page.totalCount">
         </el-pagination>
-    </div>
+      </div>
     </div>
     <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
     <add :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-callback="closeCallback"></add>
@@ -135,7 +137,7 @@
       //编辑
       handleUpdateRow(data) {
        this.formData = data
-       this.ctrl.dialogTitle = data.linkName + '——编辑'
+       this.ctrl.dialogTitle = data.linkName + ' —— 编辑'
        this.ctrl.dialogVisible = true
       },
       handleChangeStatus(id, statusId) {

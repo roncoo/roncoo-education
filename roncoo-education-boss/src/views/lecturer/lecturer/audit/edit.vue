@@ -1,7 +1,7 @@
 <template>
   <!--弹窗-->
   <el-dialog
-    width="60%"
+    width="65%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
@@ -171,10 +171,6 @@
               });
             }
           }).catch(() => {
-            this.$message({
-              type: 'error',
-              message: "提交失败"
-            });
             this.loading.hide()
           })
         } else {

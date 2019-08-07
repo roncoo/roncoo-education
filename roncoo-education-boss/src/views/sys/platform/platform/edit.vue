@@ -5,8 +5,8 @@
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
-    <el-form ref="formData" :model="formData" label-width="100px">
-      <el-form-item label="客户端名称:">
+    <el-form ref="formData" :model="formData" :rules="rules" label-width="100px">
+      <el-form-item label="客户端名称:" prop="clientName">
         <el-input v-model="formData.clientName"></el-input>
       </el-form-item>
       <el-form-item label="排序:">
@@ -28,6 +28,11 @@
     name: 'Edit',
     data() {
       return {
+        rules: {
+          clientName: [
+            { required: true, message: '请选择客户端名称', trigger: 'blur' }
+          ]
+        }
       }
     },
     props: {
@@ -47,12 +52,20 @@
     },
     methods: {
       handleClose(done) {
+        this.$refs['formData'].resetFields()
         this.$emit('close-callback')
       },
       handleChange(value) {
         this.formData.sort = value
       },
       submitForm(formData) {
+        if (!this.formData.clientName) {
+          this.$message({
+            type: 'error',
+            message: '请输入客户端名称'
+          });
+          return false
+        }
         this.$refs[formData].validate((valid) => {
           if (valid) {
             this.loading.show()
