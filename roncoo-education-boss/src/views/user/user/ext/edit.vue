@@ -6,22 +6,6 @@
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form ref="formData" :model="formData" label-width="100px">
-      <el-form-item label="头像:">
-        <el-upload
-          class="upload-demo"
-          action="http://192.168.31.134:5840/course/pc/upload/pic/{USER}"
-          :on-preview="handlePreview"
-          :on-remove="handleRemove"
-          :before-remove="beforeRemove"
-           multiple
-          :limit="1"
-          :on-exceed="handleExceed"
-          :on-success="success"
-          :file-list="fileList">
-          <el-button size="small" type="primary">点击上传</el-button>
-          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-        </el-upload>
-      </el-form-item>
       <el-form-item label="用户手机:">
         <el-input :disabled="true" v-model="formData.mobile"></el-input>
       </el-form-item>

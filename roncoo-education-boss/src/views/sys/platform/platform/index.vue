@@ -205,7 +205,6 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.ctrl.loading = true
           this.changeStatus(id, statusId)
           this.handleReset()
         }).catch(() => {
@@ -214,6 +213,7 @@
       },
       // 请求更新用户方法
       changeStatus(id, statusId) {
+        this.ctrl.loading = true
         api.platformUpdate({ id: id, statusId: statusId }).then(res => {
           this.ctrl.loading = false
           if (res.code === 200 && res.data > 0) {
@@ -232,7 +232,7 @@
               this.handleReset()
           }
         }).catch(() => {
-          this.ctrl.loading = false
+          this.ctrl.loading = true
         })
       },
       // 注册时间段查询条件

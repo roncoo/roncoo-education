@@ -5,7 +5,7 @@
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
-    <el-form ref="formData" :model="formData" label-width="80px">
+    <el-form ref="formData" :model="formData" label-width="100px">
       <el-alert class="title" :closable="false" title="讲师个人信息" type="info" />
         <br/>
         <div>
@@ -71,8 +71,8 @@
         </div>
     </el-form>
     <el-row style="margin-top:17px; ">
+      <el-button style="float:right;margin-left:6px;" size="mini" type="danger" plain @click="handleClose">取 消</el-button>
         <el-button style="float:right" size="mini" type="primary" @click="submitForm('formData')">确 定</el-button>
-        <el-button style="float:right;margin-left:6px;" size="mini" type="danger" plain @click="handleClose">取 消</el-button>
     </el-row>
   </el-dialog>
 </template>
@@ -160,13 +160,10 @@
                 }
               }).catch(() => {
                 this.loading.hide()
-                this.$message({
-                    type: 'error',
-                    message: "提交失败"
-                  });
               })
             }
           } else {
+            this.loading.hide()
             this.$message({
               type: 'error',
               message: "提交失败"

@@ -152,14 +152,6 @@ export default {
           });
         }
       })
-      this.$refs[formData].validate((valid) => {
-        if (valid) {
-          this.formData.introduce = this.editor.txt.html()
-          this.handleConfirm()
-        } else {
-          return false;
-        }
-      })
     },
     // 编辑器上传图片
     editorUpload(files, insert) {

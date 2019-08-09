@@ -189,10 +189,7 @@
               });
             }
           }).catch(() => {
-            this.$message({
-                type: 'error',
-                message: "删除失败"
-              });
+            this.ctrl.loading = false
           })
         })
       },
@@ -225,7 +222,6 @@
       reload() {
         this.formData = {}
         this.map = {}
-        this.map.zoneId = this.$route.query.zoneId
         this.getList()
       },
       //编辑
@@ -236,6 +232,7 @@
       },
       getList() {
         this.ctrl.loading = true
+        this.map.zoneId = this.$route.query.zoneId
         api.zoneCourselist(this.map, this.page.pageCurrent, this.page.pageSize).then(res => {
           this.page = res.data
           this.page.numPerPage = res.data.pageSize

@@ -153,6 +153,7 @@
               this.loading.hide()
               if (res.code === 200 && res.data > 0) {
                 this.tips('操作成功', 'success')
+                this.handleClose()
               } else {
                 this.$message({
                   type: 'error',

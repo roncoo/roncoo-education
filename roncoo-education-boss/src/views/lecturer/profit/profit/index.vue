@@ -29,7 +29,7 @@
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
         <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
-        <el-button v-has="'/user/pc/lecturer/profit/batch'" type="success" @click="handleBatch()" size="mini">标记为已打款</el-button>
+        <el-button type="success" @click="handleBatch()" size="mini">标记为已打款</el-button>
       </el-form-item>
       </el-form>
     </div>

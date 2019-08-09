@@ -1,6 +1,6 @@
 <template>
   <div class="pad20">
-    <el-form :model="formData" v-loading="ctrl.loading" label-width="100px">
+    <el-form ref="formData" :model="formData" label-width="100px">
       <el-form-item label="文章名称：">
         <el-input v-model="formData.artTitle"></el-input>
       </el-form-item>
@@ -32,7 +32,6 @@
     },
     mounted() {
       this.navId = this.$route.query.navId
-      console.log(this.navId)
       this.getArticala(this.navId)
     },
     methods: {
@@ -42,7 +41,6 @@
           setTimeout(() => {
           this.editor.create(); // 创建用户协议富文本编辑器
           this.editor.customConfig.customUploadImg = this.editorUpload
-          console.log(this.formData)
           if (this.formData.artDesc !== undefined && this.formData.artDesc !== '' && this.formData.artDesc !== null) {
             this.editor.txt.html(this.formData.artDesc)
           } else {
@@ -71,24 +69,25 @@
         this.formData.sort = value
       },
       getArticala(navId) {
-        this.ctrl.loading = true
+        this.loading.show()
         api.navArticleView({ navId: navId }).then(res => {
           this.createEdit();
-          this.ctrl.loading = false
+          this.loading.hide()
           if (res.code === 200) {
               this.formData = res.data
           }
         }).catch(() => {
-          this.ctrl.loading = false
+          this.loading.hide()
         })
       },
       handleClose() {
         this.editor.txt.clear()
-        this.$router.push({ path: '/homepage/website/websiteNav' });
+        window.opener = null;
+        window.open("about:blank", "_top").close()
+        this.$router.go(-1)
       },
-      submitForm(formName) {
-        this.formData.artDesc = this.editor.txt.html()
-        this.$refs[formName].validate((valid) => {
+      submitForm(formData) {
+        this.$refs[formData].validate((valid) => {
           if (valid) {
             this.loading.show()
             api.navArticleUpdate(this.formData).then(res => {
@@ -103,15 +102,16 @@
                 });
               }
             }).catch(() => {
-              this.loading.show()
-              })
+              this.loading.hide()
+            })
           } else {
+            this.loading.hide()
             this.$message({
               type: 'error',
               message: "更新失败"
             });
           }
-        });
+        })
       }
     }
   }

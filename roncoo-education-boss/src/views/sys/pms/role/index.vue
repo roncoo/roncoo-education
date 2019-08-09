@@ -247,7 +247,7 @@
           this.ctrl.load = false
           this.formData = res.data
           this.ctrl.editDialogVisible = true
-          this.ctrl.dialogTitle = res.roleName + " —— 信息修改"
+          this.ctrl.dialogTitle = res.data.roleName + " —— 信息修改"
         }).catch(() => {
           this.ctrl.load = false
         })

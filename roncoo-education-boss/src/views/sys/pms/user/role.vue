@@ -1,7 +1,7 @@
 <template>
   <!--弹窗-->
   <el-dialog
-    width="90%"
+    width="60%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
@@ -31,20 +31,20 @@
         @selection-change="handleSelectionChange"
         border
         style="width: 100%">
-          <el-table-column type="index" label="序号">
+          <el-table-column type="index" width="40" label="序号">
           </el-table-column>
           <el-table-column prop="roleName" label="名称">
           </el-table-column>
-          <el-table-column prop="id" label="备注">
+          <el-table-column prop="remark" label="备注">
           </el-table-column>
-          <el-table-column prop="sort" label="排序">
+          <el-table-column prop="sort" width="90" label="排序">
           </el-table-column>
           <el-table-column label="状态">
             <template slot-scope="scope">
               <span :class="textClass(scope.row.statusId)">{{textuStatusId[scope.row.statusId]}}</span>
             </template>
           </el-table-column>
-          <el-table-column :reserve-selection="true" type="selection" prop="id"></el-table-column>
+          <el-table-column width="50" :reserve-selection="true" type="selection" prop="id"></el-table-column>
         </el-table>
         <el-pagination
             background

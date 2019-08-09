@@ -35,9 +35,9 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item style="float:right" >
-          <el-button type="primary" :loading="ctrl.loading" @click="handleCheck">查询</el-button>
-          <el-button class="filter-item" @click="handleReset">重置</el-button>
+        <el-form-item>
+          <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
+          <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
         </el-form-item>
       </el-form>
    </div>
@@ -270,6 +270,8 @@ export default {
           message: msg[command]
         });
           this.reload()
+      }).catch(() => {
+        this.ctrl.load = false
       })
     },
     // 修改弹窗
