@@ -29,8 +29,8 @@
         </el-button>
       </el-form-item>
       <div class="tips">
-        <span style="margin-right:20px;">mobile: 13800000000</span>
-        <span> password: 123456</span>
+        <span style="margin-right:20px;">广州市领课网络科技有限公司 版权所有©2015-2019</span>
+        <span> | 粤ICP备16009964号</span>
       </div>
     </el-form>
   </div>
