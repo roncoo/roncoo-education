@@ -22,7 +22,7 @@
     </el-form>
     <el-row style="margin-top:17px; ">
       <el-button style="float:right;margin-left:6px;" size="mini" type="danger" plain @click="handleClose">取 消</el-button>
-      <el-button style="float:right" size="mini" type="primary" @click="submitForm('form')">确 定</el-button>        
+      <el-button style="float:right" size="mini" type="primary" @click="submitForm('form')">确 定</el-button>
     </el-row>
   </el-dialog>
     <list-user :visible="ctrl.dialogVisible" :title="ctrl.dialogTitle" @close-callback="closeCallback"></list-user>
