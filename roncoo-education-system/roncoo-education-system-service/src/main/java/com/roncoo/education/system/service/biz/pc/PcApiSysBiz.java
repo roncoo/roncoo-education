@@ -30,7 +30,22 @@ public class PcApiSysBiz {
 		if (ObjectUtil.isNull(sys)) {
 			return Result.error("找不到系统配置信息");
 		}
-		return Result.success(BeanUtil.copyProperties(sys, SysViewRESQ.class));
+		SysViewRESQ resq = BeanUtil.copyProperties(sys, SysViewRESQ.class);
+		resq.setPolyvUseid("******");
+		resq.setPolyvWritetoken("******");
+		resq.setPolyvReadtoken("******");
+		resq.setPolyvSecretkey("******");
+		resq.setAliyunAccessKeyId("******");
+		resq.setAliyunAccessKeySecret("******");
+		resq.setAliyunOssUrl("******");
+		resq.setAliyunOssBucket("******");
+		resq.setSmsCode("******");
+		resq.setSignName("******");
+		resq.setPayKey("******");
+		resq.setPaySecret("******");
+		resq.setPayUrl("******");
+		resq.setNotifyUrl("******");
+		return Result.success(resq);
 	}
 
 	public Result<Integer> update(SysUpdateRESQ resq) {

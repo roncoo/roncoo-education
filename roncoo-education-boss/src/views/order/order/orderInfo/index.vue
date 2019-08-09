@@ -93,20 +93,20 @@
       </el-table-column>
       <el-table-column label="课程信息">
         <template slot-scope="scope">
-          <el-button v-has="'/user/pc/lecturer/view'" type="text" @click="handleOrderList(scope.row.courseId, scope.row.courseName, 1)">{{scope.row.courseName}}</el-button>
-          <el-row>【<el-button type="text">明细</el-button>】</el-row>
+          <el-button v-has="'/user/pc/lecturer/view'" type="text" @click="handleOrderList(scope.row.courseId)">{{scope.row.courseName}}</el-button>
+          <el-row>【<el-button type="text" @click="handleOrderList(scope.row.courseId, scope.row.courseName, 1)">明细</el-button>】</el-row>
         </template>
       </el-table-column>
       <el-table-column label="讲师信息" width="100">
         <template slot-scope="scope">
-          <el-button v-has="'/user/pc/lecturer/view'" type="text" @click="handleOrderList(scope.row.lecturerUserNo, scope.row.lecturerName, 2)">{{scope.row.lecturerName}}</el-button>
-          <el-row>【<el-button type="text" @click="handleLecturerView(scope.row.lecturerUserNo)">明细</el-button>】</el-row>
+          <el-button v-has="'/user/pc/lecturer/view'" type="text" @click="handleLecturerView(scope.row.lecturerUserNo)">{{scope.row.lecturerName}}</el-button>
+          <el-row>【<el-button type="text" @click="handleOrderList(scope.row.lecturerUserNo, scope.row.lecturerName, 2)">明细</el-button>】</el-row>
         </template>
       </el-table-column>
       <el-table-column label="用户信息" width="120">
          <template slot-scope="scope">
-          <el-button v-has="'/user/pc/user/ext/view'" type="text" @click="handleOrderList(scope.row.userNo, scope.row.mobile, 3)">{{scope.row.mobile}}</el-button>
-          <el-row>【<el-button type="text" @click="handleUserView(scope.row.userNo)">明细</el-button>】</el-row>
+          <el-button v-has="'/user/pc/user/ext/view'" type="text" @click="handleUserView(scope.row.userNo)">{{scope.row.mobile}}</el-button>
+          <el-row>【<el-button type="text" @click="handleOrderList(scope.row.userNo, scope.row.mobile, 3)">明细</el-button>】</el-row>
         </template>
       </el-table-column>
       <el-table-column label="交易类型" width="80">
@@ -353,6 +353,9 @@ export default {
         this.totalProfit = res.data.totalProfit.toFixed(2)
         this.platformProfit = res.data.platformProfit.toFixed(2)
         this.lecturerProfit = res.data.lecturerProfit.toFixed(2)
+        this.ctrl.load = false
+      }).catch(() => {
+        this.ctrl.load = false
       })
     },
     getList() {
@@ -362,7 +365,6 @@ export default {
         this.page.pageSize = res.data.pageSize
         this.page.totalCount = res.data.totalCount
         this.statistical()
-        this.ctrl.load = false
       }).catch(() => {
         this.ctrl.load = false
       })
