@@ -70,8 +70,8 @@
       </el-form>
     </div>
       <el-row style="margin-top:17px; ">
-          <el-button style="float:right" size="mini" type="primary" @click="submitForm('formData')">确 定</el-button>
-          <el-button style="float:right;margin-left:6px;" size="mini" type="danger" plain @click="handleClose">取 消</el-button>
+        <el-button style="float:right;margin-left:6px;" size="mini" type="danger" plain @click="handleClose">取 消</el-button>
+        <el-button style="float:right" size="mini" type="primary" @click="submitForm('formData')">确 定</el-button>
       </el-row>
       <br/>
       <br/>
@@ -180,9 +180,18 @@
         })
       },
       handleClose() {
-        window.opener = null;
-        window.open("about:blank", "_top").close()
-        this.$router.go(-1)
+        const view = {
+          key: this.$route.fullPath
+        }
+        this.$store.dispatch('delView', view).then(({ visitedViews }) => {
+          // console.log(visitedViews)
+          const latestView = visitedViews.slice(-1)[0]
+          if (latestView) {
+            this.$router.push(latestView.route.fullPath)
+          } else {
+            this.$router.push('/')
+          }
+        })
       }
     }
   }

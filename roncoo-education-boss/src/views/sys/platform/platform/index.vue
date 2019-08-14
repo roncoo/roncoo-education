@@ -2,8 +2,8 @@
   <div class="pad20">
     <div>
       <el-form :inline="true" size="mini">
-      <el-form-item label="客户端名称">
-        <el-input v-model="map.clientName"></el-input>
+      <el-form-item label="客户端名称：">
+        <el-input v-model.trim="map.clientName"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
@@ -14,7 +14,7 @@
     </div>
     <div>
       <el-table v-loading="ctrl.loading" size="medium" :data="list" stripe border style="width: 100%">
-        <el-table-column type="index" label="序号" width="40"></el-table-column>
+        <el-table-column type="index" label="序号" width="50"></el-table-column>
         <el-table-column label="客户端名称">
            <template slot-scope="scope">
             <el-button v-has="'/user/pc/platform/add'" type="text" @click="handleView(scope.row.id)">{{scope.row.clientName}}</el-button>

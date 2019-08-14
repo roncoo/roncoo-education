@@ -4,8 +4,18 @@
       <el-form :inline="true" size="mini">
         <el-form-item>
         </el-form-item>
-      <el-form-item label="专区名称">
-        <el-input v-model="map.zoneName"></el-input>
+      <el-form-item label="专区名称：">
+        <el-input v-model.trim="map.zoneName"></el-input>
+      </el-form-item>
+      <el-form-item label="状态:" >
+        <el-select v-model="map.statusId" class="auto-width" clearable filterable placeholder="状态" style="width: 85px">
+          <el-option
+            v-for="item in opts.statusIdList"
+            :key="item.code"
+            :label="item.desc"
+            :value="item.code">
+          </el-option>
+        </el-select>
       </el-form-item>
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
@@ -16,7 +26,7 @@
     </div>
     <div>
       <el-table v-loading="ctrl.loading" size="medium" :data="list" stripe border style="width: 100%">
-        <el-table-column type="index" label="序号" width="40">
+        <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="zoneName" label="专区名称">
         </el-table-column>
@@ -80,10 +90,13 @@
    components: { Edit },
     data() {
       return {
-        map: {},
+        opts: {
+          statusIdList: []
+        },
         ctrl: {
           loading: false
         },
+        map: {},
         // 表单数据, 例如新增编辑子项，页面表单
         formData: {},
         list: [],
@@ -98,6 +111,9 @@
       }
     },
     mounted() {
+      this.$store.dispatch('GetOpts', { enumName: "StatusIdEnum", type: 'arr' }).then(res => {
+        this.opts.statusIdList = res
+      })
       this.getList()
     },
     methods: {

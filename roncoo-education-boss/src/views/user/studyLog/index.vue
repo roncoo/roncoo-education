@@ -2,16 +2,10 @@
   <div class="pad20">
     <div>
       <el-form :inline="true" size="mini">
-      <el-form-item label="时间">
-        <el-date-picker
-          v-model="gmtCreate"
-          type="daterange"
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-          align="center"
-          @change="changeTime">
-        </el-date-picker>
+      <el-form-item label="时间：">
+        <div>
+          <datePicker v-model="gmtCreate" ref="dataRange" type="daterange"></datePicker>
+        </div>
       </el-form-item>
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
@@ -21,7 +15,7 @@
     </div>
     <div>
       <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
-        <el-table-column type="index" label="序号" width="40"></el-table-column>
+        <el-table-column type="index" label="序号" width="50"></el-table-column>
         <el-table-column prop="courseName" label="课程名称"></el-table-column>
         <el-table-column prop="chapterName" label="章节名称"></el-table-column>
         <el-table-column prop="periodName" label="课时名称"></el-table-column>
@@ -42,7 +36,9 @@
 </template>
 <script>
   import * as api from '@/api/user'
+  import datePicker from '@/components/DateRange/datePicker';
   export default {
+    components: { datePicker },
     data() {
       return {
         ctrl: {
@@ -82,6 +78,18 @@
         }
       }
     },
+    watch: {
+      // 注册时间段查询条件
+     'gmtCreate': function(gmtCreate) {
+        if (this.gmtCreate !== null && this.gmtCreate.length) {
+          this.map.beginGmtCreate = this.gmtCreate[0]
+          this.map.endGmtCreate = this.gmtCreate[1]
+        } else {
+          this.map.beginGmtCreate = ''
+          this.map.endGmtCreate = ''
+        }
+      }
+    },
     mounted() {
       this.map.userExtNo = this.$route.query.userNo
       this.listForPage()
@@ -96,23 +104,6 @@
         this.page.pageCurrent = val
         this.listForPage()
         // console.log(`当前页: ${val}`)
-      },
-      // 注册时间段查询条件
-      changeTime() {
-        if (this.gmtCreate !== null && this.gmtCreate.length) {
-          this.map.beginGmtCreate = this.dateToString(this.gmtCreate[0])
-          this.map.beginGmtCreate = this.dateToString(this.gmtCreate[1])
-        } else {
-          this.map.beginGmtCreate = ''
-          this.map.beginGmtCreate = ''
-        }
-      },
-      dateToString(date) {
-        const year = date.getFullYear()
-        const month = (date.getMonth() + 1).toString().padStart(2, '0')
-        const day = date.getDate().toString().padStart(2, '0')
-        const timeString = `${year}-${month}-${day}`
-        return timeString
       },
       // 查询条件
        handleCheck() {

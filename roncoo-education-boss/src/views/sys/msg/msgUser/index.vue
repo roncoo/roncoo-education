@@ -3,10 +3,10 @@
     <div>
       <el-form :inline="true" size="mini">
       <el-form-item label="短信标题">
-        <el-input v-model="map.msgTitle"></el-input>
+        <el-input v-model.trim="map.msgTitle"></el-input>
       </el-form-item>
       <el-form-item label="用户手机">
-        <el-input v-model="map.mobile"></el-input>
+        <el-input v-model.trim="map.mobile"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
@@ -16,7 +16,7 @@
     </div>
     <div>
       <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
-        <el-table-column type="index" label="序号" width="40">
+        <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column label="用户手机">
            <template slot-scope="scope">

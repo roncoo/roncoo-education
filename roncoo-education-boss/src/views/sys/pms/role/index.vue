@@ -2,8 +2,8 @@
   <div class="pad20">
       <div>
         <el-form :inline="true" size="mini">
-        <el-form-item label="名称">
-          <el-input v-model="map.roleName"></el-input>
+        <el-form-item label="名称：">
+          <el-input v-model.trim="map.roleName"></el-input>
         </el-form-item>
         <el-form-item label="状态:" >
         <el-select v-model="map.statusId" class="auto-width" clearable filterable placeholder="状态" style="width: 85px">
@@ -24,7 +24,7 @@
       </div>
       <div>
         <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
-          <el-table-column type="index" label="序号">
+          <el-table-column type="index" label="序号" width="50">
           </el-table-column>
           <el-table-column prop="roleName" label="名称">
           </el-table-column>

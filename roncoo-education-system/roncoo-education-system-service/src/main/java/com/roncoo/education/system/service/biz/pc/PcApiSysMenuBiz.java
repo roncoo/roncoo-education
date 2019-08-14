@@ -207,6 +207,9 @@ public class PcApiSysMenuBiz {
 		if (CollectionUtil.isNotEmpty(list)) {
 			for (SysMenu m : list) {
 				SysMenuUserRESQ resq = BeanUtil.copyProperties(m, SysMenuUserRESQ.class);
+				if (m.getMenuName().equals("首页")) {
+					resq.setHidden(true);
+				}
 				resq.setName(m.getMenuName());
 				resq.setPath(m.getMenuUrl());
 				resq.setApiUrl(m.getApiUrl());

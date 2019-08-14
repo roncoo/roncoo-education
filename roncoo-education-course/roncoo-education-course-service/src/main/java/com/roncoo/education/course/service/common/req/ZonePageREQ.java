@@ -28,6 +28,11 @@ public class ZonePageREQ implements Serializable {
 	@ApiModelProperty(value = "专区名称", required = false)
 	private String zoneName;
 	/**
+	 * 状态(1:正常，0:禁用)
+	 */
+	@ApiModelProperty(value = "状态(1:正常，0:禁用)", required = false)
+	private Integer statusId;
+	/**
 	 * 当前页
 	 */
 	@ApiModelProperty(value = "当前页", required = true)

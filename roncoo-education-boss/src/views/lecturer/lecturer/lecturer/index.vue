@@ -2,13 +2,13 @@
   <div class="pad20">
     <div>
       <el-form :inline="true" size="mini">
-      <el-form-item label="讲师名称">
-        <el-input v-model="map.lecturerName"></el-input>
+      <el-form-item label="讲师名称：">
+        <el-input v-model.trim="map.lecturerName"></el-input>
       </el-form-item>
-      <el-form-item label="手机号">
-        <el-input v-model="map.lecturerMobile"></el-input>
+      <el-form-item label="手机号：">
+        <el-input v-model.trim="map.lecturerMobile"></el-input>
       </el-form-item>
-      <el-form-item label="状态:" >
+      <el-form-item label="状态：" >
         <el-select v-model="map.statusId" class="auto-width" clearable filterable placeholder="状态" style="width: 85px">
           <el-option
             v-for="item in opts.statusIdList"
@@ -26,7 +26,7 @@
     </div>
     <div>
       <el-table v-loading="ctrl.loading" size="medium" :data="list" stripe border style="width: 100%">
-        <el-table-column type="index" label="序号" width="40">
+        <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column label="手机号">
            <template slot-scope="scope">

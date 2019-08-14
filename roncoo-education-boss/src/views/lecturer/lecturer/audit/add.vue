@@ -1,27 +1,27 @@
 <template>
   <!--弹窗-->
   <el-dialog
-    width="50%"
+    width="35%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form ref="formData" :model="formData" :rules="rules" label-width="100px">
-      <el-form-item label="讲师名称:" prop="lecturerName">
+      <el-form-item label="讲师名称：" prop="lecturerName">
         <el-input v-model="formData.lecturerName"></el-input>
       </el-form-item>
-      <el-form-item label="手机号码:" prop="lecturerMobile">
+      <el-form-item label="手机号码：" prop="lecturerMobile">
         <el-input v-model="formData.lecturerMobile"></el-input>
         <el-button v-has="'/user/pc/lecturer/audit/check'" type="primary" v-if="check === 1" @click="checkMobile()">校验</el-button>
         <el-button type="success" icon="el-icon-check" v-if="check === 2"></el-button>
         <el-button type="danger" icon="el-icon-close" v-if="check === 3"></el-button>
       </el-form-item>
-      <el-form-item v-if="newUser === 2" label="登录密码:">
+      <el-form-item v-if="newUser === 2" label="登录密码：">
         <el-input v-model="formData.mobilePsw" placeholder="请输入登录密码"></el-input>
       </el-form-item>
-      <el-form-item v-if="newUser === 2" label="确认密码:">
+      <el-form-item v-if="newUser === 2" label="确认密码：">
         <el-input v-model="formData.confirmPasswd" placeholder="请输入确认密码"></el-input>
       </el-form-item>
-      <el-form-item label="邮箱:" prop="lecturerEmail">
+      <el-form-item label="邮箱：" prop="lecturerEmail">
         <el-input v-model="formData.lecturerEmail"></el-input>
       </el-form-item>
     </el-form>

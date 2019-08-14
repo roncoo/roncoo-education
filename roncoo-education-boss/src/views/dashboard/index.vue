@@ -17,6 +17,7 @@
                 <el-button style="float:right;margin-left:6px;" size="mini" type="primary" @click="jumpUrl('demo')">演示环境</el-button>
                 <el-button style="float:right;" type="warning" size="mini" @click="jumpUrl('home')">官网</el-button>
               </div>
+              <br/>
             </el-card>
           </el-col>
           <el-col :span="12">
@@ -30,6 +31,7 @@
                 <el-button style="float:right;margin-left:6px;" size="mini" type="primary" @click="jumpUrl('fineUI')">演示环境</el-button>
                 <el-button style="float:right;" type="warning" size="mini" @click="jumpUrl('home')">官网</el-button>
               </div>
+              <br/>
             </el-card>
           </el-col>
         </el-row>

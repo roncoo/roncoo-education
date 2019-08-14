@@ -6,8 +6,8 @@
     :visible.sync="visible"
     :before-close="handleClose">
      <el-form :inline="true">
-      <el-alert class="title" :closable="false" title="讲师个人信息" type="info" />
-      <br/>
+      <el-card >
+        <el-divider style="font-weight:bold; background-color:#f4f4f5">讲师个人信息</el-divider>
         <el-row>
           <el-col :span="8"><div>
             <el-form-item label="头像:">
@@ -65,12 +65,16 @@
             </el-form-item>
           </div></el-col>
         </el-row>
-      <el-alert class="title" :closable="false" title="简介" type="info" />
+      </el-card>
       <br/>
+      <el-card >
+        <el-divider style="font-weight:bold; background-color:#f4f4f5">简介</el-divider>
         <el-form-item v-html="formData.introduce">
         </el-form-item>
-      <el-alert class="title" :closable="false" title="分成情况" type="info" />
+      </el-card>
       <br/>
+      <el-card >
+        <el-divider style="font-weight:bold; background-color:#f4f4f5">分成情况</el-divider>
         <el-row>
           <el-col :span="8"><div>
             <el-form-item label="讲师分成情况:">
@@ -129,6 +133,7 @@
             </el-form-item>
           </div></el-col>
         </el-row>
+      </el-card>
     </el-form>
     <el-row style="margin-top:17px; ">
         <el-button style="float:right;margin-left:6px;" size="mini" type="danger" plain @click="handleClose">取 消</el-button>

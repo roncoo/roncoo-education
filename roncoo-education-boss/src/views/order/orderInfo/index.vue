@@ -2,22 +2,15 @@
   <div class="pad20">
     <el-form :inline="true" size="mini">
       <el-form-item label="手机号码：">
-        <el-input v-model="map.mobile"></el-input>
+        <el-input v-model.trim="map.mobile"></el-input>
       </el-form-item>
       <el-form-item label="课程名称：">
-        <el-input v-model="map.courseName"></el-input>
+        <el-input v-model.trim="map.courseName"></el-input>
       </el-form-item>
       <el-form-item label="支付时间：" >
-        <el-date-picker
-        v-model="payTime"
-        type="daterange"
-        range-separator="至"
-        start-placeholder="开始日期"
-        end-placeholder="结束日期"
-        align="center"
-        @change="changeTime"
-        style="width: 357px">
-        </el-date-picker>
+        <div>
+          <datePicker style="width: 357px" v-model="payTime" ref="dataRange" type="daterange"></datePicker>
+        </div>
       </el-form-item>
       <el-form-item label="订单状态：">
         <el-select v-model="map.orderStatus" class="auto-width" clearable filterable placeholder="订单状态" style="width: 100px">
@@ -30,13 +23,13 @@
         </el-select>
       </el-form-item>
       <el-form-item label="订单编号：">
-        <el-input v-model="map.orderNo"></el-input>
+        <el-input v-model.trim="map.orderNo"></el-input>
       </el-form-item>
       <el-form-item label="后台备注：">
-        <el-input v-model="map.remark"></el-input>
+        <el-input v-model.trim="map.remark"></el-input>
       </el-form-item>
       <el-form-item label="讲师名称：">
-        <el-input v-model="map.lecturerName"></el-input>
+        <el-input v-model.trim="map.lecturerName"></el-input>
       </el-form-item>
       <el-form-item label="购买渠道：">
         <el-select v-model="map.channelType" class="auto-width" clearable filterable placeholder="购买渠道" style="width: 100px">
@@ -83,58 +76,76 @@
           </div>
         </el-form-item>
     </el-form>
-    <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
-      <el-table-column type="index" label="序号" width="40">
+    <el-table v-loading="ctrl.load" border size="medium" :data="list" stripe style="width: 100%">
+      <el-table-column type="index" label="序号" width="50">
       </el-table-column>
       <el-table-column label="订单号" width="170">
         <template slot-scope="scope">
           <el-button v-has="'/course/pc/order/info/view'" type="text" @click="handleView(scope.row.id)">{{scope.row.orderNo}}</el-button>
         </template>
       </el-table-column>
-      <el-table-column label="课程信息">
+      <el-table-column label="课程信息" width="200">
         <template slot-scope="scope">
-          <el-button v-has="'/user/pc/lecturer/view'" type="text" @click="handleOrderList(scope.row.courseId)">{{scope.row.courseName}}</el-button>
-          <el-row>【<el-button type="text" @click="handleOrderList(scope.row.courseId, scope.row.courseName, 1)">明细</el-button>】</el-row>
+           <el-row>{{scope.row.courseName}}</el-row>
+          <!-- <el-button v-has="'/user/pc/lecturer/view'" type="text" @click="handleOrderList(scope.row.courseId)">{{scope.row.courseName}}</el-button> -->
+          <el-row>【<el-button type="text" @click="handleOrderList(scope.row.courseId, scope.row.courseName, 1)">详情</el-button>】</el-row>
         </template>
       </el-table-column>
-      <el-table-column label="讲师信息" width="100">
+      <el-table-column label="讲师信息" width="150">
         <template slot-scope="scope">
           <el-button v-has="'/user/pc/lecturer/view'" type="text" @click="handleLecturerView(scope.row.lecturerUserNo)">{{scope.row.lecturerName}}</el-button>
-          <el-row>【<el-button type="text" @click="handleOrderList(scope.row.lecturerUserNo, scope.row.lecturerName, 2)">明细</el-button>】</el-row>
+          <el-row>【<el-button type="text" @click="handleOrderList(scope.row.lecturerUserNo, scope.row.lecturerName, 2)">详情</el-button>】</el-row>
         </template>
       </el-table-column>
       <el-table-column label="用户信息" width="120">
          <template slot-scope="scope">
           <el-button v-has="'/user/pc/user/ext/view'" type="text" @click="handleUserView(scope.row.userNo)">{{scope.row.mobile}}</el-button>
-          <el-row>【<el-button type="text" @click="handleOrderList(scope.row.userNo, scope.row.mobile, 3)">明细</el-button>】</el-row>
+          <el-row>【<el-button type="text" @click="handleOrderList(scope.row.userNo, scope.row.mobile, 3)">详情</el-button>】</el-row>
         </template>
       </el-table-column>
-      <el-table-column label="交易类型" width="80">
+      <el-table-column
+        label="交易类型"
+        prop="tradeType"
+        align="center"
+        width="100">
         <template slot-scope="scope">
-          <span>{{textTradeType[scope.row.tradeType]}}</span>
+          <el-tag v-if="scope.row.tradeType === 1" type="success">线上支付</el-tag>
+          <el-tag v-if="scope.row.tradeType === 2" type="brandColor">线下支付</el-tag>
         </template>
       </el-table-column>
       <el-table-column label="支付方式 / 价格(元)" width="140">
         <template slot-scope="scope">
-          <el-row>{{textPayType[scope.row.payType]}}</el-row>
+          <el-tag v-if="scope.row.payType === 1" type="success">微信支付</el-tag>
+          <el-tag v-if="scope.row.payType === 2" type="brandColor">支付宝支付</el-tag>
           <el-row>价格:【{{scope.row.pricePaid.toFixed(2)}}】</el-row>
         </template>
       </el-table-column>
-      <el-table-column label="购买渠道" width="80">
-        <template slot-scope="scope">
-          <el-row>{{textChannelType[scope.row.channelType]}}</el-row>
+      <el-table-column
+        label="购买渠道"
+        prop="channelType"
+        align="center"
+        width="80">
+        <template slot-scope="sett">
+          <el-tag v-if="sett.row.channelType === 1" type="success">PC端</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="订单状态" width="80">
-        <template slot-scope="scope">
-          <el-row>{{textOrderStatus[scope.row.orderStatus]}}</el-row>
+      <el-table-column
+        label="订单状态"
+        prop="orderStatus"
+        align="center"
+        width="100">
+        <template slot-scope="sett">
+          <el-tag v-if="sett.row.orderStatus === 1" type="warning">待支付</el-tag>
+          <el-tag v-if="sett.row.orderStatus === 2" type="success">支付成功</el-tag>
+          <el-tag v-if="sett.row.orderStatus === 3" type="danger">支付失败</el-tag>
+          <el-tag v-if="sett.row.orderStatus === 4" type="brandColor">已关闭</el-tag>
         </template>
       </el-table-column>
       <el-table-column prop="remarkCus" label="客户备注" width="100">
       </el-table-column>
       <el-table-column prop="payTime" label="支付时间" width="160">
       </el-table-column>
-      <el-table-column label="操作" width="100">
+      <el-table-column label="操作" fixed="right" width="100">
         <template slot-scope="scope">
           <el-button v-has="'/course/pc/order/info/edit'" type="success" @click="handleRemark(scope.row)" size="mini">备注</el-button>
         </template>
@@ -162,10 +173,11 @@ import * as userApi from '@/api/user'
 import * as lecturerApi from '@/api/lecturer'
 import Remark from './remark'
 import ViewLecturer from '@/views/lecturer/lecturer/lecturer/view'
-import viewUser from '@/views/user/user/ext/view'
+import viewUser from '@/views/user/ext/view'
 import OrderView from './view'
+import datePicker from '@/components/DateRange/datePicker';
 export default {
-  components: { Remark, ViewLecturer, OrderView, viewUser },
+  components: { Remark, ViewLecturer, OrderView, viewUser, datePicker },
   data() {
     return {
       ctrl: {
@@ -214,6 +226,19 @@ export default {
         3: '支付失败',
         4: '已关闭'
       }
+    }
+  },
+  watch: {
+    // 注册时间段查询条件
+   'payTime': function(payTime) {
+      if (this.payTime !== null && this.payTime.length) {
+        this.map.beginPayTime = this.payTime[0]
+        this.map.endPayTime = this.payTime[1]
+      } else {
+        this.map.beginPayTime = ''
+        this.map.endPayTime = ''
+      }
+      console.log(this.map)
     }
   },
   mounted() {
@@ -293,23 +318,6 @@ export default {
       }).catch(() => {
         this.ctrl.load = false
       })
-    },
-    // 支付时间段查询条件
-    changeTime() {
-      if (this.payTime !== null && this.payTime.length) {
-        this.map.beginPayTime = this.dateToString(this.payTime[0])
-        this.map.endPayTime = this.dateToString(this.payTime[1])
-      } else {
-        this.map.beginPayTime = ''
-        this.map.endPayTime = ''
-      }
-    },
-    dateToString(date) {
-      const year = date.getFullYear()
-      const month = (date.getMonth() + 1).toString().padStart(2, '0')
-      const day = date.getDate().toString().padStart(2, '0')
-      const timeString = `${year}-${month}-${day}`
-      return timeString
     },
     // 关闭编辑弹窗回调
     closeCllback() {

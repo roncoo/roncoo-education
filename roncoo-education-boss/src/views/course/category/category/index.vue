@@ -2,9 +2,19 @@
   <div class="pad20">
     <div>
       <el-form :inline="true" size="mini">
-        <el-form-item label="分类名称">
-          <el-input v-model="map.categoryName"></el-input>
+        <el-form-item label="分类名称：">
+          <el-input v-model.trim="map.categoryName"></el-input>
         </el-form-item>
+        <el-form-item label="状态:" >
+        <el-select v-model="map.statusId" class="auto-width" clearable filterable placeholder="状态" style="width: 85px">
+          <el-option
+            v-for="item in opts.statusIdList"
+            :key="item.code"
+            :label="item.desc"
+            :value="item.code">
+          </el-option>
+        </el-select>
+      </el-form-item>
         <el-form-item>
           <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
         <el-button icon='el-icon-refresh' class="filter-item" @click="handleReset">重置</el-button>
@@ -23,7 +33,7 @@
         <el-table-column
         type="index"
         label="序号"
-        width="40">
+        width="50">
         </el-table-column>
         <el-table-column
           prop="categoryName"

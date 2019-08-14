@@ -2,8 +2,8 @@
   <div class="pad20">
     <div>
       <el-form :inline="true" size="mini">
-        <el-form-item label="菜单名称">
-          <el-input v-model="map.menuName"></el-input>
+        <el-form-item label="菜单名称：">
+          <el-input v-model.trim="map.menuName"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
@@ -23,7 +23,7 @@
         <el-table-column
           type="index"
           label="序号"
-          width="55">
+          width="50">
         </el-table-column>
         <el-table-column
           prop="menuName"
@@ -39,10 +39,11 @@
         </el-table-column>
         <el-table-column
           prop="apiUrl"
-          label="接口地址">
+          label="接口地址"
+          width="300">
         </el-table-column>
         <el-table-column
-          width="100"
+          width="80"
           prop="hiddenType"
           label="类型">
           <template slot-scope="scope">
@@ -50,7 +51,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          width="100"
+          width="80"
           prop="sort"
           label="排序">
         </el-table-column>

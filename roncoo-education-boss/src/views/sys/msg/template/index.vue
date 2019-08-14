@@ -3,7 +3,7 @@
     <div>
       <el-form :inline="true" size="mini">
       <el-form-item label="标题">
-        <el-input v-model="map.title"></el-input>
+        <el-input v-model.trim="map.title"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
@@ -14,7 +14,7 @@
     </div>
     <div>
       <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
-        <el-table-column type="index" label="序号" width="40">
+        <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="title" label="标题" width="200">
         </el-table-column>

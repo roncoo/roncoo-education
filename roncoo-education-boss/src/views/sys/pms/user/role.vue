@@ -8,8 +8,8 @@
     <div class="pad20">
       <div>
         <el-form :inline="true" size="mini">
-        <el-form-item label="角色">
-          <el-input v-model="map.roleName"></el-input>
+        <el-form-item label="角色：">
+          <el-input v-model.trim="map.roleName"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" :loading="ctrl.load" @click="handleCheck">查询</el-button>
@@ -31,20 +31,20 @@
         @selection-change="handleSelectionChange"
         border
         style="width: 100%">
-          <el-table-column type="index" width="40" label="序号">
+          <el-table-column type="index" width="50" label="序号">
           </el-table-column>
           <el-table-column prop="roleName" label="名称">
           </el-table-column>
           <el-table-column prop="remark" label="备注">
           </el-table-column>
-          <el-table-column prop="sort" width="90" label="排序">
+          <el-table-column prop="sort" width="100" label="排序">
           </el-table-column>
-          <el-table-column label="状态">
+          <el-table-column label="状态" width="100">
             <template slot-scope="scope">
               <span :class="textClass(scope.row.statusId)">{{textuStatusId[scope.row.statusId]}}</span>
             </template>
           </el-table-column>
-          <el-table-column width="50" :reserve-selection="true" type="selection" prop="id"></el-table-column>
+          <el-table-column width="60" :reserve-selection="true" type="selection" prop="id"></el-table-column>
         </el-table>
         <el-pagination
             background
@@ -217,20 +217,12 @@
       handleClose(done) {
         this.$emit('close-callback')
       },
-      textClass(userType) {
+      textClass(type) {
         return {
-          c_red: userType === 0,
-          c_blue: userType === 2
+          c_red: type === 0,
+          c_blue: type === 2
         }
       }
     }
   }
 </script>
-<style scoped>
-  .cancel {
-    text-align: right;
-  }
-  .button {
-    padding: 5px 10px;
-  }
-</style>

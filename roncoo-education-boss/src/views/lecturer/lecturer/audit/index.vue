@@ -2,13 +2,13 @@
   <div class="pad20">
     <div>
       <el-form :inline="true" size="mini">
-      <el-form-item label="讲师名称">
-        <el-input v-model="map.lecturerName"></el-input>
+      <el-form-item label="讲师名称：">
+        <el-input v-model.trim="map.lecturerName"></el-input>
       </el-form-item>
-      <el-form-item label="手机号">
-        <el-input v-model="map.lecturerMobile"></el-input>
+      <el-form-item label="手机号：">
+        <el-input v-model.trim="map.lecturerMobile"></el-input>
       </el-form-item>
-      <el-form-item label="状态:" >
+      <el-form-item label="状态：" >
         <el-select v-model="map.statusId" class="auto-width" clearable filterable placeholder="状态" style="width: 85px">
           <el-option
             v-for="item in opts.statusIdList"
@@ -18,7 +18,7 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="审核情况:" >
+      <el-form-item label="审核情况：" >
         <el-select v-model="map.auditStatus" class="auto-width" clearable filterable placeholder="审核情况" style="width: 110px">
           <el-option
             v-for="item in opts.auditStatusList"
@@ -37,9 +37,9 @@
     </div>
     <div>
       <el-table v-loading="ctrl.loading" size="medium" :data="list" stripe border style="width: 100%">
-        <el-table-column type="index" label="序号" width="40">
+        <el-table-column type="index" label="序号" width="50">
         </el-table-column>
-        <el-table-column label="手机号">
+        <el-table-column label="手机号" width="150">
            <template slot-scope="scope">
             <el-button v-has="'/user/pc/lecturer/audit/view'" type="text" @click="handleView(scope.row.id)">{{scope.row.lecturerMobile}}</el-button>
           </template>
@@ -66,14 +66,19 @@
             </el-switch>
           </template>
         </el-table-column>
-        <el-table-column label="分成比例">
+        <el-table-column label="分成比例" width="150">
           <template slot-scope="scope">
              [ 讲师: {{scope.row.lecturerProportion*100}}%]
           </template>
         </el-table-column>
-        <el-table-column label="审核状态">
+        <el-table-column
+          label="审核状态"
+          prop="auditStatus"
+          align="center">
           <template slot-scope="scope">
-            <span :class="textAuditStatusClass(scope.row.auditStatus)">{{textAuditStatus[scope.row.auditStatus]}}</span>
+            <el-tag v-if="scope.row.auditStatus === 0" type="brandColor">待审核</el-tag>
+            <el-tag v-if="scope.row.auditStatus === 1" type="success">审核通过</el-tag>
+            <el-tag v-if="scope.row.auditStatus === 2" type="danger">审核不通过</el-tag>
           </template>
         </el-table-column>
         <el-table-column

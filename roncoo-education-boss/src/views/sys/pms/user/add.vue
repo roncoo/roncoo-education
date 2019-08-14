@@ -7,15 +7,15 @@
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form ref="form" :model="form" :rules="rules" label-width="100px">
-      <el-form-item label="手机:" prop="mobile">
+      <el-form-item label="手机：" prop="mobile">
         <el-input placeholder="请输入内容" v-model="form.mobile" class="input-with-select">
           <el-button v-has="'/user/pc/user/list'" slot="append" icon="el-icon-search" @click="userList()"></el-button>
         </el-input>
      </el-form-item>
-      <el-form-item label="名称:" prop="realName">
+      <el-form-item label="名称：" prop="realName">
         <el-input v-model="form.realName"></el-input>
       </el-form-item>
-      <el-form-item label="备注:">
+      <el-form-item label="备注：">
         <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="form.remark">
         </el-input>
       </el-form-item>
@@ -63,6 +63,7 @@ export default {
   },
   methods: {
     userList() {
+      this.ctrl.dialogTitle = '用户列表'
       this.ctrl.dialogVisible = true
     },
     // 关闭编辑弹窗回调

@@ -3,7 +3,7 @@
     <div>
       <el-form :inline="true" size="mini">
       <el-form-item label="导航标题：">
-        <el-input v-model="map.navTitle"></el-input>
+        <el-input v-model.trim="map.navTitle"></el-input>
       </el-form-item>
       <el-form-item label="状态：" >
         <el-select v-model="map.statusId" class="auto-width" clearable filterable placeholder="状态" style="width: 85px">
@@ -24,13 +24,17 @@
     </div>
     <div>
       <el-table v-loading="ctrl.loading" size="medium" :data="list" stripe border style="width: 100%">
-        <el-table-column type="index" label="序号" width="40">
+        <el-table-column type="index" label="序号" width="50">
         </el-table-column>
-        <el-table-column width="200" prop="navTitle" label="导航标题">
+        <el-table-column width="300" prop="navTitle" label="导航标题">
         </el-table-column>
-        <el-table-column label="跳转方式" >
+        <el-table-column
+          label="跳转方式"
+          prop="target"
+          align="center">
           <template slot-scope="scope">
-            <span>{{textuTarget[scope.row.target]}}</span>
+            <el-tag v-if="scope.row.target === '_blank'" type="success">新窗口打开</el-tag>
+            <el-tag v-if="scope.row.target === '_self'" type="brandColor">同窗口打开</el-tag>
           </template>
         </el-table-column>
         <el-table-column prop="sort" label="排序">
@@ -103,10 +107,6 @@
         },
         opts: {
           statusIdList: []
-        },
-        textuTarget: {
-          '_blank': '新窗口打开',
-          '_self': '同窗口打开'
         },
         page: {
           beginPageIndex: 1,

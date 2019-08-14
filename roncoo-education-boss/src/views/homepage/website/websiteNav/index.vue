@@ -2,10 +2,10 @@
   <div class="pad20">
     <div>
       <el-form :inline="true" size="mini">
-      <el-form-item label="分类名称">
-        <el-input v-model="map.navName"></el-input>
+      <el-form-item label="分类名称：">
+        <el-input v-model.trim="map.navName"></el-input>
       </el-form-item>
-      <el-form-item label="状态:" >
+      <el-form-item label="状态：" >
         <el-select v-model="map.statusId" class="auto-width" clearable filterable placeholder="状态" style="width: 85px">
           <el-option
             v-for="item in opts.statusIdList"
@@ -30,7 +30,7 @@
       border
       row-key="id"
       :default-expand-all="true">
-        <el-table-column type="index" label="序号" width="40">
+        <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="navName" label="导航名称">
         </el-table-column>

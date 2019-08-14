@@ -2,10 +2,10 @@
   <div class="pad20">
     <div>
       <el-form :inline="true" size="mini">
-      <el-form-item label="链接名称">
-        <el-input v-model="map.linkName"></el-input>
+      <el-form-item label="链接名称：">
+        <el-input v-model.trim="map.linkName"></el-input>
       </el-form-item>
-      <el-form-item label="状态:" >
+      <el-form-item label="状态：" >
         <el-select v-model="map.statusId" class="auto-width" clearable filterable placeholder="状态" style="width: 85px">
           <el-option
             v-for="item in opts.statusIdList"
@@ -24,7 +24,7 @@
     </div>
     <div>
       <el-table v-loading="ctrl.loading" size="medium" :data="list" stripe border style="width: 100%">
-        <el-table-column type="index" label="序号" width="40">
+        <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="linkName,linkUrl" label="链接名称/链接地址" width="400">
           <template slot-scope="scope"><el-link type="primary" @click="jumpUrl(scope.row.linkUrl)" target="_blank">{{scope.row.linkName}}</el-link> 【{{scope.row.linkUrl}}】</template>

@@ -3,7 +3,7 @@
     <div class="filter-container">
       <el-form :inline="true" size="mini">
         <el-form-item label="课程名称:">
-          <el-input v-model="map.courseName"></el-input>
+          <el-input v-model.trim="map.courseName"></el-input>
         </el-form-item>
         <el-form-item label="状态:" >
           <el-select v-model="map.statusId" class="auto-width" clearable filterable placeholder="状态" style="width: 85px">
@@ -41,7 +41,6 @@
         </el-form-item>
       </el-form>
    </div>
-
     <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border>
       <el-table-column type="index" label="序号" width="40">
       </el-table-column>
@@ -50,15 +49,18 @@
           <el-button type="text" @click="handleView(scope.row)" >{{scope.row.courseName}}</el-button>
         </template> -->
       </el-table-column>>
-
       <el-table-column label="课程分类" width="180">
         <template slot-scope="scope">
         {{scope.row.categoryName1}}/{{scope.row.categoryName2}}/{{scope.row.categoryName3}}
         </template>
       </el-table-column>
-      <el-table-column label="是否收费" width="100">
+      <el-table-column
+        label="是否收费"
+        prop="isFree"
+        align="center">
         <template slot-scope="scope">
-          <span :class="textClass(scope.row.isFree)">{{textIsFree[scope.row.isFree]}}</span>
+          <el-tag v-if="scope.row.isFree === 1" type="success">免费</el-tag>
+          <el-tag v-if="scope.row.isFree === 0" type="danger">收费</el-tag>
         </template>
       </el-table-column>
       <el-table-column label="原价" width="100">

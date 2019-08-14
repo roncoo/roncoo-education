@@ -1,18 +1,18 @@
 <template>
   <!--弹窗-->
   <el-dialog
-    width="27%"
+    width="30%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
-    <el-form ref="formData" :model="formData" label-width="80px">
-      <el-form-item label="审核结果:">
+    <el-form ref="formData" :model="formData" label-width="100px">
+      <el-form-item label="审核结果：">
         <el-radio-group v-model="formData.auditStatus">
           <el-radio :label="1">通过</el-radio>
           <el-radio :label="2">不通过</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="审核意见:">
+      <el-form-item label="审核意见：">
         <el-input type="textarea" :rows="3" :autosize="{ minRows: 2, maxRows: 4}" placeholder="系统默认通过" v-model="formData.auditOpinion"></el-input>
       </el-form-item>
     </el-form>

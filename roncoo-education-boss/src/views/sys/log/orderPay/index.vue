@@ -2,8 +2,8 @@
   <div class="pad20">
     <div>
       <el-form :inline="true" size="mini">
-      <el-form-item label="订单号">
-        <el-input v-model="map.orderNo"></el-input>
+      <el-form-item label="订单号：">
+        <el-input v-model.trim="map.orderNo"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
@@ -15,7 +15,7 @@
       <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
         <el-table-column type="index" label="序号" width="40"></el-table-column>
         <el-table-column width="300" prop="orderNo" label="订单号"></el-table-column>
-        <el-table-column width="300" prop="serialMumber" label="流水号"></el-table-column>
+        <el-table-column width="300" prop="serialNumber" label="流水号"></el-table-column>
         <el-table-column width="150" label="订单状态">
           <template slot-scope="scope">
             <span>{{textOrderStatus[scope.row.orderStatus]}}</span>

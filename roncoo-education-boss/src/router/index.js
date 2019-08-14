@@ -17,17 +17,11 @@ export const asyncRouterMap = [
     component: () => import('@/views/order'),
     children: [
       {
-        path: 'order',
-        component: () => import('@/views/order/order'),
-        children: [
-          {
-            path: 'orderInfo',
-            component: () => import('@/views/order/order/orderInfo'),
-            meta: { requireAuth: true }
-          }
-         ]
+        path: 'orderInfo',
+        component: () => import('@/views/order/orderInfo'),
+        meta: { requireAuth: true }
       }
-    ]
+     ]
   },
   //首页管理
   {
@@ -56,8 +50,8 @@ export const asyncRouterMap = [
           },
           {
             path: 'course',
-            component: () => import('@/views/homepage/zone/course'),
-            meta: { requireAuth: true }
+            meta: { title: '专区课程' },
+            component: () => import('@/views/homepage/zone/course')
           }
          ]
       },
@@ -161,29 +155,22 @@ export const asyncRouterMap = [
       }
     ]
   },
-  // 用户管理
+  // 学员管理
   {
     path: 'user',
     component: () => import('@/views/user'),
     children: [
-    // 学员管理
+      // 学员列表
       {
-        path: 'user',
-        component: () => import('@/views/user/user'),
-        children: [
-        // 学员列表
-          {
-            path: 'ext',
-            component: () => import('@/views/user/user/ext'),
-            meta: { requireAuth: true }
-          },
-          {
-            // 用户学习日志列表
-            path: 'studyLog',
-            component: () => import('@/views/user/user/studyLog'),
-            meta: { requireAuth: true }
-          }
-        ]
+        path: 'ext',
+        component: () => import('@/views/user/ext'),
+        meta: { requireAuth: true }
+      },
+      {
+        // 用户学习日志列表
+        path: 'studyLog',
+        meta: { title: '学习日志' },
+        component: () => import('@/views/user/studyLog')
       }
     ]
   },

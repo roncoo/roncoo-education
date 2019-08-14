@@ -1,21 +1,21 @@
 <template>
   <!--弹窗-->
   <el-dialog
-    width="45%"
+    width="35%"
     :title="title"
     :visible.sync="visible"
     :before-close="handleClose">
-    <el-form ref="formData" :model="formData" label-width="80px">
-      <el-form-item label="用户手机:">
+    <el-form ref="formData" :model="formData" label-width="100px">
+      <el-form-item label="用户手机：">
         <el-input :disabled="true" v-model="formData.mobile"></el-input>
       </el-form-item>
-      <el-form-item label="名称:">
+      <el-form-item label="名称：">
         <el-input v-model="formData.realName"></el-input>
       </el-form-item>
-      <el-form-item label="排序:">
+      <el-form-item label="排序：">
         <el-input-number style="width: 300px;" v-model="formData.sort" @change="handleChange" :min="1" :max="10000"></el-input-number>
       </el-form-item>
-      <el-form-item label="备注:">
+      <el-form-item label="备注：">
         <el-input type="textarea" v-model="formData.remark"></el-input>
       </el-form-item>
     </el-form>

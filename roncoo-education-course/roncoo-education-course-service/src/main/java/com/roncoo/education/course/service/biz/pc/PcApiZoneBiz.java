@@ -48,6 +48,9 @@ public class PcApiZoneBiz {
 		if (StringUtils.hasText(req.getZoneName())) {
 			c.andZoneNameEqualTo(req.getZoneName());
 		}
+		if (req.getStatusId() != null) {
+			c.andStatusIdEqualTo(req.getStatusId());
+		}
 		example.setOrderByClause(" status_id desc, sort desc, id desc ");
 		Page<Zone> page = dao.listForPage(req.getPageCurrent(), req.getPageSize(), example);
 		return Result.success(PageUtil.transform(page, ZonePageRESQ.class));

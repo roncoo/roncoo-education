@@ -2,13 +2,13 @@
   <div class="pad20">
     <div>
       <el-form :inline="true" size="mini">
-      <el-form-item label="用户手机">
-        <el-input v-model="map.mobile"></el-input>
+      <el-form-item label="用户手机：">
+        <el-input v-model.trim="map.mobile"></el-input>
       </el-form-item>
-      <el-form-item label="昵称">
-        <el-input v-model="map.nickname"></el-input>
+      <el-form-item label="昵称：">
+        <el-input v-model.trim="map.nickname"></el-input>
       </el-form-item>
-      <el-form-item label="状态:" >
+      <el-form-item label="状态：" >
         <el-select v-model="map.statusId" class="auto-width" clearable filterable placeholder="状态" style="width: 85px">
           <el-option
             v-for="item in opts.statusIdList"
@@ -18,16 +18,10 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="注册时间">
-        <el-date-picker
-          v-model="gmtCreate"
-          type="daterange"
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-          align="center"
-          @change="changeTime">
-        </el-date-picker>
+      <el-form-item label="注册时间：">
+        <div>
+          <datePicker v-model="gmtCreate" ref="dataRange" type="daterange"></datePicker>
+        </div>
       </el-form-item>
       <el-form-item>
         <el-button icon='el-icon-search' type="primary" @click="handleCheck">查询</el-button>
@@ -37,7 +31,7 @@
     </div>
     <div>
       <el-table v-loading="ctrl.load" size="medium" :data="list" stripe border style="width: 100%">
-        <el-table-column type="index" label="序号" width="40">
+        <el-table-column type="index" label="序号" width="50">
         </el-table-column>
         <el-table-column prop="userNo" label="用户编号">
         </el-table-column>
@@ -46,9 +40,14 @@
             <el-button v-has="'/user/pc/user/ext/view'" type="text" @click="handleView(scope.row.id)">{{scope.row.mobile}}</el-button>
           </template>
         </el-table-column>
-        <el-table-column label="用户类型"  width="120">
-          <template slot-scope="scope">
-            <span :class="textClass(scope.row.userType)">{{textuUserType[scope.row.userType]}}</span>
+        <el-table-column
+          label="用户类型"
+          prop="userType"
+          align="center"
+          width="200">
+          <template slot-scope="sett">
+            <el-tag v-if="sett.row.userType === 1" type="success">用户</el-tag>
+            <el-tag v-if="sett.row.userType === 2" type="brandColor">讲师</el-tag>
           </template>
         </el-table-column>
         <el-table-column prop="nickname" label="昵称">
@@ -106,8 +105,9 @@
   import * as api from '@/api/user'
   import Edit from './edit'
   import viewUser from './view'
+  import datePicker from '@/components/DateRange/datePicker';
   export default {
-    components: { Edit, viewUser },
+    components: { Edit, viewUser, datePicker },
     data() {
       return {
         list: [],
@@ -132,14 +132,18 @@
           pageSize: 20,
           totalCount: 0,
           totalPage: 0
-        },
-        textuUserType: {
-          1: '用户',
-          2: '讲师'
-        },
-        textuStatusId: {
-          0: '禁用',
-          1: '正常'
+        }
+      }
+    },
+    watch: {
+      // 注册时间段查询条件
+     'gmtCreate': function(gmtCreate) {
+        if (this.gmtCreate !== null && this.gmtCreate.length) {
+          this.map.beginGmtCreate = this.gmtCreate[0]
+          this.map.endGmtCreate = this.gmtCreate[1]
+        } else {
+          this.map.beginGmtCreate = ''
+          this.map.endGmtCreate = ''
         }
       }
     },
@@ -151,7 +155,7 @@
     },
     methods: {
       handleStudy(row) {
-        this.$router.push({ path: '/user/user/studyLog', query: { userNo: row }});
+        this.$router.push({ path: '/user/studyLog', query: { userNo: row }});
       },
       // 跳修改弹窗页面
       handleEdit(id) {
@@ -226,23 +230,6 @@
           this.reload()
         })
       },
-      // 注册时间段查询条件
-      changeTime() {
-        if (this.gmtCreate !== null && this.gmtCreate.length) {
-          this.map.beginGmtCreate = this.dateToString(this.gmtCreate[0])
-          this.map.endGmtCreate = this.dateToString(this.gmtCreate[1])
-        } else {
-          this.map.beginGmtCreate = ''
-          this.map.endGmtCreate = ''
-        }
-      },
-      dateToString(date) {
-        const year = date.getFullYear()
-        const month = (date.getMonth() + 1).toString().padStart(2, '0')
-        const day = date.getDate().toString().padStart(2, '0')
-        const timeString = `${year}-${month}-${day}`
-        return timeString
-      },
       // 查询条件
        handleCheck() {
         this.page.pageCurrent = 1
@@ -280,12 +267,6 @@
         }).catch(() => {
           this.ctrl.load = false
         })
-      },
-      textClass(userType) {
-        return {
-          c_red: userType === 0,
-          c_blue: userType === 2
-        }
       }
     }
   }

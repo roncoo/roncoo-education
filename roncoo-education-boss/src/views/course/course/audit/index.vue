@@ -3,7 +3,7 @@
     <div class="filter-container">
       <el-form :inline="true" size="mini">
         <el-form-item label="课程名称:">
-          <el-input v-model="map.courseName"></el-input>
+          <el-input v-model.trim="map.courseName"></el-input>
         </el-form-item>
         <el-form-item label="状态:" >
           <el-select v-model="map.statusId" class="auto-width" clearable filterable placeholder="状态" style="width: 85px">
@@ -65,9 +65,13 @@
         {{scope.row.categoryName1}}/{{scope.row.categoryName2}}/{{scope.row.categoryName3}}
         </template>
       </el-table-column>
-      <el-table-column label="是否收费" width="90">
+      <el-table-column
+        label="是否收费"
+        prop="isFree"
+        align="center">
         <template slot-scope="scope">
-          <span :class="textClass(scope.row.isFree)">{{textIsFree[scope.row.isFree]}}</span>
+          <el-tag v-if="scope.row.isFree === 1" type="success">免费</el-tag>
+          <el-tag v-if="scope.row.isFree === 0" type="danger">收费</el-tag>
         </template>
       </el-table-column>
       <el-table-column label="原价" width="100">
@@ -113,9 +117,14 @@
       </el-table-column>
       <el-table-column prop="sort" label="排序" width="80">
       </el-table-column>
-      <el-table-column label="审核状态" width="100">
+      <el-table-column
+        label="审核状态"
+        prop="auditStatus"
+        align="center">
         <template slot-scope="scope">
-          <span :class="textAuditStatusClass(scope.row.auditStatus)">{{textAuditStatus[scope.row.auditStatus]}}</span>
+          <el-tag v-if="scope.row.auditStatus === 0" type="brandColor">待审核</el-tag>
+          <el-tag v-if="scope.row.auditStatus === 1" type="success">审核通过</el-tag>
+          <el-tag v-if="scope.row.auditStatus === 2" type="danger">审核不通过</el-tag>
         </template>
       </el-table-column>
       <el-table-column label="操作" width="160">
@@ -168,19 +177,6 @@ export default {
         pageSize: 20,
         totalCount: 0,
         totalPage: 0
-      },
-      textIsFree: {
-        1: '免费',
-        0: '收费'
-      },
-      textStatusId: {
-        1: '正常',
-        0: '禁用'
-      },
-      textAuditStatus: {
-        0: '待审核',
-        1: '审核通过',
-        2: '审核不通过'
       }
     }
   },
