@@ -88,7 +88,7 @@ public class FilterPre extends ZuulFilter {
 		Long userNo = null;
 		try {
 			userNo = getUserNoByToken(request);
-			if (uri.contains("/pc") && !uri.contains("/system/pc/menu/user/list") && !uri.contains("/system/pc/sys/enum/list") && !uri.contains("/system/pc/menu/user/button/list")) {
+			if (uri.contains("/pc") && !uri.contains("/system/pc/menu/user/list") && !uri.contains("/system/pc/sys/enum/list") && !uri.contains("/system/pc/menu/user/button/list") && !uri.contains("/course/pc/upload/pic")) {
 				// 管理后台鉴权
 				if (!stringRedisTemplate.hasKey(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()))) {
 					throw new BaseException(ResultEnum.MENU_PAST);
