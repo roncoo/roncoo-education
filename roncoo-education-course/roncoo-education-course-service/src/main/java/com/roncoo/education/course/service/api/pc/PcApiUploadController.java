@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiOperation;
  * 
  */
 @RestController
-@RequestMapping(value = "/api/course/pc/upload")
+@RequestMapping(value = "/course/pc/api/upload")
 public class PcApiUploadController extends BaseController {
 
 	@Autowired
