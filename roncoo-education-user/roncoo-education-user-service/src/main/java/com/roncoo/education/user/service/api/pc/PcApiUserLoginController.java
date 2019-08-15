@@ -17,7 +17,7 @@ import io.swagger.annotations.ApiOperation;
  * 后台用户接口
  */
 @RestController
-@RequestMapping(value = "/user/pc/user/login")
+@RequestMapping(value = "/api/user/pc/user/login")
 public class PcApiUserLoginController {
 
 	@Autowired

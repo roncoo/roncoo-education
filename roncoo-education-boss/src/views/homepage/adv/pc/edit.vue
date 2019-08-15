@@ -7,20 +7,9 @@
     :before-close="handleClose">
     <el-form :model="formData" :rules="rules" ref="formData" label-width="100px">
       <el-form-item label="广告图片:">
-        <el-upload
-          class="upload-demo"
-          action="http://192.168.31.134:5840/course/pc/upload/pic/{COURSE}"
-          :on-preview="handlePreview"
-          :on-remove="handleRemove"
-          :before-remove="beforeRemove"
-          multiple
-          :limit="1"
-          :on-exceed="handleExceed"
-          :on-success="success"
-          :file-list="fileList">
-          <el-button size="small" type="primary">点击上传</el-button>
-          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-        </el-upload>
+        <div>
+          <before v-model="formData.advImg" ref="dataRange"></before>
+        </div>
       </el-form-item>
       <el-form-item label="广告标题:" prop="advTitle">
         <el-input v-model="formData.advTitle" ></el-input>
@@ -64,7 +53,9 @@
 </template>
 <script>
   import * as api from '@/api/homepage'
+  import before from '@/components/upload/index';
   export default {
+    components: { before },
     name: 'Edit',
     data() {
       return {
