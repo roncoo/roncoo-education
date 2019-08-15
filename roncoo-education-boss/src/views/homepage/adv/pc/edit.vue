@@ -6,9 +6,17 @@
     :visible.sync="visible"
     :before-close="handleClose">
     <el-form :model="formData" :rules="rules" ref="formData" label-width="100px">
-      <el-form-item label="广告图片:">
+      <el-form-item label="广告图片:" prop="advImg">
         <div>
-          <before v-model="formData.advImg" ref="dataRange"></before>
+          <el-upload
+            class="avatar-uploader"
+            action=""
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+            :http-request="handlePost">
+            <img v-if="formData.advImg" :src="formData.advImg" class="avatar" alt="">
+            <i v-else  class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
         </div>
       </el-form-item>
       <el-form-item label="广告标题:" prop="advTitle">
@@ -53,17 +61,14 @@
 </template>
 <script>
   import * as api from '@/api/homepage'
-  import before from '@/components/upload/index';
+  import * as apia from '@/api/commonality'
   export default {
-    components: { before },
     name: 'Edit',
     data() {
       return {
         opts: {
           advTargetList: []
-
         },
-        fileList: [],
         rules: {
           advImg: [
             { required: true, message: '请输入广告图片', trigger: 'blur', autocomplete: 'on' }
@@ -114,20 +119,24 @@
         this.$refs['formData'].resetFields()
         this.$emit('close-callback')
       },
-      handleRemove(file, fileList) {
-        console.log("fileList<<<<<<<<<<<", file, fileList)
+      handleAvatarSuccess(res, file) {
+        this.formData.advImg = URL.createObjectURL(file.raw);
       },
-      handlePreview(file) {
-        console.log(file)
-      },
-      success(response, file, fileList) {
-        console.log("成功" + fileList)
-      },
-      handleExceed(files, fileList) {
-        this.$message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件`);
-      },
-      beforeRemove(file, fileList) {
-        return this.$confirm(`确定移除${file.name}？`);
+      handlePost(file) {
+        console.log(file);
+        const fd = new FormData();
+        fd.append('picFile', file.file)
+        // 配置post请求的参数。参数名file,后面跟要传的文件，参数名fileType，值为category（看后端的具体要求）
+        apia.uploadPic(fd).then(response => {
+          this.formData.advImg = response.data
+          console.log(this.formData.advImg);
+        }).catch(() => {
+          this.$message({
+            showClose: true,
+            message: '上传失败',
+            type: 'error'
+          });
+        })
       },
       submitForm(formName) {
         if (this.formData === undefined) {
@@ -137,6 +146,13 @@
             type: 'error'
           });
         } else {
+          if (!this.advImg) {
+            this.$message({
+              type: 'error',
+              message: '请添加广告图片'
+            });
+            return false
+          }
           if (!this.formData.advTitle) {
             this.$message({
               type: 'error',
@@ -215,3 +231,28 @@
     }
   }
 </script>
+<style>
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 150px;
+    height: 150px;
+    line-height: 150px;
+    text-align: center;
+  }
+  .avatar {
+    width: 150px;
+    height: 150px;
+    display: block;
+  }
+</style>

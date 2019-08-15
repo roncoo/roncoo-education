@@ -85,20 +85,23 @@
     </div>
     </div>
     <edit :visible="ctrl.dialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
+    <add :visible="ctrl.addDialogVisible" :title="ctrl.dialogTitle" @close-callback="closeCallback"></add>
 </div>
 </template>
 <script>
   import * as api from '@/api/homepage'
   import Edit from './edit'
+  import Add from './add'
   export default {
-   components: { Edit },
+   components: { Edit, Add },
     data() {
       return {
         // 页面控制数据，例如形式弹窗，显示加载中等
         ctrl: {
           loading: false,
           remoteAuthorLoading: false,
-          dialogVisible: false
+          dialogVisible: false,
+          addDialogVisible: false
         },
         opts: {
           statusIdList: []
@@ -127,9 +130,8 @@
     methods: {
       //新增
       handleAddRow() {
-        this.formData.sort = 1
         this.ctrl.dialogTitle = '新增'
-        this.ctrl.dialogVisible = true
+        this.ctrl.addDialogVisible = true
       },
       //编辑
       handleUpdateRow(data) {
@@ -140,6 +142,7 @@
       // 关闭编辑弹窗回调
       closeCallback() {
         this.ctrl.dialogVisible = false;
+        this.ctrl.addDialogVisible = false
         this.reload()
       },
       handleChangeStatus(id, statusId) {

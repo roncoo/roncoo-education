@@ -4,7 +4,7 @@ import request from '@/utils/request'
 // 上传图片
 export function uploadPic(data = {}) {
   return request({
-    url: `/course/pc/upload/pic`,
+    url: `/course/pc/api/upload/pic`,
     method: 'post',
     data: data
   })
@@ -21,7 +21,7 @@ export function menuUserList(params) {
 
 export function enumList(enumName) {
   return request({
-    url: `/system/pc/sys/enum/list`,
+    url: `/system/pc/api/sys/enum/list`,
     method: 'post',
     data: { enumName: enumName }
   })
