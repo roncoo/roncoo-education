@@ -60,7 +60,9 @@
     },
     methods: {
       handleClose(done) {
-        this.$refs['formData'].resetFields()
+        this.$nextTick(() => {
+         this.$refs['formData'].resetFields();
+        })
         this.$emit('close-callback')
       },
       handleChange(value) {
