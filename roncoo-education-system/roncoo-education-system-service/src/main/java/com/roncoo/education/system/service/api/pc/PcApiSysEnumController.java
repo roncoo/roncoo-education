@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiOperation;
  *
  */
 @RestController
-@RequestMapping(value = "/system/pc/sys/enum")
+@RequestMapping(value = "/system/pc/api/sys/enum")
 public class PcApiSysEnumController extends BaseController {
 
 	@ApiOperation(value = "获取枚举信息", notes = "获取枚举信息")
