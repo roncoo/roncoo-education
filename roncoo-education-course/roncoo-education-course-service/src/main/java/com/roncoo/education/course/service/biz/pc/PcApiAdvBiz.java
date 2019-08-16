@@ -65,8 +65,8 @@ public class PcApiAdvBiz {
 	 */
 	public Result<Integer> save(AdvSaveREQ req) {
 		Adv record = BeanUtil.copyProperties(req, Adv.class);
-		record.setBeginTime(DateUtil.parseDate(req.getBeginTime(), "yyyy-MM-dd HH:mm:ss"));
-		record.setEndTime(DateUtil.parseDate(req.getEndTime(), "yyyy-MM-dd HH:mm:ss"));
+		record.setBeginTime(req.getBeginTime());
+		record.setEndTime(req.getEndTime());
 		int results = dao.save(record);
 		if (results > 0) {
 			return Result.success(results);
