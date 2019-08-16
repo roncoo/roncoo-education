@@ -46,6 +46,7 @@
 * 如果想运营教育平台，我们提供Saas云服务！
 * 支持其他合作方式，欢迎来撩！
 * 商务合作联系QQ：513781560
+* 商务合作联系QQ：2955237748
 * 官网地址：[https://edu.roncoo.net](https://edu.roncoo.net/index.html)
 
 ## 项目推荐
