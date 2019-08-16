@@ -40,6 +40,7 @@
       </el-form-item>
       <el-form-item label="开始时间:">
         <el-date-picker
+          value-format="yyyy-MM-dd HH:mm:ss"
           v-model="formData.beginTime"
           type="datetime"
           placeholder="选择日期时间">
@@ -47,6 +48,7 @@
       </el-form-item>
       <el-form-item label="结束时间:">
         <el-date-picker
+          value-format="yyyy-MM-dd HH:mm:ss"
           v-model="formData.endTime"
           type="datetime"
           placeholder="选择日期时间">
