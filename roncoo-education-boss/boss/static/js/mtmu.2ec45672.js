@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([["mtmu"],{mtmu:function(e,t,n){"use strict";n.r(t);var u=n("KHd+"),i=Object(u.a)({},function(){var e=this.$createElement;return(this._self._c||e)("router-view")},[],!1,null,null,null);i.options.__file="index.vue";t.default=i.exports}}]);
