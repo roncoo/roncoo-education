@@ -1,0 +1,61 @@
+<div class="bjui-pageContent">
+	<div class="bjui-doc">
+		<h4>课程详情</h4>
+		<div class="row">
+			<div class="col-md-6">
+				<blockquote class="point">
+					<p>
+						<img src="${bean.courseLogo}" width="380" />
+					</p>
+				</blockquote>
+			</div>
+			<div class="col-md-6">
+				<blockquote class="point">
+					<p>
+						<label>标题：</label>${bean.courseName}
+					</p>
+					<p>
+						<label>原价：</label>${bean.courseOriginal!'0'}元 &nbsp; <label>优惠价：</label>${bean.courseDiscount!'0'}元
+					</p>
+					<p>
+						<label>讲师名称：</label>${bean.lecturerName}
+						&nbsp;<label>所属分类：</label>${bean.categoryName1!}--${bean.categoryName2!}--${bean.categoryName3!}
+					</p>
+					<p>
+						<label>课程状态：</label> <#list statusIdEnums as em><#if bean.statusId?? && bean.statusId==em.code><span class="${em.color}">${em.desc}</span></#if></#list>
+						&nbsp;<label>是否收费：</label> <#list isFreeEnums as em><#if bean.isFree?? && bean.isFree == em.code> <span class="${em.color}">${em.desc}</span></#if></#list>
+					</p>
+					<P>
+						<label>上下架：</label> <#list isPutawayEnums as em><#if bean.isPutaway?? && bean.isPutaway==em.code><span class="${em.color}">${em.desc}</span></#if></#list>
+					</P>
+				</blockquote>
+			</div>
+		</div>
+		
+		<h4>课程章节--课时</h4>
+		<div class="row">
+			<div class="col-md-12">
+                <blockquote class="point">
+                    <#list bean.courseChapterAuditList! as chapter>
+                                                                    【${chapter_index+1}】 ${chapter.chapterName!}
+                        <br/>
+                        <br/>
+                        <#list chapter.courseChapterPeriodAuditList! as period>
+                        &nbsp;&nbsp;&nbsp;&nbsp;|--课时：${period.periodName!}
+                        <br/>
+                        <br/>
+                        </#list>
+                    </#list>
+                </blockquote>
+            </div>
+		</div>
+	</div>
+</div>
+<div class="bjui-pageFooter">
+	<ul>
+		<li>
+			<button type="button" class="btn-close">关闭</button>
+		</li>
+		<li></li>
+	</ul>
+</div>

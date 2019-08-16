@@ -20,7 +20,7 @@
       </el-form-item>
       <el-form-item label="注册时间：">
         <div>
-          <datePicker v-model="gmtCreate" ref="dataRange" type="daterange"></datePicker>
+          <datePicker v-model="gmtCreate" ref="dataRange" :newVal='gmtCreate' type="daterange"></datePicker>
         </div>
       </el-form-item>
       <el-form-item>

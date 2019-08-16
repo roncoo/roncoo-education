@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([["t6I4"],{t6I4:function(e,t,n){"use strict";n.r(t);var i=n("KHd+"),u=Object(i.a)({},function(){var e=this.$createElement;return(this._self._c||e)("router-view")},[],!1,null,null,null);u.options.__file="index.vue";t.default=u.exports}}]);

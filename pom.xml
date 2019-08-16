@@ -370,6 +370,8 @@
 		<module>roncoo-education-job</module>
 		<!-- 网关接口 -->
 		<module>roncoo-education-gateway</module>
+		<!-- 管理后台 -->
+		<module>roncoo-education-wed-boss</module>
 	</modules>
 
 </project>

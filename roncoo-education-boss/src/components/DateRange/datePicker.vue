@@ -71,12 +71,21 @@ reset：重置functionn(int, langth) //int：当前日期往前推第int天，la
       autofill: {
         type: Boolean,
         default: false
+      },
+      newVal: {
+        type: String,
+        default: 'daterange'
       }
     },
     model: {
       prop: 'value',
       event: 'returnBack'
 
+    },
+    watch: {
+      newVal(newVal) {
+        this.value = newVal
+      }
     },
     mounted() {
       if (this.autofill) {
