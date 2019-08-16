@@ -4,7 +4,7 @@
 ###### v4.0.0-RELEASE -- 2019.08.16
 1. 管理后台使用Vue实现前后端分离
 2. 增加roncoo-education-boss工程，推荐使用
-3. 保留roncoo-education-web-boss，下一版本将去除
+3. 保留roncoo-education-web-boss，下一版本将移除
 4. 修改sonar检测出来的bug和漏洞
 5. 调整接口url风格，修改网关映射规则
 
