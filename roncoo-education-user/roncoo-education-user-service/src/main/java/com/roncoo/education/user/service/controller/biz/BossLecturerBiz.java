@@ -3,7 +3,6 @@ package com.roncoo.education.user.service.controller.biz;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,16 +43,6 @@ public class BossLecturerBiz {
 	public Page<LecturerVO> listForPage(LecturerQO qo) {
 		LecturerExample example = new LecturerExample();
 		Criteria c = example.createCriteria();
-		if (StringUtils.isNotBlank(qo.getLecturerMobile())) {
-			c.andLecturerMobileEqualTo(qo.getLecturerMobile());
-		}
-		if (StringUtils.isNotEmpty(qo.getLecturerName())) {
-			c.andLecturerNameLike(PageUtil.rightLike(qo.getLecturerName()));
-		}
-		if (qo.getStatusId() != null) {
-			c.andStatusIdEqualTo(qo.getStatusId());
-		}
-		example.setOrderByClause(" status_id desc, sort desc, id desc ");
 		Page<Lecturer> page = dao.listForPage(qo.getPageCurrent(), qo.getPageSize(), example);
 		return PageUtil.transform(page, LecturerVO.class);
 	}

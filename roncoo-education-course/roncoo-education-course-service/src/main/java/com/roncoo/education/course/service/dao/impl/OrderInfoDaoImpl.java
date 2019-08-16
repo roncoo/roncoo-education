@@ -14,8 +14,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import com.roncoo.education.course.common.bean.qo.OrderInfoQO;
-import com.roncoo.education.course.common.bean.vo.CountIncomeVO;
 import com.roncoo.education.course.common.bean.vo.OrderReportVO;
+import com.roncoo.education.course.service.common.resq.CountIncomeRESQ;
 import com.roncoo.education.course.service.dao.OrderInfoDao;
 import com.roncoo.education.course.service.dao.impl.mapper.OrderInfoMapper;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo;
@@ -181,17 +181,16 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 	/**
 	 * 统计订单收入情况
 	 * 
-	 * @author wuyun
 	 */
 	@Override
-	public CountIncomeVO countIncome(OrderInfoQO qo) {
+	public CountIncomeRESQ countIncome(OrderInfoQO qo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select sum(price_paid) as totalProfit, sum(lecturer_profit) as lecturerProfit, sum(platform_profit) as platformProfit from order_info where 1=1 ");
 		sql.append(joinSql(qo));
-		CountIncomeVO result = jdbcTemplate.queryForObject(sql.toString(), new RowMapper<CountIncomeVO>() {
+		CountIncomeRESQ result = jdbcTemplate.queryForObject(sql.toString(), new RowMapper<CountIncomeRESQ>() {
 			@Override
-			public CountIncomeVO mapRow(ResultSet resultSet, int arg1) throws SQLException {
-				CountIncomeVO o = new CountIncomeVO();
+			public CountIncomeRESQ mapRow(ResultSet resultSet, int arg1) throws SQLException {
+				CountIncomeRESQ o = new CountIncomeRESQ();
 				if (StringUtils.isEmpty(resultSet.getBigDecimal("totalProfit"))) {
 					o.setTotalProfit(BigDecimal.ZERO);
 				} else {

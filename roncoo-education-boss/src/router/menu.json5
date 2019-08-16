@@ -1,0 +1,348 @@
+/**
+
+ 菜单配置项:
+ {
+ "id": 0, // 后端菜单id，在前端目前没什么用
+ "name": "首页", // 菜单的标题，用于菜单标题、多标签Tag标题的显示
+ "path": "/dashboard", // 菜单的路径，以`/`开头为本系统内部页面，如果是一个外部链接，那么将会在系统中嵌入视图显示
+ "icon": null, // 图标
+ "hidden": true, // 是否显示
+ "children": [], // 子项
+ "redirect": true, // 是否在面包屑中可点击跳转,
+ "external": true  // 是否点击新开窗口显示
+ }
+
+**/
+[
+  {
+    "id": 0,
+    "name": "首页",
+    "path": "dashboard",
+    "icon": null
+  }/*,
+  {
+    "id": 0,
+    "name": "订单管理",
+    "path": "order",
+    "icon": null,
+    "children": [
+      {
+        "id": 2,
+        "name": "订单管理",
+        "path": "/order",
+        "icon": null,
+        "children": [
+          {
+            "id": 2,
+            "name": "订单列表",
+            "path": "/order/order/orderInfo",
+            "icon": null,
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 0,
+    "name": "首页管理",
+    "path": "homepage",
+    "icon": null,
+    "children": [
+      {
+        "id": 2,
+        "name": "首页轮播",
+        "path": "/adv",
+        "icon": null,
+        "children": [
+          {
+            "id": 2,
+            "name": "PC端设置",
+            "path": "/homepage/adv/pc",
+            "icon": null,
+          }
+        ]
+      },
+      {
+        "id": 2,
+         "name": "专区管理",
+         "path": "/zone",
+          "icon": null,
+          "children": [
+           {
+             "id": 2,
+             "name": "PC端设置",
+             "path": "/homepage/zone/pc",
+             "icon": null,
+            },
+            {
+             "id": 2,
+             "name": "专区课程",
+             "path": "/homepage/zone/course",
+             "icon": null,
+             "hidden": true,
+            }
+          ]
+       },
+      {
+          "id": 2,
+          "name": "站点管理",
+          "path": "/website",
+          "icon": null,
+          "children": [
+            {
+               "id": 2,
+               "name": "头部导航",
+               "path": "/homepage/website/navBar",
+               "icon": null,
+             },
+             {
+               "id": 2,
+               "name": "底部导航",
+               "path": "/homepage/website/websiteNav",
+               "icon": null,
+             },
+             {
+               "id": 2,
+               "name": "文章管理",
+               "path": "/homepage/website/websiteNavArticle",
+               "icon": null,
+               "hidden": true,
+             },
+             {
+               "id": 2,
+               "name": "友情链接",
+               "path": "/homepage/website/websiteLink",
+               "icon": null,
+             },
+           ]
+      }
+    ]
+  },
+  {
+    "id": 0,
+    "name": "课程管理",
+    "path": "course",
+    "icon": null,
+    "children": [
+      {
+          "id": 2,
+          "name": "课程管理",
+          "path": "/course",
+          "icon": null,
+          "children": [
+            {
+            "id": 2,
+            "name": "课程列表",
+            "path": "/course/course/course",
+            "icon": null,
+            },
+            {
+            "id": 2,
+            "name": "课程审核列表",
+            "path": "/course/course/audit",
+            "icon": null,
+            }
+          ]
+      },
+      {
+          "id": 2,
+          "name": "分类管理",
+          "path": "/category",
+          "icon": null,
+          "children": [
+            {
+            "id": 2,
+            "name": "分类列表",
+            "path": "/course/category/category",
+            "icon": null,
+            }
+          ]
+      }
+    ]
+  },
+  {
+    "id": 0,
+    "name": "讲师管理",
+    "path": "lecturer",
+    "icon": null,
+    "children": [
+      {
+          "id": 2,
+          "name": "讲师管理",
+          "path": "/lecturer",
+          "icon": null,
+          "children": [
+            {
+            "id": 2,
+            "name": "讲师列表",
+            "path": "/lecturer/lecturer/lecturer",
+            "icon": null,
+            },
+            {
+            "id": 2,
+            "name": "讲师审核列表",
+            "path": "/lecturer/lecturer/audit",
+            "icon": null,
+            }
+          ]
+      },
+      {
+          "id": 2,
+          "name": "讲师分润",
+          "path": "/profit",
+          "icon": null,
+          "children": [
+            {
+            "id": 2,
+            "name": "分润列表",
+            "path": "/lecturer/profit/profit",
+            "icon": null,
+            }
+          ]
+      }
+    ]
+  },
+  {
+    "id": 0,
+    "name": "学员管理",
+    "path": "user",
+    "icon": null,
+    "children": [
+      {
+          "id": 2,
+          "name": "学员管理",
+          "path": "/user",
+          "icon": null,
+          "children": [
+            {
+            "id": 2,
+            "name": "学员列表",
+            "path": "/user/user/ext",
+            "icon": null,
+            },
+            {
+             "id": 2,
+             "name": "学习记录",
+             "path": "/user/user/studyLog",
+             "icon": null,
+             "hidden": true,
+            }
+          ]
+      }
+    ]
+  },
+  {
+    "id": 0,
+    "name": "系统管理",
+    "path": "sys",
+    "icon": null,
+    "children": [
+      {
+        "id": 2,
+        "name": "权限管理",
+        "path": "/pms",
+        "icon": null,
+        "children": [
+            {
+            "id": 2,
+            "name": "用户管理",
+            "path": "/sys/pms/user",
+            "icon": null,
+            },
+            {
+            "id": 2,
+            "name": "角色管理",
+            "path": "/sys/pms/role",
+            "icon": null,
+            },
+            {
+            "id": 2,
+            "name": "菜单管理",
+            "path": "/sys/pms/menu",
+            "icon": null,
+            }
+        ]
+      },
+      {
+        "id": 2,
+         "name": "消息管理",
+         "path": "/msg",
+          "icon": null,
+          "children": [
+               {
+               "id": 2,
+               "name": "消息模板",
+               "path": "/sys/msg/template",
+               "icon": null,
+               },
+               {
+               "id": 2,
+               "name": "用户消息",
+               "path": "/sys/msg/msgUser",
+               "icon": null,
+               },
+               {
+               "id": 2,
+               "name": "站内消息",
+               "path": "/sys/msg/msg",
+               "icon": null,
+               }
+           ]
+       },
+      {
+          "id": 2,
+          "name": "站点管理",
+          "path": "/website",
+          "icon": null,
+          "children": [
+              {
+                "id": 2,
+                "name": "站点设置",
+                "path": "/sys/website/website",
+                "icon": null,
+              },
+              {
+                "id": 2,
+                "name": "系统设置",
+                "path": "/sys/website/sys",
+                "icon": null,
+              }
+           ]
+      },
+      {
+          "id": 2,
+          "name": "平台管理",
+          "path": "/platform",
+          "icon": null,
+          "children": [
+              {
+                "id": 2,
+                "name": "应用管理",
+                "path": "/sys/platform/platform",
+                "icon": null,
+              }
+           ]
+      },
+      {
+          "id": 2,
+          "name": "日志查看",
+          "path": "/log",
+          "icon": null,
+          "children": [
+              {
+                "id": 2,
+                "name": "操作日志",
+                "path": "/sys/log/sys",
+                "icon": null,
+              },
+              {
+                "id": 2,
+                "name": "支付日志",
+                "path": "/sys/log/orderPay",
+                "icon": null,
+              }
+           ]
+      }
+    ]
+  }*/
+]

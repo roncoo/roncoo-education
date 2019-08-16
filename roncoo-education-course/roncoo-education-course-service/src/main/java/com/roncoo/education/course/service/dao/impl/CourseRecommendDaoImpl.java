@@ -54,4 +54,17 @@ public class CourseRecommendDaoImpl implements CourseRecommendDao {
 		criteria.andStatusIdEqualTo(StatusId);
 		return this.courseRecommendMapper.selectByExample(example);
 	}
+
+	@Override
+	public CourseRecommend getByCategoryIdAndCourseId(Long categoryId, Long courseId) {
+		CourseRecommendExample example = new CourseRecommendExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andCategoryIdEqualTo(categoryId);
+		criteria.andCourseIdEqualTo(courseId);
+		List<CourseRecommend> list = this.courseRecommendMapper.selectByExample(example);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
+	}
 }

@@ -26,4 +26,13 @@ public interface CourseRecommendDao {
 	 */
 	List<CourseRecommend> listByCategoryIdAndStatusId(Long categoryId, Integer StatusId);
 
+	/**
+	 * 根据分类ID、课程ID获取推荐课程信息
+	 * 
+	 * @param categoryId
+	 * @param courseId
+	 * @return
+	 */
+	CourseRecommend getByCategoryIdAndCourseId(Long categoryId, Long courseId);
+
 }

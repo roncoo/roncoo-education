@@ -7,8 +7,10 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
@@ -16,7 +18,6 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
-import com.auth0.jwt.interfaces.DecodedJWT;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +25,17 @@ import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.StringUtils;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.http.ServletInputStreamWrapper;
 import com.roncoo.education.util.base.BaseException;
 import com.roncoo.education.util.base.Result;
+import com.roncoo.education.util.enums.RedisPreEnum;
 import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.tools.JSONUtil;
 import com.roncoo.education.util.tools.JWTUtil;
+import com.xiaoleilu.hutool.util.CollectionUtil;
 
 /**
  * 请求开始前执行
@@ -58,6 +62,7 @@ public class FilterPre extends ZuulFilter {
 	@Override
 	public boolean shouldFilter() {
 		String uri = RequestContext.getCurrentContext().getRequest().getServletPath();
+		logger.info("请求地址", uri);
 
 		if (uri.contains("/callback")) {
 			// 回调使用
@@ -73,19 +78,38 @@ public class FilterPre extends ZuulFilter {
 	@Override
 	public Object run() {
 		RequestContext ctx = RequestContext.getCurrentContext();
+		String uri = RequestContext.getCurrentContext().getRequest().getServletPath();
+		logger.info("请求地址" + uri);
 		HttpServletRequest request = ctx.getRequest();
 		Long userNo = null;
 		try {
 			userNo = getUserNoByToken(request);
+			if (uri.contains("/pc") && !uri.contains("/system/pc/menu/user/list") && !uri.contains("/system/pc/menu/user/button/list")) {
+				// 管理后台鉴权
+				if (!stringRedisTemplate.hasKey(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()))) {
+					throw new BaseException(ResultEnum.MENU_PAST);
+				}
+				String tk = stringRedisTemplate.opsForValue().get(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()));
+				// 校验接口是否有权限
+				if (!checkUri(uri, tk)) {
+					throw new BaseException(ResultEnum.MENU_NO);
+				}
+				// 更新时间，使用户菜单不过期
+				stringRedisTemplate.opsForValue().set(RedisPreEnum.ADMINI_MENU.getCode().concat(userNo.toString()), tk, 1, TimeUnit.HOURS);
+			}
+
 		} catch (BaseException e) {
 			logger.error("系统异常", e.getMessage());
+			ctx.setSendZuulResponse(false);
 			resp(ctx, e.getMessage(), e.getCode());
+			return null;
 		}
 		// 参数封装
 		try {
 			ctx.setRequest(requestWrapper(request, userNo));
 		} catch (IOException e) {
 			logger.error("封装参数异常", e.getMessage());
+			ctx.setSendZuulResponse(false);
 			resp(ctx, "系统异常，请重试");
 		}
 		return null;
@@ -118,17 +142,11 @@ public class FilterPre extends ZuulFilter {
 		}
 
 		// 单点登录处理，注意，登录的时候必须要放入缓存
-		/*if (!stringRedisTemplate.hasKey(userNo.toString())) {
-			// 不存在，则登录异常，有效期为1小时
-			throw new BaseException(ResultEnum.TOKEN_PAST);
-		}
-
-		// 存在，判断是否token相同
-		String tk = stringRedisTemplate.opsForValue().get(userNo.toString());
-		if (!token.equals(tk)) {
-			// 不同则为不同的用户登录，这时候提示异地登录
-			throw new BaseException(ResultEnum.REMOTE_ERROR);
-		}*/
+		/*
+		 * if (!stringRedisTemplate.hasKey(userNo.toString())) { // 不存在，则登录异常，有效期为1小时 throw new BaseException(ResultEnum.TOKEN_PAST); }
+		 * 
+		 * // 存在，判断是否token相同 String tk = stringRedisTemplate.opsForValue().get(userNo.toString()); if (!token.equals(tk)) { // 不同则为不同的用户登录，这时候提示异地登录 throw new BaseException(ResultEnum.REMOTE_ERROR); }
+		 */
 
 		// 更新时间，使token不过期
 		stringRedisTemplate.opsForValue().set(userNo.toString(), token, 1, TimeUnit.HOURS);
@@ -147,14 +165,17 @@ public class FilterPre extends ZuulFilter {
 			public BufferedReader getReader() throws IOException {
 				return new BufferedReader(new InputStreamReader(getInputStream()));
 			}
+
 			@Override
 			public ServletInputStream getInputStream() throws IOException {
 				return new ServletInputStreamWrapper(reqBodyBytes);
 			}
+
 			@Override
 			public int getContentLength() {
 				return reqBodyBytes.length;
 			}
+
 			@Override
 			public long getContentLengthLong() {
 				return reqBodyBytes.length;
@@ -201,6 +222,36 @@ public class FilterPre extends ZuulFilter {
 			}
 		}
 		return paramMap;
+	}
+
+	private static Boolean checkUri(String uri, String tk) {
+		Set<String> menuSet = new HashSet<>();
+		List<SysMenuVO> menuVOList = JSONUtil.parseArray(tk, SysMenuVO.class);
+		listMenu(menuSet, menuVOList);
+		if (StringUtils.hasText(uri) && uri.endsWith("/")) {
+			uri = uri.substring(0, uri.length() - 1);
+		}
+		for (String s : menuSet) {
+			if (s.contains(uri)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * @param list
+	 * @return
+	 */
+	private static void listMenu(Set<String> menuSet, List<SysMenuVO> menuVOList) {
+		if (CollectionUtil.isNotEmpty(menuVOList)) {
+			for (SysMenuVO sm : menuVOList) {
+				if (StringUtils.hasText(sm.getApiUrl())) {
+					menuSet.add(sm.getApiUrl());
+				}
+				listMenu(menuSet, sm.getList());
+			}
+		}
 	}
 
 }

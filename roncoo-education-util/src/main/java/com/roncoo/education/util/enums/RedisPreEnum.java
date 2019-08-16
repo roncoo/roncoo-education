@@ -19,7 +19,9 @@ public enum RedisPreEnum {
 
 	SYS_MSG_SEND_NUM("sys_msg_send_num_", "发送站内信key数量-sys_msg_send_num_"), //
 
-	SYS_MSG("sys_msg_", "站内信-sys_msg"); //
+	SYS_MSG("sys_msg_", "站内信-sys_msg"), //
+
+	ADMINI_MENU("admini_menu_", "管理员菜单-admini_menu_"); //
 
 	private String code;
 

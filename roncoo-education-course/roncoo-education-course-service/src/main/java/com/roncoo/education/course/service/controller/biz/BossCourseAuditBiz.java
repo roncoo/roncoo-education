@@ -315,7 +315,7 @@ public class BossCourseAuditBiz extends BaseBiz {
 				CourseChapterPeriod chapterPeriod = courseChapterPeriodDao.getById(courseChapterPeriodAudit.getId());
 				// 如果信息表存在就更新信息表信息
 				if (ObjectUtil.isNotNull(chapterPeriod)) {
-					if (IsDocEnum.YES.getCode().equals(chapterPeriod.getIsDoc())) {
+					if (IsDocEnum.NO.getCode().equals(chapterPeriod.getIsDoc())) {
 						AliyunUtil.delete(chapterPeriod.getDocUrl(), BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class));
 					}
 					chapterPeriod = BeanUtil.copyProperties(chapterperiodAudit, CourseChapterPeriod.class);

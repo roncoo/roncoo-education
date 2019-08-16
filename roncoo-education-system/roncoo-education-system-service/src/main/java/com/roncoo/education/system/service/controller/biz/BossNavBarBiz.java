@@ -1,21 +1,20 @@
 package com.roncoo.education.system.service.controller.biz;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.apache.commons.lang.StringUtils;
 
-import com.roncoo.education.util.base.BaseException;
-import com.roncoo.education.util.enums.NavEnum;
-import com.roncoo.education.util.tools.BeanUtil;
 import com.roncoo.education.system.common.bean.qo.NavBarQO;
 import com.roncoo.education.system.common.bean.vo.NavBarVO;
-import com.roncoo.education.util.base.Base;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.system.service.dao.NavBarDao;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.NavBar;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.NavBarExample;
 import com.roncoo.education.system.service.dao.impl.mapper.entity.NavBarExample.Criteria;
+import com.roncoo.education.util.base.Base;
+import com.roncoo.education.util.base.BaseException;
+import com.roncoo.education.util.base.Page;
+import com.roncoo.education.util.base.PageUtil;
+import com.roncoo.education.util.tools.BeanUtil;
 import com.xiaoleilu.hutool.util.ObjectUtil;
 
 /**
@@ -56,7 +55,6 @@ public class BossNavBarBiz {
 		if (ObjectUtil.isNotNull(navBar)) {
 			throw new BaseException("已经添加该导航");
 		}
-		qo.setNavTitle(NavEnum.getByDesc(qo.getNavUrl()).desc);
 		NavBar record = BeanUtil.copyProperties(qo, NavBar.class);
 		return dao.save(record);
 	}

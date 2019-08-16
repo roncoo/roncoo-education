@@ -15,6 +15,7 @@ import com.roncoo.education.course.common.bean.vo.CountIncomeVO;
 import com.roncoo.education.course.common.bean.vo.OrderEchartsVO;
 import com.roncoo.education.course.common.bean.vo.OrderInfoVO;
 import com.roncoo.education.course.common.bean.vo.OrderReportVO;
+import com.roncoo.education.course.service.common.resq.CountIncomeRESQ;
 import com.roncoo.education.course.service.dao.OrderInfoDao;
 import com.roncoo.education.course.service.dao.OrderPayDao;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo;
@@ -171,7 +172,8 @@ public class BossOrderInfoBiz extends BaseBiz {
 	 * @author wuyun
 	 */
 	public CountIncomeVO countIncome(OrderInfoQO qo) {
-		return dao.countIncome(qo);
+		CountIncomeRESQ resq = dao.countIncome(qo);
+		return BeanUtil.copyProperties(resq, CountIncomeVO.class);
 	}
 
 	/**

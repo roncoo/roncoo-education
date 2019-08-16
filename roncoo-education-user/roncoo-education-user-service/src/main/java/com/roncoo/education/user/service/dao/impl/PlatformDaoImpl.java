@@ -47,13 +47,25 @@ public class PlatformDaoImpl implements PlatformDao {
 		int totalPage = PageUtil.countTotalPage(count, pageSize);
 		example.setLimitStart(PageUtil.countOffset(pageCurrent, pageSize));
 		example.setPageSize(pageSize);
-		return new Page<Platform>(count, totalPage, pageCurrent, pageSize, this.platformMapper.selectByExample(example));
+		return new Page<Platform>(count, totalPage, pageCurrent, pageSize,
+				this.platformMapper.selectByExample(example));
 	}
 
 	@Override
 	public Platform getByClientId(String clientId) {
 		PlatformExample example = new PlatformExample();
 		example.createCriteria().andClientIdEqualTo(clientId);
+		List<Platform> list = this.platformMapper.selectByExample(example);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
+	}
+
+	@Override
+	public Platform getByClientName(String clientName) {
+		PlatformExample example = new PlatformExample();
+		example.createCriteria().andClientNameEqualTo(clientName);
 		List<Platform> list = this.platformMapper.selectByExample(example);
 		if (list.isEmpty()) {
 			return null;

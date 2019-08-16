@@ -40,7 +40,7 @@
 			<tr>
 				<td align="center">${bean_index+1}</td>
 				<td><img alt="${bean.advTitle!}" src="${bean.advImg!}" width="150"></td>
-				<td>${bean.advTitle!}<br/><a href="${bean.advUrl}" target="_blank" style="max-width:100px;">${bean.advUrl}</a></td>
+				<td style="max-width:250px;">${bean.advTitle!}<br/><a href="${bean.advUrl}" target="_blank">${bean.advUrl}</a></td>
 				<td>${bean.sort!}</td>
 				<td><#list statusIdEnums as em><#if bean.statusId?? && bean.statusId==em.code><span class="${em.color}">${em.desc}</span></#if></#list></td>
 				<td>${bean.beginTime!?string('yyyy-MM-dd HH:mm:ss')}</td>

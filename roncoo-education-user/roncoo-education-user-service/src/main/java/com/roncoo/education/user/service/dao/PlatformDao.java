@@ -16,4 +16,6 @@ public interface PlatformDao {
 	Page<Platform> listForPage(int pageCurrent, int pageSize, PlatformExample example);
 
 	Platform getByClientId(String clientId);
+
+	Platform getByClientName(String clientName);
 }
