@@ -371,7 +371,7 @@
 		<!-- 网关接口 -->
 		<module>roncoo-education-gateway</module>
 		<!-- 管理后台 -->
-		<module>roncoo-education-wed-boss</module>
+		<module>roncoo-education-web-boss</module>
 	</modules>
 
 </project>
