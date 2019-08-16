@@ -1,7 +1,6 @@
 package com.roncoo.education.course.service.common.req;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -46,11 +45,11 @@ public class AdvSaveREQ implements Serializable {
 	 * 开始时间
 	 */
 	@ApiModelProperty(value = "开始时间", required = true)
-	private Date beginTime;
+	private String beginTime;
 	/**
 	 * 结束时间
 	 */
 	@ApiModelProperty(value = "结束时间", required = true)
-	private Date endTime;
+	private String endTime;
 
 }
