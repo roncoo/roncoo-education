@@ -29,11 +29,10 @@ public class ApiAdvBiz {
 	public Result<AdvListDTO> list(AdvBO advBO) {
 		AdvListDTO dto = new AdvListDTO();
 		// 开始时间和结束时间
-		List<Adv> advList = advDao.listByPlatShowAndStatusId(advBO.getPlatShow(), StatusIdEnum.YES.getCode());
-		if (CollectionUtil.isEmpty(advList)) {
-			return Result.error("找不到广告信息");
+		List<Adv> advList = advDao.listByPlatShowAndStatusIdAndBeginTimeAndEndTime(advBO.getPlatShow(), StatusIdEnum.YES.getCode(), DateUtil.parseDate("2019-07-04", "yyyy-MM-dd"), DateUtil.parseDate("2019-07-03", "yyyy-MM-dd"));
+		if (CollectionUtil.isNotEmpty(advList)) {
+			dto.setAdvList(PageUtil.copyList(advList, AdvDTO.class));
 		}
-		dto.setAdvList(PageUtil.copyList(advList, AdvDTO.class));
 		return Result.success(dto);
 	}
 
