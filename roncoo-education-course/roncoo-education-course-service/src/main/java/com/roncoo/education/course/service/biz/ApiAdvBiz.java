@@ -37,5 +37,4 @@ public class ApiAdvBiz {
 		return Result.success(dto);
 	}
 
-
 }
