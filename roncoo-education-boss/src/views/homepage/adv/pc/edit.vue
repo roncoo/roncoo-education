@@ -146,7 +146,7 @@
             type: 'error'
           });
         } else {
-          if (!this.advImg) {
+          if (!this.formData.advImg) {
             this.$message({
               type: 'error',
               message: '请添加广告图片'

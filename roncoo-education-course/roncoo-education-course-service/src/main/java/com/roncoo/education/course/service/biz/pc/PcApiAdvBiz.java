@@ -23,7 +23,6 @@ import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.tools.BeanUtil;
-import com.roncoo.education.util.tools.DateUtil;
 import com.xiaoleilu.hutool.util.ObjectUtil;
 
 /**
@@ -92,8 +91,8 @@ public class PcApiAdvBiz {
 			AliyunUtil.delete(adv.getAdvImg(), BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class));
 		}
 		Adv record = BeanUtil.copyProperties(req, Adv.class);
-		record.setBeginTime(DateUtil.parseDate(req.getBeginTime(), "yyyy-MM-dd HH:mm:ss"));
-		record.setEndTime(DateUtil.parseDate(req.getEndTime(), "yyyy-MM-dd HH:mm:ss"));
+		record.setBeginTime(req.getBeginTime());
+		record.setEndTime(req.getEndTime());
 		int results = dao.updateById(record);
 		if (results > 0) {
 			return Result.success(results);
