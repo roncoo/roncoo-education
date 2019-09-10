@@ -12,8 +12,8 @@ import com.roncoo.education.course.service.dao.AdvDao;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.Adv;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.base.Result;
-import com.roncoo.education.util.enums.StatusIdEnum;
 import com.roncoo.education.util.tools.DateUtil;
+import com.roncoo.education.util.enums.StatusIdEnum;
 import com.xiaoleilu.hutool.util.CollectionUtil;
 
 /**
@@ -30,7 +30,6 @@ public class ApiAdvBiz {
 	public Result<AdvListDTO> list(AdvBO advBO) {
 		AdvListDTO dto = new AdvListDTO();
 		// 开始时间和结束时间
-
 		List<Adv> advList = advDao.listByPlatShowAndStatusIdAndBeginTimeAndEndTime(advBO.getPlatShow(), StatusIdEnum.YES.getCode(), DateUtil.parseDate("2019-07-04", "yyyy-MM-dd"), DateUtil.parseDate("2019-07-03", "yyyy-MM-dd"));
 		if (CollectionUtil.isNotEmpty(advList)) {
 			dto.setAdvList(PageUtil.copyList(advList, AdvDTO.class));

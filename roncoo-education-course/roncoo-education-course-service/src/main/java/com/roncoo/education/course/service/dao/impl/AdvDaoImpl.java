@@ -62,4 +62,6 @@ public class AdvDaoImpl implements AdvDao {
 		c.andEndTimeGreaterThan(endTime);
 		return this.advMapper.selectByExample(example);
 	}
+
+
 }
