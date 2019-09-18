@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.roncoo</groupId>
 		<artifactId>roncoo-education-course</artifactId>
-		<version>4.0.0-RELEASE</version>
+		<version>5.0.0-RELEASE</version>
 	</parent>
 
 	<artifactId>roncoo-education-course-service</artifactId>

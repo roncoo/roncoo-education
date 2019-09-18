@@ -5,7 +5,7 @@
 
 	<groupId>com.roncoo</groupId>
 	<artifactId>roncoo-education</artifactId>
-	<version>4.0.0-RELEASE</version>
+	<version>5.0.0-RELEASE</version>
 	<packaging>pom</packaging>
 
 	<name>roncoo-education</name>
@@ -370,8 +370,6 @@
 		<module>roncoo-education-job</module>
 		<!-- 网关接口 -->
 		<module>roncoo-education-gateway</module>
-		<!-- 管理后台 -->
-		<module>roncoo-education-web-boss</module>
 	</modules>
 
 </project>
