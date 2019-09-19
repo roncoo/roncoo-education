@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="text">开源协议：MIT | 官网：<el-link type="primary" href="https://edu.roncoo.net/" target="_blank">https://edu.roncoo.net/</el-link></div>
+    <div class="text">开源协议：MIT | 官网：<el-link type="primary" href="https://www.roncoo.net/" target="_blank">https://edu.roncoo.net/</el-link></div>
     <div>
       <el-divider></el-divider>
       <div>
@@ -50,7 +50,7 @@ export default {
           window.open('https://www.roncoo.net/')
           break;
         case 'demo':
-          window.open('http://roncoo.vicp.net/')
+          window.open('http://edu.roncoo.com/')
           break;
         case 'fineUI':
           window.open('http://edu.os.roncoo.com/')
