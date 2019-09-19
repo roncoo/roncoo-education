@@ -1,6 +1,6 @@
 ### 版本升级日志
  ---
-###### v5.0.0-RELEASE -- 2019.09.18
+###### v5.0.0-SNAPSHOT -- 2019.09.18
 1. 修改bug和漏洞
 2、保留roncoo-education-web-boss，移除
 
