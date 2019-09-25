@@ -9,7 +9,7 @@
       <el-form-item label="名称：" prop="roleName">
         <el-input v-model="formData.roleName"></el-input>
       </el-form-item>
-      <el-form-item label="备注：">
+      <el-form-item label="备注：" prop="remark">
         <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="formData.remark">
         </el-input>
       </el-form-item>
@@ -30,6 +30,9 @@ export default {
       rules: {
         roleName: [
           { required: true, message: '请输入名称', trigger: 'blur' }
+        ],
+        remark: [
+          { required: true, message: '请输入备注', trigger: 'blur' }
         ]
       }
     }
@@ -51,6 +54,13 @@ export default {
         this.$message({
           type: 'error',
           message: '请输入名称'
+        });
+        return false
+      }
+      if (!this.formData.remark) {
+        this.$message({
+          type: 'error',
+          message: '请输入备注'
         });
         return false
       }

@@ -42,6 +42,7 @@ export default {
   name: 'Add',
   data() {
     return {
+      formData: {},
       sort: 1,
       menuType: 1,
       rules: {
@@ -53,9 +54,13 @@ export default {
   },
   props: {
     // route object
-    formData: {
-      type: Object,
-      default: () => {}
+    // formData: {
+    //   type: Object,
+    //   default: () => {}
+    // },
+    parentId: {
+      type: String,
+      default: ''
     },
     visible: {
       type: Boolean,
@@ -101,6 +106,7 @@ export default {
       this.$refs[formData].validate((valid) => {
         if (valid) {
           this.loading.show()
+          this.formData.parentId = this.parentId
           this.formData.sort = this.sort
           this.formData.hiddenType = this.hiddenType
           api.menuSave(this.formData).then(res => {
@@ -129,6 +135,7 @@ export default {
     // 关闭弹窗
     handleClose(done) {
       this.$refs['formData'].resetFields()
+      this.formData = {}
       this.$emit('close-callback')
     }
   }

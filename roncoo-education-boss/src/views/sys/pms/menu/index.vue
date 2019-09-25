@@ -69,7 +69,7 @@
         </el-table-column>
       </el-table>
     </div>
-    <add :visible="ctrl.addDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCallback"></add>
+    <add :visible="ctrl.addDialogVisible" :parentId="parentId" :title="ctrl.dialogTitle" @close-callback="closeCallback"></add>
     <edit :visible="ctrl.editDialogVisible" :formData="formData" :title="ctrl.dialogTitle" @close-callback="closeCallback"></edit>
   </div>
 </template>
@@ -84,6 +84,7 @@
         map: {},
         formData: {},
         tableData: [],
+        parentId: '',
         expands: [],
         ctrl: {
           load: false,
@@ -133,7 +134,7 @@
         })
       },
       addSubMmenu(row) {
-        this.formData.parentId = row
+        this.parentId = row
         this.ctrl.dialogTitle = "添加"
         this.ctrl.addDialogVisible = true
       },
@@ -187,6 +188,7 @@
       reload() {
         this.map = {}
         this.formData = {}
+        this.parentId = ''
         this.menuList()
       },
       textClass(userType) {
