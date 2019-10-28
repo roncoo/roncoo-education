@@ -1,13 +1,9 @@
 ### 版本升级日志
 ---
-###### v6.0.0-SNAPSHOT -- 2019.10.28
-1. 架构调整,移除roncoo-education-course-common、roncoo-education-system-common、
-   roncoo-education-user-common
-2. 修改bug和漏洞若干
-
- ---
-###### v5.0.0-SNAPSHOT -- 2019.09.18
+###### v5.0.0-RELEASE -- 2019.10.28
 1. 移除roncoo-education-web-boss工程，替换为roncoo-education-boss
+1. 架构调整，更接近商业版架构（移除roncoo-education-course-common、roncoo-education-system-common、
+   roncoo-education-user-common3个工程）
 2. 修改bug和漏洞若干
 
  ---
