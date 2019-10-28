@@ -2,18 +2,18 @@ package com.roncoo.education.job;
 
 import java.io.File;
 
+import com.roncoo.education.course.feign.interfaces.IFeignCourseVideo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.roncoo.education.course.feign.IBossCourseVideo;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.config.SystemUtil;
 import com.xiaoleilu.hutool.io.FileUtil;
 
 /**
  * 定时任务-视频处理
- * 
+ *
  * @author wuyun
  */
 @Component
@@ -23,7 +23,7 @@ public class VideoCrontab extends BaseController {
 	private static boolean taskFlag = false;
 
 	@Autowired
-	private IBossCourseVideo bossCourseVideo;
+	private IFeignCourseVideo feignCourseVideo;
 
 	/**
 	 * 定时任务每分钟执行一次 <br/>
@@ -45,24 +45,24 @@ public class VideoCrontab extends BaseController {
 		if (file.isDirectory()) {// isDirectory是否文件夹
 			File[] files = file.listFiles();// listFiles是获取该目录下所有文件和目录的绝对路径
 			for (File targetFile : files) {
-				
+
 				if (targetFile.isFile() && targetFile.exists()) {
 					if (FileUtil.newerThan(targetFile, (System.currentTimeMillis() - 7200000))) {// 上传两个小时内
-						
+
 						try {
-							bossCourseVideo.handleScheduledTasks(targetFile);
+							feignCourseVideo.handleScheduledTasks(targetFile);
 							videoSum = videoSum + 1;
 						} catch (Exception e) {
 							logger.error("视频定时任务处理失败", e);
 						}
-						
+
 					}
 				}
 			}
 		}
 
 		VideoCrontab.taskFlag = false;
-		
+
 		logger.warn("视频处理-定时任务完成，处理视频数={}", videoSum);
 	}
 

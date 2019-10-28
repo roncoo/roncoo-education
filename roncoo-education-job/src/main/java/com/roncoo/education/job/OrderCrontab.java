@@ -1,15 +1,15 @@
 package com.roncoo.education.job;
 
+import com.roncoo.education.course.feign.interfaces.IFeignOrderInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.roncoo.education.course.feign.IBossOrderInfo;
 import com.roncoo.education.util.base.BaseController;
 
 /**
  * 定时任务-订单处理
- * 
+ *
  * @author wuyun
  */
 @Component
@@ -20,7 +20,7 @@ public class OrderCrontab extends BaseController {
 	private static boolean taskFlag = false;
 
 	@Autowired
-	private IBossOrderInfo bossOrderInfo;
+	private IFeignOrderInfo feignOrderInfo;
 
 	/**
 	 * 定时任务每分钟执行一次
@@ -37,7 +37,7 @@ public class OrderCrontab extends BaseController {
 		logger.warn("订单处理-定时任务开始");
 
 		try {
-			bossOrderInfo.handleScheduledTasks();
+			feignOrderInfo.handleScheduledTasks();
 		} catch (Exception e) {
 			logger.error("定时任务-订单处理-执行出错", e);
 		}

@@ -1,15 +1,15 @@
 package com.roncoo.education.job;
 
+import com.roncoo.education.system.feign.interfaces.IFeignMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.roncoo.education.system.feign.IBossMsg;
 import com.roncoo.education.util.base.BaseController;
 
 /**
  * 站内信-定时发送
- * 
+ *
  * @author wuyun
  *
  */
@@ -20,7 +20,7 @@ public class MsgSendCrontab extends BaseController {
 	private static boolean taskFlag = false;
 
 	@Autowired
-	private IBossMsg bossMsg;
+	private IFeignMsg bossMsg;
 
 	/**
 	 * 定时任务，一小时启动一次
