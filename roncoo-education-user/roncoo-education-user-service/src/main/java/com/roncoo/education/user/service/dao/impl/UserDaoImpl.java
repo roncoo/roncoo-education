@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.roncoo.education.user.common.bean.vo.UserExtMsgVO;
-import com.roncoo.education.user.service.common.AbstractBaseJdbc;
+import com.roncoo.education.user.feign.vo.UserExtMsgVO;
+import com.roncoo.education.user.common.AbstractBaseJdbc;
 import com.roncoo.education.user.service.dao.UserDao;
 import com.roncoo.education.user.service.dao.impl.mapper.UserMapper;
 import com.roncoo.education.user.service.dao.impl.mapper.entity.User;

@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.user.service.biz.pc.PcApiPlatformBiz;
-import com.roncoo.education.user.service.common.req.PlatformDeleteREQ;
-import com.roncoo.education.user.service.common.req.PlatformPageREQ;
-import com.roncoo.education.user.service.common.req.PlatformSaveREQ;
-import com.roncoo.education.user.service.common.req.PlatformUpdateREQ;
-import com.roncoo.education.user.service.common.req.PlatformViewREQ;
-import com.roncoo.education.user.service.common.resq.PlatformPageRESQ;
-import com.roncoo.education.user.service.common.resq.PlatformViewRESQ;
+import com.roncoo.education.user.service.api.pc.biz.PcApiPlatformBiz;
+import com.roncoo.education.user.common.req.PlatformDeleteREQ;
+import com.roncoo.education.user.common.req.PlatformPageREQ;
+import com.roncoo.education.user.common.req.PlatformSaveREQ;
+import com.roncoo.education.user.common.req.PlatformUpdateREQ;
+import com.roncoo.education.user.common.req.PlatformViewREQ;
+import com.roncoo.education.user.common.resq.PlatformPageRESQ;
+import com.roncoo.education.user.common.resq.PlatformViewRESQ;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;
@@ -34,7 +34,7 @@ public class PcApiPlatformController extends BaseController {
 
 	/**
 	 * 平台信息分页列表接口
-	 * 
+	 *
 	 * @param lecturerViewPageREQ
 	 */
 	@ApiOperation(value = "平台信息分页列表接口", notes = "平台信息分页列表接口")
@@ -45,17 +45,17 @@ public class PcApiPlatformController extends BaseController {
 
 	/**
 	 * 保存平台信息接口
-	 * 
+	 *
 	 */
 	@ApiOperation(value = "保存平台信息接口", notes = "保存平台信息接口")
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Result<Integer> save(@RequestBody PlatformSaveREQ platformSaveREQ) {
 		return biz.save(platformSaveREQ);
 	}
-	
+
 	/**
 	 * 删除平台信息接口
-	 * 
+	 *
 	 */
 	@ApiOperation(value = "删除平台信息接口", notes = "删除平台信息接口")
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
@@ -65,7 +65,7 @@ public class PcApiPlatformController extends BaseController {
 
 	/**
 	 * 更新平台信息接口
-	 * 
+	 *
 	 */
 	@ApiOperation(value = "更新平台信息接口", notes = "更新平台信息接口")
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -75,7 +75,7 @@ public class PcApiPlatformController extends BaseController {
 
 	/**
 	 * 平台信息信息查看接口
-	 * 
+	 *
 	 * @param lecturerViewREQ
 	 */
 	@ApiOperation(value = "平台信息查看接口", notes = "根据平台信息用户编号查看平台信息信息")

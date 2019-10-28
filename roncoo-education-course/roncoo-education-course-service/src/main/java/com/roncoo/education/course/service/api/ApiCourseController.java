@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.course.service.biz.ApiCourseBiz;
-import com.roncoo.education.course.service.common.bo.CourseInfoPageBO;
-import com.roncoo.education.course.service.common.bo.CourseInfoSearchBO;
-import com.roncoo.education.course.service.common.bo.CourseVideoBO;
-import com.roncoo.education.course.service.common.dto.CourseInfoPageDTO;
-import com.roncoo.education.course.service.common.dto.CourseInfoSearchPageDTO;
-import com.roncoo.education.course.service.common.dto.CourseViewDTO;
+import com.roncoo.education.course.service.api.biz.ApiCourseBiz;
+import com.roncoo.education.course.common.bo.CourseInfoPageBO;
+import com.roncoo.education.course.common.bo.CourseInfoSearchBO;
+import com.roncoo.education.course.common.bo.CourseVideoBO;
+import com.roncoo.education.course.common.dto.CourseInfoPageDTO;
+import com.roncoo.education.course.common.dto.CourseInfoSearchPageDTO;
+import com.roncoo.education.course.common.dto.CourseViewDTO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;
@@ -33,7 +33,7 @@ public class ApiCourseController extends BaseController {
 
 	/**
 	 * 课程信息列表接口
-	 * 
+	 *
 	 * @param courseInfoPageBO
 	 * @return
 	 * @author wuyun
@@ -46,7 +46,7 @@ public class ApiCourseController extends BaseController {
 
 	/**
 	 * 课程详情接口
-	 * 
+	 *
 	 * @param courseVideoBO
 	 * @return
 	 */
@@ -55,10 +55,10 @@ public class ApiCourseController extends BaseController {
 	public Result<CourseViewDTO> view(@RequestBody CourseVideoBO courseVideoBO) {
 		return biz.view(courseVideoBO);
 	}
-	
+
 	/**
 	 * 搜索课程接口
-	 * 
+	 *
 	 * @param courseVideoBO
 	 * @return
 	 */

@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.user.service.biz.pc.PcApiSendSmsLogBiz;
-import com.roncoo.education.user.service.common.req.SendSmsLogPageREQ;
-import com.roncoo.education.user.service.common.req.SendSmsLogSendREQ;
-import com.roncoo.education.user.service.common.resq.SendSmsLogPageRESQ;
+import com.roncoo.education.user.service.api.pc.biz.PcApiSendSmsLogBiz;
+import com.roncoo.education.user.common.req.SendSmsLogPageREQ;
+import com.roncoo.education.user.common.req.SendSmsLogSendREQ;
+import com.roncoo.education.user.common.resq.SendSmsLogPageRESQ;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;
@@ -28,7 +28,7 @@ public class PcApiSendSmsLogController extends BaseController {
 
 	/**
 	 * 短信记录分页列表接口
-	 * 
+	 *
 	 * @param sendSmsLogPageREQ
 	 */
 	@ApiOperation(value = "短信记录分页列表接口", notes = "短信记录分页列表接口")
@@ -39,7 +39,7 @@ public class PcApiSendSmsLogController extends BaseController {
 
 	/**
 	 * 发送验证码接口
-	 * 
+	 *
 	 * @param sendSmsLogSendREQ
 	 */
 	@ApiOperation(value = "发送验证码接口", notes = "发送验证码接口")

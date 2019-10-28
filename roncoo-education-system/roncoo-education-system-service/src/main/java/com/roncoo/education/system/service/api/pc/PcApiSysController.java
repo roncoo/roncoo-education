@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.system.service.biz.pc.PcApiSysBiz;
-import com.roncoo.education.system.service.common.req.SysUpdateRESQ;
-import com.roncoo.education.system.service.common.resq.SysViewRESQ;
+import com.roncoo.education.system.service.api.pc.biz.PcApiSysBiz;
+import com.roncoo.education.system.common.req.SysUpdateRESQ;
+import com.roncoo.education.system.common.resq.SysViewRESQ;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
 

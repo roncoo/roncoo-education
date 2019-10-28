@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.user.service.biz.auth.AuthApiLecturerAuditBiz;
-import com.roncoo.education.user.service.common.bo.auth.AuthLecturerAuditBO;
-import com.roncoo.education.user.service.common.bo.auth.AuthLecturerAuditSaveBO;
-import com.roncoo.education.user.service.common.bo.auth.AuthLecturerAuditViewBO;
-import com.roncoo.education.user.service.common.dto.auth.AuthLecturerAuditViewDTO;
+import com.roncoo.education.user.service.api.auth.biz.AuthApiLecturerAuditBiz;
+import com.roncoo.education.user.common.bo.auth.AuthLecturerAuditBO;
+import com.roncoo.education.user.common.bo.auth.AuthLecturerAuditSaveBO;
+import com.roncoo.education.user.common.bo.auth.AuthLecturerAuditViewBO;
+import com.roncoo.education.user.common.dto.auth.AuthLecturerAuditViewDTO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
 

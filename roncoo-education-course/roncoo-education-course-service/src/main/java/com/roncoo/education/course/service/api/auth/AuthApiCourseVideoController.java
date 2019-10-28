@@ -1,18 +1,18 @@
 package com.roncoo.education.course.service.api.auth;
 
+import com.roncoo.education.course.service.api.auth.biz.AuthApiCourseVideoBiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.course.service.biz.auth.AuthApiCourseVideoBiz;
-import com.roncoo.education.course.service.common.bo.auth.AuthCourseVideoBO;
-import com.roncoo.education.course.service.common.bo.auth.AuthCourseVideoDeleteBO;
-import com.roncoo.education.course.service.common.bo.auth.AuthCourseVideoSaveBO;
-import com.roncoo.education.course.service.common.bo.auth.AuthCourseVideoUpdateBO;
-import com.roncoo.education.course.service.common.bo.auth.AuthPeriodIdVideoBO;
-import com.roncoo.education.course.service.common.dto.auth.AuthCourseVideoListDTO;
+import com.roncoo.education.course.common.bo.auth.AuthCourseVideoBO;
+import com.roncoo.education.course.common.bo.auth.AuthCourseVideoDeleteBO;
+import com.roncoo.education.course.common.bo.auth.AuthCourseVideoSaveBO;
+import com.roncoo.education.course.common.bo.auth.AuthCourseVideoUpdateBO;
+import com.roncoo.education.course.common.bo.auth.AuthPeriodIdVideoBO;
+import com.roncoo.education.course.common.dto.auth.AuthCourseVideoListDTO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
 
@@ -32,7 +32,7 @@ public class AuthApiCourseVideoController extends BaseController {
 
 	/**
 	 * 章节视频库，课时视频库添加接口
-	 * 
+	 *
 	 * @param authCourseVideoSaveBo
 	 * @author wuyun
 	 */
@@ -44,7 +44,7 @@ public class AuthApiCourseVideoController extends BaseController {
 
 	/**
 	 * 章节视频库列出（右边的展示）
-	 * 
+	 *
 	 * @param chapterId
 	 * @author wuyun
 	 */
@@ -56,7 +56,7 @@ public class AuthApiCourseVideoController extends BaseController {
 
 	/**
 	 * 课时视频列出（左边的展示）
-	 * 
+	 *
 	 * @param periodId
 	 * @author wuyun
 	 */
@@ -68,7 +68,7 @@ public class AuthApiCourseVideoController extends BaseController {
 
 	/**
 	 * 课时视频更新接口
-	 * 
+	 *
 	 * @param authCourseVideoUpdateBo
 	 * @author wuyun
 	 */
@@ -80,7 +80,7 @@ public class AuthApiCourseVideoController extends BaseController {
 
 	/**
 	 * 视频删除
-	 * 
+	 *
 	 * @param authCourseVideoDeleteBO
 	 * @author wuyun
 	 */

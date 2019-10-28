@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.system.service.biz.pc.PcApiSysLogBiz;
-import com.roncoo.education.system.service.common.req.SysLogPageREQ;
-import com.roncoo.education.system.service.common.resq.SysLogPageRESQ;
+import com.roncoo.education.system.service.api.pc.biz.PcApiSysLogBiz;
+import com.roncoo.education.system.common.req.SysLogPageREQ;
+import com.roncoo.education.system.common.resq.SysLogPageRESQ;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;

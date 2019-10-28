@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.system.service.biz.pc.PcApiMsgUserBiz;
-import com.roncoo.education.system.service.common.req.MsgUserDeleteREQ;
-import com.roncoo.education.system.service.common.req.MsgUserPageREQ;
-import com.roncoo.education.system.service.common.req.MsgUserViewREQ;
-import com.roncoo.education.system.service.common.resq.MsgUserPageRESQ;
-import com.roncoo.education.system.service.common.resq.MsgUserViewRESQ;
+import com.roncoo.education.system.service.api.pc.biz.PcApiMsgUserBiz;
+import com.roncoo.education.system.common.req.MsgUserDeleteREQ;
+import com.roncoo.education.system.common.req.MsgUserPageREQ;
+import com.roncoo.education.system.common.req.MsgUserViewREQ;
+import com.roncoo.education.system.common.resq.MsgUserPageRESQ;
+import com.roncoo.education.system.common.resq.MsgUserViewRESQ;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;

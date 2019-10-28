@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.system.service.biz.pc.PcApiWebsiteBiz;
-import com.roncoo.education.system.service.common.req.WebsiteUpdateREQ;
-import com.roncoo.education.system.service.common.resq.WebsiteViewRESQ;
+import com.roncoo.education.system.service.api.pc.biz.PcApiWebsiteBiz;
+import com.roncoo.education.system.common.req.WebsiteUpdateREQ;
+import com.roncoo.education.system.common.resq.WebsiteViewRESQ;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
 
@@ -28,7 +28,7 @@ public class PcApiWebsiteController extends BaseController {
 
 	/**
 	 * 获取站点信息接口
-	 * 
+	 *
 	 * @return 站点信息
 	 */
 	@ApiOperation(value = "获取站点信息接口", notes = "获取站点信息")

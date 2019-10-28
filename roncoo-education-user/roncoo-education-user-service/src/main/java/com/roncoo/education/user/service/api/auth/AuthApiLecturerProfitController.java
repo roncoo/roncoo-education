@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.user.service.biz.auth.AuthApiLecturerProfitBiz;
-import com.roncoo.education.user.service.common.bo.auth.AuthLecturerProfitPageBO;
-import com.roncoo.education.user.service.common.bo.auth.AuthLecturerProfitSaveBO;
-import com.roncoo.education.user.service.common.dto.auth.AuthLecturerProfitPageDTO;
+import com.roncoo.education.user.service.api.auth.biz.AuthApiLecturerProfitBiz;
+import com.roncoo.education.user.common.bo.auth.AuthLecturerProfitPageBO;
+import com.roncoo.education.user.common.bo.auth.AuthLecturerProfitSaveBO;
+import com.roncoo.education.user.common.dto.auth.AuthLecturerProfitPageDTO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;
@@ -30,7 +30,7 @@ public class AuthApiLecturerProfitController extends BaseController {
 
 	/**
 	 * 讲师提现记录分页列出接口
-	 * 
+	 *
 	 * @param authLecturerProfitPageBO
 	 * @author wuyun
 	 */
@@ -42,7 +42,7 @@ public class AuthApiLecturerProfitController extends BaseController {
 
 	/**
 	 * 讲师申请提现接口
-	 * 
+	 *
 	 * @param authLecturerProfitSaveBO
 	 * @author wuyun
 	 */

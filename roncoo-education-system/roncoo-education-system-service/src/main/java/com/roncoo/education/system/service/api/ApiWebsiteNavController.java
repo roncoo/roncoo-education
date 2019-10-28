@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.system.service.biz.ApiWebsiteNavBiz;
-import com.roncoo.education.system.service.common.dto.WebsiteNavListDTO;
+import com.roncoo.education.system.service.api.biz.ApiWebsiteNavBiz;
+import com.roncoo.education.system.common.dto.WebsiteNavListDTO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
 
@@ -25,7 +25,7 @@ public class ApiWebsiteNavController extends BaseController {
 
 	/**
 	 * 获取站点导航信息接口
-	 * 
+	 *
 	 * @return
 	 * @author wuyun
 	 */

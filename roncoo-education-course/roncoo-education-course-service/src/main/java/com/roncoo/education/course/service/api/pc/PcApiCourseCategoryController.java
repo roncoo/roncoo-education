@@ -1,19 +1,19 @@
 package com.roncoo.education.course.service.api.pc;
 
+import com.roncoo.education.course.service.api.pc.biz.PcApiCourseCategoryBiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.course.service.biz.pc.PcApiCourseCategoryBiz;
-import com.roncoo.education.course.service.common.req.CourseCategoryDeleteREQ;
-import com.roncoo.education.course.service.common.req.CourseCategoryPageREQ;
-import com.roncoo.education.course.service.common.req.CourseCategorySaveREQ;
-import com.roncoo.education.course.service.common.req.CourseCategoryUpdateREQ;
-import com.roncoo.education.course.service.common.req.CourseCategoryViewREQ;
-import com.roncoo.education.course.service.common.resq.CourseCategoryPageRESQ;
-import com.roncoo.education.course.service.common.resq.CourseCategoryViewRESQ;
+import com.roncoo.education.course.common.req.CourseCategoryDeleteREQ;
+import com.roncoo.education.course.common.req.CourseCategoryPageREQ;
+import com.roncoo.education.course.common.req.CourseCategorySaveREQ;
+import com.roncoo.education.course.common.req.CourseCategoryUpdateREQ;
+import com.roncoo.education.course.common.req.CourseCategoryViewREQ;
+import com.roncoo.education.course.common.resq.CourseCategoryPageRESQ;
+import com.roncoo.education.course.common.resq.CourseCategoryViewRESQ;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;
@@ -33,7 +33,7 @@ public class PcApiCourseCategoryController extends BaseController {
 
 	/**
 	 * 分页列出课程分类信息
-	 * 
+	 *
 	 * @param courseCategoryPageREQ
 	 * @return
 	 */
@@ -45,7 +45,7 @@ public class PcApiCourseCategoryController extends BaseController {
 
 	/**
 	 * 添加课程分类信息
-	 * 
+	 *
 	 * @param courseCategorySaveREQ
 	 * @return
 	 */
@@ -57,7 +57,7 @@ public class PcApiCourseCategoryController extends BaseController {
 
 	/**
 	 * 删除课程分类信息
-	 * 
+	 *
 	 * @param courseCategoryDeleteREQ
 	 * @return
 	 */
@@ -69,7 +69,7 @@ public class PcApiCourseCategoryController extends BaseController {
 
 	/**
 	 * 更新课程分类信息
-	 * 
+	 *
 	 * @param courseCategoryUpdateREQ
 	 * @return
 	 */
@@ -81,7 +81,7 @@ public class PcApiCourseCategoryController extends BaseController {
 
 	/**
 	 * 查看课程分类信息
-	 * 
+	 *
 	 * @param courseCategoryViewREQ
 	 * @return
 	 */

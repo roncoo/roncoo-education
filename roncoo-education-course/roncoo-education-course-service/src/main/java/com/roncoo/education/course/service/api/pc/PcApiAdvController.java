@@ -1,19 +1,19 @@
 package com.roncoo.education.course.service.api.pc;
 
+import com.roncoo.education.course.service.api.pc.biz.PcApiAdvBiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.course.service.biz.pc.PcApiAdvBiz;
-import com.roncoo.education.course.service.common.req.AdvDeleteREQ;
-import com.roncoo.education.course.service.common.req.AdvPageREQ;
-import com.roncoo.education.course.service.common.req.AdvSaveREQ;
-import com.roncoo.education.course.service.common.req.AdvUpdateREQ;
-import com.roncoo.education.course.service.common.req.AdvViewREQ;
-import com.roncoo.education.course.service.common.resq.AdvPageRESQ;
-import com.roncoo.education.course.service.common.resq.AdvViewRESQ;
+import com.roncoo.education.course.common.req.AdvDeleteREQ;
+import com.roncoo.education.course.common.req.AdvPageREQ;
+import com.roncoo.education.course.common.req.AdvSaveREQ;
+import com.roncoo.education.course.common.req.AdvUpdateREQ;
+import com.roncoo.education.course.common.req.AdvViewREQ;
+import com.roncoo.education.course.common.resq.AdvPageRESQ;
+import com.roncoo.education.course.common.resq.AdvViewRESQ;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;
@@ -21,7 +21,7 @@ import com.roncoo.education.util.base.Result;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * 
+ *
  * 广告信息
  *
  */
@@ -34,7 +34,7 @@ public class PcApiAdvController extends BaseController {
 
 	/**
 	 * 轮播广告分页列表接口
-	 * 
+	 *
 	 * @param advPageREQ
 	 * @return
 	 */
@@ -46,7 +46,7 @@ public class PcApiAdvController extends BaseController {
 
 	/**
 	 * 轮播广告添加接口
-	 * 
+	 *
 	 * @param advSaveREQ
 	 * @return
 	 */
@@ -58,7 +58,7 @@ public class PcApiAdvController extends BaseController {
 
 	/**
 	 * 轮播广告更新接口
-	 * 
+	 *
 	 * @param advUpdateREQ
 	 * @return
 	 */
@@ -70,7 +70,7 @@ public class PcApiAdvController extends BaseController {
 
 	/**
 	 * 轮播广告删除接口
-	 * 
+	 *
 	 * @param advDeleteREQ
 	 * @return
 	 */
@@ -82,7 +82,7 @@ public class PcApiAdvController extends BaseController {
 
 	/**
 	 * 轮播广告查看接口
-	 * 
+	 *
 	 * @param advViewREQ
 	 * @return
 	 */

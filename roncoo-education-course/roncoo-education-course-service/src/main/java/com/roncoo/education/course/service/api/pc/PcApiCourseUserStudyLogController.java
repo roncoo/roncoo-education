@@ -1,16 +1,16 @@
 package com.roncoo.education.course.service.api.pc;
 
+import com.roncoo.education.course.service.api.pc.biz.PcApiCourseUserStudyLogBiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.course.service.biz.pc.PcApiCourseUserStudyLogBiz;
-import com.roncoo.education.course.service.common.req.CourseUserStudyLogPageREQ;
-import com.roncoo.education.course.service.common.req.CourseUserStudyLogPlayREQ;
-import com.roncoo.education.course.service.common.resq.CourseUserStudyLogPageRESQ;
-import com.roncoo.education.course.service.common.resq.CourseUserStudyLogPlayRESQ;
+import com.roncoo.education.course.common.req.CourseUserStudyLogPageREQ;
+import com.roncoo.education.course.common.req.CourseUserStudyLogPlayREQ;
+import com.roncoo.education.course.common.resq.CourseUserStudyLogPageRESQ;
+import com.roncoo.education.course.common.resq.CourseUserStudyLogPlayRESQ;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;
@@ -18,7 +18,7 @@ import com.roncoo.education.util.base.Result;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * 
+ *
  * 课程用户学习日志
  *
  */
@@ -31,7 +31,7 @@ public class PcApiCourseUserStudyLogController extends BaseController {
 
 	/**
 	 * 分页列出用户学习日志
-	 * 
+	 *
 	 * @param courseUserStudyLogREQ
 	 * @return
 	 */
@@ -43,7 +43,7 @@ public class PcApiCourseUserStudyLogController extends BaseController {
 
 	/**
 	 * 课时播放量排行榜
-	 * 
+	 *
 	 * @return
 	 */
 	@ApiOperation(value = "课时播放量排行榜接口", notes = "课时播放量排行榜接口")

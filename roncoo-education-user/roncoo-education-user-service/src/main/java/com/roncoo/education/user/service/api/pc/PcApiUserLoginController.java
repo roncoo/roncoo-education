@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.user.service.biz.pc.PcApiUserLoginBiz;
-import com.roncoo.education.user.service.common.req.UserLoginPasswordREQ;
-import com.roncoo.education.user.service.common.resq.UserLoginRESQ;
+import com.roncoo.education.user.service.api.pc.biz.PcApiUserLoginBiz;
+import com.roncoo.education.user.common.req.UserLoginPasswordREQ;
+import com.roncoo.education.user.common.resq.UserLoginRESQ;
 import com.roncoo.education.util.base.Result;
 
 import io.swagger.annotations.ApiOperation;

@@ -1,16 +1,16 @@
 package com.roncoo.education.course.service.api.auth;
 
+import com.roncoo.education.course.service.api.auth.biz.AuthApiCourseBiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.course.service.biz.auth.AuthApiCourseBiz;
-import com.roncoo.education.course.service.common.bo.auth.AuthCourseSignBO;
-import com.roncoo.education.course.service.common.bo.auth.AuthCourseViewBO;
-import com.roncoo.education.course.service.common.dto.auth.AuthCourseSignDTO;
-import com.roncoo.education.course.service.common.dto.auth.AuthCourseViewDTO;
+import com.roncoo.education.course.common.bo.auth.AuthCourseSignBO;
+import com.roncoo.education.course.common.bo.auth.AuthCourseViewBO;
+import com.roncoo.education.course.common.dto.auth.AuthCourseSignDTO;
+import com.roncoo.education.course.common.dto.auth.AuthCourseViewDTO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
 

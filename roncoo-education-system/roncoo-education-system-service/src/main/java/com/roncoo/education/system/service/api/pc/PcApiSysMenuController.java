@@ -6,16 +6,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.system.service.biz.pc.PcApiSysMenuBiz;
-import com.roncoo.education.system.service.common.req.SysMenuDeleteREQ;
-import com.roncoo.education.system.service.common.req.SysMenuListREQ;
-import com.roncoo.education.system.service.common.req.SysMenuSaveREQ;
-import com.roncoo.education.system.service.common.req.SysMenuUpdateREQ;
-import com.roncoo.education.system.service.common.req.SysMenuUserListREQ;
-import com.roncoo.education.system.service.common.req.SysMenuViewREQ;
-import com.roncoo.education.system.service.common.resq.SysMenuListRESQ;
-import com.roncoo.education.system.service.common.resq.SysMenuUserListRESQ;
-import com.roncoo.education.system.service.common.resq.SysMenuViewRESQ;
+import com.roncoo.education.system.service.api.pc.biz.PcApiSysMenuBiz;
+import com.roncoo.education.system.common.req.SysMenuDeleteREQ;
+import com.roncoo.education.system.common.req.SysMenuListREQ;
+import com.roncoo.education.system.common.req.SysMenuSaveREQ;
+import com.roncoo.education.system.common.req.SysMenuUpdateREQ;
+import com.roncoo.education.system.common.req.SysMenuUserListREQ;
+import com.roncoo.education.system.common.req.SysMenuViewREQ;
+import com.roncoo.education.system.common.resq.SysMenuListRESQ;
+import com.roncoo.education.system.common.resq.SysMenuUserListRESQ;
+import com.roncoo.education.system.common.resq.SysMenuViewRESQ;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
 
@@ -86,7 +86,7 @@ public class PcApiSysMenuController extends BaseController {
 	public Result<SysMenuUserListRESQ> list(@RequestBody SysMenuUserListREQ sysMenuUserListREQ) {
 		return biz.userList(sysMenuUserListREQ);
 	}
-	
+
 
 	/**
 	 * 用户菜单信息列出信息接口

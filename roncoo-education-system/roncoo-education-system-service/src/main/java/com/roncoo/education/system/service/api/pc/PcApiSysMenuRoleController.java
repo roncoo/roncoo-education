@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.system.service.biz.pc.PcApiSysMenuRoleBiz;
-import com.roncoo.education.system.service.common.req.SysMenuRoleListREQ;
-import com.roncoo.education.system.service.common.req.SysMenuRoleSaveREQ;
-import com.roncoo.education.system.service.common.resq.SysMenuRoleListRESQ;
+import com.roncoo.education.system.service.api.pc.biz.PcApiSysMenuRoleBiz;
+import com.roncoo.education.system.common.req.SysMenuRoleListREQ;
+import com.roncoo.education.system.common.req.SysMenuRoleSaveREQ;
+import com.roncoo.education.system.common.resq.SysMenuRoleListRESQ;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
 

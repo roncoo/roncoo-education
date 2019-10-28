@@ -1,5 +1,6 @@
 package com.roncoo.education.course.service.api.auth;
 
+import com.roncoo.education.course.service.api.auth.biz.AuthApiOrderInfoBiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,17 +8,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.abel533.echarts.Option;
-import com.roncoo.education.course.service.biz.auth.AuthApiOrderInfoBiz;
-import com.roncoo.education.course.service.common.bo.OrderInfoCloseBO;
-import com.roncoo.education.course.service.common.bo.auth.AuthOrderInfoContinuePayBO;
-import com.roncoo.education.course.service.common.bo.auth.AuthOrderInfoForChartsBO;
-import com.roncoo.education.course.service.common.bo.auth.AuthOrderInfoListBO;
-import com.roncoo.education.course.service.common.bo.auth.AuthOrderInfoViewBO;
-import com.roncoo.education.course.service.common.bo.auth.AuthOrderPayBO;
-import com.roncoo.education.course.service.common.dto.auth.AuthOrderInfoDTO;
-import com.roncoo.education.course.service.common.dto.auth.AuthOrderInfoListDTO;
-import com.roncoo.education.course.service.common.dto.auth.AuthOrderInfoListForLecturerDTO;
-import com.roncoo.education.course.service.common.dto.auth.AuthOrderPayDTO;
+import com.roncoo.education.course.common.bo.OrderInfoCloseBO;
+import com.roncoo.education.course.common.bo.auth.AuthOrderInfoContinuePayBO;
+import com.roncoo.education.course.common.bo.auth.AuthOrderInfoForChartsBO;
+import com.roncoo.education.course.common.bo.auth.AuthOrderInfoListBO;
+import com.roncoo.education.course.common.bo.auth.AuthOrderInfoViewBO;
+import com.roncoo.education.course.common.bo.auth.AuthOrderPayBO;
+import com.roncoo.education.course.common.dto.auth.AuthOrderInfoDTO;
+import com.roncoo.education.course.common.dto.auth.AuthOrderInfoListDTO;
+import com.roncoo.education.course.common.dto.auth.AuthOrderInfoListForLecturerDTO;
+import com.roncoo.education.course.common.dto.auth.AuthOrderPayDTO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;
@@ -74,7 +74,7 @@ public class AuthApiOrderInfoController extends BaseController {
 
 	/**
 	 * 订单详情信息接口
-	 * 
+	 *
 	 * @param infoBO
 	 * @return
 	 */
@@ -98,7 +98,7 @@ public class AuthApiOrderInfoController extends BaseController {
 
 	/**
 	 * 讲师收益折线图
-	 * 
+	 *
 	 * @param bo
 	 * @return
 	 */

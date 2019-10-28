@@ -1,19 +1,19 @@
 package com.roncoo.education.course.service.api.pc;
 
+import com.roncoo.education.course.service.api.pc.biz.PcApiCourseRecommendBiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.course.service.biz.pc.PcApiCourseRecommendBiz;
-import com.roncoo.education.course.service.common.req.CourseRecommendDeleteREQ;
-import com.roncoo.education.course.service.common.req.CourseRecommendPageREQ;
-import com.roncoo.education.course.service.common.req.CourseRecommendSaveREQ;
-import com.roncoo.education.course.service.common.req.CourseRecommendUpdateREQ;
-import com.roncoo.education.course.service.common.req.CourseRecommendViewREQ;
-import com.roncoo.education.course.service.common.resq.CourseRecommendPageRESQ;
-import com.roncoo.education.course.service.common.resq.CourseRecommendViewRESQ;
+import com.roncoo.education.course.common.req.CourseRecommendDeleteREQ;
+import com.roncoo.education.course.common.req.CourseRecommendPageREQ;
+import com.roncoo.education.course.common.req.CourseRecommendSaveREQ;
+import com.roncoo.education.course.common.req.CourseRecommendUpdateREQ;
+import com.roncoo.education.course.common.req.CourseRecommendViewREQ;
+import com.roncoo.education.course.common.resq.CourseRecommendPageRESQ;
+import com.roncoo.education.course.common.resq.CourseRecommendViewRESQ;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;
@@ -33,7 +33,7 @@ public class PcApiCourseRecommendController extends BaseController {
 
 	/**
 	 * 分页列出课程推荐信息
-	 * 
+	 *
 	 * @param courseRecommendPageREQ
 	 * @return
 	 */
@@ -45,7 +45,7 @@ public class PcApiCourseRecommendController extends BaseController {
 
 	/**
 	 * 添加课程推荐信息
-	 * 
+	 *
 	 * @param courseRecommendSaveREQ
 	 * @return
 	 */
@@ -57,7 +57,7 @@ public class PcApiCourseRecommendController extends BaseController {
 
 	/**
 	 * 删除课程推荐信息
-	 * 
+	 *
 	 * @param courseRecommendDeleteREQ
 	 * @return
 	 */
@@ -69,7 +69,7 @@ public class PcApiCourseRecommendController extends BaseController {
 
 	/**
 	 * 更新课程推荐信息
-	 * 
+	 *
 	 * @param courseRecommendUpdateREQ
 	 * @return
 	 */
@@ -81,7 +81,7 @@ public class PcApiCourseRecommendController extends BaseController {
 
 	/**
 	 * 查看课程推荐信息
-	 * 
+	 *
 	 * @param courseCategoryViewREQ
 	 * @return
 	 */

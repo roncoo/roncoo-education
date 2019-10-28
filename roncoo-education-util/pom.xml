@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.roncoo</groupId>
 		<artifactId>roncoo-education</artifactId>
-		<version>5.0.0-SNAPSHOT</version>
+		<version>6.0.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>roncoo-education-util</artifactId>
@@ -108,12 +108,12 @@
             <groupId>net.logstash.logback</groupId>
             <artifactId>logstash-logback-encoder</artifactId>
         </dependency>
-        
+
 		<dependency>
 			<groupId>com.itextpdf</groupId>
 			<artifactId>itextpdf</artifactId>
 		</dependency>
-		
+
 		<dependency>
             <groupId>com.spring4all</groupId>
             <artifactId>swagger-spring-boot-starter</artifactId>
@@ -139,7 +139,7 @@
 		</dependency>
 
 	</dependencies>
-	
+
 	<build>
         <resources>
             <resource>

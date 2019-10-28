@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.user.service.biz.auth.AuthApiLecturerExtBiz;
-import com.roncoo.education.user.service.common.bo.auth.AuthLecturerExtViewBO;
-import com.roncoo.education.user.service.common.bo.auth.AuthUserExtBankBO;
-import com.roncoo.education.user.service.common.dto.auth.AuthLecturerExtViewDTO;
+import com.roncoo.education.user.service.api.auth.biz.AuthApiLecturerExtBiz;
+import com.roncoo.education.user.common.bo.auth.AuthLecturerExtViewBO;
+import com.roncoo.education.user.common.bo.auth.AuthUserExtBankBO;
+import com.roncoo.education.user.common.dto.auth.AuthLecturerExtViewDTO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
 
@@ -29,7 +29,7 @@ public class AuthApiLecturerExtController extends BaseController {
 
 	/**
 	 * 账户信息详情接口
-	 * 
+	 *
 	 * @param authLecturerExtViewBO
 	 * @author wuyun
 	 */
@@ -41,7 +41,7 @@ public class AuthApiLecturerExtController extends BaseController {
 
 	/**
 	 * 更新用户银行卡信息接口
-	 * 
+	 *
 	 * @param authUserExtBankBO
 	 * @author wuyun
 	 */

@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.system.service.biz.ApiWebsiteLinkBiz;
-import com.roncoo.education.system.service.common.dto.WebsiteLinkListDTO;
+import com.roncoo.education.system.service.api.biz.ApiWebsiteLinkBiz;
+import com.roncoo.education.system.common.dto.WebsiteLinkListDTO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
 
@@ -25,7 +25,7 @@ public class ApiWebsiteLinkController extends BaseController {
 
 	/**
 	 * 获取站点友情链接接口
-	 * 
+	 *
 	 * @return 站点友情链接
 	 * @author wuyun
 	 */

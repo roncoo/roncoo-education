@@ -1,0 +1,152 @@
+package com.roncoo.education.course.service.api.pc.biz;
+
+import com.roncoo.education.course.common.req.*;
+import com.roncoo.education.course.common.resq.CourseCategoryPageRESQ;
+import com.roncoo.education.course.common.resq.CourseCategoryViewRESQ;
+import com.roncoo.education.course.service.dao.CourseCategoryDao;
+import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseCategory;
+import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseCategoryExample;
+import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseCategoryExample.Criteria;
+import com.roncoo.education.util.base.Page;
+import com.roncoo.education.util.base.PageUtil;
+import com.roncoo.education.util.base.Result;
+import com.roncoo.education.util.enums.ResultEnum;
+import com.roncoo.education.util.tools.BeanUtil;
+import com.xiaoleilu.hutool.util.ObjectUtil;
+import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * 课程分类
+ *
+ */
+@Component
+public class PcApiCourseCategoryBiz {
+
+	@Autowired
+	private CourseCategoryDao dao;
+
+	/**
+	 * 课程分类-分页列出
+	 *
+	 * @param req
+	 * @return
+	 */
+	public Result<Page<CourseCategoryPageRESQ>> listForPage(CourseCategoryPageREQ req) {
+		CourseCategoryExample example = new CourseCategoryExample();
+		Criteria c = example.createCriteria();
+		if (req.getStatusId() != null) {
+			c.andStatusIdEqualTo(req.getStatusId());
+		}
+		if (req.getCategoryType() != null) {
+			c.andCategoryTypeEqualTo(req.getCategoryType());
+		}
+		if (req.getParentId() != null) {
+			c.andParentIdEqualTo(req.getParentId());
+		}
+		if (StringUtils.hasText(req.getCategoryName())) {
+			c.andCategoryNameLike(PageUtil.rightLike(req.getCategoryName()));
+		} else {
+			c.andFloorEqualTo(1);
+		}
+		example.setOrderByClause(" status_id desc, sort desc, id desc ");
+		Page<CourseCategory> page = dao.listForPage(req.getPageCurrent(), req.getPageSize(), example);
+		Page<CourseCategoryPageRESQ> listForPage = PageUtil.transform(page, CourseCategoryPageRESQ.class);
+		for (CourseCategoryPageRESQ resq : listForPage.getList()) {
+			resq.setChildren(recursionList(resq.getId()));
+		}
+		return Result.success(listForPage);
+	}
+
+	public Result<Integer> save(CourseCategorySaveREQ req) {
+		if (StringUtils.isEmpty(req.getParentId())) {
+			return Result.error("父ID不能为空");
+		}
+		if (StringUtils.isEmpty(req.getFloor())) {
+			return Result.error("层级不能为空");
+		}
+		if (StringUtils.isEmpty(req.getCategoryName())) {
+			return Result.error("分类名称不能为空");
+		}
+		if (StringUtils.isEmpty(req.getCategoryType())) {
+			return Result.error("分类类型不能为空");
+		}
+
+		if (req.getParentId() == 0 && req.getFloor() == 1) {
+			req.setFloor(1);
+		} else {
+			CourseCategory parentCategory = dao.getById(req.getParentId());
+			if (ObjectUtil.isNull(parentCategory)) {
+				return Result.error("找不到父分类信息");
+			}
+			req.setFloor(req.getFloor() + 1);
+		}
+		CourseCategory record = BeanUtil.copyProperties(req, CourseCategory.class);
+		int results = dao.save(record);
+		if (results > 0) {
+			return Result.success(results);
+		}
+		return Result.error(ResultEnum.COURSE_SAVE_FAIL);
+	}
+
+	public Result<Integer> delete(CourseCategoryDeleteREQ req) {
+		if (StringUtils.isEmpty(req.getId())) {
+			return Result.error("ID不能为空");
+		}
+		List<CourseCategory> list = dao.listByParentId(req.getId());
+		if (CollectionUtils.isNotEmpty(list)) {
+			return Result.error("请先删除下级分类");
+		}
+		int results = dao.deleteById(req.getId());
+		if (results > 0) {
+			return Result.success(results);
+		}
+		return Result.error(ResultEnum.COURSE_DELETE_FAIL);
+	}
+
+	public Result<Integer> update(CourseCategoryUpdateREQ req) {
+		if (StringUtils.isEmpty(req.getId())) {
+			return Result.error("ID不能为空");
+		}
+		CourseCategory record = BeanUtil.copyProperties(req, CourseCategory.class);
+		int results = dao.updateById(record);
+		if (results > 0) {
+			return Result.success(results);
+		}
+		return Result.error(ResultEnum.COURSE_DELETE_FAIL);
+	}
+
+	public Result<CourseCategoryViewRESQ> view(CourseCategoryViewREQ req) {
+		if (StringUtils.isEmpty(req.getId())) {
+			return Result.error("ID不能为空");
+		}
+		CourseCategory parentCategory = dao.getById(req.getId());
+		if (ObjectUtil.isNull(parentCategory)) {
+			return Result.error("找不到父分类信息");
+		}
+		return Result.success(BeanUtil.copyProperties(parentCategory, CourseCategoryViewRESQ.class));
+	}
+
+	/**
+	 * 递归展示分类
+	 *
+	 * @author WY
+	 */
+	private List<CourseCategoryPageRESQ> recursionList(Long parentId) {
+		List<CourseCategoryPageRESQ> list = new ArrayList<>();
+		List<CourseCategory> CourseCategoryList = dao.listByParentId(parentId);
+		if (CollectionUtils.isNotEmpty(CourseCategoryList)) {
+			for (CourseCategory courseCategory : CourseCategoryList) {
+				CourseCategoryPageRESQ resq = BeanUtil.copyProperties(courseCategory, CourseCategoryPageRESQ.class);
+				resq.setChildren(recursionList(courseCategory.getId()));
+				list.add(resq);
+			}
+		}
+		return list;
+	}
+}

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.system.service.common.bo.SysEnumBO;
+import com.roncoo.education.system.common.bo.SysEnumBO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.tools.EnumUtil;

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.roncoo.education.course.service.biz.ApiUploadBiz;
+import com.roncoo.education.course.service.api.biz.ApiUploadBiz;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
 
@@ -18,7 +18,7 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * 上传接口
- * 
+ *
  * @author wuyun
  */
 @RestController
@@ -30,7 +30,7 @@ public class ApiUploadController extends BaseController {
 
 	/**
 	 * 上传视频接口
-	 * 
+	 *
 	 * @param videoFile
 	 * @author wuyun
 	 */
@@ -42,7 +42,7 @@ public class ApiUploadController extends BaseController {
 
 	/**
 	 * 上传图片接口
-	 * 
+	 *
 	 * @param picFile
 	 * @author wuyun
 	 */
@@ -54,7 +54,7 @@ public class ApiUploadController extends BaseController {
 
 	/**
 	 * 上传文档接口
-	 * 
+	 *
 	 * @param docFile
 	 * @param periodUploadDoc
 	 * @author wuyun

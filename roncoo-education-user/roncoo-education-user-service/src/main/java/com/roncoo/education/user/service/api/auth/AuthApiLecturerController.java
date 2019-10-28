@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.user.service.biz.auth.AuthApiLecturerBiz;
-import com.roncoo.education.user.service.common.bo.LecturerViewBO;
-import com.roncoo.education.user.service.common.dto.LecturerViewDTO;
+import com.roncoo.education.user.service.api.auth.biz.AuthApiLecturerBiz;
+import com.roncoo.education.user.common.bo.LecturerViewBO;
+import com.roncoo.education.user.common.dto.LecturerViewDTO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
 
@@ -28,7 +28,7 @@ public class AuthApiLecturerController extends BaseController {
 
 	/**
 	 * 讲师信息查看接口
-	 * 
+	 *
 	 * @param lecturerUserNo
 	 * @author wuyun
 	 */

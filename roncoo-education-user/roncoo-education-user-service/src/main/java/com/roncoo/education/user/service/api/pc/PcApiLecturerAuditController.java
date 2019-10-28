@@ -1,15 +1,15 @@
 package com.roncoo.education.user.service.api.pc;
 
-import com.roncoo.education.user.service.common.req.*;
+import com.roncoo.education.user.common.req.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.user.service.biz.pc.PcApiLecturerAuditBiz;
-import com.roncoo.education.user.service.common.resq.LecturerAuditPageRESQ;
-import com.roncoo.education.user.service.common.resq.LecturerAuditViewRESQ;
+import com.roncoo.education.user.service.api.pc.biz.PcApiLecturerAuditBiz;
+import com.roncoo.education.user.common.resq.LecturerAuditPageRESQ;
+import com.roncoo.education.user.common.resq.LecturerAuditViewRESQ;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;
@@ -30,7 +30,7 @@ public class PcApiLecturerAuditController extends BaseController {
 
 	/**
 	 * 讲师信息-审核分页列表接口
-	 * 
+	 *
 	 * @param lecturerAuditPageREQ
 	 */
 	@ApiOperation(value = "讲师信息-审核分页列表接口", notes = "讲师信息-审核分页列表接口")
@@ -41,7 +41,7 @@ public class PcApiLecturerAuditController extends BaseController {
 
 	/**
 	 * 讲师信息-审核添加接口
-	 * 
+	 *
 	 * @param lecturerAuditSaveREQ
 	 */
 	@ApiOperation(value = "讲师信息-审核添加接口", notes = "讲师信息-审核添加接口")
@@ -52,7 +52,7 @@ public class PcApiLecturerAuditController extends BaseController {
 
 	/**
 	 * 讲师信息-审核更新接口
-	 * 
+	 *
 	 * @param lecturerAuditUpdateREQ
 	 */
 	@ApiOperation(value = "讲师信息-审核更新接口", notes = "讲师信息-审核更新接口")
@@ -63,7 +63,7 @@ public class PcApiLecturerAuditController extends BaseController {
 
 	/**
 	 * 讲师信息-审核接口
-	 * 
+	 *
 	 * @param lecturerAuditAuditREQ
 	 */
 	@ApiOperation(value = "讲师信息-审核接口", notes = "讲师信息-审核接口")
@@ -74,7 +74,7 @@ public class PcApiLecturerAuditController extends BaseController {
 
 	/**
 	 * 讲师信息-审核查看接口
-	 * 
+	 *
 	 * @param lecturerAuditViewREQ
 	 */
 	@ApiOperation(value = "讲师信息-审核查看接口", notes = "讲师信息-审核查看接口")

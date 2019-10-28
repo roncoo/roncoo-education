@@ -5,17 +5,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.course.service.biz.ApiCourseRecommendBiz;
-import com.roncoo.education.course.service.common.bo.CourseRecommendBO;
-import com.roncoo.education.course.service.common.dto.CourseRecommendListDTO;
+import com.roncoo.education.course.service.api.biz.ApiCourseRecommendBiz;
+import com.roncoo.education.course.common.bo.CourseRecommendBO;
+import com.roncoo.education.course.common.dto.CourseRecommendListDTO;
 import com.roncoo.education.util.base.Result;
 
 import io.swagger.annotations.ApiOperation;
 
 /**
- * 
+ *
  * 课程推荐
- * 
+ *
  * @author kyh
  *
  */
@@ -28,7 +28,7 @@ public class ApiCourseRecommendController {
 
 	/**
 	 * 课程推荐列出接口
-	 * 
+	 *
 	 * @author kyh
 	 */
 	@ApiOperation(value = "课程推荐列出接口", notes = "课程推荐列出接口")

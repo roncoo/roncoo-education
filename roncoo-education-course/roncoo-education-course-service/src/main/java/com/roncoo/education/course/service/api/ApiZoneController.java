@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.course.service.biz.ApiZoneBiz;
-import com.roncoo.education.course.service.common.bo.ZoneBO;
-import com.roncoo.education.course.service.common.dto.ZoneDTO;
+import com.roncoo.education.course.service.api.biz.ApiZoneBiz;
+import com.roncoo.education.course.common.bo.ZoneBO;
+import com.roncoo.education.course.common.dto.ZoneDTO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;
@@ -29,7 +29,7 @@ public class ApiZoneController extends BaseController {
 
 	/**
 	 * 专区课程分页列表接口
-	 * 
+	 *
 	 * @param bo
 	 * @return
 	 */

@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.course.service.biz.ApiCourseCategoryBiz;
-import com.roncoo.education.course.service.common.dto.CourseCategoryListDTO;
+import com.roncoo.education.course.service.api.biz.ApiCourseCategoryBiz;
+import com.roncoo.education.course.common.dto.CourseCategoryListDTO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
 
@@ -26,7 +26,7 @@ public class ApiCourseCategoryController extends BaseController {
 
 	/**
 	 * 普通课程分类列表接口
-	 * 
+	 *
 	 * @author wuyun
 	 */
 	@ApiOperation(value = "课程分类列表接口", notes = "课程分类列表")

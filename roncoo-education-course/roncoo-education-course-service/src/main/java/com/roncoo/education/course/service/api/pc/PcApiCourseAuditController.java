@@ -1,20 +1,20 @@
 package com.roncoo.education.course.service.api.pc;
 
+import com.roncoo.education.course.service.api.pc.biz.PcApiCourseAuditBiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.course.service.biz.pc.PcApiCourseAuditBiz;
-import com.roncoo.education.course.service.common.req.CourseAuditAuditStatusREQ;
-import com.roncoo.education.course.service.common.req.CourseAuditGetREQ;
-import com.roncoo.education.course.service.common.req.CourseAuditPageREQ;
-import com.roncoo.education.course.service.common.req.CourseAuditUpdateREQ;
-import com.roncoo.education.course.service.common.req.CourseAuditViewREQ;
-import com.roncoo.education.course.service.common.resq.CourseAuditGetRESQ;
-import com.roncoo.education.course.service.common.resq.CourseAuditPageRESQ;
-import com.roncoo.education.course.service.common.resq.CourseAuditViewRESQ;
+import com.roncoo.education.course.common.req.CourseAuditAuditStatusREQ;
+import com.roncoo.education.course.common.req.CourseAuditGetREQ;
+import com.roncoo.education.course.common.req.CourseAuditPageREQ;
+import com.roncoo.education.course.common.req.CourseAuditUpdateREQ;
+import com.roncoo.education.course.common.req.CourseAuditViewREQ;
+import com.roncoo.education.course.common.resq.CourseAuditGetRESQ;
+import com.roncoo.education.course.common.resq.CourseAuditPageRESQ;
+import com.roncoo.education.course.common.resq.CourseAuditViewRESQ;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;
@@ -33,7 +33,7 @@ public class PcApiCourseAuditController extends BaseController {
 
 	/**
 	 * 课程-审核分页列出接口
-	 * 
+	 *
 	 * @param courseAuditPageREQ
 	 * @return
 	 */
@@ -45,7 +45,7 @@ public class PcApiCourseAuditController extends BaseController {
 
 	/**
 	 * 课程-审核更新接口
-	 * 
+	 *
 	 * @param courseAuditUpdateREQ
 	 * @return
 	 */
@@ -57,7 +57,7 @@ public class PcApiCourseAuditController extends BaseController {
 
 	/**
 	 * 课程-审核接口
-	 * 
+	 *
 	 * @param courseAuditUpdateREQ
 	 * @return
 	 */
@@ -69,7 +69,7 @@ public class PcApiCourseAuditController extends BaseController {
 
 	/**
 	 * 课程查看接口(课程修改使用)
-	 * 
+	 *
 	 * @param courseGetREQ
 	 * @return
 	 */
@@ -81,7 +81,7 @@ public class PcApiCourseAuditController extends BaseController {
 
 	/**
 	 * 课程-审核查看接口
-	 * 
+	 *
 	 * @param courseUpdateREQ
 	 * @return
 	 */

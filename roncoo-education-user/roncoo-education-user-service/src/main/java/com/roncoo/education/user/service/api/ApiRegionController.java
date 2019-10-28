@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.user.service.biz.ApiRegionBiz;
-import com.roncoo.education.user.service.common.bo.UserRegionCityIdBO;
-import com.roncoo.education.user.service.common.bo.UserRegionLevelBO;
-import com.roncoo.education.user.service.common.bo.UserRegionProvinceBO;
-import com.roncoo.education.user.service.common.dto.RegionListDTO;
+import com.roncoo.education.user.service.api.biz.ApiRegionBiz;
+import com.roncoo.education.user.common.bo.UserRegionCityIdBO;
+import com.roncoo.education.user.common.bo.UserRegionLevelBO;
+import com.roncoo.education.user.common.bo.UserRegionProvinceBO;
+import com.roncoo.education.user.common.dto.RegionListDTO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
 

@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.system.service.biz.auth.AuthApiMsgBiz;
-import com.roncoo.education.system.service.common.bo.MsgViewBO;
-import com.roncoo.education.system.service.common.dto.MsgDTO;
+import com.roncoo.education.system.service.api.auth.biz.AuthApiMsgBiz;
+import com.roncoo.education.system.common.bo.MsgViewBO;
+import com.roncoo.education.system.common.dto.MsgDTO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
 

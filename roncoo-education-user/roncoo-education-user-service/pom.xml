@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.roncoo</groupId>
 		<artifactId>roncoo-education-user</artifactId>
-		<version>5.0.0-SNAPSHOT</version>
+		<version>6.0.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>roncoo-education-user-service</artifactId>
@@ -16,14 +16,14 @@
 
 		<dependency>
 			<groupId>com.roncoo</groupId>
-			<artifactId>roncoo-education-user-common</artifactId>
+			<artifactId>roncoo-education-user-feign</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.roncoo</groupId>
 			<artifactId>roncoo-education-system-feign</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -46,7 +46,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
-        
+
 		<!-- redis -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -85,7 +85,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 		<!-- zipkin -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

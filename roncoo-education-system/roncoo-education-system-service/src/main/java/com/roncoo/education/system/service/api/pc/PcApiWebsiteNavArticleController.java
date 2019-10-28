@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.system.service.biz.pc.PcApiWebsiteNavArticleBiz;
-import com.roncoo.education.system.service.common.req.WebsiteNavArticleSaveREQ;
-import com.roncoo.education.system.service.common.req.WebsiteNavArticleUpdateREQ;
-import com.roncoo.education.system.service.common.req.WebsiteNavArticleViewREQ;
-import com.roncoo.education.system.service.common.resq.WebsiteNavArticleViewRESQ;
+import com.roncoo.education.system.service.api.pc.biz.PcApiWebsiteNavArticleBiz;
+import com.roncoo.education.system.common.req.WebsiteNavArticleSaveREQ;
+import com.roncoo.education.system.common.req.WebsiteNavArticleUpdateREQ;
+import com.roncoo.education.system.common.req.WebsiteNavArticleViewREQ;
+import com.roncoo.education.system.common.resq.WebsiteNavArticleViewRESQ;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
 
@@ -29,7 +29,7 @@ public class PcApiWebsiteNavArticleController extends BaseController {
 
 	/**
 	 * 获取站点导航文章接口
-	 * 
+	 *
 	 * @return
 	 */
 	@ApiOperation(value = "获取站点导航文章接口", notes = "获取站点导航文章信息")
@@ -40,7 +40,7 @@ public class PcApiWebsiteNavArticleController extends BaseController {
 
 	/**
 	 * 获取站点导航文章接口
-	 * 
+	 *
 	 * @return
 	 */
 	@ApiOperation(value = "添加站点导航文章接口", notes = "获取站点导航文章信息")
@@ -51,7 +51,7 @@ public class PcApiWebsiteNavArticleController extends BaseController {
 
 	/**
 	 * 更新站点导航文章接口
-	 * 
+	 *
 	 * @return
 	 */
 	@ApiOperation(value = "更新站点导航文章接口", notes = "更新站点导航文章信息")

@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.user.service.biz.pc.PcApiUserExtBiz;
-import com.roncoo.education.user.service.common.req.UserExtPageREQ;
-import com.roncoo.education.user.service.common.req.UserExtUpdateREQ;
-import com.roncoo.education.user.service.common.req.UserExtViewREQ;
-import com.roncoo.education.user.service.common.resq.UserExtPageRESQ;
-import com.roncoo.education.user.service.common.resq.UserExtViewRESQ;
+import com.roncoo.education.user.service.api.pc.biz.PcApiUserExtBiz;
+import com.roncoo.education.user.common.req.UserExtPageREQ;
+import com.roncoo.education.user.common.req.UserExtUpdateREQ;
+import com.roncoo.education.user.common.req.UserExtViewREQ;
+import com.roncoo.education.user.common.resq.UserExtPageRESQ;
+import com.roncoo.education.user.common.resq.UserExtViewRESQ;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;

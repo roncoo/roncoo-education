@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.system.service.biz.auth.AuthApiMsgUserBiz;
-import com.roncoo.education.system.service.common.bo.MsgReadBO;
-import com.roncoo.education.system.service.common.bo.MsgUserBO;
-import com.roncoo.education.system.service.common.bo.MsgViewBO;
-import com.roncoo.education.system.service.common.dto.MsgDTO;
-import com.roncoo.education.system.service.common.dto.MsgReadDTO;
-import com.roncoo.education.system.service.common.dto.MsgUserDTO;
+import com.roncoo.education.system.service.api.auth.biz.AuthApiMsgUserBiz;
+import com.roncoo.education.system.common.bo.MsgReadBO;
+import com.roncoo.education.system.common.bo.MsgUserBO;
+import com.roncoo.education.system.common.bo.MsgViewBO;
+import com.roncoo.education.system.common.dto.MsgDTO;
+import com.roncoo.education.system.common.dto.MsgReadDTO;
+import com.roncoo.education.system.common.dto.MsgUserDTO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;
@@ -33,7 +33,7 @@ public class AuthApiMsgUser extends BaseController {
 
 	/**
 	 * 站内信分页列表接口
-	 * 
+	 *
 	 * @param msgUserBO
 	 * @return
 	 * @author wuyun
@@ -46,7 +46,7 @@ public class AuthApiMsgUser extends BaseController {
 
 	/**
 	 * 用户查看站内信内容
-	 * 
+	 *
 	 * @param MsgViewBO
 	 * @return
 	 * @author wuyun
@@ -59,7 +59,7 @@ public class AuthApiMsgUser extends BaseController {
 
 	/**
 	 * 用户站内信未读条数
-	 * 
+	 *
 	 * @param msgReadBO
 	 * @return
 	 * @author wuyun
