@@ -1,5 +1,9 @@
 ### 版本升级日志
 ---
+###### v5.0.1-SNAPSHOT -- 2019.11.01
+1. 修补roncoo-education-boss依赖插件版本
+
+---
 ###### v5.0.0-RELEASE -- 2019.10.28
 1. 移除roncoo-education-web-boss工程，替换为roncoo-education-boss
 1. 架构调整，更接近商业版架构（移除roncoo-education-course-common、roncoo-education-system-common、
