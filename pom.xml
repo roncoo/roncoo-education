@@ -93,27 +93,12 @@
 			<!-- com.roncoo -->
 			<dependency>
 				<groupId>com.roncoo</groupId>
-				<artifactId>roncoo-education-course-common</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.roncoo</groupId>
 				<artifactId>roncoo-education-course-feign</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.roncoo</groupId>
-				<artifactId>roncoo-education-system-common</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.roncoo</groupId>
 				<artifactId>roncoo-education-system-feign</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.roncoo</groupId>
-				<artifactId>roncoo-education-user-common</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
