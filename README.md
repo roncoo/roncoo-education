@@ -1,4 +1,4 @@
-<div align=center>![logo](doc/images/logo.jpg "logo")
+<div align=center>![logo](doc/images/logo.jpg "logo")</div>
 
 # 领课教育 - 一个全行业都适用的分布式在线教育系统
 
