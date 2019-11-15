@@ -1,3 +1,4 @@
+![logo](doc/images/logo.jpg "logo")
 # 领课教育 - 领课网络在线教育系统
 
 ### 项目介绍（如果对你有用，请给个star！）
