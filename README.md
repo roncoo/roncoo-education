@@ -6,7 +6,7 @@
 # 领课教育 - 一个全行业都适用的分布式在线教育系统
 
 ### 项目介绍（如果对你有用，请给个star！）
-领课教育（roncoo-education）是基于领课网络多年的在线教育平台开发和运营经验打造出来的产品，致力于打造一个全行业都适用的分布式在线教育系统。系统采用前后端分离模式，前台采用vue.js为核心框架，后台采用Spring Cloud为核心框架。系统目前主要功能有课程点播功能，支持多家视频云的接入，课程附件管理功能，支持多家存储云的接入，讲师管理功能，支持讲师入驻功能，可以帮助个人或者企业快速实现一个轻量级的在线教育平台。
+领课教育（roncoo-education）是基于领课网络多年的在线教育平台开发和运营经验打造出来的产品，致力于打造一个全行业都适用的分布式在线教育系统。系统采用前后端分离模式，前台采用vue.js为核心框架，后台采用Spring Cloud为核心框架。系统目前主要功能有课程点播功能，支持多家视频云的接入，课程附件设置功能，支持多家云存储的接入，讲师管理功能，支持讲师入驻功能，可以帮助个人或者企业快速实现一个轻量级的在线教育平台。
 
 ### 特别说明
 * 系统功能通用，无论是个人还是企业都可以利用该系统快速搭建一个属于自己的在线教育平台。
@@ -33,8 +33,7 @@
 ##### 前端演示地址：[领课教育](http://edu.os.roncoo.com/) | 后台演示地址：[运营后台](http://roncoo.vicp.net/web)
 
 ### 相关工程
-##### 前端门户系统（roncoo-education-web）：[码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web)
-##### 后台管理系统（roncoo-education-admin）：[码云地址](https://gitee.com/roncoocom/roncoo-education-admin) | [Github地址](https://github.com/roncoo/roncoo-education-admin)
+##### 前端工程（roncoo-education-web）：[码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web)
 
 ### 使用文档
 ##### [项目介绍](https://blog.roncoo.com/article/1105321762337357826) | [部署文档](https://blog.roncoo.com/article/1103554925858197505) | [常见问题](https://blog.roncoo.com/article/1105309620724858882)
@@ -52,11 +51,12 @@
 ### 商业合作
 * 如果想使用教育系统，我们商业版功能更强大！
 * 如果想定制教育系统，我们提供有偿服务支持！
-* 如果想运营教育平台，我们有提供Saas云服务！
+* 如果想运营教育平台，我们提供Saas云服务！
 * 支持其他合作方式，欢迎来撩！
 * 商务合作联系QQ：513781560
 * 商务合作联系QQ：2955237748
 * 官网地址：[https://edu.roncoo.net](https://edu.roncoo.net/index.html)
 
 ## 项目推荐
-##### roncoo-pay：[码云地址](https://gitee.com/roncoocom/roncoo-pay) | [Github地址](https://github.com/roncoo/roncoo-pay)
+##### roncoo-recharge：[码云地址](https://gitee.com/roncoocom/roncoo-recharge) | [Github地址](https://github.com/roncoo/roncoo-recharge)
+##### roncoo-jui-springboot：[码云地址](https://gitee.com/roncoocom/roncoo-jui-springboot) | [Github地址](https://github.com/roncoo/roncoo-jui-springboot)
