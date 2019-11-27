@@ -48,7 +48,9 @@
 
 ### 官方QQ群（加群免费获取sql脚本）
 
-<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=e28093a355b157fd5d907856a336a558a16255abb466bdfa9e7a5cc91274b871"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课④" title="在线教育系统-领课④"> 74876271</a>
+<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=1ab031ece9d457fb7c275b0e95466dedfdf71091784f4c0b2c93ca4cc89e736d"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课⑤" title="在线教育系统-领课⑤"> 74876271</a>
+
+<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=e28093a355b157fd5d907856a336a558a16255abb466bdfa9e7a5cc91274b871"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课④" title="在线教育系统-领课④"> 74876271</a> 已满
 
 <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=b574c38c199744e267868108f509c06259314305130ac488d1734bdac4c8ed9f"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课③" title="在线教育系统-领课③"> 774890501</a> 已满
 
