@@ -5,7 +5,7 @@
 
 	<groupId>com.roncoo</groupId>
 	<artifactId>roncoo-education</artifactId>
-	<version>5.0.1-SNAPSHOT</version>
+	<version>5.0.0-RELEASE</version>
 	<packaging>pom</packaging>
 
 	<name>roncoo-education</name>
