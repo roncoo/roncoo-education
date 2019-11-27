@@ -7,10 +7,10 @@
 
 ---
 ### 相关工程
-###### 说明：领课教育系统采用前后端分离模式，把前端拆分为单独工程。roncoo-education是后台工程，为roncoo-education-web和roncoo-education-admin提供api接口
+###### 领课教育系统采用前后端分离架构，前端为独立工程。roncoo-education是后台工程，roncoo-education-web是前端门户工程，roncoo-education-admin是前端管理工程
 ##### 领课教育系统(roncoo-education)：[码云地址](https://gitee.com/roncoocom/roncoo-education) | [Github地址](https://github.com/roncoo/roncoo-education)
 ##### 前端门户工程(roncoo-education-web)：[码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web)
-##### 后台管理工程(roncoo-education-admin)：[码云地址](https://gitee.com/roncoocom/roncoo-education-admin) | [Github地址](https://github.com/roncoo/roncoo-education-admin)
+##### 前端管理工程(roncoo-education-admin)：[码云地址](https://gitee.com/roncoocom/roncoo-education-admin) | [Github地址](https://github.com/roncoo/roncoo-education-admin)
 ---
 
 ### 项目介绍（如果对你有用，请给个star！）
