@@ -107,10 +107,10 @@ public final class PolyvUtil {
         map.put("viewerName", bo.getUserNo());
         map.put("extraParams", "HTML5");
         map.put("viewerId", bo.getUserNo());
-        String concated = "extraParams" + map.get("extraParams") + "ts" + map.get("ts") + "userId" + map.get("userId")
-                + "videoId" + map.get("videoId") + "viewerId" + map.get("viewerId") + "viewerIp" + map.get("viewerIp")
-                + "viewerName" + map.get("viewerName");
-        map.put("sign", MD5Util.MD5(useid + bo.getVid() + ts + bo.getIp()).toUpperCase());
+        String concated = "extraParams" + map.get("extraParams") + "ts" + map.get("ts") + "userId" + map.get("userId") + "videoId" + map.get("videoId") + "viewerId" + map.get("viewerId") + "viewerIp" + map.get("viewerIp") + "viewerName" + map.get("viewerName");
+        logger.info("保利威视，获取concated接口：result={}", concated);
+        logger.info("保利威视，获取secretkey接口：result={}", secretkey);
+        map.put("sign", MD5Util.MD5(secretkey + concated + secretkey).toUpperCase());
         String result = post(SystemUtil.POLYV_GETTOKEN, map);
         logger.info("保利威视，获取token接口：result={}", result);
         Map<String, Object> resultMap = JSONUtil.parseObject(result, HashMap.class);
