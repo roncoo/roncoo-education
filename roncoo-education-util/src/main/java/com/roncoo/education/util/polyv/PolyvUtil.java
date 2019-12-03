@@ -97,7 +97,6 @@ public final class PolyvUtil {
     public static PolyvSignResult getSignForH5(PolyvSign bo, String useid, String secretkey) {
         // 根据时间戳、vid、密钥生成sign值
         String ts = String.valueOf(System.currentTimeMillis());
-
         // 获取播放token
         Map<String, Object> map = new HashedMap<>();
         map.put("userId", useid);
@@ -107,6 +106,7 @@ public final class PolyvUtil {
         map.put("viewerName", bo.getUserNo());
         map.put("extraParams", "HTML5");
         map.put("viewerId", bo.getUserNo());
+        logger.info("保利威视，map：map={}", map);
         String concated = "extraParams" + map.get("extraParams") + "ts" + map.get("ts") + "userId" + map.get("userId") + "videoId" + map.get("videoId") + "viewerId" + map.get("viewerId") + "viewerIp" + map.get("viewerIp") + "viewerName" + map.get("viewerName");
         map.put("sign", MD5Util.MD5(secretkey + concated + secretkey).toUpperCase());
         String result = post(SystemUtil.POLYV_GETTOKEN, map);
