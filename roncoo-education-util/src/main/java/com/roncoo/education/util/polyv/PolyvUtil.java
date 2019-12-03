@@ -102,7 +102,7 @@ public final class PolyvUtil {
         map.put("userId", useid);
         map.put("videoId", bo.getVid());
         map.put("ts", ts);
-        map.put("viewerIp", bo.getIp());
+        map.put("viewerIp", "127.0.0.1");
         map.put("viewerName", bo.getUserNo());
         map.put("extraParams", "HTML5");
         map.put("viewerId", bo.getUserNo());
