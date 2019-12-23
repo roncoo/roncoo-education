@@ -29,26 +29,6 @@
 			<timezone>+8</timezone>
 		</developer>
 		<developer>
-			<name>yangzj</name>
-			<email>yangzj@roncoo.com</email>
-			<organization>LingKe, Co., Ltd.</organization>
-			<organizationUrl>http://www.roncoo.net</organizationUrl>
-			<roles>
-				<role>developer</role>
-			</roles>
-			<timezone>+8</timezone>
-		</developer>
-		<developer>
-			<name>wuy</name>
-			<email>wuy@roncoo.com</email>
-			<organization>LingKe, Co., Ltd.</organization>
-			<organizationUrl>http://www.roncoo.net</organizationUrl>
-			<roles>
-				<role>developer</role>
-			</roles>
-			<timezone>+8</timezone>
-		</developer>
-		<developer>
 			<name>liaohr</name>
 			<email>liaohr@roncoo.com</email>
 			<organization>LingKe, Co., Ltd.</organization>
@@ -68,6 +48,26 @@
 			</roles>
 			<timezone>+8</timezone>
 		</developer>
+		<developer>
+            <name>yangzj</name>
+            <email>yangzj@roncoo.com</email>
+            <organization>LingKe, Co., Ltd.</organization>
+            <organizationUrl>http://www.roncoo.net</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+        <developer>
+            <name>wuy</name>
+            <email>wuy@roncoo.com</email>
+            <organization>LingKe, Co., Ltd.</organization>
+            <organizationUrl>http://www.roncoo.net</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
 	</developers>
 
 	<!-- io.spring.platform -->
@@ -246,22 +246,11 @@
 				<version>${io.zipkin.java.version}</version>
 			</dependency>
 
-			<!-- com.roncoo -->
 			<dependency>
-				<groupId>com.roncoo</groupId>
-				<artifactId>roncoo-spring-boot-starter-druid</artifactId>
-				<version>1.0.6</version>
-			</dependency>
-			<dependency>
-				<groupId>com.roncoo</groupId>
-				<artifactId>roncoo-spring-boot-starter-shiro</artifactId>
-				<version>1.0.6</version>
-			</dependency>
-			<dependency>
-				<groupId>com.roncoo</groupId>
-				<artifactId>shiro-freemarker-tags</artifactId>
-				<version>1.0.0</version>
-			</dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>1.1.21</version>
+            </dependency>
 
 			<!-- spring cloud -->
 			<dependency>
@@ -281,6 +270,9 @@
 			    <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
+                    <configuration>
+                        <executable>true</executable>
+                    </configuration>
                     <executions>
                         <execution>
                             <phase>package</phase>
