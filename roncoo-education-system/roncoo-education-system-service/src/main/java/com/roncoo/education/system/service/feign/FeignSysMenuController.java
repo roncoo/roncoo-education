@@ -50,7 +50,7 @@ public class FeignSysMenuController extends BaseController implements IFeignSysM
 	}
 
 	@Override
-	public List<SysMenuVO> listByUserAndMenu(@RequestBody Long userNo) {
+	public List<String> listByUserAndMenu(@RequestBody Long userNo) {
 		return biz.listByUserAndMenu(userNo);
 	}
 

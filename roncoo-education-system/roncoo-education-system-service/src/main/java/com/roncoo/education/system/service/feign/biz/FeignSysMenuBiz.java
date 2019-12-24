@@ -1,8 +1,11 @@
 package com.roncoo.education.system.service.feign.biz;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import com.roncoo.education.util.base.BaseBiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,107 +33,66 @@ import com.xiaoleilu.hutool.util.ObjectUtil;
  * @author wujing
  */
 @Component
-public class FeignSysMenuBiz {
+public class FeignSysMenuBiz extends BaseBiz {
 
-	@Autowired
-	private SysMenuDao dao;
-	@Autowired
-	private SysUserDao sysUserDao;
-	@Autowired
-	private SysRoleUserDao sysRoleUserDao;
-	@Autowired
-	private SysMenuRoleDao sysMenuRoleDao;
+    @Autowired
+    private SysMenuDao dao;
+    @Autowired
+    private SysUserDao sysUserDao;
+    @Autowired
+    private SysRoleUserDao sysRoleUserDao;
+    @Autowired
+    private SysMenuRoleDao sysMenuRoleDao;
 
-	public Page<SysMenuVO> listForPage(SysMenuQO qo) {
-		SysMenuExample example = new SysMenuExample();
-		Criteria c = example.createCriteria();
-		example.setOrderByClause(" id desc ");
-		Page<SysMenu> page = dao.listForPage(qo.getPageCurrent(), qo.getPageSize(), example);
-		return PageUtil.transform(page, SysMenuVO.class);
-	}
+    public Page<SysMenuVO> listForPage(SysMenuQO qo) {
+        SysMenuExample example = new SysMenuExample();
+        Criteria c = example.createCriteria();
+        example.setOrderByClause(" id desc ");
+        Page<SysMenu> page = dao.listForPage(qo.getPageCurrent(), qo.getPageSize(), example);
+        return PageUtil.transform(page, SysMenuVO.class);
+    }
 
-	public int save(SysMenuQO qo) {
-		SysMenu record = BeanUtil.copyProperties(qo, SysMenu.class);
-		return dao.save(record);
-	}
+    public int save(SysMenuQO qo) {
+        SysMenu record = BeanUtil.copyProperties(qo, SysMenu.class);
+        return dao.save(record);
+    }
 
-	public int deleteById(Long id) {
-		return dao.deleteById(id);
-	}
+    public int deleteById(Long id) {
+        return dao.deleteById(id);
+    }
 
-	public SysMenuVO getById(Long id) {
-		SysMenu record = dao.getById(id);
-		return BeanUtil.copyProperties(record, SysMenuVO.class);
-	}
+    public SysMenuVO getById(Long id) {
+        SysMenu record = dao.getById(id);
+        return BeanUtil.copyProperties(record, SysMenuVO.class);
+    }
 
-	public int updateById(SysMenuQO qo) {
-		SysMenu record = BeanUtil.copyProperties(qo, SysMenu.class);
-		return dao.updateById(record);
-	}
+    public int updateById(SysMenuQO qo) {
+        SysMenu record = BeanUtil.copyProperties(qo, SysMenu.class);
+        return dao.updateById(record);
+    }
 
-	public List<SysMenuVO> listByUserAndMenu(Long userNo) {
-		List<SysMenuVO> list = new ArrayList<>();
-		if (userNo == null) {
-			// 没权限
-			return list;
-		}
-		SysUser sysUser = sysUserDao.getByUserNo(userNo);
-		if (ObjectUtil.isNull(sysUser)) {
-			// 没权限
-			return list;
-		}
-		List<SysMenuRole> sysMenuRoleList = new ArrayList<>();
-		List<SysRoleUser> sysRoleUserList = sysRoleUserDao.listByUserId(sysUser.getId());
-		for (SysRoleUser sru : sysRoleUserList) {
-			sysMenuRoleList.addAll(sysMenuRoleDao.listByRoleId(sru.getRoleId()));
-		}
-		// 筛选
-		list = listByRole(sysMenuRoleList);
-		return list;
-	}
+    public List<String> listByUserAndMenu(Long userNo) {
+        List<String> list = new ArrayList<>();
+        if (userNo == null) {
+            // 没权限
+            return list;
+        }
+        SysUser sysUser = sysUserDao.getByUserNo(userNo);
+        if (ObjectUtil.isNull(sysUser)) {
+            // 没权限
+            return list;
+        }
+        List<SysRoleUser> sysRoleUserList = sysRoleUserDao.listByUserId(sysUser.getId());
+        for (SysRoleUser sru : sysRoleUserList) {
+            List<SysMenuRole> list1 = sysMenuRoleDao.listByRoleId(sru.getRoleId());
+            for (SysMenuRole sysMenuRole : list1) {
+                SysMenu sysMenu = dao.getById(sysMenuRole.getMenuId());
+                if (ObjectUtil.isNotNull(sysMenu)) {
+                    list.add(sysMenu.getApiUrl());
+                }
+            }
+        }
 
-	private List<SysMenuVO> listByRole(List<SysMenuRole> sysMenuRoleList) {
-		List<SysMenuVO> list = userRecursion(0L);
-		List<SysMenuVO> sysMenuVOList = new ArrayList<>();
-		sysMenuVOList = listMenu(sysMenuVOList, sysMenuRoleList, list);
-		return sysMenuVOList;
-	}
-
-	private List<SysMenuVO> listMenu(List<SysMenuVO> sysMenuVOList, List<SysMenuRole> sysMenuRoleList, List<SysMenuVO> list) {
-		for (SysMenuVO mv : list) {
-			SysMenuVO v = null;
-			for (SysMenuRole vo : sysMenuRoleList) {
-				if (mv.getId().equals(vo.getMenuId())) {
-					v = BeanUtil.copyProperties(mv, SysMenuVO.class);
-					break;
-				}
-			}
-			if (ObjectUtil.isNotNull(v)) {
-				sysMenuVOList.add(v);
-				List<SysMenuVO> l = new ArrayList<>();
-				if (v != null) {
-					v.setList(l);
-				}
-				listMenu(l, sysMenuRoleList, mv.getList());
-			}
-		}
-		return sysMenuVOList;
-	}
-
-	/**
-	 * 用户递归显示菜单(角色关联菜单)
-	 */
-	private List<SysMenuVO> userRecursion(Long parentId) {
-		List<SysMenuVO> lists = new ArrayList<>();
-		List<SysMenu> list = dao.listByParentId(parentId);
-		if (CollectionUtil.isNotEmpty(list)) {
-			for (SysMenu m : list) {
-				SysMenuVO resq = BeanUtil.copyProperties(m, SysMenuVO.class);
-				resq.setList(userRecursion(m.getId()));
-				lists.add(resq);
-			}
-		}
-		return lists;
-	}
-
+        return list;
+    }
 }

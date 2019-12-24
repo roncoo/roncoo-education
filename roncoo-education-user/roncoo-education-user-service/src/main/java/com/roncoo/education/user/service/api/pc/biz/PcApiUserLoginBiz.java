@@ -73,7 +73,7 @@ public class PcApiUserLoginBiz {
 			return Result.error("账号或者密码不正确");
 		}
 		// 获取用户菜单权限
-		List<SysMenuVO> menuList = feignSysMenu.listByUserAndMenu(user.getUserNo());
+		List<String> menuList = feignSysMenu.listByUserAndMenu(user.getUserNo());
 		if (CollectionUtil.isEmpty(menuList)) {
 			return Result.error("没权限！");
 		}

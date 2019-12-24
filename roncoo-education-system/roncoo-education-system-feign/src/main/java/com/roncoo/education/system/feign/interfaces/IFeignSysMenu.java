@@ -35,6 +35,6 @@ public interface IFeignSysMenu {
     SysMenuVO getById(@RequestBody Long id);
 
     @RequestMapping(value = "/feign/system/sysMenu/listByUserAndMenu")
-    List<SysMenuVO> listByUserAndMenu(@RequestBody Long userNo);
+    List<String> listByUserAndMenu(@RequestBody Long userNo);
 
 }
