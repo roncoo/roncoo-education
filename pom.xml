@@ -333,8 +333,6 @@
 		<module>roncoo-education-server-config</module>
 		<!-- 监控中心 -->
 		<module>roncoo-education-server-admin</module>
-		<!-- 链接监控 -->
-		<module>roncoo-education-server-zipkin</module>
 		<!-- 公用工具 -->
 		<module>roncoo-education-util</module>
 		<!-- 系统管理 -->
