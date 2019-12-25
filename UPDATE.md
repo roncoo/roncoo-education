@@ -4,6 +4,7 @@
 1. 修改网关配置开发环境地址与测试环境地址一致
 2. 移除roncoo-druid，替换为alibaba-druid
 3. 移除server-zipkin, 官方建议单独部署
+4. 拦截器优化权限校验
 
 ---
 ###### v5.0.0-RELEASE -- 2019.10.28
