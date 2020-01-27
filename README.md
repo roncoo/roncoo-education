@@ -5,20 +5,21 @@
 ##### 领课教育系统(roncoo-education)：[码云地址](https://gitee.com/roncoocom/roncoo-education) | [Github地址](https://github.com/roncoo/roncoo-education)
 ##### 前端门户工程(roncoo-education-web)：[码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web)
 ##### 后台管理工程(roncoo-education-admin)：[码云地址](https://gitee.com/roncoocom/roncoo-education-admin) | [Github地址](https://github.com/roncoo/roncoo-education-admin)
-###### 领课教育系统采用前后端分离架构，前端为独立工程。
+> 领课教育系统采用前后端分离架构，前端为独立工程。
 ###### roncoo-education是后台工程，核心框架：Spring Cloud
 ###### roncoo-education-web是前端门户工程，核心框架：Vuejs + Nuxt.js
 ###### roncoo-education-admin是后台管理工程，核心框架：vue-element-admin
+
 ---
 
-# 领课教育 - 一个全行业都适用的分布式在线教育系统
+# 领课教育 - 一个各行业都适用的分布式在线教育系统
 * 系统功能通用，无论是个人还是企业都可以利用该系统快速搭建一个属于自己的在线教育平台。
 * 系统采用MIT开源协议，可以在商业项目中免费使用或者二次开发而不必支付任何费用。
 * 基于领课网络的商业项目，代码保证100%开源。
-* 若使用[领课教育商业版](https://edu.roncoo.net/)，能更快速助你搭建在线教育系统。
+* 若使用[领课教育商业版](https://edu.roncoo.net/)，功能更丰富，搭建更快速。
 
 ### 项目介绍（如果对你有用，请给个star！）
-领课教育（roncoo-education）是基于领课网络多年的在线教育平台开发和运营经验打造出来的产品，致力于打造一个全行业都适用的分布式在线教育系统。系统采用前后端分离模式，前台采用vue.js为核心框架，后台采用Spring Cloud为核心框架。系统目前主要功能有课程点播功能，支持多家视频云的接入，课程附件管理功能，支持多家存储云的接入，讲师管理功能，支持讲师入驻功能，可以帮助个人或者企业快速实现一个轻量级的在线教育平台。
+领课教育（roncoo-education）是基于领课网络多年的在线教育平台开发和运营经验打造出来的产品，致力于打造一个各行业都适用的分布式在线教育系统。系统采用前后端分离模式，前台采用vue.js为核心框架，后台采用Spring Cloud为核心框架。系统目前主要功能有课程点播功能，支持多家视频云的接入，课程附件管理功能，支持多家存储云的接入，讲师管理功能，支持讲师入驻功能，可以帮助个人或者企业快速实现一个轻量级的在线教育平台。
 
 ### 前台主要功能介绍
 * 首页功能，导航模块（自定义导航设置），广告模块（自定的轮播设置），课程模块（自定义课程设置）
