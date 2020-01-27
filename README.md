@@ -1,5 +1,5 @@
 <div align=center><img src="doc/images/logo.jpg"/></div>
-<div align=center>一个各行业都适用的分布式在线教育系统</div>
+<h1 align=center>一个各行业都适用的分布式在线教育系统</h1>
 
 * 系统功能通用，无论是个人还是企业都可以利用该系统快速搭建一个属于自己的在线教育平台。
 * 系统采用MIT开源协议，可以在商业项目中免费使用或者二次开发而不必支付任何费用。
