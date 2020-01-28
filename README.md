@@ -3,8 +3,8 @@
 
 * 系统功能通用，无论是个人还是企业都可以利用该系统快速搭建一个属于自己的在线教育平台。
 * 系统采用MIT开源协议，可以在商业项目中免费使用或者二次开发而不必支付任何费用。
-* 基于领课网络的商业项目，代码保证100%开源。
-* 若使用[领课教育商业版](https://edu.roncoo.net/)，功能更丰富，搭建更快速。
+* 所有使用到的框架或者组件都是基于开源项目，代码保证100%开源。
+* 若使用[领课教育商业版](https://edu.roncoo.net/)，功能更丰富，全程指导，上线更快速。
 
 ### 相关工程
 ##### 领课教育系统(roncoo-education)：[码云地址](https://gitee.com/roncoocom/roncoo-education) | [Github地址](https://github.com/roncoo/roncoo-education)
