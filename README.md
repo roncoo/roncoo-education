@@ -58,7 +58,7 @@ roncoo-education-admin是后台管理工程，核心框架：vue-element-admin
 * 如果您没有技术团队也想运营教育平台，我们可提供教育系统SaaS云服务！
 * 合作模式不限，欢迎来撩！
 * 商务合作联系方式1：微信：15820530994 或 QQ：513781560
-* 商务合作联系方式2：微信：Baoshi_1988 或 QQ：2955237748
+* 商务合作联系方式2：微信：18027263931 或 QQ：2955237748
 * 官网地址：[https://edu.roncoo.net](https://edu.roncoo.net/index.html)
 
 ## 项目推荐
