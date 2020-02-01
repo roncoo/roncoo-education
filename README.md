@@ -4,7 +4,6 @@
 * 系统功能通用，无论是个人还是企业都可以利用该系统快速搭建一个属于自己的在线教育平台。
 * 系统采用MIT开源协议，可以在商业项目中免费使用或者二次开发而不必支付任何费用。
 * 所有使用到的框架或者组件都是基于开源项目，代码保证100%开源。
-* 如需服务器部署研究学习领课教育系统，可加微信(18302045627)申请获取由[IT云 www.doityun.com](https://www.doityun.com/)免费提供的1台2核CPU、8G内存、20G磁盘的学习专用云服务器，免费使用时长为1个月。
 * 如需商业技术服务支持，可使用[领课教育系统商业版](https://edu.roncoo.net/)，功能更丰富，全程指导，上线更快速。
 
 ### 相关工程
@@ -39,7 +38,9 @@ roncoo-education-admin是后台管理工程，核心框架：vue-element-admin
 ##### 前端演示地址：[领课教育](http://edu.os.roncoo.com/) | 后台演示地址：[运营后台](http://roncoo.vicp.net/web)
 
 ### 使用文档
-##### [项目介绍](https://blog.roncoo.com/article/1105321762337357826) | [部署文档](https://blog.roncoo.com/article/1103554925858197505) | [常见问题](https://blog.roncoo.com/article/1105309620724858882)
+##### [项目介绍](https://blog.roncoo.com/article/1105321762337357826)  |  [部署文档](https://blog.roncoo.com/article/1103554925858197505)  |  [常见问题](https://blog.roncoo.com/article/1105309620724858882)
+
+如需服务器部署领课教育系统进行研究学习，可加微信(18302045627)申请获取由【[IT云 www.doityun.com](https://www.doityun.com/)】免费提供的1台2核CPU、8G内存、20G磁盘的学习专用云服务器，免费使用时长为1个月。
 
 ### 官方QQ群（加群免费获取sql脚本）
 
