@@ -35,7 +35,7 @@ roncoo-education-admin是后台管理工程，核心框架：vue-element-admin
 * 支付功能模块，可无缝对接[龙果支付系统](https://pay.roncoo.net/)商业版
 
 ### 演示地址
-##### 前端演示地址：[领课教育](http://edu.os.roncoo.com/) | 后台演示地址：[运营后台](http://roncoo.vicp.net/web)
+##### 前端演示地址：[领课教育](http://edu.os.roncoo.com/) | 后台演示地址：[运营后台](http://edu.os.roncoo.com/admin)
 
 ### 使用文档
 ##### [项目介绍](https://blog.roncoo.com/article/1105321762337357826)  |  [部署文档](https://blog.roncoo.com/article/1103554925858197505)  |  [常见问题](https://blog.roncoo.com/article/1105309620724858882)
