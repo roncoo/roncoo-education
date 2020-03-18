@@ -29,9 +29,6 @@ public class PcApiWebsiteNavArticleBiz {
 			return Result.error("NavId不能为空");
 		}
 		WebsiteNavArticle record = dao.getByNavId(req.getNavId());
-		if (ObjectUtil.isNull(record)) {
-			return Result.error("找不到导航文章信息");
-		}
 		return Result.success(BeanUtil.copyProperties(record, WebsiteNavArticleViewRESQ.class));
 	}
 
