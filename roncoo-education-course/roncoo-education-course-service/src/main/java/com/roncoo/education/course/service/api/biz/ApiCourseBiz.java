@@ -150,7 +150,7 @@ public class ApiCourseBiz {
 		if (!StringUtils.isEmpty(courseInfoPageBO.getCourseName())) {
 			c.andCourseNameLike(PageUtil.rightLike(SqlUtil.checkSql(courseInfoPageBO.getCourseName())));
 		}
-		example.setOrderByClause(" course_sort desc, id desc ");
+		example.setOrderByClause(" sort desc, id desc ");
 		Page<Course> page = courseDao.listForPage(courseInfoPageBO.getPageCurrent(), courseInfoPageBO.getPageSize(), example);
 		return Result.success(PageUtil.transform(page, CourseInfoPageDTO.class));
 	}

@@ -162,7 +162,7 @@ public class AuthApiCourseBiz extends BaseBiz {
 
 		// 课时信息
 		for (CourseChapterDTO courseChapterDTO : dto.getChapterList()) {
-			List<CourseChapterPeriod> courseChapterPeriodList = courseChapterPeriodDao.listByChapterId(courseChapterDTO.getId());
+			List<CourseChapterPeriod> courseChapterPeriodList = courseChapterPeriodDao.listByChapterIdAndStatusId(courseChapterDTO.getId(), StatusIdEnum.YES.getCode());
 			courseChapterDTO.setPeriodList(PageUtil.copyList(courseChapterPeriodList, CourseChapterPeriodDTO.class));
 		}
 
