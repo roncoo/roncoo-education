@@ -4,8 +4,8 @@
 *.project
 *.settings
 *.mvn
-*.project
 *.springBeans
 *.factorypath
 *.iml
-**/.idea
+*.idea
+**.iml
