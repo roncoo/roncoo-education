@@ -1,6 +1,6 @@
-<div align=center><img src="doc/images/logo.jpg"/>一个各行业都适用的分布式在线教育系统</div>
+<div align=center><img src="doc/images/logo.jpg"/></div>
 
-### 相关工程
+### 一个各行业都适用的分布式在线教育系统
 ##### 领课教育系统(roncoo-education)：[码云地址](https://gitee.com/roncoocom/roncoo-education) | [Github地址](https://github.com/roncoo/roncoo-education)
 > roncoo-education是后台工程，核心框架：Spring Cloud  
 
@@ -9,6 +9,12 @@
 
 ##### 后台管理工程(roncoo-education-admin)：[码云地址](https://gitee.com/roncoocom/roncoo-education-admin) | [Github地址](https://github.com/roncoo/roncoo-education-admin)
 > roncoo-education-admin是后台管理工程，核心框架：vue-element-admin
+
+### 演示地址
+##### 前端演示地址：[领课教育](http://edu.os.roncoo.com/) | 后台演示地址：[运营后台](http://edu.os.roncoo.com/admin)
+
+### 使用文档
+##### [项目介绍](https://blog.roncoo.com/article/1105321762337357826)  |  [部署文档](https://blog.roncoo.com/article/1103554925858197505)  |  [常见问题](https://blog.roncoo.com/article/1105309620724858882)
 
 * 系统功能通用，无论是个人还是企业都可以利用该系统快速搭建一个属于自己的在线教育平台。
 * 系统采用MIT开源协议，可以在商业项目中免费使用或者二次开发而不必支付任何费用。
@@ -34,22 +40,12 @@
 * 广告管理功能，后台自定义广告设置，增加营销效果
 * 支付功能模块，可无缝对接[龙果支付系统](https://pay.roncoo.net/)商业版
 
-### 演示地址
-##### 前端演示地址：[领课教育](http://edu.os.roncoo.com/) | 后台演示地址：[运营后台](http://edu.os.roncoo.com/admin)
-
-### 使用文档
-##### [项目介绍](https://blog.roncoo.com/article/1105321762337357826)  |  [部署文档](https://blog.roncoo.com/article/1103554925858197505)  |  [常见问题](https://blog.roncoo.com/article/1105309620724858882)
-
 ### 官方QQ群（加群免费获取sql脚本）
 
 <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=6b66a953c914f45131bd8bd0936a410cc58b3820d8828ed8f9ad884ada667873"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课⑦" title="在线教育系统-领课⑦"> 1028579521</a> 可加
 
-> QQ群：532451240(已满)  
-> QQ群：903738971(已满)  
-> QQ群：74876271 (已满)  
-> QQ群：774890501(已满)  
-> QQ群：702189511(已满)  
-> QQ群：826617734(已满)
+> QQ群：532451240(已满)  QQ群：903738971(已满)   QQ群：74876271 (已满)  
+> QQ群：774890501(已满)   QQ群：702189511(已满)   QQ群：826617734(已满)
 
 ### 商业合作
 * 如果您想使用功能更完善的教育系统，我们有商业版！
