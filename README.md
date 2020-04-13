@@ -1,19 +1,19 @@
-<div align=center><img src="doc/images/logo.jpg"/></div>
-<h1 align=center>一个各行业都适用的分布式在线教育系统</h1>
+<div align=center><img src="doc/images/logo.jpg"/>一个各行业都适用的分布式在线教育系统</div>
+
+### 相关工程
+##### 领课教育系统(roncoo-education)：[码云地址](https://gitee.com/roncoocom/roncoo-education) | [Github地址](https://github.com/roncoo/roncoo-education)
+> roncoo-education是后台工程，核心框架：Spring Cloud  
+
+##### 前端门户工程(roncoo-education-web)：[码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web)
+> roncoo-education-web是前端门户工程，核心框架：Vuejs + Nuxt.js  
+
+##### 后台管理工程(roncoo-education-admin)：[码云地址](https://gitee.com/roncoocom/roncoo-education-admin) | [Github地址](https://github.com/roncoo/roncoo-education-admin)
+> roncoo-education-admin是后台管理工程，核心框架：vue-element-admin
 
 * 系统功能通用，无论是个人还是企业都可以利用该系统快速搭建一个属于自己的在线教育平台。
 * 系统采用MIT开源协议，可以在商业项目中免费使用或者二次开发而不必支付任何费用。
 * 所有使用到的框架或者组件都是基于开源项目，代码保证100%开源。
 * 如需商业技术服务支持，可使用[领课教育系统商业版](https://edu.roncoo.net/)，功能更丰富，全程指导，上线更快速。
-
-### 相关工程
-##### 领课教育系统(roncoo-education)：[码云地址](https://gitee.com/roncoocom/roncoo-education) | [Github地址](https://github.com/roncoo/roncoo-education)
-##### 前端门户工程(roncoo-education-web)：[码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web)
-##### 后台管理工程(roncoo-education-admin)：[码云地址](https://gitee.com/roncoocom/roncoo-education-admin) | [Github地址](https://github.com/roncoo/roncoo-education-admin)
-> 领课教育系统采用前后端分离架构，前端为独立工程。  
-roncoo-education是后台工程，核心框架：Spring Cloud  
-roncoo-education-web是前端门户工程，核心框架：Vuejs + Nuxt.js  
-roncoo-education-admin是后台管理工程，核心框架：vue-element-admin
 
 ### 项目介绍（如果对你有用，请给个star！）
 领课教育系统（roncoo-education）是基于领课网络多年的在线教育平台开发和运营经验打造出来的产品，致力于打造一个各行业都适用的分布式在线教育系统。系统采用前后端分离模式，前台采用vue.js为核心框架，后台采用Spring Cloud为核心框架。系统目前主要功能有课程点播功能，支持多家视频云的接入，课程附件管理功能，支持多家存储云的接入，讲师管理功能，支持讲师入驻功能，可以帮助个人或者企业快速搭建一个轻量级的在线教育平台。
@@ -39,8 +39,6 @@ roncoo-education-admin是后台管理工程，核心框架：vue-element-admin
 
 ### 使用文档
 ##### [项目介绍](https://blog.roncoo.com/article/1105321762337357826)  |  [部署文档](https://blog.roncoo.com/article/1103554925858197505)  |  [常见问题](https://blog.roncoo.com/article/1105309620724858882)
-
-如需服务器部署领课教育系统进行研究学习，可加微信(18302045627)申请获取由【[IT云 www.doityun.com](https://www.doityun.com/)】免费提供的1台2核CPU、8G内存、20G磁盘的学习专用云服务器，免费使用时长为1个月。
 
 ### 官方QQ群（加群免费获取sql脚本）
 
