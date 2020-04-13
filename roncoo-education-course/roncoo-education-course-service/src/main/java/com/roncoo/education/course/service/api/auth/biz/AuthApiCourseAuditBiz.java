@@ -96,8 +96,9 @@ public class AuthApiCourseAuditBiz extends BaseBiz {
 		AuthCourseAuditViewDTO dto = BeanUtil.copyProperties(courseAudit, AuthCourseAuditViewDTO.class);
 		// 课程介绍
 		CourseIntroduceAudit courseIntroduceAudit = courseIntroduceAuditDao.getById(courseAudit.getIntroduceId());
-		dto.setIntroduce(courseIntroduceAudit.getIntroduce());
-
+		if (courseIntroduceAudit != null && StringUtils.hasText(courseIntroduceAudit.getIntroduce())) {
+			dto.setIntroduce(courseIntroduceAudit.getIntroduce());
+		}
 		return Result.success(dto);
 	}
 
