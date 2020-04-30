@@ -5,7 +5,7 @@
 
 	<groupId>com.roncoo</groupId>
 	<artifactId>roncoo-education</artifactId>
-	<version>6.1.0-RELEASE</version>
+	<version>7.0.0-RELEASE</version>
 	<packaging>pom</packaging>
 
 	<name>roncoo-education</name>
@@ -333,7 +333,7 @@
 		<module>roncoo-education-server-config</module>
 		<!-- 监控中心 -->
 		<module>roncoo-education-server-admin</module>
-		<!-- 公用工具 -->
+		<!-- 基础工程 -->
 		<module>roncoo-education-util</module>
 		<!-- 系统管理 -->
 		<module>roncoo-education-system</module>
@@ -342,9 +342,9 @@
 		<!-- 课程管理 -->
 		<module>roncoo-education-course</module>
 		<!-- 定时任务 -->
-		<module>roncoo-education-job</module>
+		<module>roncoo-education-server-job</module>
 		<!-- 网关接口 -->
-		<module>roncoo-education-gateway</module>
+		<module>roncoo-education-server-gateway</module>
 	</modules>
 
 </project>

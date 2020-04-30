@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>com.roncoo</groupId>
 		<artifactId>roncoo-education</artifactId>
-		<version>6.1.0-RELEASE</version>
+		<version>7.0.0-RELEASE</version>
 	</parent>
 
-	<artifactId>roncoo-education-gateway</artifactId>
+	<artifactId>roncoo-education-server-gateway</artifactId>
 
-	<name>roncoo-education-gateway</name>
+	<name>roncoo-education-server-gateway</name>
 
 	<dependencies>
 
@@ -91,7 +91,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>gateway</finalName>
+		<finalName>server-gateway</finalName>
 
 		<plugins>
 			<plugin>

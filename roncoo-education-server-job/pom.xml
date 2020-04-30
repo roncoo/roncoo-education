@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>com.roncoo</groupId>
 		<artifactId>roncoo-education</artifactId>
-		<version>6.1.0-RELEASE</version>
+		<version>7.0.0-RELEASE</version>
 	</parent>
 
-	<artifactId>roncoo-education-job</artifactId>
+	<artifactId>roncoo-education-server-job</artifactId>
 
-	<name>roncoo-education-job</name>
+	<name>roncoo-education-server-job</name>
 
 	<dependencies>
 
@@ -63,7 +63,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>job</finalName>
+		<finalName>server-job</finalName>
 
 		<plugins>
 			<plugin>

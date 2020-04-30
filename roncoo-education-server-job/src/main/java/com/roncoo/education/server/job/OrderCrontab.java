@@ -1,4 +1,4 @@
-package com.roncoo.education.job;
+package com.roncoo.education.server.job;
 
 import com.roncoo.education.course.feign.interfaces.IFeignOrderInfo;
 import org.springframework.beans.factory.annotation.Autowired;

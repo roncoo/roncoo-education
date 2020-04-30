@@ -11,7 +11,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import com.roncoo.education.gateway.common.FilterPre;
+import com.roncoo.education.server.gateway.common.FilterPre;
 
 /**
  * 服务网关

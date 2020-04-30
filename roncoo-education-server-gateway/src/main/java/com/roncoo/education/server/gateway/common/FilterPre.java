@@ -1,16 +1,14 @@
 /**
  * Copyright 2015-现在 广州市领课网络科技有限公司
  */
-package com.roncoo.education.gateway.common;
+package com.roncoo.education.server.gateway.common;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
@@ -35,7 +33,6 @@ import com.roncoo.education.util.enums.RedisPreEnum;
 import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.tools.JSONUtil;
 import com.roncoo.education.util.tools.JWTUtil;
-import com.xiaoleilu.hutool.util.CollectionUtil;
 
 /**
  * 请求开始前执行
