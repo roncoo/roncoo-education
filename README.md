@@ -1,6 +1,8 @@
-<div align=center><img src="doc/images/logo.jpg"/></div>
-
-<h2 align=center>一个各行业都适用的分布式在线教育系统</h2>
+<div align=center>
+ <img src="logo.jpg"/>
+ <a href="https://edu.doc.roncoos.com/"><strong>项目文档</strong></a>
+ <h2>一个各行业都适用的分布式在线教育系统</h2>
+</div>
 
 ##### 领课教育系统(roncoo-education)：[码云地址](https://gitee.com/roncoocom/roncoo-education) | [Github地址](https://github.com/roncoo/roncoo-education)
 > roncoo-education是后台工程，核心框架：Spring Cloud  
