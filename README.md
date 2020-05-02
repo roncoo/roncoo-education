@@ -1,7 +1,7 @@
 <div align=center>
  <img src="logo.jpg"/>
- <a href="https://edu.doc.roncoos.com/"><strong>项目文档</strong></a>
  <h2>一个各行业都适用的分布式在线教育系统</h2>
+ <a href="http://edu.doc.roncoos.com/"><strong>项目文档</strong></a>
 </div>
 
 ##### 领课教育系统(roncoo-education)：[码云地址](https://gitee.com/roncoocom/roncoo-education) | [Github地址](https://github.com/roncoo/roncoo-education)
