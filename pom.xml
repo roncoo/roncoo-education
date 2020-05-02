@@ -331,8 +331,6 @@
 		<module>roncoo-education-server-eureka</module>
 		<!-- 配置中心 -->
 		<module>roncoo-education-server-config</module>
-		<!-- 监控中心 -->
-		<module>roncoo-education-server-sba</module>
 		<!-- 基础工程 -->
 		<module>roncoo-education-util</module>
 		<!-- 系统管理 -->
@@ -345,6 +343,8 @@
 		<module>roncoo-education-server-job</module>
 		<!-- 网关接口 -->
 		<module>roncoo-education-server-gateway</module>
+		<!-- 监控中心 -->
+		<module>roncoo-education-server-sba</module>
 	</modules>
 
 </project>
