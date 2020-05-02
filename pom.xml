@@ -332,7 +332,7 @@
 		<!-- 配置中心 -->
 		<module>roncoo-education-server-config</module>
 		<!-- 监控中心 -->
-		<module>roncoo-education-server-admin</module>
+		<module>roncoo-education-server-sba</module>
 		<!-- 基础工程 -->
 		<module>roncoo-education-util</module>
 		<!-- 系统管理 -->

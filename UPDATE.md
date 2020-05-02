@@ -5,7 +5,8 @@
 2. 修复课程简介为空不显示课程信息
 3. roncoo-education-gateway修改为roncoo-education-server-gateway
 4. roncoo-education-job修改为roncoo-education-server-job
-5. 
+5. roncoo-education-server-admin修改为roncoo-education-server-sba
+ 
 
 ###### v6.0.0-RELEASE -- 2020.01.28
 1. 修改网关配置开发环境地址与测试环境地址一致

@@ -7,7 +7,7 @@
 		<version>7.0.0-RELEASE</version>
 	</parent>
 
-	<artifactId>roncoo-education-server-admin</artifactId>
+	<artifactId>roncoo-education-server-sba</artifactId>
 
 	<dependencies>
 
@@ -55,7 +55,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>server-admin</finalName>
+		<finalName>server-sba</finalName>
 
 		<plugins>
 			<plugin>
