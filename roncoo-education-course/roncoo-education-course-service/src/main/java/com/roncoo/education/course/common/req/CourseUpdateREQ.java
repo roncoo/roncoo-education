@@ -34,6 +34,11 @@ public class CourseUpdateREQ implements Serializable {
 	@ApiModelProperty(value = "排序", required = false)
 	private Integer sort;
 	/**
+	 * 课程排序
+	 */
+	@ApiModelProperty(value = "课程排序", required = false)
+	private Integer  courseSort;
+	/**
 	 * 一级分类ID
 	 */
 	@ApiModelProperty(value = "一级分类ID", required = false)
