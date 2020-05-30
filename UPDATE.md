@@ -6,6 +6,7 @@
 3. roncoo-education-gateway修改为roncoo-education-server-gateway
 4. roncoo-education-job修改为roncoo-education-server-job
 5. roncoo-education-server-admin修改为roncoo-education-server-sba
+6. 修改网关过滤器判断失败，继续执行的bug
  
 
 ###### v6.0.0-RELEASE -- 2020.01.28
