@@ -16,6 +16,7 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
+import com.netflix.zuul.exception.ZuulException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +74,7 @@ public class FilterPre extends ZuulFilter {
     }
 
     @Override
-    public Object run() {
+    public Object run() throws ZuulException {
         RequestContext ctx = RequestContext.getCurrentContext();
         String uri = RequestContext.getCurrentContext().getRequest().getServletPath();
         logger.info("请求地址" + uri);
@@ -96,20 +97,18 @@ public class FilterPre extends ZuulFilter {
             }
 
         } catch (BaseException e) {
-            logger.error("系统异常", e.getMessage());
-            ctx.setSendZuulResponse(false);
-            resp(ctx, e.getMessage(), e.getCode());
-            return null;
+            logger.error("系统异常", e);
+            throw new ZuulException(e, e.getCode(), e.getMessage());
         }
         // 参数封装
         try {
             ctx.setRequest(requestWrapper(request, userNo));
-        } catch (IOException e) {
+            return null;
+        } catch (Exception e) {
             logger.error("封装参数异常", e.getMessage());
-            ctx.setSendZuulResponse(false);
-            resp(ctx, "系统异常，请重试");
+            throw new ZuulException(e, ResultEnum.ERROR.getCode(), e.getMessage());
         }
-        return null;
+
     }
 
     /**
@@ -178,16 +177,6 @@ public class FilterPre extends ZuulFilter {
                 return reqBodyBytes.length;
             }
         };
-    }
-
-    private void resp(RequestContext ctx, String msg) {
-        ctx.getResponse().setCharacterEncoding("UTF-8");
-        ctx.setResponseBody(JSONUtil.toJSONString(Result.error(msg)));
-    }
-
-    private void resp(RequestContext ctx, String msg, int code) {
-        ctx.getResponse().setCharacterEncoding("UTF-8");
-        ctx.setResponseBody(JSONUtil.toJSONString(Result.error(code, msg)));
     }
 
     @SuppressWarnings("unchecked")
