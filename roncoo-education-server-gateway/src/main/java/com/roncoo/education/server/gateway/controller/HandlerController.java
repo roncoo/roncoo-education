@@ -1,6 +1,7 @@
 package com.roncoo.education.server.gateway.controller;
 
 import com.roncoo.education.util.base.Result;
+import com.roncoo.education.util.enums.ResultEnum;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +31,7 @@ public class HandlerController implements ErrorController {
 			ZuulException e = (ZuulException) ctx.getThrowable();
 			return Result.error(e.nStatusCode, e.errorCause);
 		}
-		return Result.error(99,throwable.getMessage());
+		return Result.error(ResultEnum.ERROR);
 	}
 
 }
