@@ -7,6 +7,7 @@
 4. roncoo-education-job修改为roncoo-education-server-job
 5. roncoo-education-server-admin修改为roncoo-education-server-sba
 6. 修改网关过滤器判断失败，继续执行的bug
+7. 修改网关默认的context-path为/api，使前后端的接口一致
  
 
 ###### v6.0.0-RELEASE -- 2020.01.28
