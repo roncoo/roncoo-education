@@ -25,8 +25,12 @@ public class HandlerController implements ErrorController {
 	@ResponseStatus(HttpStatus.OK)
 	public Result<String> error() {
 		RequestContext ctx = RequestContext.getCurrentContext();
-		ZuulException e = (ZuulException) ctx.getThrowable();
-		return Result.error(e.nStatusCode, e.errorCause);
+		Throwable throwable = ctx.getThrowable();
+		if( throwable instanceof  ZuulException ){
+			ZuulException e = (ZuulException) ctx.getThrowable();
+			return Result.error(e.nStatusCode, e.errorCause);
+		}
+		return Result.error(99,throwable.getMessage());
 	}
 
 }
