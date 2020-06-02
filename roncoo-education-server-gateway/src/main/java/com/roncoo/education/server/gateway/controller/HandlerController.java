@@ -26,7 +26,7 @@ public class HandlerController implements ErrorController {
 	public Result<String> error() {
 		RequestContext ctx = RequestContext.getCurrentContext();
 		Throwable throwable = ctx.getThrowable();
-		if( throwable instanceof  ZuulException ){
+		if(null != throwable && throwable instanceof  ZuulException ){
 			ZuulException e = (ZuulException) ctx.getThrowable();
 			return Result.error(e.nStatusCode, e.errorCause);
 		}
