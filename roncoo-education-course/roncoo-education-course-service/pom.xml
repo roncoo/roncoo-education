@@ -48,6 +48,12 @@
 			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
 
+		<!-- fastdfs -->
+		<dependency>
+			<groupId>com.roncoo</groupId>
+			<artifactId>roncoo-spring-boot-starter-fastdfs</artifactId>
+		</dependency>
+
 		<!-- mybatis -->
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>

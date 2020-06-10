@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
+import com.roncoo.spring.boot.autoconfigure.fastdfs.FastdfsClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -57,6 +58,8 @@ public class ApiUploadBiz extends BaseBiz {
 	private CourseVideoDao courseVideoDao;
 	@Autowired
 	private FileStorageDao fileStorageDao;
+	@Autowired
+	private FastdfsClientService fastdfsClientService;
 
 	/**
 	 * 上传视频接口
@@ -196,8 +199,24 @@ public class ApiUploadBiz extends BaseBiz {
 				Result.error("未配置系统配置表");
 			}
 			Long fileNo = IdWorker.getId();
-			// 1、上传到本地
-			if (sys.getFileType().equals(FileTypeEnum.LOCAL.getCode())) {
+
+			if(sys.getFileType().equals(FileTypeEnum.ALIYUN.getCode())){
+				// 存储方式：阿里云
+				return Result.success(AliyunUtil.uploadPic(PlatformEnum.COURSE, picFile,
+						BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
+			}else if (sys.getFileType().equals(FileTypeEnum.FDSF.getCode())) {
+				// 存储方式：FastDFS
+				String fileName = picFile.getOriginalFilename();
+				String type = fileName.substring(fileName.lastIndexOf(".")+1);
+				try {
+					String[] sts = fastdfsClientService.autoUpload(picFile.getBytes(), type);
+					return Result.success(sts[0]+sts[1]);
+				} catch (Exception e) {
+					logger.error("上传到FDSF失败", e);
+					return Result.error("上传文件出错，请重新上传");
+				}
+			}else if (sys.getFileType().equals(FileTypeEnum.LOCAL.getCode())) {
+				// 存储方式：传到本地
 				File pic = new File(SystemUtil.PIC_STORAGE_PATH + fileNo.toString() + "."
 						+ StrUtil.getSuffix(picFile.getOriginalFilename()));
 				try {
@@ -219,8 +238,7 @@ public class ApiUploadBiz extends BaseBiz {
 					return Result.error("上传文件出错，请重新上传");
 				}
 			}
-			return Result.success(AliyunUtil.uploadPic(PlatformEnum.COURSE, picFile,
-					BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
+
 		}
 		return Result.error("请选择上传的图片");
 	}
@@ -238,8 +256,24 @@ public class ApiUploadBiz extends BaseBiz {
 				Result.error("未配置系统配置表");
 			}
 			Long fileNo = IdWorker.getId();
-			// 1、上传到本地
-			if (sys.getFileType().equals(FileTypeEnum.LOCAL.getCode())) {
+
+			if(sys.getFileType().equals(FileTypeEnum.ALIYUN.getCode())){
+				// 存储方式：阿里云
+				return Result.success(AliyunUtil.uploadDoc(PlatformEnum.COURSE, docFile,
+						BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
+			}else if (sys.getFileType().equals(FileTypeEnum.FDSF.getCode())) {
+				// 存储方式：FastDFS
+				String fileName = docFile.getOriginalFilename();
+				String type = fileName.substring(fileName.lastIndexOf(".")+1);
+				try {
+					String[] sts = fastdfsClientService.autoUpload(docFile.getBytes(), type);
+					return Result.success(sts[0]+sts[1]);
+				} catch (Exception e) {
+					logger.error("上传到FDSF失败", e);
+					return Result.error("上传文件出错，请重新上传");
+				}
+			}else if (sys.getFileType().equals(FileTypeEnum.LOCAL.getCode())) {
+				// 存储方式：传到本地
 				File pic = new File(SystemUtil.DOC_STORAGE_PATH + fileNo.toString() + "."
 						+ StrUtil.getSuffix(docFile.getOriginalFilename()));
 				try {
@@ -261,8 +295,7 @@ public class ApiUploadBiz extends BaseBiz {
 					return Result.error("上传文件出错，请重新上传");
 				}
 			}
-			return Result.success(AliyunUtil.uploadDoc(PlatformEnum.COURSE, docFile,
-					BeanUtil.copyProperties(bossSys.getSys(), Aliyun.class)));
+
 		}
 		return Result.error("请选择上传的文件");
 

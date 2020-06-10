@@ -112,6 +112,15 @@
 				<version>${project.version}</version>
 			</dependency>
 
+			<!-- fastdfs -->
+			<!-- https://mvnrepository.com/artifact/com.roncoo/roncoo-spring-boot-starter-fastdfs -->
+			<dependency>
+				<groupId>com.roncoo</groupId>
+				<artifactId>roncoo-spring-boot-starter-fastdfs</artifactId>
+				<version>1.2.0</version>
+			</dependency>
+
+
 			<!-- aliyun -->
 			<!-- fastjson -->
 			<dependency>
@@ -216,34 +225,6 @@
 				<groupId>de.codecentric</groupId>
 				<artifactId>spring-boot-admin-server-ui</artifactId>
 				<version>${de.codecentric.version}</version>
-			</dependency>
-
-			<!-- zipkin -->
-			<dependency>
-				<groupId>io.zipkin.java</groupId>
-				<artifactId>zipkin-server</artifactId>
-				<version>${io.zipkin.java.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.apache.logging.log4j</groupId>
-						<artifactId>log4j-slf4j-impl</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			<dependency>
-				<groupId>io.zipkin.java</groupId>
-				<artifactId>zipkin-autoconfigure-ui</artifactId>
-				<version>${io.zipkin.java.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.zipkin.java</groupId>
-				<artifactId>zipkin-autoconfigure-collector-kafka</artifactId>
-				<version>${io.zipkin.java.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.zipkin.java</groupId>
-				<artifactId>zipkin-autoconfigure-storage-elasticsearch</artifactId>
-				<version>${io.zipkin.java.version}</version>
 			</dependency>
 
 			<dependency>

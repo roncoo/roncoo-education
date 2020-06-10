@@ -8,7 +8,7 @@
 5. roncoo-education-server-admin修改为roncoo-education-server-sba
 6. 修改网关过滤器判断失败，继续执行的bug
 7. 修改网关默认的context-path为/api，使前后端的接口一致
- 
+8. 增加文件存储方式：FastDFS
 
 ###### v6.0.0-RELEASE -- 2020.01.28
 1. 修改网关配置开发环境地址与测试环境地址一致
