@@ -13,7 +13,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum VideoTypeEnum {
 
-	POLYV(1, "保利威视"), QINIU(2, "其他");
+	POLYV(1, "保利威视"), OTHER(2, "其他");
 
 	private Integer code;
 

@@ -3,6 +3,7 @@
  */
 package com.roncoo.education.util.enums;
 
+import com.roncoo.education.util.base.BaseException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

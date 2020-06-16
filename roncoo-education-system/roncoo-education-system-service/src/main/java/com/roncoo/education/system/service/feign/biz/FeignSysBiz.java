@@ -36,11 +36,8 @@ public class FeignSysBiz {
 
 	public int save(SysQO qo) {
 		Sys record = BeanUtil.copyProperties(qo, Sys.class);
-		if (VideoTypeEnum.QINIU.getCode().equals(record.getVideoType())) {
+		if (VideoTypeEnum.OTHER.getCode().equals(record.getVideoType())) {
 			throw new BaseException("视频存储暂未支持七牛");
-		}
-		if (FileTypeEnum.QINIU.getCode().equals(record.getFileType())) {
-			throw new BaseException("文件存储暂未支持七牛");
 		}
 		if (SysTypeEnum.OTHERPAYMENT.getCode().equals(record.getPayType())) {
 			throw new BaseException("支付通道暂时只支持龙果支付");
@@ -59,11 +56,8 @@ public class FeignSysBiz {
 
 	public int updateById(SysQO qo) {
 		Sys record = BeanUtil.copyProperties(qo, Sys.class);
-		if (VideoTypeEnum.QINIU.getCode().equals(record.getVideoType())) {
+		if (VideoTypeEnum.OTHER.getCode().equals(record.getVideoType())) {
 			throw new BaseException("视频存储暂未支持七牛");
-		}
-		if (FileTypeEnum.QINIU.getCode().equals(record.getFileType())) {
-			throw new BaseException("文件存储暂未支持七牛");
 		}
 		if (SysTypeEnum.OTHERPAYMENT.getCode().equals(record.getPayType())) {
 			throw new BaseException("支付通道暂时只支持龙果支付");
