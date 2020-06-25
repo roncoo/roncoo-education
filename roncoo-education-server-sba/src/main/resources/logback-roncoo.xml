@@ -2,9 +2,9 @@
 <configuration>
 
 	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
-	
+
 	<springProperty name="springApplicationName" source="spring.application.name" defaultValue="roncoo-education"/>
-	<springProperty name="FILE_PATH" source="info.roncoo.logging.path" defaultValue="/home/roncoo/logs"/>
+	<springProperty name="FILE_PATH" source="management.endpoint.logfile.external-file" defaultValue="/home/roncoo/logs"/>
 
     <property name="PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -|   %msg%n"/>
 
@@ -20,7 +20,7 @@
 			<appender-ref ref="CONSOLE" />
 		</root>
 	</springProfile>
-	
+
 	<!-- 测试环境 -->
     <springProfile name="dev,test">
         <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">

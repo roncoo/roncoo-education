@@ -212,7 +212,7 @@
 			<!-- de.codecentric -->
 			<dependency>
 				<groupId>de.codecentric</groupId>
-				<artifactId>spring-boot-admin-server-cloud</artifactId>
+				<artifactId>spring-boot-admin-starter-server</artifactId>
 				<version>${de.codecentric.version}</version>
 			</dependency>
 			<dependency>
