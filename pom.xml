@@ -79,7 +79,7 @@
 
 	<properties>
 		<org.springframework.cloud.version>Finchley.SR2</org.springframework.cloud.version>
-		<de.codecentric.version>2.2.3</de.codecentric.version>
+		<de.codecentric.version>2.0.6</de.codecentric.version>
 		<io.zipkin.java.version>2.11.12</io.zipkin.java.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
