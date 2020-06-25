@@ -3,7 +3,7 @@
 ###### v8.0.0-RELEASE
 1. 升级FastDFS的版本，已修复加载出现的bug
 2. 升级swagger2的jar版本
-3. 精简server-sba的jar，移除多余的jar
+3. 升级spring boot admin，精简server-sba的jar，移除多余的jar
 4. 调整日志输出位置，整合日志web输出
 5. 修复类型不匹配的bug
 
