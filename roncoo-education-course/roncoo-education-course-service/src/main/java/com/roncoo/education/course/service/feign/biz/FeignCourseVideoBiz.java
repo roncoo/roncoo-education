@@ -6,6 +6,7 @@ import java.util.List;
 import com.roncoo.education.course.feign.qo.CourseVideoQO;
 import com.roncoo.education.course.feign.vo.CourseVideoVO;
 import com.roncoo.education.util.base.BaseException;
+import com.xiaoleilu.hutool.util.CollectionUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -117,18 +118,23 @@ public class FeignCourseVideoBiz {
 
             // 更新课时审核表视频信息
             List<CourseChapterPeriodAudit> periodAuditList = courseChapterPeriodAuditDao.listByVideoNo(videoNo);
-            for (CourseChapterPeriodAudit periodAudit : periodAuditList) {
-                periodAudit.setVideoLength(result.getDuration());
-                periodAudit.setVideoVid(result.getVid());
-                courseChapterPeriodAuditDao.updateById(periodAudit);
+            if (CollectionUtil.isNotEmpty(periodAuditList)) {
+                for (CourseChapterPeriodAudit periodAudit : periodAuditList) {
+                    periodAudit.setVideoLength(result.getDuration());
+                    periodAudit.setVideoVid(result.getVid());
+                    courseChapterPeriodAuditDao.updateById(periodAudit);
+                }
             }
             // 更新课时视频信息
             List<CourseChapterPeriod> periodList = courseChapterPeriodDao.listByVideoNo(videoNo);
-            for (CourseChapterPeriod period : periodList) {
-                period.setVideoLength(result.getDuration());
-                period.setVideoVid(result.getVid());
-                courseChapterPeriodDao.updateById(period);
+            if (CollectionUtil.isNotEmpty(periodList)) {
+                for (CourseChapterPeriod period : periodList) {
+                    period.setVideoLength(result.getDuration());
+                    period.setVideoVid(result.getVid());
+                    courseChapterPeriodDao.updateById(period);
+                }
             }
+
 
         }
         // 成功删除本地文件
