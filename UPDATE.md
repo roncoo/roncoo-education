@@ -6,6 +6,7 @@
 3. 升级spring boot admin，精简server-sba的jar，移除多余的jar
 4. 调整日志输出位置，整合日志web输出
 5. 修复类型不匹配的bug
+6. 修复上传视频校验bug
 
 ###### v7.0.0-RELEASE
 1. 整理优化演示数据
