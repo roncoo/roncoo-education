@@ -8,6 +8,3 @@ ENTRYPOINT ["sh","-c","java -jar /server-eureka.jar"]
 
 ## docker run
 # docker run -p 5761:5761 -v /home/roncoo/dockers/logs/eureka:/home/roncoo/education/logs/eureka --name eureka -d roncoo-education-server-eureka:8.0.0-RELEASE
-
-## docker push
-# mvn dockerfile:push
