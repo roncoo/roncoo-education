@@ -2,11 +2,11 @@ version: '1'
 services:
   server-eureka:
     restart: always
+    environment:
+      - JAVA_OPTS: '-Xmn128M -Xmx128M'
+      - RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=192.168.1.13'
     build:
       dockerfile: ./roncoo-education-server-eureka
-      args:
-        JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=192.168.1.13'
     image: roncoo-education-server-eureka
     volumes:
       - /home/roncoo/dockers/logs/eureka:/home/roncoo/education/logs/eureka
@@ -16,11 +16,11 @@ services:
       - "5761:5761"
   server-config:
     restart: always
+    environment:
+      - JAVA_OPTS: '-Xmn128M -Xmx128M'
+      - RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=192.168.1.13'
     build:
       dockerfile: ./roncoo-education-server-config
-      args:
-        JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=192.168.1.13'
     image: roncoo-education-server-config
       volumes:
         - /home/roncoo/dockers/logs/config:/home/roncoo/education/logs/config
