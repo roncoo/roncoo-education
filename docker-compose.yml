@@ -2,7 +2,7 @@ version: "2.3"
 services:
   server-eureka:
     build:
-      dockerfile: ./roncoo-education-server-eureka
+      context: ./roncoo-education-server-eureka
     image: roncoo-education-server-eureka
     container_name: eureka
     restart: always
@@ -17,7 +17,7 @@ services:
       - "5761:5761"
   server-config:
     build:
-      dockerfile: ./roncoo-education-server-config
+      context: ./roncoo-education-server-config
     image: roncoo-education-server-config
     container_name: config
     restart: always
