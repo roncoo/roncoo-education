@@ -29,7 +29,7 @@ services:
     networks:
       - education
     ports:
-      - "5721:5721"
+      - "5741:5741"
     depends_on:
       - server-eureka
     links:
