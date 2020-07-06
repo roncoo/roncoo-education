@@ -1,7 +1,7 @@
 FROM daocloud.io/library/java:8-jre-alpine
 MAINTAINER roncoo
 ADD target/server-eureka.jar /server-eureka.jar
-ENTRYPOINT ["sh","-c","/server-eureka.jar"]
+ENTRYPOINT ["sh","-c","java -jar /server-eureka.jar"]
 
 ## docker build
 # mvn clean package dockerfile:build
