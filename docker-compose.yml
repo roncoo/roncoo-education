@@ -67,7 +67,7 @@ services:
     networks:
       - education
     ports:
-      - "5761:5761"
+      - "5710:5710"
     depends_on:
       - server-config
     links:
