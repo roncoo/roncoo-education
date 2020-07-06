@@ -275,6 +275,20 @@
 					<artifactId>sonar-maven-plugin</artifactId>
 					<version>3.6.0.1398</version>
 				</plugin>
+
+				<!-- https://github.com/spotify/dockerfile-maven -->
+				<plugin>
+					<groupId>com.spotify</groupId>
+					<artifactId>dockerfile-maven-plugin</artifactId>
+					<version>1.4.13</version>
+					<configuration>
+						<repository>${project.artifactId}</repository>
+						<tag>${project.version}</tag>
+						<buildArgs>
+							<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+						</buildArgs>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
