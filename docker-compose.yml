@@ -7,8 +7,8 @@ services:
     container_name: eureka
     restart: always
     environment:
-      - JAVA_OPTS: '-Xmn128M -Xmx128M'
-      - RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=192.168.1.13'
+      JAVA_OPTS: '-Xmn128M -Xmx128M'
+      RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=192.168.1.13'
     volumes:
       - /home/roncoo/dockers/logs/eureka:/home/roncoo/education/logs/eureka
     networks:
@@ -22,8 +22,8 @@ services:
     container_name: config
     restart: always
     environment:
-      - JAVA_OPTS: '-Xmn128M -Xmx128M'
-      - RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=192.168.1.13'
+      JAVA_OPTS: '-Xmn128M -Xmx128M'
+      RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=192.168.1.13'
     volumes:
       - /home/roncoo/dockers/logs/config:/home/roncoo/education/logs/config
     networks:
