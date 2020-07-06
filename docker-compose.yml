@@ -9,9 +9,6 @@ services:
     image: roncoo-education-server-eureka
     container_name: eureka
     restart: always
-    environment:
-      JAVA_OPTS: '-Xmn128M -Xmx128M'
-      RUN_ARGS: '--spring.profiles.active=dev'
     volumes:
       - /home/roncoo/dockers/logs/eureka:/home/roncoo/education/logs/eureka
     networks:
@@ -27,9 +24,6 @@ services:
     image: roncoo-education-server-config
     container_name: config
     restart: always
-    environment:
-      JAVA_OPTS: '-Xmn128M -Xmx128M'
-      RUN_ARGS: '--spring.profiles.active=native --info.eureka.host=server-eureka'
     volumes:
       - /home/roncoo/dockers/logs/config:/home/roncoo/education/logs/config
     networks:
@@ -38,6 +32,25 @@ services:
       - "5721:5721"
     depends_on:
       - server-eureka
+    links:
+      - server-eureka
+  server-gateway:
+    build:
+      context: ./roncoo-education-server-gateway
+      args:
+        JAVA_OPTS: '-Xmn128M -Xmx128M'
+        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=server-eureka'
+    image: roncoo-education-server-gateway
+    container_name: gateway
+    restart: always
+    volumes:
+      - /home/roncoo/dockers/logs/gateway:/home/roncoo/education/logs/gateway
+    networks:
+      - education
+    ports:
+      - "5840:5840"
+    depends_on:
+      - server-config
     links:
       - server-eureka
 networks:

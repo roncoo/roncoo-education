@@ -1,11 +1,8 @@
 FROM daocloud.io/library/java:8-jre-alpine
 MAINTAINER roncoo
-ENV PARAMS="--info.eureka.host=192.168.1.13"
+ARG JAVA_OPTS="-Xmx128M"
+ENV JAVA_OPTS=$JAVA_OPTS
+ARG RUN_ARGS="--spring.profiles.active=prod"
+ENV RUN_ARGS=$RUN_ARGS
 ADD target/server-gateway.jar /server-gateway.jar
-ENTRYPOINT ["sh","-c","java -jar /server-gateway.jar $PARAMS"]
-
-## docker build
-# mvn clean package -pl roncoo-education-server-gateway -am dockerfile:build
-
-## docker run
-# docker run -p 5840:5840 -v /home/roncoo/dockers/logs/gateway:/home/roncoo/education/logs/gateway --name gateway -d roncoo-education-server-gateway:8.0.0-RELEASE
+ENTRYPOINT ["sh","-c","java $JAVA_OPTS -jar /server-gateway.jar $RUN_ARGS"]
