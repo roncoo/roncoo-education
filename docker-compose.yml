@@ -30,6 +30,8 @@ services:
       - education
     ports:
       - "5721:5721"
+    depends_on:
+      - server-eureka
 networks:
   education:
     driver: bridge
