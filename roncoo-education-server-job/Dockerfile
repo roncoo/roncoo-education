@@ -1,11 +1,8 @@
 FROM daocloud.io/library/java:8-jre-alpine
 MAINTAINER roncoo
-ENV PARAMS="--info.eureka.host=192.168.1.13"
+ARG JAVA_OPTS="-Xmx128M"
+ENV JAVA_OPTS=$JAVA_OPTS
+ARG RUN_ARGS="--spring.profiles.active=prod"
+ENV RUN_ARGS=$RUN_ARGS
 ADD target/server-job.jar /server-job.jar
-ENTRYPOINT ["sh","-c","java -jar /server-job.jar $PARAMS"]
-
-## docker build
-# mvn clean package dockerfile:build
-
-## docker run
-# docker run -p 5761:5761 -v /home/roncoo/dockers/logs/job:/home/roncoo/education/logs/job --name job -d roncoo-education-server-job:8.0.0-RELEASE
+ENTRYPOINT ["sh","-c","java $JAVA_OPTS -jar /server-job.jar $RUN_ARGS"]
