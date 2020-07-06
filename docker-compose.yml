@@ -53,6 +53,25 @@ services:
       - server-config
     links:
       - server-eureka
+  course-service:
+    build:
+      context: ./roncoo-education-course/roncoo-education-course-service
+      args:
+        JAVA_OPTS: '-Xmn128M -Xmx128M'
+        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=server-eureka'
+    image: roncoo-education-course-service
+    container_name: course
+    restart: always
+    volumes:
+      - /home/roncoo/dockers/logs/course:/home/roncoo/education/logs/course
+    networks:
+      - education
+    ports:
+      - "5761:5761"
+    depends_on:
+      - server-config
+    links:
+      - server-eureka
 networks:
   education:
     driver: bridge
