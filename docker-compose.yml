@@ -34,6 +34,44 @@ services:
       - server-eureka
     links:
       - server-eureka
+  server-sba:
+    build:
+      context: ./roncoo-education-server-sba
+      args:
+        JAVA_OPTS: '-Xmn128M -Xmx128M'
+        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=server-eureka'
+    image: roncoo-education-server-sba
+    container_name: sba
+    restart: always
+    volumes:
+      - /home/roncoo/dockers/logs/sba:/home/roncoo/education/logs/sba
+    networks:
+      - education
+    ports:
+      - "5721:5721"
+    depends_on:
+      - server-eureka
+    links:
+      - server-eureka
+  server-job:
+    build:
+      context: ./roncoo-education-server-job
+      args:
+        JAVA_OPTS: '-Xmn128M -Xmx128M'
+        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=server-eureka'
+    image: roncoo-education-server-job
+    container_name: job
+    restart: always
+    volumes:
+      - /home/roncoo/dockers/logs/job:/home/roncoo/education/logs/job
+    networks:
+      - education
+    ports:
+      - "5820:5820"
+    depends_on:
+      - server-eureka
+    links:
+      - server-eureka
   server-gateway:
     build:
       context: ./roncoo-education-server-gateway
@@ -49,6 +87,44 @@ services:
       - education
     ports:
       - "5840:5840"
+    depends_on:
+      - server-config
+    links:
+      - server-eureka
+  system-service:
+    build:
+      context: ./roncoo-education-system/roncoo-education-system-service
+      args:
+        JAVA_OPTS: '-Xmn128M -Xmx128M'
+        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=server-eureka'
+    image: roncoo-education-system-service
+    container_name: system
+    restart: always
+    volumes:
+      - /home/roncoo/dockers/logs/system:/home/roncoo/education/logs/system
+    networks:
+      - education
+    ports:
+      - "5730:5730"
+    depends_on:
+      - server-config
+    links:
+      - server-eureka
+  user-service:
+    build:
+      context: ./roncoo-education-user/roncoo-education-user-service
+      args:
+        JAVA_OPTS: '-Xmn128M -Xmx128M'
+        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=server-eureka'
+    image: roncoo-education-user-service
+    container_name: user
+    restart: always
+    volumes:
+      - /home/roncoo/dockers/logs/user:/home/roncoo/education/logs/user
+    networks:
+      - education
+    ports:
+      - "5720:5720"
     depends_on:
       - server-config
     links:
@@ -76,7 +152,6 @@ networks:
   education:
     driver: bridge
 
-## docker build
-# mvn clean package dockerfile:build
-## docker run
-# docker run -p 5761:5761 -v /home/roncoo/dockers/logs/eureka:/home/roncoo/education/logs/eureka --name eureka -d roncoo-education-server-eureka:8.0.0-RELEASE
+# mvn clean package
+# docker-compose build
+# docker-compose up -d
