@@ -1,35 +1,37 @@
 version: '1'
 services:
   server-eureka:
-    restart: always
-    environment:
-      - JAVA_OPTS: '-Xmn128M -Xmx128M'
-      - RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=192.168.1.13'
     build:
       dockerfile: ./roncoo-education-server-eureka
     image: roncoo-education-server-eureka
-    volumes:
-      - /home/roncoo/dockers/logs/eureka:/home/roncoo/education/logs/eureka
-    networks:
-      - edu-net
-    ports:
-      - "5761:5761"
-  server-config:
+    container_name: eureka
     restart: always
     environment:
       - JAVA_OPTS: '-Xmn128M -Xmx128M'
       - RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=192.168.1.13'
+    volumes:
+      - /home/roncoo/dockers/logs/eureka:/home/roncoo/education/logs/eureka
+    networks:
+      - education
+    ports:
+      - "5761:5761"
+  server-config:
     build:
       dockerfile: ./roncoo-education-server-config
     image: roncoo-education-server-config
-      volumes:
-        - /home/roncoo/dockers/logs/config:/home/roncoo/education/logs/config
-      networks:
-        - edu-net
-      ports:
-        - "5721:5721"
+    container_name: config
+    restart: always
+    environment:
+      - JAVA_OPTS: '-Xmn128M -Xmx128M'
+      - RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=192.168.1.13'
+    volumes:
+      - /home/roncoo/dockers/logs/config:/home/roncoo/education/logs/config
+    networks:
+      - education
+    ports:
+      - "5721:5721"
 networks:
-  edu-net:
+  education:
     driver: bridge
 
 ## docker build
