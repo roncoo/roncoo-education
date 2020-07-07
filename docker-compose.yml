@@ -1,4 +1,4 @@
-version: "2.3"
+version: "3.0"
 services:
   server-eureka:
     build:
@@ -107,7 +107,7 @@ services:
     ports:
       - "5730:5730"
     depends_on:
-      - server-config
+      - server-gateway
     links:
       - server-eureka
   user-service:
@@ -126,7 +126,7 @@ services:
     ports:
       - "5720:5720"
     depends_on:
-      - server-config
+      - server-gateway
     links:
       - server-eureka
   course-service:
@@ -145,7 +145,7 @@ services:
     ports:
       - "5710:5710"
     depends_on:
-      - server-config
+      - server-gateway
     links:
       - server-eureka
 networks:
