@@ -151,7 +151,3 @@ services:
 networks:
   education:
     driver: bridge
-
-# mvn clean package
-# docker-compose build
-# docker-compose up -d
