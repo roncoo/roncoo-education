@@ -9,6 +9,7 @@
 6. 修复上传视频校验bug
 7. 增加docker部署方式
 
+---
 ###### v7.0.0-RELEASE
 1. 整理优化演示数据
 2. 修复课程简介为空不显示课程信息
@@ -19,6 +20,7 @@
 7. 修改网关默认的context-path为/api，使前后端的接口一致
 8. 增加文件存储方式：FastDFS
 
+---
 ###### v6.0.0-RELEASE -- 2020.01.28
 1. 修改网关配置开发环境地址与测试环境地址一致
 2. 移除roncoo-druid，替换为alibaba-druid
@@ -29,10 +31,8 @@
 ---
 ###### v5.0.0-RELEASE -- 2019.10.28
 1. 移除roncoo-education-web-boss工程，替换为roncoo-education-admin，单独维护
-1. 架构调整，更接近商业版架构（移除roncoo-education-course-common、roncoo-education-system-common、
-   roncoo-education-user-common3个工程）
-2. 修改bug和漏洞若干
-
+2. 架构调整，更接近商业版架构（移除roncoo-education-course-common、roncoo-education-system-common、roncoo-education-user-common3个工程）
+3. 修改bug和漏洞若干
  ---
 ###### v4.0.0-RELEASE -- 2019.08.16
 1. 管理后台使用Vue实现前后端分离

@@ -1,6 +1,4 @@
-<div align=center>
- <img src="logo.jpg"/>
-</div>
+<div align=center><img src="logo.jpg"/></div>
 
 ##### 领课教育系统(roncoo-education)：[码云地址](https://gitee.com/roncoocom/roncoo-education) | [Github地址](https://github.com/roncoo/roncoo-education)
 > roncoo-education是后台工程，核心框架：Spring Cloud  
@@ -11,13 +9,20 @@
 ##### 后台管理工程(roncoo-education-admin)：[码云地址](https://gitee.com/roncoocom/roncoo-education-admin) | [Github地址](https://github.com/roncoo/roncoo-education-admin)
 > roncoo-education-admin是后台管理工程，核心框架：vue-element-admin
 
-### 演示地址
-##### 前端演示地址：[领课教育](http://edu.os.roncoo.com/) | 后台演示地址：[运营后台](http://edu.os.roncoo.com/admin)
+### 演示地址（如果对你有用，请给个star！）
+| 前端演示地址 | 后台演示地址 |
+|---|---|
+| [领课教育系统-开源版](http://edu.os.roncoo.com/) | [管理运营后台-开源版](http://edu.os.roncoo.com/admin) |
 
 ### 使用文档（如果对你有用，请给个star！）
-##### [项目介绍](https://blog.roncoo.com/article/1105321762337357826)  |  [部署文档](https://blog.roncoo.com/article/1103554925858197505)  |  [常见问题](https://blog.roncoo.com/article/1105309620724858882)
-##### [领课教育系统-FastDFS安装](https://blog.roncoo.com/article/1275251133292867586)
 ##### [领课教育系统-开源版-项目文档](http://doc.os.roncoos.com/)
+##### [领课教育系统-MySQL安装](https://blog.roncoo.com/article/1280781211745636354)
+##### [领课教育系统-Redis安装](https://blog.roncoo.com/article/1281402533735550977)
+##### [领课教育系统-Elasticsearch安装](https://blog.roncoo.com/article/1281405654742323202)
+##### [领课教育系统-FastDFS安装](https://blog.roncoo.com/article/1275251133292867586)
+##### [项目介绍](https://blog.roncoo.com/article/1105321762337357826)  |  [部署文档](https://blog.roncoo.com/article/1103554925858197505)  |  [常见问题](https://blog.roncoo.com/article/1105309620724858882)
+
+---
 
 ### 项目介绍
 领课教育系统（roncoo-education）是基于领课网络多年的在线教育平台开发和运营经验打造出来的产品，致力于打造一个各行业都适用的分布式在线教育系统。系统采用前后端分离模式，前台采用vue.js为核心框架，后台采用Spring Cloud为核心框架。系统目前主要功能有课程点播功能，支持多家视频云的接入，课程附件管理功能，支持多家存储云的接入，讲师管理功能，支持讲师入驻功能，可以帮助个人或者企业快速搭建一个轻量级的在线教育平台。
