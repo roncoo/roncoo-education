@@ -282,7 +282,7 @@
 					<artifactId>dockerfile-maven-plugin</artifactId>
 					<version>1.4.13</version>
 					<configuration>
-						<repository>harbor.roncoos.com/library/${project.artifactId}</repository>
+						<repository>harbor.roncoo.com/library/${project.artifactId}</repository>
 						<tag>${project.version}</tag>
 						<buildArgs>
 							<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
