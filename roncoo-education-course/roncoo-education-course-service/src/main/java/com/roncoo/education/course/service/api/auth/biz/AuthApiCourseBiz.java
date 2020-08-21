@@ -213,6 +213,7 @@ public class AuthApiCourseBiz extends BaseBiz {
 		public StudyLog(AuthCourseSignBO authCourseSignBO, CourseChapterPeriod courseChapterPeriod, Course course, CourseChapter courseChapter) {
 			this.authCourseSignBO = authCourseSignBO;
 			this.courseChapterPeriod = courseChapterPeriod;
+			this.courseChapter = courseChapter;
 			this.course = course;
 		}
 
