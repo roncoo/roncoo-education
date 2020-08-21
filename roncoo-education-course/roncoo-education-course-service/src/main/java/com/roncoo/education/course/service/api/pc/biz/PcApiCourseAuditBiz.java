@@ -302,7 +302,7 @@ public class PcApiCourseAuditBiz {
 			courseIntroduceDao.save(introduce);
 		} else {
 			courseIntroduce = BeanUtil.copyProperties(courseIntroduceAudit, CourseIntroduce.class);
-			courseIntroduceAuditDao.updateById(courseIntroduceAudit);
+			courseIntroduceDao.updateById(courseIntroduceAudit);
 		}
 		// 3、对章节操作
 		chapter(courseAudit);
