@@ -15,9 +15,9 @@
 ###### v7.0.0-RELEASE
 1. 整理优化演示数据
 2. 修复课程简介为空不显示课程信息
-3. roncoo-education-gateway修改为roncoo-education-app-gateway
-4. roncoo-education-job修改为roncoo-education-app-job
-5. roncoo-education-app-admin修改为roncoo-education-app-sba
+3. roncoo-education-gateway修改为roncoo-education-server-gateway
+4. roncoo-education-job修改为roncoo-education-server-job
+5. roncoo-education-server-admin修改为roncoo-education-server-sba
 6. 修改网关过滤器判断失败，继续执行的bug
 7. 修改网关默认的context-path为/api，使前后端的接口一致
 8. 增加文件存储方式：FastDFS
@@ -54,7 +54,7 @@
 
  ---
 ###### v2.0.0-RELEASE -- 2019.03.18
-1. 集成了链路监控：roncoo-education-app-zipkin
+1. 集成了链路监控：roncoo-education-server-zipkin
 2. 新增站内信功能
 3. 新增推荐课程功能
 4. 新增发送验证码功能

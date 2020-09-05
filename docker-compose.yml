@@ -1,6 +1,6 @@
 version: "3.0"
 services:
-  server-eureka:
+  app-eureka:
     build:
       context: ./roncoo-education-app-eureka
       args:
@@ -15,12 +15,12 @@ services:
       - education
     ports:
       - "5761:5761"
-  server-config:
+  app-config:
     build:
       context: ./roncoo-education-app-config
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=native --info.eureka.host=server-eureka'
+        RUN_ARGS: '--spring.profiles.active=native --info.eureka.host=app-eureka'
     image: roncoo-education-app-config
     container_name: config
     restart: always
@@ -31,15 +31,15 @@ services:
     ports:
       - "5741:5741"
     depends_on:
-      - server-eureka
+      - app-eureka
     links:
-      - server-eureka
-  server-sba:
+      - app-eureka
+  app-sba:
     build:
       context: ./roncoo-education-app-sba
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=server-eureka'
+        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=app-eureka'
     image: roncoo-education-app-sba
     container_name: sba
     restart: always
@@ -50,15 +50,15 @@ services:
     ports:
       - "5721:5721"
     depends_on:
-      - server-config
+      - app-config
     links:
-      - server-eureka
-  server-job:
+      - app-eureka
+  app-job:
     build:
       context: ./roncoo-education-app-job
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=server-eureka'
+        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=app-eureka'
     image: roncoo-education-app-job
     container_name: job
     restart: always
@@ -69,15 +69,15 @@ services:
     ports:
       - "5820:5820"
     depends_on:
-      - server-config
+      - app-config
     links:
-      - server-eureka
-  server-gateway:
+      - app-eureka
+  app-gateway:
     build:
       context: ./roncoo-education-app-gateway
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=server-eureka'
+        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=app-eureka'
     image: roncoo-education-app-gateway
     container_name: gateway
     restart: always
@@ -88,15 +88,15 @@ services:
     ports:
       - "5840:5840"
     depends_on:
-      - server-config
+      - app-config
     links:
-      - server-eureka
+      - app-eureka
   system-service:
     build:
       context: ./roncoo-education-system/roncoo-education-system-service
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=server-eureka'
+        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=app-eureka'
     image: roncoo-education-system-service
     container_name: system
     restart: always
@@ -107,15 +107,15 @@ services:
     ports:
       - "5730:5730"
     depends_on:
-      - server-gateway
+      - app-gateway
     links:
-      - server-eureka
+      - app-eureka
   user-service:
     build:
       context: ./roncoo-education-user/roncoo-education-user-service
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=server-eureka'
+        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=app-eureka'
     image: roncoo-education-user-service
     container_name: user
     restart: always
@@ -126,15 +126,15 @@ services:
     ports:
       - "5720:5720"
     depends_on:
-      - server-gateway
+      - app-gateway
     links:
-      - server-eureka
+      - app-eureka
   course-service:
     build:
       context: ./roncoo-education-course/roncoo-education-course-service
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=server-eureka'
+        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=app-eureka'
     image: roncoo-education-course-service
     container_name: course
     restart: always
@@ -145,9 +145,9 @@ services:
     ports:
       - "5710:5710"
     depends_on:
-      - server-gateway
+      - app-gateway
     links:
-      - server-eureka
+      - app-eureka
 networks:
   education:
     driver: bridge
