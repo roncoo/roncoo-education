@@ -2,11 +2,11 @@ version: "3.0"
 services:
   server-eureka:
     build:
-      context: ./roncoo-education-server-eureka
+      context: ./roncoo-education-app-eureka
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
         RUN_ARGS: '--spring.profiles.active=dev'
-    image: roncoo-education-server-eureka
+    image: roncoo-education-app-eureka
     container_name: eureka
     restart: always
     volumes:
@@ -17,11 +17,11 @@ services:
       - "5761:5761"
   server-config:
     build:
-      context: ./roncoo-education-server-config
+      context: ./roncoo-education-app-config
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
         RUN_ARGS: '--spring.profiles.active=native --info.eureka.host=server-eureka'
-    image: roncoo-education-server-config
+    image: roncoo-education-app-config
     container_name: config
     restart: always
     volumes:
@@ -36,11 +36,11 @@ services:
       - server-eureka
   server-sba:
     build:
-      context: ./roncoo-education-server-sba
+      context: ./roncoo-education-app-sba
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
         RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=server-eureka'
-    image: roncoo-education-server-sba
+    image: roncoo-education-app-sba
     container_name: sba
     restart: always
     volumes:
@@ -55,11 +55,11 @@ services:
       - server-eureka
   server-job:
     build:
-      context: ./roncoo-education-server-job
+      context: ./roncoo-education-app-job
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
         RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=server-eureka'
-    image: roncoo-education-server-job
+    image: roncoo-education-app-job
     container_name: job
     restart: always
     volumes:
@@ -74,11 +74,11 @@ services:
       - server-eureka
   server-gateway:
     build:
-      context: ./roncoo-education-server-gateway
+      context: ./roncoo-education-app-gateway
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
         RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=server-eureka'
-    image: roncoo-education-server-gateway
+    image: roncoo-education-app-gateway
     container_name: gateway
     restart: always
     volumes:

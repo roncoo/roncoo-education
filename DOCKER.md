@@ -1,11 +1,11 @@
 #### 端口设置
 |                服务名称             |     服务端口     | 
 | --------------------------------- | --------------- |
-| roncoo-education-server-eureka    |  5761           |
-| roncoo-education-server-confg     |  5741           |
-| roncoo-education-server-sba       |  5721           |
-| roncoo-education-server-job       |  5820           |
-| roncoo-education-server-gateway   |  5840           |
+| roncoo-education-app-eureka    |  5761           |
+| roncoo-education-app-confg     |  5741           |
+| roncoo-education-app-sba       |  5721           |
+| roncoo-education-app-job       |  5820           |
+| roncoo-education-app-gateway   |  5840           |
 | roncoo-education-system           |  5730           |
 | roncoo-education-user             |  5720           |
 | roncoo-education-course           |  5710           |
@@ -21,4 +21,4 @@
 # docker-compose up -d
 ```
 > 特别说明：请提前配置好MySQL、Redis、Elasticsearch  
-> 配置文件在 **./roncoo-education-server-config/src/main/resources/config**
+> 配置文件在 **./roncoo-education-app-config/src/main/resources/config**
