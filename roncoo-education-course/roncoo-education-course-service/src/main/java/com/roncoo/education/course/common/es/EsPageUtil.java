@@ -3,17 +3,16 @@
  */
 package com.roncoo.education.course.common.es;
 
+import com.roncoo.education.util.base.Page;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
+
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
-
-import com.roncoo.education.util.base.Page;
 
 /**
  * 分页
@@ -30,7 +29,7 @@ public final class EsPageUtil<T extends Serializable> implements Serializable {
 	private EsPageUtil() {
 	}
 
-	public static <T extends Serializable> Page<T> transform(org.springframework.data.domain.Page<EsCourse> page, Class<T> classType) {
+	public static <T extends Serializable> Page<T> transform(org.springframework.data.domain.Page<?> page, Class<T> classType) {
 		Page<T> pb = new Page<>();
 		try {
 			pb.setList(copyList(page.getContent(), classType));

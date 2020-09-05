@@ -18,21 +18,22 @@ import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.get.MultiGetItemResponse;
 import org.elasticsearch.action.get.MultiGetResponse;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.common.document.DocumentField;
 import org.elasticsearch.common.text.Text;
 import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.SearchHitField;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.ElasticsearchException;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.ScriptedField;
-import org.springframework.data.elasticsearch.core.AbstractResultMapper;
 import org.springframework.data.elasticsearch.core.DefaultEntityMapper;
+import org.springframework.data.elasticsearch.core.DefaultResultMapper;
 import org.springframework.data.elasticsearch.core.EntityMapper;
 import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
 import org.springframework.data.elasticsearch.core.aggregation.impl.AggregatedPageImpl;
 import org.springframework.data.elasticsearch.core.mapping.ElasticsearchPersistentEntity;
 import org.springframework.data.elasticsearch.core.mapping.ElasticsearchPersistentProperty;
+import org.springframework.data.elasticsearch.core.mapping.SimpleElasticsearchMappingContext;
 import org.springframework.data.mapping.context.MappingContext;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -42,22 +43,22 @@ import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
- * 类名称：ExtResultMapper 类描述：自定义结果映射类 创建人：WeJan 创建时间：2018-09-13 20:47
- *
- * http://nullpointer.pw/
  */
+@Slf4j
 @Component
-public class ResultMapperExt extends AbstractResultMapper {
+public class ResultMapperExt extends DefaultResultMapper {
 
 	private MappingContext<? extends ElasticsearchPersistentEntity<?>, ElasticsearchPersistentProperty> mappingContext;
 
 	public ResultMapperExt() {
-		super(new DefaultEntityMapper());
+		this(new SimpleElasticsearchMappingContext());
 	}
 
 	public ResultMapperExt(MappingContext<? extends ElasticsearchPersistentEntity<?>, ElasticsearchPersistentProperty> mappingContext) {
-		super(new DefaultEntityMapper());
+		super(new DefaultEntityMapper(mappingContext));
 		this.mappingContext = mappingContext;
 	}
 
@@ -67,19 +68,17 @@ public class ResultMapperExt extends AbstractResultMapper {
 
 	public ResultMapperExt(MappingContext<? extends ElasticsearchPersistentEntity<?>, ElasticsearchPersistentProperty> mappingContext, EntityMapper entityMapper) {
 		super(entityMapper);
-		this.mappingContext = mappingContext;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public <T> AggregatedPage<T> mapResults(SearchResponse response, Class<T> clazz, Pageable pageable) {
-		long totalHits = response.getHits().totalHits();
+		long totalHits = response.getHits().getTotalHits();
 		List<T> results = new ArrayList<>();
 		for (SearchHit hit : response.getHits()) {
 			if (hit != null) {
 				T result = null;
-				if (StringUtils.hasText(hit.sourceAsString())) {
-					result = mapEntity(hit.sourceAsString(), clazz);
+				if (StringUtils.hasText(hit.getSourceAsString())) {
+					result = mapEntity(hit.getSourceAsString(), clazz);
 				} else {
 					result = mapEntity(hit.getFields().values(), clazz);
 				}
@@ -120,13 +119,13 @@ public class ResultMapperExt extends AbstractResultMapper {
 				ScriptedField scriptedField = field.getAnnotation(ScriptedField.class);
 				if (scriptedField != null) {
 					String name = scriptedField.name().isEmpty() ? field.getName() : scriptedField.name();
-					SearchHitField searchHitField = hit.getFields().get(name);
-					if (searchHitField != null) {
+					DocumentField DocumentField = hit.getFields().get(name);
+					if (DocumentField != null) {
 						field.setAccessible(true);
 						try {
-							field.set(result, searchHitField.getValue());
+							field.set(result, DocumentField.getValue());
 						} catch (IllegalArgumentException e) {
-							throw new ElasticsearchException("failed to set scripted field: " + name + " with value: " + searchHitField.getValue(), e);
+							throw new ElasticsearchException("failed to set scripted field: " + name + " with value: " + DocumentField.getValue(), e);
 						} catch (IllegalAccessException e) {
 							throw new ElasticsearchException("failed to access scripted field: " + name, e);
 						}
@@ -136,17 +135,18 @@ public class ResultMapperExt extends AbstractResultMapper {
 		}
 	}
 
-	private <T> T mapEntity(Collection<SearchHitField> values, Class<T> clazz) {
+	private <T> T mapEntity(Collection<DocumentField> values, Class<T> clazz) {
 		return mapEntity(buildJSONFromFields(values), clazz);
 	}
 
-	private String buildJSONFromFields(Collection<SearchHitField> values) {
+	private String buildJSONFromFields(Collection<DocumentField> values) {
 		JsonFactory nodeFactory = new JsonFactory();
+		JsonGenerator generator = null;
 		try {
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
-			JsonGenerator generator = nodeFactory.createGenerator(stream, JsonEncoding.UTF8);
+			generator = nodeFactory.createGenerator(stream, JsonEncoding.UTF8);
 			generator.writeStartObject();
-			for (SearchHitField value : values) {
+			for (DocumentField value : values) {
 				if (value.getValues().size() > 1) {
 					generator.writeArrayFieldStart(value.getName());
 					for (Object val : value.getValues()) {
@@ -162,6 +162,14 @@ public class ResultMapperExt extends AbstractResultMapper {
 			return new String(stream.toByteArray(), Charset.forName("UTF-8"));
 		} catch (IOException e) {
 			return null;
+		} finally {
+			if (generator != null) {
+				try {
+					generator.close();
+				} catch (IOException e) {
+					log.error("关闭数据流失败", e);
+				}
+			}
 		}
 	}
 
