@@ -1,5 +1,14 @@
 <div align=center><img src="logo.jpg"/></div>
 
+### 分支组件使用说明
+| 名称 | master分支 | alibaba分支 |
+|:---|:---|:---|
+| 核心组件 | spring cloud netflix |  spring cloud alibaba |
+| 注册中心 | Eureka |  Nacos |
+| 配置中心 | Config |  Nacos |
+| 断路器 | Hystrix |  Sentinel |
+| 服务网关 | Zuul |  Gateway |
+
 ##### 领课教育系统(roncoo-education)：[码云地址](https://gitee.com/roncoocom/roncoo-education) | [Github地址](https://github.com/roncoo/roncoo-education)
 > roncoo-education是后台工程，核心框架：Spring Cloud  
 
