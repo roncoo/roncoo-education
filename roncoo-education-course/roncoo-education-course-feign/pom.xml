@@ -9,7 +9,6 @@
 	</parent>
 
 	<artifactId>roncoo-education-course-feign</artifactId>
-
 	<name>roncoo-education-course-feign</name>
 
 	<dependencies>
@@ -23,5 +22,4 @@
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
 	</dependencies>
-
 </project>

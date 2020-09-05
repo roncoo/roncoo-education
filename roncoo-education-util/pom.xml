@@ -10,11 +10,9 @@
   </parent>
 
   <artifactId>roncoo-education-util</artifactId>
-
   <name>roncoo-education-util</name>
 
   <dependencies>
-
     <!-- aliyun oss -->
     <dependency>
       <groupId>com.aliyun.oss</groupId>
@@ -132,7 +130,6 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
     </dependency>
-
   </dependencies>
 
   <build>
@@ -152,5 +149,4 @@
       </resource>
     </resources>
   </build>
-
 </project>
