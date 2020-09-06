@@ -4,5 +4,5 @@ ARG JAVA_OPTS="-Xmx128M"
 ENV JAVA_OPTS=$JAVA_OPTS
 ARG RUN_ARGS="--spring.profiles.active=prod"
 ENV RUN_ARGS=$RUN_ARGS
-ADD target/server-config.jar /server-config.jar
-ENTRYPOINT ["sh","-c","java $JAVA_OPTS -jar /server-config.jar $RUN_ARGS"]
+ADD target/app-config.jar /app-config.jar
+ENTRYPOINT ["sh","-c","java $JAVA_OPTS -jar /app-config.jar $RUN_ARGS"]
