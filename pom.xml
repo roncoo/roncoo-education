@@ -324,10 +324,6 @@
   </profiles>
 
   <modules>
-    <!-- 注册中心 -->
-    <module>roncoo-education-app-eureka</module>
-    <!-- 配置中心 -->
-    <module>roncoo-education-app-config</module>
     <!-- 网关接口 -->
     <module>roncoo-education-app-gateway</module>
     <!-- 定时任务 -->
