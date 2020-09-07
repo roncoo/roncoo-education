@@ -1,5 +1,8 @@
 ### 版本升级日志
 ---
+###### v9.0.0-RELEASE
+
+---
 ###### v8.0.0-RELEASE
 1. 升级FastDFS的版本，已修复加载出现的bug
 2. 升级swagger2的jar版本
