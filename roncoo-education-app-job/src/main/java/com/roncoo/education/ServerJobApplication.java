@@ -14,10 +14,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableFeignClients
 @SpringCloudApplication
-public class CrontabPlanApplication {
+public class ServerJobApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CrontabPlanApplication.class, args);
+        SpringApplication.run(ServerJobApplication.class, args);
     }
 
 }

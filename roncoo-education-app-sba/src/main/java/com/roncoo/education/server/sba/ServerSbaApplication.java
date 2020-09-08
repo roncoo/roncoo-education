@@ -12,10 +12,10 @@ import de.codecentric.boot.admin.server.config.EnableAdminServer;
 @EnableAdminServer
 @EnableDiscoveryClient
 @SpringBootApplication
-public class ServerAdminApplication {
+public class ServerSbaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ServerAdminApplication.class, args);
+		SpringApplication.run(ServerSbaApplication.class, args);
 	}
 
 }
