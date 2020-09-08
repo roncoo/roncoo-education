@@ -15,12 +15,12 @@ import com.roncoo.education.server.gateway.common.FilterPre;
 
 /**
  * 服务网关
- * 
+ *
  * @author wujing
  */
 @EnableZuulProxy
 @SpringCloudApplication
-public class GatewayApiApplication {
+public class ServerGatewayApplication {
 
 	@Bean
 	public CorsFilter corsFilter() {
@@ -36,7 +36,7 @@ public class GatewayApiApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(GatewayApiApplication.class, args);
+		SpringApplication.run(ServerGatewayApplication.class, args);
 	}
 
 	@Bean
