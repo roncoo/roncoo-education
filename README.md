@@ -56,10 +56,12 @@
 
 ### 官方QQ群（加群免费获取sql脚本）
 
-<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=e0f66ae59613b485ae95664444aa4b4e210848da8bc2f09bd9eb6eaa654dd6b5"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课⑧" title="在线教育系统-领课⑧"> 154407415</a> 可加
+<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=5hPSMiWCiKukEStUPngTpPHgt-v1JTL9&jump_from=webapi"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课⑨" title="在线教育系统-领课⑨"> 284915592</a> 可加
 
-> QQ群：1028579521(已满) QQ群：532451240(已满)  QQ群：903738971(已满)   QQ群：74876271 (已满)  
-> QQ群：774890501(已满)   QQ群：702189511(已满)   QQ群：826617734(已满) 
+> QQ群：1028579521(已满)
+> QQ群：532451240(已满)  QQ群：903738971(已满)   QQ群：74876271 (已满)  
+> QQ群：774890501(已满)   QQ群：702189511(已满)   QQ群：826617734(已满)
+> QQ群：154407415(已满)
 
 ### 商业合作
 * 如果您想使用功能更完善的教育系统，我们有 [领课教育系统商业版](https://edu.roncoo.net/)！
