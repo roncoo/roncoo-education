@@ -1,6 +1,7 @@
 ### 版本升级日志
 ---
 ###### v9.0.0-RELEASE
+1. app-job的启动bug修复
 
 ---
 ###### v8.0.0-RELEASE
@@ -12,7 +13,7 @@
 6. 修复上传视频校验bug
 7. 增加docker部署方式
 8. 升级核心框架版本，并修复升级版本导致的问题
-9. 修改子项目名称，更符合业务特性
+9. 修改子项目名称，roncoo-education-server-*修改为roncoo-education-app-*，更符合业务特性
 
 ---
 ###### v7.0.0-RELEASE

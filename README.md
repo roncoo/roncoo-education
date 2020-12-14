@@ -3,7 +3,7 @@
 ### 分支使用组件说明
 | 名称 | master分支 | alibaba分支 |
 |:---|:---|:---|
-| 核心组件 | spring cloud netflix Hoxton.SR3  |  spring cloud alibaba 2.2.1.RELEASE  |
+| 核心组件 | spring cloud netflix Hoxton.SR3  |  spring cloud alibaba 2.2.2.RELEASE  |
 | 注册中心 | spring cloud netflix eureka      |  spring cloud alibaba nacos          |
 | 配置中心 | spring cloud config              |  spring cloud alibaba nacos          |
 | 断路器   | spring cloud netflix hystrix    |  spring cloud alibaba sentinel        |
