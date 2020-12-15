@@ -13,15 +13,14 @@
   <name>roncoo-education-user-service</name>
 
   <dependencies>
-    <!-- eureka-client -->
+    <!-- Nacos -->
     <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+      <groupId>com.alibaba.cloud</groupId>
+      <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
     </dependency>
-    <!-- config -->
     <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-config</artifactId>
+      <groupId>com.alibaba.cloud</groupId>
+      <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
     </dependency>
     <!-- hystrix -->
     <dependency>

@@ -94,6 +94,15 @@
         <scope>import</scope>
       </dependency>
 
+      <!-- spring cloud alibaba -->
+      <dependency>
+        <groupId>com.alibaba.cloud</groupId>
+        <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+        <version>2.2.3.RELEASE</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
       <!-- com.roncoo -->
       <dependency>
         <groupId>com.roncoo</groupId>
@@ -313,10 +322,6 @@
   </profiles>
 
   <modules>
-    <!-- 注册中心 -->
-    <module>roncoo-education-app-eureka</module>
-    <!-- 配置中心 -->
-    <module>roncoo-education-app-config</module>
     <!-- 网关接口 -->
     <module>roncoo-education-app-gateway</module>
     <!-- 定时任务 -->
