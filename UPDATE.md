@@ -2,6 +2,7 @@
 ---
 ###### v9.0.0-RELEASE
 1. app-job的启动bug修复
+2. 主分支切换为alibaba分支
 
 ---
 ###### v8.0.0-RELEASE

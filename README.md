@@ -1,13 +1,13 @@
 <div align=center><img src="logo.jpg"/></div>
 
 ### 分支使用组件说明
-| 名称 | master分支 | alibaba分支 |
+| 名称 | 主分支(Alibaba分支) | Nextfile分支 |
 |:---|:---|:---|
-| 核心组件 | spring cloud netflix Hoxton.SR3  |  spring cloud alibaba 2.2.2.RELEASE  |
-| 注册中心 | spring cloud netflix eureka      |  spring cloud alibaba nacos          |
-| 配置中心 | spring cloud config              |  spring cloud alibaba nacos          |
-| 断路器   | spring cloud netflix hystrix    |  spring cloud alibaba sentinel        |
-| 服务网关 | spring cloud netflix zuul       |  spring cloud gateway                 |
+| 核心组件 |  spring cloud alibaba 2.2.3.RELEASE |  spring cloud netflix Hoxton.SR3 |
+| 注册中心 |  spring cloud alibaba nacos         |  spring cloud netflix eureka     |
+| 配置中心 |  spring cloud alibaba nacos         |  spring cloud config             |
+| 服务熔断 |  spring cloud alibaba sentinel      |  spring cloud netflix hystrix    |
+| 服务网关 |  spring cloud gateway               |  spring cloud netflix zuul       |
 
 ---
 
@@ -58,10 +58,9 @@
 
 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=DOTD1t5YG-KYfi6JSW4Yms9XWFkNsya6&jump_from=webapi"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课⑩" title="在线教育系统-领课⑩"> 703455569</a> 可加
 
-> QQ群：1028579521(已满)
-> QQ群：532451240(已满)  QQ群：903738971(已满)   QQ群：74876271 (已满)  
-> QQ群：774890501(已满)   QQ群：702189511(已满)   QQ群：826617734(已满)
-> QQ群：154407415(已满)   QQ群：284915592(已满)
+> QQ群：532451240(已满) | QQ群：903738971(已满) | QQ群：74876271 (已满)       
+> QQ群：774890501(已满) | QQ群：702189511(已满) | QQ群：826617734(已满)  
+> QQ群：154407415(已满) | QQ群：284915592(已满) | QQ群：1028579521(已满)  
 
 ### 商业合作
 * 如果您想使用功能更完善的教育系统，我们有 [领课教育系统商业版](https://edu.roncoo.net/)！
