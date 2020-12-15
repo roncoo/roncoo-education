@@ -1,8 +1,8 @@
 ### 版本升级日志
 ---
 ###### v9.0.0-RELEASE
-1. app-job的启动bug修复
-2. 主分支切换为alibaba分支
+1. 主分支切换为alibaba分支
+2. app-job的启动bug修复
 
 ---
 ###### v8.0.0-RELEASE
