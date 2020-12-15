@@ -18,7 +18,7 @@
 2. 利用docker-compose构建
 # docker-compose build
 3. 启动
-# docker-compose up -d
+# `docker-compose up -d`
 ```
 > 特别说明：请提前配置好MySQL、Redis、Elasticsearch  
 > 配置文件在 **./roncoo-education-app-config/src/main/resources/config**
