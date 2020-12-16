@@ -17,7 +17,7 @@
 # mvn clean package
 2. 利用docker-compose构建
 # docker-compose build
-3. 启动
+3. 启动docker-compose
 # docker-compose up -d
 ```
 > 特别说明：请提前配置好MySQL、Redis、Elasticsearch  
