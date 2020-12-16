@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
     <springProperty name="springApplicationName" source="spring.application.name" defaultValue="roncoo-education"/>
-    <springProperty name="FILE_PATH" source="management.endpoint.logfile.external-file" defaultValue="/home/roncoo/logs"/>
+    <springProperty name="FILE_PATH" source="management.endpoint.logfile.external-file"
+                    defaultValue="/home/roncoo/logs"/>
 
     <property name="PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -|   %msg%n"/>
 
@@ -14,16 +15,16 @@
                 <pattern>${PATTERN}</pattern>
             </encoder>
         </appender>
-        <logger name="com.roncoo" level="debug" />
-        <logger name="org.springframework.cloud.netflix.zuul" level="debug" />
-        <logger name="org.springframework.jdbc.core.JdbcTemplate" level="debug" />
+        <logger name="com.roncoo" level="debug"/>
+        <logger name="org.springframework.cloud.netflix.zuul" level="debug"/>
+        <logger name="org.springframework.jdbc.core.JdbcTemplate" level="debug"/>
         <root level="info">
-            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="CONSOLE"/>
         </root>
     </springProfile>
 
     <!-- 开发、测试环境 -->
-    <springProfile name="dev,test">
+    <springProfile name="dev,test,demo">
         <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
             <encoder>
                 <pattern>${PATTERN}</pattern>
@@ -44,13 +45,13 @@
             </layout>
         </appender>
 
-        <logger name="com.roncoo" level="debug" />
-        <logger name="org.springframework.cloud.netflix.zuul" level="debug" />
-        <logger name="org.springframework.jdbc.core.JdbcTemplate" level="debug" />
+        <logger name="com.roncoo" level="debug"/>
+        <logger name="org.springframework.cloud.netflix.zuul" level="debug"/>
+        <logger name="org.springframework.jdbc.core.JdbcTemplate" level="debug"/>
 
         <root level="info">
-            <appender-ref ref="CONSOLE" />
-            <appender-ref ref="TEST-FILE" />
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="TEST-FILE"/>
         </root>
     </springProfile>
 
@@ -98,10 +99,10 @@
             </encoder>
         </appender>
 
-        <logger name="com.roncoo" level="warn" />
+        <logger name="com.roncoo" level="warn"/>
 
         <root level="warn">
-            <appender-ref ref="PROD_FILE" />
+            <appender-ref ref="PROD_FILE"/>
             <!--<appender-ref ref="LOGSTASH" />-->
         </root>
     </springProfile>

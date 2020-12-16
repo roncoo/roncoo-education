@@ -1,8 +1,28 @@
 /**
  * Copyright 2015-现在 广州市领课网络科技有限公司
  */
-package com.roncoo.education.server.gateway.common;
+package com.roncoo.education.app.gateway.common;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.netflix.zuul.ZuulFilter;
+import com.netflix.zuul.context.RequestContext;
+import com.netflix.zuul.exception.ZuulException;
+import com.netflix.zuul.http.ServletInputStreamWrapper;
+import com.roncoo.education.util.base.BaseException;
+import com.roncoo.education.util.enums.RedisPreEnum;
+import com.roncoo.education.util.enums.ResultEnum;
+import com.roncoo.education.util.tools.JSONUtil;
+import com.roncoo.education.util.tools.JWTUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.util.StringUtils;
+
+import javax.servlet.ServletInputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -11,29 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
-
-import javax.servlet.ServletInputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
-
-import com.netflix.zuul.exception.ZuulException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.util.StringUtils;
-
-import com.auth0.jwt.interfaces.DecodedJWT;
-import com.netflix.zuul.ZuulFilter;
-import com.netflix.zuul.context.RequestContext;
-import com.netflix.zuul.http.ServletInputStreamWrapper;
-import com.roncoo.education.util.base.BaseException;
-import com.roncoo.education.util.base.Result;
-import com.roncoo.education.util.enums.RedisPreEnum;
-import com.roncoo.education.util.enums.ResultEnum;
-import com.roncoo.education.util.tools.JSONUtil;
-import com.roncoo.education.util.tools.JWTUtil;
 
 /**
  * 请求开始前执行
@@ -46,6 +43,51 @@ public class FilterPre extends ZuulFilter {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+
+    @SuppressWarnings("unchecked")
+    private static TreeMap<String, Object> getParamMap(HttpServletRequest request) {
+        TreeMap<String, Object> paramMap = new TreeMap<>();
+        Map<String, String[]> map = request.getParameterMap();
+        for (String key : map.keySet()) {
+            paramMap.put(key, map.get(key)[0]);
+        }
+        if (paramMap.isEmpty()) {
+            DataInputStream in = null;
+            try {
+                in = new DataInputStream(request.getInputStream());
+                byte[] buf = new byte[request.getContentLength()];
+                in.readFully(buf);
+                String t = new String(buf, "UTF-8");
+                if (StringUtils.hasText(t)) {
+                    return new TreeMap<>(JSONUtil.parseObject(t, TreeMap.class));
+                }
+            } catch (Exception e) {
+                logger.error("获取不到任何参数");
+            } finally {
+                if (null != in)
+                    try {
+                        in.close();// 关闭数据流
+                    } catch (IOException e) {
+                        logger.error("关闭数据流异常");
+                    }
+            }
+        }
+        return paramMap;
+    }
+
+    // 校验用户是否有权限
+    private static Boolean checkUri(String uri, String tk) {
+        List<String> menuVOList1 = JSONUtil.parseArray(tk, String.class);
+        if (StringUtils.hasText(uri) && uri.endsWith("/")) {
+            uri = uri.substring(0, uri.length() - 1);
+        }
+        for (String s : menuVOList1) {
+            if (s.contains(uri)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public String filterType() {
@@ -138,11 +180,16 @@ public class FilterPre extends ZuulFilter {
         }
 
         // 单点登录处理，注意，登录的时候必须要放入缓存
-        /*
-         * if (!stringRedisTemplate.hasKey(userNo.toString())) { // 不存在，则登录异常，有效期为1小时 throw new BaseException(ResultEnum.TOKEN_PAST); }
-         *
-         * // 存在，判断是否token相同 String tk = stringRedisTemplate.opsForValue().get(userNo.toString()); if (!token.equals(tk)) { // 不同则为不同的用户登录，这时候提示异地登录 throw new BaseException(ResultEnum.REMOTE_ERROR); }
-         */
+//        if (!stringRedisTemplate.hasKey(userNo.toString())) {
+//            // 不存在，则登录异常，有效期为1小时
+//            throw new BaseException(ResultEnum.TOKEN_PAST);
+//        }
+//        // 存在，判断是否token相同
+//        String tk = stringRedisTemplate.opsForValue().get(userNo.toString());
+//        if (!token.equals(tk)) {
+//            // 不同则为不同的用户登录，这时候提示异地登录
+//            throw new BaseException(ResultEnum.REMOTE_ERROR);
+//        }
 
         // 更新时间，使token不过期
         stringRedisTemplate.opsForValue().set(userNo.toString(), token, 1, TimeUnit.HOURS);
@@ -177,50 +224,5 @@ public class FilterPre extends ZuulFilter {
                 return reqBodyBytes.length;
             }
         };
-    }
-
-    @SuppressWarnings("unchecked")
-    private static TreeMap<String, Object> getParamMap(HttpServletRequest request) {
-        TreeMap<String, Object> paramMap = new TreeMap<>();
-        Map<String, String[]> map = request.getParameterMap();
-        for (String key : map.keySet()) {
-            paramMap.put(key, map.get(key)[0]);
-        }
-        if (paramMap.isEmpty()) {
-            DataInputStream in = null;
-            try {
-                in = new DataInputStream(request.getInputStream());
-                byte[] buf = new byte[request.getContentLength()];
-                in.readFully(buf);
-                String t = new String(buf, "UTF-8");
-                if (StringUtils.hasText(t)) {
-                    return new TreeMap<>(JSONUtil.parseObject(t, TreeMap.class));
-                }
-            } catch (Exception e) {
-                logger.error("获取不到任何参数");
-            } finally {
-                if (null != in)
-                    try {
-                        in.close();// 关闭数据流
-                    } catch (IOException e) {
-                        logger.error("关闭数据流异常");
-                    }
-            }
-        }
-        return paramMap;
-    }
-
-    // 校验用户是否有权限
-    private static Boolean checkUri(String uri, String tk) {
-        List<String> menuVOList1 = JSONUtil.parseArray(tk, String.class);
-        if (StringUtils.hasText(uri) && uri.endsWith("/")) {
-            uri = uri.substring(0, uri.length() - 1);
-        }
-        for (String s : menuVOList1) {
-            if (s.contains(uri)) {
-                return true;
-            }
-        }
-        return false;
     }
 }
