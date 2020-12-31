@@ -5,7 +5,7 @@ services:
       context: ./roncoo-education-app-sba
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=app-eureka'
+        RUN_ARGS: '--spring.profiles.active=dev --spring.cloud.nacos.server-addr=localhost:8848'
     image: roncoo-education-app-sba
     container_name: sba
     restart: always
@@ -20,7 +20,7 @@ services:
       context: ./roncoo-education-app-job
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=app-eureka'
+        RUN_ARGS: '--spring.profiles.active=dev --spring.cloud.nacos.server-addr=localhost:8848'
     image: roncoo-education-app-job
     container_name: job
     restart: always
@@ -35,7 +35,7 @@ services:
       context: ./roncoo-education-app-gateway
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=app-eureka'
+        RUN_ARGS: '--spring.profiles.active=dev --spring.cloud.nacos.server-addr=localhost:8848'
     image: roncoo-education-app-gateway
     container_name: gateway
     restart: always
@@ -50,7 +50,7 @@ services:
       context: ./roncoo-education-system/roncoo-education-system-service
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=app-eureka'
+        RUN_ARGS: '--spring.profiles.active=dev --spring.cloud.nacos.server-addr=localhost:8848'
     image: roncoo-education-system-service
     container_name: system
     restart: always
@@ -67,7 +67,7 @@ services:
       context: ./roncoo-education-user/roncoo-education-user-service
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=app-eureka'
+        RUN_ARGS: '--spring.profiles.active=dev --spring.cloud.nacos.server-addr=localhost:8848'
     image: roncoo-education-user-service
     container_name: user
     restart: always
@@ -84,7 +84,7 @@ services:
       context: ./roncoo-education-course/roncoo-education-course-service
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=app-eureka'
+        RUN_ARGS: '--spring.profiles.active=dev --spring.cloud.nacos.server-addr=localhost:8848'
     image: roncoo-education-course-service
     container_name: course
     restart: always
