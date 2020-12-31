@@ -5,6 +5,7 @@
 2. 主分支切换为alibaba分支
 3. 修复升级后的freemark页面不显示的bug
 4. 修复docker-compose在alibaba分支下的bug
+5. 修复nacos_config.zip的配置名称错误问题
 
 ---
 ###### v8.0.0-RELEASE
