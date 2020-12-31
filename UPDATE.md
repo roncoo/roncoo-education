@@ -4,6 +4,7 @@
 1. app-job的启动bug修复
 2. 主分支切换为alibaba分支
 3. 修复升级后的freemark页面不显示的bug
+4. 修复docker-compose在alibaba分支下的bug
 
 ---
 ###### v8.0.0-RELEASE
