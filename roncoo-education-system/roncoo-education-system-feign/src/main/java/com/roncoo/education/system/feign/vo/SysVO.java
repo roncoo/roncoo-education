@@ -89,6 +89,8 @@ public class SysVO implements Serializable {
 	 * oss_bucket
 	 */
 	private String aliyunOssBucket;
+
+	private String aliyunOssEndpoint;
 	/**
 	 * pay_url
 	 */
