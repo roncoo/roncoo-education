@@ -1105,6 +1105,146 @@ public class SysExample {
             return (Criteria) this;
         }
 
+        public Criteria andAliyunOssEndpointIsNull() {
+            addCriterion("aliyun_oss_endpoint is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOssEndpointIsNotNull() {
+            addCriterion("aliyun_oss_endpoint is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOssEndpointEqualTo(String value) {
+            addCriterion("aliyun_oss_endpoint =", value, "aliyunOssEndpoint");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOssEndpointNotEqualTo(String value) {
+            addCriterion("aliyun_oss_endpoint <>", value, "aliyunOssEndpoint");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOssEndpointGreaterThan(String value) {
+            addCriterion("aliyun_oss_endpoint >", value, "aliyunOssEndpoint");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOssEndpointGreaterThanOrEqualTo(String value) {
+            addCriterion("aliyun_oss_endpoint >=", value, "aliyunOssEndpoint");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOssEndpointLessThan(String value) {
+            addCriterion("aliyun_oss_endpoint <", value, "aliyunOssEndpoint");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOssEndpointLessThanOrEqualTo(String value) {
+            addCriterion("aliyun_oss_endpoint <=", value, "aliyunOssEndpoint");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOssEndpointLike(String value) {
+            addCriterion("aliyun_oss_endpoint like", value, "aliyunOssEndpoint");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOssEndpointNotLike(String value) {
+            addCriterion("aliyun_oss_endpoint not like", value, "aliyunOssEndpoint");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOssEndpointIn(List<String> values) {
+            addCriterion("aliyun_oss_endpoint in", values, "aliyunOssEndpoint");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOssEndpointNotIn(List<String> values) {
+            addCriterion("aliyun_oss_endpoint not in", values, "aliyunOssEndpoint");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOssEndpointBetween(String value1, String value2) {
+            addCriterion("aliyun_oss_endpoint between", value1, value2, "aliyunOssEndpoint");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOssEndpointNotBetween(String value1, String value2) {
+            addCriterion("aliyun_oss_endpoint not between", value1, value2, "aliyunOssEndpoint");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOasVaultIsNull() {
+            addCriterion("aliyun_oas_vault is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOasVaultIsNotNull() {
+            addCriterion("aliyun_oas_vault is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOasVaultEqualTo(String value) {
+            addCriterion("aliyun_oas_vault =", value, "aliyunOasVault");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOasVaultNotEqualTo(String value) {
+            addCriterion("aliyun_oas_vault <>", value, "aliyunOasVault");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOasVaultGreaterThan(String value) {
+            addCriterion("aliyun_oas_vault >", value, "aliyunOasVault");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOasVaultGreaterThanOrEqualTo(String value) {
+            addCriterion("aliyun_oas_vault >=", value, "aliyunOasVault");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOasVaultLessThan(String value) {
+            addCriterion("aliyun_oas_vault <", value, "aliyunOasVault");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOasVaultLessThanOrEqualTo(String value) {
+            addCriterion("aliyun_oas_vault <=", value, "aliyunOasVault");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOasVaultLike(String value) {
+            addCriterion("aliyun_oas_vault like", value, "aliyunOasVault");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOasVaultNotLike(String value) {
+            addCriterion("aliyun_oas_vault not like", value, "aliyunOasVault");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOasVaultIn(List<String> values) {
+            addCriterion("aliyun_oas_vault in", values, "aliyunOasVault");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOasVaultNotIn(List<String> values) {
+            addCriterion("aliyun_oas_vault not in", values, "aliyunOasVault");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOasVaultBetween(String value1, String value2) {
+            addCriterion("aliyun_oas_vault between", value1, value2, "aliyunOasVault");
+            return (Criteria) this;
+        }
+
+        public Criteria andAliyunOasVaultNotBetween(String value1, String value2) {
+            addCriterion("aliyun_oas_vault not between", value1, value2, "aliyunOasVault");
+            return (Criteria) this;
+        }
+
         public Criteria andPayTypeIsNull() {
             addCriterion("pay_type is null");
             return (Criteria) this;

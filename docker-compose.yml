@@ -1,153 +1,101 @@
 version: "3.0"
 services:
-  app-eureka:
-    build:
-      context: ./roncoo-education-app-eureka
-      args:
-        JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev'
-    image: roncoo-education-app-eureka
-    container_name: eureka
-    restart: always
-    volumes:
-      - /home/roncoo/dockers/logs/eureka:/home/roncoo/education/logs/eureka
-    networks:
-      - education
-    ports:
-      - "5761:5761"
-  app-config:
-    build:
-      context: ./roncoo-education-app-config
-      args:
-        JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=native --info.eureka.host=app-eureka'
-    image: roncoo-education-app-config
-    container_name: config
-    restart: always
-    volumes:
-      - /home/roncoo/dockers/logs/config:/home/roncoo/education/logs/config
-    networks:
-      - education
-    ports:
-      - "5741:5741"
-    depends_on:
-      - app-eureka
-    links:
-      - app-eureka
   app-sba:
     build:
       context: ./roncoo-education-app-sba
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=app-eureka'
+        RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=192.168.100.11:8848'
     image: roncoo-education-app-sba
     container_name: sba
     restart: always
     volumes:
-      - /home/roncoo/dockers/logs/sba:/home/roncoo/education/logs/sba
+      - /home/roncoo/dockers/logs/sba:/root/education/logs/sba
     networks:
       - education
     ports:
       - "5721:5721"
-    depends_on:
-      - app-config
-    links:
-      - app-eureka
   app-job:
     build:
       context: ./roncoo-education-app-job
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=app-eureka'
+        RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=192.168.100.11:8848'
     image: roncoo-education-app-job
     container_name: job
     restart: always
     volumes:
-      - /home/roncoo/dockers/logs/job:/home/roncoo/education/logs/job
+      - /home/roncoo/dockers/logs/job:/root/education/logs/job
     networks:
       - education
     ports:
       - "5820:5820"
-    depends_on:
-      - app-config
-    links:
-      - app-eureka
   app-gateway:
     build:
       context: ./roncoo-education-app-gateway
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=app-eureka'
+        RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=192.168.100.11:8848'
     image: roncoo-education-app-gateway
     container_name: gateway
     restart: always
     volumes:
-      - /home/roncoo/dockers/logs/gateway:/home/roncoo/education/logs/gateway
+      - /home/roncoo/dockers/logs/gateway:/root/education/logs/gateway
     networks:
       - education
     ports:
       - "5840:5840"
-    depends_on:
-      - app-config
-    links:
-      - app-eureka
   system-service:
     build:
       context: ./roncoo-education-system/roncoo-education-system-service
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=app-eureka'
+        RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=192.168.100.11:8848'
     image: roncoo-education-system-service
     container_name: system
     restart: always
     volumes:
-      - /home/roncoo/dockers/logs/system:/home/roncoo/education/logs/system
+      - /home/roncoo/dockers/logs/system:/root/education/logs/system
     networks:
       - education
     ports:
       - "5730:5730"
     depends_on:
       - app-gateway
-    links:
-      - app-eureka
   user-service:
     build:
       context: ./roncoo-education-user/roncoo-education-user-service
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=app-eureka'
+        RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=192.168.100.11:8848'
     image: roncoo-education-user-service
     container_name: user
     restart: always
     volumes:
-      - /home/roncoo/dockers/logs/user:/home/roncoo/education/logs/user
+      - /home/roncoo/dockers/logs/user:/root/education/logs/user
     networks:
       - education
     ports:
       - "5720:5720"
     depends_on:
       - app-gateway
-    links:
-      - app-eureka
   course-service:
     build:
       context: ./roncoo-education-course/roncoo-education-course-service
       args:
         JAVA_OPTS: '-Xmn128M -Xmx128M'
-        RUN_ARGS: '--spring.profiles.active=dev --info.eureka.host=app-eureka'
+        RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=192.168.100.11:8848'
     image: roncoo-education-course-service
     container_name: course
     restart: always
     volumes:
-      - /home/roncoo/dockers/logs/course:/home/roncoo/education/logs/course
+      - /home/roncoo/dockers/logs/course:/root/education/logs/course
     networks:
       - education
     ports:
       - "5710:5710"
     depends_on:
       - app-gateway
-    links:
-      - app-eureka
 networks:
   education:
     driver: bridge

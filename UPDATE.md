@@ -3,6 +3,12 @@
 ###### v9.0.0-RELEASE
 1. app-job的启动bug修复
 2. 主分支切换为alibaba分支
+3. 修复升级后的freemark页面不显示的bug
+4. 修复docker-compose在alibaba分支下的bug
+5. 修复nacos_config.zip的配置名称错误问题
+6. 移除多余的配置
+7. 升级swaager的UI，更换为knife4j-spring-ui
+7. 上传配置调整
 
 ---
 ###### v8.0.0-RELEASE

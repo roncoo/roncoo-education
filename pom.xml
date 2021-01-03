@@ -1,341 +1,341 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.roncoo</groupId>
-  <artifactId>roncoo-education</artifactId>
-  <version>9.0.0-RELEASE</version>
-  <packaging>pom</packaging>
+    <groupId>com.roncoo</groupId>
+    <artifactId>roncoo-education</artifactId>
+    <version>9.0.0-RELEASE</version>
+    <packaging>pom</packaging>
 
-  <name>roncoo-education</name>
-  <description>领课教育-分布式在线教育开源系统</description>
-  <url>http://www.roncoo.net</url>
-
-  <organization>
-    <name>LingKe, Co., Ltd.</name>
+    <name>roncoo-education</name>
+    <description>领课教育-分布式在线教育开源系统</description>
     <url>http://www.roncoo.net</url>
-  </organization>
 
-  <developers>
-    <developer>
-      <name>fengyongwei</name>
-      <email>fengyw@roncoo.com</email>
-      <organization>LingKe, Co., Ltd.</organization>
-      <organizationUrl>http://www.roncoo.net</organizationUrl>
-      <roles>
-        <role>developer</role>
-      </roles>
-      <timezone>+8</timezone>
-    </developer>
-    <developer>
-      <name>liaohr</name>
-      <email>liaohr@roncoo.com</email>
-      <organization>LingKe, Co., Ltd.</organization>
-      <organizationUrl>http://www.roncoo.net</organizationUrl>
-      <roles>
-        <role>developer</role>
-      </roles>
-      <timezone>+8</timezone>
-    </developer>
-    <developer>
-      <name>keyh</name>
-      <email>keyh@roncoo.com</email>
-      <organization>LingKe, Co., Ltd.</organization>
-      <organizationUrl>http://www.roncoo.net</organizationUrl>
-      <roles>
-        <role>developer</role>
-      </roles>
-      <timezone>+8</timezone>
-    </developer>
-    <developer>
-      <name>yangzj</name>
-      <organization>LingKe, Co., Ltd.</organization>
-      <organizationUrl>http://www.roncoo.net</organizationUrl>
-      <roles>
-        <role>developer</role>
-      </roles>
-      <timezone>+8</timezone>
-    </developer>
-    <developer>
-      <name>wuy</name>
-      <organization>LingKe, Co., Ltd.</organization>
-      <organizationUrl>http://www.roncoo.net</organizationUrl>
-      <roles>
-        <role>developer</role>
-      </roles>
-      <timezone>+8</timezone>
-    </developer>
-  </developers>
+    <organization>
+        <name>LingKe, Co., Ltd.</name>
+        <url>http://www.roncoo.net</url>
+    </organization>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <java.version>1.8</java.version>
-  </properties>
+    <developers>
+        <developer>
+            <name>fengyongwei</name>
+            <email>fengyw@roncoo.com</email>
+            <organization>LingKe, Co., Ltd.</organization>
+            <organizationUrl>http://www.roncoo.net</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+        <developer>
+            <name>liaohr</name>
+            <email>liaohr@roncoo.com</email>
+            <organization>LingKe, Co., Ltd.</organization>
+            <organizationUrl>http://www.roncoo.net</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+        <developer>
+            <name>keyh</name>
+            <email>keyh@roncoo.com</email>
+            <organization>LingKe, Co., Ltd.</organization>
+            <organizationUrl>http://www.roncoo.net</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+        <developer>
+            <name>yangzj</name>
+            <organization>LingKe, Co., Ltd.</organization>
+            <organizationUrl>http://www.roncoo.net</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+        <developer>
+            <name>wuy</name>
+            <organization>LingKe, Co., Ltd.</organization>
+            <organizationUrl>http://www.roncoo.net</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
 
-  <dependencyManagement>
-    <dependencies>
-      <!-- spring boot -->
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.5.RELEASE</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+    </properties>
 
-      <!-- spring cloud -->
-      <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-dependencies</artifactId>
-        <version>Hoxton.SR3</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
+    <dependencyManagement>
+        <dependencies>
+            <!-- spring boot -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>2.2.5.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
-      <!-- spring cloud alibaba -->
-      <dependency>
-        <groupId>com.alibaba.cloud</groupId>
-        <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-        <version>2.2.3.RELEASE</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
+            <!-- spring cloud -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Hoxton.SR3</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
-      <!-- com.roncoo -->
-      <dependency>
-        <groupId>com.roncoo</groupId>
-        <artifactId>roncoo-education-course-feign</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.roncoo</groupId>
-        <artifactId>roncoo-education-system-feign</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.roncoo</groupId>
-        <artifactId>roncoo-education-user-feign</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.roncoo</groupId>
-        <artifactId>roncoo-education-util</artifactId>
-        <version>${project.version}</version>
-      </dependency>
+            <!-- spring cloud alibaba -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2.2.3.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
-      <!-- fastdfs -->
-      <!-- https://mvnrepository.com/artifact/com.roncoo/roncoo-spring-boot-starter-fastdfs -->
-      <dependency>
-        <groupId>com.roncoo</groupId>
-        <artifactId>roncoo-spring-boot-starter-fastdfs</artifactId>
-        <version>1.2.1</version>
-      </dependency>
+            <!-- com.roncoo -->
+            <dependency>
+                <groupId>com.roncoo</groupId>
+                <artifactId>roncoo-education-course-feign</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.roncoo</groupId>
+                <artifactId>roncoo-education-system-feign</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.roncoo</groupId>
+                <artifactId>roncoo-education-user-feign</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.roncoo</groupId>
+                <artifactId>roncoo-education-util</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
-      <!-- aliyun -->
-      <!-- fastjson -->
-      <dependency>
-        <groupId>com.alibaba</groupId>
-        <artifactId>fastjson</artifactId>
-        <version>1.2.28</version>
-      </dependency>
-      <dependency>
-        <groupId>com.aliyun.oss</groupId>
-        <artifactId>aliyun-sdk-oss</artifactId>
-        <version>2.2.1</version>
-      </dependency>
-      <dependency>
-        <groupId>com.aliyun.oas</groupId>
-        <artifactId>aliyun-oas</artifactId>
-        <version>0.2.5</version>
-      </dependency>
-      <dependency>
-        <groupId>com.aliyun</groupId>
-        <artifactId>aliyun-java-sdk-core</artifactId>
-        <version>2.4.2</version>
-      </dependency>
-      <dependency>
-        <groupId>com.aliyun</groupId>
-        <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
-        <version>1.0.0</version>
-      </dependency>
+            <!-- fastdfs -->
+            <!-- https://mvnrepository.com/artifact/com.roncoo/roncoo-spring-boot-starter-fastdfs -->
+            <dependency>
+                <groupId>com.roncoo</groupId>
+                <artifactId>roncoo-spring-boot-starter-fastdfs</artifactId>
+                <version>1.2.1</version>
+            </dependency>
 
-      <!-- Swagger -->
-      <dependency>
-        <groupId>com.spring4all</groupId>
-        <artifactId>swagger-spring-boot-starter</artifactId>
-        <version>1.9.1.RELEASE</version>
-      </dependency>
-      <dependency>
-        <groupId>com.github.xiaoymin</groupId>
-        <artifactId>swagger-bootstrap-ui</artifactId>
-        <version>1.9.6</version>
-      </dependency>
+            <!-- aliyun -->
+            <!-- fastjson -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.28</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>2.2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun.oas</groupId>
+                <artifactId>aliyun-oas</artifactId>
+                <version>0.2.5</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>2.4.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+                <version>1.0.0</version>
+            </dependency>
 
-      <!-- jwt -->
-      <dependency>
-        <groupId>com.auth0</groupId>
-        <artifactId>java-jwt</artifactId>
-        <version>3.2.0</version>
-      </dependency>
+            <!-- Swagger -->
+            <dependency>
+                <groupId>com.spring4all</groupId>
+                <artifactId>swagger-spring-boot-starter</artifactId>
+                <version>1.9.1.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-ui</artifactId>
+                <version>2.0.7</version>
+            </dependency>
 
-      <!-- mybatis  -->
-      <dependency>
-        <groupId>org.mybatis.spring.boot</groupId>
-        <artifactId>mybatis-spring-boot-starter</artifactId>
-        <version>1.3.1</version>
-      </dependency>
+            <!-- jwt -->
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>3.2.0</version>
+            </dependency>
 
-      <!-- logback -->
-      <dependency>
-        <groupId>net.logstash.logback</groupId>
-        <artifactId>logstash-logback-encoder</artifactId>
-        <version>5.2</version>
-      </dependency>
+            <!-- mybatis  -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>1.3.1</version>
+            </dependency>
 
-      <!-- excel -->
-      <dependency>
-        <groupId>org.apache.poi</groupId>
-        <artifactId>poi-ooxml</artifactId>
-        <version>3.17</version>
-      </dependency>
+            <!-- logback -->
+            <dependency>
+                <groupId>net.logstash.logback</groupId>
+                <artifactId>logstash-logback-encoder</artifactId>
+                <version>5.2</version>
+            </dependency>
 
-      <!-- ECharts -->
-      <dependency>
-        <groupId>com.github.abel533</groupId>
-        <artifactId>ECharts</artifactId>
-        <version>3.0.0.2</version>
-      </dependency>
+            <!-- excel -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>3.17</version>
+            </dependency>
 
-      <!-- hutool -->
-      <dependency>
-        <groupId>com.xiaoleilu</groupId>
-        <artifactId>hutool</artifactId>
-        <version>2.16.2</version>
-      </dependency>
+            <!-- ECharts -->
+            <dependency>
+                <groupId>com.github.abel533</groupId>
+                <artifactId>ECharts</artifactId>
+                <version>3.0.0.2</version>
+            </dependency>
 
-      <!-- jsoup -->
-      <dependency>
-        <groupId>org.jsoup</groupId>
-        <artifactId>jsoup</artifactId>
-        <version>1.7.2</version>
-      </dependency>
+            <!-- hutool -->
+            <dependency>
+                <groupId>com.xiaoleilu</groupId>
+                <artifactId>hutool</artifactId>
+                <version>2.16.2</version>
+            </dependency>
 
-      <!-- pdf -->
-      <dependency>
-        <groupId>com.itextpdf</groupId>
-        <artifactId>itextpdf</artifactId>
-        <version>5.5.13</version>
-      </dependency>
+            <!-- jsoup -->
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>1.7.2</version>
+            </dependency>
 
-      <!-- de.codecentric -->
-      <dependency>
-        <groupId>de.codecentric</groupId>
-        <artifactId>spring-boot-admin-starter-server</artifactId>
-        <version>2.2.4</version>
-      </dependency>
+            <!-- pdf -->
+            <dependency>
+                <groupId>com.itextpdf</groupId>
+                <artifactId>itextpdf</artifactId>
+                <version>5.5.13</version>
+            </dependency>
 
-      <!-- druid -->
-      <dependency>
-        <groupId>com.alibaba</groupId>
-        <artifactId>druid-spring-boot-starter</artifactId>
-        <version>1.1.21</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+            <!-- de.codecentric -->
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-server</artifactId>
+                <version>2.2.4</version>
+            </dependency>
 
-  <build>
-    <pluginManagement>
-      <plugins>
-        <!-- spring boot -->
-        <plugin>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-maven-plugin</artifactId>
-          <configuration>
-            <executable>true</executable>
-          </configuration>
-          <executions>
-            <execution>
-              <phase>package</phase>
-              <goals>
-                <goal>repackage</goal>
-                <goal>build-info</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
+            <!-- druid -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>1.1.21</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-        <!-- compiler -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <configuration>
-            <source>${java.version}</source>
-            <target>${java.version}</target>
-            <skip>true</skip>
-            <encoding>${project.build.sourceEncoding}</encoding>
-          </configuration>
-        </plugin>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- spring boot -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <configuration>
+                        <executable>true</executable>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>repackage</goal>
+                                <goal>build-info</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
 
-        <!-- sonar -->
-        <plugin>
-          <groupId>org.sonarsource.scanner.maven</groupId>
-          <artifactId>sonar-maven-plugin</artifactId>
-          <version>3.6.0.1398</version>
-        </plugin>
+                <!-- compiler -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <skip>true</skip>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
 
-        <!-- https://github.com/spotify/dockerfile-maven -->
-        <plugin>
-          <groupId>com.spotify</groupId>
-          <artifactId>dockerfile-maven-plugin</artifactId>
-          <version>1.4.13</version>
-          <configuration>
-            <repository>harbor.roncoo.com/library/${project.artifactId}</repository>
-            <tag>${project.version}</tag>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
+                <!-- sonar -->
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>3.6.0.1398</version>
+                </plugin>
 
-  <!-- 环境变量 -->
-  <profiles>
-    <profile>
-      <id>dev</id>
-      <properties>
-        <env>dev</env>
-      </properties>
-    </profile>
-    <profile>
-      <id>prod</id>
-      <properties>
-        <env>prod</env>
-      </properties>
-    </profile>
-    <profile>
-      <id>test</id>
-      <properties>
-        <env>test</env>
-      </properties>
-    </profile>
-  </profiles>
+                <!-- https://github.com/spotify/dockerfile-maven -->
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>dockerfile-maven-plugin</artifactId>
+                    <version>1.4.13</version>
+                    <configuration>
+                        <repository>harbor.roncoo.com/library/${project.artifactId}</repository>
+                        <tag>${project.version}</tag>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
-  <modules>
-    <!-- 网关接口 -->
-    <module>roncoo-education-app-gateway</module>
-    <!-- 定时任务 -->
-    <module>roncoo-education-app-job</module>
-    <!-- 监控中心 -->
-    <module>roncoo-education-app-sba</module>
+    <!-- 环境变量 -->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <env>dev</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <env>prod</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <env>test</env>
+            </properties>
+        </profile>
+    </profiles>
 
-    <!-- 基础工程 -->
-    <module>roncoo-education-util</module>
-    <!-- 系统管理 -->
-    <module>roncoo-education-system</module>
-    <!-- 用户管理 -->
-    <module>roncoo-education-user</module>
-    <!-- 课程管理 -->
-    <module>roncoo-education-course</module>
-  </modules>
+    <modules>
+        <!-- 网关接口 -->
+        <module>roncoo-education-app-gateway</module>
+        <!-- 定时任务 -->
+        <module>roncoo-education-app-job</module>
+        <!-- 监控中心 -->
+        <module>roncoo-education-app-sba</module>
+
+        <!-- 基础工程 -->
+        <module>roncoo-education-util</module>
+        <!-- 系统管理 -->
+        <module>roncoo-education-system</module>
+        <!-- 用户管理 -->
+        <module>roncoo-education-user</module>
+        <!-- 课程管理 -->
+        <module>roncoo-education-course</module>
+    </modules>
 </project>

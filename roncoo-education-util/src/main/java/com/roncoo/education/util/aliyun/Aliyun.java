@@ -24,6 +24,7 @@ public class Aliyun implements Serializable {
 	private String aliyunAccessKeySecret;
 	private String aliyunOssUrl;
 	private String aliyunOssBucket;
+	private String aliyunOssEndpoint;
 	private String aliyunOasVault;
 	private String payUrl;
 	private String payKey;
