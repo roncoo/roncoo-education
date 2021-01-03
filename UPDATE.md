@@ -6,9 +6,9 @@
 3. 修复升级后的freemark页面不显示的bug
 4. 修复docker-compose在alibaba分支下的bug
 5. 修复nacos_config.zip的配置名称错误问题
-6. 移除多余的配置
+6. 移除多余的配置，上传配置调整
 7. 升级swaager的UI，更换为knife4j-spring-ui
-7. 上传配置调整
+8. 优化docker-compose.yml
 
 ---
 ###### v8.0.0-RELEASE
