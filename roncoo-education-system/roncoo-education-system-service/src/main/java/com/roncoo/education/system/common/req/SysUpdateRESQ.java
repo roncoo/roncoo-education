@@ -77,6 +77,8 @@ public class SysUpdateRESQ implements Serializable {
 
 	@ApiModelProperty(value = "Endpoint（地域节点）")
 	private String aliyunOssEndpoint;
+	@ApiModelProperty(value = "视频Bucket")
+	private String aliyunOasVault;
 	/**
 	 * smsCode
 	 */
