@@ -8,6 +8,7 @@
 5. 修复nacos_config.zip的配置名称错误问题
 6. 移除多余的配置
 7. 升级swaager的UI，更换为knife4j-spring-ui
+7. 上传配置调整
 
 ---
 ###### v8.0.0-RELEASE

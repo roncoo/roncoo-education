@@ -42,7 +42,7 @@ public final class AliyunUtil {
 	public static String getUrlSign(Aliyun aliyun, String url, Date expires) {
 		GeneratePresignedUrlRequest generatePresignedUrlRequest = new GeneratePresignedUrlRequest(aliyun.getAliyunOssBucket(), url.replace(aliyun.getAliyunOssUrl(), ""));
 		generatePresignedUrlRequest.setExpiration(expires);
-		return url + "?" + getOssClient(SystemUtil.ALIYUN_OSS_ENDPOINT, aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret()).generatePresignedUrl(generatePresignedUrlRequest).getQuery();
+		return url + "?" + getOssClient(aliyun.getAliyunOssEndpoint(), aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret()).generatePresignedUrl(generatePresignedUrlRequest).getQuery();
 	}
 
 	public static File download(Aliyun aliyun, String url) {
@@ -56,7 +56,7 @@ public final class AliyunUtil {
 			file.getParentFile().mkdirs();
 		}
 		try {
-			downloadObject(SystemUtil.ALIYUN_OSS_ENDPOINT, aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret(), aliyun.getAliyunOssBucket(), key, file);
+			downloadObject(aliyun.getAliyunOssEndpoint(), aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret(), aliyun.getAliyunOssBucket(), key, file);
 		} catch (IOException e) {
 			log.error("上传失败", e);
 		}
@@ -68,7 +68,7 @@ public final class AliyunUtil {
 		try {
 			String name = file.getName();
 			String filePath = platformEnum.name().toLowerCase() + "/" + StrUtil.get32UUID() + name.substring(name.lastIndexOf("."));
-			getOssClient(SystemUtil.ALIYUN_OSS_ENDPOINT, aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret()).putObject(aliyun.getAliyunOssBucket(), filePath, file);
+			getOssClient(aliyun.getAliyunOssEndpoint(), aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret()).putObject(aliyun.getAliyunOssBucket(), filePath, file);
 			return aliyun.getAliyunOssUrl() + filePath;
 		} catch (Exception e) {
 			log.error("上传失败", e);
@@ -83,7 +83,7 @@ public final class AliyunUtil {
 			in = file.getInputStream();
 			String name = file.getOriginalFilename();
 			String filePath = platformEnum.name().toLowerCase() + "/" + StrUtil.get32UUID() + name.substring(name.lastIndexOf("."));
-			getOssClient(SystemUtil.ALIYUN_OSS_ENDPOINT, aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret()).putObject(aliyun.getAliyunOssBucket(), filePath, in);
+			getOssClient(aliyun.getAliyunOssEndpoint(), aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret()).putObject(aliyun.getAliyunOssBucket(), filePath, in);
 			return aliyun.getAliyunOssUrl() + filePath;
 		} catch (Exception e) {
 			log.error("上传失败", e);
@@ -103,11 +103,34 @@ public final class AliyunUtil {
 		try {
 			String name = file.getName();
 			String filePath = platformEnum.name().toLowerCase() + "/" + StrUtil.get32UUID() + name.substring(name.lastIndexOf("."));
-			putObjectForFile(SystemUtil.ALIYUN_OSS_ENDPOINT, aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret(), aliyun.getAliyunOssBucket(), filePath, new FileInputStream(file), file.getName());
+			putObjectForFile(aliyun.getAliyunOssEndpoint(), aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret(), aliyun.getAliyunOssBucket(), filePath, new FileInputStream(file), file.getName());
 			return aliyun.getAliyunOssUrl() + filePath;
 		} catch (Exception e) {
 			log.error("上传失败", e);
 			return "";
+		}
+	}
+
+	public static String uploadVideo(PlatformEnum platformEnum, File file, Aliyun aliyun) {
+		// 上传
+		FileInputStream fileInputStream = null;
+		try {
+			fileInputStream = new FileInputStream(file);
+			String name = file.getName();
+			String filePath = platformEnum.name().toLowerCase() + "/" + StrUtil.get32UUID() + name.substring(name.lastIndexOf("."));
+			putObjectForFile(aliyun.getAliyunOssEndpoint(), aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret(), aliyun.getAliyunOasVault(), filePath, fileInputStream, file.getName());
+			return aliyun.getAliyunOssUrl() + filePath;
+		} catch (Exception e) {
+			log.error("上传失败", e);
+			return "";
+		} finally {
+			if (fileInputStream != null) {
+				try {
+					fileInputStream.close();
+				} catch (IOException e) {
+					log.error("上传失败", e);
+				}
+			}
 		}
 	}
 
@@ -118,7 +141,7 @@ public final class AliyunUtil {
 			in = file.getInputStream();
 			String name = file.getOriginalFilename();
 			String filePath = platformEnum.name().toLowerCase() + "/" + StrUtil.get32UUID() + name.substring(name.lastIndexOf("."));
-			putObjectForFile(SystemUtil.ALIYUN_OSS_ENDPOINT, aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret(), aliyun.getAliyunOssBucket(), filePath, in, file.getOriginalFilename());
+			putObjectForFile(aliyun.getAliyunOssEndpoint(), aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret(), aliyun.getAliyunOssBucket(), filePath, in, file.getOriginalFilename());
 			return aliyun.getAliyunOssUrl() + filePath;
 		} catch (Exception e) {
 			log.error("上传失败", e);
@@ -145,17 +168,6 @@ public final class AliyunUtil {
 		} catch (Exception e) {
 			log.error("上传失败", e);
 		}
-	}
-
-	public static String uploadOAS(File file, Aliyun aliyun) {
-		// 上传文件
-		try {
-			UploadResult uploadResult = getArchiveManager(aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret(), SystemUtil.ALIYUN_OAS_URL).upload(aliyun.getAliyunOasVault(), file);
-			return uploadResult.getArchiveId();
-		} catch (Exception e) {
-			log.error("上传到OAS失败，会忽略不再上传", e);
-		}
-		return "";
 	}
 
 	public static boolean sendMsg(String phone, String code, Aliyun aliyun) throws ClientException {
@@ -247,7 +259,7 @@ public final class AliyunUtil {
 	 * @throws IOException
 	 */
 	private static void deleteObject(String bucketName, String key, Aliyun aliyun) throws IOException {
-		getOssClient(SystemUtil.ALIYUN_OSS_ENDPOINT, aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret()).deleteObject(bucketName, key);
+		getOssClient(aliyun.getAliyunOssEndpoint(), aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret()).deleteObject(bucketName, key);
 	}
 
 }

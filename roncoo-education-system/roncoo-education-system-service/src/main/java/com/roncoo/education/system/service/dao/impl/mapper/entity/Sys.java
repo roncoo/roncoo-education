@@ -34,6 +34,10 @@ public class Sys implements Serializable {
 
     private String aliyunOssBucket;
 
+    private String aliyunOssEndpoint;
+
+    private String aliyunOasVault;
+
     private Integer payType;
 
     private String payUrl;
@@ -170,6 +174,22 @@ public class Sys implements Serializable {
         this.aliyunOssBucket = aliyunOssBucket == null ? null : aliyunOssBucket.trim();
     }
 
+    public String getAliyunOssEndpoint() {
+        return aliyunOssEndpoint;
+    }
+
+    public void setAliyunOssEndpoint(String aliyunOssEndpoint) {
+        this.aliyunOssEndpoint = aliyunOssEndpoint == null ? null : aliyunOssEndpoint.trim();
+    }
+
+    public String getAliyunOasVault() {
+        return aliyunOasVault;
+    }
+
+    public void setAliyunOasVault(String aliyunOasVault) {
+        this.aliyunOasVault = aliyunOasVault == null ? null : aliyunOasVault.trim();
+    }
+
     public Integer getPayType() {
         return payType;
     }
@@ -247,6 +267,8 @@ public class Sys implements Serializable {
         sb.append(", aliyunAccessKeySecret=").append(aliyunAccessKeySecret);
         sb.append(", aliyunOssUrl=").append(aliyunOssUrl);
         sb.append(", aliyunOssBucket=").append(aliyunOssBucket);
+        sb.append(", aliyunOssEndpoint=").append(aliyunOssEndpoint);
+        sb.append(", aliyunOasVault=").append(aliyunOasVault);
         sb.append(", payType=").append(payType);
         sb.append(", payUrl=").append(payUrl);
         sb.append(", payKey=").append(payKey);

@@ -141,7 +141,7 @@ public class ApiUploadBiz extends BaseBiz {
                     courseVideoDao.updateById(courseVideo);
 
                     // 3、异步上传到阿里云
-                    String videoOasId = AliyunUtil.uploadDoc(PlatformEnum.COURSE, targetFile, BeanUtil.copyProperties(sys, Aliyun.class));
+                    String videoOasId = AliyunUtil.uploadVideo(PlatformEnum.COURSE, targetFile, BeanUtil.copyProperties(sys, Aliyun.class));
                     courseVideo.setVideoOasId(videoOasId);
                     courseVideoDao.updateById(courseVideo);
 

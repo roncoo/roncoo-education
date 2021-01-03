@@ -6,6 +6,7 @@ import java.util.List;
 import com.roncoo.education.course.feign.qo.CourseVideoQO;
 import com.roncoo.education.course.feign.vo.CourseVideoVO;
 import com.roncoo.education.util.base.BaseException;
+import com.roncoo.education.util.enums.PlatformEnum;
 import com.xiaoleilu.hutool.util.CollectionUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,7 +105,7 @@ public class FeignCourseVideoBiz {
 
         if (ObjectUtil.isNotNull(result)) {
             // 2、异步上传到阿里云
-            String videoOasId = AliyunUtil.uploadOAS(targetFile, BeanUtil.copyProperties(sys, Aliyun.class));
+            String videoOasId = AliyunUtil.uploadVideo(PlatformEnum.COURSE, targetFile, BeanUtil.copyProperties(sys, Aliyun.class));
             if (CollectionUtils.isNotEmpty(list)) {
                 for (CourseVideo info : list) {
                     // 上传
