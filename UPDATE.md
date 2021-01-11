@@ -1,8 +1,7 @@
 ### 版本升级日志
 ---
 ###### v9.0.0-RELEASE
-1. 主分支切换为alibaba分支
-2. app-job的启动bug修复
+1. 主分支切换为alibaba分支，netflix分支不再更新
 
 ---
 ###### v8.0.0-RELEASE
