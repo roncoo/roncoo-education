@@ -60,8 +60,6 @@ services:
       - education
     ports:
       - "5730:5730"
-    depends_on:
-      - app-gateway
   user-service:
     build:
       context: ./roncoo-education-user/roncoo-education-user-service
@@ -77,8 +75,6 @@ services:
       - education
     ports:
       - "5720:5720"
-    depends_on:
-      - app-gateway
   course-service:
     build:
       context: ./roncoo-education-course/roncoo-education-course-service
@@ -94,8 +90,6 @@ services:
       - education
     ports:
       - "5710:5710"
-    depends_on:
-      - app-gateway
 networks:
   education:
     driver: bridge
