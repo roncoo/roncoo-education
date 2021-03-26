@@ -1,6 +1,6 @@
 <div align=center><img src="logo.jpg"/></div>
 
-### 项目分支使用组件说明
+### 项目分支使用组件说明（如果对你有用，请给个star！）
 | 名称 | 主分支(Alibaba分支) | Nextfile分支 |
 |:---|:---|:---|
 | 核心组件 |  spring cloud alibaba 2.2.3.RELEASE |  spring cloud netflix Hoxton.SR3 |
@@ -24,7 +24,7 @@
 
 ### 演示地址
 * [前端演示地址](http://edu.os.roncoo.com/) | [后台演示地址](http://edu.os.roncoo.com/admin) 
-### 帮助文档（如果对你有用，请给个star！）
+### 帮助文档
 * [项目文档](http://doc.os.roncoos.com/) | [常见问题](https://blog.roncoo.com/article/1105309620724858882) | [部署文档](https://blog.roncoo.com/article/1103554925858197505) 
 * [MySQL安装](https://blog.roncoo.com/article/1280781211745636354) | [Redis安装](https://blog.roncoo.com/article/1281402533735550977) | [Elasticsearch安装](https://blog.roncoo.com/article/1281405654742323202) | [FastDFS安装](https://blog.roncoo.com/article/1275251133292867586)
 
