@@ -1,6 +1,6 @@
 <div align=center><img src="logo.jpg"/></div>
 
-### 分支使用组件说明
+### 项目分支使用组件说明
 | 名称 | 主分支(Alibaba分支) | Nextfile分支 |
 |:---|:---|:---|
 | 核心组件 |  spring cloud alibaba 2.2.3.RELEASE |  spring cloud netflix Hoxton.SR3 |
@@ -11,22 +11,22 @@
 
 ---
 
-##### 领课教育系统(roncoo-education)：[码云地址](https://gitee.com/roncoocom/roncoo-education) | [Github地址](https://github.com/roncoo/roncoo-education)
+##### 领课教育系统(roncoo-education)：[CodeChina](https://codechina.csdn.net/roncoocom/roncoo-education) | [码云地址](https://gitee.com/roncoocom/roncoo-education) | [Github地址](https://github.com/roncoo/roncoo-education)
 > roncoo-education是后台工程，核心框架：Spring Cloud  
 
-##### 前端门户工程(roncoo-education-web)：[码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web)
+##### 前端门户工程(roncoo-education-web)：[CodeChina](https://codechina.csdn.net/roncoocom/roncoo-education-web) | [码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web)
 > roncoo-education-web是前端门户工程，核心框架：Vuejs + Nuxt.js  
 
-##### 后台管理工程(roncoo-education-admin)：[码云地址](https://gitee.com/roncoocom/roncoo-education-admin) | [Github地址](https://github.com/roncoo/roncoo-education-admin)
+##### 后台管理工程(roncoo-education-admin)：[CodeChina](https://codechina.csdn.net/roncoocom/roncoo-education-admin) | [码云地址](https://gitee.com/roncoocom/roncoo-education-admin) | [Github地址](https://github.com/roncoo/roncoo-education-admin)
 > roncoo-education-admin是后台管理工程，核心框架：vue-element-admin
 
 ---
 
-### 项目说明（如果对你有用，请给个star！）
-##### [领课教育系统-前端演示地址](http://edu.os.roncoo.com/)  | [领课教育系统-后台演示地址](http://edu.os.roncoo.com/admin) 
-##### [领课教育系统-MySQL安装](https://blog.roncoo.com/article/1280781211745636354) | [领课教育系统-Redis安装](https://blog.roncoo.com/article/1281402533735550977) 
-##### [领课教育系统-Elasticsearch安装](https://blog.roncoo.com/article/1281405654742323202) |  [领课教育系统-FastDFS安装](https://blog.roncoo.com/article/1275251133292867586)
-##### [项目文档](http://doc.os.roncoos.com/)  | [项目介绍](https://blog.roncoo.com/article/1105321762337357826)  |  [部署文档](https://blog.roncoo.com/article/1103554925858197505)  |  [常见问题](https://blog.roncoo.com/article/1105309620724858882)
+### 演示地址
+* [前端演示地址](http://edu.os.roncoo.com/) | [后台演示地址](http://edu.os.roncoo.com/admin) 
+### 帮助文档（如果对你有用，请给个star！）
+* [项目文档](http://doc.os.roncoos.com/) | [常见问题](https://blog.roncoo.com/article/1105309620724858882) | [部署文档](https://blog.roncoo.com/article/1103554925858197505) 
+* [MySQL安装](https://blog.roncoo.com/article/1280781211745636354) | [Redis安装](https://blog.roncoo.com/article/1281402533735550977) | [Elasticsearch安装](https://blog.roncoo.com/article/1281405654742323202) | [FastDFS安装](https://blog.roncoo.com/article/1275251133292867586)
 
 ---
 
