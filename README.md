@@ -35,7 +35,6 @@
 
 * 所有使用到的框架或者组件都是基于开源项目，代码保证100%开源。
 * 系统功能通用，无论是个人还是企业都可以利用该系统快速搭建一个属于自己的在线教育平台。
-* 如需商业技术服务支持，可使用 [领课教育系统商业版](https://edu.roncoo.net/)，功能更丰富，架构更健壮，VIP服务，上线快速。
 
 ### 前台主要功能介绍
 * 首页功能，导航模块，广告模块，课程模块，文章模块，友情链接
@@ -52,7 +51,6 @@
 * 订单管理功能，订单的列出，对订单进行分析统计功能
 * 用户登录功能，同一时间只允许同一个账号在同一个地方登录，防止账号共享
 * 广告管理功能，后台自定义广告设置，增加营销效果
-* 支付功能模块，无缝对接 [龙果支付系统商业版](https://pay.roncoo.net/)
 
 ### 官方QQ群（加群免费获取sql脚本）
 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=BpOlarqoFOUReMfHsinOBDrFJhVln6LO&jump_from=webapi"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课⑪" title="在线教育系统-领课⑪"> 624670981</a> 可加
