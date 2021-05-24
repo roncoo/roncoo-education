@@ -1,10 +1,10 @@
 package com.roncoo.education.system.feign.qo;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 系统配置表
@@ -46,7 +46,7 @@ public class SysQO implements Serializable {
      */
     private Integer sort;
     /**
-     * 视频存储平台（1保利威视，2七牛）
+     * 视频存储平台（1保利威视，2其他）
      */
     private Integer videoType;
     /**
@@ -66,7 +66,7 @@ public class SysQO implements Serializable {
      */
     private String polyvSecretkey;
     /**
-     * 文件存储类型（1阿里云，2七牛）
+     * 文件存储类型（1阿里云，2FDSF）
      */
     private Integer fileType;
     /**
