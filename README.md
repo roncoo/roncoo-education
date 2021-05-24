@@ -1,5 +1,21 @@
 <div align=center><img src="logo.jpg"/></div>
 
+```
+roncoo-education
+    ├── roncoo-education-app-gateway 网关服务：所有请求的入口，主要实现权限校验和请求转发
+    │   
+    ├── roncoo-education-app-job 定时任务：实现分布式任务调度功能，主要实现订单超时处理等
+    │   
+    ├── roncoo-education-app-sba 应用监控：基于Spring Boot Admin（不启动，不影响功能）
+    │   
+    ├── roncoo-education-app-course 课程服务
+    │   
+    ├── roncoo-education-app-system 系统服务
+    │   
+    ├── roncoo-education-app-user 用户服务
+    │ 
+    └── roncoo-education-util 公共工具类，抽取的工具类包
+```
 ### 项目分支使用组件说明
 | 名称 | 主分支(Alibaba分支) | Nextfile分支 |
 |:---|:---|:---|
