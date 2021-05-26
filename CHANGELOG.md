@@ -3,6 +3,8 @@
 ###### v10.0.0-RELEASE
 1. 增加视频类型和存储类型的说明
 2. 增加工程的模块说明
+3. 切换网关组件为Spring CLoud Gateway
+4. 增加nacos_cofig.zip配置，nacos可以一键导入
 
 ---
 ###### v9.0.0-RELEASE
