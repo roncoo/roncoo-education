@@ -5,14 +5,14 @@ package com.roncoo.education.course.service.api.pc.biz;
 
 import com.roncoo.education.course.service.dao.FileStorageDao;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.FileStorage;
-import com.roncoo.education.system.feign.vo.SysVO;
 import com.roncoo.education.system.feign.interfaces.IFeignSys;
+import com.roncoo.education.system.feign.vo.SysVO;
 import com.roncoo.education.util.aliyun.Aliyun;
 import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.config.SystemUtil;
-import com.roncoo.education.util.enums.FileStorageTypeEnum;
+import com.roncoo.education.util.enums.FileClassifyEnum;
 import com.roncoo.education.util.enums.FileTypeEnum;
 import com.roncoo.education.util.enums.PlatformEnum;
 import com.roncoo.education.util.tools.BeanUtil;
@@ -60,7 +60,7 @@ public class PcApiUploadBiz extends BaseBiz {
                     fileStorage.setFileName(picFile.getOriginalFilename());
                     fileStorage.setFileNo(fileNo);
                     fileStorage.setFileSize(picFile.getSize());
-                    fileStorage.setFileType(FileStorageTypeEnum.PICTURE.getCode());
+                    fileStorage.setfileClassify(FileClassifyEnum.PICTURE.getCode());
                     fileStorage.setFileUrl(pic.toString());
                     fileStorageDao.save(fileStorage);
                     return Result.success(pic.toString());
@@ -98,7 +98,7 @@ public class PcApiUploadBiz extends BaseBiz {
                     fileStorage.setFileName(docFile.getOriginalFilename());
                     fileStorage.setFileNo(fileNo);
                     fileStorage.setFileSize(docFile.getSize());
-                    fileStorage.setFileType(FileStorageTypeEnum.DOC.getCode());
+                    fileStorage.setfileClassify(FileClassifyEnum.DOC.getCode());
                     fileStorage.setFileUrl(pic.toString());
                     fileStorageDao.save(fileStorage);
                     return Result.success(pic.toString());

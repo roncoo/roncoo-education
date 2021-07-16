@@ -14,7 +14,7 @@ public class FileStorage implements Serializable {
 
     private String fileUrl;
 
-    private Integer fileType;
+    private Integer fileClassify;
 
     private Long fileSize;
 
@@ -60,12 +60,12 @@ public class FileStorage implements Serializable {
         this.fileUrl = fileUrl == null ? null : fileUrl.trim();
     }
 
-    public Integer getFileType() {
-        return fileType;
+    public Integer getfileClassify() {
+        return fileClassify;
     }
 
-    public void setFileType(Integer fileType) {
-        this.fileType = fileType;
+    public void setfileClassify(Integer fileClassify) {
+        this.fileClassify = fileClassify;
     }
 
     public Long getFileSize() {
@@ -87,7 +87,7 @@ public class FileStorage implements Serializable {
         sb.append(", fileNo=").append(fileNo);
         sb.append(", fileName=").append(fileName);
         sb.append(", fileUrl=").append(fileUrl);
-        sb.append(", fileType=").append(fileType);
+        sb.append(", fileClassify=").append(fileClassify);
         sb.append(", fileSize=").append(fileSize);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

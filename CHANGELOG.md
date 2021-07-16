@@ -5,6 +5,7 @@
 2. 增加工程的模块说明
 3. 切换网关组件为Spring CLoud Gateway
 4. 增加nacos_cofig.zip配置，nacos可以一键导入
+5. 将file_storage的表file_type修改为file_classify
 
 ---
 ###### v9.0.0-RELEASE

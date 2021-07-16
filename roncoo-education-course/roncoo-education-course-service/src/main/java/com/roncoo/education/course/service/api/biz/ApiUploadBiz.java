@@ -3,16 +3,6 @@
  */
 package com.roncoo.education.course.service.api.biz;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.List;
-
-import com.roncoo.spring.boot.autoconfigure.fastdfs.FastdfsClientService;
-import com.xiaoleilu.hutool.util.CollectionUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.roncoo.education.course.service.dao.CourseChapterPeriodAuditDao;
 import com.roncoo.education.course.service.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.service.dao.CourseVideoDao;
@@ -21,14 +11,14 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterP
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriodAudit;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideo;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.FileStorage;
-import com.roncoo.education.system.feign.vo.SysVO;
 import com.roncoo.education.system.feign.interfaces.IFeignSys;
+import com.roncoo.education.system.feign.vo.SysVO;
 import com.roncoo.education.util.aliyun.Aliyun;
 import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.BaseBiz;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.config.SystemUtil;
-import com.roncoo.education.util.enums.FileStorageTypeEnum;
+import com.roncoo.education.util.enums.FileClassifyEnum;
 import com.roncoo.education.util.enums.FileTypeEnum;
 import com.roncoo.education.util.enums.PlatformEnum;
 import com.roncoo.education.util.enums.VideoStatusEnum;
@@ -38,7 +28,16 @@ import com.roncoo.education.util.polyv.UploadFileResult;
 import com.roncoo.education.util.tools.BeanUtil;
 import com.roncoo.education.util.tools.IdWorker;
 import com.roncoo.education.util.tools.StrUtil;
+import com.roncoo.spring.boot.autoconfigure.fastdfs.FastdfsClientService;
+import com.xiaoleilu.hutool.util.CollectionUtil;
 import com.xiaoleilu.hutool.util.ObjectUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 上传接口
@@ -233,7 +232,7 @@ public class ApiUploadBiz extends BaseBiz {
                     fileStorage.setFileName(picFile.getOriginalFilename());
                     fileStorage.setFileNo(fileNo);
                     fileStorage.setFileSize(picFile.getSize());
-                    fileStorage.setFileType(FileStorageTypeEnum.PICTURE.getCode());
+                    fileStorage.setfileClassify(FileClassifyEnum.PICTURE.getCode());
                     fileStorage.setFileUrl(pic.toString());
                     fileStorageDao.save(fileStorage);
                     return Result.success(pic.toString());
@@ -290,7 +289,7 @@ public class ApiUploadBiz extends BaseBiz {
                     fileStorage.setFileName(docFile.getOriginalFilename());
                     fileStorage.setFileNo(fileNo);
                     fileStorage.setFileSize(docFile.getSize());
-                    fileStorage.setFileType(FileStorageTypeEnum.DOC.getCode());
+                    fileStorage.setfileClassify(FileClassifyEnum.DOC.getCode());
                     fileStorage.setFileUrl(pic.toString());
                     fileStorageDao.save(fileStorage);
                     return Result.success(pic.toString());
