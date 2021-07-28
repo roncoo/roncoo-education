@@ -3,11 +3,11 @@
  */
 package com.roncoo.education.user.common.bo;
 
-import java.io.Serializable;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -48,6 +48,10 @@ public class UserRegisterBO implements Serializable {
 	@ApiModelProperty(value = "手机验证码", required = true)
 	private String code;
 
+    @ApiModelProperty(value = "ip地址")
 	private String ip;
+
+    @ApiModelProperty(value = "注册来源", hidden = true)
+    private Integer source = 2;
 
 }
