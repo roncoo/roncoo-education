@@ -101,7 +101,7 @@ public class ApiUserInfoBiz extends BaseBiz {
 
         // 同步数据到演示环境
         try {
-            String post = HttpUtil.post("http://demo.edu.roncoo.net/user/api/user/register", JSONUtil.toJSONString(userRegisterBO));
+            String post = HttpUtil.post("https://demo.edu.roncoo.net/gateway/user/api/user/register", JSONUtil.toJSONString(userRegisterBO));
             logger.warn("-----------------同步注册" + post);
         } catch (Exception e) {
             e.printStackTrace();
