@@ -109,8 +109,10 @@ public class ApiUserInfoBiz extends BaseBiz {
             RSA rsa = new RSA(null, publicKey);
             userRegisterBO.setPassword(rsa.encryptBase64(userRegisterBO.getPassword(), KeyType.PublicKey));
             userRegisterBO.setRepassword(rsa.encryptBase64(userRegisterBO.getRepassword(), KeyType.PublicKey));
-            String post = HttpUtil.post("http://demo.edu.roncoo.net/gateway/user/api/user/register", JSONUtil.toJsonStr(userRegisterBO));
-            logger.warn("-----------------同步注册" + post);
+            String jsonStr = JSONUtil.toJsonStr(userRegisterBO);
+            logger.warn("-----------------同步注册参数:{}", jsonStr);
+            String post = HttpUtil.post("http://demo.edu.roncoo.net/gateway/user/api/user/register", jsonStr);
+            logger.warn("-----------------同步注册结果:{}", post);
         } catch (Exception e) {
             e.printStackTrace();
             logger.info("同步数据异常:{}", e.getMessage());
