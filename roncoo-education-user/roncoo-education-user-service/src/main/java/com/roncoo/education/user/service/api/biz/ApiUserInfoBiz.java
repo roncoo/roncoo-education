@@ -3,6 +3,7 @@ package com.roncoo.education.user.service.api.biz;
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
 import cn.hutool.http.HttpUtil;
+import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.aliyuncs.exceptions.ClientException;
 import com.roncoo.education.system.feign.interfaces.IFeignSys;
@@ -111,8 +112,12 @@ public class ApiUserInfoBiz extends BaseBiz {
             userRegisterBO.setRepassword(rsa.encryptBase64(userRegisterBO.getRepassword(), KeyType.PublicKey));
             String jsonStr = JSONUtil.toJsonStr(userRegisterBO);
             logger.warn("-----------------同步注册参数:{}", jsonStr);
-            String post = HttpUtil.post("http://demo.edu.roncoo.net/gateway/user/api/user/register", jsonStr);
+            String post = HttpUtil.post("https://demo.edu.roncoo.net/gateway/user/api/user/register", jsonStr);
             logger.warn("-----------------同步注册结果:{}", post);
+            JSONObject jsonObject = JSONUtil.parseObj(post);
+            if (200 != (Integer) jsonObject.get("code")) {
+                logger.warn("-----------------错误信息:{}", jsonObject.get("msg"));
+            }
         } catch (Exception e) {
             e.printStackTrace();
             logger.info("同步数据异常:{}", e.getMessage());
