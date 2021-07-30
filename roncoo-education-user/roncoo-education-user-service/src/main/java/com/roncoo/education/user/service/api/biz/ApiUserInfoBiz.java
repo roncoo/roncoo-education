@@ -59,9 +59,6 @@ public class ApiUserInfoBiz extends BaseBiz {
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
-    // RSA公钥
-    private final String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCzBzD+Sgi5z+zq8P/qMimssuozcjdx4pBu2U2OKf6bDdQEKmSB1KXCheG2m19+xnerIZ22fr8nHc0r1qIKIUrJ0UWU8qXkANe4u0wW0V52BsW6H02Jmc1mFjrYcOCpToVFGvLm17AgP6tNBAiTjiiBc0V+prAZ9ixrC5aPsI4gAwIDAQAB";
-
     @Transactional
     public Result<UserLoginDTO> register(UserRegisterBO userRegisterBO) {
         if (StringUtils.isEmpty(userRegisterBO.getMobile())) {
@@ -108,10 +105,11 @@ public class ApiUserInfoBiz extends BaseBiz {
         // 同步数据到演示环境
         try {
             // 密码加密
+            String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCzBzD+Sgi5z+zq8P/qMimssuozcjdx4pBu2U2OKf6bDdQEKmSB1KXCheG2m19+xnerIZ22fr8nHc0r1qIKIUrJ0UWU8qXkANe4u0wW0V52BsW6H02Jmc1mFjrYcOCpToVFGvLm17AgP6tNBAiTjiiBc0V+prAZ9ixrC5aPsI4gAwIDAQAB";
             RSA rsa = new RSA(null, publicKey);
             userRegisterBO.setPassword(rsa.encryptBase64(userRegisterBO.getPassword(), KeyType.PublicKey));
             userRegisterBO.setRepassword(rsa.encryptBase64(userRegisterBO.getRepassword(), KeyType.PublicKey));
-            String post = HttpUtil.post("http://dev.school.roncoos.com/gateway/user/api/user/register", JSONUtil.toJsonStr(userRegisterBO));
+            String post = HttpUtil.post("http://demo.edu.roncoo.net/gateway/user/api/user/register", JSONUtil.toJsonStr(userRegisterBO));
             logger.warn("-----------------同步注册" + post);
         } catch (Exception e) {
             e.printStackTrace();
