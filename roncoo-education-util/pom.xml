@@ -47,6 +47,12 @@
             <artifactId>hutool</artifactId>
         </dependency>
 
+        <!-- hutool -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+
         <!-- jwt -->
         <dependency>
             <groupId>com.auth0</groupId>
