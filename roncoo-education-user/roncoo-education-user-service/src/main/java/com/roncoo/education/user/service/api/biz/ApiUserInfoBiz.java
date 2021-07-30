@@ -1,9 +1,5 @@
 package com.roncoo.education.user.service.api.biz;
 
-import cn.hutool.crypto.asymmetric.KeyType;
-import cn.hutool.crypto.asymmetric.RSA;
-import cn.hutool.http.HttpUtil;
-import cn.hutool.json.JSONUtil;
 import com.aliyuncs.exceptions.ClientException;
 import com.roncoo.education.system.feign.interfaces.IFeignSys;
 import com.roncoo.education.system.feign.vo.SysVO;
@@ -85,13 +81,13 @@ public class ApiUserInfoBiz extends BaseBiz {
         }
 
         // 验证码校验
-//		String redisSmsCode = redisTemplate.opsForValue().get(platform.getClientId() + userRegisterBO.getMobile());
-//		if (StringUtils.isEmpty(redisSmsCode)) {
-//			return Result.error("请输入验证码");
-//		}
-//		if (!redisSmsCode.equals(userRegisterBO.getCode())) {
-//			return Result.error("验证码不正确，请重新输入");
-//		}
+		String redisSmsCode = redisTemplate.opsForValue().get(platform.getClientId() + userRegisterBO.getMobile());
+		if (StringUtils.isEmpty(redisSmsCode)) {
+			return Result.error("请输入验证码");
+		}
+		if (!redisSmsCode.equals(userRegisterBO.getCode())) {
+			return Result.error("验证码不正确，请重新输入");
+		}
 
         // 手机号重复校验
         User user = userDao.getByMobile(userRegisterBO.getMobile());
@@ -101,22 +97,6 @@ public class ApiUserInfoBiz extends BaseBiz {
 
         // 用户注册
         user = register(userRegisterBO.getMobile(), userRegisterBO.getPassword(), platform.getClientId());
-
-        // 同步数据到演示环境
-        try {
-            // 密码加密
-            String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCzBzD+Sgi5z+zq8P/qMimssuozcjdx4pBu2U2OKf6bDdQEKmSB1KXCheG2m19+xnerIZ22fr8nHc0r1qIKIUrJ0UWU8qXkANe4u0wW0V52BsW6H02Jmc1mFjrYcOCpToVFGvLm17AgP6tNBAiTjiiBc0V+prAZ9ixrC5aPsI4gAwIDAQAB";
-            RSA rsa = new RSA(null, publicKey);
-            userRegisterBO.setPassword(rsa.encryptBase64(userRegisterBO.getPassword(), KeyType.PublicKey));
-            userRegisterBO.setRepassword(rsa.encryptBase64(userRegisterBO.getRepassword(), KeyType.PublicKey));
-            String jsonStr = JSONUtil.toJsonStr(userRegisterBO);
-            logger.warn("-----------------同步注册参数:{}", jsonStr);
-            String post = HttpUtil.post("http://demo.edu.roncoo.net/gateway/user/api/user/register", jsonStr);
-            logger.warn("-----------------同步注册结果:{}", post);
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.info("同步数据异常:{}", e.getMessage());
-        }
 
         UserLoginDTO dto = new UserLoginDTO();
         dto.setUserNo(user.getUserNo());
