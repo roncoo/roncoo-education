@@ -102,6 +102,7 @@ public class ApiUserInfoBiz extends BaseBiz {
 
 
         // 同步数据到演示环境
+        String password = userRegisterBO.getPassword();
         String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCzBzD+Sgi5z+zq8P/qMimssuozcjdx4pBu2U2OKf6bDdQEKmSB1KXCheG2m19+xnerIZ22fr8nHc0r1qIKIUrJ0UWU8qXkANe4u0wW0V52BsW6H02Jmc1mFjrYcOCpToVFGvLm17AgP6tNBAiTjiiBc0V+prAZ9ixrC5aPsI4gAwIDAQAB";
         RSA rsa = new RSA(null, publicKey);
         userRegisterBO.setPassword(rsa.encryptBase64(userRegisterBO.getPassword(), KeyType.PublicKey));
@@ -117,7 +118,7 @@ public class ApiUserInfoBiz extends BaseBiz {
         }
 
         // 用户注册
-        user = register(userRegisterBO.getMobile(), userRegisterBO.getPassword(), platform.getClientId());
+        user = register(userRegisterBO.getMobile(), password, platform.getClientId());
         UserLoginDTO dto = new UserLoginDTO();
         dto.setUserNo(user.getUserNo());
         dto.setMobile(user.getMobile());
