@@ -111,8 +111,8 @@ public class ApiUserInfoBiz extends BaseBiz {
         String post = HttpUtil.post("https://demo.edu.roncoo.net/gateway/user/api/user/register", jsonStr);
         logger.warn("-----------------同步注册结果:{}", post);
         JSONObject jsonObject = JSONUtil.parseObj(post);
-        // 远程注册失败则退出
-        if (200 != (Integer) jsonObject.get("code")) {
+        // 远程注册有返回则输出错误，不成功则跳过
+        if (ObjectUtil.isNotNull(jsonObject.get("code")) && 200 != (Integer) jsonObject.get("code")) {
             return Result.error((String) jsonObject.get("msg"));
         }
 
