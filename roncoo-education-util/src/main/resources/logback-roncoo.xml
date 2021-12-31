@@ -23,38 +23,6 @@
         </root>
     </springProfile>
 
-    <!-- 开发、测试环境 -->
-    <springProfile name="dev,test,demo">
-        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-            <encoder>
-                <pattern>${PATTERN}</pattern>
-            </encoder>
-        </appender>
-        <appender name="TEST-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <!-- 文件路径 -->
-            <file>${FILE_PATH}/info</file>
-            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                <!-- 文件名称 -->
-                <fileNamePattern>${FILE_PATH}/info.%d{yyyy-MM-dd}.log</fileNamePattern>
-                <!-- 文件最大保存历史数量 -->
-                <MaxHistory>7</MaxHistory>
-            </rollingPolicy>
-
-            <layout class="ch.qos.logback.classic.PatternLayout">
-                <pattern>${PATTERN}</pattern>
-            </layout>
-        </appender>
-
-        <logger name="com.roncoo" level="debug"/>
-        <logger name="org.springframework.cloud.netflix.zuul" level="debug"/>
-        <logger name="org.springframework.jdbc.core.JdbcTemplate" level="debug"/>
-
-        <root level="info">
-            <appender-ref ref="CONSOLE"/>
-            <appender-ref ref="TEST-FILE"/>
-        </root>
-    </springProfile>
-
     <!-- 生产环境 -->
     <springProfile name="prod">
         <appender name="PROD_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -104,6 +72,38 @@
         <root level="warn">
             <appender-ref ref="PROD_FILE"/>
             <!--<appender-ref ref="LOGSTASH" />-->
+        </root>
+    </springProfile>
+
+    <!-- 开发、测试环境 -->
+    <springProfile name="!local">
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>${PATTERN}</pattern>
+            </encoder>
+        </appender>
+        <appender name="TEST-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <!-- 文件路径 -->
+            <file>${FILE_PATH}/info</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <!-- 文件名称 -->
+                <fileNamePattern>${FILE_PATH}/info.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <!-- 文件最大保存历史数量 -->
+                <MaxHistory>7</MaxHistory>
+            </rollingPolicy>
+
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>${PATTERN}</pattern>
+            </layout>
+        </appender>
+
+        <logger name="com.roncoo" level="debug"/>
+        <logger name="org.springframework.cloud.netflix.zuul" level="debug"/>
+        <logger name="org.springframework.jdbc.core.JdbcTemplate" level="debug"/>
+
+        <root level="info">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="TEST-FILE"/>
         </root>
     </springProfile>
 </configuration>
