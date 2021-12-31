@@ -5,16 +5,6 @@ package com.roncoo.education.course.service.api.biz;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.roncoo.education.course.dao.CourseChapterPeriodAuditDao;
-import com.roncoo.education.course.dao.CourseChapterPeriodDao;
-import com.roncoo.education.course.dao.CourseVideoDao;
-import com.roncoo.education.course.dao.FileStorageDao;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodAudit;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseVideo;
-import com.roncoo.education.course.dao.impl.mapper.entity.FileStorage;
-import com.roncoo.education.system.feign.interfaces.IFeignSys;
-import com.roncoo.education.system.feign.interfaces.vo.SysVO;
 import com.roncoo.education.common.core.aliyun.Aliyun;
 import com.roncoo.education.common.core.aliyun.AliyunUtil;
 import com.roncoo.education.common.core.base.BaseBiz;
@@ -30,6 +20,16 @@ import com.roncoo.education.common.core.polyv.UploadFileResult;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
 import com.roncoo.education.common.core.tools.StrUtil;
+import com.roncoo.education.course.dao.CourseChapterPeriodAuditDao;
+import com.roncoo.education.course.dao.CourseChapterPeriodDao;
+import com.roncoo.education.course.dao.CourseVideoDao;
+import com.roncoo.education.course.dao.FileStorageDao;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodAudit;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseVideo;
+import com.roncoo.education.course.dao.impl.mapper.entity.FileStorage;
+import com.roncoo.education.system.feign.interfaces.IFeignSys;
+import com.roncoo.education.system.feign.interfaces.vo.SysVO;
 import com.roncoo.spring.boot.autoconfigure.fastdfs.FastdfsClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -58,7 +58,7 @@ public class ApiUploadBiz extends BaseBiz {
     private CourseVideoDao courseVideoDao;
     @Autowired
     private FileStorageDao fileStorageDao;
-    @Autowired
+    @Autowired(required = false)
     private FastdfsClientService fastdfsClientService;
 
     /**

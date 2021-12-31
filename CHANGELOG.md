@@ -1,12 +1,12 @@
 ### 版本升级日志
 ---
 ###### v10.0.0-RELEASE
-1. 增加视频类型和存储类型的说明
-2. 增加工程的模块说明
-3. 切换网关组件为Spring CLoud Gateway
-4. 增加nacos_cofig.zip配置，nacos可以一键导入
-5. 将file_storage的表file_type修改为file_classify
-6. 升级spring boot主版本，多个组件版本升级
+1. 升级spring boot主版本，多个组件版本升级
+2. 全新架构，重构项目结构
+3. 增加视频类型和存储类型的说明，增加minio支持
+4. 切换网关组件为Spring CLoud Gateway
+5. 增加nacos_cofig.zip配置，nacos可以一键导入
+6. 将file_storage的表file_type修改为file_classify
 
 ---
 ###### v9.0.0-RELEASE
