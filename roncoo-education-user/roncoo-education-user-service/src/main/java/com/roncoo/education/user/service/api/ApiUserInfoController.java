@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.roncoo.education.user.service.api.biz.ApiUserInfoBiz;
-import com.roncoo.education.user.common.bo.UserAuthBO;
-import com.roncoo.education.user.common.bo.UserLoginCodeBO;
-import com.roncoo.education.user.common.bo.UserLoginPasswordBO;
-import com.roncoo.education.user.common.bo.UserRegisterBO;
-import com.roncoo.education.user.common.bo.UserSendCodeBO;
-import com.roncoo.education.user.common.bo.auth.UserUpdateBO;
-import com.roncoo.education.user.common.dto.UserLoginDTO;
+import com.roncoo.education.user.service.api.bo.UserAuthBO;
+import com.roncoo.education.user.service.api.bo.UserLoginCodeBO;
+import com.roncoo.education.user.service.api.bo.UserLoginPasswordBO;
+import com.roncoo.education.user.service.api.bo.UserRegisterBO;
+import com.roncoo.education.user.service.api.bo.UserSendCodeBO;
+import com.roncoo.education.user.service.auth.bo.UserUpdateBO;
+import com.roncoo.education.user.service.api.dto.UserLoginDTO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
 

@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.roncoo.education.system.common.dto.NavBarDTO;
-import com.roncoo.education.system.common.dto.NavBarListDTO;
-import com.roncoo.education.system.service.dao.NavBarDao;
-import com.roncoo.education.system.service.dao.impl.mapper.entity.NavBar;
+import com.roncoo.education.system.service.api.dto.NavBarDTO;
+import com.roncoo.education.system.service.api.dto.NavBarListDTO;
+import com.roncoo.education.system.dao.NavBarDao;
+import com.roncoo.education.system.dao.impl.mapper.entity.NavBar;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.StatusIdEnum;
 import com.roncoo.education.util.tools.ArrayListUtil;

@@ -1,11 +1,11 @@
 package com.roncoo.education.course.service.api.biz;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.roncoo.education.course.common.bo.AdvBO;
-import com.roncoo.education.course.common.dto.AdvDTO;
-import com.roncoo.education.course.common.dto.AdvListDTO;
-import com.roncoo.education.course.service.dao.AdvDao;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.Adv;
+import com.roncoo.education.course.service.api.bo.AdvBO;
+import com.roncoo.education.course.service.api.dto.AdvDTO;
+import com.roncoo.education.course.service.api.dto.AdvListDTO;
+import com.roncoo.education.course.dao.AdvDao;
+import com.roncoo.education.course.dao.impl.mapper.entity.Adv;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.StatusIdEnum;

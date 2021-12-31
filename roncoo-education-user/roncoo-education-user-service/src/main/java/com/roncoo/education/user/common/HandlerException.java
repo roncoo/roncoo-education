@@ -13,7 +13,7 @@ import com.roncoo.education.util.base.Result;
  *
  * @author wujing
  */
-@RestControllerAdvice(basePackages = "com.roncoo.education.user.service.feign.gateway")
+@RestControllerAdvice(basePackages = "com.roncoo.education.user.service")
 public class HandlerException extends BaseController {
 
 	@ExceptionHandler({ BaseException.class })

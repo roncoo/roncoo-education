@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.roncoo.education.system.service.dao.impl.mapper.MsgMapper" >
-  <resultMap id="BaseResultMap" type="com.roncoo.education.system.service.dao.impl.mapper.entity.Msg" >
+<mapper namespace="com.roncoo.education.system.dao.impl.mapper.MsgMapper" >
+  <resultMap id="BaseResultMap" type="com.roncoo.education.system.dao.impl.mapper.entity.Msg" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
@@ -15,7 +15,7 @@
     <result column="is_top" property="isTop" jdbcType="TINYINT" />
     <result column="back_remark" property="backRemark" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.roncoo.education.system.service.dao.impl.mapper.entity.Msg" extends="BaseResultMap" >
+  <resultMap id="ResultMapWithBLOBs" type="com.roncoo.education.system.dao.impl.mapper.entity.Msg" extends="BaseResultMap" >
     <result column="msg_text" property="msgText" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -77,13 +77,13 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, gmt_create, gmt_modified, status_id, sort, msg_type, msg_title, is_time_send, 
+    id, gmt_create, gmt_modified, status_id, sort, msg_type, msg_title, is_time_send,
     send_time, is_send, is_top, back_remark
   </sql>
   <sql id="Blob_Column_List" >
     msg_text
   </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.MsgExample" >
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.MsgExample" >
     select
     <if test="distinct" >
       distinct
@@ -99,7 +99,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.MsgExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.MsgExample" >
     select
     <if test="distinct" >
       distinct
@@ -117,7 +117,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -128,25 +128,25 @@
     delete from msg
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.MsgExample" >
+  <delete id="deleteByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.MsgExample" >
     delete from msg
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Msg" >
-    insert into msg (id, gmt_create, gmt_modified, 
-      status_id, sort, msg_type, 
-      msg_title, is_time_send, send_time, 
-      is_send, is_top, back_remark, 
+  <insert id="insert" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.Msg" >
+    insert into msg (id, gmt_create, gmt_modified,
+      status_id, sort, msg_type,
+      msg_title, is_time_send, send_time,
+      is_send, is_top, back_remark,
       msg_text)
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{msgType,jdbcType=TINYINT}, 
-      #{msgTitle,jdbcType=VARCHAR}, #{isTimeSend,jdbcType=TINYINT}, #{sendTime,jdbcType=TIMESTAMP}, 
-      #{isSend,jdbcType=TINYINT}, #{isTop,jdbcType=TINYINT}, #{backRemark,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
+      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{msgType,jdbcType=TINYINT},
+      #{msgTitle,jdbcType=VARCHAR}, #{isTimeSend,jdbcType=TINYINT}, #{sendTime,jdbcType=TIMESTAMP},
+      #{isSend,jdbcType=TINYINT}, #{isTop,jdbcType=TINYINT}, #{backRemark,jdbcType=VARCHAR},
       #{msgText,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Msg" >
+  <insert id="insertSelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.Msg" >
     insert into msg
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -231,7 +231,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.MsgExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.MsgExample" resultType="java.lang.Integer" >
     select count(*) from msg
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -321,7 +321,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Msg" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.Msg" >
     update msg
     <set >
       <if test="gmtCreate != null" >
@@ -363,7 +363,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Msg" >
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.Msg" >
     update msg
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
@@ -379,7 +379,7 @@
       msg_text = #{msgText,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Msg" >
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.Msg" >
     update msg
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},

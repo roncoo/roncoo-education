@@ -1,7 +1,7 @@
 package com.roncoo.education.course.feign.interfaces;
 
-import com.roncoo.education.course.feign.qo.DicQO;
-import com.roncoo.education.course.feign.vo.DicVO;
+import com.roncoo.education.course.feign.interfaces.qo.DicQO;
+import com.roncoo.education.course.feign.interfaces.vo.DicVO;
 import com.roncoo.education.util.base.Page;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;

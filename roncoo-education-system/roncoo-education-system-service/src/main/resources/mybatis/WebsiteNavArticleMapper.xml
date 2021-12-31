@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.roncoo.education.system.service.dao.impl.mapper.WebsiteNavArticleMapper" >
-  <resultMap id="BaseResultMap" type="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteNavArticle" >
+<mapper namespace="com.roncoo.education.system.dao.impl.mapper.WebsiteNavArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavArticle" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
@@ -11,7 +11,7 @@
     <result column="art_title" property="artTitle" jdbcType="VARCHAR" />
     <result column="art_pic" property="artPic" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteNavArticle" extends="BaseResultMap" >
+  <resultMap id="ResultMapWithBLOBs" type="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavArticle" extends="BaseResultMap" >
     <result column="art_desc" property="artDesc" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -78,7 +78,7 @@
   <sql id="Blob_Column_List" >
     art_desc
   </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteNavArticleExample" >
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavArticleExample" >
     select
     <if test="distinct" >
       distinct
@@ -94,7 +94,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteNavArticleExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavArticleExample" >
     select
     <if test="distinct" >
       distinct
@@ -112,7 +112,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -123,23 +123,23 @@
     delete from website_nav_article
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteNavArticleExample" >
+  <delete id="deleteByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavArticleExample" >
     delete from website_nav_article
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteNavArticle" >
-    insert into website_nav_article (id, gmt_create, gmt_modified, 
-      status_id, sort, nav_id, 
+  <insert id="insert" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavArticle" >
+    insert into website_nav_article (id, gmt_create, gmt_modified,
+      status_id, sort, nav_id,
       art_title, art_pic, art_desc
       )
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{navId,jdbcType=BIGINT}, 
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
+      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{navId,jdbcType=BIGINT},
       #{artTitle,jdbcType=VARCHAR}, #{artPic,jdbcType=VARCHAR}, #{artDesc,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteNavArticle" >
+  <insert id="insertSelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavArticle" >
     insert into website_nav_article
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -200,7 +200,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteNavArticleExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavArticleExample" resultType="java.lang.Integer" >
     select count(*) from website_nav_article
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -270,7 +270,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteNavArticle" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavArticle" >
     update website_nav_article
     <set >
       <if test="gmtCreate != null" >
@@ -300,7 +300,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteNavArticle" >
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavArticle" >
     update website_nav_article
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
@@ -312,7 +312,7 @@
       art_desc = #{artDesc,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteNavArticle" >
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavArticle" >
     update website_nav_article
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},

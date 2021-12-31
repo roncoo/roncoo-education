@@ -1,7 +1,7 @@
 package com.roncoo.education.course.feign.interfaces;
 
-import com.roncoo.education.course.feign.qo.CourseChapterPeriodAuditQO;
-import com.roncoo.education.course.feign.vo.CourseChapterPeriodAuditVO;
+import com.roncoo.education.course.feign.interfaces.qo.CourseChapterPeriodAuditQO;
+import com.roncoo.education.course.feign.interfaces.vo.CourseChapterPeriodAuditVO;
 import com.roncoo.education.util.base.Page;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;

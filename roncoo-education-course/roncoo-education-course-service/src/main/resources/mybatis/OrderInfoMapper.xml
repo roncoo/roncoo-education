@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.roncoo.education.course.service.dao.impl.mapper.OrderInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo" >
+<mapper namespace="com.roncoo.education.course.dao.impl.mapper.OrderInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.roncoo.education.course.dao.impl.mapper.entity.OrderInfo" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
@@ -87,12 +87,12 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, gmt_create, gmt_modified, lecturer_user_no, lecturer_name, user_no, mobile, register_time, 
-    order_no, course_id, course_name, price_payable, price_discount, price_paid, platform_profit, 
-    lecturer_profit, trade_type, pay_type, channel_type, order_status, is_show_lecturer, 
+    id, gmt_create, gmt_modified, lecturer_user_no, lecturer_name, user_no, mobile, register_time,
+    order_no, course_id, course_name, price_payable, price_discount, price_paid, platform_profit,
+    lecturer_profit, trade_type, pay_type, channel_type, order_status, is_show_lecturer,
     is_show_user, remark_cus, remark, pay_time
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfoExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.OrderInfoExample" >
     select
     <if test="distinct" >
       distinct
@@ -110,7 +110,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from order_info
     where id = #{id,jdbcType=BIGINT}
@@ -119,33 +119,33 @@
     delete from order_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfoExample" >
+  <delete id="deleteByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.OrderInfoExample" >
     delete from order_info
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo" >
-    insert into order_info (id, gmt_create, gmt_modified, 
-      lecturer_user_no, lecturer_name, user_no, 
-      mobile, register_time, order_no, 
-      course_id, course_name, price_payable, 
-      price_discount, price_paid, platform_profit, 
-      lecturer_profit, trade_type, pay_type, 
-      channel_type, order_status, is_show_lecturer, 
-      is_show_user, remark_cus, remark, 
+  <insert id="insert" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.OrderInfo" >
+    insert into order_info (id, gmt_create, gmt_modified,
+      lecturer_user_no, lecturer_name, user_no,
+      mobile, register_time, order_no,
+      course_id, course_name, price_payable,
+      price_discount, price_paid, platform_profit,
+      lecturer_profit, trade_type, pay_type,
+      channel_type, order_status, is_show_lecturer,
+      is_show_user, remark_cus, remark,
       pay_time)
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{lecturerUserNo,jdbcType=BIGINT}, #{lecturerName,jdbcType=VARCHAR}, #{userNo,jdbcType=BIGINT}, 
-      #{mobile,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP}, #{orderNo,jdbcType=BIGINT}, 
-      #{courseId,jdbcType=BIGINT}, #{courseName,jdbcType=VARCHAR}, #{pricePayable,jdbcType=DECIMAL}, 
-      #{priceDiscount,jdbcType=DECIMAL}, #{pricePaid,jdbcType=DECIMAL}, #{platformProfit,jdbcType=DECIMAL}, 
-      #{lecturerProfit,jdbcType=DECIMAL}, #{tradeType,jdbcType=TINYINT}, #{payType,jdbcType=TINYINT}, 
-      #{channelType,jdbcType=TINYINT}, #{orderStatus,jdbcType=TINYINT}, #{isShowLecturer,jdbcType=TINYINT}, 
-      #{isShowUser,jdbcType=TINYINT}, #{remarkCus,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
+      #{lecturerUserNo,jdbcType=BIGINT}, #{lecturerName,jdbcType=VARCHAR}, #{userNo,jdbcType=BIGINT},
+      #{mobile,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP}, #{orderNo,jdbcType=BIGINT},
+      #{courseId,jdbcType=BIGINT}, #{courseName,jdbcType=VARCHAR}, #{pricePayable,jdbcType=DECIMAL},
+      #{priceDiscount,jdbcType=DECIMAL}, #{pricePaid,jdbcType=DECIMAL}, #{platformProfit,jdbcType=DECIMAL},
+      #{lecturerProfit,jdbcType=DECIMAL}, #{tradeType,jdbcType=TINYINT}, #{payType,jdbcType=TINYINT},
+      #{channelType,jdbcType=TINYINT}, #{orderStatus,jdbcType=TINYINT}, #{isShowLecturer,jdbcType=TINYINT},
+      #{isShowUser,jdbcType=TINYINT}, #{remarkCus,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
       #{payTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo" >
+  <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.OrderInfo" >
     insert into order_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -302,7 +302,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfoExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.OrderInfoExample" resultType="java.lang.Integer" >
     select count(*) from order_info
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -422,7 +422,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.OrderInfo" >
     update order_info
     <set >
       <if test="gmtCreate != null" >
@@ -500,7 +500,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.OrderInfo" >
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.OrderInfo" >
     update order_info
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},

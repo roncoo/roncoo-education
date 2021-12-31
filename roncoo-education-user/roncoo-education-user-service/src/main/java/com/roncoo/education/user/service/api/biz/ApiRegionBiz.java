@@ -1,13 +1,13 @@
 package com.roncoo.education.user.service.api.biz;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.roncoo.education.user.common.bo.UserRegionCityIdBO;
-import com.roncoo.education.user.common.bo.UserRegionLevelBO;
-import com.roncoo.education.user.common.bo.UserRegionProvinceBO;
-import com.roncoo.education.user.common.dto.RegionDTO;
-import com.roncoo.education.user.common.dto.RegionListDTO;
-import com.roncoo.education.user.service.dao.RegionDao;
-import com.roncoo.education.user.service.dao.impl.mapper.entity.Region;
+import com.roncoo.education.user.service.api.bo.UserRegionCityIdBO;
+import com.roncoo.education.user.service.api.bo.UserRegionLevelBO;
+import com.roncoo.education.user.service.api.bo.UserRegionProvinceBO;
+import com.roncoo.education.user.service.api.dto.RegionDTO;
+import com.roncoo.education.user.service.api.dto.RegionListDTO;
+import com.roncoo.education.user.dao.RegionDao;
+import com.roncoo.education.user.dao.impl.mapper.entity.Region;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.base.Result;
 import org.springframework.beans.factory.annotation.Autowired;

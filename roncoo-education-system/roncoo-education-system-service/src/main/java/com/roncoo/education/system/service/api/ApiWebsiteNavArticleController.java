@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.roncoo.education.system.service.api.biz.ApiWebsiteNavArticleBiz;
-import com.roncoo.education.system.common.bo.WebsiteNavArticleBO;
-import com.roncoo.education.system.common.dto.WebsiteNavArticleDTO;
+import com.roncoo.education.system.service.api.bo.WebsiteNavArticleBO;
+import com.roncoo.education.system.service.api.dto.WebsiteNavArticleDTO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
 

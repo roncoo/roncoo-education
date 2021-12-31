@@ -16,7 +16,7 @@ import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.roncoo.education.user.feign.vo.LecturerProfitVO;
+import com.roncoo.education.user.feign.interfaces.vo.LecturerProfitVO;
 import com.roncoo.education.util.base.Page;
 
 /**

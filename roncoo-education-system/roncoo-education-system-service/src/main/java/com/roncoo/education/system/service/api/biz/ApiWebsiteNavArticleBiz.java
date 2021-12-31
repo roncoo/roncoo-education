@@ -1,10 +1,10 @@
 package com.roncoo.education.system.service.api.biz;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.roncoo.education.system.common.bo.WebsiteNavArticleBO;
-import com.roncoo.education.system.common.dto.WebsiteNavArticleDTO;
-import com.roncoo.education.system.service.dao.WebsiteNavArticleDao;
-import com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteNavArticle;
+import com.roncoo.education.system.service.api.bo.WebsiteNavArticleBO;
+import com.roncoo.education.system.service.api.dto.WebsiteNavArticleDTO;
+import com.roncoo.education.system.dao.WebsiteNavArticleDao;
+import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavArticle;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.StatusIdEnum;
 import com.roncoo.education.util.tools.BeanUtil;

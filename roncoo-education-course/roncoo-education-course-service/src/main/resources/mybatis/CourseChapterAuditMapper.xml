@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.roncoo.education.course.service.dao.impl.mapper.CourseChapterAuditMapper" >
-  <resultMap id="BaseResultMap" type="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterAudit" >
+<mapper namespace="com.roncoo.education.course.dao.impl.mapper.CourseChapterAuditMapper" >
+  <resultMap id="BaseResultMap" type="com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterAudit" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
@@ -75,10 +75,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, gmt_create, gmt_modified, status_id, sort, audit_status, audit_opinion, course_id, 
+    id, gmt_create, gmt_modified, status_id, sort, audit_status, audit_opinion, course_id,
     chapter_name, chapter_desc, is_free, chapter_original, chapter_discount
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterAuditExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterAuditExample" >
     select
     <if test="distinct" >
       distinct
@@ -96,7 +96,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from course_chapter_audit
     where id = #{id,jdbcType=BIGINT}
@@ -105,25 +105,25 @@
     delete from course_chapter_audit
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterAuditExample" >
+  <delete id="deleteByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterAuditExample" >
     delete from course_chapter_audit
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterAudit" >
-    insert into course_chapter_audit (id, gmt_create, gmt_modified, 
-      status_id, sort, audit_status, 
-      audit_opinion, course_id, chapter_name, 
-      chapter_desc, is_free, chapter_original, 
+  <insert id="insert" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterAudit" >
+    insert into course_chapter_audit (id, gmt_create, gmt_modified,
+      status_id, sort, audit_status,
+      audit_opinion, course_id, chapter_name,
+      chapter_desc, is_free, chapter_original,
       chapter_discount)
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{auditStatus,jdbcType=INTEGER}, 
-      #{auditOpinion,jdbcType=VARCHAR}, #{courseId,jdbcType=BIGINT}, #{chapterName,jdbcType=VARCHAR}, 
-      #{chapterDesc,jdbcType=VARCHAR}, #{isFree,jdbcType=TINYINT}, #{chapterOriginal,jdbcType=DECIMAL}, 
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
+      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{auditStatus,jdbcType=INTEGER},
+      #{auditOpinion,jdbcType=VARCHAR}, #{courseId,jdbcType=BIGINT}, #{chapterName,jdbcType=VARCHAR},
+      #{chapterDesc,jdbcType=VARCHAR}, #{isFree,jdbcType=TINYINT}, #{chapterOriginal,jdbcType=DECIMAL},
       #{chapterDiscount,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterAudit" >
+  <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterAudit" >
     insert into course_chapter_audit
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -208,7 +208,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterAuditExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterAuditExample" resultType="java.lang.Integer" >
     select count(*) from course_chapter_audit
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -280,7 +280,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterAudit" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterAudit" >
     update course_chapter_audit
     <set >
       <if test="gmtCreate != null" >
@@ -322,7 +322,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterAudit" >
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterAudit" >
     update course_chapter_audit
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.roncoo.education.course.service.api.biz.ApiCourseCategoryBiz;
-import com.roncoo.education.course.common.dto.CourseCategoryListDTO;
+import com.roncoo.education.course.service.api.dto.CourseCategoryListDTO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Result;
 

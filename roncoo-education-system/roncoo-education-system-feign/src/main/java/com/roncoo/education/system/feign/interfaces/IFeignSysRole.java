@@ -1,7 +1,7 @@
 package com.roncoo.education.system.feign.interfaces;
 
-import com.roncoo.education.system.feign.qo.SysRoleQO;
-import com.roncoo.education.system.feign.vo.SysRoleVO;
+import com.roncoo.education.system.feign.interfaces.qo.SysRoleQO;
+import com.roncoo.education.system.feign.interfaces.vo.SysRoleVO;
 import com.roncoo.education.util.base.Page;
 import org.springframework.cloud.openfeign.FeignClient;
 

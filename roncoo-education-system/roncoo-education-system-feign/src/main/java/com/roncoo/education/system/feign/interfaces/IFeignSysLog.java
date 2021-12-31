@@ -1,7 +1,7 @@
 package com.roncoo.education.system.feign.interfaces;
 
-import com.roncoo.education.system.feign.qo.SysLogQO;
-import com.roncoo.education.system.feign.vo.SysLogVO;
+import com.roncoo.education.system.feign.interfaces.qo.SysLogQO;
+import com.roncoo.education.system.feign.interfaces.vo.SysLogVO;
 import com.roncoo.education.util.base.Page;
 import org.springframework.cloud.openfeign.FeignClient;
 

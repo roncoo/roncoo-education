@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * @author wujing
  */
-@RestControllerAdvice(basePackages = "com.roncoo.education.course.service.feign.gateway")
+@RestControllerAdvice(basePackages = "com.roncoo.education.course.service")
 public class HandlerException extends BaseController {
 
     @ExceptionHandler({FeignException.class})

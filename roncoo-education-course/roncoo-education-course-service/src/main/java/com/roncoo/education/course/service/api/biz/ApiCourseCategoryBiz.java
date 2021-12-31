@@ -1,12 +1,12 @@
 package com.roncoo.education.course.service.api.biz;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.roncoo.education.course.common.dto.CourseCategoryDTO;
-import com.roncoo.education.course.common.dto.CourseCategoryListDTO;
-import com.roncoo.education.course.common.dto.CourseCategoryThreeDTO;
-import com.roncoo.education.course.common.dto.CourseCategoryTwoDTO;
-import com.roncoo.education.course.service.dao.CourseCategoryDao;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseCategory;
+import com.roncoo.education.course.service.api.dto.CourseCategoryDTO;
+import com.roncoo.education.course.service.api.dto.CourseCategoryListDTO;
+import com.roncoo.education.course.service.api.dto.CourseCategoryThreeDTO;
+import com.roncoo.education.course.service.api.dto.CourseCategoryTwoDTO;
+import com.roncoo.education.course.dao.CourseCategoryDao;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseCategory;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.CategoryTypeEnum;
 import com.roncoo.education.util.enums.StatusIdEnum;

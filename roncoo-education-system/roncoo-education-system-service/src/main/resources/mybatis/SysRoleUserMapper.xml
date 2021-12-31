@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.roncoo.education.system.service.dao.impl.mapper.SysRoleUserMapper" >
-  <resultMap id="BaseResultMap" type="com.roncoo.education.system.service.dao.impl.mapper.entity.SysRoleUser" >
+<mapper namespace="com.roncoo.education.system.dao.impl.mapper.SysRoleUserMapper" >
+  <resultMap id="BaseResultMap" type="com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List" >
     id, gmt_create, gmt_modified, status_id, sort, role_id, user_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.SysRoleUserExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUserExample" >
     select
     <if test="distinct" >
       distinct
@@ -89,7 +89,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from sys_role_user
     where id = #{id,jdbcType=BIGINT}
@@ -98,21 +98,21 @@
     delete from sys_role_user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.SysRoleUserExample" >
+  <delete id="deleteByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUserExample" >
     delete from sys_role_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.SysRoleUser" >
-    insert into sys_role_user (id, gmt_create, gmt_modified, 
-      status_id, sort, role_id, 
+  <insert id="insert" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser" >
+    insert into sys_role_user (id, gmt_create, gmt_modified,
+      status_id, sort, role_id,
       user_id)
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{roleId,jdbcType=BIGINT}, 
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
+      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{roleId,jdbcType=BIGINT},
       #{userId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.SysRoleUser" >
+  <insert id="insertSelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser" >
     insert into sys_role_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -161,7 +161,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.SysRoleUserExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUserExample" resultType="java.lang.Integer" >
     select count(*) from sys_role_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -209,7 +209,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.SysRoleUser" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser" >
     update sys_role_user
     <set >
       <if test="gmtCreate != null" >
@@ -233,7 +233,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.SysRoleUser" >
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser" >
     update sys_role_user
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},

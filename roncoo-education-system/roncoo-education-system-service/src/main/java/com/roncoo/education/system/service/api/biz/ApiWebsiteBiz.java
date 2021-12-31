@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.roncoo.education.system.common.dto.WebsiteDTO;
-import com.roncoo.education.system.service.dao.WebsiteDao;
-import com.roncoo.education.system.service.dao.impl.mapper.entity.Website;
+import com.roncoo.education.system.service.api.dto.WebsiteDTO;
+import com.roncoo.education.system.dao.WebsiteDao;
+import com.roncoo.education.system.dao.impl.mapper.entity.Website;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.StatusIdEnum;
 import com.roncoo.education.util.tools.BeanUtil;

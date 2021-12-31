@@ -1,7 +1,7 @@
 package com.roncoo.education.system.feign.interfaces;
 
-import com.roncoo.education.system.feign.qo.WebsiteNavArticleQO;
-import com.roncoo.education.system.feign.vo.WebsiteNavArticleVO;
+import com.roncoo.education.system.feign.interfaces.qo.WebsiteNavArticleQO;
+import com.roncoo.education.system.feign.interfaces.vo.WebsiteNavArticleVO;
 import com.roncoo.education.util.base.Page;
 import org.springframework.cloud.openfeign.FeignClient;
 

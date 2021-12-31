@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.roncoo.education.system.service.dao.impl.mapper.SysMapper">
-  <resultMap id="BaseResultMap" type="com.roncoo.education.system.service.dao.impl.mapper.entity.Sys">
+<mapper namespace="com.roncoo.education.system.dao.impl.mapper.SysMapper">
+  <resultMap id="BaseResultMap" type="com.roncoo.education.system.dao.impl.mapper.entity.Sys">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
@@ -86,12 +86,12 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, status_id, sort, video_type, polyv_useid, polyv_writetoken, 
-    polyv_readtoken, polyv_secretkey, file_type, aliyun_access_key_id, aliyun_access_key_secret, 
-    aliyun_oss_url, aliyun_oss_bucket, aliyun_oss_endpoint, aliyun_oas_vault, pay_type, 
+    id, gmt_create, gmt_modified, status_id, sort, video_type, polyv_useid, polyv_writetoken,
+    polyv_readtoken, polyv_secretkey, file_type, aliyun_access_key_id, aliyun_access_key_secret,
+    aliyun_oss_url, aliyun_oss_bucket, aliyun_oss_endpoint, aliyun_oas_vault, pay_type,
     pay_url, pay_key, pay_secret, notify_url, sms_code, sign_name
   </sql>
-  <select id="selectByExample" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.SysExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -109,7 +109,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from sys
     where id = #{id,jdbcType=BIGINT}
@@ -118,33 +118,33 @@
     delete from sys
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.SysExample">
+  <delete id="deleteByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysExample">
     delete from sys
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Sys">
-    insert into sys (id, gmt_create, gmt_modified, 
-      status_id, sort, video_type, 
-      polyv_useid, polyv_writetoken, polyv_readtoken, 
-      polyv_secretkey, file_type, aliyun_access_key_id, 
-      aliyun_access_key_secret, aliyun_oss_url, aliyun_oss_bucket, 
-      aliyun_oss_endpoint, aliyun_oas_vault, pay_type, 
-      pay_url, pay_key, pay_secret, 
+  <insert id="insert" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.Sys">
+    insert into sys (id, gmt_create, gmt_modified,
+      status_id, sort, video_type,
+      polyv_useid, polyv_writetoken, polyv_readtoken,
+      polyv_secretkey, file_type, aliyun_access_key_id,
+      aliyun_access_key_secret, aliyun_oss_url, aliyun_oss_bucket,
+      aliyun_oss_endpoint, aliyun_oas_vault, pay_type,
+      pay_url, pay_key, pay_secret,
       notify_url, sms_code, sign_name
       )
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{videoType,jdbcType=TINYINT}, 
-      #{polyvUseid,jdbcType=VARCHAR}, #{polyvWritetoken,jdbcType=VARCHAR}, #{polyvReadtoken,jdbcType=VARCHAR}, 
-      #{polyvSecretkey,jdbcType=VARCHAR}, #{fileType,jdbcType=TINYINT}, #{aliyunAccessKeyId,jdbcType=VARCHAR}, 
-      #{aliyunAccessKeySecret,jdbcType=VARCHAR}, #{aliyunOssUrl,jdbcType=VARCHAR}, #{aliyunOssBucket,jdbcType=VARCHAR}, 
-      #{aliyunOssEndpoint,jdbcType=VARCHAR}, #{aliyunOasVault,jdbcType=VARCHAR}, #{payType,jdbcType=TINYINT}, 
-      #{payUrl,jdbcType=VARCHAR}, #{payKey,jdbcType=VARCHAR}, #{paySecret,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
+      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{videoType,jdbcType=TINYINT},
+      #{polyvUseid,jdbcType=VARCHAR}, #{polyvWritetoken,jdbcType=VARCHAR}, #{polyvReadtoken,jdbcType=VARCHAR},
+      #{polyvSecretkey,jdbcType=VARCHAR}, #{fileType,jdbcType=TINYINT}, #{aliyunAccessKeyId,jdbcType=VARCHAR},
+      #{aliyunAccessKeySecret,jdbcType=VARCHAR}, #{aliyunOssUrl,jdbcType=VARCHAR}, #{aliyunOssBucket,jdbcType=VARCHAR},
+      #{aliyunOssEndpoint,jdbcType=VARCHAR}, #{aliyunOasVault,jdbcType=VARCHAR}, #{payType,jdbcType=TINYINT},
+      #{payUrl,jdbcType=VARCHAR}, #{payKey,jdbcType=VARCHAR}, #{paySecret,jdbcType=VARCHAR},
       #{notifyUrl,jdbcType=VARCHAR}, #{smsCode,jdbcType=VARCHAR}, #{signName,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Sys">
+  <insert id="insertSelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.Sys">
     insert into sys
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -295,7 +295,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.SysExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysExample" resultType="java.lang.Integer">
     select count(*) from sys
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -411,7 +411,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Sys">
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.Sys">
     update sys
     <set>
       <if test="gmtCreate != null">
@@ -486,7 +486,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Sys">
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.Sys">
     update sys
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},

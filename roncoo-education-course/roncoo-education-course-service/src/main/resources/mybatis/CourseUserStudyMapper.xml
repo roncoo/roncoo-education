@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.roncoo.education.course.service.dao.impl.mapper.CourseUserStudyMapper" >
-  <resultMap id="BaseResultMap" type="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseUserStudy" >
+<mapper namespace="com.roncoo.education.course.dao.impl.mapper.CourseUserStudyMapper" >
+  <resultMap id="BaseResultMap" type="com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudy" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
@@ -71,10 +71,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, gmt_create, gmt_modified, status_id, sort, course_id, user_no, period_total, 
+    id, gmt_create, gmt_modified, status_id, sort, course_id, user_no, period_total,
     period_study
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseUserStudyExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudyExample" >
     select
     <if test="distinct" >
       distinct
@@ -92,7 +92,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from course_user_study
     where id = #{id,jdbcType=BIGINT}
@@ -101,23 +101,23 @@
     delete from course_user_study
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseUserStudyExample" >
+  <delete id="deleteByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudyExample" >
     delete from course_user_study
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseUserStudy" >
-    insert into course_user_study (id, gmt_create, gmt_modified, 
-      status_id, sort, course_id, 
+  <insert id="insert" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudy" >
+    insert into course_user_study (id, gmt_create, gmt_modified,
+      status_id, sort, course_id,
       user_no, period_total, period_study
       )
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{courseId,jdbcType=BIGINT}, 
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
+      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{courseId,jdbcType=BIGINT},
       #{userNo,jdbcType=BIGINT}, #{periodTotal,jdbcType=INTEGER}, #{periodStudy,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseUserStudy" >
+  <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudy" >
     insert into course_user_study
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -178,7 +178,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseUserStudyExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudyExample" resultType="java.lang.Integer" >
     select count(*) from course_user_study
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -234,7 +234,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseUserStudy" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudy" >
     update course_user_study
     <set >
       <if test="gmtCreate != null" >
@@ -264,7 +264,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseUserStudy" >
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudy" >
     update course_user_study
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},

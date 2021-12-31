@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.roncoo.education.user.service.dao.impl.mapper.RegionMapper" >
-  <resultMap id="BaseResultMap" type="com.roncoo.education.user.service.dao.impl.mapper.entity.Region" >
+<mapper namespace="com.roncoo.education.user.dao.impl.mapper.RegionMapper" >
+  <resultMap id="BaseResultMap" type="com.roncoo.education.user.dao.impl.mapper.entity.Region" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="parent_id" property="parentId" jdbcType="BIGINT" />
     <result column="level" property="level" jdbcType="INTEGER" />
@@ -76,10 +76,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, parent_id, level, center_lng, center_lat, province_id, province_code, province_name, 
+    id, parent_id, level, center_lng, center_lat, province_id, province_code, province_name,
     city_id, city_code, city_name, region_name, district_name, merger_name
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.RegionExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.RegionExample" >
     select
     <if test="distinct" >
       distinct
@@ -97,7 +97,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from region
     where id = #{id,jdbcType=BIGINT}
@@ -106,25 +106,25 @@
     delete from region
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.RegionExample" >
+  <delete id="deleteByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.RegionExample" >
     delete from region
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.Region" >
-    insert into region (id, parent_id, level, 
-      center_lng, center_lat, province_id, 
-      province_code, province_name, city_id, 
-      city_code, city_name, region_name, 
+  <insert id="insert" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.Region" >
+    insert into region (id, parent_id, level,
+      center_lng, center_lat, province_id,
+      province_code, province_name, city_id,
+      city_code, city_name, region_name,
       district_name, merger_name)
-    values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{level,jdbcType=INTEGER}, 
-      #{centerLng,jdbcType=DECIMAL}, #{centerLat,jdbcType=DECIMAL}, #{provinceId,jdbcType=INTEGER}, 
-      #{provinceCode,jdbcType=VARCHAR}, #{provinceName,jdbcType=VARCHAR}, #{cityId,jdbcType=INTEGER}, 
-      #{cityCode,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, #{regionName,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{level,jdbcType=INTEGER},
+      #{centerLng,jdbcType=DECIMAL}, #{centerLat,jdbcType=DECIMAL}, #{provinceId,jdbcType=INTEGER},
+      #{provinceCode,jdbcType=VARCHAR}, #{provinceName,jdbcType=VARCHAR}, #{cityId,jdbcType=INTEGER},
+      #{cityCode,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, #{regionName,jdbcType=VARCHAR},
       #{districtName,jdbcType=VARCHAR}, #{mergerName,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.Region" >
+  <insert id="insertSelective" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.Region" >
     insert into region
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -215,7 +215,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.RegionExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.RegionExample" resultType="java.lang.Integer" >
     select count(*) from region
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -291,7 +291,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.Region" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.Region" >
     update region
     <set >
       <if test="parentId != null" >
@@ -336,7 +336,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.Region" >
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.Region" >
     update region
     set parent_id = #{parentId,jdbcType=BIGINT},
       level = #{level,jdbcType=INTEGER},

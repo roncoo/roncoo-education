@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.roncoo.education.system.service.dao.impl.mapper.WebsiteMapper" >
-  <resultMap id="BaseResultMap" type="com.roncoo.education.system.service.dao.impl.mapper.entity.Website" >
+<mapper namespace="com.roncoo.education.system.dao.impl.mapper.WebsiteMapper" >
+  <resultMap id="BaseResultMap" type="com.roncoo.education.system.dao.impl.mapper.entity.Website" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
@@ -87,12 +87,12 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, gmt_create, gmt_modified, status_id, sort, logo_ico, logo_img, website_title, 
-    website_keyword, website_desc, copyright, icp, prn, weixin, weixin_xcx, weibo, is_enable_statistics, 
-    statistics_code, is_show_service, service1, service2, user_agreement, recruit_title, 
+    id, gmt_create, gmt_modified, status_id, sort, logo_ico, logo_img, website_title,
+    website_keyword, website_desc, copyright, icp, prn, weixin, weixin_xcx, weibo, is_enable_statistics,
+    statistics_code, is_show_service, service1, service2, user_agreement, recruit_title,
     recruit_info, entry_agreement
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteExample" >
     select
     <if test="distinct" >
       distinct
@@ -110,7 +110,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from website
     where id = #{id,jdbcType=BIGINT}
@@ -119,33 +119,33 @@
     delete from website
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteExample" >
+  <delete id="deleteByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteExample" >
     delete from website
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Website" >
-    insert into website (id, gmt_create, gmt_modified, 
-      status_id, sort, logo_ico, 
-      logo_img, website_title, website_keyword, 
-      website_desc, copyright, icp, 
-      prn, weixin, weixin_xcx, 
-      weibo, is_enable_statistics, statistics_code, 
-      is_show_service, service1, service2, 
-      user_agreement, recruit_title, recruit_info, 
+  <insert id="insert" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.Website" >
+    insert into website (id, gmt_create, gmt_modified,
+      status_id, sort, logo_ico,
+      logo_img, website_title, website_keyword,
+      website_desc, copyright, icp,
+      prn, weixin, weixin_xcx,
+      weibo, is_enable_statistics, statistics_code,
+      is_show_service, service1, service2,
+      user_agreement, recruit_title, recruit_info,
       entry_agreement)
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{logoIco,jdbcType=VARCHAR}, 
-      #{logoImg,jdbcType=VARCHAR}, #{websiteTitle,jdbcType=VARCHAR}, #{websiteKeyword,jdbcType=VARCHAR}, 
-      #{websiteDesc,jdbcType=VARCHAR}, #{copyright,jdbcType=VARCHAR}, #{icp,jdbcType=VARCHAR}, 
-      #{prn,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, #{weixinXcx,jdbcType=VARCHAR}, 
-      #{weibo,jdbcType=VARCHAR}, #{isEnableStatistics,jdbcType=TINYINT}, #{statisticsCode,jdbcType=VARCHAR}, 
-      #{isShowService,jdbcType=TINYINT}, #{service1,jdbcType=VARCHAR}, #{service2,jdbcType=VARCHAR}, 
-      #{userAgreement,jdbcType=VARCHAR}, #{recruitTitle,jdbcType=VARCHAR}, #{recruitInfo,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
+      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{logoIco,jdbcType=VARCHAR},
+      #{logoImg,jdbcType=VARCHAR}, #{websiteTitle,jdbcType=VARCHAR}, #{websiteKeyword,jdbcType=VARCHAR},
+      #{websiteDesc,jdbcType=VARCHAR}, #{copyright,jdbcType=VARCHAR}, #{icp,jdbcType=VARCHAR},
+      #{prn,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, #{weixinXcx,jdbcType=VARCHAR},
+      #{weibo,jdbcType=VARCHAR}, #{isEnableStatistics,jdbcType=TINYINT}, #{statisticsCode,jdbcType=VARCHAR},
+      #{isShowService,jdbcType=TINYINT}, #{service1,jdbcType=VARCHAR}, #{service2,jdbcType=VARCHAR},
+      #{userAgreement,jdbcType=VARCHAR}, #{recruitTitle,jdbcType=VARCHAR}, #{recruitInfo,jdbcType=VARCHAR},
       #{entryAgreement,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Website" >
+  <insert id="insertSelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.Website" >
     insert into website
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -302,7 +302,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteExample" resultType="java.lang.Integer" >
     select count(*) from website
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -422,7 +422,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Website" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.Website" >
     update website
     <set >
       <if test="gmtCreate != null" >
@@ -500,7 +500,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.service.dao.impl.mapper.entity.Website" >
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.Website" >
     update website
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},

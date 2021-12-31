@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.roncoo.education.user.service.dao.impl.mapper.UserLogLoginMapper" >
-  <resultMap id="BaseResultMap" type="com.roncoo.education.user.service.dao.impl.mapper.entity.UserLogLogin" >
+<mapper namespace="com.roncoo.education.user.dao.impl.mapper.UserLogLoginMapper" >
+  <resultMap id="BaseResultMap" type="com.roncoo.education.user.dao.impl.mapper.entity.UserLogLogin" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="user_no" property="userNo" jdbcType="BIGINT" />
@@ -70,7 +70,7 @@
   <sql id="Base_Column_List" >
     id, gmt_create, user_no, client_id, login_status, login_ip
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.UserLogLoginExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UserLogLoginExample" >
     select
     <if test="distinct" >
       distinct
@@ -88,7 +88,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from user_log_login
     where id = #{id,jdbcType=BIGINT}
@@ -97,21 +97,21 @@
     delete from user_log_login
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.UserLogLoginExample" >
+  <delete id="deleteByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UserLogLoginExample" >
     delete from user_log_login
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.UserLogLogin" >
-    insert into user_log_login (id, gmt_create, user_no, 
+  <insert id="insert" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UserLogLogin" >
+    insert into user_log_login (id, gmt_create, user_no,
       client_id, login_status, login_ip
       )
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{userNo,jdbcType=BIGINT}, 
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{userNo,jdbcType=BIGINT},
       #{clientId,jdbcType=CHAR}, #{loginStatus,jdbcType=TINYINT}, #{loginIp,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.UserLogLogin" >
+  <insert id="insertSelective" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UserLogLogin" >
     insert into user_log_login
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -154,7 +154,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.UserLogLoginExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UserLogLoginExample" resultType="java.lang.Integer" >
     select count(*) from user_log_login
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -198,7 +198,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.UserLogLogin" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UserLogLogin" >
     update user_log_login
     <set >
       <if test="gmtCreate != null" >
@@ -219,7 +219,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.user.service.dao.impl.mapper.entity.UserLogLogin" >
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UserLogLogin" >
     update user_log_login
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       user_no = #{userNo,jdbcType=BIGINT},

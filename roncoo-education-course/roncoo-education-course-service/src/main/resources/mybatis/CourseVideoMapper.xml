@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.roncoo.education.course.service.dao.impl.mapper.CourseVideoMapper" >
-  <resultMap id="BaseResultMap" type="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideo" >
+<mapper namespace="com.roncoo.education.course.dao.impl.mapper.CourseVideoMapper" >
+  <resultMap id="BaseResultMap" type="com.roncoo.education.course.dao.impl.mapper.entity.CourseVideo" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
@@ -76,10 +76,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, gmt_create, gmt_modified, status_id, sort, course_id, chapter_id, period_id, 
+    id, gmt_create, gmt_modified, status_id, sort, course_id, chapter_id, period_id,
     video_name, video_no, video_status, video_length, video_vid, video_oas_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideoExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseVideoExample" >
     select
     <if test="distinct" >
       distinct
@@ -97,7 +97,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from course_video
     where id = #{id,jdbcType=BIGINT}
@@ -106,25 +106,25 @@
     delete from course_video
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideoExample" >
+  <delete id="deleteByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseVideoExample" >
     delete from course_video
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideo" >
-    insert into course_video (id, gmt_create, gmt_modified, 
-      status_id, sort, course_id, 
-      chapter_id, period_id, video_name, 
-      video_no, video_status, video_length, 
+  <insert id="insert" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseVideo" >
+    insert into course_video (id, gmt_create, gmt_modified,
+      status_id, sort, course_id,
+      chapter_id, period_id, video_name,
+      video_no, video_status, video_length,
       video_vid, video_oas_id)
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{courseId,jdbcType=BIGINT}, 
-      #{chapterId,jdbcType=BIGINT}, #{periodId,jdbcType=BIGINT}, #{videoName,jdbcType=VARCHAR}, 
-      #{videoNo,jdbcType=BIGINT}, #{videoStatus,jdbcType=TINYINT}, #{videoLength,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
+      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{courseId,jdbcType=BIGINT},
+      #{chapterId,jdbcType=BIGINT}, #{periodId,jdbcType=BIGINT}, #{videoName,jdbcType=VARCHAR},
+      #{videoNo,jdbcType=BIGINT}, #{videoStatus,jdbcType=TINYINT}, #{videoLength,jdbcType=VARCHAR},
       #{videoVid,jdbcType=VARCHAR}, #{videoOasId,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideo" >
+  <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseVideo" >
     insert into course_video
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -215,7 +215,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideoExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseVideoExample" resultType="java.lang.Integer" >
     select count(*) from course_video
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -291,7 +291,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideo" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseVideo" >
     update course_video
     <set >
       <if test="gmtCreate != null" >
@@ -336,7 +336,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideo" >
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseVideo" >
     update course_video
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},

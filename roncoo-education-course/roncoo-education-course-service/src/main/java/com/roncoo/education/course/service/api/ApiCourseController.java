@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.roncoo.education.course.service.api.biz.ApiCourseBiz;
-import com.roncoo.education.course.common.bo.CourseInfoPageBO;
-import com.roncoo.education.course.common.bo.CourseInfoSearchBO;
-import com.roncoo.education.course.common.bo.CourseVideoBO;
-import com.roncoo.education.course.common.dto.CourseInfoPageDTO;
-import com.roncoo.education.course.common.dto.CourseInfoSearchPageDTO;
-import com.roncoo.education.course.common.dto.CourseViewDTO;
+import com.roncoo.education.course.service.api.bo.CourseInfoPageBO;
+import com.roncoo.education.course.service.api.bo.CourseInfoSearchBO;
+import com.roncoo.education.course.service.api.bo.CourseVideoBO;
+import com.roncoo.education.course.service.api.dto.CourseInfoPageDTO;
+import com.roncoo.education.course.service.api.dto.CourseInfoSearchPageDTO;
+import com.roncoo.education.course.service.api.dto.CourseViewDTO;
 import com.roncoo.education.util.base.BaseController;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.Result;
