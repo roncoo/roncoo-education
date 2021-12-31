@@ -1,34 +1,15 @@
 package com.roncoo.education.user.service.api.pc.biz;
 
-import java.math.BigDecimal;
-import java.util.regex.Pattern;
-
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.crypto.digest.DigestUtil;
 import com.roncoo.education.user.common.req.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
-
 import com.roncoo.education.user.common.resq.LecturerAuditPageRESQ;
 import com.roncoo.education.user.common.resq.LecturerAuditViewRESQ;
 import com.roncoo.education.user.common.resq.LecturerExtViewRESQ;
-import com.roncoo.education.user.service.dao.LecturerAuditDao;
-import com.roncoo.education.user.service.dao.LecturerDao;
-import com.roncoo.education.user.service.dao.LecturerExtDao;
-import com.roncoo.education.user.service.dao.UserDao;
-import com.roncoo.education.user.service.dao.UserExtDao;
-import com.roncoo.education.user.service.dao.impl.mapper.entity.Lecturer;
-import com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerAudit;
-import com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerAuditExample;
+import com.roncoo.education.user.service.dao.*;
+import com.roncoo.education.user.service.dao.impl.mapper.entity.*;
 import com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerAuditExample.Criteria;
-import com.roncoo.education.user.service.dao.impl.mapper.entity.LecturerExt;
-import com.roncoo.education.user.service.dao.impl.mapper.entity.User;
-import com.roncoo.education.user.service.dao.impl.mapper.entity.UserExt;
-import com.roncoo.education.util.base.BaseBiz;
-import com.roncoo.education.util.base.BaseException;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.util.base.*;
 import com.roncoo.education.util.enums.AuditStatusEnum;
 import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.enums.UserTypeEnum;
@@ -36,8 +17,13 @@ import com.roncoo.education.util.tools.BeanUtil;
 import com.roncoo.education.util.tools.NOUtil;
 import com.roncoo.education.util.tools.SignUtil;
 import com.roncoo.education.util.tools.StrUtil;
-import com.xiaoleilu.hutool.crypto.DigestUtil;
-import com.xiaoleilu.hutool.util.ObjectUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+
+import java.math.BigDecimal;
+import java.util.regex.Pattern;
 
 @Component
 public class PcApiLecturerAuditBiz extends BaseBiz {

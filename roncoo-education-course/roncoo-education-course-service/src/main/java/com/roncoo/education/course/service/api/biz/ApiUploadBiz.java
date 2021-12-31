@@ -3,6 +3,8 @@
  */
 package com.roncoo.education.course.service.api.biz;
 
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.course.service.dao.CourseChapterPeriodAuditDao;
 import com.roncoo.education.course.service.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.service.dao.CourseVideoDao;
@@ -29,8 +31,6 @@ import com.roncoo.education.util.tools.BeanUtil;
 import com.roncoo.education.util.tools.IdWorker;
 import com.roncoo.education.util.tools.StrUtil;
 import com.roncoo.spring.boot.autoconfigure.fastdfs.FastdfsClientService;
-import com.xiaoleilu.hutool.util.CollectionUtil;
-import com.xiaoleilu.hutool.util.ObjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;

@@ -1,15 +1,8 @@
 package com.roncoo.education.course.service.feign.biz;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import cn.hutool.core.collection.CollectionUtil;
 import com.roncoo.education.course.feign.qo.CourseCategoryQO;
 import com.roncoo.education.course.feign.vo.CourseCategoryVO;
-import org.apache.commons.collections.CollectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
-
 import com.roncoo.education.course.service.dao.CourseCategoryDao;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseCategory;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseCategoryExample;
@@ -17,6 +10,12 @@ import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseCategory
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.tools.BeanUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 课程分类
@@ -60,7 +59,7 @@ public class FeignCourseCategoryBiz {
     private List<CourseCategoryVO> recursionList(Long parentId) {
         List<CourseCategoryVO> list = new ArrayList<>();
         List<CourseCategory> CourseCategoryList = dao.listByParentId(parentId);
-        if (CollectionUtils.isNotEmpty(CourseCategoryList)) {
+        if (CollectionUtil.isNotEmpty(CourseCategoryList)) {
             for (CourseCategory courseCategory : CourseCategoryList) {
                 CourseCategoryVO vo = BeanUtil.copyProperties(courseCategory, CourseCategoryVO.class);
                 vo.setList(recursionList(courseCategory.getId()));

@@ -1,13 +1,14 @@
 package com.roncoo.education.app.gateway.filter;
 
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.roncoo.education.util.base.BaseException;
 import com.roncoo.education.util.enums.RedisPreEnum;
 import com.roncoo.education.util.enums.ResultEnum;
+import com.roncoo.education.util.tools.JSUtil;
 import com.roncoo.education.util.tools.JWTUtil;
-import com.xiaoleilu.hutool.json.JSONObject;
-import com.xiaoleilu.hutool.json.JSONUtil;
-import com.xiaoleilu.hutool.util.ObjectUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -86,7 +87,7 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
 
     // 校验用户是否有权限
     private static Boolean checkUri(String uri, String tk) {
-        List<String> menuVOList1 = com.roncoo.education.util.tools.JSONUtil.parseArray(tk, String.class);
+        List<String> menuVOList1 = JSUtil.parseArray(tk, String.class);
         if (StringUtils.hasText(uri) && uri.endsWith("/")) {
             uri = uri.substring(0, uri.length() - 1);
         }
@@ -121,7 +122,7 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
                 bodyJson = JSONUtil.parseObj(body);
             }
             if (ObjectUtil.isNotNull(userNo)) {
-                bodyJson.put(USERNO, userNo);
+                bodyJson.set(USERNO, userNo);
             }
             return Mono.just(JSONUtil.toJsonStr(bodyJson));
         });
@@ -193,7 +194,6 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
 
         // 更新时间，使token不过期
         stringRedisTemplate.opsForValue().set(userNo.toString(), token, 1, TimeUnit.HOURS);
-
         return userNo;
     }
 

@@ -1,10 +1,6 @@
 package com.roncoo.education.system.service.api.pc.biz;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
-
-import com.aliyun.oas.utils.StringUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.system.common.req.MsgUserDeleteREQ;
 import com.roncoo.education.system.common.req.MsgUserPageREQ;
 import com.roncoo.education.system.common.req.MsgUserViewREQ;
@@ -19,52 +15,53 @@ import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.tools.BeanUtil;
-import com.xiaoleilu.hutool.util.ObjectUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 /**
  * 站内信用户记录
- *
  */
 @Component
 public class PcApiMsgUserBiz {
 
-	@Autowired
-	private MsgUserDao dao;
+    @Autowired
+    private MsgUserDao dao;
 
-	public Result<Page<MsgUserPageRESQ>> list(MsgUserPageREQ req) {
-		MsgUserExample example = new MsgUserExample();
-		Criteria c = example.createCriteria();
-		if (StringUtil.isNotEmpty(req.getMsgTitle())) {
-			c.andMsgTitleLike(PageUtil.like(req.getMsgTitle()));
-		}
-		if (StringUtil.isNotEmpty(req.getMobile())) {
-			c.andMobileLike(PageUtil.like(req.getMobile()));
-		}
-		example.setOrderByClause(" status_id desc, sort desc, id desc ");
-		Page<MsgUser> page = dao.listForPage(req.getPageCurrent(), req.getPageSize(), example);
-		return Result.success(PageUtil.transform(page, MsgUserPageRESQ.class));
-	}
+    public Result<Page<MsgUserPageRESQ>> list(MsgUserPageREQ req) {
+        MsgUserExample example = new MsgUserExample();
+        Criteria c = example.createCriteria();
+        if (StringUtils.hasText(req.getMsgTitle())) {
+            c.andMsgTitleLike(PageUtil.like(req.getMsgTitle()));
+        }
+        if (StringUtils.hasText(req.getMobile())) {
+            c.andMobileLike(PageUtil.like(req.getMobile()));
+        }
+        example.setOrderByClause(" status_id desc, sort desc, id desc ");
+        Page<MsgUser> page = dao.listForPage(req.getPageCurrent(), req.getPageSize(), example);
+        return Result.success(PageUtil.transform(page, MsgUserPageRESQ.class));
+    }
 
-	public Result<Integer> delete(MsgUserDeleteREQ req) {
-		if (StringUtils.isEmpty(req.getId())) {
-			return Result.error("ID不能为空");
-		}
-		int result = dao.deleteById(req.getId());
-		if (result < 0) {
-			return Result.error(ResultEnum.SYSTEM_DELETE_FAIL);
-		}
-		return Result.success(result);
-	}
+    public Result<Integer> delete(MsgUserDeleteREQ req) {
+        if (StringUtils.isEmpty(req.getId())) {
+            return Result.error("ID不能为空");
+        }
+        int result = dao.deleteById(req.getId());
+        if (result < 0) {
+            return Result.error(ResultEnum.SYSTEM_DELETE_FAIL);
+        }
+        return Result.success(result);
+    }
 
-	public Result<MsgUserViewRESQ> view(MsgUserViewREQ req) {
-		if (StringUtils.isEmpty(req.getId())) {
-			return Result.error("ID不能为空");
-		}
-		MsgUser record = dao.getById(req.getId());
-		if (ObjectUtil.isNull(record)) {
-			return Result.error("找不到用户消息记录");
-		}
-		return Result.success(BeanUtil.copyProperties(record, MsgUserViewRESQ.class));
-	}
+    public Result<MsgUserViewRESQ> view(MsgUserViewREQ req) {
+        if (StringUtils.isEmpty(req.getId())) {
+            return Result.error("ID不能为空");
+        }
+        MsgUser record = dao.getById(req.getId());
+        if (ObjectUtil.isNull(record)) {
+            return Result.error("找不到用户消息记录");
+        }
+        return Result.success(BeanUtil.copyProperties(record, MsgUserViewRESQ.class));
+    }
 
 }

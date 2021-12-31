@@ -1,25 +1,9 @@
 package com.roncoo.education.system.service.api.pc.biz;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
-
-import com.roncoo.education.system.common.req.SysMenuDeleteREQ;
-import com.roncoo.education.system.common.req.SysMenuListREQ;
-import com.roncoo.education.system.common.req.SysMenuSaveREQ;
-import com.roncoo.education.system.common.req.SysMenuUpdateREQ;
-import com.roncoo.education.system.common.req.SysMenuUserListREQ;
-import com.roncoo.education.system.common.req.SysMenuViewREQ;
-import com.roncoo.education.system.common.resq.SysMenuListRESQ;
-import com.roncoo.education.system.common.resq.SysMenuRESQ;
-import com.roncoo.education.system.common.resq.SysMenuUserListRESQ;
-import com.roncoo.education.system.common.resq.SysMenuUserRESQ;
-import com.roncoo.education.system.common.resq.SysMenuViewRESQ;
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.ObjectUtil;
+import com.roncoo.education.system.common.req.*;
+import com.roncoo.education.system.common.resq.*;
 import com.roncoo.education.system.service.dao.SysMenuDao;
 import com.roncoo.education.system.service.dao.SysMenuRoleDao;
 import com.roncoo.education.system.service.dao.SysRoleUserDao;
@@ -32,8 +16,13 @@ import com.roncoo.education.util.base.Result;
 import com.roncoo.education.util.enums.MenuTypeEnum;
 import com.roncoo.education.util.enums.ResultEnum;
 import com.roncoo.education.util.tools.BeanUtil;
-import com.xiaoleilu.hutool.util.CollectionUtil;
-import com.xiaoleilu.hutool.util.ObjectUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 菜单信息
@@ -70,7 +59,7 @@ public class PcApiSysMenuBiz {
             }
         }
 
-        if (CollectionUtils.isNotEmpty(list)) {
+        if (CollectionUtil.isNotEmpty(list)) {
             resq.setSysMenu(list);
         }
         return Result.success(resq);
@@ -164,7 +153,7 @@ public class PcApiSysMenuBiz {
         }
         // 筛选
         List<SysMenuUserRESQ> list = listByRole(sysMenuRoleList, MenuTypeEnum.BUTTON.getCode());
-        if (CollectionUtils.isNotEmpty(list)) {
+        if (CollectionUtil.isNotEmpty(list)) {
             resq.setSysMenu(list);
         }
         return Result.success(resq);
@@ -236,7 +225,7 @@ public class PcApiSysMenuBiz {
         List<SysMenuUserRESQ> list = userRecursion(0L, null);
         List<SysMenuUserRESQ> apiUrlList = new ArrayList<>();
         List<SysMenuUserRESQ> listResqs = getListMenu(apiUrlList, sysMenuRoleList, list);
-        if (CollectionUtils.isNotEmpty(listResqs)) {
+        if (CollectionUtil.isNotEmpty(listResqs)) {
             resq.setSysMenu(listResqs);
         }
         return Result.success(resq);

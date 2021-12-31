@@ -1,47 +1,18 @@
 package com.roncoo.education.course.service.feign.biz;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.ObjectUtil;
+import com.roncoo.education.course.common.es.EsCourse;
 import com.roncoo.education.course.feign.qo.CourseAuditQO;
 import com.roncoo.education.course.feign.vo.CourseAuditVO;
 import com.roncoo.education.course.feign.vo.CourseChapterAuditVO;
 import com.roncoo.education.course.feign.vo.CourseChapterPeriodAuditVO;
-import org.apache.commons.collections.CollectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.data.elasticsearch.core.query.IndexQuery;
-import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
-
-import com.roncoo.education.course.common.es.EsCourse;
-import com.roncoo.education.course.service.dao.CourseAuditDao;
-import com.roncoo.education.course.service.dao.CourseCategoryDao;
-import com.roncoo.education.course.service.dao.CourseChapterAuditDao;
-import com.roncoo.education.course.service.dao.CourseChapterDao;
-import com.roncoo.education.course.service.dao.CourseChapterPeriodAuditDao;
-import com.roncoo.education.course.service.dao.CourseChapterPeriodDao;
-import com.roncoo.education.course.service.dao.CourseDao;
-import com.roncoo.education.course.service.dao.CourseIntroduceAuditDao;
-import com.roncoo.education.course.service.dao.CourseIntroduceDao;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.Course;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAudit;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAuditExample;
+import com.roncoo.education.course.service.dao.*;
+import com.roncoo.education.course.service.dao.impl.mapper.entity.*;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseAuditExample.Criteria;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseCategory;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapter;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterAudit;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriod;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriodAudit;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduce;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduceAudit;
 import com.roncoo.education.system.feign.interfaces.IFeignSys;
-import com.roncoo.education.user.feign.vo.LecturerVO;
 import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
+import com.roncoo.education.user.feign.vo.LecturerVO;
 import com.roncoo.education.util.aliyun.Aliyun;
 import com.roncoo.education.util.aliyun.AliyunUtil;
 import com.roncoo.education.util.base.BaseBiz;
@@ -53,7 +24,19 @@ import com.roncoo.education.util.enums.IsDocEnum;
 import com.roncoo.education.util.enums.IsFreeEnum;
 import com.roncoo.education.util.enums.StatusIdEnum;
 import com.roncoo.education.util.tools.BeanUtil;
-import com.xiaoleilu.hutool.util.ObjectUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
+import org.springframework.data.elasticsearch.core.query.IndexQuery;
+import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 课程信息-审核
@@ -88,7 +71,7 @@ public class FeignCourseAuditBiz extends BaseBiz {
     private IFeignSys bossSys;
 
     @Autowired
-    private ElasticsearchTemplate elasticsearchTemplate;
+    private ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     public Page<CourseAuditVO> listForPage(CourseAuditQO qo) {
         CourseAuditExample example = new CourseAuditExample();
@@ -179,7 +162,7 @@ public class FeignCourseAuditBiz extends BaseBiz {
 
         // 章节
         List<CourseChapterAudit> ChapterList = courseChapterAuditDao.listByCourseIdAndStatusId(vo.getId(), StatusIdEnum.YES.getCode());
-        if (CollectionUtils.isNotEmpty(ChapterList)) {
+        if (CollectionUtil.isNotEmpty(ChapterList)) {
             List<CourseChapterAuditVO> courseChapterVOList = new ArrayList<>();
             for (CourseChapterAudit courseChapter : ChapterList) {
                 // 课时
@@ -241,7 +224,7 @@ public class FeignCourseAuditBiz extends BaseBiz {
             course.setGmtCreate(null);
             course.setGmtModified(null);
             // 设置总课时数
-            if (CollectionUtils.isEmpty(periodAuditList)) {
+            if (CollectionUtil.isEmpty(periodAuditList)) {
                 course.setPeriodTotal(0);
             } else {
                 course.setPeriodTotal(periodAuditList.size());
@@ -254,7 +237,7 @@ public class FeignCourseAuditBiz extends BaseBiz {
             info.setGmtCreate(null);
             info.setGmtModified(null);
             // 设置总课时数
-            if (CollectionUtils.isEmpty(periodAuditList)) {
+            if (CollectionUtil.isEmpty(periodAuditList)) {
                 info.setPeriodTotal(0);
             } else {
                 info.setPeriodTotal(periodAuditList.size());
@@ -279,7 +262,7 @@ public class FeignCourseAuditBiz extends BaseBiz {
         // 3、对章节操作
         // 根据课程编号查找章节审核信息集合
         List<CourseChapterAudit> courseChapterAuditList = courseChapterAuditDao.listByCourseId(courseAudit.getId());
-        if (CollectionUtils.isNotEmpty(courseChapterAuditList)) {
+        if (CollectionUtil.isNotEmpty(courseChapterAuditList)) {
             for (CourseChapterAudit courseChapterAudit : courseChapterAuditList) {
                 // 根据章节编号查找章节审核信息
                 CourseChapterAudit infoAudit = courseChapterAuditDao.getById(courseChapterAudit.getId());
@@ -347,9 +330,8 @@ public class FeignCourseAuditBiz extends BaseBiz {
                 if (!ObjectUtils.isEmpty(lecturerInfoVO) && !StringUtils.isEmpty(lecturerInfoVO.getLecturerName()) && lecturerInfoVO.getStatusId().equals(StatusIdEnum.YES.getCode())) {
                     esCourse.setLecturerName(lecturerInfoVO.getLecturerName());
                 }
-                IndexQuery query = new IndexQueryBuilder().withIndexName("edu_course").withType("edu_course").withObject(esCourse).build();
-                elasticsearchTemplate.index(query);
-                elasticsearchTemplate.refresh("edu_course");
+                IndexQuery query = new IndexQueryBuilder().withObject(esCourse).build();
+                elasticsearchRestTemplate.index(query, IndexCoordinates.of(EsCourse.COURSE));
             } catch (Exception e) {
                 logger.error("elasticsearch更新数据失败", e);
             }

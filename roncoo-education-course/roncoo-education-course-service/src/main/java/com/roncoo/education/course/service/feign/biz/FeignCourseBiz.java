@@ -1,40 +1,28 @@
 package com.roncoo.education.course.service.feign.biz;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.course.feign.qo.CourseQO;
 import com.roncoo.education.course.feign.vo.CourseChapterPeriodVO;
 import com.roncoo.education.course.feign.vo.CourseChapterVO;
 import com.roncoo.education.course.feign.vo.CourseVO;
-import org.apache.commons.collections.CollectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
-
-import com.roncoo.education.course.service.dao.CourseCategoryDao;
-import com.roncoo.education.course.service.dao.CourseChapterDao;
-import com.roncoo.education.course.service.dao.CourseChapterPeriodDao;
-import com.roncoo.education.course.service.dao.CourseDao;
-import com.roncoo.education.course.service.dao.CourseIntroduceDao;
-import com.roncoo.education.course.service.dao.ZoneCourseDao;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.Course;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseCategory;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapter;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriod;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseExample;
+import com.roncoo.education.course.service.dao.*;
+import com.roncoo.education.course.service.dao.impl.mapper.entity.*;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseExample.Criteria;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduce;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.ZoneCourse;
 import com.roncoo.education.util.base.BaseException;
 import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.enums.IsFreeEnum;
 import com.roncoo.education.util.enums.StatusIdEnum;
 import com.roncoo.education.util.tools.BeanUtil;
-import com.xiaoleilu.hutool.util.ObjectUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 课程信息
@@ -62,7 +50,7 @@ public class FeignCourseBiz {
         Criteria c = example.createCriteria();
         if (qo.getZoneId() != null) {
             List<ZoneCourse> list = zoneCourseDao.listByZoneId(qo.getZoneId());
-            if (CollectionUtils.isNotEmpty(list)) {
+            if (CollectionUtil.isNotEmpty(list)) {
                 List<Long> notInCourseNoList = new ArrayList<>();
                 for (ZoneCourse zoneCourse : list) {
                     notInCourseNoList.add(zoneCourse.getCourseId());
@@ -178,7 +166,7 @@ public class FeignCourseBiz {
         }
         // 章节
         List<CourseChapter> ChapterList = courseChapterDao.listByCourseIdAndStatusId(courseVO.getId(), StatusIdEnum.YES.getCode());
-        if (CollectionUtils.isNotEmpty(ChapterList)) {
+        if (CollectionUtil.isNotEmpty(ChapterList)) {
             List<CourseChapterVO> courseChapterVOList = new ArrayList<>();
             for (CourseChapter courseChapter : ChapterList) {
                 // 课时

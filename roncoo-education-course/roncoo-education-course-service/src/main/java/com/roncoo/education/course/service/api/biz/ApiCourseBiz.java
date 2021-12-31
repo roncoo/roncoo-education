@@ -1,12 +1,12 @@
 package com.roncoo.education.course.service.api.biz;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.roncoo.education.course.common.bo.CourseInfoPageBO;
 import com.roncoo.education.course.common.bo.CourseInfoSearchBO;
 import com.roncoo.education.course.common.bo.CourseVideoBO;
 import com.roncoo.education.course.common.dto.*;
 import com.roncoo.education.course.common.es.EsCourse;
 import com.roncoo.education.course.common.es.EsPageUtil;
-import com.roncoo.education.course.common.es.ResultMapperExt;
 import com.roncoo.education.course.service.dao.CourseChapterDao;
 import com.roncoo.education.course.service.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.service.dao.CourseDao;
@@ -23,7 +23,6 @@ import com.roncoo.education.util.enums.IsPutawayEnum;
 import com.roncoo.education.util.enums.StatusIdEnum;
 import com.roncoo.education.util.tools.BeanUtil;
 import com.roncoo.education.util.tools.SqlUtil;
-import com.xiaoleilu.hutool.util.CollectionUtil;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -34,7 +33,9 @@ import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -60,11 +61,8 @@ public class ApiCourseBiz {
     @Autowired
     private IFeignLecturer bossLecturer;
 
-    @Autowired(required = false)
-    private ElasticsearchTemplate elasticsearchTemplate;
-
     @Autowired
-    private ResultMapperExt resultMapperExt;
+    private ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     /**
      * 课程详情接口
@@ -179,8 +177,7 @@ public class ApiCourseBiz {
         // 模糊查询multiMatchQuery，最佳字段best_fields
         qb.must(QueryBuilders.multiMatchQuery(bo.getCourseName(), "courseName", "lecturerName").type(MultiMatchQueryBuilder.Type.BEST_FIELDS));
         nsb.withQuery(qb);
-
-        org.springframework.data.domain.Page<EsCourse> page = elasticsearchTemplate.queryForPage(nsb.build(), EsCourse.class, resultMapperExt);
-        return Result.success(EsPageUtil.transform(page, CourseInfoSearchPageDTO.class));
+        SearchHits<EsCourse> searchHits = elasticsearchRestTemplate.search(nsb.build(), EsCourse.class, IndexCoordinates.of(EsCourse.COURSE));
+        return Result.success(EsPageUtil.transform(searchHits, bo.getPageCurrent(), bo.getPageSize(), CourseInfoSearchPageDTO.class));
     }
 }

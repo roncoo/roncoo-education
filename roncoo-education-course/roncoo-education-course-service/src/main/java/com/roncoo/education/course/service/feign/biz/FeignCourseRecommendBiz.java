@@ -1,12 +1,8 @@
 package com.roncoo.education.course.service.feign.biz;
 
-import java.util.List;
-
+import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.course.feign.qo.CourseRecommendQO;
 import com.roncoo.education.course.feign.vo.CourseRecommendVO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.roncoo.education.course.service.dao.CourseDao;
 import com.roncoo.education.course.service.dao.CourseRecommendDao;
 import com.roncoo.education.course.service.dao.impl.mapper.entity.Course;
@@ -18,7 +14,10 @@ import com.roncoo.education.util.base.Page;
 import com.roncoo.education.util.base.PageUtil;
 import com.roncoo.education.util.enums.StatusIdEnum;
 import com.roncoo.education.util.tools.BeanUtil;
-import com.xiaoleilu.hutool.util.ObjectUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * 课程推荐

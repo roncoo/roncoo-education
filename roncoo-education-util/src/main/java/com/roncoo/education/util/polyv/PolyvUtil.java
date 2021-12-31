@@ -3,16 +3,16 @@
  */
 package com.roncoo.education.util.polyv;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
-
+import cn.hutool.core.codec.Base64;
+import cn.hutool.core.util.URLUtil;
+import cn.hutool.crypto.SecureUtil;
+import cn.hutool.json.JSONArray;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+import com.roncoo.education.util.config.SystemUtil;
+import com.roncoo.education.util.tools.JSUtil;
+import com.roncoo.education.util.tools.MD5Util;
+import com.roncoo.education.util.tools.SHA1Util;
 import org.apache.commons.collections4.map.HashedMap;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -32,17 +32,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
-import com.aliyun.oas.utils.StringUtil;
-import com.ning.http.util.Base64;
-import com.roncoo.education.util.config.SystemUtil;
-import com.roncoo.education.util.tools.JSONUtil;
-import com.roncoo.education.util.tools.MD5Util;
-import com.roncoo.education.util.tools.SHA1Util;
-import com.xiaoleilu.hutool.crypto.SecureUtil;
-import com.xiaoleilu.hutool.http.HttpUtil;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import java.io.File;
+import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 /**
  * 保利威视工具类
@@ -53,7 +48,7 @@ public final class PolyvUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(PolyvUtil.class);
 
-    private static final String KEY = "roncoo-cloud"; // 长度为12
+    private static final String KEY = "rc-education"; // 长度为12
     private static final String CHARSET_UTF_8 = "UTF-8";
 
     private PolyvUtil() {
@@ -67,9 +62,7 @@ public final class PolyvUtil {
      */
     public static String getPolyvCode(PolyvCode polyvCode) {
         try {
-            return HttpUtil.encode(
-                    Base64.encode(SecureUtil.des(Base64.decode(KEY)).encrypt(JSONUtil.toJSONString(polyvCode))),
-                    CHARSET_UTF_8);
+            return URLUtil.encodeQuery(Base64.encode(SecureUtil.des(Base64.decode(KEY)).encrypt(JSUtil.toJSONString(polyvCode))), StandardCharsets.UTF_8);
         } catch (Exception e) {
             logger.error("保利威视，加密出错", e);
             return "";
@@ -84,9 +77,7 @@ public final class PolyvUtil {
      */
     public static PolyvCode decode(String code) {
         try {
-            return JSONUtil.parseObject(new String(
-                            SecureUtil.des(Base64.decode(KEY)).decrypt(Base64.decode(HttpUtil.decode(code, CHARSET_UTF_8)))),
-                    PolyvCode.class);
+            return JSUtil.parseObject(new String(SecureUtil.des(Base64.decode(KEY)).decrypt(Base64.decode(URLDecoder.decode(code, CHARSET_UTF_8)))), PolyvCode.class);
         } catch (Exception e) {
             logger.error("保利威视，解密出错", e);
             return null;
@@ -102,7 +93,7 @@ public final class PolyvUtil {
         map.put("userId", useid);
         map.put("videoId", bo.getVid());
         map.put("ts", ts);
-        map.put("viewerIp", "127.0.0.1");
+        map.put("viewerIp", bo.getIp());
         map.put("viewerName", bo.getUserNo());
         map.put("extraParams", "HTML5");
         map.put("viewerId", bo.getUserNo());
@@ -111,7 +102,7 @@ public final class PolyvUtil {
         map.put("sign", MD5Util.MD5(secretkey + concated + secretkey).toUpperCase());
         String result = post(SystemUtil.POLYV_GETTOKEN, map);
         logger.info("保利威视，获取token接口：result={}", result);
-        Map<String, Object> resultMap = JSONUtil.parseObject(result, HashMap.class);
+        Map<String, Object> resultMap = JSUtil.parseObject(result, HashMap.class);
         int code = Integer.valueOf(resultMap.get("code").toString()).intValue();
         if (code != 200) {
             return null;
@@ -142,10 +133,10 @@ public final class PolyvUtil {
         String s = post("http://api.polyv.net/v2/video/{userid}/get-video-msg".replace("{userid}", useid), param);
         try {
             @SuppressWarnings("unchecked")
-            Map<String, Object> m = JSONUtil.parseObject(s, HashMap.class);
+            Map<String, Object> m = JSUtil.parseObject(s, HashMap.class);
             if (m.get("code").toString().equals("200")) {
                 // 成功
-                return JSONUtil.parseArray(JSONUtil.toJSONString(m.get("data")), UploadFileResult.class).get(0);
+                return JSUtil.parseArray(JSUtil.toJSONString(m.get("data")), UploadFileResult.class).get(0);
             }
             logger.error("获取视频失败，原因为：{}", s);
         } catch (Exception e) {
@@ -166,14 +157,14 @@ public final class PolyvUtil {
         param.put("JSONRPC", "{\"title\": \"" + uploadFile.getTitle() + "\", \"tag\": \"" + uploadFile.getTag()
                 + "\", \"desc\": \"" + uploadFile.getDesc() + "\"}");
         param.put("cataid", uploadFile.getCataid());
-        if (StringUtil.isNotBlank(uploadFile.getWatermark())) {
+        if (StringUtils.hasText(uploadFile.getWatermark())) {
             param.put("watermark", uploadFile.getWatermark());
         }
         String result = postFile(SystemUtil.POLYV_UPLOADVIDEO, param, file);
         try {
-            JSONObject json = JSONObject.fromObject(result);
-            if ("0".equals(json.getString("error"))) {
-                return JSONUtil.parseArray(json.getString("data"), UploadFileResult.class).get(0);
+            JSONObject json = JSONUtil.parseObj(result);
+            if ("0".equals(json.getStr("error"))) {
+                return JSUtil.parseArray(json.getStr("data"), UploadFileResult.class).get(0);
             }
         } catch (Exception e) {
             logger.error(e.toString(), e);
@@ -232,12 +223,12 @@ public final class PolyvUtil {
             JSONArray choices = new JSONArray();
             for (String value : question.getAnswerList()) {
                 JSONObject answer = new JSONObject();
-                answer.put("answer", value);
+                answer.set("answer", value);
                 choices.add(answer);
             }
             JSONObject righeAnswer = new JSONObject();
-            righeAnswer.put("answer", question.getRightAnswer());
-            righeAnswer.put("right_answer", question.getRight());
+            righeAnswer.set("answer", question.getRightAnswer());
+            righeAnswer.set("right_answer", question.getRight());
             choices.add(righeAnswer);
             List<BasicNameValuePair> nvps = new ArrayList<>();
             nvps.add(new BasicNameValuePair("method", "saveExam"));
@@ -255,7 +246,7 @@ public final class PolyvUtil {
             httpPost.setEntity(se);
             HttpResponse httpResponse = HttpClientBuilder.create().build().execute(httpPost);
             String resultStr = EntityUtils.toString(httpResponse.getEntity(), CHARSET_UTF_8);
-            return (QuestionResult) JSONObject.toBean(JSONObject.fromObject(resultStr), QuestionResult.class);
+            return JSUtil.parseObject(resultStr, QuestionResult.class);
         } catch (Exception e) {
             logger.error("添加问题失败！");
         }
