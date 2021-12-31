@@ -34,44 +34,21 @@
 * 广告管理功能，后台自定义广告设置，增加营销效果
 * 支付功能模块，无缝对接 [龙果支付系统商业版](https://pay.roncoo.net/)
 
-```
-roncoo-education
-    ├── roncoo-education-app-gateway 网关服务：所有请求的入口，主要实现权限校验和请求转发
-    │   
-    ├── roncoo-education-app-job 定时任务：实现分布式任务调度功能，主要实现订单超时处理等
-    │   
-    ├── roncoo-education-app-sba 应用监控：基于Spring Boot Admin（不启动，不影响功能）
-    │   
-    ├── roncoo-education-app-course 课程服务
-    │   
-    ├── roncoo-education-app-system 系统服务
-    │   
-    ├── roncoo-education-app-user 用户服务
-    │ 
-    └── roncoo-education-util 公共工具类，抽取的工具类包
-```
-
 ---
 
-##### 领课教育系统(roncoo-education)：[CodeChina](https://codechina.csdn.net/roncoocom/roncoo-education) | [码云地址](https://gitee.com/roncoocom/roncoo-education) | [Github地址](https://github.com/roncoo/roncoo-education)
+##### 领课教育系统(roncoo-education)：[码云地址](https://gitee.com/roncoocom/roncoo-education) | [Github地址](https://github.com/roncoo/roncoo-education) | [CodeChina](https://codechina.csdn.net/roncoocom/roncoo-education)
 > roncoo-education是后台工程，核心框架：Spring Cloud Alibaba 
 
-##### 前端门户工程(roncoo-education-web)：[CodeChina](https://codechina.csdn.net/roncoocom/roncoo-education-web) | [码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web)
+##### 前端门户工程(roncoo-education-web)： [码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web) | [CodeChina](https://codechina.csdn.net/roncoocom/roncoo-education-web)
 > roncoo-education-web是前端门户工程，核心框架：Vuejs + Nuxt.js  
 
-##### 后台管理工程(roncoo-education-admin)：[CodeChina](https://codechina.csdn.net/roncoocom/roncoo-education-admin) | [码云地址](https://gitee.com/roncoocom/roncoo-education-admin) | [Github地址](https://github.com/roncoo/roncoo-education-admin)
+##### 后台管理工程(roncoo-education-admin)：[码云地址](https://gitee.com/roncoocom/roncoo-education-admin) | [Github地址](https://github.com/roncoo/roncoo-education-admin) | [CodeChina](https://codechina.csdn.net/roncoocom/roncoo-education-admin)
 > roncoo-education-admin是后台管理工程，核心框架：vue-element-admin
 
----
-
 ### 演示地址
-* [前端演示地址](https://eduos.roncoo.net/) | [后台演示地址](https://eduos.roncoo.net/admin) 
-### 帮助文档（如果对你有用，请给个star！）
-* [项目文档](http://doc.os.roncoos.com/) | [常见问题](https://blog.roncoo.com/article/1105309620724858882) | [部署文档](https://blog.roncoo.com/article/1103554925858197505) 
-* [MySQL安装](https://blog.roncoo.com/article/1280781211745636354) | [Redis安装](https://blog.roncoo.com/article/1281402533735550977) | [Elasticsearch安装](https://blog.roncoo.com/article/1281405654742323202) | [FastDFS安装](https://blog.roncoo.com/article/1275251133292867586)
-
----
-
+* [前端门户演示地址：https://eduos.roncoo.net/](https://eduos.roncoo.net/) 
+* [后台管理演示地址：https://eduos.roncoo.net/admin](https://eduos.roncoo.net/admin) 
+* [项目帮助文档地址：https://eduos.roncoo.net/doc](https://eduos.roncoo.net/doc) 
 
 ### 官方QQ群（加群免费获取sql脚本）
 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=BpOlarqoFOUReMfHsinOBDrFJhVln6LO&jump_from=webapi"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课⑪" title="在线教育系统-领课⑪"> 624670981</a> 可加
