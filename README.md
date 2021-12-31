@@ -10,23 +10,6 @@
     </div>
 </div>
 
-```
-roncoo-education
-    ├── roncoo-education-app-gateway 网关服务：所有请求的入口，主要实现权限校验和请求转发
-    │   
-    ├── roncoo-education-app-job 定时任务：实现分布式任务调度功能，主要实现订单超时处理等
-    │   
-    ├── roncoo-education-app-sba 应用监控：基于Spring Boot Admin（不启动，不影响功能）
-    │   
-    ├── roncoo-education-app-course 课程服务
-    │   
-    ├── roncoo-education-app-system 系统服务
-    │   
-    ├── roncoo-education-app-user 用户服务
-    │ 
-    └── roncoo-education-util 公共工具类，抽取的工具类包
-```
-
 ### 项目介绍
 领课教育系统（roncoo-education）是基于领课网络多年的在线教育平台开发和运营经验打造出来的产品，致力于打造一个各行业都适用的分布式在线教育系统。系统采用前后端分离模式，前台采用vue.js为核心框架，后台采用Spring Cloud为核心框架。系统目前主要功能有课程点播功能，支持多家视频云的接入，课程附件管理功能，支持多家存储云的接入，讲师管理功能，支持讲师入驻功能，可以帮助个人或者企业快速搭建一个轻量级的在线教育平台。
 
@@ -50,6 +33,23 @@ roncoo-education
 * 用户登录功能，同一时间只允许同一个账号在同一个地方登录，防止账号共享
 * 广告管理功能，后台自定义广告设置，增加营销效果
 * 支付功能模块，无缝对接 [龙果支付系统商业版](https://pay.roncoo.net/)
+
+```
+roncoo-education
+    ├── roncoo-education-app-gateway 网关服务：所有请求的入口，主要实现权限校验和请求转发
+    │   
+    ├── roncoo-education-app-job 定时任务：实现分布式任务调度功能，主要实现订单超时处理等
+    │   
+    ├── roncoo-education-app-sba 应用监控：基于Spring Boot Admin（不启动，不影响功能）
+    │   
+    ├── roncoo-education-app-course 课程服务
+    │   
+    ├── roncoo-education-app-system 系统服务
+    │   
+    ├── roncoo-education-app-user 用户服务
+    │ 
+    └── roncoo-education-util 公共工具类，抽取的工具类包
+```
 
 ---
 
