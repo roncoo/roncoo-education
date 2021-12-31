@@ -13,34 +13,32 @@ import java.util.Properties;
  */
 public final class SystemUtil {
 
-	private SystemUtil() {
-	}
+    private SystemUtil() {
+    }
 
-	private static final Properties properties = new Properties();
+    private static final Properties properties = new Properties();
 
-	static {
-		try {
-			properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("system.properties"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    static {
+        try {
+            properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("system.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-	private static String getProperty(String keyName) {
-		return properties.getProperty(keyName, "").trim();
-	}
+    private static String getProperty(String keyName) {
+        return properties.getProperty(keyName, "").trim();
+    }
 
+    public static final String PERIOD_VIDEO_PATH = getProperty("period_video_path");
+    public static final String PIC_PATH = getProperty("pic_path");
+    public static final String DOC_STORAGE_PATH = getProperty("doc_storage_path");
+    public static final String PIC_STORAGE_PATH = getProperty("pic_storage_path");
 
-	public static final String PERIOD_VIDEO_PATH = getProperty("period_video_path");
-	public static final String PIC_PATH = getProperty("pic_path");
+    public static final String TEST_COURSE = getProperty("test_course");
 
-	public static final String POLYV_UPLOADVIDEO = getProperty("polyv_uploadVideo");
-	public static final String POLYV_DELETEVIDEO = getProperty("polyv_deleteVideo");
-	public static final String POLYV_QUESTION = getProperty("polyv_question");
-	public static final String POLYV_GETTOKEN = getProperty("polyv_getToken");
-
-	public static final String TEST_COURSE = getProperty("test_course");
-
-	public static final String DOC_STORAGE_PATH = getProperty("doc_storage_path");
-	public static final String PIC_STORAGE_PATH = getProperty("pic_storage_path");
+    public static final String POLYV_UPLOADVIDEO = getProperty("polyv_uploadVideo");
+    public static final String POLYV_DELETEVIDEO = getProperty("polyv_deleteVideo");
+    public static final String POLYV_QUESTION = getProperty("polyv_question");
+    public static final String POLYV_GETTOKEN = getProperty("polyv_getToken");
 }
