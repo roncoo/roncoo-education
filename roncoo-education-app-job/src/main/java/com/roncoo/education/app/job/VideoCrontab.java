@@ -2,8 +2,8 @@ package com.roncoo.education.app.job;
 
 import cn.hutool.core.io.FileUtil;
 import com.roncoo.education.course.feign.interfaces.IFeignCourseVideo;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.config.SystemUtil;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.config.SystemUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

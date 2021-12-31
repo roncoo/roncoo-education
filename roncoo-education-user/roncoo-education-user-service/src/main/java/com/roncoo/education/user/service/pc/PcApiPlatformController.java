@@ -14,9 +14,9 @@ import com.roncoo.education.user.service.pc.req.PlatformUpdateREQ;
 import com.roncoo.education.user.service.pc.req.PlatformViewREQ;
 import com.roncoo.education.user.service.pc.resq.PlatformPageRESQ;
 import com.roncoo.education.user.service.pc.resq.PlatformViewRESQ;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.Result;
 
 import io.swagger.annotations.ApiOperation;
 

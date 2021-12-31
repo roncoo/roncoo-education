@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 
 import com.roncoo.education.course.dao.AdvDao;
 import com.roncoo.education.course.dao.impl.mapper.AdvMapper;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.IdWorker;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.IdWorker;
 
 @Repository
 public class AdvDaoImpl implements AdvDao {

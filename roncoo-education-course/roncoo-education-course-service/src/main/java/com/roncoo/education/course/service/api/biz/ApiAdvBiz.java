@@ -6,10 +6,10 @@ import com.roncoo.education.course.service.api.dto.AdvDTO;
 import com.roncoo.education.course.service.api.dto.AdvListDTO;
 import com.roncoo.education.course.dao.AdvDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Adv;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.base.Result;
-import com.roncoo.education.util.enums.StatusIdEnum;
-import com.roncoo.education.util.tools.DateUtil;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.StatusIdEnum;
+import com.roncoo.education.common.core.tools.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

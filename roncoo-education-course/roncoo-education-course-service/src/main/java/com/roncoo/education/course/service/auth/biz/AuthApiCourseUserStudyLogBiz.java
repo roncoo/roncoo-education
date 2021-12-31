@@ -10,10 +10,10 @@ import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudyLog;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudyLogExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudyLogExample.Criteria;
-import com.roncoo.education.util.base.BaseBiz;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.BaseBiz;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.base.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

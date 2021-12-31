@@ -4,9 +4,9 @@
 package com.roncoo.education.course.service.callback;
 
 import com.roncoo.education.course.service.callback.biz.CallbackPolyvBiz;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.polyv.PolyvAuth;
-import com.roncoo.education.util.polyv.PolyvVideo;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.polyv.PolyvAuth;
+import com.roncoo.education.common.core.polyv.PolyvVideo;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.roncoo.education.system.feign.interfaces.qo.SysQO;
 import com.roncoo.education.system.feign.interfaces.vo.SysVO;
 import com.roncoo.education.system.feign.biz.FeignSysBiz;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Page;
 
 /**
  * 系统配置表

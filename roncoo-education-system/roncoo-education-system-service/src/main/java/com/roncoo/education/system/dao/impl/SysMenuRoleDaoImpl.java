@@ -9,9 +9,9 @@ import com.roncoo.education.system.dao.SysMenuRoleDao;
 import com.roncoo.education.system.dao.impl.mapper.SysMenuRoleMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuRole;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuRoleExample;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.IdWorker;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.IdWorker;
 
 @Repository
 public class SysMenuRoleDaoImpl implements SysMenuRoleDao {

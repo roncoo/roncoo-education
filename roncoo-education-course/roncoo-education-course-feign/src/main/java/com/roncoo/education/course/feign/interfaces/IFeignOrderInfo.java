@@ -6,7 +6,7 @@ import com.roncoo.education.course.feign.interfaces.vo.CountIncomeVO;
 import com.roncoo.education.course.feign.interfaces.vo.OrderEchartsVO;
 import com.roncoo.education.course.feign.interfaces.vo.OrderInfoVO;
 import com.roncoo.education.course.feign.interfaces.vo.OrderReportVO;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -11,9 +11,9 @@ import com.roncoo.education.system.dao.impl.mapper.MsgMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.Msg;
 import com.roncoo.education.system.dao.impl.mapper.entity.MsgExample;
 import com.roncoo.education.system.dao.impl.mapper.entity.MsgExample.Criteria;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.IdWorker;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.IdWorker;
 
 @Repository
 public class MsgDaoImpl implements MsgDao {

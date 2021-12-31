@@ -5,12 +5,12 @@ import com.roncoo.education.system.feign.interfaces.vo.SysVO;
 import com.roncoo.education.system.dao.SysDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.Sys;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysExample;
-import com.roncoo.education.util.base.BaseException;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.enums.SysTypeEnum;
-import com.roncoo.education.util.enums.VideoTypeEnum;
-import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.common.core.base.BaseException;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.enums.SysTypeEnum;
+import com.roncoo.education.common.core.enums.VideoTypeEnum;
+import com.roncoo.education.common.core.tools.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -10,8 +10,8 @@ import com.roncoo.education.system.service.pc.biz.PcApiSysRoleUserBiz;
 import com.roncoo.education.system.service.pc.req.SysRoleUserListREQ;
 import com.roncoo.education.system.service.pc.req.SysRoleUserSaveREQ;
 import com.roncoo.education.system.service.pc.resq.SysRoleUserListRESQ;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Result;
 
 import io.swagger.annotations.ApiOperation;
 

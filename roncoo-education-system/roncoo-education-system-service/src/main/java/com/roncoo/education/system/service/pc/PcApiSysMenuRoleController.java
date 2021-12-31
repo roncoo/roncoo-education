@@ -10,8 +10,8 @@ import com.roncoo.education.system.service.pc.biz.PcApiSysMenuRoleBiz;
 import com.roncoo.education.system.service.pc.req.SysMenuRoleListREQ;
 import com.roncoo.education.system.service.pc.req.SysMenuRoleSaveREQ;
 import com.roncoo.education.system.service.pc.resq.SysMenuRoleListRESQ;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Result;
 
 import io.swagger.annotations.ApiOperation;
 

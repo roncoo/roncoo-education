@@ -5,8 +5,8 @@ import com.roncoo.education.user.service.api.bo.LecturerViewBO;
 import com.roncoo.education.user.service.api.dto.LecturerViewDTO;
 import com.roncoo.education.user.dao.LecturerDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.Lecturer;
-import com.roncoo.education.util.base.Result;
-import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.tools.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -4,9 +4,9 @@ import com.roncoo.education.user.dao.impl.mapper.entity.LecturerProfit;
 import com.roncoo.education.user.dao.LecturerProfitDao;
 import com.roncoo.education.user.dao.impl.mapper.LecturerProfitMapper;
 import com.roncoo.education.user.dao.impl.mapper.entity.LecturerProfitExample;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.IdWorker;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.IdWorker;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

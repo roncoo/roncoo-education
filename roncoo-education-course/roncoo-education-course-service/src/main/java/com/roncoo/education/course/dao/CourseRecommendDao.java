@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseRecommend;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseRecommendExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface CourseRecommendDao {
 	int save(CourseRecommend record);

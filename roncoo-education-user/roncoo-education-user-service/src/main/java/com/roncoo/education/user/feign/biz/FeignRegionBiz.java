@@ -8,9 +8,9 @@ import com.roncoo.education.user.feign.interfaces.vo.RegionVO;
 import com.roncoo.education.user.dao.RegionDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.Region;
 import com.roncoo.education.user.dao.impl.mapper.entity.RegionExample;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.BeanUtil;
 
 /**
  * 行政区域表

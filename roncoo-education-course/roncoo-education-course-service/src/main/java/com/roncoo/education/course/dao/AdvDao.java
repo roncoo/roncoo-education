@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.roncoo.education.course.dao.impl.mapper.entity.Adv;
 import com.roncoo.education.course.dao.impl.mapper.entity.AdvExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface AdvDao {
 	int save(Adv record);

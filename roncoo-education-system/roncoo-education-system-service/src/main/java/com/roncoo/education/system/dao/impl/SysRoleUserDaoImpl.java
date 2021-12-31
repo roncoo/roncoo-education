@@ -9,9 +9,9 @@ import com.roncoo.education.system.dao.SysRoleUserDao;
 import com.roncoo.education.system.dao.impl.mapper.SysRoleUserMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUserExample;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.IdWorker;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.IdWorker;
 
 @Repository
 public class SysRoleUserDaoImpl implements SysRoleUserDao {

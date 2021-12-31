@@ -2,7 +2,7 @@ package com.roncoo.education.system.dao;
 
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUser;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUserExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface SysUserDao {
 	int save(SysUser record);

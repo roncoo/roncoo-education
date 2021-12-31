@@ -15,13 +15,13 @@ import com.roncoo.education.system.dao.impl.mapper.entity.Msg;
 import com.roncoo.education.system.dao.impl.mapper.entity.MsgUser;
 import com.roncoo.education.system.dao.impl.mapper.entity.MsgUserExample;
 import com.roncoo.education.system.dao.impl.mapper.entity.MsgUserExample.Criteria;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.base.Result;
-import com.roncoo.education.util.enums.IsDefaultEnum;
-import com.roncoo.education.util.enums.IsReadEnum;
-import com.roncoo.education.util.enums.StatusIdEnum;
-import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.IsDefaultEnum;
+import com.roncoo.education.common.core.enums.IsReadEnum;
+import com.roncoo.education.common.core.enums.StatusIdEnum;
+import com.roncoo.education.common.core.tools.BeanUtil;
 
 /**
  * 站内信用户记录表

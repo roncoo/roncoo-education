@@ -4,9 +4,9 @@ import com.roncoo.education.system.dao.MsgTemplateDao;
 import com.roncoo.education.system.dao.impl.mapper.MsgTemplateMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.MsgTemplate;
 import com.roncoo.education.system.dao.impl.mapper.entity.MsgTemplateExample;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.IdWorker;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

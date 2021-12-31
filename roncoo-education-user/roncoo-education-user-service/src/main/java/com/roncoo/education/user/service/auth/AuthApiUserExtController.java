@@ -10,8 +10,8 @@ import com.roncoo.education.user.service.auth.biz.AuthApiUserExtBiz;
 import com.roncoo.education.user.service.auth.bo.AuthUserExtBO;
 import com.roncoo.education.user.service.auth.bo.AuthUserExtViewBO;
 import com.roncoo.education.user.service.auth.dto.AuthUserExtDTO;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Result;
 
 import io.swagger.annotations.ApiOperation;
 

@@ -10,9 +10,9 @@ import org.springframework.util.StringUtils;
 import com.roncoo.education.system.service.api.dto.WebsiteDTO;
 import com.roncoo.education.system.dao.WebsiteDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.Website;
-import com.roncoo.education.util.base.Result;
-import com.roncoo.education.util.enums.StatusIdEnum;
-import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.StatusIdEnum;
+import com.roncoo.education.common.core.tools.BeanUtil;
 
 /**
  * 站点信息

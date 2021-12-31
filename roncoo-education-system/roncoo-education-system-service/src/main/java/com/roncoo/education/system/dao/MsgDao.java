@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.roncoo.education.system.dao.impl.mapper.entity.MsgExample;
 import com.roncoo.education.system.dao.impl.mapper.entity.Msg;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface MsgDao {
 	int save(Msg record);

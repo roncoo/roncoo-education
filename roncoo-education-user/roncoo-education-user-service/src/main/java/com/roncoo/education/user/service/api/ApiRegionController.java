@@ -11,8 +11,8 @@ import com.roncoo.education.user.service.api.bo.UserRegionCityIdBO;
 import com.roncoo.education.user.service.api.bo.UserRegionLevelBO;
 import com.roncoo.education.user.service.api.bo.UserRegionProvinceBO;
 import com.roncoo.education.user.service.api.dto.RegionListDTO;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Result;
 
 import io.swagger.annotations.ApiOperation;
 

@@ -11,8 +11,8 @@ import com.roncoo.education.user.service.auth.bo.AuthLecturerAuditBO;
 import com.roncoo.education.user.service.auth.bo.AuthLecturerAuditSaveBO;
 import com.roncoo.education.user.service.auth.bo.AuthLecturerAuditViewBO;
 import com.roncoo.education.user.service.auth.dto.AuthLecturerAuditViewDTO;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Result;
 
 import io.swagger.annotations.ApiOperation;
 

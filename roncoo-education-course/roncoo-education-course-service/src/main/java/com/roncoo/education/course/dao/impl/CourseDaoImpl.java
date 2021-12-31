@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.impl.mapper.CourseMapper;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
 
 @Repository
 public class CourseDaoImpl implements CourseDao {

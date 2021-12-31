@@ -2,7 +2,7 @@ package com.roncoo.education.system.dao;
 
 import com.roncoo.education.system.dao.impl.mapper.entity.MsgUser;
 import com.roncoo.education.system.dao.impl.mapper.entity.MsgUserExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface MsgUserDao {
 	int save(MsgUser record);

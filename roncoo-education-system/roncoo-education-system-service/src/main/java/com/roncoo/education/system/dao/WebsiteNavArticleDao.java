@@ -2,7 +2,7 @@ package com.roncoo.education.system.dao;
 
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavArticle;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavArticleExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface WebsiteNavArticleDao {
 	int save(WebsiteNavArticle record);

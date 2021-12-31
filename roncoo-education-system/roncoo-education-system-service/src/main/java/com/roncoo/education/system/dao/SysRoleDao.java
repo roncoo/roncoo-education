@@ -2,7 +2,7 @@ package com.roncoo.education.system.dao;
 
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRole;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface SysRoleDao {
     int save(SysRole record);

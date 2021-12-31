@@ -140,7 +140,12 @@
             </dependency>
             <dependency>
                 <groupId>com.roncoo</groupId>
-                <artifactId>roncoo-education-util</artifactId>
+                <artifactId>roncoo-education-common-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.roncoo</groupId>
+                <artifactId>roncoo-education-common-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
@@ -229,9 +234,8 @@
         <module>roncoo-education-app-job</module>
         <!-- 监控中心 -->
         <module>roncoo-education-app-sba</module>
-
         <!-- 基础工程 -->
-        <module>roncoo-education-util</module>
+        <module>roncoo-education-common</module>
         <!-- 系统管理 -->
         <module>roncoo-education-system</module>
         <!-- 用户管理 -->

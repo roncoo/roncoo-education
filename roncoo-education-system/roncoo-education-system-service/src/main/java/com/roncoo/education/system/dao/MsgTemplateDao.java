@@ -2,7 +2,7 @@ package com.roncoo.education.system.dao;
 
 import com.roncoo.education.system.dao.impl.mapper.entity.MsgTemplate;
 import com.roncoo.education.system.dao.impl.mapper.entity.MsgTemplateExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface MsgTemplateDao {
     int save(MsgTemplate record);

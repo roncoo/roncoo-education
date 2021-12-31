@@ -3,7 +3,7 @@ package com.roncoo.education.user.dao;
 
 import com.roncoo.education.user.dao.impl.mapper.entity.LecturerAudit;
 import com.roncoo.education.user.dao.impl.mapper.entity.LecturerAuditExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface LecturerAuditDao {
 	int save(LecturerAudit record);

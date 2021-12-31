@@ -2,7 +2,7 @@ package com.roncoo.education.course.dao;
 
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseAudit;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseAuditExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface CourseAuditDao {
 	int save(CourseAudit record);

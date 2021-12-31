@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUserExample;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface SysRoleUserDao {
 	int save(SysRoleUser record);

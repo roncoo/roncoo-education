@@ -9,9 +9,9 @@ import com.roncoo.education.system.dao.SysUserDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUser;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUserExample;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUserExample.Criteria;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.BeanUtil;
 
 /**
  * 后台用户信息

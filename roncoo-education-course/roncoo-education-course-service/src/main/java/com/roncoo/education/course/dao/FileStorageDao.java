@@ -2,7 +2,7 @@ package com.roncoo.education.course.dao;
 
 import com.roncoo.education.course.dao.impl.mapper.entity.FileStorage;
 import com.roncoo.education.course.dao.impl.mapper.entity.FileStorageExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface FileStorageDao {
     int save(FileStorage record);

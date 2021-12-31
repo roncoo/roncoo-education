@@ -8,12 +8,12 @@ import com.roncoo.education.user.feign.interfaces.vo.LecturerExtVO;
 import com.roncoo.education.user.dao.LecturerExtDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.LecturerExt;
 import com.roncoo.education.user.dao.impl.mapper.entity.LecturerExtExample;
-import com.roncoo.education.util.base.BaseBiz;
-import com.roncoo.education.util.base.BaseException;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.BeanUtil;
-import com.roncoo.education.util.tools.SignUtil;
+import com.roncoo.education.common.core.base.BaseBiz;
+import com.roncoo.education.common.core.base.BaseException;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.core.tools.SignUtil;
 
 /**
  * 讲师账户信息表

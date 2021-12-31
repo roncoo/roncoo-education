@@ -2,7 +2,7 @@ package com.roncoo.education.user.dao;
 
 import com.roncoo.education.user.dao.impl.mapper.entity.LecturerProfit;
 import com.roncoo.education.user.dao.impl.mapper.entity.LecturerProfitExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface LecturerProfitDao {
 	int save(LecturerProfit record);

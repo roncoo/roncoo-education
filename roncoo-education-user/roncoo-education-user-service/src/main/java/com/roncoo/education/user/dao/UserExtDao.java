@@ -2,7 +2,7 @@ package com.roncoo.education.user.dao;
 
 import com.roncoo.education.user.dao.impl.mapper.entity.UserExt;
 import com.roncoo.education.user.dao.impl.mapper.entity.UserExtExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface UserExtDao {
 	int save(UserExt record);

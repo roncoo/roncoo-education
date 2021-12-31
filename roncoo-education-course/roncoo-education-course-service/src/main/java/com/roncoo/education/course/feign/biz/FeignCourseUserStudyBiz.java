@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 import com.roncoo.education.course.dao.CourseUserStudyDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudy;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudyExample;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.BeanUtil;
 
 /**
  * 课程用户关联表

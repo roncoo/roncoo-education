@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import com.roncoo.education.course.dao.ZoneCourseDao;
 import com.roncoo.education.course.dao.impl.mapper.ZoneCourseMapper;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.enums.StatusIdEnum;
-import com.roncoo.education.util.tools.IdWorker;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.enums.StatusIdEnum;
+import com.roncoo.education.common.core.tools.IdWorker;
 
 @Repository
 public class ZoneCourseDaoImpl implements ZoneCourseDao {

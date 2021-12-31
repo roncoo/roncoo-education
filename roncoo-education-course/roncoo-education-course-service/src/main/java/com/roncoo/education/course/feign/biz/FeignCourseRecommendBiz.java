@@ -9,11 +9,11 @@ import com.roncoo.education.course.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseRecommend;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseRecommendExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseRecommendExample.Criteria;
-import com.roncoo.education.util.base.BaseException;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.enums.StatusIdEnum;
-import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.common.core.base.BaseException;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.enums.StatusIdEnum;
+import com.roncoo.education.common.core.tools.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

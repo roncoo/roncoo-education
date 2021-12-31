@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.roncoo.education.system.dao.impl.mapper.entity.NavBar;
 import com.roncoo.education.system.dao.impl.mapper.entity.NavBarExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface NavBarDao {
 	int save(NavBar record);

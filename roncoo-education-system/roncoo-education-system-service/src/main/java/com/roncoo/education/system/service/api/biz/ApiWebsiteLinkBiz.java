@@ -9,9 +9,9 @@ import com.roncoo.education.system.service.api.dto.WebsiteLinkDTO;
 import com.roncoo.education.system.service.api.dto.WebsiteLinkListDTO;
 import com.roncoo.education.system.dao.WebsiteLinkDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.base.Result;
-import com.roncoo.education.util.enums.StatusIdEnum;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.StatusIdEnum;
 
 /**
  * 站点友情链接

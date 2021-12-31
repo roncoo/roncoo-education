@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.roncoo.education.system.service.api.biz.ApiNavBarBiz;
 import com.roncoo.education.system.service.api.dto.NavBarListDTO;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Result;
 
 import io.swagger.annotations.ApiOperation;
 

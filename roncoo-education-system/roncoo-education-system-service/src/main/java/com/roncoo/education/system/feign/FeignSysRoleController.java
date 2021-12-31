@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.roncoo.education.system.feign.interfaces.qo.SysRoleQO;
 import com.roncoo.education.system.feign.interfaces.vo.SysRoleVO;
 import com.roncoo.education.system.feign.biz.FeignSysRoleBiz;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Page;
 
 /**
  * 角色信息

@@ -10,10 +10,10 @@ import com.roncoo.education.system.dao.SysLogDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysLog;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysLogExample;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysLogExample.Criteria;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.base.Result;
-import com.roncoo.education.util.tools.DateUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.tools.DateUtil;
 
 /**
  * 后台操作日志表

@@ -14,8 +14,8 @@ import com.roncoo.education.user.service.api.bo.UserRegisterBO;
 import com.roncoo.education.user.service.api.bo.UserSendCodeBO;
 import com.roncoo.education.user.service.auth.bo.UserUpdateBO;
 import com.roncoo.education.user.service.api.dto.UserLoginDTO;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Result;
 
 import io.swagger.annotations.ApiOperation;
 

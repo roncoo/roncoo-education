@@ -12,9 +12,9 @@ import org.springframework.util.StringUtils;
 
 import com.roncoo.education.user.dao.UserExtDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.UserExt;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.IdWorker;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.IdWorker;
 
 @Repository
 public class UserExtDaoImpl implements UserExtDao {

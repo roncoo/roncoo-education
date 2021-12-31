@@ -14,10 +14,10 @@ import org.springframework.util.StringUtils;
 
 import com.roncoo.education.course.dao.CourseUserStudyLogDao;
 import com.roncoo.education.course.dao.impl.mapper.CourseUserStudyLogMapper;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.IdWorker;
-import com.roncoo.education.util.tools.SqlUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.IdWorker;
+import com.roncoo.education.common.core.tools.SqlUtil;
 
 @Repository
 public class CourseUserStudyLogDaoImpl implements CourseUserStudyLogDao {

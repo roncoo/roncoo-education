@@ -11,11 +11,11 @@ import com.roncoo.education.course.dao.AdvDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Adv;
 import com.roncoo.education.course.dao.impl.mapper.entity.AdvExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.AdvExample.Criteria;
-import com.roncoo.education.util.aliyun.Aliyun;
-import com.roncoo.education.util.aliyun.AliyunUtil;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.common.core.aliyun.Aliyun;
+import com.roncoo.education.common.core.aliyun.AliyunUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.BeanUtil;
 
 /**
  * 广告信息

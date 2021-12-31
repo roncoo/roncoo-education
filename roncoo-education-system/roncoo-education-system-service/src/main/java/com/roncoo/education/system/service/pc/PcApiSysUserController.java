@@ -15,9 +15,9 @@ import com.roncoo.education.system.service.pc.req.SysUserUpdateREQ;
 import com.roncoo.education.system.service.pc.req.SysUserViewREQ;
 import com.roncoo.education.system.service.pc.resq.SysUserPageRESQ;
 import com.roncoo.education.system.service.pc.resq.SysUserViewRESQ;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.Result;
 
 import io.swagger.annotations.ApiOperation;
 

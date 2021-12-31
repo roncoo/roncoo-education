@@ -16,8 +16,8 @@ import com.roncoo.education.system.service.pc.req.SysMenuViewREQ;
 import com.roncoo.education.system.service.pc.resq.SysMenuListRESQ;
 import com.roncoo.education.system.service.pc.resq.SysMenuUserListRESQ;
 import com.roncoo.education.system.service.pc.resq.SysMenuViewRESQ;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Result;
 
 import io.swagger.annotations.ApiOperation;
 

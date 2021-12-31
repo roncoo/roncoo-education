@@ -14,9 +14,9 @@ import com.roncoo.education.system.service.pc.req.WebsiteLinkUpdateREQ;
 import com.roncoo.education.system.service.pc.req.WebsiteLinkViewREQ;
 import com.roncoo.education.system.service.pc.resq.WebsiteLinkPageRESQ;
 import com.roncoo.education.system.service.pc.resq.WebsiteLinkViewRESQ;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.Result;
 
 import io.swagger.annotations.ApiOperation;
 

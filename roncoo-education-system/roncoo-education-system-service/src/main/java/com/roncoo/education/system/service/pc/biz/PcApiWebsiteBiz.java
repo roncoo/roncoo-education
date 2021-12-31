@@ -7,9 +7,9 @@ import com.roncoo.education.system.service.pc.req.WebsiteUpdateREQ;
 import com.roncoo.education.system.service.pc.resq.WebsiteViewRESQ;
 import com.roncoo.education.system.dao.WebsiteDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.Website;
-import com.roncoo.education.util.base.Result;
-import com.roncoo.education.util.enums.ResultEnum;
-import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.ResultEnum;
+import com.roncoo.education.common.core.tools.BeanUtil;
 
 /**
  * 站点信息

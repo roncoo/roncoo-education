@@ -8,7 +8,7 @@ import com.roncoo.education.course.dao.impl.mapper.entity.OrderInfoExample;
 import com.roncoo.education.course.feign.interfaces.qo.OrderInfoQO;
 import com.roncoo.education.course.feign.interfaces.vo.OrderReportVO;
 import com.roncoo.education.course.service.pc.resq.CountIncomeRESQ;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface OrderInfoDao {
     int save(OrderInfo record);

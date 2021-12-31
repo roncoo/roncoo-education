@@ -4,9 +4,9 @@ import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodAud
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodAuditExample;
 import com.roncoo.education.course.dao.CourseChapterPeriodAuditDao;
 import com.roncoo.education.course.dao.impl.mapper.CourseChapterPeriodAuditMapper;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.IdWorker;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.IdWorker;
 
 import java.util.List;
 

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.roncoo.education.user.feign.interfaces.qo.LecturerQO;
 import com.roncoo.education.user.feign.interfaces.vo.LecturerVO;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Page;
 
 /**
  * 讲师信息

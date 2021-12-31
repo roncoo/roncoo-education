@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuRole;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuRoleExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface SysMenuRoleDao {
 	int save(SysMenuRole record);

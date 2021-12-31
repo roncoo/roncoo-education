@@ -9,9 +9,9 @@ import com.roncoo.education.system.dao.SysMenuRoleDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuRole;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuRoleExample;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuRoleExample.Criteria;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.BeanUtil;
 
 /**
  * 菜单角色关联表

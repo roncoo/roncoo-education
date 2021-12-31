@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodAudit;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodAuditExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface CourseChapterPeriodAuditDao {
 	int save(CourseChapterPeriodAudit record);

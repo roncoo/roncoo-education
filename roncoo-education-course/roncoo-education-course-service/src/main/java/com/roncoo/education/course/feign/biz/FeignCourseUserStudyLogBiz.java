@@ -18,11 +18,11 @@ import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudyLog;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudyLogExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudyLogExample.Criteria;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.ArrayListUtil;
-import com.roncoo.education.util.tools.BeanUtil;
-import com.roncoo.education.util.tools.DateUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.ArrayListUtil;
+import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.core.tools.DateUtil;
 
 /**
  * 课程用户学习日志

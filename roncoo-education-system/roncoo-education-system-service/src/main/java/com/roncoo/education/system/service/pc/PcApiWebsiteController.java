@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.roncoo.education.system.service.pc.biz.PcApiWebsiteBiz;
 import com.roncoo.education.system.service.pc.req.WebsiteUpdateREQ;
 import com.roncoo.education.system.service.pc.resq.WebsiteViewRESQ;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Result;
 
 import io.swagger.annotations.ApiOperation;
 

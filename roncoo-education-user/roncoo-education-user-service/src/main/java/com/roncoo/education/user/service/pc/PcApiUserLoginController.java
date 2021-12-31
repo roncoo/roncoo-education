@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.roncoo.education.user.service.pc.biz.PcApiUserLoginBiz;
 import com.roncoo.education.user.service.pc.req.UserLoginPasswordREQ;
 import com.roncoo.education.user.service.pc.resq.UserLoginRESQ;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.Result;
 
 import io.swagger.annotations.ApiOperation;
 

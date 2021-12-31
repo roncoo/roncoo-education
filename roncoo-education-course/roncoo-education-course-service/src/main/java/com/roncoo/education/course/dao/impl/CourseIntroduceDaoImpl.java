@@ -4,8 +4,8 @@ import com.roncoo.education.course.dao.CourseIntroduceDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseIntroduceExample;
 import com.roncoo.education.course.dao.impl.mapper.CourseIntroduceMapper;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseIntroduce;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

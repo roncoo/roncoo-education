@@ -6,9 +6,9 @@ import com.roncoo.education.course.dao.OrderPayDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.OrderPay;
 import com.roncoo.education.course.dao.impl.mapper.entity.OrderPayExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.OrderPayExample.Criteria;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.base.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

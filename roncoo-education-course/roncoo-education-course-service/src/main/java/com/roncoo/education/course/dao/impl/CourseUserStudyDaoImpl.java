@@ -9,9 +9,9 @@ import com.roncoo.education.course.dao.CourseUserStudyDao;
 import com.roncoo.education.course.dao.impl.mapper.CourseUserStudyMapper;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudy;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudyExample;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.IdWorker;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.IdWorker;
 
 @Repository
 public class CourseUserStudyDaoImpl implements CourseUserStudyDao {

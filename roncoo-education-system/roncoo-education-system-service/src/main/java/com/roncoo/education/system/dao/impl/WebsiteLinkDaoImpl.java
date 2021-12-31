@@ -5,9 +5,9 @@ import com.roncoo.education.system.dao.WebsiteLinkDao;
 import com.roncoo.education.system.dao.impl.mapper.WebsiteLinkMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.IdWorker;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.IdWorker;
 
 import java.util.List;
 

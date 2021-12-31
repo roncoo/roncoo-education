@@ -6,13 +6,13 @@ import org.springframework.util.StringUtils;
 
 import com.roncoo.education.system.feign.interfaces.qo.WebsiteLinkQO;
 import com.roncoo.education.system.feign.interfaces.vo.WebsiteLinkVO;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.system.dao.WebsiteLinkDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample.Criteria;
-import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.common.core.tools.BeanUtil;
 
 /**
  * 站点友情链接

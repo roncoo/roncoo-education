@@ -2,7 +2,7 @@ package com.roncoo.education.course.dao;
 
 import com.roncoo.education.course.dao.impl.mapper.entity.DicList;
 import com.roncoo.education.course.dao.impl.mapper.entity.DicListExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface DicListDao {
     int save(DicList record);

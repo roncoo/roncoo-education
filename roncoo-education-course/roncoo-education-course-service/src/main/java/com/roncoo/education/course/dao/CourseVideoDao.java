@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseVideo;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseVideoExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface CourseVideoDao {
 	int save(CourseVideo record);

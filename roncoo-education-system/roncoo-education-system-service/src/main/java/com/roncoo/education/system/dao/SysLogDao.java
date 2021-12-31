@@ -2,7 +2,7 @@ package com.roncoo.education.system.dao;
 
 import com.roncoo.education.system.dao.impl.mapper.entity.SysLog;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysLogExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface SysLogDao {
     int save(SysLog record);

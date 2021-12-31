@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenu;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface SysMenuDao {
 	int save(SysMenu record);

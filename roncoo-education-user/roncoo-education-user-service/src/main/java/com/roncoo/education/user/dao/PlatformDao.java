@@ -2,7 +2,7 @@ package com.roncoo.education.user.dao;
 
 import com.roncoo.education.user.dao.impl.mapper.entity.Platform;
 import com.roncoo.education.user.dao.impl.mapper.entity.PlatformExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface PlatformDao {
 	int save(Platform record);

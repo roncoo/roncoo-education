@@ -5,9 +5,9 @@ import com.roncoo.education.system.dao.NavBarDao;
 import com.roncoo.education.system.dao.impl.mapper.NavBarMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.NavBar;
 import com.roncoo.education.system.dao.impl.mapper.entity.NavBarExample;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.IdWorker;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.IdWorker;
 
 import java.util.List;
 

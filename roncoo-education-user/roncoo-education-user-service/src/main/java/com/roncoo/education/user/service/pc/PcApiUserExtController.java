@@ -12,9 +12,9 @@ import com.roncoo.education.user.service.pc.req.UserExtUpdateREQ;
 import com.roncoo.education.user.service.pc.req.UserExtViewREQ;
 import com.roncoo.education.user.service.pc.resq.UserExtPageRESQ;
 import com.roncoo.education.user.service.pc.resq.UserExtViewRESQ;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.Result;
 
 import io.swagger.annotations.ApiOperation;
 

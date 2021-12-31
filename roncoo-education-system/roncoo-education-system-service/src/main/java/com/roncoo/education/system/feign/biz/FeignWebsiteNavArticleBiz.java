@@ -5,12 +5,12 @@ import org.springframework.stereotype.Component;
 
 import com.roncoo.education.system.feign.interfaces.qo.WebsiteNavArticleQO;
 import com.roncoo.education.system.feign.interfaces.vo.WebsiteNavArticleVO;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.system.dao.WebsiteNavArticleDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavArticle;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavArticleExample;
-import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.common.core.tools.BeanUtil;
 
 /**
  * 站点导航文章

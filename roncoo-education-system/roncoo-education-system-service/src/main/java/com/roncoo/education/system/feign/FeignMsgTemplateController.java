@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.roncoo.education.system.feign.interfaces.qo.MsgTemplateQO;
 import com.roncoo.education.system.feign.interfaces.vo.MsgTemplateVO;
 import com.roncoo.education.system.feign.biz.FeignMsgTemplateBiz;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Page;
 
 
 /**

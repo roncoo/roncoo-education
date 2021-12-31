@@ -8,8 +8,8 @@ import com.roncoo.education.system.service.api.bo.MsgViewBO;
 import com.roncoo.education.system.service.api.dto.MsgDTO;
 import com.roncoo.education.system.dao.MsgDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.Msg;
-import com.roncoo.education.util.base.Result;
-import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.tools.BeanUtil;
 
 /**
  * 站内信息表

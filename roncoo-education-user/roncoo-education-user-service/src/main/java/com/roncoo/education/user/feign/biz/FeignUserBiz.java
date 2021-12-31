@@ -8,9 +8,9 @@ import com.roncoo.education.user.feign.interfaces.vo.UserVO;
 import com.roncoo.education.user.dao.UserDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.User;
 import com.roncoo.education.user.dao.impl.mapper.entity.UserExample;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.BeanUtil;
 
 /**
  * 用户基本信息

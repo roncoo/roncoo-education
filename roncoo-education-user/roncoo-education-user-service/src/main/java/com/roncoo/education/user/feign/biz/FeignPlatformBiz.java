@@ -10,9 +10,9 @@ import com.roncoo.education.user.dao.PlatformDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.Platform;
 import com.roncoo.education.user.dao.impl.mapper.entity.PlatformExample;
 import com.roncoo.education.user.dao.impl.mapper.entity.PlatformExample.Criteria;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.BeanUtil;
 
 /**
  * 平台信息

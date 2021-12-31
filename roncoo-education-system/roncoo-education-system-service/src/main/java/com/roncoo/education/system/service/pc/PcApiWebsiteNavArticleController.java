@@ -11,8 +11,8 @@ import com.roncoo.education.system.service.pc.req.WebsiteNavArticleSaveREQ;
 import com.roncoo.education.system.service.pc.req.WebsiteNavArticleUpdateREQ;
 import com.roncoo.education.system.service.pc.req.WebsiteNavArticleViewREQ;
 import com.roncoo.education.system.service.pc.resq.WebsiteNavArticleViewRESQ;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Result;
 
 import io.swagger.annotations.ApiOperation;
 

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.roncoo.education.user.feign.interfaces.qo.UserQO;
 import com.roncoo.education.user.feign.interfaces.vo.UserVO;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Page;
 
 /**
  * 用户基本信息

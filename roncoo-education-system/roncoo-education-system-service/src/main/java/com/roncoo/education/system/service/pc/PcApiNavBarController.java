@@ -14,9 +14,9 @@ import com.roncoo.education.system.service.pc.req.NavBarUpdateREQ;
 import com.roncoo.education.system.service.pc.req.NavBarViewREQ;
 import com.roncoo.education.system.service.pc.resq.NavBarPageRESQ;
 import com.roncoo.education.system.service.pc.resq.NavBarViewRESQ;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.Result;
 
 import io.swagger.annotations.ApiOperation;
 

@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 import com.roncoo.education.course.dao.DicListDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.DicList;
 import com.roncoo.education.course.dao.impl.mapper.entity.DicListExample;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.BeanUtil;
 
 /**
  * 数据字典明细表

@@ -5,9 +5,9 @@ import com.roncoo.education.system.dao.WebsiteNavDao;
 import com.roncoo.education.system.dao.impl.mapper.WebsiteNavMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNav;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavExample;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.IdWorker;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.IdWorker;
 
 import java.util.List;
 

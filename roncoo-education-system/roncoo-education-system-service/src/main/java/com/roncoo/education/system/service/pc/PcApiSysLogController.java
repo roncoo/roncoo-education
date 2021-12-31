@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.roncoo.education.system.service.pc.biz.PcApiSysLogBiz;
 import com.roncoo.education.system.service.pc.req.SysLogPageREQ;
 import com.roncoo.education.system.service.pc.resq.SysLogPageRESQ;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.Result;
 
 import io.swagger.annotations.ApiOperation;
 

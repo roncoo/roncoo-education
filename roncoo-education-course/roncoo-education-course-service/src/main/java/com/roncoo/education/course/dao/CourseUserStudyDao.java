@@ -2,7 +2,7 @@ package com.roncoo.education.course.dao;
 
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudy;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudyExample;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
 
 public interface CourseUserStudyDao {
     int save(CourseUserStudy record);

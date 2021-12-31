@@ -10,9 +10,9 @@ import com.roncoo.education.user.service.auth.biz.AuthApiLecturerProfitBiz;
 import com.roncoo.education.user.service.auth.bo.AuthLecturerProfitPageBO;
 import com.roncoo.education.user.service.auth.bo.AuthLecturerProfitSaveBO;
 import com.roncoo.education.user.service.auth.dto.AuthLecturerProfitPageDTO;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.Result;
 
 import io.swagger.annotations.ApiOperation;
 

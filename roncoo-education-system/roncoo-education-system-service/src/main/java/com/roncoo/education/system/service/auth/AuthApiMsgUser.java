@@ -13,9 +13,9 @@ import com.roncoo.education.system.service.api.bo.MsgViewBO;
 import com.roncoo.education.system.service.api.dto.MsgDTO;
 import com.roncoo.education.system.service.api.dto.MsgReadDTO;
 import com.roncoo.education.system.service.api.dto.MsgUserDTO;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.Result;
 
 import io.swagger.annotations.ApiOperation;
 

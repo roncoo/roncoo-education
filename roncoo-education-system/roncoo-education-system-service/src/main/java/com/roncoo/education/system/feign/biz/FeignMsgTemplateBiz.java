@@ -8,9 +8,9 @@ import com.roncoo.education.system.feign.interfaces.vo.MsgTemplateVO;
 import com.roncoo.education.system.dao.MsgTemplateDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.MsgTemplate;
 import com.roncoo.education.system.dao.impl.mapper.entity.MsgTemplateExample;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.BeanUtil;
 
 /**
  * 消息模板

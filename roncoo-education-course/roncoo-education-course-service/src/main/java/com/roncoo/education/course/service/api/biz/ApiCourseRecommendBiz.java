@@ -9,9 +9,9 @@ import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.CourseRecommendDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseRecommend;
-import com.roncoo.education.util.base.Result;
-import com.roncoo.education.util.enums.StatusIdEnum;
-import com.roncoo.education.util.tools.BeanUtil;
+import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.StatusIdEnum;
+import com.roncoo.education.common.core.tools.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -4,8 +4,8 @@
 package com.roncoo.education.course.service.pc;
 
 import com.roncoo.education.course.service.pc.biz.PcApiUploadBiz;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Result;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Result;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

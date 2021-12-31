@@ -13,8 +13,8 @@ import com.roncoo.education.user.feign.interfaces.qo.UserExtEchartsQO;
 import com.roncoo.education.user.feign.interfaces.qo.UserExtQO;
 import com.roncoo.education.user.feign.interfaces.vo.UserEchartsVO;
 import com.roncoo.education.user.feign.interfaces.vo.UserExtVO;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Page;
 
 /**
  * 用户教育信息

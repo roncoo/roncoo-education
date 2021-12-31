@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.roncoo.education.system.feign.interfaces.qo.SysMenuRoleQO;
 import com.roncoo.education.system.feign.interfaces.vo.SysMenuRoleVO;
 import com.roncoo.education.system.feign.biz.FeignSysMenuRoleBiz;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Page;
 
 /**
  * 菜单角色关联表

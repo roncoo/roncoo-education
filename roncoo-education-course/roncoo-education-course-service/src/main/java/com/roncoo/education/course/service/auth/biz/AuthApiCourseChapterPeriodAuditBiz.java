@@ -2,6 +2,7 @@ package com.roncoo.education.course.service.auth.biz;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
+import com.roncoo.education.common.core.enums.*;
 import com.roncoo.education.course.dao.CourseAuditDao;
 import com.roncoo.education.course.dao.CourseChapterAuditDao;
 import com.roncoo.education.course.dao.CourseChapterPeriodAuditDao;
@@ -15,12 +16,11 @@ import com.roncoo.education.course.service.auth.dto.AuthCourseChapterPeriodAudit
 import com.roncoo.education.course.service.auth.dto.AuthPeriodAuditDTO;
 import com.roncoo.education.course.service.auth.dto.AuthPeriodAuditListDTO;
 import com.roncoo.education.course.service.auth.dto.AuthPeriodAuditViewDTO;
-import com.roncoo.education.util.base.BaseBiz;
-import com.roncoo.education.util.base.Result;
-import com.roncoo.education.util.enums.*;
-import com.roncoo.education.util.tools.ArrayListUtil;
-import com.roncoo.education.util.tools.BeanUtil;
-import com.roncoo.education.util.tools.Constants;
+import com.roncoo.education.common.core.base.BaseBiz;
+import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.tools.ArrayListUtil;
+import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.core.tools.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
