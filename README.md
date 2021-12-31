@@ -19,7 +19,7 @@ roncoo-education
 ### 项目分支使用组件说明
 | 名称 | 主分支(Alibaba分支) | Nextfile分支 |
 |:---|:---|:---|
-| 核心组件 |  spring cloud alibaba 2.2.3.RELEASE |  spring cloud netflix Hoxton.SR3 |
+| 核心组件 |  spring cloud alibaba 2.2.6.RELEASE |  spring cloud netflix Hoxton.SR3 |
 | 注册中心 |  spring cloud alibaba nacos         |  spring cloud netflix eureka     |
 | 配置中心 |  spring cloud alibaba nacos         |  spring cloud config             |
 | 服务熔断 |  spring cloud alibaba sentinel      |  spring cloud netflix hystrix    |
