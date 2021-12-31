@@ -14,7 +14,7 @@ services:
     networks:
       - education
     ports:
-      - "5721:5721"
+      - "5800:5800"
   app-job:
     build:
       context: ./roncoo-education-app-job
@@ -59,7 +59,7 @@ services:
     networks:
       - education
     ports:
-      - "5730:5730"
+      - "5710:5710"
   user-service:
     build:
       context: ./roncoo-education-user/roncoo-education-user-service
@@ -89,7 +89,7 @@ services:
     networks:
       - education
     ports:
-      - "5710:5710"
+      - "5730:5730"
 networks:
   education:
     driver: bridge
