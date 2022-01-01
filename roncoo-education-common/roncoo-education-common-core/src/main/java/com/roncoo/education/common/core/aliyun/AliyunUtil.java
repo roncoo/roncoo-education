@@ -1,6 +1,7 @@
 package com.roncoo.education.common.core.aliyun;
 
-import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.OSS;
+import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.*;
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.CommonResponse;
@@ -202,7 +203,7 @@ public final class AliyunUtil {
      * @param inputStream
      */
     private static PutObjectResult putObjectForFile(String endpoint, String keyId, String keySecret, String bucketName, String key, InputStream inputStream, String fileName) {
-        OSSClient ossClient = getOssClient(endpoint, keyId, keySecret);
+        OSS ossClient = getOssClient(endpoint, keyId, keySecret);
         ObjectMetadata meta = new ObjectMetadata();
         if (StringUtils.hasText(fileName)) {
             meta.setContentDisposition("attachment;filename={}".replace("{}", fileName));
@@ -215,8 +216,8 @@ public final class AliyunUtil {
         getOssClient(endpoint, keyId, keySecret).getObject(new GetObjectRequest(bucketName, key), file);
     }
 
-    private static OSSClient getOssClient(String endpoint, String keyId, String keySecret) {
-        return new OSSClient(endpoint, keyId, keySecret);
+    private static OSS getOssClient(String endpoint, String keyId, String keySecret) {
+        return new OSSClientBuilder().build(endpoint, keyId, keySecret);
     }
 
     /**

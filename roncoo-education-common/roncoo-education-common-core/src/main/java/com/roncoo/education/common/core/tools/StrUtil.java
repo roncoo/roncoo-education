@@ -3,7 +3,7 @@
  */
 package com.roncoo.education.common.core.tools;
 
-import cn.hutool.crypto.SecureUtil;
+import cn.hutool.core.util.IdUtil;
 
 import java.util.Random;
 
@@ -36,7 +36,7 @@ public final class StrUtil {
     }
 
     public static String get32UUID() {
-        return SecureUtil.simpleUUID();
+        return IdUtil.simpleUUID();
     }
 
 }
