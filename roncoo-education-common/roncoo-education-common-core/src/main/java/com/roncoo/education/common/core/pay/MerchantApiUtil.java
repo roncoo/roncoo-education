@@ -3,7 +3,7 @@
  */
 package com.roncoo.education.common.core.pay;
 
-import com.roncoo.education.util.tools.MD5Util;
+import com.roncoo.education.common.core.tools.MD5Util;
 import org.springframework.util.StringUtils;
 
 import java.util.Map;
