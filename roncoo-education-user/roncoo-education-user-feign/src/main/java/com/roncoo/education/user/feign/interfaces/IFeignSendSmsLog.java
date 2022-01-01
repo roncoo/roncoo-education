@@ -1,10 +1,9 @@
 package com.roncoo.education.user.feign.interfaces;
 
-import com.roncoo.education.user.feign.qo.SendSmsLogQO;
-import com.roncoo.education.user.feign.vo.SendSmsLogVO;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.user.feign.interfaces.qo.SendSmsLogQO;
+import com.roncoo.education.user.feign.interfaces.vo.SendSmsLogVO;
 import org.springframework.cloud.openfeign.FeignClient;
-
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 

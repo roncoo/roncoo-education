@@ -1,10 +1,9 @@
 package com.roncoo.education.user.feign.interfaces;
 
-import com.roncoo.education.user.feign.qo.LecturerProfitQO;
-import com.roncoo.education.user.feign.vo.LecturerProfitVO;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.user.feign.interfaces.qo.LecturerProfitQO;
+import com.roncoo.education.user.feign.interfaces.vo.LecturerProfitVO;
 import org.springframework.cloud.openfeign.FeignClient;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

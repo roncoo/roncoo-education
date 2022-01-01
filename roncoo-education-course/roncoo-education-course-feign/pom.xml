@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>com.roncoo</groupId>
-            <artifactId>roncoo-education-util</artifactId>
+            <artifactId>roncoo-education-common-core</artifactId>
         </dependency>
 
         <dependency>

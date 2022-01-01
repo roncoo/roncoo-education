@@ -100,25 +100,29 @@ public class ApiUserInfoBiz extends BaseBiz {
             return Result.error("该手机号已经注册，请更换手机号");
         }
 
+        // 用户注册
+        user = register(userRegisterBO.getMobile(), userRegisterBO.getPassword(), platform.getClientId());
 
         // 同步数据到演示环境
-        String password = userRegisterBO.getPassword();
-        String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCzBzD+Sgi5z+zq8P/qMimssuozcjdx4pBu2U2OKf6bDdQEKmSB1KXCheG2m19+xnerIZ22fr8nHc0r1qIKIUrJ0UWU8qXkANe4u0wW0V52BsW6H02Jmc1mFjrYcOCpToVFGvLm17AgP6tNBAiTjiiBc0V+prAZ9ixrC5aPsI4gAwIDAQAB";
-        RSA rsa = new RSA(null, publicKey);
-        userRegisterBO.setPassword(rsa.encryptBase64(userRegisterBO.getPassword(), KeyType.PublicKey));
-        userRegisterBO.setRepassword(rsa.encryptBase64(userRegisterBO.getRepassword(), KeyType.PublicKey));
-        String jsonStr = JSONUtil.toJsonStr(userRegisterBO);
-        logger.warn("-----------------同步注册参数:{}", jsonStr);
-        String post = HttpUtil.post("https://demo.edu.roncoo.net/gateway/user/api/user/register", jsonStr);
-        logger.warn("-----------------同步注册结果:{}", post);
-        JSONObject jsonObject = JSONUtil.parseObj(post);
-        // 远程注册有返回则输出错误，不成功则跳过
-        if (ObjectUtil.isNotNull(jsonObject.get("code")) && 200 != (Integer) jsonObject.get("code")) {
-            return Result.error((String) jsonObject.get("msg"));
+        try {
+            // 密码加密
+            String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCzBzD+Sgi5z+zq8P/qMimssuozcjdx4pBu2U2OKf6bDdQEKmSB1KXCheG2m19+xnerIZ22fr8nHc0r1qIKIUrJ0UWU8qXkANe4u0wW0V52BsW6H02Jmc1mFjrYcOCpToVFGvLm17AgP6tNBAiTjiiBc0V+prAZ9ixrC5aPsI4gAwIDAQAB";
+            RSA rsa = new RSA(null, publicKey);
+            userRegisterBO.setPassword(rsa.encryptBase64(userRegisterBO.getPassword(), KeyType.PublicKey));
+            userRegisterBO.setRepassword(rsa.encryptBase64(userRegisterBO.getRepassword(), KeyType.PublicKey));
+            String jsonStr = JSONUtil.toJsonStr(userRegisterBO);
+            logger.warn("-----------------同步注册参数:{}", jsonStr);
+            String post = HttpUtil.post("https://demo.edu.roncoo.net/gateway/user/api/user/register", jsonStr);
+            logger.warn("-----------------同步注册结果:{}", post);
+            JSONObject jsonObject = JSONUtil.parseObj(post);
+            if (200 != (Integer) jsonObject.get("code")) {
+                logger.warn("-----------------错误信息:{}", jsonObject.get("msg"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.info("同步数据异常:{}", e.getMessage());
         }
 
-        // 用户注册
-        user = register(userRegisterBO.getMobile(), password, platform.getClientId());
         UserLoginDTO dto = new UserLoginDTO();
         dto.setUserNo(user.getUserNo());
         dto.setMobile(user.getMobile());

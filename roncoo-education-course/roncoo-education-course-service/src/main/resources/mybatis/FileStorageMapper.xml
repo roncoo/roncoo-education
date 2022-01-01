@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.roncoo.education.course.service.dao.impl.mapper.FileStorageMapper">
-    <resultMap id="BaseResultMap" type="com.roncoo.education.course.service.dao.impl.mapper.entity.FileStorage">
+<mapper namespace="com.roncoo.education.course.dao.impl.mapper.FileStorageMapper">
+    <resultMap id="BaseResultMap" type="com.roncoo.education.course.dao.impl.mapper.entity.FileStorage">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
         <result column="file_no" property="fileNo" jdbcType="BIGINT"/>
@@ -74,7 +74,7 @@
     id, gmt_create, file_no, file_name, file_url, file_classify, file_size
   </sql>
     <select id="selectByExample" resultMap="BaseResultMap"
-            parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.FileStorageExample">
+            parameterType="com.roncoo.education.course.dao.impl.mapper.entity.FileStorageExample">
         select
         <if test="distinct">
             distinct
@@ -102,13 +102,13 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
     <delete id="deleteByExample"
-            parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.FileStorageExample">
+            parameterType="com.roncoo.education.course.dao.impl.mapper.entity.FileStorageExample">
         delete from file_storage
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.FileStorage">
+    <insert id="insert" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.FileStorage">
     insert into file_storage (id, gmt_create, file_no,
       file_name, file_url, file_classify,
       file_size)
@@ -116,7 +116,7 @@
       #{fileName,jdbcType=VARCHAR}, #{fileUrl,jdbcType=VARCHAR}, #{fileClassify,jdbcType=TINYINT},
       #{fileSize,jdbcType=BIGINT})
   </insert>
-    <insert id="insertSelective" parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.FileStorage">
+    <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.FileStorage">
         insert into file_storage
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -166,7 +166,7 @@
         </trim>
     </insert>
     <select id="countByExample"
-            parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.FileStorageExample"
+            parameterType="com.roncoo.education.course.dao.impl.mapper.entity.FileStorageExample"
             resultType="java.lang.Integer">
         select count(*) from file_storage
         <if test="_parameter != null">
@@ -216,7 +216,7 @@
         </if>
     </update>
     <update id="updateByPrimaryKeySelective"
-            parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.FileStorage">
+            parameterType="com.roncoo.education.course.dao.impl.mapper.entity.FileStorage">
         update file_storage
         <set>
             <if test="gmtCreate != null">
@@ -241,7 +241,7 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey"
-            parameterType="com.roncoo.education.course.service.dao.impl.mapper.entity.FileStorage">
+            parameterType="com.roncoo.education.course.dao.impl.mapper.entity.FileStorage">
     update file_storage
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       file_no = #{fileNo,jdbcType=BIGINT},

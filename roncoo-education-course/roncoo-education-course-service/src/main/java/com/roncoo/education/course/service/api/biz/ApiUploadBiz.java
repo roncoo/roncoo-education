@@ -3,34 +3,34 @@
  */
 package com.roncoo.education.course.service.api.biz;
 
-import com.roncoo.education.course.service.dao.CourseChapterPeriodAuditDao;
-import com.roncoo.education.course.service.dao.CourseChapterPeriodDao;
-import com.roncoo.education.course.service.dao.CourseVideoDao;
-import com.roncoo.education.course.service.dao.FileStorageDao;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriod;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriodAudit;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseVideo;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.FileStorage;
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.ObjectUtil;
+import com.roncoo.education.common.core.aliyun.Aliyun;
+import com.roncoo.education.common.core.aliyun.AliyunUtil;
+import com.roncoo.education.common.core.base.BaseBiz;
+import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.config.SystemUtil;
+import com.roncoo.education.common.core.enums.FileClassifyEnum;
+import com.roncoo.education.common.core.enums.FileTypeEnum;
+import com.roncoo.education.common.core.enums.PlatformEnum;
+import com.roncoo.education.common.core.enums.VideoStatusEnum;
+import com.roncoo.education.common.core.polyv.PolyvUtil;
+import com.roncoo.education.common.core.polyv.UploadFile;
+import com.roncoo.education.common.core.polyv.UploadFileResult;
+import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.core.tools.IdWorker;
+import com.roncoo.education.common.core.tools.StrUtil;
+import com.roncoo.education.course.dao.CourseChapterPeriodAuditDao;
+import com.roncoo.education.course.dao.CourseChapterPeriodDao;
+import com.roncoo.education.course.dao.CourseVideoDao;
+import com.roncoo.education.course.dao.FileStorageDao;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodAudit;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseVideo;
+import com.roncoo.education.course.dao.impl.mapper.entity.FileStorage;
 import com.roncoo.education.system.feign.interfaces.IFeignSys;
-import com.roncoo.education.system.feign.vo.SysVO;
-import com.roncoo.education.util.aliyun.Aliyun;
-import com.roncoo.education.util.aliyun.AliyunUtil;
-import com.roncoo.education.util.base.BaseBiz;
-import com.roncoo.education.util.base.Result;
-import com.roncoo.education.util.config.SystemUtil;
-import com.roncoo.education.util.enums.FileClassifyEnum;
-import com.roncoo.education.util.enums.FileTypeEnum;
-import com.roncoo.education.util.enums.PlatformEnum;
-import com.roncoo.education.util.enums.VideoStatusEnum;
-import com.roncoo.education.util.polyv.PolyvUtil;
-import com.roncoo.education.util.polyv.UploadFile;
-import com.roncoo.education.util.polyv.UploadFileResult;
-import com.roncoo.education.util.tools.BeanUtil;
-import com.roncoo.education.util.tools.IdWorker;
-import com.roncoo.education.util.tools.StrUtil;
+import com.roncoo.education.system.feign.interfaces.vo.SysVO;
 import com.roncoo.spring.boot.autoconfigure.fastdfs.FastdfsClientService;
-import com.xiaoleilu.hutool.util.CollectionUtil;
-import com.xiaoleilu.hutool.util.ObjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -58,7 +58,7 @@ public class ApiUploadBiz extends BaseBiz {
     private CourseVideoDao courseVideoDao;
     @Autowired
     private FileStorageDao fileStorageDao;
-    @Autowired
+    @Autowired(required = false)
     private FastdfsClientService fastdfsClientService;
 
     /**

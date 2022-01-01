@@ -7,8 +7,8 @@ import reactor.core.publisher.Mono;
 @RestController
 public class IndexController {
 
-  @GetMapping("/")
-  public Mono<String> index() {
-    return Mono.just("SUCCESS");
-  }
+    @GetMapping("/")
+    public Mono<String> index() {
+        return Mono.just("SUCCESS");
+    }
 }

@@ -4,7 +4,7 @@ services:
     build:
       context: ./roncoo-education-app-sba
       args:
-        JAVA_OPTS: '-Xmn128M -Xmx512M'
+        JAVA_OPTS: '-Xmn256M -Xmx256M'
         RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=192.168.100.11:8848'
     image: roncoo-education-app-sba
     container_name: sba
@@ -14,12 +14,12 @@ services:
     networks:
       - education
     ports:
-      - "5721:5721"
+      - "5800:5800"
   app-job:
     build:
       context: ./roncoo-education-app-job
       args:
-        JAVA_OPTS: '-Xmn128M -Xmx512M'
+        JAVA_OPTS: '-Xmn256M -Xmx256M'
         RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=192.168.100.11:8848'
     image: roncoo-education-app-job
     container_name: job
@@ -34,7 +34,7 @@ services:
     build:
       context: ./roncoo-education-app-gateway
       args:
-        JAVA_OPTS: '-Xmn128M -Xmx512M'
+        JAVA_OPTS: '-Xmn256M -Xmx256M'
         RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=192.168.100.11:8848'
     image: roncoo-education-app-gateway
     container_name: gateway
@@ -49,7 +49,7 @@ services:
     build:
       context: ./roncoo-education-system/roncoo-education-system-service
       args:
-        JAVA_OPTS: '-Xmn128M -Xmx512M'
+        JAVA_OPTS: '-Xmn256M -Xmx256M'
         RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=192.168.100.11:8848'
     image: roncoo-education-system-service
     container_name: system
@@ -59,12 +59,12 @@ services:
     networks:
       - education
     ports:
-      - "5730:5730"
+      - "5710:5710"
   user-service:
     build:
       context: ./roncoo-education-user/roncoo-education-user-service
       args:
-        JAVA_OPTS: '-Xmn128M -Xmx512M'
+        JAVA_OPTS: '-Xmn256M -Xmx256M'
         RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=192.168.100.11:8848'
     image: roncoo-education-user-service
     container_name: user
@@ -79,7 +79,7 @@ services:
     build:
       context: ./roncoo-education-course/roncoo-education-course-service
       args:
-        JAVA_OPTS: '-Xmn128M -Xmx512M'
+        JAVA_OPTS: '-Xmn256M -Xmx256M'
         RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=192.168.100.11:8848'
     image: roncoo-education-course-service
     container_name: course
@@ -89,7 +89,7 @@ services:
     networks:
       - education
     ports:
-      - "5710:5710"
+      - "5730:5730"
 networks:
   education:
     driver: bridge

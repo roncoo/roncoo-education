@@ -1,12 +1,11 @@
 package com.roncoo.education.user.feign.interfaces;
 
-import com.roncoo.education.user.feign.qo.UserExtEchartsQO;
-import com.roncoo.education.user.feign.qo.UserExtQO;
-import com.roncoo.education.user.feign.vo.UserEchartsVO;
-import com.roncoo.education.user.feign.vo.UserExtVO;
-import com.roncoo.education.util.base.Page;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.user.feign.interfaces.qo.UserExtEchartsQO;
+import com.roncoo.education.user.feign.interfaces.qo.UserExtQO;
+import com.roncoo.education.user.feign.interfaces.vo.UserEchartsVO;
+import com.roncoo.education.user.feign.interfaces.vo.UserExtVO;
 import org.springframework.cloud.openfeign.FeignClient;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
