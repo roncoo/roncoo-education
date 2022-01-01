@@ -13,10 +13,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum SysTypeEnum {
 
-	RONCOOPAY(1, "龙果支付"), OTHERPAYMENT(2, "其他");
+    RONCOOPAY(1, "龙果支付"), OTHERPAYMENT(2, "其他");
 
-	private Integer code;
+    private Integer code;
 
-	private String desc;
+    private String desc;
 
 }

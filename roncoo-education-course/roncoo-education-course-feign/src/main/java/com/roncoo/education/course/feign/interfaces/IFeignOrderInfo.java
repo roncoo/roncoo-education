@@ -1,12 +1,12 @@
 package com.roncoo.education.course.feign.interfaces;
 
+import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.course.feign.interfaces.qo.OrderEchartsQO;
 import com.roncoo.education.course.feign.interfaces.qo.OrderInfoQO;
 import com.roncoo.education.course.feign.interfaces.vo.CountIncomeVO;
 import com.roncoo.education.course.feign.interfaces.vo.OrderEchartsVO;
 import com.roncoo.education.course.feign.interfaces.vo.OrderInfoVO;
 import com.roncoo.education.course.feign.interfaces.vo.OrderReportVO;
-import com.roncoo.education.common.core.base.Page;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;

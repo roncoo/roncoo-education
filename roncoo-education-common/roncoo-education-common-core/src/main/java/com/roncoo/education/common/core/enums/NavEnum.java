@@ -10,9 +10,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum NavEnum {
 
-	INDEX("/index", "首页"), COURSE("/list", "录播中心"), RECRUIT("/recruit", "讲师招募");
+    INDEX("/index", "首页"), COURSE("/list", "录播中心"), RECRUIT("/recruit", "讲师招募");
 
-	private String code;
+    private String code;
 
-	private String desc;
+    private String desc;
 }

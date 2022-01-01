@@ -58,7 +58,7 @@ public class ZoneCourseQO implements Serializable {
      */
     private Long courseId;
     /**
-	 * 课程名称
-	 */
-	private String courseName;
+     * 课程名称
+     */
+    private String courseName;
 }

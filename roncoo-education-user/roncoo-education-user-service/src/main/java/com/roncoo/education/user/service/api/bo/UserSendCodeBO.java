@@ -3,10 +3,10 @@
  */
 package com.roncoo.education.user.service.api.bo;
 
-import java.io.Serializable;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -19,15 +19,15 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class UserSendCodeBO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 手机号码
-	 */
-	private String mobile;
-	/**
-	 * clientId
-	 */
-	private String clientId;
+    /**
+     * 手机号码
+     */
+    private String mobile;
+    /**
+     * clientId
+     */
+    private String clientId;
 
 }

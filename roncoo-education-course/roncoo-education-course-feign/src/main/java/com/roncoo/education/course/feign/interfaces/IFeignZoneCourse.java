@@ -1,5 +1,6 @@
 package com.roncoo.education.course.feign.interfaces;
 
+import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.course.feign.interfaces.qo.ZoneCourseQO;
 import com.roncoo.education.course.feign.interfaces.vo.ZoneCourseVO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -7,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.roncoo.education.common.core.base.Page;
 
 /**
  * 专区课程关联表

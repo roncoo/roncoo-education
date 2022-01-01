@@ -1,15 +1,14 @@
 package com.roncoo.education.system.feign;
 
-import com.roncoo.education.system.feign.interfaces.IFeignSysRoleUser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import com.roncoo.education.system.feign.interfaces.qo.SysRoleUserQO;
-import com.roncoo.education.system.feign.interfaces.vo.SysRoleUserVO;
-import com.roncoo.education.system.feign.biz.FeignSysRoleUserBiz;
 import com.roncoo.education.common.core.base.BaseController;
 import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.system.feign.biz.FeignSysRoleUserBiz;
+import com.roncoo.education.system.feign.interfaces.IFeignSysRoleUser;
+import com.roncoo.education.system.feign.interfaces.qo.SysRoleUserQO;
+import com.roncoo.education.system.feign.interfaces.vo.SysRoleUserVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 角色用户关联表

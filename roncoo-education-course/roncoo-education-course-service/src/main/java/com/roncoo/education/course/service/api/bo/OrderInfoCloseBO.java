@@ -1,10 +1,10 @@
 package com.roncoo.education.course.service.api.bo;
 
-import java.io.Serializable;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * 关闭订单信息

@@ -128,17 +128,17 @@ public class OrderInfoQO implements Serializable {
     private Date payTime;
     private String beginPayTime;
 
-	private String endPayTime;
-	private BigDecimal beginPaidPrice;
+    private String endPayTime;
+    private BigDecimal beginPaidPrice;
 
-	private BigDecimal endPaidPrice;
-	/**
-	 * 开始时间
-	 */
-	private String beginCreate;
-	/**
-	 * 结束时间
-	 */
-	private String endCreate;
-	private BigDecimal lecturerIncome;
+    private BigDecimal endPaidPrice;
+    /**
+     * 开始时间
+     */
+    private String beginCreate;
+    /**
+     * 结束时间
+     */
+    private String endCreate;
+    private BigDecimal lecturerIncome;
 }

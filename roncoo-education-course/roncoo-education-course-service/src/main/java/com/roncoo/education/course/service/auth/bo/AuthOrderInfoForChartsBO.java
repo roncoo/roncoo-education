@@ -1,10 +1,10 @@
 package com.roncoo.education.course.service.auth.bo;
 
-import java.io.Serializable;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -25,13 +25,13 @@ public class AuthOrderInfoForChartsBO implements Serializable {
     @ApiModelProperty(value = "讲师用户编号", required = true)
     private Long lecturerUserNo;
     /**
-	 * 开始时间
-	 */
+     * 开始时间
+     */
     @ApiModelProperty(value = "开始时间", required = false)
-	private String beginCreate;
-	/**
-	 * 结束时间
-	 */
+    private String beginCreate;
+    /**
+     * 结束时间
+     */
     @ApiModelProperty(value = "结束时间", required = false)
-	private String endCreate;
+    private String endCreate;
 }

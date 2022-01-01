@@ -1,21 +1,20 @@
 package com.roncoo.education.course.feign.biz;
 
+import com.roncoo.education.common.core.aliyun.Aliyun;
+import com.roncoo.education.common.core.aliyun.AliyunUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.course.dao.AdvDao;
+import com.roncoo.education.course.dao.impl.mapper.entity.Adv;
+import com.roncoo.education.course.dao.impl.mapper.entity.AdvExample;
+import com.roncoo.education.course.dao.impl.mapper.entity.AdvExample.Criteria;
 import com.roncoo.education.course.feign.interfaces.qo.AdvQO;
 import com.roncoo.education.course.feign.interfaces.vo.AdvVO;
 import com.roncoo.education.system.feign.interfaces.IFeignSys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-
-import com.roncoo.education.course.dao.AdvDao;
-import com.roncoo.education.course.dao.impl.mapper.entity.Adv;
-import com.roncoo.education.course.dao.impl.mapper.entity.AdvExample;
-import com.roncoo.education.course.dao.impl.mapper.entity.AdvExample.Criteria;
-import com.roncoo.education.common.core.aliyun.Aliyun;
-import com.roncoo.education.common.core.aliyun.AliyunUtil;
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.PageUtil;
-import com.roncoo.education.common.core.tools.BeanUtil;
 
 /**
  * 广告信息

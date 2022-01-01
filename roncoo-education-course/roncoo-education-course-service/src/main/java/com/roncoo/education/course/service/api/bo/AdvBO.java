@@ -1,10 +1,10 @@
 package com.roncoo.education.course.service.api.bo;
 
-import java.io.Serializable;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * 广告信息
@@ -15,12 +15,12 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class AdvBO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 位置(0电脑端，1微信端)
-	 */
-	@ApiModelProperty(value = "位置(0电脑端，1微信端)")
-	private Integer platShow;
+    /**
+     * 位置(0电脑端，1微信端)
+     */
+    @ApiModelProperty(value = "位置(0电脑端，1微信端)")
+    private Integer platShow;
 
 }

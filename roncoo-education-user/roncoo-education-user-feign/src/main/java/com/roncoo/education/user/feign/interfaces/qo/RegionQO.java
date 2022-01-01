@@ -1,9 +1,10 @@
 package com.roncoo.education.user.feign.interfaces.qo;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 行政区域表

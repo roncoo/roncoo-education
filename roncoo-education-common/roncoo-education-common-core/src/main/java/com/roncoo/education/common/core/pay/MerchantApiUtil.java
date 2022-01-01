@@ -3,14 +3,14 @@
  */
 package com.roncoo.education.common.core.pay;
 
+import com.roncoo.education.util.tools.MD5Util;
+import org.springframework.util.StringUtils;
+
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import org.springframework.util.StringUtils;
-import com.roncoo.education.util.tools.MD5Util;
 
 /**
- *
  * @author forest
  */
 public final class MerchantApiUtil {
@@ -21,10 +21,8 @@ public final class MerchantApiUtil {
     /**
      * 获取参数签名
      *
-     * @param paramMap
-     *            签名参数
-     * @param paySecret
-     *            签名密钥
+     * @param paramMap  签名参数
+     * @param paySecret 签名密钥
      * @return
      */
     public static String getSign(Map<String, Object> paramMap, String paySecret) {
@@ -66,12 +64,9 @@ public final class MerchantApiUtil {
     /**
      * 验证商户签名
      *
-     * @param paramMap
-     *            签名参数
-     * @param paySecret
-     *            签名私钥
-     * @param signStr
-     *            原始签名密文
+     * @param paramMap  签名参数
+     * @param paySecret 签名私钥
+     * @param signStr   原始签名密文
      * @return
      */
     public static boolean isRightSign(Map<String, Object> paramMap, String paySecret, String signStr) {

@@ -3,10 +3,10 @@
  */
 package com.roncoo.education.course.service.api.bo;
 
-import java.io.Serializable;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * 订单异步通知

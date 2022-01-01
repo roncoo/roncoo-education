@@ -1,11 +1,11 @@
 package com.roncoo.education.user.service.auth.bo;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-
-import lombok.Data;
-import lombok.experimental.Accessors;
 
 /**
  * 讲师账户信息表

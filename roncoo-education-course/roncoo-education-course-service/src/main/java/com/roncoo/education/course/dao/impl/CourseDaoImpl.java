@@ -1,16 +1,15 @@
 package com.roncoo.education.course.dao.impl;
 
-import java.util.List;
-
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.course.dao.CourseDao;
+import com.roncoo.education.course.dao.impl.mapper.CourseMapper;
 import com.roncoo.education.course.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.roncoo.education.course.dao.CourseDao;
-import com.roncoo.education.course.dao.impl.mapper.CourseMapper;
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.PageUtil;
+import java.util.List;
 
 @Repository
 public class CourseDaoImpl implements CourseDao {
@@ -26,8 +25,8 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     public int updateById(Course record) {
-    	record.setGmtCreate(null);
-		record.setGmtModified(null);
+        record.setGmtCreate(null);
+        record.setGmtModified(null);
         return this.courseMapper.updateByPrimaryKeySelective(record);
     }
 
@@ -45,47 +44,47 @@ public class CourseDaoImpl implements CourseDao {
         return new Page<Course>(count, totalPage, pageCurrent, pageSize, this.courseMapper.selectByExample(example));
     }
 
-	@Override
-	public List<Course> listByCategoryId(Long courseId) {
-		CourseExample example = new CourseExample();
-		CourseExample.Criteria c = example.createCriteria();
-		c.andIdEqualTo(courseId);
-		List<Course> list = this.courseMapper.selectByExample(example);
-		return list;
-	}
+    @Override
+    public List<Course> listByCategoryId(Long courseId) {
+        CourseExample example = new CourseExample();
+        CourseExample.Criteria c = example.createCriteria();
+        c.andIdEqualTo(courseId);
+        List<Course> list = this.courseMapper.selectByExample(example);
+        return list;
+    }
 
-	@Override
-	public Course getByCourseIdAndStatusId(Long courseId, Integer StatusId) {
-		CourseExample example = new CourseExample();
-		CourseExample.Criteria c = example.createCriteria();
-		c.andIdEqualTo(courseId);
-		c.andStatusIdEqualTo(StatusId);
-		List<Course> list = this.courseMapper.selectByExample(example);
-		if (list.isEmpty()) {
-			return null;
-		}
-		return list.get(0);
-	}
+    @Override
+    public Course getByCourseIdAndStatusId(Long courseId, Integer StatusId) {
+        CourseExample example = new CourseExample();
+        CourseExample.Criteria c = example.createCriteria();
+        c.andIdEqualTo(courseId);
+        c.andStatusIdEqualTo(StatusId);
+        List<Course> list = this.courseMapper.selectByExample(example);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
 
-	@Override
-	public Course getByCourseName(String courseName) {
-		CourseExample example = new CourseExample();
-		CourseExample.Criteria c = example.createCriteria();
-		c.andCourseNameLike(PageUtil.rightLike(courseName));
-		List<Course> courseList =  this.courseMapper.selectByExample(example);
-		if (courseList.isEmpty()) {
-			return null;
-		}
-		return courseList.get(0);
-	}
+    @Override
+    public Course getByCourseName(String courseName) {
+        CourseExample example = new CourseExample();
+        CourseExample.Criteria c = example.createCriteria();
+        c.andCourseNameLike(PageUtil.rightLike(courseName));
+        List<Course> courseList = this.courseMapper.selectByExample(example);
+        if (courseList.isEmpty()) {
+            return null;
+        }
+        return courseList.get(0);
+    }
 
-	@Override
-	public List<Course> listBycategoryId2AndStatusId(Long categoryId2, Integer statusId) {
-		CourseExample example = new CourseExample();
-		CourseExample.Criteria c = example.createCriteria();
-		c.andCategoryId2EqualTo(categoryId2);
-		c.andStatusIdEqualTo(statusId);
-		example.setOrderByClause("sort desc,id desc");
-		return this.courseMapper.selectByExample(example);
-	}
+    @Override
+    public List<Course> listBycategoryId2AndStatusId(Long categoryId2, Integer statusId) {
+        CourseExample example = new CourseExample();
+        CourseExample.Criteria c = example.createCriteria();
+        c.andCategoryId2EqualTo(categoryId2);
+        c.andStatusIdEqualTo(statusId);
+        example.setOrderByClause("sort desc,id desc");
+        return this.courseMapper.selectByExample(example);
+    }
 }

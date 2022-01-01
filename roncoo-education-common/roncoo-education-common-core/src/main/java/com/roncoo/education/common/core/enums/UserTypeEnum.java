@@ -13,11 +13,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum UserTypeEnum {
 
-	USER(1, "用户", ""), LECTURER(2, "讲师", "blue");
+    USER(1, "用户", ""), LECTURER(2, "讲师", "blue");
 
-	private Integer code;
+    private Integer code;
 
-	private String desc;
+    private String desc;
 
-	private String color;
+    private String color;
 }

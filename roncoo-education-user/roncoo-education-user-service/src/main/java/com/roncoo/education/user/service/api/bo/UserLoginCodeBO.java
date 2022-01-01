@@ -3,11 +3,11 @@
  */
 package com.roncoo.education.user.service.api.bo;
 
-import java.io.Serializable;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -20,24 +20,24 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class UserLoginCodeBO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 手机号码
-	 */
-	@ApiModelProperty(value = "手机", required = true)
-	private String mobile;
-	/**
-	 * 手机验证码
-	 */
-	@ApiModelProperty(value = "手机验证码", required = true)
-	private String code;
-	/**
-	 * clientId
-	 */
-	@ApiModelProperty(value = "clientId", required = true)
-	private String clientId;
+    /**
+     * 手机号码
+     */
+    @ApiModelProperty(value = "手机", required = true)
+    private String mobile;
+    /**
+     * 手机验证码
+     */
+    @ApiModelProperty(value = "手机验证码", required = true)
+    private String code;
+    /**
+     * clientId
+     */
+    @ApiModelProperty(value = "clientId", required = true)
+    private String clientId;
 
-	private String ip;
+    private String ip;
 
 }

@@ -11,17 +11,17 @@ import java.util.List;
 @Accessors(chain = true)
 public class OrderEchartsVO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 总收入
-	 */
-	private List<BigDecimal> countPaidPrice;
-	private List<Integer> countPaidPriceq;
+    /**
+     * 总收入
+     */
+    private List<BigDecimal> countPaidPrice;
+    private List<Integer> countPaidPriceq;
 
-	/**
-	 * 总订单数
-	 */
-	private List<Integer> countOrders;
+    /**
+     * 总订单数
+     */
+    private List<Integer> countOrders;
 
 }

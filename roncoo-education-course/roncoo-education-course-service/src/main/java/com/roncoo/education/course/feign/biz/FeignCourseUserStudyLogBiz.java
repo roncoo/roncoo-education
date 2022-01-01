@@ -1,28 +1,23 @@
 package com.roncoo.education.course.feign.biz;
 
-import java.util.List;
-
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.ArrayListUtil;
+import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.core.tools.DateUtil;
+import com.roncoo.education.course.dao.CourseChapterDao;
+import com.roncoo.education.course.dao.CourseChapterPeriodDao;
+import com.roncoo.education.course.dao.CourseDao;
+import com.roncoo.education.course.dao.CourseUserStudyLogDao;
+import com.roncoo.education.course.dao.impl.mapper.entity.*;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudyLogExample.Criteria;
 import com.roncoo.education.course.feign.interfaces.qo.CourseUserStudyLogQO;
 import com.roncoo.education.course.feign.interfaces.vo.CourseUserStudyLogVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.roncoo.education.course.dao.CourseChapterDao;
-import com.roncoo.education.course.dao.CourseChapterPeriodDao;
-import com.roncoo.education.course.dao.CourseDao;
-import com.roncoo.education.course.dao.CourseUserStudyLogDao;
-import com.roncoo.education.course.dao.impl.mapper.entity.Course;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapter;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudyLog;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudyLogExample;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudyLogExample.Criteria;
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.PageUtil;
-import com.roncoo.education.common.core.tools.ArrayListUtil;
-import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.core.tools.DateUtil;
+import java.util.List;
 
 /**
  * 课程用户学习日志

@@ -1,12 +1,12 @@
 package com.roncoo.education.course.dao.impl;
 
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseIntroduceAudit;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseIntroduceAuditExample;
-import com.roncoo.education.course.dao.CourseIntroduceAuditDao;
-import com.roncoo.education.course.dao.impl.mapper.CourseIntroduceAuditMapper;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
+import com.roncoo.education.course.dao.CourseIntroduceAuditDao;
+import com.roncoo.education.course.dao.impl.mapper.CourseIntroduceAuditMapper;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseIntroduceAudit;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseIntroduceAuditExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -25,8 +25,8 @@ public class CourseIntroduceAuditDaoImpl implements CourseIntroduceAuditDao {
     }
 
     public int updateById(CourseIntroduceAudit record) {
-    	record.setGmtCreate(null);
-    	record.setGmtModified(null);
+        record.setGmtCreate(null);
+        record.setGmtModified(null);
         return this.courseIntroduceAuditMapper.updateByPrimaryKeySelective(record);
     }
 

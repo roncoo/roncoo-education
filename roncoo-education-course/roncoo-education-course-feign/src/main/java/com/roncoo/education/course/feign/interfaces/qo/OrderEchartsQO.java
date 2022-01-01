@@ -10,8 +10,8 @@ import java.util.List;
 @Accessors(chain = true)
 public class OrderEchartsQO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private List<String> dateList;
+    private List<String> dateList;
 
 }

@@ -13,10 +13,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum HasNoticeEnum {
 
-	YES(1, "已提醒"), NO(0, "未提醒");
+    YES(1, "已提醒"), NO(0, "未提醒");
 
-	private Integer code;
+    private Integer code;
 
-	private String desc;
+    private String desc;
 
 }

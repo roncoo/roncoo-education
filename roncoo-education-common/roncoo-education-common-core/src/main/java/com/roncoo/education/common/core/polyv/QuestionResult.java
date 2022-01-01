@@ -10,32 +10,32 @@ import java.io.Serializable;
  **/
 public class QuestionResult implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 错误码 0为成功 ，其他为失败
-	 */
-	private String error;
+    /**
+     * 错误码 0为成功 ，其他为失败
+     */
+    private String error;
 
-	/**
-	 * 问题id
-	 */
-	private String examId;
+    /**
+     * 问题id
+     */
+    private String examId;
 
-	public String getError() {
-		return error;
-	}
+    public String getError() {
+        return error;
+    }
 
-	public void setError(String error) {
-		this.error = error;
-	}
+    public void setError(String error) {
+        this.error = error;
+    }
 
-	public String getExamId() {
-		return examId;
-	}
+    public String getExamId() {
+        return examId;
+    }
 
-	public void setExamId(String examId) {
-		this.examId = examId;
-	}
+    public void setExamId(String examId) {
+        this.examId = examId;
+    }
 
 }

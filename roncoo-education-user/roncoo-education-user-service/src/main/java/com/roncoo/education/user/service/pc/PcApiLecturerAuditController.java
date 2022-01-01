@@ -1,12 +1,12 @@
 package com.roncoo.education.user.service.pc;
 
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.user.service.pc.biz.PcApiLecturerAuditBiz;
 import com.roncoo.education.user.service.pc.req.*;
 import com.roncoo.education.user.service.pc.resq.LecturerAuditPageRESQ;
 import com.roncoo.education.user.service.pc.resq.LecturerAuditViewRESQ;
-import com.roncoo.education.common.core.base.BaseController;
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.Result;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

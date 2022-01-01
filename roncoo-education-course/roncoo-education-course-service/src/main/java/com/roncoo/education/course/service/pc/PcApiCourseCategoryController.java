@@ -1,12 +1,12 @@
 package com.roncoo.education.course.service.pc;
 
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.service.pc.biz.PcApiCourseCategoryBiz;
 import com.roncoo.education.course.service.pc.req.*;
 import com.roncoo.education.course.service.pc.resq.CourseCategoryPageRESQ;
 import com.roncoo.education.course.service.pc.resq.CourseCategoryViewRESQ;
-import com.roncoo.education.common.core.base.BaseController;
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.Result;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -13,10 +13,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum PayTypeEnum {
 
-	WEIXIN(1, "微信支付"), ALIPAY(2, "支付宝支付");
+    WEIXIN(1, "微信支付"), ALIPAY(2, "支付宝支付");
 
-	private Integer code;
+    private Integer code;
 
-	private String desc;
+    private String desc;
 
 }

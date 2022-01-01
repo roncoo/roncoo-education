@@ -1,16 +1,15 @@
 package com.roncoo.education.course.service.auth.dto;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * <p>
@@ -29,7 +28,7 @@ public class AuthOrderInfoListForLecturerDTO implements Serializable {
      * 订单号
      */
     @ApiModelProperty(value = "订单号")
-	@JsonSerialize(using = ToStringSerializer.class)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long orderNo;
     /**
      * 课程名称

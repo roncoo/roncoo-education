@@ -1,12 +1,12 @@
 package com.roncoo.education.course.service.auth.dto;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-
-import lombok.Data;
-import lombok.experimental.Accessors;
 
 /**
  * 课程信息-审核

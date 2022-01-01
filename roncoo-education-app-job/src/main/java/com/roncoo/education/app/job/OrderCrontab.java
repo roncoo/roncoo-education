@@ -1,7 +1,7 @@
 package com.roncoo.education.app.job;
 
-import com.roncoo.education.course.feign.interfaces.IFeignOrderInfo;
 import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.course.feign.interfaces.IFeignOrderInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

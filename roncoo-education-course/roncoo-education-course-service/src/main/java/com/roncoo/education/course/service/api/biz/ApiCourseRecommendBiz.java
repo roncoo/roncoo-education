@@ -2,16 +2,16 @@ package com.roncoo.education.course.service.api.biz;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.roncoo.education.course.service.api.bo.CourseRecommendBO;
-import com.roncoo.education.course.service.api.dto.CourseRecommendDTO;
-import com.roncoo.education.course.service.api.dto.CourseRecommendListDTO;
+import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.StatusIdEnum;
+import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.CourseRecommendDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseRecommend;
-import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.core.enums.StatusIdEnum;
-import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.course.service.api.bo.CourseRecommendBO;
+import com.roncoo.education.course.service.api.dto.CourseRecommendDTO;
+import com.roncoo.education.course.service.api.dto.CourseRecommendListDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

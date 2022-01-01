@@ -1,10 +1,9 @@
 package com.roncoo.education.system.feign.interfaces;
 
+import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.system.feign.interfaces.qo.SysLogQO;
 import com.roncoo.education.system.feign.interfaces.vo.SysLogVO;
-import com.roncoo.education.common.core.base.Page;
 import org.springframework.cloud.openfeign.FeignClient;
-
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 

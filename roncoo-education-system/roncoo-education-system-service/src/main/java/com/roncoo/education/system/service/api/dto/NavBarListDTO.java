@@ -1,12 +1,12 @@
 package com.roncoo.education.system.service.api.dto;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 头部导航

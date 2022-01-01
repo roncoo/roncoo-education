@@ -1,8 +1,8 @@
 package com.roncoo.education.course.dao;
 
+import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudy;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudyExample;
-import com.roncoo.education.common.core.base.Page;
 
 public interface CourseUserStudyDao {
     int save(CourseUserStudy record);
@@ -22,5 +22,5 @@ public interface CourseUserStudyDao {
      * @param courseNo
      * @return
      */
-	CourseUserStudy getByUserNoAndCourseId(Long userNo, Long courseId);
+    CourseUserStudy getByUserNoAndCourseId(Long userNo, Long courseId);
 }

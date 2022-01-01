@@ -1,15 +1,15 @@
 package com.roncoo.education.course.feign.biz;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.roncoo.education.course.feign.interfaces.qo.CourseCategoryQO;
-import com.roncoo.education.course.feign.interfaces.vo.CourseCategoryVO;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.course.dao.CourseCategoryDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseCategory;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseCategoryExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseCategoryExample.Criteria;
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.PageUtil;
-import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.course.feign.interfaces.qo.CourseCategoryQO;
+import com.roncoo.education.course.feign.interfaces.vo.CourseCategoryVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

@@ -1,25 +1,25 @@
 package com.roncoo.education.user.dao;
 
-import java.util.List;
-
+import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.user.dao.impl.mapper.entity.Region;
 import com.roncoo.education.user.dao.impl.mapper.entity.RegionExample;
-import com.roncoo.education.common.core.base.Page;
+
+import java.util.List;
 
 public interface RegionDao {
-	int save(Region record);
+    int save(Region record);
 
-	int deleteById(Long id);
+    int deleteById(Long id);
 
-	int updateById(Region record);
+    int updateById(Region record);
 
-	Region getById(Long id);
+    Region getById(Long id);
 
-	Page<Region> listForPage(int pageCurrent, int pageSize, RegionExample example);
+    Page<Region> listForPage(int pageCurrent, int pageSize, RegionExample example);
 
-	List<Region> listByLevel(Integer level);
+    List<Region> listByLevel(Integer level);
 
-	List<Region> listByProvinceId(Integer provinceId);
+    List<Region> listByProvinceId(Integer provinceId);
 
-	List<Region> listByCityId(Integer cityId);
+    List<Region> listByCityId(Integer cityId);
 }

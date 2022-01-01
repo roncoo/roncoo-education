@@ -1,11 +1,11 @@
 package com.roncoo.education.system.dao.impl.mapper;
 
-import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleExample;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRole;
-
-import java.util.List;
+import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleExample;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface SysRoleMapper {

@@ -1,10 +1,10 @@
 package com.roncoo.education.system.feign.interfaces.qo;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 角色用户关联表

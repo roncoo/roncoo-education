@@ -1,10 +1,10 @@
 package com.roncoo.education.system.feign.interfaces.qo;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 设置信息集合，有站点信息，讲师招募信息，代理招募信息
@@ -70,13 +70,13 @@ public class WebsiteQO implements Serializable {
      */
     private String copyright;
     /**
-	 * 备案号
-	 */
-	private String icp;
-	/**
-	 * 公安备案号
-	 */
-	private String prn;
+     * 备案号
+     */
+    private String icp;
+    /**
+     * 公安备案号
+     */
+    private String prn;
     /**
      * 站点微信
      */
@@ -110,20 +110,20 @@ public class WebsiteQO implements Serializable {
      */
     private String service2;
     /**
-	 * 用户协议
-	 */
-	private String userAgreement;
-	/**
-	 * 招募标题
-	 */
-	private String recruitTitle;
-	/**
-	 * 招募信息
-	 */
-	private String recruitInfo;
-	/**
-	 * 入驻协议
-	 */
-	private String entryAgreement;
+     * 用户协议
+     */
+    private String userAgreement;
+    /**
+     * 招募标题
+     */
+    private String recruitTitle;
+    /**
+     * 招募信息
+     */
+    private String recruitInfo;
+    /**
+     * 入驻协议
+     */
+    private String entryAgreement;
 
 }

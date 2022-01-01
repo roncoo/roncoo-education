@@ -1,10 +1,10 @@
 package com.roncoo.education.user.service.auth.bo;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 用户基本信息

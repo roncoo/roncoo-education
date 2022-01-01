@@ -1,9 +1,9 @@
 package com.roncoo.education.system.service.api.bo;
 
-import java.io.Serializable;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * 菜单角色关联表

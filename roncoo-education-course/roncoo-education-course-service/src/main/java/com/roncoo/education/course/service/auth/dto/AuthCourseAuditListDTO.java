@@ -1,14 +1,13 @@
 package com.roncoo.education.course.service.auth.dto;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 课程信息-审核
@@ -68,8 +67,8 @@ public class AuthCourseAuditListDTO implements Serializable {
     @ApiModelProperty(value = "是否上架(1:上架，0:下架)")
     private Integer isPutaway;
     /**
-	 * 是否可删除
-	 */
-	@ApiModelProperty(value = "是否可删除（1:可删除，0:不可删除）")
-	private Integer isDelete;
+     * 是否可删除
+     */
+    @ApiModelProperty(value = "是否可删除（1:可删除，0:不可删除）")
+    private Integer isDelete;
 }

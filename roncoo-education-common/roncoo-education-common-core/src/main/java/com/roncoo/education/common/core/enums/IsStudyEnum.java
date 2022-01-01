@@ -8,6 +8,7 @@ import lombok.Getter;
 
 /**
  * 是否学习枚举类
+ *
  * @author forest
  */
 @Getter

@@ -13,10 +13,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum OperateTypeEnum {
 
-	INCREASE(1, "增加"), EDIT(2, "修改"), DISADLE(3,"禁用");
+    INCREASE(1, "增加"), EDIT(2, "修改"), DISADLE(3, "禁用");
 
-	private Integer code;
+    private Integer code;
 
-	private String desc;
+    private String desc;
 
 }

@@ -213,9 +213,9 @@ public class CallbackOrderBO implements Serializable {
         this.sign = sign;
     }
 
-	@Override
-	public String toString() {
-		return "OrderInfoRoncooPayNotifyBO [payKey=" + payKey + ", productName=" + productName + ", outTradeNo=" + outTradeNo + ", orderPrice=" + orderPrice + ", productType=" + productType + ", tradeStatus=" + tradeStatus + ", successTime=" + successTime + ", orderTime=" + orderTime + ", trxNo=" + trxNo + ", remark=" + remark + ", notify_time=" + notify_time + ", notify_type=" + notify_type + ", notify_id=" + notify_id + ", app_id=" + app_id + ", charset=" + charset + ", version=" + version + ", sign_type=" + sign_type + ", trade_no=" + trade_no + ", out_trade_no=" + out_trade_no + ", sign=" + sign + "]";
-	}
+    @Override
+    public String toString() {
+        return "OrderInfoRoncooPayNotifyBO [payKey=" + payKey + ", productName=" + productName + ", outTradeNo=" + outTradeNo + ", orderPrice=" + orderPrice + ", productType=" + productType + ", tradeStatus=" + tradeStatus + ", successTime=" + successTime + ", orderTime=" + orderTime + ", trxNo=" + trxNo + ", remark=" + remark + ", notify_time=" + notify_time + ", notify_type=" + notify_type + ", notify_id=" + notify_id + ", app_id=" + app_id + ", charset=" + charset + ", version=" + version + ", sign_type=" + sign_type + ", trade_no=" + trade_no + ", out_trade_no=" + out_trade_no + ", sign=" + sign + "]";
+    }
 
 }

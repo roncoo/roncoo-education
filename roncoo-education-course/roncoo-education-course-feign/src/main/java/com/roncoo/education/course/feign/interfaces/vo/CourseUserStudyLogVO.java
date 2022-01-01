@@ -15,43 +15,43 @@ import java.util.Date;
 @Accessors(chain = true)
 public class CourseUserStudyLogVO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 主键
-	 */
-	private Long id;
-	/**
-	 * 创建时间
-	 */
-	private Date gmtCreate;
-	/**
-	 * 课程编号
-	 */
-	private Long courseId;
-	/**
-	 * 章节编号
-	 */
-	private Long chapterId;
-	/**
-	 * 课时编号
-	 */
-	private Long periodId;
-	/**
-	 * 课程名称
-	 */
-	private String courseName;
-	/**
-	 * 章节名称
-	 */
-	private String chapterName;
-	/**
-	 * 课时名称
-	 */
-	private String periodName;
-	/**
-	 * 用户编号
-	 */
-	private Long userNo;
+    /**
+     * 主键
+     */
+    private Long id;
+    /**
+     * 创建时间
+     */
+    private Date gmtCreate;
+    /**
+     * 课程编号
+     */
+    private Long courseId;
+    /**
+     * 章节编号
+     */
+    private Long chapterId;
+    /**
+     * 课时编号
+     */
+    private Long periodId;
+    /**
+     * 课程名称
+     */
+    private String courseName;
+    /**
+     * 章节名称
+     */
+    private String chapterName;
+    /**
+     * 课时名称
+     */
+    private String periodName;
+    /**
+     * 用户编号
+     */
+    private Long userNo;
 
 }

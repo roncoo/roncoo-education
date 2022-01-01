@@ -3,11 +3,11 @@
  */
 package com.roncoo.education.user.service.api.bo;
 
-import java.io.Serializable;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -20,12 +20,12 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class UserAuthBO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * uuid
-	 */
-	@ApiModelProperty(value = "uuid", required = true)
-	private String uuid;
+    /**
+     * uuid
+     */
+    @ApiModelProperty(value = "uuid", required = true)
+    private String uuid;
 
 }

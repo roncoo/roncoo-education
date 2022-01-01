@@ -3,11 +3,11 @@
  */
 package com.roncoo.education.course.service.pc.resq;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 收入统计
@@ -18,21 +18,21 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class CountIncomeRESQ implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 总收入
-	 */
-	private BigDecimal totalProfit = BigDecimal.valueOf(0);
+    /**
+     * 总收入
+     */
+    private BigDecimal totalProfit = BigDecimal.valueOf(0);
 
-	/**
-	 * 平台收入
-	 */
-	private BigDecimal platformProfit = BigDecimal.valueOf(0);
+    /**
+     * 平台收入
+     */
+    private BigDecimal platformProfit = BigDecimal.valueOf(0);
 
-	/**
-	 * 讲师收入
-	 */
-	private BigDecimal lecturerProfit = BigDecimal.valueOf(0);
+    /**
+     * 讲师收入
+     */
+    private BigDecimal lecturerProfit = BigDecimal.valueOf(0);
 
 }

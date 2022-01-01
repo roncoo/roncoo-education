@@ -13,10 +13,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum AdvTargetEnum {
 
-	BLANK("_blank", "新窗口打开"), SELF("_self", "同窗口打开");
+    BLANK("_blank", "新窗口打开"), SELF("_self", "同窗口打开");
 
-	private String code;
+    private String code;
 
-	private String desc;
+    private String desc;
 
 }

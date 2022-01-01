@@ -1,18 +1,18 @@
 package com.roncoo.education.user.service.auth.biz;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.roncoo.education.system.feign.interfaces.IFeignSys;
-import com.roncoo.education.user.service.auth.bo.AuthUserExtBO;
-import com.roncoo.education.user.service.auth.bo.AuthUserExtViewBO;
-import com.roncoo.education.user.service.auth.dto.AuthUserExtDTO;
-import com.roncoo.education.user.dao.UserExtDao;
-import com.roncoo.education.user.dao.impl.mapper.entity.UserExt;
 import com.roncoo.education.common.core.aliyun.Aliyun;
 import com.roncoo.education.common.core.aliyun.AliyunUtil;
 import com.roncoo.education.common.core.base.BaseBiz;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.system.feign.interfaces.IFeignSys;
+import com.roncoo.education.user.dao.UserExtDao;
+import com.roncoo.education.user.dao.impl.mapper.entity.UserExt;
+import com.roncoo.education.user.service.auth.bo.AuthUserExtBO;
+import com.roncoo.education.user.service.auth.bo.AuthUserExtViewBO;
+import com.roncoo.education.user.service.auth.dto.AuthUserExtDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

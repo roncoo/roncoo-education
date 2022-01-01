@@ -1,7 +1,8 @@
 package com.roncoo.education.course.feign;
 
-import java.io.File;
-
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.course.feign.biz.FeignCourseVideoBiz;
 import com.roncoo.education.course.feign.interfaces.IFeignCourseVideo;
 import com.roncoo.education.course.feign.interfaces.qo.CourseVideoQO;
 import com.roncoo.education.course.feign.interfaces.vo.CourseVideoVO;
@@ -9,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.course.feign.biz.FeignCourseVideoBiz;
-import com.roncoo.education.common.core.base.BaseController;
-import com.roncoo.education.common.core.base.Page;
+import java.io.File;
 
 /**
  * 课程视频信息

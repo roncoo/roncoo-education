@@ -1,12 +1,12 @@
 package com.roncoo.education.user.dao.impl;
 
-import com.roncoo.education.user.dao.impl.mapper.UserLogModifiedMapper;
-import com.roncoo.education.user.dao.impl.mapper.entity.UserLogModified;
-import com.roncoo.education.user.dao.impl.mapper.entity.UserLogModifiedExample;
-import com.roncoo.education.user.dao.UserLogModifiedDao;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
+import com.roncoo.education.user.dao.UserLogModifiedDao;
+import com.roncoo.education.user.dao.impl.mapper.UserLogModifiedMapper;
+import com.roncoo.education.user.dao.impl.mapper.entity.UserLogModified;
+import com.roncoo.education.user.dao.impl.mapper.entity.UserLogModifiedExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

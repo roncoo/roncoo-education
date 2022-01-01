@@ -7,5 +7,5 @@ package com.roncoo.education.common.core.enums;
  * @author wujing
  */
 public enum PlatformEnum {
-	COURSE, USER, SYSTEM;
+    COURSE, USER, SYSTEM;
 }

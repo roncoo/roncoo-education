@@ -1,14 +1,14 @@
 package com.roncoo.education.system.feign.biz;
 
-import com.roncoo.education.system.feign.interfaces.qo.MsgUserQO;
-import com.roncoo.education.system.feign.interfaces.vo.MsgUserVO;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.system.dao.MsgUserDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.MsgUser;
 import com.roncoo.education.system.dao.impl.mapper.entity.MsgUserExample;
 import com.roncoo.education.system.dao.impl.mapper.entity.MsgUserExample.Criteria;
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.PageUtil;
-import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.system.feign.interfaces.qo.MsgUserQO;
+import com.roncoo.education.system.feign.interfaces.vo.MsgUserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

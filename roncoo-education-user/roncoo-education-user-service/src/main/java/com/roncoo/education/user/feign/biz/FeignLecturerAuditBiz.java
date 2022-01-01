@@ -1,6 +1,13 @@
 package com.roncoo.education.user.feign.biz;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.roncoo.education.common.core.base.BaseBiz;
+import com.roncoo.education.common.core.base.BaseException;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.enums.AuditStatusEnum;
+import com.roncoo.education.common.core.enums.UserTypeEnum;
+import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.user.dao.LecturerAuditDao;
 import com.roncoo.education.user.dao.LecturerDao;
 import com.roncoo.education.user.dao.LecturerExtDao;
@@ -9,13 +16,6 @@ import com.roncoo.education.user.dao.impl.mapper.entity.*;
 import com.roncoo.education.user.feign.interfaces.qo.LecturerAuditQO;
 import com.roncoo.education.user.feign.interfaces.vo.LecturerAuditVO;
 import com.roncoo.education.user.feign.interfaces.vo.LecturerExtVO;
-import com.roncoo.education.common.core.base.BaseBiz;
-import com.roncoo.education.common.core.base.BaseException;
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.PageUtil;
-import com.roncoo.education.common.core.enums.AuditStatusEnum;
-import com.roncoo.education.common.core.enums.UserTypeEnum;
-import com.roncoo.education.common.core.tools.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

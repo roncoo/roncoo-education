@@ -20,13 +20,12 @@ public final class MD5Util {
     /**
      * Used building output as Hex
      */
-    private static final char[] DIGITS = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+    private static final char[] DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
     /**
      * 对字符串进行MD5加密， 默认使用UTF-8
      *
-     * @param text
-     *            明文
+     * @param text 明文
      * @return 密文
      */
     public static String sign(String... text) {
@@ -44,8 +43,7 @@ public final class MD5Util {
     /**
      * 对字符串进行MD5加密， 默认使用UTF-8
      *
-     * @param text
-     *            明文
+     * @param text 明文
      * @return 密文
      */
     public static String MD5(String text) {
@@ -55,10 +53,8 @@ public final class MD5Util {
     /**
      * 对字符串进行MD5加密
      *
-     * @param text
-     *            明文
-     * @param charsetName
-     *            指定编码
+     * @param text        明文
+     * @param charsetName 指定编码
      * @return 密文
      */
     public static String MD5(String text, String charsetName) {

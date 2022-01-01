@@ -1,7 +1,9 @@
 package com.roncoo.education.course.service.auth.biz;
 
-import com.roncoo.education.course.service.auth.bo.AuthCourseUserStudyLogPageBO;
-import com.roncoo.education.course.service.auth.dto.AuthCourseUserStudyLogPageDTO;
+import com.roncoo.education.common.core.base.BaseBiz;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.CourseUserStudyLogDao;
@@ -10,10 +12,8 @@ import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudyLog;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudyLogExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseUserStudyLogExample.Criteria;
-import com.roncoo.education.common.core.base.BaseBiz;
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.PageUtil;
-import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.course.service.auth.bo.AuthCourseUserStudyLogPageBO;
+import com.roncoo.education.course.service.auth.dto.AuthCourseUserStudyLogPageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

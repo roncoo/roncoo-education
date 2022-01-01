@@ -1,12 +1,12 @@
 package com.roncoo.education.user.service.auth.biz;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.roncoo.education.user.service.api.bo.LecturerViewBO;
-import com.roncoo.education.user.service.api.dto.LecturerViewDTO;
-import com.roncoo.education.user.dao.LecturerDao;
-import com.roncoo.education.user.dao.impl.mapper.entity.Lecturer;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.user.dao.LecturerDao;
+import com.roncoo.education.user.dao.impl.mapper.entity.Lecturer;
+import com.roncoo.education.user.service.api.bo.LecturerViewBO;
+import com.roncoo.education.user.service.api.dto.LecturerViewDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

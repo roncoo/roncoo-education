@@ -13,10 +13,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum HiddenTypeEnum {
 
-	YES(1, "显示"), NO(0, "不显示");
+    YES(1, "显示"), NO(0, "不显示");
 
-	private Integer code;
+    private Integer code;
 
-	private String desc;
+    private String desc;
 
 }

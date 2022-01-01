@@ -3,8 +3,8 @@
  */
 package com.roncoo.education.common.core.base;
 
-import com.roncoo.education.util.enums.*;
-import com.roncoo.education.util.tools.JSUtil;
+import com.roncoo.education.common.core.enums.*;
+import com.roncoo.education.common.core.tools.JSUtil;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;

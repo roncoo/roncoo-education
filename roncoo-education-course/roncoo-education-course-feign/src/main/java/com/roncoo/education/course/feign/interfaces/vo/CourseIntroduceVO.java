@@ -15,23 +15,23 @@ import java.util.Date;
 @Accessors(chain = true)
 public class CourseIntroduceVO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 主键
-	 */
-	private Long id;
-	/**
-	 * 创建时间
-	 */
-	private Date gmtCreate;
-	/**
-	 * 修改时间
-	 */
-	private Date gmtModified;
-	/**
-	 * 课程简介
-	 */
-	private String introduce;
+    /**
+     * 主键
+     */
+    private Long id;
+    /**
+     * 创建时间
+     */
+    private Date gmtCreate;
+    /**
+     * 修改时间
+     */
+    private Date gmtModified;
+    /**
+     * 课程简介
+     */
+    private String introduce;
 
 }

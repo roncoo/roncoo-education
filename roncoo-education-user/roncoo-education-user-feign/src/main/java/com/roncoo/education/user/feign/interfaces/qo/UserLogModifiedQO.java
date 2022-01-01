@@ -1,9 +1,10 @@
 package com.roncoo.education.user.feign.interfaces.qo;
 
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 用户修改日志

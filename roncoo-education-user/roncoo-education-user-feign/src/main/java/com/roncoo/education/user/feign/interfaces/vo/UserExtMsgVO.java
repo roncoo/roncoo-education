@@ -3,10 +3,10 @@
  */
 package com.roncoo.education.user.feign.interfaces.vo;
 
-import java.io.Serializable;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * 用户教育信息,批量生成用户站内信用
@@ -17,15 +17,15 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class UserExtMsgVO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 用户编号
-	 */
-	private Long userNo;
+    /**
+     * 用户编号
+     */
+    private Long userNo;
 
-	/**
-	 * 用户手机
-	 */
-	private String mobile;
+    /**
+     * 用户手机
+     */
+    private String mobile;
 }

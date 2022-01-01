@@ -1,16 +1,15 @@
 package com.roncoo.education.course.feign;
 
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.course.feign.biz.FeignCourseUserStudyBiz;
 import com.roncoo.education.course.feign.interfaces.IFeignCourseUserStudy;
 import com.roncoo.education.course.feign.interfaces.qo.CourseUserStudyQO;
 import com.roncoo.education.course.feign.interfaces.vo.CourseUserStudyVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import com.roncoo.education.common.core.base.BaseController;
-import com.roncoo.education.common.core.base.Page;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 课程用户关联表

@@ -1,12 +1,12 @@
 package com.roncoo.education.course.dao.impl;
 
-import com.roncoo.education.course.dao.impl.mapper.entity.FileStorage;
-import com.roncoo.education.course.dao.impl.mapper.entity.FileStorageExample;
-import com.roncoo.education.course.dao.FileStorageDao;
-import com.roncoo.education.course.dao.impl.mapper.FileStorageMapper;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
+import com.roncoo.education.course.dao.FileStorageDao;
+import com.roncoo.education.course.dao.impl.mapper.FileStorageMapper;
+import com.roncoo.education.course.dao.impl.mapper.entity.FileStorage;
+import com.roncoo.education.course.dao.impl.mapper.entity.FileStorageExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

@@ -1,15 +1,14 @@
 package com.roncoo.education.system.service.api.dto;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 站点信息
@@ -26,7 +25,7 @@ public class WebsiteDTO implements Serializable {
      * 主键
      */
     @ApiModelProperty(value = "主键id")
-	@JsonSerialize(using = ToStringSerializer.class)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
     /**
      * 创建时间
@@ -71,30 +70,30 @@ public class WebsiteDTO implements Serializable {
     @ApiModelProperty(value = "站点版权")
     private String copyright;
     /**
-	 * 备案号
-	 */
+     * 备案号
+     */
     @ApiModelProperty(value = "备案号")
-	private String icp;
-	/**
-	 * 公安备案号
-	 */
+    private String icp;
+    /**
+     * 公安备案号
+     */
     @ApiModelProperty(value = "公安备案号")
-	private String prnNo;
-	/**
-	 * 公安备案
-	 */
+    private String prnNo;
+    /**
+     * 公安备案
+     */
     @ApiModelProperty(value = "公安备案")
-	private String prn;
+    private String prn;
     /**
      * 站点微信
      */
     @ApiModelProperty(value = "站点微信")
     private String weixin;
     /**
-	 * 微信小程序二维码
-	 */
+     * 微信小程序二维码
+     */
     @ApiModelProperty(value = "微信小程序二维码")
-	private String weixinXcx;
+    private String weixinXcx;
     /**
      * 站点微博
      */
@@ -136,10 +135,10 @@ public class WebsiteDTO implements Serializable {
     @ApiModelProperty(value = "logoIco")
     private String logoIco;
     /**
-	 * 用户协议
-	 */
+     * 用户协议
+     */
     @ApiModelProperty(value = "用户协议")
-	private String userAgreement;
+    private String userAgreement;
     /**
      * 招募标题
      */

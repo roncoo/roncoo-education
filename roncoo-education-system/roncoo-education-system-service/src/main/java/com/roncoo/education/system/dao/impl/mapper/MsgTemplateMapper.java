@@ -1,11 +1,11 @@
 package com.roncoo.education.system.dao.impl.mapper;
 
-import com.roncoo.education.system.dao.impl.mapper.entity.MsgTemplateExample;
 import com.roncoo.education.system.dao.impl.mapper.entity.MsgTemplate;
-
-import java.util.List;
+import com.roncoo.education.system.dao.impl.mapper.entity.MsgTemplateExample;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface MsgTemplateMapper {

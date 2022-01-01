@@ -1,16 +1,16 @@
 package com.roncoo.education.system.service.pc.biz;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.roncoo.education.system.service.pc.req.SysUpdateRESQ;
-import com.roncoo.education.system.service.pc.resq.SysViewRESQ;
-import com.roncoo.education.system.dao.SysDao;
-import com.roncoo.education.system.dao.impl.mapper.entity.Sys;
 import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.enums.SysTypeEnum;
 import com.roncoo.education.common.core.enums.VideoTypeEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.system.dao.SysDao;
+import com.roncoo.education.system.dao.impl.mapper.entity.Sys;
+import com.roncoo.education.system.service.pc.req.SysUpdateRESQ;
+import com.roncoo.education.system.service.pc.resq.SysViewRESQ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

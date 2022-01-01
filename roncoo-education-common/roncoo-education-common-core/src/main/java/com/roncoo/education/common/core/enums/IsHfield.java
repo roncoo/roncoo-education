@@ -15,10 +15,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum IsHfield {
 
-	NO(0, "不高亮"), YES(1, "高亮");
+    NO(0, "不高亮"), YES(1, "高亮");
 
-	private Integer code;
+    private Integer code;
 
-	private String desc;
+    private String desc;
 
 }

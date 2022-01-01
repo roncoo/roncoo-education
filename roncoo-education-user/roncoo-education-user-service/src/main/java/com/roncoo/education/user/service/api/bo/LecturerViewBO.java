@@ -3,11 +3,11 @@
  */
 package com.roncoo.education.user.service.api.bo;
 
-import java.io.Serializable;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -20,12 +20,12 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class LecturerViewBO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 讲师编号
-	 */
-	@ApiModelProperty(value = "讲师用户编号", required = true)
-	private Long lecturerUserNo;
+    /**
+     * 讲师编号
+     */
+    @ApiModelProperty(value = "讲师用户编号", required = true)
+    private Long lecturerUserNo;
 
 }

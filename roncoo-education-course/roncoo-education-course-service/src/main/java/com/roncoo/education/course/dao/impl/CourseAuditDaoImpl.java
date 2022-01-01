@@ -1,12 +1,12 @@
 package com.roncoo.education.course.dao.impl;
 
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseAudit;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseAuditExample;
-import com.roncoo.education.course.dao.CourseAuditDao;
-import com.roncoo.education.course.dao.impl.mapper.CourseAuditMapper;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
+import com.roncoo.education.course.dao.CourseAuditDao;
+import com.roncoo.education.course.dao.impl.mapper.CourseAuditMapper;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseAudit;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseAuditExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -25,8 +25,8 @@ public class CourseAuditDaoImpl implements CourseAuditDao {
     }
 
     public int updateById(CourseAudit record) {
-    	record.setGmtCreate(null);
-		record.setGmtModified(null);
+        record.setGmtCreate(null);
+        record.setGmtModified(null);
         return this.courseAuditMapper.updateByPrimaryKeySelective(record);
     }
 
@@ -44,16 +44,16 @@ public class CourseAuditDaoImpl implements CourseAuditDao {
         return new Page<CourseAudit>(count, totalPage, pageCurrent, pageSize, this.courseAuditMapper.selectByExample(example));
     }
 
-	@Override
-	public int updateAuditStatusBycourseId(Integer auditStatus, Long courseId) {
-		CourseAuditExample example = new CourseAuditExample();
-		CourseAuditExample.Criteria c = example.createCriteria();
-		c.andIdEqualTo(courseId);
-		CourseAudit record = new CourseAudit();
-		record.setId(courseId);
-		record.setAuditStatus(auditStatus);
-		record.setGmtCreate(null);
-		record.setGmtModified(null);
-		return this.courseAuditMapper.updateByExampleSelective(record, example);
-	}
+    @Override
+    public int updateAuditStatusBycourseId(Integer auditStatus, Long courseId) {
+        CourseAuditExample example = new CourseAuditExample();
+        CourseAuditExample.Criteria c = example.createCriteria();
+        c.andIdEqualTo(courseId);
+        CourseAudit record = new CourseAudit();
+        record.setId(courseId);
+        record.setAuditStatus(auditStatus);
+        record.setGmtCreate(null);
+        record.setGmtModified(null);
+        return this.courseAuditMapper.updateByExampleSelective(record, example);
+    }
 }

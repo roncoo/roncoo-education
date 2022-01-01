@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- *
  * @author forest
  */
 @Getter

@@ -69,7 +69,7 @@ public class UserExtExample {
     }
 
     public void setLimitStart(int limitStart) {
-        this.limitStart=limitStart;
+        this.limitStart = limitStart;
     }
 
     public int getLimitStart() {
@@ -77,7 +77,7 @@ public class UserExtExample {
     }
 
     public void setPageSize(int pageSize) {
-        this.pageSize=pageSize;
+        this.pageSize = pageSize;
     }
 
     public int getPageSize() {

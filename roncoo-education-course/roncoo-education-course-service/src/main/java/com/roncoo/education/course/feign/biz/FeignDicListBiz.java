@@ -1,16 +1,15 @@
 package com.roncoo.education.course.feign.biz;
 
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.course.dao.DicListDao;
+import com.roncoo.education.course.dao.impl.mapper.entity.DicList;
+import com.roncoo.education.course.dao.impl.mapper.entity.DicListExample;
 import com.roncoo.education.course.feign.interfaces.qo.DicListQO;
 import com.roncoo.education.course.feign.interfaces.vo.DicListVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.roncoo.education.course.dao.DicListDao;
-import com.roncoo.education.course.dao.impl.mapper.entity.DicList;
-import com.roncoo.education.course.dao.impl.mapper.entity.DicListExample;
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.PageUtil;
-import com.roncoo.education.common.core.tools.BeanUtil;
 
 /**
  * 数据字典明细表

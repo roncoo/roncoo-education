@@ -1,8 +1,8 @@
 package com.roncoo.education.user.dao;
 
+import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.user.dao.impl.mapper.entity.UserLogLogin;
 import com.roncoo.education.user.dao.impl.mapper.entity.UserLogLoginExample;
-import com.roncoo.education.common.core.base.Page;
 
 public interface UserLogLoginDao {
     int save(UserLogLogin record);

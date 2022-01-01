@@ -3,10 +3,10 @@
  */
 package com.roncoo.education.common.core.polyv;
 
-import java.io.Serializable;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * 获取课时code值实体类
@@ -17,21 +17,21 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class PolyvSign implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 课时vid
-	 */
-	private String vid;
+    /**
+     * 课时vid
+     */
+    private String vid;
 
-	/**
-	 * 播放ip
-	 */
-	private String ip;
+    /**
+     * 播放ip
+     */
+    private String ip;
 
-	/**
-	 * 用户编号
-	 */
-	private Long userNo;
+    /**
+     * 用户编号
+     */
+    private Long userNo;
 
 }

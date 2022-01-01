@@ -1,10 +1,10 @@
 package com.roncoo.education.course.dao;
 
-import java.util.List;
-
+import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.course.dao.impl.mapper.entity.Zone;
 import com.roncoo.education.course.dao.impl.mapper.entity.ZoneExample;
-import com.roncoo.education.common.core.base.Page;
+
+import java.util.List;
 
 public interface ZoneDao {
     int save(Zone record);
@@ -17,5 +17,5 @@ public interface ZoneDao {
 
     Page<Zone> listForPage(int pageCurrent, int pageSize, ZoneExample example);
 
-	List<Zone> listAllZone();
+    List<Zone> listAllZone();
 }

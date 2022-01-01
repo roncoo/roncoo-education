@@ -1,11 +1,11 @@
 package com.roncoo.education.system.feign.interfaces.vo;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
-import lombok.Data;
-import lombok.experimental.Accessors;
 
 /**
  * 站点导航

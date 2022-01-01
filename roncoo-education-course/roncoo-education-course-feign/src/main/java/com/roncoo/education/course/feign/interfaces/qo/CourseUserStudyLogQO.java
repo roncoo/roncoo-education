@@ -51,11 +51,11 @@ public class CourseUserStudyLogQO implements Serializable {
     private Long userNo;
 
     /**
-	 * 开始时间
-	 */
-	private String beginGmtCreate;
-	/**
-	 * 结束时间
-	 */
-	private String endGmtCreate;
+     * 开始时间
+     */
+    private String beginGmtCreate;
+    /**
+     * 结束时间
+     */
+    private String endGmtCreate;
 }

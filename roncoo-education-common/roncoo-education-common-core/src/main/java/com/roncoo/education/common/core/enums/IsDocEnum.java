@@ -15,10 +15,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum IsDocEnum {
 
-	YES(1, "存在"), NO(0, "否");
+    YES(1, "存在"), NO(0, "否");
 
-	private Integer code;
+    private Integer code;
 
-	private String desc;
+    private String desc;
 
 }

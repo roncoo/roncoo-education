@@ -1,17 +1,15 @@
 package com.roncoo.education.system.service.pc.resq;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /**
  * 头部导航
- *
  */
 @Data
 @Accessors(chain = true)
@@ -23,7 +21,7 @@ public class NavBarPageRESQ implements Serializable {
      * 主键
      */
     @ApiModelProperty(value = "主键id")
-	@JsonSerialize(using = ToStringSerializer.class)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
     /**
      * 状态(1有效, 0无效)

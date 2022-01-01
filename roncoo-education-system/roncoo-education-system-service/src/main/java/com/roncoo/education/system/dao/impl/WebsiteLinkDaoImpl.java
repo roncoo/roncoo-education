@@ -1,18 +1,17 @@
 package com.roncoo.education.system.dao.impl;
 
-import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample.Criteria;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.IdWorker;
 import com.roncoo.education.system.dao.WebsiteLinkDao;
 import com.roncoo.education.system.dao.impl.mapper.WebsiteLinkMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample;
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.PageUtil;
-import com.roncoo.education.common.core.tools.IdWorker;
-
-import java.util.List;
-
+import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class WebsiteLinkDaoImpl implements WebsiteLinkDao {
@@ -47,12 +46,12 @@ public class WebsiteLinkDaoImpl implements WebsiteLinkDao {
     }
 
     @Override
-	public List<WebsiteLink> listByStatusId(Integer statusId) {
-		WebsiteLinkExample example = new WebsiteLinkExample();
-		Criteria c = example.createCriteria();
-		c.andStatusIdEqualTo(statusId);
-		example.setOrderByClause(" sort desc, id desc ");
-		return this.websiteLinkMapper.selectByExample(example);
-	}
+    public List<WebsiteLink> listByStatusId(Integer statusId) {
+        WebsiteLinkExample example = new WebsiteLinkExample();
+        Criteria c = example.createCriteria();
+        c.andStatusIdEqualTo(statusId);
+        example.setOrderByClause(" sort desc, id desc ");
+        return this.websiteLinkMapper.selectByExample(example);
+    }
 
 }

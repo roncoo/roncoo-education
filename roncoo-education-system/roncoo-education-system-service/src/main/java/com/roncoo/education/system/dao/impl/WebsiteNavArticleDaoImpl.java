@@ -1,18 +1,17 @@
 package com.roncoo.education.system.dao.impl;
 
-import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavArticleExample.Criteria;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.IdWorker;
 import com.roncoo.education.system.dao.WebsiteNavArticleDao;
 import com.roncoo.education.system.dao.impl.mapper.WebsiteNavArticleMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavArticle;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavArticleExample;
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.PageUtil;
-import com.roncoo.education.common.core.tools.IdWorker;
-
-import java.util.List;
-
+import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavArticleExample.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class WebsiteNavArticleDaoImpl implements WebsiteNavArticleDao {
@@ -47,26 +46,26 @@ public class WebsiteNavArticleDaoImpl implements WebsiteNavArticleDao {
     }
 
     @Override
-	public WebsiteNavArticle getByNavId(Long navId) {
-		WebsiteNavArticleExample example = new WebsiteNavArticleExample();
-		example.createCriteria().andNavIdEqualTo(navId);
-		List<WebsiteNavArticle> list = this.websiteNavArticleMapper.selectByExampleWithBLOBs(example);
-		if (list.isEmpty()) {
-			return null;
-		}
-		return list.get(0);
-	}
+    public WebsiteNavArticle getByNavId(Long navId) {
+        WebsiteNavArticleExample example = new WebsiteNavArticleExample();
+        example.createCriteria().andNavIdEqualTo(navId);
+        List<WebsiteNavArticle> list = this.websiteNavArticleMapper.selectByExampleWithBLOBs(example);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
 
     @Override
-	public WebsiteNavArticle getByNavIdAndStatusId(Long navId, Integer statusId) {
-		WebsiteNavArticleExample example = new WebsiteNavArticleExample();
-		Criteria C = example.createCriteria();
-		C.andNavIdEqualTo(navId);
-		C.andStatusIdEqualTo(statusId);
-		List<WebsiteNavArticle> list = this.websiteNavArticleMapper.selectByExampleWithBLOBs(example);
-		if (list.isEmpty()) {
-			return null;
-		}
-		return list.get(0);
-	}
+    public WebsiteNavArticle getByNavIdAndStatusId(Long navId, Integer statusId) {
+        WebsiteNavArticleExample example = new WebsiteNavArticleExample();
+        Criteria C = example.createCriteria();
+        C.andNavIdEqualTo(navId);
+        C.andStatusIdEqualTo(statusId);
+        List<WebsiteNavArticle> list = this.websiteNavArticleMapper.selectByExampleWithBLOBs(example);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
 }

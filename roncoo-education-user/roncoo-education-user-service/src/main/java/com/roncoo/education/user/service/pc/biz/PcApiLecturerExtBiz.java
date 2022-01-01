@@ -1,18 +1,18 @@
 package com.roncoo.education.user.service.pc.biz;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.roncoo.education.user.service.auth.bo.AuthLecturerExtViewBO;
-import com.roncoo.education.user.service.auth.bo.AuthUserExtBankBO;
-import com.roncoo.education.user.service.auth.dto.AuthLecturerExtViewDTO;
-import com.roncoo.education.user.dao.LecturerExtDao;
-import com.roncoo.education.user.dao.UserExtDao;
-import com.roncoo.education.user.dao.impl.mapper.entity.LecturerExt;
-import com.roncoo.education.user.dao.impl.mapper.entity.UserExt;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.SignUtil;
+import com.roncoo.education.user.dao.LecturerExtDao;
+import com.roncoo.education.user.dao.UserExtDao;
+import com.roncoo.education.user.dao.impl.mapper.entity.LecturerExt;
+import com.roncoo.education.user.dao.impl.mapper.entity.UserExt;
+import com.roncoo.education.user.service.auth.bo.AuthLecturerExtViewBO;
+import com.roncoo.education.user.service.auth.bo.AuthUserExtBankBO;
+import com.roncoo.education.user.service.auth.dto.AuthLecturerExtViewDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;

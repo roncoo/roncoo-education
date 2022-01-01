@@ -3,9 +3,10 @@
  */
 package com.roncoo.education.common.core.polyv;
 
-import java.io.Serializable;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * 课时信息获取sign值

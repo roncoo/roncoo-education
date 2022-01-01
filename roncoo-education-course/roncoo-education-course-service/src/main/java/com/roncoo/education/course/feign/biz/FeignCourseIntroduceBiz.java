@@ -1,16 +1,15 @@
 package com.roncoo.education.course.feign.biz;
 
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.course.dao.CourseIntroduceDao;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseIntroduce;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseIntroduceExample;
 import com.roncoo.education.course.feign.interfaces.qo.CourseIntroduceQO;
 import com.roncoo.education.course.feign.interfaces.vo.CourseIntroduceVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.roncoo.education.course.dao.CourseIntroduceDao;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseIntroduce;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseIntroduceExample;
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.PageUtil;
-import com.roncoo.education.common.core.tools.BeanUtil;
 
 /**
  * 课程介绍信息

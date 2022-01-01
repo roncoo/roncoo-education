@@ -2,10 +2,10 @@ package com.roncoo.education.course.dao.impl.mapper;
 
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseCategory;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseCategoryExample;
-
-import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface CourseCategoryMapper {

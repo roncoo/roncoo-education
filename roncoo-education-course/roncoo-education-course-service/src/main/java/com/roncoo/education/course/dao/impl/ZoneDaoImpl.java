@@ -1,17 +1,16 @@
 package com.roncoo.education.course.dao.impl;
 
-import com.roncoo.education.course.dao.impl.mapper.entity.Zone;
-import com.roncoo.education.course.dao.impl.mapper.entity.ZoneExample;
-import com.roncoo.education.course.dao.ZoneDao;
-import com.roncoo.education.course.dao.impl.mapper.ZoneMapper;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
-
-import java.util.List;
-
+import com.roncoo.education.course.dao.ZoneDao;
+import com.roncoo.education.course.dao.impl.mapper.ZoneMapper;
+import com.roncoo.education.course.dao.impl.mapper.entity.Zone;
+import com.roncoo.education.course.dao.impl.mapper.entity.ZoneExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class ZoneDaoImpl implements ZoneDao {
@@ -45,10 +44,10 @@ public class ZoneDaoImpl implements ZoneDao {
         return new Page<Zone>(count, totalPage, pageCurrent, pageSize, this.zoneMapper.selectByExample(example));
     }
 
-	@Override
-	public List<Zone> listAllZone() {
-		ZoneExample example = new ZoneExample();
-		List<Zone> list= this.zoneMapper.selectByExample(example);
-		return list;
-	}
+    @Override
+    public List<Zone> listAllZone() {
+        ZoneExample example = new ZoneExample();
+        List<Zone> list = this.zoneMapper.selectByExample(example);
+        return list;
+    }
 }

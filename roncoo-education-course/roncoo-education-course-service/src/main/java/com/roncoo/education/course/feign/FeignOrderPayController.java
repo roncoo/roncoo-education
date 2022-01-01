@@ -1,16 +1,15 @@
 package com.roncoo.education.course.feign;
 
+import com.roncoo.education.common.core.base.BaseController;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.course.feign.biz.FeignOrderPayBiz;
 import com.roncoo.education.course.feign.interfaces.IFeignOrderPay;
 import com.roncoo.education.course.feign.interfaces.qo.OrderPayQO;
 import com.roncoo.education.course.feign.interfaces.vo.OrderPayVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import com.roncoo.education.course.feign.biz.FeignOrderPayBiz;
-import com.roncoo.education.common.core.base.BaseController;
-import com.roncoo.education.common.core.base.Page;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 订单支付信息表

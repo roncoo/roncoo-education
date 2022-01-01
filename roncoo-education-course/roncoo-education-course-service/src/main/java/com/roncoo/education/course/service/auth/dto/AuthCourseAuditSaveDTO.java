@@ -1,13 +1,12 @@
 package com.roncoo.education.course.service.auth.dto;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * @author WY
@@ -16,7 +15,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class AuthCourseAuditSaveDTO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * 课程ID

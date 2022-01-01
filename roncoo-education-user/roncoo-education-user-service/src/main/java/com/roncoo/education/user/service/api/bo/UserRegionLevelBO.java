@@ -3,11 +3,11 @@
  */
 package com.roncoo.education.user.service.api.bo;
 
-import java.io.Serializable;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -20,12 +20,12 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class UserRegionLevelBO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 级别
-	 */
-	@ApiModelProperty(value = "级别", required = true)
-	private Integer level;
+    /**
+     * 级别
+     */
+    @ApiModelProperty(value = "级别", required = true)
+    private Integer level;
 
 }

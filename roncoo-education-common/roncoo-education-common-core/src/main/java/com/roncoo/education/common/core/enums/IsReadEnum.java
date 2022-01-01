@@ -13,10 +13,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum IsReadEnum {
 
-	YES(1, "已读"), NO(0, "未读");
+    YES(1, "已读"), NO(0, "未读");
 
-	private Integer code;
+    private Integer code;
 
-	private String desc;
+    private String desc;
 
 }

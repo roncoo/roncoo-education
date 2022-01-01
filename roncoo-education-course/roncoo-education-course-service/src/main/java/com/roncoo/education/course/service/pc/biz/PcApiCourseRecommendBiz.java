@@ -1,6 +1,12 @@
 package com.roncoo.education.course.service.pc.biz;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.ResultEnum;
+import com.roncoo.education.common.core.enums.StatusIdEnum;
+import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.course.dao.CourseCategoryDao;
 import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.CourseRecommendDao;
@@ -12,12 +18,6 @@ import com.roncoo.education.course.dao.impl.mapper.entity.CourseRecommendExample
 import com.roncoo.education.course.service.pc.req.*;
 import com.roncoo.education.course.service.pc.resq.CourseRecommendPageRESQ;
 import com.roncoo.education.course.service.pc.resq.CourseRecommendViewRESQ;
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.PageUtil;
-import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.core.enums.ResultEnum;
-import com.roncoo.education.common.core.enums.StatusIdEnum;
-import com.roncoo.education.common.core.tools.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

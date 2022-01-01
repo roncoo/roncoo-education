@@ -1,16 +1,15 @@
 package com.roncoo.education.course.service.auth.dto;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 讲师信息
@@ -27,7 +26,7 @@ public class AuthLecturerDTO implements Serializable {
      * 主键
      */
     @ApiModelProperty(value = "课程ID")
-	@JsonSerialize(using = ToStringSerializer.class)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
     /**
      * 创建时间
@@ -55,7 +54,7 @@ public class AuthLecturerDTO implements Serializable {
      * 讲师用户编号
      */
     @ApiModelProperty(value = "讲师用户编号")
-	@JsonSerialize(using = ToStringSerializer.class)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long lecturerUserNo;
     /**
      * 讲师名称

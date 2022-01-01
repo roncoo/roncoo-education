@@ -1,12 +1,12 @@
 package com.roncoo.education.course.dao.impl;
 
-import com.roncoo.education.course.dao.impl.mapper.entity.Dic;
-import com.roncoo.education.course.dao.impl.mapper.entity.DicExample;
-import com.roncoo.education.course.dao.DicDao;
-import com.roncoo.education.course.dao.impl.mapper.DicMapper;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
+import com.roncoo.education.course.dao.DicDao;
+import com.roncoo.education.course.dao.impl.mapper.DicMapper;
+import com.roncoo.education.course.dao.impl.mapper.entity.Dic;
+import com.roncoo.education.course.dao.impl.mapper.entity.DicExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
