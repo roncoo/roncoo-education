@@ -264,7 +264,6 @@ public class PcApiCourseAuditBiz extends BaseBiz {
         if (ObjectUtil.isNull(courseAudit)) {
             return Result.error("课程不存在");
         }
-
         // 根据课程ID查询课时信息集合
         List<CourseChapterPeriodAudit> periodAuditList = courseChapterPeriodAuditDao.listByCourseId(courseAudit.getId());
 

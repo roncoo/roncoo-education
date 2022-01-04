@@ -149,7 +149,6 @@ public class PcApiCourseBiz extends BaseBiz {
                 return Result.error(ResultEnum.COURSE_UPDATE_FAIL);
             }
         }
-
         if (StringUtils.hasText(req.getIntroduce())) {
             // 更新课程介绍
             CourseIntroduce courseIntroduce = courseIntroduceDao.getById(course.getIntroduceId());
