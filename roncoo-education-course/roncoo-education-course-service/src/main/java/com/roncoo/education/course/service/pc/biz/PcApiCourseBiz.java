@@ -2,13 +2,13 @@ package com.roncoo.education.course.service.pc.biz;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.PageUtil;
-import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.base.*;
 import com.roncoo.education.common.core.enums.IsFreeEnum;
+import com.roncoo.education.common.core.enums.IsPutawayEnum;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.es.EsCourse;
 import com.roncoo.education.course.dao.*;
 import com.roncoo.education.course.dao.impl.mapper.entity.*;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseExample.Criteria;
@@ -20,6 +20,10 @@ import com.roncoo.education.course.service.pc.resq.*;
 import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
 import com.roncoo.education.user.feign.interfaces.vo.LecturerVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
+import org.springframework.data.elasticsearch.core.query.IndexQuery;
+import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -31,7 +35,7 @@ import java.util.List;
  * 课程信息
  */
 @Component
-public class PcApiCourseBiz {
+public class PcApiCourseBiz extends BaseBiz {
 
     @Autowired
     private IFeignLecturer bossLecturer;
@@ -52,7 +56,8 @@ public class PcApiCourseBiz {
     private CourseCategoryDao courseCategoryDao;
     @Autowired
     private CourseChapterPeriodDao courseChapterPeriodDao;
-
+    @Autowired
+    private ElasticsearchRestTemplate elasticsearchRestTemplate;
     /**
      * 分页列出
      *
@@ -168,7 +173,50 @@ public class PcApiCourseBiz {
             courseIntroduceAudit.setIntroduce(req.getIntroduce());
             courseIntroduceAuditDao.updateById(courseIntroduceAudit);
         }
+
+        if (IsPutawayEnum.YES.getCode().equals(req.getIsPutaway()) && StatusIdEnum.YES.getCode().equals(req.getStatusId())) {
+            courseAddEs(dao.getById(course.getId()));
+        } else {
+            courseDelEs(course.getId());
+        }
+
+
         return Result.success(result);
+    }
+
+    /**
+     * 课程添加ES
+     *
+     * @param course 课程信息
+     */
+    private void courseAddEs(Course course) {
+        LecturerVO lecturer = bossLecturer.getByLecturerUserNo(course.getLecturerUserNo());
+        if (ObjectUtil.isNull(lecturer)) {
+            throw new BaseException("讲师不存在");
+        }
+        try {
+            course.setIsPutaway(IsPutawayEnum.YES.getCode());
+            course.setStatusId(StatusIdEnum.YES.getCode());
+            EsCourse esCourse = BeanUtil.copyProperties(course, EsCourse.class);
+            esCourse.setLecturerName(lecturer.getLecturerName());
+            IndexQuery query = new IndexQueryBuilder().withObject(esCourse).build();
+            elasticsearchRestTemplate.index(query, IndexCoordinates.of(EsCourse.COURSE));
+        } catch (Exception e) {
+            logger.error("elasticsearch更新数据失败! 原因={}", e);
+        }
+    }
+
+    /**
+     * 课程删除ES
+     *
+     * @param courseId 课程ID
+     */
+    private void courseDelEs(Long courseId) {
+        try {
+            elasticsearchRestTemplate.delete(courseId.toString(), EsCourse.class);
+        } catch (Exception e) {
+            logger.error("Elasticsearch删除数据失败", e);
+        }
     }
 
     /**
