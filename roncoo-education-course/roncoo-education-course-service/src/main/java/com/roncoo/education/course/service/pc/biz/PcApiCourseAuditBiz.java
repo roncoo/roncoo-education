@@ -4,12 +4,10 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.aliyun.Aliyun;
 import com.roncoo.education.common.core.aliyun.AliyunUtil;
-import com.roncoo.education.common.core.base.BaseException;
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.PageUtil;
-import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.base.*;
 import com.roncoo.education.common.core.enums.*;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.es.EsCourse;
 import com.roncoo.education.course.dao.*;
 import com.roncoo.education.course.dao.impl.mapper.entity.*;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseAuditExample.Criteria;
@@ -19,8 +17,13 @@ import com.roncoo.education.system.feign.interfaces.IFeignSys;
 import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
 import com.roncoo.education.user.feign.interfaces.vo.LecturerVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
+import org.springframework.data.elasticsearch.core.query.IndexQuery;
+import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
@@ -30,7 +33,7 @@ import java.util.List;
  * 课程信息-审核
  */
 @Component
-public class PcApiCourseAuditBiz {
+public class PcApiCourseAuditBiz extends BaseBiz {
 
     @Autowired
     private IFeignLecturer bossLecturer;
@@ -55,6 +58,9 @@ public class PcApiCourseAuditBiz {
     private CourseIntroduceDao courseIntroduceDao;
     @Autowired
     private CourseIntroduceAuditDao courseIntroduceAuditDao;
+
+    @Autowired
+    private ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     public Result<Page<CourseAuditPageRESQ>> list(CourseAuditPageREQ req) {
         CourseAuditExample example = new CourseAuditExample();
@@ -258,7 +264,6 @@ public class PcApiCourseAuditBiz {
         if (ObjectUtil.isNull(courseAudit)) {
             return Result.error("课程不存在");
         }
-
         // 根据课程ID查询课时信息集合
         List<CourseChapterPeriodAudit> periodAuditList = courseChapterPeriodAuditDao.listByCourseId(courseAudit.getId());
 
@@ -314,9 +319,50 @@ public class PcApiCourseAuditBiz {
         CourseAudit audit = BeanUtil.copyProperties(req, CourseAudit.class);
         int resultNum = dao.updateById(audit);
         if (resultNum < 0) {
+            if (IsPutawayEnum.YES.getCode().equals(courseAudit.getIsPutaway()) && StatusIdEnum.YES.getCode().equals(courseAudit.getStatusId())) {
+                courseAddEs(course);
+            } else {
+                courseDelEs(course.getId());
+            }
+
             return Result.error(ResultEnum.COURSE_AUDIT_FAIL);
         }
         return Result.success(resultNum);
+    }
+
+    /**
+     * 课程添加ES
+     *
+     * @param course 课程信息
+     */
+    private void courseAddEs(Course course) {
+        LecturerVO lecturer = bossLecturer.getByLecturerUserNo(course.getLecturerUserNo());
+        if (ObjectUtil.isNull(lecturer)) {
+            throw new BaseException("讲师不存在");
+        }
+        try {
+            course.setIsPutaway(IsPutawayEnum.YES.getCode());
+            course.setStatusId(StatusIdEnum.YES.getCode());
+            EsCourse esCourse = BeanUtil.copyProperties(course, EsCourse.class);
+            esCourse.setLecturerName(lecturer.getLecturerName());
+            IndexQuery query = new IndexQueryBuilder().withObject(esCourse).build();
+            elasticsearchRestTemplate.index(query, IndexCoordinates.of(EsCourse.COURSE));
+        } catch (Exception e) {
+            logger.error("elasticsearch更新数据失败! 原因={}", e);
+        }
+    }
+
+    /**
+     * 课程删除ES
+     *
+     * @param courseId 课程ID
+     */
+    private void courseDelEs(Long courseId) {
+        try {
+            elasticsearchRestTemplate.delete(courseId.toString(), EsCourse.class);
+        } catch (Exception e) {
+            logger.error("Elasticsearch删除数据失败", e);
+        }
     }
 
     // 审核章节
