@@ -27,7 +27,7 @@ public class PcApiSysEnumController extends BaseController {
         if (sysEnumBO.getEnumName() == null) {
             return Result.error("枚举[" + sysEnumBO.getEnumName() + "]不存在");
         }
-        String className = "com.roncoo.education.util.enums." + sysEnumBO.getEnumName();
+        String className = "com.roncoo.education.common.core.enums." + sysEnumBO.getEnumName();
         try {
             Class clazz = Class.forName(className);
             if (clazz == null) {
