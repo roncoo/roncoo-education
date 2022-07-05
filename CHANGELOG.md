@@ -7,6 +7,7 @@
 4. 切换网关组件为Spring CLoud Gateway
 5. 增加nacos_cofig.zip配置，nacos可以一键导入
 6. 将file_storage的表file_type修改为file_classify
+7. 网关增加聚合接口文档，更方便接口文档的查看和对接
 
 ---
 ###### v9.0.0-RELEASE
