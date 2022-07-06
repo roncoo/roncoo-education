@@ -45,7 +45,7 @@ public class EsCourse implements Serializable {
     /**
      * 课程封面
      */
-    private String courselog;
+    private String courseLogo;
     /**
      * 课程名称
      */
@@ -139,12 +139,12 @@ public class EsCourse implements Serializable {
         this.lecturerName = lecturerName;
     }
 
-    public String getCourselog() {
-        return courselog;
+    public String getCourseLogo() {
+        return courseLogo;
     }
 
-    public void setCourselog(String courselog) {
-        this.courselog = courselog;
+    public void setCourseLogo(String courseLogo) {
+        this.courseLogo = courseLogo;
     }
 
     public BigDecimal getCourseOriginal() {
@@ -165,7 +165,7 @@ public class EsCourse implements Serializable {
 
     @Override
     public String toString() {
-        return "EsCourse [id=" + id + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", sort=" + sort + ", lecturerName=" + lecturerName + ", courseNo=" + courseNo + ", courselog=" + courselog + ", courseName=" + courseName + ", courseSort=" + courseSort + ", courseOriginal="
+        return "EsCourse [id=" + id + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", sort=" + sort + ", lecturerName=" + lecturerName + ", courseNo=" + courseNo + ", courseLogo=" + courseLogo + ", courseName=" + courseName + ", courseSort=" + courseSort + ", courseOriginal="
                 + courseOriginal + ", courseDiscount=" + courseDiscount + ", isFree=" + isFree + "]";
     }
 
