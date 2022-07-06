@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  * 课程信息
  */
 @RestController
-@RequestMapping(value = "/course/pc/course")
+@RequestMapping(value = "/course/pc/course/es/add")
 public class PcApiCourseController extends BaseController {
 
     @Autowired
