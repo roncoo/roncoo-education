@@ -50,4 +50,13 @@ public interface CourseDao {
      * @return
      */
     List<Course> listBycategoryId2AndStatusId(Long categoryId2, Integer statusId);
+
+    /**
+     * 根据状态获取课程信息
+     *
+     * @param isPutaway
+     * @param statusId
+     * @return
+     */
+    List<Course> listByIsPutawayAndStatusId(Integer isPutaway, Integer statusId);
 }

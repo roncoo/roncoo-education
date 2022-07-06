@@ -87,4 +87,13 @@ public class CourseDaoImpl implements CourseDao {
         example.setOrderByClause("sort desc,id desc");
         return this.courseMapper.selectByExample(example);
     }
+
+    @Override
+    public List<Course> listByIsPutawayAndStatusId(Integer isPutaway, Integer statusId) {
+        CourseExample example = new CourseExample();
+        CourseExample.Criteria c = example.createCriteria();
+        c.andIsPutawayEqualTo(isPutaway);
+        c.andStatusIdEqualTo(statusId);
+        return this.courseMapper.selectByExample(example);
+    }
 }

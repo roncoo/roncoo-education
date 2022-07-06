@@ -13,16 +13,13 @@ import com.roncoo.education.course.service.pc.resq.CoursePageRESQ;
 import com.roncoo.education.course.service.pc.resq.CourseViewRESQ;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 课程信息
  */
 @RestController
-@RequestMapping(value = "/course/pc/course")
+@RequestMapping(value = "/course/pc/course/es/add")
 public class PcApiCourseController extends BaseController {
 
     @Autowired
@@ -74,6 +71,12 @@ public class PcApiCourseController extends BaseController {
     @RequestMapping(value = "/view", method = RequestMethod.POST)
     public Result<CourseViewRESQ> view(@RequestBody CourseViewREQ courseViewREQ) {
         return biz.view(courseViewREQ);
+    }
+
+    @ApiOperation(value = "一键导入ES", notes = "一键导入ES")
+    @PostMapping(value = "/es/add")
+    public Result<String> addEs() {
+        return biz.addEs();
     }
 
 }

@@ -57,6 +57,11 @@ public class FeignLecturerController extends BaseController implements IFeignLec
         return biz.listAllForLecturer();
     }
 
+    @Override
+    public List<LecturerVO> listByLecturerUserNos(LecturerQO lecturerQO) {
+        return biz.listByLecturerUserNos(lecturerQO);
+    }
+
     /***
      * 根据讲师用户编号查找讲师信息
      */

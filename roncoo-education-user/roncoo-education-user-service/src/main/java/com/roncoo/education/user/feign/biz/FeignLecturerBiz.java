@@ -106,4 +106,9 @@ public class FeignLecturerBiz {
         List<Lecturer> lecturerList = dao.listByStatusId(StatusIdEnum.YES.getCode());
         return PageUtil.copyList(lecturerList, LecturerVO.class);
     }
+
+    public List<LecturerVO> listByLecturerUserNos(LecturerQO lecturerQO) {
+        List<Lecturer> lecturerList = dao.listByLecturerUserNos(lecturerQO.getLecturerUserNos());
+        return PageUtil.copyList(lecturerList, LecturerVO.class);
+    }
 }

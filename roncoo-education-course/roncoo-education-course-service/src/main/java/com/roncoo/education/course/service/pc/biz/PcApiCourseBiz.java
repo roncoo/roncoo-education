@@ -18,6 +18,7 @@ import com.roncoo.education.course.service.pc.req.CourseUpdateREQ;
 import com.roncoo.education.course.service.pc.req.CourseViewREQ;
 import com.roncoo.education.course.service.pc.resq.*;
 import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
+import com.roncoo.education.user.feign.interfaces.qo.LecturerQO;
 import com.roncoo.education.user.feign.interfaces.vo.LecturerVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
@@ -29,7 +30,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 课程信息
@@ -58,6 +63,7 @@ public class PcApiCourseBiz extends BaseBiz {
     private CourseChapterPeriodDao courseChapterPeriodDao;
     @Autowired
     private ElasticsearchRestTemplate elasticsearchRestTemplate;
+
     /**
      * 分页列出
      *
@@ -298,4 +304,38 @@ public class PcApiCourseBiz extends BaseBiz {
         return Result.success(resq);
     }
 
+    public Result<String> addEs() {
+        // 查询全部，删除全部索引重建
+        List<Course> courseList = dao.listByIsPutawayAndStatusId(IsPutawayEnum.YES.getCode(), StatusIdEnum.YES.getCode());
+        if (CollectionUtil.isEmpty(courseList)) {
+            return Result.error("暂无导入课程");
+        }
+        List<Long> lecturerUserNos = courseList.stream().map(Course::getLecturerUserNo).collect(Collectors.toList());
+        Map<Long, LecturerVO> lecturerNameMap = new HashMap<>();
+        LecturerQO lecturerQO = new LecturerQO();
+        lecturerQO.setLecturerUserNos(lecturerUserNos);
+        List<LecturerVO> lecturerVOList = bossLecturer.listByLecturerUserNos(lecturerQO);
+        if (CollectionUtil.isNotEmpty(lecturerVOList)) {
+            lecturerNameMap = lecturerVOList.stream().collect(Collectors.toMap(LecturerVO::getLecturerUserNo, item -> item));
+        }
+        List<IndexQuery> queries = new ArrayList<>();
+        try {
+            // 查询讲师名称并插入es
+            for (Course course : courseList) {
+                EsCourse esCourse = BeanUtil.copyProperties(course, EsCourse.class);
+                LecturerVO lecturerVO = lecturerNameMap.get(course.getLecturerUserNo());
+                if (ObjectUtil.isNotNull(lecturerVO) && !StringUtils.isEmpty(lecturerVO.getLecturerName())) {
+                    esCourse.setLecturerName(lecturerVO.getLecturerName());
+                }
+                IndexQuery query = new IndexQueryBuilder().withObject(esCourse).build();
+                queries.add(query);
+            }
+            elasticsearchRestTemplate.indexOps(EsCourse.class).delete();
+            elasticsearchRestTemplate.bulkIndex(queries, IndexCoordinates.of(EsCourse.COURSE));
+        } catch (Exception e) {
+            logger.warn("elasticsearch更新数据失败", e);
+            return Result.error("导入失败");
+        }
+        return Result.success("导入成功");
+    }
 }
