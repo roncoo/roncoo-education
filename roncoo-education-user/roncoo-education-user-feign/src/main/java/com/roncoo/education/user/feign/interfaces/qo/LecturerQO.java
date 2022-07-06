@@ -6,6 +6,7 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 讲师信息
@@ -78,4 +79,8 @@ public class LecturerQO implements Serializable {
      * 讲师分成比例
      */
     private BigDecimal lecturerProportion;
+    /**
+     * 讲师编号集合
+     */
+    private List<Long> lecturerUserNos;
 }

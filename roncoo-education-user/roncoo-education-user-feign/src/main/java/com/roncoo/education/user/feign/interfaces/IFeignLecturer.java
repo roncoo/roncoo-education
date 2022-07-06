@@ -47,5 +47,13 @@ public interface IFeignLecturer {
      */
     @RequestMapping(value = "/feign/user/lecturer/listAllForLecturer", method = RequestMethod.POST)
     List<LecturerVO> listAllForLecturer();
+    /**
+     * 根据讲师编号集合获取讲师信息
+     *
+     * @param lecturerQO
+     * @return
+     */
+    @RequestMapping(value = "/lecturer/listByLecturerUserNos", method = RequestMethod.POST)
+    List<LecturerVO> listByLecturerUserNos(@RequestBody LecturerQO lecturerQO);
 
 }

@@ -93,4 +93,12 @@ public class LecturerDaoImpl implements LecturerDao {
         }
         return resultList.get(0);
     }
+
+    @Override
+    public List<Lecturer> listByLecturerUserNos(List<Long> lecturerUserNos) {
+        LecturerExample example = new LecturerExample();
+        LecturerExample.Criteria criteria = example.createCriteria();
+        criteria.andLecturerUserNoIn(lecturerUserNos);
+        return this.lecturerMapper.selectByExample(example);
+    }
 }

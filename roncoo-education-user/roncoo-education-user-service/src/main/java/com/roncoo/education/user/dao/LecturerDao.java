@@ -46,4 +46,12 @@ public interface LecturerDao {
      * @author WY
      */
     Lecturer getByLecturerUserNoAndStatusId(Long lecturerUserNo, Integer statusId);
+
+    /**
+     * 根据讲师编号集合获取讲师信息
+     *
+     * @param lecturerUserNos
+     * @return
+     */
+    List<Lecturer> listByLecturerUserNos(List<Long> lecturerUserNos);
 }
