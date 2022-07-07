@@ -40,23 +40,22 @@
 > roncoo-education是后台工程，核心框架：Spring Cloud Alibaba 
 
 ##### 前端门户工程(roncoo-education-web)： [码云地址](https://gitee.com/roncoocom/roncoo-education-web) | [Github地址](https://github.com/roncoo/roncoo-education-web) | [CodeChina](https://codechina.csdn.net/roncoocom/roncoo-education-web)
-> roncoo-education-web是前端门户工程，核心框架：Vuejs + Nuxt.js  
+> roncoo-education-web是前端门户工程，核心框架：Vuejs + Nuxt.js
 
 ##### 后台管理工程(roncoo-education-admin)：[码云地址](https://gitee.com/roncoocom/roncoo-education-admin) | [Github地址](https://github.com/roncoo/roncoo-education-admin) | [CodeChina](https://codechina.csdn.net/roncoocom/roncoo-education-admin)
+
 > roncoo-education-admin是后台管理工程，核心框架：vue-element-admin
 
 ### 演示地址
-* [前端门户演示地址：https://eduos.roncoo.net/](https://eduos.roncoo.net/) 
-* [后台管理演示地址：https://eduos.roncoo.net/admin](https://eduos.roncoo.net/admin) 
-* [项目帮助文档地址：https://eduos.roncoo.net/doc](https://eduos.roncoo.net/doc) 
 
-### 官方QQ群（加群免费获取sql脚本）
-<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=BpOlarqoFOUReMfHsinOBDrFJhVln6LO&jump_from=webapi"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课⑪" title="在线教育系统-领课⑪"> 624670981</a> 可加
+* [前端门户演示地址：https://eduos.roncoo.net/](https://eduos.roncoo.net/)
+* [后台管理演示地址：https://eduos.roncoo.net/admin](https://eduos.roncoo.net/admin)
+* [项目帮助文档地址：https://eduos.roncoo.net/doc](https://eduos.roncoo.net/doc)
 
-> QQ群：1028579521(已满)  
-> QQ群：532451240(已满)  QQ群：903738971(已满)   QQ群：74876271 (已满)  
-> QQ群：774890501(已满)  QQ群：702189511(已满)   QQ群：826617734(已满)  
-> QQ群：154407415(已满)  QQ群：284915592(已满)   QQ群：703455569(已满)  
+### 官方开源群（加群免费获取sql脚本）
+
+<img src="qun.jpg" alt="领课教育系统-官方开源群"/>
 
 ## 项目推荐
+
 ##### 龙果支付系统(roncoo-pay)：[码云地址](https://gitee.com/roncoocom/roncoo-pay) | [Github地址](https://github.com/roncoo/roncoo-pay)
