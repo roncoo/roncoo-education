@@ -4,10 +4,7 @@ import com.roncoo.education.common.core.base.BaseController;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.service.pc.biz.PcApiCourseBiz;
-import com.roncoo.education.course.service.pc.req.CourseGetREQ;
-import com.roncoo.education.course.service.pc.req.CoursePageREQ;
-import com.roncoo.education.course.service.pc.req.CourseUpdateREQ;
-import com.roncoo.education.course.service.pc.req.CourseViewREQ;
+import com.roncoo.education.course.service.pc.req.*;
 import com.roncoo.education.course.service.pc.resq.CourseGetRESQ;
 import com.roncoo.education.course.service.pc.resq.CoursePageRESQ;
 import com.roncoo.education.course.service.pc.resq.CourseViewRESQ;
@@ -24,6 +21,18 @@ public class PcApiCourseController extends BaseController {
 
     @Autowired
     private PcApiCourseBiz biz;
+
+    /**
+     * 课程更新接口
+     *
+     * @param courseUpdateREQ
+     * @return
+     */
+    @ApiOperation(value = "课程添加接口", notes = "课程添加接口")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public Result<Integer> add(@RequestBody CourseSaveREQ courseSaveREQ) {
+        return biz.save(courseSaveREQ);
+    }
 
     /**
      * 课程分页列出接口

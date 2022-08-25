@@ -3,19 +3,13 @@ package com.roncoo.education.course.service.pc.biz;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.*;
-import com.roncoo.education.common.core.enums.IsFreeEnum;
-import com.roncoo.education.common.core.enums.IsPutawayEnum;
-import com.roncoo.education.common.core.enums.ResultEnum;
-import com.roncoo.education.common.core.enums.StatusIdEnum;
+import com.roncoo.education.common.core.enums.*;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.es.EsCourse;
 import com.roncoo.education.course.dao.*;
 import com.roncoo.education.course.dao.impl.mapper.entity.*;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseExample.Criteria;
-import com.roncoo.education.course.service.pc.req.CourseGetREQ;
-import com.roncoo.education.course.service.pc.req.CoursePageREQ;
-import com.roncoo.education.course.service.pc.req.CourseUpdateREQ;
-import com.roncoo.education.course.service.pc.req.CourseViewREQ;
+import com.roncoo.education.course.service.pc.req.*;
 import com.roncoo.education.course.service.pc.resq.*;
 import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
 import com.roncoo.education.user.feign.interfaces.qo.LecturerQO;
@@ -63,6 +57,50 @@ public class PcApiCourseBiz extends BaseBiz {
     private CourseChapterPeriodDao courseChapterPeriodDao;
     @Autowired
     private ElasticsearchRestTemplate elasticsearchRestTemplate;
+
+    /**
+     * 先添加到审核表，再添加到课程表
+     *
+     * @param courseSaveREQ
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public Result<Integer> save(CourseSaveREQ courseSaveREQ) {
+        // 审核表
+        if (StringUtils.isEmpty(courseSaveREQ.getLecturerUserNo())) {
+            return Result.error("请选择讲师");
+        }
+        // 原价小于0
+        if (courseSaveREQ.getCourseOriginal().compareTo(BigDecimal.valueOf(0)) == -1) {
+            return Result.error("售价不能小于0");
+        }
+        // 课程收费但价格为空
+        if (IsFreeEnum.CHARGE.getCode().equals(courseSaveREQ.getIsFree())) {
+            if (courseSaveREQ.getCourseOriginal() == null) {
+                return Result.error("价格不能为空");
+            }
+        }
+
+        CourseIntroduceAudit courseIntroduceAudit = new CourseIntroduceAudit();
+        courseIntroduceAudit.setIntroduce(courseSaveREQ.getIntroduce());
+        courseIntroduceAuditDao.save(courseIntroduceAudit);
+        CourseAudit record = BeanUtil.copyProperties(courseSaveREQ, CourseAudit.class);
+        if (IsFreeEnum.FREE.getCode().equals(courseSaveREQ.getIsFree())) {
+            // 课程免费就设置价格为0(原价、优惠价)
+            record.setCourseOriginal(BigDecimal.valueOf(0));
+            record.setCourseDiscount(BigDecimal.valueOf(0));
+        }
+        record.setStatusId(StatusIdEnum.YES.getCode());
+        record.setIsPutaway(IsPutawayEnum.YES.getCode());
+        record.setAuditStatus(AuditStatusEnum.SUCCESS.getCode());
+        record.setIntroduceId(courseIntroduceAudit.getId());
+        courseAuditDao.save(record);
+
+        // 课程
+        courseIntroduceDao.save(BeanUtil.copyProperties(courseIntroduceAudit, CourseIntroduce.class));
+        dao.save(BeanUtil.copyProperties(record, Course.class));
+        return Result.success(1);
+    }
 
     /**
      * 分页列出
@@ -338,4 +376,5 @@ public class PcApiCourseBiz extends BaseBiz {
         }
         return Result.success("导入成功");
     }
+
 }

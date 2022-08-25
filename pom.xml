@@ -213,6 +213,8 @@
         <module>roncoo-education-app-gateway</module>
         <!-- 定时任务 -->
         <module>roncoo-education-app-job</module>
+        <!-- 代码生成 -->
+        <module>roncoo-education-app-generator</module>
         <!-- 监控中心 -->
         <module>roncoo-education-app-sba</module>
         <!-- 基础工程 -->
