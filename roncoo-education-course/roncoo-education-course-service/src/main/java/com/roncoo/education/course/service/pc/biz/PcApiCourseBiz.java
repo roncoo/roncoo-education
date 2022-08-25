@@ -60,7 +60,6 @@ public class PcApiCourseBiz extends BaseBiz {
 
     /**
      * 先添加到审核表，再添加到课程表
-     *
      * @param courseSaveREQ
      * @return
      */
