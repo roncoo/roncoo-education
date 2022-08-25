@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
-public interface MsgusersMapper {
+public interface MsgUserMapper {
     int countByExample(MsgUserExample example);
 
     int deleteByExample(MsgUserExample example);
