@@ -16,7 +16,6 @@ import com.roncoo.education.course.dao.impl.mapper.entity.AdvExample.Criteria;
 import com.roncoo.education.course.service.pc.req.*;
 import com.roncoo.education.course.service.pc.resq.AdvPageRESQ;
 import com.roncoo.education.course.service.pc.resq.AdvViewRESQ;
-import com.roncoo.education.system.feign.interfaces.IFeignSys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

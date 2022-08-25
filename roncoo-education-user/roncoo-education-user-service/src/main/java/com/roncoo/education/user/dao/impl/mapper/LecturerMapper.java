@@ -2,10 +2,11 @@ package com.roncoo.education.user.dao.impl.mapper;
 
 import com.roncoo.education.user.dao.impl.mapper.entity.Lecturer;
 import com.roncoo.education.user.dao.impl.mapper.entity.LecturerExample;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface LecturerMapper {
@@ -19,15 +20,21 @@ public interface LecturerMapper {
 
     int insertSelective(Lecturer record);
 
+    List<Lecturer> selectByExampleWithBLOBs(LecturerExample example);
+
     List<Lecturer> selectByExample(LecturerExample example);
 
     Lecturer selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") Lecturer record, @Param("example") LecturerExample example);
 
+    int updateByExampleWithBLOBs(@Param("record") Lecturer record, @Param("example") LecturerExample example);
+
     int updateByExample(@Param("record") Lecturer record, @Param("example") LecturerExample example);
 
     int updateByPrimaryKeySelective(Lecturer record);
+
+    int updateByPrimaryKeyWithBLOBs(Lecturer record);
 
     int updateByPrimaryKey(Lecturer record);
 }

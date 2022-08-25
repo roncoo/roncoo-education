@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author wujing
  */
 @RestController
-@RequestMapping(value = "/user/api/user")
+@RequestMapping(value = "/user/api/users")
 public class ApiUserInfoController extends BaseController {
 
     @Autowired

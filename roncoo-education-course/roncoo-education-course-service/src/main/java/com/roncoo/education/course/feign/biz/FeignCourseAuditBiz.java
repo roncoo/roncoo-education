@@ -21,7 +21,6 @@ import com.roncoo.education.course.feign.interfaces.qo.CourseAuditQO;
 import com.roncoo.education.course.feign.interfaces.vo.CourseAuditVO;
 import com.roncoo.education.course.feign.interfaces.vo.CourseChapterAuditVO;
 import com.roncoo.education.course.feign.interfaces.vo.CourseChapterPeriodAuditVO;
-import com.roncoo.education.system.feign.interfaces.IFeignSys;
 import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
 import com.roncoo.education.user.feign.interfaces.vo.LecturerVO;
 import org.springframework.beans.factory.annotation.Autowired;

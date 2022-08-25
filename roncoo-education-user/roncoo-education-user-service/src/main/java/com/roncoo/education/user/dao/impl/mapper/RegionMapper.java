@@ -2,10 +2,11 @@ package com.roncoo.education.user.dao.impl.mapper;
 
 import com.roncoo.education.user.dao.impl.mapper.entity.Region;
 import com.roncoo.education.user.dao.impl.mapper.entity.RegionExample;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface RegionMapper {

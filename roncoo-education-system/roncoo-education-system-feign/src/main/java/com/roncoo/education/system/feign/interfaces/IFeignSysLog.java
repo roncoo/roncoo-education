@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @FeignClient(value = "roncoo-education-system-service")
 public interface IFeignSysLog {
 
-
     @RequestMapping(value = "/feign/system/sysLog/listForPage")
     Page<SysLogVO> listForPage(@RequestBody SysLogQO qo);
 

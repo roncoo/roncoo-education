@@ -23,8 +23,6 @@ import com.roncoo.education.course.dao.impl.mapper.entity.CourseVideo;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseVideoExample;
 import com.roncoo.education.course.feign.interfaces.qo.CourseVideoQO;
 import com.roncoo.education.course.feign.interfaces.vo.CourseVideoVO;
-import com.roncoo.education.system.feign.interfaces.IFeignSys;
-import com.roncoo.education.system.feign.interfaces.vo.SysVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

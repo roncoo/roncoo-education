@@ -1,26 +1,26 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.roncoo.education.user.dao.impl.mapper.LecturerMapper">
     <resultMap id="BaseResultMap" type="com.roncoo.education.user.dao.impl.mapper.entity.Lecturer">
-        <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
-        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
-        <result column="status_id" property="statusId" jdbcType="TINYINT"/>
-        <result column="sort" property="sort" jdbcType="INTEGER"/>
-        <result column="lecturer_user_no" property="lecturerUserNo" jdbcType="BIGINT"/>
-        <result column="lecturer_name" property="lecturerName" jdbcType="VARCHAR"/>
-        <result column="lecturer_mobile" property="lecturerMobile" jdbcType="CHAR"/>
-        <result column="lecturer_email" property="lecturerEmail" jdbcType="VARCHAR"/>
-        <result column="position" property="position" jdbcType="VARCHAR"/>
-        <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
-        <result column="introduce" property="introduce" jdbcType="VARCHAR"/>
-        <result column="lecturer_proportion" property="lecturerProportion" jdbcType="DECIMAL"/>
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+        <result column="status_id" jdbcType="TINYINT" property="statusId"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="lecturer_name" jdbcType="VARCHAR" property="lecturerName"/>
+        <result column="lecturer_mobile" jdbcType="CHAR" property="lecturerMobile"/>
+        <result column="lecturer_position" jdbcType="VARCHAR" property="lecturerPosition"/>
+        <result column="lecturer_head" jdbcType="VARCHAR" property="lecturerHead"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.roncoo.education.user.dao.impl.mapper.entity.Lecturer">
+        <result column="introduce" jdbcType="LONGVARCHAR" property="introduce"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
             <foreach collection="oredCriteria" item="criteria" separator="or">
                 <if test="criteria.valid">
-                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
                         <foreach collection="criteria.criteria" item="criterion">
                             <choose>
                                 <when test="criterion.noValue">
@@ -34,8 +34,7 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
-                                             separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -50,7 +49,7 @@
         <where>
             <foreach collection="example.oredCriteria" item="criteria" separator="or">
                 <if test="criteria.valid">
-                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
                         <foreach collection="criteria.criteria" item="criterion">
                             <choose>
                                 <when test="criterion.noValue">
@@ -64,8 +63,7 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
-                                             separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -77,11 +75,30 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, status_id, sort, lecturer_user_no, lecturer_name, lecturer_mobile,
-    lecturer_email, position, head_img_url, introduce, lecturer_proportion
-  </sql>
-    <select id="selectByExample" resultMap="BaseResultMap"
-            parameterType="com.roncoo.education.user.dao.impl.mapper.entity.LecturerExample">
+        id
+        , gmt_create, gmt_modified, status_id, sort, user_id, lecturer_name, lecturer_mobile,
+    lecturer_position, lecturer_head
+    </sql>
+    <sql id="Blob_Column_List">
+        introduce
+    </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.LecturerExample" resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from lecturer
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.LecturerExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -98,16 +115,19 @@
             limit ${limitStart} , ${pageSize}
         </if>
     </select>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
         from lecturer
         where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from lecturer
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete
+        from lecturer
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
     <delete id="deleteByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.LecturerExample">
         delete from lecturer
         <if test="_parameter != null">
@@ -115,17 +135,15 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.Lecturer">
-    insert into lecturer (id, gmt_create, gmt_modified,
-      status_id, sort, lecturer_user_no,
-      lecturer_name, lecturer_mobile, lecturer_email,
-      position, head_img_url, introduce,
-      lecturer_proportion)
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
-      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{lecturerUserNo,jdbcType=BIGINT},
-      #{lecturerName,jdbcType=VARCHAR}, #{lecturerMobile,jdbcType=CHAR}, #{lecturerEmail,jdbcType=VARCHAR},
-      #{position,jdbcType=VARCHAR}, #{headImgUrl,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR},
-      #{lecturerProportion,jdbcType=DECIMAL})
-  </insert>
+        insert into lecturer (id, gmt_create, gmt_modified,
+                              status_id, sort, user_id,
+                              lecturer_name, lecturer_mobile, lecturer_position,
+                              lecturer_head, introduce)
+        values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
+                #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT},
+                #{lecturerName,jdbcType=VARCHAR}, #{lecturerMobile,jdbcType=CHAR}, #{lecturerPosition,jdbcType=VARCHAR},
+                #{lecturerHead,jdbcType=VARCHAR}, #{introduce,jdbcType=LONGVARCHAR})
+    </insert>
     <insert id="insertSelective" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.Lecturer">
         insert into lecturer
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -144,8 +162,8 @@
             <if test="sort != null">
                 sort,
             </if>
-            <if test="lecturerUserNo != null">
-                lecturer_user_no,
+            <if test="userId != null">
+                user_id,
             </if>
             <if test="lecturerName != null">
                 lecturer_name,
@@ -153,20 +171,14 @@
             <if test="lecturerMobile != null">
                 lecturer_mobile,
             </if>
-            <if test="lecturerEmail != null">
-                lecturer_email,
+            <if test="lecturerPosition != null">
+                lecturer_position,
             </if>
-            <if test="position != null">
-                position,
-            </if>
-            <if test="headImgUrl != null">
-                head_img_url,
+            <if test="lecturerHead != null">
+                lecturer_head,
             </if>
             <if test="introduce != null">
                 introduce,
-            </if>
-            <if test="lecturerProportion != null">
-                lecturer_proportion,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -185,8 +197,8 @@
             <if test="sort != null">
                 #{sort,jdbcType=INTEGER},
             </if>
-            <if test="lecturerUserNo != null">
-                #{lecturerUserNo,jdbcType=BIGINT},
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
             </if>
             <if test="lecturerName != null">
                 #{lecturerName,jdbcType=VARCHAR},
@@ -194,25 +206,18 @@
             <if test="lecturerMobile != null">
                 #{lecturerMobile,jdbcType=CHAR},
             </if>
-            <if test="lecturerEmail != null">
-                #{lecturerEmail,jdbcType=VARCHAR},
+            <if test="lecturerPosition != null">
+                #{lecturerPosition,jdbcType=VARCHAR},
             </if>
-            <if test="position != null">
-                #{position,jdbcType=VARCHAR},
-            </if>
-            <if test="headImgUrl != null">
-                #{headImgUrl,jdbcType=VARCHAR},
+            <if test="lecturerHead != null">
+                #{lecturerHead,jdbcType=VARCHAR},
             </if>
             <if test="introduce != null">
-                #{introduce,jdbcType=VARCHAR},
-            </if>
-            <if test="lecturerProportion != null">
-                #{lecturerProportion,jdbcType=DECIMAL},
+                #{introduce,jdbcType=LONGVARCHAR},
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.LecturerExample"
-            resultType="java.lang.Integer">
+    <select id="countByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.LecturerExample" resultType="java.lang.Integer">
         select count(*) from lecturer
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -236,8 +241,8 @@
             <if test="record.sort != null">
                 sort = #{record.sort,jdbcType=INTEGER},
             </if>
-            <if test="record.lecturerUserNo != null">
-                lecturer_user_no = #{record.lecturerUserNo,jdbcType=BIGINT},
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=BIGINT},
             </if>
             <if test="record.lecturerName != null">
                 lecturer_name = #{record.lecturerName,jdbcType=VARCHAR},
@@ -245,22 +250,33 @@
             <if test="record.lecturerMobile != null">
                 lecturer_mobile = #{record.lecturerMobile,jdbcType=CHAR},
             </if>
-            <if test="record.lecturerEmail != null">
-                lecturer_email = #{record.lecturerEmail,jdbcType=VARCHAR},
+            <if test="record.lecturerPosition != null">
+                lecturer_position = #{record.lecturerPosition,jdbcType=VARCHAR},
             </if>
-            <if test="record.position != null">
-                position = #{record.position,jdbcType=VARCHAR},
-            </if>
-            <if test="record.headImgUrl != null">
-                head_img_url = #{record.headImgUrl,jdbcType=VARCHAR},
+            <if test="record.lecturerHead != null">
+                lecturer_head = #{record.lecturerHead,jdbcType=VARCHAR},
             </if>
             <if test="record.introduce != null">
-                introduce = #{record.introduce,jdbcType=VARCHAR},
-            </if>
-            <if test="record.lecturerProportion != null">
-                lecturer_proportion = #{record.lecturerProportion,jdbcType=DECIMAL},
+                introduce = #{record.introduce,jdbcType=LONGVARCHAR},
             </if>
         </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update lecturer
+        set id = #{record.id,jdbcType=BIGINT},
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+        status_id = #{record.statusId,jdbcType=TINYINT},
+        sort = #{record.sort,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=BIGINT},
+        lecturer_name = #{record.lecturerName,jdbcType=VARCHAR},
+        lecturer_mobile = #{record.lecturerMobile,jdbcType=CHAR},
+        lecturer_position = #{record.lecturerPosition,jdbcType=VARCHAR},
+        lecturer_head = #{record.lecturerHead,jdbcType=VARCHAR},
+        introduce = #{record.introduce,jdbcType=LONGVARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -272,14 +288,11 @@
         gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
         status_id = #{record.statusId,jdbcType=TINYINT},
         sort = #{record.sort,jdbcType=INTEGER},
-        lecturer_user_no = #{record.lecturerUserNo,jdbcType=BIGINT},
+        user_id = #{record.userId,jdbcType=BIGINT},
         lecturer_name = #{record.lecturerName,jdbcType=VARCHAR},
         lecturer_mobile = #{record.lecturerMobile,jdbcType=CHAR},
-        lecturer_email = #{record.lecturerEmail,jdbcType=VARCHAR},
-        position = #{record.position,jdbcType=VARCHAR},
-        head_img_url = #{record.headImgUrl,jdbcType=VARCHAR},
-        introduce = #{record.introduce,jdbcType=VARCHAR},
-        lecturer_proportion = #{record.lecturerProportion,jdbcType=DECIMAL}
+        lecturer_position = #{record.lecturerPosition,jdbcType=VARCHAR},
+        lecturer_head = #{record.lecturerHead,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -299,8 +312,8 @@
             <if test="sort != null">
                 sort = #{sort,jdbcType=INTEGER},
             </if>
-            <if test="lecturerUserNo != null">
-                lecturer_user_no = #{lecturerUserNo,jdbcType=BIGINT},
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
             </if>
             <if test="lecturerName != null">
                 lecturer_name = #{lecturerName,jdbcType=VARCHAR},
@@ -308,38 +321,43 @@
             <if test="lecturerMobile != null">
                 lecturer_mobile = #{lecturerMobile,jdbcType=CHAR},
             </if>
-            <if test="lecturerEmail != null">
-                lecturer_email = #{lecturerEmail,jdbcType=VARCHAR},
+            <if test="lecturerPosition != null">
+                lecturer_position = #{lecturerPosition,jdbcType=VARCHAR},
             </if>
-            <if test="position != null">
-                position = #{position,jdbcType=VARCHAR},
-            </if>
-            <if test="headImgUrl != null">
-                head_img_url = #{headImgUrl,jdbcType=VARCHAR},
+            <if test="lecturerHead != null">
+                lecturer_head = #{lecturerHead,jdbcType=VARCHAR},
             </if>
             <if test="introduce != null">
-                introduce = #{introduce,jdbcType=VARCHAR},
-            </if>
-            <if test="lecturerProportion != null">
-                lecturer_proportion = #{lecturerProportion,jdbcType=DECIMAL},
+                introduce = #{introduce,jdbcType=LONGVARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.Lecturer">
+        update lecturer
+        set gmt_create        = #{gmtCreate,jdbcType=TIMESTAMP},
+            gmt_modified      = #{gmtModified,jdbcType=TIMESTAMP},
+            status_id         = #{statusId,jdbcType=TINYINT},
+            sort              = #{sort,jdbcType=INTEGER},
+            user_id           = #{userId,jdbcType=BIGINT},
+            lecturer_name     = #{lecturerName,jdbcType=VARCHAR},
+            lecturer_mobile   = #{lecturerMobile,jdbcType=CHAR},
+            lecturer_position = #{lecturerPosition,jdbcType=VARCHAR},
+            lecturer_head     = #{lecturerHead,jdbcType=VARCHAR},
+            introduce         = #{introduce,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
     <update id="updateByPrimaryKey" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.Lecturer">
-    update lecturer
-    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      status_id = #{statusId,jdbcType=TINYINT},
-      sort = #{sort,jdbcType=INTEGER},
-      lecturer_user_no = #{lecturerUserNo,jdbcType=BIGINT},
-      lecturer_name = #{lecturerName,jdbcType=VARCHAR},
-      lecturer_mobile = #{lecturerMobile,jdbcType=CHAR},
-      lecturer_email = #{lecturerEmail,jdbcType=VARCHAR},
-      position = #{position,jdbcType=VARCHAR},
-      head_img_url = #{headImgUrl,jdbcType=VARCHAR},
-      introduce = #{introduce,jdbcType=VARCHAR},
-      lecturer_proportion = #{lecturerProportion,jdbcType=DECIMAL}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        update lecturer
+        set gmt_create        = #{gmtCreate,jdbcType=TIMESTAMP},
+            gmt_modified      = #{gmtModified,jdbcType=TIMESTAMP},
+            status_id         = #{statusId,jdbcType=TINYINT},
+            sort              = #{sort,jdbcType=INTEGER},
+            user_id           = #{userId,jdbcType=BIGINT},
+            lecturer_name     = #{lecturerName,jdbcType=VARCHAR},
+            lecturer_mobile   = #{lecturerMobile,jdbcType=CHAR},
+            lecturer_position = #{lecturerPosition,jdbcType=VARCHAR},
+            lecturer_head     = #{lecturerHead,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

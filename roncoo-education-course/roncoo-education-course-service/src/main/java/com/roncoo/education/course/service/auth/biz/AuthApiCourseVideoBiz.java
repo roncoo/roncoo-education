@@ -22,8 +22,6 @@ import com.roncoo.education.course.dao.impl.mapper.entity.CourseVideo;
 import com.roncoo.education.course.service.auth.bo.*;
 import com.roncoo.education.course.service.auth.dto.AuthCourseVideoForListDTO;
 import com.roncoo.education.course.service.auth.dto.AuthCourseVideoListDTO;
-import com.roncoo.education.system.feign.interfaces.IFeignSys;
-import com.roncoo.education.system.feign.interfaces.vo.SysVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

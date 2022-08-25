@@ -17,8 +17,6 @@ import com.roncoo.education.common.core.tools.IdWorker;
 import com.roncoo.education.common.core.tools.StrUtil;
 import com.roncoo.education.course.dao.FileStorageDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.FileStorage;
-import com.roncoo.education.system.feign.interfaces.IFeignSys;
-import com.roncoo.education.system.feign.interfaces.vo.SysVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;

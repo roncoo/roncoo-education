@@ -24,8 +24,6 @@ import com.roncoo.education.course.service.auth.bo.AuthCourseViewBO;
 import com.roncoo.education.course.service.auth.dto.AuthCourseSignDTO;
 import com.roncoo.education.course.service.auth.dto.AuthCourseViewDTO;
 import com.roncoo.education.course.service.auth.dto.AuthLecturerDTO;
-import com.roncoo.education.system.feign.interfaces.IFeignSys;
-import com.roncoo.education.system.feign.interfaces.vo.SysVO;
 import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
 import com.roncoo.education.user.feign.interfaces.vo.LecturerVO;
 import org.springframework.beans.factory.annotation.Autowired;

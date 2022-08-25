@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.roncoo.education.system.dao.impl.mapper.SysLogMapper">
     <resultMap id="BaseResultMap" type="com.roncoo.education.system.dao.impl.mapper.entity.SysLog">
-        <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
-        <result column="user_no" property="userNo" jdbcType="BIGINT"/>
-        <result column="real_name" property="realName" jdbcType="VARCHAR"/>
-        <result column="ip" property="ip" jdbcType="VARCHAR"/>
-        <result column="operation" property="operation" jdbcType="VARCHAR"/>
-        <result column="method" property="method" jdbcType="VARCHAR"/>
-        <result column="path" property="path" jdbcType="VARCHAR"/>
-        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="user_no" jdbcType="BIGINT" property="userNo"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="ip" jdbcType="VARCHAR" property="ip"/>
+        <result column="operation" jdbcType="VARCHAR" property="operation"/>
+        <result column="method" jdbcType="VARCHAR" property="method"/>
+        <result column="path" jdbcType="VARCHAR" property="path"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
             <foreach collection="oredCriteria" item="criteria" separator="or">
                 <if test="criteria.valid">
-                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
                         <foreach collection="criteria.criteria" item="criterion">
                             <choose>
                                 <when test="criterion.noValue">
@@ -30,8 +30,7 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
-                                             separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -46,7 +45,7 @@
         <where>
             <foreach collection="example.oredCriteria" item="criteria" separator="or">
                 <if test="criteria.valid">
-                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
                         <foreach collection="criteria.criteria" item="criterion">
                             <choose>
                                 <when test="criterion.noValue">
@@ -60,8 +59,7 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
-                                             separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -73,10 +71,10 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, gmt_create, user_no, real_name, ip, operation, method, path, content
-  </sql>
-    <select id="selectByExample" resultMap="BaseResultMap"
-            parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysLogExample">
+        id
+        , gmt_create, user_no, real_name, ip, operation, method, path, content
+    </sql>
+    <select id="selectByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysLogExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -93,16 +91,17 @@
             limit ${limitStart} , ${pageSize}
         </if>
     </select>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from sys_log
         where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from sys_log
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete
+        from sys_log
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
     <delete id="deleteByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysLogExample">
         delete from sys_log
         <if test="_parameter != null">
@@ -110,15 +109,13 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysLog">
-    insert into sys_log (id, gmt_create, user_no,
-      real_name, ip, operation,
-      method, path, content
-      )
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{userNo,jdbcType=BIGINT},
-      #{realName,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{operation,jdbcType=VARCHAR},
-      #{method,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}
-      )
-  </insert>
+        insert into sys_log (id, gmt_create, user_no,
+                             real_name, ip, operation,
+                             method, path, content)
+        values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{userNo,jdbcType=BIGINT},
+                #{realName,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{operation,jdbcType=VARCHAR},
+                #{method,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR})
+    </insert>
     <insert id="insertSelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysLog">
         insert into sys_log
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -180,8 +177,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysLogExample"
-            resultType="java.lang.Integer">
+    <select id="countByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysLogExample" resultType="java.lang.Integer">
         select count(*) from sys_log
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -268,15 +264,15 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysLog">
-    update sys_log
-    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      user_no = #{userNo,jdbcType=BIGINT},
-      real_name = #{realName,jdbcType=VARCHAR},
-      ip = #{ip,jdbcType=VARCHAR},
-      operation = #{operation,jdbcType=VARCHAR},
-      method = #{method,jdbcType=VARCHAR},
-      path = #{path,jdbcType=VARCHAR},
-      content = #{content,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
+        update sys_log
+        set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            user_no    = #{userNo,jdbcType=BIGINT},
+            real_name  = #{realName,jdbcType=VARCHAR},
+            ip         = #{ip,jdbcType=VARCHAR},
+            operation  = #{operation,jdbcType=VARCHAR},
+            method     = #{method,jdbcType=VARCHAR},
+            path       = #{path,jdbcType=VARCHAR},
+            content    = #{content,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -13,7 +13,6 @@ import com.roncoo.education.course.dao.impl.mapper.entity.*;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseAuditExample.Criteria;
 import com.roncoo.education.course.service.pc.req.*;
 import com.roncoo.education.course.service.pc.resq.*;
-import com.roncoo.education.system.feign.interfaces.IFeignSys;
 import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
 import com.roncoo.education.user.feign.interfaces.vo.LecturerVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;

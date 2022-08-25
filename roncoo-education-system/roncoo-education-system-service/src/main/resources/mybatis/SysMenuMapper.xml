@@ -1,25 +1,25 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.roncoo.education.system.dao.impl.mapper.SysMenuMapper">
     <resultMap id="BaseResultMap" type="com.roncoo.education.system.dao.impl.mapper.entity.SysMenu">
-        <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
-        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
-        <result column="status_id" property="statusId" jdbcType="TINYINT"/>
-        <result column="sort" property="sort" jdbcType="INTEGER"/>
-        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
-        <result column="menu_name" property="menuName" jdbcType="VARCHAR"/>
-        <result column="menu_url" property="menuUrl" jdbcType="VARCHAR"/>
-        <result column="api_url" property="apiUrl" jdbcType="VARCHAR"/>
-        <result column="menu_icon" property="menuIcon" jdbcType="VARCHAR"/>
-        <result column="remark" property="remark" jdbcType="VARCHAR"/>
-        <result column="menu_type" property="menuType" jdbcType="TINYINT"/>
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+        <result column="status_id" jdbcType="TINYINT" property="statusId"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
+        <result column="menu_name" jdbcType="VARCHAR" property="menuName"/>
+        <result column="menu_url" jdbcType="VARCHAR" property="menuUrl"/>
+        <result column="api_url" jdbcType="VARCHAR" property="apiUrl"/>
+        <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="menu_type" jdbcType="TINYINT" property="menuType"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
             <foreach collection="oredCriteria" item="criteria" separator="or">
                 <if test="criteria.valid">
-                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
                         <foreach collection="criteria.criteria" item="criterion">
                             <choose>
                                 <when test="criterion.noValue">
@@ -33,8 +33,7 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
-                                             separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -49,7 +48,7 @@
         <where>
             <foreach collection="example.oredCriteria" item="criteria" separator="or">
                 <if test="criteria.valid">
-                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
                         <foreach collection="criteria.criteria" item="criterion">
                             <choose>
                                 <when test="criterion.noValue">
@@ -63,8 +62,7 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
-                                             separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -76,11 +74,11 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, status_id, sort, parent_id, menu_name, menu_url, api_url,
+        id
+        , gmt_create, gmt_modified, status_id, sort, parent_id, menu_name, menu_url, api_url,
     menu_icon, remark, menu_type
-  </sql>
-    <select id="selectByExample" resultMap="BaseResultMap"
-            parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysMenuExample">
+    </sql>
+    <select id="selectByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysMenuExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -97,16 +95,17 @@
             limit ${limitStart} , ${pageSize}
         </if>
     </select>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from sys_menu
         where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from sys_menu
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete
+        from sys_menu
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
     <delete id="deleteByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysMenuExample">
         delete from sys_menu
         <if test="_parameter != null">
@@ -114,17 +113,15 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysMenu">
-    insert into sys_menu (id, gmt_create, gmt_modified,
-      status_id, sort, parent_id,
-      menu_name, menu_url, api_url,
-      menu_icon, remark, menu_type
-      )
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
-      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{parentId,jdbcType=BIGINT},
-      #{menuName,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR}, #{apiUrl,jdbcType=VARCHAR},
-      #{menuIcon,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{menuType,jdbcType=TINYINT}
-      )
-  </insert>
+        insert into sys_menu (id, gmt_create, gmt_modified,
+                              status_id, sort, parent_id,
+                              menu_name, menu_url, api_url,
+                              menu_icon, remark, menu_type)
+        values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
+                #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{parentId,jdbcType=BIGINT},
+                #{menuName,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR}, #{apiUrl,jdbcType=VARCHAR},
+                #{menuIcon,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{menuType,jdbcType=TINYINT})
+    </insert>
     <insert id="insertSelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysMenu">
         insert into sys_menu
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -204,8 +201,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysMenuExample"
-            resultType="java.lang.Integer">
+    <select id="countByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysMenuExample" resultType="java.lang.Integer">
         select count(*) from sys_menu
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -313,16 +309,16 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysMenu">
-    update sys_menu
-    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      status_id = #{statusId,jdbcType=TINYINT},
-      sort = #{sort,jdbcType=INTEGER},
-      parent_id = #{parentId,jdbcType=BIGINT},
-      menu_name = #{menuName,jdbcType=VARCHAR},
-      menu_url = #{menuUrl,jdbcType=VARCHAR},
-      api_url = #{apiUrl,jdbcType=VARCHAR},
-      menu_icon = #{menuIcon,jdbcType=VARCHAR},
+        update sys_menu
+        set gmt_create   = #{gmtCreate,jdbcType=TIMESTAMP},
+            gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            status_id    = #{statusId,jdbcType=TINYINT},
+            sort         = #{sort,jdbcType=INTEGER},
+            parent_id    = #{parentId,jdbcType=BIGINT},
+            menu_name    = #{menuName,jdbcType=VARCHAR},
+            menu_url     = #{menuUrl,jdbcType=VARCHAR},
+            api_url      = #{apiUrl,jdbcType=VARCHAR},
+            menu_icon    = #{menuIcon,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       menu_type = #{menuType,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}

@@ -7,7 +7,6 @@ import com.roncoo.education.common.core.base.BaseBiz;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.system.feign.interfaces.IFeignSys;
 import com.roncoo.education.user.dao.UserExtDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.UserExt;
 import com.roncoo.education.user.service.auth.bo.AuthUserExtBO;

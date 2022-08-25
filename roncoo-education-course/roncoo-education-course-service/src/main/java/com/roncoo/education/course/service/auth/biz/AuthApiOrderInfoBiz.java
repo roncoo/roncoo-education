@@ -28,8 +28,6 @@ import com.roncoo.education.course.dao.impl.mapper.entity.OrderPay;
 import com.roncoo.education.course.service.api.bo.OrderInfoCloseBO;
 import com.roncoo.education.course.service.auth.bo.*;
 import com.roncoo.education.course.service.auth.dto.*;
-import com.roncoo.education.system.feign.interfaces.IFeignSys;
-import com.roncoo.education.system.feign.interfaces.vo.SysVO;
 import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
 import com.roncoo.education.user.feign.interfaces.IFeignUserExt;
 import com.roncoo.education.user.feign.interfaces.vo.LecturerVO;

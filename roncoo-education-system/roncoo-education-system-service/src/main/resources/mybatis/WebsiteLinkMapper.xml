@@ -1,21 +1,21 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.roncoo.education.system.dao.impl.mapper.WebsiteLinkMapper">
     <resultMap id="BaseResultMap" type="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink">
-        <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
-        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
-        <result column="status_id" property="statusId" jdbcType="TINYINT"/>
-        <result column="sort" property="sort" jdbcType="INTEGER"/>
-        <result column="link_name" property="linkName" jdbcType="VARCHAR"/>
-        <result column="link_url" property="linkUrl" jdbcType="VARCHAR"/>
-        <result column="link_target" property="linkTarget" jdbcType="VARCHAR"/>
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+        <result column="status_id" jdbcType="TINYINT" property="statusId"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="link_name" jdbcType="VARCHAR" property="linkName"/>
+        <result column="link_url" jdbcType="VARCHAR" property="linkUrl"/>
+        <result column="link_target" jdbcType="VARCHAR" property="linkTarget"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
             <foreach collection="oredCriteria" item="criteria" separator="or">
                 <if test="criteria.valid">
-                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
                         <foreach collection="criteria.criteria" item="criterion">
                             <choose>
                                 <when test="criterion.noValue">
@@ -29,8 +29,7 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
-                                             separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -45,7 +44,7 @@
         <where>
             <foreach collection="example.oredCriteria" item="criteria" separator="or">
                 <if test="criteria.valid">
-                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
                         <foreach collection="criteria.criteria" item="criterion">
                             <choose>
                                 <when test="criterion.noValue">
@@ -59,8 +58,7 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
-                                             separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -72,10 +70,10 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, status_id, sort, link_name, link_url, link_target
-  </sql>
-    <select id="selectByExample" resultMap="BaseResultMap"
-            parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample">
+        id
+        , gmt_create, gmt_modified, status_id, sort, link_name, link_url, link_target
+    </sql>
+    <select id="selectByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -92,16 +90,17 @@
             limit ${limitStart} , ${pageSize}
         </if>
     </select>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from website_link
         where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from website_link
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete
+        from website_link
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
     <delete id="deleteByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample">
         delete from website_link
         <if test="_parameter != null">
@@ -109,13 +108,13 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink">
-    insert into website_link (id, gmt_create, gmt_modified,
-      status_id, sort, link_name,
-      link_url, link_target)
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
-      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{linkName,jdbcType=VARCHAR},
-      #{linkUrl,jdbcType=VARCHAR}, #{linkTarget,jdbcType=VARCHAR})
-  </insert>
+        insert into website_link (id, gmt_create, gmt_modified,
+                                  status_id, sort, link_name,
+                                  link_url, link_target)
+        values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
+                #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{linkName,jdbcType=VARCHAR},
+                #{linkUrl,jdbcType=VARCHAR}, #{linkTarget,jdbcType=VARCHAR})
+    </insert>
     <insert id="insertSelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink">
         insert into website_link
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -171,8 +170,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample"
-            resultType="java.lang.Integer">
+    <select id="countByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample" resultType="java.lang.Integer">
         select count(*) from website_link
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -224,8 +222,7 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective"
-            parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink">
+    <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink">
         update website_link
         <set>
             <if test="gmtCreate != null">
@@ -253,14 +250,14 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink">
-    update website_link
-    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      status_id = #{statusId,jdbcType=TINYINT},
-      sort = #{sort,jdbcType=INTEGER},
-      link_name = #{linkName,jdbcType=VARCHAR},
-      link_url = #{linkUrl,jdbcType=VARCHAR},
-      link_target = #{linkTarget,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        update website_link
+        set gmt_create   = #{gmtCreate,jdbcType=TIMESTAMP},
+            gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            status_id    = #{statusId,jdbcType=TINYINT},
+            sort         = #{sort,jdbcType=INTEGER},
+            link_name    = #{linkName,jdbcType=VARCHAR},
+            link_url     = #{linkUrl,jdbcType=VARCHAR},
+            link_target  = #{linkTarget,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

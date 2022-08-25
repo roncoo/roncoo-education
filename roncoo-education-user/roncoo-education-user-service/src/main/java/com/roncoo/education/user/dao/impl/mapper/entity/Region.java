@@ -10,13 +10,13 @@ public class Region implements Serializable {
 
     private Integer level;
 
+    private String provinceCode;
+
     private BigDecimal centerLng;
 
     private BigDecimal centerLat;
 
     private Integer provinceId;
-
-    private String provinceCode;
 
     private String provinceName;
 
@@ -58,6 +58,14 @@ public class Region implements Serializable {
         this.level = level;
     }
 
+    public String getProvinceCode() {
+        return provinceCode;
+    }
+
+    public void setProvinceCode(String provinceCode) {
+        this.provinceCode = provinceCode == null ? null : provinceCode.trim();
+    }
+
     public BigDecimal getCenterLng() {
         return centerLng;
     }
@@ -80,14 +88,6 @@ public class Region implements Serializable {
 
     public void setProvinceId(Integer provinceId) {
         this.provinceId = provinceId;
-    }
-
-    public String getProvinceCode() {
-        return provinceCode;
-    }
-
-    public void setProvinceCode(String provinceCode) {
-        this.provinceCode = provinceCode == null ? null : provinceCode.trim();
     }
 
     public String getProvinceName() {
@@ -155,10 +155,10 @@ public class Region implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", parentId=").append(parentId);
         sb.append(", level=").append(level);
+        sb.append(", provinceCode=").append(provinceCode);
         sb.append(", centerLng=").append(centerLng);
         sb.append(", centerLat=").append(centerLat);
         sb.append(", provinceId=").append(provinceId);
-        sb.append(", provinceCode=").append(provinceCode);
         sb.append(", provinceName=").append(provinceName);
         sb.append(", cityId=").append(cityId);
         sb.append(", cityCode=").append(cityCode);

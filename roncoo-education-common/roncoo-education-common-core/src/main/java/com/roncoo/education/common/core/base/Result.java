@@ -16,7 +16,7 @@ import java.io.Serializable;
  * @param <T>
  * @author wujing
  */
-public final class Result<T extends Serializable> implements Serializable {
+public final class Result<T> implements Serializable {
 
     private static final Logger logger = LoggerFactory.getLogger(Result.class);
 
@@ -46,22 +46,22 @@ public final class Result<T extends Serializable> implements Serializable {
         this.data = data;
     }
 
-    public static <T extends Serializable> Result<T> error(String msg) {
+    public static <T> Result<T> error(String msg) {
         logger.debug("返回错误：code={}, msg={}", ResultEnum.ERROR.getCode(), msg);
         return new Result<T>(ResultEnum.ERROR.getCode(), msg, null);
     }
 
-    public static <T extends Serializable> Result<T> error(ResultEnum resultEnum) {
+    public static <T> Result<T> error(ResultEnum resultEnum) {
         logger.debug("返回错误：code={}, msg={}", resultEnum.getCode(), resultEnum.getDesc());
         return new Result<T>(resultEnum.getCode(), resultEnum.getDesc(), null);
     }
 
-    public static <T extends Serializable> Result<T> error(int code, String msg) {
+    public static <T> Result<T> error(int code, String msg) {
         logger.debug("返回错误：code={}, msg={}", code, msg);
         return new Result<T>(code, msg, null);
     }
 
-    public static <T extends Serializable> Result<T> success(T data) {
+    public static <T> Result<T> success(T data) {
         return new Result<T>(ResultEnum.SUCCESS.getCode(), "", data);
     }
 

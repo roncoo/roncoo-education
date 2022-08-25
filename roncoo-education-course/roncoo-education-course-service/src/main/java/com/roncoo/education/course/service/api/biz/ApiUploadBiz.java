@@ -28,8 +28,6 @@ import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodAudit;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseVideo;
 import com.roncoo.education.course.dao.impl.mapper.entity.FileStorage;
-import com.roncoo.education.system.feign.interfaces.IFeignSys;
-import com.roncoo.education.system.feign.interfaces.vo.SysVO;
 import com.roncoo.spring.boot.autoconfigure.fastdfs.FastdfsClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

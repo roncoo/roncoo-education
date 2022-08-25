@@ -26,33 +26,47 @@ import java.util.Map;
  */
 public class ControllerGenerator {
 
-    private static Logger log = Logger.getLogger(ControllerGenerator.class);
+    private static final Logger log = Logger.getLogger(ControllerGenerator.class);
 
     /**
      * 执行创建
      *
-     * @param args
-     * @throws Exception
+     * @param args 请求参数
      */
-    public static void main(String[] args) throws Exception {
-        DaoGenerator.main(args);
+    public static void main(String[] args) {
         ControllerGenerator.runCreate();
     }
 
     /**
      * 自定义文件生成
      *
-     * @return
+     * @return 文件输出配置
      */
     private static List<FileOutConfig> focList() {
-        List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
-        focList.addAll(feignList()); // feign
-        focList.addAll(serviceFeignList()); // service.feign
-        focList.addAll(serviceApiList()); // service.api
-        focList.addAll(serviceDaoList()); // service.dao
-        focList.addAll(servicePcList());// service.pc
-        focList.addAll(commonList()); // service.common(bo、dto)
-        focList.addAll(commonPcList()); // service.common(req、resp)
+        List<FileOutConfig> focList = new ArrayList<>();
+
+        // service.dao
+        focList.addAll(serviceDaoList());
+
+        // service.api
+        focList.addAll(serviceApiList());
+
+        // service.auth
+        focList.addAll(serviceAuthList());
+
+        // service.boss
+        focList.addAll(serviceBossList());
+
+        // service.admin
+        focList.addAll(serviceAdminList());
+
+        // service.tch
+        focList.addAll(serviceTchList());
+
+        // feign
+        focList.addAll(feignList());
+        // service.feign
+        focList.addAll(serviceFeignList());
         return focList;
     }
 
@@ -71,20 +85,25 @@ public class ControllerGenerator {
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setFileOverride(true); // 覆盖文件
-        gc.setSwagger2(true);// swagger2
-        gc.setAuthor(ConfigUtil.author);// 作者
-        gc.setOutputDir(ConfigUtil.projectPath);// 输出目录
+        // 覆盖文件
+        gc.setFileOverride(true);
+        // swagger2
+        gc.setSwagger2(true);
+        // 作者
+        gc.setAuthor(ConfigUtil.author);
+        // 输出目录
+        gc.setOutputDir(ConfigUtil.projectPath);
         mpg.setGlobalConfig(gc);
 
         // 数据库配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setDbType(DbType.MYSQL);//
+        dsc.setDbType(DbType.MYSQL);
         dsc.setDriverName(ConfigUtil.dbClass);
         dsc.setUrl(ConfigUtil.url);
         dsc.setUsername(ConfigUtil.username);
         dsc.setPassword(ConfigUtil.password);
-        dsc.setTypeConvert(typeConvert()); // 自定义数据库表字段转换器
+        // 自定义数据库表字段转换器
+        dsc.setTypeConvert(typeConvert());
         mpg.setDataSource(dsc);
 
         // 策略配置
@@ -95,8 +114,7 @@ public class ControllerGenerator {
         sc.setEntityLombokModel(true);
         sc.setRestControllerStyle(true);
         sc.setEntityTableFieldAnnotationEnable(true);
-
-        if (ConfigUtil.tableNames != null && ConfigUtil.tableNames.trim() != "" && !"%".equals(ConfigUtil.tableNames)) {
+        if (ConfigUtil.tableNames != null && !"".equals(ConfigUtil.tableNames.trim()) && !"%".equals(ConfigUtil.tableNames.trim())) {
             sc.setInclude(ConfigUtil.tableNames.split(","));
         }
         mpg.setStrategy(sc);
@@ -118,7 +136,7 @@ public class ControllerGenerator {
      * 自定义数据库表字段转换器
      */
     private static MySqlTypeConvert typeConvert() {
-        MySqlTypeConvert convert = new MySqlTypeConvert() {
+        return new MySqlTypeConvert() {
             @Override
             public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
                 if (fieldType.contains("tinyint")) {
@@ -127,13 +145,14 @@ public class ControllerGenerator {
                     } else {
                         return DbColumnType.INTEGER;
                     }
-                } else if (fieldType.contains("datetime")) {
+                } /*else if (fieldType.contains("datetime") || fieldType.contains("datetime")) {
                     return DbColumnType.DATE;
-                }
+                } else if (fieldType.contains("date")) {
+                    return DbColumnType.DATE;
+                }*/
                 return super.processTypeConvert(globalConfig, fieldType);
             }
         };
-        return convert;
     }
 
     /**
@@ -143,7 +162,7 @@ public class ControllerGenerator {
         InjectionConfig ic = new InjectionConfig() {
             @Override
             public void initMap() {
-                Map<String, Object> map = new HashMap<String, Object>();
+                Map<String, Object> map = new HashMap<>();
                 map.put("projectName", ConfigUtil.projectName);
                 map.put("packagePrefix", ConfigUtil.packagePrefix);
                 map.put("packageName", ConfigUtil.packageName);
@@ -154,211 +173,42 @@ public class ControllerGenerator {
         return ic;
     }
 
-
     /**
-     * common(req、resp) 模块
+     * service - dao 模块
      *
-     * @return
+     * @return 文件输出配置
      */
-    private static List<FileOutConfig> commonPcList() {
+    private static List<FileOutConfig> serviceDaoList() {
         final String path = ConfigUtil.projectPath + "/" + ConfigUtil.projectName;
 
-        List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
-        focList.add(new FileOutConfig("/template/common/req/req.java.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/common/req/" + tableInfo.getEntityName() + "REQ.java";
-            }
-        });
-        focList.add(new FileOutConfig("/template/common/req/reqEdit.java.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/common/req/" + tableInfo.getEntityName() + "EditREQ.java";
-            }
-        });
-        focList.add(new FileOutConfig("/template/common/req/reqList.java.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/common/req/" + tableInfo.getEntityName() + "ListREQ.java";
-            }
-        });
-        focList.add(new FileOutConfig("/template/common/req/reqSave.java.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/common/req/" + tableInfo.getEntityName() + "SaveREQ.java";
-            }
-        });
-        focList.add(new FileOutConfig("/template/common/resp/resp.java.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/common/resp/" + tableInfo.getEntityName() + "RESP.java";
-            }
-        });
-        focList.add(new FileOutConfig("/template/common/resp/respList.java.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/common/resp/" + tableInfo.getEntityName() + "ListRESP.java";
-            }
-        });
-        focList.add(new FileOutConfig("/template/common/resp/respView.java.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/common/resp/" + tableInfo.getEntityName() + "ViewRESP.java";
-            }
-        });
-        return focList;
-    }
+        List<FileOutConfig> focList = new ArrayList<>();
 
-    /**
-     * service pc模块
-     *
-     * @return
-     */
-    private static List<FileOutConfig> servicePcList() {
-        final String path = ConfigUtil.projectPath + "/" + ConfigUtil.projectName;
-
-        List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
-        // api
-        focList.add(new FileOutConfig("/template/service/pc/pc.java.ftl") {
+        focList.add(new FileOutConfig("/template/service/dao/impl/impl.java.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/" + "/pc/Pc" + tableInfo.getEntityName() + "Controller.java";
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/dao/impl/" + tableInfo.getEntityName() + "DaoImpl.java";
             }
         });
-        // biz
-        focList.add(new FileOutConfig("/template/service/pc/biz/pc.biz.java.ftl") {
+        focList.add(new FileOutConfig("/template/service/dao/dao.java.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/" + "/pc/biz/Pc" + tableInfo.getEntityName() + "Biz.java";
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/dao/" + tableInfo.getEntityName() + "Dao.java";
             }
         });
-        return focList;
-    }
-
-    /**
-     * web-boss 模块
-     *
-     * @return
-     */
-    private static List<FileOutConfig> bossList() {
-        final String path = ConfigUtil.projectPath + "/" + ConfigUtil.bossPath + "/" + ConfigUtil.bossPath + "-service";
-
-        List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
-        focList.add(new FileOutConfig("/template/boss/controller.java.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + ConfigUtil.packagePath + "/web/boss/controller/" + ConfigUtil.packageName + "/" + tableInfo.getEntityName() + "Controller.java";
-            }
-        });
-        focList.add(new FileOutConfig("/template/boss/biz.java.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + ConfigUtil.packagePath + "/web/boss/biz/" + ConfigUtil.packageName + "/" + tableInfo.getEntityName() + "Biz.java";
-            }
-        });
-        focList.add(new FileOutConfig("/template/boss/ftl/add.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/resources/templates/" + ConfigUtil.packageName + "/" + tableInfo.getEntityPath() + "/" + "add.ftl";
-            }
-        });
-
-        focList.add(new FileOutConfig("/template/boss/ftl/edit.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/resources/templates/" + ConfigUtil.packageName + "/" + tableInfo.getEntityPath() + "/" + "edit.ftl";
-            }
-        });
-
-        focList.add(new FileOutConfig("/template/boss/ftl/list.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/resources/templates/" + ConfigUtil.packageName + "/" + tableInfo.getEntityPath() + "/" + "list.ftl";
-            }
-        });
-
-        focList.add(new FileOutConfig("/template/boss/ftl/view.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/resources/templates/" + ConfigUtil.packageName + "/" + tableInfo.getEntityPath() + "/" + "view.ftl";
-            }
-        });
-
-        return focList;
-
-    }
-
-    /**
-     * feign 工程
-     *
-     * @return
-     */
-    private static List<FileOutConfig> feignList() {
-        String projectPath = ConfigUtil.projectPath.replace("service", "feign");
-        String projectName = ConfigUtil.projectName.replace("service", "feign");
-        String packagePath = ConfigUtil.packagePath.replace("service", "feign");
-        String packageName = ConfigUtil.packageName.replace("service", "feign");
-        final String path = projectPath + "/" + projectName;
-
-        List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
-        focList.add(new FileOutConfig("/template/feign/qo.java.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + packagePath + "/" + packageName + "/feign/qo/" + tableInfo.getEntityName() + "QO.java";
-            }
-        });
-        focList.add(new FileOutConfig("/template/feign/vo.java.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + packagePath + "/" + packageName + "/feign/vo/" + tableInfo.getEntityName() + "VO.java";
-            }
-        });
-        focList.add(new FileOutConfig("/template/feign/interfaces.java.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + packagePath + "/" + packageName + "/feign/interfaces/IFeign" + tableInfo.getEntityName() + ".java";
-            }
-        });
-
-        return focList;
-    }
-
-    /**
-     * common(bo、dto) 模块
-     *
-     * @return
-     */
-    private static List<FileOutConfig> commonList() {
-        final String path = ConfigUtil.projectPath + "/" + ConfigUtil.projectName;
-
-        List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
-        focList.add(new FileOutConfig("/template/common/bo/bo.java.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/common/bo/" + tableInfo.getEntityName() + "BO.java";
-            }
-        });
-        focList.add(new FileOutConfig("/template/common/dto/dto.java.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/common/dto/" + tableInfo.getEntityName() + "DTO.java";
-            }
-        });
-
         return focList;
     }
 
     /**
      * service api模块
      *
-     * @return
+     * @return 文件输出配置
      */
     private static List<FileOutConfig> serviceApiList() {
         final String path = ConfigUtil.projectPath + "/" + ConfigUtil.projectName;
 
-        List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
+        List<FileOutConfig> focList = new ArrayList<>();
         // api
-        focList.add(new FileOutConfig("/template/service/api/api.java.ftl") {
+        focList.add(new FileOutConfig("/template/service/api/api.controller.java.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/" + "/api/Api" + tableInfo.getEntityName() + "Controller.java";
@@ -371,44 +221,271 @@ public class ControllerGenerator {
                 return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/" + "/api/biz/Api" + tableInfo.getEntityName() + "Biz.java";
             }
         });
-        // authapi
-        focList.add(new FileOutConfig("/template/service/api/auth/authApi.java.ftl") {
+        // req
+        focList.add(new FileOutConfig("/template/service/api/api.req.java.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/" + "/api/auth/Auth" + tableInfo.getEntityName() + "Controller.java";
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/" + "/api/req/Api" + tableInfo.getEntityName() + "Req.java";
             }
         });
-
-        // ahthbiz
-        focList.add(new FileOutConfig("/template/service/api/auth/biz/authApi.biz.java.ftl") {
+        // resp
+        focList.add(new FileOutConfig("/template/service/api/api.resp.java.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/" + "/api/auth/biz/Auth" + tableInfo.getEntityName() + "Biz.java";
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/" + "/api/resp/Api" + tableInfo.getEntityName() + "Resp.java";
             }
         });
         return focList;
     }
 
     /**
-     * service - dao 模块
+     * service api模块
      *
-     * @return
+     * @return 文件输出配置
      */
-    private static List<FileOutConfig> serviceDaoList() {
+    private static List<FileOutConfig> serviceAuthList() {
         final String path = ConfigUtil.projectPath + "/" + ConfigUtil.projectName;
 
-        List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
-
-        focList.add(new FileOutConfig("/template/service/dao/impl/impl.java.ftl") {
+        List<FileOutConfig> focList = new ArrayList<>();
+        // api
+        focList.add(new FileOutConfig("/template/service/auth/auth.controller.java.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/" + "/dao/impl/" + tableInfo.getEntityName() + "DaoImpl.java";
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/" + "/auth/Auth" + tableInfo.getEntityName() + "Controller.java";
             }
         });
-        focList.add(new FileOutConfig("/template/service/dao/dao.java.ftl") {
+        // biz
+        focList.add(new FileOutConfig("/template/service/auth/biz/auth.biz.java.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/" + "/dao/" + tableInfo.getEntityName() + "Dao.java";
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/" + "/auth/biz/Auth" + tableInfo.getEntityName() + "Biz.java";
+            }
+        });
+        // req
+        focList.add(new FileOutConfig("/template/service/auth/auth.req.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/" + "/auth/req/Auth" + tableInfo.getEntityName() + "Req.java";
+            }
+        });
+        // resp
+        focList.add(new FileOutConfig("/template/service/auth/auth.resp.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/" + "/auth/resp/Auth" + tableInfo.getEntityName() + "Resp.java";
+            }
+        });
+        return focList;
+    }
+
+    /**
+     * service Boss模块
+     *
+     * @return 文件输出配置
+     */
+    private static List<FileOutConfig> serviceBossList() {
+        final String path = ConfigUtil.projectPath + "/" + ConfigUtil.projectName;
+
+        List<FileOutConfig> focList = new ArrayList<>();
+        // api
+        focList.add(new FileOutConfig("/template/service/boss/boss.controller.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/boss/Boss" + tableInfo.getEntityName() + "Controller.java";
+            }
+        });
+        // biz
+        focList.add(new FileOutConfig("/template/service/boss/biz/boss.biz.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/boss/biz/Boss" + tableInfo.getEntityName() + "Biz.java";
+            }
+        });
+
+        // req
+        focList.add(new FileOutConfig("/template/service/boss/boss.req.save.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/boss/req/Boss" + tableInfo.getEntityName() + "SaveReq.java";
+            }
+        });
+        focList.add(new FileOutConfig("/template/service/boss/boss.req.page.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/boss/req/Boss" + tableInfo.getEntityName() + "PageReq.java";
+            }
+        });
+        focList.add(new FileOutConfig("/template/service/boss/boss.req.edit.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/boss/req/Boss" + tableInfo.getEntityName() + "EditReq.java";
+            }
+        });
+
+        // resp
+        focList.add(new FileOutConfig("/template/service/boss/boss.resp.view.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/boss/resp/Boss" + tableInfo.getEntityName() + "ViewResp.java";
+            }
+        });
+        focList.add(new FileOutConfig("/template/service/boss/boss.resp.page.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/boss/resp/Boss" + tableInfo.getEntityName() + "PageResp.java";
+            }
+        });
+        return focList;
+    }
+
+    /**
+     * service Crm模块
+     *
+     * @return 文件输出配置
+     */
+    private static List<FileOutConfig> serviceAdminList() {
+        final String path = ConfigUtil.projectPath + "/" + ConfigUtil.projectName;
+
+        List<FileOutConfig> focList = new ArrayList<>();
+        // api
+        focList.add(new FileOutConfig("/template/service/admin/admin.controller.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/admin/Admin" + tableInfo.getEntityName() + "Controller.java";
+            }
+        });
+        // biz
+        focList.add(new FileOutConfig("/template/service/admin/biz/admin.biz.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/admin/biz/Admin" + tableInfo.getEntityName() + "Biz.java";
+            }
+        });
+
+        // req
+        focList.add(new FileOutConfig("/template/service/admin/admin.req.save.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/admin/req/Admin" + tableInfo.getEntityName() + "SaveReq.java";
+            }
+        });
+        focList.add(new FileOutConfig("/template/service/admin/admin.req.page.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/admin/req/Admin" + tableInfo.getEntityName() + "PageReq.java";
+            }
+        });
+        focList.add(new FileOutConfig("/template/service/admin/admin.req.edit.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/admin/req/Admin" + tableInfo.getEntityName() + "EditReq.java";
+            }
+        });
+
+        // resp
+        focList.add(new FileOutConfig("/template/service/admin/admin.resp.view.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/admin/resp/Admin" + tableInfo.getEntityName() + "ViewResp.java";
+            }
+        });
+        focList.add(new FileOutConfig("/template/service/admin/admin.resp.page.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/admin/resp/Admin" + tableInfo.getEntityName() + "PageResp.java";
+            }
+        });
+        return focList;
+    }
+
+    private static List<FileOutConfig> serviceTchList() {
+        final String path = ConfigUtil.projectPath + "/" + ConfigUtil.projectName;
+
+        List<FileOutConfig> focList = new ArrayList<>();
+        // api
+        focList.add(new FileOutConfig("/template/service/tch/tch.controller.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/" + "/tch/Tch" + tableInfo.getEntityName() + "Controller.java";
+            }
+        });
+        // biz
+        focList.add(new FileOutConfig("/template/service/tch/biz/tch.biz.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/" + "/tch/biz/Tch" + tableInfo.getEntityName() + "Biz.java";
+            }
+        });
+
+        // req
+        focList.add(new FileOutConfig("/template/service/tch/tch.req.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/tch/req/Tch" + tableInfo.getEntityName() + "Req.java";
+            }
+        });
+
+        // resp
+        focList.add(new FileOutConfig("/template/service/tch/tch.resp.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/tch/resp/Tch" + tableInfo.getEntityName() + "Resp.java";
+            }
+        });
+        return focList;
+    }
+
+    /**
+     * feign 工程
+     *
+     * @return 文件输出配置
+     */
+    private static List<FileOutConfig> feignList() {
+        String projectPath = ConfigUtil.projectPath.replace("service", "feign");
+        String projectName = ConfigUtil.projectName.replace("service", "feign");
+        String packagePath = ConfigUtil.packagePath.replace("service", "feign");
+        String packageName = ConfigUtil.packageName.replace("service", "feign");
+        final String path = projectPath + "/" + projectName;
+
+        List<FileOutConfig> focList = new ArrayList<>();
+        focList.add(new FileOutConfig("/template/feign/interfaces.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + packagePath + "/" + packageName + "/feign/interfaces/IFeign" + tableInfo.getEntityName() + ".java";
+            }
+        });
+
+        // qo
+        focList.add(new FileOutConfig("/template/feign/qo.page.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + packagePath + "/" + packageName + "/feign/interfaces/qo/" + tableInfo.getEntityName() + "PageQO.java";
+            }
+        });
+        focList.add(new FileOutConfig("/template/feign/qo.save.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + packagePath + "/" + packageName + "/feign/interfaces/qo/" + tableInfo.getEntityName() + "SaveQO.java";
+            }
+        });
+        focList.add(new FileOutConfig("/template/feign/qo.edit.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + packagePath + "/" + packageName + "/feign/interfaces/qo/" + tableInfo.getEntityName() + "EditQO.java";
+            }
+        });
+
+        // vo
+        focList.add(new FileOutConfig("/template/feign/vo.page.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + packagePath + "/" + packageName + "/feign/interfaces/vo/" + tableInfo.getEntityName() + "PageVO.java";
+            }
+        });
+        focList.add(new FileOutConfig("/template/feign/vo.view.java.ftl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                return path + "/src/main/java/" + packagePath + "/" + packageName + "/feign/interfaces/vo/" + tableInfo.getEntityName() + "ViewVO.java";
             }
         });
         return focList;
@@ -417,22 +494,22 @@ public class ControllerGenerator {
     /**
      * service feign模块
      *
-     * @return
+     * @return 文件输出配置
      */
     private static List<FileOutConfig> serviceFeignList() {
         final String path = ConfigUtil.projectPath + "/" + ConfigUtil.projectName;
 
-        List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
+        List<FileOutConfig> focList = new ArrayList<>();
         focList.add(new FileOutConfig("/template/service/feign/feign.java.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/feign/Feign" + tableInfo.getEntityName() + "Controller.java";
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/feign/Feign" + tableInfo.getEntityName() + "Controller.java";
             }
         });
         focList.add(new FileOutConfig("/template/service/feign/biz/biz.java.ftl") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/service/feign/biz/Feign" + tableInfo.getEntityName() + "Biz.java";
+                return path + "/src/main/java/" + ConfigUtil.packagePath + "/" + ConfigUtil.packageName + "/feign/biz/Feign" + tableInfo.getEntityName() + "Biz.java";
             }
         });
         return focList;

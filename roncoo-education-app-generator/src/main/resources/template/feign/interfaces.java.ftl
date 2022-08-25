@@ -1,14 +1,14 @@
 package ${cfg.packagePrefix}.${cfg.packageName!}.feign.interfaces;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import ${cfg.packagePrefix}.common.core.base.Page;
-import ${cfg.packagePrefix}.${cfg.packageName!}.feign.qo.${entity}QO;
-import ${cfg.packagePrefix}.${cfg.packageName!}.feign.vo.${entity}VO;
+import ${cfg.packagePrefix}.${cfg.packageName!}.feign.interfaces.qo.${entity}PageQO;
+import ${cfg.packagePrefix}.${cfg.packageName!}.feign.interfaces.qo.${entity}SaveQO;
+import ${cfg.packagePrefix}.${cfg.packageName!}.feign.interfaces.qo.${entity}EditQO;
+import ${cfg.packagePrefix}.${cfg.packageName!}.feign.interfaces.vo.${entity}PageVO;
+import ${cfg.packagePrefix}.${cfg.packageName!}.feign.interfaces.vo.${entity}ViewVO;
 
 /**
 * ${table.comment} 接口
@@ -16,23 +16,53 @@ import ${cfg.packagePrefix}.${cfg.packageName!}.feign.vo.${entity}VO;
 * @author ${author}
 * @date ${date}
 */
-@FeignClient(value = "service-${cfg.packageName!}")
-public interface IFeign${entity}{
+@FeignClient(value = "${cfg.projectName!?replace("roncoo-education-", "")}", path = "/${cfg.packageName!}/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.name?replace('_', "/")}</#if>")
+public interface IFeign${entity} {
 
-@RequestMapping(value = "/${cfg.packageName!}/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>/listForPage", method = RequestMethod.POST)
+/**
+* 分页列出-${table.comment!}
+*
+* @param qo ${table.comment!}
+* @return 分页结果
+*/
+@PostMapping(value = "/page")
 Page
-<${entity}VO> listForPage(@RequestBody ${entity}QO qo);
+<${entity}PageVO> page(@RequestBody ${entity}PageQO qo);
 
-    @RequestMapping(value = "/${cfg.packageName!}/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>/save", method = RequestMethod.POST)
-    int save(@RequestBody ${entity}QO qo);
+    /**
+    * 保存-${table.comment!}
+    *
+    * @param qo ${table.comment!}
+    * @return 影响记录数
+    */
+    @PostMapping(value = "/save")
+    int save(@RequestBody ${entity}SaveQO qo);
 
-    @RequestMapping(value = "/${cfg.packageName!}/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>/delete/{id}", method = RequestMethod.DELETE)
+    /**
+    * 根据ID删除-${table.comment!}
+    *
+    * @param id 主键ID
+    * @return 影响记录数
+    */
+    @DeleteMapping(value = "/delete/{id}")
     int deleteById(@PathVariable(value = "id") Long id);
 
-    @RequestMapping(value = "/${cfg.packageName!}/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>/updateById", method = RequestMethod.PUT)
-    int updateById(@RequestBody ${entity}QO qo);
+    /**
+    * 修改${table.comment!}
+    *
+    * @param qo ${table.comment!}
+    * @return 影响记录数
+    */
+    @PutMapping(value = "/edit")
+    int updateById(@RequestBody ${entity}EditQO qo);
 
-    @RequestMapping(value = "/${cfg.packageName!}/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>/get/{id}", method = RequestMethod.GET)
-    ${entity}VO getById(@PathVariable(value = "id") Long id);
+    /**
+    * 根据ID获取${table.comment!}
+    *
+    * @param id 主键ID
+    * @return ${table.comment!}
+    */
+    @GetMapping(value = "/get/{id}")
+    ${entity}ViewVO getById(@PathVariable(value = "id") Long id);
 
     }

@@ -1,8 +1,10 @@
-package ${cfg.packagePrefix}.${cfg.packageName!}.service.dao;
+package ${cfg.packagePrefix}.${cfg.packageName!}.dao;
 
 import ${cfg.packagePrefix}.common.core.base.Page;
-import ${cfg.packagePrefix}.${cfg.packageName!}.service.dao.impl.mapper.entity.${entity};
-import ${cfg.packagePrefix}.${cfg.packageName!}.service.dao.impl.mapper.entity.${entity}Example;
+import ${cfg.packagePrefix}.${cfg.packageName!}.dao.impl.mapper.entity.${entity};
+import ${cfg.packagePrefix}.${cfg.packageName!}.dao.impl.mapper.entity.${entity}Example;
+
+import java.util.List;
 
 /**
 * ${table.comment!} 服务类
@@ -32,7 +34,7 @@ import ${cfg.packagePrefix}.${cfg.packageName!}.service.dao.impl.mapper.entity.$
     int deleteById(Long id);
 
     /**
-    * 修改试卷分类
+    * 修改${table.comment!}
     *
     * @param record ${table.comment!}
     * @return 影响记录数
@@ -55,7 +57,22 @@ import ${cfg.packagePrefix}.${cfg.packageName!}.service.dao.impl.mapper.entity.$
     * @param example     查询条件
     * @return 分页结果
     */
-    Page<${entity}> listForPage(int pageCurrent, int pageSize, ${entity}Example example);
+    Page<${entity}> page(int pageCurrent, int pageSize, ${entity}Example example);
 
+    /**
+    * ${table.comment!}--条件列出
+    *
+    * @param example     查询条件
+    * @return ${table.comment!}列表
+    */
+    List<${entity}> listByExample(${entity}Example example);
+
+    /**
+    * ${table.comment!}--条件统计
+    *
+    * @param example     统计条件
+    * @return ${table.comment!}数量
+    */
+    int countByExample(${entity}Example example);
     }
 </#if>

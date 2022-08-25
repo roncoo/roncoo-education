@@ -11,7 +11,6 @@ import com.roncoo.education.course.dao.impl.mapper.entity.AdvExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.AdvExample.Criteria;
 import com.roncoo.education.course.feign.interfaces.qo.AdvQO;
 import com.roncoo.education.course.feign.interfaces.vo.AdvVO;
-import com.roncoo.education.system.feign.interfaces.IFeignSys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

@@ -11,8 +11,6 @@ import com.roncoo.education.common.core.pay.MerchantApiUtil;
 import com.roncoo.education.course.service.api.bo.OrderInfoPayNotifyBO;
 import com.roncoo.education.course.service.callback.biz.CallbackOrderBiz;
 import com.roncoo.education.course.service.callback.bo.CallbackOrderBO;
-import com.roncoo.education.system.feign.interfaces.IFeignSys;
-import com.roncoo.education.system.feign.interfaces.vo.SysVO;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;

@@ -8,7 +8,6 @@ import com.roncoo.education.common.core.enums.RedisPreEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.common.core.tools.JWTUtil;
-import com.roncoo.education.system.feign.interfaces.IFeignSysMenu;
 import com.roncoo.education.user.dao.PlatformDao;
 import com.roncoo.education.user.dao.UserDao;
 import com.roncoo.education.user.dao.UserLogLoginDao;

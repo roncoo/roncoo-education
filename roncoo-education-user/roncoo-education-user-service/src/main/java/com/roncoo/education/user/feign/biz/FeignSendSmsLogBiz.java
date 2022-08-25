@@ -12,8 +12,6 @@ import com.roncoo.education.common.core.enums.IsSuccessEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.DateUtil;
-import com.roncoo.education.system.feign.interfaces.IFeignSys;
-import com.roncoo.education.system.feign.interfaces.vo.SysVO;
 import com.roncoo.education.user.dao.PlatformDao;
 import com.roncoo.education.user.dao.SendSmsLogDao;
 import com.roncoo.education.user.dao.UserDao;
