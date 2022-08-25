@@ -16,8 +16,6 @@ public class ZoneCourse implements Serializable {
 
     private Long zoneId;
 
-    private Integer zoneLocation;
-
     private Long courseId;
 
     private static final long serialVersionUID = 1L;
@@ -70,14 +68,6 @@ public class ZoneCourse implements Serializable {
         this.zoneId = zoneId;
     }
 
-    public Integer getZoneLocation() {
-        return zoneLocation;
-    }
-
-    public void setZoneLocation(Integer zoneLocation) {
-        this.zoneLocation = zoneLocation;
-    }
-
     public Long getCourseId() {
         return courseId;
     }
@@ -98,7 +88,6 @@ public class ZoneCourse implements Serializable {
         sb.append(", statusId=").append(statusId);
         sb.append(", sort=").append(sort);
         sb.append(", zoneId=").append(zoneId);
-        sb.append(", zoneLocation=").append(zoneLocation);
         sb.append(", courseId=").append(courseId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

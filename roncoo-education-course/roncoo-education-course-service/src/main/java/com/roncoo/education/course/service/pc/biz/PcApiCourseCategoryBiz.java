@@ -7,7 +7,7 @@ import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.course.dao.CourseCategoryDao;
+import com.roncoo.education.course.dao.CategoryDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseCategory;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseCategoryExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseCategoryExample.Criteria;
@@ -28,7 +28,7 @@ import java.util.List;
 public class PcApiCourseCategoryBiz {
 
     @Autowired
-    private CourseCategoryDao dao;
+    private CategoryDao dao;
 
     /**
      * 课程分类-分页列出

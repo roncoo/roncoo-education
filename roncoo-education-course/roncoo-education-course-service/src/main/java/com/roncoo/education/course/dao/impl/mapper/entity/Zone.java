@@ -18,8 +18,6 @@ public class Zone implements Serializable {
 
     private String zoneDesc;
 
-    private Integer zoneLocation;
-
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -78,14 +76,6 @@ public class Zone implements Serializable {
         this.zoneDesc = zoneDesc == null ? null : zoneDesc.trim();
     }
 
-    public Integer getZoneLocation() {
-        return zoneLocation;
-    }
-
-    public void setZoneLocation(Integer zoneLocation) {
-        this.zoneLocation = zoneLocation;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -99,7 +89,6 @@ public class Zone implements Serializable {
         sb.append(", sort=").append(sort);
         sb.append(", zoneName=").append(zoneName);
         sb.append(", zoneDesc=").append(zoneDesc);
-        sb.append(", zoneLocation=").append(zoneLocation);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

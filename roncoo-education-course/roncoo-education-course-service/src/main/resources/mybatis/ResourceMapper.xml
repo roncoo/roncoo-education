@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.roncoo.education.course.dao.impl.mapper.ResourceMapper">
+  <resultMap id="BaseResultMap" type="com.roncoo.education.course.dao.impl.mapper.entity.Resource">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="status_id" jdbcType="TINYINT" property="statusId" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="recourse_name" jdbcType="VARCHAR" property="recourseName" />
+    <result column="recourse_size" jdbcType="BIGINT" property="recourseSize" />
+    <result column="recourse_type" jdbcType="TINYINT" property="recourseType" />
+    <result column="video_status" jdbcType="TINYINT" property="videoStatus" />
+    <result column="video_length" jdbcType="VARCHAR" property="videoLength" />
+    <result column="video_vid" jdbcType="VARCHAR" property="videoVid" />
+    <result column="file_url" jdbcType="VARCHAR" property="fileUrl" />
+    <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, gmt_create, gmt_modified, status_id, sort, recourse_name, recourse_size, recourse_type, 
+    video_status, video_length, video_vid, file_url, file_name
+  </sql>
+  <select id="selectByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0">
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from resource
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from resource
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample">
+    delete from resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Resource">
+    insert into resource (id, gmt_create, gmt_modified, 
+      status_id, sort, recourse_name, 
+      recourse_size, recourse_type, video_status, 
+      video_length, video_vid, file_url, 
+      file_name)
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
+      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{recourseName,jdbcType=VARCHAR}, 
+      #{recourseSize,jdbcType=BIGINT}, #{recourseType,jdbcType=TINYINT}, #{videoStatus,jdbcType=TINYINT}, 
+      #{videoLength,jdbcType=VARCHAR}, #{videoVid,jdbcType=VARCHAR}, #{fileUrl,jdbcType=VARCHAR}, 
+      #{fileName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Resource">
+    insert into resource
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+      <if test="statusId != null">
+        status_id,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="recourseName != null">
+        recourse_name,
+      </if>
+      <if test="recourseSize != null">
+        recourse_size,
+      </if>
+      <if test="recourseType != null">
+        recourse_type,
+      </if>
+      <if test="videoStatus != null">
+        video_status,
+      </if>
+      <if test="videoLength != null">
+        video_length,
+      </if>
+      <if test="videoVid != null">
+        video_vid,
+      </if>
+      <if test="fileUrl != null">
+        file_url,
+      </if>
+      <if test="fileName != null">
+        file_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusId != null">
+        #{statusId,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="recourseName != null">
+        #{recourseName,jdbcType=VARCHAR},
+      </if>
+      <if test="recourseSize != null">
+        #{recourseSize,jdbcType=BIGINT},
+      </if>
+      <if test="recourseType != null">
+        #{recourseType,jdbcType=TINYINT},
+      </if>
+      <if test="videoStatus != null">
+        #{videoStatus,jdbcType=TINYINT},
+      </if>
+      <if test="videoLength != null">
+        #{videoLength,jdbcType=VARCHAR},
+      </if>
+      <if test="videoVid != null">
+        #{videoVid,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null">
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample" resultType="java.lang.Integer">
+    select count(*) from resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update resource
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.gmtCreate != null">
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModified != null">
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.statusId != null">
+        status_id = #{record.statusId,jdbcType=TINYINT},
+      </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.recourseName != null">
+        recourse_name = #{record.recourseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recourseSize != null">
+        recourse_size = #{record.recourseSize,jdbcType=BIGINT},
+      </if>
+      <if test="record.recourseType != null">
+        recourse_type = #{record.recourseType,jdbcType=TINYINT},
+      </if>
+      <if test="record.videoStatus != null">
+        video_status = #{record.videoStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.videoLength != null">
+        video_length = #{record.videoLength,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoVid != null">
+        video_vid = #{record.videoVid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileUrl != null">
+        file_url = #{record.fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileName != null">
+        file_name = #{record.fileName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update resource
+    set id = #{record.id,jdbcType=BIGINT},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      status_id = #{record.statusId,jdbcType=TINYINT},
+      sort = #{record.sort,jdbcType=INTEGER},
+      recourse_name = #{record.recourseName,jdbcType=VARCHAR},
+      recourse_size = #{record.recourseSize,jdbcType=BIGINT},
+      recourse_type = #{record.recourseType,jdbcType=TINYINT},
+      video_status = #{record.videoStatus,jdbcType=TINYINT},
+      video_length = #{record.videoLength,jdbcType=VARCHAR},
+      video_vid = #{record.videoVid,jdbcType=VARCHAR},
+      file_url = #{record.fileUrl,jdbcType=VARCHAR},
+      file_name = #{record.fileName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Resource">
+    update resource
+    <set>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusId != null">
+        status_id = #{statusId,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="recourseName != null">
+        recourse_name = #{recourseName,jdbcType=VARCHAR},
+      </if>
+      <if test="recourseSize != null">
+        recourse_size = #{recourseSize,jdbcType=BIGINT},
+      </if>
+      <if test="recourseType != null">
+        recourse_type = #{recourseType,jdbcType=TINYINT},
+      </if>
+      <if test="videoStatus != null">
+        video_status = #{videoStatus,jdbcType=TINYINT},
+      </if>
+      <if test="videoLength != null">
+        video_length = #{videoLength,jdbcType=VARCHAR},
+      </if>
+      <if test="videoVid != null">
+        video_vid = #{videoVid,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null">
+        file_url = #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Resource">
+    update resource
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      status_id = #{statusId,jdbcType=TINYINT},
+      sort = #{sort,jdbcType=INTEGER},
+      recourse_name = #{recourseName,jdbcType=VARCHAR},
+      recourse_size = #{recourseSize,jdbcType=BIGINT},
+      recourse_type = #{recourseType,jdbcType=TINYINT},
+      video_status = #{videoStatus,jdbcType=TINYINT},
+      video_length = #{videoLength,jdbcType=VARCHAR},
+      video_vid = #{videoVid,jdbcType=VARCHAR},
+      file_url = #{fileUrl,jdbcType=VARCHAR},
+      file_name = #{fileName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

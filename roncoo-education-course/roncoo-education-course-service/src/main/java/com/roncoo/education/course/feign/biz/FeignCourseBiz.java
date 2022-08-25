@@ -41,7 +41,7 @@ public class FeignCourseBiz {
     @Autowired
     private CourseIntroduceDao courseIntroduceDao;
     @Autowired
-    private CourseCategoryDao courseCategoryDao;
+    private CategoryDao courseCategoryDao;
     @Autowired
     private CourseChapterPeriodDao courseChapterPeriodDao;
 

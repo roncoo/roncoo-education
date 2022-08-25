@@ -1,7 +1,6 @@
 package com.roncoo.education.course.dao.impl.mapper.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class CourseChapter implements Serializable {
@@ -22,10 +21,6 @@ public class CourseChapter implements Serializable {
     private String chapterDesc;
 
     private Integer isFree;
-
-    private BigDecimal chapterOriginal;
-
-    private BigDecimal chapterDiscount;
 
     private static final long serialVersionUID = 1L;
 
@@ -101,22 +96,6 @@ public class CourseChapter implements Serializable {
         this.isFree = isFree;
     }
 
-    public BigDecimal getChapterOriginal() {
-        return chapterOriginal;
-    }
-
-    public void setChapterOriginal(BigDecimal chapterOriginal) {
-        this.chapterOriginal = chapterOriginal;
-    }
-
-    public BigDecimal getChapterDiscount() {
-        return chapterDiscount;
-    }
-
-    public void setChapterDiscount(BigDecimal chapterDiscount) {
-        this.chapterDiscount = chapterDiscount;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -132,8 +111,6 @@ public class CourseChapter implements Serializable {
         sb.append(", chapterName=").append(chapterName);
         sb.append(", chapterDesc=").append(chapterDesc);
         sb.append(", isFree=").append(isFree);
-        sb.append(", chapterOriginal=").append(chapterOriginal);
-        sb.append(", chapterDiscount=").append(chapterDiscount);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

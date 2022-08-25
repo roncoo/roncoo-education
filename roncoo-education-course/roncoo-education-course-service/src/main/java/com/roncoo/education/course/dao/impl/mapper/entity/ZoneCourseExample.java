@@ -69,7 +69,7 @@ public class ZoneCourseExample {
     }
 
     public void setLimitStart(int limitStart) {
-        this.limitStart = limitStart;
+        this.limitStart=limitStart;
     }
 
     public int getLimitStart() {
@@ -77,7 +77,7 @@ public class ZoneCourseExample {
     }
 
     public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
+        this.pageSize=pageSize;
     }
 
     public int getPageSize() {
@@ -482,66 +482,6 @@ public class ZoneCourseExample {
 
         public Criteria andZoneIdNotBetween(Long value1, Long value2) {
             addCriterion("zone_id not between", value1, value2, "zoneId");
-            return (Criteria) this;
-        }
-
-        public Criteria andZoneLocationIsNull() {
-            addCriterion("zone_location is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andZoneLocationIsNotNull() {
-            addCriterion("zone_location is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andZoneLocationEqualTo(Integer value) {
-            addCriterion("zone_location =", value, "zoneLocation");
-            return (Criteria) this;
-        }
-
-        public Criteria andZoneLocationNotEqualTo(Integer value) {
-            addCriterion("zone_location <>", value, "zoneLocation");
-            return (Criteria) this;
-        }
-
-        public Criteria andZoneLocationGreaterThan(Integer value) {
-            addCriterion("zone_location >", value, "zoneLocation");
-            return (Criteria) this;
-        }
-
-        public Criteria andZoneLocationGreaterThanOrEqualTo(Integer value) {
-            addCriterion("zone_location >=", value, "zoneLocation");
-            return (Criteria) this;
-        }
-
-        public Criteria andZoneLocationLessThan(Integer value) {
-            addCriterion("zone_location <", value, "zoneLocation");
-            return (Criteria) this;
-        }
-
-        public Criteria andZoneLocationLessThanOrEqualTo(Integer value) {
-            addCriterion("zone_location <=", value, "zoneLocation");
-            return (Criteria) this;
-        }
-
-        public Criteria andZoneLocationIn(List<Integer> values) {
-            addCriterion("zone_location in", values, "zoneLocation");
-            return (Criteria) this;
-        }
-
-        public Criteria andZoneLocationNotIn(List<Integer> values) {
-            addCriterion("zone_location not in", values, "zoneLocation");
-            return (Criteria) this;
-        }
-
-        public Criteria andZoneLocationBetween(Integer value1, Integer value2) {
-            addCriterion("zone_location between", value1, value2, "zoneLocation");
-            return (Criteria) this;
-        }
-
-        public Criteria andZoneLocationNotBetween(Integer value1, Integer value2) {
-            addCriterion("zone_location not between", value1, value2, "zoneLocation");
             return (Criteria) this;
         }
 

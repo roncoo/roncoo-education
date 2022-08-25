@@ -5,7 +5,7 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.system.dao.WebsiteLinkDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink;
-import com.roncoo.education.system.service.api.resp.WebsiteLinkResp;
+import com.roncoo.education.system.service.api.resp.ApiWebsiteLinkResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,9 +22,9 @@ public class ApiWebsiteLinkBiz {
     @Autowired
     private WebsiteLinkDao dao;
 
-    public Result<List<WebsiteLinkResp>> list() {
+    public Result<List<ApiWebsiteLinkResp>> list() {
         List<WebsiteLink> websiteLinkList = dao.listByStatusId(StatusIdEnum.YES.getCode());
-        return Result.success(PageUtil.copyList(websiteLinkList, WebsiteLinkResp.class));
+        return Result.success(PageUtil.copyList(websiteLinkList, ApiWebsiteLinkResp.class));
     }
 
 }

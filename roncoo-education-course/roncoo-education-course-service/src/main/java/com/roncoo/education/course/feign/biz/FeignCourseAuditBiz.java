@@ -48,7 +48,7 @@ public class FeignCourseAuditBiz extends BaseBiz {
     @Autowired
     private CourseAuditDao dao;
     @Autowired
-    private CourseCategoryDao courseCategoryDao;
+    private CategoryDao courseCategoryDao;
     @Autowired
     private CourseDao courseDao;
     @Autowired

@@ -7,7 +7,7 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.course.dao.CourseCategoryDao;
+import com.roncoo.education.course.dao.CategoryDao;
 import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.ZoneCourseDao;
 import com.roncoo.education.course.dao.ZoneDao;
@@ -32,7 +32,7 @@ public class PcApiZoneCourseBiz {
     @Autowired
     private ZoneCourseDao dao;
     @Autowired
-    private CourseCategoryDao courseCategoryDao;
+    private CategoryDao courseCategoryDao;
     @Autowired
     private CourseDao courseDao;
 

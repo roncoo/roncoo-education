@@ -5,7 +5,6 @@ import com.roncoo.education.common.core.aliyun.AliyunUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.course.dao.AdvDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Adv;
 import com.roncoo.education.course.dao.impl.mapper.entity.AdvExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.AdvExample.Criteria;

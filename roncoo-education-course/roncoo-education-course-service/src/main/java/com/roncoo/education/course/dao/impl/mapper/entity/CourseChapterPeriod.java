@@ -1,7 +1,6 @@
 package com.roncoo.education.course.dao.impl.mapper.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class CourseChapterPeriod implements Serializable {
@@ -25,29 +24,7 @@ public class CourseChapterPeriod implements Serializable {
 
     private Integer isFree;
 
-    private BigDecimal periodOriginal;
-
-    private BigDecimal periodDiscount;
-
-    private Integer countBuy;
-
-    private Integer countStudy;
-
-    private Integer isDoc;
-
-    private String docName;
-
-    private String docUrl;
-
-    private String isVideo;
-
-    private Long videoNo;
-
-    private String videoName;
-
-    private String videoLength;
-
-    private String videoVid;
+    private Long resourceId;
 
     private static final long serialVersionUID = 1L;
 
@@ -131,100 +108,12 @@ public class CourseChapterPeriod implements Serializable {
         this.isFree = isFree;
     }
 
-    public BigDecimal getPeriodOriginal() {
-        return periodOriginal;
+    public Long getResourceId() {
+        return resourceId;
     }
 
-    public void setPeriodOriginal(BigDecimal periodOriginal) {
-        this.periodOriginal = periodOriginal;
-    }
-
-    public BigDecimal getPeriodDiscount() {
-        return periodDiscount;
-    }
-
-    public void setPeriodDiscount(BigDecimal periodDiscount) {
-        this.periodDiscount = periodDiscount;
-    }
-
-    public Integer getCountBuy() {
-        return countBuy;
-    }
-
-    public void setCountBuy(Integer countBuy) {
-        this.countBuy = countBuy;
-    }
-
-    public Integer getCountStudy() {
-        return countStudy;
-    }
-
-    public void setCountStudy(Integer countStudy) {
-        this.countStudy = countStudy;
-    }
-
-    public Integer getIsDoc() {
-        return isDoc;
-    }
-
-    public void setIsDoc(Integer isDoc) {
-        this.isDoc = isDoc;
-    }
-
-    public String getDocName() {
-        return docName;
-    }
-
-    public void setDocName(String docName) {
-        this.docName = docName == null ? null : docName.trim();
-    }
-
-    public String getDocUrl() {
-        return docUrl;
-    }
-
-    public void setDocUrl(String docUrl) {
-        this.docUrl = docUrl == null ? null : docUrl.trim();
-    }
-
-    public String getIsVideo() {
-        return isVideo;
-    }
-
-    public void setIsVideo(String isVideo) {
-        this.isVideo = isVideo == null ? null : isVideo.trim();
-    }
-
-    public Long getVideoNo() {
-        return videoNo;
-    }
-
-    public void setVideoNo(Long videoNo) {
-        this.videoNo = videoNo;
-    }
-
-    public String getVideoName() {
-        return videoName;
-    }
-
-    public void setVideoName(String videoName) {
-        this.videoName = videoName == null ? null : videoName.trim();
-    }
-
-    public String getVideoLength() {
-        return videoLength;
-    }
-
-    public void setVideoLength(String videoLength) {
-        this.videoLength = videoLength == null ? null : videoLength.trim();
-    }
-
-    public String getVideoVid() {
-        return videoVid;
-    }
-
-    public void setVideoVid(String videoVid) {
-        this.videoVid = videoVid == null ? null : videoVid.trim();
+    public void setResourceId(Long resourceId) {
+        this.resourceId = resourceId;
     }
 
     @Override
@@ -243,18 +132,7 @@ public class CourseChapterPeriod implements Serializable {
         sb.append(", periodName=").append(periodName);
         sb.append(", periodDesc=").append(periodDesc);
         sb.append(", isFree=").append(isFree);
-        sb.append(", periodOriginal=").append(periodOriginal);
-        sb.append(", periodDiscount=").append(periodDiscount);
-        sb.append(", countBuy=").append(countBuy);
-        sb.append(", countStudy=").append(countStudy);
-        sb.append(", isDoc=").append(isDoc);
-        sb.append(", docName=").append(docName);
-        sb.append(", docUrl=").append(docUrl);
-        sb.append(", isVideo=").append(isVideo);
-        sb.append(", videoNo=").append(videoNo);
-        sb.append(", videoName=").append(videoName);
-        sb.append(", videoLength=").append(videoLength);
-        sb.append(", videoVid=").append(videoVid);
+        sb.append(", resourceId=").append(resourceId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

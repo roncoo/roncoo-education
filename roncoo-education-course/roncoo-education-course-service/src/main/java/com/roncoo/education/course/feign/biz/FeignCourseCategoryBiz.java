@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.course.dao.CourseCategoryDao;
+import com.roncoo.education.course.dao.CategoryDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseCategory;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseCategoryExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseCategoryExample.Criteria;
@@ -26,7 +26,7 @@ import java.util.List;
 public class FeignCourseCategoryBiz {
 
     @Autowired
-    private CourseCategoryDao dao;
+    private CategoryDao dao;
 
     public Page<CourseCategoryVO> listForPage(CourseCategoryQO qo) {
         CourseCategoryExample example = new CourseCategoryExample();

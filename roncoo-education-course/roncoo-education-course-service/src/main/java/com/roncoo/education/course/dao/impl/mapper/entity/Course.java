@@ -15,19 +15,13 @@ public class Course implements Serializable {
 
     private Integer sort;
 
-    private Long lecturerUserNo;
+    private Long lecturerId;
 
-    private Long categoryId1;
-
-    private Long categoryId2;
-
-    private Long categoryId3;
+    private Long categoryId;
 
     private String courseName;
 
     private String courseLogo;
-
-    private Long introduceId;
 
     private Integer isFree;
 
@@ -43,7 +37,7 @@ public class Course implements Serializable {
 
     private Integer countStudy;
 
-    private Integer periodTotal;
+    private String introduce;
 
     private static final long serialVersionUID = 1L;
 
@@ -87,36 +81,20 @@ public class Course implements Serializable {
         this.sort = sort;
     }
 
-    public Long getLecturerUserNo() {
-        return lecturerUserNo;
+    public Long getLecturerId() {
+        return lecturerId;
     }
 
-    public void setLecturerUserNo(Long lecturerUserNo) {
-        this.lecturerUserNo = lecturerUserNo;
+    public void setLecturerId(Long lecturerId) {
+        this.lecturerId = lecturerId;
     }
 
-    public Long getCategoryId1() {
-        return categoryId1;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategoryId1(Long categoryId1) {
-        this.categoryId1 = categoryId1;
-    }
-
-    public Long getCategoryId2() {
-        return categoryId2;
-    }
-
-    public void setCategoryId2(Long categoryId2) {
-        this.categoryId2 = categoryId2;
-    }
-
-    public Long getCategoryId3() {
-        return categoryId3;
-    }
-
-    public void setCategoryId3(Long categoryId3) {
-        this.categoryId3 = categoryId3;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getCourseName() {
@@ -133,14 +111,6 @@ public class Course implements Serializable {
 
     public void setCourseLogo(String courseLogo) {
         this.courseLogo = courseLogo == null ? null : courseLogo.trim();
-    }
-
-    public Long getIntroduceId() {
-        return introduceId;
-    }
-
-    public void setIntroduceId(Long introduceId) {
-        this.introduceId = introduceId;
     }
 
     public Integer getIsFree() {
@@ -199,12 +169,12 @@ public class Course implements Serializable {
         this.countStudy = countStudy;
     }
 
-    public Integer getPeriodTotal() {
-        return periodTotal;
+    public String getIntroduce() {
+        return introduce;
     }
 
-    public void setPeriodTotal(Integer periodTotal) {
-        this.periodTotal = periodTotal;
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce == null ? null : introduce.trim();
     }
 
     @Override
@@ -218,13 +188,10 @@ public class Course implements Serializable {
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", statusId=").append(statusId);
         sb.append(", sort=").append(sort);
-        sb.append(", lecturerUserNo=").append(lecturerUserNo);
-        sb.append(", categoryId1=").append(categoryId1);
-        sb.append(", categoryId2=").append(categoryId2);
-        sb.append(", categoryId3=").append(categoryId3);
+        sb.append(", lecturerId=").append(lecturerId);
+        sb.append(", categoryId=").append(categoryId);
         sb.append(", courseName=").append(courseName);
         sb.append(", courseLogo=").append(courseLogo);
-        sb.append(", introduceId=").append(introduceId);
         sb.append(", isFree=").append(isFree);
         sb.append(", courseOriginal=").append(courseOriginal);
         sb.append(", courseDiscount=").append(courseDiscount);
@@ -232,7 +199,7 @@ public class Course implements Serializable {
         sb.append(", courseSort=").append(courseSort);
         sb.append(", countBuy=").append(countBuy);
         sb.append(", countStudy=").append(countStudy);
-        sb.append(", periodTotal=").append(periodTotal);
+        sb.append(", introduce=").append(introduce);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

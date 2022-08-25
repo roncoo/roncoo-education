@@ -20,5 +20,5 @@ public class CourseCategoryListDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "分类列表", required = true)
-    private List<CourseCategoryDTO> courseCategoryList = new ArrayList<>();
+    private courseCategoryList = new ArrayList<>();
 }

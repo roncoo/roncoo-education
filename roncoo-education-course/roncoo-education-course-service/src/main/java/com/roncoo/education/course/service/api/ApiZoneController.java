@@ -2,6 +2,7 @@ package com.roncoo.education.course.service.api;
 
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.service.BaseController;
 import com.roncoo.education.course.service.api.biz.ApiZoneBiz;
 import com.roncoo.education.course.service.api.bo.ZoneBO;
 import com.roncoo.education.course.service.api.dto.ZoneDTO;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author wuyun
  */
 @RestController
-@RequestMapping(value = "/course/api/zone/course")
+@RequestMapping(value = "/course/api/zone")
 public class ApiZoneController extends BaseController {
 
     @Autowired

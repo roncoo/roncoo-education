@@ -1,6 +1,5 @@
 package com.roncoo.education.course.dao.impl.mapper.entity;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -70,7 +69,7 @@ public class CourseChapterExample {
     }
 
     public void setLimitStart(int limitStart) {
-        this.limitStart = limitStart;
+        this.limitStart=limitStart;
     }
 
     public int getLimitStart() {
@@ -78,7 +77,7 @@ public class CourseChapterExample {
     }
 
     public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
+        this.pageSize=pageSize;
     }
 
     public int getPageSize() {
@@ -683,126 +682,6 @@ public class CourseChapterExample {
 
         public Criteria andIsFreeNotBetween(Integer value1, Integer value2) {
             addCriterion("is_free not between", value1, value2, "isFree");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalIsNull() {
-            addCriterion("chapter_original is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalIsNotNull() {
-            addCriterion("chapter_original is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalEqualTo(BigDecimal value) {
-            addCriterion("chapter_original =", value, "chapterOriginal");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalNotEqualTo(BigDecimal value) {
-            addCriterion("chapter_original <>", value, "chapterOriginal");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalGreaterThan(BigDecimal value) {
-            addCriterion("chapter_original >", value, "chapterOriginal");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("chapter_original >=", value, "chapterOriginal");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalLessThan(BigDecimal value) {
-            addCriterion("chapter_original <", value, "chapterOriginal");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("chapter_original <=", value, "chapterOriginal");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalIn(List<BigDecimal> values) {
-            addCriterion("chapter_original in", values, "chapterOriginal");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalNotIn(List<BigDecimal> values) {
-            addCriterion("chapter_original not in", values, "chapterOriginal");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("chapter_original between", value1, value2, "chapterOriginal");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("chapter_original not between", value1, value2, "chapterOriginal");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountIsNull() {
-            addCriterion("chapter_discount is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountIsNotNull() {
-            addCriterion("chapter_discount is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountEqualTo(BigDecimal value) {
-            addCriterion("chapter_discount =", value, "chapterDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountNotEqualTo(BigDecimal value) {
-            addCriterion("chapter_discount <>", value, "chapterDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountGreaterThan(BigDecimal value) {
-            addCriterion("chapter_discount >", value, "chapterDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("chapter_discount >=", value, "chapterDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountLessThan(BigDecimal value) {
-            addCriterion("chapter_discount <", value, "chapterDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("chapter_discount <=", value, "chapterDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountIn(List<BigDecimal> values) {
-            addCriterion("chapter_discount in", values, "chapterDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountNotIn(List<BigDecimal> values) {
-            addCriterion("chapter_discount not in", values, "chapterDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("chapter_discount between", value1, value2, "chapterDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("chapter_discount not between", value1, value2, "chapterDiscount");
             return (Criteria) this;
         }
     }

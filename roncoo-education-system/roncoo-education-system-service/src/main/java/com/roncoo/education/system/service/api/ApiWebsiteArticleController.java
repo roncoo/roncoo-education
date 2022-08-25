@@ -2,8 +2,8 @@ package com.roncoo.education.system.service.api;
 
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.api.biz.ApiWebsiteArticleBiz;
-import com.roncoo.education.system.service.api.req.WebsiteArticleReq;
-import com.roncoo.education.system.service.api.resp.WebsiteArticleResp;
+import com.roncoo.education.system.service.api.req.ApiWebsiteArticleReq;
+import com.roncoo.education.system.service.api.resp.ApiWebsiteArticleResp;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,7 +33,7 @@ public class ApiWebsiteArticleController {
      */
     @ApiOperation(value = "获取站点导航信息接口", notes = "获取站点导航信息")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public Result<List<WebsiteArticleResp>> list() {
+    public Result<List<ApiWebsiteArticleResp>> list() {
         return biz.list();
     }
 
@@ -45,7 +45,7 @@ public class ApiWebsiteArticleController {
      */
     @ApiOperation(value = "获取站点导航文章接口", notes = "根据站点导航ID获取站点导航文章信息")
     @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public Result<WebsiteArticleResp> get(@RequestBody WebsiteArticleReq websiteArticleReq) {
-        return biz.get(websiteArticleReq);
+    public Result<ApiWebsiteArticleResp> get(@RequestBody ApiWebsiteArticleReq req) {
+        return biz.get(req);
     }
 }

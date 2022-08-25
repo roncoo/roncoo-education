@@ -53,7 +53,7 @@ public class PcApiCourseBiz extends BaseBiz {
     @Autowired
     private CourseIntroduceAuditDao courseIntroduceAuditDao;
     @Autowired
-    private CourseCategoryDao courseCategoryDao;
+    private CategoryDao courseCategoryDao;
     @Autowired
     private CourseChapterPeriodDao courseChapterPeriodDao;
     @Autowired

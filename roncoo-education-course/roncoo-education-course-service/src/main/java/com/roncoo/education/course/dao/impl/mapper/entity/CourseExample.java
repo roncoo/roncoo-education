@@ -70,7 +70,7 @@ public class CourseExample {
     }
 
     public void setLimitStart(int limitStart) {
-        this.limitStart = limitStart;
+        this.limitStart=limitStart;
     }
 
     public int getLimitStart() {
@@ -78,7 +78,7 @@ public class CourseExample {
     }
 
     public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
+        this.pageSize=pageSize;
     }
 
     public int getPageSize() {
@@ -426,243 +426,123 @@ public class CourseExample {
             return (Criteria) this;
         }
 
-        public Criteria andLecturerUserNoIsNull() {
-            addCriterion("lecturer_user_no is null");
+        public Criteria andLecturerIdIsNull() {
+            addCriterion("lecturer_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerUserNoIsNotNull() {
-            addCriterion("lecturer_user_no is not null");
+        public Criteria andLecturerIdIsNotNull() {
+            addCriterion("lecturer_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerUserNoEqualTo(Long value) {
-            addCriterion("lecturer_user_no =", value, "lecturerUserNo");
+        public Criteria andLecturerIdEqualTo(Long value) {
+            addCriterion("lecturer_id =", value, "lecturerId");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerUserNoNotEqualTo(Long value) {
-            addCriterion("lecturer_user_no <>", value, "lecturerUserNo");
+        public Criteria andLecturerIdNotEqualTo(Long value) {
+            addCriterion("lecturer_id <>", value, "lecturerId");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerUserNoGreaterThan(Long value) {
-            addCriterion("lecturer_user_no >", value, "lecturerUserNo");
+        public Criteria andLecturerIdGreaterThan(Long value) {
+            addCriterion("lecturer_id >", value, "lecturerId");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerUserNoGreaterThanOrEqualTo(Long value) {
-            addCriterion("lecturer_user_no >=", value, "lecturerUserNo");
+        public Criteria andLecturerIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("lecturer_id >=", value, "lecturerId");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerUserNoLessThan(Long value) {
-            addCriterion("lecturer_user_no <", value, "lecturerUserNo");
+        public Criteria andLecturerIdLessThan(Long value) {
+            addCriterion("lecturer_id <", value, "lecturerId");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerUserNoLessThanOrEqualTo(Long value) {
-            addCriterion("lecturer_user_no <=", value, "lecturerUserNo");
+        public Criteria andLecturerIdLessThanOrEqualTo(Long value) {
+            addCriterion("lecturer_id <=", value, "lecturerId");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerUserNoIn(List<Long> values) {
-            addCriterion("lecturer_user_no in", values, "lecturerUserNo");
+        public Criteria andLecturerIdIn(List<Long> values) {
+            addCriterion("lecturer_id in", values, "lecturerId");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerUserNoNotIn(List<Long> values) {
-            addCriterion("lecturer_user_no not in", values, "lecturerUserNo");
+        public Criteria andLecturerIdNotIn(List<Long> values) {
+            addCriterion("lecturer_id not in", values, "lecturerId");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerUserNoBetween(Long value1, Long value2) {
-            addCriterion("lecturer_user_no between", value1, value2, "lecturerUserNo");
+        public Criteria andLecturerIdBetween(Long value1, Long value2) {
+            addCriterion("lecturer_id between", value1, value2, "lecturerId");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerUserNoNotBetween(Long value1, Long value2) {
-            addCriterion("lecturer_user_no not between", value1, value2, "lecturerUserNo");
+        public Criteria andLecturerIdNotBetween(Long value1, Long value2) {
+            addCriterion("lecturer_id not between", value1, value2, "lecturerId");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryId1IsNull() {
-            addCriterion("category_id1 is null");
+        public Criteria andCategoryIdIsNull() {
+            addCriterion("category_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryId1IsNotNull() {
-            addCriterion("category_id1 is not null");
+        public Criteria andCategoryIdIsNotNull() {
+            addCriterion("category_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryId1EqualTo(Long value) {
-            addCriterion("category_id1 =", value, "categoryId1");
+        public Criteria andCategoryIdEqualTo(Long value) {
+            addCriterion("category_id =", value, "categoryId");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryId1NotEqualTo(Long value) {
-            addCriterion("category_id1 <>", value, "categoryId1");
+        public Criteria andCategoryIdNotEqualTo(Long value) {
+            addCriterion("category_id <>", value, "categoryId");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryId1GreaterThan(Long value) {
-            addCriterion("category_id1 >", value, "categoryId1");
+        public Criteria andCategoryIdGreaterThan(Long value) {
+            addCriterion("category_id >", value, "categoryId");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryId1GreaterThanOrEqualTo(Long value) {
-            addCriterion("category_id1 >=", value, "categoryId1");
+        public Criteria andCategoryIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("category_id >=", value, "categoryId");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryId1LessThan(Long value) {
-            addCriterion("category_id1 <", value, "categoryId1");
+        public Criteria andCategoryIdLessThan(Long value) {
+            addCriterion("category_id <", value, "categoryId");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryId1LessThanOrEqualTo(Long value) {
-            addCriterion("category_id1 <=", value, "categoryId1");
+        public Criteria andCategoryIdLessThanOrEqualTo(Long value) {
+            addCriterion("category_id <=", value, "categoryId");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryId1In(List<Long> values) {
-            addCriterion("category_id1 in", values, "categoryId1");
+        public Criteria andCategoryIdIn(List<Long> values) {
+            addCriterion("category_id in", values, "categoryId");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryId1NotIn(List<Long> values) {
-            addCriterion("category_id1 not in", values, "categoryId1");
+        public Criteria andCategoryIdNotIn(List<Long> values) {
+            addCriterion("category_id not in", values, "categoryId");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryId1Between(Long value1, Long value2) {
-            addCriterion("category_id1 between", value1, value2, "categoryId1");
+        public Criteria andCategoryIdBetween(Long value1, Long value2) {
+            addCriterion("category_id between", value1, value2, "categoryId");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryId1NotBetween(Long value1, Long value2) {
-            addCriterion("category_id1 not between", value1, value2, "categoryId1");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId2IsNull() {
-            addCriterion("category_id2 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId2IsNotNull() {
-            addCriterion("category_id2 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId2EqualTo(Long value) {
-            addCriterion("category_id2 =", value, "categoryId2");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId2NotEqualTo(Long value) {
-            addCriterion("category_id2 <>", value, "categoryId2");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId2GreaterThan(Long value) {
-            addCriterion("category_id2 >", value, "categoryId2");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId2GreaterThanOrEqualTo(Long value) {
-            addCriterion("category_id2 >=", value, "categoryId2");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId2LessThan(Long value) {
-            addCriterion("category_id2 <", value, "categoryId2");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId2LessThanOrEqualTo(Long value) {
-            addCriterion("category_id2 <=", value, "categoryId2");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId2In(List<Long> values) {
-            addCriterion("category_id2 in", values, "categoryId2");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId2NotIn(List<Long> values) {
-            addCriterion("category_id2 not in", values, "categoryId2");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId2Between(Long value1, Long value2) {
-            addCriterion("category_id2 between", value1, value2, "categoryId2");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId2NotBetween(Long value1, Long value2) {
-            addCriterion("category_id2 not between", value1, value2, "categoryId2");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId3IsNull() {
-            addCriterion("category_id3 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId3IsNotNull() {
-            addCriterion("category_id3 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId3EqualTo(Long value) {
-            addCriterion("category_id3 =", value, "categoryId3");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId3NotEqualTo(Long value) {
-            addCriterion("category_id3 <>", value, "categoryId3");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId3GreaterThan(Long value) {
-            addCriterion("category_id3 >", value, "categoryId3");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId3GreaterThanOrEqualTo(Long value) {
-            addCriterion("category_id3 >=", value, "categoryId3");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId3LessThan(Long value) {
-            addCriterion("category_id3 <", value, "categoryId3");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId3LessThanOrEqualTo(Long value) {
-            addCriterion("category_id3 <=", value, "categoryId3");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId3In(List<Long> values) {
-            addCriterion("category_id3 in", values, "categoryId3");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId3NotIn(List<Long> values) {
-            addCriterion("category_id3 not in", values, "categoryId3");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId3Between(Long value1, Long value2) {
-            addCriterion("category_id3 between", value1, value2, "categoryId3");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryId3NotBetween(Long value1, Long value2) {
-            addCriterion("category_id3 not between", value1, value2, "categoryId3");
+        public Criteria andCategoryIdNotBetween(Long value1, Long value2) {
+            addCriterion("category_id not between", value1, value2, "categoryId");
             return (Criteria) this;
         }
 
@@ -803,66 +683,6 @@ public class CourseExample {
 
         public Criteria andCourseLogoNotBetween(String value1, String value2) {
             addCriterion("course_logo not between", value1, value2, "courseLogo");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceIdIsNull() {
-            addCriterion("introduce_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceIdIsNotNull() {
-            addCriterion("introduce_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceIdEqualTo(Long value) {
-            addCriterion("introduce_id =", value, "introduceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceIdNotEqualTo(Long value) {
-            addCriterion("introduce_id <>", value, "introduceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceIdGreaterThan(Long value) {
-            addCriterion("introduce_id >", value, "introduceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("introduce_id >=", value, "introduceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceIdLessThan(Long value) {
-            addCriterion("introduce_id <", value, "introduceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceIdLessThanOrEqualTo(Long value) {
-            addCriterion("introduce_id <=", value, "introduceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceIdIn(List<Long> values) {
-            addCriterion("introduce_id in", values, "introduceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceIdNotIn(List<Long> values) {
-            addCriterion("introduce_id not in", values, "introduceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceIdBetween(Long value1, Long value2) {
-            addCriterion("introduce_id between", value1, value2, "introduceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceIdNotBetween(Long value1, Long value2) {
-            addCriterion("introduce_id not between", value1, value2, "introduceId");
             return (Criteria) this;
         }
 
@@ -1283,66 +1103,6 @@ public class CourseExample {
 
         public Criteria andCountStudyNotBetween(Integer value1, Integer value2) {
             addCriterion("count_study not between", value1, value2, "countStudy");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTotalIsNull() {
-            addCriterion("period_total is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTotalIsNotNull() {
-            addCriterion("period_total is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTotalEqualTo(Integer value) {
-            addCriterion("period_total =", value, "periodTotal");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTotalNotEqualTo(Integer value) {
-            addCriterion("period_total <>", value, "periodTotal");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTotalGreaterThan(Integer value) {
-            addCriterion("period_total >", value, "periodTotal");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTotalGreaterThanOrEqualTo(Integer value) {
-            addCriterion("period_total >=", value, "periodTotal");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTotalLessThan(Integer value) {
-            addCriterion("period_total <", value, "periodTotal");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTotalLessThanOrEqualTo(Integer value) {
-            addCriterion("period_total <=", value, "periodTotal");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTotalIn(List<Integer> values) {
-            addCriterion("period_total in", values, "periodTotal");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTotalNotIn(List<Integer> values) {
-            addCriterion("period_total not in", values, "periodTotal");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTotalBetween(Integer value1, Integer value2) {
-            addCriterion("period_total between", value1, value2, "periodTotal");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTotalNotBetween(Integer value1, Integer value2) {
-            addCriterion("period_total not between", value1, value2, "periodTotal");
             return (Criteria) this;
         }
     }
