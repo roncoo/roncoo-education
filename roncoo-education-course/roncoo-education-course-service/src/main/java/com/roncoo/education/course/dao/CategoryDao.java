@@ -6,49 +6,69 @@ import com.roncoo.education.course.dao.impl.mapper.entity.CategoryExample;
 
 import java.util.List;
 
+/**
+ * 分类 服务类
+ *
+ * @author wujing
+ * @date 2022-08-25
+ */
 public interface CategoryDao {
+
+    /**
+     * 保存分类
+     *
+     * @param record 分类
+     * @return 影响记录数
+     */
     int save(Category record);
 
+    /**
+     * 根据ID删除分类
+     *
+     * @param id 主键ID
+     * @return 影响记录数
+     */
     int deleteById(Long id);
 
+    /**
+     * 修改分类
+     *
+     * @param record 分类
+     * @return 影响记录数
+     */
     int updateById(Category record);
 
+    /**
+     * 根据ID获取分类
+     *
+     * @param id 主键ID
+     * @return 分类
+     */
     Category getById(Long id);
 
-    Page<Category> listForPage(int pageCurrent, int pageSize, CategoryExample example);
+    /**
+     * 分类--分页查询
+     *
+     * @param pageCurrent 当前页
+     * @param pageSize    分页大小
+     * @param example     查询条件
+     * @return 分页结果
+     */
+    Page<Category> page(int pageCurrent, int pageSize, CategoryExample example);
 
     /**
-     * 根据父类编号查找课程分类信息
+     * 分类--条件列出
      *
-     * @param parentId
-     * @author WY
+     * @param example     查询条件
+     * @return 分类列表
      */
-    List<Category> listByParentId(Long parentId);
+    List<Category> listByExample(CategoryExample example);
 
     /**
-     * 根据层级列出分类信息
+     * 分类--条件统计
      *
-     * @param floor
-     * @author WY
+     * @param example     统计条件
+     * @return 分类数量
      */
-    List<Category> listByFloor(Integer floor);
-
-    /**
-     * 根据层级、父类ID列出分类信息
-     *
-     * @param floor
-     * @param parentId
-     * @author WY
-     */
-    List<Category> listByFloorAndCategoryId(Integer floor, Long parentId);
-
-    /**
-     * 根据分类类型、层级查询可用状态的课程分类集合
-     *
-     * @param categoryType
-     * @param floor
-     * @param statusId
-     * @author wuyun
-     */
-    List<Category> listByCategoryTypeAndFloorAndStatusId(Integer categoryType, Integer floor, Integer statusId);
+    int countByExample(CategoryExample example);
 }

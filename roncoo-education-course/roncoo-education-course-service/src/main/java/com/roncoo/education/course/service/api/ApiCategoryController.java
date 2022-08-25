@@ -1,10 +1,8 @@
 package com.roncoo.education.course.service.api;
 
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.service.BaseController;
 import com.roncoo.education.course.service.api.biz.ApiCategoryBiz;
-import com.roncoo.education.course.service.api.dto.ApiCategoryResp;
-import com.roncoo.education.course.service.api.dto.CourseCategoryListDTO;
+import com.roncoo.education.course.service.api.resp.ApiCategoryResp;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +18,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/course/api/category")
-public class ApiCategoryController extends BaseController {
+public class ApiCategoryController {
 
     @Autowired
     private ApiCategoryBiz biz;

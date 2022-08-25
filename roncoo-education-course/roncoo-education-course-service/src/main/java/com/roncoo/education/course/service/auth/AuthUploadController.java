@@ -4,7 +4,6 @@
 package com.roncoo.education.course.service.auth;
 
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.service.BaseController;
 import com.roncoo.education.course.service.auth.biz.AuthUploadBiz;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @RestController
 @RequestMapping(value = "/course/auth/upload")
-public class AuthUploadController extends BaseController {
+public class AuthUploadController  {
 
     @Autowired
     private AuthUploadBiz biz;

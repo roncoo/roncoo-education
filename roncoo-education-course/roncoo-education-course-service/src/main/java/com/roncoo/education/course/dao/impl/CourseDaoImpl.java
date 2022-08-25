@@ -2,98 +2,80 @@ package com.roncoo.education.course.dao.impl;
 
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.IdWorker;
 import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.impl.mapper.CourseMapper;
 import com.roncoo.education.course.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseExample;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
+/**
+ * 课程信息 服务实现类
+ *
+ * @author wujing
+ * @date 2022-08-25
+ */
 @Repository
+@RequiredArgsConstructor
 public class CourseDaoImpl implements CourseDao {
-    @Autowired
-    private CourseMapper courseMapper;
 
+    @NotNull
+    private final CourseMapper mapper;
+
+    @Override
     public int save(Course record) {
-        return this.courseMapper.insertSelective(record);
+        if (record.getId() == null) {
+            record.setId(IdWorker.getId());
+        }
+        return this.mapper.insertSelective(record);
     }
 
+    @Override
     public int deleteById(Long id) {
-        return this.courseMapper.deleteByPrimaryKey(id);
+        return this.mapper.deleteByPrimaryKey(id);
     }
 
+    @Override
     public int updateById(Course record) {
         record.setGmtCreate(null);
         record.setGmtModified(null);
-        return this.courseMapper.updateByPrimaryKeySelective(record);
+        return this.mapper.updateByPrimaryKeySelective(record);
     }
 
+    @Override
     public Course getById(Long id) {
-        return this.courseMapper.selectByPrimaryKey(id);
+        return this.mapper.selectByPrimaryKey(id);
     }
 
-    public Page<Course> listForPage(int pageCurrent, int pageSize, CourseExample example) {
-        int count = this.courseMapper.countByExample(example);
+    @Override
+    public Page<Course> page(int pageCurrent, int pageSize, CourseExample example) {
+        int count = this.mapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);
         pageCurrent = PageUtil.checkPageCurrent(count, pageSize, pageCurrent);
         int totalPage = PageUtil.countTotalPage(count, pageSize);
         example.setLimitStart(PageUtil.countOffset(pageCurrent, pageSize));
         example.setPageSize(pageSize);
-        return new Page<Course>(count, totalPage, pageCurrent, pageSize, this.courseMapper.selectByExample(example));
+        return new Page<>(count, totalPage, pageCurrent, pageSize, this.mapper.selectByExample(example));
     }
 
     @Override
-    public List<Course> listByCategoryId(Long courseId) {
-        CourseExample example = new CourseExample();
-        CourseExample.Criteria c = example.createCriteria();
-        c.andIdEqualTo(courseId);
-        List<Course> list = this.courseMapper.selectByExample(example);
-        return list;
+    public List<Course> listByExample(CourseExample example) {
+        return this.mapper.selectByExample(example);
     }
 
     @Override
-    public Course getByCourseIdAndStatusId(Long courseId, Integer StatusId) {
-        CourseExample example = new CourseExample();
-        CourseExample.Criteria c = example.createCriteria();
-        c.andIdEqualTo(courseId);
-        c.andStatusIdEqualTo(StatusId);
-        List<Course> list = this.courseMapper.selectByExample(example);
-        if (list.isEmpty()) {
-            return null;
-        }
-        return list.get(0);
+    public int countByExample(CourseExample example){
+        return this.mapper.countByExample(example);
     }
 
     @Override
-    public Course getByCourseName(String courseName) {
+    public List<Course> listByIds(List<Long> courseIds) {
         CourseExample example = new CourseExample();
-        CourseExample.Criteria c = example.createCriteria();
-        c.andCourseNameLike(PageUtil.rightLike(courseName));
-        List<Course> courseList = this.courseMapper.selectByExample(example);
-        if (courseList.isEmpty()) {
-            return null;
-        }
-        return courseList.get(0);
-    }
-
-    @Override
-    public List<Course> listBycategoryId2AndStatusId(Long categoryId2, Integer statusId) {
-        CourseExample example = new CourseExample();
-        CourseExample.Criteria c = example.createCriteria();
-        c.andCategoryId2EqualTo(categoryId2);
-        c.andStatusIdEqualTo(statusId);
-        example.setOrderByClause("sort desc,id desc");
-        return this.courseMapper.selectByExample(example);
-    }
-
-    @Override
-    public List<Course> listByIsPutawayAndStatusId(Integer isPutaway, Integer statusId) {
-        CourseExample example = new CourseExample();
-        CourseExample.Criteria c = example.createCriteria();
-        c.andIsPutawayEqualTo(isPutaway);
-        c.andStatusIdEqualTo(statusId);
-        return this.courseMapper.selectByExample(example);
+        example.createCriteria().andIdIn(courseIds);
+        return this.mapper.selectByExample(example);
     }
 }
