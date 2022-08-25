@@ -46,22 +46,20 @@
 		</javaModelGenerator>
 
 		<!-- 生成xml文件 -->
-		<sqlMapGenerator targetPackage="mybatis" targetProject="${projectPath}/${projectName}/src/main/resources">
-		</sqlMapGenerator>
+		<sqlMapGenerator targetPackage="mybatis" targetProject="${projectPath}/${projectName}/src/main/resources"></sqlMapGenerator>
 
 		<!-- 生成mapper类 -->
-		<javaClientGenerator targetPackage="${packagePrefix}.${packageName}.service.dao.impl.mapper" targetProject="${projectPath}/${projectName}/src/main/java" type="XMLMAPPER">
-		</javaClientGenerator>
+		<javaClientGenerator targetPackage="${packagePrefix}.${packageName}.dao.impl.mapper" targetProject="${projectPath}/${projectName}/src/main/java" type="XMLMAPPER"></javaClientGenerator>
 
 		<!-- %代表生成全部的表 -->
-		<!--		<table tableName="%" />-->
+		<!-- <table tableName="%" />-->
 		<table tableName="${tableNames}"/>
 
 		<!-- tableName=表名；domainObjectName=生成的实体名；column为你需要覆盖的数据库字段-->
-		<!--        <table tableName="${tableNames}" domainObjectName="WholeProcesssMark">-->
-		<!--            <columnOverride column="src_url" jdbcType="VARCHAR" />-->
-		<!--            <columnOverride column="mark_content" jdbcType="VARCHAR" />-->
-		<!--        </table>-->
+		<!-- <table tableName="${tableNames}" domainObjectName="WholeProcesssMark">-->
+		<!--  <columnOverride column="src_url" jdbcType="VARCHAR" />-->
+		<!--  <columnOverride column="mark_content" jdbcType="VARCHAR" />-->
+		<!-- </table>-->
 
 	</context>
 </generatorConfiguration>
