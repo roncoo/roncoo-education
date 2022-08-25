@@ -18,42 +18,41 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.constraints.NotNull;
 
 /**
-* ${table.comment!}
-*
-* @author ${author}
-* @date ${date}
-*/
+ * ${table.comment!}
+ *
+ * @author ${author}
+ * @date ${date}
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/${cfg.packageName!}/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.name?replace('_', "/")}</#if>")
 public class Feign${entity}Controller extends BaseController implements IFeign${entity} {
 
-@NotNull
-private final Feign${entity}Biz biz;
+    @NotNull
+    private final Feign${entity}Biz biz;
 
-@Override
-public Page
-<${entity}PageVO> page(@RequestBody ${entity}PageQO qo) {
-    return biz.page(qo);
+    @Override
+    public Page<${entity}PageVO> page(@RequestBody ${entity}PageQO qo) {
+        return biz.page(qo);
     }
 
     @Override
     public int save(@RequestBody ${entity}SaveQO qo) {
-    return biz.save(qo);
+        return biz.save(qo);
     }
 
     @Override
     public int deleteById(@PathVariable(value = "id") Long id) {
-    return biz.deleteById(id);
+        return biz.deleteById(id);
     }
 
     @Override
     public int updateById(@RequestBody ${entity}EditQO qo) {
-    return biz.updateById(qo);
+        return biz.updateById(qo);
     }
 
     @Override
     public ${entity}ViewVO getById(@PathVariable(value = "id") Long id) {
-    return biz.getById(id);
+        return biz.getById(id);
     }
-    }
+}

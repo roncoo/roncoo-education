@@ -2,41 +2,41 @@ package ${cfg.packagePrefix}.${cfg.packageName!}.service.admin.req;
 
 <#list table.fields as field>
     <#if field.propertyType == "Date" || field.propertyType == "LocalDateTime">
-        import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
         <#break>
     </#if>
 </#list>
 <#list table.importPackages as pkg>
-    <#if !pkg?contains('com.baomidou') && !pkg?contains('activerecord.AbstractModel')>
-        import ${pkg};
-    </#if>
+<#if !pkg?contains('com.baomidou') && !pkg?contains('activerecord.AbstractModel')>
+import ${pkg};
+</#if>
 </#list>
 <#if swagger2>
-    import io.swagger.annotations.ApiModel;
-    import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 </#if>
 <#if entityLombokModel>
-    import lombok.Data;
-    import lombok.experimental.Accessors;
+import lombok.Data;
+import lombok.experimental.Accessors;
 </#if>
 
 /**
-* <p>
-    * ADMIN-${table.comment!}
-    * </p>
-*
-* @author ${author}
-*/
+ * <p>
+ * ADMIN-${table.comment!}
+ * </p>
+ *
+ * @author ${author}
+ */
 <#if entityLombokModel>
-    @Data
-    @Accessors(chain = true)
+@Data
+@Accessors(chain = true)
 </#if>
 <#if swagger2>
-    @ApiModel(value = "Admin${entity}SaveReq", description = "ADMIN-${table.comment!}添加")
+@ApiModel(value = "Admin${entity}SaveReq", description = "ADMIN-${table.comment!}添加")
 </#if>
 public class Admin${entity}SaveReq implements Serializable {
 
-private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>
     <#if field.keyFlag>
@@ -44,22 +44,22 @@ private static final long serialVersionUID = 1L;
     </#if>
 
     <#if field.propertyName !='createUserSysNo' && field.propertyName !='createTime'
-    && field.propertyName !='updateUserSysNo' && field.propertyName !='updateTime'
-    && field.propertyName !='delUserSysNo' && field.propertyName !='delTime'
-    && field.propertyName !='delFlag' && field.propertyName !='version'>
-        <#if field.comment!?length gt 0>
-            <#if field.propertyType == "Date" || field.propertyType == "LocalDateTime">
-                @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-            </#if>
-            <#if swagger2>
-                @ApiModelProperty(value = "${field.comment}")
-            <#else>
-                /**
-                * ${field.comment}
-                */
-            </#if>
-        </#if>
-        private ${field.propertyType} ${field.propertyName};
+        && field.propertyName !='updateUserSysNo' && field.propertyName !='updateTime'
+        && field.propertyName !='delUserSysNo' && field.propertyName !='delTime'
+        && field.propertyName !='delFlag' && field.propertyName !='version'>
+    <#if field.comment!?length gt 0>
+    <#if field.propertyType == "Date" || field.propertyType == "LocalDateTime">
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    </#if>
+    <#if swagger2>
+    @ApiModelProperty(value = "${field.comment}")
+    <#else>
+    /**
+     * ${field.comment}
+     */
+    </#if>
+    </#if>
+    private ${field.propertyType} ${field.propertyName};
     </#if>
 </#list>
 <#------------  END 字段循环遍历  ---------->
@@ -70,25 +70,25 @@ private static final long serialVersionUID = 1L;
         <#else>
             <#assign getprefix="get"/>
         </#if>
-        public ${field.propertyType} ${getprefix}${field.capitalName}() {
+    public ${field.propertyType} ${getprefix}${field.capitalName}() {
         return ${field.propertyName};
-        }
+    }
 
         <#if entityBuilderModel>
-            public ${entity} set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
+    public ${entity} set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
         <#else>
-            public void set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
+    public void set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
         </#if>
         this.${field.propertyName} = ${field.propertyName};
         <#if entityBuilderModel>
-            return this;
+        return this;
         </#if>
-        }
+    }
     </#list>
 </#if>
 <#if entityColumnConstant>
     <#list table.fields as field>
-        public static final String ${field.name?upper_case} = "${field.name}";
+    public static final String ${field.name?upper_case} = "${field.name}";
 
     </#list>
 </#if>
@@ -106,15 +106,15 @@ private static final long serialVersionUID = 1L;
 <#if !entityLombokModel>
     @Override
     public String toString() {
-    return "${entity}{" +
+        return "${entity}{" +
     <#list table.fields as field>
         <#if field_index==0>
-            "${field.propertyName}=" + ${field.propertyName} +
+        "${field.propertyName}=" + ${field.propertyName} +
         <#else>
-            ", ${field.propertyName}=" + ${field.propertyName} +
+        ", ${field.propertyName}=" + ${field.propertyName} +
         </#if>
     </#list>
-    "}";
+        "}";
     }
 </#if>
 }

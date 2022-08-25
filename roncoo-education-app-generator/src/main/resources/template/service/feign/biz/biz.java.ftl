@@ -20,42 +20,41 @@ import org.springframework.stereotype.Component;
 import javax.validation.constraints.NotNull;
 
 /**
-* ${table.comment!}
-*
-* @author ${author}
-*/
+ * ${table.comment!}
+ *
+ * @author ${author}
+ */
 @Component
 @RequiredArgsConstructor
 public class Feign${entity}Biz extends BaseBiz {
 
-@NotNull
-private final ${entity}Dao dao;
+    @NotNull
+    private final ${entity}Dao dao;
 
-public Page
-<${entity}PageVO> page(${entity}PageQO qo) {
-    ${entity}Example example = new ${entity}Example();
-    Criteria c = example.createCriteria();
-    example.setOrderByClause(" id desc ");
-    Page<${entity}> page = dao.page(qo.getPageCurrent(), qo.getPageSize(), example);
-    return PageUtil.transform(page, ${entity}PageVO.class);
+    public Page<${entity}PageVO> page(${entity}PageQO qo) {
+        ${entity}Example example = new ${entity}Example();
+        Criteria c = example.createCriteria();
+        example.setOrderByClause(" id desc ");
+        Page<${entity}> page = dao.page(qo.getPageCurrent(), qo.getPageSize(), example);
+        return PageUtil.transform(page, ${entity}PageVO.class);
     }
 
     public int save(${entity}SaveQO qo) {
-    ${entity} record = BeanUtil.copyProperties(qo, ${entity}.class);
-    return dao.save(record);
+        ${entity} record = BeanUtil.copyProperties(qo, ${entity}.class);
+        return dao.save(record);
     }
 
     public int deleteById(Long id) {
-    return dao.deleteById(id);
+        return dao.deleteById(id);
     }
 
     public int updateById(${entity}EditQO qo) {
-    ${entity} record = BeanUtil.copyProperties(qo, ${entity}.class);
-    return dao.updateById(record);
+        ${entity} record = BeanUtil.copyProperties(qo, ${entity}.class);
+        return dao.updateById(record);
     }
 
     public ${entity}ViewVO getById(Long id) {
-    ${entity} record = dao.getById(id);
-    return BeanUtil.copyProperties(record, ${entity}ViewVO.class);
+        ${entity} record = dao.getById(id);
+        return BeanUtil.copyProperties(record, ${entity}ViewVO.class);
     }
-    }
+}

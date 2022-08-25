@@ -8,15 +8,15 @@ import org.springframework.stereotype.Component;
 import javax.validation.constraints.NotNull;
 
 /**
-* API-${table.comment!}
-*
-* @author ${author}
-*/
+ * API-${table.comment!}
+ *
+ * @author ${author}
+ */
 @Component
 @RequiredArgsConstructor
 public class Api${entity}Biz extends BaseBiz {
 
-@NotNull
-private final ${entity}Dao dao;
+    @NotNull
+    private final ${entity}Dao dao;
 
 }
