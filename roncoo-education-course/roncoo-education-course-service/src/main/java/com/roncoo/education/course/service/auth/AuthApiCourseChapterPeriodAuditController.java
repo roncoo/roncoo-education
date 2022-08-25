@@ -1,6 +1,5 @@
 package com.roncoo.education.course.service.auth;
 
-import com.roncoo.education.common.core.base.BaseController;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.service.auth.biz.AuthApiCourseChapterPeriodAuditBiz;
 import com.roncoo.education.course.service.auth.bo.*;

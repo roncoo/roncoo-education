@@ -19,7 +19,9 @@ public class WebsiteArticleDaoImpl implements WebsiteArticleDao {
 
     @Override
     public int save(WebsiteArticle record) {
-        record.setId(IdWorker.getId());
+        if (record.getId() == null) {
+            record.setId(IdWorker.getId());
+        }
         return this.WebsiteArticleMapper.insertSelective(record);
     }
 

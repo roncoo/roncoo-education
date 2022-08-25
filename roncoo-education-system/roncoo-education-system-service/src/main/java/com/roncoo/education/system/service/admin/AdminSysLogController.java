@@ -1,11 +1,10 @@
 package com.roncoo.education.system.service.admin;
 
-import com.roncoo.education.common.core.base.BaseController;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysLogBiz;
 import com.roncoo.education.system.service.admin.req.SysLogPageREQ;
-import com.roncoo.education.system.service.admin.resq.SysLogPageRESQ;
+import com.roncoo.education.system.service.admin.resp.SysLogPageRESQ;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/system/admin/sys/log")
-public class AdminSysLogController extends BaseController {
+public class AdminSysLogController {
 
     @Autowired
     private AdminSysLogBiz biz;

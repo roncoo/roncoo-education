@@ -4,27 +4,17 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class WebsiteArticle implements Serializable {
-    private Long id;
-
-    private Date gmtCreate;
-
-    private Date gmtModified;
-
-    private Integer statusId;
-
-    private Integer sort;
-
-    private Long parentId;
-
-    private String artName;
-
-    private String artTitle;
-
-    private String artPic;
-
-    private String artDesc;
-
     private static final long serialVersionUID = 1L;
+    private Long id;
+    private Date gmtCreate;
+    private Date gmtModified;
+    private Integer statusId;
+    private Integer sort;
+    private Long parentId;
+    private String artName;
+    private String artTitle;
+    private String artPic;
+    private String artDesc;
 
     public Long getId() {
         return id;

@@ -21,9 +21,7 @@ package ${cfg.packagePrefix}.${cfg.packageName!}.service.api.req;
 </#if>
 
 /**
-* <p>
-    * API-${table.comment!}
-    * </p>
+* API-${table.comment!}
 *
 * @author ${author}
 * @date ${date}

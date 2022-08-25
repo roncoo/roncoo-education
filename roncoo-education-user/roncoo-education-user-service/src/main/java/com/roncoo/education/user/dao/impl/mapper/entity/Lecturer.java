@@ -4,29 +4,18 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Lecturer implements Serializable {
-    private Long id;
-
-    private Date gmtCreate;
-
-    private Date gmtModified;
-
-    private Integer statusId;
-
-    private Integer sort;
-
-    private Long userId;
-
-    private String lecturerName;
-
-    private String lecturerMobile;
-
-    private String lecturerPosition;
-
-    private String lecturerHead;
-
-    private String introduce;
-
     private static final long serialVersionUID = 1L;
+    private Long id;
+    private Date gmtCreate;
+    private Date gmtModified;
+    private Integer statusId;
+    private Integer sort;
+    private Long userId;
+    private String lecturerName;
+    private String lecturerMobile;
+    private String lecturerPosition;
+    private String lecturerHead;
+    private String introduce;
 
     public Long getId() {
         return id;

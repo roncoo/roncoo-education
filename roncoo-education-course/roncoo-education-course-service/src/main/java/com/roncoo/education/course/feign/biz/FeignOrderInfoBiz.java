@@ -1,7 +1,7 @@
 package com.roncoo.education.course.feign.biz;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.roncoo.education.common.core.base.BaseBiz;
+import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.enums.OrderStatusEnum;

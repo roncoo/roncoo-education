@@ -6,6 +6,7 @@ import com.roncoo.education.common.core.base.*;
 import com.roncoo.education.common.core.enums.*;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.es.EsCourse;
+import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.*;
 import com.roncoo.education.course.dao.impl.mapper.entity.*;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseExample.Criteria;

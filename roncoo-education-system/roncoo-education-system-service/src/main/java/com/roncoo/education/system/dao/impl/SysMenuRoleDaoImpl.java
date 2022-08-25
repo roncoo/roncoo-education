@@ -17,27 +17,35 @@ public class SysMenuRoleDaoImpl implements SysMenuRoleDao {
     @Autowired
     private SysMenuRoleMapper sysMenuRoleMapper;
 
+    @Override
     public int save(SysMenuRole record) {
-        record.setId(IdWorker.getId());
+        if (record.getId() == null) {
+            record.setId(IdWorker.getId());
+        }
         return this.sysMenuRoleMapper.insertSelective(record);
     }
 
+    @Override
     public int deleteById(Long id) {
         return this.sysMenuRoleMapper.deleteByPrimaryKey(id);
     }
 
+    @Override
     public int updateById(SysMenuRole record) {
         return this.sysMenuRoleMapper.updateByPrimaryKeySelective(record);
     }
 
+    @Override
     public int updateByExampleSelective(SysMenuRole record, SysMenuRoleExample example) {
         return this.sysMenuRoleMapper.updateByExampleSelective(record, example);
     }
 
+    @Override
     public SysMenuRole getById(Long id) {
         return this.sysMenuRoleMapper.selectByPrimaryKey(id);
     }
 
+    @Override
     public Page<SysMenuRole> listForPage(int pageCurrent, int pageSize, SysMenuRoleExample example) {
         int count = this.sysMenuRoleMapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);

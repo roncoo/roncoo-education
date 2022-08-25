@@ -1,41 +1,45 @@
 package com.roncoo.education.user.feign.biz;
 
+
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.user.dao.MsgUserDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.MsgUser;
 import com.roncoo.education.user.dao.impl.mapper.entity.MsgUserExample;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.roncoo.education.user.dao.impl.mapper.entity.MsgUserExample.Criteria;
+import com.roncoo.education.user.feign.interfaces.qo.MsgUserEditQO;
+import com.roncoo.education.user.feign.interfaces.qo.MsgUserPageQO;
+import com.roncoo.education.user.feign.interfaces.qo.MsgUserSaveQO;
+import com.roncoo.education.user.feign.interfaces.vo.MsgUserPageVO;
+import com.roncoo.education.user.feign.interfaces.vo.MsgUserViewVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * 站内信用户记录表
  *
- * @author wuyun
+ * @author wujing
  */
 @Component
-public class FeignMsgUserBiz {
+@RequiredArgsConstructor
+public class FeignMsgUserBiz extends BaseBiz {
 
-    @Autowired
-    private MsgUserDao dao;
+    @NotNull
+    private final MsgUserDao dao;
 
-    public Page<MsgUserVO> listForPage(MsgUserQO qo) {
+    public Page<MsgUserPageVO> page(MsgUserPageQO qo) {
         MsgUserExample example = new MsgUserExample();
         Criteria c = example.createCriteria();
-        if (StringUtils.hasText(qo.getMsgTitle())) {
-            c.andMsgTitleLike(PageUtil.rightLike(qo.getMsgTitle()));
-        }
-        if (StringUtils.hasText(qo.getMobile())) {
-            c.andMobileLike(PageUtil.rightLike(qo.getMobile()));
-        }
-        example.setOrderByClause(" status_id desc, sort desc, id desc ");
-        Page<MsgUser> page = dao.listForPage(qo.getPageCurrent(), qo.getPageSize(), example);
-        return PageUtil.transform(page, MsgUserVO.class);
+        example.setOrderByClause(" id desc ");
+        Page<MsgUser> page = dao.page(qo.getPageCurrent(), qo.getPageSize(), example);
+        return PageUtil.transform(page, MsgUserPageVO.class);
     }
 
-    public int save(MsgUserQO qo) {
+    public int save(MsgUserSaveQO qo) {
         MsgUser record = BeanUtil.copyProperties(qo, MsgUser.class);
         return dao.save(record);
     }
@@ -44,14 +48,13 @@ public class FeignMsgUserBiz {
         return dao.deleteById(id);
     }
 
-    public MsgUserVO getById(Long id) {
-        MsgUser record = dao.getById(id);
-        return BeanUtil.copyProperties(record, MsgUserVO.class);
-    }
-
-    public int updateById(MsgUserQO qo) {
+    public int updateById(MsgUserEditQO qo) {
         MsgUser record = BeanUtil.copyProperties(qo, MsgUser.class);
         return dao.updateById(record);
     }
 
+    public MsgUserViewVO getById(Long id) {
+        MsgUser record = dao.getById(id);
+        return BeanUtil.copyProperties(record, MsgUserViewVO.class);
+    }
 }

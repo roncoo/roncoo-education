@@ -18,27 +18,35 @@ public class SysMenuDaoImpl implements SysMenuDao {
     @Autowired
     private SysMenuMapper sysMenuMapper;
 
+    @Override
     public int save(SysMenu record) {
-        record.setId(IdWorker.getId());
+        if (record.getId() == null) {
+            record.setId(IdWorker.getId());
+        }
         return this.sysMenuMapper.insertSelective(record);
     }
 
+    @Override
     public int deleteById(Long id) {
         return this.sysMenuMapper.deleteByPrimaryKey(id);
     }
 
+    @Override
     public int updateById(SysMenu record) {
         return this.sysMenuMapper.updateByPrimaryKeySelective(record);
     }
 
+    @Override
     public int updateByExampleSelective(SysMenu record, SysMenuExample example) {
         return this.sysMenuMapper.updateByExampleSelective(record, example);
     }
 
+    @Override
     public SysMenu getById(Long id) {
         return this.sysMenuMapper.selectByPrimaryKey(id);
     }
 
+    @Override
     public Page<SysMenu> listForPage(int pageCurrent, int pageSize, SysMenuExample example) {
         int count = this.sysMenuMapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);

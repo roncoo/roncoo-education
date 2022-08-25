@@ -7,7 +7,7 @@ import com.roncoo.education.system.dao.SysMenuRoleDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuRole;
 import com.roncoo.education.system.service.admin.req.SysMenuRoleListREQ;
 import com.roncoo.education.system.service.admin.req.SysMenuRoleSaveREQ;
-import com.roncoo.education.system.service.admin.resq.SysMenuRoleListRESQ;
+import com.roncoo.education.system.service.admin.resp.SysMenuRoleListRESQ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

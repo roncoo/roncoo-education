@@ -13,19 +13,21 @@ import java.util.Date;
  */
 public final class NOUtil {
 
+    private final static String YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
+
     private NOUtil() {
     }
 
     public static Long getOrderNo() {
-        return Long.valueOf(DateUtil.format(new Date(), Constants.DATE.YYYYMMDDHHMMSS) + RandomUtil.randomNumbers(3));
+        return Long.valueOf(DateUtil.format(new Date(), YYYYMMDDHHMMSS) + RandomUtil.randomNumbers(3));
     }
 
     public static Long getSerialNumber() {
-        return Long.valueOf(DateUtil.format(new Date(), Constants.DATE.YYYYMMDDHHMMSS) + RandomUtil.randomNumbers(4));
+        return Long.valueOf(DateUtil.format(new Date(), YYYYMMDDHHMMSS) + RandomUtil.randomNumbers(4));
     }
 
     public static Long getUserNo() {
-        return Long.valueOf(DateUtil.format(new Date(), Constants.DATE.YYYYMMDDHHMMSS) + RandomUtil.randomNumbers(2));
+        return Long.valueOf(DateUtil.format(new Date(), YYYYMMDDHHMMSS) + RandomUtil.randomNumbers(2));
     }
 
 }

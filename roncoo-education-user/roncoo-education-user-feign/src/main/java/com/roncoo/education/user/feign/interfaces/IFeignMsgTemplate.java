@@ -1,34 +1,66 @@
 package com.roncoo.education.user.feign.interfaces;
 
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.system.feign.interfaces.qo.MsgTemplateQO;
-import com.roncoo.education.system.feign.interfaces.vo.MsgTemplateVO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.user.feign.interfaces.qo.MsgTemplatePageQO;
+import com.roncoo.education.user.feign.interfaces.qo.MsgTemplateSaveQO;
+import com.roncoo.education.user.feign.interfaces.qo.MsgTemplateEditQO;
+import com.roncoo.education.user.feign.interfaces.vo.MsgTemplatePageVO;
+import com.roncoo.education.user.feign.interfaces.vo.MsgTemplateViewVO;
 
 /**
- * 消息模板
+ * 消息模板 接口
  *
- * @author wuyun
+ * @author wujing
+ * @date 2022-08-25
  */
-@FeignClient(value = "roncoo-education-system-service")
+@FeignClient(value = "user-service", path = "/user/msg/template")
 public interface IFeignMsgTemplate {
 
-    @RequestMapping(value = "/feign/system/msgTemplate/listForPage")
-    Page<MsgTemplateVO> listForPage(@RequestBody MsgTemplateQO qo);
+    /**
+     * 分页列出-消息模板
+     *
+     * @param qo 消息模板
+     * @return 分页结果
+     */
+    @PostMapping(value = "/page")
+    Page<MsgTemplatePageVO> page(@RequestBody MsgTemplatePageQO qo);
 
-    @RequestMapping(value = "/feign/system/msgTemplate/save")
-    int save(@RequestBody MsgTemplateQO qo);
+    /**
+     * 保存-消息模板
+     *
+     * @param qo 消息模板
+     * @return 影响记录数
+     */
+    @PostMapping(value = "/save")
+    int save(@RequestBody MsgTemplateSaveQO qo);
 
-    @RequestMapping(value = "/feign/system/msgTemplate/deleteById")
-    int deleteById(@RequestBody Long id);
+    /**
+     * 根据ID删除-消息模板
+     *
+     * @param id 主键ID
+     * @return 影响记录数
+     */
+    @DeleteMapping(value = "/delete/{id}")
+    int deleteById(@PathVariable(value = "id") Long id);
 
-    @RequestMapping(value = "/feign/system/msgTemplate/updateById")
-    int updateById(@RequestBody MsgTemplateQO qo);
+    /**
+     * 修改消息模板
+     *
+     * @param qo 消息模板
+     * @return 影响记录数
+     */
+    @PutMapping(value = "/edit")
+    int updateById(@RequestBody MsgTemplateEditQO qo);
 
-    @RequestMapping(value = "/feign/system/msgTemplate/getById")
-    MsgTemplateVO getById(@RequestBody Long id);
-
+    /**
+     * 根据ID获取消息模板
+     *
+     * @param id 主键ID
+     * @return 消息模板
+     */
+    @GetMapping(value = "/get/{id}")
+    MsgTemplateViewVO getById(@PathVariable(value = "id") Long id);
 }

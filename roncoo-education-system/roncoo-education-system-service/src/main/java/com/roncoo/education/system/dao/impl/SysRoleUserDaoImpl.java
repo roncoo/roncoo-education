@@ -17,27 +17,35 @@ public class SysRoleUserDaoImpl implements SysRoleUserDao {
     @Autowired
     private SysRoleUserMapper sysRoleUserMapper;
 
+    @Override
     public int save(SysRoleUser record) {
-        record.setId(IdWorker.getId());
+        if (record.getId() == null) {
+            record.setId(IdWorker.getId());
+        }
         return this.sysRoleUserMapper.insertSelective(record);
     }
 
+    @Override
     public int deleteById(Long id) {
         return this.sysRoleUserMapper.deleteByPrimaryKey(id);
     }
 
+    @Override
     public int updateById(SysRoleUser record) {
         return this.sysRoleUserMapper.updateByPrimaryKeySelective(record);
     }
 
+    @Override
     public int updateByExampleSelective(SysRoleUser record, SysRoleUserExample example) {
         return this.sysRoleUserMapper.updateByExampleSelective(record, example);
     }
 
+    @Override
     public SysRoleUser getById(Long id) {
         return this.sysRoleUserMapper.selectByPrimaryKey(id);
     }
 
+    @Override
     public Page<SysRoleUser> listForPage(int pageCurrent, int pageSize, SysRoleUserExample example) {
         int count = this.sysRoleUserMapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);

@@ -21,9 +21,7 @@ package ${cfg.packagePrefix}.${cfg.packageName!}.service.auth.resp;
 </#if>
 
 /**
-* <p>
-    * API-AUTH-${table.comment!}
-    * </p>
+* API-AUTH-${table.comment!}
 *
 * @author ${author}
 * @date ${date}

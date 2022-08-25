@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.aliyun.Aliyun;
 import com.roncoo.education.common.core.aliyun.AliyunUtil;
-import com.roncoo.education.common.core.base.BaseBiz;
+import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;

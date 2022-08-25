@@ -20,7 +20,9 @@ public class WebsiteNavDaoImpl implements WebsiteNavDao {
 
     @Override
     public int save(WebsiteNav record) {
-        record.setId(IdWorker.getId());
+        if (record.getId() == null) {
+            record.setId(IdWorker.getId());
+        }
         return this.websiteNavMapper.insertSelective(record);
     }
 

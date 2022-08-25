@@ -9,7 +9,7 @@ import com.roncoo.education.system.dao.impl.mapper.entity.SysLog;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysLogExample;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysLogExample.Criteria;
 import com.roncoo.education.system.service.admin.req.SysLogPageREQ;
-import com.roncoo.education.system.service.admin.resq.SysLogPageRESQ;
+import com.roncoo.education.system.service.admin.resp.SysLogPageRESQ;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

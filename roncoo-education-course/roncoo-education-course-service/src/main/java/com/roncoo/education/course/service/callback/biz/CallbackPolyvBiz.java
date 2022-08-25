@@ -3,7 +3,7 @@
  */
 package com.roncoo.education.course.service.callback.biz;
 
-import com.roncoo.education.common.core.base.BaseBiz;
+import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.core.enums.IsFreeEnum;
 import com.roncoo.education.common.core.enums.OrderStatusEnum;
 import com.roncoo.education.common.core.polyv.*;

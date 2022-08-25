@@ -4,25 +4,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class SysLog implements Serializable {
-    private Long id;
-
-    private Date gmtCreate;
-
-    private Long userNo;
-
-    private String realName;
-
-    private String ip;
-
-    private String operation;
-
-    private String method;
-
-    private String path;
-
-    private String content;
-
     private static final long serialVersionUID = 1L;
+    private Long id;
+    private Date gmtCreate;
+    private Long userNo;
+    private String realName;
+    private String ip;
+    private String operation;
+    private String method;
+    private String path;
+    private String content;
 
     public Long getId() {
         return id;

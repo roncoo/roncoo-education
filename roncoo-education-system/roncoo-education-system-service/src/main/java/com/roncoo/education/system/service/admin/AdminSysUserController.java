@@ -1,12 +1,11 @@
 package com.roncoo.education.system.service.admin;
 
-import com.roncoo.education.common.core.base.BaseController;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysUserBiz;
 import com.roncoo.education.system.service.admin.req.*;
-import com.roncoo.education.system.service.admin.resq.SysUserPageRESQ;
-import com.roncoo.education.system.service.admin.resq.SysUserViewRESQ;
+import com.roncoo.education.system.service.admin.resp.SysUserPageRESQ;
+import com.roncoo.education.system.service.admin.resp.SysUserViewRESQ;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/system/admin/sys/user")
-public class AdminSysUserController extends BaseController {
+public class AdminSysUserController {
 
     @Autowired
     private AdminSysUserBiz biz;

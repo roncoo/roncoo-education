@@ -20,7 +20,9 @@ public class WebsiteLinkDaoImpl implements WebsiteLinkDao {
 
     @Override
     public int save(WebsiteLink record) {
-        record.setId(IdWorker.getId());
+        if (record.getId() == null) {
+            record.setId(IdWorker.getId());
+        }
         return this.websiteLinkMapper.insertSelective(record);
     }
 

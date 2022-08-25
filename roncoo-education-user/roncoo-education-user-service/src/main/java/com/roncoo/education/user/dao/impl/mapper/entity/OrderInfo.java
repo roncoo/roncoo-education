@@ -5,49 +5,28 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class OrderInfo implements Serializable {
-    private Long id;
-
-    private Date gmtCreate;
-
-    private Date gmtModified;
-
-    private Long orderNo;
-
-    private String lecturerName;
-
-    private Long userId;
-
-    private String mobile;
-
-    private Date registerTime;
-
-    private Long lecturerId;
-
-    private Long courseId;
-
-    private String courseName;
-
-    private BigDecimal pricePayable;
-
-    private BigDecimal priceDiscount;
-
-    private BigDecimal pricePaid;
-
-    private Integer tradeType;
-
-    private Integer payType;
-
-    private Integer channelType;
-
-    private Integer orderStatus;
-
-    private String remarkCus;
-
-    private String remark;
-
-    private Date payTime;
-
     private static final long serialVersionUID = 1L;
+    private Long id;
+    private Date gmtCreate;
+    private Date gmtModified;
+    private Long orderNo;
+    private String lecturerName;
+    private Long userId;
+    private String mobile;
+    private Date registerTime;
+    private Long lecturerId;
+    private Long courseId;
+    private String courseName;
+    private BigDecimal pricePayable;
+    private BigDecimal priceDiscount;
+    private BigDecimal pricePaid;
+    private Integer tradeType;
+    private Integer payType;
+    private Integer channelType;
+    private Integer orderStatus;
+    private String remarkCus;
+    private String remark;
+    private Date payTime;
 
     public Long getId() {
         return id;

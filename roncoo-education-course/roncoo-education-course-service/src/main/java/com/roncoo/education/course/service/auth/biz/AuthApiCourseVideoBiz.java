@@ -2,7 +2,7 @@ package com.roncoo.education.course.service.auth.biz;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.roncoo.education.common.core.base.BaseBiz;
+import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.AuditStatusEnum;
 import com.roncoo.education.common.core.enums.IsVideoEnum;

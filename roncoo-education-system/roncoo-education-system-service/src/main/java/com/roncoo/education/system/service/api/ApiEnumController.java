@@ -1,11 +1,13 @@
 package com.roncoo.education.system.service.api;
 
 import cn.hutool.core.util.StrUtil;
-import com.roncoo.education.common.core.base.BaseController;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.EnumUtil;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
@@ -16,7 +18,7 @@ import java.util.ArrayList;
  */
 @RestController
 @RequestMapping(value = "/system/api/enum")
-public class ApiEnumController extends BaseController {
+public class ApiEnumController {
 
     private static final String DEFAULT_ENUM_NAME = "name";
     private static final String DEFAULT_PREFIX = "com.roncoo.education.common.core.enums.";

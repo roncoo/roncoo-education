@@ -1,12 +1,11 @@
 package com.roncoo.education.system.service.admin;
 
-import com.roncoo.education.common.core.base.BaseController;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysMenuBiz;
 import com.roncoo.education.system.service.admin.req.*;
-import com.roncoo.education.system.service.admin.resq.SysMenuListRESQ;
-import com.roncoo.education.system.service.admin.resq.SysMenuUserListRESQ;
-import com.roncoo.education.system.service.admin.resq.SysMenuViewRESQ;
+import com.roncoo.education.system.service.admin.resp.SysMenuListRESQ;
+import com.roncoo.education.system.service.admin.resp.SysMenuUserListRESQ;
+import com.roncoo.education.system.service.admin.resp.SysMenuViewRESQ;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/system/admin/sys/menu")
-public class AdminSysMenuController extends BaseController {
+public class AdminSysMenuController {
 
     @Autowired
     private AdminSysMenuBiz biz;

@@ -1,0 +1,105 @@
+package com.roncoo.education.system.service.admin.biz;
+
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.system.dao.SysConfigDao;
+import com.roncoo.education.system.dao.impl.mapper.entity.SysConfig;
+import com.roncoo.education.system.dao.impl.mapper.entity.SysConfigExample;
+import com.roncoo.education.system.dao.impl.mapper.entity.SysConfigExample.Criteria;
+import com.roncoo.education.system.service.admin.req.AdminSysConfigEditReq;
+import com.roncoo.education.system.service.admin.req.AdminSysConfigPageReq;
+import com.roncoo.education.system.service.admin.req.AdminSysConfigSaveReq;
+import com.roncoo.education.system.service.admin.resp.AdminSysConfigPageResp;
+import com.roncoo.education.system.service.admin.resp.AdminSysConfigViewResp;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
+import javax.validation.constraints.NotNull;
+
+/**
+ * ADMIN-系统配置
+ *
+ * @author wujing
+ */
+@Component
+@RequiredArgsConstructor
+public class AdminSysConfigBiz extends BaseBiz {
+
+    @NotNull
+    private final SysConfigDao dao;
+
+    /**
+     * 系统配置分页
+     *
+     * @param req 系统配置分页查询参数
+     * @return 系统配置分页查询结果
+     */
+    public Result
+            <Page
+                    <AdminSysConfigPageResp>> page(AdminSysConfigPageReq req) {
+        SysConfigExample example = new SysConfigExample();
+        Criteria c = example.createCriteria();
+        Page<SysConfig> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
+        Page
+                <AdminSysConfigPageResp> respPage = PageUtil.transform(page, AdminSysConfigPageResp.class);
+        return Result.success(respPage);
+    }
+
+    /**
+     * 系统配置添加
+     *
+     * @param req 系统配置
+     * @return 添加结果
+     */
+    public Result
+            <String> save(AdminSysConfigSaveReq req) {
+        SysConfig record = BeanUtil.copyProperties(req, SysConfig.class);
+        if (dao.save(record) > 0) {
+            return Result.success(toI18nSuccess());
+        }
+        return Result.error(toI18nFail());
+    }
+
+    /**
+     * 系统配置查看
+     *
+     * @param id 主键ID
+     * @return 系统配置
+     */
+    public Result
+            <AdminSysConfigViewResp> view(Long id) {
+        return Result.success(BeanUtil.copyProperties(dao.getById(id), AdminSysConfigViewResp.class));
+    }
+
+    /**
+     * 系统配置修改
+     *
+     * @param req 系统配置修改对象
+     * @return 修改结果
+     */
+    public Result
+            <String> edit(AdminSysConfigEditReq req) {
+        SysConfig record = BeanUtil.copyProperties(req, SysConfig.class);
+        if (dao.updateById(record) > 0) {
+            return Result.success(toI18nSuccess());
+        }
+        return Result.error(toI18nFail());
+    }
+
+    /**
+     * 系统配置删除
+     *
+     * @param id ID主键
+     * @return 删除结果
+     */
+    public Result
+            <String> delete(Long id) {
+        if (dao.deleteById(id) > 0) {
+            return Result.success(toI18nSuccess());
+        }
+        return Result.error(toI18nFail());
+    }
+}

@@ -19,27 +19,35 @@ public class SysUserDaoImpl implements SysUserDao {
     @Autowired
     private SysUserMapper sysUserMapper;
 
+    @Override
     public int save(SysUser record) {
-        record.setId(IdWorker.getId());
+        if (record.getId() == null) {
+            record.setId(IdWorker.getId());
+        }
         return this.sysUserMapper.insertSelective(record);
     }
 
+    @Override
     public int deleteById(Long id) {
         return this.sysUserMapper.deleteByPrimaryKey(id);
     }
 
+    @Override
     public int updateById(SysUser record) {
         return this.sysUserMapper.updateByPrimaryKeySelective(record);
     }
 
+    @Override
     public int updateByExampleSelective(SysUser record, SysUserExample example) {
         return this.sysUserMapper.updateByExampleSelective(record, example);
     }
 
+    @Override
     public SysUser getById(Long id) {
         return this.sysUserMapper.selectByPrimaryKey(id);
     }
 
+    @Override
     public Page<SysUser> listForPage(int pageCurrent, int pageSize, SysUserExample example) {
         int count = this.sysUserMapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);

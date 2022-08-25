@@ -4,21 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class OrderPay implements Serializable {
-    private Long id;
-
-    private Date gmtCreate;
-
-    private Long orderNo;
-
-    private Long serialNumber;
-
-    private Integer orderStatus;
-
-    private Integer payType;
-
-    private Date payTime;
-
     private static final long serialVersionUID = 1L;
+    private Long id;
+    private Date gmtCreate;
+    private Long orderNo;
+    private Long serialNumber;
+    private Integer orderStatus;
+    private Integer payType;
+    private Date payTime;
 
     public Long getId() {
         return id;

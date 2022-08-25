@@ -353,6 +353,6 @@
             region_name   = #{regionName,jdbcType=VARCHAR},
             district_name = #{districtName,jdbcType=VARCHAR},
             merger_name   = #{mergerName,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

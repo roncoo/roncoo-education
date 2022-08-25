@@ -4,19 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class LogSms implements Serializable {
-    private Long id;
-
-    private Date gmtCreate;
-
-    private String template;
-
-    private String mobile;
-
-    private String smsCode;
-
-    private Integer isSuccess;
-
     private static final long serialVersionUID = 1L;
+    private Long id;
+    private Date gmtCreate;
+    private String template;
+    private String mobile;
+    private String smsCode;
+    private Integer isSuccess;
 
     public Long getId() {
         return id;

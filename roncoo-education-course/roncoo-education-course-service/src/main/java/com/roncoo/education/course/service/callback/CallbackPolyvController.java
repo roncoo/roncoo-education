@@ -3,7 +3,6 @@
  */
 package com.roncoo.education.course.service.callback;
 
-import com.roncoo.education.common.core.base.BaseController;
 import com.roncoo.education.common.core.polyv.PolyvAuth;
 import com.roncoo.education.common.core.polyv.PolyvVideo;
 import com.roncoo.education.course.service.callback.biz.CallbackPolyvBiz;

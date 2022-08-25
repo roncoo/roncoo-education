@@ -1,11 +1,10 @@
 package com.roncoo.education.system.service.admin;
 
-import com.roncoo.education.common.core.base.BaseController;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysRoleUserBiz;
 import com.roncoo.education.system.service.admin.req.SysRoleUserListREQ;
 import com.roncoo.education.system.service.admin.req.SysRoleUserSaveREQ;
-import com.roncoo.education.system.service.admin.resq.SysRoleUserListRESQ;
+import com.roncoo.education.system.service.admin.resp.SysRoleUserListRESQ;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/system/admin/sys/role/user")
-public class AdminSysRoleUserController extends BaseController {
+public class AdminSysRoleUserController {
 
     @Autowired
     private AdminSysRoleUserBiz biz;

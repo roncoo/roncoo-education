@@ -1,53 +1,66 @@
 package com.roncoo.education.user.feign.interfaces;
 
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.system.feign.interfaces.qo.MsgQO;
-import com.roncoo.education.system.feign.interfaces.vo.MsgVO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.user.feign.interfaces.qo.MsgPageQO;
+import com.roncoo.education.user.feign.interfaces.qo.MsgSaveQO;
+import com.roncoo.education.user.feign.interfaces.qo.MsgEditQO;
+import com.roncoo.education.user.feign.interfaces.vo.MsgPageVO;
+import com.roncoo.education.user.feign.interfaces.vo.MsgViewVO;
 
 /**
- * 站内信息表
+ * 站内信息表 接口
  *
- * @author wuyun
+ * @author wujing
+ * @date 2022-08-25
  */
-@FeignClient(value = "roncoo-education-system-service")
+@FeignClient(value = "user-service", path = "/user/msg")
 public interface IFeignMsg {
 
-
-    @RequestMapping(value = "/feign/system/msg/listForPage")
-    Page<MsgVO> listForPage(@RequestBody MsgQO qo);
-
-    @RequestMapping(value = "/feign/system/msg/save")
-    int save(@RequestBody MsgQO qo);
-
-    @RequestMapping(value = "/feign/system/msg/deleteById")
-    int deleteById(@RequestBody Long id);
-
-    @RequestMapping(value = "/feign/system/msg/updateById")
-    int updateById(@RequestBody MsgQO qo);
-
-    @RequestMapping(value = "/feign/system/msg/getById")
-    MsgVO getById(@RequestBody Long id);
+    /**
+     * 分页列出-站内信息表
+     *
+     * @param qo 站内信息表
+     * @return 分页结果
+     */
+    @PostMapping(value = "/page")
+    Page<MsgPageVO> page(@RequestBody MsgPageQO qo);
 
     /**
-     * 手动推送站内信
+     * 保存-站内信息表
      *
-     * @return
-     * @author wuyun
+     * @param qo 站内信息表
+     * @return 影响记录数
      */
-    @RequestMapping(value = "/feign/system/msg/pushByManual")
-    int pushByManual(@RequestBody Long id);
+    @PostMapping(value = "/save")
+    int save(@RequestBody MsgSaveQO qo);
 
     /**
-     * 定时器推送站内信
+     * 根据ID删除-站内信息表
      *
-     * @return
-     * @author wuyun
+     * @param id 主键ID
+     * @return 影响记录数
      */
-    @RequestMapping(value = "/feign/system/msg/push")
-    int push();
+    @DeleteMapping(value = "/delete/{id}")
+    int deleteById(@PathVariable(value = "id") Long id);
 
+    /**
+     * 修改站内信息表
+     *
+     * @param qo 站内信息表
+     * @return 影响记录数
+     */
+    @PutMapping(value = "/edit")
+    int updateById(@RequestBody MsgEditQO qo);
+
+    /**
+     * 根据ID获取站内信息表
+     *
+     * @param id 主键ID
+     * @return 站内信息表
+     */
+    @GetMapping(value = "/get/{id}")
+    MsgViewVO getById(@PathVariable(value = "id") Long id);
 }

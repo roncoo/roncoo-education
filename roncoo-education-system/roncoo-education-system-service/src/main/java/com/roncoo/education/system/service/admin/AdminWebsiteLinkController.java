@@ -1,12 +1,11 @@
 package com.roncoo.education.system.service.admin;
 
-import com.roncoo.education.common.core.base.BaseController;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminWebsiteLinkBiz;
 import com.roncoo.education.system.service.admin.req.*;
-import com.roncoo.education.system.service.admin.resq.WebsiteLinkPageRESQ;
-import com.roncoo.education.system.service.admin.resq.WebsiteLinkViewRESQ;
+import com.roncoo.education.system.service.admin.resp.WebsiteLinkPageRESQ;
+import com.roncoo.education.system.service.admin.resp.WebsiteLinkViewRESQ;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/system/admin/website/link")
-public class AdminWebsiteLinkController extends BaseController {
+public class AdminWebsiteLinkController {
 
     @Autowired
     private AdminWebsiteLinkBiz biz;

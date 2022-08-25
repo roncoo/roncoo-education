@@ -1,6 +1,5 @@
 package com.roncoo.education.course.feign;
 
-import com.roncoo.education.common.core.base.BaseController;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.course.feign.biz.FeignCourseRecommendBiz;
 import com.roncoo.education.course.feign.interfaces.IFeignCourseRecommend;

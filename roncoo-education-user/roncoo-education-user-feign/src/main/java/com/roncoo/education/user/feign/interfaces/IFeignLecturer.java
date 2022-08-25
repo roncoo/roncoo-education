@@ -1,59 +1,66 @@
 package com.roncoo.education.user.feign.interfaces;
 
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.user.feign.interfaces.qo.LecturerQO;
-import com.roncoo.education.user.feign.interfaces.vo.LecturerVO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.user.feign.interfaces.qo.LecturerPageQO;
+import com.roncoo.education.user.feign.interfaces.qo.LecturerSaveQO;
+import com.roncoo.education.user.feign.interfaces.qo.LecturerEditQO;
+import com.roncoo.education.user.feign.interfaces.vo.LecturerPageVO;
+import com.roncoo.education.user.feign.interfaces.vo.LecturerViewVO;
 
 /**
- * 讲师信息
+ * 讲师信息 接口
  *
  * @author wujing
+ * @date 2022-08-25
  */
-@FeignClient(value = "roncoo-education-user-service")
+@FeignClient(value = "user-service", path = "/user/lecturer")
 public interface IFeignLecturer {
 
-    @RequestMapping(value = "/feign/user/lecturer/listForPage", method = RequestMethod.POST)
-    Page<LecturerVO> listForPage(@RequestBody LecturerQO qo);
+    /**
+     * 分页列出-讲师信息
+     *
+     * @param qo 讲师信息
+     * @return 分页结果
+     */
+    @PostMapping(value = "/page")
+    Page<LecturerPageVO> page(@RequestBody LecturerPageQO qo);
 
-    @RequestMapping(value = "/feign/user/lecturer/save", method = RequestMethod.POST)
-    int save(@RequestBody LecturerQO qo);
+    /**
+     * 保存-讲师信息
+     *
+     * @param qo 讲师信息
+     * @return 影响记录数
+     */
+    @PostMapping(value = "/save")
+    int save(@RequestBody LecturerSaveQO qo);
 
-    @RequestMapping(value = "/feign/user/lecturer/delete/{id}", method = RequestMethod.DELETE)
+    /**
+     * 根据ID删除-讲师信息
+     *
+     * @param id 主键ID
+     * @return 影响记录数
+     */
+    @DeleteMapping(value = "/delete/{id}")
     int deleteById(@PathVariable(value = "id") Long id);
 
-    @RequestMapping(value = "/feign/user/lecturer/update", method = RequestMethod.PUT)
-    int updateById(@RequestBody LecturerQO qo);
-
-    @RequestMapping(value = "/feign/user/lecturer/get/{id}", method = RequestMethod.GET)
-    LecturerVO getById(@PathVariable(value = "id") Long id);
-
-    /***
-     * 根据讲师用户编号查找讲师信息
+    /**
+     * 修改讲师信息
+     *
+     * @param qo 讲师信息
+     * @return 影响记录数
      */
-    @RequestMapping(value = "/feign/user/lecturer/getByLecturerUserNo/{lecturerUserNo}", method = RequestMethod.GET)
-    LecturerVO getByLecturerUserNo(@PathVariable(value = "lecturerUserNo") Long lecturerUserNo);
+    @PutMapping(value = "/edit")
+    int updateById(@RequestBody LecturerEditQO qo);
 
     /**
-     * 列出所有讲师信息
+     * 根据ID获取讲师信息
      *
-     * @author LHR
+     * @param id 主键ID
+     * @return 讲师信息
      */
-    @RequestMapping(value = "/feign/user/lecturer/listAllForLecturer", method = RequestMethod.POST)
-    List<LecturerVO> listAllForLecturer();
-    /**
-     * 根据讲师编号集合获取讲师信息
-     *
-     * @param lecturerQO
-     * @return
-     */
-    @RequestMapping(value = "/lecturer/listByLecturerUserNos", method = RequestMethod.POST)
-    List<LecturerVO> listByLecturerUserNos(@RequestBody LecturerQO lecturerQO);
-
+    @GetMapping(value = "/get/{id}")
+    LecturerViewVO getById(@PathVariable(value = "id") Long id);
 }

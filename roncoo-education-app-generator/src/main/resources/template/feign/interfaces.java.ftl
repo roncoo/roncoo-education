@@ -64,5 +64,4 @@ Page
     */
     @GetMapping(value = "/get/{id}")
     ${entity}ViewVO getById(@PathVariable(value = "id") Long id);
-
     }

@@ -4,27 +4,17 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class LogLogin implements Serializable {
-    private Long id;
-
-    private Date gmtCreate;
-
-    private Long userId;
-
-    private Integer loginStatus;
-
-    private String loginIp;
-
-    private String country;
-
-    private String province;
-
-    private String city;
-
-    private String browser;
-
-    private String os;
-
     private static final long serialVersionUID = 1L;
+    private Long id;
+    private Date gmtCreate;
+    private Long userId;
+    private Integer loginStatus;
+    private String loginIp;
+    private String country;
+    private String province;
+    private String city;
+    private String browser;
+    private String os;
 
     public Long getId() {
         return id;

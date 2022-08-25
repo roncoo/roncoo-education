@@ -4,33 +4,20 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class WebsiteAdv implements Serializable {
-    private Long id;
-
-    private Date gmtCreate;
-
-    private Date gmtModified;
-
-    private Integer statusId;
-
-    private Integer sort;
-
-    private String advTitle;
-
-    private String advImg;
-
-    private String advUrl;
-
-    private String advTarget;
-
-    private Integer advLocation;
-
-    private Date beginTime;
-
-    private Date endTime;
-
-    private Integer platShow;
-
     private static final long serialVersionUID = 1L;
+    private Long id;
+    private Date gmtCreate;
+    private Date gmtModified;
+    private Integer statusId;
+    private Integer sort;
+    private String advTitle;
+    private String advImg;
+    private String advUrl;
+    private String advTarget;
+    private Integer advLocation;
+    private Date beginTime;
+    private Date endTime;
+    private Integer platShow;
 
     public Long getId() {
         return id;

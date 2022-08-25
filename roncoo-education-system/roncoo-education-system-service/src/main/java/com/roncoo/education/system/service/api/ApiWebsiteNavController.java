@@ -1,6 +1,5 @@
 package com.roncoo.education.system.service.api;
 
-import com.roncoo.education.common.core.base.BaseController;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.api.biz.ApiWebsiteNavBiz;
 import com.roncoo.education.system.service.api.resp.WebsiteNavResp;
@@ -19,7 +18,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/system/api/website/nav")
-public class ApiWebsiteNavController extends BaseController {
+public class ApiWebsiteNavController {
 
     @Autowired
     private ApiWebsiteNavBiz biz;

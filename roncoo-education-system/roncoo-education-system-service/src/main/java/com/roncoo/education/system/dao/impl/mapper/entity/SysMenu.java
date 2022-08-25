@@ -4,31 +4,19 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class SysMenu implements Serializable {
-    private Long id;
-
-    private Date gmtCreate;
-
-    private Date gmtModified;
-
-    private Integer statusId;
-
-    private Integer sort;
-
-    private Long parentId;
-
-    private String menuName;
-
-    private String menuUrl;
-
-    private String apiUrl;
-
-    private String menuIcon;
-
-    private String remark;
-
-    private Integer menuType;
-
     private static final long serialVersionUID = 1L;
+    private Long id;
+    private Date gmtCreate;
+    private Date gmtModified;
+    private Integer statusId;
+    private Integer sort;
+    private Long parentId;
+    private String menuName;
+    private String menuUrl;
+    private String apiUrl;
+    private String menuIcon;
+    private String remark;
+    private Integer menuType;
 
     public Long getId() {
         return id;

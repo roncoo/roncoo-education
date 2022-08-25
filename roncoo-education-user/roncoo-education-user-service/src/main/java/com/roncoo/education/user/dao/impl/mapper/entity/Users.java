@@ -4,33 +4,20 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Users implements Serializable {
-    private Long id;
-
-    private Date gmtCreate;
-
-    private Date gmtModified;
-
-    private Integer statusId;
-
-    private String mobile;
-
-    private String mobileSalt;
-
-    private String mobilePsw;
-
-    private String nickname;
-
-    private Integer userType;
-
-    private Integer userSex;
-
-    private Integer userAge;
-
-    private String userHead;
-
-    private String remark;
-
     private static final long serialVersionUID = 1L;
+    private Long id;
+    private Date gmtCreate;
+    private Date gmtModified;
+    private Integer statusId;
+    private String mobile;
+    private String mobileSalt;
+    private String mobilePsw;
+    private String nickname;
+    private Integer userType;
+    private Integer userSex;
+    private Integer userAge;
+    private String userHead;
+    private String remark;
 
     public Long getId() {
         return id;
