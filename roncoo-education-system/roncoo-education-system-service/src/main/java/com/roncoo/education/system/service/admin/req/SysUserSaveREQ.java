@@ -16,7 +16,6 @@ import java.io.Serializable;
 public class SysUserSaveREQ implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     /**
      * 手机
      */
@@ -26,12 +25,12 @@ public class SysUserSaveREQ implements Serializable {
      * 登录密码
      */
     @ApiModelProperty(value = "密码", required = true)
-    private String password;
+    private String mobilePwd;
     /**
      * 重复密码
      */
     @ApiModelProperty(value = "重复密码", required = true)
-    private String repassword;
+    private String rePassword;
     /**
      * 真实姓名
      */

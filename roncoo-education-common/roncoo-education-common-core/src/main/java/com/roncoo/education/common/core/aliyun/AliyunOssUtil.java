@@ -35,7 +35,7 @@ public final class AliyunOssUtil {
         // 上传
         try {
             String name = file.getName();
-            String filePath = PREFIX + "/" + IdUtil.fastUUID() + name.substring(name.lastIndexOf("."));
+            String filePath = PREFIX + "/" + IdUtil.simpleUUID() + name.substring(name.lastIndexOf("."));
             getOssClient(aliyun.getAliyunOssEndpoint(), aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret()).putObject(aliyun.getAliyunOssBucket(), filePath, file);
             return aliyun.getAliyunOssUrl() + filePath;
         } catch (Exception e) {
@@ -50,7 +50,7 @@ public final class AliyunOssUtil {
         try {
             in = file.getInputStream();
             String name = file.getOriginalFilename();
-            String filePath = PREFIX + "/" + IdUtil.fastUUID() + name.substring(name.lastIndexOf("."));
+            String filePath = PREFIX + "/" + IdUtil.simpleUUID() + name.substring(name.lastIndexOf("."));
             getOssClient(aliyun.getAliyunOssEndpoint(), aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret()).putObject(aliyun.getAliyunOssBucket(), filePath, in);
             return aliyun.getAliyunOssUrl() + filePath;
         } catch (Exception e) {
@@ -70,7 +70,7 @@ public final class AliyunOssUtil {
         // 上传
         try {
             String name = file.getName();
-            String filePath = PREFIX+ "/" + IdUtil.fastUUID() + name.substring(name.lastIndexOf("."));
+            String filePath = PREFIX+ "/" + IdUtil.simpleUUID() + name.substring(name.lastIndexOf("."));
             putObjectForFile(aliyun.getAliyunOssEndpoint(), aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret(), aliyun.getAliyunOssBucket(), filePath, new FileInputStream(file), file.getName());
             return aliyun.getAliyunOssUrl() + filePath;
         } catch (Exception e) {
@@ -85,7 +85,7 @@ public final class AliyunOssUtil {
         try {
             in = file.getInputStream();
             String name = file.getOriginalFilename();
-            String filePath = PREFIX+ "/" + IdUtil.fastUUID() + name.substring(name.lastIndexOf("."));
+            String filePath = PREFIX+ "/" + IdUtil.simpleUUID() + name.substring(name.lastIndexOf("."));
             putObjectForFile(aliyun.getAliyunOssEndpoint(), aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret(), aliyun.getAliyunOssBucket(), filePath, in, file.getOriginalFilename());
             return aliyun.getAliyunOssUrl() + filePath;
         } catch (Exception e) {

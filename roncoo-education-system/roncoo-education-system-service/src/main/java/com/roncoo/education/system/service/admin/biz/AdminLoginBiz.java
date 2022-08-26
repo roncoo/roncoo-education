@@ -44,7 +44,7 @@ public class AdminLoginBiz {
             return Result.error("账号不可用");
         }
         // 密码校验
-        if (!SHA1Util.getSign(sysUser.getMobileSalt()+req.getPassword()).equals(sysUser.getMobilePsw())) {
+        if (!SHA1Util.getSign(sysUser.getMobileSalt()+req.getMobilePwd()).equals(sysUser.getMobilePsw())) {
             return Result.error("账号或密码不正确");
         }
 

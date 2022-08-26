@@ -46,7 +46,7 @@ public class AdminSysUserBiz {
     }
 
     public Result<Integer> save(SysUserSaveREQ req) {
-        if (!req.getPassword().equals(req.getRepassword())) {
+        if (!req.getMobilePwd().equals(req.getRePassword())) {
             return Result.error("密码不一致");
         }
         SysUser sysUser = dao.getByMobile(req.getMobile());
@@ -54,8 +54,8 @@ public class AdminSysUserBiz {
             return Result.error("用户已添加成管理员");
         }
         SysUser record = BeanUtil.copyProperties(req, SysUser.class);
-        record.setMobileSalt(IdUtil.fastUUID());
-        record.setMobilePsw(SHA1Util.getSign(record.getMobileSalt() + req.getPassword()));
+        record.setMobileSalt(IdUtil.simpleUUID());
+        record.setMobilePsw(SHA1Util.getSign(record.getMobileSalt() + req.getMobilePwd()));
         int results = dao.save(record);
         if (results > 0) {
             return Result.success(results);
