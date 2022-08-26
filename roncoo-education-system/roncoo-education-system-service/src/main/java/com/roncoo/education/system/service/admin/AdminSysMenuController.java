@@ -5,6 +5,7 @@ import com.roncoo.education.system.service.admin.biz.AdminSysMenuBiz;
 import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuListResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuUserListResp;
+import com.roncoo.education.system.service.admin.resp.AdminSysMenuUserResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuViewResp;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 菜单信息
@@ -75,7 +78,7 @@ public class AdminSysMenuController {
      */
     @ApiOperation(value = "登录用户菜单接口", notes = "获取当前登录用户的所有菜单")
     @RequestMapping(value = "/user/list", method = RequestMethod.POST)
-    public Result<AdminSysMenuUserListResp> userList() {
+    public Result<List<AdminSysMenuUserResp>> userList() {
         return biz.userList();
     }
 
@@ -84,7 +87,7 @@ public class AdminSysMenuController {
      */
     @ApiOperation(value = "指定用户菜单接口", notes = "获取指定用户的所有菜单")
     @RequestMapping(value = "/button/list", method = RequestMethod.POST)
-    public Result<AdminSysMenuUserListResp> buttonList(@RequestBody AdminSysMenuUserListReq sysMenuUserListREQ) {
+    public Result<List<AdminSysMenuUserResp>> buttonList(@RequestBody AdminSysMenuUserListReq sysMenuUserListREQ) {
         return biz.buttonList(sysMenuUserListREQ);
     }
 

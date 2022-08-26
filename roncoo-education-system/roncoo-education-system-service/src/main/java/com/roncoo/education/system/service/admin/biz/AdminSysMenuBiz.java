@@ -139,23 +139,18 @@ public class AdminSysMenuBiz {
         return Result.success(BeanUtil.copyProperties(record, AdminSysMenuViewResp.class));
     }
 
-    public Result<AdminSysMenuUserListResp> userList() {
+    public Result<List<AdminSysMenuUserResp>> userList() {
         SysUser sysUser = sysUserDao.getById(ThreadContext.userId());
         if (ObjectUtil.isNull(sysUser) || !sysUser.getStatusId().equals(StatusIdEnum.YES.getCode())) {
             return Result.error("用户异常");
         }
-        AdminSysMenuUserListResp resq = new AdminSysMenuUserListResp();
         List<SysMenuRole> sysMenuRoleList = new ArrayList<>();
         List<SysRoleUser> sysRoleUserList = sysRoleUserDao.listByUserId(sysUser.getId());
         for (SysRoleUser sru : sysRoleUserList) {
             sysMenuRoleList.addAll(sysMenuRoleDao.listByRoleId(sru.getRoleId()));
         }
         // 筛选
-        List<AdminSysMenuUserResp> list = listByRole(sysMenuRoleList, MenuTypeEnum.BUTTON.getCode());
-        if (CollectionUtil.isNotEmpty(list)) {
-            resq.setSysMenu(list);
-        }
-        return Result.success(resq);
+        return Result.success(listByRole(sysMenuRoleList, MenuTypeEnum.BUTTON.getCode()));
     }
 
     private List<AdminSysMenuUserResp> listByRole(List<SysMenuRole> sysMenuRoleList, Integer menuType) {
@@ -209,12 +204,11 @@ public class AdminSysMenuBiz {
         return lists;
     }
 
-    public Result<AdminSysMenuUserListResp> buttonList(AdminSysMenuUserListReq req) {
+    public Result<List<AdminSysMenuUserResp>> buttonList(AdminSysMenuUserListReq req) {
         SysUser sysUser = sysUserDao.getById(req.getUserId());
         if (ObjectUtil.isNull(sysUser)) {
             return Result.error("用户异常");
         }
-        AdminSysMenuUserListResp resq = new AdminSysMenuUserListResp();
         List<SysMenuRole> sysMenuRoleList = new ArrayList<>();
         List<SysRoleUser> sysRoleUserList = sysRoleUserDao.listByUserId(sysUser.getId());
         for (SysRoleUser sru : sysRoleUserList) {
@@ -223,11 +217,7 @@ public class AdminSysMenuBiz {
         // 筛选
         List<AdminSysMenuUserResp> list = userRecursion(0L, null);
         List<AdminSysMenuUserResp> apiUrlList = new ArrayList<>();
-        List<AdminSysMenuUserResp> listResqs = getListMenu(apiUrlList, sysMenuRoleList, list);
-        if (CollectionUtil.isNotEmpty(listResqs)) {
-            resq.setSysMenu(listResqs);
-        }
-        return Result.success(resq);
+        return Result.success(getListMenu(apiUrlList, sysMenuRoleList, list));
     }
 
     // 列出用户所有按钮菜单
