@@ -10,6 +10,7 @@ import com.roncoo.education.system.dao.WebsiteLinkDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample.Criteria;
+import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminWebsiteLinkPageResp;
 import com.roncoo.education.system.service.admin.resp.AdminWebsiteLinkViewResp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class AdminWebsiteLinkBiz {
      * @param req
      * @return
      */
-    public Result<Page<AdminWebsiteLinkPageResp>> list(WebsiteLinkPageREQ req) {
+    public Result<Page<AdminWebsiteLinkPageResp>> list(AdminWebsiteLinkPageReq req) {
         WebsiteLinkExample example = new WebsiteLinkExample();
         Criteria c = example.createCriteria();
         if (StringUtils.hasText(req.getLinkName())) {
@@ -51,7 +52,7 @@ public class AdminWebsiteLinkBiz {
      * @param req
      * @return
      */
-    public Result<Integer> save(WebsiteLinkSaveREQ req) {
+    public Result<Integer> save(AdminWebsiteLinkSaveReq req) {
         WebsiteLink record = BeanUtil.copyProperties(req, WebsiteLink.class);
         int results = dao.save(record);
         if (results > 0) {
@@ -66,7 +67,7 @@ public class AdminWebsiteLinkBiz {
      * @param req
      * @return
      */
-    public Result<Integer> delete(WebsiteLinkDeleteREQ req) {
+    public Result<Integer> delete(AdminWebsiteLinkDeleteReq req) {
         if (req.getId() == null) {
             return Result.error("ID不能为空");
         }
@@ -87,7 +88,7 @@ public class AdminWebsiteLinkBiz {
      * @param req
      * @return
      */
-    public Result<Integer> update(WebsiteLinkUpdateREQ req) {
+    public Result<Integer> update(AdminWebsiteLinkUpdateReq req) {
         if (req.getId() == null) {
             return Result.error("ID不能为空");
         }
@@ -109,7 +110,7 @@ public class AdminWebsiteLinkBiz {
      * @param req
      * @return
      */
-    public Result<AdminWebsiteLinkViewResp> view(WebsiteLinkViewREQ req) {
+    public Result<AdminWebsiteLinkViewResp> view(AdminWebsiteLinkViewReq req) {
         if (req.getId() == null) {
             return Result.error("ID不能为空");
         }

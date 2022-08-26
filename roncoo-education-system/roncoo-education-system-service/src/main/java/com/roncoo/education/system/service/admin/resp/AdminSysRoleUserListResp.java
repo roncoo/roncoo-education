@@ -23,5 +23,5 @@ public class AdminSysRoleUserListResp implements Serializable {
      * 角色用户关联集合
      */
     @ApiModelProperty(value = "角色用户关联集合")
-    private List<SysRoleUserRESQ> list = new ArrayList<>();
+    private List<AdminSysRoleUserResp> list = new ArrayList<>();
 }

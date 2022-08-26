@@ -10,6 +10,7 @@ import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser;
 import com.roncoo.education.system.service.admin.req.AdminSysRoleUserListReq;
 import com.roncoo.education.system.service.admin.req.AdminSysRoleUserSaveReq;
 import com.roncoo.education.system.service.admin.resp.AdminSysRoleUserListResp;
+import com.roncoo.education.system.service.admin.resp.AdminSysRoleUserResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,10 +38,10 @@ public class AdminSysRoleUserBiz {
         AdminSysRoleUserListResp resq = new AdminSysRoleUserListResp();
         List<SysRoleUser> list = dao.listByUserId(req.getUserId());
         if (CollectionUtil.isNotEmpty(list)) {
-            List<SysRoleUserRESQ> roleList = new ArrayList<>();
+            List<AdminSysRoleUserResp> roleList = new ArrayList<>();
             for (SysRoleUser sysRoleUser : list) {
                 SysRole sysRole = sysRoleDao.getById(sysRoleUser.getRoleId());
-                roleList.add(BeanUtil.copyProperties(sysRole, SysRoleUserRESQ.class));
+                roleList.add(BeanUtil.copyProperties(sysRole, AdminSysRoleUserResp.class));
             }
             resq.setList(roleList);
         }

@@ -43,7 +43,7 @@ public class AdminSysMenuBiz {
 
     public Result<AdminSysMenuListResp> list(AdminSysMenuListReq req) {
         AdminSysMenuListResp resq = new AdminSysMenuListResp();
-        List<SysMenuRESQ> list = new ArrayList<>();
+        List<AdminSysMenuResp> list = new ArrayList<>();
         if (StringUtils.isEmpty(req.getMenuName())) {
             list = recursion(0L);
         } else {
@@ -51,7 +51,7 @@ public class AdminSysMenuBiz {
             List<SysMenu> sysMenuList = dao.listByMenuName(req.getMenuName());
             if (CollectionUtil.isNotEmpty(sysMenuList)) {
                 for (SysMenu sysMenu : sysMenuList) {
-                    SysMenuRESQ sysMenuRESQ = BeanUtil.copyProperties(sysMenu, SysMenuRESQ.class);
+                    AdminSysMenuResp sysMenuRESQ = BeanUtil.copyProperties(sysMenu, AdminSysMenuResp.class);
                     sysMenuRESQ.setLabel(sysMenu.getMenuName());
                     sysMenuRESQ.setChildren(recursion(sysMenu.getId()));
                     list.add(sysMenuRESQ);
@@ -68,12 +68,12 @@ public class AdminSysMenuBiz {
     /**
      * 递归显示菜单(角色关联菜单)
      */
-    private List<SysMenuRESQ> recursion(Long parentId) {
-        List<SysMenuRESQ> lists = new ArrayList<>();
+    private List<AdminSysMenuResp> recursion(Long parentId) {
+        List<AdminSysMenuResp> lists = new ArrayList<>();
         List<SysMenu> list = dao.listByParentId(parentId);
         if (CollectionUtil.isNotEmpty(list)) {
             for (SysMenu m : list) {
-                SysMenuRESQ resq = BeanUtil.copyProperties(m, SysMenuRESQ.class);
+                AdminSysMenuResp resq = BeanUtil.copyProperties(m, AdminSysMenuResp.class);
                 resq.setLabel(resq.getMenuName());
                 resq.setChildren(recursion(m.getId()));
                 lists.add(resq);
@@ -152,32 +152,32 @@ public class AdminSysMenuBiz {
             sysMenuRoleList.addAll(sysMenuRoleDao.listByRoleId(sru.getRoleId()));
         }
         // 筛选
-        List<SysMenuUserRESQ> list = listByRole(sysMenuRoleList, MenuTypeEnum.BUTTON.getCode());
+        List<AdminSysMenuUserResp> list = listByRole(sysMenuRoleList, MenuTypeEnum.BUTTON.getCode());
         if (CollectionUtil.isNotEmpty(list)) {
             resq.setSysMenu(list);
         }
         return Result.success(resq);
     }
 
-    private List<SysMenuUserRESQ> listByRole(List<SysMenuRole> sysMenuRoleList, Integer menuType) {
-        List<SysMenuUserRESQ> list = userRecursion(0L, menuType);
-        List<SysMenuUserRESQ> sysMenuUserRESQList = new ArrayList<>();
+    private List<AdminSysMenuUserResp> listByRole(List<SysMenuRole> sysMenuRoleList, Integer menuType) {
+        List<AdminSysMenuUserResp> list = userRecursion(0L, menuType);
+        List<AdminSysMenuUserResp> sysMenuUserRESQList = new ArrayList<>();
         sysMenuUserRESQList = listMenu(sysMenuUserRESQList, sysMenuRoleList, list);
         return sysMenuUserRESQList;
     }
 
-    private List<SysMenuUserRESQ> listMenu(List<SysMenuUserRESQ> sysMenuVOList, List<SysMenuRole> sysMenuRoleList, List<SysMenuUserRESQ> list) {
-        for (SysMenuUserRESQ mv : list) {
-            SysMenuUserRESQ v = new SysMenuUserRESQ();
+    private List<AdminSysMenuUserResp> listMenu(List<AdminSysMenuUserResp> sysMenuVOList, List<SysMenuRole> sysMenuRoleList, List<AdminSysMenuUserResp> list) {
+        for (AdminSysMenuUserResp mv : list) {
+            AdminSysMenuUserResp v = new AdminSysMenuUserResp();
             for (SysMenuRole vo : sysMenuRoleList) {
                 if (mv.getId().equals(vo.getMenuId())) {
-                    v = BeanUtil.copyProperties(mv, SysMenuUserRESQ.class);
+                    v = BeanUtil.copyProperties(mv, AdminSysMenuUserResp.class);
                     break;
                 }
             }
             if (ObjectUtil.isNotNull(v) && v.getId() != null) {
                 sysMenuVOList.add(v);
-                List<SysMenuUserRESQ> l = new ArrayList<>();
+                List<AdminSysMenuUserResp> l = new ArrayList<>();
                 if (v != null) {
                     v.setChildren(l);
                 }
@@ -190,12 +190,12 @@ public class AdminSysMenuBiz {
     /**
      * 用户递归显示菜单(角色关联菜单)
      */
-    private List<SysMenuUserRESQ> userRecursion(Long parentId, Integer menuType) {
-        List<SysMenuUserRESQ> lists = new ArrayList<>();
+    private List<AdminSysMenuUserResp> userRecursion(Long parentId, Integer menuType) {
+        List<AdminSysMenuUserResp> lists = new ArrayList<>();
         List<SysMenu> list = dao.listByParentIdAndNotMenuType(parentId, menuType);
         if (CollectionUtil.isNotEmpty(list)) {
             for (SysMenu m : list) {
-                SysMenuUserRESQ resq = BeanUtil.copyProperties(m, SysMenuUserRESQ.class);
+                AdminSysMenuUserResp resq = BeanUtil.copyProperties(m, AdminSysMenuUserResp.class);
                 if (m.getMenuName().equals("首页")) {
                     resq.setHidden(true);
                 }
@@ -222,9 +222,9 @@ public class AdminSysMenuBiz {
             sysMenuRoleList.addAll(sysMenuRoleDao.listByRoleId(sru.getRoleId()));
         }
         // 筛选
-        List<SysMenuUserRESQ> list = userRecursion(0L, null);
-        List<SysMenuUserRESQ> apiUrlList = new ArrayList<>();
-        List<SysMenuUserRESQ> listResqs = getListMenu(apiUrlList, sysMenuRoleList, list);
+        List<AdminSysMenuUserResp> list = userRecursion(0L, null);
+        List<AdminSysMenuUserResp> apiUrlList = new ArrayList<>();
+        List<AdminSysMenuUserResp> listResqs = getListMenu(apiUrlList, sysMenuRoleList, list);
         if (CollectionUtil.isNotEmpty(listResqs)) {
             resq.setSysMenu(listResqs);
         }
@@ -232,9 +232,9 @@ public class AdminSysMenuBiz {
     }
 
     // 列出用户所有按钮菜单
-    private List<SysMenuUserRESQ> getListMenu(List<SysMenuUserRESQ> apiUrlList, List<SysMenuRole> sysMenuRoleList, List<SysMenuUserRESQ> list) {
-        for (SysMenuUserRESQ mv : list) {
-            SysMenuUserRESQ v = new SysMenuUserRESQ();
+    private List<AdminSysMenuUserResp> getListMenu(List<AdminSysMenuUserResp> apiUrlList, List<SysMenuRole> sysMenuRoleList, List<AdminSysMenuUserResp> list) {
+        for (AdminSysMenuUserResp mv : list) {
+            AdminSysMenuUserResp v = new AdminSysMenuUserResp();
             for (SysMenuRole vo : sysMenuRoleList) {
                 if (mv.getId().equals(vo.getMenuId()) && MenuTypeEnum.BUTTON.getCode().equals(mv.getMenuType())) {
                     v.setApiUrl(mv.getApiUrl());

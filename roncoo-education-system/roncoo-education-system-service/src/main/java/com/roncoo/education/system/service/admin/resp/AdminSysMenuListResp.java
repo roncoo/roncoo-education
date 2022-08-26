@@ -23,6 +23,6 @@ public class AdminSysMenuListResp implements Serializable {
      * 菜单集合
      */
     @ApiModelProperty(value = "菜单集合")
-    private List<SysMenuRESQ> sysMenu = new ArrayList<>();
+    private List<AdminSysMenuResp> sysMenu = new ArrayList<>();
 
 }

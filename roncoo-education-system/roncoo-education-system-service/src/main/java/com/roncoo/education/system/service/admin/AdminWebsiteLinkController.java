@@ -3,6 +3,7 @@ package com.roncoo.education.system.service.admin;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminWebsiteLinkBiz;
+import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminWebsiteLinkPageResp;
 import com.roncoo.education.system.service.admin.resp.AdminWebsiteLinkViewResp;
 import io.swagger.annotations.ApiOperation;
@@ -27,7 +28,7 @@ public class AdminWebsiteLinkController {
      */
     @ApiOperation(value = "站点友情分页列表链接接口", notes = "站点友情分页列表接口")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result<Page<AdminWebsiteLinkPageResp>> list(@RequestBody WebsiteLinkPageREQ websiteLinkPageREQ) {
+    public Result<Page<AdminWebsiteLinkPageResp>> list(@RequestBody AdminWebsiteLinkPageReq websiteLinkPageREQ) {
         return biz.list(websiteLinkPageREQ);
     }
 
@@ -36,7 +37,7 @@ public class AdminWebsiteLinkController {
      */
     @ApiOperation(value = "站点友情保存接口", notes = "站点友情保存接口")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Result<Integer> save(@RequestBody WebsiteLinkSaveREQ websiteLinkSaveREQ) {
+    public Result<Integer> save(@RequestBody AdminWebsiteLinkSaveReq websiteLinkSaveREQ) {
         return biz.save(websiteLinkSaveREQ);
     }
 
@@ -45,7 +46,7 @@ public class AdminWebsiteLinkController {
      */
     @ApiOperation(value = "站点友情删除接口", notes = "站点友情删除接口")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public Result<Integer> delete(@RequestBody WebsiteLinkDeleteREQ websiteLinkDeleteREQ) {
+    public Result<Integer> delete(@RequestBody AdminWebsiteLinkDeleteReq websiteLinkDeleteREQ) {
         return biz.delete(websiteLinkDeleteREQ);
     }
 
@@ -54,7 +55,7 @@ public class AdminWebsiteLinkController {
      */
     @ApiOperation(value = "站点友情更新接口", notes = "站点友情更新接口")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public Result<Integer> update(@RequestBody WebsiteLinkUpdateREQ websiteLinkUpdateREQ) {
+    public Result<Integer> update(@RequestBody AdminWebsiteLinkUpdateReq websiteLinkUpdateREQ) {
         return biz.update(websiteLinkUpdateREQ);
     }
 
@@ -63,7 +64,7 @@ public class AdminWebsiteLinkController {
      */
     @ApiOperation(value = "站点友情查看接口", notes = "站点友情查看接口")
     @RequestMapping(value = "/view", method = RequestMethod.POST)
-    public Result<AdminWebsiteLinkViewResp> view(@RequestBody WebsiteLinkViewREQ websiteLinkViewREQ) {
+    public Result<AdminWebsiteLinkViewResp> view(@RequestBody AdminWebsiteLinkViewReq websiteLinkViewREQ) {
         return biz.view(websiteLinkViewREQ);
     }
 
