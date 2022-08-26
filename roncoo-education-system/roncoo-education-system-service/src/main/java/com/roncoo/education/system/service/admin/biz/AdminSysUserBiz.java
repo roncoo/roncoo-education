@@ -1,11 +1,13 @@
 package com.roncoo.education.system.service.admin.biz;
 
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.core.tools.SHA1Util;
 import com.roncoo.education.system.dao.SysRoleUserDao;
 import com.roncoo.education.system.dao.SysUserDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUser;
@@ -38,20 +40,22 @@ public class AdminSysUserBiz {
         if (StringUtils.hasText(req.getMobile())) {
             c.andMobileEqualTo(req.getMobile());
         }
-        example.setOrderByClause(" sort asc, status_id desc, id desc ");
+        example.setOrderByClause(" status_id desc, sort asc, id desc ");
         Page<SysUser> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         return Result.success(PageUtil.transform(page, SysUserPageRESQ.class));
     }
 
     public Result<Integer> save(SysUserSaveREQ req) {
-        if (req.getUserId() == null) {
-            return Result.error("userID不能为空");
+        if (!req.getPassword().equals(req.getRepassword())) {
+            return Result.error("密码不一致");
         }
-        SysUser sysUser = dao.getById(req.getUserId());
+        SysUser sysUser = dao.getByMobile(req.getMobile());
         if (ObjectUtil.isNotNull(sysUser)) {
             return Result.error("用户已添加成管理员");
         }
         SysUser record = BeanUtil.copyProperties(req, SysUser.class);
+        record.setMobileSalt(IdUtil.fastUUID());
+        record.setMobilePsw(SHA1Util.getSign(record.getMobileSalt() + req.getPassword()));
         int results = dao.save(record);
         if (results > 0) {
             return Result.success(results);

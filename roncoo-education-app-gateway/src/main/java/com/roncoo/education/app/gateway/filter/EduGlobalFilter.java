@@ -18,6 +18,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -27,6 +28,14 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Component
 public class EduGlobalFilter implements GlobalFilter, Ordered {
+
+    /**
+     * 不需要授权认证的访问路径
+     */
+    private static final List<String> EXCLUDE_URL = Arrays.asList(
+            // 登录接口
+            "/system/admin/login/password"
+    );
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -55,6 +64,11 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
         }
         if (FilterUtil.checkUri(uri, FilterUtil.API_V2)) {
             // 路径存在关键词：/v2，不鉴权
+            return chain.filter(exchange);
+        }
+
+        // 额外不需要认证的接口
+        if(EXCLUDE_URL.contains(uri)){
             return chain.filter(exchange);
         }
 

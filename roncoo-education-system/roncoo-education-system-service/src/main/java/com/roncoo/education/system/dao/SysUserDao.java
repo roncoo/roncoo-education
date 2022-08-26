@@ -17,4 +17,5 @@ public interface SysUserDao {
 
     Page<SysUser> page(int pageCurrent, int pageSize, SysUserExample example);
 
+    SysUser getByMobile(String mobile);
 }

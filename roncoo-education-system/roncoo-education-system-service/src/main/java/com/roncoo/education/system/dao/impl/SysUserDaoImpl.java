@@ -1,6 +1,5 @@
 package com.roncoo.education.system.dao.impl;
 
-import cn.hutool.core.collection.CollectionUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
@@ -8,7 +7,6 @@ import com.roncoo.education.system.dao.SysUserDao;
 import com.roncoo.education.system.dao.impl.mapper.SysUserMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUser;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUserExample;
-import com.roncoo.education.system.dao.impl.mapper.entity.SysUserExample.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -56,6 +54,17 @@ public class SysUserDaoImpl implements SysUserDao {
         example.setLimitStart(PageUtil.countOffset(pageCurrent, pageSize));
         example.setPageSize(pageSize);
         return new Page<SysUser>(count, totalPage, pageCurrent, pageSize, this.sysUserMapper.selectByExample(example));
+    }
+
+    @Override
+    public SysUser getByMobile(String mobile) {
+        SysUserExample example = new SysUserExample();
+        example.createCriteria().andMobileEqualTo(mobile);
+        List<SysUser> list = this.sysUserMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list.get(0);
     }
 
 }
