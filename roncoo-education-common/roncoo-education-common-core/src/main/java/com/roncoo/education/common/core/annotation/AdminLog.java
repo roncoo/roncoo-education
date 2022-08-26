@@ -4,6 +4,7 @@ import java.lang.annotation.*;
 
 /**
  * 系统日志注解
+ * @author fengyw
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

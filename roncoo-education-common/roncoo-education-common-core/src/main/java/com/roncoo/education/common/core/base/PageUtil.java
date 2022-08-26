@@ -176,7 +176,6 @@ public final class PageUtil<T extends Serializable> implements Serializable {
      *
      * @param pageCurrent 当前页
      * @param pageSize    每页记录数
-     * @param pageBean    DWZ分页查询参数
      * @return limitSql
      */
     public static String limitSql(int totalCount, int pageCurrent, int pageSize) {

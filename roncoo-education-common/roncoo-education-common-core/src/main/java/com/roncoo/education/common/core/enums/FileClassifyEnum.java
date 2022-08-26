@@ -13,7 +13,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum FileClassifyEnum {
 
-    DOC(1, "附件"), PICTURE(2, "图片"), VIDEO(3, "视频");
+    VIDEO(1, "视频"), FILE(2, "文件");
 
     private Integer code;
 

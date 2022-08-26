@@ -2,7 +2,6 @@ package com.roncoo.education.app.gateway.filter;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.roncoo.education.common.core.base.BaseException;
-import com.roncoo.education.common.core.enums.RedisPreEnum;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.common.core.tools.JSUtil;
