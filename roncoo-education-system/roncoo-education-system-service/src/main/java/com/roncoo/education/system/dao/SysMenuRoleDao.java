@@ -27,6 +27,8 @@ public interface SysMenuRoleDao {
      */
     List<SysMenuRole> listByRoleId(Long roleId);
 
+    List<SysMenuRole> listByRoleIds(List<Long> roleIds);
+
     /**
      * 删除角色下的菜单
      *

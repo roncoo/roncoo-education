@@ -2,9 +2,9 @@ package com.roncoo.education.system.service.admin;
 
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysMenuRoleBiz;
-import com.roncoo.education.system.service.admin.req.SysMenuRoleListREQ;
-import com.roncoo.education.system.service.admin.req.SysMenuRoleSaveREQ;
-import com.roncoo.education.system.service.admin.resp.SysMenuRoleListRESQ;
+import com.roncoo.education.system.service.admin.req.AdminSysMenuRoleListReq;
+import com.roncoo.education.system.service.admin.req.AdminSysMenuRoleSaveReq;
+import com.roncoo.education.system.service.admin.resp.AdminSysMenuRoleListResp;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +29,7 @@ public class AdminSysMenuRoleController {
      */
     @ApiOperation(value = "列出菜单角色关联信息接口", notes = "列出菜单角色关联信息接口")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result<SysMenuRoleListRESQ> list(@RequestBody SysMenuRoleListREQ sysMenuRoleListREQ) {
+    public Result<AdminSysMenuRoleListResp> list(@RequestBody AdminSysMenuRoleListReq sysMenuRoleListREQ) {
         return biz.list(sysMenuRoleListREQ);
     }
 
@@ -38,7 +38,7 @@ public class AdminSysMenuRoleController {
      */
     @ApiOperation(value = "添加角色菜单关联信息接口", notes = "添加角色菜单关联信息接口")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Result<Integer> save(@RequestBody SysMenuRoleSaveREQ sysMenuRoleSaveREQ) {
+    public Result<Integer> save(@RequestBody AdminSysMenuRoleSaveReq sysMenuRoleSaveREQ) {
         return biz.save(sysMenuRoleSaveREQ);
     }
 

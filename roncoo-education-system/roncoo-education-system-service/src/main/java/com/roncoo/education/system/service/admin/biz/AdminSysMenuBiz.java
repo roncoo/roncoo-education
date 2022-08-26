@@ -41,8 +41,8 @@ public class AdminSysMenuBiz {
     @Autowired
     private SysMenuRoleDao sysMenuRoleDao;
 
-    public Result<SysMenuListRESQ> list(SysMenuListREQ req) {
-        SysMenuListRESQ resq = new SysMenuListRESQ();
+    public Result<AdminSysMenuListResp> list(AdminSysMenuListReq req) {
+        AdminSysMenuListResp resq = new AdminSysMenuListResp();
         List<SysMenuRESQ> list = new ArrayList<>();
         if (StringUtils.isEmpty(req.getMenuName())) {
             list = recursion(0L);
@@ -82,7 +82,7 @@ public class AdminSysMenuBiz {
         return lists;
     }
 
-    public Result<Integer> save(SysMenuSaveREQ req) {
+    public Result<Integer> save(AdminSysMenuSaveReq req) {
         SysMenu record = BeanUtil.copyProperties(req, SysMenu.class);
         int results = dao.save(record);
         if (results > 0) {
@@ -92,7 +92,7 @@ public class AdminSysMenuBiz {
     }
 
     @Transactional
-    public Result<Integer> delete(SysMenuDeleteREQ req) {
+    public Result<Integer> delete(AdminSysMenuDeleteReq req) {
         if (req.getId() == null) {
             return Result.error("主键ID不能为空");
         }
@@ -110,7 +110,7 @@ public class AdminSysMenuBiz {
         return Result.error(ResultEnum.SYSTEM_DELETE_FAIL);
     }
 
-    public Result<Integer> update(SysMenuUpdateREQ req) {
+    public Result<Integer> update(AdminSysMenuUpdateReq req) {
         if (req.getId() == null) {
             return Result.error("主键ID不能为空");
         }
@@ -126,7 +126,7 @@ public class AdminSysMenuBiz {
         return Result.error(ResultEnum.SYSTEM_UPDATE_FAIL);
     }
 
-    public Result<SysMenuViewRESQ> view(SysMenuViewREQ req) {
+    public Result<AdminSysMenuViewResp> view(AdminSysMenuViewReq req) {
         if (req.getId() == null) {
             return Result.error("主键ID不能为空");
         }
@@ -134,10 +134,10 @@ public class AdminSysMenuBiz {
         if (ObjectUtil.isNull(record)) {
             return Result.error("找不到菜单信息");
         }
-        return Result.success(BeanUtil.copyProperties(record, SysMenuViewRESQ.class));
+        return Result.success(BeanUtil.copyProperties(record, AdminSysMenuViewResp.class));
     }
 
-    public Result<SysMenuUserListRESQ> userList(SysMenuUserListREQ req) {
+    public Result<AdminSysMenuUserListResp> userList(AdminSysMenuUserListReq req) {
         if (req.getUserId() == null) {
             return Result.error("用户编不能为空");
         }
@@ -145,7 +145,7 @@ public class AdminSysMenuBiz {
         if (ObjectUtil.isNull(sysUser)) {
             return Result.error("用户异常");
         }
-        SysMenuUserListRESQ resq = new SysMenuUserListRESQ();
+        AdminSysMenuUserListResp resq = new AdminSysMenuUserListResp();
         List<SysMenuRole> sysMenuRoleList = new ArrayList<>();
         List<SysRoleUser> sysRoleUserList = sysRoleUserDao.listByUserId(sysUser.getId());
         for (SysRoleUser sru : sysRoleUserList) {
@@ -210,12 +210,12 @@ public class AdminSysMenuBiz {
         return lists;
     }
 
-    public Result<SysMenuUserListRESQ> buttonList(SysMenuUserListREQ req) {
+    public Result<AdminSysMenuUserListResp> buttonList(AdminSysMenuUserListReq req) {
         SysUser sysUser = sysUserDao.getById(req.getUserId());
         if (ObjectUtil.isNull(sysUser)) {
             return Result.error("用户异常");
         }
-        SysMenuUserListRESQ resq = new SysMenuUserListRESQ();
+        AdminSysMenuUserListResp resq = new AdminSysMenuUserListResp();
         List<SysMenuRole> sysMenuRoleList = new ArrayList<>();
         List<SysRoleUser> sysRoleUserList = sysRoleUserDao.listByUserId(sysUser.getId());
         for (SysRoleUser sru : sysRoleUserList) {

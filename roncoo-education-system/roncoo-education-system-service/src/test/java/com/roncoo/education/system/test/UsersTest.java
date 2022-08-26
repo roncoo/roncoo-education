@@ -1,7 +1,7 @@
 package com.roncoo.education.system.test;
 
 import com.roncoo.education.system.service.admin.biz.AdminSysUserBiz;
-import com.roncoo.education.system.service.admin.req.SysUserSaveREQ;
+import com.roncoo.education.system.service.admin.req.AdminSysUserSaveReq;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,7 +12,7 @@ public class UsersTest extends  BaseTest{
 
     @Test
     public void save() {
-        SysUserSaveREQ req = new SysUserSaveREQ();
+        AdminSysUserSaveReq req = new AdminSysUserSaveReq();
         req.setMobile("18302045627");
         req.setPassword("RonCoo.123");
         req.setRepassword("RonCoo.123");

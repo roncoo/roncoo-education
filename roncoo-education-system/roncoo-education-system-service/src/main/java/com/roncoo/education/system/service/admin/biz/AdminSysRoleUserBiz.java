@@ -7,10 +7,9 @@ import com.roncoo.education.system.dao.SysRoleDao;
 import com.roncoo.education.system.dao.SysRoleUserDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRole;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser;
-import com.roncoo.education.system.service.admin.req.SysRoleUserListREQ;
-import com.roncoo.education.system.service.admin.req.SysRoleUserSaveREQ;
-import com.roncoo.education.system.service.admin.resp.SysRoleUserListRESQ;
-import com.roncoo.education.system.service.admin.resp.SysRoleUserRESQ;
+import com.roncoo.education.system.service.admin.req.AdminSysRoleUserListReq;
+import com.roncoo.education.system.service.admin.req.AdminSysRoleUserSaveReq;
+import com.roncoo.education.system.service.admin.resp.AdminSysRoleUserListResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,11 +30,11 @@ public class AdminSysRoleUserBiz {
     @Autowired
     private SysRoleDao sysRoleDao;
 
-    public Result<SysRoleUserListRESQ> list(SysRoleUserListREQ req) {
+    public Result<AdminSysRoleUserListResp> list(AdminSysRoleUserListReq req) {
         if (req.getUserId() == null) {
             return Result.error("用户ID不能为空");
         }
-        SysRoleUserListRESQ resq = new SysRoleUserListRESQ();
+        AdminSysRoleUserListResp resq = new AdminSysRoleUserListResp();
         List<SysRoleUser> list = dao.listByUserId(req.getUserId());
         if (CollectionUtil.isNotEmpty(list)) {
             List<SysRoleUserRESQ> roleList = new ArrayList<>();
@@ -49,7 +48,7 @@ public class AdminSysRoleUserBiz {
     }
 
     @Transactional
-    public Result<Integer> save(SysRoleUserSaveREQ req) {
+    public Result<Integer> save(AdminSysRoleUserSaveReq req) {
         if (req.getUserId() == null) {
             return Result.error("用户ID不能为空");
         }

@@ -64,6 +64,13 @@ public class SysMenuRoleDaoImpl implements SysMenuRoleDao {
     }
 
     @Override
+    public List<SysMenuRole> listByRoleIds(List<Long> roleIds) {
+        SysMenuRoleExample example = new SysMenuRoleExample();
+        example.createCriteria().andRoleIdIn(roleIds);
+        return this.sysMenuRoleMapper.selectByExample(example);
+    }
+
+    @Override
     public int deleteByRoleId(Long roleId) {
         SysMenuRoleExample example = new SysMenuRoleExample();
         example.createCriteria().andRoleIdEqualTo(roleId);

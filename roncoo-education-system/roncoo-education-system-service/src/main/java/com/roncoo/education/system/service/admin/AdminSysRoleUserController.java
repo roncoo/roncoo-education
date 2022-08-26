@@ -2,9 +2,9 @@ package com.roncoo.education.system.service.admin;
 
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysRoleUserBiz;
-import com.roncoo.education.system.service.admin.req.SysRoleUserListREQ;
-import com.roncoo.education.system.service.admin.req.SysRoleUserSaveREQ;
-import com.roncoo.education.system.service.admin.resp.SysRoleUserListRESQ;
+import com.roncoo.education.system.service.admin.req.AdminSysRoleUserListReq;
+import com.roncoo.education.system.service.admin.req.AdminSysRoleUserSaveReq;
+import com.roncoo.education.system.service.admin.resp.AdminSysRoleUserListResp;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +29,7 @@ public class AdminSysRoleUserController {
      */
     @ApiOperation(value = "列出角色用户关联信息接口", notes = "列出角色用户关联信息接口")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result<SysRoleUserListRESQ> list(@RequestBody SysRoleUserListREQ sysRoleUserListREQ) {
+    public Result<AdminSysRoleUserListResp> list(@RequestBody AdminSysRoleUserListReq sysRoleUserListREQ) {
         return biz.list(sysRoleUserListREQ);
     }
 
@@ -38,7 +38,7 @@ public class AdminSysRoleUserController {
      */
     @ApiOperation(value = "添加用户角色信息接口", notes = "添加用户角色信息接口")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Result<Integer> save(@RequestBody SysRoleUserSaveREQ sysRoleUserSaveREQ) {
+    public Result<Integer> save(@RequestBody AdminSysRoleUserSaveReq sysRoleUserSaveREQ) {
         return biz.save(sysRoleUserSaveREQ);
     }
 

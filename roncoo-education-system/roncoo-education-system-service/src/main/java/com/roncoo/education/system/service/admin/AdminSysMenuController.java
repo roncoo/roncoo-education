@@ -3,9 +3,9 @@ package com.roncoo.education.system.service.admin;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysMenuBiz;
 import com.roncoo.education.system.service.admin.req.*;
-import com.roncoo.education.system.service.admin.resp.SysMenuListRESQ;
-import com.roncoo.education.system.service.admin.resp.SysMenuUserListRESQ;
-import com.roncoo.education.system.service.admin.resp.SysMenuViewRESQ;
+import com.roncoo.education.system.service.admin.resp.AdminSysMenuListResp;
+import com.roncoo.education.system.service.admin.resp.AdminSysMenuUserListResp;
+import com.roncoo.education.system.service.admin.resp.AdminSysMenuViewResp;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,8 +30,8 @@ public class AdminSysMenuController {
      */
     @ApiOperation(value = "菜单信息列出信息接口", notes = "菜单信息列出信息")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result<SysMenuListRESQ> list(@RequestBody SysMenuListREQ sysMenuListREQ) {
-        return biz.list(sysMenuListREQ);
+    public Result<AdminSysMenuListResp> list(@RequestBody AdminSysMenuListReq sysMenuListReq) {
+        return biz.list(sysMenuListReq);
     }
 
     /**
@@ -39,8 +39,8 @@ public class AdminSysMenuController {
      */
     @ApiOperation(value = "菜单信息保存接口", notes = "菜单信息保存接口")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Result<Integer> save(@RequestBody SysMenuSaveREQ sysMenuSaveREQ) {
-        return biz.save(sysMenuSaveREQ);
+    public Result<Integer> save(@RequestBody AdminSysMenuSaveReq sysMenuSaveReq) {
+        return biz.save(sysMenuSaveReq);
     }
 
     /**
@@ -48,8 +48,8 @@ public class AdminSysMenuController {
      */
     @ApiOperation(value = "菜单信息删除接口", notes = "菜单信息删除接口")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public Result<Integer> delete(@RequestBody SysMenuDeleteREQ sysMenuDeleteREQ) {
-        return biz.delete(sysMenuDeleteREQ);
+    public Result<Integer> delete(@RequestBody AdminSysMenuDeleteReq sysMenuDeleteReq) {
+        return biz.delete(sysMenuDeleteReq);
     }
 
     /**
@@ -57,8 +57,8 @@ public class AdminSysMenuController {
      */
     @ApiOperation(value = "菜单信息更新接口", notes = "菜单信息更新接口")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public Result<Integer> update(@RequestBody SysMenuUpdateREQ sysMenuUpdateREQ) {
-        return biz.update(sysMenuUpdateREQ);
+    public Result<Integer> update(@RequestBody AdminSysMenuUpdateReq sysMenuUpdateReq) {
+        return biz.update(sysMenuUpdateReq);
     }
 
     /**
@@ -66,7 +66,7 @@ public class AdminSysMenuController {
      */
     @ApiOperation(value = "菜单信息查看接口", notes = "菜单信息查看接口")
     @RequestMapping(value = "/view", method = RequestMethod.POST)
-    public Result<SysMenuViewRESQ> view(@RequestBody SysMenuViewREQ sysMenuViewREQ) {
+    public Result<AdminSysMenuViewResp> view(@RequestBody AdminSysMenuViewReq sysMenuViewREQ) {
         return biz.view(sysMenuViewREQ);
     }
 
@@ -75,7 +75,7 @@ public class AdminSysMenuController {
      */
     @ApiOperation(value = "用户菜单信息列出信息接口(登录用户)", notes = "用户菜单信息列出信息接口(登录用户)")
     @RequestMapping(value = "/user/list", method = RequestMethod.POST)
-    public Result<SysMenuUserListRESQ> list(@RequestBody SysMenuUserListREQ sysMenuUserListREQ) {
+    public Result<AdminSysMenuUserListResp> list(@RequestBody AdminSysMenuUserListReq sysMenuUserListREQ) {
         return biz.userList(sysMenuUserListREQ);
     }
 
@@ -85,7 +85,7 @@ public class AdminSysMenuController {
      */
     @ApiOperation(value = "用户按钮菜单信息列出信息接口(按钮)", notes = "用户按钮菜单信息列出信息接口(登录用户)")
     @RequestMapping(value = "/user/button/list", method = RequestMethod.POST)
-    public Result<SysMenuUserListRESQ> buttonList(@RequestBody SysMenuUserListREQ sysMenuUserListREQ) {
+    public Result<AdminSysMenuUserListResp> buttonList(@RequestBody AdminSysMenuUserListReq sysMenuUserListREQ) {
         return biz.buttonList(sysMenuUserListREQ);
     }
 

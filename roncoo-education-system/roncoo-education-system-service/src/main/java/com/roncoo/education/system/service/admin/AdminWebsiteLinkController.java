@@ -3,9 +3,8 @@ package com.roncoo.education.system.service.admin;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminWebsiteLinkBiz;
-import com.roncoo.education.system.service.admin.req.*;
-import com.roncoo.education.system.service.admin.resp.WebsiteLinkPageRESQ;
-import com.roncoo.education.system.service.admin.resp.WebsiteLinkViewRESQ;
+import com.roncoo.education.system.service.admin.resp.AdminWebsiteLinkPageResp;
+import com.roncoo.education.system.service.admin.resp.AdminWebsiteLinkViewResp;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,7 +27,7 @@ public class AdminWebsiteLinkController {
      */
     @ApiOperation(value = "站点友情分页列表链接接口", notes = "站点友情分页列表接口")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result<Page<WebsiteLinkPageRESQ>> list(@RequestBody WebsiteLinkPageREQ websiteLinkPageREQ) {
+    public Result<Page<AdminWebsiteLinkPageResp>> list(@RequestBody WebsiteLinkPageREQ websiteLinkPageREQ) {
         return biz.list(websiteLinkPageREQ);
     }
 
@@ -64,7 +63,7 @@ public class AdminWebsiteLinkController {
      */
     @ApiOperation(value = "站点友情查看接口", notes = "站点友情查看接口")
     @RequestMapping(value = "/view", method = RequestMethod.POST)
-    public Result<WebsiteLinkViewRESQ> view(@RequestBody WebsiteLinkViewREQ websiteLinkViewREQ) {
+    public Result<AdminWebsiteLinkViewResp> view(@RequestBody WebsiteLinkViewREQ websiteLinkViewREQ) {
         return biz.view(websiteLinkViewREQ);
     }
 

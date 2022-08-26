@@ -10,9 +10,8 @@ import com.roncoo.education.system.dao.WebsiteLinkDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample.Criteria;
-import com.roncoo.education.system.service.admin.req.*;
-import com.roncoo.education.system.service.admin.resp.WebsiteLinkPageRESQ;
-import com.roncoo.education.system.service.admin.resp.WebsiteLinkViewRESQ;
+import com.roncoo.education.system.service.admin.resp.AdminWebsiteLinkPageResp;
+import com.roncoo.education.system.service.admin.resp.AdminWebsiteLinkViewResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -32,7 +31,7 @@ public class AdminWebsiteLinkBiz {
      * @param req
      * @return
      */
-    public Result<Page<WebsiteLinkPageRESQ>> list(WebsiteLinkPageREQ req) {
+    public Result<Page<AdminWebsiteLinkPageResp>> list(WebsiteLinkPageREQ req) {
         WebsiteLinkExample example = new WebsiteLinkExample();
         Criteria c = example.createCriteria();
         if (StringUtils.hasText(req.getLinkName())) {
@@ -43,7 +42,7 @@ public class AdminWebsiteLinkBiz {
         }
         example.setOrderByClause(" status_id desc, sort desc, id desc ");
         Page<WebsiteLink> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
-        return Result.success(PageUtil.transform(page, WebsiteLinkPageRESQ.class));
+        return Result.success(PageUtil.transform(page, AdminWebsiteLinkPageResp.class));
     }
 
     /**
@@ -110,7 +109,7 @@ public class AdminWebsiteLinkBiz {
      * @param req
      * @return
      */
-    public Result<WebsiteLinkViewRESQ> view(WebsiteLinkViewREQ req) {
+    public Result<AdminWebsiteLinkViewResp> view(WebsiteLinkViewREQ req) {
         if (req.getId() == null) {
             return Result.error("ID不能为空");
         }
@@ -118,7 +117,7 @@ public class AdminWebsiteLinkBiz {
         if (ObjectUtil.isNull(record)) {
             return Result.error("找不到友情链接信息");
         }
-        return Result.success(BeanUtil.copyProperties(record, WebsiteLinkViewRESQ.class));
+        return Result.success(BeanUtil.copyProperties(record, AdminWebsiteLinkViewResp.class));
     }
 
 }

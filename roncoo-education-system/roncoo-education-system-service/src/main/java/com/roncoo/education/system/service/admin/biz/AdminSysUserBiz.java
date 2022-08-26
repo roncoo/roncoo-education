@@ -14,8 +14,8 @@ import com.roncoo.education.system.dao.impl.mapper.entity.SysUser;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUserExample;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUserExample.Criteria;
 import com.roncoo.education.system.service.admin.req.*;
-import com.roncoo.education.system.service.admin.resp.SysUserPageRESQ;
-import com.roncoo.education.system.service.admin.resp.SysUserViewRESQ;
+import com.roncoo.education.system.service.admin.resp.AdminSysUserPageResp;
+import com.roncoo.education.system.service.admin.resp.AdminSysUserViewResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +34,7 @@ public class AdminSysUserBiz {
     @Autowired
     private SysUserDao dao;
 
-    public Result<Page<SysUserPageRESQ>> list(SysUserPageREQ req) {
+    public Result<Page<AdminSysUserPageResp>> list(AdminSysUserPageReq req) {
         SysUserExample example = new SysUserExample();
         Criteria c = example.createCriteria();
         if (StringUtils.hasText(req.getMobile())) {
@@ -42,10 +42,10 @@ public class AdminSysUserBiz {
         }
         example.setOrderByClause(" status_id desc, sort asc, id desc ");
         Page<SysUser> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
-        return Result.success(PageUtil.transform(page, SysUserPageRESQ.class));
+        return Result.success(PageUtil.transform(page, AdminSysUserPageResp.class));
     }
 
-    public Result<Integer> save(SysUserSaveREQ req) {
+    public Result<Integer> save(AdminSysUserSaveReq req) {
         if (!req.getMobilePwd().equals(req.getRePassword())) {
             return Result.error("密码不一致");
         }
@@ -64,7 +64,7 @@ public class AdminSysUserBiz {
     }
 
     @Transactional
-    public Result<Integer> delete(SysUserDeleteREQ req) {
+    public Result<Integer> delete(AdminSysUserDeleteReq req) {
         if (req.getId() == null) {
             return Result.error("主键ID不能为空");
         }
@@ -74,7 +74,7 @@ public class AdminSysUserBiz {
         return Result.success(dao.deleteById(req.getId()));
     }
 
-    public Result<Integer> update(SysUserUpdateREQ req) {
+    public Result<Integer> update(AdminSysUserUpdateReq req) {
         if (req.getId() == null) {
             return Result.error("主键ID不能为空");
         }
@@ -90,7 +90,7 @@ public class AdminSysUserBiz {
         return Result.error(ResultEnum.SYSTEM_UPDATE_FAIL);
     }
 
-    public Result<SysUserViewRESQ> view(SysUserViewREQ req) {
+    public Result<AdminSysUserViewResp> view(AdminSysUserViewReq req) {
         if (req.getId() == null) {
             return Result.error("主键ID不能为空");
         }
@@ -98,10 +98,10 @@ public class AdminSysUserBiz {
         if (ObjectUtil.isNull(sysUser)) {
             return Result.error("管理员不存在");
         }
-        return Result.success(BeanUtil.copyProperties(sysUser, SysUserViewRESQ.class));
+        return Result.success(BeanUtil.copyProperties(sysUser, AdminSysUserViewResp.class));
     }
 
-    public Result<Integer> updatePassword(SysUserUpdatePasswordREQ req) {
+    public Result<Integer> updatePassword(AdminSysUserUpdatePasswordReq req) {
         if (req.getUserId() == null) {
             return Result.error("用户ID不能为空,请重试");
         }

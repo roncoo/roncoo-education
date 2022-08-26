@@ -3,8 +3,8 @@ package com.roncoo.education.system.service.admin;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysLogBiz;
-import com.roncoo.education.system.service.admin.req.SysLogPageREQ;
-import com.roncoo.education.system.service.admin.resp.SysLogPageRESQ;
+import com.roncoo.education.system.service.admin.req.AdminSysLogPageReq;
+import com.roncoo.education.system.service.admin.resp.AdminSysLogPageResp;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,8 +29,8 @@ public class AdminSysLogController {
      */
     @ApiOperation(value = "后台操作日志分页列表接口", notes = "后台操作日志分页列表接口")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result<Page<SysLogPageRESQ>> list(@RequestBody SysLogPageREQ sysLogPageREQ) {
-        return biz.list(sysLogPageREQ);
+    public Result<Page<AdminSysLogPageResp>> list(@RequestBody AdminSysLogPageReq req) {
+        return biz.list(req);
     }
 
 }

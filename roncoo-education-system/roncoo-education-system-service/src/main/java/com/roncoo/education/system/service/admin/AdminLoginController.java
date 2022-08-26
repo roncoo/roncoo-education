@@ -2,8 +2,8 @@ package com.roncoo.education.system.service.admin;
 
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminLoginBiz;
-import com.roncoo.education.system.service.admin.req.AdminUsersLoginReq;
-import com.roncoo.education.system.service.admin.resp.AdminUsersLoginResp;
+import com.roncoo.education.system.service.admin.req.AdminSysUserLoginReq;
+import com.roncoo.education.system.service.admin.resp.AdminSysUserLoginResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ public class AdminLoginController {
 
     @ApiOperation(value = "密码登录", notes = "用户使用密码登录")
     @PostMapping(value = "/password")
-    public Result<AdminUsersLoginResp> login(@RequestBody AdminUsersLoginReq req) {
+    public Result<AdminSysUserLoginResp> login(@RequestBody AdminSysUserLoginReq req) {
         return biz.login(req);
     }
 

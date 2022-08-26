@@ -5,9 +5,9 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.dao.SysMenuDao;
 import com.roncoo.education.system.dao.SysMenuRoleDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuRole;
-import com.roncoo.education.system.service.admin.req.SysMenuRoleListREQ;
-import com.roncoo.education.system.service.admin.req.SysMenuRoleSaveREQ;
-import com.roncoo.education.system.service.admin.resp.SysMenuRoleListRESQ;
+import com.roncoo.education.system.service.admin.req.AdminSysMenuRoleListReq;
+import com.roncoo.education.system.service.admin.req.AdminSysMenuRoleSaveReq;
+import com.roncoo.education.system.service.admin.resp.AdminSysMenuRoleListResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,11 +34,11 @@ public class AdminSysMenuRoleBiz {
      * @param req
      * @return
      */
-    public Result<SysMenuRoleListRESQ> list(SysMenuRoleListREQ req) {
+    public Result<AdminSysMenuRoleListResp> list(AdminSysMenuRoleListReq req) {
         if (req.getRoleId() == null) {
             return Result.error("角色ID不能为空");
         }
-        SysMenuRoleListRESQ resq = new SysMenuRoleListRESQ();
+        AdminSysMenuRoleListResp resq = new AdminSysMenuRoleListResp();
         List<SysMenuRole> list = dao.listByRoleId(req.getRoleId());
         List<String> roleIdList = new ArrayList<>();
         if (CollectionUtil.isNotEmpty(list)) {
@@ -51,7 +51,7 @@ public class AdminSysMenuRoleBiz {
     }
 
     @Transactional
-    public Result<Integer> save(SysMenuRoleSaveREQ req) {
+    public Result<Integer> save(AdminSysMenuRoleSaveReq req) {
         if (req.getRoleId() == null) {
             return Result.error("角色ID不能为空");
         }

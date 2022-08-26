@@ -50,4 +50,6 @@ public interface SysMenuDao {
      * @return
      */
     List<SysMenu> listByMenuName(String menuName);
+
+    List<SysMenu> getByIds(List<Long> ids);
 }

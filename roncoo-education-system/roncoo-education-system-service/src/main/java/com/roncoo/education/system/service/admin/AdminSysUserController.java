@@ -4,8 +4,8 @@ import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysUserBiz;
 import com.roncoo.education.system.service.admin.req.*;
-import com.roncoo.education.system.service.admin.resp.SysUserPageRESQ;
-import com.roncoo.education.system.service.admin.resp.SysUserViewRESQ;
+import com.roncoo.education.system.service.admin.resp.AdminSysUserPageResp;
+import com.roncoo.education.system.service.admin.resp.AdminSysUserViewResp;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,7 +30,7 @@ public class AdminSysUserController {
      */
     @ApiOperation(value = "后台管理员分页列表接口", notes = "后台管理员分页列表接口")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result<Page<SysUserPageRESQ>> list(@RequestBody SysUserPageREQ sysUserPageREQ) {
+    public Result<Page<AdminSysUserPageResp>> list(@RequestBody AdminSysUserPageReq sysUserPageREQ) {
         return biz.list(sysUserPageREQ);
     }
 
@@ -39,7 +39,7 @@ public class AdminSysUserController {
      */
     @ApiOperation(value = "后台管理员添加接口", notes = "后台管理员添加接口")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Result<Integer> save(@RequestBody SysUserSaveREQ sysUserSaveREQ) {
+    public Result<Integer> save(@RequestBody AdminSysUserSaveReq sysUserSaveREQ) {
         return biz.save(sysUserSaveREQ);
     }
 
@@ -48,7 +48,7 @@ public class AdminSysUserController {
      */
     @ApiOperation(value = "后台管理员删除接口", notes = "后台管理员删除接口")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public Result<Integer> delete(@RequestBody SysUserDeleteREQ sysUserSaveREQ) {
+    public Result<Integer> delete(@RequestBody AdminSysUserDeleteReq sysUserSaveREQ) {
         return biz.delete(sysUserSaveREQ);
     }
 
@@ -57,7 +57,7 @@ public class AdminSysUserController {
      */
     @ApiOperation(value = "后台管理员更新接口", notes = "后台管理员更新接口")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public Result<Integer> update(@RequestBody SysUserUpdateREQ sysUserUpdateREQ) {
+    public Result<Integer> update(@RequestBody AdminSysUserUpdateReq sysUserUpdateREQ) {
         return biz.update(sysUserUpdateREQ);
     }
 
@@ -66,7 +66,7 @@ public class AdminSysUserController {
      */
     @ApiOperation(value = "后台管理员查看接口", notes = "后台管理员查看接口")
     @RequestMapping(value = "/view", method = RequestMethod.POST)
-    public Result<SysUserViewRESQ> view(@RequestBody SysUserViewREQ sysUserViewREQ) {
+    public Result<AdminSysUserViewResp> view(@RequestBody AdminSysUserViewReq sysUserViewREQ) {
         return biz.view(sysUserViewREQ);
     }
 
@@ -75,7 +75,7 @@ public class AdminSysUserController {
      */
     @ApiOperation(value = "后台管理员密码接口", notes = "后台管理员更新密码接口")
     @RequestMapping(value = "/update/password", method = RequestMethod.POST)
-    public Result<Integer> updatePassword(@RequestBody SysUserUpdatePasswordREQ sysUserUpdatePasswordREQ) {
+    public Result<Integer> updatePassword(@RequestBody AdminSysUserUpdatePasswordReq sysUserUpdatePasswordREQ) {
         return biz.updatePassword(sysUserUpdatePasswordREQ);
     }
 
