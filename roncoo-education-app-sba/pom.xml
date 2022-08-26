@@ -46,7 +46,7 @@
     </dependencies>
 
     <build>
-        <finalName>app-sba</finalName>
+        <finalName>sba</finalName>
 
         <plugins>
             <plugin>

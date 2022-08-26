@@ -36,7 +36,7 @@
     </dependencies>
 
     <build>
-        <finalName>system-service</finalName>
+        <finalName>system</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

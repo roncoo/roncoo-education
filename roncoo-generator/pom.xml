@@ -77,7 +77,7 @@
     </dependencies>
 
     <build>
-        <finalName>app-generator</finalName>
+        <finalName>generator</finalName>
 
         <plugins>
             <plugin>
