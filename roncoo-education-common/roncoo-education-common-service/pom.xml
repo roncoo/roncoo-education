@@ -34,12 +34,6 @@
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
 
-        <!-- zipkin 需要使用直接开启即可 -->
-        <!--<dependency>
-          <groupId>org.springframework.cloud</groupId>
-          <artifactId>spring-cloud-starter-zipkin</artifactId>
-        </dependency>-->
-
         <!-- minio -->
         <dependency>
             <groupId>com.roncoo</groupId>
