@@ -19,8 +19,17 @@
 
     <developers>
         <developer>
-            <name>fengyongwei</name>
+            <name>fengyw</name>
             <email>fengyw@roncoo.com</email>
+            <organization>LingKe, Co., Ltd.</organization>
+            <organizationUrl>http://www.roncoo.net</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+        <developer>
+            <name>wuy</name>
             <organization>LingKe, Co., Ltd.</organization>
             <organizationUrl>http://www.roncoo.net</organizationUrl>
             <roles>
@@ -50,15 +59,6 @@
         </developer>
         <developer>
             <name>yangzj</name>
-            <organization>LingKe, Co., Ltd.</organization>
-            <organizationUrl>http://www.roncoo.net</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
-        <developer>
-            <name>wuy</name>
             <organization>LingKe, Co., Ltd.</organization>
             <organizationUrl>http://www.roncoo.net</organizationUrl>
             <roles>
@@ -185,28 +185,6 @@
             </plugins>
         </pluginManagement>
     </build>
-
-    <!-- 环境变量 -->
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <properties>
-                <env>dev</env>
-            </properties>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <env>prod</env>
-            </properties>
-        </profile>
-        <profile>
-            <id>test</id>
-            <properties>
-                <env>test</env>
-            </properties>
-        </profile>
-    </profiles>
 
     <modules>
         <!-- 网关接口 -->
