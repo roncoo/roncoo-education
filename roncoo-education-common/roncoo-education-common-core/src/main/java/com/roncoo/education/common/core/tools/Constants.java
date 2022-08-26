@@ -19,7 +19,7 @@ public final class Constants {
     public static final String ADMIN = "admin";
     public static final String TOKEN = "token";
     public static final String USER_ID = "userId";
-    public static final Integer FREEZE = 3;
+    //public static final Integer FREEZE = 3;
 
     /**
      * 单位：分钟
@@ -29,7 +29,6 @@ public final class Constants {
     public interface RedisPre {
         String ADMINI_MENU = "admin::menu::";
         String USERS_INFO = "users::info::";
-        String CONFIG_WEBSITE = "config::website";
     }
 
 }

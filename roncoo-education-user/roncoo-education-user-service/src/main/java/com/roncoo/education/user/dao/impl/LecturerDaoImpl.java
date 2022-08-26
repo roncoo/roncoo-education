@@ -53,7 +53,7 @@ public class LecturerDaoImpl implements LecturerDao {
     public Lecturer getByLectureruserId(Long lectureruserId) {
         LecturerExample example = new LecturerExample();
         LecturerExample.Criteria criteria = example.createCriteria();
-        criteria.andLectureruserIdEqualTo(lectureruserId);
+        criteria.andUserIdEqualTo(lectureruserId);
         List<Lecturer> resultList = this.lecturerMapper.selectByExample(example);
         if (resultList.isEmpty()) {
             return null;
@@ -85,7 +85,7 @@ public class LecturerDaoImpl implements LecturerDao {
     public Lecturer getByLectureruserIdAndStatusId(Long lectureruserId, Integer statusId) {
         LecturerExample example = new LecturerExample();
         LecturerExample.Criteria criteria = example.createCriteria();
-        criteria.andLectureruserIdEqualTo(lectureruserId);
+        criteria.andUserIdEqualTo(lectureruserId);
         criteria.andStatusIdEqualTo(statusId);
         List<Lecturer> resultList = this.lecturerMapper.selectByExample(example);
         if (resultList.isEmpty()) {
@@ -98,7 +98,7 @@ public class LecturerDaoImpl implements LecturerDao {
     public List<Lecturer> listByLectureruserIds(List<Long> lectureruserIds) {
         LecturerExample example = new LecturerExample();
         LecturerExample.Criteria criteria = example.createCriteria();
-        criteria.andLectureruserIdIn(lectureruserIds);
+        criteria.andUserIdIn(lectureruserIds);
         return this.lecturerMapper.selectByExample(example);
     }
 }

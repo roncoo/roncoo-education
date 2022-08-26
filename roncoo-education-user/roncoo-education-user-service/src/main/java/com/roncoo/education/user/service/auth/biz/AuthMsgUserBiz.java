@@ -73,10 +73,11 @@ public class AuthMsgUserBiz extends BaseBiz {
         }
 
         // 未阅读，则刷新阅读状态
-        if (IsDefaultEnum.NO.getCode().equals(record.getIsRead())) {
-            record.setIsRead(IsDefaultEnum.YES.getCode());
-            dao.updateById(record);
-        }
+//        if (IsDefaultEnum.NO.getCode().equals(record.getIsRead())) {
+//            record.setIsRead(IsDefaultEnum.YES.getCode());
+//            dao.updateById(record);
+//        }
+
         // 返回消息实体
         Msg msg = msgDao.getById(record.getMsgId());
         if (msg == null) {

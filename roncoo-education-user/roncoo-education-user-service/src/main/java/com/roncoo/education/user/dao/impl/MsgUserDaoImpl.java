@@ -4,7 +4,7 @@ import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
 import com.roncoo.education.user.dao.MsgUserDao;
-import com.roncoo.education.user.dao.impl.mapper.MsgusersMapper;
+import com.roncoo.education.user.dao.impl.mapper.MsgUserMapper;
 import com.roncoo.education.user.dao.impl.mapper.entity.MsgUser;
 import com.roncoo.education.user.dao.impl.mapper.entity.MsgUserExample;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ import java.util.List;
 public class MsgUserDaoImpl implements MsgUserDao {
 
     @NotNull
-    private final MsgusersMapper mapper;
+    private final MsgUserMapper mapper;
 
     @Override
     public int save(MsgUser record) {

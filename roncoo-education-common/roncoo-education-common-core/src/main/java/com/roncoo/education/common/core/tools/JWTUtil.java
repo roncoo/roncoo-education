@@ -49,16 +49,12 @@ public final class JWTUtil {
      * @throws IllegalArgumentException
      * @throws UnsupportedEncodingException
      */
-    public static DecodedJWT verify(String token) throws JWTVerificationException, IllegalArgumentException, UnsupportedEncodingException {
+    public static DecodedJWT verify(String token) throws JWTVerificationException, IllegalArgumentException {
         return JWT.require(Algorithm.HMAC256(TOKEN_SECRET)).withIssuer(ISSUER).build().verify(token);
     }
 
     /**
-     * @param token
      * @return
-     * @throws JWTVerificationException
-     * @throws IllegalArgumentException
-     * @throws UnsupportedEncodingException
      */
     public static Long getUserId(DecodedJWT decodedJWT) {
         return Long.valueOf(decodedJWT.getClaim(USERID).asString());
