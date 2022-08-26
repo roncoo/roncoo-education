@@ -4,18 +4,29 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class SysConfig implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Long id;
+
     private Integer configType;
+
     private Integer contentType;
+
     private String configName;
+
     private String configKey;
+
     private Boolean configShow;
+
     private String remark;
+
     private Integer sort;
+
     private Date gmtCreate;
+
     private Date gmtModified;
+
     private String configValue;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

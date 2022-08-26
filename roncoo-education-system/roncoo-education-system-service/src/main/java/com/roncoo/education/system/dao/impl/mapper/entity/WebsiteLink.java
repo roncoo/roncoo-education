@@ -4,15 +4,23 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class WebsiteLink implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Long id;
+
     private Date gmtCreate;
+
     private Date gmtModified;
+
     private Integer statusId;
+
     private Integer sort;
+
     private String linkName;
+
     private String linkUrl;
+
     private String linkTarget;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

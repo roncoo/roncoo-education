@@ -4,14 +4,21 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class SysRole implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Long id;
+
     private Date gmtCreate;
+
     private Date gmtModified;
+
     private Integer statusId;
+
     private Integer sort;
+
     private String roleName;
+
     private String remark;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

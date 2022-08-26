@@ -4,16 +4,25 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class SysLog implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Long id;
+
     private Date gmtCreate;
+
     private Long userId;
+
     private String realName;
+
     private String ip;
+
     private String operation;
+
     private String method;
+
     private String path;
+
     private String content;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;
@@ -35,7 +44,7 @@ public class SysLog implements Serializable {
         return userId;
     }
 
-    public void setuserId(Long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
