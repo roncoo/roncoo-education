@@ -1,19 +1,19 @@
 package com.roncoo.education.user.service.admin.biz;
 
-import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.user.dao.MsgTemplateDao;
+import com.roncoo.education.user.dao.impl.mapper.entity.MsgTemplate;
+import com.roncoo.education.user.dao.impl.mapper.entity.MsgTemplateExample;
+import com.roncoo.education.user.dao.impl.mapper.entity.MsgTemplateExample.Criteria;
 import com.roncoo.education.user.service.admin.req.AdminMsgTemplateEditReq;
 import com.roncoo.education.user.service.admin.req.AdminMsgTemplatePageReq;
 import com.roncoo.education.user.service.admin.req.AdminMsgTemplateSaveReq;
 import com.roncoo.education.user.service.admin.resp.AdminMsgTemplatePageResp;
 import com.roncoo.education.user.service.admin.resp.AdminMsgTemplateViewResp;
-import com.roncoo.education.user.dao.MsgTemplateDao;
-import com.roncoo.education.user.dao.impl.mapper.entity.MsgTemplate;
-import com.roncoo.education.user.dao.impl.mapper.entity.MsgTemplateExample;
-import com.roncoo.education.user.dao.impl.mapper.entity.MsgTemplateExample.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

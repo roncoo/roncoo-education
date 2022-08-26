@@ -1,12 +1,12 @@
 package com.roncoo.education.user.service.admin.resp;
 
-import java.math.BigDecimal;
-import java.io.Serializable;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * <p>

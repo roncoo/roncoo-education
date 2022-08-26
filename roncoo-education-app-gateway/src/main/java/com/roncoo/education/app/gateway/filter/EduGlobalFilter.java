@@ -68,7 +68,7 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
         }
 
         // 额外不需要认证的接口
-        if(EXCLUDE_URL.contains(uri)){
+        if (EXCLUDE_URL.contains(uri)) {
             return chain.filter(exchange);
         }
 

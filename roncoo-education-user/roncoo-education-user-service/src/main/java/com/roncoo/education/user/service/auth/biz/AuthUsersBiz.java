@@ -1,6 +1,7 @@
 package com.roncoo.education.user.service.auth.biz;
 
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.user.dao.UsersDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

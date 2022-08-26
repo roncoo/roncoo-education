@@ -2,7 +2,6 @@ package com.roncoo.education.user.service.admin;
 
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.core.base.SysLogCache;
 import com.roncoo.education.user.service.admin.biz.AdminMsgBiz;
 import com.roncoo.education.user.service.admin.req.AdminMsgEditReq;
 import com.roncoo.education.user.service.admin.req.AdminMsgPageReq;
