@@ -4,7 +4,6 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.tools.Constants;
-import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.common.core.tools.JWTUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +29,19 @@ import java.util.concurrent.TimeUnit;
 public class EduGlobalFilter implements GlobalFilter, Ordered {
 
     /**
-     * 不需要授权认证的访问路径
+     * admin不需要token校验的接口
      */
-    private static final List<String> EXCLUDE_URL = Arrays.asList(
+    private static final List<String> EXCLUDE_TOKEN_URL = Arrays.asList(
             // 登录接口
             "/system/admin/login/password"
+    );
+
+    /**
+     * admin不需要权限校验的接口
+     */
+    private static final List<String> EXCLUDE_URL = Arrays.asList(
+            // 登录获取菜单接口
+            "/system/admin/sys/menu/user/list"
     );
 
     @Autowired
@@ -67,8 +74,8 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
             return chain.filter(exchange);
         }
 
-        // 额外不需要认证的接口
-        if (EXCLUDE_URL.contains(uri)) {
+        // 额外不需要token认证的接口
+        if (EXCLUDE_TOKEN_URL.contains(uri)) {
             return chain.filter(exchange);
         }
 
@@ -93,14 +100,15 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
 
     // 校验用户是否有权限
     private static Boolean checkUri(String uri, String tk) {
-        List<String> menuVOList1 = JSUtil.parseArray(tk, String.class);
         if (StringUtils.hasText(uri) && uri.endsWith("/")) {
             uri = uri.substring(0, uri.length() - 1);
         }
-        for (String s : menuVOList1) {
-            if (s.contains(uri)) {
-                return true;
-            }
+        // 额外不需要权限校验的接口
+        if (EXCLUDE_URL.contains(uri)) {
+            return true;
+        }
+        if (tk.contains(uri)) {
+            return true;
         }
         return false;
     }

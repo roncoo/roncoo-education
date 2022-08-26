@@ -2,9 +2,11 @@ package com.roncoo.education.system.service.admin.biz;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
+import com.roncoo.education.common.config.ThreadContext;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.MenuTypeEnum;
 import com.roncoo.education.common.core.enums.ResultEnum;
+import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.system.dao.SysMenuDao;
 import com.roncoo.education.system.dao.SysMenuRoleDao;
@@ -137,12 +139,9 @@ public class AdminSysMenuBiz {
         return Result.success(BeanUtil.copyProperties(record, AdminSysMenuViewResp.class));
     }
 
-    public Result<AdminSysMenuUserListResp> userList(AdminSysMenuUserListReq req) {
-        if (req.getUserId() == null) {
-            return Result.error("用户编不能为空");
-        }
-        SysUser sysUser = sysUserDao.getById(req.getUserId());
-        if (ObjectUtil.isNull(sysUser)) {
+    public Result<AdminSysMenuUserListResp> userList() {
+        SysUser sysUser = sysUserDao.getById(ThreadContext.userId());
+        if (ObjectUtil.isNull(sysUser) || !sysUser.getStatusId().equals(StatusIdEnum.YES.getCode())) {
             return Result.error("用户异常");
         }
         AdminSysMenuUserListResp resq = new AdminSysMenuUserListResp();

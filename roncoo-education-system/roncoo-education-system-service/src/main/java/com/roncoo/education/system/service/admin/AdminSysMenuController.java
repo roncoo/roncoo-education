@@ -73,18 +73,17 @@ public class AdminSysMenuController {
     /**
      * 用户菜单信息列出信息接口
      */
-    @ApiOperation(value = "用户菜单信息列出信息接口(登录用户)", notes = "用户菜单信息列出信息接口(登录用户)")
+    @ApiOperation(value = "登录用户菜单接口", notes = "获取当前登录用户的所有菜单")
     @RequestMapping(value = "/user/list", method = RequestMethod.POST)
-    public Result<AdminSysMenuUserListResp> list(@RequestBody AdminSysMenuUserListReq sysMenuUserListREQ) {
-        return biz.userList(sysMenuUserListREQ);
+    public Result<AdminSysMenuUserListResp> userList() {
+        return biz.userList();
     }
-
 
     /**
      * 用户菜单信息列出信息接口
      */
-    @ApiOperation(value = "用户按钮菜单信息列出信息接口(按钮)", notes = "用户按钮菜单信息列出信息接口(登录用户)")
-    @RequestMapping(value = "/user/button/list", method = RequestMethod.POST)
+    @ApiOperation(value = "指定用户菜单接口", notes = "获取指定用户的所有菜单")
+    @RequestMapping(value = "/button/list", method = RequestMethod.POST)
     public Result<AdminSysMenuUserListResp> buttonList(@RequestBody AdminSysMenuUserListReq sysMenuUserListREQ) {
         return biz.buttonList(sysMenuUserListREQ);
     }
