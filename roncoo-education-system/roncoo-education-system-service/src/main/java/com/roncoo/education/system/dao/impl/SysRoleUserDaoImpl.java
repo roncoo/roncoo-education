@@ -46,7 +46,7 @@ public class SysRoleUserDaoImpl implements SysRoleUserDao {
     }
 
     @Override
-    public Page<SysRoleUser> listForPage(int pageCurrent, int pageSize, SysRoleUserExample example) {
+    public Page<SysRoleUser> page(int pageCurrent, int pageSize, SysRoleUserExample example) {
         int count = this.sysRoleUserMapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);
         pageCurrent = PageUtil.checkPageCurrent(count, pageSize, pageCurrent);

@@ -7,7 +7,7 @@ public class SysLog implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
     private Date gmtCreate;
-    private Long userNo;
+    private Long userId;
     private String realName;
     private String ip;
     private String operation;
@@ -31,12 +31,12 @@ public class SysLog implements Serializable {
         this.gmtCreate = gmtCreate;
     }
 
-    public Long getUserNo() {
-        return userNo;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserNo(Long userNo) {
-        this.userNo = userNo;
+    public void setuserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getRealName() {
@@ -95,7 +95,7 @@ public class SysLog implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", gmtCreate=").append(gmtCreate);
-        sb.append(", userNo=").append(userNo);
+        sb.append(", userId=").append(userId);
         sb.append(", realName=").append(realName);
         sb.append(", ip=").append(ip);
         sb.append(", operation=").append(operation);

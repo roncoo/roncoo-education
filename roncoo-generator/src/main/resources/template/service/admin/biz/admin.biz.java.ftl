@@ -54,9 +54,9 @@ public class Admin${entity}Biz extends BaseBiz {
     public Result<String> save(Admin${entity}SaveReq req) {
         ${entity} record = BeanUtil.copyProperties(req, ${entity}.class);
         if (dao.save(record) > 0) {
-            return Result.success(toI18nSuccess());
+            return Result.success("操作成功");
         }
-        return Result.error(toI18nFail());
+        return Result.error("操作失败");
     }
 
     /**
@@ -78,9 +78,9 @@ public class Admin${entity}Biz extends BaseBiz {
     public Result<String> edit(Admin${entity}EditReq req) {
         ${entity} record = BeanUtil.copyProperties(req, ${entity}.class);
         if (dao.updateById(record) > 0) {
-            return Result.success(toI18nSuccess());
+            return Result.success("操作成功");
         }
-        return Result.error(toI18nFail());
+        return Result.error("操作失败");
     }
 
     /**
@@ -91,8 +91,8 @@ public class Admin${entity}Biz extends BaseBiz {
      */
     public Result<String> delete(Long id) {
         if (dao.deleteById(id) > 0) {
-            return Result.success(toI18nSuccess());
+            return Result.success("操作成功");
         }
-        return Result.error(toI18nFail());
+        return Result.error("操作失败");
     }
 }

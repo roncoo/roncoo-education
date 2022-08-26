@@ -42,7 +42,7 @@ public class AuthOrderInfoReq implements Serializable {
     @ApiModelProperty(value = "讲师名称")
     private String lecturerName;
 
-    @ApiModelProperty(value = "下单用户编号")
+    @ApiModelProperty(value = "下单用户ID")
     private Long userId;
 
     @ApiModelProperty(value = "下单用户电话")

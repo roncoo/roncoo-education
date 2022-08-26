@@ -17,7 +17,7 @@ public interface SysRoleUserDao {
 
     SysRoleUser getById(Long id);
 
-    Page<SysRoleUser> listForPage(int pageCurrent, int pageSize, SysRoleUserExample example);
+    Page<SysRoleUser> page(int pageCurrent, int pageSize, SysRoleUserExample example);
 
     /**
      * 删除用户所有角色

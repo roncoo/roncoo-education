@@ -15,7 +15,7 @@ public interface RegionDao {
 
     Region getById(Long id);
 
-    Page<Region> listForPage(int pageCurrent, int pageSize, RegionExample example);
+    Page<Region> page(int pageCurrent, int pageSize, RegionExample example);
 
     List<Region> listByLevel(Integer level);
 

@@ -17,10 +17,10 @@ public class SysUserUpdatePasswordREQ implements Serializable {
 
     private static final long serialVersionUID = 1L;
     /**
-     * 用户编号
+     * 用户ID
      */
-    @ApiModelProperty(value = "用户编号", required = true)
-    private Long adminUserNo;
+    @ApiModelProperty(value = "用户ID", required = true)
+    private Long userId;
     /**
      * 新密码
      */

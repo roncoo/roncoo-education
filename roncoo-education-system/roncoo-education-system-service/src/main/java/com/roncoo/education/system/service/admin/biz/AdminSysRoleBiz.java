@@ -43,7 +43,7 @@ public class AdminSysRoleBiz {
             c.andStatusIdEqualTo(req.getStatusId());
         }
         example.setOrderByClause(" status_id desc, sort desc, id desc ");
-        Page<SysRole> page = dao.listForPage(req.getPageCurrent(), req.getPageSize(), example);
+        Page<SysRole> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         return Result.success(PageUtil.transform(page, SysRolePageRESQ.class));
     }
 

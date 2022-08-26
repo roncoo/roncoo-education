@@ -39,7 +39,7 @@ public class RegionDaoImpl implements RegionDao {
     }
 
     @Override
-    public Page<Region> listForPage(int pageCurrent, int pageSize, RegionExample example) {
+    public Page<Region> page(int pageCurrent, int pageSize, RegionExample example) {
         int count = this.regionMapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);
         pageCurrent = PageUtil.checkPageCurrent(count, pageSize, pageCurrent);

@@ -48,7 +48,7 @@ public class SysUserDaoImpl implements SysUserDao {
     }
 
     @Override
-    public Page<SysUser> listForPage(int pageCurrent, int pageSize, SysUserExample example) {
+    public Page<SysUser> page(int pageCurrent, int pageSize, SysUserExample example) {
         int count = this.sysUserMapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);
         pageCurrent = PageUtil.checkPageCurrent(count, pageSize, pageCurrent);
@@ -58,15 +58,4 @@ public class SysUserDaoImpl implements SysUserDao {
         return new Page<SysUser>(count, totalPage, pageCurrent, pageSize, this.sysUserMapper.selectByExample(example));
     }
 
-    @Override
-    public SysUser getByUserNo(Long userNo) {
-        SysUserExample example = new SysUserExample();
-        Criteria c = example.createCriteria();
-        c.andUserNoEqualTo(userNo);
-        List<SysUser> list = sysUserMapper.selectByExample(example);
-        if (CollectionUtil.isEmpty(list)) {
-            return null;
-        }
-        return list.get(0);
-    }
 }

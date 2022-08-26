@@ -37,14 +37,11 @@ public class AdminWebsiteNavBiz extends BaseBiz {
      * @param req 头部导航分页查询参数
      * @return 头部导航分页查询结果
      */
-    public Result
-            <Page
-                    <AdminWebsiteNavPageResp>> page(AdminWebsiteNavPageReq req) {
+    public Result<Page<AdminWebsiteNavPageResp>> page(AdminWebsiteNavPageReq req) {
         WebsiteNavExample example = new WebsiteNavExample();
         Criteria c = example.createCriteria();
         Page<WebsiteNav> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
-        Page
-                <AdminWebsiteNavPageResp> respPage = PageUtil.transform(page, AdminWebsiteNavPageResp.class);
+        Page<AdminWebsiteNavPageResp> respPage = PageUtil.transform(page, AdminWebsiteNavPageResp.class);
         return Result.success(respPage);
     }
 
@@ -54,13 +51,12 @@ public class AdminWebsiteNavBiz extends BaseBiz {
      * @param req 头部导航
      * @return 添加结果
      */
-    public Result
-            <String> save(AdminWebsiteNavSaveReq req) {
+    public Result<String> save(AdminWebsiteNavSaveReq req) {
         WebsiteNav record = BeanUtil.copyProperties(req, WebsiteNav.class);
         if (dao.save(record) > 0) {
-            return Result.success(toI18nSuccess());
+            return Result.success("操作成功");
         }
-        return Result.error(toI18nFail());
+        return Result.error("操作失败");
     }
 
     /**
@@ -69,8 +65,7 @@ public class AdminWebsiteNavBiz extends BaseBiz {
      * @param id 主键ID
      * @return 头部导航
      */
-    public Result
-            <AdminWebsiteNavViewResp> view(Long id) {
+    public Result<AdminWebsiteNavViewResp> view(Long id) {
         return Result.success(BeanUtil.copyProperties(dao.getById(id), AdminWebsiteNavViewResp.class));
     }
 
@@ -80,13 +75,12 @@ public class AdminWebsiteNavBiz extends BaseBiz {
      * @param req 头部导航修改对象
      * @return 修改结果
      */
-    public Result
-            <String> edit(AdminWebsiteNavEditReq req) {
+    public Result<String> edit(AdminWebsiteNavEditReq req) {
         WebsiteNav record = BeanUtil.copyProperties(req, WebsiteNav.class);
         if (dao.updateById(record) > 0) {
-            return Result.success(toI18nSuccess());
+            return Result.success("操作成功");
         }
-        return Result.error(toI18nFail());
+        return Result.error("操作失败");
     }
 
     /**
@@ -95,11 +89,10 @@ public class AdminWebsiteNavBiz extends BaseBiz {
      * @param id ID主键
      * @return 删除结果
      */
-    public Result
-            <String> delete(Long id) {
+    public Result<String> delete(Long id) {
         if (dao.deleteById(id) > 0) {
-            return Result.success(toI18nSuccess());
+            return Result.success("操作成功");
         }
-        return Result.error(toI18nFail());
+        return Result.error("操作失败");
     }
 }

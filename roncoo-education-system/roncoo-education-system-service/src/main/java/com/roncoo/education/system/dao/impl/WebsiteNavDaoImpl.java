@@ -42,7 +42,7 @@ public class WebsiteNavDaoImpl implements WebsiteNavDao {
     }
 
     @Override
-    public Page<WebsiteNav> listForPage(int pageCurrent, int pageSize, WebsiteNavExample example) {
+    public Page<WebsiteNav> page(int pageCurrent, int pageSize, WebsiteNavExample example) {
         int count = this.websiteNavMapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);
         pageCurrent = PageUtil.checkPageCurrent(count, pageSize, pageCurrent);

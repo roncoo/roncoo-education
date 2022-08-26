@@ -1,8 +1,6 @@
 package com.roncoo.education.system.service.admin.biz;
 
 import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.crypto.digest.DigestUtil;
-import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
@@ -16,9 +14,6 @@ import com.roncoo.education.system.dao.impl.mapper.entity.SysUserExample.Criteri
 import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.SysUserPageRESQ;
 import com.roncoo.education.system.service.admin.resp.SysUserViewRESQ;
-import com.roncoo.education.user.feign.interfaces.IFeignUser;
-import com.roncoo.education.user.feign.interfaces.qo.UserQO;
-import com.roncoo.education.user.feign.interfaces.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,9 +28,6 @@ import org.springframework.util.StringUtils;
 public class AdminSysUserBiz {
 
     @Autowired
-    private IFeignUser bossUser;
-
-    @Autowired
     private SysRoleUserDao sysRoleUserDao;
     @Autowired
     private SysUserDao dao;
@@ -47,24 +39,19 @@ public class AdminSysUserBiz {
             c.andMobileEqualTo(req.getMobile());
         }
         example.setOrderByClause(" sort asc, status_id desc, id desc ");
-        Page<SysUser> page = dao.listForPage(req.getPageCurrent(), req.getPageSize(), example);
+        Page<SysUser> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         return Result.success(PageUtil.transform(page, SysUserPageRESQ.class));
     }
 
     public Result<Integer> save(SysUserSaveREQ req) {
-        if (req.getAdminUserNo() == null) {
-            return Result.error("userNo不能为空");
+        if (req.getUserId() == null) {
+            return Result.error("userID不能为空");
         }
-        UserVO userVO = bossUser.getByUserNo(req.getAdminUserNo());
-        if (ObjectUtil.isNull(userVO)) {
-            throw new BaseException("找不到用户信息,请重试");
-        }
-        SysUser sysUser = dao.getByUserNo(req.getAdminUserNo());
+        SysUser sysUser = dao.getById(req.getUserId());
         if (ObjectUtil.isNotNull(sysUser)) {
             return Result.error("用户已添加成管理员");
         }
         SysUser record = BeanUtil.copyProperties(req, SysUser.class);
-        record.setUserNo(req.getAdminUserNo());
         int results = dao.save(record);
         if (results > 0) {
             return Result.success(results);
@@ -111,8 +98,8 @@ public class AdminSysUserBiz {
     }
 
     public Result<Integer> updatePassword(SysUserUpdatePasswordREQ req) {
-        if (req.getAdminUserNo() == null) {
-            return Result.error("用户编号不能为空,请重试");
+        if (req.getUserId() == null) {
+            return Result.error("用户ID不能为空,请重试");
         }
         if (StringUtils.isEmpty(req.getMobilePsw())) {
             return Result.error("新密码不能为空,请重试");
@@ -123,20 +110,7 @@ public class AdminSysUserBiz {
         if (!req.getRePwd().equals(req.getMobilePsw())) {
             return Result.error("密码不一致,请重试");
         }
-        UserVO userVO = bossUser.getByUserNo(req.getAdminUserNo());
-        if (ObjectUtil.isNull(userVO)) {
-            return Result.error("找不到用户信息,请重试");
-        }
-        if (DigestUtil.sha1Hex(userVO.getMobileSalt() + req.getMobilePsw()).equals(userVO.getMobilePsw())) {
-            return Result.error("输入的密码与原密码一致,请重试");
-        }
-        UserQO userQO = new UserQO();
-        userQO.setId(userVO.getId());
-        userQO.setMobilePsw(DigestUtil.sha1Hex(userVO.getMobileSalt() + req.getMobilePsw()));
-        int results = bossUser.updateById(userQO);
-        if (results > 0) {
-            return Result.success(results);
-        }
+
         return Result.error(ResultEnum.SYSTEM_UPDATE_FAIL);
     }
 

@@ -40,7 +40,7 @@ public class UsersDaoImpl extends AbstractBaseJdbc implements UsersDao {
     }
 
     @Override
-    public Page<Users> listForPage(int pageCurrent, int pageSize, UsersExample example) {
+    public Page<Users> page(int pageCurrent, int pageSize, UsersExample example) {
         int count = this.usersMapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);
         pageCurrent = PageUtil.checkPageCurrent(count, pageSize, pageCurrent);

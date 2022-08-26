@@ -41,7 +41,7 @@ public class WebsiteArticleDaoImpl implements WebsiteArticleDao {
     }
 
     @Override
-    public Page<WebsiteArticle> listForPage(int pageCurrent, int pageSize, WebsiteArticleExample example) {
+    public Page<WebsiteArticle> page(int pageCurrent, int pageSize, WebsiteArticleExample example) {
         int count = this.WebsiteArticleMapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);
         pageCurrent = PageUtil.checkPageCurrent(count, pageSize, pageCurrent);

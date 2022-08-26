@@ -38,7 +38,7 @@ public class SysLogPageRESQ implements Serializable {
      */
     @ApiModelProperty(value = "操作人")
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long userNo;
+    private Long userId;
     /**
      * 真实姓名
      */

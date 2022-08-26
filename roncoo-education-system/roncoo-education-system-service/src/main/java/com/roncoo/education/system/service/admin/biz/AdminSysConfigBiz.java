@@ -37,14 +37,11 @@ public class AdminSysConfigBiz extends BaseBiz {
      * @param req 系统配置分页查询参数
      * @return 系统配置分页查询结果
      */
-    public Result
-            <Page
-                    <AdminSysConfigPageResp>> page(AdminSysConfigPageReq req) {
+    public Result<Page<AdminSysConfigPageResp>> page(AdminSysConfigPageReq req) {
         SysConfigExample example = new SysConfigExample();
         Criteria c = example.createCriteria();
         Page<SysConfig> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
-        Page
-                <AdminSysConfigPageResp> respPage = PageUtil.transform(page, AdminSysConfigPageResp.class);
+        Page<AdminSysConfigPageResp> respPage = PageUtil.transform(page, AdminSysConfigPageResp.class);
         return Result.success(respPage);
     }
 
@@ -54,13 +51,12 @@ public class AdminSysConfigBiz extends BaseBiz {
      * @param req 系统配置
      * @return 添加结果
      */
-    public Result
-            <String> save(AdminSysConfigSaveReq req) {
+    public Result<String> save(AdminSysConfigSaveReq req) {
         SysConfig record = BeanUtil.copyProperties(req, SysConfig.class);
         if (dao.save(record) > 0) {
-            return Result.success(toI18nSuccess());
+            return Result.success("操作成功");
         }
-        return Result.error(toI18nFail());
+        return Result.error("操作失败");
     }
 
     /**
@@ -69,8 +65,7 @@ public class AdminSysConfigBiz extends BaseBiz {
      * @param id 主键ID
      * @return 系统配置
      */
-    public Result
-            <AdminSysConfigViewResp> view(Long id) {
+    public Result<AdminSysConfigViewResp> view(Long id) {
         return Result.success(BeanUtil.copyProperties(dao.getById(id), AdminSysConfigViewResp.class));
     }
 
@@ -80,13 +75,12 @@ public class AdminSysConfigBiz extends BaseBiz {
      * @param req 系统配置修改对象
      * @return 修改结果
      */
-    public Result
-            <String> edit(AdminSysConfigEditReq req) {
+    public Result<String> edit(AdminSysConfigEditReq req) {
         SysConfig record = BeanUtil.copyProperties(req, SysConfig.class);
         if (dao.updateById(record) > 0) {
-            return Result.success(toI18nSuccess());
+            return Result.success("操作成功");
         }
-        return Result.error(toI18nFail());
+        return Result.error("操作失败");
     }
 
     /**
@@ -95,11 +89,10 @@ public class AdminSysConfigBiz extends BaseBiz {
      * @param id ID主键
      * @return 删除结果
      */
-    public Result
-            <String> delete(Long id) {
+    public Result<String> delete(Long id) {
         if (dao.deleteById(id) > 0) {
-            return Result.success(toI18nSuccess());
+            return Result.success("操作成功");
         }
-        return Result.error(toI18nFail());
+        return Result.error("操作失败");
     }
 }

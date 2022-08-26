@@ -4,16 +4,27 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class SysUser implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Long id;
+
     private Date gmtCreate;
+
     private Date gmtModified;
+
     private Integer statusId;
+
     private Integer sort;
-    private Long userNo;
+
     private String mobile;
+
+    private String mobileSalt;
+
+    private String mobilePsw;
+
     private String realName;
+
     private String remark;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;
@@ -55,20 +66,28 @@ public class SysUser implements Serializable {
         this.sort = sort;
     }
 
-    public Long getUserNo() {
-        return userNo;
-    }
-
-    public void setUserNo(Long userNo) {
-        this.userNo = userNo;
-    }
-
     public String getMobile() {
         return mobile;
     }
 
     public void setMobile(String mobile) {
         this.mobile = mobile == null ? null : mobile.trim();
+    }
+
+    public String getMobileSalt() {
+        return mobileSalt;
+    }
+
+    public void setMobileSalt(String mobileSalt) {
+        this.mobileSalt = mobileSalt == null ? null : mobileSalt.trim();
+    }
+
+    public String getMobilePsw() {
+        return mobilePsw;
+    }
+
+    public void setMobilePsw(String mobilePsw) {
+        this.mobilePsw = mobilePsw == null ? null : mobilePsw.trim();
     }
 
     public String getRealName() {
@@ -98,8 +117,9 @@ public class SysUser implements Serializable {
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", statusId=").append(statusId);
         sb.append(", sort=").append(sort);
-        sb.append(", userNo=").append(userNo);
         sb.append(", mobile=").append(mobile);
+        sb.append(", mobileSalt=").append(mobileSalt);
+        sb.append(", mobilePsw=").append(mobilePsw);
         sb.append(", realName=").append(realName);
         sb.append(", remark=").append(remark);
         sb.append(", serialVersionUID=").append(serialVersionUID);

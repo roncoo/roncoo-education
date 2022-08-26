@@ -19,20 +19,20 @@ public class SysUserExample {
         oredCriteria = new ArrayList<Criteria>();
     }
 
-    public String getOrderByClause() {
-        return orderByClause;
-    }
-
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
     }
 
-    public boolean isDistinct() {
-        return distinct;
+    public String getOrderByClause() {
+        return orderByClause;
     }
 
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
+    }
+
+    public boolean isDistinct() {
+        return distinct;
     }
 
     public List<Criteria> getOredCriteria() {
@@ -68,20 +68,20 @@ public class SysUserExample {
         distinct = false;
     }
 
+    public void setLimitStart(int limitStart) {
+        this.limitStart=limitStart;
+    }
+
     public int getLimitStart() {
         return limitStart;
     }
 
-    public void setLimitStart(int limitStart) {
-        this.limitStart = limitStart;
+    public void setPageSize(int pageSize) {
+        this.pageSize=pageSize;
     }
 
     public int getPageSize() {
         return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
     }
 
     protected abstract static class GeneratedCriteria {
@@ -425,66 +425,6 @@ public class SysUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andUserNoIsNull() {
-            addCriterion("user_no is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNoIsNotNull() {
-            addCriterion("user_no is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNoEqualTo(Long value) {
-            addCriterion("user_no =", value, "userNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNoNotEqualTo(Long value) {
-            addCriterion("user_no <>", value, "userNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNoGreaterThan(Long value) {
-            addCriterion("user_no >", value, "userNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNoGreaterThanOrEqualTo(Long value) {
-            addCriterion("user_no >=", value, "userNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNoLessThan(Long value) {
-            addCriterion("user_no <", value, "userNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNoLessThanOrEqualTo(Long value) {
-            addCriterion("user_no <=", value, "userNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNoIn(List<Long> values) {
-            addCriterion("user_no in", values, "userNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNoNotIn(List<Long> values) {
-            addCriterion("user_no not in", values, "userNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNoBetween(Long value1, Long value2) {
-            addCriterion("user_no between", value1, value2, "userNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNoNotBetween(Long value1, Long value2) {
-            addCriterion("user_no not between", value1, value2, "userNo");
-            return (Criteria) this;
-        }
-
         public Criteria andMobileIsNull() {
             addCriterion("mobile is null");
             return (Criteria) this;
@@ -552,6 +492,146 @@ public class SysUserExample {
 
         public Criteria andMobileNotBetween(String value1, String value2) {
             addCriterion("mobile not between", value1, value2, "mobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileSaltIsNull() {
+            addCriterion("mobile_salt is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileSaltIsNotNull() {
+            addCriterion("mobile_salt is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileSaltEqualTo(String value) {
+            addCriterion("mobile_salt =", value, "mobileSalt");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileSaltNotEqualTo(String value) {
+            addCriterion("mobile_salt <>", value, "mobileSalt");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileSaltGreaterThan(String value) {
+            addCriterion("mobile_salt >", value, "mobileSalt");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileSaltGreaterThanOrEqualTo(String value) {
+            addCriterion("mobile_salt >=", value, "mobileSalt");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileSaltLessThan(String value) {
+            addCriterion("mobile_salt <", value, "mobileSalt");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileSaltLessThanOrEqualTo(String value) {
+            addCriterion("mobile_salt <=", value, "mobileSalt");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileSaltLike(String value) {
+            addCriterion("mobile_salt like", value, "mobileSalt");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileSaltNotLike(String value) {
+            addCriterion("mobile_salt not like", value, "mobileSalt");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileSaltIn(List<String> values) {
+            addCriterion("mobile_salt in", values, "mobileSalt");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileSaltNotIn(List<String> values) {
+            addCriterion("mobile_salt not in", values, "mobileSalt");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileSaltBetween(String value1, String value2) {
+            addCriterion("mobile_salt between", value1, value2, "mobileSalt");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileSaltNotBetween(String value1, String value2) {
+            addCriterion("mobile_salt not between", value1, value2, "mobileSalt");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePswIsNull() {
+            addCriterion("mobile_psw is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePswIsNotNull() {
+            addCriterion("mobile_psw is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePswEqualTo(String value) {
+            addCriterion("mobile_psw =", value, "mobilePsw");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePswNotEqualTo(String value) {
+            addCriterion("mobile_psw <>", value, "mobilePsw");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePswGreaterThan(String value) {
+            addCriterion("mobile_psw >", value, "mobilePsw");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePswGreaterThanOrEqualTo(String value) {
+            addCriterion("mobile_psw >=", value, "mobilePsw");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePswLessThan(String value) {
+            addCriterion("mobile_psw <", value, "mobilePsw");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePswLessThanOrEqualTo(String value) {
+            addCriterion("mobile_psw <=", value, "mobilePsw");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePswLike(String value) {
+            addCriterion("mobile_psw like", value, "mobilePsw");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePswNotLike(String value) {
+            addCriterion("mobile_psw not like", value, "mobilePsw");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePswIn(List<String> values) {
+            addCriterion("mobile_psw in", values, "mobilePsw");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePswNotIn(List<String> values) {
+            addCriterion("mobile_psw not in", values, "mobilePsw");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePswBetween(String value1, String value2) {
+            addCriterion("mobile_psw between", value1, value2, "mobilePsw");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePswNotBetween(String value1, String value2) {
+            addCriterion("mobile_psw not between", value1, value2, "mobilePsw");
             return (Criteria) this;
         }
 
@@ -720,6 +800,38 @@ public class SysUserExample {
 
         private String typeHandler;
 
+        public String getCondition() {
+            return condition;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public boolean isNoValue() {
+            return noValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
+
+        public boolean isBetweenValue() {
+            return betweenValue;
+        }
+
+        public boolean isListValue() {
+            return listValue;
+        }
+
+        public String getTypeHandler() {
+            return typeHandler;
+        }
+
         protected Criterion(String condition) {
             super();
             this.condition = condition;
@@ -754,38 +866,6 @@ public class SysUserExample {
 
         protected Criterion(String condition, Object value, Object secondValue) {
             this(condition, value, secondValue, null);
-        }
-
-        public String getCondition() {
-            return condition;
-        }
-
-        public Object getValue() {
-            return value;
-        }
-
-        public Object getSecondValue() {
-            return secondValue;
-        }
-
-        public boolean isNoValue() {
-            return noValue;
-        }
-
-        public boolean isSingleValue() {
-            return singleValue;
-        }
-
-        public boolean isBetweenValue() {
-            return betweenValue;
-        }
-
-        public boolean isListValue() {
-            return listValue;
-        }
-
-        public String getTypeHandler() {
-            return typeHandler;
         }
     }
 }

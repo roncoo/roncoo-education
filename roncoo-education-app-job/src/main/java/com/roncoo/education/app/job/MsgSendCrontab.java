@@ -27,7 +27,7 @@ public class MsgSendCrontab extends BaseController {
     public void pushCancel() {
         synchronized (KEY) {
             if (MsgSendCrontab.taskFlag) {
-                logger.warn("站内信-定时发送已经启动");
+                log.warn("站内信-定时发送已经启动");
                 return;
             }
             MsgSendCrontab.taskFlag = true;
@@ -36,11 +36,11 @@ public class MsgSendCrontab extends BaseController {
         try {
             bossMsg.push();
         } catch (Exception e) {
-            logger.error("站内信-定时发送-执行出错", e);
+            log.error("站内信-定时发送-执行出错", e);
         }
 
         MsgSendCrontab.taskFlag = false;
 
-        logger.warn("站内信-定时发送-任务完成");
+        log.warn("站内信-定时发送-任务完成");
     }
 }

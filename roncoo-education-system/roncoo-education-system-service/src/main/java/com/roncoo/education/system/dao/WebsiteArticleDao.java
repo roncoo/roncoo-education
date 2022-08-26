@@ -15,7 +15,7 @@ public interface WebsiteArticleDao {
 
     WebsiteArticle getById(Long id);
 
-    Page<WebsiteArticle> listForPage(int pageCurrent, int pageSize, WebsiteArticleExample example);
+    Page<WebsiteArticle> page(int pageCurrent, int pageSize, WebsiteArticleExample example);
 
     /**
      * 根据状态获取集合

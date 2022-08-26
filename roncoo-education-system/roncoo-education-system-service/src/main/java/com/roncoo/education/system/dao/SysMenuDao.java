@@ -17,7 +17,7 @@ public interface SysMenuDao {
 
     SysMenu getById(Long id);
 
-    Page<SysMenu> listForPage(int pageCurrent, int pageSize, SysMenuExample example);
+    Page<SysMenu> page(int pageCurrent, int pageSize, SysMenuExample example);
 
     /**
      * 根据父ID获取菜单

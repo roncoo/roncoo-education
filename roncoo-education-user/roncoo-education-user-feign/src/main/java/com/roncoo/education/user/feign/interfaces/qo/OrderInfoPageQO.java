@@ -55,7 +55,7 @@ public class OrderInfoPageQO implements Serializable {
     private String lecturerName;
 
     /**
-     * 下单用户编号
+     * 下单用户ID
      */
     private Long userId;
 

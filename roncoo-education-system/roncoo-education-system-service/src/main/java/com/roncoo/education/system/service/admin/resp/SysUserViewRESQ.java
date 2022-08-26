@@ -36,11 +36,11 @@ public class SysUserViewRESQ implements Serializable {
     @ApiModelProperty(value = "排序")
     private Integer sort;
     /**
-     * 用户编号
+     * 用户ID
      */
-    @ApiModelProperty(value = "用户编号")
+    @ApiModelProperty(value = "用户ID")
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long userNo;
+    private Long userId;
     /**
      * 手机
      */

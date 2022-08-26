@@ -3,8 +3,7 @@
  */
 package com.roncoo.education.common.core.tools;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 
 import java.lang.management.ManagementFactory;
@@ -24,6 +23,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * @author hubin
  * @Date 2016-08-01
  */
+@Slf4j
 public class IdWorker {
 
     /**
@@ -45,7 +45,6 @@ public class IdWorker {
     }
 
     static class Sequence {
-        private static final Logger logger = LoggerFactory.getLogger(Sequence.class);
 
         /* 时间起始标记点，作为基准，一般取系统的最近时间（一旦确定不能变动） */
         private final long twepoch = 1288834974657L;
@@ -128,7 +127,7 @@ public class IdWorker {
                     }
                 }
             } catch (Exception e) {
-                logger.warn(" getDatacenterId: " + e.getMessage());
+                log.warn(" getDatacenterId: " + e.getMessage());
             }
             return id;
         }

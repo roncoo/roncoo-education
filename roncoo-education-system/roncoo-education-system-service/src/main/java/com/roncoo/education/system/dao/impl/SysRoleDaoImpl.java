@@ -44,7 +44,7 @@ public class SysRoleDaoImpl implements SysRoleDao {
     }
 
     @Override
-    public Page<SysRole> listForPage(int pageCurrent, int pageSize, SysRoleExample example) {
+    public Page<SysRole> page(int pageCurrent, int pageSize, SysRoleExample example) {
         int count = this.sysRoleMapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);
         pageCurrent = PageUtil.checkPageCurrent(count, pageSize, pageCurrent);

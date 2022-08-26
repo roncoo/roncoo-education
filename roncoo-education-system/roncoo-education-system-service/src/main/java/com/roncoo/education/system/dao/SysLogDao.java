@@ -15,5 +15,5 @@ public interface SysLogDao {
 
     SysLog getById(Long id);
 
-    Page<SysLog> listForPage(int pageCurrent, int pageSize, SysLogExample example);
+    Page<SysLog> page(int pageCurrent, int pageSize, SysLogExample example);
 }

@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="com.roncoo.education.system.dao.impl.mapper.entity.SysLog">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
-        <result column="user_no" jdbcType="BIGINT" property="userNo"/>
+        <result column="user_no" jdbcType="BIGINT" property="userId"/>
         <result column="real_name" jdbcType="VARCHAR" property="realName"/>
         <result column="ip" jdbcType="VARCHAR" property="ip"/>
         <result column="operation" jdbcType="VARCHAR" property="operation"/>
@@ -112,7 +112,7 @@
         insert into sys_log (id, gmt_create, user_no,
                              real_name, ip, operation,
                              method, path, content)
-        values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{userNo,jdbcType=BIGINT},
+        values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{userId,jdbcType=BIGINT},
                 #{realName,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{operation,jdbcType=VARCHAR},
                 #{method,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR})
     </insert>
@@ -125,7 +125,7 @@
             <if test="gmtCreate != null">
                 gmt_create,
             </if>
-            <if test="userNo != null">
+            <if test="userId != null">
                 user_no,
             </if>
             <if test="realName != null">
@@ -154,8 +154,8 @@
             <if test="gmtCreate != null">
                 #{gmtCreate,jdbcType=TIMESTAMP},
             </if>
-            <if test="userNo != null">
-                #{userNo,jdbcType=BIGINT},
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
             </if>
             <if test="realName != null">
                 #{realName,jdbcType=VARCHAR},
@@ -192,8 +192,8 @@
             <if test="record.gmtCreate != null">
                 gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
             </if>
-            <if test="record.userNo != null">
-                user_no = #{record.userNo,jdbcType=BIGINT},
+            <if test="record.userId != null">
+                user_no = #{record.userId,jdbcType=BIGINT},
             </if>
             <if test="record.realName != null">
                 real_name = #{record.realName,jdbcType=VARCHAR},
@@ -222,7 +222,7 @@
         update sys_log
         set id = #{record.id,jdbcType=BIGINT},
         gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
-        user_no = #{record.userNo,jdbcType=BIGINT},
+        user_no = #{record.userId,jdbcType=BIGINT},
         real_name = #{record.realName,jdbcType=VARCHAR},
         ip = #{record.ip,jdbcType=VARCHAR},
         operation = #{record.operation,jdbcType=VARCHAR},
@@ -239,8 +239,8 @@
             <if test="gmtCreate != null">
                 gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
             </if>
-            <if test="userNo != null">
-                user_no = #{userNo,jdbcType=BIGINT},
+            <if test="userId != null">
+                user_no = #{userId,jdbcType=BIGINT},
             </if>
             <if test="realName != null">
                 real_name = #{realName,jdbcType=VARCHAR},
@@ -266,7 +266,7 @@
     <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysLog">
         update sys_log
         set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-            user_no    = #{userNo,jdbcType=BIGINT},
+            user_no    = #{userId,jdbcType=BIGINT},
             real_name  = #{realName,jdbcType=VARCHAR},
             ip         = #{ip,jdbcType=VARCHAR},
             operation  = #{operation,jdbcType=VARCHAR},

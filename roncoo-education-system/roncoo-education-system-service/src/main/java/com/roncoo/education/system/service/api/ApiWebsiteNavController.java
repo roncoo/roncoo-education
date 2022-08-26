@@ -2,6 +2,7 @@ package com.roncoo.education.system.service.api;
 
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.api.biz.ApiWebsiteNavBiz;
+import com.roncoo.education.system.service.api.resp.ApiWebsiteNavResp;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +31,7 @@ public class ApiWebsiteNavController {
      */
     @ApiOperation(value = "头部导航接口", notes = "返回头部导航列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public Result<List<WebsiteNavResp>> list() {
+    public Result<List<ApiWebsiteNavResp>> list() {
         return biz.list();
     }
 

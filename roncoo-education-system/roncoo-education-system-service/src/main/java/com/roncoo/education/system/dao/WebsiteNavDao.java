@@ -15,7 +15,7 @@ public interface WebsiteNavDao {
 
     WebsiteNav getById(Long id);
 
-    Page<WebsiteNav> listForPage(int pageCurrent, int pageSize, WebsiteNavExample example);
+    Page<WebsiteNav> page(int pageCurrent, int pageSize, WebsiteNavExample example);
 
     /**
      * 根据状态获取集合

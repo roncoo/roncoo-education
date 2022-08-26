@@ -39,7 +39,7 @@ public class LecturerDaoImpl implements LecturerDao {
     }
 
     @Override
-    public Page<Lecturer> listForPage(int pageCurrent, int pageSize, LecturerExample example) {
+    public Page<Lecturer> page(int pageCurrent, int pageSize, LecturerExample example) {
         int count = this.lecturerMapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);
         pageCurrent = PageUtil.checkPageCurrent(count, pageSize, pageCurrent);
@@ -50,10 +50,10 @@ public class LecturerDaoImpl implements LecturerDao {
     }
 
     @Override
-    public Lecturer getByLecturerUserNo(Long lecturerUserNo) {
+    public Lecturer getByLectureruserId(Long lectureruserId) {
         LecturerExample example = new LecturerExample();
         LecturerExample.Criteria criteria = example.createCriteria();
-        criteria.andLecturerUserNoEqualTo(lecturerUserNo);
+        criteria.andLectureruserIdEqualTo(lectureruserId);
         List<Lecturer> resultList = this.lecturerMapper.selectByExample(example);
         if (resultList.isEmpty()) {
             return null;
@@ -82,10 +82,10 @@ public class LecturerDaoImpl implements LecturerDao {
     }
 
     @Override
-    public Lecturer getByLecturerUserNoAndStatusId(Long lecturerUserNo, Integer statusId) {
+    public Lecturer getByLectureruserIdAndStatusId(Long lectureruserId, Integer statusId) {
         LecturerExample example = new LecturerExample();
         LecturerExample.Criteria criteria = example.createCriteria();
-        criteria.andLecturerUserNoEqualTo(lecturerUserNo);
+        criteria.andLectureruserIdEqualTo(lectureruserId);
         criteria.andStatusIdEqualTo(statusId);
         List<Lecturer> resultList = this.lecturerMapper.selectByExample(example);
         if (resultList.isEmpty()) {
@@ -95,10 +95,10 @@ public class LecturerDaoImpl implements LecturerDao {
     }
 
     @Override
-    public List<Lecturer> listByLecturerUserNos(List<Long> lecturerUserNos) {
+    public List<Lecturer> listByLectureruserIds(List<Long> lectureruserIds) {
         LecturerExample example = new LecturerExample();
         LecturerExample.Criteria criteria = example.createCriteria();
-        criteria.andLecturerUserNoIn(lecturerUserNos);
+        criteria.andLectureruserIdIn(lectureruserIds);
         return this.lecturerMapper.selectByExample(example);
     }
 }

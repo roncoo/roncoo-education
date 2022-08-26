@@ -31,7 +31,7 @@ public class VideoCrontab extends BaseController {
     public void orderCancel() {
         synchronized (KEY) {
             if (VideoCrontab.taskFlag) {
-                logger.warn("视频处理-任务已经启动");
+                log.warn("视频处理-任务已经启动");
                 return;
             }
             VideoCrontab.taskFlag = true;
@@ -51,7 +51,7 @@ public class VideoCrontab extends BaseController {
                             feignCourseVideo.handleScheduledTasks(targetFile);
                             videoSum = videoSum + 1;
                         } catch (Exception e) {
-                            logger.error("视频定时任务处理失败", e);
+                            log.error("视频定时任务处理失败", e);
                         }
 
                     }
@@ -61,7 +61,7 @@ public class VideoCrontab extends BaseController {
 
         VideoCrontab.taskFlag = false;
 
-        logger.warn("视频处理-定时任务完成，处理视频数={}", videoSum);
+        log.warn("视频处理-定时任务完成，处理视频数={}", videoSum);
     }
 
 }

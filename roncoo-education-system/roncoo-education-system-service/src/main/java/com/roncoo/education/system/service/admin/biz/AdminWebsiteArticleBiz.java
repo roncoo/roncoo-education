@@ -37,14 +37,11 @@ public class AdminWebsiteArticleBiz extends BaseBiz {
      * @param req 站点导航文章分页查询参数
      * @return 站点导航文章分页查询结果
      */
-    public Result
-            <Page
-                    <AdminWebsiteArticlePageResp>> page(AdminWebsiteArticlePageReq req) {
+    public Result<Page<AdminWebsiteArticlePageResp>> page(AdminWebsiteArticlePageReq req) {
         WebsiteArticleExample example = new WebsiteArticleExample();
         Criteria c = example.createCriteria();
         Page<WebsiteArticle> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
-        Page
-                <AdminWebsiteArticlePageResp> respPage = PageUtil.transform(page, AdminWebsiteArticlePageResp.class);
+        Page<AdminWebsiteArticlePageResp> respPage = PageUtil.transform(page, AdminWebsiteArticlePageResp.class);
         return Result.success(respPage);
     }
 
@@ -54,13 +51,12 @@ public class AdminWebsiteArticleBiz extends BaseBiz {
      * @param req 站点导航文章
      * @return 添加结果
      */
-    public Result
-            <String> save(AdminWebsiteArticleSaveReq req) {
+    public Result<String> save(AdminWebsiteArticleSaveReq req) {
         WebsiteArticle record = BeanUtil.copyProperties(req, WebsiteArticle.class);
         if (dao.save(record) > 0) {
-            return Result.success(toI18nSuccess());
+            return Result.success("操作成功");
         }
-        return Result.error(toI18nFail());
+        return Result.error("操作失败");
     }
 
     /**
@@ -69,8 +65,7 @@ public class AdminWebsiteArticleBiz extends BaseBiz {
      * @param id 主键ID
      * @return 站点导航文章
      */
-    public Result
-            <AdminWebsiteArticleViewResp> view(Long id) {
+    public Result<AdminWebsiteArticleViewResp> view(Long id) {
         return Result.success(BeanUtil.copyProperties(dao.getById(id), AdminWebsiteArticleViewResp.class));
     }
 
@@ -80,13 +75,12 @@ public class AdminWebsiteArticleBiz extends BaseBiz {
      * @param req 站点导航文章修改对象
      * @return 修改结果
      */
-    public Result
-            <String> edit(AdminWebsiteArticleEditReq req) {
+    public Result<String> edit(AdminWebsiteArticleEditReq req) {
         WebsiteArticle record = BeanUtil.copyProperties(req, WebsiteArticle.class);
         if (dao.updateById(record) > 0) {
-            return Result.success(toI18nSuccess());
+            return Result.success("操作成功");
         }
-        return Result.error(toI18nFail());
+        return Result.error("操作失败");
     }
 
     /**
@@ -95,11 +89,10 @@ public class AdminWebsiteArticleBiz extends BaseBiz {
      * @param id ID主键
      * @return 删除结果
      */
-    public Result
-            <String> delete(Long id) {
+    public Result<String> delete(Long id) {
         if (dao.deleteById(id) > 0) {
-            return Result.success(toI18nSuccess());
+            return Result.success("操作成功");
         }
-        return Result.error(toI18nFail());
+        return Result.error("操作失败");
     }
 }

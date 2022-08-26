@@ -44,7 +44,7 @@ public class SysLogDaoImpl implements SysLogDao {
     }
 
     @Override
-    public Page<SysLog> listForPage(int pageCurrent, int pageSize, SysLogExample example) {
+    public Page<SysLog> page(int pageCurrent, int pageSize, SysLogExample example) {
         int count = this.sysLogMapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);
         pageCurrent = PageUtil.checkPageCurrent(count, pageSize, pageCurrent);

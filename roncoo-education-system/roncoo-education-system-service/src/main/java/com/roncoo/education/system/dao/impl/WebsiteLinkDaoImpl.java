@@ -42,7 +42,7 @@ public class WebsiteLinkDaoImpl implements WebsiteLinkDao {
     }
 
     @Override
-    public Page<WebsiteLink> listForPage(int pageCurrent, int pageSize, WebsiteLinkExample example) {
+    public Page<WebsiteLink> page(int pageCurrent, int pageSize, WebsiteLinkExample example) {
         int count = this.websiteLinkMapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);
         pageCurrent = PageUtil.checkPageCurrent(count, pageSize, pageCurrent);

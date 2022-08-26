@@ -17,7 +17,7 @@ public interface SysMenuRoleDao {
 
     SysMenuRole getById(Long id);
 
-    Page<SysMenuRole> listForPage(int pageCurrent, int pageSize, SysMenuRoleExample example);
+    Page<SysMenuRole> page(int pageCurrent, int pageSize, SysMenuRoleExample example);
 
     /**
      * 根据角色ID列出角色下所有的菜单

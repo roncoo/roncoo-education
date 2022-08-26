@@ -27,17 +27,17 @@ public class OrderCrontab extends BaseController {
     public void orderCancel() {
         synchronized (KEY) {
             if (OrderCrontab.taskFlag) {
-                logger.warn("订单处理-任务已经启动");
+                log.warn("订单处理-任务已经启动");
                 return;
             }
             OrderCrontab.taskFlag = true;
         }
-        logger.warn("订单处理-定时任务开始");
+        log.warn("订单处理-定时任务开始");
 
         try {
             feignOrderInfo.handleScheduledTasks();
         } catch (Exception e) {
-            logger.error("定时任务-订单处理-执行出错", e);
+            log.error("定时任务-订单处理-执行出错", e);
         }
         OrderCrontab.taskFlag = false;
     }

@@ -5,8 +5,7 @@ package com.roncoo.education.common.es;
 
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHits;
@@ -25,9 +24,8 @@ import java.util.Map;
  * @param <T>
  * @author wujing
  */
+@Slf4j
 public final class EsPageUtil<T extends Serializable> implements Serializable {
-
-    private static final Logger logger = LoggerFactory.getLogger(EsPageUtil.class);
 
     private static final long serialVersionUID = 1L;
 
@@ -39,7 +37,7 @@ public final class EsPageUtil<T extends Serializable> implements Serializable {
         try {
             pb.setList(copyList(searchHits.getSearchHits(), classType));
         } catch (Exception e) {
-            logger.error("transform error", e);
+            log.error("transform error", e);
         }
         pb.setPageCurrent(pageCurrent);
         pb.setPageSize(pageSize);
@@ -73,7 +71,7 @@ public final class EsPageUtil<T extends Serializable> implements Serializable {
                 }
                 res.add(t);
             } catch (Exception e) {
-                logger.error("copyList error", e);
+                log.error("copyList error", e);
             }
         }
         return res;

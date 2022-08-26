@@ -138,10 +138,10 @@ public class AdminSysMenuBiz {
     }
 
     public Result<SysMenuUserListRESQ> userList(SysMenuUserListREQ req) {
-        if (req.getUserNo() == null) {
+        if (req.getUserId() == null) {
             return Result.error("用户编不能为空");
         }
-        SysUser sysUser = sysUserDao.getByUserNo(req.getUserNo());
+        SysUser sysUser = sysUserDao.getById(req.getUserId());
         if (ObjectUtil.isNull(sysUser)) {
             return Result.error("用户异常");
         }
@@ -211,7 +211,7 @@ public class AdminSysMenuBiz {
     }
 
     public Result<SysMenuUserListRESQ> buttonList(SysMenuUserListREQ req) {
-        SysUser sysUser = sysUserDao.getByUserNo(req.getUserNo());
+        SysUser sysUser = sysUserDao.getById(req.getUserId());
         if (ObjectUtil.isNull(sysUser)) {
             return Result.error("用户异常");
         }

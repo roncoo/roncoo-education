@@ -7,8 +7,6 @@ import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.common.core.tools.JWTUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -29,7 +27,6 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Component
 public class EduGlobalFilter implements GlobalFilter, Ordered {
-    private static final Logger logger = LoggerFactory.getLogger(EduGlobalFilter.class);
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -102,7 +99,7 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
         try {
             jwt = JWTUtil.verify(token);
         } catch (Exception e) {
-            logger.error("token异常，token={}", token);
+            log.error("token异常，token={}", token);
             throw new BaseException(ResultEnum.TOKEN_ERROR);
         }
 

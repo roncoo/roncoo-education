@@ -13,7 +13,7 @@ public interface UsersDao {
 
     Users getById(Long id);
 
-    Page<Users> listForPage(int pageCurrent, int pageSize, UsersExample example);
+    Page<Users> page(int pageCurrent, int pageSize, UsersExample example);
 
     Users getByMobile(String mobile);
 

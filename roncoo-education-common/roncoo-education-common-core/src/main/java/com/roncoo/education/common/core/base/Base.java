@@ -16,7 +16,6 @@ public class Base {
 
     protected final Logger log = LoggerFactory.getLogger(this.getClass());
 
-
     public void log(Object obj) {
         log.info(JSONUtil.toJsonPrettyStr(obj));
     }

@@ -8,8 +8,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
@@ -17,9 +16,8 @@ import java.util.Date;
 /**
  * @author wujing
  */
+@Slf4j
 public final class JWTUtil {
-
-    protected static final Logger logger = LoggerFactory.getLogger(JWTUtil.class);
 
     private static final String TOKEN_SECRET = "eyJhbGciOiJIUzI1NiJ9";
     private static final String ISSUER = "RONCOO";
@@ -39,7 +37,7 @@ public final class JWTUtil {
         try {
             return JWT.create().withIssuer(ISSUER).withClaim(USERID, userId.toString()).withExpiresAt(new Date(System.currentTimeMillis() + date)).sign(Algorithm.HMAC256(TOKEN_SECRET));
         } catch (Exception e) {
-            logger.error("JWT生成失败", e);
+            log.error("JWT生成失败", e);
             return "";
         }
     }

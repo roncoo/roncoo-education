@@ -245,63 +245,63 @@ public class SysLogExample {
             return (Criteria) this;
         }
 
-        public Criteria andUserNoIsNull() {
+        public Criteria anduserIdIsNull() {
             addCriterion("user_no is null");
             return (Criteria) this;
         }
 
-        public Criteria andUserNoIsNotNull() {
+        public Criteria anduserIdIsNotNull() {
             addCriterion("user_no is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUserNoEqualTo(Long value) {
-            addCriterion("user_no =", value, "userNo");
+        public Criteria anduserIdEqualTo(Long value) {
+            addCriterion("user_no =", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserNoNotEqualTo(Long value) {
-            addCriterion("user_no <>", value, "userNo");
+        public Criteria anduserIdNotEqualTo(Long value) {
+            addCriterion("user_no <>", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserNoGreaterThan(Long value) {
-            addCriterion("user_no >", value, "userNo");
+        public Criteria anduserIdGreaterThan(Long value) {
+            addCriterion("user_no >", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserNoGreaterThanOrEqualTo(Long value) {
-            addCriterion("user_no >=", value, "userNo");
+        public Criteria anduserIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("user_no >=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserNoLessThan(Long value) {
-            addCriterion("user_no <", value, "userNo");
+        public Criteria anduserIdLessThan(Long value) {
+            addCriterion("user_no <", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserNoLessThanOrEqualTo(Long value) {
-            addCriterion("user_no <=", value, "userNo");
+        public Criteria anduserIdLessThanOrEqualTo(Long value) {
+            addCriterion("user_no <=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserNoIn(List<Long> values) {
-            addCriterion("user_no in", values, "userNo");
+        public Criteria anduserIdIn(List<Long> values) {
+            addCriterion("user_no in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserNoNotIn(List<Long> values) {
-            addCriterion("user_no not in", values, "userNo");
+        public Criteria anduserIdNotIn(List<Long> values) {
+            addCriterion("user_no not in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserNoBetween(Long value1, Long value2) {
-            addCriterion("user_no between", value1, value2, "userNo");
+        public Criteria anduserIdBetween(Long value1, Long value2) {
+            addCriterion("user_no between", value1, value2, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserNoNotBetween(Long value1, Long value2) {
-            addCriterion("user_no not between", value1, value2, "userNo");
+        public Criteria anduserIdNotBetween(Long value1, Long value2) {
+            addCriterion("user_no not between", value1, value2, "userId");
             return (Criteria) this;
         }
 

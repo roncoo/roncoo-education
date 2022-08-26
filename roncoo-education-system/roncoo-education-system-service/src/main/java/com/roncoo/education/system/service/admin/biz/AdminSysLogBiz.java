@@ -38,7 +38,7 @@ public class AdminSysLogBiz {
             c.andGmtCreateLessThanOrEqualTo(DateUtil.addDate(DateUtil.parseDate(req.getEndDate(), "yyyy-MM-dd"), 1));
         }
         example.setOrderByClause(" id desc ");
-        Page<SysLog> page = sysLogDao.listForPage(req.getPageCurrent(), req.getPageSize(), example);
+        Page<SysLog> page = sysLogDao.page(req.getPageCurrent(), req.getPageSize(), example);
         return Result.success(PageUtil.transform(page, SysLogPageRESQ.class));
     }
 

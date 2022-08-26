@@ -47,7 +47,7 @@ public class SysMenuDaoImpl implements SysMenuDao {
     }
 
     @Override
-    public Page<SysMenu> listForPage(int pageCurrent, int pageSize, SysMenuExample example) {
+    public Page<SysMenu> page(int pageCurrent, int pageSize, SysMenuExample example) {
         int count = this.sysMenuMapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);
         pageCurrent = PageUtil.checkPageCurrent(count, pageSize, pageCurrent);

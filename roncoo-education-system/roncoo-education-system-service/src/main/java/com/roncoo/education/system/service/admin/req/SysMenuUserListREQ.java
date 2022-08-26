@@ -18,9 +18,9 @@ public class SysMenuUserListREQ implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 用户编号
+     * 用户ID
      */
-    @ApiModelProperty(value = "用户编号", required = false)
-    private Long userNo;
+    @ApiModelProperty(value = "用户ID", required = false)
+    private Long userId;
 
 }

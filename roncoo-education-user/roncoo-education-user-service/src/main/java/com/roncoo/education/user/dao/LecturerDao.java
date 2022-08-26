@@ -15,16 +15,16 @@ public interface LecturerDao {
 
     Lecturer getById(Long id);
 
-    Page<Lecturer> listForPage(int pageCurrent, int pageSize, LecturerExample example);
+    Page<Lecturer> page(int pageCurrent, int pageSize, LecturerExample example);
 
     /**
      * 根据讲师编号查找讲师信息
      *
-     * @param lecturerUserNo
+     * @param lectureruserId
      * @return
      * @author WY
      */
-    Lecturer getByLecturerUserNo(Long lecturerUserNo);
+    Lecturer getByLectureruserId(Long lectureruserId);
 
     /**
      * 根据讲师名称查找讲师信息
@@ -40,18 +40,18 @@ public interface LecturerDao {
     /**
      * 根据讲师编号、状态查找讲师信息
      *
-     * @param lecturerUserNo
+     * @param lectureruserId
      * @param statusId
      * @return
      * @author WY
      */
-    Lecturer getByLecturerUserNoAndStatusId(Long lecturerUserNo, Integer statusId);
+    Lecturer getByLectureruserIdAndStatusId(Long lectureruserId, Integer statusId);
 
     /**
      * 根据讲师编号集合获取讲师信息
      *
-     * @param lecturerUserNos
+     * @param lectureruserIds
      * @return
      */
-    List<Lecturer> listByLecturerUserNos(List<Long> lecturerUserNos);
+    List<Lecturer> listByLectureruserIds(List<Long> lectureruserIds);
 }

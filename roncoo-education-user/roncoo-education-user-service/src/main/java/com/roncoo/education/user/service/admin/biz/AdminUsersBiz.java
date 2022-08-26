@@ -53,9 +53,9 @@ public class AdminUsersBiz extends BaseBiz {
     public Result<String> save(AdminUsersSaveReq req) {
         Users record = BeanUtil.copyProperties(req, Users.class);
         if (dao.save(record) > 0) {
-            return Result.success(toI18nSuccess());
+            return Result.success("操作成功");
         }
-        return Result.error(toI18nFail());
+        return Result.error("操作失败");
     }
 
     /**
@@ -77,9 +77,9 @@ public class AdminUsersBiz extends BaseBiz {
     public Result<String> edit(AdminUsersEditReq req) {
         Users record = BeanUtil.copyProperties(req, Users.class);
         if (dao.updateById(record) > 0) {
-            return Result.success(toI18nSuccess());
+            return Result.success("操作成功");
         }
-        return Result.error(toI18nFail());
+        return Result.error("操作失败");
     }
 
     /**
@@ -90,8 +90,8 @@ public class AdminUsersBiz extends BaseBiz {
      */
     public Result<String> delete(Long id) {
         if (dao.deleteById(id) > 0) {
-            return Result.success(toI18nSuccess());
+            return Result.success("操作成功");
         }
-        return Result.error(toI18nFail());
+        return Result.error("操作失败");
     }
 }

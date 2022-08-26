@@ -42,7 +42,7 @@ public class AdminWebsiteLinkBiz {
             c.andStatusIdEqualTo(req.getStatusId());
         }
         example.setOrderByClause(" status_id desc, sort desc, id desc ");
-        Page<WebsiteLink> page = dao.listForPage(req.getPageCurrent(), req.getPageSize(), example);
+        Page<WebsiteLink> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         return Result.success(PageUtil.transform(page, WebsiteLinkPageRESQ.class));
     }
 

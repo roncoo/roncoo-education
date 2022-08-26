@@ -46,7 +46,7 @@ public class SysMenuRoleDaoImpl implements SysMenuRoleDao {
     }
 
     @Override
-    public Page<SysMenuRole> listForPage(int pageCurrent, int pageSize, SysMenuRoleExample example) {
+    public Page<SysMenuRole> page(int pageCurrent, int pageSize, SysMenuRoleExample example) {
         int count = this.sysMenuRoleMapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);
         pageCurrent = PageUtil.checkPageCurrent(count, pageSize, pageCurrent);
