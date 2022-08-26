@@ -44,8 +44,8 @@ public class ApiWebsiteArticleController {
      * @author wuyun
      */
     @ApiOperation(value = "获取站点导航文章接口", notes = "根据站点导航ID获取站点导航文章信息")
-    @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public Result<ApiWebsiteArticleResp> get(@RequestBody ApiWebsiteArticleReq req) {
+    @RequestMapping(value = "/view", method = RequestMethod.POST)
+    public Result<ApiWebsiteArticleResp> view(@RequestBody ApiWebsiteArticleReq req) {
         return biz.get(req);
     }
 }

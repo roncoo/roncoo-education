@@ -31,8 +31,7 @@ public class FeignSysConfigBiz extends BaseBiz {
     @NotNull
     private final SysConfigDao dao;
 
-    public Page
-            <SysConfigPageVO> page(SysConfigPageQO qo) {
+    public Page<SysConfigPageVO> page(SysConfigPageQO qo) {
         SysConfigExample example = new SysConfigExample();
         Criteria c = example.createCriteria();
         example.setOrderByClause(" id desc ");

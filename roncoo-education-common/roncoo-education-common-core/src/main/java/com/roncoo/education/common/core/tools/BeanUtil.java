@@ -10,6 +10,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 队列属性复制
@@ -70,4 +71,7 @@ public final class BeanUtil<T extends Serializable> {
         return res;
     }
 
+    public static <T> T objToBean(Map<?, ?> map, Class<T> clazz) {
+        return cn.hutool.core.bean.BeanUtil.mapToBeanIgnoreCase(map, clazz, true);
+    }
 }

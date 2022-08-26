@@ -2,8 +2,6 @@ package com.roncoo.education.course.service.admin;
 
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.core.base.SysLog;
-import com.roncoo.education.common.core.base.SysLogCache;
 import com.roncoo.education.course.service.admin.biz.AdminCourseBiz;
 import com.roncoo.education.course.service.admin.req.AdminCourseEditReq;
 import com.roncoo.education.course.service.admin.req.AdminCoursePageReq;
@@ -40,7 +38,6 @@ public class AdminCourseController {
     }
 
     @ApiOperation(value = "课程信息添加", notes = "课程信息添加")
-    @SysLog(value = "课程信息添加")
     @PostMapping(value = "/save")
     public Result<String> save(@RequestBody @Valid AdminCourseSaveReq req) {
         return biz.save(req);
@@ -48,14 +45,12 @@ public class AdminCourseController {
 
     @ApiOperation(value = "课程信息查看", notes = "课程信息查看")
     @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
-    @SysLogCache
     @GetMapping(value = "/view")
     public Result<AdminCourseViewResp> view(@RequestParam Long id) {
         return biz.view(id);
     }
 
     @ApiOperation(value = "课程信息修改", notes = "课程信息修改")
-    @SysLog(value = "课程信息修改", isUpdate = true)
     @PutMapping(value = "/edit")
     public Result<String> edit(@RequestBody @Valid AdminCourseEditReq req) {
         return biz.edit(req);
@@ -63,7 +58,6 @@ public class AdminCourseController {
 
     @ApiOperation(value = "课程信息删除", notes = "课程信息删除")
     @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
-    @SysLog(value = "课程信息删除")
     @DeleteMapping(value = "/delete")
     public Result<String> delete(@RequestParam Long id) {
         return biz.delete(id);

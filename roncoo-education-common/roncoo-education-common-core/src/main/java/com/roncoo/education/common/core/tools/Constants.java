@@ -3,8 +3,6 @@
  */
 package com.roncoo.education.common.core.tools;
 
-import cn.hutool.core.util.StrUtil;
-
 /**
  * 常量工具类
  *
@@ -31,6 +29,7 @@ public final class Constants {
     public interface RedisPre {
         String ADMINI_MENU = "admin::menu::";
         String USERS_INFO = "users::info::";
+        String CONFIG_WEBSITE = "config::website";
     }
 
 }

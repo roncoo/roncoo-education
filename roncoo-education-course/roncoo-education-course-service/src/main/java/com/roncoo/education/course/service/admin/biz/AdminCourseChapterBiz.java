@@ -1,19 +1,19 @@
 package com.roncoo.education.course.service.admin.biz;
 
-import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.course.dao.CourseChapterDao;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapter;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterExample;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterExample.Criteria;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterEditReq;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterPageReq;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterSaveReq;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterPageResp;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterViewResp;
-import com.roncoo.education.course.dao.CourseChapterDao;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapter;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterExample;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterExample.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

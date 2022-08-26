@@ -10,6 +10,8 @@ import com.roncoo.education.course.dao.impl.mapper.entity.*;
 import com.roncoo.education.course.service.api.resp.ApiZoneCourseResp;
 import com.roncoo.education.course.service.api.resp.ApiZoneResp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
  * @author fengyw
  */
 @Component
+@CacheConfig(cacheNames = {"course"})
 public class ApiZoneBiz {
 
     @Autowired
@@ -29,10 +32,12 @@ public class ApiZoneBiz {
     @Autowired
     private CourseDao courseDao;
 
+    @Cacheable
     public Result<List<ApiZoneResp>> list() {
         // 获取所有可用专区
         ZoneExample example = new ZoneExample();
         example.createCriteria().andStatusIdEqualTo(StatusIdEnum.YES.getCode());
+        example.setOrderByClause(" sort asc, id desc ");
         List<Zone> zoneList = zoneDao.listByExample(example);
         List<ApiZoneResp> result = new ArrayList<>();
         for (Zone zone : zoneList) {
@@ -40,7 +45,6 @@ public class ApiZoneBiz {
             List<Long> courseIds = zoneCourse(zone);
             // 获取对应的课程信息
             List<Course> courseList = courseDao.listByIds(courseIds);
-
             ApiZoneResp resp = BeanUtil.copyProperties(zone, ApiZoneResp.class);
             resp.setCourseList(BeanUtil.copyProperties(courseList, ApiZoneCourseResp.class));
             result.add(resp);
@@ -51,6 +55,7 @@ public class ApiZoneBiz {
     private List<Long> zoneCourse(Zone zone) {
         ZoneCourseExample example = new ZoneCourseExample();
         example.createCriteria().andZoneIdEqualTo(zone.getId());
+        example.setOrderByClause(" sort asc, id desc");
         List<ZoneCourse> result = zoneCourseDao.listByExample(example);
         return result.stream().map(ZoneCourse::getCourseId).collect(Collectors.toList());
     }

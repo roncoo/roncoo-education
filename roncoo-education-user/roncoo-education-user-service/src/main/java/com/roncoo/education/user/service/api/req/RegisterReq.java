@@ -30,7 +30,7 @@ public class RegisterReq implements Serializable {
      * 登录密码
      */
     @ApiModelProperty(value = "密码", required = true)
-    private String password;
+    private String mobilePwd;
     /**
      * 重复密码
      */

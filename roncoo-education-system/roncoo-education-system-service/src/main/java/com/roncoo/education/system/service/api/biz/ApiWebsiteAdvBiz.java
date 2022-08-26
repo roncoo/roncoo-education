@@ -9,6 +9,8 @@ import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteAdv;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteAdvExample;
 import com.roncoo.education.system.service.api.resp.ApiWebsiteAdvResp;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
@@ -20,12 +22,14 @@ import java.util.List;
  * @author wujing
  */
 @Component
+@CacheConfig(cacheNames = {"system"})
 @RequiredArgsConstructor
 public class ApiWebsiteAdvBiz extends BaseBiz {
 
     @NotNull
     private final WebsiteAdvDao dao;
 
+    @Cacheable
     public Result<List<ApiWebsiteAdvResp>> list() {
         WebsiteAdvExample example = new WebsiteAdvExample();
         example.createCriteria().andStatusIdEqualTo(StatusIdEnum.YES.getCode());

@@ -31,8 +31,7 @@ public class FeignSysConfigController implements IFeignSysConfig {
     private final FeignSysConfigBiz biz;
 
     @Override
-    public Page
-            <SysConfigPageVO> page(@RequestBody SysConfigPageQO qo) {
+    public Page<SysConfigPageVO> page(@RequestBody SysConfigPageQO qo) {
         return biz.page(qo);
     }
 

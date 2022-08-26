@@ -1,5 +1,6 @@
 package com.roncoo.education.user.service.api.biz;
 
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.LoginStatusEnum;
@@ -36,11 +37,11 @@ public class ApiUsersBiz extends BaseBiz {
         if (StringUtils.isEmpty(req.getMobile())) {
             return Result.error("手机号不能为空");
         }
-        if (StringUtils.isEmpty(req.getPassword())) {
+        if (StringUtils.isEmpty(req.getMobilePwd())) {
             return Result.error("密码不能为空");
         }
         // 密码校验
-        if (!req.getPassword().equals(req.getRepassword())) {
+        if (!req.getMobilePwd().equals(req.getRepassword())) {
             return Result.error("密码不一致");
         }
 
@@ -51,7 +52,7 @@ public class ApiUsersBiz extends BaseBiz {
         }
 
         // 用户注册
-        user = register(req.getMobile(), req.getPassword());
+        user = register(req.getMobile(), req.getMobilePwd());
 
         // 登录日志
         loginLog(user.getId(), LoginStatusEnum.SUCCESS, req.getIp());
@@ -91,9 +92,6 @@ public class ApiUsersBiz extends BaseBiz {
         dto.setMobile(user.getMobile());
         dto.setToken(JWTUtil.create(user.getId(), JWTUtil.DATE));
 
-        // 登录成功，存入缓存，单点登录使用
-        // redisTemplate.opsForValue().set(dto.getUserId().toString(), dto.getToken(), 1, TimeUnit.DAYS);
-
         return Result.success(dto);
     }
 
@@ -101,7 +99,7 @@ public class ApiUsersBiz extends BaseBiz {
         // 用户基本信息
         Users user = new Users();
         user.setMobile(mobile);
-        user.setMobileSalt(StrUtil.get32UUID());
+        user.setMobileSalt(IdUtil.simpleUUID());
         user.setMobilePsw(DigestUtil.sha1Hex(user.getMobileSalt() + password));
         userDao.save(user);
         return user;
