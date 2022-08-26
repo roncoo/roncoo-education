@@ -53,6 +53,10 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
             // 路径存在关键词：/api，不鉴权
             return chain.filter(exchange);
         }
+        if (FilterUtil.checkUri(uri, FilterUtil.API_V2)) {
+            // 路径存在关键词：/api，不鉴权
+            return chain.filter(exchange);
+        }
 
         Long userId = getUserId(request);
 

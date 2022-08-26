@@ -21,6 +21,10 @@ public final class FilterUtil {
     }
 
     /**
+     * 技术文档
+     */
+    public static final String API_V2 = "/v2";
+    /**
      * Api路径前缀
      */
     public static final String API_URL_PREFIX = "/api";
@@ -28,10 +32,6 @@ public final class FilterUtil {
      * Boss路径前缀
      */
     public static final String CALLBACK_URL_PREFIX = "/callback";
-    /**
-     * Auth路径前缀
-     */
-    public static final String AUTH_URL_PREFIX = "/auth";
     /**
      * Admin路径前缀
      */
