@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.roncoo</groupId>
-    <artifactId>roncoo-education-app-generator</artifactId>
+    <artifactId>roncoo-generator</artifactId>
     <packaging>jar</packaging>
     <version>1.0.0</version>
 
-    <name>roncoo-education-app-generator</name>
+    <name>roncoo-generator</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
