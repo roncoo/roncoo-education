@@ -4,6 +4,7 @@ import com.roncoo.education.common.config.ThreadContext;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.ReadEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
@@ -73,10 +74,10 @@ public class AuthMsgUserBiz extends BaseBiz {
         }
 
         // 未阅读，则刷新阅读状态
-//        if (IsDefaultEnum.NO.getCode().equals(record.getIsRead())) {
-//            record.setIsRead(IsDefaultEnum.YES.getCode());
-//            dao.updateById(record);
-//        }
+        if (ReadEnum.NO.getCode().equals(record.getIsRead())) {
+            record.setIsRead(ReadEnum.READ.getCode());
+            dao.updateById(record);
+        }
 
         // 返回消息实体
         Msg msg = msgDao.getById(record.getMsgId());

@@ -35,7 +35,6 @@ public class AuthMsgUserController {
     /**
      * 站内信分页列表接口
      *
-     * @param msgUserBO
      * @return
      * @author wuyun
      */
@@ -48,7 +47,6 @@ public class AuthMsgUserController {
     /**
      * 用户查看站内信内容
      *
-     * @param MsgViewBO
      * @return
      * @author wuyun
      */

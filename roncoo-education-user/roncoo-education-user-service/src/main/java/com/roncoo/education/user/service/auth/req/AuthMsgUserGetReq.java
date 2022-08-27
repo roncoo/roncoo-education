@@ -22,12 +22,6 @@ public class AuthMsgUserGetReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "当前页")
-    private int pageCurrent = 1;
-
-    @ApiModelProperty(value = "每页条数")
-    private int pageSize = 20;
-
     @ApiModelProperty(value = "主键")
     private Long id;
 }
