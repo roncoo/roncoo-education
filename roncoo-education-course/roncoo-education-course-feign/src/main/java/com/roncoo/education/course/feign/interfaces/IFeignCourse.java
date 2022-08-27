@@ -65,5 +65,6 @@ public interface IFeignCourse {
     @GetMapping(value = "/get/{id}")
     CourseViewVO getById(@PathVariable(value = "id") Long id);
 
+    @PostMapping(value = "/listByIds")
     List<CourseViewVO> listByIds(@RequestBody List<Long> courseIds);
 }
