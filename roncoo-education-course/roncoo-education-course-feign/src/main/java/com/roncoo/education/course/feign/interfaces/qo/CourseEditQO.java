@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
  * 课程信息
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-08-27
  */
 @Data
 @Accessors(chain = true)
@@ -74,14 +74,14 @@ public class CourseEditQO implements Serializable{
     private Integer isFree;
 
     /**
-     * 原价
+     * 划线价
      */
-    private BigDecimal courseOriginal;
+    private BigDecimal rulingPrice;
 
     /**
-     * 优惠价
+     * 课程价格
      */
-    private BigDecimal courseDiscount;
+    private BigDecimal coursePrice;
 
     /**
      * 是否上架(1:上架，0:下架)

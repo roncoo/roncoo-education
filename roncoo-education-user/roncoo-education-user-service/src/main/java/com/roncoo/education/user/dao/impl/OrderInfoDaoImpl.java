@@ -1,5 +1,6 @@
 package com.roncoo.education.user.dao.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
@@ -70,5 +71,29 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
     @Override
     public int countByExample(OrderInfoExample example) {
         return this.mapper.countByExample(example);
+    }
+
+    @Override
+    public OrderInfo getByUserAndCourseId(Long userId, Long courseId) {
+        OrderInfoExample example = new OrderInfoExample();
+        example.createCriteria().andUserIdEqualTo(userId).andCourseIdEqualTo(courseId);
+        example.setOrderByClause("id desc");
+        List<OrderInfo> orderInfos = this.mapper.selectByExample(example);
+        if (CollUtil.isNotEmpty(orderInfos)) {
+            return orderInfos.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public OrderInfo getByOrderNo(Long orderNo) {
+        OrderInfoExample example = new OrderInfoExample();
+        example.createCriteria().andOrderNoEqualTo(orderNo);
+        example.setOrderByClause("id desc");
+        List<OrderInfo> orderInfos = this.mapper.selectByExample(example);
+        if (CollUtil.isNotEmpty(orderInfos)) {
+            return orderInfos.get(0);
+        }
+        return null;
     }
 }

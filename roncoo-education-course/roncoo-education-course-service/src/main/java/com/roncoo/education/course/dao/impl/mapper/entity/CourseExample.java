@@ -746,123 +746,123 @@ public class CourseExample {
             return (Criteria) this;
         }
 
-        public Criteria andCourseOriginalIsNull() {
-            addCriterion("course_original is null");
+        public Criteria andRulingPriceIsNull() {
+            addCriterion("ruling_price is null");
             return (Criteria) this;
         }
 
-        public Criteria andCourseOriginalIsNotNull() {
-            addCriterion("course_original is not null");
+        public Criteria andRulingPriceIsNotNull() {
+            addCriterion("ruling_price is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCourseOriginalEqualTo(BigDecimal value) {
-            addCriterion("course_original =", value, "courseOriginal");
+        public Criteria andRulingPriceEqualTo(BigDecimal value) {
+            addCriterion("ruling_price =", value, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseOriginalNotEqualTo(BigDecimal value) {
-            addCriterion("course_original <>", value, "courseOriginal");
+        public Criteria andRulingPriceNotEqualTo(BigDecimal value) {
+            addCriterion("ruling_price <>", value, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseOriginalGreaterThan(BigDecimal value) {
-            addCriterion("course_original >", value, "courseOriginal");
+        public Criteria andRulingPriceGreaterThan(BigDecimal value) {
+            addCriterion("ruling_price >", value, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseOriginalGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("course_original >=", value, "courseOriginal");
+        public Criteria andRulingPriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("ruling_price >=", value, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseOriginalLessThan(BigDecimal value) {
-            addCriterion("course_original <", value, "courseOriginal");
+        public Criteria andRulingPriceLessThan(BigDecimal value) {
+            addCriterion("ruling_price <", value, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseOriginalLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("course_original <=", value, "courseOriginal");
+        public Criteria andRulingPriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("ruling_price <=", value, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseOriginalIn(List<BigDecimal> values) {
-            addCriterion("course_original in", values, "courseOriginal");
+        public Criteria andRulingPriceIn(List<BigDecimal> values) {
+            addCriterion("ruling_price in", values, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseOriginalNotIn(List<BigDecimal> values) {
-            addCriterion("course_original not in", values, "courseOriginal");
+        public Criteria andRulingPriceNotIn(List<BigDecimal> values) {
+            addCriterion("ruling_price not in", values, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseOriginalBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("course_original between", value1, value2, "courseOriginal");
+        public Criteria andRulingPriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("ruling_price between", value1, value2, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseOriginalNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("course_original not between", value1, value2, "courseOriginal");
+        public Criteria andRulingPriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("ruling_price not between", value1, value2, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseDiscountIsNull() {
-            addCriterion("course_discount is null");
+        public Criteria andCoursePriceIsNull() {
+            addCriterion("course_price is null");
             return (Criteria) this;
         }
 
-        public Criteria andCourseDiscountIsNotNull() {
-            addCriterion("course_discount is not null");
+        public Criteria andCoursePriceIsNotNull() {
+            addCriterion("course_price is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCourseDiscountEqualTo(BigDecimal value) {
-            addCriterion("course_discount =", value, "courseDiscount");
+        public Criteria andCoursePriceEqualTo(BigDecimal value) {
+            addCriterion("course_price =", value, "coursePrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseDiscountNotEqualTo(BigDecimal value) {
-            addCriterion("course_discount <>", value, "courseDiscount");
+        public Criteria andCoursePriceNotEqualTo(BigDecimal value) {
+            addCriterion("course_price <>", value, "coursePrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseDiscountGreaterThan(BigDecimal value) {
-            addCriterion("course_discount >", value, "courseDiscount");
+        public Criteria andCoursePriceGreaterThan(BigDecimal value) {
+            addCriterion("course_price >", value, "coursePrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseDiscountGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("course_discount >=", value, "courseDiscount");
+        public Criteria andCoursePriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("course_price >=", value, "coursePrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseDiscountLessThan(BigDecimal value) {
-            addCriterion("course_discount <", value, "courseDiscount");
+        public Criteria andCoursePriceLessThan(BigDecimal value) {
+            addCriterion("course_price <", value, "coursePrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseDiscountLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("course_discount <=", value, "courseDiscount");
+        public Criteria andCoursePriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("course_price <=", value, "coursePrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseDiscountIn(List<BigDecimal> values) {
-            addCriterion("course_discount in", values, "courseDiscount");
+        public Criteria andCoursePriceIn(List<BigDecimal> values) {
+            addCriterion("course_price in", values, "coursePrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseDiscountNotIn(List<BigDecimal> values) {
-            addCriterion("course_discount not in", values, "courseDiscount");
+        public Criteria andCoursePriceNotIn(List<BigDecimal> values) {
+            addCriterion("course_price not in", values, "coursePrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseDiscountBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("course_discount between", value1, value2, "courseDiscount");
+        public Criteria andCoursePriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("course_price between", value1, value2, "coursePrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseDiscountNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("course_discount not between", value1, value2, "courseDiscount");
+        public Criteria andCoursePriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("course_price not between", value1, value2, "coursePrice");
             return (Criteria) this;
         }
 

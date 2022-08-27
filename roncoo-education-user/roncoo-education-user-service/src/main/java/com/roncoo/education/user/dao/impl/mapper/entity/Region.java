@@ -4,21 +4,35 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class Region implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Long id;
+
     private Long parentId;
+
     private Integer level;
+
     private String provinceCode;
+
     private BigDecimal centerLng;
+
     private BigDecimal centerLat;
+
     private Integer provinceId;
+
     private String provinceName;
+
     private Integer cityId;
+
     private String cityCode;
+
     private String cityName;
+
     private String regionName;
+
     private String districtName;
+
     private String mergerName;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

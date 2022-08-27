@@ -14,7 +14,7 @@ import com.roncoo.education.course.feign.interfaces.vo.ZoneCourseViewVO;
  * 专区课程关联表 接口
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-08-27
  */
 @FeignClient(value = "course-service", path = "/course/zone/course")
 public interface IFeignZoneCourse {

@@ -6,6 +6,7 @@ import com.roncoo.education.user.service.api.req.RegionCityIdReq;
 import com.roncoo.education.user.service.api.req.RegionLevelReq;
 import com.roncoo.education.user.service.api.req.RegionProvinceReq;
 import com.roncoo.education.user.service.api.resp.RegionResp;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ import java.util.List;
  *
  * @author wujing
  */
+@Api(tags = "Api-行政区域")
 @RestController
 @RequestMapping(value = "/user/api/region")
 public class ApiRegionController {

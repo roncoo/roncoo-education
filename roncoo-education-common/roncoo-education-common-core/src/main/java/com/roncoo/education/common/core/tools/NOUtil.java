@@ -26,8 +26,4 @@ public final class NOUtil {
         return Long.valueOf(DateUtil.format(new Date(), YYYYMMDDHHMMSS) + RandomUtil.randomNumbers(4));
     }
 
-    public static Long getUserId() {
-        return Long.valueOf(DateUtil.format(new Date(), YYYYMMDDHHMMSS) + RandomUtil.randomNumbers(2));
-    }
-
 }

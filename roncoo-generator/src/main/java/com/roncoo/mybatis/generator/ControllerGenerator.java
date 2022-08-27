@@ -52,16 +52,16 @@ public class ControllerGenerator {
         //focList.addAll(serviceApiList());
 
         // service.auth
-        focList.addAll(serviceAuthList());
+        //focList.addAll(serviceAuthList());
 
         // service.admin
         //focList.addAll(serviceAdminList());
 
         // feign
-        //focList.addAll(feignList());
+        focList.addAll(feignList());
 
         // service.feign
-        //focList.addAll(serviceFeignList());
+        focList.addAll(serviceFeignList());
         return focList;
     }
 

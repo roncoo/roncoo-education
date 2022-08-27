@@ -5,6 +5,7 @@ import com.roncoo.education.user.service.api.biz.ApiUsersBiz;
 import com.roncoo.education.user.service.api.req.PasswordReq;
 import com.roncoo.education.user.service.api.req.RegisterReq;
 import com.roncoo.education.user.service.api.resp.UsersLoginResp;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author wujing
  */
+@Api(tags = "Api-用户登录注册")
 @RestController
 @RequestMapping(value = "/user/api/users")
 public class ApiUsersController {

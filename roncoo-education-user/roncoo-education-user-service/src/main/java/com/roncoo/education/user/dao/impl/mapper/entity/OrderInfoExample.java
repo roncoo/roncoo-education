@@ -20,20 +20,20 @@ public class OrderInfoExample {
         oredCriteria = new ArrayList<Criteria>();
     }
 
-    public String getOrderByClause() {
-        return orderByClause;
-    }
-
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
     }
 
-    public boolean isDistinct() {
-        return distinct;
+    public String getOrderByClause() {
+        return orderByClause;
     }
 
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
+    }
+
+    public boolean isDistinct() {
+        return distinct;
     }
 
     public List<Criteria> getOredCriteria() {
@@ -69,20 +69,20 @@ public class OrderInfoExample {
         distinct = false;
     }
 
+    public void setLimitStart(int limitStart) {
+        this.limitStart=limitStart;
+    }
+
     public int getLimitStart() {
         return limitStart;
     }
 
-    public void setLimitStart(int limitStart) {
-        this.limitStart = limitStart;
+    public void setPageSize(int pageSize) {
+        this.pageSize=pageSize;
     }
 
     public int getPageSize() {
         return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
     }
 
     protected abstract static class GeneratedCriteria {
@@ -366,76 +366,6 @@ public class OrderInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andLecturerNameIsNull() {
-            addCriterion("lecturer_name is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerNameIsNotNull() {
-            addCriterion("lecturer_name is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerNameEqualTo(String value) {
-            addCriterion("lecturer_name =", value, "lecturerName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerNameNotEqualTo(String value) {
-            addCriterion("lecturer_name <>", value, "lecturerName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerNameGreaterThan(String value) {
-            addCriterion("lecturer_name >", value, "lecturerName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerNameGreaterThanOrEqualTo(String value) {
-            addCriterion("lecturer_name >=", value, "lecturerName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerNameLessThan(String value) {
-            addCriterion("lecturer_name <", value, "lecturerName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerNameLessThanOrEqualTo(String value) {
-            addCriterion("lecturer_name <=", value, "lecturerName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerNameLike(String value) {
-            addCriterion("lecturer_name like", value, "lecturerName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerNameNotLike(String value) {
-            addCriterion("lecturer_name not like", value, "lecturerName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerNameIn(List<String> values) {
-            addCriterion("lecturer_name in", values, "lecturerName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerNameNotIn(List<String> values) {
-            addCriterion("lecturer_name not in", values, "lecturerName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerNameBetween(String value1, String value2) {
-            addCriterion("lecturer_name between", value1, value2, "lecturerName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerNameNotBetween(String value1, String value2) {
-            addCriterion("lecturer_name not between", value1, value2, "lecturerName");
-            return (Criteria) this;
-        }
-
         public Criteria andUserIdIsNull() {
             addCriterion("user_id is null");
             return (Criteria) this;
@@ -626,66 +556,6 @@ public class OrderInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andLecturerIdIsNull() {
-            addCriterion("lecturer_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdIsNotNull() {
-            addCriterion("lecturer_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdEqualTo(Long value) {
-            addCriterion("lecturer_id =", value, "lecturerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdNotEqualTo(Long value) {
-            addCriterion("lecturer_id <>", value, "lecturerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdGreaterThan(Long value) {
-            addCriterion("lecturer_id >", value, "lecturerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("lecturer_id >=", value, "lecturerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdLessThan(Long value) {
-            addCriterion("lecturer_id <", value, "lecturerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdLessThanOrEqualTo(Long value) {
-            addCriterion("lecturer_id <=", value, "lecturerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdIn(List<Long> values) {
-            addCriterion("lecturer_id in", values, "lecturerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdNotIn(List<Long> values) {
-            addCriterion("lecturer_id not in", values, "lecturerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdBetween(Long value1, Long value2) {
-            addCriterion("lecturer_id between", value1, value2, "lecturerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdNotBetween(Long value1, Long value2) {
-            addCriterion("lecturer_id not between", value1, value2, "lecturerId");
-            return (Criteria) this;
-        }
-
         public Criteria andCourseIdIsNull() {
             addCriterion("course_id is null");
             return (Criteria) this;
@@ -746,313 +616,123 @@ public class OrderInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andCourseNameIsNull() {
-            addCriterion("course_name is null");
+        public Criteria andRulingPriceIsNull() {
+            addCriterion("ruling_price is null");
             return (Criteria) this;
         }
 
-        public Criteria andCourseNameIsNotNull() {
-            addCriterion("course_name is not null");
+        public Criteria andRulingPriceIsNotNull() {
+            addCriterion("ruling_price is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCourseNameEqualTo(String value) {
-            addCriterion("course_name =", value, "courseName");
+        public Criteria andRulingPriceEqualTo(BigDecimal value) {
+            addCriterion("ruling_price =", value, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseNameNotEqualTo(String value) {
-            addCriterion("course_name <>", value, "courseName");
+        public Criteria andRulingPriceNotEqualTo(BigDecimal value) {
+            addCriterion("ruling_price <>", value, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseNameGreaterThan(String value) {
-            addCriterion("course_name >", value, "courseName");
+        public Criteria andRulingPriceGreaterThan(BigDecimal value) {
+            addCriterion("ruling_price >", value, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseNameGreaterThanOrEqualTo(String value) {
-            addCriterion("course_name >=", value, "courseName");
+        public Criteria andRulingPriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("ruling_price >=", value, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseNameLessThan(String value) {
-            addCriterion("course_name <", value, "courseName");
+        public Criteria andRulingPriceLessThan(BigDecimal value) {
+            addCriterion("ruling_price <", value, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseNameLessThanOrEqualTo(String value) {
-            addCriterion("course_name <=", value, "courseName");
+        public Criteria andRulingPriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("ruling_price <=", value, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseNameLike(String value) {
-            addCriterion("course_name like", value, "courseName");
+        public Criteria andRulingPriceIn(List<BigDecimal> values) {
+            addCriterion("ruling_price in", values, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseNameNotLike(String value) {
-            addCriterion("course_name not like", value, "courseName");
+        public Criteria andRulingPriceNotIn(List<BigDecimal> values) {
+            addCriterion("ruling_price not in", values, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseNameIn(List<String> values) {
-            addCriterion("course_name in", values, "courseName");
+        public Criteria andRulingPriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("ruling_price between", value1, value2, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseNameNotIn(List<String> values) {
-            addCriterion("course_name not in", values, "courseName");
+        public Criteria andRulingPriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("ruling_price not between", value1, value2, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCourseNameBetween(String value1, String value2) {
-            addCriterion("course_name between", value1, value2, "courseName");
+        public Criteria andCoursePriceIsNull() {
+            addCriterion("course_price is null");
             return (Criteria) this;
         }
 
-        public Criteria andCourseNameNotBetween(String value1, String value2) {
-            addCriterion("course_name not between", value1, value2, "courseName");
+        public Criteria andCoursePriceIsNotNull() {
+            addCriterion("course_price is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPricePayableIsNull() {
-            addCriterion("price_payable is null");
+        public Criteria andCoursePriceEqualTo(BigDecimal value) {
+            addCriterion("course_price =", value, "coursePrice");
             return (Criteria) this;
         }
 
-        public Criteria andPricePayableIsNotNull() {
-            addCriterion("price_payable is not null");
+        public Criteria andCoursePriceNotEqualTo(BigDecimal value) {
+            addCriterion("course_price <>", value, "coursePrice");
             return (Criteria) this;
         }
 
-        public Criteria andPricePayableEqualTo(BigDecimal value) {
-            addCriterion("price_payable =", value, "pricePayable");
+        public Criteria andCoursePriceGreaterThan(BigDecimal value) {
+            addCriterion("course_price >", value, "coursePrice");
             return (Criteria) this;
         }
 
-        public Criteria andPricePayableNotEqualTo(BigDecimal value) {
-            addCriterion("price_payable <>", value, "pricePayable");
+        public Criteria andCoursePriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("course_price >=", value, "coursePrice");
             return (Criteria) this;
         }
 
-        public Criteria andPricePayableGreaterThan(BigDecimal value) {
-            addCriterion("price_payable >", value, "pricePayable");
+        public Criteria andCoursePriceLessThan(BigDecimal value) {
+            addCriterion("course_price <", value, "coursePrice");
             return (Criteria) this;
         }
 
-        public Criteria andPricePayableGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("price_payable >=", value, "pricePayable");
+        public Criteria andCoursePriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("course_price <=", value, "coursePrice");
             return (Criteria) this;
         }
 
-        public Criteria andPricePayableLessThan(BigDecimal value) {
-            addCriterion("price_payable <", value, "pricePayable");
+        public Criteria andCoursePriceIn(List<BigDecimal> values) {
+            addCriterion("course_price in", values, "coursePrice");
             return (Criteria) this;
         }
 
-        public Criteria andPricePayableLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("price_payable <=", value, "pricePayable");
+        public Criteria andCoursePriceNotIn(List<BigDecimal> values) {
+            addCriterion("course_price not in", values, "coursePrice");
             return (Criteria) this;
         }
 
-        public Criteria andPricePayableIn(List<BigDecimal> values) {
-            addCriterion("price_payable in", values, "pricePayable");
+        public Criteria andCoursePriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("course_price between", value1, value2, "coursePrice");
             return (Criteria) this;
         }
 
-        public Criteria andPricePayableNotIn(List<BigDecimal> values) {
-            addCriterion("price_payable not in", values, "pricePayable");
-            return (Criteria) this;
-        }
-
-        public Criteria andPricePayableBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("price_payable between", value1, value2, "pricePayable");
-            return (Criteria) this;
-        }
-
-        public Criteria andPricePayableNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("price_payable not between", value1, value2, "pricePayable");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceDiscountIsNull() {
-            addCriterion("price_discount is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceDiscountIsNotNull() {
-            addCriterion("price_discount is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceDiscountEqualTo(BigDecimal value) {
-            addCriterion("price_discount =", value, "priceDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceDiscountNotEqualTo(BigDecimal value) {
-            addCriterion("price_discount <>", value, "priceDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceDiscountGreaterThan(BigDecimal value) {
-            addCriterion("price_discount >", value, "priceDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceDiscountGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("price_discount >=", value, "priceDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceDiscountLessThan(BigDecimal value) {
-            addCriterion("price_discount <", value, "priceDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceDiscountLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("price_discount <=", value, "priceDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceDiscountIn(List<BigDecimal> values) {
-            addCriterion("price_discount in", values, "priceDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceDiscountNotIn(List<BigDecimal> values) {
-            addCriterion("price_discount not in", values, "priceDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceDiscountBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("price_discount between", value1, value2, "priceDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceDiscountNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("price_discount not between", value1, value2, "priceDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPricePaidIsNull() {
-            addCriterion("price_paid is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPricePaidIsNotNull() {
-            addCriterion("price_paid is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPricePaidEqualTo(BigDecimal value) {
-            addCriterion("price_paid =", value, "pricePaid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPricePaidNotEqualTo(BigDecimal value) {
-            addCriterion("price_paid <>", value, "pricePaid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPricePaidGreaterThan(BigDecimal value) {
-            addCriterion("price_paid >", value, "pricePaid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPricePaidGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("price_paid >=", value, "pricePaid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPricePaidLessThan(BigDecimal value) {
-            addCriterion("price_paid <", value, "pricePaid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPricePaidLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("price_paid <=", value, "pricePaid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPricePaidIn(List<BigDecimal> values) {
-            addCriterion("price_paid in", values, "pricePaid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPricePaidNotIn(List<BigDecimal> values) {
-            addCriterion("price_paid not in", values, "pricePaid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPricePaidBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("price_paid between", value1, value2, "pricePaid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPricePaidNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("price_paid not between", value1, value2, "pricePaid");
-            return (Criteria) this;
-        }
-
-        public Criteria andTradeTypeIsNull() {
-            addCriterion("trade_type is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTradeTypeIsNotNull() {
-            addCriterion("trade_type is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTradeTypeEqualTo(Integer value) {
-            addCriterion("trade_type =", value, "tradeType");
-            return (Criteria) this;
-        }
-
-        public Criteria andTradeTypeNotEqualTo(Integer value) {
-            addCriterion("trade_type <>", value, "tradeType");
-            return (Criteria) this;
-        }
-
-        public Criteria andTradeTypeGreaterThan(Integer value) {
-            addCriterion("trade_type >", value, "tradeType");
-            return (Criteria) this;
-        }
-
-        public Criteria andTradeTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("trade_type >=", value, "tradeType");
-            return (Criteria) this;
-        }
-
-        public Criteria andTradeTypeLessThan(Integer value) {
-            addCriterion("trade_type <", value, "tradeType");
-            return (Criteria) this;
-        }
-
-        public Criteria andTradeTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("trade_type <=", value, "tradeType");
-            return (Criteria) this;
-        }
-
-        public Criteria andTradeTypeIn(List<Integer> values) {
-            addCriterion("trade_type in", values, "tradeType");
-            return (Criteria) this;
-        }
-
-        public Criteria andTradeTypeNotIn(List<Integer> values) {
-            addCriterion("trade_type not in", values, "tradeType");
-            return (Criteria) this;
-        }
-
-        public Criteria andTradeTypeBetween(Integer value1, Integer value2) {
-            addCriterion("trade_type between", value1, value2, "tradeType");
-            return (Criteria) this;
-        }
-
-        public Criteria andTradeTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("trade_type not between", value1, value2, "tradeType");
+        public Criteria andCoursePriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("course_price not between", value1, value2, "coursePrice");
             return (Criteria) this;
         }
 
@@ -1461,6 +1141,38 @@ public class OrderInfoExample {
 
         private String typeHandler;
 
+        public String getCondition() {
+            return condition;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public boolean isNoValue() {
+            return noValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
+
+        public boolean isBetweenValue() {
+            return betweenValue;
+        }
+
+        public boolean isListValue() {
+            return listValue;
+        }
+
+        public String getTypeHandler() {
+            return typeHandler;
+        }
+
         protected Criterion(String condition) {
             super();
             this.condition = condition;
@@ -1495,38 +1207,6 @@ public class OrderInfoExample {
 
         protected Criterion(String condition, Object value, Object secondValue) {
             this(condition, value, secondValue, null);
-        }
-
-        public String getCondition() {
-            return condition;
-        }
-
-        public Object getValue() {
-            return value;
-        }
-
-        public Object getSecondValue() {
-            return secondValue;
-        }
-
-        public boolean isNoValue() {
-            return noValue;
-        }
-
-        public boolean isSingleValue() {
-            return singleValue;
-        }
-
-        public boolean isBetweenValue() {
-            return betweenValue;
-        }
-
-        public boolean isListValue() {
-            return listValue;
-        }
-
-        public String getTypeHandler() {
-            return typeHandler;
         }
     }
 }

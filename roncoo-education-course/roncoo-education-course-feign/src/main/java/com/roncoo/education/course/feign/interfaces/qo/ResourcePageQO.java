@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
  * 课程视频信息
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-08-27
  */
 @Data
 @Accessors(chain = true)

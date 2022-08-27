@@ -1,17 +1,33 @@
 package com.roncoo.education.user.dao.impl.mapper.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class OrderPay implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Long id;
+
     private Date gmtCreate;
+
     private Long orderNo;
+
     private Long serialNumber;
-    private Integer orderStatus;
+
+    private BigDecimal rulingPrice;
+
+    private BigDecimal coursePrice;
+
     private Integer payType;
+
+    private Integer orderStatus;
+
+    private String remarkCus;
+
+    private Integer channelType;
+
     private Date payTime;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;
@@ -45,12 +61,20 @@ public class OrderPay implements Serializable {
         this.serialNumber = serialNumber;
     }
 
-    public Integer getOrderStatus() {
-        return orderStatus;
+    public BigDecimal getRulingPrice() {
+        return rulingPrice;
     }
 
-    public void setOrderStatus(Integer orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setRulingPrice(BigDecimal rulingPrice) {
+        this.rulingPrice = rulingPrice;
+    }
+
+    public BigDecimal getCoursePrice() {
+        return coursePrice;
+    }
+
+    public void setCoursePrice(BigDecimal coursePrice) {
+        this.coursePrice = coursePrice;
     }
 
     public Integer getPayType() {
@@ -59,6 +83,30 @@ public class OrderPay implements Serializable {
 
     public void setPayType(Integer payType) {
         this.payType = payType;
+    }
+
+    public Integer getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(Integer orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public String getRemarkCus() {
+        return remarkCus;
+    }
+
+    public void setRemarkCus(String remarkCus) {
+        this.remarkCus = remarkCus == null ? null : remarkCus.trim();
+    }
+
+    public Integer getChannelType() {
+        return channelType;
+    }
+
+    public void setChannelType(Integer channelType) {
+        this.channelType = channelType;
     }
 
     public Date getPayTime() {
@@ -79,8 +127,12 @@ public class OrderPay implements Serializable {
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", orderNo=").append(orderNo);
         sb.append(", serialNumber=").append(serialNumber);
-        sb.append(", orderStatus=").append(orderStatus);
+        sb.append(", rulingPrice=").append(rulingPrice);
+        sb.append(", coursePrice=").append(coursePrice);
         sb.append(", payType=").append(payType);
+        sb.append(", orderStatus=").append(orderStatus);
+        sb.append(", remarkCus=").append(remarkCus);
+        sb.append(", channelType=").append(channelType);
         sb.append(", payTime=").append(payTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

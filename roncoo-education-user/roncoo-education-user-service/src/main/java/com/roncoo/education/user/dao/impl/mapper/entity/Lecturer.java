@@ -4,18 +4,27 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Lecturer implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Long id;
+
     private Date gmtCreate;
+
     private Date gmtModified;
+
     private Integer statusId;
+
     private Integer sort;
-    private Long userId;
+
     private String lecturerName;
+
     private String lecturerMobile;
+
     private String lecturerPosition;
+
     private String lecturerHead;
+
     private String introduce;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;
@@ -55,14 +64,6 @@ public class Lecturer implements Serializable {
 
     public void setSort(Integer sort) {
         this.sort = sort;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public String getLecturerName() {
@@ -116,7 +117,6 @@ public class Lecturer implements Serializable {
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", statusId=").append(statusId);
         sb.append(", sort=").append(sort);
-        sb.append(", userId=").append(userId);
         sb.append(", lecturerName=").append(lecturerName);
         sb.append(", lecturerMobile=").append(lecturerMobile);
         sb.append(", lecturerPosition=").append(lecturerPosition);

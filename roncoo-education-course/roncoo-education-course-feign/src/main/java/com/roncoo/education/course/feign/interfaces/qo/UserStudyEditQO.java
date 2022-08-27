@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
  * 课程用户学习日志
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-08-27
  */
 @Data
 @Accessors(chain = true)

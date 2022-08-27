@@ -4,20 +4,33 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Msg implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Long id;
+
     private Date gmtCreate;
+
     private Date gmtModified;
+
     private Integer statusId;
+
     private Integer sort;
+
     private Integer msgType;
+
     private String msgTitle;
+
     private Integer isTimeSend;
+
     private Date sendTime;
+
     private Integer isSend;
+
     private Integer isTop;
+
     private String remark;
+
     private String msgText;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

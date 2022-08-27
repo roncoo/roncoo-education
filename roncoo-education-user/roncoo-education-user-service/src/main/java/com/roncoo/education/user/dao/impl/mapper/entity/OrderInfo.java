@@ -5,28 +5,39 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class OrderInfo implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Long id;
+
     private Date gmtCreate;
+
     private Date gmtModified;
+
     private Long orderNo;
-    private String lecturerName;
+
     private Long userId;
+
     private String mobile;
+
     private Date registerTime;
-    private Long lecturerId;
+
     private Long courseId;
-    private String courseName;
-    private BigDecimal pricePayable;
-    private BigDecimal priceDiscount;
-    private BigDecimal pricePaid;
-    private Integer tradeType;
+
+    private BigDecimal rulingPrice;
+
+    private BigDecimal coursePrice;
+
     private Integer payType;
+
     private Integer channelType;
+
     private Integer orderStatus;
+
     private String remarkCus;
+
     private String remark;
+
     private Date payTime;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;
@@ -60,14 +71,6 @@ public class OrderInfo implements Serializable {
         this.orderNo = orderNo;
     }
 
-    public String getLecturerName() {
-        return lecturerName;
-    }
-
-    public void setLecturerName(String lecturerName) {
-        this.lecturerName = lecturerName == null ? null : lecturerName.trim();
-    }
-
     public Long getUserId() {
         return userId;
     }
@@ -92,14 +95,6 @@ public class OrderInfo implements Serializable {
         this.registerTime = registerTime;
     }
 
-    public Long getLecturerId() {
-        return lecturerId;
-    }
-
-    public void setLecturerId(Long lecturerId) {
-        this.lecturerId = lecturerId;
-    }
-
     public Long getCourseId() {
         return courseId;
     }
@@ -108,44 +103,20 @@ public class OrderInfo implements Serializable {
         this.courseId = courseId;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public BigDecimal getRulingPrice() {
+        return rulingPrice;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName == null ? null : courseName.trim();
+    public void setRulingPrice(BigDecimal rulingPrice) {
+        this.rulingPrice = rulingPrice;
     }
 
-    public BigDecimal getPricePayable() {
-        return pricePayable;
+    public BigDecimal getCoursePrice() {
+        return coursePrice;
     }
 
-    public void setPricePayable(BigDecimal pricePayable) {
-        this.pricePayable = pricePayable;
-    }
-
-    public BigDecimal getPriceDiscount() {
-        return priceDiscount;
-    }
-
-    public void setPriceDiscount(BigDecimal priceDiscount) {
-        this.priceDiscount = priceDiscount;
-    }
-
-    public BigDecimal getPricePaid() {
-        return pricePaid;
-    }
-
-    public void setPricePaid(BigDecimal pricePaid) {
-        this.pricePaid = pricePaid;
-    }
-
-    public Integer getTradeType() {
-        return tradeType;
-    }
-
-    public void setTradeType(Integer tradeType) {
-        this.tradeType = tradeType;
+    public void setCoursePrice(BigDecimal coursePrice) {
+        this.coursePrice = coursePrice;
     }
 
     public Integer getPayType() {
@@ -206,17 +177,12 @@ public class OrderInfo implements Serializable {
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", orderNo=").append(orderNo);
-        sb.append(", lecturerName=").append(lecturerName);
         sb.append(", userId=").append(userId);
         sb.append(", mobile=").append(mobile);
         sb.append(", registerTime=").append(registerTime);
-        sb.append(", lecturerId=").append(lecturerId);
         sb.append(", courseId=").append(courseId);
-        sb.append(", courseName=").append(courseName);
-        sb.append(", pricePayable=").append(pricePayable);
-        sb.append(", priceDiscount=").append(priceDiscount);
-        sb.append(", pricePaid=").append(pricePaid);
-        sb.append(", tradeType=").append(tradeType);
+        sb.append(", rulingPrice=").append(rulingPrice);
+        sb.append(", coursePrice=").append(coursePrice);
         sb.append(", payType=").append(payType);
         sb.append(", channelType=").append(channelType);
         sb.append(", orderStatus=").append(orderStatus);

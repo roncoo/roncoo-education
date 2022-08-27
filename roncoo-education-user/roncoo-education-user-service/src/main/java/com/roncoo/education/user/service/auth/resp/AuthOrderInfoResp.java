@@ -11,9 +11,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * <p>
  * API-AUTH-订单信息表
- * </p>
  *
  * @author wujing
  * @date 2022-08-25
@@ -38,9 +36,6 @@ public class AuthOrderInfoResp implements Serializable {
 
     @ApiModelProperty(value = "订单号")
     private Long orderNo;
-
-    @ApiModelProperty(value = "讲师名称")
-    private String lecturerName;
 
     @ApiModelProperty(value = "下单用户ID")
     private Long userId;

@@ -12,8 +12,8 @@
     <result column="course_name" jdbcType="VARCHAR" property="courseName" />
     <result column="course_logo" jdbcType="VARCHAR" property="courseLogo" />
     <result column="is_free" jdbcType="TINYINT" property="isFree" />
-    <result column="course_original" jdbcType="DECIMAL" property="courseOriginal" />
-    <result column="course_discount" jdbcType="DECIMAL" property="courseDiscount" />
+    <result column="ruling_price" jdbcType="DECIMAL" property="rulingPrice" />
+    <result column="course_price" jdbcType="DECIMAL" property="coursePrice" />
     <result column="is_putaway" jdbcType="TINYINT" property="isPutaway" />
     <result column="course_sort" jdbcType="INTEGER" property="courseSort" />
     <result column="count_buy" jdbcType="INTEGER" property="countBuy" />
@@ -82,8 +82,8 @@
   </sql>
   <sql id="Base_Column_List">
     id, gmt_create, gmt_modified, status_id, sort, lecturer_id, category_id, course_name, 
-    course_logo, is_free, course_original, course_discount, is_putaway, course_sort, 
-    count_buy, count_study
+    course_logo, is_free, ruling_price, course_price, is_putaway, course_sort, count_buy, 
+    count_study
   </sql>
   <sql id="Blob_Column_List">
     introduce
@@ -143,13 +143,13 @@
     insert into course (id, gmt_create, gmt_modified, 
       status_id, sort, lecturer_id, 
       category_id, course_name, course_logo, 
-      is_free, course_original, course_discount, 
+      is_free, ruling_price, course_price, 
       is_putaway, course_sort, count_buy, 
       count_study, introduce)
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{lecturerId,jdbcType=BIGINT}, 
       #{categoryId,jdbcType=BIGINT}, #{courseName,jdbcType=VARCHAR}, #{courseLogo,jdbcType=VARCHAR}, 
-      #{isFree,jdbcType=TINYINT}, #{courseOriginal,jdbcType=DECIMAL}, #{courseDiscount,jdbcType=DECIMAL}, 
+      #{isFree,jdbcType=TINYINT}, #{rulingPrice,jdbcType=DECIMAL}, #{coursePrice,jdbcType=DECIMAL}, 
       #{isPutaway,jdbcType=TINYINT}, #{courseSort,jdbcType=INTEGER}, #{countBuy,jdbcType=INTEGER}, 
       #{countStudy,jdbcType=INTEGER}, #{introduce,jdbcType=LONGVARCHAR})
   </insert>
@@ -186,11 +186,11 @@
       <if test="isFree != null">
         is_free,
       </if>
-      <if test="courseOriginal != null">
-        course_original,
+      <if test="rulingPrice != null">
+        ruling_price,
       </if>
-      <if test="courseDiscount != null">
-        course_discount,
+      <if test="coursePrice != null">
+        course_price,
       </if>
       <if test="isPutaway != null">
         is_putaway,
@@ -239,11 +239,11 @@
       <if test="isFree != null">
         #{isFree,jdbcType=TINYINT},
       </if>
-      <if test="courseOriginal != null">
-        #{courseOriginal,jdbcType=DECIMAL},
+      <if test="rulingPrice != null">
+        #{rulingPrice,jdbcType=DECIMAL},
       </if>
-      <if test="courseDiscount != null">
-        #{courseDiscount,jdbcType=DECIMAL},
+      <if test="coursePrice != null">
+        #{coursePrice,jdbcType=DECIMAL},
       </if>
       <if test="isPutaway != null">
         #{isPutaway,jdbcType=TINYINT},
@@ -301,11 +301,11 @@
       <if test="record.isFree != null">
         is_free = #{record.isFree,jdbcType=TINYINT},
       </if>
-      <if test="record.courseOriginal != null">
-        course_original = #{record.courseOriginal,jdbcType=DECIMAL},
+      <if test="record.rulingPrice != null">
+        ruling_price = #{record.rulingPrice,jdbcType=DECIMAL},
       </if>
-      <if test="record.courseDiscount != null">
-        course_discount = #{record.courseDiscount,jdbcType=DECIMAL},
+      <if test="record.coursePrice != null">
+        course_price = #{record.coursePrice,jdbcType=DECIMAL},
       </if>
       <if test="record.isPutaway != null">
         is_putaway = #{record.isPutaway,jdbcType=TINYINT},
@@ -339,8 +339,8 @@
       course_name = #{record.courseName,jdbcType=VARCHAR},
       course_logo = #{record.courseLogo,jdbcType=VARCHAR},
       is_free = #{record.isFree,jdbcType=TINYINT},
-      course_original = #{record.courseOriginal,jdbcType=DECIMAL},
-      course_discount = #{record.courseDiscount,jdbcType=DECIMAL},
+      ruling_price = #{record.rulingPrice,jdbcType=DECIMAL},
+      course_price = #{record.coursePrice,jdbcType=DECIMAL},
       is_putaway = #{record.isPutaway,jdbcType=TINYINT},
       course_sort = #{record.courseSort,jdbcType=INTEGER},
       count_buy = #{record.countBuy,jdbcType=INTEGER},
@@ -362,8 +362,8 @@
       course_name = #{record.courseName,jdbcType=VARCHAR},
       course_logo = #{record.courseLogo,jdbcType=VARCHAR},
       is_free = #{record.isFree,jdbcType=TINYINT},
-      course_original = #{record.courseOriginal,jdbcType=DECIMAL},
-      course_discount = #{record.courseDiscount,jdbcType=DECIMAL},
+      ruling_price = #{record.rulingPrice,jdbcType=DECIMAL},
+      course_price = #{record.coursePrice,jdbcType=DECIMAL},
       is_putaway = #{record.isPutaway,jdbcType=TINYINT},
       course_sort = #{record.courseSort,jdbcType=INTEGER},
       count_buy = #{record.countBuy,jdbcType=INTEGER},
@@ -402,11 +402,11 @@
       <if test="isFree != null">
         is_free = #{isFree,jdbcType=TINYINT},
       </if>
-      <if test="courseOriginal != null">
-        course_original = #{courseOriginal,jdbcType=DECIMAL},
+      <if test="rulingPrice != null">
+        ruling_price = #{rulingPrice,jdbcType=DECIMAL},
       </if>
-      <if test="courseDiscount != null">
-        course_discount = #{courseDiscount,jdbcType=DECIMAL},
+      <if test="coursePrice != null">
+        course_price = #{coursePrice,jdbcType=DECIMAL},
       </if>
       <if test="isPutaway != null">
         is_putaway = #{isPutaway,jdbcType=TINYINT},
@@ -437,8 +437,8 @@
       course_name = #{courseName,jdbcType=VARCHAR},
       course_logo = #{courseLogo,jdbcType=VARCHAR},
       is_free = #{isFree,jdbcType=TINYINT},
-      course_original = #{courseOriginal,jdbcType=DECIMAL},
-      course_discount = #{courseDiscount,jdbcType=DECIMAL},
+      ruling_price = #{rulingPrice,jdbcType=DECIMAL},
+      course_price = #{coursePrice,jdbcType=DECIMAL},
       is_putaway = #{isPutaway,jdbcType=TINYINT},
       course_sort = #{courseSort,jdbcType=INTEGER},
       count_buy = #{countBuy,jdbcType=INTEGER},
@@ -457,8 +457,8 @@
       course_name = #{courseName,jdbcType=VARCHAR},
       course_logo = #{courseLogo,jdbcType=VARCHAR},
       is_free = #{isFree,jdbcType=TINYINT},
-      course_original = #{courseOriginal,jdbcType=DECIMAL},
-      course_discount = #{courseDiscount,jdbcType=DECIMAL},
+      ruling_price = #{rulingPrice,jdbcType=DECIMAL},
+      course_price = #{coursePrice,jdbcType=DECIMAL},
       is_putaway = #{isPutaway,jdbcType=TINYINT},
       course_sort = #{courseSort,jdbcType=INTEGER},
       count_buy = #{countBuy,jdbcType=INTEGER},

@@ -25,9 +25,9 @@ public class Course implements Serializable {
 
     private Integer isFree;
 
-    private BigDecimal courseOriginal;
+    private BigDecimal rulingPrice;
 
-    private BigDecimal courseDiscount;
+    private BigDecimal coursePrice;
 
     private Integer isPutaway;
 
@@ -121,20 +121,20 @@ public class Course implements Serializable {
         this.isFree = isFree;
     }
 
-    public BigDecimal getCourseOriginal() {
-        return courseOriginal;
+    public BigDecimal getRulingPrice() {
+        return rulingPrice;
     }
 
-    public void setCourseOriginal(BigDecimal courseOriginal) {
-        this.courseOriginal = courseOriginal;
+    public void setRulingPrice(BigDecimal rulingPrice) {
+        this.rulingPrice = rulingPrice;
     }
 
-    public BigDecimal getCourseDiscount() {
-        return courseDiscount;
+    public BigDecimal getCoursePrice() {
+        return coursePrice;
     }
 
-    public void setCourseDiscount(BigDecimal courseDiscount) {
-        this.courseDiscount = courseDiscount;
+    public void setCoursePrice(BigDecimal coursePrice) {
+        this.coursePrice = coursePrice;
     }
 
     public Integer getIsPutaway() {
@@ -193,8 +193,8 @@ public class Course implements Serializable {
         sb.append(", courseName=").append(courseName);
         sb.append(", courseLogo=").append(courseLogo);
         sb.append(", isFree=").append(isFree);
-        sb.append(", courseOriginal=").append(courseOriginal);
-        sb.append(", courseDiscount=").append(courseDiscount);
+        sb.append(", rulingPrice=").append(rulingPrice);
+        sb.append(", coursePrice=").append(coursePrice);
         sb.append(", isPutaway=").append(isPutaway);
         sb.append(", courseSort=").append(courseSort);
         sb.append(", countBuy=").append(countBuy);

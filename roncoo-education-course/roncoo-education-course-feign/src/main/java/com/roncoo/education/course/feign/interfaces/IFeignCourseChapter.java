@@ -14,7 +14,7 @@ import com.roncoo.education.course.feign.interfaces.vo.CourseChapterViewVO;
  * 章节信息 接口
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-08-27
  */
 @FeignClient(value = "course-service", path = "/course/course/chapter")
 public interface IFeignCourseChapter {

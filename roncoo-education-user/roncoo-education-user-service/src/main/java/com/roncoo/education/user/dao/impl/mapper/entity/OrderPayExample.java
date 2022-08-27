@@ -1,5 +1,6 @@
 package com.roncoo.education.user.dao.impl.mapper.entity;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,20 +20,20 @@ public class OrderPayExample {
         oredCriteria = new ArrayList<Criteria>();
     }
 
-    public String getOrderByClause() {
-        return orderByClause;
-    }
-
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
     }
 
-    public boolean isDistinct() {
-        return distinct;
+    public String getOrderByClause() {
+        return orderByClause;
     }
 
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
+    }
+
+    public boolean isDistinct() {
+        return distinct;
     }
 
     public List<Criteria> getOredCriteria() {
@@ -68,20 +69,20 @@ public class OrderPayExample {
         distinct = false;
     }
 
+    public void setLimitStart(int limitStart) {
+        this.limitStart=limitStart;
+    }
+
     public int getLimitStart() {
         return limitStart;
     }
 
-    public void setLimitStart(int limitStart) {
-        this.limitStart = limitStart;
+    public void setPageSize(int pageSize) {
+        this.pageSize=pageSize;
     }
 
     public int getPageSize() {
         return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
     }
 
     protected abstract static class GeneratedCriteria {
@@ -365,63 +366,123 @@ public class OrderPayExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusIsNull() {
-            addCriterion("order_status is null");
+        public Criteria andRulingPriceIsNull() {
+            addCriterion("ruling_price is null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusIsNotNull() {
-            addCriterion("order_status is not null");
+        public Criteria andRulingPriceIsNotNull() {
+            addCriterion("ruling_price is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusEqualTo(Integer value) {
-            addCriterion("order_status =", value, "orderStatus");
+        public Criteria andRulingPriceEqualTo(BigDecimal value) {
+            addCriterion("ruling_price =", value, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusNotEqualTo(Integer value) {
-            addCriterion("order_status <>", value, "orderStatus");
+        public Criteria andRulingPriceNotEqualTo(BigDecimal value) {
+            addCriterion("ruling_price <>", value, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusGreaterThan(Integer value) {
-            addCriterion("order_status >", value, "orderStatus");
+        public Criteria andRulingPriceGreaterThan(BigDecimal value) {
+            addCriterion("ruling_price >", value, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusGreaterThanOrEqualTo(Integer value) {
-            addCriterion("order_status >=", value, "orderStatus");
+        public Criteria andRulingPriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("ruling_price >=", value, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusLessThan(Integer value) {
-            addCriterion("order_status <", value, "orderStatus");
+        public Criteria andRulingPriceLessThan(BigDecimal value) {
+            addCriterion("ruling_price <", value, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusLessThanOrEqualTo(Integer value) {
-            addCriterion("order_status <=", value, "orderStatus");
+        public Criteria andRulingPriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("ruling_price <=", value, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusIn(List<Integer> values) {
-            addCriterion("order_status in", values, "orderStatus");
+        public Criteria andRulingPriceIn(List<BigDecimal> values) {
+            addCriterion("ruling_price in", values, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusNotIn(List<Integer> values) {
-            addCriterion("order_status not in", values, "orderStatus");
+        public Criteria andRulingPriceNotIn(List<BigDecimal> values) {
+            addCriterion("ruling_price not in", values, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusBetween(Integer value1, Integer value2) {
-            addCriterion("order_status between", value1, value2, "orderStatus");
+        public Criteria andRulingPriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("ruling_price between", value1, value2, "rulingPrice");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusNotBetween(Integer value1, Integer value2) {
-            addCriterion("order_status not between", value1, value2, "orderStatus");
+        public Criteria andRulingPriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("ruling_price not between", value1, value2, "rulingPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursePriceIsNull() {
+            addCriterion("course_price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursePriceIsNotNull() {
+            addCriterion("course_price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursePriceEqualTo(BigDecimal value) {
+            addCriterion("course_price =", value, "coursePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursePriceNotEqualTo(BigDecimal value) {
+            addCriterion("course_price <>", value, "coursePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursePriceGreaterThan(BigDecimal value) {
+            addCriterion("course_price >", value, "coursePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursePriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("course_price >=", value, "coursePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursePriceLessThan(BigDecimal value) {
+            addCriterion("course_price <", value, "coursePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursePriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("course_price <=", value, "coursePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursePriceIn(List<BigDecimal> values) {
+            addCriterion("course_price in", values, "coursePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursePriceNotIn(List<BigDecimal> values) {
+            addCriterion("course_price not in", values, "coursePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursePriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("course_price between", value1, value2, "coursePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoursePriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("course_price not between", value1, value2, "coursePrice");
             return (Criteria) this;
         }
 
@@ -482,6 +543,196 @@ public class OrderPayExample {
 
         public Criteria andPayTypeNotBetween(Integer value1, Integer value2) {
             addCriterion("pay_type not between", value1, value2, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusIsNull() {
+            addCriterion("order_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusIsNotNull() {
+            addCriterion("order_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusEqualTo(Integer value) {
+            addCriterion("order_status =", value, "orderStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusNotEqualTo(Integer value) {
+            addCriterion("order_status <>", value, "orderStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusGreaterThan(Integer value) {
+            addCriterion("order_status >", value, "orderStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("order_status >=", value, "orderStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusLessThan(Integer value) {
+            addCriterion("order_status <", value, "orderStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("order_status <=", value, "orderStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusIn(List<Integer> values) {
+            addCriterion("order_status in", values, "orderStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusNotIn(List<Integer> values) {
+            addCriterion("order_status not in", values, "orderStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusBetween(Integer value1, Integer value2) {
+            addCriterion("order_status between", value1, value2, "orderStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("order_status not between", value1, value2, "orderStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkCusIsNull() {
+            addCriterion("remark_cus is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkCusIsNotNull() {
+            addCriterion("remark_cus is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkCusEqualTo(String value) {
+            addCriterion("remark_cus =", value, "remarkCus");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkCusNotEqualTo(String value) {
+            addCriterion("remark_cus <>", value, "remarkCus");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkCusGreaterThan(String value) {
+            addCriterion("remark_cus >", value, "remarkCus");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkCusGreaterThanOrEqualTo(String value) {
+            addCriterion("remark_cus >=", value, "remarkCus");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkCusLessThan(String value) {
+            addCriterion("remark_cus <", value, "remarkCus");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkCusLessThanOrEqualTo(String value) {
+            addCriterion("remark_cus <=", value, "remarkCus");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkCusLike(String value) {
+            addCriterion("remark_cus like", value, "remarkCus");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkCusNotLike(String value) {
+            addCriterion("remark_cus not like", value, "remarkCus");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkCusIn(List<String> values) {
+            addCriterion("remark_cus in", values, "remarkCus");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkCusNotIn(List<String> values) {
+            addCriterion("remark_cus not in", values, "remarkCus");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkCusBetween(String value1, String value2) {
+            addCriterion("remark_cus between", value1, value2, "remarkCus");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkCusNotBetween(String value1, String value2) {
+            addCriterion("remark_cus not between", value1, value2, "remarkCus");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTypeIsNull() {
+            addCriterion("channel_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTypeIsNotNull() {
+            addCriterion("channel_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTypeEqualTo(Integer value) {
+            addCriterion("channel_type =", value, "channelType");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTypeNotEqualTo(Integer value) {
+            addCriterion("channel_type <>", value, "channelType");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTypeGreaterThan(Integer value) {
+            addCriterion("channel_type >", value, "channelType");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("channel_type >=", value, "channelType");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTypeLessThan(Integer value) {
+            addCriterion("channel_type <", value, "channelType");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("channel_type <=", value, "channelType");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTypeIn(List<Integer> values) {
+            addCriterion("channel_type in", values, "channelType");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTypeNotIn(List<Integer> values) {
+            addCriterion("channel_type not in", values, "channelType");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTypeBetween(Integer value1, Integer value2) {
+            addCriterion("channel_type between", value1, value2, "channelType");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("channel_type not between", value1, value2, "channelType");
             return (Criteria) this;
         }
 
@@ -570,6 +821,38 @@ public class OrderPayExample {
 
         private String typeHandler;
 
+        public String getCondition() {
+            return condition;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public boolean isNoValue() {
+            return noValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
+
+        public boolean isBetweenValue() {
+            return betweenValue;
+        }
+
+        public boolean isListValue() {
+            return listValue;
+        }
+
+        public String getTypeHandler() {
+            return typeHandler;
+        }
+
         protected Criterion(String condition) {
             super();
             this.condition = condition;
@@ -604,38 +887,6 @@ public class OrderPayExample {
 
         protected Criterion(String condition, Object value, Object secondValue) {
             this(condition, value, secondValue, null);
-        }
-
-        public String getCondition() {
-            return condition;
-        }
-
-        public Object getValue() {
-            return value;
-        }
-
-        public Object getSecondValue() {
-            return secondValue;
-        }
-
-        public boolean isNoValue() {
-            return noValue;
-        }
-
-        public boolean isSingleValue() {
-            return singleValue;
-        }
-
-        public boolean isBetweenValue() {
-            return betweenValue;
-        }
-
-        public boolean isListValue() {
-            return listValue;
-        }
-
-        public String getTypeHandler() {
-            return typeHandler;
         }
     }
 }

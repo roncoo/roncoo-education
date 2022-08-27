@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>com.roncoo</groupId>
-            <artifactId>roncoo-education-user-feign</artifactId>
+            <artifactId>roncoo-education-course-feign</artifactId>
         </dependency>
         <dependency>
             <groupId>com.roncoo</groupId>
