@@ -2,6 +2,7 @@ package com.roncoo.education.system.service.api;
 
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.EnumUtil;
+import com.roncoo.education.system.service.api.req.ApiEnumReq;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,8 +27,8 @@ public class ApiEnumController {
 
     @ApiOperation(value = "枚举通用接口", notes = "返回枚举信息")
     @RequestMapping(value = "/view", method = RequestMethod.POST)
-    public Result<ArrayList> getEnumInfo(@RequestBody String enumName) {
-        String className = new StringBuffer(DEFAULT_PREFIX).append(enumName).toString();
+    public Result<ArrayList> getEnumInfo(@RequestBody ApiEnumReq req) {
+        String className = new StringBuffer(DEFAULT_PREFIX).append(req.getEnumName()).toString();
         try {
             Class clazz = Class.forName(className);
             return Result.success(new ArrayList<>(EnumUtil.toList(clazz, DEFAULT_ENUM_NAME)));
