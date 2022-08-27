@@ -7,9 +7,7 @@ import com.roncoo.education.course.service.api.resp.ApiCourseResp;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@EnableFeignClients
 @Slf4j
 public class CourseTest extends BaseTest {
 
