@@ -25,7 +25,7 @@ public class ApiEnumController {
 
     @ApiOperation(value = "枚举通用接口", notes = "返回枚举信息")
     @RequestMapping(value = "/view", method = RequestMethod.POST)
-    public Result<ArrayList> getEnumInfo(@RequestParam(name = "name") String enumName) {
+    public Result<ArrayList> getEnumInfo(@RequestParam(name = "enumName") String enumName) {
         if (StrUtil.isBlank(enumName)) {
             return Result.error("请输入要获取的枚举名称");
         }
