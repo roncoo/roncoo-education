@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * 课程信息
@@ -56,5 +57,10 @@ public class FeignCourseBiz extends BaseBiz {
     public CourseViewVO getById(Long id) {
         Course record = dao.getById(id);
         return BeanUtil.copyProperties(record, CourseViewVO.class);
+    }
+
+    public List<CourseViewVO> listByIds(List<Long> courseIds) {
+        List<Course> list = dao.listByIds(courseIds);
+        return BeanUtil.copyProperties(list, CourseViewVO.class);
     }
 }

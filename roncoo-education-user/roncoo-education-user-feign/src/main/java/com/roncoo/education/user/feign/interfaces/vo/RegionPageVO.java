@@ -2,7 +2,6 @@ package com.roncoo.education.user.feign.interfaces.vo;
 
 import java.math.BigDecimal;
 import java.io.Serializable;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -10,11 +9,11 @@ import lombok.experimental.Accessors;
  * 行政区域表
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-08-27
  */
 @Data
 @Accessors(chain = true)
-public class RegionPageVO implements Serializable {
+public class RegionPageVO implements Serializable{
 
     private static final long serialVersionUID = 1L;
 

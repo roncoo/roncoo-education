@@ -3,7 +3,6 @@ package com.roncoo.education.user.feign.interfaces.qo;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.io.Serializable;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -11,11 +10,11 @@ import lombok.experimental.Accessors;
  * 订单信息表
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-08-27
  */
 @Data
 @Accessors(chain = true)
-public class OrderInfoEditQO implements Serializable {
+public class OrderInfoEditQO implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
@@ -40,12 +39,7 @@ public class OrderInfoEditQO implements Serializable {
     private Long orderNo;
 
     /**
-     * 讲师名称
-     */
-    private String lecturerName;
-
-    /**
-     * 下单用户ID
+     * 下单用户编号
      */
     private Long userId;
 
@@ -60,39 +54,19 @@ public class OrderInfoEditQO implements Serializable {
     private LocalDateTime registerTime;
 
     /**
-     * 讲师ID
-     */
-    private Long lecturerId;
-
-    /**
      * 课程ID
      */
     private Long courseId;
 
     /**
-     * 课程名称
+     * 划线价
      */
-    private String courseName;
+    private BigDecimal rulingPrice;
 
     /**
-     * 应付金额
+     * 课程价格
      */
-    private BigDecimal pricePayable;
-
-    /**
-     * 优惠金额
-     */
-    private BigDecimal priceDiscount;
-
-    /**
-     * 实付金额
-     */
-    private BigDecimal pricePaid;
-
-    /**
-     * 交易类型：1线上支付，2线下支付
-     */
-    private Integer tradeType;
+    private BigDecimal coursePrice;
 
     /**
      * 支付方式：1微信支付，2支付宝支付

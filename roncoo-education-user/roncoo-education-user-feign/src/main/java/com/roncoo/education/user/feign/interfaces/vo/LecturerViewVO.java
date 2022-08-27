@@ -2,7 +2,6 @@ package com.roncoo.education.user.feign.interfaces.vo;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -10,11 +9,11 @@ import lombok.experimental.Accessors;
  * 讲师信息
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-08-27
  */
 @Data
 @Accessors(chain = true)
-public class LecturerViewVO implements Serializable {
+public class LecturerViewVO implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
@@ -42,11 +41,6 @@ public class LecturerViewVO implements Serializable {
      * 排序
      */
     private Integer sort;
-
-    /**
-     * 用户ID
-     */
-    private Long userId;
 
     /**
      * 讲师名称

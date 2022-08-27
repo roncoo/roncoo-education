@@ -14,7 +14,7 @@ import com.roncoo.education.user.feign.interfaces.vo.LecturerViewVO;
  * 讲师信息 接口
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-08-27
  */
 @FeignClient(value = "user-service", path = "/user/lecturer")
 public interface IFeignLecturer {
@@ -63,4 +63,5 @@ public interface IFeignLecturer {
      */
     @GetMapping(value = "/get/{id}")
     LecturerViewVO getById(@PathVariable(value = "id") Long id);
+
 }

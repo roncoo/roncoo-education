@@ -14,7 +14,7 @@ import com.roncoo.education.user.feign.interfaces.vo.LogLoginViewVO;
  * 用户登录日志 接口
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-08-27
  */
 @FeignClient(value = "user-service", path = "/user/log/login")
 public interface IFeignLogLogin {
@@ -63,4 +63,5 @@ public interface IFeignLogLogin {
      */
     @GetMapping(value = "/get/{id}")
     LogLoginViewVO getById(@PathVariable(value = "id") Long id);
+
 }

@@ -1,14 +1,15 @@
 package com.roncoo.education.course.feign.interfaces;
 
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.course.feign.interfaces.qo.CourseEditQO;
+import com.roncoo.education.course.feign.interfaces.qo.CoursePageQO;
+import com.roncoo.education.course.feign.interfaces.qo.CourseSaveQO;
+import com.roncoo.education.course.feign.interfaces.vo.CoursePageVO;
+import com.roncoo.education.course.feign.interfaces.vo.CourseViewVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.course.feign.interfaces.qo.CoursePageQO;
-import com.roncoo.education.course.feign.interfaces.qo.CourseSaveQO;
-import com.roncoo.education.course.feign.interfaces.qo.CourseEditQO;
-import com.roncoo.education.course.feign.interfaces.vo.CoursePageVO;
-import com.roncoo.education.course.feign.interfaces.vo.CourseViewVO;
+import java.util.List;
 
 /**
  * 课程信息 接口
@@ -64,4 +65,5 @@ public interface IFeignCourse {
     @GetMapping(value = "/get/{id}")
     CourseViewVO getById(@PathVariable(value = "id") Long id);
 
+    List<CourseViewVO> listByIds(@RequestBody List<Long> courseIds);
 }

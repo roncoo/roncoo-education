@@ -2,7 +2,6 @@ package com.roncoo.education.user.feign.interfaces.qo;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -10,11 +9,11 @@ import lombok.experimental.Accessors;
  * 站内信用户记录表
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-08-27
  */
 @Data
 @Accessors(chain = true)
-public class MsgUserPageQO implements Serializable {
+public class MsgUserPageQO implements Serializable{
 
     private static final long serialVersionUID = 1L;
 

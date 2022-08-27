@@ -14,7 +14,7 @@ import com.roncoo.education.user.feign.interfaces.vo.RegionViewVO;
  * 行政区域表 接口
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-08-27
  */
 @FeignClient(value = "user-service", path = "/user/region")
 public interface IFeignRegion {
@@ -63,4 +63,5 @@ public interface IFeignRegion {
      */
     @GetMapping(value = "/get/{id}")
     RegionViewVO getById(@PathVariable(value = "id") Long id);
+
 }

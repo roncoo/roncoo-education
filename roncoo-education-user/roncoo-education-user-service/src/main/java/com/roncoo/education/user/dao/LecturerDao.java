@@ -18,15 +18,6 @@ public interface LecturerDao {
     Page<Lecturer> page(int pageCurrent, int pageSize, LecturerExample example);
 
     /**
-     * 根据讲师编号查找讲师信息
-     *
-     * @param lectureruserId
-     * @return
-     * @author WY
-     */
-    Lecturer getByLectureruserId(Long lectureruserId);
-
-    /**
      * 根据讲师名称查找讲师信息
      *
      * @param LecturerName
@@ -38,20 +29,10 @@ public interface LecturerDao {
     List<Lecturer> listByStatusId(Integer statusId);
 
     /**
-     * 根据讲师编号、状态查找讲师信息
-     *
-     * @param lectureruserId
-     * @param statusId
-     * @return
-     * @author WY
-     */
-    Lecturer getByLectureruserIdAndStatusId(Long lectureruserId, Integer statusId);
-
-    /**
      * 根据讲师编号集合获取讲师信息
      *
      * @param lectureruserIds
      * @return
      */
-    List<Lecturer> listByLectureruserIds(List<Long> lectureruserIds);
+    List<Lecturer> listByIds(List<Long> ids);
 }

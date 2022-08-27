@@ -21,7 +21,7 @@ import javax.validation.constraints.NotNull;
  * 站内信用户记录表
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-08-27
  */
 @RestController
 @RequiredArgsConstructor

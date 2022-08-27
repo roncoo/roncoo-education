@@ -14,7 +14,7 @@ import com.roncoo.education.user.feign.interfaces.vo.MsgViewVO;
  * 站内信息表 接口
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-08-27
  */
 @FeignClient(value = "user-service", path = "/user/msg")
 public interface IFeignMsg {
@@ -63,4 +63,5 @@ public interface IFeignMsg {
      */
     @GetMapping(value = "/get/{id}")
     MsgViewVO getById(@PathVariable(value = "id") Long id);
+
 }

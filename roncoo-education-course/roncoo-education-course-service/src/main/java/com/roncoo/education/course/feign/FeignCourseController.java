@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * 课程信息
@@ -54,5 +55,10 @@ public class FeignCourseController extends BaseController implements IFeignCours
     @Override
     public CourseViewVO getById(@PathVariable(value = "id") Long id) {
         return biz.getById(id);
+    }
+
+    @Override
+    public List<CourseViewVO> listByIds(@RequestBody List<Long> courseIds) {
+        return biz.listByIds(courseIds);
     }
 }

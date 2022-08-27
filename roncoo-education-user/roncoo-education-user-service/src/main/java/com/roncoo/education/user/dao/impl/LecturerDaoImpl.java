@@ -50,18 +50,6 @@ public class LecturerDaoImpl implements LecturerDao {
     }
 
     @Override
-    public Lecturer getByLectureruserId(Long lectureruserId) {
-        LecturerExample example = new LecturerExample();
-        LecturerExample.Criteria criteria = example.createCriteria();
-        criteria.andUserIdEqualTo(lectureruserId);
-        List<Lecturer> resultList = this.lecturerMapper.selectByExample(example);
-        if (resultList.isEmpty()) {
-            return null;
-        }
-        return resultList.get(0);
-    }
-
-    @Override
     public List<Lecturer> listByStatusId(Integer statusId) {
         LecturerExample example = new LecturerExample();
         LecturerExample.Criteria criteria = example.createCriteria();
@@ -82,23 +70,10 @@ public class LecturerDaoImpl implements LecturerDao {
     }
 
     @Override
-    public Lecturer getByLectureruserIdAndStatusId(Long lectureruserId, Integer statusId) {
+    public List<Lecturer> listByIds(List<Long> ids) {
         LecturerExample example = new LecturerExample();
         LecturerExample.Criteria criteria = example.createCriteria();
-        criteria.andUserIdEqualTo(lectureruserId);
-        criteria.andStatusIdEqualTo(statusId);
-        List<Lecturer> resultList = this.lecturerMapper.selectByExample(example);
-        if (resultList.isEmpty()) {
-            return null;
-        }
-        return resultList.get(0);
-    }
-
-    @Override
-    public List<Lecturer> listByLectureruserIds(List<Long> lectureruserIds) {
-        LecturerExample example = new LecturerExample();
-        LecturerExample.Criteria criteria = example.createCriteria();
-        criteria.andUserIdIn(lectureruserIds);
+        criteria.andIdIn(ids);
         return this.lecturerMapper.selectByExample(example);
     }
 }
