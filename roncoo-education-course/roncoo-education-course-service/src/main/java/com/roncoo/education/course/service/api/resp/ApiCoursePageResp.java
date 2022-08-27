@@ -9,7 +9,6 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * <p>
@@ -22,7 +21,7 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 @ApiModel(value = "ApiCourseResp", description = "API-课程信息")
-public class ApiCourseResp implements Serializable {
+public class ApiCoursePageResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -37,6 +36,12 @@ public class ApiCourseResp implements Serializable {
     @ApiModelProperty(value = "修改时间")
     private LocalDateTime gmtModified;
 
+    @ApiModelProperty(value = "讲师ID")
+    private Long lecturerId;
+
+    @ApiModelProperty(value = "分类ID")
+    private Long categoryId;
+
     @ApiModelProperty(value = "课程名称")
     private String courseName;
 
@@ -50,26 +55,17 @@ public class ApiCourseResp implements Serializable {
     private Integer isFree;
 
     @ApiModelProperty(value = "原价")
-    private BigDecimal courseOriginal;
+    private BigDecimal rulingPrice;
 
     @ApiModelProperty(value = "优惠价")
-    private BigDecimal courseDiscount;
+    private BigDecimal coursePrice;
 
-    @ApiModelProperty(value = "购买人数")
-    private Integer countBuy;
+    @ApiModelProperty(value = "课程排序(前端显示使用)")
+    private Integer courseSort;
 
-    @ApiModelProperty(value = "学习人数")
-    private Integer countStudy;
-
-    @ApiModelProperty(value = "分类ID")
-    private Long categoryId;
-
-    @ApiModelProperty(value = "讲师ID")
-    private Long lecturerId;
-
-    @ApiModelProperty(value = "讲师信息")
-    private ApiCourseLecturerResp lecturerResp;
-
-    @ApiModelProperty(value = "章节信息")
-    private List<ApiCourseChapterResp> chapterRespList;
+//    @ApiModelProperty(value = "购买人数")
+//    private Integer countBuy;
+//
+//    @ApiModelProperty(value = "学习人数")
+//    private Integer countStudy;
 }

@@ -68,7 +68,19 @@ public class CourseChapterPeriodDaoImpl implements CourseChapterPeriodDao {
     }
 
     @Override
-    public int countByExample(CourseChapterPeriodExample example){
+    public int countByExample(CourseChapterPeriodExample example) {
         return this.mapper.countByExample(example);
+    }
+
+    @Override
+    public List<CourseChapterPeriod> listByCourseIdAndStatusId(Long courseId, Integer statusId) {
+        CourseChapterPeriodExample example = new CourseChapterPeriodExample();
+        CourseChapterPeriodExample.Criteria c = example.createCriteria();
+        c.andCourseIdEqualTo(courseId);
+        if (null != statusId) {
+            c.andStatusIdEqualTo(statusId);
+        }
+        example.setOrderByClause("sort asc, id desc");
+        return this.mapper.selectByExample(example);
     }
 }

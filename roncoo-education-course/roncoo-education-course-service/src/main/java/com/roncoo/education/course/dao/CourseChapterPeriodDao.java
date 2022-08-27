@@ -59,7 +59,7 @@ public interface CourseChapterPeriodDao {
     /**
      * 课时信息--条件列出
      *
-     * @param example     查询条件
+     * @param example 查询条件
      * @return 课时信息列表
      */
     List<CourseChapterPeriod> listByExample(CourseChapterPeriodExample example);
@@ -67,8 +67,10 @@ public interface CourseChapterPeriodDao {
     /**
      * 课时信息--条件统计
      *
-     * @param example     统计条件
+     * @param example 统计条件
      * @return 课时信息数量
      */
     int countByExample(CourseChapterPeriodExample example);
+
+    List<CourseChapterPeriod> listByCourseIdAndStatusId(Long courseId, Integer statusId);
 }

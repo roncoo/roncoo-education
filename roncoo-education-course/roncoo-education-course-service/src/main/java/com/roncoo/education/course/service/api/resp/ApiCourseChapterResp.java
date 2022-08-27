@@ -1,12 +1,14 @@
 package com.roncoo.education.course.service.api.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import java.time.LocalDateTime;
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -34,12 +36,6 @@ public class ApiCourseChapterResp implements Serializable {
     @ApiModelProperty(value = "修改时间")
     private LocalDateTime gmtModified;
 
-    @ApiModelProperty(value = "状态(1:正常，0:禁用)")
-    private Integer statusId;
-
-    @ApiModelProperty(value = "排序")
-    private Integer sort;
-
     @ApiModelProperty(value = "课程ID")
     private Long courseId;
 
@@ -51,4 +47,7 @@ public class ApiCourseChapterResp implements Serializable {
 
     @ApiModelProperty(value = "是否免费(1免费，0收费)")
     private Integer isFree;
+
+    @ApiModelProperty(value = "课时信息")
+    private List<ApiCourseChapterPeriodResp> periodRespList;
 }
