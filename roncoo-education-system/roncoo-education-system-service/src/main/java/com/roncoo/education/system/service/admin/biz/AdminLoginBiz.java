@@ -73,7 +73,7 @@ public class AdminLoginBiz {
 
         // 获取菜单权限，放入缓存
         List<String> menus = extracted(sysUser);
-        cacheRedis.set(Constants.RedisPre.ADMINI_MENU.concat(sysUser.getId().toString()), JSUtil.toJSONString(menus), 1, TimeUnit.DAYS);
+        cacheRedis.set(Constants.RedisPre.ADMINI_MENU.concat(sysUser.getId().toString()), JSUtil.toJsonString(menus), 1, TimeUnit.DAYS);
 
         // TODO 登录日志
         return Result.success(resp);

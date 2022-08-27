@@ -19,6 +19,6 @@ public class ZoneTest extends BaseTest {
     @Test
     public void list() {
         Result<List<ApiZoneResp>> result = apiZoneBiz.list();
-        log.info("zone={}", JSUtil.toJSONString(result.getData()));
+        log.info("zone={}", JSUtil.toJsonString(result.getData()));
     }
 }

@@ -19,6 +19,6 @@ public class CategoryTest extends BaseTest {
     @Test
     public void list() {
         Result<List<ApiCategoryResp>> res = apiCategoryBiz.list();
-        log.info("Category={}", JSUtil.toJSONString(res.getData()));
+        log.info("Category={}", JSUtil.toJsonString(res.getData()));
     }
 }

@@ -26,7 +26,7 @@ public class CacheRedis {
             if (t instanceof String) {
                 stringRedisTemplate.opsForValue().set(key, t.toString(), timeToLive, TimeUnit.MICROSECONDS);
             }
-            stringRedisTemplate.opsForValue().set(key, JSUtil.toJSONString(t), timeToLive, TimeUnit.MICROSECONDS);
+            stringRedisTemplate.opsForValue().set(key, JSUtil.toJsonString(t), timeToLive, TimeUnit.MICROSECONDS);
         }
         return t;
     }
@@ -36,7 +36,7 @@ public class CacheRedis {
      */
     public <T> T set(String key, T t, int time, TimeUnit timeUnit) {
         if (t != null) {
-            stringRedisTemplate.opsForValue().set(key, JSUtil.toJSONString(t), time, timeUnit);
+            stringRedisTemplate.opsForValue().set(key, JSUtil.toJsonString(t), time, timeUnit);
         }
         return t;
     }

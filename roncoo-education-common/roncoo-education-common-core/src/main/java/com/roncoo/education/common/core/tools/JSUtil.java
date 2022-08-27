@@ -19,7 +19,7 @@ public final class JSUtil {
     private JSUtil() {
     }
 
-    public static String toJSONString(Object obj) {
+    public static String toJsonString(Object obj) {
         try {
             return JSONUtil.toJsonStr(obj);
         } catch (Exception e) {
