@@ -3,8 +3,7 @@ package com.roncoo.education.system.service.admin;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysMenuBiz;
 import com.roncoo.education.system.service.admin.req.*;
-import com.roncoo.education.system.service.admin.resp.AdminSysMenuListResp;
-import com.roncoo.education.system.service.admin.resp.AdminSysMenuUserListResp;
+import com.roncoo.education.system.service.admin.resp.AdminSysMenuResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuUserResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuViewResp;
 import io.swagger.annotations.ApiOperation;
@@ -33,7 +32,7 @@ public class AdminSysMenuController {
      */
     @ApiOperation(value = "菜单信息列出信息接口", notes = "菜单信息列出信息")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result<AdminSysMenuListResp> list(@RequestBody AdminSysMenuListReq sysMenuListReq) {
+    public Result<List<AdminSysMenuResp>> list(@RequestBody AdminSysMenuListReq sysMenuListReq) {
         return biz.list(sysMenuListReq);
     }
 

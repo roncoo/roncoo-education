@@ -43,8 +43,7 @@ public class AdminSysMenuBiz {
     @Autowired
     private SysMenuRoleDao sysMenuRoleDao;
 
-    public Result<AdminSysMenuListResp> list(AdminSysMenuListReq req) {
-        AdminSysMenuListResp resq = new AdminSysMenuListResp();
+    public Result<List<AdminSysMenuResp>> list(AdminSysMenuListReq req) {
         List<AdminSysMenuResp> list = new ArrayList<>();
         if (StringUtils.isEmpty(req.getMenuName())) {
             list = recursion(0L);
@@ -60,11 +59,7 @@ public class AdminSysMenuBiz {
                 }
             }
         }
-
-        if (CollectionUtil.isNotEmpty(list)) {
-            resq.setSysMenu(list);
-        }
-        return Result.success(resq);
+        return Result.success(list);
     }
 
     /**
