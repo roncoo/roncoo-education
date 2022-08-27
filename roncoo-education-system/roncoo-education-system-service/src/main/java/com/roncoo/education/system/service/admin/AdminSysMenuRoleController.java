@@ -4,13 +4,14 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysMenuRoleBiz;
 import com.roncoo.education.system.service.admin.req.AdminSysMenuRoleListReq;
 import com.roncoo.education.system.service.admin.req.AdminSysMenuRoleSaveReq;
-import com.roncoo.education.system.service.admin.resp.AdminSysMenuRoleListResp;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 菜单角色关联表
@@ -29,7 +30,7 @@ public class AdminSysMenuRoleController {
      */
     @ApiOperation(value = "列出菜单角色关联信息接口", notes = "列出菜单角色关联信息接口")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result<AdminSysMenuRoleListResp> list(@RequestBody AdminSysMenuRoleListReq sysMenuRoleListREQ) {
+    public Result<List<String>> list(@RequestBody AdminSysMenuRoleListReq sysMenuRoleListREQ) {
         return biz.list(sysMenuRoleListREQ);
     }
 
