@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.config.ThreadContext;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.MenuTypeEnum;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
@@ -11,7 +12,10 @@ import com.roncoo.education.system.dao.SysMenuDao;
 import com.roncoo.education.system.dao.SysMenuRoleDao;
 import com.roncoo.education.system.dao.SysRoleUserDao;
 import com.roncoo.education.system.dao.SysUserDao;
-import com.roncoo.education.system.dao.impl.mapper.entity.*;
+import com.roncoo.education.system.dao.impl.mapper.entity.SysMenu;
+import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuExample;
+import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuRole;
+import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser;
 import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuUserResp;
@@ -122,16 +126,11 @@ public class AdminSysMenuBiz {
         return Result.success(BeanUtil.copyProperties(record, AdminSysMenuViewResp.class));
     }
 
-    public Result<List<AdminSysMenuUserResp>> listForUser(AdminSysMenuUserListReq req) {
+    public Result<List<AdminSysMenuUserResp>> userList(AdminSysMenuUserListReq req) {
         if (ObjectUtil.isEmpty(req.getUserId())) {
             req.setUserId(ThreadContext.userId());
         }
-        SysUser sysUser = sysUserDao.getById(req.getUserId());
-        if (ObjectUtil.isNull(sysUser) || !sysUser.getStatusId().equals(StatusIdEnum.YES.getCode())) {
-            return Result.error("用户异常");
-        }
-
-        List<SysRoleUser> sysRoleUserList = sysRoleUserDao.listByUserId(sysUser.getId());
+        List<SysRoleUser> sysRoleUserList = sysRoleUserDao.listByUserId(req.getUserId());
         if (CollectionUtil.isEmpty(sysRoleUserList)) {
             return Result.success(new ArrayList<>());
         }
@@ -148,6 +147,8 @@ public class AdminSysMenuBiz {
         SysMenuExample.Criteria c = example.createCriteria();
         c.andIdIn(menuList);
         c.andStatusIdEqualTo(StatusIdEnum.YES.getCode());
+        // 只需要获取目录和菜单
+        c.andMenuTypeLessThan(MenuTypeEnum.PERMISSION.getCode());
         example.setOrderByClause("sort asc, id desc");
         List<SysMenu> sysMenuList = dao.listByExample(example);
         return Result.success(filters(0L, sysMenuList));
@@ -184,4 +185,28 @@ public class AdminSysMenuBiz {
         return respList;
     }
 
+    public Result<List<String>> permissionList() {
+        List<SysRoleUser> sysRoleUserList = sysRoleUserDao.listByUserId(ThreadContext.userId());
+        if (CollectionUtil.isEmpty(sysRoleUserList)) {
+            return Result.success(new ArrayList<>());
+        }
+        // 用户的所有角色
+        List<Long> roleList = sysRoleUserList.stream().map(SysRoleUser::getRoleId).collect(Collectors.toList());
+
+        List<SysMenuRole> menuRoleList = sysMenuRoleDao.listByRoleIds(roleList);
+        if (CollectionUtil.isEmpty(menuRoleList)) {
+            return Result.success(new ArrayList<>());
+        }
+        // 用户的所有菜单
+        List<Long> menuList = menuRoleList.stream().map(SysMenuRole::getMenuId).collect(Collectors.toList());
+        SysMenuExample example = new SysMenuExample();
+        SysMenuExample.Criteria c = example.createCriteria();
+        c.andIdIn(menuList);
+        c.andStatusIdEqualTo(StatusIdEnum.YES.getCode());
+        // 只需要获取权限
+        c.andMenuTypeEqualTo(MenuTypeEnum.PERMISSION.getCode());
+        example.setOrderByClause("sort asc, id desc");
+        List<SysMenu> sysMenuList = dao.listByExample(example);
+        return Result.success(sysMenuList.stream().map(SysMenu::getAuthValue).collect(Collectors.toList()));
+    }
 }

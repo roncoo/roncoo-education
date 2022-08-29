@@ -72,8 +72,8 @@ public class AdminSysMenuViewResp implements Serializable {
     @ApiModelProperty(value = "是否显示(1: 显示；0:不显示)")
     private Integer hiddenType;
     /**
-     * 菜单类型(1：目录 2：菜单 3：按钮)
+     * 菜单类型(1：目录 2：菜单 3：权限)
      */
-    @ApiModelProperty(value = "菜单类型(1：目录   2：菜单   3：按钮)")
+    @ApiModelProperty(value = "菜单类型(1：目录   2：菜单   3：权限)")
     private Integer menuType;
 }

@@ -20,13 +20,13 @@ public class SysMenu implements Serializable {
 
     private String menuUrl;
 
-    private String apiUrl;
-
     private String menuIcon;
 
     private String remark;
 
     private Integer menuType;
+
+    private String authValue;
 
     private static final long serialVersionUID = 1L;
 
@@ -94,14 +94,6 @@ public class SysMenu implements Serializable {
         this.menuUrl = menuUrl == null ? null : menuUrl.trim();
     }
 
-    public String getApiUrl() {
-        return apiUrl;
-    }
-
-    public void setApiUrl(String apiUrl) {
-        this.apiUrl = apiUrl == null ? null : apiUrl.trim();
-    }
-
     public String getMenuIcon() {
         return menuIcon;
     }
@@ -126,6 +118,14 @@ public class SysMenu implements Serializable {
         this.menuType = menuType;
     }
 
+    public String getAuthValue() {
+        return authValue;
+    }
+
+    public void setAuthValue(String authValue) {
+        this.authValue = authValue == null ? null : authValue.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -140,10 +140,10 @@ public class SysMenu implements Serializable {
         sb.append(", parentId=").append(parentId);
         sb.append(", menuName=").append(menuName);
         sb.append(", menuUrl=").append(menuUrl);
-        sb.append(", apiUrl=").append(apiUrl);
         sb.append(", menuIcon=").append(menuIcon);
         sb.append(", remark=").append(remark);
         sb.append(", menuType=").append(menuType);
+        sb.append(", authValue=").append(authValue);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

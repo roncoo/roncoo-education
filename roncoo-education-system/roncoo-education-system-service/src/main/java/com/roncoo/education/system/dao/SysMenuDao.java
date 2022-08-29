@@ -28,7 +28,7 @@ public interface SysMenuDao {
     List<SysMenu> listByParentId(Long parentId);
 
     /**
-     * 根据父ID、如果菜单类型为空获取所有菜单，包含按钮,则获取所有菜单，不包含按钮
+     * 根据父ID、如果菜单类型为空获取所有菜单，包含权限,则获取所有菜单，不包含权限
      *
      * @param parentId
      * @param menuType

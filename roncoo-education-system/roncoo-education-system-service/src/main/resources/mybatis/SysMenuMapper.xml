@@ -10,10 +10,12 @@
     <result column="parent_id" jdbcType="BIGINT" property="parentId" />
     <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
     <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
-    <result column="api_url" jdbcType="VARCHAR" property="apiUrl" />
     <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="menu_type" jdbcType="TINYINT" property="menuType" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.roncoo.education.system.dao.impl.mapper.entity.SysMenu">
+    <result column="auth_value" jdbcType="LONGVARCHAR" property="authValue" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -74,9 +76,28 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, status_id, sort, parent_id, menu_name, menu_url, api_url, 
-    menu_icon, remark, menu_type
+    id, gmt_create, gmt_modified, status_id, sort, parent_id, menu_name, menu_url, menu_icon, 
+    remark, menu_type
   </sql>
+  <sql id="Blob_Column_List">
+    auth_value
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysMenuExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_menu
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysMenuExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -94,9 +115,11 @@
       limit ${limitStart} , ${pageSize}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from sys_menu
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -113,13 +136,13 @@
   <insert id="insert" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysMenu">
     insert into sys_menu (id, gmt_create, gmt_modified, 
       status_id, sort, parent_id, 
-      menu_name, menu_url, api_url, 
-      menu_icon, remark, menu_type
+      menu_name, menu_url, menu_icon, 
+      remark, menu_type, auth_value
       )
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{parentId,jdbcType=BIGINT}, 
-      #{menuName,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR}, #{apiUrl,jdbcType=VARCHAR}, 
-      #{menuIcon,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{menuType,jdbcType=TINYINT}
+      #{menuName,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR}, #{menuIcon,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{menuType,jdbcType=TINYINT}, #{authValue,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysMenu">
@@ -149,9 +172,6 @@
       <if test="menuUrl != null">
         menu_url,
       </if>
-      <if test="apiUrl != null">
-        api_url,
-      </if>
       <if test="menuIcon != null">
         menu_icon,
       </if>
@@ -160,6 +180,9 @@
       </if>
       <if test="menuType != null">
         menu_type,
+      </if>
+      <if test="authValue != null">
+        auth_value,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -187,9 +210,6 @@
       <if test="menuUrl != null">
         #{menuUrl,jdbcType=VARCHAR},
       </if>
-      <if test="apiUrl != null">
-        #{apiUrl,jdbcType=VARCHAR},
-      </if>
       <if test="menuIcon != null">
         #{menuIcon,jdbcType=VARCHAR},
       </if>
@@ -198,6 +218,9 @@
       </if>
       <if test="menuType != null">
         #{menuType,jdbcType=TINYINT},
+      </if>
+      <if test="authValue != null">
+        #{authValue,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -234,9 +257,6 @@
       <if test="record.menuUrl != null">
         menu_url = #{record.menuUrl,jdbcType=VARCHAR},
       </if>
-      <if test="record.apiUrl != null">
-        api_url = #{record.apiUrl,jdbcType=VARCHAR},
-      </if>
       <if test="record.menuIcon != null">
         menu_icon = #{record.menuIcon,jdbcType=VARCHAR},
       </if>
@@ -246,7 +266,28 @@
       <if test="record.menuType != null">
         menu_type = #{record.menuType,jdbcType=TINYINT},
       </if>
+      <if test="record.authValue != null">
+        auth_value = #{record.authValue,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update sys_menu
+    set id = #{record.id,jdbcType=BIGINT},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      status_id = #{record.statusId,jdbcType=TINYINT},
+      sort = #{record.sort,jdbcType=INTEGER},
+      parent_id = #{record.parentId,jdbcType=BIGINT},
+      menu_name = #{record.menuName,jdbcType=VARCHAR},
+      menu_url = #{record.menuUrl,jdbcType=VARCHAR},
+      menu_icon = #{record.menuIcon,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      menu_type = #{record.menuType,jdbcType=TINYINT},
+      auth_value = #{record.authValue,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -261,7 +302,6 @@
       parent_id = #{record.parentId,jdbcType=BIGINT},
       menu_name = #{record.menuName,jdbcType=VARCHAR},
       menu_url = #{record.menuUrl,jdbcType=VARCHAR},
-      api_url = #{record.apiUrl,jdbcType=VARCHAR},
       menu_icon = #{record.menuIcon,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
       menu_type = #{record.menuType,jdbcType=TINYINT}
@@ -293,9 +333,6 @@
       <if test="menuUrl != null">
         menu_url = #{menuUrl,jdbcType=VARCHAR},
       </if>
-      <if test="apiUrl != null">
-        api_url = #{apiUrl,jdbcType=VARCHAR},
-      </if>
       <if test="menuIcon != null">
         menu_icon = #{menuIcon,jdbcType=VARCHAR},
       </if>
@@ -305,7 +342,25 @@
       <if test="menuType != null">
         menu_type = #{menuType,jdbcType=TINYINT},
       </if>
+      <if test="authValue != null">
+        auth_value = #{authValue,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysMenu">
+    update sys_menu
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      status_id = #{statusId,jdbcType=TINYINT},
+      sort = #{sort,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_url = #{menuUrl,jdbcType=VARCHAR},
+      menu_icon = #{menuIcon,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      menu_type = #{menuType,jdbcType=TINYINT},
+      auth_value = #{authValue,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysMenu">
@@ -317,7 +372,6 @@
       parent_id = #{parentId,jdbcType=BIGINT},
       menu_name = #{menuName,jdbcType=VARCHAR},
       menu_url = #{menuUrl,jdbcType=VARCHAR},
-      api_url = #{apiUrl,jdbcType=VARCHAR},
       menu_icon = #{menuIcon,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       menu_type = #{menuType,jdbcType=TINYINT}

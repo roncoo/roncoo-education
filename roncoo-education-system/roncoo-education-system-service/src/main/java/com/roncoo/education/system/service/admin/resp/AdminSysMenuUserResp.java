@@ -54,7 +54,7 @@ public class AdminSysMenuUserResp implements Serializable {
     /**
      * 目标
      */
-    @ApiModelProperty(value = "目标")
+    @ApiModelProperty(value = "icon")
     private String targetName;
 
     private List<AdminSysMenuUserResp> children;
