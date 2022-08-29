@@ -52,4 +52,6 @@ public interface SysMenuDao {
     List<SysMenu> listByMenuName(String menuName);
 
     List<SysMenu> getByIds(List<Long> ids);
+
+    List<SysMenu> listByExample(SysMenuExample example);
 }

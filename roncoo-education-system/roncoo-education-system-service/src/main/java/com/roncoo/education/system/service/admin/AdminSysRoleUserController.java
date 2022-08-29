@@ -29,7 +29,7 @@ public class AdminSysRoleUserController {
     /**
      * 列出角色用户关联信息接口
      */
-    @ApiOperation(value = "列出角色用户关联信息接口", notes = "列出角色用户关联信息接口")
+    @ApiOperation(value = "角色用户列出", notes = "根据用户ID列出该用户的所有角色")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public Result<List<AdminSysRoleUserResp>> list(@RequestBody AdminSysRoleUserListReq sysRoleUserListREQ) {
         return biz.list(sysRoleUserListREQ);
@@ -38,7 +38,7 @@ public class AdminSysRoleUserController {
     /**
      * 添加用户角色信息接口
      */
-    @ApiOperation(value = "添加用户角色信息接口", notes = "添加用户角色信息接口")
+    @ApiOperation(value = "角色用户保存", notes = "用户角色添加接口")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Result<Integer> save(@RequestBody AdminSysRoleUserSaveReq sysRoleUserSaveREQ) {
         return biz.save(sysRoleUserSaveREQ);

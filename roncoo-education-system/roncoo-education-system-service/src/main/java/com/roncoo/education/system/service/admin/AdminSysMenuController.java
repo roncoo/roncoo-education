@@ -4,8 +4,8 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysMenuBiz;
 import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuResp;
-import com.roncoo.education.system.service.admin.resp.AdminSysMenuUserResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuViewResp;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +20,7 @@ import java.util.List;
  *
  * @author wujing
  */
+@Api(tags = "菜单接口")
 @RestController
 @RequestMapping(value = "/system/admin/sys/menu")
 public class AdminSysMenuController {
@@ -30,7 +31,7 @@ public class AdminSysMenuController {
     /**
      * 菜单信息列出信息接口
      */
-    @ApiOperation(value = "菜单信息列出信息接口", notes = "菜单信息列出信息")
+    @ApiOperation(value = "菜单列出", notes = "根据条件列出菜单")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public Result<List<AdminSysMenuResp>> list(@RequestBody AdminSysMenuListReq sysMenuListReq) {
         return biz.list(sysMenuListReq);
@@ -39,7 +40,7 @@ public class AdminSysMenuController {
     /**
      * 菜单信息保存信息接口
      */
-    @ApiOperation(value = "菜单信息保存接口", notes = "菜单信息保存接口")
+    @ApiOperation(value = "菜单保存", notes = "菜单添加")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Result<Integer> save(@RequestBody AdminSysMenuSaveReq sysMenuSaveReq) {
         return biz.save(sysMenuSaveReq);
@@ -48,7 +49,7 @@ public class AdminSysMenuController {
     /**
      * 菜单信息删除接口
      */
-    @ApiOperation(value = "菜单信息删除接口", notes = "菜单信息删除接口")
+    @ApiOperation(value = "菜单删除", notes = "根据ID删除菜单")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public Result<Integer> delete(@RequestBody AdminSysMenuDeleteReq sysMenuDeleteReq) {
         return biz.delete(sysMenuDeleteReq);
@@ -57,7 +58,7 @@ public class AdminSysMenuController {
     /**
      * 菜单信息更新接口
      */
-    @ApiOperation(value = "菜单信息更新接口", notes = "菜单信息更新接口")
+    @ApiOperation(value = "菜单更新", notes = "菜单修改")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public Result<Integer> update(@RequestBody AdminSysMenuUpdateReq sysMenuUpdateReq) {
         return biz.update(sysMenuUpdateReq);
@@ -75,19 +76,10 @@ public class AdminSysMenuController {
     /**
      * 用户菜单信息列出信息接口
      */
-    @ApiOperation(value = "登录用户菜单接口", notes = "获取当前登录用户的所有菜单")
+    @ApiOperation(value = "用户菜单接口", notes = "获取指定用户的所有菜单")
     @RequestMapping(value = "/user/list", method = RequestMethod.POST)
-    public Result<List<AdminSysMenuUserResp>> userList() {
-        return biz.userList();
-    }
-
-    /**
-     * 用户菜单信息列出信息接口
-     */
-    @ApiOperation(value = "指定用户菜单接口", notes = "获取指定用户的所有菜单")
-    @RequestMapping(value = "/button/list", method = RequestMethod.POST)
-    public Result<List<AdminSysMenuUserResp>> buttonList(@RequestBody AdminSysMenuUserListReq sysMenuUserListREQ) {
-        return biz.buttonList(sysMenuUserListREQ);
+    public Result<List<AdminSysMenuResp>> userList(@RequestBody AdminSysMenuUserListReq req) {
+        return biz.listForUser(req);
     }
 
 }

@@ -1,24 +1,23 @@
-/**
- * Copyright 2015-2017 广州市领课网络科技有限公司
- */
 package com.roncoo.education.common.core.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * 短信类型
+ * 视频上传状态
  *
- * @author wuyun
+ * @author LHR
  */
 @Getter
 @AllArgsConstructor
-public enum MsgTypeEnum {
+public enum UploadStatusEnum {
 
-    SYSTEM(1, "系统消息"), OTHER(2, "其他");
+    WAIT(1, "待上传", ""), SUCCES(2, "上传成功", "green"), FINAL(3, "上传失败", "red");
 
     private Integer code;
 
     private String desc;
+
+    private String color;
 
 }

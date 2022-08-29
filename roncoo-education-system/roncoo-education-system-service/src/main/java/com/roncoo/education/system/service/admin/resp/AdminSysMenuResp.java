@@ -81,10 +81,10 @@ public class AdminSysMenuResp implements Serializable {
     /**
      * 菜单类型(1：目录 2：菜单 3：按钮)
      */
-    @ApiModelProperty(value = "菜单类型(1：目录   2：菜单   3：按钮)")
+    @ApiModelProperty(value = "菜单类型(1目录 2菜单 3按钮)")
     private Integer menuType;
     /**
      * 下级菜单集合
      */
-    private List<AdminSysMenuResp> children;
+    private List<AdminSysMenuResp> childrenList;
 }

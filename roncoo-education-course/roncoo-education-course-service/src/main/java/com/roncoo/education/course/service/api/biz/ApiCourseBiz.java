@@ -106,13 +106,11 @@ public class ApiCourseBiz extends BaseBiz {
             return Result.error("该课程已下架");
         }
         ApiCourseResp courseResp = BeanUtil.copyProperties(course, ApiCourseResp.class);
-
         // 获取讲师信息
         LecturerViewVO lecturerViewVO = feignLecturer.getById(course.getLecturerId());
         if (ObjectUtil.isNotEmpty(lecturerViewVO)) {
             courseResp.setLecturerResp(BeanUtil.copyProperties(lecturerViewVO, ApiCourseLecturerResp.class));
         }
-
         // 章节信息
         List<CourseChapter> chapterList = chapterDao.listByCourseIdAndStatusId(course.getId(), StatusIdEnum.YES.getCode());
         if (CollUtil.isNotEmpty(chapterList)) {

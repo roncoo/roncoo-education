@@ -33,7 +33,7 @@ public class AdminSysRoleBiz {
     @Autowired
     private SysMenuRoleDao sysMenuRoleDao;
 
-    public Result<Page<AdminSysRolePageResp>> list(AdminSysRolePageReq req) {
+    public Result<Page<AdminSysRolePageResp>> listForPage(AdminSysRolePageReq req) {
         SysRoleExample example = new SysRoleExample();
         Criteria c = example.createCriteria();
         if (StringUtils.hasText(req.getRoleName())) {
@@ -42,7 +42,7 @@ public class AdminSysRoleBiz {
         if (req.getStatusId() != null) {
             c.andStatusIdEqualTo(req.getStatusId());
         }
-        example.setOrderByClause(" status_id desc, sort desc, id desc ");
+        example.setOrderByClause(" sort desc, id desc ");
         Page<SysRole> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         return Result.success(PageUtil.transform(page, AdminSysRolePageResp.class));
     }
@@ -59,7 +59,7 @@ public class AdminSysRoleBiz {
         return Result.error(ResultEnum.SYSTEM_SAVE_FAIL);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Result<Integer> delete(AdminSysRoleDeleteReq req) {
         if (StringUtils.isEmpty(req.getId())) {
             return Result.error("角色ID不能为空");

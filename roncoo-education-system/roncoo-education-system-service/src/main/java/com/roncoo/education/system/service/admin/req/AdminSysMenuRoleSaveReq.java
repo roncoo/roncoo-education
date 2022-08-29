@@ -17,11 +17,11 @@ public class AdminSysMenuRoleSaveReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
     /**
-     * 菜单ID集合
-     */
-    private List<Long> menuId;
-    /**
      * 角色ID
      */
     private Long roleId;
+    /**
+     * 菜单ID集合
+     */
+    private List<Long> menuId;
 }

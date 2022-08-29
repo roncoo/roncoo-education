@@ -20,7 +20,7 @@ public class AdminSysMenuUserListReq implements Serializable {
     /**
      * 用户ID
      */
-    @ApiModelProperty(value = "用户ID", required = false)
+    @ApiModelProperty(value = "用户ID，为空则获取当前登录用户菜单", required = false)
     private Long userId;
 
 }

@@ -28,16 +28,16 @@ public class AdminSysRoleController {
     /**
      * 角色分页列表接口
      */
-    @ApiOperation(value = "角色分页列表接口", notes = "角色分页列表接口")
-    @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result<Page<AdminSysRolePageResp>> list(@RequestBody AdminSysRolePageReq sysRolePageREQ) {
-        return biz.list(sysRolePageREQ);
+    @ApiOperation(value = "角色分页", notes = "角色分页列表接口")
+    @RequestMapping(value = "/page", method = RequestMethod.POST)
+    public Result<Page<AdminSysRolePageResp>> listForPage(@RequestBody AdminSysRolePageReq sysRolePageREQ) {
+        return biz.listForPage(sysRolePageREQ);
     }
 
     /**
      * 角色添加接口
      */
-    @ApiOperation(value = "角色添加接口", notes = "角色添加接口")
+    @ApiOperation(value = "角色保存", notes = "角色添加接口")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Result<Integer> save(@RequestBody AdminSysRoleSaveReq sysRoleSaveREQ) {
         return biz.save(sysRoleSaveREQ);

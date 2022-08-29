@@ -4,7 +4,6 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.config.ThreadContext;
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.core.enums.MenuTypeEnum;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
@@ -12,19 +11,17 @@ import com.roncoo.education.system.dao.SysMenuDao;
 import com.roncoo.education.system.dao.SysMenuRoleDao;
 import com.roncoo.education.system.dao.SysRoleUserDao;
 import com.roncoo.education.system.dao.SysUserDao;
-import com.roncoo.education.system.dao.impl.mapper.entity.SysMenu;
-import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuRole;
-import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser;
-import com.roncoo.education.system.dao.impl.mapper.entity.SysUser;
+import com.roncoo.education.system.dao.impl.mapper.entity.*;
 import com.roncoo.education.system.service.admin.req.*;
-import com.roncoo.education.system.service.admin.resp.*;
+import com.roncoo.education.system.service.admin.resp.AdminSysMenuResp;
+import com.roncoo.education.system.service.admin.resp.AdminSysMenuViewResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 菜单信息
@@ -44,39 +41,32 @@ public class AdminSysMenuBiz {
     private SysMenuRoleDao sysMenuRoleDao;
 
     public Result<List<AdminSysMenuResp>> list(AdminSysMenuListReq req) {
-        List<AdminSysMenuResp> list = new ArrayList<>();
-        if (StringUtils.isEmpty(req.getMenuName())) {
-            list = recursion(0L);
-        } else {
-            // 模糊查询
-            List<SysMenu> sysMenuList = dao.listByMenuName(req.getMenuName());
-            if (CollectionUtil.isNotEmpty(sysMenuList)) {
-                for (SysMenu sysMenu : sysMenuList) {
-                    AdminSysMenuResp sysMenuRESQ = BeanUtil.copyProperties(sysMenu, AdminSysMenuResp.class);
-                    sysMenuRESQ.setLabel(sysMenu.getMenuName());
-                    sysMenuRESQ.setChildren(recursion(sysMenu.getId()));
-                    list.add(sysMenuRESQ);
-                }
-            }
+        SysMenuExample example = new SysMenuExample();
+        SysMenuExample.Criteria c = example.createCriteria();
+        if (StringUtils.hasText(req.getMenuName())) {
+            c.andMenuNameEqualTo(req.getMenuName());
         }
-        return Result.success(list);
+        if (ObjectUtil.isNotEmpty(req.getStatusId())) {
+            c.andStatusIdEqualTo(req.getStatusId());
+        }
+        example.setOrderByClause("sort asc, id desc");
+        List<SysMenu> sysMenuList = dao.listByExample(example);
+        return Result.success(filter(0L, sysMenuList));
     }
 
     /**
-     * 递归显示菜单(角色关联菜单)
+     * 菜单层级处理
      */
-    private List<AdminSysMenuResp> recursion(Long parentId) {
-        List<AdminSysMenuResp> lists = new ArrayList<>();
-        List<SysMenu> list = dao.listByParentId(parentId);
-        if (CollectionUtil.isNotEmpty(list)) {
-            for (SysMenu m : list) {
-                AdminSysMenuResp resq = BeanUtil.copyProperties(m, AdminSysMenuResp.class);
-                resq.setLabel(resq.getMenuName());
-                resq.setChildren(recursion(m.getId()));
-                lists.add(resq);
+    private List<AdminSysMenuResp> filter(Long parentId, List<SysMenu> menuList) {
+        List<SysMenu> sysMenuList = menuList.stream().filter(item -> parentId.compareTo(item.getParentId()) == 0).collect(Collectors.toList());
+        if (CollectionUtil.isNotEmpty(sysMenuList)) {
+            List<AdminSysMenuResp> respList = BeanUtil.copyProperties(sysMenuList, AdminSysMenuResp.class);
+            for (AdminSysMenuResp resp : respList) {
+                resp.setChildrenList(filter(resp.getId(), menuList));
             }
+            return respList;
         }
-        return lists;
+        return null;
     }
 
     public Result<Integer> save(AdminSysMenuSaveReq req) {
@@ -88,17 +78,14 @@ public class AdminSysMenuBiz {
         return Result.error(ResultEnum.SYSTEM_SAVE_FAIL);
     }
 
-    @Transactional
     public Result<Integer> delete(AdminSysMenuDeleteReq req) {
         if (req.getId() == null) {
             return Result.error("主键ID不能为空");
         }
-        // 删除菜单,存在子菜单则迭代删除子菜单
+        // 存在子菜单则不允许删除
         List<SysMenu> list = dao.listByParentId(req.getId());
         if (CollectionUtil.isNotEmpty(list)) {
-            for (SysMenu sysMenu : list) {
-                dao.deleteById(sysMenu.getId());
-            }
+            return Result.error("请先删除下级菜单");
         }
         int results = dao.deleteById(req.getId());
         if (results > 0) {
@@ -134,104 +121,35 @@ public class AdminSysMenuBiz {
         return Result.success(BeanUtil.copyProperties(record, AdminSysMenuViewResp.class));
     }
 
-    public Result<List<AdminSysMenuUserResp>> userList() {
-        SysUser sysUser = sysUserDao.getById(ThreadContext.userId());
+    public Result<List<AdminSysMenuResp>> listForUser(AdminSysMenuUserListReq req) {
+        if (ObjectUtil.isEmpty(req.getUserId())) {
+            req.setUserId(ThreadContext.userId());
+        }
+        SysUser sysUser = sysUserDao.getById(req.getUserId());
         if (ObjectUtil.isNull(sysUser) || !sysUser.getStatusId().equals(StatusIdEnum.YES.getCode())) {
             return Result.error("用户异常");
         }
-        List<SysMenuRole> sysMenuRoleList = new ArrayList<>();
+
         List<SysRoleUser> sysRoleUserList = sysRoleUserDao.listByUserId(sysUser.getId());
-        for (SysRoleUser sru : sysRoleUserList) {
-            sysMenuRoleList.addAll(sysMenuRoleDao.listByRoleId(sru.getRoleId()));
+        if (CollectionUtil.isEmpty(sysRoleUserList)) {
+            return Result.success(new ArrayList<>());
         }
-        // 筛选
-        return Result.success(listByRole(sysMenuRoleList, MenuTypeEnum.BUTTON.getCode()));
-    }
+        // 用户的所有角色
+        List<Long> roleList = sysRoleUserList.stream().map(SysRoleUser::getRoleId).collect(Collectors.toList());
 
-    private List<AdminSysMenuUserResp> listByRole(List<SysMenuRole> sysMenuRoleList, Integer menuType) {
-        List<AdminSysMenuUserResp> list = userRecursion(0L, menuType);
-        List<AdminSysMenuUserResp> sysMenuUserRESQList = new ArrayList<>();
-        sysMenuUserRESQList = listMenu(sysMenuUserRESQList, sysMenuRoleList, list);
-        return sysMenuUserRESQList;
-    }
-
-    private List<AdminSysMenuUserResp> listMenu(List<AdminSysMenuUserResp> sysMenuVOList, List<SysMenuRole> sysMenuRoleList, List<AdminSysMenuUserResp> list) {
-        for (AdminSysMenuUserResp mv : list) {
-            AdminSysMenuUserResp v = new AdminSysMenuUserResp();
-            for (SysMenuRole vo : sysMenuRoleList) {
-                if (mv.getId().equals(vo.getMenuId())) {
-                    v = BeanUtil.copyProperties(mv, AdminSysMenuUserResp.class);
-                    break;
-                }
-            }
-            if (ObjectUtil.isNotNull(v) && v.getId() != null) {
-                sysMenuVOList.add(v);
-                List<AdminSysMenuUserResp> l = new ArrayList<>();
-                if (v != null) {
-                    v.setChildren(l);
-                }
-                listMenu(l, sysMenuRoleList, mv.getChildren());
-            }
+        List<SysMenuRole> menuRoleList = sysMenuRoleDao.listByRoleIds(roleList);
+        if (CollectionUtil.isEmpty(menuRoleList)) {
+            return Result.success(new ArrayList<>());
         }
-        return sysMenuVOList;
-    }
-
-    /**
-     * 用户递归显示菜单(角色关联菜单)
-     */
-    private List<AdminSysMenuUserResp> userRecursion(Long parentId, Integer menuType) {
-        List<AdminSysMenuUserResp> lists = new ArrayList<>();
-        List<SysMenu> list = dao.listByParentIdAndNotMenuType(parentId, menuType);
-        if (CollectionUtil.isNotEmpty(list)) {
-            for (SysMenu m : list) {
-                AdminSysMenuUserResp resq = BeanUtil.copyProperties(m, AdminSysMenuUserResp.class);
-                if (m.getMenuName().equals("首页")) {
-                    resq.setHidden(true);
-                }
-                resq.setName(m.getMenuName());
-                resq.setPath(m.getMenuUrl());
-                resq.setApiUrl(m.getApiUrl());
-                resq.setIcon(m.getMenuIcon());
-                resq.setChildren(userRecursion(m.getId(), menuType));
-                lists.add(resq);
-            }
-        }
-        return lists;
-    }
-
-    public Result<List<AdminSysMenuUserResp>> buttonList(AdminSysMenuUserListReq req) {
-        SysUser sysUser = sysUserDao.getById(req.getUserId());
-        if (ObjectUtil.isNull(sysUser)) {
-            return Result.error("用户异常");
-        }
-        List<SysMenuRole> sysMenuRoleList = new ArrayList<>();
-        List<SysRoleUser> sysRoleUserList = sysRoleUserDao.listByUserId(sysUser.getId());
-        for (SysRoleUser sru : sysRoleUserList) {
-            sysMenuRoleList.addAll(sysMenuRoleDao.listByRoleId(sru.getRoleId()));
-        }
-        // 筛选
-        List<AdminSysMenuUserResp> list = userRecursion(0L, null);
-        List<AdminSysMenuUserResp> apiUrlList = new ArrayList<>();
-        return Result.success(getListMenu(apiUrlList, sysMenuRoleList, list));
-    }
-
-    // 列出用户所有按钮菜单
-    private List<AdminSysMenuUserResp> getListMenu(List<AdminSysMenuUserResp> apiUrlList, List<SysMenuRole> sysMenuRoleList, List<AdminSysMenuUserResp> list) {
-        for (AdminSysMenuUserResp mv : list) {
-            AdminSysMenuUserResp v = new AdminSysMenuUserResp();
-            for (SysMenuRole vo : sysMenuRoleList) {
-                if (mv.getId().equals(vo.getMenuId()) && MenuTypeEnum.BUTTON.getCode().equals(mv.getMenuType())) {
-                    v.setApiUrl(mv.getApiUrl());
-                    v.setName(mv.getName());
-                    apiUrlList.add(v);
-                    break;
-                }
-            }
-            if (ObjectUtil.isNotNull(v)) {
-                getListMenu(apiUrlList, sysMenuRoleList, mv.getChildren());
-            }
-        }
-        return apiUrlList;
+        // 用户的所有菜单
+        List<Long> menuList = menuRoleList.stream().map(SysMenuRole::getMenuId).collect(Collectors.toList());
+        SysMenuExample example = new SysMenuExample();
+        SysMenuExample.Criteria c = example.createCriteria();
+        c.andIdIn(menuList);
+        c.andStatusIdEqualTo(StatusIdEnum.YES.getCode());
+        example.setOrderByClause("sort asc, id desc");
+        List<SysMenu> sysMenuList = dao.listByExample(example);
+        return Result.success(filter(0L, sysMenuList));
     }
 
 }

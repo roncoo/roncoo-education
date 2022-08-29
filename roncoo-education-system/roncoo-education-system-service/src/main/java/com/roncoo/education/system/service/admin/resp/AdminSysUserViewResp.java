@@ -36,12 +36,6 @@ public class AdminSysUserViewResp implements Serializable {
     @ApiModelProperty(value = "排序")
     private Integer sort;
     /**
-     * 用户ID
-     */
-    @ApiModelProperty(value = "用户ID")
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long userId;
-    /**
      * 手机
      */
     @ApiModelProperty(value = "手机")

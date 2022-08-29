@@ -46,15 +46,15 @@ public class AdminSysRoleUserBiz {
         return Result.success(new ArrayList<>());
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Result<Integer> save(AdminSysRoleUserSaveReq req) {
         if (req.getUserId() == null) {
             return Result.error("用户ID不能为空");
         }
-        // 先删除旧的，再添加新的
+        // 先删除旧的角色
         dao.deleteByUserId(req.getUserId());
+        // 再新增
         if (CollectionUtil.isNotEmpty(req.getRoleId())) {
-            // 拆分角色和平台拼接ID
             for (Long roleId : req.getRoleId()) {
                 SysRoleUser sysRoleUser = new SysRoleUser();
                 sysRoleUser.setRoleId(roleId);

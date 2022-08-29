@@ -28,16 +28,16 @@ public class AdminSysMenuRoleController {
     /**
      * 列出菜单角色关联信息接口
      */
-    @ApiOperation(value = "列出菜单角色关联信息接口", notes = "列出菜单角色关联信息接口")
+    @ApiOperation(value = "菜单ID列出", notes = "根据角色ID列出该角色的所有菜单ID")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result<List<String>> list(@RequestBody AdminSysMenuRoleListReq sysMenuRoleListREQ) {
-        return biz.list(sysMenuRoleListREQ);
+    public Result<List<Long>> list(@RequestBody AdminSysMenuRoleListReq req) {
+        return biz.list(req);
     }
 
     /**
      * 添加角色菜单关联信息接口
      */
-    @ApiOperation(value = "添加角色菜单关联信息接口", notes = "添加角色菜单关联信息接口")
+    @ApiOperation(value = "角色菜单保存", notes = "角色菜单添加")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Result<Integer> save(@RequestBody AdminSysMenuRoleSaveReq sysMenuRoleSaveREQ) {
         return biz.save(sysMenuRoleSaveREQ);

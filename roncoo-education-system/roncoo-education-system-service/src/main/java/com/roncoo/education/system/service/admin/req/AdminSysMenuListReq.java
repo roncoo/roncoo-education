@@ -17,10 +17,10 @@ public class AdminSysMenuListReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 菜单名称
-     */
     @ApiModelProperty(value = "菜单名称", required = false)
     private String menuName;
+
+    @ApiModelProperty(value = "状态", required = false)
+    private Integer statusId;
 
 }

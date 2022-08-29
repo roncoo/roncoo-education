@@ -34,7 +34,7 @@ public class AdminSysUserBiz {
     @Autowired
     private SysUserDao dao;
 
-    public Result<Page<AdminSysUserPageResp>> list(AdminSysUserPageReq req) {
+    public Result<Page<AdminSysUserPageResp>> listForPage(AdminSysUserPageReq req) {
         SysUserExample example = new SysUserExample();
         Criteria c = example.createCriteria();
         if (StringUtils.hasText(req.getMobile())) {

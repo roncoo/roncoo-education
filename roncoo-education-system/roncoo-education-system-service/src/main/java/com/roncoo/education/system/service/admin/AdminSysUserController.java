@@ -1,5 +1,6 @@
 package com.roncoo.education.system.service.admin;
 
+import com.roncoo.education.common.config.ThreadContext;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysUserBiz;
@@ -8,10 +9,7 @@ import com.roncoo.education.system.service.admin.resp.AdminSysUserPageResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserViewResp;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 后台用户信息
@@ -29,9 +27,9 @@ public class AdminSysUserController {
      * 后台管理员分页列表接口
      */
     @ApiOperation(value = "后台管理员分页列表接口", notes = "后台管理员分页列表接口")
-    @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result<Page<AdminSysUserPageResp>> list(@RequestBody AdminSysUserPageReq sysUserPageREQ) {
-        return biz.list(sysUserPageREQ);
+    @RequestMapping(value = "/page", method = RequestMethod.POST)
+    public Result<Page<AdminSysUserPageResp>> listForPage(@RequestBody AdminSysUserPageReq sysUserPageREQ) {
+        return biz.listForPage(sysUserPageREQ);
     }
 
     /**
@@ -77,6 +75,14 @@ public class AdminSysUserController {
     @RequestMapping(value = "/update/password", method = RequestMethod.POST)
     public Result<Integer> updatePassword(@RequestBody AdminSysUserUpdatePasswordReq sysUserUpdatePasswordREQ) {
         return biz.updatePassword(sysUserUpdatePasswordREQ);
+    }
+
+    @ApiOperation(value = "当前登录用户", notes = "获取当前登录用户")
+    @GetMapping(value = "/current")
+    public Result<AdminSysUserViewResp> currentView() {
+        AdminSysUserViewReq req = new AdminSysUserViewReq();
+        req.setId(ThreadContext.userId());
+        return biz.view(req);
     }
 
 }

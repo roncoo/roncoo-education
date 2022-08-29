@@ -98,4 +98,9 @@ public class SysMenuDaoImpl implements SysMenuDao {
         example.createCriteria().andIdIn(ids);
         return this.sysMenuMapper.selectByExample(example);
     }
+
+    @Override
+    public List<SysMenu> listByExample(SysMenuExample example) {
+        return this.sysMenuMapper.selectByExample(example);
+    }
 }

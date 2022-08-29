@@ -7,13 +7,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * @author YZJ
+ * @author wujing
  */
 @Getter
 @AllArgsConstructor
-public enum FileClassifyEnum {
+public enum StorageTypeEnum {
 
-    VIDEO(1, "视频"), FILE(2, "文件");
+    LOCAL(0, "本地"), ALIYUN(1, "阿里云"), FDSF(2, "FastDFS"), MINIO(3, "MinIO");
 
     private Integer code;
 
