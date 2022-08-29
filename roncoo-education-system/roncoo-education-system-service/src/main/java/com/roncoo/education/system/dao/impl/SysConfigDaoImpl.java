@@ -59,12 +59,12 @@ public class SysConfigDaoImpl implements SysConfigDao {
         int totalPage = PageUtil.countTotalPage(count, pageSize);
         example.setLimitStart(PageUtil.countOffset(pageCurrent, pageSize));
         example.setPageSize(pageSize);
-        return new Page<>(count, totalPage, pageCurrent, pageSize, this.mapper.selectByExample(example));
+        return new Page<>(count, totalPage, pageCurrent, pageSize, this.mapper.selectByExampleWithBLOBs(example));
     }
 
     @Override
     public List<SysConfig> listByExample(SysConfigExample example) {
-        return this.mapper.selectByExample(example);
+        return this.mapper.selectByExampleWithBLOBs(example);
     }
 
     @Override
