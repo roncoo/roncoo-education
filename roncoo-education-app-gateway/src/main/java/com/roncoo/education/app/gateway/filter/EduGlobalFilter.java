@@ -41,7 +41,9 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
      */
     private static final List<String> EXCLUDE_URL = Arrays.asList(
             // 登录获取菜单接口
-            "/system/admin/sys/menu/user/list"
+            "/system/admin/sys/menu/user/list",
+            // 登录获取权限接口
+            "/system/admin/sys/menu/permission/list"
     );
 
     @Autowired
