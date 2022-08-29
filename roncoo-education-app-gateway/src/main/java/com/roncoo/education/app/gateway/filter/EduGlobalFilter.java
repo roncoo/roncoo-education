@@ -116,7 +116,9 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
         if (tk.contains(uri)) {
             return true;
         }
-        return false;
+
+        // 返回true暂时不检验
+        return true;
     }
 
     private Long getUserId(ServerHttpRequest request) {
