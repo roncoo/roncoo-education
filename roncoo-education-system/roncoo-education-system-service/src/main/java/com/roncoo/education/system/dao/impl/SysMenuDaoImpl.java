@@ -7,7 +7,6 @@ import com.roncoo.education.system.dao.SysMenuDao;
 import com.roncoo.education.system.dao.impl.mapper.SysMenuMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenu;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuExample;
-import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuExample.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -54,7 +53,7 @@ public class SysMenuDaoImpl implements SysMenuDao {
         int totalPage = PageUtil.countTotalPage(count, pageSize);
         example.setLimitStart(PageUtil.countOffset(pageCurrent, pageSize));
         example.setPageSize(pageSize);
-        return new Page<SysMenu>(count, totalPage, pageCurrent, pageSize, this.sysMenuMapper.selectByExample(example));
+        return new Page<SysMenu>(count, totalPage, pageCurrent, pageSize, this.sysMenuMapper.selectByExampleWithBLOBs(example));
     }
 
     @Override
@@ -66,42 +65,15 @@ public class SysMenuDaoImpl implements SysMenuDao {
     }
 
     @Override
-    public List<SysMenu> listByParentIdAndNotMenuType(Long parentId, Integer menuType) {
-        SysMenuExample example = new SysMenuExample();
-        Criteria criteria = example.createCriteria();
-        criteria.andParentIdEqualTo(parentId);
-        if (menuType != null) {
-            criteria.andMenuTypeNotEqualTo(menuType);
-        }
-        example.setOrderByClause(" sort desc, id desc");
-        return this.sysMenuMapper.selectByExample(example);
-    }
-
-    @Override
-    public List<SysMenu> listAll() {
-        SysMenuExample example = new SysMenuExample();
-        example.setOrderByClause(" sort desc, id desc");
-        return this.sysMenuMapper.selectByExample(example);
-    }
-
-    @Override
-    public List<SysMenu> listByMenuName(String menuName) {
-        SysMenuExample example = new SysMenuExample();
-        example.createCriteria().andMenuNameLike(menuName);
-        example.setOrderByClause(" sort desc, id desc");
-        return this.sysMenuMapper.selectByExample(example);
-    }
-
-    @Override
     public List<SysMenu> getByIds(List<Long> ids) {
         SysMenuExample example = new SysMenuExample();
         example.createCriteria().andIdIn(ids);
-        return this.sysMenuMapper.selectByExample(example);
+        return this.sysMenuMapper.selectByExampleWithBLOBs(example);
     }
 
     @Override
     public List<SysMenu> listByExample(SysMenuExample example) {
-        return null;
+        return this.sysMenuMapper.selectByExample(example);
     }
 
     @Override
