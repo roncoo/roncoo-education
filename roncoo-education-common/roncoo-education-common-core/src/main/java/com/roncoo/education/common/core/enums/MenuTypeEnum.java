@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * 菜单类型(1：目录 2：菜单 3：按钮)
+ * 菜单类型(1目录 2菜单 3权限)
  */
 @Getter
 @AllArgsConstructor

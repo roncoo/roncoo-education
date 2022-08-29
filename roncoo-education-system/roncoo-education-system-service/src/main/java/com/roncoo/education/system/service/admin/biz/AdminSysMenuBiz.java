@@ -14,6 +14,7 @@ import com.roncoo.education.system.dao.SysUserDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.*;
 import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuResp;
+import com.roncoo.education.system.service.admin.resp.AdminSysMenuUserResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuViewResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -121,7 +122,7 @@ public class AdminSysMenuBiz {
         return Result.success(BeanUtil.copyProperties(record, AdminSysMenuViewResp.class));
     }
 
-    public Result<List<AdminSysMenuResp>> listForUser(AdminSysMenuUserListReq req) {
+    public Result<List<AdminSysMenuUserResp>> listForUser(AdminSysMenuUserListReq req) {
         if (ObjectUtil.isEmpty(req.getUserId())) {
             req.setUserId(ThreadContext.userId());
         }
@@ -149,7 +150,38 @@ public class AdminSysMenuBiz {
         c.andStatusIdEqualTo(StatusIdEnum.YES.getCode());
         example.setOrderByClause("sort asc, id desc");
         List<SysMenu> sysMenuList = dao.listByExample(example);
-        return Result.success(filter(0L, sysMenuList));
+        return Result.success(filters(0L, sysMenuList));
+    }
+
+    /**
+     * 菜单层级处理
+     */
+    private List<AdminSysMenuUserResp> filters(Long parentId, List<SysMenu> menuList) {
+        List<SysMenu> sysMenuList = menuList.stream().filter(item -> parentId.compareTo(item.getParentId()) == 0).collect(Collectors.toList());
+        if (CollectionUtil.isNotEmpty(sysMenuList)) {
+            List<AdminSysMenuUserResp> respList = copys(sysMenuList);
+            for (AdminSysMenuUserResp resp : respList) {
+                resp.setChildren(filters(resp.getId(), menuList));
+            }
+            return respList;
+        }
+        return null;
+    }
+
+    private List<AdminSysMenuUserResp> copys(List<SysMenu> sysMenuList) {
+        List<AdminSysMenuUserResp> respList = new ArrayList<>();
+        for (SysMenu sysMenu : sysMenuList) {
+            AdminSysMenuUserResp resp = new AdminSysMenuUserResp();
+            resp.setId(sysMenu.getId());
+            resp.setName(sysMenu.getMenuName());
+            resp.setNameEn(sysMenu.getMenuName());
+            resp.setMenuType(sysMenu.getMenuType());
+            resp.setPath(sysMenu.getMenuUrl());
+            resp.setSort(sysMenu.getSort());
+            resp.setTargetName(sysMenu.getMenuIcon());
+            respList.add(resp);
+        }
+        return respList;
     }
 
 }

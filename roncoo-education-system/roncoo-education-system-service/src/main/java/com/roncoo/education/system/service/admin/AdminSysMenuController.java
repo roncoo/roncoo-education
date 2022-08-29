@@ -4,6 +4,7 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysMenuBiz;
 import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuResp;
+import com.roncoo.education.system.service.admin.resp.AdminSysMenuUserResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuViewResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -78,7 +79,7 @@ public class AdminSysMenuController {
      */
     @ApiOperation(value = "用户菜单接口", notes = "获取指定用户的所有菜单")
     @RequestMapping(value = "/user/list", method = RequestMethod.POST)
-    public Result<List<AdminSysMenuResp>> userList(@RequestBody AdminSysMenuUserListReq req) {
+    public Result<List<AdminSysMenuUserResp>> userList(@RequestBody AdminSysMenuUserListReq req) {
         return biz.listForUser(req);
     }
 
