@@ -45,9 +45,7 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
             // 登录获取权限接口
             "/system/admin/sys/menu/permission/list",
             // 登录获取当前用户接口
-            "/system/admin/sys/user/current",
-            // 通用枚举接口
-            "/system/api/enum/view"
+            "/system/admin/sys/user/current"
     );
 
     @Autowired
