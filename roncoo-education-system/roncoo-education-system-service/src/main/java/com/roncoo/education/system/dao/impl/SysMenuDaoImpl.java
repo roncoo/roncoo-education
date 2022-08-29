@@ -100,6 +100,11 @@ public class SysMenuDaoImpl implements SysMenuDao {
     }
 
     @Override
+    public List<SysMenu> listByExample(SysMenuExample example) {
+        return null;
+    }
+
+    @Override
     public List<SysMenu> selectByExampleWithBLOBs(SysMenuExample example) {
         return this.sysMenuMapper.selectByExampleWithBLOBs(example);
     }
