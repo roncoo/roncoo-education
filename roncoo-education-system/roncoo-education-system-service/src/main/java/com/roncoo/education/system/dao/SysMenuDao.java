@@ -54,4 +54,5 @@ public interface SysMenuDao {
     List<SysMenu> getByIds(List<Long> ids);
 
     List<SysMenu> listByExample(SysMenuExample example);
+    List<SysMenu> selectByExampleWithBLOBs(SysMenuExample example);
 }
