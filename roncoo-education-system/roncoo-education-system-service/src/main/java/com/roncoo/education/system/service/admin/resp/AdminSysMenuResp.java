@@ -67,7 +67,7 @@ public class AdminSysMenuResp implements Serializable {
      * 接口URL
      */
     @ApiModelProperty(value = "接口URL")
-    private String apiUrl;
+    private String authValue;
     /**
      * 备注
      */

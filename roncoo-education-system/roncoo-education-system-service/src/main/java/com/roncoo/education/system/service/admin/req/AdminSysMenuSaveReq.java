@@ -36,7 +36,7 @@ public class AdminSysMenuSaveReq implements Serializable {
      * 接口URL
      */
     @ApiModelProperty(value = "接口URL")
-    private String apiUrl;
+    private String authValue;
     /**
      * 菜单图标
      */
