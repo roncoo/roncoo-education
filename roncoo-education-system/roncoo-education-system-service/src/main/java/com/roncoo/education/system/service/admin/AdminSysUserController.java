@@ -37,7 +37,7 @@ public class AdminSysUserController {
      */
     @ApiOperation(value = "后台管理员添加接口", notes = "后台管理员添加接口")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Result<Integer> save(@RequestBody AdminSysUserSaveReq sysUserSaveREQ) {
+    public Result<String> save(@RequestBody AdminSysUserSaveReq sysUserSaveREQ) {
         return biz.save(sysUserSaveREQ);
     }
 
@@ -46,7 +46,7 @@ public class AdminSysUserController {
      */
     @ApiOperation(value = "后台管理员删除接口", notes = "后台管理员删除接口")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public Result<Integer> delete(@RequestBody AdminSysUserDeleteReq sysUserSaveREQ) {
+    public Result<String> delete(@RequestBody AdminSysUserDeleteReq sysUserSaveREQ) {
         return biz.delete(sysUserSaveREQ);
     }
 
@@ -55,7 +55,7 @@ public class AdminSysUserController {
      */
     @ApiOperation(value = "后台管理员更新接口", notes = "后台管理员更新接口")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public Result<Integer> update(@RequestBody AdminSysUserUpdateReq sysUserUpdateREQ) {
+    public Result<String> update(@RequestBody AdminSysUserUpdateReq sysUserUpdateREQ) {
         return biz.update(sysUserUpdateREQ);
     }
 
@@ -73,7 +73,7 @@ public class AdminSysUserController {
      */
     @ApiOperation(value = "后台管理员密码接口", notes = "后台管理员更新密码接口")
     @RequestMapping(value = "/update/password", method = RequestMethod.POST)
-    public Result<Integer> updatePassword(@RequestBody AdminSysUserUpdatePasswordReq sysUserUpdatePasswordREQ) {
+    public Result<String> updatePassword(@RequestBody AdminSysUserUpdatePasswordReq sysUserUpdatePasswordREQ) {
         return biz.updatePassword(sysUserUpdatePasswordREQ);
     }
 

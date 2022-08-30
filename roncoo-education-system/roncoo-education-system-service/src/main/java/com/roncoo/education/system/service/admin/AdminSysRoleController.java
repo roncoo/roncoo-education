@@ -39,7 +39,7 @@ public class AdminSysRoleController {
      */
     @ApiOperation(value = "角色保存", notes = "角色添加接口")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Result<Integer> save(@RequestBody AdminSysRoleSaveReq sysRoleSaveREQ) {
+    public Result<String> save(@RequestBody AdminSysRoleSaveReq sysRoleSaveREQ) {
         return biz.save(sysRoleSaveREQ);
     }
 
@@ -48,7 +48,7 @@ public class AdminSysRoleController {
      */
     @ApiOperation(value = "角色删除接口", notes = "角色删除接口")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public Result<Integer> delete(@RequestBody AdminSysRoleDeleteReq sysRoleDeleteREQ) {
+    public Result<String> delete(@RequestBody AdminSysRoleDeleteReq sysRoleDeleteREQ) {
         return biz.delete(sysRoleDeleteREQ);
     }
 
@@ -57,7 +57,7 @@ public class AdminSysRoleController {
      */
     @ApiOperation(value = "角色更新接口", notes = "角色更新接口")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public Result<Integer> update(@RequestBody AdminSysRoleUpdateReq sysRoleUpdateREQ) {
+    public Result<String> update(@RequestBody AdminSysRoleUpdateReq sysRoleUpdateREQ) {
         return biz.update(sysRoleUpdateREQ);
     }
 

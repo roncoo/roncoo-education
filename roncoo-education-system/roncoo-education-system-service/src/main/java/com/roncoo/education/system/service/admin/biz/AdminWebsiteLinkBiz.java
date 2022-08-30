@@ -52,11 +52,11 @@ public class AdminWebsiteLinkBiz {
      * @param req
      * @return
      */
-    public Result<Integer> save(AdminWebsiteLinkSaveReq req) {
+    public Result<String> save(AdminWebsiteLinkSaveReq req) {
         WebsiteLink record = BeanUtil.copyProperties(req, WebsiteLink.class);
         int results = dao.save(record);
         if (results > 0) {
-            return Result.success(results);
+            return Result.success("操作成功");
         }
         return Result.error(ResultEnum.SYSTEM_SAVE_FAIL);
     }
@@ -67,7 +67,7 @@ public class AdminWebsiteLinkBiz {
      * @param req
      * @return
      */
-    public Result<Integer> delete(AdminWebsiteLinkDeleteReq req) {
+    public Result<String> delete(AdminWebsiteLinkDeleteReq req) {
         if (req.getId() == null) {
             return Result.error("ID不能为空");
         }
@@ -77,7 +77,7 @@ public class AdminWebsiteLinkBiz {
         }
         int results = dao.deleteById(req.getId());
         if (results > 0) {
-            return Result.success(results);
+            return Result.success("操作成功");
         }
         return Result.error(ResultEnum.SYSTEM_DELETE_FAIL);
     }
@@ -88,7 +88,7 @@ public class AdminWebsiteLinkBiz {
      * @param req
      * @return
      */
-    public Result<Integer> update(AdminWebsiteLinkUpdateReq req) {
+    public Result<String> update(AdminWebsiteLinkUpdateReq req) {
         if (req.getId() == null) {
             return Result.error("ID不能为空");
         }
@@ -99,7 +99,7 @@ public class AdminWebsiteLinkBiz {
         WebsiteLink record = BeanUtil.copyProperties(req, WebsiteLink.class);
         int results = dao.updateById(record);
         if (results > 0) {
-            return Result.success(results);
+            return Result.success("操作成功");
         }
         return Result.error(ResultEnum.SYSTEM_UPDATE_FAIL);
     }

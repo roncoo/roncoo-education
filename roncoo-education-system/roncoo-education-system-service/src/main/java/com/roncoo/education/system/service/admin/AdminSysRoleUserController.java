@@ -40,7 +40,7 @@ public class AdminSysRoleUserController {
      */
     @ApiOperation(value = "角色用户保存", notes = "用户角色添加接口")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Result<Integer> save(@RequestBody AdminSysRoleUserSaveReq sysRoleUserSaveREQ) {
+    public Result<String> save(@RequestBody AdminSysRoleUserSaveReq sysRoleUserSaveREQ) {
         return biz.save(sysRoleUserSaveREQ);
     }
 

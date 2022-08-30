@@ -39,7 +39,7 @@ public class AdminSysMenuRoleController {
      */
     @ApiOperation(value = "角色菜单保存", notes = "角色菜单添加")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Result<Integer> save(@RequestBody AdminSysMenuRoleSaveReq sysMenuRoleSaveREQ) {
+    public Result<String> save(@RequestBody AdminSysMenuRoleSaveReq sysMenuRoleSaveREQ) {
         return biz.save(sysMenuRoleSaveREQ);
     }
 

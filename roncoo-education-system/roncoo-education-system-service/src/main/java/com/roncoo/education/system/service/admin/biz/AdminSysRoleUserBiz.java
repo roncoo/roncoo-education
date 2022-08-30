@@ -47,7 +47,7 @@ public class AdminSysRoleUserBiz {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public Result<Integer> save(AdminSysRoleUserSaveReq req) {
+    public Result<String> save(AdminSysRoleUserSaveReq req) {
         if (req.getUserId() == null) {
             return Result.error("用户ID不能为空");
         }
@@ -62,6 +62,6 @@ public class AdminSysRoleUserBiz {
                 dao.save(sysRoleUser);
             }
         }
-        return Result.success(1);
+        return Result.success("操作成功");
     }
 }

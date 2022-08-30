@@ -42,7 +42,7 @@ public class AdminSysMenuRoleBiz {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public Result<Integer> save(AdminSysMenuRoleSaveReq req) {
+    public Result<String> save(AdminSysMenuRoleSaveReq req) {
         if (req.getRoleId() == null) {
             return Result.error("角色ID不能为空");
         }
@@ -57,7 +57,7 @@ public class AdminSysMenuRoleBiz {
                 dao.save(entity);
             }
         }
-        return Result.success(1);
+        return Result.success("操作成功");
     }
 
 }

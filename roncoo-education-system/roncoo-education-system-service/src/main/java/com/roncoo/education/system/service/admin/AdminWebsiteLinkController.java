@@ -37,7 +37,7 @@ public class AdminWebsiteLinkController {
      */
     @ApiOperation(value = "站点友情保存接口", notes = "站点友情保存接口")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Result<Integer> save(@RequestBody AdminWebsiteLinkSaveReq websiteLinkSaveREQ) {
+    public Result<String> save(@RequestBody AdminWebsiteLinkSaveReq websiteLinkSaveREQ) {
         return biz.save(websiteLinkSaveREQ);
     }
 
@@ -46,7 +46,7 @@ public class AdminWebsiteLinkController {
      */
     @ApiOperation(value = "站点友情删除接口", notes = "站点友情删除接口")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public Result<Integer> delete(@RequestBody AdminWebsiteLinkDeleteReq websiteLinkDeleteREQ) {
+    public Result<String> delete(@RequestBody AdminWebsiteLinkDeleteReq websiteLinkDeleteREQ) {
         return biz.delete(websiteLinkDeleteREQ);
     }
 
@@ -55,7 +55,7 @@ public class AdminWebsiteLinkController {
      */
     @ApiOperation(value = "站点友情更新接口", notes = "站点友情更新接口")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public Result<Integer> update(@RequestBody AdminWebsiteLinkUpdateReq websiteLinkUpdateREQ) {
+    public Result<String> update(@RequestBody AdminWebsiteLinkUpdateReq websiteLinkUpdateREQ) {
         return biz.update(websiteLinkUpdateREQ);
     }
 

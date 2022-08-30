@@ -47,20 +47,20 @@ public class AdminSysRoleBiz {
         return Result.success(PageUtil.transform(page, AdminSysRolePageResp.class));
     }
 
-    public Result<Integer> save(AdminSysRoleSaveReq req) {
+    public Result<String> save(AdminSysRoleSaveReq req) {
         if (StringUtils.isEmpty(req.getRoleName())) {
             return Result.error("角色名称不能为空");
         }
         SysRole record = BeanUtil.copyProperties(req, SysRole.class);
         int results = dao.save(record);
         if (results > 0) {
-            return Result.success(results);
+            return Result.success("操作成功");
         }
         return Result.error(ResultEnum.SYSTEM_SAVE_FAIL);
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public Result<Integer> delete(AdminSysRoleDeleteReq req) {
+    public Result<String> delete(AdminSysRoleDeleteReq req) {
         if (StringUtils.isEmpty(req.getId())) {
             return Result.error("角色ID不能为空");
         }
@@ -69,19 +69,19 @@ public class AdminSysRoleBiz {
         // 2、删除角色
         int results = dao.deleteById(req.getId());
         if (results > 0) {
-            return Result.success(results);
+            return Result.success("操作成功");
         }
         return Result.error(ResultEnum.SYSTEM_DELETE_FAIL);
     }
 
-    public Result<Integer> update(AdminSysRoleUpdateReq req) {
+    public Result<String> update(AdminSysRoleUpdateReq req) {
         if (req.getId() == null) {
             return Result.error("角色ID不能为空");
         }
         SysRole record = BeanUtil.copyProperties(req, SysRole.class);
         int results = dao.updateById(record);
         if (results > 0) {
-            return Result.success(results);
+            return Result.success("操作成功");
         }
         return Result.error(ResultEnum.SYSTEM_UPDATE_FAIL);
     }

@@ -82,7 +82,7 @@ public class AdminSysUserBiz {
         return Result.success(respPage);
     }
 
-    public Result<Integer> save(AdminSysUserSaveReq req) {
+    public Result<String> save(AdminSysUserSaveReq req) {
         if (!req.getMobilePwd().equals(req.getRePassword())) {
             return Result.error("密码不一致");
         }
@@ -95,23 +95,24 @@ public class AdminSysUserBiz {
         record.setMobilePsw(SHA1Util.getSign(record.getMobileSalt() + req.getMobilePwd()));
         int results = dao.save(record);
         if (results > 0) {
-            return Result.success(results);
+            return Result.success("操作成功");
         }
         return Result.error(ResultEnum.SYSTEM_SAVE_FAIL);
     }
 
     @Transactional
-    public Result<Integer> delete(AdminSysUserDeleteReq req) {
+    public Result<String> delete(AdminSysUserDeleteReq req) {
         if (req.getId() == null) {
             return Result.error("主键ID不能为空");
         }
         // 1、删除用户所有角色
         sysRoleUserDao.deleteByUserId(req.getId());
         // 2、删除用户
-        return Result.success(dao.deleteById(req.getId()));
+        dao.deleteById(req.getId());
+        return Result.success("操作成功");
     }
 
-    public Result<Integer> update(AdminSysUserUpdateReq req) {
+    public Result<String> update(AdminSysUserUpdateReq req) {
         if (req.getId() == null) {
             return Result.error("主键ID不能为空");
         }
@@ -122,7 +123,7 @@ public class AdminSysUserBiz {
         SysUser record = BeanUtil.copyProperties(req, SysUser.class);
         int results = dao.updateById(record);
         if (results > 0) {
-            return Result.success(results);
+            return Result.success("操作成功");
         }
         return Result.error(ResultEnum.SYSTEM_UPDATE_FAIL);
     }
@@ -138,7 +139,7 @@ public class AdminSysUserBiz {
         return Result.success(BeanUtil.copyProperties(sysUser, AdminSysUserViewResp.class));
     }
 
-    public Result<Integer> updatePassword(AdminSysUserUpdatePasswordReq req) {
+    public Result<String> updatePassword(AdminSysUserUpdatePasswordReq req) {
         if (req.getUserId() == null) {
             return Result.error("用户ID不能为空,请重试");
         }
@@ -151,7 +152,7 @@ public class AdminSysUserBiz {
         if (!req.getRePwd().equals(req.getMobilePsw())) {
             return Result.error("密码不一致,请重试");
         }
-
+        // TODO
         return Result.error(ResultEnum.SYSTEM_UPDATE_FAIL);
     }
 

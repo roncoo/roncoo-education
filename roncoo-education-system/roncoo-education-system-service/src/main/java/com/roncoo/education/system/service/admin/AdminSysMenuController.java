@@ -43,7 +43,7 @@ public class AdminSysMenuController {
      */
     @ApiOperation(value = "菜单保存", notes = "菜单添加")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Result<Integer> save(@RequestBody AdminSysMenuSaveReq sysMenuSaveReq) {
+    public Result<String> save(@RequestBody AdminSysMenuSaveReq sysMenuSaveReq) {
         return biz.save(sysMenuSaveReq);
     }
 
@@ -52,7 +52,7 @@ public class AdminSysMenuController {
      */
     @ApiOperation(value = "菜单删除", notes = "根据ID删除菜单")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public Result<Integer> delete(@RequestBody AdminSysMenuDeleteReq sysMenuDeleteReq) {
+    public Result<String> delete(@RequestBody AdminSysMenuDeleteReq sysMenuDeleteReq) {
         return biz.delete(sysMenuDeleteReq);
     }
 
@@ -61,7 +61,7 @@ public class AdminSysMenuController {
      */
     @ApiOperation(value = "菜单更新", notes = "菜单修改")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public Result<Integer> update(@RequestBody AdminSysMenuUpdateReq sysMenuUpdateReq) {
+    public Result<String> update(@RequestBody AdminSysMenuUpdateReq sysMenuUpdateReq) {
         return biz.update(sysMenuUpdateReq);
     }
 
@@ -91,5 +91,4 @@ public class AdminSysMenuController {
     public Result<List<String>> permissionList() {
         return biz.permissionList();
     }
-
 }
