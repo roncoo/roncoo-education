@@ -69,4 +69,11 @@ public class SysRoleUserDaoImpl implements SysRoleUserDao {
         example.createCriteria().andUserIdEqualTo(userId);
         return this.sysRoleUserMapper.selectByExample(example);
     }
+
+    @Override
+    public List<SysRoleUser> listByUserIds(List<Long> userIdList) {
+        SysRoleUserExample example = new SysRoleUserExample();
+        example.createCriteria().andUserIdIn(userIdList);
+        return this.sysRoleUserMapper.selectByExample(example);
+    }
 }

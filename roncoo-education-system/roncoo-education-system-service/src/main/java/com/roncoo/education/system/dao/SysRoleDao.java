@@ -4,6 +4,8 @@ import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRole;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleExample;
 
+import java.util.List;
+
 public interface SysRoleDao {
     int save(SysRole record);
 
@@ -16,4 +18,6 @@ public interface SysRoleDao {
     SysRole getById(Long id);
 
     Page<SysRole> page(int pageCurrent, int pageSize, SysRoleExample example);
+
+    List<SysRole> listByIds(List<Long> roleIdList);
 }

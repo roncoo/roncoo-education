@@ -1,5 +1,6 @@
 package com.roncoo.education.system.service.admin.biz;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
@@ -8,8 +9,11 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.SHA1Util;
+import com.roncoo.education.system.dao.SysRoleDao;
 import com.roncoo.education.system.dao.SysRoleUserDao;
 import com.roncoo.education.system.dao.SysUserDao;
+import com.roncoo.education.system.dao.impl.mapper.entity.SysRole;
+import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUser;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUserExample;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUserExample.Criteria;
@@ -21,6 +25,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 /**
  * 后台用户信息
  *
@@ -30,9 +39,11 @@ import org.springframework.util.StringUtils;
 public class AdminSysUserBiz {
 
     @Autowired
+    private SysUserDao dao;
+    @Autowired
     private SysRoleUserDao sysRoleUserDao;
     @Autowired
-    private SysUserDao dao;
+    private SysRoleDao sysRoleDao;
 
     public Result<Page<AdminSysUserPageResp>> listForPage(AdminSysUserPageReq req) {
         SysUserExample example = new SysUserExample();
@@ -42,7 +53,33 @@ public class AdminSysUserBiz {
         }
         example.setOrderByClause(" status_id desc, sort asc, id desc ");
         Page<SysUser> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
-        return Result.success(PageUtil.transform(page, AdminSysUserPageResp.class));
+        Page<AdminSysUserPageResp> respPage = PageUtil.transform(page, AdminSysUserPageResp.class);
+        if (CollUtil.isNotEmpty(respPage.getList())) {
+            List<Long> userIdList = respPage.getList().stream().map(AdminSysUserPageResp::getUserId).collect(Collectors.toList());
+            List<SysRoleUser> roleUserList = sysRoleUserDao.listByUserIds(userIdList);
+            if (CollUtil.isNotEmpty(roleUserList)) {
+                List<Long> roles = roleUserList.stream().map(SysRoleUser::getRoleId).collect(Collectors.toList());
+                List<SysRole> roleList = sysRoleDao.listByIds(roles);
+                Map<Long, String> roleNameMap = null;
+                if (CollUtil.isNotEmpty(roleList)) {
+                   roleNameMap = roleList.stream().collect(Collectors.toMap(SysRole::getId, SysRole::getRoleName));
+                }
+                Map<Long, List<Long>> map = roleUserList.stream().collect(Collectors.groupingBy(SysRoleUser::getUserId, Collectors.mapping(SysRoleUser::getRoleId, Collectors.toList())));
+                for(AdminSysUserPageResp resp: respPage.getList()){
+                    List<Long> roleIdList = map.get(resp.getId());
+                    if(CollUtil.isNotEmpty(roleIdList)){
+                        List<String> roleNameList = new ArrayList<>();
+                        for(Long roleId: roleIdList){
+                            if( null !=roleNameMap){
+                                roleNameList.add(roleNameMap.get(roleId));
+                            }
+                        }
+                        resp.setRoleNameList(roleNameList);
+                    }
+                }
+            }
+        }
+        return Result.success(respPage);
     }
 
     public Result<Integer> save(AdminSysUserSaveReq req) {

@@ -10,6 +10,8 @@ import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class SysRoleDaoImpl implements SysRoleDao {
     @Autowired
@@ -52,5 +54,13 @@ public class SysRoleDaoImpl implements SysRoleDao {
         example.setLimitStart(PageUtil.countOffset(pageCurrent, pageSize));
         example.setPageSize(pageSize);
         return new Page<SysRole>(count, totalPage, pageCurrent, pageSize, this.sysRoleMapper.selectByExample(example));
+    }
+
+    @Override
+    public List<SysRole> listByIds(List<Long> roleIdList) {
+        SysRoleExample example = new SysRoleExample();
+        example.createCriteria().andIdIn(roleIdList);
+        example.setOrderByClause("sort asc, id desc");
+        return this.sysRoleMapper.selectByExample(example);
     }
 }

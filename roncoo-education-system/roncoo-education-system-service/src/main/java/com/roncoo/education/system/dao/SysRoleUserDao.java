@@ -34,4 +34,6 @@ public interface SysRoleUserDao {
      * @return
      */
     List<SysRoleUser> listByUserId(Long userId);
+
+    List<SysRoleUser> listByUserIds(List<Long> userIdList);
 }
