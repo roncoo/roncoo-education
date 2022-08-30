@@ -8,7 +8,6 @@ import com.roncoo.education.common.core.enums.MenuTypeEnum;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.system.dao.SysMenuDao;
 import com.roncoo.education.system.dao.SysMenuRoleDao;
 import com.roncoo.education.system.dao.SysRoleUserDao;
@@ -77,12 +76,6 @@ public class AdminSysMenuBiz {
 
     public Result<String> save(AdminSysMenuSaveReq req) {
         SysMenu record = BeanUtil.copyProperties(req, SysMenu.class);
-
-        // 若为权限
-        if (MenuTypeEnum.PERMISSION.getCode().equals(req.getMenuType())) {
-            record.setAuthValue(JSUtil.toJsonString(req.getAuthValueList()));
-        }
-
         int results = dao.save(record);
         if (results > 0) {
             return Result.success("操作成功");

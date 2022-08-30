@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * 菜单信息-保存
@@ -38,6 +37,9 @@ public class AdminSysMenuSaveReq implements Serializable {
      */
     @ApiModelProperty(value = "菜单图标")
     private String menuIcon;
+
+    @ApiModelProperty(value = "权限认证值")
+    private String authValue;
     /**
      * 备注
      */
@@ -53,7 +55,4 @@ public class AdminSysMenuSaveReq implements Serializable {
      */
     @ApiModelProperty(value = "排序")
     private Integer sort;
-
-    @ApiModelProperty(value = "权限认证值")
-    private List<String> authValueList;
 }
