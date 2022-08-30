@@ -55,7 +55,7 @@ public class AdminSysMenuBiz {
             c.andStatusIdEqualTo(req.getStatusId());
         }
         example.setOrderByClause("sort asc, id desc");
-        List<SysMenu> sysMenuList = dao.listByExample(example);
+        List<SysMenu> sysMenuList = dao.selectByExampleWithBLOBs(example);
         return Result.success(filter(0L, sysMenuList));
     }
 

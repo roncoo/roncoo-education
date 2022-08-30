@@ -62,15 +62,15 @@ public class AdminSysUserBiz {
                 List<SysRole> roleList = sysRoleDao.listByIds(roles);
                 Map<Long, String> roleNameMap = null;
                 if (CollUtil.isNotEmpty(roleList)) {
-                   roleNameMap = roleList.stream().collect(Collectors.toMap(SysRole::getId, SysRole::getRoleName));
+                    roleNameMap = roleList.stream().collect(Collectors.toMap(SysRole::getId, SysRole::getRoleName));
                 }
                 Map<Long, List<Long>> map = roleUserList.stream().collect(Collectors.groupingBy(SysRoleUser::getUserId, Collectors.mapping(SysRoleUser::getRoleId, Collectors.toList())));
-                for(AdminSysUserPageResp resp: respPage.getList()){
+                for (AdminSysUserPageResp resp : respPage.getList()) {
                     List<Long> roleIdList = map.get(resp.getId());
-                    if(CollUtil.isNotEmpty(roleIdList)){
+                    if (CollUtil.isNotEmpty(roleIdList)) {
                         List<String> roleNameList = new ArrayList<>();
-                        for(Long roleId: roleIdList){
-                            if( null !=roleNameMap){
+                        for (Long roleId : roleIdList) {
+                            if (null != roleNameMap) {
                                 roleNameList.add(roleNameMap.get(roleId));
                             }
                         }
