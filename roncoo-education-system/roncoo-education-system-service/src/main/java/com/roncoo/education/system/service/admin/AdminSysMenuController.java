@@ -91,4 +91,5 @@ public class AdminSysMenuController {
     public Result<List<String>> permissionList() {
         return biz.permissionList();
     }
+
 }

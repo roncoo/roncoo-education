@@ -37,6 +37,7 @@ public class AdminSysMenuRoleBiz {
             for (SysMenuRole sysMenuRole : menuRoleList) {
                 roleIdList.add(sysMenuRole.getMenuId());
             }
+            return Result.success(roleIdList);
         }
         return Result.success(new ArrayList<>());
     }
