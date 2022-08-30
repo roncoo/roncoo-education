@@ -47,11 +47,11 @@ public class AdminSysMenuRoleBiz {
         if (req.getRoleId() == null) {
             return Result.error("角色ID不能为空");
         }
-        if (CollectionUtil.isNotEmpty(req.getMenuId())) {
+        if (CollectionUtil.isNotEmpty(req.getMenuIdList())) {
             // 先删除该角色下所有的菜单
             dao.deleteByRoleId(req.getRoleId());
             // 再保存新的菜单
-            for (Long menuId : req.getMenuId()) {
+            for (Long menuId : req.getMenuIdList()) {
                 SysMenuRole entity = new SysMenuRole();
                 entity.setMenuId(menuId);
                 entity.setRoleId(req.getRoleId());

@@ -23,5 +23,5 @@ public class AdminSysMenuRoleSaveReq implements Serializable {
     /**
      * 菜单ID集合
      */
-    private List<Long> menuId;
+    private List<Long> menuIdList;
 }
