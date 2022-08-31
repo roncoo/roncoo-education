@@ -20,8 +20,6 @@ public class Users implements Serializable {
 
     private String nickname;
 
-    private Integer userType;
-
     private Integer userSex;
 
     private Integer userAge;
@@ -96,14 +94,6 @@ public class Users implements Serializable {
         this.nickname = nickname == null ? null : nickname.trim();
     }
 
-    public Integer getUserType() {
-        return userType;
-    }
-
-    public void setUserType(Integer userType) {
-        this.userType = userType;
-    }
-
     public Integer getUserSex() {
         return userSex;
     }
@@ -150,7 +140,6 @@ public class Users implements Serializable {
         sb.append(", mobileSalt=").append(mobileSalt);
         sb.append(", mobilePsw=").append(mobilePsw);
         sb.append(", nickname=").append(nickname);
-        sb.append(", userType=").append(userType);
         sb.append(", userSex=").append(userSex);
         sb.append(", userAge=").append(userAge);
         sb.append(", userHead=").append(userHead);

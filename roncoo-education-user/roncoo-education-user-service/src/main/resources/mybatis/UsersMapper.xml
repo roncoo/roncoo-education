@@ -10,7 +10,6 @@
     <result column="mobile_salt" jdbcType="VARCHAR" property="mobileSalt" />
     <result column="mobile_psw" jdbcType="VARCHAR" property="mobilePsw" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
-    <result column="user_type" jdbcType="TINYINT" property="userType" />
     <result column="user_sex" jdbcType="TINYINT" property="userSex" />
     <result column="user_age" jdbcType="INTEGER" property="userAge" />
     <result column="user_head" jdbcType="VARCHAR" property="userHead" />
@@ -76,7 +75,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, gmt_create, gmt_modified, status_id, mobile, mobile_salt, mobile_psw, nickname, 
-    user_type, user_sex, user_age, user_head, remark
+    user_sex, user_age, user_head, remark
   </sql>
   <select id="selectByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UsersExample" resultMap="BaseResultMap">
     select
@@ -114,14 +113,14 @@
   <insert id="insert" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.Users">
     insert into users (id, gmt_create, gmt_modified, 
       status_id, mobile, mobile_salt, 
-      mobile_psw, nickname, user_type, 
-      user_sex, user_age, user_head, 
-      remark)
+      mobile_psw, nickname, user_sex, 
+      user_age, user_head, remark
+      )
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{statusId,jdbcType=TINYINT}, #{mobile,jdbcType=VARCHAR}, #{mobileSalt,jdbcType=VARCHAR}, 
-      #{mobilePsw,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{userType,jdbcType=TINYINT}, 
-      #{userSex,jdbcType=TINYINT}, #{userAge,jdbcType=INTEGER}, #{userHead,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR})
+      #{mobilePsw,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{userSex,jdbcType=TINYINT}, 
+      #{userAge,jdbcType=INTEGER}, #{userHead,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.Users">
     insert into users
@@ -149,9 +148,6 @@
       </if>
       <if test="nickname != null">
         nickname,
-      </if>
-      <if test="userType != null">
-        user_type,
       </if>
       <if test="userSex != null">
         user_sex,
@@ -190,9 +186,6 @@
       </if>
       <if test="nickname != null">
         #{nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="userType != null">
-        #{userType,jdbcType=TINYINT},
       </if>
       <if test="userSex != null">
         #{userSex,jdbcType=TINYINT},
@@ -241,9 +234,6 @@
       <if test="record.nickname != null">
         nickname = #{record.nickname,jdbcType=VARCHAR},
       </if>
-      <if test="record.userType != null">
-        user_type = #{record.userType,jdbcType=TINYINT},
-      </if>
       <if test="record.userSex != null">
         user_sex = #{record.userSex,jdbcType=TINYINT},
       </if>
@@ -271,7 +261,6 @@
       mobile_salt = #{record.mobileSalt,jdbcType=VARCHAR},
       mobile_psw = #{record.mobilePsw,jdbcType=VARCHAR},
       nickname = #{record.nickname,jdbcType=VARCHAR},
-      user_type = #{record.userType,jdbcType=TINYINT},
       user_sex = #{record.userSex,jdbcType=TINYINT},
       user_age = #{record.userAge,jdbcType=INTEGER},
       user_head = #{record.userHead,jdbcType=VARCHAR},
@@ -304,9 +293,6 @@
       <if test="nickname != null">
         nickname = #{nickname,jdbcType=VARCHAR},
       </if>
-      <if test="userType != null">
-        user_type = #{userType,jdbcType=TINYINT},
-      </if>
       <if test="userSex != null">
         user_sex = #{userSex,jdbcType=TINYINT},
       </if>
@@ -331,7 +317,6 @@
       mobile_salt = #{mobileSalt,jdbcType=VARCHAR},
       mobile_psw = #{mobilePsw,jdbcType=VARCHAR},
       nickname = #{nickname,jdbcType=VARCHAR},
-      user_type = #{userType,jdbcType=TINYINT},
       user_sex = #{userSex,jdbcType=TINYINT},
       user_age = #{userAge,jdbcType=INTEGER},
       user_head = #{userHead,jdbcType=VARCHAR},

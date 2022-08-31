@@ -11,7 +11,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum SexEnum {
+public enum UserSexEnum {
 
     MALE(1, "男", "green"), FEMALE(2, "女", "red"), SECRET(3, "保密", "orange");
 
