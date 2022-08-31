@@ -56,7 +56,7 @@ public class WebsiteLinkDaoImpl implements WebsiteLinkDao {
     public List<WebsiteLink> listByStatusId(Integer statusId) {
         WebsiteLinkExample example = new WebsiteLinkExample();
         example.createCriteria().andStatusIdEqualTo(statusId);
-        example.setOrderByClause(" sort desc, id desc ");
+        example.setOrderByClause(" sort asc, id desc ");
         return this.websiteLinkMapper.selectByExample(example);
     }
 

@@ -56,7 +56,7 @@ public class WebsiteNavDaoImpl implements WebsiteNavDao {
     public List<WebsiteNav> listByStatusId(Integer statusId) {
         WebsiteNavExample example = new WebsiteNavExample();
         example.createCriteria().andStatusIdEqualTo(statusId);
-        example.setOrderByClause(" sort desc, id desc ");
+        example.setOrderByClause(" sort asc, id desc ");
         return this.websiteNavMapper.selectByExample(example);
     }
 

@@ -51,7 +51,7 @@ public class AuthMsgUserBiz extends BaseBiz {
         if (req.getIsRead() != null) {
             c.andIsReadEqualTo(req.getIsRead());
         }
-        example.setOrderByClause(" sort desc, id desc ");
+        example.setOrderByClause(" sort asc, id desc ");
         Page<MsgUser> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         return Result.success(PageUtil.transform(page, AuthMsgUserResp.class));
     }

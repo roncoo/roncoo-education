@@ -55,7 +55,7 @@ public class WebsiteArticleDaoImpl implements WebsiteArticleDao {
     public List<WebsiteArticle> listByStatusId(Integer statusId) {
         WebsiteArticleExample example = new WebsiteArticleExample();
         example.createCriteria().andStatusIdEqualTo(statusId);
-        example.setOrderByClause(" sort desc, id desc ");
+        example.setOrderByClause(" sort asc, id desc ");
         return this.WebsiteArticleMapper.selectByExampleWithBLOBs(example);
     }
 }

@@ -60,7 +60,7 @@ public class SysMenuDaoImpl implements SysMenuDao {
     public List<SysMenu> listByParentId(Long parentId) {
         SysMenuExample example = new SysMenuExample();
         example.createCriteria().andParentIdEqualTo(parentId);
-        example.setOrderByClause(" sort desc, id desc");
+        example.setOrderByClause(" sort asc, id desc");
         return this.sysMenuMapper.selectByExample(example);
     }
 
