@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -23,9 +22,9 @@ public class LocalUploadImpl implements UploadFace {
 
     @Override
     public String uploadPic(MultipartFile file, Upload upload) {
-        String fileName =  IdUtil.simpleUUID() + FileUtil.getSuffix(file.getOriginalFilename());
+        String fileName =  IdUtil.simpleUUID() +"."+ FileUtil.getSuffix(file.getOriginalFilename());
         try {
-            file.transferTo(new File(LOCALPATH +fileName));
+            file.transferTo(FileUtil.file(LOCALPATH +fileName));
         } catch (IOException e) {
             log.error("本地上传错误", e);
             return "";
