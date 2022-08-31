@@ -20,6 +20,7 @@ import com.roncoo.education.system.dao.impl.mapper.entity.SysUserExample.Criteri
 import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserPageResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserViewResp;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,6 +36,7 @@ import java.util.stream.Collectors;
  *
  * @author wujing
  */
+@Slf4j
 @Component
 public class AdminSysUserBiz {
 
@@ -83,6 +85,7 @@ public class AdminSysUserBiz {
     }
 
     public Result<String> save(AdminSysUserSaveReq req) {
+        log.info("req={}", req);
         if (!req.getMobilePwd().equals(req.getRePassword())) {
             return Result.error("密码不一致");
         }
