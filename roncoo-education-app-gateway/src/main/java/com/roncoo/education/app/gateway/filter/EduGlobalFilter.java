@@ -77,14 +77,16 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
             // 路径存在关键词：/v2，不鉴权
             return chain.filter(exchange);
         }
-
+        if (FilterUtil.checkUri(uri, FilterUtil.IMAGES)) {
+            // 路径存在关键词：/images
+            return chain.filter(exchange);
+        }
         // 额外不需要token认证的接口
         if (EXCLUDE_TOKEN_URL.contains(uri)) {
             return chain.filter(exchange);
         }
 
         Long userId = getUserId(request);
-
         if (FilterUtil.checkUri(uri, FilterUtil.ADMIN_URL_PREFIX)) {
             // admin校验
             if (!stringRedisTemplate.hasKey(Constants.RedisPre.ADMINI_MENU.concat(userId.toString()))) {

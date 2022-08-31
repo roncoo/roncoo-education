@@ -25,6 +25,10 @@ public final class FilterUtil {
      */
     public static final String API_V2 = "/v2";
     /**
+     * 图片
+     */
+    public static final String IMAGES = "/images";
+    /**
      * Api路径前缀
      */
     public static final String API_URL_PREFIX = "/api";

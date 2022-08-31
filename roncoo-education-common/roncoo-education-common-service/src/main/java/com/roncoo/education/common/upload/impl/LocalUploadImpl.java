@@ -22,14 +22,14 @@ public class LocalUploadImpl implements UploadFace {
 
     @Override
     public String uploadPic(MultipartFile file, Upload upload) {
-        String fileName =  IdUtil.simpleUUID() +"."+ FileUtil.getSuffix(file.getOriginalFilename());
+        String fileName = IdUtil.simpleUUID() + "." + FileUtil.getSuffix(file.getOriginalFilename());
         try {
-            file.transferTo(FileUtil.file(FileUtil.mkParentDirs(LOCALPATH) ,fileName));
+            file.transferTo(FileUtil.file(FileUtil.mkParentDirs(LOCALPATH), fileName));
         } catch (IOException e) {
             log.error("本地上传错误", e);
             return "";
         }
-        return upload.getWebsiteDomain() + "gateway/system" + PATH + fileName;
+        return upload.getWebsiteDomain() + "gateway" + PATH + fileName;
     }
 
 }
