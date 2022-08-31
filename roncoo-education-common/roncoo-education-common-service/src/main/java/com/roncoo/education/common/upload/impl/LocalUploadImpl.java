@@ -24,7 +24,7 @@ public class LocalUploadImpl implements UploadFace {
     public String uploadPic(MultipartFile file, Upload upload) {
         String fileName = IdUtil.simpleUUID() + "." + FileUtil.getSuffix(file.getOriginalFilename());
         try {
-            file.transferTo(FileUtil.file(FileUtil.mkParentDirs(LOCALPATH), fileName));
+            file.transferTo(FileUtil.file(FileUtil.mkdir(LOCALPATH), fileName));
         } catch (IOException e) {
             log.error("本地上传错误", e);
             return "";
