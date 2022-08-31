@@ -4,7 +4,6 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysRoleUserBiz;
 import com.roncoo.education.system.service.admin.req.AdminSysRoleUserListReq;
 import com.roncoo.education.system.service.admin.req.AdminSysRoleUserSaveReq;
-import com.roncoo.education.system.service.admin.resp.AdminSysRoleUserResp;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,7 +30,7 @@ public class AdminSysRoleUserController {
      */
     @ApiOperation(value = "角色用户列出", notes = "根据用户ID列出该用户的所有角色")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result<List<AdminSysRoleUserResp>> list(@RequestBody AdminSysRoleUserListReq sysRoleUserListREQ) {
+    public Result<List<Long>> list(@RequestBody AdminSysRoleUserListReq sysRoleUserListREQ) {
         return biz.list(sysRoleUserListREQ);
     }
 
