@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
  * 用户信息
  *
  * @author wujing
- * @date 2022-08-27
+ * @date 2022-08-31
  */
 @Data
 @Accessors(chain = true)
@@ -56,11 +56,6 @@ public class UsersEditQO implements Serializable{
      * 昵称
      */
     private String nickname;
-
-    /**
-     * 用户类型(1用户，2讲师)
-     */
-    private Integer userType;
 
     /**
      * 用户性别(1男，2女，3保密)

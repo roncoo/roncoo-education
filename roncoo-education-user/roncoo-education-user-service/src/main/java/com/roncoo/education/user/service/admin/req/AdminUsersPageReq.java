@@ -1,13 +1,12 @@
 package com.roncoo.education.user.service.admin.req;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDateTime;
+import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -48,9 +47,6 @@ public class AdminUsersPageReq implements Serializable {
 
     @ApiModelProperty(value = "昵称")
     private String nickname;
-
-    @ApiModelProperty(value = "用户类型(1用户，2讲师)")
-    private Integer userType;
 
     @ApiModelProperty(value = "用户性别(1男，2女，3保密)")
     private Integer userSex;
