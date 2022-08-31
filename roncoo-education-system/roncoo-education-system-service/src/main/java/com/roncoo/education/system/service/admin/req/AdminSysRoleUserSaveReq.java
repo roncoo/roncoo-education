@@ -27,5 +27,5 @@ public class AdminSysRoleUserSaveReq implements Serializable {
      * 角色ID集合
      */
     @ApiModelProperty(value = "角色ID集合", required = true)
-    private List<Long> roleId;
+    private List<Long> roleIdList;
 }

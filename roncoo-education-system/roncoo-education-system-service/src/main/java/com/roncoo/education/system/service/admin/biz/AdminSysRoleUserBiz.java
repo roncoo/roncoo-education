@@ -48,8 +48,8 @@ public class AdminSysRoleUserBiz {
         // 先删除旧的角色
         dao.deleteByUserId(req.getUserId());
         // 再新增
-        if (CollectionUtil.isNotEmpty(req.getRoleId())) {
-            for (Long roleId : req.getRoleId()) {
+        if (CollectionUtil.isNotEmpty(req.getRoleIdList())) {
+            for (Long roleId : req.getRoleIdList()) {
                 SysRoleUser sysRoleUser = new SysRoleUser();
                 sysRoleUser.setRoleId(roleId);
                 sysRoleUser.setUserId(req.getUserId());
