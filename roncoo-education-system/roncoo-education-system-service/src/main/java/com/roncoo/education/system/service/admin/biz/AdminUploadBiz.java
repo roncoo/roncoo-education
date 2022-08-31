@@ -40,7 +40,7 @@ public class AdminUploadBiz {
     public Result<String> uploadPic(MultipartFile picFile) {
         Upload upload = getUploadForSysConfig();
         if(ObjectUtil.isNotEmpty(upload)|| StringUtils.isEmpty(upload.getStoragePlatform())){
-            UploadFace uploadFace =  uploadFaceMap.get(UploadModeEnum.getByCode(Integer.valueOf(upload.getStoragePlatform())));
+            UploadFace uploadFace =  uploadFaceMap.get(UploadModeEnum.getByCode(Integer.valueOf(upload.getStoragePlatform())).getMode());
             String fileUrl = uploadFace.uploadPic(picFile, upload);
             return Result.success(fileUrl);
         }
