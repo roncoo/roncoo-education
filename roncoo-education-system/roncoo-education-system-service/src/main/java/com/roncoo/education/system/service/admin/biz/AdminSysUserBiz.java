@@ -62,30 +62,32 @@ public class AdminSysUserBiz {
             if (CollUtil.isNotEmpty(roleUserList)) {
                 List<Long> roles = roleUserList.stream().map(SysRoleUser::getRoleId).collect(Collectors.toList());
                 List<SysRole> roleList = sysRoleDao.listByIds(roles);
-                Map<Long, String> roleNameMap = null;
-                if (CollUtil.isNotEmpty(roleList)) {
-                    roleNameMap = roleList.stream().collect(Collectors.toMap(SysRole::getId, SysRole::getRoleName));
-                }
-                Map<Long, List<Long>> map = roleUserList.stream().collect(Collectors.groupingBy(SysRoleUser::getUserId, Collectors.mapping(SysRoleUser::getRoleId, Collectors.toList())));
-                for (AdminSysUserPageResp resp : respPage.getList()) {
-                    List<Long> roleIdList = map.get(resp.getUserId());
-                    if (CollUtil.isNotEmpty(roleIdList)) {
-                        List<String> roleNameList = new ArrayList<>();
-                        for (Long roleId : roleIdList) {
-                            if (null != roleNameMap) {
-                                roleNameList.add(roleNameMap.get(roleId));
-                            }
-                        }
-                        resp.setRoleNameList(roleNameList);
-                    }
-                }
+                extracted(respPage, roleUserList, roleList);
             }
         }
         return Result.success(respPage);
     }
 
+    private void extracted(Page<AdminSysUserPageResp> respPage, List<SysRoleUser> roleUserList, List<SysRole> roleList) {
+        log.info("roleUserList={}", roleUserList);
+        log.info("roleList={}", roleList);
+        if (CollUtil.isNotEmpty(roleList)) {
+            Map<Long, String> roleNameMap = roleList.stream().collect(Collectors.toMap(SysRole::getId, SysRole::getRoleName));
+            Map<Long, List<Long>> map = roleUserList.stream().collect(Collectors.groupingBy(SysRoleUser::getUserId, Collectors.mapping(SysRoleUser::getRoleId, Collectors.toList())));
+            for (AdminSysUserPageResp resp : respPage.getList()) {
+                List<Long> roleIdList = map.get(resp.getUserId());
+                if (CollUtil.isNotEmpty(roleIdList)) {
+                    List<String> roleNameList = new ArrayList<>();
+                    for (Long roleId : roleIdList) {
+                        roleNameList.add(roleNameMap.get(roleId));
+                    }
+                    resp.setRoleNameList(roleNameList);
+                }
+            }
+        }
+    }
+
     public Result<String> save(AdminSysUserSaveReq req) {
-        log.info("req={}", req);
         if (!req.getMobilePwd().equals(req.getRePassword())) {
             return Result.error("密码不一致");
         }
