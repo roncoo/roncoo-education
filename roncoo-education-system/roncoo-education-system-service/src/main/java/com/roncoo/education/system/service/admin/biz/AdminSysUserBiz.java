@@ -51,7 +51,7 @@ public class AdminSysUserBiz {
         if (StringUtils.hasText(req.getMobile())) {
             c.andMobileEqualTo(req.getMobile());
         }
-        example.setOrderByClause(" status_id desc, sort asc, id desc ");
+        example.setOrderByClause(" sort asc, id desc ");
         Page<SysUser> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminSysUserPageResp> respPage = PageUtil.transform(page, AdminSysUserPageResp.class);
         if (CollUtil.isNotEmpty(respPage.getList())) {
@@ -66,7 +66,7 @@ public class AdminSysUserBiz {
                 }
                 Map<Long, List<Long>> map = roleUserList.stream().collect(Collectors.groupingBy(SysRoleUser::getUserId, Collectors.mapping(SysRoleUser::getRoleId, Collectors.toList())));
                 for (AdminSysUserPageResp resp : respPage.getList()) {
-                    List<Long> roleIdList = map.get(resp.getId());
+                    List<Long> roleIdList = map.get(resp.getUserId());
                     if (CollUtil.isNotEmpty(roleIdList)) {
                         List<String> roleNameList = new ArrayList<>();
                         for (Long roleId : roleIdList) {
