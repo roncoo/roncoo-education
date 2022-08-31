@@ -57,7 +57,7 @@ public class AdminSysUserBiz {
         Page<SysUser> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminSysUserPageResp> respPage = PageUtil.transform(page, AdminSysUserPageResp.class);
         if (CollUtil.isNotEmpty(respPage.getList())) {
-            List<Long> userIdList = respPage.getList().stream().map(AdminSysUserPageResp::getUserId).collect(Collectors.toList());
+            List<Long> userIdList = respPage.getList().stream().map(AdminSysUserPageResp::getId).collect(Collectors.toList());
             List<SysRoleUser> roleUserList = sysRoleUserDao.listByUserIds(userIdList);
             if (CollUtil.isNotEmpty(roleUserList)) {
                 List<Long> roles = roleUserList.stream().map(SysRoleUser::getRoleId).collect(Collectors.toList());
@@ -69,13 +69,11 @@ public class AdminSysUserBiz {
     }
 
     private void extracted(Page<AdminSysUserPageResp> respPage, List<SysRoleUser> roleUserList, List<SysRole> roleList) {
-        log.info("roleUserList={}", roleUserList);
-        log.info("roleList={}", roleList);
         if (CollUtil.isNotEmpty(roleList)) {
             Map<Long, String> roleNameMap = roleList.stream().collect(Collectors.toMap(SysRole::getId, SysRole::getRoleName));
             Map<Long, List<Long>> map = roleUserList.stream().collect(Collectors.groupingBy(SysRoleUser::getUserId, Collectors.mapping(SysRoleUser::getRoleId, Collectors.toList())));
             for (AdminSysUserPageResp resp : respPage.getList()) {
-                List<Long> roleIdList = map.get(resp.getUserId());
+                List<Long> roleIdList = map.get(resp.getId());
                 if (CollUtil.isNotEmpty(roleIdList)) {
                     List<String> roleNameList = new ArrayList<>();
                     for (Long roleId : roleIdList) {

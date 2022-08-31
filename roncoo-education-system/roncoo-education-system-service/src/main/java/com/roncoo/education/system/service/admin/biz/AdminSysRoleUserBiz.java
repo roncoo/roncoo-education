@@ -2,20 +2,18 @@ package com.roncoo.education.system.service.admin.biz;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.system.dao.SysRoleDao;
 import com.roncoo.education.system.dao.SysRoleUserDao;
-import com.roncoo.education.system.dao.impl.mapper.entity.SysRole;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser;
 import com.roncoo.education.system.service.admin.req.AdminSysRoleUserListReq;
 import com.roncoo.education.system.service.admin.req.AdminSysRoleUserSaveReq;
-import com.roncoo.education.system.service.admin.resp.AdminSysRoleUserResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 角色用户关联表
@@ -30,18 +28,14 @@ public class AdminSysRoleUserBiz {
     @Autowired
     private SysRoleDao sysRoleDao;
 
-    public Result<List<AdminSysRoleUserResp>> list(AdminSysRoleUserListReq req) {
+    public Result<List<Long>> list(AdminSysRoleUserListReq req) {
         if (req.getUserId() == null) {
             return Result.error("用户ID不能为空");
         }
         List<SysRoleUser> list = dao.listByUserId(req.getUserId());
         if (CollectionUtil.isNotEmpty(list)) {
-            List<AdminSysRoleUserResp> roleList = new ArrayList<>();
-            for (SysRoleUser sysRoleUser : list) {
-                SysRole sysRole = sysRoleDao.getById(sysRoleUser.getRoleId());
-                roleList.add(BeanUtil.copyProperties(sysRole, AdminSysRoleUserResp.class));
-            }
-            return Result.success(roleList);
+            List<Long> roleIdList = list.stream().map(SysRoleUser::getRoleId).collect(Collectors.toList());
+            return Result.success(roleIdList);
         }
         return Result.success(new ArrayList<>());
     }
