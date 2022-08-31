@@ -5,7 +5,7 @@ package com.roncoo.education.system.service.admin.biz;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.core.enums.UploadModeEnum;
+import com.roncoo.education.common.core.enums.StoragePlatformEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.upload.Upload;
 import com.roncoo.education.common.upload.UploadFace;
@@ -40,7 +40,7 @@ public class AdminUploadBiz {
     public Result<String> uploadPic(MultipartFile picFile) {
         Upload upload = getUploadForSysConfig();
         if(ObjectUtil.isNotEmpty(upload)|| StringUtils.isEmpty(upload.getStoragePlatform())){
-            UploadFace uploadFace =  uploadFaceMap.get(UploadModeEnum.getByCode(Integer.valueOf(upload.getStoragePlatform())).getMode());
+            UploadFace uploadFace =  uploadFaceMap.get(StoragePlatformEnum.getByCode(Integer.valueOf(upload.getStoragePlatform())).getMode());
             String fileUrl = uploadFace.uploadPic(picFile, upload);
             return Result.success(fileUrl);
         }

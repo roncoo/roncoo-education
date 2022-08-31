@@ -10,7 +10,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum UploadModeEnum {
+public enum StoragePlatformEnum {
 
     LOCAL(1, "本地", "local"), MinIO(2, "MinIO", "minio");
 
@@ -26,8 +26,8 @@ public enum UploadModeEnum {
      * @param code 编码
      * @return 枚举信息
      */
-    public static UploadModeEnum getByCode(Integer code) {
-        for (UploadModeEnum val : UploadModeEnum.values()) {
+    public static StoragePlatformEnum getByCode(Integer code) {
+        for (StoragePlatformEnum val : StoragePlatformEnum.values()) {
             if (val.getCode().equals(code)) {
                 return val;
             }
