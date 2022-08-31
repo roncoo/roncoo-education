@@ -1,9 +1,11 @@
 package com.roncoo.education.common.config;
 
 import com.roncoo.education.common.core.tools.Constants;
+import com.roncoo.education.common.upload.impl.LocalUploadImpl;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler(LocalUploadImpl.PATH+"/**").addResourceLocations("file:" + LocalUploadImpl.LOCALPATH);
+    }
+
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

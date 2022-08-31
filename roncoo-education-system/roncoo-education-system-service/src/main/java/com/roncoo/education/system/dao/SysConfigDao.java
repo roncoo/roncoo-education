@@ -71,4 +71,6 @@ public interface SysConfigDao {
      * @return 系统配置数量
      */
     int countByExample(SysConfigExample example);
+
+    SysConfig getByConfigKey(String configKey);
 }

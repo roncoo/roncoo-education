@@ -1,5 +1,6 @@
 package com.roncoo.education.system.dao.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
@@ -70,5 +71,17 @@ public class SysConfigDaoImpl implements SysConfigDao {
     @Override
     public int countByExample(SysConfigExample example) {
         return this.mapper.countByExample(example);
+    }
+
+    @Override
+    public SysConfig getByConfigKey(String configKey) {
+        SysConfigExample example = new SysConfigExample();
+        example.createCriteria().andConfigKeyEqualTo(configKey);
+        example.setOrderByClause("sort asc, id desc");
+        List<SysConfig> configList = this.mapper.selectByExampleWithBLOBs(example);
+        if(CollUtil.isNotEmpty(configList)){
+            return configList.get(0);
+        }
+        return null;
     }
 }
