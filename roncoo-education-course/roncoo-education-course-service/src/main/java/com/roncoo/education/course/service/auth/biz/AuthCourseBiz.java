@@ -1,7 +1,9 @@
 package com.roncoo.education.course.service.auth.biz;
 
+import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.CourseDao;
+import com.roncoo.education.course.service.auth.req.AuthCourseReq;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -19,4 +21,7 @@ public class AuthCourseBiz extends BaseBiz {
     @NotNull
     private final CourseDao dao;
 
+    public Result<String> sign(AuthCourseReq req) {
+        return null;
+    }
 }
