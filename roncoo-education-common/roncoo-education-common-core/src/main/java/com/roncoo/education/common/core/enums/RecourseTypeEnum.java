@@ -13,7 +13,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum RecourseTypeEnum {
 
-    VIDEO(1, "视频"), FILE(2, "文件");
+    VIDEO(1, "视频"), AUDIO(2, "音频"), DOC(3, "文档");
 
     private Integer code;
 
