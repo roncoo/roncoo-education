@@ -11,7 +11,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum RecourseTypeEnum {
+public enum ResourceTypeEnum {
 
     VIDEO(1, "视频"), AUDIO(2, "音频"), DOC(3, "文档");
 
