@@ -73,4 +73,6 @@ public interface CourseChapterPeriodDao {
     int countByExample(CourseChapterPeriodExample example);
 
     List<CourseChapterPeriod> listByCourseIdAndStatusId(Long courseId, Integer statusId);
+
+    List<CourseChapterPeriod> listByChapterIds(List<Long> chapterIds);
 }

@@ -8,6 +8,7 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -51,4 +52,6 @@ public class AdminCourseChapterPageResp implements Serializable {
 
     @ApiModelProperty(value = "是否免费(1免费，0收费)")
     private Integer isFree;
+
+    private List<AdminCourseChapterPeriodViewResp> periodViewRespList;
 }

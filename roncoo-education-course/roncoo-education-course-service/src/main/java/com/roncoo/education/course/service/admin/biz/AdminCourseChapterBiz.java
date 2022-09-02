@@ -1,23 +1,30 @@
 package com.roncoo.education.course.service.admin.biz;
 
+import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.CourseChapterDao;
+import com.roncoo.education.course.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapter;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterExample.Criteria;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterEditReq;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterPageReq;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterSaveReq;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterPageResp;
+import com.roncoo.education.course.service.admin.resp.AdminCourseChapterPeriodViewResp;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * ADMIN-章节信息
@@ -30,6 +37,8 @@ public class AdminCourseChapterBiz extends BaseBiz {
 
     @NotNull
     private final CourseChapterDao dao;
+    @NotNull
+    private final CourseChapterPeriodDao courseChapterPeriodDao;
 
     /**
      * 章节信息分页
@@ -42,6 +51,16 @@ public class AdminCourseChapterBiz extends BaseBiz {
         Criteria c = example.createCriteria();
         Page<CourseChapter> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminCourseChapterPageResp> respPage = PageUtil.transform(page, AdminCourseChapterPageResp.class);
+        if (CollUtil.isNotEmpty(respPage.getList())) {
+            List<Long> chapterIds = respPage.getList().stream().map(AdminCourseChapterPageResp::getId).collect(Collectors.toList());
+            List<CourseChapterPeriod> periodList = courseChapterPeriodDao.listByChapterIds(chapterIds);
+            if (CollUtil.isNotEmpty(periodList)) {
+                Map<Long, List<CourseChapterPeriod>> periodMap = periodList.stream().collect(Collectors.groupingBy(CourseChapterPeriod::getChapterId, Collectors.toList()));
+                for (AdminCourseChapterPageResp resp : respPage.getList()) {
+                    resp.setPeriodViewRespList(BeanUtil.copyProperties(periodMap.get(resp.getId()), AdminCourseChapterPeriodViewResp.class));
+                }
+            }
+        }
         return Result.success(respPage);
     }
 
