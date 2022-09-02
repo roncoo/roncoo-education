@@ -59,11 +59,11 @@ public class AdminCoursePageResp implements Serializable {
     @ApiModelProperty(value = "是否免费(1:免费，0:收费)")
     private Integer isFree;
 
-    @ApiModelProperty(value = "原价")
-    private BigDecimal courseOriginal;
+    @ApiModelProperty(value = "划线价")
+    private BigDecimal rulingPrice;
 
-    @ApiModelProperty(value = "优惠价")
-    private BigDecimal courseDiscount;
+    @ApiModelProperty(value = "价格")
+    private BigDecimal coursePrice;
 
     @ApiModelProperty(value = "是否上架(1:上架，0:下架)")
     private Integer isPutaway;
