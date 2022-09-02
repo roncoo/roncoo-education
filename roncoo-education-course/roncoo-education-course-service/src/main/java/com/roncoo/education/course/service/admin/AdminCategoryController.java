@@ -4,8 +4,10 @@ import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.service.admin.biz.AdminCategoryBiz;
 import com.roncoo.education.course.service.admin.req.AdminCategoryEditReq;
+import com.roncoo.education.course.service.admin.req.AdminCategoryListReq;
 import com.roncoo.education.course.service.admin.req.AdminCategoryPageReq;
 import com.roncoo.education.course.service.admin.req.AdminCategorySaveReq;
+import com.roncoo.education.course.service.admin.resp.AdminCategoryListResp;
 import com.roncoo.education.course.service.admin.resp.AdminCategoryPageResp;
 import com.roncoo.education.course.service.admin.resp.AdminCategoryViewResp;
 import io.swagger.annotations.Api;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * ADMIN-分类
@@ -30,6 +33,12 @@ public class AdminCategoryController {
 
     @NotNull
     private final AdminCategoryBiz biz;
+
+    @ApiOperation(value = "分类分页", notes = "分类分页")
+    @PostMapping(value = "/list")
+    public Result<List<AdminCategoryListResp>> list(@RequestBody AdminCategoryListReq req) {
+        return biz.list(req);
+    }
 
     @ApiOperation(value = "分类分页", notes = "分类分页")
     @PostMapping(value = "/page")

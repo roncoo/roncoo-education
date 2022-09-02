@@ -1,5 +1,7 @@
 package com.roncoo.education.course.service.admin.biz;
 
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
@@ -10,14 +12,18 @@ import com.roncoo.education.course.dao.impl.mapper.entity.Category;
 import com.roncoo.education.course.dao.impl.mapper.entity.CategoryExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.CategoryExample.Criteria;
 import com.roncoo.education.course.service.admin.req.AdminCategoryEditReq;
+import com.roncoo.education.course.service.admin.req.AdminCategoryListReq;
 import com.roncoo.education.course.service.admin.req.AdminCategoryPageReq;
 import com.roncoo.education.course.service.admin.req.AdminCategorySaveReq;
+import com.roncoo.education.course.service.admin.resp.AdminCategoryListResp;
 import com.roncoo.education.course.service.admin.resp.AdminCategoryPageResp;
 import com.roncoo.education.course.service.admin.resp.AdminCategoryViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * ADMIN-分类
@@ -30,6 +36,32 @@ public class AdminCategoryBiz extends BaseBiz {
 
     @NotNull
     private final CategoryDao dao;
+
+    public Result<List<AdminCategoryListResp>> list(AdminCategoryListReq req) {
+        CategoryExample example = new CategoryExample();
+        Criteria c = example.createCriteria();
+        c.andCategoryTypeEqualTo(req.getCategoryType());
+        if (ObjectUtil.isNotEmpty(req.getStatusId())) {
+            c.andStatusIdEqualTo(req.getStatusId());
+        }
+        List<Category> categoryList = dao.listByExample(example);
+        return Result.success(filter(0L, categoryList));
+    }
+
+    /**
+     * 菜单层级处理
+     */
+    private List<AdminCategoryListResp> filter(Long parentId, List<Category> categoryList) {
+        List<Category> list = categoryList.stream().filter(item -> parentId.compareTo(item.getParentId()) == 0).collect(Collectors.toList());
+        if (CollectionUtil.isNotEmpty(list)) {
+            List<AdminCategoryListResp> respList = BeanUtil.copyProperties(list, AdminCategoryListResp.class);
+            for (AdminCategoryListResp resp : respList) {
+                resp.setChildrenList(filter(resp.getId(), categoryList));
+            }
+            return respList;
+        }
+        return null;
+    }
 
     /**
      * 分类分页
