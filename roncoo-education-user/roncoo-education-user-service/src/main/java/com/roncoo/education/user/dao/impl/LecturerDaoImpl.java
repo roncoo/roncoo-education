@@ -2,6 +2,7 @@ package com.roncoo.education.user.dao.impl;
 
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.tools.IdWorker;
 import com.roncoo.education.user.dao.LecturerDao;
 import com.roncoo.education.user.dao.impl.mapper.LecturerMapper;
 import com.roncoo.education.user.dao.impl.mapper.entity.Lecturer;
@@ -18,6 +19,9 @@ public class LecturerDaoImpl implements LecturerDao {
 
     @Override
     public int save(Lecturer record) {
+        if (record.getId() == null) {
+            record.setId(IdWorker.getId());
+        }
         return this.lecturerMapper.insertSelective(record);
     }
 

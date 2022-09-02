@@ -20,7 +20,9 @@ public class UsersDaoImpl extends AbstractBaseJdbc implements UsersDao {
 
     @Override
     public int save(Users record) {
-        record.setId(IdWorker.getId());
+        if (record.getId() == null) {
+            record.setId(IdWorker.getId());
+        }
         return this.usersMapper.insertSelective(record);
     }
 

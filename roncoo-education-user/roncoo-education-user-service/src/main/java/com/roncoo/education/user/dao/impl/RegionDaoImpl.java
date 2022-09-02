@@ -19,7 +19,9 @@ public class RegionDaoImpl implements RegionDao {
 
     @Override
     public int save(Region record) {
-        record.setId(IdWorker.getId());
+        if (record.getId() == null) {
+            record.setId(IdWorker.getId());
+        }
         return this.regionMapper.insertSelective(record);
     }
 
