@@ -62,4 +62,10 @@ public class AdminCourseController {
     public Result<String> delete(@RequestParam Long id) {
         return biz.delete(id);
     }
+
+    @ApiOperation(value = "ES同步", notes = "将课程同步到ES")
+    @GetMapping(value = "/es")
+    public Result<String> syncEs() {
+        return biz.syncEs();
+    }
 }

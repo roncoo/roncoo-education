@@ -1,9 +1,13 @@
 package com.roncoo.education.course.service.admin.biz;
 
+import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.PutawayEnum;
+import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.es.EsCourse;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Course;
@@ -15,9 +19,16 @@ import com.roncoo.education.course.service.admin.req.AdminCourseSaveReq;
 import com.roncoo.education.course.service.admin.resp.AdminCoursePageResp;
 import com.roncoo.education.course.service.admin.resp.AdminCourseViewResp;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
+import org.springframework.data.elasticsearch.core.query.IndexQuery;
+import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ADMIN-课程信息
@@ -30,6 +41,9 @@ public class AdminCourseBiz extends BaseBiz {
 
     @NotNull
     private final CourseDao dao;
+
+    @Autowired
+    private ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     /**
      * 课程信息分页
@@ -54,6 +68,8 @@ public class AdminCourseBiz extends BaseBiz {
     public Result<String> save(AdminCourseSaveReq req) {
         Course record = BeanUtil.copyProperties(req, Course.class);
         if (dao.save(record) > 0) {
+            EsCourse esCourse = BeanUtil.copyProperties(record, EsCourse.class);
+            elasticsearchRestTemplate.index(new IndexQueryBuilder().withObject(esCourse).build(), IndexCoordinates.of(EsCourse.COURSE));
             return Result.success("操作成功");
         }
         return Result.error("操作失败");
@@ -78,6 +94,8 @@ public class AdminCourseBiz extends BaseBiz {
     public Result<String> edit(AdminCourseEditReq req) {
         Course record = BeanUtil.copyProperties(req, Course.class);
         if (dao.updateById(record) > 0) {
+            EsCourse esCourse = BeanUtil.copyProperties(record, EsCourse.class);
+            elasticsearchRestTemplate.index(new IndexQueryBuilder().withObject(esCourse).build(), IndexCoordinates.of(EsCourse.COURSE));
             return Result.success("操作成功");
         }
         return Result.error("操作失败");
@@ -91,8 +109,27 @@ public class AdminCourseBiz extends BaseBiz {
      */
     public Result<String> delete(Long id) {
         if (dao.deleteById(id) > 0) {
+            elasticsearchRestTemplate.delete(id.toString(), EsCourse.class);
             return Result.success("操作成功");
         }
         return Result.error("操作失败");
+    }
+
+    public Result<String> syncEs() {
+        // 获取全部课程
+        CourseExample example = new CourseExample();
+        example.createCriteria().andIsPutawayEqualTo(PutawayEnum.UP.getCode()).andStatusIdEqualTo(StatusIdEnum.YES.getCode());
+        List<Course> courseList = dao.listByExample(example);
+        if (CollUtil.isNotEmpty(courseList)) {
+            List<IndexQuery> queries = new ArrayList<>();
+            for (Course course : courseList) {
+                EsCourse esCourse = BeanUtil.copyProperties(course, EsCourse.class);
+                queries.add(new IndexQueryBuilder().withObject(esCourse).build());
+            }
+            // 更新es
+            elasticsearchRestTemplate.indexOps(EsCourse.class).delete();
+            elasticsearchRestTemplate.bulkIndex(queries, IndexCoordinates.of(EsCourse.COURSE));
+        }
+        return Result.success("操作成功");
     }
 }

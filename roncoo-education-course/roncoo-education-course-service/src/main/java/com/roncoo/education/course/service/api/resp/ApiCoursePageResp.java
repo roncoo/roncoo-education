@@ -62,10 +62,4 @@ public class ApiCoursePageResp implements Serializable {
 
     @ApiModelProperty(value = "课程排序(前端显示使用)")
     private Integer courseSort;
-
-//    @ApiModelProperty(value = "购买人数")
-//    private Integer countBuy;
-//
-//    @ApiModelProperty(value = "学习人数")
-//    private Integer countStudy;
 }
