@@ -45,22 +45,22 @@ public class ResourceViewVO implements Serializable{
     /**
      * 资源名称
      */
-    private String recourseName;
+    private String recourceName;
 
     /**
      * 资源类型(1:视频2:音频;3:文档)
      */
-    private Integer recourseType;
+    private Integer recourceType;
 
     /**
      * 资源大小
      */
-    private Long recourseSize;
+    private Long recourceSize;
 
     /**
      * 资源地址
      */
-    private String recourseUrl;
+    private String recourceUrl;
 
     /**
      * 状态(1待上传，2上传成功，3上传失败)
