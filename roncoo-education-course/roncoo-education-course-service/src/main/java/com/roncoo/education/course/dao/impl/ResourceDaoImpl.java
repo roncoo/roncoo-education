@@ -17,7 +17,7 @@ import java.util.List;
  * 课程视频信息 服务实现类
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-09-02
  */
 @Repository
 @RequiredArgsConstructor

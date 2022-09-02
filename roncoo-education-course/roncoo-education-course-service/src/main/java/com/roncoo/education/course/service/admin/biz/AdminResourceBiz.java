@@ -1,19 +1,19 @@
 package com.roncoo.education.course.service.admin.biz;
 
+import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.service.BaseBiz;
-import com.roncoo.education.course.dao.ResourceDao;
-import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
-import com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample;
-import com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample.Criteria;
 import com.roncoo.education.course.service.admin.req.AdminResourceEditReq;
 import com.roncoo.education.course.service.admin.req.AdminResourcePageReq;
 import com.roncoo.education.course.service.admin.req.AdminResourceSaveReq;
 import com.roncoo.education.course.service.admin.resp.AdminResourcePageResp;
 import com.roncoo.education.course.service.admin.resp.AdminResourceViewResp;
+import com.roncoo.education.course.dao.ResourceDao;
+import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
+import com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample;
+import com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

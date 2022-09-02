@@ -8,13 +8,12 @@
     <result column="status_id" jdbcType="TINYINT" property="statusId" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="recourse_name" jdbcType="VARCHAR" property="recourseName" />
-    <result column="recourse_size" jdbcType="BIGINT" property="recourseSize" />
     <result column="recourse_type" jdbcType="TINYINT" property="recourseType" />
+    <result column="recourse_size" jdbcType="BIGINT" property="recourseSize" />
+    <result column="recourse_url" jdbcType="VARCHAR" property="recourseUrl" />
     <result column="video_status" jdbcType="TINYINT" property="videoStatus" />
     <result column="video_length" jdbcType="VARCHAR" property="videoLength" />
     <result column="video_vid" jdbcType="VARCHAR" property="videoVid" />
-    <result column="file_url" jdbcType="VARCHAR" property="fileUrl" />
-    <result column="file_name" jdbcType="VARCHAR" property="fileName" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -75,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, status_id, sort, recourse_name, recourse_size, recourse_type, 
-    video_status, video_length, video_vid, file_url, file_name
+    id, gmt_create, gmt_modified, status_id, sort, recourse_name, recourse_type, recourse_size, 
+    recourse_url, video_status, video_length, video_vid
   </sql>
   <select id="selectByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample" resultMap="BaseResultMap">
     select
@@ -114,14 +113,14 @@
   <insert id="insert" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Resource">
     insert into resource (id, gmt_create, gmt_modified, 
       status_id, sort, recourse_name, 
-      recourse_size, recourse_type, video_status, 
-      video_length, video_vid, file_url, 
-      file_name)
+      recourse_type, recourse_size, recourse_url, 
+      video_status, video_length, video_vid
+      )
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{recourseName,jdbcType=VARCHAR}, 
-      #{recourseSize,jdbcType=BIGINT}, #{recourseType,jdbcType=TINYINT}, #{videoStatus,jdbcType=TINYINT}, 
-      #{videoLength,jdbcType=VARCHAR}, #{videoVid,jdbcType=VARCHAR}, #{fileUrl,jdbcType=VARCHAR}, 
-      #{fileName,jdbcType=VARCHAR})
+      #{recourseType,jdbcType=TINYINT}, #{recourseSize,jdbcType=BIGINT}, #{recourseUrl,jdbcType=VARCHAR}, 
+      #{videoStatus,jdbcType=TINYINT}, #{videoLength,jdbcType=VARCHAR}, #{videoVid,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Resource">
     insert into resource
@@ -144,11 +143,14 @@
       <if test="recourseName != null">
         recourse_name,
       </if>
+      <if test="recourseType != null">
+        recourse_type,
+      </if>
       <if test="recourseSize != null">
         recourse_size,
       </if>
-      <if test="recourseType != null">
-        recourse_type,
+      <if test="recourseUrl != null">
+        recourse_url,
       </if>
       <if test="videoStatus != null">
         video_status,
@@ -158,12 +160,6 @@
       </if>
       <if test="videoVid != null">
         video_vid,
-      </if>
-      <if test="fileUrl != null">
-        file_url,
-      </if>
-      <if test="fileName != null">
-        file_name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -185,11 +181,14 @@
       <if test="recourseName != null">
         #{recourseName,jdbcType=VARCHAR},
       </if>
+      <if test="recourseType != null">
+        #{recourseType,jdbcType=TINYINT},
+      </if>
       <if test="recourseSize != null">
         #{recourseSize,jdbcType=BIGINT},
       </if>
-      <if test="recourseType != null">
-        #{recourseType,jdbcType=TINYINT},
+      <if test="recourseUrl != null">
+        #{recourseUrl,jdbcType=VARCHAR},
       </if>
       <if test="videoStatus != null">
         #{videoStatus,jdbcType=TINYINT},
@@ -199,12 +198,6 @@
       </if>
       <if test="videoVid != null">
         #{videoVid,jdbcType=VARCHAR},
-      </if>
-      <if test="fileUrl != null">
-        #{fileUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="fileName != null">
-        #{fileName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -235,11 +228,14 @@
       <if test="record.recourseName != null">
         recourse_name = #{record.recourseName,jdbcType=VARCHAR},
       </if>
+      <if test="record.recourseType != null">
+        recourse_type = #{record.recourseType,jdbcType=TINYINT},
+      </if>
       <if test="record.recourseSize != null">
         recourse_size = #{record.recourseSize,jdbcType=BIGINT},
       </if>
-      <if test="record.recourseType != null">
-        recourse_type = #{record.recourseType,jdbcType=TINYINT},
+      <if test="record.recourseUrl != null">
+        recourse_url = #{record.recourseUrl,jdbcType=VARCHAR},
       </if>
       <if test="record.videoStatus != null">
         video_status = #{record.videoStatus,jdbcType=TINYINT},
@@ -249,12 +245,6 @@
       </if>
       <if test="record.videoVid != null">
         video_vid = #{record.videoVid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.fileUrl != null">
-        file_url = #{record.fileUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="record.fileName != null">
-        file_name = #{record.fileName,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -269,13 +259,12 @@
       status_id = #{record.statusId,jdbcType=TINYINT},
       sort = #{record.sort,jdbcType=INTEGER},
       recourse_name = #{record.recourseName,jdbcType=VARCHAR},
-      recourse_size = #{record.recourseSize,jdbcType=BIGINT},
       recourse_type = #{record.recourseType,jdbcType=TINYINT},
+      recourse_size = #{record.recourseSize,jdbcType=BIGINT},
+      recourse_url = #{record.recourseUrl,jdbcType=VARCHAR},
       video_status = #{record.videoStatus,jdbcType=TINYINT},
       video_length = #{record.videoLength,jdbcType=VARCHAR},
-      video_vid = #{record.videoVid,jdbcType=VARCHAR},
-      file_url = #{record.fileUrl,jdbcType=VARCHAR},
-      file_name = #{record.fileName,jdbcType=VARCHAR}
+      video_vid = #{record.videoVid,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -298,11 +287,14 @@
       <if test="recourseName != null">
         recourse_name = #{recourseName,jdbcType=VARCHAR},
       </if>
+      <if test="recourseType != null">
+        recourse_type = #{recourseType,jdbcType=TINYINT},
+      </if>
       <if test="recourseSize != null">
         recourse_size = #{recourseSize,jdbcType=BIGINT},
       </if>
-      <if test="recourseType != null">
-        recourse_type = #{recourseType,jdbcType=TINYINT},
+      <if test="recourseUrl != null">
+        recourse_url = #{recourseUrl,jdbcType=VARCHAR},
       </if>
       <if test="videoStatus != null">
         video_status = #{videoStatus,jdbcType=TINYINT},
@@ -312,12 +304,6 @@
       </if>
       <if test="videoVid != null">
         video_vid = #{videoVid,jdbcType=VARCHAR},
-      </if>
-      <if test="fileUrl != null">
-        file_url = #{fileUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="fileName != null">
-        file_name = #{fileName,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -329,13 +315,12 @@
       status_id = #{statusId,jdbcType=TINYINT},
       sort = #{sort,jdbcType=INTEGER},
       recourse_name = #{recourseName,jdbcType=VARCHAR},
-      recourse_size = #{recourseSize,jdbcType=BIGINT},
       recourse_type = #{recourseType,jdbcType=TINYINT},
+      recourse_size = #{recourseSize,jdbcType=BIGINT},
+      recourse_url = #{recourseUrl,jdbcType=VARCHAR},
       video_status = #{videoStatus,jdbcType=TINYINT},
       video_length = #{videoLength,jdbcType=VARCHAR},
-      video_vid = #{videoVid,jdbcType=VARCHAR},
-      file_url = #{fileUrl,jdbcType=VARCHAR},
-      file_name = #{fileName,jdbcType=VARCHAR}
+      video_vid = #{videoVid,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

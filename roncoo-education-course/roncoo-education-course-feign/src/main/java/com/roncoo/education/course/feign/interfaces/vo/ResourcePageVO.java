@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
  * 课程视频信息
  *
  * @author wujing
- * @date 2022-08-27
+ * @date 2022-09-02
  */
 @Data
 @Accessors(chain = true)
@@ -43,22 +43,27 @@ public class ResourcePageVO implements Serializable{
     private Integer sort;
 
     /**
-     * 视频名称
+     * 资源名称
      */
     private String recourseName;
 
     /**
-     * 文件大小
-     */
-    private Long recourseSize;
-
-    /**
-     * 资源类型(1:视频;2:文件)
+     * 资源类型(1:视频2:音频;3:文档)
      */
     private Integer recourseType;
 
     /**
-     * 视频状态(1待上传，2上传成功，3上传失败)
+     * 资源大小
+     */
+    private Long recourseSize;
+
+    /**
+     * 资源地址
+     */
+    private String recourseUrl;
+
+    /**
+     * 状态(1待上传，2上传成功，3上传失败)
      */
     private Integer videoStatus;
 
@@ -68,17 +73,7 @@ public class ResourcePageVO implements Serializable{
     private String videoLength;
 
     /**
-     * 视频ID
+     * vid
      */
     private String videoVid;
-
-    /**
-     * 文件地址
-     */
-    private String fileUrl;
-
-    /**
-     * 文件名称
-     */
-    private String fileName;
 }

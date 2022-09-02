@@ -495,6 +495,66 @@ public class ResourceExample {
             return (Criteria) this;
         }
 
+        public Criteria andRecourseTypeIsNull() {
+            addCriterion("recourse_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecourseTypeIsNotNull() {
+            addCriterion("recourse_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecourseTypeEqualTo(Integer value) {
+            addCriterion("recourse_type =", value, "recourseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecourseTypeNotEqualTo(Integer value) {
+            addCriterion("recourse_type <>", value, "recourseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecourseTypeGreaterThan(Integer value) {
+            addCriterion("recourse_type >", value, "recourseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecourseTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("recourse_type >=", value, "recourseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecourseTypeLessThan(Integer value) {
+            addCriterion("recourse_type <", value, "recourseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecourseTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("recourse_type <=", value, "recourseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecourseTypeIn(List<Integer> values) {
+            addCriterion("recourse_type in", values, "recourseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecourseTypeNotIn(List<Integer> values) {
+            addCriterion("recourse_type not in", values, "recourseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecourseTypeBetween(Integer value1, Integer value2) {
+            addCriterion("recourse_type between", value1, value2, "recourseType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecourseTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("recourse_type not between", value1, value2, "recourseType");
+            return (Criteria) this;
+        }
+
         public Criteria andRecourseSizeIsNull() {
             addCriterion("recourse_size is null");
             return (Criteria) this;
@@ -555,63 +615,73 @@ public class ResourceExample {
             return (Criteria) this;
         }
 
-        public Criteria andRecourseTypeIsNull() {
-            addCriterion("recourse_type is null");
+        public Criteria andRecourseUrlIsNull() {
+            addCriterion("recourse_url is null");
             return (Criteria) this;
         }
 
-        public Criteria andRecourseTypeIsNotNull() {
-            addCriterion("recourse_type is not null");
+        public Criteria andRecourseUrlIsNotNull() {
+            addCriterion("recourse_url is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRecourseTypeEqualTo(Integer value) {
-            addCriterion("recourse_type =", value, "recourseType");
+        public Criteria andRecourseUrlEqualTo(String value) {
+            addCriterion("recourse_url =", value, "recourseUrl");
             return (Criteria) this;
         }
 
-        public Criteria andRecourseTypeNotEqualTo(Integer value) {
-            addCriterion("recourse_type <>", value, "recourseType");
+        public Criteria andRecourseUrlNotEqualTo(String value) {
+            addCriterion("recourse_url <>", value, "recourseUrl");
             return (Criteria) this;
         }
 
-        public Criteria andRecourseTypeGreaterThan(Integer value) {
-            addCriterion("recourse_type >", value, "recourseType");
+        public Criteria andRecourseUrlGreaterThan(String value) {
+            addCriterion("recourse_url >", value, "recourseUrl");
             return (Criteria) this;
         }
 
-        public Criteria andRecourseTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("recourse_type >=", value, "recourseType");
+        public Criteria andRecourseUrlGreaterThanOrEqualTo(String value) {
+            addCriterion("recourse_url >=", value, "recourseUrl");
             return (Criteria) this;
         }
 
-        public Criteria andRecourseTypeLessThan(Integer value) {
-            addCriterion("recourse_type <", value, "recourseType");
+        public Criteria andRecourseUrlLessThan(String value) {
+            addCriterion("recourse_url <", value, "recourseUrl");
             return (Criteria) this;
         }
 
-        public Criteria andRecourseTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("recourse_type <=", value, "recourseType");
+        public Criteria andRecourseUrlLessThanOrEqualTo(String value) {
+            addCriterion("recourse_url <=", value, "recourseUrl");
             return (Criteria) this;
         }
 
-        public Criteria andRecourseTypeIn(List<Integer> values) {
-            addCriterion("recourse_type in", values, "recourseType");
+        public Criteria andRecourseUrlLike(String value) {
+            addCriterion("recourse_url like", value, "recourseUrl");
             return (Criteria) this;
         }
 
-        public Criteria andRecourseTypeNotIn(List<Integer> values) {
-            addCriterion("recourse_type not in", values, "recourseType");
+        public Criteria andRecourseUrlNotLike(String value) {
+            addCriterion("recourse_url not like", value, "recourseUrl");
             return (Criteria) this;
         }
 
-        public Criteria andRecourseTypeBetween(Integer value1, Integer value2) {
-            addCriterion("recourse_type between", value1, value2, "recourseType");
+        public Criteria andRecourseUrlIn(List<String> values) {
+            addCriterion("recourse_url in", values, "recourseUrl");
             return (Criteria) this;
         }
 
-        public Criteria andRecourseTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("recourse_type not between", value1, value2, "recourseType");
+        public Criteria andRecourseUrlNotIn(List<String> values) {
+            addCriterion("recourse_url not in", values, "recourseUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecourseUrlBetween(String value1, String value2) {
+            addCriterion("recourse_url between", value1, value2, "recourseUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecourseUrlNotBetween(String value1, String value2) {
+            addCriterion("recourse_url not between", value1, value2, "recourseUrl");
             return (Criteria) this;
         }
 
@@ -812,146 +882,6 @@ public class ResourceExample {
 
         public Criteria andVideoVidNotBetween(String value1, String value2) {
             addCriterion("video_vid not between", value1, value2, "videoVid");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileUrlIsNull() {
-            addCriterion("file_url is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileUrlIsNotNull() {
-            addCriterion("file_url is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileUrlEqualTo(String value) {
-            addCriterion("file_url =", value, "fileUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileUrlNotEqualTo(String value) {
-            addCriterion("file_url <>", value, "fileUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileUrlGreaterThan(String value) {
-            addCriterion("file_url >", value, "fileUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileUrlGreaterThanOrEqualTo(String value) {
-            addCriterion("file_url >=", value, "fileUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileUrlLessThan(String value) {
-            addCriterion("file_url <", value, "fileUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileUrlLessThanOrEqualTo(String value) {
-            addCriterion("file_url <=", value, "fileUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileUrlLike(String value) {
-            addCriterion("file_url like", value, "fileUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileUrlNotLike(String value) {
-            addCriterion("file_url not like", value, "fileUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileUrlIn(List<String> values) {
-            addCriterion("file_url in", values, "fileUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileUrlNotIn(List<String> values) {
-            addCriterion("file_url not in", values, "fileUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileUrlBetween(String value1, String value2) {
-            addCriterion("file_url between", value1, value2, "fileUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileUrlNotBetween(String value1, String value2) {
-            addCriterion("file_url not between", value1, value2, "fileUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileNameIsNull() {
-            addCriterion("file_name is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileNameIsNotNull() {
-            addCriterion("file_name is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileNameEqualTo(String value) {
-            addCriterion("file_name =", value, "fileName");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileNameNotEqualTo(String value) {
-            addCriterion("file_name <>", value, "fileName");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileNameGreaterThan(String value) {
-            addCriterion("file_name >", value, "fileName");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileNameGreaterThanOrEqualTo(String value) {
-            addCriterion("file_name >=", value, "fileName");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileNameLessThan(String value) {
-            addCriterion("file_name <", value, "fileName");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileNameLessThanOrEqualTo(String value) {
-            addCriterion("file_name <=", value, "fileName");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileNameLike(String value) {
-            addCriterion("file_name like", value, "fileName");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileNameNotLike(String value) {
-            addCriterion("file_name not like", value, "fileName");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileNameIn(List<String> values) {
-            addCriterion("file_name in", values, "fileName");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileNameNotIn(List<String> values) {
-            addCriterion("file_name not in", values, "fileName");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileNameBetween(String value1, String value2) {
-            addCriterion("file_name between", value1, value2, "fileName");
-            return (Criteria) this;
-        }
-
-        public Criteria andFileNameNotBetween(String value1, String value2) {
-            addCriterion("file_name not between", value1, value2, "fileName");
             return (Criteria) this;
         }
     }

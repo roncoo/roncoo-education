@@ -1,6 +1,6 @@
-package com.roncoo.education.course.service.auth;
+package com.roncoo.education.course.service.api;
 
-import com.roncoo.education.course.service.auth.biz.AuthResourceBiz;
+import com.roncoo.education.course.service.api.biz.ApiResourceBiz;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.constraints.NotNull;
 
 /**
- * AUTH-课程视频信息
+ * API-课程视频信息
  *
  * @author wujing
  * @date 2022-09-02
  */
-@Api(tags = "AUTH-课程视频信息")
+@Api(tags = "API-课程视频信息")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/course/auth/resource")
-public class AuthResourceController {
+@RequestMapping("/course/api/resource")
+public class ApiResourceController {
 
     @NotNull
-    private final AuthResourceBiz biz;
+    private final ApiResourceBiz biz;
 
 }

@@ -21,7 +21,7 @@ import javax.validation.constraints.NotNull;
  * 课程视频信息
  *
  * @author wujing
- * @date 2022-08-27
+ * @date 2022-09-02
  */
 @RestController
 @RequiredArgsConstructor

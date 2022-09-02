@@ -16,19 +16,17 @@ public class Resource implements Serializable {
 
     private String recourseName;
 
+    private Integer recourseType;
+
     private Long recourseSize;
 
-    private Integer recourseType;
+    private String recourseUrl;
 
     private Integer videoStatus;
 
     private String videoLength;
 
     private String videoVid;
-
-    private String fileUrl;
-
-    private String fileName;
 
     private static final long serialVersionUID = 1L;
 
@@ -80,6 +78,14 @@ public class Resource implements Serializable {
         this.recourseName = recourseName == null ? null : recourseName.trim();
     }
 
+    public Integer getRecourseType() {
+        return recourseType;
+    }
+
+    public void setRecourseType(Integer recourseType) {
+        this.recourseType = recourseType;
+    }
+
     public Long getRecourseSize() {
         return recourseSize;
     }
@@ -88,12 +94,12 @@ public class Resource implements Serializable {
         this.recourseSize = recourseSize;
     }
 
-    public Integer getRecourseType() {
-        return recourseType;
+    public String getRecourseUrl() {
+        return recourseUrl;
     }
 
-    public void setRecourseType(Integer recourseType) {
-        this.recourseType = recourseType;
+    public void setRecourseUrl(String recourseUrl) {
+        this.recourseUrl = recourseUrl == null ? null : recourseUrl.trim();
     }
 
     public Integer getVideoStatus() {
@@ -120,22 +126,6 @@ public class Resource implements Serializable {
         this.videoVid = videoVid == null ? null : videoVid.trim();
     }
 
-    public String getFileUrl() {
-        return fileUrl;
-    }
-
-    public void setFileUrl(String fileUrl) {
-        this.fileUrl = fileUrl == null ? null : fileUrl.trim();
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName == null ? null : fileName.trim();
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -148,13 +138,12 @@ public class Resource implements Serializable {
         sb.append(", statusId=").append(statusId);
         sb.append(", sort=").append(sort);
         sb.append(", recourseName=").append(recourseName);
-        sb.append(", recourseSize=").append(recourseSize);
         sb.append(", recourseType=").append(recourseType);
+        sb.append(", recourseSize=").append(recourseSize);
+        sb.append(", recourseUrl=").append(recourseUrl);
         sb.append(", videoStatus=").append(videoStatus);
         sb.append(", videoLength=").append(videoLength);
         sb.append(", videoVid=").append(videoVid);
-        sb.append(", fileUrl=").append(fileUrl);
-        sb.append(", fileName=").append(fileName);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
