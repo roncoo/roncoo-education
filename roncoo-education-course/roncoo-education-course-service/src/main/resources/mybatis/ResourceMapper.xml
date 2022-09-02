@@ -7,10 +7,10 @@
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     <result column="status_id" jdbcType="TINYINT" property="statusId" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
-    <result column="recource_name" jdbcType="VARCHAR" property="recourceName" />
-    <result column="recource_type" jdbcType="TINYINT" property="recourceType" />
-    <result column="recource_size" jdbcType="BIGINT" property="recourceSize" />
-    <result column="recource_url" jdbcType="VARCHAR" property="recourceUrl" />
+    <result column="resource_name" jdbcType="VARCHAR" property="resourceName" />
+    <result column="resource_type" jdbcType="TINYINT" property="resourceType" />
+    <result column="resource_size" jdbcType="BIGINT" property="resourceSize" />
+    <result column="resource_url" jdbcType="VARCHAR" property="resourceUrl" />
     <result column="video_status" jdbcType="TINYINT" property="videoStatus" />
     <result column="video_length" jdbcType="VARCHAR" property="videoLength" />
     <result column="video_vid" jdbcType="VARCHAR" property="videoVid" />
@@ -74,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, status_id, sort, recource_name, recource_type, recource_size, 
-    recource_url, video_status, video_length, video_vid
+    id, gmt_create, gmt_modified, status_id, sort, resource_name, resource_type, resource_size, 
+    resource_url, video_status, video_length, video_vid
   </sql>
   <select id="selectByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample" resultMap="BaseResultMap">
     select
@@ -112,13 +112,13 @@
   </delete>
   <insert id="insert" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Resource">
     insert into resource (id, gmt_create, gmt_modified, 
-      status_id, sort, recource_name, 
-      recource_type, recource_size, recource_url, 
+      status_id, sort, resource_name, 
+      resource_type, resource_size, resource_url, 
       video_status, video_length, video_vid
       )
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{recourceName,jdbcType=VARCHAR}, 
-      #{recourceType,jdbcType=TINYINT}, #{recourceSize,jdbcType=BIGINT}, #{recourceUrl,jdbcType=VARCHAR}, 
+      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{resourceName,jdbcType=VARCHAR}, 
+      #{resourceType,jdbcType=TINYINT}, #{resourceSize,jdbcType=BIGINT}, #{resourceUrl,jdbcType=VARCHAR}, 
       #{videoStatus,jdbcType=TINYINT}, #{videoLength,jdbcType=VARCHAR}, #{videoVid,jdbcType=VARCHAR}
       )
   </insert>
@@ -140,17 +140,17 @@
       <if test="sort != null">
         sort,
       </if>
-      <if test="recourceName != null">
-        recource_name,
+      <if test="resourceName != null">
+        resource_name,
       </if>
-      <if test="recourceType != null">
-        recource_type,
+      <if test="resourceType != null">
+        resource_type,
       </if>
-      <if test="recourceSize != null">
-        recource_size,
+      <if test="resourceSize != null">
+        resource_size,
       </if>
-      <if test="recourceUrl != null">
-        recource_url,
+      <if test="resourceUrl != null">
+        resource_url,
       </if>
       <if test="videoStatus != null">
         video_status,
@@ -178,17 +178,17 @@
       <if test="sort != null">
         #{sort,jdbcType=INTEGER},
       </if>
-      <if test="recourceName != null">
-        #{recourceName,jdbcType=VARCHAR},
+      <if test="resourceName != null">
+        #{resourceName,jdbcType=VARCHAR},
       </if>
-      <if test="recourceType != null">
-        #{recourceType,jdbcType=TINYINT},
+      <if test="resourceType != null">
+        #{resourceType,jdbcType=TINYINT},
       </if>
-      <if test="recourceSize != null">
-        #{recourceSize,jdbcType=BIGINT},
+      <if test="resourceSize != null">
+        #{resourceSize,jdbcType=BIGINT},
       </if>
-      <if test="recourceUrl != null">
-        #{recourceUrl,jdbcType=VARCHAR},
+      <if test="resourceUrl != null">
+        #{resourceUrl,jdbcType=VARCHAR},
       </if>
       <if test="videoStatus != null">
         #{videoStatus,jdbcType=TINYINT},
@@ -225,17 +225,17 @@
       <if test="record.sort != null">
         sort = #{record.sort,jdbcType=INTEGER},
       </if>
-      <if test="record.recourceName != null">
-        recource_name = #{record.recourceName,jdbcType=VARCHAR},
+      <if test="record.resourceName != null">
+        resource_name = #{record.resourceName,jdbcType=VARCHAR},
       </if>
-      <if test="record.recourceType != null">
-        recource_type = #{record.recourceType,jdbcType=TINYINT},
+      <if test="record.resourceType != null">
+        resource_type = #{record.resourceType,jdbcType=TINYINT},
       </if>
-      <if test="record.recourceSize != null">
-        recource_size = #{record.recourceSize,jdbcType=BIGINT},
+      <if test="record.resourceSize != null">
+        resource_size = #{record.resourceSize,jdbcType=BIGINT},
       </if>
-      <if test="record.recourceUrl != null">
-        recource_url = #{record.recourceUrl,jdbcType=VARCHAR},
+      <if test="record.resourceUrl != null">
+        resource_url = #{record.resourceUrl,jdbcType=VARCHAR},
       </if>
       <if test="record.videoStatus != null">
         video_status = #{record.videoStatus,jdbcType=TINYINT},
@@ -258,10 +258,10 @@
       gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
       status_id = #{record.statusId,jdbcType=TINYINT},
       sort = #{record.sort,jdbcType=INTEGER},
-      recource_name = #{record.recourceName,jdbcType=VARCHAR},
-      recource_type = #{record.recourceType,jdbcType=TINYINT},
-      recource_size = #{record.recourceSize,jdbcType=BIGINT},
-      recource_url = #{record.recourceUrl,jdbcType=VARCHAR},
+      resource_name = #{record.resourceName,jdbcType=VARCHAR},
+      resource_type = #{record.resourceType,jdbcType=TINYINT},
+      resource_size = #{record.resourceSize,jdbcType=BIGINT},
+      resource_url = #{record.resourceUrl,jdbcType=VARCHAR},
       video_status = #{record.videoStatus,jdbcType=TINYINT},
       video_length = #{record.videoLength,jdbcType=VARCHAR},
       video_vid = #{record.videoVid,jdbcType=VARCHAR}
@@ -284,17 +284,17 @@
       <if test="sort != null">
         sort = #{sort,jdbcType=INTEGER},
       </if>
-      <if test="recourceName != null">
-        recource_name = #{recourceName,jdbcType=VARCHAR},
+      <if test="resourceName != null">
+        resource_name = #{resourceName,jdbcType=VARCHAR},
       </if>
-      <if test="recourceType != null">
-        recource_type = #{recourceType,jdbcType=TINYINT},
+      <if test="resourceType != null">
+        resource_type = #{resourceType,jdbcType=TINYINT},
       </if>
-      <if test="recourceSize != null">
-        recource_size = #{recourceSize,jdbcType=BIGINT},
+      <if test="resourceSize != null">
+        resource_size = #{resourceSize,jdbcType=BIGINT},
       </if>
-      <if test="recourceUrl != null">
-        recource_url = #{recourceUrl,jdbcType=VARCHAR},
+      <if test="resourceUrl != null">
+        resource_url = #{resourceUrl,jdbcType=VARCHAR},
       </if>
       <if test="videoStatus != null">
         video_status = #{videoStatus,jdbcType=TINYINT},
@@ -314,10 +314,10 @@
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       status_id = #{statusId,jdbcType=TINYINT},
       sort = #{sort,jdbcType=INTEGER},
-      recource_name = #{recourceName,jdbcType=VARCHAR},
-      recource_type = #{recourceType,jdbcType=TINYINT},
-      recource_size = #{recourceSize,jdbcType=BIGINT},
-      recource_url = #{recourceUrl,jdbcType=VARCHAR},
+      resource_name = #{resourceName,jdbcType=VARCHAR},
+      resource_type = #{resourceType,jdbcType=TINYINT},
+      resource_size = #{resourceSize,jdbcType=BIGINT},
+      resource_url = #{resourceUrl,jdbcType=VARCHAR},
       video_status = #{videoStatus,jdbcType=TINYINT},
       video_length = #{videoLength,jdbcType=VARCHAR},
       video_vid = #{videoVid,jdbcType=VARCHAR}

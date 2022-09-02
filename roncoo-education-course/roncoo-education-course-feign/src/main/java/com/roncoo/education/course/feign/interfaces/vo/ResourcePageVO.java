@@ -45,22 +45,22 @@ public class ResourcePageVO implements Serializable{
     /**
      * 资源名称
      */
-    private String recourceName;
+    private String resourceName;
 
     /**
      * 资源类型(1:视频2:音频;3:文档)
      */
-    private Integer recourceType;
+    private Integer resourceType;
 
     /**
      * 资源大小
      */
-    private Long recourceSize;
+    private Long resourceSize;
 
     /**
      * 资源地址
      */
-    private String recourceUrl;
+    private String resourceUrl;
 
     /**
      * 状态(1待上传，2上传成功，3上传失败)

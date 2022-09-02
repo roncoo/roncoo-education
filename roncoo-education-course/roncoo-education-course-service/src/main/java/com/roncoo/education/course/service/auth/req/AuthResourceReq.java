@@ -41,16 +41,16 @@ public class AuthResourceReq implements Serializable {
     private Integer sort;
 
     @ApiModelProperty(value = "资源名称")
-    private String recourceName;
+    private String resourceName;
 
     @ApiModelProperty(value = "资源类型(1:视频2:音频;3:文档)")
-    private Integer recourceType;
+    private Integer resourceType;
 
     @ApiModelProperty(value = "资源大小")
-    private Long recourceSize;
+    private Long resourceSize;
 
     @ApiModelProperty(value = "资源地址")
-    private String recourceUrl;
+    private String resourceUrl;
 
     @ApiModelProperty(value = "状态(1待上传，2上传成功，3上传失败)")
     private Integer videoStatus;

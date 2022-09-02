@@ -14,13 +14,13 @@ public class Resource implements Serializable {
 
     private Integer sort;
 
-    private String recourceName;
+    private String resourceName;
 
-    private Integer recourceType;
+    private Integer resourceType;
 
-    private Long recourceSize;
+    private Long resourceSize;
 
-    private String recourceUrl;
+    private String resourceUrl;
 
     private Integer videoStatus;
 
@@ -70,36 +70,36 @@ public class Resource implements Serializable {
         this.sort = sort;
     }
 
-    public String getRecourceName() {
-        return recourceName;
+    public String getResourceName() {
+        return resourceName;
     }
 
-    public void setRecourceName(String recourceName) {
-        this.recourceName = recourceName == null ? null : recourceName.trim();
+    public void setResourceName(String resourceName) {
+        this.resourceName = resourceName == null ? null : resourceName.trim();
     }
 
-    public Integer getRecourceType() {
-        return recourceType;
+    public Integer getResourceType() {
+        return resourceType;
     }
 
-    public void setRecourceType(Integer recourceType) {
-        this.recourceType = recourceType;
+    public void setResourceType(Integer resourceType) {
+        this.resourceType = resourceType;
     }
 
-    public Long getRecourceSize() {
-        return recourceSize;
+    public Long getResourceSize() {
+        return resourceSize;
     }
 
-    public void setRecourceSize(Long recourceSize) {
-        this.recourceSize = recourceSize;
+    public void setResourceSize(Long resourceSize) {
+        this.resourceSize = resourceSize;
     }
 
-    public String getRecourceUrl() {
-        return recourceUrl;
+    public String getResourceUrl() {
+        return resourceUrl;
     }
 
-    public void setRecourceUrl(String recourceUrl) {
-        this.recourceUrl = recourceUrl == null ? null : recourceUrl.trim();
+    public void setResourceUrl(String resourceUrl) {
+        this.resourceUrl = resourceUrl == null ? null : resourceUrl.trim();
     }
 
     public Integer getVideoStatus() {
@@ -137,10 +137,10 @@ public class Resource implements Serializable {
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", statusId=").append(statusId);
         sb.append(", sort=").append(sort);
-        sb.append(", recourceName=").append(recourceName);
-        sb.append(", recourceType=").append(recourceType);
-        sb.append(", recourceSize=").append(recourceSize);
-        sb.append(", recourceUrl=").append(recourceUrl);
+        sb.append(", resourceName=").append(resourceName);
+        sb.append(", resourceType=").append(resourceType);
+        sb.append(", resourceSize=").append(resourceSize);
+        sb.append(", resourceUrl=").append(resourceUrl);
         sb.append(", videoStatus=").append(videoStatus);
         sb.append(", videoLength=").append(videoLength);
         sb.append(", videoVid=").append(videoVid);
