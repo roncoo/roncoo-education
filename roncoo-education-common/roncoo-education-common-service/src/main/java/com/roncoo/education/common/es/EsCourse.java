@@ -19,7 +19,7 @@ import java.util.Date;
 @Accessors(chain = true)
 public class EsCourse implements Serializable {
     private static final long serialVersionUID = 1L;
-    public static final String COURSE = "rc_course";
+    public static final String COURSE = "rc_es_course";
 
     /**
      * 主键
