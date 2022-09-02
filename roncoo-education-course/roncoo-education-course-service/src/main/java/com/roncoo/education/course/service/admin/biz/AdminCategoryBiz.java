@@ -44,6 +44,7 @@ public class AdminCategoryBiz extends BaseBiz {
         if (ObjectUtil.isNotEmpty(req.getStatusId())) {
             c.andStatusIdEqualTo(req.getStatusId());
         }
+        example.setOrderByClause("sort acs, id desc");
         List<Category> categoryList = dao.listByExample(example);
         return Result.success(filter(0L, categoryList));
     }
