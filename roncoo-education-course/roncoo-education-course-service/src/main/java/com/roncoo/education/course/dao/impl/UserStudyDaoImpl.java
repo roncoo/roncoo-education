@@ -1,5 +1,6 @@
 package com.roncoo.education.course.dao.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
@@ -17,7 +18,7 @@ import java.util.List;
  * 课程用户学习日志 服务实现类
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-09-03
  */
 @Repository
 @RequiredArgsConstructor
@@ -42,6 +43,7 @@ public class UserStudyDaoImpl implements UserStudyDao {
     @Override
     public int updateById(UserStudy record) {
         record.setGmtCreate(null);
+        record.setGmtModified(null);
         return this.mapper.updateByPrimaryKeySelective(record);
     }
 
@@ -69,5 +71,16 @@ public class UserStudyDaoImpl implements UserStudyDao {
     @Override
     public int countByExample(UserStudyExample example){
         return this.mapper.countByExample(example);
+    }
+
+    @Override
+    public UserStudy getByPeriodIdAndUserId(Long periodId, Long userId) {
+        UserStudyExample example = new UserStudyExample();
+        example.createCriteria().andPeriodIdEqualTo(periodId).andUserIdEqualTo(userId);
+        List<UserStudy> list = this.mapper.selectByExample(example);
+        if(CollUtil.isNotEmpty(list)){
+            return list.get(0);
+        }
+        return null;
     }
 }

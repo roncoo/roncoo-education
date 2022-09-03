@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
  * 课程用户学习日志
  *
  * @author wujing
- * @date 2022-08-27
+ * @date 2022-09-03
  */
 @Data
 @Accessors(chain = true)
@@ -27,6 +27,11 @@ public class UserStudyViewVO implements Serializable{
      * 创建时间
      */
     private LocalDateTime gmtCreate;
+
+    /**
+     * 修改时间
+     */
+    private LocalDateTime gmtModified;
 
     /**
      * 课程ID

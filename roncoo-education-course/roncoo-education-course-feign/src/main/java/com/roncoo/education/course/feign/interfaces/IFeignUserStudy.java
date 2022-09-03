@@ -14,7 +14,7 @@ import com.roncoo.education.course.feign.interfaces.vo.UserStudyViewVO;
  * 课程用户学习日志 接口
  *
  * @author wujing
- * @date 2022-08-27
+ * @date 2022-09-03
  */
 @FeignClient(value = "course-service", path = "/course/user/study")
 public interface IFeignUserStudy {

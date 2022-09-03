@@ -2,7 +2,8 @@ package com.roncoo.education.course.service.auth;
 
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.service.auth.biz.AuthCourseBiz;
-import com.roncoo.education.course.service.auth.req.AuthCourseReq;
+import com.roncoo.education.course.service.auth.req.AuthCourseSignReq;
+import com.roncoo.education.course.service.auth.resp.AuthCourseSignResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +36,7 @@ public class AuthCourseController {
      */
     @ApiOperation(value = "观看授权", notes = "课程观看授权")
     @RequestMapping(value = "/sign", method = RequestMethod.POST)
-    public Result<String> sign(@RequestBody AuthCourseReq req) {
+    public Result<AuthCourseSignResp> sign(@RequestBody AuthCourseSignReq req) {
         return biz.sign(req);
     }
 

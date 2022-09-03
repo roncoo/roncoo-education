@@ -59,7 +59,7 @@ public interface UserCourseDao {
     /**
      * 课程用户关联表--条件列出
      *
-     * @param example     查询条件
+     * @param example 查询条件
      * @return 课程用户关联表列表
      */
     List<UserCourse> listByExample(UserCourseExample example);
@@ -67,8 +67,10 @@ public interface UserCourseDao {
     /**
      * 课程用户关联表--条件统计
      *
-     * @param example     统计条件
+     * @param example 统计条件
      * @return 课程用户关联表数量
      */
     int countByExample(UserCourseExample example);
+
+    UserCourse getByCourseIdAndUserId(Long courseId, Long userId);
 }

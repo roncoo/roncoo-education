@@ -1,19 +1,19 @@
 package com.roncoo.education.course.service.admin.biz;
 
+import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.service.BaseBiz;
-import com.roncoo.education.course.dao.UserStudyDao;
-import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
-import com.roncoo.education.course.dao.impl.mapper.entity.UserStudyExample;
-import com.roncoo.education.course.dao.impl.mapper.entity.UserStudyExample.Criteria;
 import com.roncoo.education.course.service.admin.req.AdminUserStudyEditReq;
 import com.roncoo.education.course.service.admin.req.AdminUserStudyPageReq;
 import com.roncoo.education.course.service.admin.req.AdminUserStudySaveReq;
 import com.roncoo.education.course.service.admin.resp.AdminUserStudyPageResp;
 import com.roncoo.education.course.service.admin.resp.AdminUserStudyViewResp;
+import com.roncoo.education.course.dao.UserStudyDao;
+import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
+import com.roncoo.education.course.dao.impl.mapper.entity.UserStudyExample;
+import com.roncoo.education.course.dao.impl.mapper.entity.UserStudyExample.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

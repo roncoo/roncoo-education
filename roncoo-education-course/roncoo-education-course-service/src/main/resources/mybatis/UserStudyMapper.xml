@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.roncoo.education.course.dao.impl.mapper.entity.UserStudy">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     <result column="course_id" jdbcType="BIGINT" property="courseId" />
     <result column="chapter_id" jdbcType="BIGINT" property="chapterId" />
     <result column="period_id" jdbcType="BIGINT" property="periodId" />
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, gmt_create, course_id, chapter_id, period_id, user_id, progress
+    id, gmt_create, gmt_modified, course_id, chapter_id, period_id, user_id, progress
   </sql>
   <select id="selectByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.UserStudyExample" resultMap="BaseResultMap">
     select
@@ -105,12 +106,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.UserStudy">
-    insert into user_study (id, gmt_create, course_id, 
-      chapter_id, period_id, user_id, 
-      progress)
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{courseId,jdbcType=BIGINT}, 
-      #{chapterId,jdbcType=BIGINT}, #{periodId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
-      #{progress,jdbcType=DECIMAL})
+    insert into user_study (id, gmt_create, gmt_modified, 
+      course_id, chapter_id, period_id, 
+      user_id, progress)
+    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
+      #{courseId,jdbcType=BIGINT}, #{chapterId,jdbcType=BIGINT}, #{periodId,jdbcType=BIGINT}, 
+      #{userId,jdbcType=BIGINT}, #{progress,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.UserStudy">
     insert into user_study
@@ -120,6 +121,9 @@
       </if>
       <if test="gmtCreate != null">
         gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
       </if>
       <if test="courseId != null">
         course_id,
@@ -143,6 +147,9 @@
       </if>
       <if test="gmtCreate != null">
         #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
       </if>
       <if test="courseId != null">
         #{courseId,jdbcType=BIGINT},
@@ -176,6 +183,9 @@
       <if test="record.gmtCreate != null">
         gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.gmtModified != null">
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.courseId != null">
         course_id = #{record.courseId,jdbcType=BIGINT},
       </if>
@@ -200,6 +210,7 @@
     update user_study
     set id = #{record.id,jdbcType=BIGINT},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
       course_id = #{record.courseId,jdbcType=BIGINT},
       chapter_id = #{record.chapterId,jdbcType=BIGINT},
       period_id = #{record.periodId,jdbcType=BIGINT},
@@ -214,6 +225,9 @@
     <set>
       <if test="gmtCreate != null">
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       </if>
       <if test="courseId != null">
         course_id = #{courseId,jdbcType=BIGINT},
@@ -236,6 +250,7 @@
   <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.UserStudy">
     update user_study
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       course_id = #{courseId,jdbcType=BIGINT},
       chapter_id = #{chapterId,jdbcType=BIGINT},
       period_id = #{periodId,jdbcType=BIGINT},

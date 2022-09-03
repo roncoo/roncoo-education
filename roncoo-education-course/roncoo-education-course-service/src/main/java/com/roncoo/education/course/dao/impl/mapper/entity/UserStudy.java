@@ -9,6 +9,8 @@ public class UserStudy implements Serializable {
 
     private Date gmtCreate;
 
+    private Date gmtModified;
+
     private Long courseId;
 
     private Long chapterId;
@@ -35,6 +37,14 @@ public class UserStudy implements Serializable {
 
     public void setGmtCreate(Date gmtCreate) {
         this.gmtCreate = gmtCreate;
+    }
+
+    public Date getGmtModified() {
+        return gmtModified;
+    }
+
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
     }
 
     public Long getCourseId() {
@@ -85,6 +95,7 @@ public class UserStudy implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", gmtCreate=").append(gmtCreate);
+        sb.append(", gmtModified=").append(gmtModified);
         sb.append(", courseId=").append(courseId);
         sb.append(", chapterId=").append(chapterId);
         sb.append(", periodId=").append(periodId);

@@ -1,5 +1,6 @@
 package com.roncoo.education.course.dao.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
@@ -68,7 +69,18 @@ public class UserCourseDaoImpl implements UserCourseDao {
     }
 
     @Override
-    public int countByExample(UserCourseExample example){
+    public int countByExample(UserCourseExample example) {
         return this.mapper.countByExample(example);
+    }
+
+    @Override
+    public UserCourse getByCourseIdAndUserId(Long courseId, Long userId) {
+        UserCourseExample example = new UserCourseExample();
+        example.createCriteria().andCourseIdEqualTo(courseId).andUserIdEqualTo(userId);
+        List<UserCourse> list = this.mapper.selectByExample(example);
+        if (CollUtil.isNotEmpty(list)) {
+            return list.get(0);
+        }
+        return null;
     }
 }

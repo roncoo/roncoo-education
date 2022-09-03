@@ -10,7 +10,7 @@ import java.util.List;
  * 课程用户学习日志 服务类
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-09-03
  */
 public interface UserStudyDao {
 
@@ -71,4 +71,6 @@ public interface UserStudyDao {
      * @return 课程用户学习日志数量
      */
     int countByExample(UserStudyExample example);
+
+    UserStudy getByPeriodIdAndUserId(Long periodId, Long userId);
 }

@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-09-03
  */
 @Data
 @Accessors(chain = true)
@@ -30,6 +30,10 @@ public class AuthUserStudyResp implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime gmtCreate;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "修改时间")
+    private LocalDateTime gmtModified;
 
     @ApiModelProperty(value = "课程ID")
     private Long courseId;
