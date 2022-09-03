@@ -20,6 +20,7 @@ import com.roncoo.education.course.service.admin.resp.AdminCategoryPageResp;
 import com.roncoo.education.course.service.admin.resp.AdminCategoryViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -43,6 +44,9 @@ public class AdminCategoryBiz extends BaseBiz {
         c.andCategoryTypeEqualTo(req.getCategoryType());
         if (ObjectUtil.isNotEmpty(req.getStatusId())) {
             c.andStatusIdEqualTo(req.getStatusId());
+        }
+        if (StringUtils.hasText(req.getCategoryName())) {
+            c.andCategoryNameEqualTo(req.getCategoryName());
         }
         example.setOrderByClause("sort acs, id desc");
         List<Category> categoryList = dao.listByExample(example);
