@@ -18,6 +18,10 @@ public class CacheRedis {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
+    public StringRedisTemplate getStringRedisTemplate() {
+        return stringRedisTemplate;
+    }
+
     /**
      * 默认缓存5分钟
      */

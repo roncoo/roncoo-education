@@ -62,7 +62,13 @@ public class AuthCourseBiz extends BaseBiz {
             userStudyDao.save(userStudy);
         }
         String sign = "";
-        return Result.success(null);
+
+        AuthCourseSignResp resp = new AuthCourseSignResp();
+        resp.setProgress(userStudy.getProgress());
+        resp.setStudyId(userStudy.getId());
+        resp.setResourceId(period.getResourceId());
+        resp.setSign(sign);
+        return Result.success(resp);
     }
 
     private Boolean play(CourseChapterPeriod period) {

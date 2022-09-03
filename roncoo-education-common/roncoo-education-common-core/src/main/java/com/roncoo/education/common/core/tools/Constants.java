@@ -30,6 +30,9 @@ public final class Constants {
         String ADMINI_MENU = "admin::menu::";
         String USERS_INFO = "users::info::";
         String ADMIN_VERI_CODE = "admin::ver::code::";
+        String USER_STUDY = "user::study::";
+        String RESOURCE = "resource::";
+        String PROGRESS = "progress::";
     }
 
 }
