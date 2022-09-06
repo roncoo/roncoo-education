@@ -14,7 +14,7 @@ import com.roncoo.education.user.feign.interfaces.vo.OrderInfoViewVO;
  * 订单信息表 接口
  *
  * @author wujing
- * @date 2022-08-27
+ * @date 2022-09-06
  */
 @FeignClient(value = "user-service", path = "/user/order/info")
 public interface IFeignOrderInfo {

@@ -1,4 +1,4 @@
-package com.roncoo.education.user.service.admin.req;
+package com.roncoo.education.user.service.api.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.math.BigDecimal;
@@ -11,15 +11,16 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * ADMIN-订单信息表
+ * API-订单信息表
  * </p>
  *
  * @author wujing
+ * @date 2022-09-06
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminOrderInfoSaveReq", description = "ADMIN-订单信息表添加")
-public class AdminOrderInfoSaveReq implements Serializable {
+@ApiModel(value = "ApiOrderInfoResp", description = "API-订单信息表")
+public class ApiOrderInfoResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

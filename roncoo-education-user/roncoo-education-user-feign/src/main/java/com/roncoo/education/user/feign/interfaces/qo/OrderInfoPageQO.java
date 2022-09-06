@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
  * 订单信息表
  *
  * @author wujing
- * @date 2022-08-27
+ * @date 2022-09-06
  */
 @Data
 @Accessors(chain = true)
@@ -84,12 +84,7 @@ public class OrderInfoPageQO implements Serializable{
     private Integer payType;
 
     /**
-     * 购买渠道：1web
-     */
-    private Integer channelType;
-
-    /**
-     * 订单状态：1待支付，2成功支付，3支付失败，4已关闭
+     * 订单状态：1待支付，2成功支付，3支付失败，4关闭支付
      */
     private Integer orderStatus;
 

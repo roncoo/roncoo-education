@@ -10,7 +10,7 @@ import java.util.List;
  * 订单信息表 服务类
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-09-06
  */
 public interface OrderInfoDao {
 
@@ -59,7 +59,7 @@ public interface OrderInfoDao {
     /**
      * 订单信息表--条件列出
      *
-     * @param example 查询条件
+     * @param example     查询条件
      * @return 订单信息表列表
      */
     List<OrderInfo> listByExample(OrderInfoExample example);
@@ -67,12 +67,8 @@ public interface OrderInfoDao {
     /**
      * 订单信息表--条件统计
      *
-     * @param example 统计条件
+     * @param example     统计条件
      * @return 订单信息表数量
      */
     int countByExample(OrderInfoExample example);
-
-    OrderInfo getByUserAndCourseId(Long userId, Long courseId);
-
-    OrderInfo getByOrderNo(Long orderNo);
 }
