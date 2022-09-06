@@ -71,4 +71,8 @@ public interface OrderInfoDao {
      * @return 订单信息表数量
      */
     int countByExample(OrderInfoExample example);
+
+    OrderInfo getByUserAndCourseId(Long userId, Long courseId);
+
+    OrderInfo getByOrderNo(Long orderNo);
 }
