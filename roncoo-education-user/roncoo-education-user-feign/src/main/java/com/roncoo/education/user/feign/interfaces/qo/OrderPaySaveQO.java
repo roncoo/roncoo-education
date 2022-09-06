@@ -1,16 +1,17 @@
 package com.roncoo.education.user.feign.interfaces.qo;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
  * 订单支付信息表
  *
  * @author wujing
- * @date 2022-08-27
+ * @date 2022-09-06
  */
 @Data
 @Accessors(chain = true)
@@ -62,11 +63,6 @@ public class OrderPaySaveQO implements Serializable{
      * 客户备注
      */
     private String remarkCus;
-
-    /**
-     * 购买渠道：1web
-     */
-    private Integer channelType;
 
     /**
      * 支付时间

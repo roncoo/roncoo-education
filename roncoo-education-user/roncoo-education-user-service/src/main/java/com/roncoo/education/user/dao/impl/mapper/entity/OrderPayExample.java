@@ -676,66 +676,6 @@ public class OrderPayExample {
             return (Criteria) this;
         }
 
-        public Criteria andChannelTypeIsNull() {
-            addCriterion("channel_type is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelTypeIsNotNull() {
-            addCriterion("channel_type is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelTypeEqualTo(Integer value) {
-            addCriterion("channel_type =", value, "channelType");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelTypeNotEqualTo(Integer value) {
-            addCriterion("channel_type <>", value, "channelType");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelTypeGreaterThan(Integer value) {
-            addCriterion("channel_type >", value, "channelType");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("channel_type >=", value, "channelType");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelTypeLessThan(Integer value) {
-            addCriterion("channel_type <", value, "channelType");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("channel_type <=", value, "channelType");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelTypeIn(List<Integer> values) {
-            addCriterion("channel_type in", values, "channelType");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelTypeNotIn(List<Integer> values) {
-            addCriterion("channel_type not in", values, "channelType");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelTypeBetween(Integer value1, Integer value2) {
-            addCriterion("channel_type between", value1, value2, "channelType");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("channel_type not between", value1, value2, "channelType");
-            return (Criteria) this;
-        }
-
         public Criteria andPayTimeIsNull() {
             addCriterion("pay_time is null");
             return (Criteria) this;

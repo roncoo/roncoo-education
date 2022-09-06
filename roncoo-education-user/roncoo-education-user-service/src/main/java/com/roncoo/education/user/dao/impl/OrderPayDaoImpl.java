@@ -17,7 +17,7 @@ import java.util.List;
  * 订单支付信息表 服务实现类
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-09-06
  */
 @Repository
 @RequiredArgsConstructor
@@ -67,7 +67,7 @@ public class OrderPayDaoImpl implements OrderPayDao {
     }
 
     @Override
-    public int countByExample(OrderPayExample example) {
+    public int countByExample(OrderPayExample example){
         return this.mapper.countByExample(example);
     }
 }

@@ -27,8 +27,6 @@ public class OrderInfo implements Serializable {
 
     private Integer payType;
 
-    private Integer channelType;
-
     private Integer orderStatus;
 
     private String remarkCus;
@@ -127,14 +125,6 @@ public class OrderInfo implements Serializable {
         this.payType = payType;
     }
 
-    public Integer getChannelType() {
-        return channelType;
-    }
-
-    public void setChannelType(Integer channelType) {
-        this.channelType = channelType;
-    }
-
     public Integer getOrderStatus() {
         return orderStatus;
     }
@@ -184,7 +174,6 @@ public class OrderInfo implements Serializable {
         sb.append(", rulingPrice=").append(rulingPrice);
         sb.append(", coursePrice=").append(coursePrice);
         sb.append(", payType=").append(payType);
-        sb.append(", channelType=").append(channelType);
         sb.append(", orderStatus=").append(orderStatus);
         sb.append(", remarkCus=").append(remarkCus);
         sb.append(", remark=").append(remark);

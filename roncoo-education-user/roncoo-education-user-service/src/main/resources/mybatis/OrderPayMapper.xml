@@ -11,7 +11,6 @@
     <result column="pay_type" jdbcType="TINYINT" property="payType" />
     <result column="order_status" jdbcType="TINYINT" property="orderStatus" />
     <result column="remark_cus" jdbcType="VARCHAR" property="remarkCus" />
-    <result column="channel_type" jdbcType="TINYINT" property="channelType" />
     <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -74,7 +73,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, gmt_create, order_no, serial_number, ruling_price, course_price, pay_type, order_status, 
-    remark_cus, channel_type, pay_time
+    remark_cus, pay_time
   </sql>
   <select id="selectByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.OrderPayExample" resultMap="BaseResultMap">
     select
@@ -113,11 +112,11 @@
     insert into order_pay (id, gmt_create, order_no, 
       serial_number, ruling_price, course_price, 
       pay_type, order_status, remark_cus, 
-      channel_type, pay_time)
+      pay_time)
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{orderNo,jdbcType=BIGINT}, 
       #{serialNumber,jdbcType=BIGINT}, #{rulingPrice,jdbcType=DECIMAL}, #{coursePrice,jdbcType=DECIMAL}, 
       #{payType,jdbcType=TINYINT}, #{orderStatus,jdbcType=TINYINT}, #{remarkCus,jdbcType=VARCHAR}, 
-      #{channelType,jdbcType=TINYINT}, #{payTime,jdbcType=TIMESTAMP})
+      #{payTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.OrderPay">
     insert into order_pay
@@ -148,9 +147,6 @@
       </if>
       <if test="remarkCus != null">
         remark_cus,
-      </if>
-      <if test="channelType != null">
-        channel_type,
       </if>
       <if test="payTime != null">
         pay_time,
@@ -183,9 +179,6 @@
       </if>
       <if test="remarkCus != null">
         #{remarkCus,jdbcType=VARCHAR},
-      </if>
-      <if test="channelType != null">
-        #{channelType,jdbcType=TINYINT},
       </if>
       <if test="payTime != null">
         #{payTime,jdbcType=TIMESTAMP},
@@ -228,9 +221,6 @@
       <if test="record.remarkCus != null">
         remark_cus = #{record.remarkCus,jdbcType=VARCHAR},
       </if>
-      <if test="record.channelType != null">
-        channel_type = #{record.channelType,jdbcType=TINYINT},
-      </if>
       <if test="record.payTime != null">
         pay_time = #{record.payTime,jdbcType=TIMESTAMP},
       </if>
@@ -250,7 +240,6 @@
       pay_type = #{record.payType,jdbcType=TINYINT},
       order_status = #{record.orderStatus,jdbcType=TINYINT},
       remark_cus = #{record.remarkCus,jdbcType=VARCHAR},
-      channel_type = #{record.channelType,jdbcType=TINYINT},
       pay_time = #{record.payTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -283,9 +272,6 @@
       <if test="remarkCus != null">
         remark_cus = #{remarkCus,jdbcType=VARCHAR},
       </if>
-      <if test="channelType != null">
-        channel_type = #{channelType,jdbcType=TINYINT},
-      </if>
       <if test="payTime != null">
         pay_time = #{payTime,jdbcType=TIMESTAMP},
       </if>
@@ -302,7 +288,6 @@
       pay_type = #{payType,jdbcType=TINYINT},
       order_status = #{orderStatus,jdbcType=TINYINT},
       remark_cus = #{remarkCus,jdbcType=VARCHAR},
-      channel_type = #{channelType,jdbcType=TINYINT},
       pay_time = #{payTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

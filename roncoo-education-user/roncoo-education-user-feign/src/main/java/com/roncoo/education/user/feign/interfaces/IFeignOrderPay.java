@@ -14,7 +14,7 @@ import com.roncoo.education.user.feign.interfaces.vo.OrderPayViewVO;
  * 订单支付信息表 接口
  *
  * @author wujing
- * @date 2022-08-27
+ * @date 2022-09-06
  */
 @FeignClient(value = "user-service", path = "/user/order/pay")
 public interface IFeignOrderPay {

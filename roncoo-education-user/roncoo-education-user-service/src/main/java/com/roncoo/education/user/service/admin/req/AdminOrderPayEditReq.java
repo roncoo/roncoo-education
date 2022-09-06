@@ -1,13 +1,13 @@
 package com.roncoo.education.user.service.admin.req;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -36,11 +36,20 @@ public class AdminOrderPayEditReq implements Serializable {
     @ApiModelProperty(value = "流水号")
     private Long serialNumber;
 
-    @ApiModelProperty(value = "订单状态：1待支付，2成功支付，3支付失败，4已关闭，5已退款, 6订单解绑")
-    private Integer orderStatus;
+    @ApiModelProperty(value = "划线价")
+    private BigDecimal rulingPrice;
+
+    @ApiModelProperty(value = "课程价格")
+    private BigDecimal coursePrice;
 
     @ApiModelProperty(value = "支付方式：1微信支付，2支付宝支付，3积分支付，4手工录单")
     private Integer payType;
+
+    @ApiModelProperty(value = "订单状态：1待支付，2成功支付，3支付失败，4已关闭，5已退款, 6订单解绑")
+    private Integer orderStatus;
+
+    @ApiModelProperty(value = "客户备注")
+    private String remarkCus;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "支付时间")

@@ -149,7 +149,6 @@ public class AuthOrderPayBiz extends BaseBiz {
         orderpay.setPayType(payType);
         orderpay.setOrderStatus(OrderStatusEnum.WAIT.getCode());
         orderpay.setRemarkCus(remarkCus);
-        orderpay.setChannelType(channelType);
         orderpay.setPayTime(new Date());
         dao.save(orderpay);
         return orderpay;

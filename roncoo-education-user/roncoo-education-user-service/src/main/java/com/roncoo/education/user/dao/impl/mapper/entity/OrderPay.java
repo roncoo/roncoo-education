@@ -23,8 +23,6 @@ public class OrderPay implements Serializable {
 
     private String remarkCus;
 
-    private Integer channelType;
-
     private Date payTime;
 
     private static final long serialVersionUID = 1L;
@@ -101,14 +99,6 @@ public class OrderPay implements Serializable {
         this.remarkCus = remarkCus == null ? null : remarkCus.trim();
     }
 
-    public Integer getChannelType() {
-        return channelType;
-    }
-
-    public void setChannelType(Integer channelType) {
-        this.channelType = channelType;
-    }
-
     public Date getPayTime() {
         return payTime;
     }
@@ -132,7 +122,6 @@ public class OrderPay implements Serializable {
         sb.append(", payType=").append(payType);
         sb.append(", orderStatus=").append(orderStatus);
         sb.append(", remarkCus=").append(remarkCus);
-        sb.append(", channelType=").append(channelType);
         sb.append(", payTime=").append(payTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
