@@ -1,6 +1,7 @@
 package com.roncoo.education.user.service.admin.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.roncoo.education.course.feign.interfaces.vo.CourseViewVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -90,4 +91,6 @@ public class AdminOrderInfoPageResp implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "支付时间")
     private LocalDateTime payTime;
+
+    private CourseViewVO courseViewVO;
 }

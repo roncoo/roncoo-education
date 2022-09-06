@@ -1,10 +1,13 @@
 package com.roncoo.education.user.service.admin.biz;
 
+import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.course.feign.interfaces.IFeignCourse;
+import com.roncoo.education.course.feign.interfaces.vo.CourseViewVO;
 import com.roncoo.education.user.dao.OrderInfoDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.OrderInfo;
 import com.roncoo.education.user.dao.impl.mapper.entity.OrderInfoExample;
@@ -18,6 +21,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * ADMIN-订单信息表
@@ -31,6 +37,9 @@ public class AdminOrderInfoBiz extends BaseBiz {
     @NotNull
     private final OrderInfoDao dao;
 
+    @NotNull
+    private final IFeignCourse feignCourse;
+
     /**
      * 订单信息表分页
      *
@@ -42,6 +51,13 @@ public class AdminOrderInfoBiz extends BaseBiz {
         Criteria c = example.createCriteria();
         Page<OrderInfo> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminOrderInfoPageResp> respPage = PageUtil.transform(page, AdminOrderInfoPageResp.class);
+        if (CollUtil.isNotEmpty(respPage.getList())) {
+            List<Long> courseIdList = respPage.getList().stream().map(AdminOrderInfoPageResp::getCourseId).collect(Collectors.toList());
+            Map<Long, CourseViewVO> courseViewVOMap = feignCourse.listByIds(courseIdList).stream().collect(Collectors.toMap(courseViewVO -> courseViewVO.getId(), courseViewVO -> courseViewVO));
+            for (AdminOrderInfoPageResp resp : respPage.getList()) {
+                resp.setCourseViewVO(courseViewVOMap.get(resp.getCourseId()));
+            }
+        }
         return Result.success(respPage);
     }
 

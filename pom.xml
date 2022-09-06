@@ -201,7 +201,5 @@
         <module>roncoo-education-user</module>
         <!-- 课程管理 -->
         <module>roncoo-education-course</module>
-        <!-- 代码生成 -->
-        <module>roncoo-generator</module>
     </modules>
 </project>
