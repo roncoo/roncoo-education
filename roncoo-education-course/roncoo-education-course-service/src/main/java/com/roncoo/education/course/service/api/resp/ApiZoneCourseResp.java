@@ -23,6 +23,9 @@ public class ApiZoneCourseResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty(value = "课程ID")
+    private Long id;
+
     @ApiModelProperty(value = "课程名称")
     private String courseName;
 
