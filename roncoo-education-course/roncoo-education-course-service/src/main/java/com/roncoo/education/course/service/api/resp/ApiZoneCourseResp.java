@@ -32,11 +32,11 @@ public class ApiZoneCourseResp implements Serializable {
     @ApiModelProperty(value = "课程封面")
     private String courseLogo;
 
-    @ApiModelProperty(value = "原价")
-    private BigDecimal courseOriginal;
+    @ApiModelProperty(value = "划线价")
+    private BigDecimal rulingPrice;
 
-    @ApiModelProperty(value = "优惠价")
-    private BigDecimal courseDiscount;
+    @ApiModelProperty(value = "课程价")
+    private BigDecimal coursePrice;
 
     @ApiModelProperty(value = "购买人数")
     private Integer countBuy;
