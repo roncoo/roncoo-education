@@ -29,7 +29,6 @@ import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.SearchHits;
@@ -93,7 +92,7 @@ public class ApiCourseBiz extends BaseBiz {
         return Result.success(EsPageUtil.transform(searchHits, req.getPageCurrent(), req.getPageSize(), ApiCoursePageResp.class));
     }
 
-    @Cacheable
+    //@Cacheable
     public Result<ApiCourseResp> view(ApiCourseReq req) {
         Course course = dao.getById(req.getCourseId());
         if (course == null) {
