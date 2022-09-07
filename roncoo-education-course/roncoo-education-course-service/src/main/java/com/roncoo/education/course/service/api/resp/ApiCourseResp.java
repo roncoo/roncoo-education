@@ -50,10 +50,10 @@ public class ApiCourseResp implements Serializable {
     private Integer isFree;
 
     @ApiModelProperty(value = "原价")
-    private BigDecimal courseOriginal;
+    private BigDecimal rulingPrice;
 
     @ApiModelProperty(value = "优惠价")
-    private BigDecimal courseDiscount;
+    private BigDecimal coursePrice;
 
     @ApiModelProperty(value = "购买人数")
     private Integer countBuy;
