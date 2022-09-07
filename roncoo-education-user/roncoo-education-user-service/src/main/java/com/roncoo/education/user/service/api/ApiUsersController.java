@@ -4,6 +4,7 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.user.service.api.biz.ApiUsersBiz;
 import com.roncoo.education.user.service.api.req.PasswordReq;
 import com.roncoo.education.user.service.api.req.RegisterReq;
+import com.roncoo.education.user.service.api.req.SendCodeReq;
 import com.roncoo.education.user.service.api.resp.UsersLoginResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,6 +26,15 @@ public class ApiUsersController {
 
     @Autowired
     private ApiUsersBiz biz;
+
+    /**
+     * 注册验证码发送接口
+     */
+    @ApiOperation(value = "注册验证码发送接口", notes = "发送手机验证码")
+    @RequestMapping(value = "/send/code", method = RequestMethod.POST)
+    public Result<String> sendCode(@RequestBody SendCodeReq req) {
+        return biz.sendCode(req);
+    }
 
     /**
      * 注册接口

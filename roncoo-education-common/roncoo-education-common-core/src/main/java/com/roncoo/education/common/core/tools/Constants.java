@@ -33,6 +33,7 @@ public final class Constants {
         String USER_STUDY = "user::study::";
         String RESOURCE = "resource::";
         String PROGRESS = "progress::";
+        String CODE = "code::";
     }
 
 }

@@ -1,5 +1,6 @@
 package com.roncoo.education.system.feign;
 
+import com.roncoo.education.common.core.aliyun.Aliyun;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.system.feign.biz.FeignSysConfigBiz;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
@@ -53,5 +54,10 @@ public class FeignSysConfigController implements IFeignSysConfig {
     @Override
     public SysConfigViewVO getById(@PathVariable(value = "id") Long id) {
         return biz.getById(id);
+    }
+
+    @Override
+    public Aliyun getAliyun() {
+        return biz.getAliyun();
     }
 }

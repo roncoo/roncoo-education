@@ -18,6 +18,10 @@ public final class NOUtil {
     private NOUtil() {
     }
 
+    public static String getVerCode() {
+        return RandomUtil.randomNumbers(6);
+    }
+
     public static Long getOrderNo() {
         return Long.valueOf(DateUtil.format(new Date(), YYYYMMDDHHMMSS) + RandomUtil.randomNumbers(3));
     }

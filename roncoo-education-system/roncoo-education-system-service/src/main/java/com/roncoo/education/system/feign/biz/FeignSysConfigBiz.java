@@ -1,6 +1,7 @@
 package com.roncoo.education.system.feign.biz;
 
 
+import com.roncoo.education.common.core.aliyun.Aliyun;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.BeanUtil;
@@ -18,6 +19,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 系统配置
@@ -56,5 +60,12 @@ public class FeignSysConfigBiz extends BaseBiz {
     public SysConfigViewVO getById(Long id) {
         SysConfig record = dao.getById(id);
         return BeanUtil.copyProperties(record, SysConfigViewVO.class);
+    }
+
+    public Aliyun getAliyun() {
+        SysConfigExample example = new SysConfigExample();
+        List<SysConfig> sysConfigs = dao.listByExample(example);
+        Map<String, String> map = sysConfigs.stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
+        return BeanUtil.objToBean(map, Aliyun.class);
     }
 }

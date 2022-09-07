@@ -1,5 +1,6 @@
 package com.roncoo.education.system.feign.interfaces;
 
+import com.roncoo.education.common.core.aliyun.Aliyun;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.system.feign.interfaces.qo.SysConfigEditQO;
 import com.roncoo.education.system.feign.interfaces.qo.SysConfigPageQO;
@@ -62,4 +63,7 @@ public interface IFeignSysConfig {
      */
     @GetMapping(value = "/get/{id}")
     SysConfigViewVO getById(@PathVariable(value = "id") Long id);
+
+    @GetMapping(value = "/getAliyun")
+    Aliyun getAliyun();
 }

@@ -2,21 +2,29 @@ package com.roncoo.education.user.service.api.biz;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.crypto.digest.DigestUtil;
+import com.roncoo.education.common.cache.CacheRedis;
+import com.roncoo.education.common.core.aliyun.AliyunSmsUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.LoginStatusEnum;
+import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.common.core.tools.JWTUtil;
+import com.roncoo.education.common.core.tools.NOUtil;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.user.dao.LogLoginDao;
 import com.roncoo.education.user.dao.UsersDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.LogLogin;
 import com.roncoo.education.user.dao.impl.mapper.entity.Users;
 import com.roncoo.education.user.service.api.req.PasswordReq;
 import com.roncoo.education.user.service.api.req.RegisterReq;
+import com.roncoo.education.user.service.api.req.SendCodeReq;
 import com.roncoo.education.user.service.api.resp.UsersLoginResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * 用户基本信息
@@ -30,6 +38,10 @@ public class ApiUsersBiz extends BaseBiz {
     private UsersDao userDao;
     @Autowired
     private LogLoginDao logLoginDao;
+    @Autowired
+    private CacheRedis cacheRedis;
+    @Autowired
+    private IFeignSysConfig feignSysConfig;
 
 
     @Transactional
@@ -37,6 +49,16 @@ public class ApiUsersBiz extends BaseBiz {
         if (StringUtils.isEmpty(req.getMobile())) {
             return Result.error("手机号不能为空");
         }
+
+        // 验证码校验
+        String redisCode = cacheRedis.get(Constants.RedisPre.CODE + req.getMobile());
+        if (!StringUtils.hasText(redisCode)) {
+            return Result.error("验证码已经过期");
+        }
+        if (!req.getCode().equals(redisCode)) {
+            return Result.error("验证码不正确");
+        }
+
         if (StringUtils.isEmpty(req.getMobilePwd())) {
             return Result.error("密码不能为空");
         }
@@ -113,4 +135,13 @@ public class ApiUsersBiz extends BaseBiz {
         logLoginDao.save(record);
     }
 
+    public Result<String> sendCode(SendCodeReq req) {
+        String code = NOUtil.getVerCode();
+        if (AliyunSmsUtil.sendVerCode(req.getMobile(), code, feignSysConfig.getAliyun())) {
+            // 缓存5分钟
+            cacheRedis.set(Constants.RedisPre.CODE + req.getMobile(), code, 5, TimeUnit.MINUTES);
+            return Result.success("发送成功");
+        }
+        return Result.error("发送失败");
+    }
 }
