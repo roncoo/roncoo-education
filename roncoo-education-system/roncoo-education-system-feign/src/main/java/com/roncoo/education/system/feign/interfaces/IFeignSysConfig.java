@@ -7,6 +7,7 @@ import com.roncoo.education.system.feign.interfaces.qo.SysConfigPageQO;
 import com.roncoo.education.system.feign.interfaces.qo.SysConfigSaveQO;
 import com.roncoo.education.system.feign.interfaces.vo.SysConfigPageVO;
 import com.roncoo.education.system.feign.interfaces.vo.SysConfigViewVO;
+import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,4 +67,7 @@ public interface IFeignSysConfig {
 
     @GetMapping(value = "/getAliyun")
     Aliyun getAliyun();
+
+    @GetMapping(value = "/getVod")
+    VodConfig getVod();
 }

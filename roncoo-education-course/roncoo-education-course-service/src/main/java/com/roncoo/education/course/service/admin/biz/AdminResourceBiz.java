@@ -1,19 +1,24 @@
 package com.roncoo.education.course.service.admin.biz;
 
-import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.core.tools.JSUtil;
+import com.roncoo.education.common.core.tools.MD5Util;
+import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.course.dao.ResourceDao;
+import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
+import com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample;
+import com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample.Criteria;
 import com.roncoo.education.course.service.admin.req.AdminResourceEditReq;
 import com.roncoo.education.course.service.admin.req.AdminResourcePageReq;
 import com.roncoo.education.course.service.admin.req.AdminResourceSaveReq;
 import com.roncoo.education.course.service.admin.resp.AdminResourcePageResp;
 import com.roncoo.education.course.service.admin.resp.AdminResourceViewResp;
-import com.roncoo.education.course.dao.ResourceDao;
-import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
-import com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample;
-import com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample.Criteria;
+import com.roncoo.education.course.service.admin.resp.AdminVodConfigResp;
+import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
+import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +35,32 @@ public class AdminResourceBiz extends BaseBiz {
 
     @NotNull
     private final ResourceDao dao;
+
+    @NotNull
+    private final IFeignSysConfig feignSysConfig;
+
+    public Result<AdminVodConfigResp> getVodConfig() {
+        VodConfig vodConfig = feignSysConfig.getVod();
+        AdminVodConfigResp resp = new AdminVodConfigResp();
+        resp.setVodPlatform(vodConfig.getVodPlatform());
+        resp.setConfig(getCofigByPolyv(vodConfig));
+        return Result.success(resp);
+    }
+
+    /**
+     * 获取保利威上传参数
+     *
+     * @param vodConfig
+     * @return
+     */
+    private String getCofigByPolyv(VodConfig vodConfig) {
+        AdminVodConfigResp.PolyvConfig polyvConfig = new AdminVodConfigResp.PolyvConfig();
+        polyvConfig.setUserid(polyvConfig.getUserid());
+        polyvConfig.setPtime(System.currentTimeMillis());
+        polyvConfig.setSign(MD5Util.md5(vodConfig.getPolyvSecretKey() + polyvConfig.getPtime()));
+        polyvConfig.setHash(MD5Util.md5(polyvConfig.getPtime() + vodConfig.getPolyvWriteToken()));
+        return JSUtil.toJsonString(polyvConfig);
+    }
 
     /**
      * 课程视频信息分页

@@ -9,6 +9,7 @@ import com.roncoo.education.system.feign.interfaces.qo.SysConfigPageQO;
 import com.roncoo.education.system.feign.interfaces.qo.SysConfigSaveQO;
 import com.roncoo.education.system.feign.interfaces.vo.SysConfigPageVO;
 import com.roncoo.education.system.feign.interfaces.vo.SysConfigViewVO;
+import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -59,5 +60,10 @@ public class FeignSysConfigController implements IFeignSysConfig {
     @Override
     public Aliyun getAliyun() {
         return biz.getAliyun();
+    }
+
+    @Override
+    public VodConfig getVod() {
+        return biz.getVod();
     }
 }

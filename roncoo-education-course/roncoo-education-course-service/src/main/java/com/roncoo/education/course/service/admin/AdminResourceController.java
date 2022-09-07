@@ -8,6 +8,7 @@ import com.roncoo.education.course.service.admin.req.AdminResourcePageReq;
 import com.roncoo.education.course.service.admin.req.AdminResourceSaveReq;
 import com.roncoo.education.course.service.admin.resp.AdminResourcePageResp;
 import com.roncoo.education.course.service.admin.resp.AdminResourceViewResp;
+import com.roncoo.education.course.service.admin.resp.AdminVodConfigResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -30,6 +31,12 @@ public class AdminResourceController {
 
     @NotNull
     private final AdminResourceBiz biz;
+
+    @ApiOperation(value = "获取上传音视频参数", notes = "获取上传音视频参数")
+    @PostMapping(value = "/vod/config")
+    public Result<AdminVodConfigResp> getVodConfig() {
+        return biz.getVodConfig();
+    }
 
     @ApiOperation(value = "课程视频信息分页", notes = "课程视频信息分页")
     @PostMapping(value = "/page")

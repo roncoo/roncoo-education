@@ -15,6 +15,7 @@ import com.roncoo.education.system.feign.interfaces.qo.SysConfigPageQO;
 import com.roncoo.education.system.feign.interfaces.qo.SysConfigSaveQO;
 import com.roncoo.education.system.feign.interfaces.vo.SysConfigPageVO;
 import com.roncoo.education.system.feign.interfaces.vo.SysConfigViewVO;
+import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -67,5 +68,12 @@ public class FeignSysConfigBiz extends BaseBiz {
         List<SysConfig> sysConfigs = dao.listByExample(example);
         Map<String, String> map = sysConfigs.stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
         return BeanUtil.objToBean(map, Aliyun.class);
+    }
+
+    public VodConfig getVod() {
+        SysConfigExample example = new SysConfigExample();
+        List<SysConfig> sysConfigs = dao.listByExample(example);
+        Map<String, String> map = sysConfigs.stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
+        return BeanUtil.objToBean(map, VodConfig.class);
     }
 }
