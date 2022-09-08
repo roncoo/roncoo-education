@@ -48,7 +48,7 @@ public class AdminCategoryBiz extends BaseBiz {
         if (StringUtils.hasText(req.getCategoryName())) {
             c.andCategoryNameEqualTo(req.getCategoryName());
         }
-        example.setOrderByClause("sort acs, id desc");
+        example.setOrderByClause("sort asc, id desc");
         List<Category> categoryList = dao.listByExample(example);
         return Result.success(filter(0L, categoryList));
     }
