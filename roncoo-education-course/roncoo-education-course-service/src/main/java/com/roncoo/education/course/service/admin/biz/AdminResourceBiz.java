@@ -70,6 +70,7 @@ public class AdminResourceBiz extends BaseBiz {
     public Result<Page<AdminResourcePageResp>> page(AdminResourcePageReq req) {
         ResourceExample example = new ResourceExample();
         Criteria c = example.createCriteria();
+        example.setOrderByClause("sort asc, id desc");
         Page<Resource> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminResourcePageResp> respPage = PageUtil.transform(page, AdminResourcePageResp.class);
         return Result.success(respPage);
