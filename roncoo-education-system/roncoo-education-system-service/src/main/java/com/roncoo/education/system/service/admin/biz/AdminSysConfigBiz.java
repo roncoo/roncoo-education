@@ -1,5 +1,7 @@
 package com.roncoo.education.system.service.admin.biz;
 
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
@@ -10,14 +12,17 @@ import com.roncoo.education.system.dao.impl.mapper.entity.SysConfig;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfigExample;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfigExample.Criteria;
 import com.roncoo.education.system.service.admin.req.AdminSysConfigEditReq;
+import com.roncoo.education.system.service.admin.req.AdminSysConfigListReq;
 import com.roncoo.education.system.service.admin.req.AdminSysConfigPageReq;
 import com.roncoo.education.system.service.admin.req.AdminSysConfigSaveReq;
+import com.roncoo.education.system.service.admin.resp.AdminSysConfigListResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysConfigPageResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysConfigViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * ADMIN-系统配置
@@ -94,5 +99,33 @@ public class AdminSysConfigBiz extends BaseBiz {
             return Result.success("操作成功");
         }
         return Result.error("操作失败");
+    }
+
+    public Result<List<AdminSysConfigListResp>> list(AdminSysConfigListReq req) {
+        SysConfigExample example = new SysConfigExample();
+        example.setOrderByClause("sort asc, id desc");
+
+        Criteria c = example.createCriteria();
+        if (ObjectUtil.isNotEmpty(req.getConfigType())) {
+            c.andConfigTypeEqualTo(req.getConfigType());
+        }
+        if (ObjectUtil.isNotEmpty(req.getContentType())) {
+            c.andContentTypeEqualTo(req.getContentType());
+        }
+        if (StrUtil.isNotBlank(req.getConfigName())) {
+            c.andConfigNameLike(PageUtil.like(req.getConfigName()));
+        }
+        if (StrUtil.isNotBlank(req.getConfigKey())) {
+            c.andConfigKeyLike(PageUtil.like(req.getConfigKey()));
+        }
+        if (ObjectUtil.isNotEmpty(req.getConfigShow())) {
+            c.andConfigShowEqualTo(req.getConfigShow());
+        }
+        if (StrUtil.isNotBlank(req.getRemark())) {
+            c.andRemarkLike(PageUtil.like(req.getRemark()));
+        }
+
+        List<SysConfig> configList = dao.listByExample(example);
+        return Result.success(BeanUtil.copyProperties(configList, AdminSysConfigListResp.class));
     }
 }

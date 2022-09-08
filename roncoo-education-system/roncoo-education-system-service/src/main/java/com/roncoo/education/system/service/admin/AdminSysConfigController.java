@@ -4,8 +4,10 @@ import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysConfigBiz;
 import com.roncoo.education.system.service.admin.req.AdminSysConfigEditReq;
+import com.roncoo.education.system.service.admin.req.AdminSysConfigListReq;
 import com.roncoo.education.system.service.admin.req.AdminSysConfigPageReq;
 import com.roncoo.education.system.service.admin.req.AdminSysConfigSaveReq;
+import com.roncoo.education.system.service.admin.resp.AdminSysConfigListResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysConfigPageResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysConfigViewResp;
 import io.swagger.annotations.Api;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * ADMIN-系统配置
@@ -30,6 +33,12 @@ public class AdminSysConfigController {
 
     @NotNull
     private final AdminSysConfigBiz biz;
+
+    @ApiOperation(value = "系统配置列表", notes = "系统配置列表")
+    @PostMapping(value = "/list")
+    public Result<List<AdminSysConfigListResp>> list(@RequestBody AdminSysConfigListReq req) {
+        return biz.list(req);
+    }
 
     @ApiOperation(value = "系统配置分页", notes = "系统配置分页")
     @PostMapping(value = "/page")
