@@ -33,7 +33,7 @@ public class AdminResourceController {
     private final AdminResourceBiz biz;
 
     @ApiOperation(value = "获取上传音视频参数", notes = "获取上传音视频参数")
-    @PostMapping(value = "/vod/config")
+    @GetMapping(value = "/vod/config")
     public Result<AdminVodConfigResp> getVodConfig() {
         return biz.getVodConfig();
     }
