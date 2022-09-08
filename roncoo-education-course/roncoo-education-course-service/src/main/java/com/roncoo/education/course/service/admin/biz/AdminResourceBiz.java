@@ -4,7 +4,6 @@ import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.common.core.tools.MD5Util;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.ResourceDao;
@@ -43,7 +42,7 @@ public class AdminResourceBiz extends BaseBiz {
         VodConfig vodConfig = feignSysConfig.getVod();
         AdminVodConfigResp resp = new AdminVodConfigResp();
         resp.setVodPlatform(vodConfig.getVodPlatform());
-        resp.setConfig(getCofigByPolyv(vodConfig));
+        resp.setPolyvConfig(getCofigByPolyv(vodConfig));
         return Result.success(resp);
     }
 
@@ -53,13 +52,13 @@ public class AdminResourceBiz extends BaseBiz {
      * @param vodConfig
      * @return
      */
-    private String getCofigByPolyv(VodConfig vodConfig) {
+    private AdminVodConfigResp.PolyvConfig getCofigByPolyv(VodConfig vodConfig) {
         AdminVodConfigResp.PolyvConfig polyvConfig = new AdminVodConfigResp.PolyvConfig();
         polyvConfig.setUserid(polyvConfig.getUserid());
         polyvConfig.setPtime(System.currentTimeMillis());
         polyvConfig.setSign(MD5Util.md5(vodConfig.getPolyvSecretKey() + polyvConfig.getPtime()));
         polyvConfig.setHash(MD5Util.md5(polyvConfig.getPtime() + vodConfig.getPolyvWriteToken()));
-        return JSUtil.toJsonString(polyvConfig);
+        return polyvConfig;
     }
 
     /**

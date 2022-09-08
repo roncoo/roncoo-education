@@ -15,8 +15,8 @@ public class AdminVodConfigResp {
     @ApiModelProperty(value = "使用平台")
     private Integer vodPlatform;
 
-    @ApiModelProperty(value = "配置")
-    private String config;
+    private PolyvConfig polyvConfig;
+    private PriConfig priConfig;
 
     /**
      * 保利威
