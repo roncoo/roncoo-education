@@ -7,7 +7,6 @@ import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.alibaba.fastjson.JSON;
 import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.common.core.tools.MD5Util;
@@ -90,7 +89,7 @@ public final class PolyvLiveUtil {
         map.put("timestamp", System.currentTimeMillis());
         map.put("url", callbackUrl);
         map.put("sign", getSign(appSecret, map));
-        JSONObject js = JSUtil.parseObject(com.roncoo.education.common.core.tools.HttpUtil.post(url, map), JSONObject.class);
+        JSONObject js = JSUtil.parseObject(HttpUtil.post(url, map), JSONObject.class);
         log.info("设置直播状态回调通知url={}", js);
     }
 
@@ -110,7 +109,7 @@ public final class PolyvLiveUtil {
         map.put("timestamp", System.currentTimeMillis());
         map.put("url", callbackUrl);
         map.put("sign", getSign(appSecret, map));
-        JSONObject js = JSUtil.parseObject(com.roncoo.education.common.core.tools.HttpUtil.post(url, map), JSONObject.class);
+        JSONObject js = JSUtil.parseObject(HttpUtil.post(url, map), JSONObject.class);
         log.info("设置转存成功回调通知url={}", js);
     }
 
@@ -130,7 +129,7 @@ public final class PolyvLiveUtil {
         map.put("timestamp", System.currentTimeMillis());
         map.put("url", callbackUrl);
         map.put("sign", getSign(appSecret, map));
-        JSONObject js = JSUtil.parseObject(com.roncoo.education.common.core.tools.HttpUtil.post(url, map), JSONObject.class);
+        JSONObject js = JSUtil.parseObject(HttpUtil.post(url, map), JSONObject.class);
         log.info("设置录制回调通知url={}", js);
     }
 
@@ -207,7 +206,7 @@ public final class PolyvLiveUtil {
 
         String response;
         try {
-            response = PolyvHttpUtil.postJsonBody(url, JSON.toJSONString(map), null);
+            response = PolyvHttpUtil.postJsonBody(url, JSUtil.toJsonString(map), null);
         } catch (IOException e) {
             log.error("保利威-修改全局回调设置失败！", e);
             throw new BaseException("polyv edit global callback setting fail!!!");
