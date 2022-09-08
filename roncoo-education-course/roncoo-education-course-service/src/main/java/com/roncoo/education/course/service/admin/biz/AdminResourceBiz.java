@@ -54,7 +54,7 @@ public class AdminResourceBiz extends BaseBiz {
      */
     private AdminVodConfigResp.PolyvConfig getCofigByPolyv(VodConfig vodConfig) {
         AdminVodConfigResp.PolyvConfig polyvConfig = new AdminVodConfigResp.PolyvConfig();
-        polyvConfig.setUserid(polyvConfig.getUserid());
+        polyvConfig.setUserid(vodConfig.getPolyvUserId());
         polyvConfig.setPtime(System.currentTimeMillis());
         polyvConfig.setSign(MD5Util.md5(vodConfig.getPolyvSecretKey() + polyvConfig.getPtime()));
         polyvConfig.setHash(MD5Util.md5(polyvConfig.getPtime() + vodConfig.getPolyvWriteToken()));

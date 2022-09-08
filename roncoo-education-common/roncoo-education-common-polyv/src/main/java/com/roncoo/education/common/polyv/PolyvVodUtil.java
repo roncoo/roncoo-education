@@ -56,9 +56,29 @@ public final class PolyvVodUtil {
     private PolyvVodUtil() {
     }
 
-    public static String getSign(String secretKey, String userId, Long ts) {
-        String s = secretKey + userId + secretKey + ts;
-        return MD5Util.md5(s);
+    public static void main(String[] args) {
+        System.out.println(getUserMain("75ae5d5bf7", "e3ZbH9lv0M"));
+    }
+
+    /**
+     * 获取用户空间及流量情况
+     *
+     * @param userid
+     * @param secretKey
+     * @return
+     */
+    public static JSONObject getUserMain(String userid, String secretKey) {
+        String requestUrl = String.format("http://api.polyv.net/v2/user/%s/main", userid);
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("userid", userid);
+        paramMap.put("ptime", String.valueOf(System.currentTimeMillis()));
+        paramMap.put("sign", getSha1Sign(paramMap, secretKey));
+        String result = HttpUtil.post(requestUrl, new HashMap<>(paramMap));
+        JSONObject resultJson = JSONUtil.parseObj(result);
+        if (SUCCESS_CODE.equals(resultJson.getInt("code"))) {
+            return resultJson.getJSONObject("data");
+        }
+        return null;
     }
 
     /**
@@ -99,7 +119,6 @@ public final class PolyvVodUtil {
         if (SUCCESS_CODE.equals(resultJson.getInt("code"))) {
             return true;
         }
-
 
         log.error("保利威视--异步批量上传视频失败：{}", result);
         return false;
@@ -541,5 +560,10 @@ public final class PolyvVodUtil {
         String sign = SecureUtil.sha1(param.toString()).toUpperCase();
         log.debug("签名结果：{}", sign);
         return sign;
+    }
+
+    public static String getSign(String secretKey, String userId, Long ts) {
+        String s = secretKey + userId + secretKey + ts;
+        return MD5Util.md5(s);
     }
 }
