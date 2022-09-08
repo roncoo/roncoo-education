@@ -50,5 +50,7 @@ public class AdminVodConfigResp {
     @AllArgsConstructor
     public static class PriConfig {
         // TODO
+        @ApiModelProperty(value = "sign")
+        private String sign;
     }
 }
