@@ -1,12 +1,13 @@
 package com.roncoo.education.course.service.auth.req;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import java.time.LocalDateTime;
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -52,7 +53,7 @@ public class AuthResourceReq implements Serializable {
     @ApiModelProperty(value = "资源地址")
     private String resourceUrl;
 
-    @ApiModelProperty(value = "状态(1待上传，2上传成功，3上传失败)")
+    @ApiModelProperty(value = "状态(1转码中，2成功，3失败)")
     private Integer videoStatus;
 
     @ApiModelProperty(value = "时长")

@@ -1,5 +1,6 @@
 package com.roncoo.education.course.dao.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
@@ -68,7 +69,18 @@ public class ResourceDaoImpl implements ResourceDao {
     }
 
     @Override
-    public int countByExample(ResourceExample example){
+    public int countByExample(ResourceExample example) {
         return this.mapper.countByExample(example);
+    }
+
+    @Override
+    public Resource getByVideoVid(String videoVid) {
+        ResourceExample example = new ResourceExample();
+        example.createCriteria().andVideoVidEqualTo(videoVid);
+        List<Resource> resourceList = this.mapper.selectByExample(example);
+        if (CollUtil.isNotEmpty(resourceList)) {
+            return resourceList.get(0);
+        }
+        return null;
     }
 }

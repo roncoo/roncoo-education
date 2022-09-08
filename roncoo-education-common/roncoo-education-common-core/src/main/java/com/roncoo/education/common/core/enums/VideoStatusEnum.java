@@ -10,9 +10,9 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum UploadStatusEnum {
+public enum VideoStatusEnum {
 
-    WAIT(1, "待上传", ""), SUCCES(2, "上传成功", "green"), FINAL(3, "上传失败", "red");
+    WAIT(1, "转码中", ""), SUCCES(2, "成功", "green"), FINAL(3, "失败", "red");
 
     private Integer code;
 

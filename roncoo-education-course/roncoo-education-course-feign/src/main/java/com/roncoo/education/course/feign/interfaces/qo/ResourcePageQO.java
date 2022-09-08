@@ -1,9 +1,10 @@
 package com.roncoo.education.course.feign.interfaces.qo;
 
-import java.time.LocalDateTime;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * 课程视频信息
@@ -13,7 +14,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class ResourcePageQO implements Serializable{
+public class ResourcePageQO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -73,7 +74,7 @@ public class ResourcePageQO implements Serializable{
     private String resourceUrl;
 
     /**
-     * 状态(1待上传，2上传成功，3上传失败)
+     * 状态(1转码中，2成功，3失败)
      */
     private Integer videoStatus;
 

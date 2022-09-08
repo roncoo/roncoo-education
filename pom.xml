@@ -126,6 +126,11 @@
             </dependency>
             <dependency>
                 <groupId>com.roncoo</groupId>
+                <artifactId>roncoo-education-common-polyv</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.roncoo</groupId>
                 <artifactId>roncoo-education-common-service</artifactId>
                 <version>${project.version}</version>
             </dependency>

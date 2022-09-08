@@ -31,6 +31,10 @@
             <groupId>com.roncoo</groupId>
             <artifactId>roncoo-education-common-service</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.roncoo</groupId>
+            <artifactId>roncoo-education-common-polyv</artifactId>
+        </dependency>
 
         <!-- test -->
         <dependency>

@@ -59,7 +59,7 @@ public interface ResourceDao {
     /**
      * 课程视频信息--条件列出
      *
-     * @param example     查询条件
+     * @param example 查询条件
      * @return 课程视频信息列表
      */
     List<Resource> listByExample(ResourceExample example);
@@ -67,8 +67,10 @@ public interface ResourceDao {
     /**
      * 课程视频信息--条件统计
      *
-     * @param example     统计条件
+     * @param example 统计条件
      * @return 课程视频信息数量
      */
     int countByExample(ResourceExample example);
+
+    Resource getByVideoVid(String videoVid);
 }
