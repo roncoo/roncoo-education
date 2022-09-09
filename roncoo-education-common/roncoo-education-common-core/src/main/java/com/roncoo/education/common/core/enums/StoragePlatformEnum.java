@@ -12,7 +12,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum StoragePlatformEnum {
 
-    LOCAL(1, "本地", "local%"), MinIO(2, "MinIO", "minio%");
+    LOCAL(1, "本地", "local%", "local"), MinIO(2, "MinIO", "minio%", "minio");
 
     private Integer code;
 
@@ -22,6 +22,11 @@ public enum StoragePlatformEnum {
      * 标记
      */
     private String tag;
+
+    /**
+     * 标记
+     */
+    private String mode;
 
     /**
      * 根据编码获取枚举信息
