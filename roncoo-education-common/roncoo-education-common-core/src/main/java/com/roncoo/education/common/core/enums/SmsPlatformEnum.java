@@ -13,12 +13,12 @@ public enum SmsPlatformEnum {
     /**
      * 领课云
      */
-    LK_YUN(1, "领课云"),
+    LK_YUN(1, "领课云", "liyun%"),
 
     /**
      * 阿里云
      */
-    ALI_YUN(2, "阿里云");
+    ALI_YUN(2, "阿里云", "aliyun%");
 
     /**
      * 编码
@@ -29,6 +29,11 @@ public enum SmsPlatformEnum {
      * 描述
      */
     private final String desc;
+
+    /**
+     * 标记
+     */
+    private final String tag;
 
     /**
      * @param code

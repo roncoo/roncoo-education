@@ -16,17 +16,17 @@ public enum VodPlatformEnum {
     /**
      * 保利威
      */
-    POLYV(1, "保利威"),
+    POLYV(1, "保利威", "polyv%"),
 
     /**
      * 百家云
      */
-    BJYUN(2, "百家云"),
+    BJYUN(2, "百家云", "baijy%"),
 
     /**
      * 私有云
      */
-    PRIVATE(3, "私有云");
+    PRIVATE(3, "私有云", "pri%");
 
     /**
      * 编码
@@ -37,6 +37,11 @@ public enum VodPlatformEnum {
      * 描述
      */
     private final String desc;
+
+    /**
+     * 标记
+     */
+    private final String tag;
 
     /**
      * 根据编码获取点播平台枚举

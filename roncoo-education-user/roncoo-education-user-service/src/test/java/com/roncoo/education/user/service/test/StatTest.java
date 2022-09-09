@@ -17,7 +17,7 @@ public class StatTest extends BaseTest {
 
     @Test
     public void stat() {
-        Result<AdminStatLoginResp> result = adminStatBiz.statLogin();
+        Result<AdminStatLoginResp> result = adminStatBiz.statLogin(-8);
         System.out.println(JSUtil.toJsonString(result.getData()));
     }
 

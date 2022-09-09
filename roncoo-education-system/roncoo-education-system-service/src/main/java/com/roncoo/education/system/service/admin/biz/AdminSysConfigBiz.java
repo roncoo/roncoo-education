@@ -5,6 +5,9 @@ import cn.hutool.core.util.StrUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.SmsPlatformEnum;
+import com.roncoo.education.common.core.enums.StoragePlatformEnum;
+import com.roncoo.education.common.core.enums.VodPlatformEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.system.dao.SysConfigDao;
@@ -108,6 +111,15 @@ public class AdminSysConfigBiz extends BaseBiz {
         Criteria c = example.createCriteria();
         if (ObjectUtil.isNotEmpty(req.getConfigType())) {
             c.andConfigTypeEqualTo(req.getConfigType());
+            if (req.getConfigType().equals("3")) {
+                c.andConfigKeyLike(VodPlatformEnum.byCode(Integer.valueOf(dao.getByConfigKey("vodPlatform").getConfigValue())).getTag());
+            }
+            if (req.getConfigType().equals("4")) {
+                c.andConfigKeyLike(StoragePlatformEnum.byCode(Integer.valueOf(dao.getByConfigKey("storagePlatform").getConfigValue())).getTag());
+            }
+            if (req.getConfigType().equals("5")) {
+                c.andConfigKeyLike(SmsPlatformEnum.byCode(Integer.valueOf(dao.getByConfigKey("smsPlatform").getConfigValue())).getTag());
+            }
         }
         if (ObjectUtil.isNotEmpty(req.getContentType())) {
             c.andContentTypeEqualTo(req.getContentType());

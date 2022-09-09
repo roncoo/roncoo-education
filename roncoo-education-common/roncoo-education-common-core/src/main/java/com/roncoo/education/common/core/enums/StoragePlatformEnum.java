@@ -12,13 +12,16 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum StoragePlatformEnum {
 
-    LOCAL(1, "本地", "local"), MinIO(2, "MinIO", "minio");
+    LOCAL(1, "本地", "local%"), MinIO(2, "MinIO", "minio%");
 
     private Integer code;
 
     private String desc;
 
-    private String mode;
+    /**
+     * 标记
+     */
+    private String tag;
 
     /**
      * 根据编码获取枚举信息
@@ -26,7 +29,7 @@ public enum StoragePlatformEnum {
      * @param code 编码
      * @return 枚举信息
      */
-    public static StoragePlatformEnum getByCode(Integer code) {
+    public static StoragePlatformEnum byCode(Integer code) {
         for (StoragePlatformEnum val : StoragePlatformEnum.values()) {
             if (val.getCode().equals(code)) {
                 return val;
