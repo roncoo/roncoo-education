@@ -25,7 +25,7 @@ public class AdminStatController {
     private AdminStatBiz biz;
 
     @ApiOperation(value = "登录统计", notes = "获取最近7天的用户登录情况")
-    @GetMapping(value = "/login/")
+    @GetMapping(value = "/login")
     public Result<AdminStatLoginResp> statLogin(@RequestParam Integer dates) {
         return biz.statLogin(dates);
     }
