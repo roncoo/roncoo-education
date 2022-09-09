@@ -28,6 +28,7 @@ import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -64,6 +65,9 @@ public class AdminCourseBiz extends BaseBiz {
     public Result<Page<AdminCoursePageResp>> page(AdminCoursePageReq req) {
         CourseExample example = new CourseExample();
         Criteria c = example.createCriteria();
+        if (StringUtils.hasText(req.getCourseName())) {
+            c.andCourseNameLike(PageUtil.rightLike(req.getCourseName()));
+        }
         Page<Course> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminCoursePageResp> respPage = PageUtil.transform(page, AdminCoursePageResp.class);
         if (CollUtil.isNotEmpty(respPage.getList())) {
