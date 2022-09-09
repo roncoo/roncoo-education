@@ -1,16 +1,20 @@
 package com.roncoo.education.user.dao.impl;
 
+import cn.hutool.core.date.DateUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
+import com.roncoo.education.common.jdbc.AbstractBaseJdbc;
 import com.roncoo.education.user.dao.LogLoginDao;
 import com.roncoo.education.user.dao.impl.mapper.LogLoginMapper;
 import com.roncoo.education.user.dao.impl.mapper.entity.LogLogin;
 import com.roncoo.education.user.dao.impl.mapper.entity.LogLoginExample;
+import com.roncoo.education.user.service.admin.resp.AdminStatLogin;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,7 +25,7 @@ import java.util.List;
  */
 @Repository
 @RequiredArgsConstructor
-public class LogLoginDaoImpl implements LogLoginDao {
+public class LogLoginDaoImpl extends AbstractBaseJdbc implements LogLoginDao {
 
     @NotNull
     private final LogLoginMapper mapper;
@@ -69,5 +73,11 @@ public class LogLoginDaoImpl implements LogLoginDao {
     @Override
     public int countByExample(LogLoginExample example) {
         return this.mapper.countByExample(example);
+    }
+
+    @Override
+    public List<AdminStatLogin> statByDate(int date) {
+        String sql = "select DATE_FORMAT(gmt_create, '%Y-%m-%d') as dates, count(*) as logins from log_login where login_status=1 and gmt_create>?  GROUP BY dates order by dates asc";
+        return this.queryForObjectList(sql, AdminStatLogin.class, DateUtil.offsetDay(new Date(), date));
     }
 }

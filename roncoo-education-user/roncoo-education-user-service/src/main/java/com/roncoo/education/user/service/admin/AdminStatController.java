@@ -1,13 +1,14 @@
-package com.roncoo.education.system.service.admin;
+package com.roncoo.education.user.service.admin;
 
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.system.service.admin.biz.AdminStatBiz;
-import com.roncoo.education.system.service.admin.resp.StatVodResp;
+import com.roncoo.education.user.service.admin.biz.AdminStatBiz;
+import com.roncoo.education.user.service.admin.resp.AdminStatLoginResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -16,17 +17,17 @@ import org.springframework.web.bind.annotation.RestController;
  * @author wujing
  */
 @RestController
-@RequestMapping("/system/admin/stat")
+@RequestMapping("/system/user/stat")
 @Api(value = "system-点播直播统计", tags = {"system-点播直播统计"})
 public class AdminStatController {
 
     @Autowired
     private AdminStatBiz biz;
 
-    @ApiOperation(value = "点播", notes = "点播空间和流量的统计")
-    @GetMapping(value = "/vod")
-    public Result<StatVodResp> vod() {
-        return biz.vod();
+    @ApiOperation(value = "登录统计", notes = "获取最近7天的用户登录情况")
+    @GetMapping(value = "/login/")
+    public Result<AdminStatLoginResp> statLogin(@RequestParam Integer dates) {
+        return biz.statLogin(dates);
     }
 
 }

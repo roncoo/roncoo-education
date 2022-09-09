@@ -3,6 +3,7 @@ package com.roncoo.education.user.dao;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.user.dao.impl.mapper.entity.LogLogin;
 import com.roncoo.education.user.dao.impl.mapper.entity.LogLoginExample;
+import com.roncoo.education.user.service.admin.resp.AdminStatLogin;
 
 import java.util.List;
 
@@ -71,4 +72,6 @@ public interface LogLoginDao {
      * @return 用户登录日志数量
      */
     int countByExample(LogLoginExample example);
+
+    List<AdminStatLogin> statByDate(int date);
 }
