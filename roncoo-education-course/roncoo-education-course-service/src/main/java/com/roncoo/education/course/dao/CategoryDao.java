@@ -59,7 +59,7 @@ public interface CategoryDao {
     /**
      * 分类--条件列出
      *
-     * @param example     查询条件
+     * @param example 查询条件
      * @return 分类列表
      */
     List<Category> listByExample(CategoryExample example);
@@ -67,8 +67,10 @@ public interface CategoryDao {
     /**
      * 分类--条件统计
      *
-     * @param example     统计条件
+     * @param example 统计条件
      * @return 分类数量
      */
     int countByExample(CategoryExample example);
+
+    List<Category> listByIds(List<Long> categoryIdList);
 }

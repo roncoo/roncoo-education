@@ -76,4 +76,10 @@ public class AdminCoursePageResp implements Serializable {
 
     @ApiModelProperty(value = "学习人数")
     private Integer countStudy;
+
+    @ApiModelProperty(value = "讲师名称")
+    private String lecturerName;
+
+    @ApiModelProperty(value = "分类名称")
+    private String categoryName;
 }

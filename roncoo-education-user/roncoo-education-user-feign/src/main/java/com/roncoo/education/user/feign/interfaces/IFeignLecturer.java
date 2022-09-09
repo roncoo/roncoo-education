@@ -1,14 +1,16 @@
 package com.roncoo.education.user.feign.interfaces;
 
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.user.feign.interfaces.qo.LecturerEditQO;
+import com.roncoo.education.user.feign.interfaces.qo.LecturerPageQO;
+import com.roncoo.education.user.feign.interfaces.qo.LecturerSaveQO;
+import com.roncoo.education.user.feign.interfaces.vo.LecturerPageVO;
+import com.roncoo.education.user.feign.interfaces.vo.LecturerViewVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.user.feign.interfaces.qo.LecturerPageQO;
-import com.roncoo.education.user.feign.interfaces.qo.LecturerSaveQO;
-import com.roncoo.education.user.feign.interfaces.qo.LecturerEditQO;
-import com.roncoo.education.user.feign.interfaces.vo.LecturerPageVO;
-import com.roncoo.education.user.feign.interfaces.vo.LecturerViewVO;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 讲师信息 接口
@@ -64,4 +66,12 @@ public interface IFeignLecturer {
     @GetMapping(value = "/get/{id}")
     LecturerViewVO getById(@PathVariable(value = "id") Long id);
 
+    /**
+     * 根据ID集合获取讲师名称集合
+     *
+     * @param lecturerIdList
+     * @return
+     */
+    @PostMapping(value = "/listByIds")
+    Map<Long, String> listByIds(@RequestBody List<Long> lecturerIdList);
 }

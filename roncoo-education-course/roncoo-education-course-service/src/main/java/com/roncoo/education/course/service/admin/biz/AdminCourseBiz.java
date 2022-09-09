@@ -9,7 +9,9 @@ import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.es.EsCourse;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.course.dao.CategoryDao;
 import com.roncoo.education.course.dao.CourseDao;
+import com.roncoo.education.course.dao.impl.mapper.entity.Category;
 import com.roncoo.education.course.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseExample.Criteria;
@@ -18,6 +20,7 @@ import com.roncoo.education.course.service.admin.req.AdminCoursePageReq;
 import com.roncoo.education.course.service.admin.req.AdminCourseSaveReq;
 import com.roncoo.education.course.service.admin.resp.AdminCoursePageResp;
 import com.roncoo.education.course.service.admin.resp.AdminCourseViewResp;
+import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
@@ -29,6 +32,8 @@ import org.springframework.stereotype.Component;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * ADMIN-课程信息
@@ -41,6 +46,11 @@ public class AdminCourseBiz extends BaseBiz {
 
     @NotNull
     private final CourseDao dao;
+    @NotNull
+    private final CategoryDao categoryDao;
+
+    @NotNull
+    private final IFeignLecturer feignLecturer;
 
     @Autowired
     private ElasticsearchRestTemplate elasticsearchRestTemplate;
@@ -56,6 +66,18 @@ public class AdminCourseBiz extends BaseBiz {
         Criteria c = example.createCriteria();
         Page<Course> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminCoursePageResp> respPage = PageUtil.transform(page, AdminCoursePageResp.class);
+        if (CollUtil.isNotEmpty(respPage.getList())) {
+            List<Long> lecturerIdList = respPage.getList().stream().map(AdminCoursePageResp::getLecturerId).collect(Collectors.toList());
+            Map<Long, String> lecturerNameMap = feignLecturer.listByIds(lecturerIdList);
+
+            List<Long> categoryIdList = respPage.getList().stream().map(AdminCoursePageResp::getCategoryId).collect(Collectors.toList());
+            Map<Long, String> categoryNameMap = categoryDao.listByIds(categoryIdList).stream().collect(Collectors.toMap(Category::getId, Category::getCategoryName));
+
+            for (AdminCoursePageResp resp : respPage.getList()) {
+                resp.setLecturerName(lecturerNameMap.get(resp.getLecturerId()));
+                resp.setCategoryName(categoryNameMap.get(resp.getCategoryId()));
+            }
+        }
         return Result.success(respPage);
     }
 

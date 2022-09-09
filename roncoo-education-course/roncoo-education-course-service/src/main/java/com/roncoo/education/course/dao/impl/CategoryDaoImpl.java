@@ -68,7 +68,14 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public int countByExample(CategoryExample example){
+    public int countByExample(CategoryExample example) {
         return this.mapper.countByExample(example);
+    }
+
+    @Override
+    public List<Category> listByIds(List<Long> categoryIdList) {
+        CategoryExample example = new CategoryExample();
+        example.createCriteria().andIdIn(categoryIdList);
+        return this.mapper.selectByExample(example);
     }
 }

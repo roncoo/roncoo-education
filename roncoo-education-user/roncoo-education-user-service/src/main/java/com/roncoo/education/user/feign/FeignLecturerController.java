@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 讲师信息
@@ -54,5 +56,10 @@ public class FeignLecturerController extends BaseController implements IFeignLec
     @Override
     public LecturerViewVO getById(@PathVariable(value = "id") Long id) {
         return biz.getById(id);
+    }
+
+    @Override
+    public Map<Long, String> listByIds(@RequestBody List<Long> lecturerIdList) {
+        return biz.listByIds(lecturerIdList);
     }
 }
