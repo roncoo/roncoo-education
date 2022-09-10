@@ -57,4 +57,6 @@ public class AdminCourseChapterPeriodViewResp implements Serializable {
 
     @ApiModelProperty(value = "资源ID")
     private Long resourceId;
+
+    private AdminResourceViewResp resourceViewResp;
 }

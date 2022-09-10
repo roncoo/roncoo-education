@@ -8,16 +8,19 @@ import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.CourseChapterDao;
 import com.roncoo.education.course.dao.CourseChapterPeriodDao;
+import com.roncoo.education.course.dao.ResourceDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapter;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterExample.Criteria;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
+import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterEditReq;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterPageReq;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterSaveReq;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterPageResp;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterPeriodViewResp;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterViewResp;
+import com.roncoo.education.course.service.admin.resp.AdminResourceViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -39,6 +42,8 @@ public class AdminCourseChapterBiz extends BaseBiz {
     private final CourseChapterDao dao;
     @NotNull
     private final CourseChapterPeriodDao courseChapterPeriodDao;
+    @NotNull
+    private final ResourceDao resourceDao;
 
     /**
      * 章节信息分页
@@ -53,11 +58,19 @@ public class AdminCourseChapterBiz extends BaseBiz {
         Page<AdminCourseChapterPageResp> respPage = PageUtil.transform(page, AdminCourseChapterPageResp.class);
         if (CollUtil.isNotEmpty(respPage.getList())) {
             List<Long> chapterIds = respPage.getList().stream().map(AdminCourseChapterPageResp::getId).collect(Collectors.toList());
+            // 课时
             List<CourseChapterPeriod> periodList = courseChapterPeriodDao.listByChapterIds(chapterIds);
+            // 资源
+            List<Long> resourceIdList = periodList.stream().map(courseChapterPeriod -> courseChapterPeriod.getResourceId()).collect(Collectors.toList());
+            List<Resource> resourceList = resourceDao.listByIds(resourceIdList);
+            Map<Long, Resource> resourceMap = resourceList.stream().collect(Collectors.toMap(Resource::getId, item->item));
             if (CollUtil.isNotEmpty(periodList)) {
                 Map<Long, List<CourseChapterPeriod>> periodMap = periodList.stream().collect(Collectors.groupingBy(CourseChapterPeriod::getChapterId, Collectors.toList()));
                 for (AdminCourseChapterPageResp resp : respPage.getList()) {
                     resp.setPeriodViewRespList(BeanUtil.copyProperties(periodMap.get(resp.getId()), AdminCourseChapterPeriodViewResp.class));
+                    for(AdminCourseChapterPeriodViewResp period: resp.getPeriodViewRespList()){
+                        period.setResourceViewResp(BeanUtil.copyProperties(resourceMap.get(period.getResourceId()), AdminResourceViewResp.class));
+                    }
                 }
             }
         }

@@ -83,4 +83,11 @@ public class ResourceDaoImpl implements ResourceDao {
         }
         return null;
     }
+
+    @Override
+    public List<Resource> listByIds(List<Long> ids) {
+        ResourceExample example = new ResourceExample();
+        example.createCriteria().andIdIn(ids);
+        return this.mapper.selectByExample(example);
+    }
 }

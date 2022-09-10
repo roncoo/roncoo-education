@@ -73,4 +73,6 @@ public interface ResourceDao {
     int countByExample(ResourceExample example);
 
     Resource getByVideoVid(String videoVid);
+
+    List<Resource> listByIds(List<Long> ids);
 }
