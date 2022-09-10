@@ -1,6 +1,7 @@
 package com.roncoo.education.course.service.admin.biz;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
@@ -54,6 +55,9 @@ public class AdminCourseChapterBiz extends BaseBiz {
     public Result<Page<AdminCourseChapterPageResp>> page(AdminCourseChapterPageReq req) {
         CourseChapterExample example = new CourseChapterExample();
         Criteria c = example.createCriteria();
+        if (ObjectUtil.isNotEmpty(req.getCourseId())) {
+            c.andCourseIdEqualTo(req.getCourseId());
+        }
         Page<CourseChapter> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminCourseChapterPageResp> respPage = PageUtil.transform(page, AdminCourseChapterPageResp.class);
         if (CollUtil.isNotEmpty(respPage.getList())) {
@@ -63,12 +67,12 @@ public class AdminCourseChapterBiz extends BaseBiz {
             // 资源
             List<Long> resourceIdList = periodList.stream().map(courseChapterPeriod -> courseChapterPeriod.getResourceId()).collect(Collectors.toList());
             List<Resource> resourceList = resourceDao.listByIds(resourceIdList);
-            Map<Long, Resource> resourceMap = resourceList.stream().collect(Collectors.toMap(Resource::getId, item->item));
+            Map<Long, Resource> resourceMap = resourceList.stream().collect(Collectors.toMap(Resource::getId, item -> item));
             if (CollUtil.isNotEmpty(periodList)) {
                 Map<Long, List<CourseChapterPeriod>> periodMap = periodList.stream().collect(Collectors.groupingBy(CourseChapterPeriod::getChapterId, Collectors.toList()));
                 for (AdminCourseChapterPageResp resp : respPage.getList()) {
                     resp.setPeriodViewRespList(BeanUtil.copyProperties(periodMap.get(resp.getId()), AdminCourseChapterPeriodViewResp.class));
-                    for(AdminCourseChapterPeriodViewResp period: resp.getPeriodViewRespList()){
+                    for (AdminCourseChapterPeriodViewResp period : resp.getPeriodViewRespList()) {
                         period.setResourceViewResp(BeanUtil.copyProperties(resourceMap.get(period.getResourceId()), AdminResourceViewResp.class));
                     }
                 }
