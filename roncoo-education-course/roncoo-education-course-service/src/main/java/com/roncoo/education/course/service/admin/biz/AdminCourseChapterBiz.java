@@ -64,11 +64,10 @@ public class AdminCourseChapterBiz extends BaseBiz {
             List<Long> chapterIds = respPage.getList().stream().map(AdminCourseChapterPageResp::getId).collect(Collectors.toList());
             // 课时
             List<CourseChapterPeriod> periodList = courseChapterPeriodDao.listByChapterIds(chapterIds);
-            // 资源
-            List<Long> resourceIdList = periodList.stream().map(courseChapterPeriod -> courseChapterPeriod.getResourceId()).collect(Collectors.toList());
-            List<Resource> resourceList = resourceDao.listByIds(resourceIdList);
-            Map<Long, Resource> resourceMap = resourceList.stream().collect(Collectors.toMap(Resource::getId, item -> item));
             if (CollUtil.isNotEmpty(periodList)) {
+                // 资源
+                List<Long> resourceIdList = periodList.stream().map(courseChapterPeriod -> courseChapterPeriod.getResourceId()).collect(Collectors.toList());
+                Map<Long, Resource> resourceMap = resourceDao.listByIds(resourceIdList).stream().collect(Collectors.toMap(Resource::getId, item -> item));
                 Map<Long, List<CourseChapterPeriod>> periodMap = periodList.stream().collect(Collectors.groupingBy(CourseChapterPeriod::getChapterId, Collectors.toList()));
                 for (AdminCourseChapterPageResp resp : respPage.getList()) {
                     resp.setPeriodViewRespList(BeanUtil.copyProperties(periodMap.get(resp.getId()), AdminCourseChapterPeriodViewResp.class));
