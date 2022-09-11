@@ -58,6 +58,7 @@ public class AdminCourseChapterBiz extends BaseBiz {
         if (ObjectUtil.isNotEmpty(req.getCourseId())) {
             c.andCourseIdEqualTo(req.getCourseId());
         }
+        example.setOrderByClause("sort asc, id desc");
         Page<CourseChapter> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminCourseChapterPageResp> respPage = PageUtil.transform(page, AdminCourseChapterPageResp.class);
         if (CollUtil.isNotEmpty(respPage.getList())) {
