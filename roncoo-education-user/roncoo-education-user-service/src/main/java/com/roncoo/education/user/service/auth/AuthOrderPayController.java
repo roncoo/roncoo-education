@@ -31,7 +31,7 @@ public class AuthOrderPayController {
     private final AuthOrderPayBiz biz;
 
     @ApiOperation(value = "支付接口", notes = "课程下单接口")
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "create", method = RequestMethod.POST)
     public Result<AuthOrderPayResp> pay(@RequestBody AuthOrderPayReq req) {
         return biz.pay(req);
     }
