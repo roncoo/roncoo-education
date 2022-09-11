@@ -67,7 +67,7 @@ public class AuthOrderPayBiz extends BaseBiz {
         }
         // 校验课程是否已经购买
         OrderInfo orderInfo = orderInfoDao.getByUserAndCourseId(ThreadContext.userId(), req.getCourseId());
-        if (orderInfo != null) {
+        if (orderInfo != null && orderInfo.getOrderStatus().equals(OrderStatusEnum.SUCCESS.getCode())) {
             return Result.error("该课程已经购买");
         }
 

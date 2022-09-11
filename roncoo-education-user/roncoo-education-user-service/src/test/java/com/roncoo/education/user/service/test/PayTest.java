@@ -14,7 +14,7 @@ public class PayTest extends BaseTest {
     @Test
     public void pay() throws Exception {
         AuthOrderPayReq req = new AuthOrderPayReq();
-        req.setPayType(PayTypeEnum.ALIPAY_SCAN.getCode());
+        req.setPayType(PayTypeEnum.WEIXIN_SCAN.getCode());
         req.setCourseId(1246446673697738753L);
         mvc.perform(MockMvcRequestBuilders.post("/user/auth/order/pay/create").content(JSUtil.toJsonString(req)));
     }
