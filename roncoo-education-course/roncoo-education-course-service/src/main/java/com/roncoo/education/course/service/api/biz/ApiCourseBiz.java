@@ -71,7 +71,8 @@ public class ApiCourseBiz extends BaseBiz {
         // 高亮字段
         nsb.withHighlightFields(new HighlightBuilder.Field("courseName").preTags("<mark>").postTags("</mark>"));
         // 课程排序（courseSort）
-        nsb.withSort(new FieldSortBuilder("courseSort").order(SortOrder.DESC));
+        nsb.withSort(new FieldSortBuilder("courseSort").order(SortOrder.ASC));
+        nsb.withSort(new FieldSortBuilder("id").order(SortOrder.DESC));
         // 分页
         nsb.withPageable(PageRequest.of(req.getPageCurrent() - 1, req.getPageSize()));
 
