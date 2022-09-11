@@ -60,10 +60,10 @@ public class AdminCourseSaveReq implements Serializable {
     private Integer isFree;
 
     @ApiModelProperty(value = "原价")
-    private BigDecimal courseOriginal;
+    private BigDecimal coursePrice;
 
     @ApiModelProperty(value = "优惠价")
-    private BigDecimal courseDiscount;
+    private BigDecimal rulingPrice;
 
     @ApiModelProperty(value = "是否上架(1:上架，0:下架)")
     private Integer isPutaway;
