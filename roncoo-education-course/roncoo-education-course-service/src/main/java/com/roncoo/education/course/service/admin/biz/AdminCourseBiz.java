@@ -98,6 +98,9 @@ public class AdminCourseBiz extends BaseBiz {
         if (req.getCoursePrice().compareTo(BigDecimal.ZERO) > 0) {
             req.setIsFree(FreeEnum.CHARGE.getCode());
         }
+        if(req.getCoursePrice().compareTo(req.getRulingPrice()) > 0){
+            req.setRulingPrice(req.getCoursePrice());
+        }
         Course record = BeanUtil.copyProperties(req, Course.class);
         if (dao.save(record) > 0) {
             EsCourse esCourse = BeanUtil.copyProperties(record, EsCourse.class);
@@ -126,6 +129,9 @@ public class AdminCourseBiz extends BaseBiz {
     public Result<String> edit(AdminCourseEditReq req) {
         if (req.getCoursePrice().compareTo(BigDecimal.ZERO) > 0) {
             req.setIsFree(FreeEnum.CHARGE.getCode());
+        }
+        if(req.getCoursePrice().compareTo(req.getRulingPrice()) > 0){
+            req.setRulingPrice(req.getCoursePrice());
         }
         Course record = BeanUtil.copyProperties(req, Course.class);
         if (dao.updateById(record) > 0) {
