@@ -34,7 +34,7 @@ public class AliPayConfig implements Serializable {
     /**
      * 签名类型；目前支持RSA2和RSA，推荐使用RSA2（服务商模式时：为服务商配置）
      */
-    private String signType;
+    private String signType = "RSA2";
 
     /**
      * 子商户-卖家支付宝用户ID（服务商模式时：必填）
