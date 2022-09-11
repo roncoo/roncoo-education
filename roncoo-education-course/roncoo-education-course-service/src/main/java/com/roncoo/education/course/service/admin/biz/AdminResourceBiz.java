@@ -20,6 +20,7 @@ import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 
@@ -70,6 +71,9 @@ public class AdminResourceBiz extends BaseBiz {
     public Result<Page<AdminResourcePageResp>> page(AdminResourcePageReq req) {
         ResourceExample example = new ResourceExample();
         Criteria c = example.createCriteria();
+        if (StringUtils.hasText(req.getResourceName())) {
+            c.andResourceNameLike(PageUtil.rightLike(req.getResourceName()));
+        }
         example.setOrderByClause("sort asc, id desc");
         Page<Resource> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminResourcePageResp> respPage = PageUtil.transform(page, AdminResourcePageResp.class);
