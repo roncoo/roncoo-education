@@ -3,13 +3,20 @@
  */
 package com.roncoo.education.common.service;
 
+import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Base;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * 基础类
  *
  * @author wujing
  */
+@Component
 public class BaseBiz extends Base {
+
+    @Autowired
+    protected CacheRedis cacheRedis;
 
 }

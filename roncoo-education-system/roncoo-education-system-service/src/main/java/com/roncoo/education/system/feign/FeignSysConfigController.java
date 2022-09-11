@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
+import java.util.Map;
 
 /**
  * 系统配置
@@ -55,6 +56,11 @@ public class FeignSysConfigController implements IFeignSysConfig {
     @Override
     public SysConfigViewVO getById(@PathVariable(value = "id") Long id) {
         return biz.getById(id);
+    }
+
+    @Override
+    public Map<String, String> getMapByConfigType(@PathVariable(value = "type") Integer configType) {
+        return biz.getMapByConfigType(configType);
     }
 
     @Override

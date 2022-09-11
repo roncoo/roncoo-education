@@ -2,15 +2,22 @@ package com.roncoo.education.user.service.auth.biz;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.config.ThreadContext;
+import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.core.enums.OrderStatusEnum;
-import com.roncoo.education.common.core.enums.PutawayEnum;
-import com.roncoo.education.common.core.enums.StatusIdEnum;
+import com.roncoo.education.common.core.enums.*;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.common.core.tools.NOUtil;
+import com.roncoo.education.common.pay.PayFace;
+import com.roncoo.education.common.pay.req.TradeOrderReq;
+import com.roncoo.education.common.pay.resp.TradeOrderResp;
+import com.roncoo.education.common.pay.util.AliPayConfig;
+import com.roncoo.education.common.pay.util.PayModelEnum;
+import com.roncoo.education.common.pay.util.WxPayConfig;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.feign.interfaces.IFeignCourse;
 import com.roncoo.education.course.feign.interfaces.vo.CourseViewVO;
+import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.user.dao.OrderInfoDao;
 import com.roncoo.education.user.dao.OrderPayDao;
 import com.roncoo.education.user.dao.UsersDao;
@@ -27,6 +34,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * AUTH-订单支付信息表
@@ -44,6 +53,10 @@ public class AuthOrderPayBiz extends BaseBiz {
     @NotNull
     private final UsersDao usersDao;
 
+    @NotNull
+    private final Map<String, PayFace> payFaceMap;
+    @NotNull
+    private final IFeignSysConfig feignSysConfig;
     @NotNull
     private final IFeignCourse feignCourse;
 
@@ -75,14 +88,51 @@ public class AuthOrderPayBiz extends BaseBiz {
         // 创建订单
         orderInfo = createOrderInfo(courseViewVO, users, orderPay);
 
-        // 下单支付
-        String payMessage = "";
+        // 创建支付
+        TradeOrderResp orderResp = createPay(req, courseViewVO, orderPay);
+        if (orderResp.isSuccess()) {
+            //返回支付信息
+            AuthOrderPayResp resp = BeanUtil.copyProperties(orderInfo, AuthOrderPayResp.class);
+            resp.setPayMessage(orderResp.getPayMessage());
+            resp.setSerialNumber(orderPay.getSerialNumber());
+            return Result.success(resp);
+        }
+        return Result.error("下单失败");
+    }
 
-        //返回支付信息
-        AuthOrderPayResp resp = BeanUtil.copyProperties(orderInfo, AuthOrderPayResp.class);
-        resp.setPayMessage(payMessage);
-        resp.setSerialNumber(orderPay.getSerialNumber());
-        return Result.success(resp);
+    private TradeOrderResp createPay(AuthOrderPayReq req, CourseViewVO courseViewVO, OrderPay orderPay) {
+        // 下单支付
+        PayFace payFace = payFaceMap.get(PayTypeEnum.byCode(req.getPayType()).getImpl());
+        if (ObjectUtil.isNull(payFace)) {
+            log.error("该接口没实现，payType={}", req.getPayType());
+            throw new BaseException("获取失败");
+        }
+
+        TradeOrderReq orderReq = new TradeOrderReq();
+        // 获取支付配置
+        getPayConfig(orderReq);
+
+        orderReq.setTradeSerialNo(orderPay.getSerialNumber().toString());
+        orderReq.setAmount(orderPay.getCoursePrice());
+        orderReq.setGoodsName(courseViewVO.getCourseName());
+        orderReq.setUserClientIp(req.getUserClientIp());
+        orderReq.setTimeExpire(null);
+        orderReq.setNotifyUrl(null);
+        orderReq.setQuitUrl(req.getQuitUrl() + "?tradeSerialNo=" + orderReq.getTradeSerialNo());
+
+        // 直连模式
+        orderReq.setPayModel(PayModelEnum.DIRECT_SALES.getCode());
+        return payFace.tradeOrder(orderReq);
+    }
+
+    private void getPayConfig(TradeOrderReq orderReq) {
+        Map<String, String> payConfig = cacheRedis.getByJson(Constants.RedisPre.PAY + ConfigTypeEnum.PAY.getCode(), HashMap.class);
+        if (ObjectUtil.isEmpty(payConfig)) {
+            payConfig = feignSysConfig.getMapByConfigType(ConfigTypeEnum.PAY.getCode());
+            cacheRedis.set(Constants.RedisPre.PAY + ConfigTypeEnum.PAY.getCode(), payConfig);
+        }
+        orderReq.setAliPayConfig(BeanUtil.objToBean(payConfig, AliPayConfig.class));
+        orderReq.setWxPayConfig(BeanUtil.objToBean(payConfig, WxPayConfig.class));
     }
 
     /**

@@ -76,4 +76,11 @@ public class FeignSysConfigBiz extends BaseBiz {
         Map<String, String> map = sysConfigs.stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
         return BeanUtil.objToBean(map, VodConfig.class);
     }
+
+    public Map<String, String> getMapByConfigType(Integer configType) {
+        SysConfigExample example = new SysConfigExample();
+        example.createCriteria().andConfigTypeEqualTo(configType);
+        List<SysConfig> sysConfigs = dao.listByExample(example);
+        return sysConfigs.stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
+    }
 }

@@ -25,12 +25,19 @@ public class AuthOrderPayReq implements Serializable {
     @ApiModelProperty(value = "课程ID")
     private Long courseId;
 
-    @ApiModelProperty(value = "支付方式：1微信支付，2支付宝支付，3积分支付，4手工录单")
-    private Integer payType = 2;
+    @ApiModelProperty(value = "支付方式：1微信扫码支付(默认)，2支付宝扫码支付")
+    private Integer payType = 1;
 
     @ApiModelProperty(value = "购买渠道：1web", required = false)
     private Integer channelType = 1;
 
     @ApiModelProperty(value = "用户备注", required = false)
     private String remarkCus;
+
+    @ApiModelProperty(value = "用户终端IP")
+    private String userClientIp;
+
+    @ApiModelProperty(value = "用户付款中途退出调整地址")
+    private String quitUrl;
+
 }

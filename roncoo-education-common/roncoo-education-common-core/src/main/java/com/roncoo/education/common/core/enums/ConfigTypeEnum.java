@@ -11,18 +11,13 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum PayTypeEnum {
+public enum ConfigTypeEnum {
 
-    WEIXIN_SCAN(1, "微信扫码支付", "wxScanPay"), ALIPAY_SCAN(2, "支付宝扫码支付", "aliScanPay");
+    SYSTEM(1, "系统信息"), PAY(6, "支付信息");
 
     private Integer code;
 
     private String desc;
-
-    /**
-     * 实现
-     */
-    private String impl;
 
     /**
      * 根据编码获取枚举信息
@@ -30,11 +25,11 @@ public enum PayTypeEnum {
      * @param code 编码
      * @return 枚举信息
      */
-    public static PayTypeEnum byCode(Integer code) {
+    public static ConfigTypeEnum byCode(Integer code) {
         if (code == null) {
             return null;
         }
-        for (PayTypeEnum val : PayTypeEnum.values()) {
+        for (ConfigTypeEnum val : ConfigTypeEnum.values()) {
             if (val.getCode().equals(code)) {
                 return val;
             }

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -47,13 +48,17 @@ public class CacheRedis {
 
     public String get(String key) {
         if (null != key) {
-            return stringRedisTemplate.opsForValue().get(key).toString();
+            return stringRedisTemplate.opsForValue().get(key);
         }
         return null;
     }
 
     public <T> T getByJson(String key, Class<T> clazz) {
-        return JSUtil.parseObject(stringRedisTemplate.opsForValue().get(key).toString(), clazz);
+        String value = get(key);
+        if (StringUtils.hasText(value)) {
+            return JSUtil.parseObject(value, clazz);
+        }
+        return null;
     }
 
     public void delete(String key) {
@@ -61,7 +66,7 @@ public class CacheRedis {
     }
 
     public <T> List<T> listByJson(String key, Class<T> clazz) {
-        return JSUtil.parseArray(stringRedisTemplate.opsForValue().get(key).toString(), clazz);
+        return JSUtil.parseArray(stringRedisTemplate.opsForValue().get(key), clazz);
     }
 
     public boolean hasKey(String key) {

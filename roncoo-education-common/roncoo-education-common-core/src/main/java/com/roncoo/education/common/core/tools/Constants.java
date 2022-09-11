@@ -34,6 +34,7 @@ public final class Constants {
         String RESOURCE = "resource::";
         String PROGRESS = "progress::";
         String CODE = "code::";
+        String PAY = "pay::";
     }
 
 }
