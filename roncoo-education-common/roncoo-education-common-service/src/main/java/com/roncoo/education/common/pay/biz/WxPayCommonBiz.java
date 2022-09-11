@@ -85,7 +85,7 @@ public class WxPayCommonBiz {
         // step2：处理请求参数
         PartnerTransactionsQueryRequest request = new PartnerTransactionsQueryRequest();
         request.setOutTradeNo(req.getOrderNo());
-        request.setSpMchid(wxPayConfig.getMchId());
+        request.setSpMchid(wxPayConfig.getWxPayMchId());
         request.setSubMchid(wxPayConfig.getSubMchId());
 
         // step2：发起查询请求
@@ -194,7 +194,7 @@ public class WxPayCommonBiz {
         // step2：处理关闭交易订单参数
         PartnerTransactionsCloseRequest request = new PartnerTransactionsCloseRequest();
         request.setOutTradeNo(req.getOrderNo());
-        request.setSpMchid(wxPayConfig.getMchId());
+        request.setSpMchid(wxPayConfig.getWxPayMchId());
         request.setSubMchid(wxPayConfig.getSubMchId());
 
         // step3：关闭交易订单
@@ -255,7 +255,7 @@ public class WxPayCommonBiz {
         try {
             // step4：构建request，传入必要参数
             NotificationRequest request = new NotificationRequest.Builder().withSerialNumber(serialNumber).withNonce(nonce).withTimestamp(timestamp).withSignature(signature).withBody(req.getBodyParam()).build();
-            NotificationHandler handler = new NotificationHandler(verifier, req.getWxPayConfig().getApiV3Key().getBytes(StandardCharsets.UTF_8));
+            NotificationHandler handler = new NotificationHandler(verifier, req.getWxPayConfig().getWxPayApiV3Key().getBytes(StandardCharsets.UTF_8));
 
             // step5：验签和解析请求体
             Notification notification = handler.parse(request);

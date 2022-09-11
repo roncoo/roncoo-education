@@ -139,7 +139,7 @@ public class AliPayCommonBiz {
 
         // step3：参数验签
         try {
-            boolean signResult = AlipaySignature.verifyV1(paramMap, req.getAliPayConfig().getAlipayPublicKey(), paramMap.get("charset"), paramMap.get("sign_type"));
+            boolean signResult = AlipaySignature.verifyV1(paramMap, req.getAliPayConfig().getAliPayPublicKey(), paramMap.get("charset"), paramMap.get("sign_type"));
             if (!signResult) {
                 log.error("支付宝支付--交易回调通知,验签失败！");
                 resp.setMsg("验签失败");

@@ -15,31 +15,31 @@ public class WxPayConfig {
     /**
      * 应用ID（服务商模式时：为服务商配置）
      */
-    private String appId;
+    private String wxPayAppId;
 
     /**
      * 直连商户号（服务商模式时：为服务商配置）
      */
-    private String mchId;
+    private String wxPayMchId;
 
     /**
      * 商户证书（服务商模式时：为服务商配置）
      *
      * @see <a href="https://kf.qq.com/faq/161222NneAJf161222U7fARv.html">如何获取商户API证书</a>
      */
-    private String privateCert;
+    private String wxPayMchPrivateCert;
 
     /**
      * 商户私钥（服务商模式时：为服务商配置）
      *
      * @see <a href="https://kf.qq.com/faq/161222NneAJf161222U7fARv.html">如何获取商户API证书</a>
      */
-    private String privateKey;
+    private String wxPayWxMchPrivateKey;
 
     /**
      * API v3密钥（服务商模式时：为服务商配置）
      */
-    private String apiV3Key;
+    private String wxPayApiV3Key;
 
     /**
      * 子商户应用ID（服务商模式时：必填）

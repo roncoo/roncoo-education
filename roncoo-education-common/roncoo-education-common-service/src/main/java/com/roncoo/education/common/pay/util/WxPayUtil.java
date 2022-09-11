@@ -51,18 +51,18 @@ public class WxPayUtil {
     private static CloseableHttpClient getCloseableHttpClient(WxPayConfig wxPayConfig) {
         try {
             // 加载商户私钥（privateKey：私钥字符串）
-            PrivateKey merchantPrivateKey = PemUtil.loadPrivateKey(new ByteArrayInputStream(wxPayConfig.getPrivateKey().getBytes(StandardCharsets.UTF_8)));
-            X509Certificate certificate = PemUtil.loadCertificate(new ByteArrayInputStream(wxPayConfig.getPrivateCert().getBytes(StandardCharsets.UTF_8)));
+            PrivateKey merchantPrivateKey = PemUtil.loadPrivateKey(new ByteArrayInputStream(wxPayConfig.getWxPayWxMchPrivateKey().getBytes(StandardCharsets.UTF_8)));
+            X509Certificate certificate = PemUtil.loadCertificate(new ByteArrayInputStream(wxPayConfig.getWxPayMchPrivateCert().getBytes(StandardCharsets.UTF_8)));
             String certSerialNo = certificate.getSerialNumber().toString(16).toUpperCase();
 
             // 加载平台证书（mchId：商户号,mchSerialNo：商户证书序列号,apiV3Key：V3密钥）
             CertificatesManager certificatesManager = CertificatesManager.getInstance();
-            certificatesManager.putMerchant(wxPayConfig.getMchId(), new WechatPay2Credentials(wxPayConfig.getMchId(), new PrivateKeySigner(certSerialNo, merchantPrivateKey)), wxPayConfig.getApiV3Key().getBytes(StandardCharsets.UTF_8));
-            Verifier verifier = certificatesManager.getVerifier(wxPayConfig.getMchId());
+            certificatesManager.putMerchant(wxPayConfig.getWxPayMchId(), new WechatPay2Credentials(wxPayConfig.getWxPayMchId(), new PrivateKeySigner(certSerialNo, merchantPrivateKey)), wxPayConfig.getWxPayApiV3Key().getBytes(StandardCharsets.UTF_8));
+            Verifier verifier = certificatesManager.getVerifier(wxPayConfig.getWxPayMchId());
 
             // 初始化httpClient
             return WechatPayHttpClientBuilder.create()
-                    .withMerchant(wxPayConfig.getMchId(), certSerialNo, merchantPrivateKey)
+                    .withMerchant(wxPayConfig.getWxPayMchId(), certSerialNo, merchantPrivateKey)
                     .withValidator(new WechatPay2Validator(verifier)).build();
         } catch (Exception e) {
             log.error("微信支付--初始化请求客户端失败！", e);
@@ -98,7 +98,7 @@ public class WxPayUtil {
             String associatedData = contentObj.getJSONObject("encrypt_certificate").getStr("associated_data");
             String nonce = contentObj.getJSONObject("encrypt_certificate").getStr("nonce");
 
-            AesUtil aesUtil = new AesUtil(wxPayConfig.getApiV3Key().getBytes(StandardCharsets.UTF_8));
+            AesUtil aesUtil = new AesUtil(wxPayConfig.getWxPayApiV3Key().getBytes(StandardCharsets.UTF_8));
             return aesUtil.decryptToString(associatedData.getBytes(StandardCharsets.UTF_8), nonce.getBytes(StandardCharsets.UTF_8), ciphertext);
         } catch (Exception e) {
             log.error("微信支付--获取平台证书列表失败！e");
@@ -129,11 +129,11 @@ public class WxPayUtil {
      */
     public static WxPayService initService(WxPayConfig wxPayConfig) {
         com.github.binarywang.wxpay.config.WxPayConfig payConfig = new com.github.binarywang.wxpay.config.WxPayConfig();
-        payConfig.setAppId(wxPayConfig.getAppId());
-        payConfig.setMchId(wxPayConfig.getMchId());
-        payConfig.setPrivateCertContent(wxPayConfig.getPrivateCert().getBytes(StandardCharsets.UTF_8));
-        payConfig.setPrivateKeyContent(wxPayConfig.getPrivateKey().getBytes(StandardCharsets.UTF_8));
-        payConfig.setApiV3Key(wxPayConfig.getApiV3Key());
+        payConfig.setAppId(wxPayConfig.getWxPayAppId());
+        payConfig.setMchId(wxPayConfig.getWxPayMchId());
+        payConfig.setPrivateCertContent(wxPayConfig.getWxPayMchPrivateCert().getBytes(StandardCharsets.UTF_8));
+        payConfig.setPrivateKeyContent(wxPayConfig.getWxPayWxMchPrivateKey().getBytes(StandardCharsets.UTF_8));
+        payConfig.setApiV3Key(wxPayConfig.getWxPayApiV3Key());
         payConfig.setSubAppId(wxPayConfig.getSubAppId());
         payConfig.setSubMchId(wxPayConfig.getSubMchId());
 

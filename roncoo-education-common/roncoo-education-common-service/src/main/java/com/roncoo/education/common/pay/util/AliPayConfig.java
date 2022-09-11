@@ -19,17 +19,17 @@ public class AliPayConfig implements Serializable {
     /**
      * 应用ID（服务商模式时：为服务商配置）
      */
-    private String appId;
+    private String aliPayAppId;
 
     /**
      * 应用私钥（服务商模式时：为服务商配置）
      */
-    private String privateKey;
+    private String aliPayAppPrivateKey;
 
     /**
      * 支付宝公钥（服务商模式时：为服务商配置）
      */
-    private String alipayPublicKey;
+    private String aliPayPublicKey;
 
     /**
      * 签名类型；目前支持RSA2和RSA，推荐使用RSA2（服务商模式时：为服务商配置）

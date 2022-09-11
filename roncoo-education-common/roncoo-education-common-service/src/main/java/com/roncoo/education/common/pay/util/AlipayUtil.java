@@ -46,7 +46,7 @@ public final class AlipayUtil {
      */
     public static AlipayTradePrecreateResponse preCreate(AliPayConfig aliPayConfig, AlipayTradePrecreateModel model, String notifyUrl) {
         try {
-            AlipayClient alipayClient = new DefaultAlipayClient(REQUEST_URL, aliPayConfig.getAppId(), aliPayConfig.getPrivateKey(), "json", DEFAULT_CHARSET, aliPayConfig.getAlipayPublicKey(), aliPayConfig.getSignType());
+            AlipayClient alipayClient = new DefaultAlipayClient(REQUEST_URL, aliPayConfig.getAliPayAppId(), aliPayConfig.getAliPayAppPrivateKey(), "json", DEFAULT_CHARSET, aliPayConfig.getAliPayPublicKey(), aliPayConfig.getSignType());
             AlipayTradePrecreateRequest request = new AlipayTradePrecreateRequest();
             request.setNotifyUrl(notifyUrl);
 
@@ -71,7 +71,7 @@ public final class AlipayUtil {
      */
     public static AlipayTradeAppPayResponse appPay(AliPayConfig aliPayConfig, AlipayTradeAppPayModel model, String notifyUrl) {
         try {
-            AlipayClient alipayClient = new DefaultAlipayClient(REQUEST_URL, aliPayConfig.getAppId(), aliPayConfig.getPrivateKey(), "json", DEFAULT_CHARSET, aliPayConfig.getAlipayPublicKey(), aliPayConfig.getSignType());
+            AlipayClient alipayClient = new DefaultAlipayClient(REQUEST_URL, aliPayConfig.getAliPayAppId(), aliPayConfig.getAliPayAppPrivateKey(), "json", DEFAULT_CHARSET, aliPayConfig.getAliPayPublicKey(), aliPayConfig.getSignType());
 
             AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
             request.setNotifyUrl(notifyUrl);
@@ -98,7 +98,7 @@ public final class AlipayUtil {
      */
     public static AlipayTradeWapPayResponse wapPay(AliPayConfig aliPayConfig, AlipayTradeWapPayModel model, String returnUrl, String notifyUrl) {
         try {
-            AlipayClient alipayClient = new DefaultAlipayClient(REQUEST_URL, aliPayConfig.getAppId(), aliPayConfig.getPrivateKey(), "json", DEFAULT_CHARSET, aliPayConfig.getAlipayPublicKey(), aliPayConfig.getSignType());
+            AlipayClient alipayClient = new DefaultAlipayClient(REQUEST_URL, aliPayConfig.getAliPayAppId(), aliPayConfig.getAliPayAppPrivateKey(), "json", DEFAULT_CHARSET, aliPayConfig.getAliPayPublicKey(), aliPayConfig.getSignType());
 
             AlipayTradeWapPayRequest request = new AlipayTradeWapPayRequest();
             request.setReturnUrl(returnUrl);
@@ -126,7 +126,7 @@ public final class AlipayUtil {
      */
     public static AlipayTradeQueryResponse tradeQuery(AliPayConfig aliPayConfig, String outTradeNo, String tradeNo, List<String> queryOptions) {
         try {
-            AlipayClient alipayClient = new DefaultAlipayClient(REQUEST_URL, aliPayConfig.getAppId(), aliPayConfig.getPrivateKey(), "json", DEFAULT_CHARSET, aliPayConfig.getAlipayPublicKey(), aliPayConfig.getSignType());
+            AlipayClient alipayClient = new DefaultAlipayClient(REQUEST_URL, aliPayConfig.getAliPayAppId(), aliPayConfig.getAliPayAppPrivateKey(), "json", DEFAULT_CHARSET, aliPayConfig.getAliPayPublicKey(), aliPayConfig.getSignType());
             AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();
 
             AlipayTradeQueryModel model = new AlipayTradeQueryModel();
@@ -157,7 +157,7 @@ public final class AlipayUtil {
      */
     public static AlipayTradeRefundResponse tradeRefund(AliPayConfig aliPayConfig, AlipayTradeRefundModel model) {
         try {
-            AlipayClient alipayClient = new DefaultAlipayClient(REQUEST_URL, aliPayConfig.getAppId(), aliPayConfig.getPrivateKey(), "json", DEFAULT_CHARSET, aliPayConfig.getAlipayPublicKey(), aliPayConfig.getSignType());
+            AlipayClient alipayClient = new DefaultAlipayClient(REQUEST_URL, aliPayConfig.getAliPayAppId(), aliPayConfig.getAliPayAppPrivateKey(), "json", DEFAULT_CHARSET, aliPayConfig.getAliPayPublicKey(), aliPayConfig.getSignType());
             AlipayTradeRefundRequest request = new AlipayTradeRefundRequest();
             // 请求参数
             request.setBizModel(model);
@@ -185,7 +185,7 @@ public final class AlipayUtil {
      */
     public static AlipayTradeFastpayRefundQueryResponse refundQuery(AliPayConfig aliPayConfig, String tradeNo, String outTradeNo, String outRequestNo, List<String> queryOptions) {
         try {
-            AlipayClient alipayClient = new DefaultAlipayClient(REQUEST_URL, aliPayConfig.getAppId(), aliPayConfig.getPrivateKey(), "json", DEFAULT_CHARSET, aliPayConfig.getAlipayPublicKey(), aliPayConfig.getSignType());
+            AlipayClient alipayClient = new DefaultAlipayClient(REQUEST_URL, aliPayConfig.getAliPayAppId(), aliPayConfig.getAliPayAppPrivateKey(), "json", DEFAULT_CHARSET, aliPayConfig.getAliPayPublicKey(), aliPayConfig.getSignType());
             AlipayTradeFastpayRefundQueryRequest request = new AlipayTradeFastpayRefundQueryRequest();
 
             AlipayTradeFastpayRefundQueryModel model = new AlipayTradeFastpayRefundQueryModel();
@@ -225,7 +225,7 @@ public final class AlipayUtil {
      */
     public static AlipayTradeCloseResponse tradeClose(AliPayConfig aliPayConfig, String tradeNo, String outTradeNo, String operatorId) {
         try {
-            AlipayClient alipayClient = new DefaultAlipayClient(REQUEST_URL, aliPayConfig.getAppId(), aliPayConfig.getPrivateKey(), "json", DEFAULT_CHARSET, aliPayConfig.getAlipayPublicKey(), aliPayConfig.getSignType());
+            AlipayClient alipayClient = new DefaultAlipayClient(REQUEST_URL, aliPayConfig.getAliPayAppId(), aliPayConfig.getAliPayAppPrivateKey(), "json", DEFAULT_CHARSET, aliPayConfig.getAliPayPublicKey(), aliPayConfig.getSignType());
             AlipayTradeCloseRequest request = new AlipayTradeCloseRequest();
 
             AlipayTradeCloseModel model = new AlipayTradeCloseModel();
