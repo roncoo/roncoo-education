@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.FreeEnum;
 import com.roncoo.education.common.core.enums.PutawayEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
@@ -31,6 +32,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -93,6 +95,9 @@ public class AdminCourseBiz extends BaseBiz {
      * @return 添加结果
      */
     public Result<String> save(AdminCourseSaveReq req) {
+        if (req.getCoursePrice().compareTo(BigDecimal.ZERO) > 0) {
+            req.setIsFree(FreeEnum.CHARGE.getCode());
+        }
         Course record = BeanUtil.copyProperties(req, Course.class);
         if (dao.save(record) > 0) {
             EsCourse esCourse = BeanUtil.copyProperties(record, EsCourse.class);
@@ -119,6 +124,9 @@ public class AdminCourseBiz extends BaseBiz {
      * @return 修改结果
      */
     public Result<String> edit(AdminCourseEditReq req) {
+        if (req.getCoursePrice().compareTo(BigDecimal.ZERO) > 0) {
+            req.setIsFree(FreeEnum.CHARGE.getCode());
+        }
         Course record = BeanUtil.copyProperties(req, Course.class);
         if (dao.updateById(record) > 0) {
             EsCourse esCourse = BeanUtil.copyProperties(record, EsCourse.class);
