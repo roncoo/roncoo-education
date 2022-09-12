@@ -40,6 +40,7 @@ public class AdminZoneBiz extends BaseBiz {
     public Result<Page<AdminZonePageResp>> page(AdminZonePageReq req) {
         ZoneExample example = new ZoneExample();
         Criteria c = example.createCriteria();
+        example.setOrderByClause("sort asc, id desc");
         Page<Zone> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminZonePageResp> respPage = PageUtil.transform(page, AdminZonePageResp.class);
         return Result.success(respPage);
