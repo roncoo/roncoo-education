@@ -1,5 +1,6 @@
 package com.roncoo.education.course.service.admin.biz;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
@@ -40,6 +41,10 @@ public class AdminZoneCourseBiz extends BaseBiz {
     public Result<Page<AdminZoneCoursePageResp>> page(AdminZoneCoursePageReq req) {
         ZoneCourseExample example = new ZoneCourseExample();
         Criteria c = example.createCriteria();
+        if(ObjectUtil.isNotEmpty(req.getZoneId())){
+            c.andZoneIdEqualTo(req.getZoneId());
+        }
+        example.setOrderByClause("sort asc, id desc");
         Page<ZoneCourse> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminZoneCoursePageResp> respPage = PageUtil.transform(page, AdminZoneCoursePageResp.class);
         return Result.success(respPage);
