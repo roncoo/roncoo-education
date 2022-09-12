@@ -58,26 +58,17 @@ public class AdminOrderInfoPageResp implements Serializable {
     @ApiModelProperty(value = "课程ID")
     private Long courseId;
 
-    @ApiModelProperty(value = "课程名称")
-    private String courseName;
+    @ApiModelProperty(value = "划线价")
+    private BigDecimal rulingPrice;
 
-    @ApiModelProperty(value = "应付金额")
-    private BigDecimal pricePayable;
-
-    @ApiModelProperty(value = "优惠金额")
-    private BigDecimal priceDiscount;
-
-    @ApiModelProperty(value = "实付金额")
-    private BigDecimal pricePaid;
+    @ApiModelProperty(value = "原价")
+    private BigDecimal coursePrice;
 
     @ApiModelProperty(value = "交易类型：1线上支付，2线下支付")
     private Integer tradeType;
 
     @ApiModelProperty(value = "支付方式：1微信支付，2支付宝支付")
     private Integer payType;
-
-    @ApiModelProperty(value = "购买渠道：1web")
-    private Integer channelType;
 
     @ApiModelProperty(value = "订单状态：1待支付，2成功支付，3支付失败，4已关闭")
     private Integer orderStatus;
