@@ -49,6 +49,7 @@ public class AdminOrderInfoBiz extends BaseBiz {
     public Result<Page<AdminOrderInfoPageResp>> page(AdminOrderInfoPageReq req) {
         OrderInfoExample example = new OrderInfoExample();
         Criteria c = example.createCriteria();
+        example.setOrderByClause("id desc");
         Page<OrderInfo> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminOrderInfoPageResp> respPage = PageUtil.transform(page, AdminOrderInfoPageResp.class);
         if (CollUtil.isNotEmpty(respPage.getList())) {
