@@ -1,6 +1,7 @@
 package com.roncoo.education.user.service.admin.biz;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
@@ -19,6 +20,7 @@ import com.roncoo.education.user.service.admin.resp.AdminOrderInfoPageResp;
 import com.roncoo.education.user.service.admin.resp.AdminOrderInfoViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -49,6 +51,12 @@ public class AdminOrderInfoBiz extends BaseBiz {
     public Result<Page<AdminOrderInfoPageResp>> page(AdminOrderInfoPageReq req) {
         OrderInfoExample example = new OrderInfoExample();
         Criteria c = example.createCriteria();
+        if (ObjectUtil.isNotEmpty(req.getOrderNo()) && req.getOrderNo().compareTo(0L) > 0) {
+            c.andOrderNoEqualTo(req.getOrderNo());
+        }
+        if (StringUtils.hasText(req.getMobile())) {
+            c.andMobileLike(PageUtil.rightLike(req.getMobile()));
+        }
         example.setOrderByClause("id desc");
         Page<OrderInfo> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminOrderInfoPageResp> respPage = PageUtil.transform(page, AdminOrderInfoPageResp.class);
