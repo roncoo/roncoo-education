@@ -1,24 +1,31 @@
 package com.roncoo.education.course.service.admin.biz;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.ZoneCourseDao;
+import com.roncoo.education.course.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.dao.impl.mapper.entity.ZoneCourse;
 import com.roncoo.education.course.dao.impl.mapper.entity.ZoneCourseExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.ZoneCourseExample.Criteria;
 import com.roncoo.education.course.service.admin.req.AdminZoneCourseEditReq;
 import com.roncoo.education.course.service.admin.req.AdminZoneCoursePageReq;
 import com.roncoo.education.course.service.admin.req.AdminZoneCourseSaveReq;
+import com.roncoo.education.course.service.admin.resp.AdminCourseViewResp;
 import com.roncoo.education.course.service.admin.resp.AdminZoneCoursePageResp;
 import com.roncoo.education.course.service.admin.resp.AdminZoneCourseViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * ADMIN-专区课程关联表
@@ -31,6 +38,8 @@ public class AdminZoneCourseBiz extends BaseBiz {
 
     @NotNull
     private final ZoneCourseDao dao;
+    @NotNull
+    private final CourseDao courseDao;
 
     /**
      * 专区课程关联表分页
@@ -47,6 +56,14 @@ public class AdminZoneCourseBiz extends BaseBiz {
         example.setOrderByClause("sort asc, id desc");
         Page<ZoneCourse> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminZoneCoursePageResp> respPage = PageUtil.transform(page, AdminZoneCoursePageResp.class);
+        if(CollUtil.isNotEmpty(respPage.getList())){
+            List<Long> courseIdList = respPage.getList().stream().map(AdminZoneCoursePageResp::getCourseId).collect(Collectors.toList());
+            Map<Long, Course> courseMap = courseDao.listByIds(courseIdList).stream().collect(Collectors.toMap(item -> item.getId(), item -> item));
+            for(AdminZoneCoursePageResp resp:respPage.getList()){
+                resp.setCourseViewResp(BeanUtil.copyProperties(courseMap.get(resp.getCourseId()), AdminCourseViewResp.class));
+            }
+        }
+
         return Result.success(respPage);
     }
 

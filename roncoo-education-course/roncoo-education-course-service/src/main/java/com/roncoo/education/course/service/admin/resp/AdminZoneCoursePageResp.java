@@ -45,4 +45,7 @@ public class AdminZoneCoursePageResp implements Serializable {
 
     @ApiModelProperty(value = "课程ID")
     private Long courseId;
+
+    @ApiModelProperty(value = "课程")
+    private AdminCourseViewResp courseViewResp;
 }
