@@ -474,7 +474,7 @@ public final class PolyvVodUtil {
         String result = HttpUtil.post(POLYV_GET_TOKEN, map);
         cn.hutool.json.JSONObject resultJson = JSONUtil.parseObj(result);
         if (resultJson.getInt("code") != 200) {
-            log.error("获取保利威播放sign值失败，返回参数={}", result);
+            log.error("获取保利威播放sign值失败，secretKey={}，请求参数={}，返回参数={}", secretKey, map, result);
             return null;
         }
         cn.hutool.json.JSONObject dataJson = resultJson.getJSONObject("data");
