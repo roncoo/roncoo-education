@@ -21,6 +21,7 @@ import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
 import com.roncoo.education.course.service.auth.req.AuthCourseSignReq;
 import com.roncoo.education.course.service.auth.resp.AuthCourseSignResp;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
+import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -91,7 +92,9 @@ public class AuthCourseBiz extends BaseBiz {
         polyvSign.setIp(req.getClientIp());
         polyvSign.setUserNo(ThreadContext.userId());
         polyvSign.setVid(resource.getVideoVid());
-        PolyvSignResponse polyvSignResponse = PolyvVodUtil.getSignForH5(polyvSign, ThreadContext.userId().toString(), feignSysConfig.getVod().getPolyvSecretKey());
+        VodConfig vodConfig = feignSysConfig.getVod();
+
+        PolyvSignResponse polyvSignResponse = PolyvVodUtil.getSignForH5(polyvSign, vodConfig.getPolyvUserId(), vodConfig.getPolyvSecretKey());
         if (ObjectUtil.isEmpty(polyvSignResponse)) {
             throw new BaseException("系统繁忙，请重试");
         }
