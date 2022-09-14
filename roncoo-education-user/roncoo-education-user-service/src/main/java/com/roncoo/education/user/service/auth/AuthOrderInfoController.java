@@ -8,10 +8,7 @@ import com.roncoo.education.user.service.auth.resp.AuthOrderInfoResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 
@@ -36,5 +33,13 @@ public class AuthOrderInfoController {
         return biz.listForPage(req);
     }
 
+    /**
+     * 用户信息查看接口
+     */
+    @ApiOperation(value = "订单查看", notes = "获取信订单信息")
+    @GetMapping(value = "/view")
+    public Result<AuthOrderInfoResp> view(@RequestParam Long orderNo) {
+        return biz.view(orderNo);
+    }
 
 }

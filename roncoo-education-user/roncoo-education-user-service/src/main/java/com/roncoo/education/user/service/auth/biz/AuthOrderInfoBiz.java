@@ -1,11 +1,13 @@
 package com.roncoo.education.user.service.auth.biz;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.config.ThreadContext;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.OrderStatusEnum;
+import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.feign.interfaces.IFeignCourse;
 import com.roncoo.education.course.feign.interfaces.vo.CourseViewVO;
@@ -58,5 +60,13 @@ public class AuthOrderInfoBiz extends BaseBiz {
             }
         }
         return Result.success(respPage);
+    }
+
+    public Result<AuthOrderInfoResp> view(Long orderNo) {
+        OrderInfo orderInfo = dao.getByOrderNo(orderNo);
+        if (ObjectUtil.isEmpty(orderInfo) || !orderInfo.getUserId().equals(ThreadContext.userId())) {
+            return Result.error("订单不存在");
+        }
+        return Result.success(BeanUtil.copyProperties(orderInfo, AuthOrderInfoResp.class));
     }
 }
