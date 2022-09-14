@@ -94,7 +94,6 @@ public class WxPayCommonBiz {
             PartnerTransactionsResult result = wxPayService.getEcommerceService().queryPartnerTransactions(request);
             // step4：处理响应信息
             if (ObjectUtil.isNull(result)) {
-                log.warn("微信服务商--交易查询，响应结果为空！");
                 resp.setMsg("支付订单查询失败，响应结果为空！");
                 return resp;
             }
@@ -113,7 +112,7 @@ public class WxPayCommonBiz {
                 resp.setTradeStatus(TradeStatusEnum.WAIT_PAY.getCode());
             }
         } catch (WxPayException e) {
-            log.warn("微信服务商--交易查询，请求异常！", e);
+            log.error("微信服务商--交易查询，请求异常！", e);
         }
         return resp;
     }
@@ -140,7 +139,6 @@ public class WxPayCommonBiz {
             WxPayOrderQueryV3Result result = wxPayService.queryOrderV3(null, req.getOrderNo());
             // step4：处理响应信息
             if (ObjectUtil.isNull(result)) {
-                log.warn("微信直营商户--交易查询，响应结果为空！");
                 resp.setMsg("支付订单查询失败，响应结果为空！");
                 return resp;
             }
@@ -159,7 +157,7 @@ public class WxPayCommonBiz {
                 resp.setTradeStatus(TradeStatusEnum.WAIT_PAY.getCode());
             }
         } catch (WxPayException e) {
-            log.warn("微信直营商户--交易查询，请求异常！", e);
+            log.error("微信直营商户--交易查询，请求异常！", e);
         }
         return resp;
     }
@@ -330,7 +328,6 @@ public class WxPayCommonBiz {
         try {
             WxPayRefundV3Result result = wxPayService.refundV3(request);
             if (ObjectUtil.isNull(result)) {
-                log.warn("微信支付--申请退款，请求响应结果为空");
                 return resp;
             }
             log.info("微信支付--申请退款，请求响应结果：{}", JSUtil.toJsonString(result));

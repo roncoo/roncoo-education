@@ -447,7 +447,6 @@ public final class PolyvVodUtil {
      * @return 获取结果
      */
     public static String getPolyvCode(CallbackVodAuthCode authCode) {
-        log.warn("获取codePolyvCode={}", JSONUtil.toJsonStr(authCode));
         try {
             return URLUtil.encodeQuery(Base64.encode(SecureUtil.des(Base64.decode(KEY)).encrypt(JSUtil.toJsonString(authCode))), StandardCharsets.UTF_8);
         } catch (Exception e) {

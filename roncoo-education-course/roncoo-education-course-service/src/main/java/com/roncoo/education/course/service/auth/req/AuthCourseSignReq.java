@@ -25,4 +25,7 @@ public class AuthCourseSignReq implements Serializable {
     @ApiModelProperty(value = "课时ID")
     private Long periodId;
 
+    @ApiModelProperty(value = "观看者IP")
+    private String clientIp;
+
 }

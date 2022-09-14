@@ -383,7 +383,6 @@ public final class PolyvLiveUtil {
         paramMap.put("videoId", videoId);
         paramMap.put("sign", getMd5Sign(paramMap, appSecret));
 
-        log.warn("{}", JSUtil.toJsonString(paramMap));
         String result = HttpUtil.post(requestUrl, new HashMap<>(paramMap));
         log.info("保利威视--创建重制课件任务响应结果：{}", result);
 

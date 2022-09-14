@@ -2,20 +2,25 @@ package com.roncoo.education.course.service.auth.biz;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.config.ThreadContext;
+import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.BuyTypeEnum;
 import com.roncoo.education.common.core.enums.FreeEnum;
+import com.roncoo.education.common.core.enums.ResourceTypeEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
+import com.roncoo.education.common.polyv.PolyvVodUtil;
+import com.roncoo.education.common.polyv.callback.CallbackVodAuthCode;
+import com.roncoo.education.common.polyv.vod.PolyvSign;
+import com.roncoo.education.common.polyv.vod.PolyvSignResponse;
 import com.roncoo.education.common.service.BaseBiz;
-import com.roncoo.education.course.dao.CourseChapterPeriodDao;
-import com.roncoo.education.course.dao.CourseDao;
-import com.roncoo.education.course.dao.UserCourseDao;
-import com.roncoo.education.course.dao.UserStudyDao;
+import com.roncoo.education.course.dao.*;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
+import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserCourse;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
 import com.roncoo.education.course.service.auth.req.AuthCourseSignReq;
 import com.roncoo.education.course.service.auth.resp.AuthCourseSignResp;
+import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -36,20 +41,30 @@ public class AuthCourseBiz extends BaseBiz {
     @NotNull
     private final CourseChapterPeriodDao periodDao;
     @NotNull
+    private final ResourceDao resourceDao;
+    @NotNull
     private final UserCourseDao userCourseDao;
     @NotNull
     private final UserStudyDao userStudyDao;
+
+    @NotNull
+    private final IFeignSysConfig feignSysConfig;
 
     public Result<AuthCourseSignResp> sign(AuthCourseSignReq req) {
         CourseChapterPeriod period = periodDao.getById(req.getPeriodId());
         if (ObjectUtil.isEmpty(period) || period.getStatusId().equals(StatusIdEnum.NO.getCode())) {
             return Result.error("该课时不存在或不可用");
         }
-
-        if (!play(period)) {
+        if (ObjectUtil.isEmpty(period.getResourceId())) {
+            return Result.error("该课时没设置资源");
+        }
+        Resource resource = resourceDao.getById(period.getResourceId());
+        if (ObjectUtil.isEmpty(resource) || resource.getResourceType().equals(ResourceTypeEnum.DOC.getCode())) {
+            return Result.error("资源类型不正确");
+        }
+        if (!check(period)) {
             return Result.error("没购买，不允许播放");
         }
-
         // 可以播放
         UserStudy userStudy = userStudyDao.getByPeriodIdAndUserId(req.getPeriodId(), ThreadContext.userId());
         if (ObjectUtil.isEmpty(userStudy)) {
@@ -61,17 +76,38 @@ public class AuthCourseBiz extends BaseBiz {
             userStudy.setProgress(BigDecimal.ZERO);
             userStudyDao.save(userStudy);
         }
-        String sign = "";
 
         AuthCourseSignResp resp = new AuthCourseSignResp();
         resp.setProgress(userStudy.getProgress());
         resp.setStudyId(userStudy.getId());
-        resp.setResourceId(period.getResourceId());
-        resp.setSign(sign);
+        resp.setVid(resource.getVideoVid());
+        // 播放参数
+        polyvSign(req, resource, resp);
         return Result.success(resp);
     }
 
-    private Boolean play(CourseChapterPeriod period) {
+    private void polyvSign(AuthCourseSignReq req, Resource resource, AuthCourseSignResp resp) {
+        PolyvSign polyvSign = new PolyvSign();
+        polyvSign.setIp(req.getClientIp());
+        polyvSign.setUserNo(ThreadContext.userId());
+        polyvSign.setVid(resource.getVideoVid());
+        PolyvSignResponse polyvSignResponse = PolyvVodUtil.getSignForH5(polyvSign, ThreadContext.userId().toString(), feignSysConfig.getVod().getPolyvSecretKey());
+        if (ObjectUtil.isEmpty(polyvSignResponse)) {
+            throw new BaseException("系统繁忙，请重试");
+        }
+        resp.setTs(polyvSignResponse.getTs());
+        resp.setSign(polyvSignResponse.getSign());
+        resp.setToken(polyvSignResponse.getToken());
+
+        // 获取code
+        CallbackVodAuthCode authCode = new CallbackVodAuthCode();
+        authCode.setPeriodId(req.getPeriodId());
+        authCode.setShowText("领课开源");
+        authCode.setUserId(ThreadContext.userId());
+        resp.setCode(PolyvVodUtil.getPolyvCode(authCode));
+    }
+
+    private Boolean check(CourseChapterPeriod period) {
         UserCourse userCourse = userCourseDao.getByCourseIdAndUserId(period.getCourseId(), ThreadContext.userId());
         if (ObjectUtil.isEmpty(userCourse)) {
             if (period.getIsFree().equals(FreeEnum.FREE.getCode())) {

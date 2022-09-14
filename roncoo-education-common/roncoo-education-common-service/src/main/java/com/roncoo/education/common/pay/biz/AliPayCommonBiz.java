@@ -57,7 +57,6 @@ public class AliPayCommonBiz {
 
         // step4：处理响应信息
         if (response == null) {
-            log.warn("支付宝支付--交易查询，响应结果为空！");
             resp.setMsg("支付订单查询失败，响应结果为空！");
             return resp;
         }

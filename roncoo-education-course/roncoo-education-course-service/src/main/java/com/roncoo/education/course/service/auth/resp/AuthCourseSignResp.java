@@ -23,15 +23,24 @@ public class AuthCourseSignResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "sign")
-    private String sign;
-
     @ApiModelProperty(value = "学习ID")
     private Long studyId;
 
-    @ApiModelProperty(value = "资源ID")
-    private Long resourceId;
-
     @ApiModelProperty(value = "最大学习进度")
     private BigDecimal progress;
+
+    @ApiModelProperty(value = "播放vid")
+    private String vid;
+
+    @ApiModelProperty(value = "播放ts")
+    private String ts;
+
+    @ApiModelProperty(value = "播放sign")
+    private String sign;
+
+    @ApiModelProperty(value = "播放token")
+    private String token;
+
+    @ApiModelProperty(value = "播放code")
+    private String code;
 }
