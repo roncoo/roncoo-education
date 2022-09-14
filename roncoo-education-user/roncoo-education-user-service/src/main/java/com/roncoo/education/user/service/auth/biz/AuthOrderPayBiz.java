@@ -48,7 +48,7 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class AuthOrderPayBiz extends BaseBiz {
 
-    private static final String NOTIFYURL = "{domain}gateway/user/api/order/pay/notify";
+    private static final String NOTIFYURL = "{domain}gateway/user/api/order/pay/notify/{payModel}/{payImpl}";
 
     @NotNull
     private final OrderPayDao dao;
@@ -106,7 +106,8 @@ public class AuthOrderPayBiz extends BaseBiz {
 
     private TradeOrderResp createPay(AuthOrderPayReq req, CourseViewVO courseViewVO, OrderPay orderPay) {
         // 下单支付
-        PayFace payFace = payFaceMap.get(PayTypeEnum.byCode(req.getPayType()).getImpl());
+        String impl = PayTypeEnum.byCode(req.getPayType()).getImpl();
+        PayFace payFace = payFaceMap.get(impl);
         if (ObjectUtil.isNull(payFace)) {
             log.error("该接口没实现，payType={}", req.getPayType());
             throw new BaseException("获取失败");
@@ -116,16 +117,17 @@ public class AuthOrderPayBiz extends BaseBiz {
         // 获取支付配置
         getPayConfig(orderReq);
 
+        // 直连模式
+        orderReq.setPayModel(PayModelEnum.DIRECT_SALES.getCode());
         orderReq.setTradeSerialNo(orderPay.getSerialNumber().toString());
         orderReq.setAmount(orderPay.getCoursePrice());
         orderReq.setGoodsName(courseViewVO.getCourseName());
         orderReq.setUserClientIp(req.getUserClientIp());
         //orderReq.setTimeExpire(null);
-        orderReq.setNotifyUrl(getNotifyUrl());
+        orderReq.setNotifyUrl(getNotifyUrl(orderReq.getPayModel(), impl));
         orderReq.setQuitUrl(req.getQuitUrl() + "?tradeSerialNo=" + orderReq.getTradeSerialNo());
 
-        // 直连模式
-        orderReq.setPayModel(PayModelEnum.DIRECT_SALES.getCode());
+
         return payFace.tradeOrder(orderReq);
     }
 
@@ -208,12 +210,12 @@ public class AuthOrderPayBiz extends BaseBiz {
         return orderpay;
     }
 
-    private String getNotifyUrl() {
+    private String getNotifyUrl(Integer payModel, String impl) {
         String websiteDomain = cacheRedis.get(Constants.RedisPre.DOMAIN);
         if (!StringUtils.hasText(websiteDomain)) {
             websiteDomain = feignSysConfig.getByConfigKey("websiteDomain").getConfigValue();
             cacheRedis.set(Constants.RedisPre.DOMAIN, websiteDomain, 1, TimeUnit.HOURS);
         }
-        return NOTIFYURL.replace("{domain}", websiteDomain);
+        return NOTIFYURL.replace("{domain}", websiteDomain).replace("{payModel}", payModel.toString()).replace("{payImpl}",impl);
     }
 }
