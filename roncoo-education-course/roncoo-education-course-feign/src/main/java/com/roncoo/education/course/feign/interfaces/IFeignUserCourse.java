@@ -1,14 +1,14 @@
 package com.roncoo.education.course.feign.interfaces;
 
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.*;
-
 import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.course.feign.interfaces.qo.UserCourseBindingQO;
+import com.roncoo.education.course.feign.interfaces.qo.UserCourseEditQO;
 import com.roncoo.education.course.feign.interfaces.qo.UserCoursePageQO;
 import com.roncoo.education.course.feign.interfaces.qo.UserCourseSaveQO;
-import com.roncoo.education.course.feign.interfaces.qo.UserCourseEditQO;
 import com.roncoo.education.course.feign.interfaces.vo.UserCoursePageVO;
 import com.roncoo.education.course.feign.interfaces.vo.UserCourseViewVO;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 课程用户关联表 接口
@@ -64,4 +64,6 @@ public interface IFeignUserCourse {
     @GetMapping(value = "/get/{id}")
     UserCourseViewVO getById(@PathVariable(value = "id") Long id);
 
+    @PutMapping(value = "/binding")
+    int binding(@RequestBody UserCourseBindingQO qo);
 }

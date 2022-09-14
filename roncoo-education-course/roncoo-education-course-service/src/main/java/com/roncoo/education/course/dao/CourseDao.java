@@ -59,7 +59,7 @@ public interface CourseDao {
     /**
      * 课程信息--条件列出
      *
-     * @param example     查询条件
+     * @param example 查询条件
      * @return 课程信息列表
      */
     List<Course> listByExample(CourseExample example);
@@ -67,10 +67,14 @@ public interface CourseDao {
     /**
      * 课程信息--条件统计
      *
-     * @param example     统计条件
+     * @param example 统计条件
      * @return 课程信息数量
      */
     int countByExample(CourseExample example);
 
     List<Course> listByIds(List<Long> courseIds);
+
+    void addCountBuy(int countBuy, Long id);
+
+    void addCountStudy(int countStudy, Long id);
 }

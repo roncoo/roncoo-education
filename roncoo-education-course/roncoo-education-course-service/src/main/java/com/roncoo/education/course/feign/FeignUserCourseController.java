@@ -4,6 +4,7 @@ import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.service.BaseController;
 import com.roncoo.education.course.feign.biz.FeignUserCourseBiz;
 import com.roncoo.education.course.feign.interfaces.IFeignUserCourse;
+import com.roncoo.education.course.feign.interfaces.qo.UserCourseBindingQO;
 import com.roncoo.education.course.feign.interfaces.qo.UserCourseEditQO;
 import com.roncoo.education.course.feign.interfaces.qo.UserCoursePageQO;
 import com.roncoo.education.course.feign.interfaces.qo.UserCourseSaveQO;
@@ -54,5 +55,10 @@ public class FeignUserCourseController extends BaseController implements IFeignU
     @Override
     public UserCourseViewVO getById(@PathVariable(value = "id") Long id) {
         return biz.getById(id);
+    }
+
+    @Override
+    public int binding(@RequestBody UserCourseBindingQO qo) {
+        return biz.binding(qo);
     }
 }

@@ -3,6 +3,7 @@ package com.roncoo.education.course.dao.impl;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
+import com.roncoo.education.common.jdbc.AbstractBaseJdbc;
 import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.impl.mapper.CourseMapper;
 import com.roncoo.education.course.dao.impl.mapper.entity.Course;
@@ -21,7 +22,7 @@ import java.util.List;
  */
 @Repository
 @RequiredArgsConstructor
-public class CourseDaoImpl implements CourseDao {
+public class CourseDaoImpl extends AbstractBaseJdbc implements CourseDao {
 
     @NotNull
     private final CourseMapper mapper;
@@ -68,7 +69,7 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
-    public int countByExample(CourseExample example){
+    public int countByExample(CourseExample example) {
         return this.mapper.countByExample(example);
     }
 
@@ -77,5 +78,17 @@ public class CourseDaoImpl implements CourseDao {
         CourseExample example = new CourseExample();
         example.createCriteria().andIdIn(courseIds);
         return this.mapper.selectByExample(example);
+    }
+
+    @Override
+    public void addCountBuy(int countBuy, Long id) {
+        String sql = "update course set count_buy=count_buy+? where id=?";
+        this.jdbcTemplate.update(sql, countBuy, id);
+    }
+
+    @Override
+    public void addCountStudy(int countStudy, Long id) {
+        String sql = "update course set count_study=count_study+? where id=?";
+        this.jdbcTemplate.update(sql, countStudy, id);
     }
 }

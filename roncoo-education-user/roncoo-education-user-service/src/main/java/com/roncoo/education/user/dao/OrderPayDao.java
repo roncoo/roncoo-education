@@ -59,7 +59,7 @@ public interface OrderPayDao {
     /**
      * 订单支付信息表--条件列出
      *
-     * @param example     查询条件
+     * @param example 查询条件
      * @return 订单支付信息表列表
      */
     List<OrderPay> listByExample(OrderPayExample example);
@@ -67,8 +67,10 @@ public interface OrderPayDao {
     /**
      * 订单支付信息表--条件统计
      *
-     * @param example     统计条件
+     * @param example 统计条件
      * @return 订单支付信息表数量
      */
     int countByExample(OrderPayExample example);
+
+    OrderPay getBySerialNumber(Long serialNumber);
 }

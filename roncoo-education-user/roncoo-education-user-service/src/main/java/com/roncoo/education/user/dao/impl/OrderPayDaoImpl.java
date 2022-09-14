@@ -1,5 +1,6 @@
 package com.roncoo.education.user.dao.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
@@ -67,7 +68,19 @@ public class OrderPayDaoImpl implements OrderPayDao {
     }
 
     @Override
-    public int countByExample(OrderPayExample example){
+    public int countByExample(OrderPayExample example) {
         return this.mapper.countByExample(example);
+    }
+
+    @Override
+    public OrderPay getBySerialNumber(Long serialNumber) {
+        OrderPayExample example = new OrderPayExample();
+        example.createCriteria().andSerialNumberEqualTo(serialNumber);
+        example.setOrderByClause("id desc");
+        List<OrderPay> orderPayList = this.mapper.selectByExample(example);
+        if (CollUtil.isNotEmpty(orderPayList)) {
+            return orderPayList.get(0);
+        }
+        return null;
     }
 }

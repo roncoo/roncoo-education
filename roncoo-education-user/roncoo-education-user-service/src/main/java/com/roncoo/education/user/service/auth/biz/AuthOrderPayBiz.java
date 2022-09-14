@@ -123,11 +123,10 @@ public class AuthOrderPayBiz extends BaseBiz {
         orderReq.setAmount(orderPay.getCoursePrice());
         orderReq.setGoodsName(courseViewVO.getCourseName());
         orderReq.setUserClientIp(req.getUserClientIp());
-        //orderReq.setTimeExpire(null);
         orderReq.setNotifyUrl(getNotifyUrl(orderReq.getPayModel(), impl));
-        orderReq.setQuitUrl(req.getQuitUrl() + "?tradeSerialNo=" + orderReq.getTradeSerialNo());
-
-
+        if (StringUtils.hasText(req.getQuitUrl())) {
+            orderReq.setQuitUrl(req.getQuitUrl() + "?tradeSerialNo=" + orderReq.getTradeSerialNo());
+        }
         return payFace.tradeOrder(orderReq);
     }
 
@@ -216,6 +215,6 @@ public class AuthOrderPayBiz extends BaseBiz {
             websiteDomain = feignSysConfig.getByConfigKey("websiteDomain").getConfigValue();
             cacheRedis.set(Constants.RedisPre.DOMAIN, websiteDomain, 1, TimeUnit.HOURS);
         }
-        return NOTIFYURL.replace("{domain}", websiteDomain).replace("{payModel}", payModel.toString()).replace("{payImpl}",impl);
+        return NOTIFYURL.replace("{domain}", websiteDomain).replace("{payModel}", payModel.toString()).replace("{payImpl}", impl);
     }
 }

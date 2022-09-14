@@ -1,7 +1,9 @@
 package com.roncoo.education.user.service.api.biz;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.roncoo.education.common.core.enums.BuyStatusEnum;
 import com.roncoo.education.common.core.enums.ConfigTypeEnum;
+import com.roncoo.education.common.core.enums.OrderStatusEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.common.core.tools.JSUtil;
@@ -12,14 +14,21 @@ import com.roncoo.education.common.pay.util.AliPayConfig;
 import com.roncoo.education.common.pay.util.TradeStatusEnum;
 import com.roncoo.education.common.pay.util.WxPayConfig;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.course.feign.interfaces.IFeignUserCourse;
+import com.roncoo.education.course.feign.interfaces.qo.UserCourseBindingQO;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
+import com.roncoo.education.user.dao.OrderInfoDao;
 import com.roncoo.education.user.dao.OrderPayDao;
+import com.roncoo.education.user.dao.impl.mapper.entity.OrderInfo;
+import com.roncoo.education.user.dao.impl.mapper.entity.OrderPay;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,11 +45,16 @@ public class ApiOrderPayBiz extends BaseBiz {
     @NotNull
     private final OrderPayDao dao;
     @NotNull
+    private final OrderInfoDao orderInfoDao;
+    @NotNull
     private final IFeignSysConfig feignSysConfig;
+    @NotNull
+    private final IFeignUserCourse feignUserCourse;
 
     @NotNull
     private final Map<String, PayFace> payFaceMap;
 
+    @Transactional(rollbackFor = Exception.class)
     public String notify(HttpServletRequest request, Integer payModel, String payImpl) {
         // step1：获取支付通知参数
         TradeNotifyReq notifyParam = getTradeNotifyParam(request);
@@ -55,9 +69,36 @@ public class ApiOrderPayBiz extends BaseBiz {
 
         if (resp.isSuccess() && resp.getTradeStatus().equals(TradeStatusEnum.SUCCESS.getCode())) {
             // 处理交易成功订单
-
+            OrderPay orderPay = dao.getBySerialNumber(Long.valueOf(resp.getTradeOrderNo()));
+            if (ObjectUtil.isNotEmpty(orderPay) && !orderPay.getOrderStatus().equals(OrderStatusEnum.SUCCESS.getCode())) {
+                OrderInfo orderInfo = orderInfoDao.getByOrderNo(orderPay.getOrderNo());
+                if (ObjectUtil.isNotEmpty(orderInfo) && !orderInfo.getOrderStatus().equals(OrderStatusEnum.SUCCESS.getCode())) {
+                    // 更新支付订单
+                    updateOrderPay(orderPay);
+                    // 更新订单
+                    updateOrderInfo(orderInfo);
+                    // 课程绑定用户
+                    feignUserCourse.binding(new UserCourseBindingQO().setCourseId(orderInfo.getCourseId()).setUserId(orderInfo.getUserId()).setBuyStatus(BuyStatusEnum.BUY.getCode()));
+                }
+            }
         }
         return resp.getReturnMsg();
+    }
+
+    private void updateOrderInfo(OrderInfo orderInfo) {
+        OrderInfo info = new OrderInfo();
+        info.setId(orderInfo.getId());
+        info.setOrderStatus(OrderStatusEnum.SUCCESS.getCode());
+        info.setPayTime(new Date());
+        orderInfoDao.updateById(info);
+    }
+
+    private void updateOrderPay(OrderPay orderPay) {
+        OrderPay pay = new OrderPay();
+        pay.setId(orderPay.getId());
+        pay.setOrderStatus(OrderStatusEnum.SUCCESS.getCode());
+        pay.setPayTime(new Date());
+        dao.updateById(pay);
     }
 
     private void getPayConfig(TradeNotifyReq req) {
