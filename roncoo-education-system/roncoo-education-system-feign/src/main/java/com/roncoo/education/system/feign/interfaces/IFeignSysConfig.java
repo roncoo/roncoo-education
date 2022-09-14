@@ -75,4 +75,7 @@ public interface IFeignSysConfig {
 
     @GetMapping(value = "/getVod")
     VodConfig getVod();
+
+    @GetMapping(value = "/getByConfigKey/{key}")
+    SysConfigViewVO getByConfigKey(@PathVariable(value = "key") String configKey);
 }

@@ -1,6 +1,7 @@
 package com.roncoo.education.system.feign.biz;
 
 
+import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.aliyun.Aliyun;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
@@ -82,5 +83,15 @@ public class FeignSysConfigBiz extends BaseBiz {
         example.createCriteria().andConfigTypeEqualTo(configType);
         List<SysConfig> sysConfigs = dao.listByExample(example);
         return sysConfigs.stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
+    }
+
+    public SysConfigViewVO getByConfigKey(String configKey) {
+        SysConfigExample example = new SysConfigExample();
+        example.createCriteria().andConfigKeyEqualTo(configKey);
+        List<SysConfig> sysConfigs = dao.listByExample(example);
+        if (CollUtil.isNotEmpty(sysConfigs)) {
+            return BeanUtil.copyProperties(sysConfigs.get(0), SysConfigViewVO.class);
+        }
+        return null;
     }
 }

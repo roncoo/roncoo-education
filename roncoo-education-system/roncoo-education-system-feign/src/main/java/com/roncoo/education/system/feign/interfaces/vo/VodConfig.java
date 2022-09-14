@@ -17,14 +17,14 @@ public class VodConfig implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 点播平台(1:私有云、2:保利威、3:百家云)
-     */
-    private Integer vodPlatform;
-
-    /**
      * 网关域名
      */
     private String websiteDomain;
+
+    /**
+     * 点播平台(1:私有云、2:保利威、3:百家云)
+     */
+    private Integer vodPlatform;
 
     /**
      * 保利威--账号ID

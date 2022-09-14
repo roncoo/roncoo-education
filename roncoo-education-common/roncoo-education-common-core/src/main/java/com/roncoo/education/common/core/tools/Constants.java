@@ -35,6 +35,7 @@ public final class Constants {
         String PROGRESS = "progress::";
         String CODE = "code::";
         String PAY = "pay::";
+        String DOMAIN = "domain::";
     }
 
 }

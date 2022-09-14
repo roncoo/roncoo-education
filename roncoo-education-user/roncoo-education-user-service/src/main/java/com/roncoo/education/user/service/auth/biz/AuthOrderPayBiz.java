@@ -30,12 +30,14 @@ import com.roncoo.education.user.service.auth.resp.AuthOrderPayResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * AUTH-订单支付信息表
@@ -45,6 +47,8 @@ import java.util.Map;
 @Component
 @RequiredArgsConstructor
 public class AuthOrderPayBiz extends BaseBiz {
+
+    private static final String NOTIFYURL = "{domain}gateway/user/api/order/pay/notify";
 
     @NotNull
     private final OrderPayDao dao;
@@ -116,8 +120,8 @@ public class AuthOrderPayBiz extends BaseBiz {
         orderReq.setAmount(orderPay.getCoursePrice());
         orderReq.setGoodsName(courseViewVO.getCourseName());
         orderReq.setUserClientIp(req.getUserClientIp());
-        orderReq.setTimeExpire(null);
-        orderReq.setNotifyUrl(null);
+        //orderReq.setTimeExpire(null);
+        orderReq.setNotifyUrl(getNotifyUrl());
         orderReq.setQuitUrl(req.getQuitUrl() + "?tradeSerialNo=" + orderReq.getTradeSerialNo());
 
         // 直连模式
@@ -202,5 +206,14 @@ public class AuthOrderPayBiz extends BaseBiz {
         orderpay.setPayTime(new Date());
         dao.save(orderpay);
         return orderpay;
+    }
+
+    private String getNotifyUrl() {
+        String websiteDomain = cacheRedis.get(Constants.RedisPre.DOMAIN);
+        if (!StringUtils.hasText(websiteDomain)) {
+            websiteDomain = feignSysConfig.getByConfigKey("websiteDomain").getConfigValue();
+            cacheRedis.set(Constants.RedisPre.DOMAIN, websiteDomain, 1, TimeUnit.HOURS);
+        }
+        return NOTIFYURL.replace("{domain}", websiteDomain);
     }
 }

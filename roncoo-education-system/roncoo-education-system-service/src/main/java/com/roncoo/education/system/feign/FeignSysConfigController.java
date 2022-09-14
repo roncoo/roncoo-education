@@ -72,4 +72,9 @@ public class FeignSysConfigController implements IFeignSysConfig {
     public VodConfig getVod() {
         return biz.getVod();
     }
+
+    @Override
+    public SysConfigViewVO getByConfigKey(@PathVariable(value = "key") String configKey) {
+        return biz.getByConfigKey(configKey);
+    }
 }
