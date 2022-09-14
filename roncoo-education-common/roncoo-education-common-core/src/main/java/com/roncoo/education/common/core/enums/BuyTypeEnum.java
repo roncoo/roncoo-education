@@ -11,9 +11,9 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum BuyStatusEnum {
+public enum BuyTypeEnum {
 
-    BUY(1, "购买", ""), FREE(0, "免费", "red");
+    BUY(1, "支付", ""), FREE(0, "免费", "red");
 
     private Integer code;
 

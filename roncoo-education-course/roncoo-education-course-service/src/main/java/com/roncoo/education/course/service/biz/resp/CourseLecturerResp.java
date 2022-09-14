@@ -1,4 +1,4 @@
-package com.roncoo.education.course.service.api.resp;
+package com.roncoo.education.course.service.biz.resp;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -17,7 +17,7 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @ApiModel(value = "ApiLecturerResp", description = "ADMIN-讲师信息查看")
-public class ApiCourseLecturerResp implements Serializable {
+public class CourseLecturerResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

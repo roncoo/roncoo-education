@@ -1,4 +1,4 @@
-package com.roncoo.education.course.service.api.resp;
+package com.roncoo.education.course.service.biz.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
@@ -22,9 +22,12 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 @ApiModel(value = "ApiCourseResp", description = "API-课程信息")
-public class ApiCourseResp implements Serializable {
+public class CourseResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    @ApiModelProperty(value = "是否允许学习: 0禁止学习，1可以学习")
+    private Integer allowStudy = 0;
 
     @ApiModelProperty(value = "主键")
     private Long id;
@@ -68,8 +71,8 @@ public class ApiCourseResp implements Serializable {
     private Long lecturerId;
 
     @ApiModelProperty(value = "讲师信息")
-    private ApiCourseLecturerResp lecturerResp;
+    private CourseLecturerResp lecturerResp;
 
     @ApiModelProperty(value = "章节信息")
-    private List<ApiCourseChapterResp> chapterRespList;
+    private List<CourseChapterResp> chapterRespList;
 }

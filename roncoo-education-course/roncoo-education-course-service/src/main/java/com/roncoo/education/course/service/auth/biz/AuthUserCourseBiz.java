@@ -52,4 +52,5 @@ public class AuthUserCourseBiz extends BaseBiz {
         }
         return Result.success(respPage);
     }
+
 }

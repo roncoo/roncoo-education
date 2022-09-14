@@ -28,8 +28,8 @@ public class UserCourseBindingQO implements Serializable {
     private Long courseId;
 
     /**
-     * 购买状态(1购买，2免费)
+     * 购买类型(1支付，2免费)
      */
-    private Integer buyStatus;
+    private Integer buyType;
 
 }

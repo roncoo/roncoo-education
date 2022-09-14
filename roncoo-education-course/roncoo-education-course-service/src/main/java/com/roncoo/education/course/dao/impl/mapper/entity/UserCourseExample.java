@@ -545,63 +545,63 @@ public class UserCourseExample {
             return (Criteria) this;
         }
 
-        public Criteria andBuyStatusIsNull() {
-            addCriterion("buy_status is null");
+        public Criteria andBuyTypeIsNull() {
+            addCriterion("buy_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andBuyStatusIsNotNull() {
-            addCriterion("buy_status is not null");
+        public Criteria andBuyTypeIsNotNull() {
+            addCriterion("buy_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBuyStatusEqualTo(Integer value) {
-            addCriterion("buy_status =", value, "buyStatus");
+        public Criteria andBuyTypeEqualTo(Integer value) {
+            addCriterion("buy_type =", value, "buyType");
             return (Criteria) this;
         }
 
-        public Criteria andBuyStatusNotEqualTo(Integer value) {
-            addCriterion("buy_status <>", value, "buyStatus");
+        public Criteria andBuyTypeNotEqualTo(Integer value) {
+            addCriterion("buy_type <>", value, "buyType");
             return (Criteria) this;
         }
 
-        public Criteria andBuyStatusGreaterThan(Integer value) {
-            addCriterion("buy_status >", value, "buyStatus");
+        public Criteria andBuyTypeGreaterThan(Integer value) {
+            addCriterion("buy_type >", value, "buyType");
             return (Criteria) this;
         }
 
-        public Criteria andBuyStatusGreaterThanOrEqualTo(Integer value) {
-            addCriterion("buy_status >=", value, "buyStatus");
+        public Criteria andBuyTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("buy_type >=", value, "buyType");
             return (Criteria) this;
         }
 
-        public Criteria andBuyStatusLessThan(Integer value) {
-            addCriterion("buy_status <", value, "buyStatus");
+        public Criteria andBuyTypeLessThan(Integer value) {
+            addCriterion("buy_type <", value, "buyType");
             return (Criteria) this;
         }
 
-        public Criteria andBuyStatusLessThanOrEqualTo(Integer value) {
-            addCriterion("buy_status <=", value, "buyStatus");
+        public Criteria andBuyTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("buy_type <=", value, "buyType");
             return (Criteria) this;
         }
 
-        public Criteria andBuyStatusIn(List<Integer> values) {
-            addCriterion("buy_status in", values, "buyStatus");
+        public Criteria andBuyTypeIn(List<Integer> values) {
+            addCriterion("buy_type in", values, "buyType");
             return (Criteria) this;
         }
 
-        public Criteria andBuyStatusNotIn(List<Integer> values) {
-            addCriterion("buy_status not in", values, "buyStatus");
+        public Criteria andBuyTypeNotIn(List<Integer> values) {
+            addCriterion("buy_type not in", values, "buyType");
             return (Criteria) this;
         }
 
-        public Criteria andBuyStatusBetween(Integer value1, Integer value2) {
-            addCriterion("buy_status between", value1, value2, "buyStatus");
+        public Criteria andBuyTypeBetween(Integer value1, Integer value2) {
+            addCriterion("buy_type between", value1, value2, "buyType");
             return (Criteria) this;
         }
 
-        public Criteria andBuyStatusNotBetween(Integer value1, Integer value2) {
-            addCriterion("buy_status not between", value1, value2, "buyStatus");
+        public Criteria andBuyTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("buy_type not between", value1, value2, "buyType");
             return (Criteria) this;
         }
     }

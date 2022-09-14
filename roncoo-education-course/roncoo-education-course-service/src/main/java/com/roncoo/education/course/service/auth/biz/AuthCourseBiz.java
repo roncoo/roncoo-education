@@ -3,7 +3,7 @@ package com.roncoo.education.course.service.auth.biz;
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.config.ThreadContext;
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.core.enums.BuyStatusEnum;
+import com.roncoo.education.common.core.enums.BuyTypeEnum;
 import com.roncoo.education.common.core.enums.FreeEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.service.BaseBiz;
@@ -79,7 +79,7 @@ public class AuthCourseBiz extends BaseBiz {
                 userCourse = new UserCourse();
                 userCourse.setUserId(ThreadContext.userId());
                 userCourse.setCourseId(period.getCourseId());
-                userCourse.setBuyStatus(BuyStatusEnum.FREE.getCode());
+                userCourse.setBuyType(BuyTypeEnum.FREE.getCode());
                 userCourseDao.save(userCourse);
                 return true;
             }

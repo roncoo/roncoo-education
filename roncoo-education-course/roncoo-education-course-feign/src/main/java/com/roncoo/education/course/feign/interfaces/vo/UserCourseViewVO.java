@@ -1,9 +1,10 @@
 package com.roncoo.education.course.feign.interfaces.vo;
 
-import java.time.LocalDateTime;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * 课程用户关联表
@@ -13,7 +14,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class UserCourseViewVO implements Serializable{
+public class UserCourseViewVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -53,7 +54,7 @@ public class UserCourseViewVO implements Serializable{
     private Long courseId;
 
     /**
-     * 购买状态(1购买，2免费)
+     * 购买类型(1支付，2免费)
      */
-    private Integer buyStatus;
+    private Integer buyType;
 }

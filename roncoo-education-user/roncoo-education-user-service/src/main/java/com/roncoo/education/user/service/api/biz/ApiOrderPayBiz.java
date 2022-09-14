@@ -1,7 +1,7 @@
 package com.roncoo.education.user.service.api.biz;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.roncoo.education.common.core.enums.BuyStatusEnum;
+import com.roncoo.education.common.core.enums.BuyTypeEnum;
 import com.roncoo.education.common.core.enums.ConfigTypeEnum;
 import com.roncoo.education.common.core.enums.OrderStatusEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
@@ -78,7 +78,7 @@ public class ApiOrderPayBiz extends BaseBiz {
                     // 更新订单
                     updateOrderInfo(orderInfo);
                     // 课程绑定用户
-                    feignUserCourse.binding(new UserCourseBindingQO().setCourseId(orderInfo.getCourseId()).setUserId(orderInfo.getUserId()).setBuyStatus(BuyStatusEnum.BUY.getCode()));
+                    feignUserCourse.binding(new UserCourseBindingQO().setCourseId(orderInfo.getCourseId()).setUserId(orderInfo.getUserId()).setBuyType(BuyTypeEnum.BUY.getCode()));
                 }
             }
         }

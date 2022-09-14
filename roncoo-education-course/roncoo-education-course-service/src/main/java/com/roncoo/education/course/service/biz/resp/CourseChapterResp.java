@@ -1,4 +1,4 @@
-package com.roncoo.education.course.service.api.resp;
+package com.roncoo.education.course.service.biz.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
@@ -21,7 +21,7 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 @ApiModel(value = "ApiCourseChapterResp", description = "API-章节信息")
-public class ApiCourseChapterResp implements Serializable {
+public class CourseChapterResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -49,5 +49,5 @@ public class ApiCourseChapterResp implements Serializable {
     private Integer isFree;
 
     @ApiModelProperty(value = "课时信息")
-    private List<ApiCourseChapterPeriodResp> periodRespList;
+    private List<CourseChapterPeriodResp> periodRespList;
 }

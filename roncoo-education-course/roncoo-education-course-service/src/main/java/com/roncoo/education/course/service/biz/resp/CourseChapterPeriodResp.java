@@ -1,4 +1,4 @@
-package com.roncoo.education.course.service.api.resp;
+package com.roncoo.education.course.service.biz.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @Data
 @Accessors(chain = true)
 @ApiModel(value = "ApiCourseChapterPeriodResp", description = "API-课时信息")
-public class ApiCourseChapterPeriodResp implements Serializable {
+public class CourseChapterPeriodResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

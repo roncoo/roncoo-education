@@ -1,23 +1,21 @@
-package com.roncoo.education.course.service.api.biz;
+package com.roncoo.education.course.service.biz;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.FreeEnum;
 import com.roncoo.education.common.core.enums.PutawayEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.es.EsCourse;
-import com.roncoo.education.common.es.EsPageUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.CourseChapterDao;
 import com.roncoo.education.course.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.dao.CourseDao;
+import com.roncoo.education.course.dao.UserCourseDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapter;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
-import com.roncoo.education.course.service.api.req.ApiCoursePageReq;
-import com.roncoo.education.course.service.api.resp.ApiCoursePageResp;
+import com.roncoo.education.course.dao.impl.mapper.entity.UserCourse;
 import com.roncoo.education.course.service.biz.req.CourseReq;
 import com.roncoo.education.course.service.biz.resp.CourseChapterPeriodResp;
 import com.roncoo.education.course.service.biz.resp.CourseChapterResp;
@@ -26,20 +24,7 @@ import com.roncoo.education.course.service.biz.resp.CourseResp;
 import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
 import com.roncoo.education.user.feign.interfaces.vo.LecturerViewVO;
 import lombok.RequiredArgsConstructor;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.MultiMatchQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
-import org.elasticsearch.search.sort.FieldSortBuilder;
-import org.elasticsearch.search.sort.SortOrder;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
-import org.springframework.data.elasticsearch.core.SearchHits;
-import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -52,53 +37,27 @@ import java.util.stream.Collectors;
  * @author wujing
  */
 @Component
-@CacheConfig(cacheNames = {"course"})
 @RequiredArgsConstructor
-public class ApiCourseBiz extends BaseBiz {
+public class CourseBiz extends BaseBiz {
 
     @NotNull
     private final CourseDao dao;
     @NotNull
+    private final UserCourseDao userCourseDao;
+    @NotNull
     private final CourseChapterDao chapterDao;
     @NotNull
     private final CourseChapterPeriodDao periodDao;
-
     @NotNull
     private final IFeignLecturer feignLecturer;
 
-    @NotNull
-    private final ElasticsearchRestTemplate elasticsearchRestTemplate;
-
-    public Result<Page<ApiCoursePageResp>> searchForPage(ApiCoursePageReq req) {
-
-        NativeSearchQueryBuilder nsb = new NativeSearchQueryBuilder();
-        // 高亮字段
-        nsb.withHighlightFields(new HighlightBuilder.Field("courseName").preTags("<mark>").postTags("</mark>"));
-        // 课程排序（courseSort）
-        nsb.withSort(new FieldSortBuilder("courseSort").order(SortOrder.ASC));
-        nsb.withSort(new FieldSortBuilder("id").order(SortOrder.DESC));
-        // 分页
-        nsb.withPageable(PageRequest.of(req.getPageCurrent() - 1, req.getPageSize()));
-
-        BoolQueryBuilder qb = QueryBuilders.boolQuery();
-        if (ObjectUtil.isNotEmpty(req.getCategoryId())) {
-            qb.must(QueryBuilders.termQuery(req.getCategoryId().toString(), "categoryId"));
-        }
-        if (ObjectUtil.isNotEmpty(req.getIsFree())) {
-            qb.must(QueryBuilders.termQuery(req.getIsFree().toString(), "isFree"));
-        }
-        if (StringUtils.hasText(req.getCourseName())) {
-            // 模糊查询multiMatchQuery，最佳字段best_fields
-            qb.must(QueryBuilders.multiMatchQuery(req.getCourseName(), "courseName").type(MultiMatchQueryBuilder.Type.BEST_FIELDS));
-        }
-        nsb.withQuery(qb);
-
-        SearchHits<EsCourse> searchHits = elasticsearchRestTemplate.search(nsb.build(), EsCourse.class, IndexCoordinates.of(EsCourse.COURSE));
-        return Result.success(EsPageUtil.transform(searchHits, req.getPageCurrent(), req.getPageSize(), ApiCoursePageResp.class));
-    }
-
-    //@Cacheable
-    public Result<CourseResp> view(CourseReq req) {
+    /**
+     * 课程查看接口
+     * @param req
+     * @param userId
+     * @return
+     */
+    public Result<CourseResp> view(CourseReq req, Long userId) {
         Course course = dao.getById(req.getCourseId());
         if (course == null) {
             return Result.error("找不到该课程信息");
@@ -110,6 +69,19 @@ public class ApiCourseBiz extends BaseBiz {
             return Result.error("该课程已下架");
         }
         CourseResp courseResp = BeanUtil.copyProperties(course, CourseResp.class);
+        if (ObjectUtil.isNotEmpty(userId)) {
+            // userId存在，即为登录
+            if (courseResp.getIsFree().equals(FreeEnum.FREE.getCode())) {
+                // 免费课程，可以学习
+                courseResp.setAllowStudy(1);
+            } else {
+                // 收费课程
+                UserCourse userCourse = userCourseDao.getByCourseIdAndUserId(req.getCourseId(), userId);
+                if (ObjectUtil.isNotEmpty(userCourse)) {
+                    courseResp.setAllowStudy(1);
+                }
+            }
+        }
         // 获取讲师信息
         LecturerViewVO lecturerViewVO = feignLecturer.getById(course.getLecturerId());
         if (ObjectUtil.isNotEmpty(lecturerViewVO)) {

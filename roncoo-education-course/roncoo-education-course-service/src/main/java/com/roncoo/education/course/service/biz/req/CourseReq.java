@@ -1,4 +1,4 @@
-package com.roncoo.education.course.service.api.req;
+package com.roncoo.education.course.service.biz.req;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @ApiModel(value = "ApiCourseReq", description = "API-课程信息")
-public class ApiCourseReq implements Serializable {
+public class CourseReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

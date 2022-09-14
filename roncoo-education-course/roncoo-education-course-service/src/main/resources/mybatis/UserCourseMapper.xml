@@ -9,7 +9,7 @@
     <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="course_id" jdbcType="BIGINT" property="courseId" />
-    <result column="buy_status" jdbcType="TINYINT" property="buyStatus" />
+    <result column="buy_type" jdbcType="TINYINT" property="buyType" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, status_id, sort, user_id, course_id, buy_status
+    id, gmt_create, gmt_modified, status_id, sort, user_id, course_id, buy_type
   </sql>
   <select id="selectByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.UserCourseExample" resultMap="BaseResultMap">
     select
@@ -108,10 +108,10 @@
   <insert id="insert" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.UserCourse">
     insert into user_course (id, gmt_create, gmt_modified, 
       status_id, sort, user_id, 
-      course_id, buy_status)
+      course_id, buy_type)
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, 
-      #{courseId,jdbcType=BIGINT}, #{buyStatus,jdbcType=TINYINT})
+      #{courseId,jdbcType=BIGINT}, #{buyType,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.UserCourse">
     insert into user_course
@@ -137,8 +137,8 @@
       <if test="courseId != null">
         course_id,
       </if>
-      <if test="buyStatus != null">
-        buy_status,
+      <if test="buyType != null">
+        buy_type,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -163,8 +163,8 @@
       <if test="courseId != null">
         #{courseId,jdbcType=BIGINT},
       </if>
-      <if test="buyStatus != null">
-        #{buyStatus,jdbcType=TINYINT},
+      <if test="buyType != null">
+        #{buyType,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -198,8 +198,8 @@
       <if test="record.courseId != null">
         course_id = #{record.courseId,jdbcType=BIGINT},
       </if>
-      <if test="record.buyStatus != null">
-        buy_status = #{record.buyStatus,jdbcType=TINYINT},
+      <if test="record.buyType != null">
+        buy_type = #{record.buyType,jdbcType=TINYINT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -215,7 +215,7 @@
       sort = #{record.sort,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=BIGINT},
       course_id = #{record.courseId,jdbcType=BIGINT},
-      buy_status = #{record.buyStatus,jdbcType=TINYINT}
+      buy_type = #{record.buyType,jdbcType=TINYINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -241,8 +241,8 @@
       <if test="courseId != null">
         course_id = #{courseId,jdbcType=BIGINT},
       </if>
-      <if test="buyStatus != null">
-        buy_status = #{buyStatus,jdbcType=TINYINT},
+      <if test="buyType != null">
+        buy_type = #{buyType,jdbcType=TINYINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -255,7 +255,7 @@
       sort = #{sort,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=BIGINT},
       course_id = #{courseId,jdbcType=BIGINT},
-      buy_status = #{buyStatus,jdbcType=TINYINT}
+      buy_type = #{buyType,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

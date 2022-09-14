@@ -46,8 +46,8 @@ public class AdminUserCoursePageReq implements Serializable {
     @ApiModelProperty(value = "课程ID")
     private Long courseId;
 
-    @ApiModelProperty(value = "购买状态(1购买，2免费)")
-    private Integer buyStatus;
+    @ApiModelProperty(value = "购买类型(1支付，2免费)")
+    private Integer buyType;
 
     @ApiModelProperty(value = "当前页")
     private int pageCurrent = 1;

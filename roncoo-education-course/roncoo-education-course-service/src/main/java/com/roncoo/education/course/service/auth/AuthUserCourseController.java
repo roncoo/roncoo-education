@@ -5,6 +5,7 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.service.auth.biz.AuthUserCourseBiz;
 import com.roncoo.education.course.service.auth.req.AuthUserCourseReq;
 import com.roncoo.education.course.service.auth.resp.AuthUserCourseResp;
+import com.roncoo.education.course.service.biz.CourseBiz;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,7 @@ public class AuthUserCourseController {
     @NotNull
     private final AuthUserCourseBiz biz;
 
+
     /**
      * 课程信息列表接口
      *
@@ -40,5 +42,6 @@ public class AuthUserCourseController {
     public Result<Page<AuthUserCourseResp>> listForPage(@RequestBody AuthUserCourseReq req) {
         return biz.listForPage(req);
     }
+
 
 }

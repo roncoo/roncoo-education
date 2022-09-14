@@ -4,9 +4,10 @@ import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.service.api.biz.ApiCourseBiz;
 import com.roncoo.education.course.service.api.req.ApiCoursePageReq;
-import com.roncoo.education.course.service.api.req.ApiCourseReq;
 import com.roncoo.education.course.service.api.resp.ApiCoursePageResp;
-import com.roncoo.education.course.service.api.resp.ApiCourseResp;
+import com.roncoo.education.course.service.biz.CourseBiz;
+import com.roncoo.education.course.service.biz.req.CourseReq;
+import com.roncoo.education.course.service.biz.resp.CourseResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,9 @@ public class ApiCourseController {
     @NotNull
     private final ApiCourseBiz biz;
 
+    @NotNull
+    private final CourseBiz courseBiz;
+
     /**
      * 课程信息列表接口
      *
@@ -48,7 +52,7 @@ public class ApiCourseController {
      */
     @ApiOperation(value = "课程详情接口", notes = "根据课程ID获取课程信息")
     @RequestMapping(value = "/view", method = RequestMethod.POST)
-    public Result<ApiCourseResp> view(@RequestBody ApiCourseReq req) {
-        return biz.view(req);
+    public Result<CourseResp> view(@RequestBody CourseReq req) {
+        return courseBiz.view(req, null);
     }
 }
