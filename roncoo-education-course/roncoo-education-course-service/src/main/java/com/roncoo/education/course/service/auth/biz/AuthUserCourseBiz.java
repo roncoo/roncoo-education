@@ -13,7 +13,7 @@ import com.roncoo.education.course.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserCourse;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserCourseExample;
 import com.roncoo.education.course.service.auth.req.AuthUserCourseReq;
-import com.roncoo.education.course.service.auth.resp.AuthCourseSignResp;
+import com.roncoo.education.course.service.auth.resp.AuthCourseResp;
 import com.roncoo.education.course.service.auth.resp.AuthUserCourseResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -47,7 +47,7 @@ public class AuthUserCourseBiz extends BaseBiz {
             List<Course> courseList = courseDao.listByIds(courseIdList);
             Map<Long, Course> courseMap = courseList.stream().collect(Collectors.toMap(item -> item.getId(), item -> item));
             for (AuthUserCourseResp resp : respPage.getList()) {
-                resp.setCourseResp(BeanUtil.copyProperties(courseMap.get(resp.getCourseId()), AuthCourseSignResp.class));
+                resp.setCourseResp(BeanUtil.copyProperties(courseMap.get(resp.getCourseId()), AuthCourseResp.class));
             }
         }
         return Result.success(respPage);

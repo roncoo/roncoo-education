@@ -31,7 +31,6 @@ public class AuthUserCourseController {
     @NotNull
     private final AuthUserCourseBiz biz;
 
-
     /**
      * 课程信息列表接口
      *
@@ -42,6 +41,5 @@ public class AuthUserCourseController {
     public Result<Page<AuthUserCourseResp>> listForPage(@RequestBody AuthUserCourseReq req) {
         return biz.listForPage(req);
     }
-
 
 }

@@ -45,5 +45,5 @@ public class AuthUserCourseResp implements Serializable {
     private Integer buyType;
 
     @ApiModelProperty(value = "课程信息")
-    private AuthCourseSignResp courseResp;
+    private AuthCourseResp courseResp;
 }
