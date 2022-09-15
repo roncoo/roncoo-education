@@ -8,19 +8,10 @@ import com.roncoo.education.common.core.enums.PutawayEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
-import com.roncoo.education.course.dao.CourseChapterDao;
-import com.roncoo.education.course.dao.CourseChapterPeriodDao;
-import com.roncoo.education.course.dao.CourseDao;
-import com.roncoo.education.course.dao.UserCourseDao;
-import com.roncoo.education.course.dao.impl.mapper.entity.Course;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapter;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
-import com.roncoo.education.course.dao.impl.mapper.entity.UserCourse;
+import com.roncoo.education.course.dao.*;
+import com.roncoo.education.course.dao.impl.mapper.entity.*;
 import com.roncoo.education.course.service.biz.req.CourseReq;
-import com.roncoo.education.course.service.biz.resp.CourseChapterPeriodResp;
-import com.roncoo.education.course.service.biz.resp.CourseChapterResp;
-import com.roncoo.education.course.service.biz.resp.CourseLecturerResp;
-import com.roncoo.education.course.service.biz.resp.CourseResp;
+import com.roncoo.education.course.service.biz.resp.*;
 import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
 import com.roncoo.education.user.feign.interfaces.vo.LecturerViewVO;
 import lombok.RequiredArgsConstructor;
@@ -49,10 +40,13 @@ public class CourseBiz extends BaseBiz {
     @NotNull
     private final CourseChapterPeriodDao periodDao;
     @NotNull
+    private final ResourceDao resourceDao;
+    @NotNull
     private final IFeignLecturer feignLecturer;
 
     /**
      * 课程查看接口
+     *
      * @param req
      * @param userId
      * @return
@@ -93,10 +87,19 @@ public class CourseBiz extends BaseBiz {
             courseResp.setChapterRespList(BeanUtil.copyProperties(chapterList, CourseChapterResp.class));
             // 课时信息
             List<CourseChapterPeriod> periodList = periodDao.listByCourseIdAndStatusId(course.getId(), StatusIdEnum.YES.getCode());
+            // 资源信息
             if (CollUtil.isNotEmpty(periodList)) {
                 Map<Long, List<CourseChapterPeriod>> map = periodList.stream().collect(Collectors.groupingBy(CourseChapterPeriod::getChapterId, Collectors.toList()));
                 for (CourseChapterResp chapterResp : courseResp.getChapterRespList()) {
                     chapterResp.setPeriodRespList(BeanUtil.copyProperties(map.get(chapterResp.getId()), CourseChapterPeriodResp.class));
+                    List<Long> resourceIdList = periodList.stream().map(courseChapterPeriod -> courseChapterPeriod.getResourceId()).collect(Collectors.toList());
+                    List<Resource> resourceList = resourceDao.listByIds(resourceIdList);
+                    if(CollUtil.isNotEmpty(resourceList)){
+                        Map<Long, Resource> resourceMap = resourceList.stream().collect(Collectors.toMap(Resource::getId, item->item));
+                        for(CourseChapterPeriodResp periodResp: chapterResp.getPeriodRespList()){
+                            periodResp.setResourceResp(BeanUtil.copyProperties(resourceMap.get(periodResp.getResourceId()), ResourceResp.class));
+                        }
+                    }
                 }
             }
         }

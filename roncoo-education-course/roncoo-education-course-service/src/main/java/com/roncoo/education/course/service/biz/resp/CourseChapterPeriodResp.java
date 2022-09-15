@@ -52,4 +52,6 @@ public class CourseChapterPeriodResp implements Serializable {
 
     @ApiModelProperty(value = "资源ID")
     private Long resourceId;
+
+    private ResourceResp resourceResp;
 }

@@ -39,8 +39,6 @@ public class ApiCallbackBiz {
     private IFeignSysConfig feignSysConfig;
 
     public String polyvUpload(CallbackVodUpload callbackVodUpload) {
-        log.info("保利威视--点播上传回调--回调参数：{}", JSUtil.toJsonString(callbackVodUpload));
-
         VodConfig vodConfig = feignSysConfig.getVod();
         String sign = PolyvVodUtil.getCallbackSign(BeanUtil.beanToStringMap(callbackVodUpload), vodConfig.getPolyvSecretKey());
         if (!callbackVodUpload.getSign().equals(sign)) {
