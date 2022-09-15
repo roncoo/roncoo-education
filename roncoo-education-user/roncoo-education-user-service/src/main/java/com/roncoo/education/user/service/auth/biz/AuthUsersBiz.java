@@ -39,7 +39,7 @@ public class AuthUsersBiz extends BaseBiz {
         users.setId(ThreadContext.userId());
         int result = dao.updateById(users);
         if (result > 0) {
-            Result.success("操作成功");
+            return Result.success("操作成功");
         }
         return Result.error("操作失败");
     }
