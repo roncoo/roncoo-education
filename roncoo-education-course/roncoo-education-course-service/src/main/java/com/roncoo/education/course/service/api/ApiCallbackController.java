@@ -28,7 +28,7 @@ public class ApiCallbackController extends BaseController {
      * @return
      */
     @ApiOperation(value = "保利威点播上传回调接口", notes = "保利威点播上传回调接口")
-    @RequestMapping(value = "/polyv/upload", method = RequestMethod.POST)
+    @RequestMapping(value = "/polyv/upload", method = {RequestMethod.POST, RequestMethod.GET})
     public String polyvUpload(CallbackVodUpload callbackVodUpload) {
         return biz.polyvUpload(callbackVodUpload);
     }
