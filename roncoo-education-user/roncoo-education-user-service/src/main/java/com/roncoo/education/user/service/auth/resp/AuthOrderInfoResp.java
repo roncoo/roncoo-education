@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -30,11 +30,11 @@ public class AuthOrderInfoResp implements Serializable {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "创建时间")
-    private LocalDateTime gmtCreate;
+    private Date gmtCreate;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "修改时间")
-    private LocalDateTime gmtModified;
+    private Date gmtModified;
 
     @ApiModelProperty(value = "订单号")
     private Long orderNo;
@@ -47,7 +47,7 @@ public class AuthOrderInfoResp implements Serializable {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "下单用户注册时间")
-    private LocalDateTime registerTime;
+    private Date registerTime;
 
     @ApiModelProperty(value = "课程ID")
     private Long courseId;
@@ -72,8 +72,11 @@ public class AuthOrderInfoResp implements Serializable {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "支付时间")
-    private LocalDateTime payTime;
+    private Date payTime;
 
     @ApiModelProperty(value = "课程名称")
     private String courseName;
+
+    @ApiModelProperty(value = "课程封面")
+    private String courseLogo;
 }

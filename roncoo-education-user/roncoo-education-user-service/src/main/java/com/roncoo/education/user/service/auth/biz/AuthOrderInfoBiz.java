@@ -54,9 +54,10 @@ public class AuthOrderInfoBiz extends BaseBiz {
         if (CollUtil.isNotEmpty(respPage.getList())) {
             // 获取课程信息
             List<Long> courseIds = respPage.getList().stream().map(AuthOrderInfoResp::getCourseId).collect(Collectors.toList());
-            Map<Long, String> courseNames = feignCourse.listByIds(courseIds).stream().collect(Collectors.toMap(CourseViewVO::getId, CourseViewVO::getCourseName));
+            Map<Long, CourseViewVO> courseViewVOMap = feignCourse.listByIds(courseIds).stream().collect(Collectors.toMap(CourseViewVO::getId, item -> item));
             for (AuthOrderInfoResp resp : respPage.getList()) {
-                resp.setCourseName(courseNames.get(resp.getCourseId()));
+                resp.setCourseName(courseViewVOMap.get(resp.getCourseId()).getCourseName());
+                resp.setCourseLogo(courseViewVOMap.get(resp.getCourseId()).getCourseLogo());
             }
         }
         return Result.success(respPage);
