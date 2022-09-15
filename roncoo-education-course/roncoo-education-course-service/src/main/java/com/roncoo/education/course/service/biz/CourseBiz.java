@@ -87,13 +87,14 @@ public class CourseBiz extends BaseBiz {
             courseResp.setChapterRespList(BeanUtil.copyProperties(chapterList, CourseChapterResp.class));
             // 课时信息
             List<CourseChapterPeriod> periodList = periodDao.listByCourseIdAndStatusId(course.getId(), StatusIdEnum.YES.getCode());
-            // 资源信息
+
             if (CollUtil.isNotEmpty(periodList)) {
                 Map<Long, List<CourseChapterPeriod>> map = periodList.stream().collect(Collectors.groupingBy(CourseChapterPeriod::getChapterId, Collectors.toList()));
+                List<Long> resourceIdList = periodList.stream().map(courseChapterPeriod -> courseChapterPeriod.getResourceId()).collect(Collectors.toList());
+                // 资源信息
+                List<Resource> resourceList = resourceDao.listByIds(resourceIdList);
                 for (CourseChapterResp chapterResp : courseResp.getChapterRespList()) {
                     chapterResp.setPeriodRespList(BeanUtil.copyProperties(map.get(chapterResp.getId()), CourseChapterPeriodResp.class));
-                    List<Long> resourceIdList = periodList.stream().map(courseChapterPeriod -> courseChapterPeriod.getResourceId()).collect(Collectors.toList());
-                    List<Resource> resourceList = resourceDao.listByIds(resourceIdList);
                     if(CollUtil.isNotEmpty(resourceList)){
                         Map<Long, Resource> resourceMap = resourceList.stream().collect(Collectors.toMap(Resource::getId, item->item));
                         for(CourseChapterPeriodResp periodResp: chapterResp.getPeriodRespList()){
