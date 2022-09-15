@@ -4,10 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.config.ThreadContext;
 import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.core.enums.BuyTypeEnum;
-import com.roncoo.education.common.core.enums.FreeEnum;
-import com.roncoo.education.common.core.enums.ResourceTypeEnum;
-import com.roncoo.education.common.core.enums.StatusIdEnum;
+import com.roncoo.education.common.core.enums.*;
 import com.roncoo.education.common.polyv.PolyvVodUtil;
 import com.roncoo.education.common.polyv.callback.CallbackVodAuthCode;
 import com.roncoo.education.common.polyv.vod.PolyvSign;
@@ -63,6 +60,10 @@ public class AuthCourseBiz extends BaseBiz {
         if (ObjectUtil.isEmpty(resource) || resource.getResourceType().equals(ResourceTypeEnum.DOC.getCode())) {
             return Result.error("资源类型不正确");
         }
+        if (!resource.getVideoStatus().equals(VideoStatusEnum.SUCCES.getCode())) {
+            return Result.error("资源暂不可用");
+        }
+
         if (!check(period)) {
             return Result.error("没购买，不允许播放");
         }
