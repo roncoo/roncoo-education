@@ -1,38 +1,56 @@
 package com.roncoo.education.system.service.admin.req;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDateTime;
+import java.io.Serializable;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-
 /**
- * 站点友情链接 -分页列出
+ * <p>
+ * ADMIN-站点友情链接
+ * </p>
+ *
+ * @author wujing
  */
 @Data
 @Accessors(chain = true)
+@ApiModel(value = "AdminWebsiteLinkPageReq", description = "ADMIN-站点友情链接分页")
 public class AdminWebsiteLinkPageReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    /**
-     * 当前页
-     */
-    @ApiModelProperty(value = "当前页", required = true)
-    private int pageCurrent = 1;
-    /**
-     * 每页记录数
-     */
-    @ApiModelProperty(value = "每页记录数", required = true)
-    private int pageSize = 20;
-    /**
-     * 状态(1:正常，0:禁用)
-     */
-    @ApiModelProperty(value = "状态(1:正常，0:禁用)", required = false)
+
+    @ApiModelProperty(value = "主键")
+    private Long id;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "创建时间")
+    private LocalDateTime gmtCreate;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "修改时间")
+    private LocalDateTime gmtModified;
+
+    @ApiModelProperty(value = "状态(1有效, 0无效)")
     private Integer statusId;
-    /**
-     * 名称
-     */
-    @ApiModelProperty(value = "名称", required = false)
+
+    @ApiModelProperty(value = "排序")
+    private Integer sort;
+
+    @ApiModelProperty(value = "名称")
     private String linkName;
 
+    @ApiModelProperty(value = "链接")
+    private String linkUrl;
+
+    @ApiModelProperty(value = "跳转方式(_blank，_self)")
+    private String linkTarget;
+
+    @ApiModelProperty(value = "当前页")
+    private int pageCurrent = 1;
+
+    @ApiModelProperty(value = "每页条数")
+    private int pageSize = 20;
 }

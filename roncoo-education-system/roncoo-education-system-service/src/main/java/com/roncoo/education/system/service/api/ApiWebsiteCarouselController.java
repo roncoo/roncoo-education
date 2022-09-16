@@ -2,7 +2,6 @@ package com.roncoo.education.system.service.api;
 
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.api.biz.ApiWebsiteCarouselBiz;
-import com.roncoo.education.system.service.api.resp.ApiWebsiteAdvResp;
 import com.roncoo.education.system.service.api.resp.ApiWebsiteCarouselResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

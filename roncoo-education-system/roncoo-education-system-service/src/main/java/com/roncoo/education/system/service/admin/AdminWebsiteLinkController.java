@@ -3,69 +3,63 @@ package com.roncoo.education.system.service.admin;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminWebsiteLinkBiz;
-import com.roncoo.education.system.service.admin.req.*;
+import com.roncoo.education.system.service.admin.req.AdminWebsiteLinkEditReq;
+import com.roncoo.education.system.service.admin.req.AdminWebsiteLinkPageReq;
+import com.roncoo.education.system.service.admin.req.AdminWebsiteLinkSaveReq;
 import com.roncoo.education.system.service.admin.resp.AdminWebsiteLinkPageResp;
 import com.roncoo.education.system.service.admin.resp.AdminWebsiteLinkViewResp;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 /**
- * 站点友情链接
+ * ADMIN-站点友情链接
+ *
+ * @author wujing
  */
+@Api(tags = "ADMIN-站点友情链接")
 @RestController
-@RequestMapping(value = "/system/admin/website/link")
+@RequiredArgsConstructor
+@RequestMapping("/system/admin/website/link")
 public class AdminWebsiteLinkController {
 
-    @Autowired
-    private AdminWebsiteLinkBiz biz;
+    @NotNull
+    private final AdminWebsiteLinkBiz biz;
 
-    /**
-     * 站点友情分页列表接口
-     */
-    @ApiOperation(value = "站点友情分页列表链接接口", notes = "站点友情分页列表接口")
-    @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result<Page<AdminWebsiteLinkPageResp>> list(@RequestBody AdminWebsiteLinkPageReq websiteLinkPageREQ) {
-        return biz.list(websiteLinkPageREQ);
+    @ApiOperation(value = "站点友情链接分页", notes = "站点友情链接分页")
+    @PostMapping(value = "/page")
+    public Result<Page<AdminWebsiteLinkPageResp>> page(@RequestBody AdminWebsiteLinkPageReq req) {
+        return biz.page(req);
     }
 
-    /**
-     * 站点友情保存接口
-     */
-    @ApiOperation(value = "站点友情保存接口", notes = "站点友情保存接口")
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Result<String> save(@RequestBody AdminWebsiteLinkSaveReq websiteLinkSaveREQ) {
-        return biz.save(websiteLinkSaveREQ);
+    @ApiOperation(value = "站点友情链接添加", notes = "站点友情链接添加")
+    @PostMapping(value = "/save")
+    public Result<String> save(@RequestBody @Valid AdminWebsiteLinkSaveReq req) {
+        return biz.save(req);
     }
 
-    /**
-     * 站点友情删除接口
-     */
-    @ApiOperation(value = "站点友情删除接口", notes = "站点友情删除接口")
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public Result<String> delete(@RequestBody AdminWebsiteLinkDeleteReq websiteLinkDeleteREQ) {
-        return biz.delete(websiteLinkDeleteREQ);
+    @ApiOperation(value = "站点友情链接查看", notes = "站点友情链接查看")
+    @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
+    @GetMapping(value = "/view")
+    public Result<AdminWebsiteLinkViewResp> view(@RequestParam Long id) {
+        return biz.view(id);
     }
 
-    /**
-     * 站点友情更新接口
-     */
-    @ApiOperation(value = "站点友情更新接口", notes = "站点友情更新接口")
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public Result<String> update(@RequestBody AdminWebsiteLinkUpdateReq websiteLinkUpdateREQ) {
-        return biz.update(websiteLinkUpdateREQ);
+    @ApiOperation(value = "站点友情链接修改", notes = "站点友情链接修改")
+    @PutMapping(value = "/edit")
+    public Result<String> edit(@RequestBody @Valid AdminWebsiteLinkEditReq req) {
+        return biz.edit(req);
     }
 
-    /**
-     * 站点友情查看接口
-     */
-    @ApiOperation(value = "站点友情查看接口", notes = "站点友情查看接口")
-    @RequestMapping(value = "/view", method = RequestMethod.POST)
-    public Result<AdminWebsiteLinkViewResp> view(@RequestBody AdminWebsiteLinkViewReq websiteLinkViewREQ) {
-        return biz.view(websiteLinkViewREQ);
+    @ApiOperation(value = "站点友情链接删除", notes = "站点友情链接删除")
+    @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
+    @DeleteMapping(value = "/delete")
+    public Result<String> delete(@RequestParam Long id) {
+        return biz.delete(id);
     }
-
 }
