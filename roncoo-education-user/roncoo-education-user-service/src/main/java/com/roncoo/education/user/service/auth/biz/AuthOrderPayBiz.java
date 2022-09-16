@@ -89,7 +89,7 @@ public class AuthOrderPayBiz extends BaseBiz {
         }
 
         // 创建支付订单
-        OrderPay orderPay = createOrderPay(courseViewVO.getRulingPrice(), courseViewVO.getCoursePrice(), req.getPayType(), req.getRemarkCus());
+        OrderPay orderPay = createOrderPay(courseViewVO.getRulingPrice(), courseViewVO.getCoursePrice(), req.getPayType(), NOUtil.getOrderNo(), req.getRemarkCus());
         // 创建订单
         orderInfo = createOrderInfo(courseViewVO, users, orderPay);
 
@@ -133,7 +133,7 @@ public class AuthOrderPayBiz extends BaseBiz {
         }
 
         // 每次支付都新增支付订单
-        OrderPay orderPay = createOrderPay(orderInfo.getRulingPrice(), orderInfo.getCoursePrice(), req.getPayType(), orderInfo.getRemarkCus());
+        OrderPay orderPay = createOrderPay(orderInfo.getRulingPrice(), orderInfo.getCoursePrice(), req.getPayType(),orderInfo.getOrderNo(), orderInfo.getRemarkCus());
 
         // 创建支付
         TradeOrderResp orderResp = createPay(req.getPayType(), req.getUserClientIp(), req.getQuitUrl(), courseViewVO, orderPay);
@@ -211,9 +211,9 @@ public class AuthOrderPayBiz extends BaseBiz {
     /**
      * 创建支付订单
      */
-    private OrderPay createOrderPay(BigDecimal rulingPrice, BigDecimal coursePrice, int payType, String remarkCus) {
+    private OrderPay createOrderPay(BigDecimal rulingPrice, BigDecimal coursePrice, int payType,Long orderNo, String remarkCus) {
         OrderPay orderpay = new OrderPay();
-        orderpay.setOrderNo(NOUtil.getOrderNo());
+        orderpay.setOrderNo(orderNo);
         orderpay.setSerialNumber(NOUtil.getSerialNumber());
         orderpay.setRulingPrice(rulingPrice);
         orderpay.setCoursePrice(coursePrice);
