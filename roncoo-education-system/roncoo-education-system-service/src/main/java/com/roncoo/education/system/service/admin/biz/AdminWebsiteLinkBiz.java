@@ -1,21 +1,22 @@
 package com.roncoo.education.system.service.admin.biz;
 
-import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.system.dao.WebsiteLinkDao;
+import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink;
+import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample;
+import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample.Criteria;
 import com.roncoo.education.system.service.admin.req.AdminWebsiteLinkEditReq;
 import com.roncoo.education.system.service.admin.req.AdminWebsiteLinkPageReq;
 import com.roncoo.education.system.service.admin.req.AdminWebsiteLinkSaveReq;
 import com.roncoo.education.system.service.admin.resp.AdminWebsiteLinkPageResp;
 import com.roncoo.education.system.service.admin.resp.AdminWebsiteLinkViewResp;
-import com.roncoo.education.system.dao.WebsiteLinkDao;
-import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink;
-import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample;
-import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 
@@ -40,6 +41,9 @@ public class AdminWebsiteLinkBiz extends BaseBiz {
     public Result<Page<AdminWebsiteLinkPageResp>> page(AdminWebsiteLinkPageReq req) {
         WebsiteLinkExample example = new WebsiteLinkExample();
         Criteria c = example.createCriteria();
+        if (StringUtils.hasText(req.getLinkName())) {
+            c.andLinkNameLike(PageUtil.rightLike(req.getLinkName()));
+        }
         example.setOrderByClause(" sort asc, id desc ");
         Page<WebsiteLink> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminWebsiteLinkPageResp> respPage = PageUtil.transform(page, AdminWebsiteLinkPageResp.class);
