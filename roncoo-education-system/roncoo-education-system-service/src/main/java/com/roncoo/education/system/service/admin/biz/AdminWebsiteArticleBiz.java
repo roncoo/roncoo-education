@@ -40,6 +40,7 @@ public class AdminWebsiteArticleBiz extends BaseBiz {
     public Result<Page<AdminWebsiteArticlePageResp>> page(AdminWebsiteArticlePageReq req) {
         WebsiteArticleExample example = new WebsiteArticleExample();
         Criteria c = example.createCriteria();
+        example.setOrderByClause("sort asc, id desc");
         Page<WebsiteArticle> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminWebsiteArticlePageResp> respPage = PageUtil.transform(page, AdminWebsiteArticlePageResp.class);
         return Result.success(respPage);

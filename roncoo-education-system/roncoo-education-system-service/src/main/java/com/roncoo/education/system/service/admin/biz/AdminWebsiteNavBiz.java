@@ -40,6 +40,7 @@ public class AdminWebsiteNavBiz extends BaseBiz {
     public Result<Page<AdminWebsiteNavPageResp>> page(AdminWebsiteNavPageReq req) {
         WebsiteNavExample example = new WebsiteNavExample();
         Criteria c = example.createCriteria();
+        example.setOrderByClause("sort asc, id desc");
         Page<WebsiteNav> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminWebsiteNavPageResp> respPage = PageUtil.transform(page, AdminWebsiteNavPageResp.class);
         return Result.success(respPage);

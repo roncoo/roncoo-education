@@ -37,14 +37,12 @@ public class AdminWebsiteAdvBiz extends BaseBiz {
      * @param req 广告信息分页查询参数
      * @return 广告信息分页查询结果
      */
-    public Result
-            <Page
-                    <AdminWebsiteAdvPageResp>> page(AdminWebsiteAdvPageReq req) {
+    public Result<Page<AdminWebsiteAdvPageResp>> page(AdminWebsiteAdvPageReq req) {
         WebsiteAdvExample example = new WebsiteAdvExample();
         Criteria c = example.createCriteria();
+        example.setOrderByClause("sort asc, id desc");
         Page<WebsiteAdv> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
-        Page
-                <AdminWebsiteAdvPageResp> respPage = PageUtil.transform(page, AdminWebsiteAdvPageResp.class);
+        Page<AdminWebsiteAdvPageResp> respPage = PageUtil.transform(page, AdminWebsiteAdvPageResp.class);
         return Result.success(respPage);
     }
 
@@ -54,8 +52,7 @@ public class AdminWebsiteAdvBiz extends BaseBiz {
      * @param req 广告信息
      * @return 添加结果
      */
-    public Result
-            <String> save(AdminWebsiteAdvSaveReq req) {
+    public Result<String> save(AdminWebsiteAdvSaveReq req) {
         WebsiteAdv record = BeanUtil.copyProperties(req, WebsiteAdv.class);
         if (dao.save(record) > 0) {
             return Result.success("操作成功");
@@ -69,8 +66,7 @@ public class AdminWebsiteAdvBiz extends BaseBiz {
      * @param id 主键ID
      * @return 广告信息
      */
-    public Result
-            <AdminWebsiteAdvViewResp> view(Long id) {
+    public Result<AdminWebsiteAdvViewResp> view(Long id) {
         return Result.success(BeanUtil.copyProperties(dao.getById(id), AdminWebsiteAdvViewResp.class));
     }
 
@@ -80,8 +76,7 @@ public class AdminWebsiteAdvBiz extends BaseBiz {
      * @param req 广告信息修改对象
      * @return 修改结果
      */
-    public Result
-            <String> edit(AdminWebsiteAdvEditReq req) {
+    public Result<String> edit(AdminWebsiteAdvEditReq req) {
         WebsiteAdv record = BeanUtil.copyProperties(req, WebsiteAdv.class);
         if (dao.updateById(record) > 0) {
             return Result.success("操作成功");
@@ -95,8 +90,7 @@ public class AdminWebsiteAdvBiz extends BaseBiz {
      * @param id ID主键
      * @return 删除结果
      */
-    public Result
-            <String> delete(Long id) {
+    public Result<String> delete(Long id) {
         if (dao.deleteById(id) > 0) {
             return Result.success("操作成功");
         }
