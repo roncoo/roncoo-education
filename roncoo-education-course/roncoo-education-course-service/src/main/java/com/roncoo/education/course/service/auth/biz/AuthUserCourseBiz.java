@@ -40,6 +40,7 @@ public class AuthUserCourseBiz extends BaseBiz {
     public Result<Page<AuthUserCourseResp>> listForPage(AuthUserCourseReq req) {
         UserCourseExample example = new UserCourseExample();
         example.createCriteria().andUserIdEqualTo(ThreadContext.userId());
+        example.setOrderByClause("id desc");
         Page<UserCourse> userCoursePage = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AuthUserCourseResp> respPage = PageUtil.transform(userCoursePage, AuthUserCourseResp.class);
         if (CollUtil.isNotEmpty(respPage.getList())) {
