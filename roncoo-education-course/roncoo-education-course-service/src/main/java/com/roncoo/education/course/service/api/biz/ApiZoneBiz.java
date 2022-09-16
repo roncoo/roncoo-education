@@ -12,6 +12,7 @@ import com.roncoo.education.course.service.api.resp.ApiZoneCourseResp;
 import com.roncoo.education.course.service.api.resp.ApiZoneResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class ApiZoneBiz {
     @Autowired
     private CourseDao courseDao;
 
-    //@Cacheable
+    @Cacheable
     public Result<List<ApiZoneResp>> list() {
         // 获取所有可用专区
         ZoneExample example = new ZoneExample();

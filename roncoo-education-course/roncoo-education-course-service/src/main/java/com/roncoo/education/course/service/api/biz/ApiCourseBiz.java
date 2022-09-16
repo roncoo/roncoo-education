@@ -33,6 +33,7 @@ import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.SearchHits;
@@ -70,7 +71,6 @@ public class ApiCourseBiz extends BaseBiz {
     private final ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     public Result<Page<ApiCoursePageResp>> searchForPage(ApiCoursePageReq req) {
-
         NativeSearchQueryBuilder nsb = new NativeSearchQueryBuilder();
         // 高亮字段
         nsb.withHighlightFields(new HighlightBuilder.Field("courseName").preTags("<mark>").postTags("</mark>"));
@@ -97,7 +97,7 @@ public class ApiCourseBiz extends BaseBiz {
         return Result.success(EsPageUtil.transform(searchHits, req.getPageCurrent(), req.getPageSize(), ApiCoursePageResp.class));
     }
 
-    //@Cacheable
+    @Cacheable
     public Result<CourseResp> view(CourseReq req) {
         Course course = dao.getById(req.getCourseId());
         if (course == null) {
