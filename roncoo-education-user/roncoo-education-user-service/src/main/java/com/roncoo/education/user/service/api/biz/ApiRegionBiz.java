@@ -10,6 +10,8 @@ import com.roncoo.education.user.service.api.req.RegionLevelReq;
 import com.roncoo.education.user.service.api.req.RegionProvinceReq;
 import com.roncoo.education.user.service.api.resp.RegionResp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -20,11 +22,13 @@ import java.util.List;
  * @author wujing
  */
 @Component
+@CacheConfig(cacheNames = {"user"})
 public class ApiRegionBiz {
 
     @Autowired
     private RegionDao regionDao;
 
+    @Cacheable
     public Result<List<RegionResp>> listForLevel(RegionLevelReq userRegionLevelBO) {
         List<Region> list = regionDao.listByLevel(userRegionLevelBO.getLevel());
         if (CollectionUtil.isNotEmpty(list)) {
@@ -33,6 +37,7 @@ public class ApiRegionBiz {
         return Result.error("找不到信息");
     }
 
+    @Cacheable
     public Result<List<RegionResp>> listForProvince(RegionProvinceReq userRegionProvinceBO) {
         List<Region> list = regionDao.listByProvinceId(userRegionProvinceBO.getProvinceId());
         if (CollectionUtil.isNotEmpty(list)) {
@@ -41,6 +46,7 @@ public class ApiRegionBiz {
         return Result.error("找不到信息");
     }
 
+    @Cacheable
     public Result<List<RegionResp>> listForCity(RegionCityIdReq userRegionCityIdBO) {
         List<Region> list = regionDao.listByCityId(userRegionCityIdBO.getCityId());
         if (CollectionUtil.isNotEmpty(list)) {
