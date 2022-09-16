@@ -3,7 +3,7 @@ package com.roncoo.education.system.dao.impl.mapper.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class WebsiteAdv implements Serializable {
+public class WebsiteCarousel implements Serializable {
     private Long id;
 
     private Date gmtCreate;
@@ -14,21 +14,17 @@ public class WebsiteAdv implements Serializable {
 
     private Integer sort;
 
-    private String advTitle;
+    private String carouselTitle;
 
-    private String advImg;
+    private String carouselImg;
 
-    private String advUrl;
+    private String carouselUrl;
 
-    private String advTarget;
-
-    private Integer advLocation;
+    private String carouselTarget;
 
     private Date beginTime;
 
     private Date endTime;
-
-    private Integer platShow;
 
     private static final long serialVersionUID = 1L;
 
@@ -72,44 +68,36 @@ public class WebsiteAdv implements Serializable {
         this.sort = sort;
     }
 
-    public String getAdvTitle() {
-        return advTitle;
+    public String getCarouselTitle() {
+        return carouselTitle;
     }
 
-    public void setAdvTitle(String advTitle) {
-        this.advTitle = advTitle == null ? null : advTitle.trim();
+    public void setCarouselTitle(String carouselTitle) {
+        this.carouselTitle = carouselTitle == null ? null : carouselTitle.trim();
     }
 
-    public String getAdvImg() {
-        return advImg;
+    public String getCarouselImg() {
+        return carouselImg;
     }
 
-    public void setAdvImg(String advImg) {
-        this.advImg = advImg == null ? null : advImg.trim();
+    public void setCarouselImg(String carouselImg) {
+        this.carouselImg = carouselImg == null ? null : carouselImg.trim();
     }
 
-    public String getAdvUrl() {
-        return advUrl;
+    public String getCarouselUrl() {
+        return carouselUrl;
     }
 
-    public void setAdvUrl(String advUrl) {
-        this.advUrl = advUrl == null ? null : advUrl.trim();
+    public void setCarouselUrl(String carouselUrl) {
+        this.carouselUrl = carouselUrl == null ? null : carouselUrl.trim();
     }
 
-    public String getAdvTarget() {
-        return advTarget;
+    public String getCarouselTarget() {
+        return carouselTarget;
     }
 
-    public void setAdvTarget(String advTarget) {
-        this.advTarget = advTarget == null ? null : advTarget.trim();
-    }
-
-    public Integer getAdvLocation() {
-        return advLocation;
-    }
-
-    public void setAdvLocation(Integer advLocation) {
-        this.advLocation = advLocation;
+    public void setCarouselTarget(String carouselTarget) {
+        this.carouselTarget = carouselTarget == null ? null : carouselTarget.trim();
     }
 
     public Date getBeginTime() {
@@ -128,14 +116,6 @@ public class WebsiteAdv implements Serializable {
         this.endTime = endTime;
     }
 
-    public Integer getPlatShow() {
-        return platShow;
-    }
-
-    public void setPlatShow(Integer platShow) {
-        this.platShow = platShow;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -147,14 +127,12 @@ public class WebsiteAdv implements Serializable {
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", statusId=").append(statusId);
         sb.append(", sort=").append(sort);
-        sb.append(", advTitle=").append(advTitle);
-        sb.append(", advImg=").append(advImg);
-        sb.append(", advUrl=").append(advUrl);
-        sb.append(", advTarget=").append(advTarget);
-        sb.append(", advLocation=").append(advLocation);
+        sb.append(", carouselTitle=").append(carouselTitle);
+        sb.append(", carouselImg=").append(carouselImg);
+        sb.append(", carouselUrl=").append(carouselUrl);
+        sb.append(", carouselTarget=").append(carouselTarget);
         sb.append(", beginTime=").append(beginTime);
         sb.append(", endTime=").append(endTime);
-        sb.append(", platShow=").append(platShow);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

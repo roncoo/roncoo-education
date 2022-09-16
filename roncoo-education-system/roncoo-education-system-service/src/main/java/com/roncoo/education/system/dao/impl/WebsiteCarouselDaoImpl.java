@@ -3,10 +3,10 @@ package com.roncoo.education.system.dao.impl;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
-import com.roncoo.education.system.dao.WebsiteAdvDao;
-import com.roncoo.education.system.dao.impl.mapper.WebsiteAdvMapper;
-import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteAdv;
-import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteAdvExample;
+import com.roncoo.education.system.dao.WebsiteCarouselDao;
+import com.roncoo.education.system.dao.impl.mapper.WebsiteCarouselMapper;
+import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarousel;
+import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarouselExample;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -17,17 +17,17 @@ import java.util.List;
  * 广告信息 服务实现类
  *
  * @author wujing
- * @date 2022-08-25
+ * @date 2022-09-16
  */
 @Repository
 @RequiredArgsConstructor
-public class WebsiteAdvDaoImpl implements WebsiteAdvDao {
+public class WebsiteCarouselDaoImpl implements WebsiteCarouselDao {
 
     @NotNull
-    private final WebsiteAdvMapper mapper;
+    private final WebsiteCarouselMapper mapper;
 
     @Override
-    public int save(WebsiteAdv record) {
+    public int save(WebsiteCarousel record) {
         if (record.getId() == null) {
             record.setId(IdWorker.getId());
         }
@@ -40,19 +40,19 @@ public class WebsiteAdvDaoImpl implements WebsiteAdvDao {
     }
 
     @Override
-    public int updateById(WebsiteAdv record) {
+    public int updateById(WebsiteCarousel record) {
         record.setGmtCreate(null);
         record.setGmtModified(null);
         return this.mapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
-    public WebsiteAdv getById(Long id) {
+    public WebsiteCarousel getById(Long id) {
         return this.mapper.selectByPrimaryKey(id);
     }
 
     @Override
-    public Page<WebsiteAdv> page(int pageCurrent, int pageSize, WebsiteAdvExample example) {
+    public Page<WebsiteCarousel> page(int pageCurrent, int pageSize, WebsiteCarouselExample example) {
         int count = this.mapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);
         pageCurrent = PageUtil.checkPageCurrent(count, pageSize, pageCurrent);
@@ -63,12 +63,12 @@ public class WebsiteAdvDaoImpl implements WebsiteAdvDao {
     }
 
     @Override
-    public List<WebsiteAdv> listByExample(WebsiteAdvExample example) {
+    public List<WebsiteCarousel> listByExample(WebsiteCarouselExample example) {
         return this.mapper.selectByExample(example);
     }
 
     @Override
-    public int countByExample(WebsiteAdvExample example) {
+    public int countByExample(WebsiteCarouselExample example){
         return this.mapper.countByExample(example);
     }
 }

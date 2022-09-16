@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class WebsiteAdvExample {
+public class WebsiteCarouselExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -15,7 +15,7 @@ public class WebsiteAdvExample {
 
     protected int pageSize = -1;
 
-    public WebsiteAdvExample() {
+    public WebsiteCarouselExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -425,343 +425,283 @@ public class WebsiteAdvExample {
             return (Criteria) this;
         }
 
-        public Criteria andAdvTitleIsNull() {
-            addCriterion("adv_title is null");
+        public Criteria andCarouselTitleIsNull() {
+            addCriterion("carousel_title is null");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTitleIsNotNull() {
-            addCriterion("adv_title is not null");
+        public Criteria andCarouselTitleIsNotNull() {
+            addCriterion("carousel_title is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTitleEqualTo(String value) {
-            addCriterion("adv_title =", value, "advTitle");
+        public Criteria andCarouselTitleEqualTo(String value) {
+            addCriterion("carousel_title =", value, "carouselTitle");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTitleNotEqualTo(String value) {
-            addCriterion("adv_title <>", value, "advTitle");
+        public Criteria andCarouselTitleNotEqualTo(String value) {
+            addCriterion("carousel_title <>", value, "carouselTitle");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTitleGreaterThan(String value) {
-            addCriterion("adv_title >", value, "advTitle");
+        public Criteria andCarouselTitleGreaterThan(String value) {
+            addCriterion("carousel_title >", value, "carouselTitle");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTitleGreaterThanOrEqualTo(String value) {
-            addCriterion("adv_title >=", value, "advTitle");
+        public Criteria andCarouselTitleGreaterThanOrEqualTo(String value) {
+            addCriterion("carousel_title >=", value, "carouselTitle");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTitleLessThan(String value) {
-            addCriterion("adv_title <", value, "advTitle");
+        public Criteria andCarouselTitleLessThan(String value) {
+            addCriterion("carousel_title <", value, "carouselTitle");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTitleLessThanOrEqualTo(String value) {
-            addCriterion("adv_title <=", value, "advTitle");
+        public Criteria andCarouselTitleLessThanOrEqualTo(String value) {
+            addCriterion("carousel_title <=", value, "carouselTitle");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTitleLike(String value) {
-            addCriterion("adv_title like", value, "advTitle");
+        public Criteria andCarouselTitleLike(String value) {
+            addCriterion("carousel_title like", value, "carouselTitle");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTitleNotLike(String value) {
-            addCriterion("adv_title not like", value, "advTitle");
+        public Criteria andCarouselTitleNotLike(String value) {
+            addCriterion("carousel_title not like", value, "carouselTitle");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTitleIn(List<String> values) {
-            addCriterion("adv_title in", values, "advTitle");
+        public Criteria andCarouselTitleIn(List<String> values) {
+            addCriterion("carousel_title in", values, "carouselTitle");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTitleNotIn(List<String> values) {
-            addCriterion("adv_title not in", values, "advTitle");
+        public Criteria andCarouselTitleNotIn(List<String> values) {
+            addCriterion("carousel_title not in", values, "carouselTitle");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTitleBetween(String value1, String value2) {
-            addCriterion("adv_title between", value1, value2, "advTitle");
+        public Criteria andCarouselTitleBetween(String value1, String value2) {
+            addCriterion("carousel_title between", value1, value2, "carouselTitle");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTitleNotBetween(String value1, String value2) {
-            addCriterion("adv_title not between", value1, value2, "advTitle");
+        public Criteria andCarouselTitleNotBetween(String value1, String value2) {
+            addCriterion("carousel_title not between", value1, value2, "carouselTitle");
             return (Criteria) this;
         }
 
-        public Criteria andAdvImgIsNull() {
-            addCriterion("adv_img is null");
+        public Criteria andCarouselImgIsNull() {
+            addCriterion("carousel_img is null");
             return (Criteria) this;
         }
 
-        public Criteria andAdvImgIsNotNull() {
-            addCriterion("adv_img is not null");
+        public Criteria andCarouselImgIsNotNull() {
+            addCriterion("carousel_img is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAdvImgEqualTo(String value) {
-            addCriterion("adv_img =", value, "advImg");
+        public Criteria andCarouselImgEqualTo(String value) {
+            addCriterion("carousel_img =", value, "carouselImg");
             return (Criteria) this;
         }
 
-        public Criteria andAdvImgNotEqualTo(String value) {
-            addCriterion("adv_img <>", value, "advImg");
+        public Criteria andCarouselImgNotEqualTo(String value) {
+            addCriterion("carousel_img <>", value, "carouselImg");
             return (Criteria) this;
         }
 
-        public Criteria andAdvImgGreaterThan(String value) {
-            addCriterion("adv_img >", value, "advImg");
+        public Criteria andCarouselImgGreaterThan(String value) {
+            addCriterion("carousel_img >", value, "carouselImg");
             return (Criteria) this;
         }
 
-        public Criteria andAdvImgGreaterThanOrEqualTo(String value) {
-            addCriterion("adv_img >=", value, "advImg");
+        public Criteria andCarouselImgGreaterThanOrEqualTo(String value) {
+            addCriterion("carousel_img >=", value, "carouselImg");
             return (Criteria) this;
         }
 
-        public Criteria andAdvImgLessThan(String value) {
-            addCriterion("adv_img <", value, "advImg");
+        public Criteria andCarouselImgLessThan(String value) {
+            addCriterion("carousel_img <", value, "carouselImg");
             return (Criteria) this;
         }
 
-        public Criteria andAdvImgLessThanOrEqualTo(String value) {
-            addCriterion("adv_img <=", value, "advImg");
+        public Criteria andCarouselImgLessThanOrEqualTo(String value) {
+            addCriterion("carousel_img <=", value, "carouselImg");
             return (Criteria) this;
         }
 
-        public Criteria andAdvImgLike(String value) {
-            addCriterion("adv_img like", value, "advImg");
+        public Criteria andCarouselImgLike(String value) {
+            addCriterion("carousel_img like", value, "carouselImg");
             return (Criteria) this;
         }
 
-        public Criteria andAdvImgNotLike(String value) {
-            addCriterion("adv_img not like", value, "advImg");
+        public Criteria andCarouselImgNotLike(String value) {
+            addCriterion("carousel_img not like", value, "carouselImg");
             return (Criteria) this;
         }
 
-        public Criteria andAdvImgIn(List<String> values) {
-            addCriterion("adv_img in", values, "advImg");
+        public Criteria andCarouselImgIn(List<String> values) {
+            addCriterion("carousel_img in", values, "carouselImg");
             return (Criteria) this;
         }
 
-        public Criteria andAdvImgNotIn(List<String> values) {
-            addCriterion("adv_img not in", values, "advImg");
+        public Criteria andCarouselImgNotIn(List<String> values) {
+            addCriterion("carousel_img not in", values, "carouselImg");
             return (Criteria) this;
         }
 
-        public Criteria andAdvImgBetween(String value1, String value2) {
-            addCriterion("adv_img between", value1, value2, "advImg");
+        public Criteria andCarouselImgBetween(String value1, String value2) {
+            addCriterion("carousel_img between", value1, value2, "carouselImg");
             return (Criteria) this;
         }
 
-        public Criteria andAdvImgNotBetween(String value1, String value2) {
-            addCriterion("adv_img not between", value1, value2, "advImg");
+        public Criteria andCarouselImgNotBetween(String value1, String value2) {
+            addCriterion("carousel_img not between", value1, value2, "carouselImg");
             return (Criteria) this;
         }
 
-        public Criteria andAdvUrlIsNull() {
-            addCriterion("adv_url is null");
+        public Criteria andCarouselUrlIsNull() {
+            addCriterion("carousel_url is null");
             return (Criteria) this;
         }
 
-        public Criteria andAdvUrlIsNotNull() {
-            addCriterion("adv_url is not null");
+        public Criteria andCarouselUrlIsNotNull() {
+            addCriterion("carousel_url is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAdvUrlEqualTo(String value) {
-            addCriterion("adv_url =", value, "advUrl");
+        public Criteria andCarouselUrlEqualTo(String value) {
+            addCriterion("carousel_url =", value, "carouselUrl");
             return (Criteria) this;
         }
 
-        public Criteria andAdvUrlNotEqualTo(String value) {
-            addCriterion("adv_url <>", value, "advUrl");
+        public Criteria andCarouselUrlNotEqualTo(String value) {
+            addCriterion("carousel_url <>", value, "carouselUrl");
             return (Criteria) this;
         }
 
-        public Criteria andAdvUrlGreaterThan(String value) {
-            addCriterion("adv_url >", value, "advUrl");
+        public Criteria andCarouselUrlGreaterThan(String value) {
+            addCriterion("carousel_url >", value, "carouselUrl");
             return (Criteria) this;
         }
 
-        public Criteria andAdvUrlGreaterThanOrEqualTo(String value) {
-            addCriterion("adv_url >=", value, "advUrl");
+        public Criteria andCarouselUrlGreaterThanOrEqualTo(String value) {
+            addCriterion("carousel_url >=", value, "carouselUrl");
             return (Criteria) this;
         }
 
-        public Criteria andAdvUrlLessThan(String value) {
-            addCriterion("adv_url <", value, "advUrl");
+        public Criteria andCarouselUrlLessThan(String value) {
+            addCriterion("carousel_url <", value, "carouselUrl");
             return (Criteria) this;
         }
 
-        public Criteria andAdvUrlLessThanOrEqualTo(String value) {
-            addCriterion("adv_url <=", value, "advUrl");
+        public Criteria andCarouselUrlLessThanOrEqualTo(String value) {
+            addCriterion("carousel_url <=", value, "carouselUrl");
             return (Criteria) this;
         }
 
-        public Criteria andAdvUrlLike(String value) {
-            addCriterion("adv_url like", value, "advUrl");
+        public Criteria andCarouselUrlLike(String value) {
+            addCriterion("carousel_url like", value, "carouselUrl");
             return (Criteria) this;
         }
 
-        public Criteria andAdvUrlNotLike(String value) {
-            addCriterion("adv_url not like", value, "advUrl");
+        public Criteria andCarouselUrlNotLike(String value) {
+            addCriterion("carousel_url not like", value, "carouselUrl");
             return (Criteria) this;
         }
 
-        public Criteria andAdvUrlIn(List<String> values) {
-            addCriterion("adv_url in", values, "advUrl");
+        public Criteria andCarouselUrlIn(List<String> values) {
+            addCriterion("carousel_url in", values, "carouselUrl");
             return (Criteria) this;
         }
 
-        public Criteria andAdvUrlNotIn(List<String> values) {
-            addCriterion("adv_url not in", values, "advUrl");
+        public Criteria andCarouselUrlNotIn(List<String> values) {
+            addCriterion("carousel_url not in", values, "carouselUrl");
             return (Criteria) this;
         }
 
-        public Criteria andAdvUrlBetween(String value1, String value2) {
-            addCriterion("adv_url between", value1, value2, "advUrl");
+        public Criteria andCarouselUrlBetween(String value1, String value2) {
+            addCriterion("carousel_url between", value1, value2, "carouselUrl");
             return (Criteria) this;
         }
 
-        public Criteria andAdvUrlNotBetween(String value1, String value2) {
-            addCriterion("adv_url not between", value1, value2, "advUrl");
+        public Criteria andCarouselUrlNotBetween(String value1, String value2) {
+            addCriterion("carousel_url not between", value1, value2, "carouselUrl");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTargetIsNull() {
-            addCriterion("adv_target is null");
+        public Criteria andCarouselTargetIsNull() {
+            addCriterion("carousel_target is null");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTargetIsNotNull() {
-            addCriterion("adv_target is not null");
+        public Criteria andCarouselTargetIsNotNull() {
+            addCriterion("carousel_target is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTargetEqualTo(String value) {
-            addCriterion("adv_target =", value, "advTarget");
+        public Criteria andCarouselTargetEqualTo(String value) {
+            addCriterion("carousel_target =", value, "carouselTarget");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTargetNotEqualTo(String value) {
-            addCriterion("adv_target <>", value, "advTarget");
+        public Criteria andCarouselTargetNotEqualTo(String value) {
+            addCriterion("carousel_target <>", value, "carouselTarget");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTargetGreaterThan(String value) {
-            addCriterion("adv_target >", value, "advTarget");
+        public Criteria andCarouselTargetGreaterThan(String value) {
+            addCriterion("carousel_target >", value, "carouselTarget");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTargetGreaterThanOrEqualTo(String value) {
-            addCriterion("adv_target >=", value, "advTarget");
+        public Criteria andCarouselTargetGreaterThanOrEqualTo(String value) {
+            addCriterion("carousel_target >=", value, "carouselTarget");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTargetLessThan(String value) {
-            addCriterion("adv_target <", value, "advTarget");
+        public Criteria andCarouselTargetLessThan(String value) {
+            addCriterion("carousel_target <", value, "carouselTarget");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTargetLessThanOrEqualTo(String value) {
-            addCriterion("adv_target <=", value, "advTarget");
+        public Criteria andCarouselTargetLessThanOrEqualTo(String value) {
+            addCriterion("carousel_target <=", value, "carouselTarget");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTargetLike(String value) {
-            addCriterion("adv_target like", value, "advTarget");
+        public Criteria andCarouselTargetLike(String value) {
+            addCriterion("carousel_target like", value, "carouselTarget");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTargetNotLike(String value) {
-            addCriterion("adv_target not like", value, "advTarget");
+        public Criteria andCarouselTargetNotLike(String value) {
+            addCriterion("carousel_target not like", value, "carouselTarget");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTargetIn(List<String> values) {
-            addCriterion("adv_target in", values, "advTarget");
+        public Criteria andCarouselTargetIn(List<String> values) {
+            addCriterion("carousel_target in", values, "carouselTarget");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTargetNotIn(List<String> values) {
-            addCriterion("adv_target not in", values, "advTarget");
+        public Criteria andCarouselTargetNotIn(List<String> values) {
+            addCriterion("carousel_target not in", values, "carouselTarget");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTargetBetween(String value1, String value2) {
-            addCriterion("adv_target between", value1, value2, "advTarget");
+        public Criteria andCarouselTargetBetween(String value1, String value2) {
+            addCriterion("carousel_target between", value1, value2, "carouselTarget");
             return (Criteria) this;
         }
 
-        public Criteria andAdvTargetNotBetween(String value1, String value2) {
-            addCriterion("adv_target not between", value1, value2, "advTarget");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdvLocationIsNull() {
-            addCriterion("adv_location is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdvLocationIsNotNull() {
-            addCriterion("adv_location is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdvLocationEqualTo(Integer value) {
-            addCriterion("adv_location =", value, "advLocation");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdvLocationNotEqualTo(Integer value) {
-            addCriterion("adv_location <>", value, "advLocation");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdvLocationGreaterThan(Integer value) {
-            addCriterion("adv_location >", value, "advLocation");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdvLocationGreaterThanOrEqualTo(Integer value) {
-            addCriterion("adv_location >=", value, "advLocation");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdvLocationLessThan(Integer value) {
-            addCriterion("adv_location <", value, "advLocation");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdvLocationLessThanOrEqualTo(Integer value) {
-            addCriterion("adv_location <=", value, "advLocation");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdvLocationIn(List<Integer> values) {
-            addCriterion("adv_location in", values, "advLocation");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdvLocationNotIn(List<Integer> values) {
-            addCriterion("adv_location not in", values, "advLocation");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdvLocationBetween(Integer value1, Integer value2) {
-            addCriterion("adv_location between", value1, value2, "advLocation");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdvLocationNotBetween(Integer value1, Integer value2) {
-            addCriterion("adv_location not between", value1, value2, "advLocation");
+        public Criteria andCarouselTargetNotBetween(String value1, String value2) {
+            addCriterion("carousel_target not between", value1, value2, "carouselTarget");
             return (Criteria) this;
         }
 
@@ -882,66 +822,6 @@ public class WebsiteAdvExample {
 
         public Criteria andEndTimeNotBetween(Date value1, Date value2) {
             addCriterion("end_time not between", value1, value2, "endTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlatShowIsNull() {
-            addCriterion("plat_show is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlatShowIsNotNull() {
-            addCriterion("plat_show is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlatShowEqualTo(Integer value) {
-            addCriterion("plat_show =", value, "platShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlatShowNotEqualTo(Integer value) {
-            addCriterion("plat_show <>", value, "platShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlatShowGreaterThan(Integer value) {
-            addCriterion("plat_show >", value, "platShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlatShowGreaterThanOrEqualTo(Integer value) {
-            addCriterion("plat_show >=", value, "platShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlatShowLessThan(Integer value) {
-            addCriterion("plat_show <", value, "platShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlatShowLessThanOrEqualTo(Integer value) {
-            addCriterion("plat_show <=", value, "platShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlatShowIn(List<Integer> values) {
-            addCriterion("plat_show in", values, "platShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlatShowNotIn(List<Integer> values) {
-            addCriterion("plat_show not in", values, "platShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlatShowBetween(Integer value1, Integer value2) {
-            addCriterion("plat_show between", value1, value2, "platShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlatShowNotBetween(Integer value1, Integer value2) {
-            addCriterion("plat_show not between", value1, value2, "platShow");
             return (Criteria) this;
         }
     }

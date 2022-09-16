@@ -1,25 +1,25 @@
-package com.roncoo.education.system.service.admin.resp;
+package com.roncoo.education.system.service.api.req;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDateTime;
+import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
 /**
  * <p>
- * ADMIN-广告信息
+ * API-广告信息
  * </p>
  *
  * @author wujing
+ * @date 2022-09-16
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminWebsiteAdvViewResp", description = "ADMIN-广告信息查看")
-public class AdminWebsiteAdvViewResp implements Serializable {
+@ApiModel(value = "ApiWebsiteCarouselReq", description = "API-广告信息")
+public class ApiWebsiteCarouselReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -41,19 +41,16 @@ public class AdminWebsiteAdvViewResp implements Serializable {
     private Integer sort;
 
     @ApiModelProperty(value = "广告标题")
-    private String advTitle;
+    private String carouselTitle;
 
     @ApiModelProperty(value = "广告图片")
-    private String advImg;
+    private String carouselImg;
 
     @ApiModelProperty(value = "广告链接")
-    private String advUrl;
+    private String carouselUrl;
 
     @ApiModelProperty(value = "广告跳转方式")
-    private String advTarget;
-
-    @ApiModelProperty(value = "广告位置(1首页轮播)")
-    private Integer advLocation;
+    private String carouselTarget;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "开始时间")
@@ -62,7 +59,4 @@ public class AdminWebsiteAdvViewResp implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "结束时间")
     private LocalDateTime endTime;
-
-    @ApiModelProperty(value = "位置(0电脑端，1微信端)")
-    private Integer platShow;
 }
