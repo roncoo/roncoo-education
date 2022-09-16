@@ -24,6 +24,7 @@ import com.roncoo.education.user.dao.UsersDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.OrderInfo;
 import com.roncoo.education.user.dao.impl.mapper.entity.OrderPay;
 import com.roncoo.education.user.dao.impl.mapper.entity.Users;
+import com.roncoo.education.user.service.auth.req.AuthOrderCancelReq;
 import com.roncoo.education.user.service.auth.req.AuthOrderCountinuePayReq;
 import com.roncoo.education.user.service.auth.req.AuthOrderPayReq;
 import com.roncoo.education.user.service.auth.resp.AuthOrderPayResp;
@@ -88,12 +89,12 @@ public class AuthOrderPayBiz extends BaseBiz {
         }
 
         // 创建支付订单
-        OrderPay orderPay = createOrderPay(courseViewVO.getRulingPrice(), courseViewVO.getCoursePrice(), req.getPayType(), req.getRemarkCus(), req.getChannelType());
+        OrderPay orderPay = createOrderPay(courseViewVO.getRulingPrice(), courseViewVO.getCoursePrice(), req.getPayType(), req.getRemarkCus());
         // 创建订单
         orderInfo = createOrderInfo(courseViewVO, users, orderPay);
 
         // 创建支付
-        TradeOrderResp orderResp = createPay(req, courseViewVO, orderPay);
+        TradeOrderResp orderResp = createPay(req.getPayType(), req.getUserClientIp(), req.getQuitUrl(), courseViewVO, orderPay);
         if (orderResp.isSuccess()) {
             //返回支付信息
             AuthOrderPayResp resp = BeanUtil.copyProperties(orderInfo, AuthOrderPayResp.class);
@@ -104,45 +105,10 @@ public class AuthOrderPayBiz extends BaseBiz {
         return Result.error("下单失败");
     }
 
-    private TradeOrderResp createPay(AuthOrderPayReq req, CourseViewVO courseViewVO, OrderPay orderPay) {
-        // 下单支付
-        String impl = PayTypeEnum.byCode(req.getPayType()).getImpl();
-        PayFace payFace = payFaceMap.get(impl);
-        if (ObjectUtil.isNull(payFace)) {
-            log.error("该接口没实现，payType={}", req.getPayType());
-            throw new BaseException("获取失败");
-        }
-
-        TradeOrderReq orderReq = new TradeOrderReq();
-        // 获取支付配置
-        getPayConfig(orderReq);
-
-        // 直连模式
-        orderReq.setPayModel(PayModelEnum.DIRECT_SALES.getCode());
-        orderReq.setTradeSerialNo(orderPay.getSerialNumber().toString());
-        orderReq.setAmount(orderPay.getCoursePrice());
-        orderReq.setGoodsName(courseViewVO.getCourseName());
-        orderReq.setUserClientIp(req.getUserClientIp());
-        orderReq.setNotifyUrl(getNotifyUrl(orderReq.getPayModel(), impl));
-        if (StringUtils.hasText(req.getQuitUrl())) {
-            orderReq.setQuitUrl(req.getQuitUrl() + "?tradeSerialNo=" + orderReq.getTradeSerialNo());
-        }
-        return payFace.tradeOrder(orderReq);
-    }
-
-    private void getPayConfig(TradeOrderReq orderReq) {
-        Map<String, String> payConfig = cacheRedis.getByJson(Constants.RedisPre.PAY + ConfigTypeEnum.PAY.getCode(), HashMap.class);
-        if (ObjectUtil.isEmpty(payConfig)) {
-            payConfig = feignSysConfig.getMapByConfigType(ConfigTypeEnum.PAY.getCode());
-            cacheRedis.set(Constants.RedisPre.PAY + ConfigTypeEnum.PAY.getCode(), payConfig);
-        }
-        orderReq.setAliPayConfig(BeanUtil.objToBean(payConfig, AliPayConfig.class));
-        orderReq.setWxPayConfig(BeanUtil.objToBean(payConfig, WxPayConfig.class));
-    }
-
     /**
      * 继续支付
      */
+    @Transactional(rollbackFor = Exception.class)
     public Result<AuthOrderPayResp> continuePay(AuthOrderCountinuePayReq req) {
         if (ObjectUtil.isEmpty(req.getOrderNo())) {
             return Result.error("请确认订单号是否正确");
@@ -167,16 +133,66 @@ public class AuthOrderPayBiz extends BaseBiz {
         }
 
         // 每次支付都新增支付订单
-        OrderPay orderPay = createOrderPay(orderInfo.getRulingPrice(), orderInfo.getCoursePrice(), req.getPayType(), req.getRemarkCus(), req.getChannelType());
+        OrderPay orderPay = createOrderPay(orderInfo.getRulingPrice(), orderInfo.getCoursePrice(), req.getPayType(), orderInfo.getRemarkCus());
 
+        // 创建支付
+        TradeOrderResp orderResp = createPay(req.getPayType(), req.getUserClientIp(), req.getQuitUrl(), courseViewVO, orderPay);
+        if (orderResp.isSuccess()) {
+            //返回支付信息
+            AuthOrderPayResp resp = BeanUtil.copyProperties(orderInfo, AuthOrderPayResp.class);
+            resp.setPayMessage(orderResp.getPayMessage());
+            resp.setSerialNumber(orderPay.getSerialNumber());
+            return Result.success(resp);
+        }
+        return Result.error("下单失败");
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public Result<String> cancel(AuthOrderCancelReq req) {
+        OrderInfo orderInfo = orderInfoDao.getByOrderNo(req.getOrderNo());
+        if (ObjectUtil.isEmpty(orderInfo) || orderInfo.getOrderStatus().equals(OrderStatusEnum.SUCCESS.getCode())) {
+            // 成功的订单，不能操作
+            return Result.error("请确认订单号是否正确");
+        }
+        orderInfo.setOrderStatus(OrderStatusEnum.CLOSE.getCode());
+        orderInfoDao.updateById(orderInfo);
+        return Result.success("操作成功");
+    }
+
+    private TradeOrderResp createPay(Integer payType, String userClientIp, String quitUrl, CourseViewVO courseViewVO, OrderPay orderPay) {
         // 下单支付
-        String payMessage = "";
+        String impl = PayTypeEnum.byCode(payType).getImpl();
+        PayFace payFace = payFaceMap.get(impl);
+        if (ObjectUtil.isNull(payFace)) {
+            log.error("该接口没实现，payType={}", payType);
+            throw new BaseException("获取失败");
+        }
 
-        //返回支付信息
-        AuthOrderPayResp resp = BeanUtil.copyProperties(orderInfo, AuthOrderPayResp.class);
-        resp.setPayMessage(payMessage);
-        resp.setSerialNumber(orderPay.getSerialNumber());
-        return Result.success(resp);
+        TradeOrderReq orderReq = new TradeOrderReq();
+        // 获取支付配置
+        getPayConfig(orderReq);
+
+        // 直连模式
+        orderReq.setPayModel(PayModelEnum.DIRECT_SALES.getCode());
+        orderReq.setTradeSerialNo(orderPay.getSerialNumber().toString());
+        orderReq.setAmount(orderPay.getCoursePrice());
+        orderReq.setGoodsName(courseViewVO.getCourseName());
+        orderReq.setUserClientIp(userClientIp);
+        orderReq.setNotifyUrl(getNotifyUrl(orderReq.getPayModel(), impl));
+        if (StringUtils.hasText(quitUrl)) {
+            orderReq.setQuitUrl(quitUrl + "?tradeSerialNo=" + orderReq.getTradeSerialNo());
+        }
+        return payFace.tradeOrder(orderReq);
+    }
+
+    private void getPayConfig(TradeOrderReq orderReq) {
+        Map<String, String> payConfig = cacheRedis.getByJson(Constants.RedisPre.PAY + ConfigTypeEnum.PAY.getCode(), HashMap.class);
+        if (ObjectUtil.isEmpty(payConfig)) {
+            payConfig = feignSysConfig.getMapByConfigType(ConfigTypeEnum.PAY.getCode());
+            cacheRedis.set(Constants.RedisPre.PAY + ConfigTypeEnum.PAY.getCode(), payConfig);
+        }
+        orderReq.setAliPayConfig(BeanUtil.objToBean(payConfig, AliPayConfig.class));
+        orderReq.setWxPayConfig(BeanUtil.objToBean(payConfig, WxPayConfig.class));
     }
 
     /**
@@ -195,7 +211,7 @@ public class AuthOrderPayBiz extends BaseBiz {
     /**
      * 创建支付订单
      */
-    private OrderPay createOrderPay(BigDecimal rulingPrice, BigDecimal coursePrice, int payType, String remarkCus, int channelType) {
+    private OrderPay createOrderPay(BigDecimal rulingPrice, BigDecimal coursePrice, int payType, String remarkCus) {
         OrderPay orderpay = new OrderPay();
         orderpay.setOrderNo(NOUtil.getOrderNo());
         orderpay.setSerialNumber(NOUtil.getSerialNumber());

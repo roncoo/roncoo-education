@@ -2,6 +2,7 @@ package com.roncoo.education.user.service.auth;
 
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.user.service.auth.biz.AuthOrderPayBiz;
+import com.roncoo.education.user.service.auth.req.AuthOrderCancelReq;
 import com.roncoo.education.user.service.auth.req.AuthOrderCountinuePayReq;
 import com.roncoo.education.user.service.auth.req.AuthOrderPayReq;
 import com.roncoo.education.user.service.auth.resp.AuthOrderPayResp;
@@ -40,6 +41,12 @@ public class AuthOrderPayController {
     @RequestMapping(value = "/continue", method = RequestMethod.POST)
     public Result<AuthOrderPayResp> continuePay(@RequestBody AuthOrderCountinuePayReq req) {
         return biz.continuePay(req);
+    }
+
+    @ApiOperation(value = "取消支付", notes = "取消订单支付")
+    @RequestMapping(value = "/cancel", method = RequestMethod.PUT)
+    public Result<String> cancel(@RequestBody AuthOrderCancelReq req) {
+        return biz.cancel(req);
     }
 
 }
