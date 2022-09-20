@@ -28,7 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,7 +89,7 @@ public class ApiOrderPayBiz extends BaseBiz {
         OrderInfo info = new OrderInfo();
         info.setId(orderInfo.getId());
         info.setOrderStatus(OrderStatusEnum.SUCCESS.getCode());
-        info.setPayTime(new Date());
+        info.setPayTime(LocalDateTime.now());
         orderInfoDao.updateById(info);
     }
 
@@ -97,7 +97,7 @@ public class ApiOrderPayBiz extends BaseBiz {
         OrderPay pay = new OrderPay();
         pay.setId(orderPay.getId());
         pay.setOrderStatus(OrderStatusEnum.SUCCESS.getCode());
-        pay.setPayTime(new Date());
+        pay.setPayTime(LocalDateTime.now());
         dao.updateById(pay);
     }
 

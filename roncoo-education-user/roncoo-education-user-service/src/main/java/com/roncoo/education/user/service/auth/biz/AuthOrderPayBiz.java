@@ -35,7 +35,7 @@ import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -133,7 +133,7 @@ public class AuthOrderPayBiz extends BaseBiz {
         }
 
         // 每次支付都新增支付订单
-        OrderPay orderPay = createOrderPay(orderInfo.getRulingPrice(), orderInfo.getCoursePrice(), req.getPayType(),orderInfo.getOrderNo(), orderInfo.getRemarkCus());
+        OrderPay orderPay = createOrderPay(orderInfo.getRulingPrice(), orderInfo.getCoursePrice(), req.getPayType(), orderInfo.getOrderNo(), orderInfo.getRemarkCus());
 
         // 创建支付
         TradeOrderResp orderResp = createPay(req.getPayType(), req.getUserClientIp(), req.getQuitUrl(), courseViewVO, orderPay);
@@ -211,7 +211,7 @@ public class AuthOrderPayBiz extends BaseBiz {
     /**
      * 创建支付订单
      */
-    private OrderPay createOrderPay(BigDecimal rulingPrice, BigDecimal coursePrice, int payType,Long orderNo, String remarkCus) {
+    private OrderPay createOrderPay(BigDecimal rulingPrice, BigDecimal coursePrice, int payType, Long orderNo, String remarkCus) {
         OrderPay orderpay = new OrderPay();
         orderpay.setOrderNo(orderNo);
         orderpay.setSerialNumber(NOUtil.getSerialNumber());
@@ -220,7 +220,7 @@ public class AuthOrderPayBiz extends BaseBiz {
         orderpay.setPayType(payType);
         orderpay.setOrderStatus(OrderStatusEnum.WAIT.getCode());
         orderpay.setRemarkCus(remarkCus);
-        orderpay.setPayTime(new Date());
+        orderpay.setPayTime(LocalDateTime.now());
         dao.save(orderpay);
         return orderpay;
     }

@@ -23,16 +23,6 @@ public class AdminSysLogPageReq implements Serializable {
     @ApiModelProperty(value = "真实姓名", required = false)
     private String realName;
     /**
-     * 查询开始时间
-     */
-    @ApiModelProperty(value = "查询开始时间", required = false)
-    private String beginDate;
-    /**
-     * 查询结束时间
-     */
-    @ApiModelProperty(value = "查询结束时间", required = false)
-    private String endDate;
-    /**
      * 当前页
      */
     @ApiModelProperty(value = "当前页", required = true)
