@@ -2,14 +2,14 @@ package com.roncoo.education.user.dao.impl.mapper.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class OrderInfo implements Serializable {
     private Long id;
 
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
 
-    private Date gmtModified;
+    private LocalDateTime gmtModified;
 
     private Long orderNo;
 
@@ -17,7 +17,7 @@ public class OrderInfo implements Serializable {
 
     private String mobile;
 
-    private Date registerTime;
+    private LocalDateTime registerTime;
 
     private Long courseId;
 
@@ -33,7 +33,7 @@ public class OrderInfo implements Serializable {
 
     private String remark;
 
-    private Date payTime;
+    private LocalDateTime payTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -45,19 +45,19 @@ public class OrderInfo implements Serializable {
         this.id = id;
     }
 
-    public Date getGmtCreate() {
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModified() {
+    public LocalDateTime getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(LocalDateTime gmtModified) {
         this.gmtModified = gmtModified;
     }
 
@@ -85,11 +85,11 @@ public class OrderInfo implements Serializable {
         this.mobile = mobile == null ? null : mobile.trim();
     }
 
-    public Date getRegisterTime() {
+    public LocalDateTime getRegisterTime() {
         return registerTime;
     }
 
-    public void setRegisterTime(Date registerTime) {
+    public void setRegisterTime(LocalDateTime registerTime) {
         this.registerTime = registerTime;
     }
 
@@ -149,11 +149,11 @@ public class OrderInfo implements Serializable {
         this.remark = remark == null ? null : remark.trim();
     }
 
-    public Date getPayTime() {
+    public LocalDateTime getPayTime() {
         return payTime;
     }
 
-    public void setPayTime(Date payTime) {
+    public void setPayTime(LocalDateTime payTime) {
         this.payTime = payTime;
     }
 

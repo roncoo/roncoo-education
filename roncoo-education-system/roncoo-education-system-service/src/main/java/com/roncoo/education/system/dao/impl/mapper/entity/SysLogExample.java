@@ -1,7 +1,7 @@
 package com.roncoo.education.system.dao.impl.mapper.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class SysLogExample {
@@ -195,52 +195,52 @@ public class SysLogExample {
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateEqualTo(Date value) {
+        public Criteria andGmtCreateEqualTo(LocalDateTime value) {
             addCriterion("gmt_create =", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotEqualTo(Date value) {
+        public Criteria andGmtCreateNotEqualTo(LocalDateTime value) {
             addCriterion("gmt_create <>", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateGreaterThan(Date value) {
+        public Criteria andGmtCreateGreaterThan(LocalDateTime value) {
             addCriterion("gmt_create >", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateGreaterThanOrEqualTo(Date value) {
+        public Criteria andGmtCreateGreaterThanOrEqualTo(LocalDateTime value) {
             addCriterion("gmt_create >=", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateLessThan(Date value) {
+        public Criteria andGmtCreateLessThan(LocalDateTime value) {
             addCriterion("gmt_create <", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateLessThanOrEqualTo(Date value) {
+        public Criteria andGmtCreateLessThanOrEqualTo(LocalDateTime value) {
             addCriterion("gmt_create <=", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateIn(List<Date> values) {
+        public Criteria andGmtCreateIn(List<LocalDateTime> values) {
             addCriterion("gmt_create in", values, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotIn(List<Date> values) {
+        public Criteria andGmtCreateNotIn(List<LocalDateTime> values) {
             addCriterion("gmt_create not in", values, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateBetween(Date value1, Date value2) {
+        public Criteria andGmtCreateBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("gmt_create between", value1, value2, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotBetween(Date value1, Date value2) {
+        public Criteria andGmtCreateNotBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("gmt_create not between", value1, value2, "gmtCreate");
             return (Criteria) this;
         }

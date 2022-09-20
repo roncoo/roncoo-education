@@ -2,14 +2,14 @@ package com.roncoo.education.course.dao.impl.mapper.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Course implements Serializable {
     private Long id;
 
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
 
-    private Date gmtModified;
+    private LocalDateTime gmtModified;
 
     private Integer statusId;
 
@@ -49,19 +49,19 @@ public class Course implements Serializable {
         this.id = id;
     }
 
-    public Date getGmtCreate() {
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModified() {
+    public LocalDateTime getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(LocalDateTime gmtModified) {
         this.gmtModified = gmtModified;
     }
 

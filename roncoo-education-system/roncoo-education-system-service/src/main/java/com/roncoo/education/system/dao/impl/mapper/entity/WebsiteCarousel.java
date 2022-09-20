@@ -1,14 +1,14 @@
 package com.roncoo.education.system.dao.impl.mapper.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class WebsiteCarousel implements Serializable {
     private Long id;
 
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
 
-    private Date gmtModified;
+    private LocalDateTime gmtModified;
 
     private Integer statusId;
 
@@ -22,9 +22,9 @@ public class WebsiteCarousel implements Serializable {
 
     private String carouselTarget;
 
-    private Date beginTime;
+    private LocalDateTime beginTime;
 
-    private Date endTime;
+    private LocalDateTime endTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -36,19 +36,19 @@ public class WebsiteCarousel implements Serializable {
         this.id = id;
     }
 
-    public Date getGmtCreate() {
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModified() {
+    public LocalDateTime getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(LocalDateTime gmtModified) {
         this.gmtModified = gmtModified;
     }
 
@@ -100,19 +100,19 @@ public class WebsiteCarousel implements Serializable {
         this.carouselTarget = carouselTarget == null ? null : carouselTarget.trim();
     }
 
-    public Date getBeginTime() {
+    public LocalDateTime getBeginTime() {
         return beginTime;
     }
 
-    public void setBeginTime(Date beginTime) {
+    public void setBeginTime(LocalDateTime beginTime) {
         this.beginTime = beginTime;
     }
 
-    public Date getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 

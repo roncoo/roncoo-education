@@ -2,12 +2,12 @@ package com.roncoo.education.user.dao.impl.mapper.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class OrderPay implements Serializable {
     private Long id;
 
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
 
     private Long orderNo;
 
@@ -23,7 +23,7 @@ public class OrderPay implements Serializable {
 
     private String remarkCus;
 
-    private Date payTime;
+    private LocalDateTime payTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -35,11 +35,11 @@ public class OrderPay implements Serializable {
         this.id = id;
     }
 
-    public Date getGmtCreate() {
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
@@ -99,11 +99,11 @@ public class OrderPay implements Serializable {
         this.remarkCus = remarkCus == null ? null : remarkCus.trim();
     }
 
-    public Date getPayTime() {
+    public LocalDateTime getPayTime() {
         return payTime;
     }
 
-    public void setPayTime(Date payTime) {
+    public void setPayTime(LocalDateTime payTime) {
         this.payTime = payTime;
     }
 

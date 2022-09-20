@@ -1,7 +1,7 @@
 package com.roncoo.education.system.dao.impl.mapper.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class WebsiteCarouselExample {
@@ -195,52 +195,52 @@ public class WebsiteCarouselExample {
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateEqualTo(Date value) {
+        public Criteria andGmtCreateEqualTo(LocalDateTime value) {
             addCriterion("gmt_create =", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotEqualTo(Date value) {
+        public Criteria andGmtCreateNotEqualTo(LocalDateTime value) {
             addCriterion("gmt_create <>", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateGreaterThan(Date value) {
+        public Criteria andGmtCreateGreaterThan(LocalDateTime value) {
             addCriterion("gmt_create >", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateGreaterThanOrEqualTo(Date value) {
+        public Criteria andGmtCreateGreaterThanOrEqualTo(LocalDateTime value) {
             addCriterion("gmt_create >=", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateLessThan(Date value) {
+        public Criteria andGmtCreateLessThan(LocalDateTime value) {
             addCriterion("gmt_create <", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateLessThanOrEqualTo(Date value) {
+        public Criteria andGmtCreateLessThanOrEqualTo(LocalDateTime value) {
             addCriterion("gmt_create <=", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateIn(List<Date> values) {
+        public Criteria andGmtCreateIn(List<LocalDateTime> values) {
             addCriterion("gmt_create in", values, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotIn(List<Date> values) {
+        public Criteria andGmtCreateNotIn(List<LocalDateTime> values) {
             addCriterion("gmt_create not in", values, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateBetween(Date value1, Date value2) {
+        public Criteria andGmtCreateBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("gmt_create between", value1, value2, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotBetween(Date value1, Date value2) {
+        public Criteria andGmtCreateNotBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("gmt_create not between", value1, value2, "gmtCreate");
             return (Criteria) this;
         }
@@ -255,52 +255,52 @@ public class WebsiteCarouselExample {
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedEqualTo(Date value) {
+        public Criteria andGmtModifiedEqualTo(LocalDateTime value) {
             addCriterion("gmt_modified =", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedNotEqualTo(Date value) {
+        public Criteria andGmtModifiedNotEqualTo(LocalDateTime value) {
             addCriterion("gmt_modified <>", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedGreaterThan(Date value) {
+        public Criteria andGmtModifiedGreaterThan(LocalDateTime value) {
             addCriterion("gmt_modified >", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedGreaterThanOrEqualTo(Date value) {
+        public Criteria andGmtModifiedGreaterThanOrEqualTo(LocalDateTime value) {
             addCriterion("gmt_modified >=", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedLessThan(Date value) {
+        public Criteria andGmtModifiedLessThan(LocalDateTime value) {
             addCriterion("gmt_modified <", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedLessThanOrEqualTo(Date value) {
+        public Criteria andGmtModifiedLessThanOrEqualTo(LocalDateTime value) {
             addCriterion("gmt_modified <=", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedIn(List<Date> values) {
+        public Criteria andGmtModifiedIn(List<LocalDateTime> values) {
             addCriterion("gmt_modified in", values, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedNotIn(List<Date> values) {
+        public Criteria andGmtModifiedNotIn(List<LocalDateTime> values) {
             addCriterion("gmt_modified not in", values, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedBetween(Date value1, Date value2) {
+        public Criteria andGmtModifiedBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("gmt_modified between", value1, value2, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedNotBetween(Date value1, Date value2) {
+        public Criteria andGmtModifiedNotBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("gmt_modified not between", value1, value2, "gmtModified");
             return (Criteria) this;
         }
@@ -715,52 +715,52 @@ public class WebsiteCarouselExample {
             return (Criteria) this;
         }
 
-        public Criteria andBeginTimeEqualTo(Date value) {
+        public Criteria andBeginTimeEqualTo(LocalDateTime value) {
             addCriterion("begin_time =", value, "beginTime");
             return (Criteria) this;
         }
 
-        public Criteria andBeginTimeNotEqualTo(Date value) {
+        public Criteria andBeginTimeNotEqualTo(LocalDateTime value) {
             addCriterion("begin_time <>", value, "beginTime");
             return (Criteria) this;
         }
 
-        public Criteria andBeginTimeGreaterThan(Date value) {
+        public Criteria andBeginTimeGreaterThan(LocalDateTime value) {
             addCriterion("begin_time >", value, "beginTime");
             return (Criteria) this;
         }
 
-        public Criteria andBeginTimeGreaterThanOrEqualTo(Date value) {
+        public Criteria andBeginTimeGreaterThanOrEqualTo(LocalDateTime value) {
             addCriterion("begin_time >=", value, "beginTime");
             return (Criteria) this;
         }
 
-        public Criteria andBeginTimeLessThan(Date value) {
+        public Criteria andBeginTimeLessThan(LocalDateTime value) {
             addCriterion("begin_time <", value, "beginTime");
             return (Criteria) this;
         }
 
-        public Criteria andBeginTimeLessThanOrEqualTo(Date value) {
+        public Criteria andBeginTimeLessThanOrEqualTo(LocalDateTime value) {
             addCriterion("begin_time <=", value, "beginTime");
             return (Criteria) this;
         }
 
-        public Criteria andBeginTimeIn(List<Date> values) {
+        public Criteria andBeginTimeIn(List<LocalDateTime> values) {
             addCriterion("begin_time in", values, "beginTime");
             return (Criteria) this;
         }
 
-        public Criteria andBeginTimeNotIn(List<Date> values) {
+        public Criteria andBeginTimeNotIn(List<LocalDateTime> values) {
             addCriterion("begin_time not in", values, "beginTime");
             return (Criteria) this;
         }
 
-        public Criteria andBeginTimeBetween(Date value1, Date value2) {
+        public Criteria andBeginTimeBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("begin_time between", value1, value2, "beginTime");
             return (Criteria) this;
         }
 
-        public Criteria andBeginTimeNotBetween(Date value1, Date value2) {
+        public Criteria andBeginTimeNotBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("begin_time not between", value1, value2, "beginTime");
             return (Criteria) this;
         }
@@ -775,52 +775,52 @@ public class WebsiteCarouselExample {
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeEqualTo(Date value) {
+        public Criteria andEndTimeEqualTo(LocalDateTime value) {
             addCriterion("end_time =", value, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeNotEqualTo(Date value) {
+        public Criteria andEndTimeNotEqualTo(LocalDateTime value) {
             addCriterion("end_time <>", value, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeGreaterThan(Date value) {
+        public Criteria andEndTimeGreaterThan(LocalDateTime value) {
             addCriterion("end_time >", value, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeGreaterThanOrEqualTo(Date value) {
+        public Criteria andEndTimeGreaterThanOrEqualTo(LocalDateTime value) {
             addCriterion("end_time >=", value, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeLessThan(Date value) {
+        public Criteria andEndTimeLessThan(LocalDateTime value) {
             addCriterion("end_time <", value, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeLessThanOrEqualTo(Date value) {
+        public Criteria andEndTimeLessThanOrEqualTo(LocalDateTime value) {
             addCriterion("end_time <=", value, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeIn(List<Date> values) {
+        public Criteria andEndTimeIn(List<LocalDateTime> values) {
             addCriterion("end_time in", values, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeNotIn(List<Date> values) {
+        public Criteria andEndTimeNotIn(List<LocalDateTime> values) {
             addCriterion("end_time not in", values, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeBetween(Date value1, Date value2) {
+        public Criteria andEndTimeBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("end_time between", value1, value2, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeNotBetween(Date value1, Date value2) {
+        public Criteria andEndTimeNotBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("end_time not between", value1, value2, "endTime");
             return (Criteria) this;
         }

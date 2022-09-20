@@ -1,12 +1,12 @@
 package com.roncoo.education.user.dao.impl.mapper.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class LogLogin implements Serializable {
     private Long id;
 
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
 
     private Long userId;
 
@@ -34,11 +34,11 @@ public class LogLogin implements Serializable {
         this.id = id;
     }
 
-    public Date getGmtCreate() {
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 

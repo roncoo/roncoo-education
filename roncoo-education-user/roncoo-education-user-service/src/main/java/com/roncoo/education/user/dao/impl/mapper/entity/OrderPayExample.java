@@ -1,8 +1,8 @@
 package com.roncoo.education.user.dao.impl.mapper.entity;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class OrderPayExample {
@@ -196,52 +196,52 @@ public class OrderPayExample {
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateEqualTo(Date value) {
+        public Criteria andGmtCreateEqualTo(LocalDateTime value) {
             addCriterion("gmt_create =", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotEqualTo(Date value) {
+        public Criteria andGmtCreateNotEqualTo(LocalDateTime value) {
             addCriterion("gmt_create <>", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateGreaterThan(Date value) {
+        public Criteria andGmtCreateGreaterThan(LocalDateTime value) {
             addCriterion("gmt_create >", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateGreaterThanOrEqualTo(Date value) {
+        public Criteria andGmtCreateGreaterThanOrEqualTo(LocalDateTime value) {
             addCriterion("gmt_create >=", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateLessThan(Date value) {
+        public Criteria andGmtCreateLessThan(LocalDateTime value) {
             addCriterion("gmt_create <", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateLessThanOrEqualTo(Date value) {
+        public Criteria andGmtCreateLessThanOrEqualTo(LocalDateTime value) {
             addCriterion("gmt_create <=", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateIn(List<Date> values) {
+        public Criteria andGmtCreateIn(List<LocalDateTime> values) {
             addCriterion("gmt_create in", values, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotIn(List<Date> values) {
+        public Criteria andGmtCreateNotIn(List<LocalDateTime> values) {
             addCriterion("gmt_create not in", values, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateBetween(Date value1, Date value2) {
+        public Criteria andGmtCreateBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("gmt_create between", value1, value2, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotBetween(Date value1, Date value2) {
+        public Criteria andGmtCreateNotBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("gmt_create not between", value1, value2, "gmtCreate");
             return (Criteria) this;
         }
@@ -686,52 +686,52 @@ public class OrderPayExample {
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeEqualTo(Date value) {
+        public Criteria andPayTimeEqualTo(LocalDateTime value) {
             addCriterion("pay_time =", value, "payTime");
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeNotEqualTo(Date value) {
+        public Criteria andPayTimeNotEqualTo(LocalDateTime value) {
             addCriterion("pay_time <>", value, "payTime");
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeGreaterThan(Date value) {
+        public Criteria andPayTimeGreaterThan(LocalDateTime value) {
             addCriterion("pay_time >", value, "payTime");
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeGreaterThanOrEqualTo(Date value) {
+        public Criteria andPayTimeGreaterThanOrEqualTo(LocalDateTime value) {
             addCriterion("pay_time >=", value, "payTime");
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeLessThan(Date value) {
+        public Criteria andPayTimeLessThan(LocalDateTime value) {
             addCriterion("pay_time <", value, "payTime");
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeLessThanOrEqualTo(Date value) {
+        public Criteria andPayTimeLessThanOrEqualTo(LocalDateTime value) {
             addCriterion("pay_time <=", value, "payTime");
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeIn(List<Date> values) {
+        public Criteria andPayTimeIn(List<LocalDateTime> values) {
             addCriterion("pay_time in", values, "payTime");
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeNotIn(List<Date> values) {
+        public Criteria andPayTimeNotIn(List<LocalDateTime> values) {
             addCriterion("pay_time not in", values, "payTime");
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeBetween(Date value1, Date value2) {
+        public Criteria andPayTimeBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("pay_time between", value1, value2, "payTime");
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeNotBetween(Date value1, Date value2) {
+        public Criteria andPayTimeNotBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("pay_time not between", value1, value2, "payTime");
             return (Criteria) this;
         }

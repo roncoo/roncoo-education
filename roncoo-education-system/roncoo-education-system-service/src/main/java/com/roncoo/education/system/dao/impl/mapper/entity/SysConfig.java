@@ -1,7 +1,7 @@
 package com.roncoo.education.system.dao.impl.mapper.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class SysConfig implements Serializable {
     private Long id;
@@ -20,9 +20,9 @@ public class SysConfig implements Serializable {
 
     private Integer sort;
 
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
 
-    private Date gmtModified;
+    private LocalDateTime gmtModified;
 
     private String configValue;
 
@@ -92,19 +92,19 @@ public class SysConfig implements Serializable {
         this.sort = sort;
     }
 
-    public Date getGmtCreate() {
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModified() {
+    public LocalDateTime getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(LocalDateTime gmtModified) {
         this.gmtModified = gmtModified;
     }
 
