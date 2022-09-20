@@ -40,6 +40,7 @@ public class AdminLecturerBiz extends BaseBiz {
     public Result<Page<AdminLecturerPageResp>> page(AdminLecturerPageReq req) {
         LecturerExample example = new LecturerExample();
         Criteria c = example.createCriteria();
+        example.setOrderByClause("sort asc, id desc");
         Page<Lecturer> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminLecturerPageResp> respPage = PageUtil.transform(page, AdminLecturerPageResp.class);
         return Result.success(respPage);

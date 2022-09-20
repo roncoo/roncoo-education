@@ -1,19 +1,19 @@
 package com.roncoo.education.user.service.admin.biz;
 
-import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.user.dao.UsersDao;
+import com.roncoo.education.user.dao.impl.mapper.entity.Users;
+import com.roncoo.education.user.dao.impl.mapper.entity.UsersExample;
+import com.roncoo.education.user.dao.impl.mapper.entity.UsersExample.Criteria;
 import com.roncoo.education.user.service.admin.req.AdminUsersEditReq;
 import com.roncoo.education.user.service.admin.req.AdminUsersPageReq;
 import com.roncoo.education.user.service.admin.req.AdminUsersSaveReq;
 import com.roncoo.education.user.service.admin.resp.AdminUsersPageResp;
 import com.roncoo.education.user.service.admin.resp.AdminUsersViewResp;
-import com.roncoo.education.user.dao.UsersDao;
-import com.roncoo.education.user.dao.impl.mapper.entity.Users;
-import com.roncoo.education.user.dao.impl.mapper.entity.UsersExample;
-import com.roncoo.education.user.dao.impl.mapper.entity.UsersExample.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -40,6 +40,7 @@ public class AdminUsersBiz extends BaseBiz {
     public Result<Page<AdminUsersPageResp>> page(AdminUsersPageReq req) {
         UsersExample example = new UsersExample();
         Criteria c = example.createCriteria();
+        example.setOrderByClause("sort asc, id desc");
         Page<Users> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminUsersPageResp> respPage = PageUtil.transform(page, AdminUsersPageResp.class);
         return Result.success(respPage);

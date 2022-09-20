@@ -40,6 +40,7 @@ public class AdminMsgBiz extends BaseBiz {
     public Result<Page<AdminMsgPageResp>> page(AdminMsgPageReq req) {
         MsgExample example = new MsgExample();
         Criteria c = example.createCriteria();
+        example.setOrderByClause("sort asc, id desc");
         Page<Msg> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminMsgPageResp> respPage = PageUtil.transform(page, AdminMsgPageResp.class);
         return Result.success(respPage);

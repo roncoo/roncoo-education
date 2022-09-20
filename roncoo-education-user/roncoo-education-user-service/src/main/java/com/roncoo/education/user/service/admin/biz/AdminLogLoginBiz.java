@@ -40,6 +40,7 @@ public class AdminLogLoginBiz extends BaseBiz {
     public Result<Page<AdminLogLoginPageResp>> page(AdminLogLoginPageReq req) {
         LogLoginExample example = new LogLoginExample();
         Criteria c = example.createCriteria();
+        example.setOrderByClause("id desc");
         Page<LogLogin> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminLogLoginPageResp> respPage = PageUtil.transform(page, AdminLogLoginPageResp.class);
         return Result.success(respPage);
