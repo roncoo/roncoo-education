@@ -59,7 +59,7 @@ public interface UserStudyDao {
     /**
      * 课程用户学习日志--条件列出
      *
-     * @param example     查询条件
+     * @param example 查询条件
      * @return 课程用户学习日志列表
      */
     List<UserStudy> listByExample(UserStudyExample example);
@@ -67,10 +67,12 @@ public interface UserStudyDao {
     /**
      * 课程用户学习日志--条件统计
      *
-     * @param example     统计条件
+     * @param example 统计条件
      * @return 课程用户学习日志数量
      */
     int countByExample(UserStudyExample example);
 
     UserStudy getByPeriodIdAndUserId(Long periodId, Long userId);
+
+    List<UserStudy> listByUserIdAndCourseIds(Long userId, List<Long> courseIdList);
 }

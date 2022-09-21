@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
+import com.roncoo.education.common.jdbc.AbstractBaseJdbc;
 import com.roncoo.education.course.dao.UserStudyDao;
 import com.roncoo.education.course.dao.impl.mapper.UserStudyMapper;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
@@ -22,7 +23,7 @@ import java.util.List;
  */
 @Repository
 @RequiredArgsConstructor
-public class UserStudyDaoImpl implements UserStudyDao {
+public class UserStudyDaoImpl extends AbstractBaseJdbc implements UserStudyDao {
 
     @NotNull
     private final UserStudyMapper mapper;
@@ -69,7 +70,7 @@ public class UserStudyDaoImpl implements UserStudyDao {
     }
 
     @Override
-    public int countByExample(UserStudyExample example){
+    public int countByExample(UserStudyExample example) {
         return this.mapper.countByExample(example);
     }
 
@@ -78,9 +79,15 @@ public class UserStudyDaoImpl implements UserStudyDao {
         UserStudyExample example = new UserStudyExample();
         example.createCriteria().andPeriodIdEqualTo(periodId).andUserIdEqualTo(userId);
         List<UserStudy> list = this.mapper.selectByExample(example);
-        if(CollUtil.isNotEmpty(list)){
+        if (CollUtil.isNotEmpty(list)) {
             return list.get(0);
         }
         return null;
+    }
+
+    @Override
+    public List<UserStudy> listByUserIdAndCourseIds(Long userId, List<Long> courseIdList) {
+        String sql = "select course_id, period_id, max(gmt_modified) as gmt_modified from user_study where user_id=? and course_id in (?) GROUP BY course_id";
+        return this.queryForObjectList(sql, UserStudy.class, userId, courseIdList);
     }
 }

@@ -1,17 +1,18 @@
 package com.roncoo.education.course.service.auth.biz;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.config.ThreadContext;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.course.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.UserCourseDao;
-import com.roncoo.education.course.dao.impl.mapper.entity.Course;
-import com.roncoo.education.course.dao.impl.mapper.entity.UserCourse;
-import com.roncoo.education.course.dao.impl.mapper.entity.UserCourseExample;
+import com.roncoo.education.course.dao.UserStudyDao;
+import com.roncoo.education.course.dao.impl.mapper.entity.*;
 import com.roncoo.education.course.service.auth.req.AuthUserCourseReq;
 import com.roncoo.education.course.service.auth.resp.AuthCourseResp;
 import com.roncoo.education.course.service.auth.resp.AuthUserCourseResp;
@@ -19,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -35,7 +37,11 @@ public class AuthUserCourseBiz extends BaseBiz {
     @NotNull
     private final UserCourseDao dao;
     @NotNull
+    private final UserStudyDao userStudyDao;
+    @NotNull
     private final CourseDao courseDao;
+    @NotNull
+    private final CourseChapterPeriodDao courseChapterPeriodDao;
 
     public Result<Page<AuthUserCourseResp>> listForPage(AuthUserCourseReq req) {
         UserCourseExample example = new UserCourseExample();
@@ -45,9 +51,30 @@ public class AuthUserCourseBiz extends BaseBiz {
         Page<AuthUserCourseResp> respPage = PageUtil.transform(userCoursePage, AuthUserCourseResp.class);
         if (CollUtil.isNotEmpty(respPage.getList())) {
             List<Long> courseIdList = respPage.getList().stream().map(AuthUserCourseResp::getCourseId).collect(Collectors.toList());
+            // 用户学习记录
+            Map<Long, UserStudy> userStudyMap = new HashMap<>();
+            List<UserStudy> userStudyList = userStudyDao.listByUserIdAndCourseIds(ThreadContext.userId(), courseIdList);
+            if (CollUtil.isNotEmpty(userStudyList)) {
+                userStudyMap = userStudyList.stream().collect(Collectors.toMap(item -> item.getCourseId(), item -> item));
+            }
+            Map<Long, CourseChapterPeriod> courseChapterPeriodMap = new HashMap<>();
+
+            // 课时信息
+            List<CourseChapterPeriod> courseChapterPeriodList = courseChapterPeriodDao.listByCourseIds(courseIdList);
+            if (CollUtil.isNotEmpty(courseChapterPeriodList)) {
+                courseChapterPeriodMap = courseChapterPeriodList.stream().collect(Collectors.toMap(item -> item.getId(), item -> item));
+            }
+
+            // 课程信息
             List<Course> courseList = courseDao.listByIds(courseIdList);
             Map<Long, Course> courseMap = courseList.stream().collect(Collectors.toMap(item -> item.getId(), item -> item));
+
             for (AuthUserCourseResp resp : respPage.getList()) {
+                UserStudy userStudy = userStudyMap.get(resp.getCourseId());
+                if(ObjectUtil.isNotEmpty(userStudy)){
+                    resp.setPeriodProgress(userStudy.getProgress());
+                    resp.setPeriodName(courseChapterPeriodMap.get(userStudy.getPeriodId()).getPeriodName());
+                }
                 resp.setCourseResp(BeanUtil.copyProperties(courseMap.get(resp.getCourseId()), AuthCourseResp.class));
             }
         }

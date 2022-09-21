@@ -73,7 +73,7 @@ public class AuthCourseBiz extends BaseBiz {
             userStudy = new UserStudy();
             userStudy.setCourseId(period.getCourseId());
             userStudy.setChapterId(period.getChapterId());
-            userStudy.setCourseId(period.getCourseId());
+            userStudy.setPeriodId(period.getId());
             userStudy.setUserId(ThreadContext.userId());
             userStudy.setProgress(BigDecimal.ZERO);
             userStudyDao.save(userStudy);
