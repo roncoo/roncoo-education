@@ -10,6 +10,7 @@ import com.roncoo.education.course.dao.impl.mapper.UserStudyMapper;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudyExample;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.NotNull;
@@ -88,6 +89,6 @@ public class UserStudyDaoImpl extends AbstractBaseJdbc implements UserStudyDao {
     @Override
     public List<UserStudy> listByUserIdAndCourseIds(Long userId, List<Long> courseIdList) {
         String sql = "select course_id, period_id, max(gmt_modified) as gmt_modified from user_study where user_id=? and course_id in (?) GROUP BY course_id";
-        return this.queryForObjectList(sql, UserStudy.class, userId, courseIdList);
+        return this.queryForObjectList(sql, UserStudy.class, userId, StringUtils.join(courseIdList, ","));
     }
 }
