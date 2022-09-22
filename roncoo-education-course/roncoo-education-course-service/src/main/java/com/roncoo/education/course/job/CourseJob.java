@@ -1,6 +1,8 @@
 package com.roncoo.education.course.job;
 
 import cn.hutool.core.collection.CollUtil;
+import com.roncoo.education.common.core.enums.PutawayEnum;
+import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.es.EsCourse;
 import com.roncoo.education.course.dao.CourseDao;
@@ -36,6 +38,7 @@ public class CourseJob {
     @Scheduled(fixedRate = 60000)
     public void course() {
         CourseExample example = new CourseExample();
+        example.createCriteria().andStatusIdEqualTo(StatusIdEnum.YES.getCode()).andIsPutawayEqualTo(PutawayEnum.UP.getCode());
         List<Course> courseList = courseDao.listByExample(example);
         if (CollUtil.isNotEmpty(courseList)) {
             List<IndexQuery> queries = new ArrayList<>();

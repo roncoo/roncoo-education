@@ -4,7 +4,6 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.FreeEnum;
-import com.roncoo.education.common.core.enums.PutawayEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
@@ -58,9 +57,6 @@ public class CourseBiz extends BaseBiz {
         }
         if (!course.getStatusId().equals(StatusIdEnum.YES.getCode())) {
             return Result.error("该课程已被禁用");
-        }
-        if (course.getIsPutaway().equals(PutawayEnum.DOWN.getCode())) {
-            return Result.error("该课程已下架");
         }
         CourseResp courseResp = BeanUtil.copyProperties(course, CourseResp.class);
         if (ObjectUtil.isNotEmpty(userId)) {

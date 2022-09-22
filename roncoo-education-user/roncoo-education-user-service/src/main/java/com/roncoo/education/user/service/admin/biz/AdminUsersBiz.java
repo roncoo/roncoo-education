@@ -1,5 +1,7 @@
 package com.roncoo.education.user.service.admin.biz;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.DesensitizedUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
@@ -43,6 +45,12 @@ public class AdminUsersBiz extends BaseBiz {
         example.setOrderByClause("id desc");
         Page<Users> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminUsersPageResp> respPage = PageUtil.transform(page, AdminUsersPageResp.class);
+        if (CollUtil.isNotEmpty(respPage.getList())) {
+            // 脱敏处理
+            for (AdminUsersPageResp resp : respPage.getList()) {
+                resp.setMobile(DesensitizedUtil.mobilePhone(resp.getMobile()));
+            }
+        }
         return Result.success(respPage);
     }
 

@@ -1,6 +1,7 @@
 package com.roncoo.education.user.service.admin.biz;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.DesensitizedUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
@@ -65,6 +66,8 @@ public class AdminOrderInfoBiz extends BaseBiz {
             Map<Long, CourseViewVO> courseViewVOMap = feignCourse.listByIds(courseIdList).stream().collect(Collectors.toMap(courseViewVO -> courseViewVO.getId(), courseViewVO -> courseViewVO));
             for (AdminOrderInfoPageResp resp : respPage.getList()) {
                 resp.setCourseViewVO(courseViewVOMap.get(resp.getCourseId()));
+                // 脱敏处理
+                resp.setMobile(DesensitizedUtil.mobilePhone(resp.getMobile()));
             }
         }
         return Result.success(respPage);
