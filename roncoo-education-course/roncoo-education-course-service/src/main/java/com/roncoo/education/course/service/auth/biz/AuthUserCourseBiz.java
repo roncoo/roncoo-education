@@ -57,12 +57,12 @@ public class AuthUserCourseBiz extends BaseBiz {
             if (CollUtil.isNotEmpty(userStudyList)) {
                 userStudyMap = userStudyList.stream().collect(Collectors.toMap(item -> item.getCourseId(), item -> item));
             }
-            Map<Long, CourseChapterPeriod> courseChapterPeriodMap = new HashMap<>();
 
             // 课时信息
+            Map<Long, String> periodNameMap = new HashMap<>();
             List<CourseChapterPeriod> courseChapterPeriodList = courseChapterPeriodDao.listByCourseIds(courseIdList);
             if (CollUtil.isNotEmpty(courseChapterPeriodList)) {
-                courseChapterPeriodMap = courseChapterPeriodList.stream().collect(Collectors.toMap(item -> item.getId(), item -> item));
+                periodNameMap = courseChapterPeriodList.stream().collect(Collectors.toMap(item -> item.getId(), item -> item.getPeriodName()));
             }
 
             // 课程信息
@@ -73,7 +73,7 @@ public class AuthUserCourseBiz extends BaseBiz {
                 UserStudy userStudy = userStudyMap.get(resp.getCourseId());
                 if(ObjectUtil.isNotEmpty(userStudy)){
                     resp.setPeriodProgress(userStudy.getProgress());
-                    resp.setPeriodName(courseChapterPeriodMap.get(userStudy.getPeriodId()).getPeriodName());
+                    resp.setPeriodName(periodNameMap.get(userStudy.getPeriodId()));
                 }
                 resp.setCourseResp(BeanUtil.copyProperties(courseMap.get(resp.getCourseId()), AuthCourseResp.class));
             }
