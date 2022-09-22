@@ -50,7 +50,7 @@ public class LecturerDaoImpl implements LecturerDao {
         int totalPage = PageUtil.countTotalPage(count, pageSize);
         example.setLimitStart(PageUtil.countOffset(pageCurrent, pageSize));
         example.setPageSize(pageSize);
-        return new Page<Lecturer>(count, totalPage, pageCurrent, pageSize, this.lecturerMapper.selectByExample(example));
+        return new Page<Lecturer>(count, totalPage, pageCurrent, pageSize, this.lecturerMapper.selectByExampleWithBLOBs(example));
     }
 
     @Override
