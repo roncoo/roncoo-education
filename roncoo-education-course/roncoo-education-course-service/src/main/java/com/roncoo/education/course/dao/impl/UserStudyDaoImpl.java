@@ -10,11 +10,12 @@ import com.roncoo.education.course.dao.impl.mapper.UserStudyMapper;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudyExample;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 课程用户学习日志 服务实现类
@@ -88,7 +89,10 @@ public class UserStudyDaoImpl extends AbstractBaseJdbc implements UserStudyDao {
 
     @Override
     public List<UserStudy> listByUserIdAndCourseIds(Long userId, List<Long> courseIdList) {
-        String sql = "select course_id, period_id, max(gmt_modified) as gmt_modified from user_study where user_id=? and course_id in (?) GROUP BY course_id";
-        return this.queryForObjectList(sql, UserStudy.class, userId, StringUtils.join(courseIdList, ","));
+        String sql = "select course_id, period_id, max(gmt_modified) as gmt_modified from user_study where user_id=:USERID and course_id in (:COURSEIDS) GROUP BY course_id";
+        Map<String, Object> map = new HashMap();
+        map.put("USERID", userId);
+        map.put("COURSEIDS", courseIdList);
+        return namedParameterJdbcTemplate.queryForList(sql,map, UserStudy.class );
     }
 }

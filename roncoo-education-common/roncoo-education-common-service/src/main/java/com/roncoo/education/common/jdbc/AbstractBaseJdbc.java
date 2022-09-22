@@ -8,6 +8,7 @@ import com.roncoo.education.common.core.base.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.util.Assert;
 
 import java.io.Serializable;
@@ -24,6 +25,9 @@ public abstract class AbstractBaseJdbc {
 
     @Autowired
     protected JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    protected NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     /**
      * 获取当前事务最后一次更新的主键值
