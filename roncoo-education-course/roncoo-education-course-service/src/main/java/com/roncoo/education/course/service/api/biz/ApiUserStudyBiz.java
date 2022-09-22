@@ -39,7 +39,6 @@ public class ApiUserStudyBiz extends BaseBiz {
         if (ObjectUtil.isEmpty(resource)) {
             Result.error("resourceId不正确");
         }
-        log.warn("value={}, {}, {}", new BigDecimal(resource.getVideoLength()), req.getCurrentDuration(), new BigDecimal(resource.getVideoLength()).subtract(req.getCurrentDuration()).intValue());
         if (new BigDecimal(resource.getVideoLength()).subtract(req.getCurrentDuration()).intValue() < 1) {
             // 若视频时长-观看时长<1s,则认为观看完成
             UserStudy userStudy = getUserStudy(req);
