@@ -10,6 +10,7 @@ import com.roncoo.education.course.dao.impl.mapper.UserStudyMapper;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudyExample;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.NotNull;
@@ -93,6 +94,6 @@ public class UserStudyDaoImpl extends AbstractBaseJdbc implements UserStudyDao {
         Map<String, Object> map = new HashMap();
         map.put("USERID", userId);
         map.put("COURSEIDS", courseIdList);
-        return namedParameterJdbcTemplate.queryForList(sql,map, UserStudy.class );
+        return namedParameterJdbcTemplate.query(sql,map, new BeanPropertyRowMapper<>(UserStudy.class) );
     }
 }
