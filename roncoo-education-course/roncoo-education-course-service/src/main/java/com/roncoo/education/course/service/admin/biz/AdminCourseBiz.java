@@ -1,6 +1,7 @@
 package com.roncoo.education.course.service.admin.biz;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
@@ -127,10 +128,10 @@ public class AdminCourseBiz extends BaseBiz {
      * @return 修改结果
      */
     public Result<String> edit(AdminCourseEditReq req) {
-        if (req.getCoursePrice().compareTo(BigDecimal.ZERO) > 0) {
+        if (ObjectUtil.isNotNull(req.getCoursePrice()) && req.getCoursePrice().compareTo(BigDecimal.ZERO) > 0) {
             req.setIsFree(FreeEnum.CHARGE.getCode());
         }
-        if(req.getCoursePrice().compareTo(req.getRulingPrice()) > 0){
+        if(ObjectUtil.isNotNull(req.getCoursePrice()) &&req.getCoursePrice().compareTo(req.getRulingPrice()) > 0){
             req.setRulingPrice(req.getCoursePrice());
         }
         Course record = BeanUtil.copyProperties(req, Course.class);
