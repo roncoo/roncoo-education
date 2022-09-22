@@ -49,6 +49,13 @@ public class AuthCourseBiz extends BaseBiz {
     private final IFeignSysConfig feignSysConfig;
 
     public Result<AuthCourseSignResp> sign(AuthCourseSignReq req) {
+        if (ObjectUtil.isNotEmpty(req.getCourseId())) {
+            // 若课程ID存在，则获取该课程的最新学习课时
+            UserStudy userStudy = userStudyDao.getByCourseIdForLast(ThreadContext.userId(), req.getCourseId());
+            if (ObjectUtil.isNull(userStudy)) {
+                req.setPeriodId(userStudy.getPeriodId());
+            }
+        }
         CourseChapterPeriod period = periodDao.getById(req.getPeriodId());
         if (ObjectUtil.isEmpty(period) || period.getStatusId().equals(StatusIdEnum.NO.getCode())) {
             return Result.error("该课时不存在或不可用");

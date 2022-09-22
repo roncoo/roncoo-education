@@ -82,4 +82,6 @@ public interface UserStudyDao {
      * @return
      */
     List<UserStudy> listByUserIdAndCourseIds(Long userId, List<Long> courseIdList);
+
+    UserStudy getByCourseIdForLast(Long userId, Long courseId);
 }
