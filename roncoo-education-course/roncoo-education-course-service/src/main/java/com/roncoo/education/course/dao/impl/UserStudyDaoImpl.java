@@ -90,10 +90,10 @@ public class UserStudyDaoImpl extends AbstractBaseJdbc implements UserStudyDao {
 
     @Override
     public List<UserStudy> listByUserIdAndCourseIds(Long userId, List<Long> courseIdList) {
-        String sql = "select course_id, period_id, max(gmt_modified) as gmt_modified from user_study where user_id=:USERID and course_id in (:COURSEIDS) GROUP BY course_id";
+        String sql = "select max(gmt_modified) as gmt_modified, course_id, chapter_id, period_id, progress from user_study where user_id=:USERID and course_id in (:COURSEIDS) GROUP BY course_id";
         Map<String, Object> map = new HashMap();
         map.put("USERID", userId);
         map.put("COURSEIDS", courseIdList);
-        return namedParameterJdbcTemplate.query(sql,map, new BeanPropertyRowMapper<>(UserStudy.class) );
+        return namedParameterJdbcTemplate.query(sql, map, new BeanPropertyRowMapper<>(UserStudy.class));
     }
 }
