@@ -40,7 +40,7 @@ public class AdminUsersBiz extends BaseBiz {
     public Result<Page<AdminUsersPageResp>> page(AdminUsersPageReq req) {
         UsersExample example = new UsersExample();
         Criteria c = example.createCriteria();
-        example.setOrderByClause("sort asc, id desc");
+        example.setOrderByClause("id desc");
         Page<Users> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminUsersPageResp> respPage = PageUtil.transform(page, AdminUsersPageResp.class);
         return Result.success(respPage);
