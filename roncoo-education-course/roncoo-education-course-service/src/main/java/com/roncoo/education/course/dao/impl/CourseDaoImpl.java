@@ -60,7 +60,7 @@ public class CourseDaoImpl extends AbstractBaseJdbc implements CourseDao {
         int totalPage = PageUtil.countTotalPage(count, pageSize);
         example.setLimitStart(PageUtil.countOffset(pageCurrent, pageSize));
         example.setPageSize(pageSize);
-        return new Page<>(count, totalPage, pageCurrent, pageSize, this.mapper.selectByExample(example));
+        return new Page<>(count, totalPage, pageCurrent, pageSize, this.mapper.selectByExampleWithBLOBs(example));
     }
 
     @Override
