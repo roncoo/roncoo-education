@@ -50,11 +50,12 @@ public class ApiUserStudyBiz extends BaseBiz {
                 // 更新进度
                 userStudy.setProgress(BigDecimal.valueOf(100));
                 dao.updateById(userStudy);
+
                 // 清空缓存
                 cacheRedis.delete(Constants.RedisPre.USER_STUDY + req.getStudyId());
                 cacheRedis.delete(Constants.RedisPre.PROGRESS + req.getStudyId());
-                return Result.success("OK");
             }
+            return Result.success("OK");
         }
         // 没观看完成，进度存入redis，如没看完，定时任务处理
         req.setTotalDuration(new BigDecimal(resource.getVideoLength()));
