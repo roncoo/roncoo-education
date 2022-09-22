@@ -52,7 +52,7 @@ public class AuthCourseBiz extends BaseBiz {
         if (ObjectUtil.isNotEmpty(req.getCourseId())) {
             // 若课程ID存在，则获取该课程的最新学习课时
             UserStudy userStudy = userStudyDao.getByCourseIdForLast(ThreadContext.userId(), req.getCourseId());
-            if (ObjectUtil.isNull(userStudy)) {
+            if (ObjectUtil.isNotNull(userStudy)) {
                 req.setPeriodId(userStudy.getPeriodId());
             }
         }
