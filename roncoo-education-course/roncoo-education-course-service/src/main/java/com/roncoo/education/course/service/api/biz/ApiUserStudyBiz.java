@@ -39,6 +39,7 @@ public class ApiUserStudyBiz extends BaseBiz {
         if (ObjectUtil.isEmpty(resource)) {
             Result.error("resourceId不正确");
         }
+        log.warn("value={}, {}, {}", new BigDecimal(resource.getVideoLength()), req.getCurrentDuration(), new BigDecimal(resource.getVideoLength()).subtract(req.getCurrentDuration()).intValue());
         if (new BigDecimal(resource.getVideoLength()).subtract(req.getCurrentDuration()).intValue() < 1) {
             // 若视频时长-观看时长<1s,则认为观看完成
             UserStudy userStudy = getUserStudy(req);
@@ -52,7 +53,7 @@ public class ApiUserStudyBiz extends BaseBiz {
                 // 清空缓存
                 cacheRedis.delete(Constants.RedisPre.USER_STUDY + req.getStudyId());
                 cacheRedis.delete(Constants.RedisPre.PROGRESS + req.getStudyId());
-                return Result.success("学习完成");
+                return Result.success("OK");
             }
         }
         // 没观看完成，进度存入redis，如没看完，定时任务处理
