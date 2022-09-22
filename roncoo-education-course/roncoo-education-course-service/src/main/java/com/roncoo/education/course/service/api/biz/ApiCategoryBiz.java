@@ -40,7 +40,7 @@ public class ApiCategoryBiz {
         // 根据分类类型、层级查询可用状态的课程分类集合
         CategoryExample example = new CategoryExample();
         example.createCriteria().andStatusIdEqualTo(StatusIdEnum.YES.getCode());
-        example.setOrderByClause(" sort asc, id asc ");
+        example.setOrderByClause(" sort asc, id desc ");
         List<Category> categories = dao.listByExample(example);
         return Result.success(filter(categories, Long.valueOf(0)));
     }
