@@ -74,5 +74,12 @@ public interface UserStudyDao {
 
     UserStudy getByPeriodIdAndUserId(Long periodId, Long userId);
 
+    /**
+     * 获取当前课程的最新学习课时记录
+     *
+     * @param userId
+     * @param courseIdList
+     * @return
+     */
     List<UserStudy> listByUserIdAndCourseIds(Long userId, List<Long> courseIdList);
 }

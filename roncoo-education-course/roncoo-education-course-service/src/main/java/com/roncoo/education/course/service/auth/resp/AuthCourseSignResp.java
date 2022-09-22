@@ -26,6 +26,9 @@ public class AuthCourseSignResp implements Serializable {
     @ApiModelProperty(value = "学习ID")
     private Long studyId;
 
+    @ApiModelProperty(value = "资源ID")
+    private Long resourceId;
+
     @ApiModelProperty(value = "最大学习进度")
     private BigDecimal progress;
 

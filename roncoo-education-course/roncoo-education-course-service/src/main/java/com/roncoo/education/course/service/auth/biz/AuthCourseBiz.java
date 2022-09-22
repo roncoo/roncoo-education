@@ -82,6 +82,7 @@ public class AuthCourseBiz extends BaseBiz {
         AuthCourseSignResp resp = new AuthCourseSignResp();
         resp.setProgress(userStudy.getProgress());
         resp.setStudyId(userStudy.getId());
+        resp.setResourceId(resource.getId());
         resp.setVid(resource.getVideoVid());
         // 播放参数
         polyvSign(req, resource, resp);
