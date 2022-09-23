@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -36,12 +37,11 @@ public class UserStudyJob {
         Set<String> keys = cacheRedis.getStringRedisTemplate().keys(Constants.RedisPre.PROGRESS + "*");
         if (CollUtil.isNotEmpty(keys)) {
             for (String key : keys) {
-                log.info("key={}, expire={}", key, cacheRedis.getStringRedisTemplate().getExpire(key, TimeUnit.MINUTES));
                 if (cacheRedis.getStringRedisTemplate().getExpire(key, TimeUnit.MINUTES) < 1439) {
                     // 默认过期时间为60分钟，若剩余时间小于59分，则处理
                     AuthUserStudyReq req = cacheRedis.getByJson(key, AuthUserStudyReq.class);
                     UserStudy userStudy = userStudyDao.getById(req.getStudyId());
-                    userStudy.setProgress(req.getCurrentDuration().divide(req.getTotalDuration(), BigDecimal.ROUND_CEILING));
+                    userStudy.setProgress(req.getCurrentDuration().divide(req.getTotalDuration(), BigDecimal.ROUND_CEILING).setScale(2, RoundingMode.HALF_UP));
                     userStudyDao.updateById(userStudy);
                     // 清楚缓存
                     cacheRedis.delete(Constants.RedisPre.USER_STUDY + req.getStudyId());
