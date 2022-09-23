@@ -39,7 +39,6 @@ public class CourseJob {
      */
     @Scheduled(cron = "0 0 05 * * ?")
     public void course() {
-        log.info("定时处理搜索同步");
         CourseExample example = new CourseExample();
         example.createCriteria().andStatusIdEqualTo(StatusIdEnum.YES.getCode()).andIsPutawayEqualTo(PutawayEnum.UP.getCode());
         List<Course> courseList = courseDao.listByExample(example);
