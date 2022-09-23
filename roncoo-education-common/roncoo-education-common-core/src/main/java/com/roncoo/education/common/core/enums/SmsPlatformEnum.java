@@ -13,7 +13,7 @@ public enum SmsPlatformEnum {
     /**
      * 领课云
      */
-    LK_YUN(1, "领课云", "lkyun%"),
+    LK_YUN(1, "领课云(暂没实现)", "lkyun%"),
 
     /**
      * 阿里云

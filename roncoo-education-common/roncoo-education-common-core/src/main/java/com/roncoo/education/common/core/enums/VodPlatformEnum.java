@@ -21,12 +21,12 @@ public enum VodPlatformEnum {
     /**
      * 百家云
      */
-    BJYUN(2, "百家云", "baijy%"),
+    BJYUN(2, "百家云(暂没实现)", "baijy%"),
 
     /**
      * 私有云
      */
-    PRIVATE(3, "私有云", "pri%");
+    PRIVATE(3, "私有云(暂没实现)", "pri%");
 
     /**
      * 编码
