@@ -1,13 +1,14 @@
 package com.roncoo.education.user.service.admin.req;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -25,14 +26,6 @@ public class AdminOrderInfoPageReq implements Serializable {
 
     @ApiModelProperty(value = "主键")
     private Long id;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
-    private LocalDateTime gmtCreate;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "修改时间")
-    private LocalDateTime gmtModified;
 
     @ApiModelProperty(value = "订单号")
     private Long orderNo;

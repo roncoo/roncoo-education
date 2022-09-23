@@ -18,6 +18,7 @@ import com.roncoo.education.user.service.admin.resp.AdminUsersPageResp;
 import com.roncoo.education.user.service.admin.resp.AdminUsersViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 
@@ -42,6 +43,9 @@ public class AdminUsersBiz extends BaseBiz {
     public Result<Page<AdminUsersPageResp>> page(AdminUsersPageReq req) {
         UsersExample example = new UsersExample();
         Criteria c = example.createCriteria();
+        if (StringUtils.hasText(req.getMobile())) {
+            c.andMobileEqualTo(PageUtil.rightLike(req.getMobile()));
+        }
         example.setOrderByClause("id desc");
         Page<Users> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminUsersPageResp> respPage = PageUtil.transform(page, AdminUsersPageResp.class);

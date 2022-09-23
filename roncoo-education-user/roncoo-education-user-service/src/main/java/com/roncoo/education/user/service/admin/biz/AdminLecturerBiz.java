@@ -16,6 +16,7 @@ import com.roncoo.education.user.service.admin.resp.AdminLecturerPageResp;
 import com.roncoo.education.user.service.admin.resp.AdminLecturerViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 
@@ -40,6 +41,9 @@ public class AdminLecturerBiz extends BaseBiz {
     public Result<Page<AdminLecturerPageResp>> page(AdminLecturerPageReq req) {
         LecturerExample example = new LecturerExample();
         Criteria c = example.createCriteria();
+        if (StringUtils.hasText(req.getLecturerName())) {
+            c.andLecturerNameEqualTo(PageUtil.rightLike(req.getLecturerName()));
+        }
         example.setOrderByClause("sort asc, id desc");
         Page<Lecturer> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminLecturerPageResp> respPage = PageUtil.transform(page, AdminLecturerPageResp.class);
