@@ -25,9 +25,9 @@ public class UserStudyJob {
     private CacheRedis cacheRedis;
 
     /**
-     * 每分钟执行一次
+     * 每10秒执行一次
      */
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 10000)
     public void progress() {
         // 处理学习进度
         Set<String> keys = cacheRedis.getStringRedisTemplate().keys(Constants.RedisPre.PROGRESS + "*");
