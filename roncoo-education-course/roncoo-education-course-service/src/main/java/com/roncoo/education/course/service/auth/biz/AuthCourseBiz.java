@@ -87,7 +87,7 @@ public class AuthCourseBiz extends BaseBiz {
         }
 
         AuthCourseSignResp resp = new AuthCourseSignResp();
-        resp.setProgress(userStudy.getProgress());
+        resp.setStartTime(userStudy.getProgress().multiply(new BigDecimal(resource.getVideoLength())).longValue());
         resp.setStudyId(userStudy.getId());
         resp.setResourceId(resource.getId());
         resp.setVid(resource.getVideoVid());

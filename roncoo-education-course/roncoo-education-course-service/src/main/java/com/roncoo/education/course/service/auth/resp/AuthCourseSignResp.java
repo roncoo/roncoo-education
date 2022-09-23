@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
  * <p>
@@ -29,8 +28,8 @@ public class AuthCourseSignResp implements Serializable {
     @ApiModelProperty(value = "资源ID")
     private Long resourceId;
 
-    @ApiModelProperty(value = "最大学习进度")
-    private BigDecimal progress;
+    @ApiModelProperty(value = "开始播放时长，单位秒")
+    private Long startTime;
 
     @ApiModelProperty(value = "播放vid")
     private String vid;
