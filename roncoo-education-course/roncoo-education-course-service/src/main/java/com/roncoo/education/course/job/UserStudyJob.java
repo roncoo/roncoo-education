@@ -6,6 +6,7 @@ import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.course.dao.UserStudyDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
 import com.roncoo.education.course.service.auth.req.AuthUserStudyReq;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author fengyw
  */
+@Slf4j
 @Component
 public class UserStudyJob {
     @Autowired
@@ -29,6 +31,7 @@ public class UserStudyJob {
      */
     @Scheduled(fixedRate = 10000)
     public void progress() {
+        log.info("定时处理学习进度");
         // 处理学习进度
         Set<String> keys = cacheRedis.getStringRedisTemplate().keys(Constants.RedisPre.PROGRESS + "*");
         if (CollUtil.isNotEmpty(keys)) {

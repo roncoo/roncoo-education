@@ -8,6 +8,7 @@ import com.roncoo.education.common.es.EsCourse;
 import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseExample;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
@@ -24,6 +25,7 @@ import java.util.List;
  *
  * @author fengyw
  */
+@Slf4j
 @Component
 public class CourseJob {
 
@@ -37,6 +39,7 @@ public class CourseJob {
      */
     @Scheduled(fixedRate = 60000)
     public void course() {
+        log.info("定时处理搜索同步");
         CourseExample example = new CourseExample();
         example.createCriteria().andStatusIdEqualTo(StatusIdEnum.YES.getCode()).andIsPutawayEqualTo(PutawayEnum.UP.getCode());
         List<Course> courseList = courseDao.listByExample(example);
