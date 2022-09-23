@@ -35,9 +35,9 @@ public class CourseJob {
     private ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     /**
-     * 每分钟执行一次
+     * 每天凌晨5点执行一次
      */
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(cron = "0 0 05 * * ?")
     public void course() {
         log.info("定时处理搜索同步");
         CourseExample example = new CourseExample();

@@ -29,13 +29,14 @@ public class UserStudyJob {
     /**
      * 每10秒执行一次
      */
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedDelay = 10000)
     public void progress() {
         log.info("定时处理学习进度");
         // 处理学习进度
         Set<String> keys = cacheRedis.getStringRedisTemplate().keys(Constants.RedisPre.PROGRESS + "*");
         if (CollUtil.isNotEmpty(keys)) {
             for (String key : keys) {
+                log.info("key={}, expire={}", key, cacheRedis.getStringRedisTemplate().getExpire(key, TimeUnit.MINUTES));
                 if (cacheRedis.getStringRedisTemplate().getExpire(key, TimeUnit.MINUTES) < 59) {
                     // 默认过期时间为60分钟，若剩余时间小于59分，则处理
                     AuthUserStudyReq req = cacheRedis.getByJson(key, AuthUserStudyReq.class);
