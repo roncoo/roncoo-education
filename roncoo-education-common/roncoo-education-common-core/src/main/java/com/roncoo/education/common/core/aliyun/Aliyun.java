@@ -21,8 +21,9 @@ public class Aliyun implements Serializable {
     private String aliyunOssBucket;
 
     // 短信签名
-    private String signName;
-    // 验证码模板
-    private String templateVer;
+    private String aliyunSmsSignName;
+    private String aliyunSmsAccessKeyId;
+    private String aliyunSmsAccessKeySecret;
+    private String aliyunSmsAuthCode;
 
 }

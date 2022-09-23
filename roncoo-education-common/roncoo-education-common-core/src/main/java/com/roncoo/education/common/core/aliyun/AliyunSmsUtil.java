@@ -28,9 +28,8 @@ public final class AliyunSmsUtil {
      */
     public static Boolean sendVerCode(String mobile, String code, Aliyun aliyun) {
         String templateParam = "{\"code\":\"{code}\"}".replace("{code}", code);
-        return send(mobile, templateParam, aliyun.getSignName(), aliyun.getTemplateVer(), aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret());
+        return send(mobile, templateParam, aliyun.getAliyunSmsSignName(), aliyun.getAliyunSmsAuthCode(), aliyun.getAliyunSmsAccessKeyId(), aliyun.getAliyunSmsAccessKeySecret());
     }
-
 
     private static Boolean send(String phone, String templateParam, String signName, String templateCode, String accessKeyId, String accessKeySecret) {
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
