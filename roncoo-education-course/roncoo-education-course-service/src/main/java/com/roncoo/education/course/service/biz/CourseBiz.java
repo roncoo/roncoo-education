@@ -78,11 +78,11 @@ public class CourseBiz extends BaseBiz {
                 }
             }
 
+            // 课时进度
             List<UserStudy> userStudyList = userStudyDao.listByUserIdAndCourseId(userId, course.getId());
-            if(CollUtil.isNotEmpty(userStudyList)){
+            if (CollUtil.isNotEmpty(userStudyList)) {
                 userStudyProgressMap = userStudyList.stream().collect(Collectors.toMap(UserStudy::getPeriodId, UserStudy::getProgress));
             }
-
         }
         // 获取讲师信息
         LecturerViewVO lecturerViewVO = feignLecturer.getById(course.getLecturerId());
@@ -103,9 +103,9 @@ public class CourseBiz extends BaseBiz {
                 List<Resource> resourceList = resourceDao.listByIds(resourceIdList);
                 for (CourseChapterResp chapterResp : courseResp.getChapterRespList()) {
                     chapterResp.setPeriodRespList(BeanUtil.copyProperties(map.get(chapterResp.getId()), CourseChapterPeriodResp.class));
-                    if(CollUtil.isNotEmpty(resourceList)){
-                        Map<Long, Resource> resourceMap = resourceList.stream().collect(Collectors.toMap(Resource::getId, item->item));
-                        for(CourseChapterPeriodResp periodResp: chapterResp.getPeriodRespList()){
+                    if (CollUtil.isNotEmpty(resourceList)) {
+                        Map<Long, Resource> resourceMap = resourceList.stream().collect(Collectors.toMap(Resource::getId, item -> item));
+                        for (CourseChapterPeriodResp periodResp : chapterResp.getPeriodRespList()) {
                             periodResp.setResourceResp(BeanUtil.copyProperties(resourceMap.get(periodResp.getResourceId()), ResourceResp.class));
                             periodResp.setPeriodProgress(userStudyProgressMap.get(periodResp.getId()));
                         }
