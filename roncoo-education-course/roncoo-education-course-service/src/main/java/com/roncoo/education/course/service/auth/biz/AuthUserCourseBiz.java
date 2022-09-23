@@ -69,7 +69,6 @@ public class AuthUserCourseBiz extends BaseBiz {
                 periodSumMap = courseChapterPeriodList.stream().collect(Collectors.groupingBy(item -> item.getCourseId(), Collectors.counting()));
             }
 
-
             Map<Long, BigDecimal> userStudySumMap = new HashMap<>();
             List<UserStudy> userStudySumList = userStudyDao.listByUserIdAndCourseIdsForSumProgress(ThreadContext.userId(), courseIdList);
             if (CollUtil.isNotEmpty(userStudySumList)) {
