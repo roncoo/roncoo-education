@@ -41,7 +41,7 @@ public class UserStudyJob {
                     // 默认过期时间为60分钟，若剩余时间小于59分，则处理
                     AuthUserStudyReq req = cacheRedis.getByJson(key, AuthUserStudyReq.class);
                     UserStudy userStudy = userStudyDao.getById(req.getStudyId());
-                    userStudy.setProgress(req.getCurrentDuration().divide(req.getTotalDuration(), BigDecimal.ROUND_CEILING).setScale(2, RoundingMode.HALF_UP));
+                    userStudy.setProgress(req.getCurrentDuration().divide(req.getTotalDuration(), BigDecimal.ROUND_CEILING).multiply(BigDecimal.valueOf(100)).setScale(2, RoundingMode.HALF_UP));
                     userStudyDao.updateById(userStudy);
                     // 清楚缓存
                     cacheRedis.delete(Constants.RedisPre.USER_STUDY + req.getStudyId());
