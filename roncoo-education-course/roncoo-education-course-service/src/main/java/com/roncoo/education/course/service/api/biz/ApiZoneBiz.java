@@ -37,7 +37,7 @@ public class ApiZoneBiz {
         // 获取所有可用专区
         ZoneExample example = new ZoneExample();
         example.createCriteria().andStatusIdEqualTo(StatusIdEnum.YES.getCode());
-        example.setOrderByClause(" sort asc, id desc ");
+        example.setOrderByClause("sort asc, id desc");
         List<Zone> zoneList = zoneDao.listByExample(example);
         List<ApiZoneResp> result = BeanUtil.copyProperties(zoneList, ApiZoneResp.class);
         if (CollUtil.isNotEmpty(result)) {
@@ -53,7 +53,7 @@ public class ApiZoneBiz {
     private List<Long> zoneCourse(Long zoneId) {
         ZoneCourseExample example = new ZoneCourseExample();
         example.createCriteria().andZoneIdEqualTo(zoneId);
-        example.setOrderByClause(" sort asc, id desc");
+        example.setOrderByClause("sort asc, id desc");
         List<ZoneCourse> result = zoneCourseDao.listByExample(example);
         return result.stream().map(ZoneCourse::getCourseId).collect(Collectors.toList());
     }

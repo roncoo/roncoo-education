@@ -16,6 +16,7 @@ import com.roncoo.education.course.service.admin.resp.AdminZonePageResp;
 import com.roncoo.education.course.service.admin.resp.AdminZoneViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 
@@ -40,6 +41,9 @@ public class AdminZoneBiz extends BaseBiz {
     public Result<Page<AdminZonePageResp>> page(AdminZonePageReq req) {
         ZoneExample example = new ZoneExample();
         Criteria c = example.createCriteria();
+        if (StringUtils.hasText(req.getZoneName())) {
+            c.andZoneNameLike(PageUtil.rightLike(req.getZoneName()));
+        }
         example.setOrderByClause("sort asc, id desc");
         Page<Zone> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminZonePageResp> respPage = PageUtil.transform(page, AdminZonePageResp.class);

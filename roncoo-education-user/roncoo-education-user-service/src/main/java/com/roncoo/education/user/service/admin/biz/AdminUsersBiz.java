@@ -44,7 +44,7 @@ public class AdminUsersBiz extends BaseBiz {
         UsersExample example = new UsersExample();
         Criteria c = example.createCriteria();
         if (StringUtils.hasText(req.getMobile())) {
-            c.andMobileEqualTo(PageUtil.rightLike(req.getMobile()));
+            c.andMobileLike(PageUtil.rightLike(req.getMobile()));
         }
         example.setOrderByClause("id desc");
         Page<Users> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);

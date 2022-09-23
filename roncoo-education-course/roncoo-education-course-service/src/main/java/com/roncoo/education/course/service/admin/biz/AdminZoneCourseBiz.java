@@ -50,20 +50,19 @@ public class AdminZoneCourseBiz extends BaseBiz {
     public Result<Page<AdminZoneCoursePageResp>> page(AdminZoneCoursePageReq req) {
         ZoneCourseExample example = new ZoneCourseExample();
         Criteria c = example.createCriteria();
-        if(ObjectUtil.isNotEmpty(req.getZoneId())){
+        if (ObjectUtil.isNotEmpty(req.getZoneId())) {
             c.andZoneIdEqualTo(req.getZoneId());
         }
         example.setOrderByClause("sort asc, id desc");
         Page<ZoneCourse> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminZoneCoursePageResp> respPage = PageUtil.transform(page, AdminZoneCoursePageResp.class);
-        if(CollUtil.isNotEmpty(respPage.getList())){
+        if (CollUtil.isNotEmpty(respPage.getList())) {
             List<Long> courseIdList = respPage.getList().stream().map(AdminZoneCoursePageResp::getCourseId).collect(Collectors.toList());
             Map<Long, Course> courseMap = courseDao.listByIds(courseIdList).stream().collect(Collectors.toMap(item -> item.getId(), item -> item));
-            for(AdminZoneCoursePageResp resp:respPage.getList()){
+            for (AdminZoneCoursePageResp resp : respPage.getList()) {
                 resp.setCourseViewResp(BeanUtil.copyProperties(courseMap.get(resp.getCourseId()), AdminCourseViewResp.class));
             }
         }
-
         return Result.success(respPage);
     }
 
