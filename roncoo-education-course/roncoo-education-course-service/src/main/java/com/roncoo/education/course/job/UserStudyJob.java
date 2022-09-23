@@ -38,6 +38,7 @@ public class UserStudyJob {
                     AuthUserStudyReq req = cacheRedis.getByJson(key, AuthUserStudyReq.class);
                     UserStudy userStudy = userStudyDao.getById(req.getStudyId());
                     userStudy.setProgress(req.getCurrentDuration().divide(req.getTotalDuration()));
+                    userStudyDao.updateById(userStudy);
                     // 清楚缓存
                     cacheRedis.delete(Constants.RedisPre.USER_STUDY + req.getStudyId());
                     cacheRedis.delete(key);
