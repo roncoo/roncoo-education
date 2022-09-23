@@ -48,12 +48,12 @@ public class ApiUserStudyBiz extends BaseBiz {
             if (userStudy.getProgress().compareTo(BigDecimal.valueOf(100)) < 0) {
                 // 更新进度
                 userStudy.setProgress(BigDecimal.valueOf(100));
-                dao.updateById(userStudy);
-
-                // 清空缓存
-                cacheRedis.delete(Constants.RedisPre.USER_STUDY + req.getStudyId());
-                cacheRedis.delete(Constants.RedisPre.PROGRESS + req.getStudyId());
             }
+            // 更新观看记录
+            dao.updateById(userStudy);
+            // 清空缓存
+            cacheRedis.delete(Constants.RedisPre.USER_STUDY + req.getStudyId());
+            cacheRedis.delete(Constants.RedisPre.PROGRESS + req.getStudyId());
             return Result.success("OK");
         }
         // 没观看完成，进度存入redis，如没看完，定时任务处理
