@@ -20,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,16 +54,26 @@ public class AuthUserCourseBiz extends BaseBiz {
             List<Long> courseIdList = respPage.getList().stream().map(AuthUserCourseResp::getCourseId).collect(Collectors.toList());
             // 用户学习记录
             Map<Long, UserStudy> userStudyMap = new HashMap<>();
-            List<UserStudy> userStudyList = userStudyDao.listByUserIdAndCourseIds(ThreadContext.userId(), courseIdList);
+            List<UserStudy> userStudyList = userStudyDao.listByUserIdAndCourseIdsForMax(ThreadContext.userId(), courseIdList);
             if (CollUtil.isNotEmpty(userStudyList)) {
                 userStudyMap = userStudyList.stream().collect(Collectors.toMap(item -> item.getCourseId(), item -> item));
             }
 
             // 课时信息
             Map<Long, String> periodNameMap = new HashMap<>();
+            // 课时数
+            Map<Long, Long> periodSumMap = new HashMap<>();
             List<CourseChapterPeriod> courseChapterPeriodList = courseChapterPeriodDao.listByCourseIds(courseIdList);
             if (CollUtil.isNotEmpty(courseChapterPeriodList)) {
                 periodNameMap = courseChapterPeriodList.stream().collect(Collectors.toMap(item -> item.getId(), item -> item.getPeriodName()));
+                periodSumMap = courseChapterPeriodList.stream().collect(Collectors.groupingBy(item -> item.getCourseId(), Collectors.counting()));
+            }
+
+
+            Map<Long, BigDecimal> userStudySumMap = new HashMap<>();
+            List<UserStudy> userStudySumList = userStudyDao.listByUserIdAndCourseIdsForSumProgress(ThreadContext.userId(), courseIdList);
+            if (CollUtil.isNotEmpty(userStudySumList)) {
+                userStudySumMap = userStudySumList.stream().collect(Collectors.toMap(item -> item.getCourseId(), item -> item.getProgress()));
             }
 
             // 课程信息
@@ -71,9 +82,10 @@ public class AuthUserCourseBiz extends BaseBiz {
 
             for (AuthUserCourseResp resp : respPage.getList()) {
                 UserStudy userStudy = userStudyMap.get(resp.getCourseId());
-                if(ObjectUtil.isNotEmpty(userStudy)){
+                if (ObjectUtil.isNotEmpty(userStudy)) {
                     resp.setPeriodProgress(userStudy.getProgress());
                     resp.setPeriodName(periodNameMap.get(userStudy.getPeriodId()));
+                    resp.setCourseProgress(userStudySumMap.get(resp.getCourseId()).divide(BigDecimal.valueOf(periodSumMap.get(resp.getCourseId())), BigDecimal.ROUND_UP));
                 }
                 resp.setCourseResp(BeanUtil.copyProperties(courseMap.get(resp.getCourseId()), AuthCourseResp.class));
             }

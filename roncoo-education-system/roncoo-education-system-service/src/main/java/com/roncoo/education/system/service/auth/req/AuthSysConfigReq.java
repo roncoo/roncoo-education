@@ -1,13 +1,11 @@
 package com.roncoo.education.system.service.auth.req;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -50,12 +48,4 @@ public class AuthSysConfigReq implements Serializable {
 
     @ApiModelProperty(value = "排序，默认值:100")
     private Integer sort;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
-    private LocalDateTime gmtCreate;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "修改时间")
-    private LocalDateTime gmtModified;
 }

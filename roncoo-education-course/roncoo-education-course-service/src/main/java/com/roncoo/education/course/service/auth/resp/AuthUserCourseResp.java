@@ -45,8 +45,8 @@ public class AuthUserCourseResp implements Serializable {
     @ApiModelProperty(value = "购买类型(1支付，2免费)")
     private Integer buyType;
 
-    @ApiModelProperty(value = "该课程总进度")
-    private BigDecimal courseProgress;
+    @ApiModelProperty(value = "课程信息")
+    private AuthCourseResp courseResp;
 
     @ApiModelProperty(value = "当前学习的课时名称")
     private String periodName;
@@ -54,6 +54,6 @@ public class AuthUserCourseResp implements Serializable {
     @ApiModelProperty(value = "当前学习的课时进度")
     private BigDecimal periodProgress;
 
-    @ApiModelProperty(value = "课程信息")
-    private AuthCourseResp courseResp;
+    @ApiModelProperty(value = "该课程总进度")
+    private BigDecimal courseProgress;
 }
