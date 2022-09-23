@@ -54,6 +54,8 @@ public class AuthCourseBiz extends BaseBiz {
             UserStudy userStudy = userStudyDao.getByCourseIdForLast(ThreadContext.userId(), req.getCourseId());
             if (ObjectUtil.isNotNull(userStudy)) {
                 req.setPeriodId(userStudy.getPeriodId());
+            }else{
+                return Result.error("请选择要学习的课时");
             }
         }
         CourseChapterPeriod period = periodDao.getById(req.getPeriodId());
