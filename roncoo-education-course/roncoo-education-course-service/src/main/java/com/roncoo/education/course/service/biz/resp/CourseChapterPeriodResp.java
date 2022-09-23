@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -54,4 +55,7 @@ public class CourseChapterPeriodResp implements Serializable {
     private Long resourceId;
 
     private ResourceResp resourceResp;
+
+    @ApiModelProperty(value = "课时进度")
+    private BigDecimal periodProgress;
 }

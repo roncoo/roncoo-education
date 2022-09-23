@@ -117,4 +117,11 @@ public class UserStudyDaoImpl extends AbstractBaseJdbc implements UserStudyDao {
         map.put("COURSEIDS", courseIdList);
         return namedParameterJdbcTemplate.query(sql, map, new BeanPropertyRowMapper<>(UserStudy.class));
     }
+
+    @Override
+    public List<UserStudy> listByUserIdAndCourseId(Long userId, Long courseId) {
+        UserStudyExample example = new UserStudyExample();
+        example.createCriteria().andUserIdEqualTo(userId).andCourseIdEqualTo(courseId);
+        return this.mapper.selectByExample(example);
+    }
 }

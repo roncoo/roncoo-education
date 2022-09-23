@@ -17,6 +17,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -34,6 +36,8 @@ public class CourseBiz extends BaseBiz {
     private final CourseDao dao;
     @NotNull
     private final UserCourseDao userCourseDao;
+    @NotNull
+    private final UserStudyDao userStudyDao;
     @NotNull
     private final CourseChapterDao chapterDao;
     @NotNull
@@ -59,6 +63,8 @@ public class CourseBiz extends BaseBiz {
             return Result.error("该课程已被禁用");
         }
         CourseResp courseResp = BeanUtil.copyProperties(course, CourseResp.class);
+
+        Map<Long, BigDecimal> userStudyProgressMap = new HashMap<>();
         if (ObjectUtil.isNotEmpty(userId)) {
             // userId存在，即为登录
             if (courseResp.getIsFree().equals(FreeEnum.FREE.getCode())) {
@@ -71,6 +77,12 @@ public class CourseBiz extends BaseBiz {
                     courseResp.setAllowStudy(1);
                 }
             }
+
+            List<UserStudy> userStudyList = userStudyDao.listByUserIdAndCourseId(userId, course.getId());
+            if(CollUtil.isNotEmpty(userStudyList)){
+                userStudyProgressMap = userStudyList.stream().collect(Collectors.toMap(UserStudy::getPeriodId, UserStudy::getProgress));
+            }
+
         }
         // 获取讲师信息
         LecturerViewVO lecturerViewVO = feignLecturer.getById(course.getLecturerId());
@@ -95,6 +107,7 @@ public class CourseBiz extends BaseBiz {
                         Map<Long, Resource> resourceMap = resourceList.stream().collect(Collectors.toMap(Resource::getId, item->item));
                         for(CourseChapterPeriodResp periodResp: chapterResp.getPeriodRespList()){
                             periodResp.setResourceResp(BeanUtil.copyProperties(resourceMap.get(periodResp.getResourceId()), ResourceResp.class));
+                            periodResp.setPeriodProgress(userStudyProgressMap.get(periodResp.getId()));
                         }
                     }
                 }

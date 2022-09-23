@@ -86,4 +86,6 @@ public interface UserStudyDao {
     UserStudy getByCourseIdForLast(Long userId, Long courseId);
 
     List<UserStudy> listByUserIdAndCourseIdsForSumProgress(Long userId, List<Long> courseIdList);
+
+    List<UserStudy>  listByUserIdAndCourseId(Long userId, Long courseId);
 }
