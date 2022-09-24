@@ -1,5 +1,6 @@
 package com.roncoo.education.course.dao.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
@@ -12,7 +13,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.NotNull;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 课程信息 服务实现类
@@ -75,8 +78,12 @@ public class CourseDaoImpl extends AbstractBaseJdbc implements CourseDao {
 
     @Override
     public List<Course> listByIds(List<Long> courseIds) {
+        if (CollUtil.isEmpty(courseIds)) {
+            return Collections.emptyList();
+        }
         CourseExample example = new CourseExample();
         example.createCriteria().andIdIn(courseIds);
+        example.setOrderByClause("field(id," + courseIds.stream().map(String::valueOf).collect(Collectors.joining(",")) + ")");
         return this.mapper.selectByExample(example);
     }
 
