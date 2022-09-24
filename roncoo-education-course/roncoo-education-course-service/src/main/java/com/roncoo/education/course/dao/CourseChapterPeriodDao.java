@@ -77,4 +77,6 @@ public interface CourseChapterPeriodDao {
     List<CourseChapterPeriod> listByChapterIds(List<Long> chapterIds);
 
     List<CourseChapterPeriod> listByCourseIds(List<Long> courseIdList);
+
+    List<CourseChapterPeriod> listByResourceId(Long resourceId);
 }

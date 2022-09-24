@@ -101,4 +101,13 @@ public class CourseChapterPeriodDaoImpl implements CourseChapterPeriodDao {
         example.setOrderByClause("sort asc, id desc");
         return this.mapper.selectByExample(example);
     }
+
+    @Override
+    public List<CourseChapterPeriod> listByResourceId(Long resourceId) {
+        CourseChapterPeriodExample example = new CourseChapterPeriodExample();
+        CourseChapterPeriodExample.Criteria c = example.createCriteria();
+        c.andResourceIdEqualTo(resourceId);
+        example.setOrderByClause("sort asc, id desc");
+        return this.mapper.selectByExample(example);
+    }
 }

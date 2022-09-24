@@ -1,12 +1,16 @@
 package com.roncoo.education.course.service.admin.biz;
 
+import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.common.core.tools.MD5Util;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.course.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.dao.ResourceDao;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
 import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
 import com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample.Criteria;
@@ -23,6 +27,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * ADMIN-课程视频信息
@@ -35,6 +41,8 @@ public class AdminResourceBiz extends BaseBiz {
 
     @NotNull
     private final ResourceDao dao;
+    @NotNull
+    private final CourseChapterPeriodDao courseChapterPeriodDao;
 
     @NotNull
     private final IFeignSysConfig feignSysConfig;
@@ -125,6 +133,11 @@ public class AdminResourceBiz extends BaseBiz {
      * @return 删除结果
      */
     public Result<String> delete(Long id) {
+        List<CourseChapterPeriod> record = courseChapterPeriodDao.listByResourceId(id);
+        if (CollUtil.isNotEmpty(record)) {
+            log.warn("资源引用={}", JSUtil.toJsonString(record.stream().map(CourseChapterPeriod::getPeriodName).collect(Collectors.toList())));
+            return Result.error("该资源存在引用，暂不能删除");
+        }
         if (dao.deleteById(id) > 0) {
             return Result.success("操作成功");
         }
