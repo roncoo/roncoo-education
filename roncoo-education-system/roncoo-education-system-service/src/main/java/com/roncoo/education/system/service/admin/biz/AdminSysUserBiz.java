@@ -160,7 +160,7 @@ public class AdminSysUserBiz {
         record.setMobileSalt(IdUtil.simpleUUID());
         record.setMobilePsw(SHA1Util.getSign(record.getMobileSalt() + req.getMobilePwd()));
         dao.updateById(record);
-        return Result.error(ResultEnum.SYSTEM_UPDATE_FAIL);
+        return Result.success("操作成功");
     }
 
 }
