@@ -60,7 +60,7 @@ public class AdminSysMenuController {
      * 菜单信息更新接口
      */
     @ApiOperation(value = "菜单更新", notes = "菜单修改")
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public Result<String> update(@RequestBody AdminSysMenuUpdateReq sysMenuUpdateReq) {
         return biz.update(sysMenuUpdateReq);
     }

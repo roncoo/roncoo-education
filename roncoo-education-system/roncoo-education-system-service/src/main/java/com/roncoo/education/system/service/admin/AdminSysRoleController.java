@@ -56,7 +56,7 @@ public class AdminSysRoleController {
      * 角色更新接口
      */
     @ApiOperation(value = "角色更新接口", notes = "角色更新接口")
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public Result<String> update(@RequestBody AdminSysRoleUpdateReq sysRoleUpdateREQ) {
         return biz.update(sysRoleUpdateREQ);
     }

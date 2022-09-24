@@ -36,7 +36,7 @@ public class AuthUsersController {
     }
 
     @ApiOperation(value = "更新接口", notes = "更新当前用户的基本信息")
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public Result<String> update(@RequestBody AuthUsersReq req) {
         return biz.update(req);
     }

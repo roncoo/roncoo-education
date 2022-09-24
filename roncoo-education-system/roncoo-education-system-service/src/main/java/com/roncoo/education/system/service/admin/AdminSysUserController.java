@@ -54,7 +54,7 @@ public class AdminSysUserController {
      * 后台管理员更新接口
      */
     @ApiOperation(value = "后台管理员更新接口", notes = "后台管理员更新接口")
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public Result<String> update(@RequestBody AdminSysUserUpdateReq sysUserUpdateREQ) {
         return biz.update(sysUserUpdateREQ);
     }
@@ -72,7 +72,7 @@ public class AdminSysUserController {
      * 后台管理员密码接口
      */
     @ApiOperation(value = "后台管理员密码接口", notes = "后台管理员更新密码接口")
-    @RequestMapping(value = "/update/password", method = RequestMethod.POST)
+    @RequestMapping(value = "/password", method = RequestMethod.POST)
     public Result<String> updatePassword(@RequestBody AdminSysUserUpdatePasswordReq sysUserUpdatePasswordREQ) {
         return biz.updatePassword(sysUserUpdatePasswordREQ);
     }
