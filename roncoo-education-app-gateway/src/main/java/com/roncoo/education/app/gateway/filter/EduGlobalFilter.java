@@ -113,12 +113,13 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
         if (EXCLUDE_URL.contains(uri)) {
             return true;
         }
+        // 权限校验
         if (tk.contains(uri)) {
             return true;
         }
 
-        // 返回true暂时不检验
-        return true;
+        log.info("用户没该权限点，{}", uri.replace("/", ":"));
+        return false;
     }
 
     private Long getUserId(ServerHttpRequest request) {
