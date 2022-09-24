@@ -109,20 +109,18 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
         if (StringUtils.hasText(uri) && uri.endsWith("/")) {
             uri = uri.substring(0, uri.length() - 1);
         }
-        if(StringUtils.hasText(uri)&& uri.startsWith("/")){
-            uri = uri.substring(uri.length() - 1);
-        }
 
         // 额外不需要权限校验的接口
         if (EXCLUDE_URL.contains(uri)) {
             return true;
         }
         // 权限校验
+        uri = uri.substring(1).replace("/", ":");
         if (tk.contains(uri)) {
             return true;
         }
 
-        log.info("用户没该权限点，{}, 该用户权限点={}", uri.replace("/", ":"), tk);
+        log.info("用户没该权限点，{}, 该用户权限点={}", uri, tk);
         return false;
     }
 
