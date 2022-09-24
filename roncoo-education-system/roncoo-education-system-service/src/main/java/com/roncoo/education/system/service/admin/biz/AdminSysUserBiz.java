@@ -146,16 +146,20 @@ public class AdminSysUserBiz {
         if (req.getUserId() == null) {
             return Result.error("用户ID不能为空,请重试");
         }
-        if (StringUtils.isEmpty(req.getMobilePsw())) {
+        if (StringUtils.isEmpty(req.getMobilePwd())) {
             return Result.error("新密码不能为空,请重试");
         }
-        if (StringUtils.isEmpty(req.getRePwd())) {
+        if (StringUtils.isEmpty(req.getConfirmPassword())) {
             return Result.error("确认密码不能为空,请重试");
         }
-        if (!req.getRePwd().equals(req.getMobilePsw())) {
+        if (!req.getConfirmPassword().equals(req.getMobilePwd())) {
             return Result.error("密码不一致,请重试");
         }
-        // TODO
+        SysUser record = new SysUser();
+        record.setId(req.getUserId());
+        record.setMobileSalt(IdUtil.simpleUUID());
+        record.setMobilePsw(SHA1Util.getSign(record.getMobileSalt() + req.getMobilePwd()));
+        dao.updateById(record);
         return Result.error(ResultEnum.SYSTEM_UPDATE_FAIL);
     }
 
