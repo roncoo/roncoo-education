@@ -121,7 +121,7 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
         }
 
         log.info("用户没该权限点，{}", uri);
-        return true;
+        return false;
     }
 
     private Long getUserId(ServerHttpRequest request) {
