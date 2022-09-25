@@ -5,13 +5,27 @@
     <parent>
         <groupId>com.roncoo</groupId>
         <artifactId>roncoo-education</artifactId>
-        <version>10.0.0-RELEASE</version>
+        <version>11.0.0-RELEASE</version>
     </parent>
 
     <groupId>com.xuxueli</groupId>
     <artifactId>roncoo-education-app-job</artifactId>
 
     <dependencies>
+        <!-- Nacos -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.roncoo</groupId>
+            <artifactId>roncoo-education-common-log</artifactId>
+        </dependency>
+
         <!-- starter-web：spring-webmvc + autoconfigure + logback + yaml + tomcat -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

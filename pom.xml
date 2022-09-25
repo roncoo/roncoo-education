@@ -5,7 +5,7 @@
 
     <groupId>com.roncoo</groupId>
     <artifactId>roncoo-education</artifactId>
-    <version>10.0.0-RELEASE</version>
+    <version>11.0.0-RELEASE</version>
     <packaging>pom</packaging>
 
     <name>roncoo-education</name>
@@ -128,6 +128,11 @@
             <dependency>
                 <groupId>com.roncoo</groupId>
                 <artifactId>roncoo-education-common-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.roncoo</groupId>
+                <artifactId>roncoo-education-common-log</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
