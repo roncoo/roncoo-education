@@ -8,13 +8,13 @@ import com.roncoo.education.common.elasticsearch.EsCourse;
 import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseExample;
+import com.xxl.job.core.handler.annotation.XxlJob;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class CourseJob {
     /**
      * 每天凌晨5点执行一次
      */
-    @Scheduled(cron = "0 0 05 * * ?")
+    @XxlJob("courseJobHandler")
     public void course() {
         CourseExample example = new CourseExample();
         example.createCriteria().andStatusIdEqualTo(StatusIdEnum.YES.getCode()).andIsPutawayEqualTo(PutawayEnum.UP.getCode());

@@ -6,9 +6,9 @@ import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.course.dao.UserStudyDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
 import com.roncoo.education.course.service.auth.req.AuthUserStudyReq;
+import com.xxl.job.core.handler.annotation.XxlJob;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -31,7 +31,7 @@ public class UserStudyJob {
     /**
      * 每10秒执行一次
      */
-    @Scheduled(fixedDelay = 10000)
+    @XxlJob("userStudyJobHandler")
     public void progress() {
         // 处理学习进度
         Set<String> keys = cacheRedis.getStringRedisTemplate().keys(Constants.RedisPre.PROGRESS + "*");
