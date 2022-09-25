@@ -6,6 +6,7 @@ import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.course.dao.UserStudyDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
 import com.roncoo.education.course.service.auth.req.AuthUserStudyReq;
+import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,7 @@ public class UserStudyJob {
                 }
             }
         }
+        XxlJobHelper.handleSuccess("完成");
     }
 
 }

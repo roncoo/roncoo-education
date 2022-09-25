@@ -8,6 +8,7 @@ import com.roncoo.education.common.elasticsearch.EsCourse;
 import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseExample;
+import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,7 @@ public class CourseJob {
             elasticsearchRestTemplate.indexOps(EsCourse.class).delete();
             elasticsearchRestTemplate.bulkIndex(queries, IndexCoordinates.of(EsCourse.COURSE));
         }
+        XxlJobHelper.handleSuccess("完成");
     }
 
 }
