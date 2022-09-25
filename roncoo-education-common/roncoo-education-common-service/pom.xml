@@ -77,6 +77,11 @@
             <scope>runtime</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-job-core</artifactId>
+        </dependency>
+
         <!-- prometheus -->
         <dependency>
             <groupId>io.micrometer</groupId>
