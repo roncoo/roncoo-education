@@ -1,4 +1,4 @@
-package com.roncoo.education.common.es;
+package com.roncoo.education.common.elasticsearch;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

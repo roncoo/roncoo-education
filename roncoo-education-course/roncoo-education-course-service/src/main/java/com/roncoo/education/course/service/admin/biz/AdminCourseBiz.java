@@ -9,7 +9,7 @@ import com.roncoo.education.common.core.enums.FreeEnum;
 import com.roncoo.education.common.core.enums.PutawayEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.es.EsCourse;
+import com.roncoo.education.common.elasticsearch.EsCourse;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.CategoryDao;
 import com.roncoo.education.course.dao.CourseDao;
