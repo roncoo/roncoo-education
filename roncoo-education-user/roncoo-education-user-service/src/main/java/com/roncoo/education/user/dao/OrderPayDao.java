@@ -73,4 +73,6 @@ public interface OrderPayDao {
     int countByExample(OrderPayExample example);
 
     OrderPay getBySerialNumber(Long serialNumber);
+
+    int updateOrderStatusByOrderNo(Long orderNo, Integer orderStatus);
 }

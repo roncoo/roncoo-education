@@ -83,4 +83,14 @@ public class OrderPayDaoImpl implements OrderPayDao {
         }
         return null;
     }
+
+    @Override
+    public int updateOrderStatusByOrderNo(Long orderNo, Integer orderStatus) {
+        OrderPay record = new OrderPay();
+        record.setOrderNo(orderNo);
+        record.setOrderStatus(orderStatus);
+        OrderPayExample example = new OrderPayExample();
+        example.createCriteria().andOrderNoEqualTo(orderNo);
+        return this.mapper.updateByExample(record, example);
+    }
 }
