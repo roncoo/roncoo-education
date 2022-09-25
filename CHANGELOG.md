@@ -1,6 +1,17 @@
 ### 版本升级日志
 ---
+
+###### v11.0.0-RELEASE
+
+1. 业务流程重新设计，优化现在的业务流程(课程由管理员维护，不再依赖讲师)
+2. 解耦龙果支付，重新对接官方支付渠道(包括支付宝和微信)
+3. Admin工程架构升级和页面优化(由vue2.0升级为vue3.0)
+4. Web工程代码重构和页面优化
+
+---
+
 ###### v10.0.0-RELEASE
+
 1. 升级spring boot主版本，多个组件版本升级
 2. 全新架构，重构项目结构
 3. 增加视频类型和存储类型的说明，增加minio支持
@@ -11,7 +22,9 @@
 8. 增加搜索功能，管理后台一键导入es功能
 
 ---
+
 ###### v9.0.0-RELEASE
+
 1. app-job的启动bug修复
 2. 主分支切换为alibaba分支
 3. 修复升级后的freemark页面不显示的bug
@@ -22,7 +35,9 @@
 8. 优化docker-compose.yml
 
 ---
+
 ###### v8.0.0-RELEASE
+
 1. 升级FastDFS的版本，已修复加载出现的bug
 2. 升级swagger2的jar版本
 3. 升级spring boot admin，精简server-sba的jar，移除多余的jar
@@ -34,7 +49,9 @@
 9. 修改子项目名称，roncoo-education-server-*修改为roncoo-education-app-*，更符合业务特性
 
 ---
+
 ###### v7.0.0-RELEASE
+
 1. 整理优化演示数据
 2. 修复课程简介为空不显示课程信息
 3. roncoo-education-gateway修改为roncoo-education-server-gateway
@@ -45,7 +62,9 @@
 8. 增加文件存储方式：FastDFS
 
 ---
+
 ###### v6.0.0-RELEASE -- 2020.01.28
+
 1. 修改网关配置开发环境地址与测试环境地址一致
 2. 移除roncoo-druid，替换为alibaba-druid
 3. 移除server-zipkin, 官方建议单独部署
@@ -53,12 +72,17 @@
 5. 移除多余的图片
 
 ---
+
 ###### v5.0.0-RELEASE -- 2019.10.28
+
 1. 移除roncoo-education-web-boss工程，替换为roncoo-education-admin，单独维护
 2. 架构调整，更接近商业版架构（移除roncoo-education-course-common、roncoo-education-system-common、roncoo-education-user-common3个工程）
 3. 修改bug和漏洞若干
+
  ---
+
 ###### v4.0.0-RELEASE -- 2019.08.16
+
 1. 管理后台使用Vue实现前后端分离
 2. 增加roncoo-education-boss工程，推荐使用
 3. 保留roncoo-education-web-boss，下一版本将移除
@@ -66,7 +90,9 @@
 5. 调整接口url风格，修改网关映射规则
 
  ---
+
 ###### v3.0.0-RELEASE -- 2019.05.16
+
 1. 修复视频上传不同步问题
 2. 修复部分微服务日志不打印的问题
 3. 修改配置中心默认获取方式为本地配置，不再依赖于项目：roncoo-education-config
@@ -75,7 +101,9 @@
 6. 增加sonar插件，使代码更健壮
 
  ---
+
 ###### v2.0.0-RELEASE -- 2019.03.18
+
 1. 集成了链路监控：roncoo-education-server-zipkin
 2. 新增站内信功能
 3. 新增推荐课程功能
@@ -86,5 +114,7 @@
 8. 优化环境配置，更方便部署
 
  ---
+
 ###### 1.0.0 -- 2019.01.04
+
 初始化

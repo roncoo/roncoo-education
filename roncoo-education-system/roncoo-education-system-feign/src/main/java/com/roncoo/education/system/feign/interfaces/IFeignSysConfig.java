@@ -1,15 +1,11 @@
 package com.roncoo.education.system.feign.interfaces;
 
 import com.roncoo.education.common.core.aliyun.Aliyun;
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.system.feign.interfaces.qo.SysConfigEditQO;
-import com.roncoo.education.system.feign.interfaces.qo.SysConfigPageQO;
-import com.roncoo.education.system.feign.interfaces.qo.SysConfigSaveQO;
-import com.roncoo.education.system.feign.interfaces.vo.SysConfigPageVO;
 import com.roncoo.education.system.feign.interfaces.vo.SysConfigViewVO;
 import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Map;
 
@@ -21,51 +17,6 @@ import java.util.Map;
  */
 @FeignClient(value = "system-service", path = "/system/sys/config")
 public interface IFeignSysConfig {
-
-    /**
-     * 分页列出-系统配置
-     *
-     * @param qo 系统配置
-     * @return 分页结果
-     */
-    @PostMapping(value = "/page")
-    Page<SysConfigPageVO> page(@RequestBody SysConfigPageQO qo);
-
-    /**
-     * 保存-系统配置
-     *
-     * @param qo 系统配置
-     * @return 影响记录数
-     */
-    @PostMapping(value = "/save")
-    int save(@RequestBody SysConfigSaveQO qo);
-
-    /**
-     * 根据ID删除-系统配置
-     *
-     * @param id 主键ID
-     * @return 影响记录数
-     */
-    @DeleteMapping(value = "/delete/{id}")
-    int deleteById(@PathVariable(value = "id") Long id);
-
-    /**
-     * 修改系统配置
-     *
-     * @param qo 系统配置
-     * @return 影响记录数
-     */
-    @PutMapping(value = "/edit")
-    int updateById(@RequestBody SysConfigEditQO qo);
-
-    /**
-     * 根据ID获取系统配置
-     *
-     * @param id 主键ID
-     * @return 系统配置
-     */
-    @GetMapping(value = "/get/{id}")
-    SysConfigViewVO getById(@PathVariable(value = "id") Long id);
 
     @GetMapping(value = "/getMapByConfigType/{type}")
     Map<String, String> getMapByConfigType(@PathVariable(value = "type") Integer configType);

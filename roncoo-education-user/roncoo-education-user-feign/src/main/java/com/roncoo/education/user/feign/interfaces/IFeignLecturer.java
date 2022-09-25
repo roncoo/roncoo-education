@@ -1,13 +1,11 @@
 package com.roncoo.education.user.feign.interfaces;
 
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.user.feign.interfaces.qo.LecturerEditQO;
-import com.roncoo.education.user.feign.interfaces.qo.LecturerPageQO;
-import com.roncoo.education.user.feign.interfaces.qo.LecturerSaveQO;
-import com.roncoo.education.user.feign.interfaces.vo.LecturerPageVO;
 import com.roncoo.education.user.feign.interfaces.vo.LecturerViewVO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Map;
@@ -20,43 +18,6 @@ import java.util.Map;
  */
 @FeignClient(value = "user-service", path = "/user/lecturer")
 public interface IFeignLecturer {
-
-    /**
-     * 分页列出-讲师信息
-     *
-     * @param qo 讲师信息
-     * @return 分页结果
-     */
-    @PostMapping(value = "/page")
-    Page<LecturerPageVO> page(@RequestBody LecturerPageQO qo);
-
-    /**
-     * 保存-讲师信息
-     *
-     * @param qo 讲师信息
-     * @return 影响记录数
-     */
-    @PostMapping(value = "/save")
-    int save(@RequestBody LecturerSaveQO qo);
-
-    /**
-     * 根据ID删除-讲师信息
-     *
-     * @param id 主键ID
-     * @return 影响记录数
-     */
-    @DeleteMapping(value = "/delete/{id}")
-    int deleteById(@PathVariable(value = "id") Long id);
-
-    /**
-     * 修改讲师信息
-     *
-     * @param qo 讲师信息
-     * @return 影响记录数
-     */
-    @PutMapping(value = "/edit")
-    int updateById(@RequestBody LecturerEditQO qo);
-
     /**
      * 根据ID获取讲师信息
      *

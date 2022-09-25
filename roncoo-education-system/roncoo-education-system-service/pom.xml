@@ -15,10 +15,6 @@
     <dependencies>
         <dependency>
             <groupId>com.roncoo</groupId>
-            <artifactId>roncoo-education-user-feign</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.roncoo</groupId>
             <artifactId>roncoo-education-system-feign</artifactId>
         </dependency>
 
