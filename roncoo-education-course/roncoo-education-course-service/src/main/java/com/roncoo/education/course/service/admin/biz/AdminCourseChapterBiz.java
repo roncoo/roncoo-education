@@ -129,6 +129,9 @@ public class AdminCourseChapterBiz extends BaseBiz {
         if (dao.deleteById(id) > 0) {
             return Result.success("操作成功");
         }
+        if (courseChapterPeriodDao.deleteById(id) > 0) {
+            return Result.success("操作成功");
+        }
         return Result.error("操作失败");
     }
 }
