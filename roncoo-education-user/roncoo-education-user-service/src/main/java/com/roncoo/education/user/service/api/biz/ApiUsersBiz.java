@@ -175,7 +175,7 @@ public class ApiUsersBiz extends BaseBiz {
         Users recorde = new Users();
         recorde.setId(user.getId());
         recorde.setMobileSalt(IdUtil.simpleUUID());
-        recorde.setMobilePsw(DigestUtil.sha1Hex(user.getMobileSalt() + req.getMobilePwd()));
+        recorde.setMobilePsw(DigestUtil.sha1Hex(recorde.getMobileSalt() + req.getMobilePwd()));
         userDao.updateById(recorde);
 
         return Result.success("重置成功");
