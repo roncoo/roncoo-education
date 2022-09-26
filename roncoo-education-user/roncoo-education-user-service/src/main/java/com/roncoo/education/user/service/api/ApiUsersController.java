@@ -2,6 +2,7 @@ package com.roncoo.education.user.service.api;
 
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.user.service.api.biz.ApiUsersBiz;
+import com.roncoo.education.user.service.api.req.LoginReq;
 import com.roncoo.education.user.service.api.req.PasswordReq;
 import com.roncoo.education.user.service.api.req.RegisterReq;
 import com.roncoo.education.user.service.api.req.SendCodeReq;
@@ -50,8 +51,17 @@ public class ApiUsersController {
      */
     @ApiOperation(value = "登录接口", notes = "密码登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Result<UsersLoginResp> loginPassword(@RequestBody PasswordReq req) {
-        return biz.loginPassword(req);
+    public Result<UsersLoginResp> loginPassword(@RequestBody LoginReq req) {
+        return biz.login(req);
+    }
+
+    /**
+     * 用户密码登录接口
+     */
+    @ApiOperation(value = "重置密码", notes = "重置密码")
+    @RequestMapping(value = "/password", method = RequestMethod.POST)
+    public Result<String> password(@RequestBody PasswordReq req) {
+        return biz.password(req);
     }
 
 }

@@ -15,6 +15,7 @@ import com.roncoo.education.user.dao.LogLoginDao;
 import com.roncoo.education.user.dao.UsersDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.LogLogin;
 import com.roncoo.education.user.dao.impl.mapper.entity.Users;
+import com.roncoo.education.user.service.api.req.LoginReq;
 import com.roncoo.education.user.service.api.req.PasswordReq;
 import com.roncoo.education.user.service.api.req.RegisterReq;
 import com.roncoo.education.user.service.api.req.SendCodeReq;
@@ -87,7 +88,7 @@ public class ApiUsersBiz extends BaseBiz {
         return Result.success(dto);
     }
 
-    public Result<UsersLoginResp> loginPassword(PasswordReq req) {
+    public Result<UsersLoginResp> login(LoginReq req) {
         if (StringUtils.isEmpty(req.getMobile())) {
             return Result.error("手机号不能为空");
         }
@@ -145,5 +146,38 @@ public class ApiUsersBiz extends BaseBiz {
             return Result.success("发送成功");
         }
         return Result.error("发送失败");
+    }
+
+    public Result<String> password(PasswordReq req) {
+        // 验证码校验
+        String redisCode = cacheRedis.get(Constants.RedisPre.CODE + req.getMobile());
+        if (!StringUtils.hasText(redisCode)) {
+            return Result.error("验证码已经过期");
+        }
+        if (!req.getCode().equals(redisCode)) {
+            return Result.error("验证码不正确");
+        }
+        if (StringUtils.isEmpty(req.getMobilePwd())) {
+            return Result.error("密码不能为空");
+        }
+        // 密码校验
+        if (!req.getMobilePwd().equals(req.getRepassword())) {
+            return Result.error("密码不一致");
+        }
+
+        // 手机号重复校验
+        Users user = userDao.getByMobile(req.getMobile());
+        if (null == user) {
+            return Result.error("该手机号没注册，请先注册");
+        }
+
+        // 重置密码
+        Users recorde = new Users();
+        recorde.setId(user.getId());
+        recorde.setMobileSalt(IdUtil.simpleUUID());
+        recorde.setMobilePsw(DigestUtil.sha1Hex(user.getMobileSalt() + req.getMobilePwd()));
+        userDao.updateById(recorde);
+
+        return Result.success("重置成功");
     }
 }

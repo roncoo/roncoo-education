@@ -18,25 +18,16 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-public class PasswordReq implements Serializable {
+public class LoginReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "手机号", required = true)
     private String mobile;
-    /**
-     * 登录密码
-     */
-    @ApiModelProperty(value = "密码", required = true)
-    private String mobilePwd;
-    /**
-     * 重复密码
-     */
-    @ApiModelProperty(value = "重复密码", required = true)
-    private String repassword;
-    /**
-     * 手机验证码
-     */
-    @ApiModelProperty(value = "手机验证码", required = true)
-    private String code;
+
+    @ApiModelProperty(value = "登录密码", required = true)
+    private String password;
+
+    @ApiModelProperty(value = "登录IP", required = false)
+    private String ip;
 }
