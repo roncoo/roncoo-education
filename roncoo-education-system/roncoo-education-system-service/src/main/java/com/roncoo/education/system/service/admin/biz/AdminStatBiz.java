@@ -40,7 +40,7 @@ public class AdminStatBiz extends BaseBiz {
             resp.setUsedSpace(result.getBigDecimal("usedSpace").divide(BigDecimal.valueOf(1024 * 1024 * 1024)).setScale(2, BigDecimal.ROUND_HALF_UP));
             resp.setTotalFlow(result.getBigDecimal("totalFlow").divide(BigDecimal.valueOf(1024 * 1024 * 1024)).setScale(2, BigDecimal.ROUND_HALF_UP));
             resp.setUsedFlow(result.getBigDecimal("usedFlow").divide(BigDecimal.valueOf(1024 * 1024 * 1024)).setScale(2, BigDecimal.ROUND_HALF_UP));
-            resp.setEmail(result.getStr("email"));
+            //resp.setEmail(result.getStr("email"));
         } catch (Exception e) {
             log.error("获取异常", e);
         }
