@@ -14,19 +14,19 @@ import lombok.Getter;
 public enum VodPlatformEnum {
 
     /**
+     * 私有云
+     */
+    PRIVATE(1, "私有云(商业版)", "pri%"),
+
+    /**
      * 保利威
      */
-    POLYV(1, "保利威", "polyv%"),
+    POLYV(2, "保利威", "polyv%"),
 
     /**
      * 百家云
      */
-    BJYUN(2, "百家云(待实现)", "baijy%"),
-
-    /**
-     * 私有云
-     */
-    PRIVATE(3, "私有云(商业版)", "pri%");
+    BJYUN(3, "百家云(待实现)", "baijy%");
 
     /**
      * 编码
