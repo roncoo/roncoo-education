@@ -126,6 +126,10 @@ public class AdminCourseChapterBiz extends BaseBiz {
      * @return 删除结果
      */
     public Result<String> delete(Long id) {
+        List<CourseChapterPeriod> periodList =  courseChapterPeriodDao.listByChapterId(id);
+        if(CollUtil.isNotEmpty(periodList) && periodList.size() > 0){
+            return Result.error("请先删除节，才能删除章");
+        }
         if (dao.deleteById(id) > 0) {
             return Result.success("操作成功");
         }
