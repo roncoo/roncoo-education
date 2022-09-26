@@ -21,7 +21,7 @@ public enum VodPlatformEnum {
     /**
      * 百家云
      */
-    BJYUN(2, "百家云(商业版)", "baijy%"),
+    BJYUN(2, "百家云(待实现)", "baijy%"),
 
     /**
      * 私有云
