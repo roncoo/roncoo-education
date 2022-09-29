@@ -10,7 +10,7 @@ services:
     container_name: sba
     restart: always
     volumes:
-      - /home/roncoo/logs/sba:/root/education/logs/sba
+      - /home/roncoo/logs/sba:/root/logs/sba
     networks:
       - education
     ports:
@@ -25,7 +25,7 @@ services:
     container_name: job
     restart: always
     volumes:
-      - /home/roncoo/logs/job:/root/education/logs/job
+      - /home/roncoo/logs/job:/root/logs/job
     networks:
       - education
     ports:
@@ -40,7 +40,7 @@ services:
     container_name: gateway
     restart: always
     volumes:
-      - /home/roncoo/logs/gateway:/root/education/logs/gateway
+      - /home/roncoo/logs/gateway:/root/logs/gateway
     networks:
       - education
     ports:
@@ -55,7 +55,7 @@ services:
     container_name: system
     restart: always
     volumes:
-      - /home/roncoo/logs/system:/root/education/logs/system
+      - /home/roncoo/logs/system:/root/logs/system
     networks:
       - education
     ports:
@@ -70,7 +70,7 @@ services:
     container_name: user
     restart: always
     volumes:
-      - /home/roncoo/logs/user:/root/education/logs/user
+      - /home/roncoo/logs/user:/root/logs/user
     networks:
       - education
     ports:
@@ -85,7 +85,7 @@ services:
     container_name: course
     restart: always
     volumes:
-      - /home/roncoo/logs/course:/root/education/logs/course
+      - /home/roncoo/logs/course:/root/logs/course
     networks:
       - education
     ports:
