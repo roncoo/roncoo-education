@@ -1,4 +1,4 @@
-FROM daocloud.io/library/java:8-jre-alpine
+FROM openjdk:8-jdk-oracle
 MAINTAINER roncoo
 ARG JAVA_OPTS="-Xmx128M"
 ENV JAVA_OPTS=$JAVA_OPTS
