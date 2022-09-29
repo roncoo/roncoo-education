@@ -42,7 +42,7 @@ public class ApiSysConfigBiz extends BaseBiz {
         Map<String, String> map = sysConfigs.stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
         ApiSysConfigWebsiteResp resp = BeanUtil.objToBean(map, ApiSysConfigWebsiteResp.class);
         // 公安网备案号处理
-        resp.setWebsiteIcp(getNumeric(resp.getWebsiteIcp()));
+        resp.setWebsitePrnNo(getNumeric(resp.getWebsitePrn()));
         return Result.success(resp);
     }
 

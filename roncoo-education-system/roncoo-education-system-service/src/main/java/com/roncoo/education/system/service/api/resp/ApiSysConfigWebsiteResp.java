@@ -36,6 +36,8 @@ public class ApiSysConfigWebsiteResp implements Serializable {
     private String websiteIcp;
     @ApiModelProperty(value = "公安部备案号")
     private String websitePrn;
+    @ApiModelProperty(value = "公安部备案号的编号")
+    private String websitePrnNo;
     @ApiModelProperty(value = "网站版权")
     private String websiteCopyright;
     @ApiModelProperty(value = "用户协议")
