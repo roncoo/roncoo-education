@@ -14,7 +14,7 @@ services:
     networks:
       - education
     ports:
-      - "5800:5800"
+      - "8182:8182"
   app-job:
     build:
       context: ./roncoo-education-app-job
@@ -29,7 +29,7 @@ services:
     networks:
       - education
     ports:
-      - "5820:5820"
+      - "8181:8181"
   app-gateway:
     build:
       context: ./roncoo-education-app-gateway
@@ -44,7 +44,7 @@ services:
     networks:
       - education
     ports:
-      - "5840:5840"
+      - "8180:8180"
   system-service:
     build:
       context: ./roncoo-education-system/roncoo-education-system-service
@@ -59,7 +59,7 @@ services:
     networks:
       - education
     ports:
-      - "5710:5710"
+      - "8184:8184"
   user-service:
     build:
       context: ./roncoo-education-user/roncoo-education-user-service
@@ -74,7 +74,7 @@ services:
     networks:
       - education
     ports:
-      - "5720:5720"
+      - "8186:8186"
   course-service:
     build:
       context: ./roncoo-education-course/roncoo-education-course-service
@@ -89,7 +89,7 @@ services:
     networks:
       - education
     ports:
-      - "5730:5730"
+      - "8188:8188"
 networks:
   education:
     driver: bridge
