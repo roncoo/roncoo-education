@@ -16,6 +16,8 @@ import org.springframework.stereotype.Component;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -38,6 +40,21 @@ public class ApiSysConfigBiz extends BaseBiz {
         SysConfigExample example = new SysConfigExample();
         List<SysConfig> sysConfigs = dao.listByExample(example);
         Map<String, String> map = sysConfigs.stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
-        return Result.success(BeanUtil.objToBean(map, ApiSysConfigWebsiteResp.class));
+        ApiSysConfigWebsiteResp resp = BeanUtil.objToBean(map, ApiSysConfigWebsiteResp.class);
+        // 公安网备案号处理
+        resp.setWebsiteIcp(getNumeric(resp.getWebsiteIcp()));
+        return Result.success(resp);
+    }
+
+    /**
+     * 从字符串获取数字
+     * @param str
+     * @return
+     */
+    private static String getNumeric(String str) {
+        String regEx="[^0-9]";
+        Pattern p = Pattern.compile(regEx);
+        Matcher m = p.matcher(str);
+        return m.replaceAll("").trim();
     }
 }
