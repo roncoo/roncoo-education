@@ -83,6 +83,7 @@ public class AuthUserCourseBiz extends BaseBiz {
                 UserStudy userStudy = userStudyMap.get(resp.getCourseId());
                 if (ObjectUtil.isNotEmpty(userStudy)) {
                     resp.setPeriodProgress(userStudy.getProgress());
+                    resp.setPeriodTime(userStudy.getGmtModified());
                     resp.setPeriodName(periodNameMap.get(userStudy.getPeriodId()));
                     resp.setCourseProgress(userStudySumMap.get(resp.getCourseId()).divide(BigDecimal.valueOf(periodSumMap.get(resp.getCourseId())), BigDecimal.ROUND_UP));
                 }
