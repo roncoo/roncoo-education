@@ -53,6 +53,8 @@ public class AuthUserCourseResp implements Serializable {
 
     @ApiModelProperty(value = "当前学习的课时进度")
     private BigDecimal periodProgress;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "当前学习的课时时间")
     private LocalDateTime periodTime;
 
