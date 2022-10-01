@@ -124,4 +124,11 @@ public class UserStudyDaoImpl extends AbstractBaseJdbc implements UserStudyDao {
         example.createCriteria().andUserIdEqualTo(userId).andCourseIdEqualTo(courseId);
         return this.mapper.selectByExample(example);
     }
+
+    @Override
+    public int deleteByPeriodId(Long periodId) {
+        UserStudyExample example = new UserStudyExample();
+        example.createCriteria().andPeriodIdEqualTo(periodId);
+        return this.mapper.deleteByExample(example);
+    }
 }

@@ -52,16 +52,16 @@ public class AuthUserCourseBiz extends BaseBiz {
         Page<AuthUserCourseResp> respPage = PageUtil.transform(userCoursePage, AuthUserCourseResp.class);
         if (CollUtil.isNotEmpty(respPage.getList())) {
             List<Long> courseIdList = respPage.getList().stream().map(AuthUserCourseResp::getCourseId).collect(Collectors.toList());
-            // 用户学习记录
+            // 用户学习记录，获取每个课程里面最新学习的课时
             Map<Long, UserStudy> userStudyMap = new HashMap<>();
             List<UserStudy> userStudyList = userStudyDao.listByUserIdAndCourseIdsForMax(ThreadContext.userId(), courseIdList);
             if (CollUtil.isNotEmpty(userStudyList)) {
                 userStudyMap = userStudyList.stream().collect(Collectors.toMap(item -> item.getCourseId(), item -> item));
             }
 
-            // 课时信息
+            // 课时名称
             Map<Long, String> periodNameMap = new HashMap<>();
-            // 课时数
+            // 每个课程的课时数
             Map<Long, Long> periodSumMap = new HashMap<>();
             List<CourseChapterPeriod> courseChapterPeriodList = courseChapterPeriodDao.listByCourseIds(courseIdList);
             if (CollUtil.isNotEmpty(courseChapterPeriodList)) {
@@ -69,6 +69,7 @@ public class AuthUserCourseBiz extends BaseBiz {
                 periodSumMap = courseChapterPeriodList.stream().collect(Collectors.groupingBy(item -> item.getCourseId(), Collectors.counting()));
             }
 
+            // 每个课程的学习进度汇总
             Map<Long, BigDecimal> userStudySumMap = new HashMap<>();
             List<UserStudy> userStudySumList = userStudyDao.listByUserIdAndCourseIdsForSumProgress(ThreadContext.userId(), courseIdList);
             if (CollUtil.isNotEmpty(userStudySumList)) {

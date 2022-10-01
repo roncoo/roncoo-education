@@ -10,6 +10,7 @@ import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.CourseChapterDao;
 import com.roncoo.education.course.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.dao.ResourceDao;
+import com.roncoo.education.course.dao.UserStudyDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapter;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterExample.Criteria;
@@ -24,6 +25,7 @@ import com.roncoo.education.course.service.admin.resp.AdminCourseChapterViewResp
 import com.roncoo.education.course.service.admin.resp.AdminResourceViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -45,6 +47,8 @@ public class AdminCourseChapterBiz extends BaseBiz {
     private final CourseChapterPeriodDao courseChapterPeriodDao;
     @NotNull
     private final ResourceDao resourceDao;
+    @NotNull
+    private final UserStudyDao userStudyDao;
 
     /**
      * 章节信息分页
@@ -125,6 +129,7 @@ public class AdminCourseChapterBiz extends BaseBiz {
      * @param id ID主键
      * @return 删除结果
      */
+    @Transactional(rollbackFor = Exception.class)
     public Result<String> delete(Long id) {
         List<CourseChapterPeriod> periodList =  courseChapterPeriodDao.listByChapterId(id);
         if(CollUtil.isNotEmpty(periodList) && periodList.size() > 0){
@@ -134,6 +139,8 @@ public class AdminCourseChapterBiz extends BaseBiz {
             return Result.success("操作成功");
         }
         if (courseChapterPeriodDao.deleteById(id) > 0) {
+            // 删除课时，也需要删除对应的学习记录，否则统计进度出现数据异常
+            userStudyDao.deleteByPeriodId(id);
             return Result.success("操作成功");
         }
         return Result.error("操作失败");

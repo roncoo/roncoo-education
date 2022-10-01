@@ -88,4 +88,6 @@ public interface UserStudyDao {
     List<UserStudy> listByUserIdAndCourseIdsForSumProgress(Long userId, List<Long> courseIdList);
 
     List<UserStudy>  listByUserIdAndCourseId(Long userId, Long courseId);
+
+    int deleteByPeriodId(Long periodId);
 }
