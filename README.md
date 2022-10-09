@@ -16,7 +16,7 @@
 
 * 所有使用到的框架或者组件都是基于开源项目，代码保证100%开源。
 * 系统功能通用，无论是个人还是企业都可以利用该系统快速搭建一个属于自己的在线教育平台。
-* 如需商业技术服务支持，可使用 [领课教育系统商业版](https://edu.roncoo.net/)，功能更丰富，架构更健壮，VIP服务，上线快速。
+* 如需商业技术服务支持，可使用 [领课教育系统商业版](https://www.roncoo.net/)，功能更丰富，架构更健壮，VIP服务，上线快速。
 
 ### 前台主要功能介绍
 
@@ -44,6 +44,12 @@
   <img src="img/admin1.jpg" alt="领课教育系统-首页"/>
   <img src="img/admin2.jpg" alt="领课教育系统-课程"/>
 
+### 演示地址
+
+* [前端门户演示地址：https://eduos.roncoo.net/](https://eduos.roncoo.net/)
+* [后台管理演示地址：https://eduos.roncoo.net/admin](https://eduos.roncoo.net/admin/)
+* [项目帮助文档地址：https://eduos.roncoo.net/doc](https://eduos.roncoo.net/doc/)
+
 ---
 
 ##### 领课教育系统(roncoo-education)：[码云地址](https://gitee.com/roncoocom/roncoo-education) | [Github地址](https://github.com/roncoo/roncoo-education)
@@ -58,20 +64,9 @@
 
 > roncoo-education-admin是后台管理工程，核心框架：vue-element-admin
 
-### 演示地址
+### 官方交流群（加群即可获取sql脚本）
 
-* [前端门户演示地址：https://eduos.roncoo.net/](https://eduos.roncoo.net/)
-* [后台管理演示地址：https://eduos.roncoo.net/admin](https://eduos.roncoo.net/admin)
-* [项目帮助文档地址：https://eduos.roncoo.net/doc](https://eduos.roncoo.net/doc)
-
-### 官方QQ群（加群免费获取sql脚本）
-
-<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=BpOlarqoFOUReMfHsinOBDrFJhVln6LO&jump_from=webapi"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课⑪" title="在线教育系统-领课⑪"> 624670981</a> 可加
-
-> QQ群：1028579521(已满)  
-> QQ群：532451240(已满)  QQ群：903738971(已满)   QQ群：74876271 (已满)  
-> QQ群：774890501(已满)  QQ群：702189511(已满)   QQ群：826617734(已满)  
-> QQ群：154407415(已满)  QQ群：284915592(已满)   QQ群：703455569(已满)
+<img src="img/qun.jpg" alt="领课教育系统-官方开源群"/>
 
 ## 项目推荐
 
