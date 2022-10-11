@@ -67,7 +67,7 @@ public class CourseBiz extends BaseBiz {
         Map<Long, BigDecimal> userStudyProgressMap = new HashMap<>();
         if (ObjectUtil.isNotEmpty(userId)) {
             // userId存在，即为登录
-            if (courseResp.getIsFree().equals(FreeEnum.FREE.getCode())) {
+            if (courseResp.getIsFree().equals(FreeEnum.FREE.getCode()) || courseResp.getCoursePrice().compareTo(BigDecimal.ZERO) <= 0) {
                 // 免费课程，可以学习
                 courseResp.setAllowStudy(1);
             } else {
