@@ -25,8 +25,8 @@
 * 课程详情：课程信息，课程目录，讲师信息、购买、播放等功能
 * 个人中心：我的课程，我的订单，个人信息
 
-  <img src="img/index.jpg" alt="领课教育系统-首页"/>
-  <img src="img/course.jpg" alt="领课教育系统-课程"/>
+  <img src="images/index.jpg" alt="领课教育系统-首页"/>
+  <img src="images/course.jpg" alt="领课教育系统-课程"/>
 
 ### 后台主要功能介绍
 
@@ -41,8 +41,8 @@
 * 支付功能模块：对接官方支付宝、官方微信
 * 其他功能模块：菜单导航功能、友情链接功能等
 
-  <img src="img/admin1.jpg" alt="领课教育系统-首页"/>
-  <img src="img/admin2.jpg" alt="领课教育系统-课程"/>
+  <img src="images/admin1.jpg" alt="领课教育系统-首页"/>
+  <img src="images/admin2.jpg" alt="领课教育系统-课程"/>
 
 ### 演示地址
 
@@ -66,7 +66,7 @@
 
 ### 官方交流群（加群即可获取sql脚本）
 
-<img src="img/qun.jpg" alt="领课教育系统-官方开源群"/>
+<img src="images/qun.jpg" alt="领课教育系统-官方开源群" width="200"/>
 
 ## 项目推荐
 
