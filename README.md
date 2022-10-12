@@ -1,5 +1,5 @@
 <div align=center>
-    <img src="logo.jpg" alt="领课教育系统-开源版"/>
+    <img src="images/logo.jpg" alt="领课教育系统-开源版"/>
     <div align=center>    
         <a href="http://spring.io/projects/spring-boot">
             <img src="https://img.shields.io/badge/spring--boot-2.3.5-blue.svg" alt="spring-boot">
