@@ -30,8 +30,6 @@ import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
-import org.elasticsearch.search.sort.FieldSortBuilder;
-import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
@@ -75,8 +73,9 @@ public class ApiCourseBiz extends BaseBiz {
         // 高亮字段
         nsb.withHighlightFields(new HighlightBuilder.Field("courseName").preTags("<mark>").postTags("</mark>"));
         // 课程排序（courseSort）
-        nsb.withSort(new FieldSortBuilder("courseSort").order(SortOrder.ASC));
-        nsb.withSort(new FieldSortBuilder("id").order(SortOrder.DESC));
+        //nsb.withSort(new FieldSortBuilder("courseSort").order(SortOrder.ASC));
+        //nsb.withSort(new FieldSortBuilder("id").order(SortOrder.DESC));
+
         // 分页
         nsb.withPageable(PageRequest.of(req.getPageCurrent() - 1, req.getPageSize()));
 
