@@ -12,7 +12,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum StoragePlatformEnum {
 
-    ALIYUN(1, "阿里云(商业版提供)", "aliyun%", "aliyun"),
+    ALIYUN(1, "阿里云(待开发)", "aliyun%", "aliyun"),
     MinIO(2, "MinIO", "minio%", "minio"),
     LOCAL(3, "本地", "local%", "local");
 
