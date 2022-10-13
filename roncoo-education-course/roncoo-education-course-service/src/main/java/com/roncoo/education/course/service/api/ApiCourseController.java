@@ -1,70 +1,58 @@
 package com.roncoo.education.course.service.api;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.course.service.api.biz.ApiCourseBiz;
+import com.roncoo.education.course.service.api.req.ApiCoursePageReq;
+import com.roncoo.education.course.service.api.resp.ApiCoursePageResp;
+import com.roncoo.education.course.service.biz.CourseBiz;
+import com.roncoo.education.course.service.biz.req.CourseReq;
+import com.roncoo.education.course.service.biz.resp.CourseResp;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.roncoo.education.course.service.api.biz.ApiCourseBiz;
-import com.roncoo.education.course.common.bo.CourseInfoPageBO;
-import com.roncoo.education.course.common.bo.CourseInfoSearchBO;
-import com.roncoo.education.course.common.bo.CourseVideoBO;
-import com.roncoo.education.course.common.dto.CourseInfoPageDTO;
-import com.roncoo.education.course.common.dto.CourseInfoSearchPageDTO;
-import com.roncoo.education.course.common.dto.CourseViewDTO;
-import com.roncoo.education.util.base.BaseController;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.Result;
-
-import io.swagger.annotations.ApiOperation;
+import javax.validation.constraints.NotNull;
 
 /**
- * 课程信息
+ * API-课程信息
  *
  * @author wujing
+ * @date 2022-08-25
  */
+@Api(tags = "API-课程信息")
 @RestController
-@RequestMapping(value = "/course/api/course")
-public class ApiCourseController extends BaseController {
+@RequiredArgsConstructor
+@RequestMapping("/course/api/course")
+public class ApiCourseController {
 
-	@Autowired
-	private ApiCourseBiz biz;
+    @NotNull
+    private final ApiCourseBiz biz;
 
-	/**
-	 * 课程信息列表接口
-	 *
-	 * @param courseInfoPageBO
-	 * @return
-	 * @author wuyun
-	 */
-	@ApiOperation(value = "课程列表接口", notes = "根据条件分页列出课程信息")
-	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public Result<Page<CourseInfoPageDTO>> list(@RequestBody CourseInfoPageBO courseInfoPageBO) {
-		return biz.list(courseInfoPageBO);
-	}
+    @NotNull
+    private final CourseBiz courseBiz;
 
-	/**
-	 * 课程详情接口
-	 *
-	 * @param courseVideoBO
-	 * @return
-	 */
-	@ApiOperation(value = "课程详情接口", notes = "根据课程ID获取课程信息")
-	@RequestMapping(value = "/view", method = RequestMethod.POST)
-	public Result<CourseViewDTO> view(@RequestBody CourseVideoBO courseVideoBO) {
-		return biz.view(courseVideoBO);
-	}
+    /**
+     * 课程信息列表接口
+     *
+     * @author fengyw
+     */
+    @ApiOperation(value = "列表和搜索接口", notes = "根据条件进行课程列出")
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public Result<Page<ApiCoursePageResp>> searchForPage(@RequestBody ApiCoursePageReq req) {
+        return biz.searchForPage(req);
+    }
 
-	/**
-	 * 搜索课程接口
-	 *
-	 * @param courseVideoBO
-	 * @return
-	 */
-	@ApiOperation(value = "课程搜索列表接口", notes = "根据课程名称，进行模糊搜索")
-	@RequestMapping(value = "/search/list", method = RequestMethod.POST)
-	public Result<Page<CourseInfoSearchPageDTO>> view(@RequestBody CourseInfoSearchBO courseInfoSearchBO) {
-		return biz.searchList(courseInfoSearchBO);
-	}
+    /**
+     * 课程详情接口
+     */
+    @ApiOperation(value = "课程详情接口", notes = "根据课程ID获取课程信息")
+    @RequestMapping(value = "/view", method = RequestMethod.POST)
+    public Result<CourseResp> view(@RequestBody CourseReq req) {
+        return courseBiz.view(req, null);
+    }
 }

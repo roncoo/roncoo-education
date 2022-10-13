@@ -1,18 +1,17 @@
 package com.roncoo.education.system.service.api.biz;
 
-import java.util.List;
-
-import org.apache.commons.collections.CollectionUtils;
+import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.StatusIdEnum;
+import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.system.dao.WebsiteNavDao;
+import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNav;
+import com.roncoo.education.system.service.api.resp.ApiWebsiteNavResp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
-import com.roncoo.education.system.common.dto.WebsiteNavDTO;
-import com.roncoo.education.system.common.dto.WebsiteNavListDTO;
-import com.roncoo.education.system.service.dao.WebsiteNavDao;
-import com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteNav;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.base.Result;
-import com.roncoo.education.util.enums.StatusIdEnum;
+import java.util.List;
 
 /**
  * 站点导航
@@ -20,23 +19,16 @@ import com.roncoo.education.util.enums.StatusIdEnum;
  * @author wuyun
  */
 @Component
+@CacheConfig(cacheNames = {"system"})
 public class ApiWebsiteNavBiz {
 
-	@Autowired
-	private WebsiteNavDao websiteNavDao;
+    @Autowired
+    private WebsiteNavDao websiteNavDao;
 
-	public Result<WebsiteNavListDTO> list() {
-		WebsiteNavListDTO dto = new WebsiteNavListDTO();
-		List<WebsiteNav> list = websiteNavDao.listByStatusIdAndParentId(StatusIdEnum.YES.getCode(), 0L);
-		if (CollectionUtils.isNotEmpty(list)) {
-			List<WebsiteNavDTO> websiteNavList = PageUtil.copyList(list, WebsiteNavDTO.class);
-			for (WebsiteNavDTO webSiteNav : websiteNavList) {
-				list = websiteNavDao.listByStatusIdAndParentId(StatusIdEnum.YES.getCode(), webSiteNav.getId());
-				webSiteNav.setWebsiteNavList(PageUtil.copyList(list, WebsiteNavDTO.class));
-			}
-			dto.setWebsiteNavList(websiteNavList);
-		}
-		return Result.success(dto);
-	}
+    @Cacheable
+    public Result<List<ApiWebsiteNavResp>> list() {
+        List<WebsiteNav> list = websiteNavDao.listByStatusId(StatusIdEnum.YES.getCode());
+        return Result.success(BeanUtil.copyProperties(list, ApiWebsiteNavResp.class));
+    }
 
 }

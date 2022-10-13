@@ -1,205 +1,135 @@
 package com.roncoo.education.course.service.api.biz;
 
-import java.util.List;
-
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.PutawayEnum;
+import com.roncoo.education.common.core.enums.StatusIdEnum;
+import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.elasticsearch.EsCourse;
+import com.roncoo.education.common.elasticsearch.EsPageUtil;
+import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.course.dao.CourseChapterDao;
+import com.roncoo.education.course.dao.CourseChapterPeriodDao;
+import com.roncoo.education.course.dao.CourseDao;
+import com.roncoo.education.course.dao.impl.mapper.entity.Course;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapter;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
+import com.roncoo.education.course.service.api.req.ApiCoursePageReq;
+import com.roncoo.education.course.service.api.resp.ApiCoursePageResp;
+import com.roncoo.education.course.service.biz.req.CourseReq;
+import com.roncoo.education.course.service.biz.resp.CourseChapterPeriodResp;
+import com.roncoo.education.course.service.biz.resp.CourseChapterResp;
+import com.roncoo.education.course.service.biz.resp.CourseLecturerResp;
+import com.roncoo.education.course.service.biz.resp.CourseResp;
+import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
+import com.roncoo.education.user.feign.interfaces.vo.LecturerViewVO;
+import lombok.RequiredArgsConstructor;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
-import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder.Field;
 import org.elasticsearch.search.sort.FieldSortBuilder;
-import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.roncoo.education.course.common.bo.CourseInfoPageBO;
-import com.roncoo.education.course.common.bo.CourseInfoSearchBO;
-import com.roncoo.education.course.common.bo.CourseVideoBO;
-import com.roncoo.education.course.common.dto.CourseChapterDTO;
-import com.roncoo.education.course.common.dto.CourseChapterPeriodDTO;
-import com.roncoo.education.course.common.dto.CourseInfoPageDTO;
-import com.roncoo.education.course.common.dto.CourseInfoSearchPageDTO;
-import com.roncoo.education.course.common.dto.CourseIntroduceDTO;
-import com.roncoo.education.course.common.dto.CourseViewDTO;
-import com.roncoo.education.course.common.dto.LecturerDTO;
-import com.roncoo.education.course.common.es.EsCourse;
-import com.roncoo.education.course.common.es.EsPageUtil;
-import com.roncoo.education.course.common.es.ResultMapperExt;
-import com.roncoo.education.course.service.dao.CourseChapterDao;
-import com.roncoo.education.course.service.dao.CourseChapterPeriodDao;
-import com.roncoo.education.course.service.dao.CourseDao;
-import com.roncoo.education.course.service.dao.CourseIntroduceDao;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.Course;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapter;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseChapterPeriod;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseExample;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseExample.Criteria;
-import com.roncoo.education.course.service.dao.impl.mapper.entity.CourseIntroduce;
-import com.roncoo.education.user.feign.vo.LecturerVO;
-import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
-import com.roncoo.education.util.base.Page;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.base.Result;
-import com.roncoo.education.util.enums.IsHfield;
-import com.roncoo.education.util.enums.IsPutawayEnum;
-import com.roncoo.education.util.enums.StatusIdEnum;
-import com.roncoo.education.util.tools.BeanUtil;
-import com.roncoo.education.util.tools.SqlUtil;
-import com.xiaoleilu.hutool.util.CollectionUtil;
+import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
- * 课程信息
+ * API-课程信息
  *
  * @author wujing
  */
 @Component
-public class ApiCourseBiz {
+@CacheConfig(cacheNames = {"course"})
+@RequiredArgsConstructor
+public class ApiCourseBiz extends BaseBiz {
 
-	@Autowired
-	private CourseDao courseDao;
-	@Autowired
-	private CourseIntroduceDao courseIntroduceDao;
-	@Autowired
-	private CourseChapterDao courseChapterDao;
-	@Autowired
-	private CourseChapterPeriodDao courseChapterPeriodDao;
-	@Autowired
-	private IFeignLecturer bossLecturer;
+    @NotNull
+    private final CourseDao dao;
+    @NotNull
+    private final CourseChapterDao chapterDao;
+    @NotNull
+    private final CourseChapterPeriodDao periodDao;
 
-	@Autowired(required = false)
-	private ElasticsearchTemplate elasticsearchTemplate;
+    @NotNull
+    private final IFeignLecturer feignLecturer;
 
-	@Autowired
-	private ResultMapperExt resultMapperExt;
+    @NotNull
+    private final ElasticsearchRestTemplate elasticsearchRestTemplate;
 
-	/**
-	 * 课程详情接口
-	 *
-	 * @param courseView
-	 * @return
-	 */
-	public Result<CourseViewDTO> view(CourseVideoBO courseVideoBO) {
-		if (courseVideoBO.getCourseId() == null) {
-			return Result.error("课程ID不能为空");
-		}
-		// 课程信息
-		Course course = courseDao.getById(courseVideoBO.getCourseId());
-		if (course == null) {
-			return Result.error("找不到该课程信息");
-		}
-		CourseViewDTO data = BeanUtil.copyProperties(course, CourseViewDTO.class);
+    public Result<Page<ApiCoursePageResp>> searchForPage(ApiCoursePageReq req) {
+        NativeSearchQueryBuilder nsb = new NativeSearchQueryBuilder();
+        // 高亮字段
+        nsb.withHighlightFields(new HighlightBuilder.Field("courseName").preTags("<mark>").postTags("</mark>"));
 
-		// 课程介绍
-		CourseIntroduce courseIntroduce = courseIntroduceDao.getById(data.getIntroduceId());
-		if (!StringUtils.isEmpty(courseIntroduce)) {
-			data.setIntroduce(BeanUtil.copyProperties(courseIntroduce, CourseIntroduceDTO.class).getIntroduce());
-		}
+        // 分页
+        nsb.withPageable(PageRequest.of(req.getPageCurrent() - 1, req.getPageSize()));
 
-		// 讲师信息
-		LecturerVO lecturerVO = bossLecturer.getByLecturerUserNo(data.getLecturerUserNo());
-		if (StringUtils.isEmpty(lecturerVO)) {
-			return Result.error("根据讲师用户编号没找到对应的讲师信息!");
-		}
-		data.setLecturer(BeanUtil.copyProperties(lecturerVO, LecturerDTO.class));
+        BoolQueryBuilder qb = QueryBuilders.boolQuery();
+        if (ObjectUtil.isNotEmpty(req.getCategoryId())) {
+            qb.must(QueryBuilders.termQuery(req.getCategoryId().toString(), "categoryId"));
+        }
+        if (ObjectUtil.isNotEmpty(req.getIsFree())) {
+            qb.must(QueryBuilders.termQuery(req.getIsFree().toString(), "isFree"));
+        }
+        if (StringUtils.hasText(req.getCourseName())) {
+            // 模糊查询multiMatchQuery，最佳字段best_fields
+            qb.must(QueryBuilders.multiMatchQuery(req.getCourseName(), "courseName").type(MultiMatchQueryBuilder.Type.BEST_FIELDS));
+        }else{
+            // 课程排序（courseSort）
+            nsb.withSort(new FieldSortBuilder("courseSort").order(SortOrder.ASC));
+            nsb.withSort(new FieldSortBuilder("id").order(SortOrder.DESC));
+        }
+        nsb.withQuery(qb);
 
-		// 章节信息
-		List<CourseChapter> courseChapterList = courseChapterDao.listByCourseIdAndStatusId(courseVideoBO.getCourseId(), StatusIdEnum.YES.getCode());
-		if (CollectionUtil.isNotEmpty(courseChapterList)) {
-			data.setChapterList(PageUtil.copyList(courseChapterList, CourseChapterDTO.class));
-		}
+        SearchHits<EsCourse> searchHits = elasticsearchRestTemplate.search(nsb.build(), EsCourse.class, IndexCoordinates.of(EsCourse.COURSE));
+        return Result.success(EsPageUtil.transform(searchHits, req.getPageCurrent(), req.getPageSize(), ApiCoursePageResp.class));
+    }
 
-		// 课时信息
-		if (CollectionUtil.isNotEmpty(data.getChapterList())) {
-			for (CourseChapterDTO courseChapterDTO : data.getChapterList()) {
-				List<CourseChapterPeriod> courseChapterPeriodList = courseChapterPeriodDao.listByChapterIdAndStatusId(courseChapterDTO.getId(), StatusIdEnum.YES.getCode());
-				courseChapterDTO.setPeriodList(PageUtil.copyList(courseChapterPeriodList, CourseChapterPeriodDTO.class));
-			}
-		}
-		return Result.success(data);
-	}
-
-	/**
-	 * 课程信息列表接口
-	 *
-	 * @param courseInfoPageBO
-	 * @return
-	 * @author wuyun
-	 */
-	public Result<Page<CourseInfoPageDTO>> list(CourseInfoPageBO courseInfoPageBO) {
-		CourseExample example = new CourseExample();
-		Criteria c = example.createCriteria();
-		c.andStatusIdEqualTo(StatusIdEnum.YES.getCode());
-		c.andIsPutawayEqualTo(IsPutawayEnum.YES.getCode());
-		if (!StringUtils.isEmpty(courseInfoPageBO.getCategoryId1())) {
-			c.andCategoryId1EqualTo(courseInfoPageBO.getCategoryId1());
-		}
-		if (!StringUtils.isEmpty(courseInfoPageBO.getCategoryId2())) {
-			c.andCategoryId2EqualTo(courseInfoPageBO.getCategoryId2());
-		}
-		if (!StringUtils.isEmpty(courseInfoPageBO.getCategoryId3())) {
-			c.andCategoryId3EqualTo(courseInfoPageBO.getCategoryId3());
-		}
-		if (!StringUtils.isEmpty(courseInfoPageBO.getIsFree())) {
-			c.andIsFreeEqualTo(courseInfoPageBO.getIsFree());
-		}
-		if (!StringUtils.isEmpty(courseInfoPageBO.getCourseName())) {
-			c.andCourseNameLike(PageUtil.rightLike(SqlUtil.checkSql(courseInfoPageBO.getCourseName())));
-		}
-		example.setOrderByClause(" sort desc, id desc ");
-		Page<Course> page = courseDao.listForPage(courseInfoPageBO.getPageCurrent(), courseInfoPageBO.getPageSize(), example);
-		return Result.success(PageUtil.transform(page, CourseInfoPageDTO.class));
-	}
-
-	/**
-	 * 课程搜索列表接口
-	 *
-	 * @param courseInfoSearchBO
-	 * @author wuyun
-	 */
-	public Result<Page<CourseInfoSearchPageDTO>> searchList(CourseInfoSearchBO bo) {
-		if (StringUtils.isEmpty(bo.getOrgNo())) {
-			return Result.error("orgNo不能为空");
-		}
-		if (bo.getPageCurrent() <= 0) {
-			bo.setPageCurrent(1);
-		}
-		if (bo.getPageSize() <= 0) {
-			bo.setPageSize(20);
-		}
-
-		if (StringUtils.isEmpty(bo.getCourseName())) {
-			return Result.success(new Page<CourseInfoSearchPageDTO>());
-		}
-
-		String heightField = "courseName";
-
-		Field hfield = null;
-		if (bo.getIsHfield() != null && bo.getIsHfield().equals(IsHfield.YES.getCode())) {
-			hfield = new HighlightBuilder.Field(heightField).preTags("<mark>").postTags("</mark>");
-		}
-
-		NativeSearchQueryBuilder nsb = new NativeSearchQueryBuilder();
-		if (bo.getIsHfield() != null && bo.getIsHfield().equals(IsHfield.YES.getCode())) {
-			nsb.withHighlightFields(hfield);// 高亮字段
-		}
-		nsb.withSort(SortBuilders.scoreSort().order(SortOrder.DESC));// 评分排序（_source）
-		nsb.withSort(new FieldSortBuilder("courseSort").order(SortOrder.DESC));// 课程排序（courseSort）
-		nsb.withPageable(PageRequest.of(bo.getPageCurrent() - 1, bo.getPageSize()));
-		// 复合查询，外套boolQuery
-		BoolQueryBuilder qb = QueryBuilders.boolQuery();
-		// 精确查询termQuery不分词，must参数等价于AND
-		qb.must(QueryBuilders.termQuery("orgNo", bo.getOrgNo()));
-		// 模糊查询multiMatchQuery，最佳字段best_fields
-		qb.must(QueryBuilders.multiMatchQuery(bo.getCourseName(), "courseName", "lecturerName").type(MultiMatchQueryBuilder.Type.BEST_FIELDS));
-
-		nsb.withQuery(qb);
-
-		org.springframework.data.domain.Page<EsCourse> page = elasticsearchTemplate.queryForPage(nsb.build(), EsCourse.class, resultMapperExt);
-		return Result.success(EsPageUtil.transform(page, CourseInfoSearchPageDTO.class));
-	}
+    @Cacheable
+    public Result<CourseResp> view(CourseReq req) {
+        Course course = dao.getById(req.getCourseId());
+        if (course == null) {
+            return Result.error("找不到该课程信息");
+        }
+        if (!course.getStatusId().equals(StatusIdEnum.YES.getCode())) {
+            return Result.error("该课程已被禁用");
+        }
+        if (course.getIsPutaway().equals(PutawayEnum.DOWN.getCode())) {
+            return Result.error("该课程已下架");
+        }
+        CourseResp courseResp = BeanUtil.copyProperties(course, CourseResp.class);
+        // 获取讲师信息
+        LecturerViewVO lecturerViewVO = feignLecturer.getById(course.getLecturerId());
+        if (ObjectUtil.isNotEmpty(lecturerViewVO)) {
+            courseResp.setLecturerResp(BeanUtil.copyProperties(lecturerViewVO, CourseLecturerResp.class));
+        }
+        // 章节信息
+        List<CourseChapter> chapterList = chapterDao.listByCourseIdAndStatusId(course.getId(), StatusIdEnum.YES.getCode());
+        if (CollUtil.isNotEmpty(chapterList)) {
+            courseResp.setChapterRespList(BeanUtil.copyProperties(chapterList, CourseChapterResp.class));
+            // 课时信息
+            List<CourseChapterPeriod> periodList = periodDao.listByCourseIdAndStatusId(course.getId(), StatusIdEnum.YES.getCode());
+            if (CollUtil.isNotEmpty(periodList)) {
+                Map<Long, List<CourseChapterPeriod>> map = periodList.stream().collect(Collectors.groupingBy(CourseChapterPeriod::getChapterId, Collectors.toList()));
+                for (CourseChapterResp chapterResp : courseResp.getChapterRespList()) {
+                    chapterResp.setPeriodRespList(BeanUtil.copyProperties(map.get(chapterResp.getId()), CourseChapterPeriodResp.class));
+                }
+            }
+        }
+        return Result.success(courseResp);
+    }
 }

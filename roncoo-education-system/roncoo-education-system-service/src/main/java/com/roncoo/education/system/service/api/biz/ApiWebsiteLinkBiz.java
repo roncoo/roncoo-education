@@ -1,17 +1,17 @@
 package com.roncoo.education.system.service.api.biz;
 
-import java.util.List;
-
+import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.StatusIdEnum;
+import com.roncoo.education.system.dao.WebsiteLinkDao;
+import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink;
+import com.roncoo.education.system.service.api.resp.ApiWebsiteLinkResp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
-import com.roncoo.education.system.common.dto.WebsiteLinkDTO;
-import com.roncoo.education.system.common.dto.WebsiteLinkListDTO;
-import com.roncoo.education.system.service.dao.WebsiteLinkDao;
-import com.roncoo.education.system.service.dao.impl.mapper.entity.WebsiteLink;
-import com.roncoo.education.util.base.PageUtil;
-import com.roncoo.education.util.base.Result;
-import com.roncoo.education.util.enums.StatusIdEnum;
+import java.util.List;
 
 /**
  * 站点友情链接
@@ -19,16 +19,16 @@ import com.roncoo.education.util.enums.StatusIdEnum;
  * @author wuyun
  */
 @Component
+@CacheConfig(cacheNames = {"system"})
 public class ApiWebsiteLinkBiz {
 
-	@Autowired
-	private WebsiteLinkDao dao;
+    @Autowired
+    private WebsiteLinkDao dao;
 
-	public Result<WebsiteLinkListDTO> list() {
-		List<WebsiteLink> websiteLinkList = dao.listByStatusId(StatusIdEnum.YES.getCode());
-		WebsiteLinkListDTO dto = new WebsiteLinkListDTO();
-		dto.setWebsiteLinkList(PageUtil.copyList(websiteLinkList, WebsiteLinkDTO.class));
-		return Result.success(dto);
-	}
+    @Cacheable
+    public Result<List<ApiWebsiteLinkResp>> list() {
+        List<WebsiteLink> websiteLinkList = dao.listByStatusId(StatusIdEnum.YES.getCode());
+        return Result.success(PageUtil.copyList(websiteLinkList, ApiWebsiteLinkResp.class));
+    }
 
 }
