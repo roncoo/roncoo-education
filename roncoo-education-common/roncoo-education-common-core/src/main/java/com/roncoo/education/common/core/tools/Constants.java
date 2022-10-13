@@ -13,42 +13,29 @@ public final class Constants {
     private Constants() {
     }
 
-    public final static String ADMIN = "admin";// admin
-    public final static Integer FREEZE = 3;// 冻结状态
-    public final static String REGEX_MOBILE = "^1[0-9]{10}$";
+    // 手机号码校验
+    public static final String REGEX_MOBILE = "^((13[0-9])|(14[5,7,9])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199)\\d{8}$";
+
+    public static final String ADMIN = "admin";
+    public static final String TOKEN = "token";
+    public static final String USER_ID = "userId";
+    //public static final Integer FREEZE = 3;
 
     /**
-     * session
-     *
-     * @author wujing
+     * 单位：分钟
      */
-    public interface Session {
-        public final static String BOSS_MENU = "BOSS_MENU";//
-        public final static String USER_NO = "USERNO"; // userno
-        public final static String USER_VO = "USERVO";// 不能使用user，关键词
-        public final static String REAL_NAME = "REALNAME";//
-    }
+    public final static int SESSIONTIME = 40;
 
-    /**
-     * cookie
-     *
-     * @author wujing
-     */
-    public interface Cookie {
-        public final static String USER_TOKEN = "USERTOKEN";
-    }
-
-    /**
-     * 日期类型
-     *
-     * @author wujing
-     */
-    public interface DATE {
-        public final static String YYYYMMDD = "yyyyMMdd";
-        public final static String YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
-        public final static String YYYYMMDDHHMMSSSSS = "yyyyMMddHHmmssSSS";
-        public final static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
-        public final static String YYYY_MM_DD = "yyyy-MM-dd";
+    public interface RedisPre {
+        String ADMINI_MENU = "admin::menu::";
+        String USERS_INFO = "users::info::";
+        String ADMIN_VERI_CODE = "admin::ver::code::";
+        String USER_STUDY = "user::study::";
+        String RESOURCE = "resource::";
+        String PROGRESS = "progress::";
+        String CODE = "code::";
+        String PAY = "pay::";
+        String DOMAIN = "domain::";
     }
 
 }

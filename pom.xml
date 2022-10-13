@@ -5,7 +5,7 @@
 
     <groupId>com.roncoo</groupId>
     <artifactId>roncoo-education</artifactId>
-    <version>10.0.0-RELEASE</version>
+    <version>11.0.0-RELEASE</version>
     <packaging>pom</packaging>
 
     <name>roncoo-education</name>
@@ -19,8 +19,17 @@
 
     <developers>
         <developer>
-            <name>fengyongwei</name>
+            <name>fengyw</name>
             <email>fengyw@roncoo.com</email>
+            <organization>LingKe, Co., Ltd.</organization>
+            <organizationUrl>http://www.roncoo.net</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+        <developer>
+            <name>wuy</name>
             <organization>LingKe, Co., Ltd.</organization>
             <organizationUrl>http://www.roncoo.net</organizationUrl>
             <roles>
@@ -50,15 +59,6 @@
         </developer>
         <developer>
             <name>yangzj</name>
-            <organization>LingKe, Co., Ltd.</organization>
-            <organizationUrl>http://www.roncoo.net</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
-        <developer>
-            <name>wuy</name>
             <organization>LingKe, Co., Ltd.</organization>
             <organizationUrl>http://www.roncoo.net</organizationUrl>
             <roles>
@@ -103,6 +103,18 @@
                 <scope>import</scope>
             </dependency>
 
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>2.3.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>4.8.1</version>
+            </dependency>
+
             <!-- com.roncoo -->
             <dependency>
                 <groupId>com.roncoo</groupId>
@@ -122,6 +134,16 @@
             <dependency>
                 <groupId>com.roncoo</groupId>
                 <artifactId>roncoo-education-common-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.roncoo</groupId>
+                <artifactId>roncoo-education-common-log</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.roncoo</groupId>
+                <artifactId>roncoo-education-common-polyv</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -185,28 +207,6 @@
             </plugins>
         </pluginManagement>
     </build>
-
-    <!-- 环境变量 -->
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <properties>
-                <env>dev</env>
-            </properties>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <env>prod</env>
-            </properties>
-        </profile>
-        <profile>
-            <id>test</id>
-            <properties>
-                <env>test</env>
-            </properties>
-        </profile>
-    </profiles>
 
     <modules>
         <!-- 网关接口 -->

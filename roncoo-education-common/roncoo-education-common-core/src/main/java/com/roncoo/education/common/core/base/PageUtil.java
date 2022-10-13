@@ -3,8 +3,7 @@
  */
 package com.roncoo.education.common.core.base;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
@@ -21,9 +20,8 @@ import java.util.regex.Pattern;
  * @param <T>
  * @author wujing
  */
+@Slf4j
 public final class PageUtil<T extends Serializable> implements Serializable {
-
-    private static final Logger logger = LoggerFactory.getLogger(PageUtil.class);
 
     private static final long serialVersionUID = 1L;
 
@@ -45,7 +43,7 @@ public final class PageUtil<T extends Serializable> implements Serializable {
         try {
             pb.setList(copyList(page.getList(), classType));
         } catch (Exception e) {
-            logger.error("transform error", e);
+            log.error("transform error", e);
         }
         pb.setPageCurrent(page.getPageCurrent());
         pb.setPageSize(page.getPageSize());
@@ -73,7 +71,7 @@ public final class PageUtil<T extends Serializable> implements Serializable {
                 res.add(t);
                 BeanUtils.copyProperties(o, t);
             } catch (Exception e) {
-                logger.error("copyList error", e);
+                log.error("copyList error", e);
             }
         }
         return res;
@@ -176,7 +174,6 @@ public final class PageUtil<T extends Serializable> implements Serializable {
      *
      * @param pageCurrent 当前页
      * @param pageSize    每页记录数
-     * @param pageBean    DWZ分页查询参数
      * @return limitSql
      */
     public static String limitSql(int totalCount, int pageCurrent, int pageSize) {

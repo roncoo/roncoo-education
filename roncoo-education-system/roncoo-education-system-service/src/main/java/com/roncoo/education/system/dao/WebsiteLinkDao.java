@@ -15,10 +15,10 @@ public interface WebsiteLinkDao {
 
     WebsiteLink getById(Long id);
 
-    Page<WebsiteLink> listForPage(int pageCurrent, int pageSize, WebsiteLinkExample example);
+    Page<WebsiteLink> page(int pageCurrent, int pageSize, WebsiteLinkExample example);
 
     /**
-     * 根据状态查询友情链接集合
+     * 根据状态获取集合
      *
      * @param statusId
      * @return

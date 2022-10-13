@@ -1,12 +1,12 @@
 package com.roncoo.education.user.service.api;
 
-import com.roncoo.education.common.core.base.BaseController;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.user.service.api.biz.ApiRegionBiz;
-import com.roncoo.education.user.service.api.bo.UserRegionCityIdBO;
-import com.roncoo.education.user.service.api.bo.UserRegionLevelBO;
-import com.roncoo.education.user.service.api.bo.UserRegionProvinceBO;
-import com.roncoo.education.user.service.api.dto.RegionListDTO;
+import com.roncoo.education.user.service.api.req.RegionCityIdReq;
+import com.roncoo.education.user.service.api.req.RegionLevelReq;
+import com.roncoo.education.user.service.api.req.RegionProvinceReq;
+import com.roncoo.education.user.service.api.resp.RegionResp;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,14 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * 行政区域表
  *
  * @author wujing
  */
+@Api(tags = "Api-行政区域")
 @RestController
-@RequestMapping(value = "/user/api/region/")
-public class ApiRegionController extends BaseController {
+@RequestMapping(value = "/user/api/region")
+public class ApiRegionController {
 
     @Autowired
     private ApiRegionBiz biz;
@@ -31,7 +34,7 @@ public class ApiRegionController extends BaseController {
      */
     @ApiOperation(value = "区域列出接口", notes = "根据级别获取区域列出信息")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result<RegionListDTO> listForLevel(@RequestBody UserRegionLevelBO userRegionLevelBO) {
+    public Result<List<RegionResp>> listForLevel(@RequestBody RegionLevelReq userRegionLevelBO) {
         return biz.listForLevel(userRegionLevelBO);
     }
 
@@ -40,7 +43,7 @@ public class ApiRegionController extends BaseController {
      */
     @ApiOperation(value = "区域列出接口", notes = "根据provinceId获取区域列表信息")
     @RequestMapping(value = "/list/province", method = RequestMethod.POST)
-    public Result<RegionListDTO> listForProvince(@RequestBody UserRegionProvinceBO userRegionProvinceBO) {
+    public Result<List<RegionResp>> listForProvince(@RequestBody RegionProvinceReq userRegionProvinceBO) {
         return biz.listForProvince(userRegionProvinceBO);
     }
 
@@ -49,7 +52,7 @@ public class ApiRegionController extends BaseController {
      */
     @ApiOperation(value = "区域列出接口", notes = "根据cityId获取区域列表信息")
     @RequestMapping(value = "/list/city", method = RequestMethod.POST)
-    public Result<RegionListDTO> listForCity(@RequestBody UserRegionCityIdBO userRegionCityIdBO) {
+    public Result<List<RegionResp>> listForCity(@RequestBody RegionCityIdReq userRegionCityIdBO) {
         return biz.listForCity(userRegionCityIdBO);
     }
 

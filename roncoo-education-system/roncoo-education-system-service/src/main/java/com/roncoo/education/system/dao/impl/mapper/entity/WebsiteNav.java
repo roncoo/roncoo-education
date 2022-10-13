@@ -1,22 +1,24 @@
 package com.roncoo.education.system.dao.impl.mapper.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class WebsiteNav implements Serializable {
     private Long id;
 
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
 
-    private Date gmtModified;
+    private LocalDateTime gmtModified;
 
     private Integer statusId;
 
     private Integer sort;
 
-    private Long parentId;
+    private String navTitle;
 
-    private String navName;
+    private String navUrl;
+
+    private String target;
 
     private static final long serialVersionUID = 1L;
 
@@ -28,19 +30,19 @@ public class WebsiteNav implements Serializable {
         this.id = id;
     }
 
-    public Date getGmtCreate() {
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModified() {
+    public LocalDateTime getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(LocalDateTime gmtModified) {
         this.gmtModified = gmtModified;
     }
 
@@ -60,20 +62,28 @@ public class WebsiteNav implements Serializable {
         this.sort = sort;
     }
 
-    public Long getParentId() {
-        return parentId;
+    public String getNavTitle() {
+        return navTitle;
     }
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
+    public void setNavTitle(String navTitle) {
+        this.navTitle = navTitle == null ? null : navTitle.trim();
     }
 
-    public String getNavName() {
-        return navName;
+    public String getNavUrl() {
+        return navUrl;
     }
 
-    public void setNavName(String navName) {
-        this.navName = navName == null ? null : navName.trim();
+    public void setNavUrl(String navUrl) {
+        this.navUrl = navUrl == null ? null : navUrl.trim();
+    }
+
+    public String getTarget() {
+        return target;
+    }
+
+    public void setTarget(String target) {
+        this.target = target == null ? null : target.trim();
     }
 
     @Override
@@ -87,8 +97,9 @@ public class WebsiteNav implements Serializable {
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", statusId=").append(statusId);
         sb.append(", sort=").append(sort);
-        sb.append(", parentId=").append(parentId);
-        sb.append(", navName=").append(navName);
+        sb.append(", navTitle=").append(navTitle);
+        sb.append(", navUrl=").append(navUrl);
+        sb.append(", target=").append(target);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

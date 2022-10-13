@@ -6,43 +6,79 @@ import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodExa
 
 import java.util.List;
 
+/**
+ * 课时信息 服务类
+ *
+ * @author wujing
+ * @date 2022-08-25
+ */
 public interface CourseChapterPeriodDao {
+
+    /**
+     * 保存课时信息
+     *
+     * @param record 课时信息
+     * @return 影响记录数
+     */
     int save(CourseChapterPeriod record);
 
+    /**
+     * 根据ID删除课时信息
+     *
+     * @param id 主键ID
+     * @return 影响记录数
+     */
     int deleteById(Long id);
 
+    /**
+     * 修改课时信息
+     *
+     * @param record 课时信息
+     * @return 影响记录数
+     */
     int updateById(CourseChapterPeriod record);
 
+    /**
+     * 根据ID获取课时信息
+     *
+     * @param id 主键ID
+     * @return 课时信息
+     */
     CourseChapterPeriod getById(Long id);
 
-    Page<CourseChapterPeriod> listForPage(int pageCurrent, int pageSize, CourseChapterPeriodExample example);
-
-    List<CourseChapterPeriod> listByChapterId(Long chapterId);
+    /**
+     * 课时信息--分页查询
+     *
+     * @param pageCurrent 当前页
+     * @param pageSize    分页大小
+     * @param example     查询条件
+     * @return 分页结果
+     */
+    Page<CourseChapterPeriod> page(int pageCurrent, int pageSize, CourseChapterPeriodExample example);
 
     /**
-     * 根据章节编号和状态查找可用的课时信息集合
+     * 课时信息--条件列出
      *
-     * @param chapterId
-     * @return
-     * @author LHR
+     * @param example 查询条件
+     * @return 课时信息列表
      */
-    List<CourseChapterPeriod> listByChapterIdAndStatusId(Long chapterId, Integer statusId);
+    List<CourseChapterPeriod> listByExample(CourseChapterPeriodExample example);
 
     /**
-     * 根据课时编号查找课时信息集合
+     * 课时信息--条件统计
      *
-     * @param videoNo
-     * @return
-     * @author wuyun
+     * @param example 统计条件
+     * @return 课时信息数量
      */
-    CourseChapterPeriod getByVideoNo(Long videoNo);
+    int countByExample(CourseChapterPeriodExample example);
 
-    /**
-     * 根据视频编号查找课时信息
-     *
-     * @param videoNo
-     * @return
-     */
-    List<CourseChapterPeriod> listByVideoNo(Long videoNo);
+    List<CourseChapterPeriod> listByCourseIdAndStatusId(Long courseId, Integer statusId);
 
+    List<CourseChapterPeriod> listByChapterIds(List<Long> chapterIds);
+
+    List<CourseChapterPeriod> listByCourseIds(List<Long> courseIdList);
+
+    List<CourseChapterPeriod> listByResourceId(Long resourceId);
+
+    List<CourseChapterPeriod> listByChapterId(Long id);
 }

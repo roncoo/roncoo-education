@@ -1,22 +1,24 @@
 package com.roncoo.education.system.dao.impl.mapper.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class SysUser implements Serializable {
     private Long id;
 
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
 
-    private Date gmtModified;
+    private LocalDateTime gmtModified;
 
     private Integer statusId;
 
     private Integer sort;
 
-    private Long userNo;
-
     private String mobile;
+
+    private String mobileSalt;
+
+    private String mobilePsw;
 
     private String realName;
 
@@ -32,19 +34,19 @@ public class SysUser implements Serializable {
         this.id = id;
     }
 
-    public Date getGmtCreate() {
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModified() {
+    public LocalDateTime getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(LocalDateTime gmtModified) {
         this.gmtModified = gmtModified;
     }
 
@@ -64,20 +66,28 @@ public class SysUser implements Serializable {
         this.sort = sort;
     }
 
-    public Long getUserNo() {
-        return userNo;
-    }
-
-    public void setUserNo(Long userNo) {
-        this.userNo = userNo;
-    }
-
     public String getMobile() {
         return mobile;
     }
 
     public void setMobile(String mobile) {
         this.mobile = mobile == null ? null : mobile.trim();
+    }
+
+    public String getMobileSalt() {
+        return mobileSalt;
+    }
+
+    public void setMobileSalt(String mobileSalt) {
+        this.mobileSalt = mobileSalt == null ? null : mobileSalt.trim();
+    }
+
+    public String getMobilePsw() {
+        return mobilePsw;
+    }
+
+    public void setMobilePsw(String mobilePsw) {
+        this.mobilePsw = mobilePsw == null ? null : mobilePsw.trim();
     }
 
     public String getRealName() {
@@ -107,8 +117,9 @@ public class SysUser implements Serializable {
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", statusId=").append(statusId);
         sb.append(", sort=").append(sort);
-        sb.append(", userNo=").append(userNo);
         sb.append(", mobile=").append(mobile);
+        sb.append(", mobileSalt=").append(mobileSalt);
+        sb.append(", mobilePsw=").append(mobilePsw);
         sb.append(", realName=").append(realName);
         sb.append(", remark=").append(remark);
         sb.append(", serialVersionUID=").append(serialVersionUID);

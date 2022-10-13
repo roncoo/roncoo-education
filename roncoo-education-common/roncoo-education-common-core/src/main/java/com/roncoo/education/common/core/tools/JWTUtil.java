@@ -8,8 +8,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
@@ -17,28 +16,28 @@ import java.util.Date;
 /**
  * @author wujing
  */
+@Slf4j
 public final class JWTUtil {
-
-    protected static final Logger logger = LoggerFactory.getLogger(JWTUtil.class);
 
     private static final String TOKEN_SECRET = "eyJhbGciOiJIUzI1NiJ9";
     private static final String ISSUER = "RONCOO";
-    public static final String USERNO = "userNo";
-    public static final Long DATE = 30 * 24 * 3600 * 1000L; // 1个月
+    public static final String USERID = "userId";
+    // 1个月
+    public static final Long DATE = 30 * 24 * 3600 * 1000L;
 
     /**
-     * @param userNo
+     * @param userId
      * @param date
      * @return
      * @throws IllegalArgumentException
      * @throws JWTCreationException
      * @throws UnsupportedEncodingException
      */
-    public static String create(Long userNo, Long date) {
+    public static String create(Long userId, Long date) {
         try {
-            return JWT.create().withIssuer(ISSUER).withClaim(USERNO, userNo.toString()).withExpiresAt(new Date(System.currentTimeMillis() + date)).sign(Algorithm.HMAC256(TOKEN_SECRET));
+            return JWT.create().withIssuer(ISSUER).withClaim(USERID, userId.toString()).withExpiresAt(new Date(System.currentTimeMillis() + date)).sign(Algorithm.HMAC256(TOKEN_SECRET));
         } catch (Exception e) {
-            logger.error("JWT生成失败", e);
+            log.error("JWT生成失败", e);
             return "";
         }
     }
@@ -50,19 +49,15 @@ public final class JWTUtil {
      * @throws IllegalArgumentException
      * @throws UnsupportedEncodingException
      */
-    public static DecodedJWT verify(String token) throws JWTVerificationException, IllegalArgumentException, UnsupportedEncodingException {
+    public static DecodedJWT verify(String token) throws JWTVerificationException, IllegalArgumentException {
         return JWT.require(Algorithm.HMAC256(TOKEN_SECRET)).withIssuer(ISSUER).build().verify(token);
     }
 
     /**
-     * @param token
      * @return
-     * @throws JWTVerificationException
-     * @throws IllegalArgumentException
-     * @throws UnsupportedEncodingException
      */
-    public static Long getUserNo(DecodedJWT decodedJWT) {
-        return Long.valueOf(decodedJWT.getClaim(USERNO).asString());
+    public static Long getUserId(DecodedJWT decodedJWT) {
+        return Long.valueOf(decodedJWT.getClaim(USERID).asString());
     }
 
 }

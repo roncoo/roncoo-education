@@ -1,14 +1,14 @@
 package com.roncoo.education.system.dao.impl.mapper.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class SysLog implements Serializable {
     private Long id;
 
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
 
-    private Long userNo;
+    private Long userId;
 
     private String realName;
 
@@ -32,20 +32,20 @@ public class SysLog implements Serializable {
         this.id = id;
     }
 
-    public Date getGmtCreate() {
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Long getUserNo() {
-        return userNo;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserNo(Long userNo) {
-        this.userNo = userNo;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getRealName() {
@@ -104,7 +104,7 @@ public class SysLog implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", gmtCreate=").append(gmtCreate);
-        sb.append(", userNo=").append(userNo);
+        sb.append(", userId=").append(userId);
         sb.append(", realName=").append(realName);
         sb.append(", ip=").append(ip);
         sb.append(", operation=").append(operation);

@@ -1,8 +1,7 @@
 package com.roncoo.education.user.dao.impl.mapper.entity;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class LecturerExample {
@@ -70,7 +69,7 @@ public class LecturerExample {
     }
 
     public void setLimitStart(int limitStart) {
-        this.limitStart = limitStart;
+        this.limitStart=limitStart;
     }
 
     public int getLimitStart() {
@@ -78,7 +77,7 @@ public class LecturerExample {
     }
 
     public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
+        this.pageSize=pageSize;
     }
 
     public int getPageSize() {
@@ -196,52 +195,52 @@ public class LecturerExample {
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateEqualTo(Date value) {
+        public Criteria andGmtCreateEqualTo(LocalDateTime value) {
             addCriterion("gmt_create =", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotEqualTo(Date value) {
+        public Criteria andGmtCreateNotEqualTo(LocalDateTime value) {
             addCriterion("gmt_create <>", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateGreaterThan(Date value) {
+        public Criteria andGmtCreateGreaterThan(LocalDateTime value) {
             addCriterion("gmt_create >", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateGreaterThanOrEqualTo(Date value) {
+        public Criteria andGmtCreateGreaterThanOrEqualTo(LocalDateTime value) {
             addCriterion("gmt_create >=", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateLessThan(Date value) {
+        public Criteria andGmtCreateLessThan(LocalDateTime value) {
             addCriterion("gmt_create <", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateLessThanOrEqualTo(Date value) {
+        public Criteria andGmtCreateLessThanOrEqualTo(LocalDateTime value) {
             addCriterion("gmt_create <=", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateIn(List<Date> values) {
+        public Criteria andGmtCreateIn(List<LocalDateTime> values) {
             addCriterion("gmt_create in", values, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotIn(List<Date> values) {
+        public Criteria andGmtCreateNotIn(List<LocalDateTime> values) {
             addCriterion("gmt_create not in", values, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateBetween(Date value1, Date value2) {
+        public Criteria andGmtCreateBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("gmt_create between", value1, value2, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotBetween(Date value1, Date value2) {
+        public Criteria andGmtCreateNotBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("gmt_create not between", value1, value2, "gmtCreate");
             return (Criteria) this;
         }
@@ -256,52 +255,52 @@ public class LecturerExample {
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedEqualTo(Date value) {
+        public Criteria andGmtModifiedEqualTo(LocalDateTime value) {
             addCriterion("gmt_modified =", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedNotEqualTo(Date value) {
+        public Criteria andGmtModifiedNotEqualTo(LocalDateTime value) {
             addCriterion("gmt_modified <>", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedGreaterThan(Date value) {
+        public Criteria andGmtModifiedGreaterThan(LocalDateTime value) {
             addCriterion("gmt_modified >", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedGreaterThanOrEqualTo(Date value) {
+        public Criteria andGmtModifiedGreaterThanOrEqualTo(LocalDateTime value) {
             addCriterion("gmt_modified >=", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedLessThan(Date value) {
+        public Criteria andGmtModifiedLessThan(LocalDateTime value) {
             addCriterion("gmt_modified <", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedLessThanOrEqualTo(Date value) {
+        public Criteria andGmtModifiedLessThanOrEqualTo(LocalDateTime value) {
             addCriterion("gmt_modified <=", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedIn(List<Date> values) {
+        public Criteria andGmtModifiedIn(List<LocalDateTime> values) {
             addCriterion("gmt_modified in", values, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedNotIn(List<Date> values) {
+        public Criteria andGmtModifiedNotIn(List<LocalDateTime> values) {
             addCriterion("gmt_modified not in", values, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedBetween(Date value1, Date value2) {
+        public Criteria andGmtModifiedBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("gmt_modified between", value1, value2, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedNotBetween(Date value1, Date value2) {
+        public Criteria andGmtModifiedNotBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("gmt_modified not between", value1, value2, "gmtModified");
             return (Criteria) this;
         }
@@ -423,66 +422,6 @@ public class LecturerExample {
 
         public Criteria andSortNotBetween(Integer value1, Integer value2) {
             addCriterion("sort not between", value1, value2, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerUserNoIsNull() {
-            addCriterion("lecturer_user_no is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerUserNoIsNotNull() {
-            addCriterion("lecturer_user_no is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerUserNoEqualTo(Long value) {
-            addCriterion("lecturer_user_no =", value, "lecturerUserNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerUserNoNotEqualTo(Long value) {
-            addCriterion("lecturer_user_no <>", value, "lecturerUserNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerUserNoGreaterThan(Long value) {
-            addCriterion("lecturer_user_no >", value, "lecturerUserNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerUserNoGreaterThanOrEqualTo(Long value) {
-            addCriterion("lecturer_user_no >=", value, "lecturerUserNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerUserNoLessThan(Long value) {
-            addCriterion("lecturer_user_no <", value, "lecturerUserNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerUserNoLessThanOrEqualTo(Long value) {
-            addCriterion("lecturer_user_no <=", value, "lecturerUserNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerUserNoIn(List<Long> values) {
-            addCriterion("lecturer_user_no in", values, "lecturerUserNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerUserNoNotIn(List<Long> values) {
-            addCriterion("lecturer_user_no not in", values, "lecturerUserNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerUserNoBetween(Long value1, Long value2) {
-            addCriterion("lecturer_user_no between", value1, value2, "lecturerUserNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerUserNoNotBetween(Long value1, Long value2) {
-            addCriterion("lecturer_user_no not between", value1, value2, "lecturerUserNo");
             return (Criteria) this;
         }
 
@@ -626,343 +565,143 @@ public class LecturerExample {
             return (Criteria) this;
         }
 
-        public Criteria andLecturerEmailIsNull() {
-            addCriterion("lecturer_email is null");
+        public Criteria andLecturerPositionIsNull() {
+            addCriterion("lecturer_position is null");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerEmailIsNotNull() {
-            addCriterion("lecturer_email is not null");
+        public Criteria andLecturerPositionIsNotNull() {
+            addCriterion("lecturer_position is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerEmailEqualTo(String value) {
-            addCriterion("lecturer_email =", value, "lecturerEmail");
+        public Criteria andLecturerPositionEqualTo(String value) {
+            addCriterion("lecturer_position =", value, "lecturerPosition");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerEmailNotEqualTo(String value) {
-            addCriterion("lecturer_email <>", value, "lecturerEmail");
+        public Criteria andLecturerPositionNotEqualTo(String value) {
+            addCriterion("lecturer_position <>", value, "lecturerPosition");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerEmailGreaterThan(String value) {
-            addCriterion("lecturer_email >", value, "lecturerEmail");
+        public Criteria andLecturerPositionGreaterThan(String value) {
+            addCriterion("lecturer_position >", value, "lecturerPosition");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerEmailGreaterThanOrEqualTo(String value) {
-            addCriterion("lecturer_email >=", value, "lecturerEmail");
+        public Criteria andLecturerPositionGreaterThanOrEqualTo(String value) {
+            addCriterion("lecturer_position >=", value, "lecturerPosition");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerEmailLessThan(String value) {
-            addCriterion("lecturer_email <", value, "lecturerEmail");
+        public Criteria andLecturerPositionLessThan(String value) {
+            addCriterion("lecturer_position <", value, "lecturerPosition");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerEmailLessThanOrEqualTo(String value) {
-            addCriterion("lecturer_email <=", value, "lecturerEmail");
+        public Criteria andLecturerPositionLessThanOrEqualTo(String value) {
+            addCriterion("lecturer_position <=", value, "lecturerPosition");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerEmailLike(String value) {
-            addCriterion("lecturer_email like", value, "lecturerEmail");
+        public Criteria andLecturerPositionLike(String value) {
+            addCriterion("lecturer_position like", value, "lecturerPosition");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerEmailNotLike(String value) {
-            addCriterion("lecturer_email not like", value, "lecturerEmail");
+        public Criteria andLecturerPositionNotLike(String value) {
+            addCriterion("lecturer_position not like", value, "lecturerPosition");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerEmailIn(List<String> values) {
-            addCriterion("lecturer_email in", values, "lecturerEmail");
+        public Criteria andLecturerPositionIn(List<String> values) {
+            addCriterion("lecturer_position in", values, "lecturerPosition");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerEmailNotIn(List<String> values) {
-            addCriterion("lecturer_email not in", values, "lecturerEmail");
+        public Criteria andLecturerPositionNotIn(List<String> values) {
+            addCriterion("lecturer_position not in", values, "lecturerPosition");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerEmailBetween(String value1, String value2) {
-            addCriterion("lecturer_email between", value1, value2, "lecturerEmail");
+        public Criteria andLecturerPositionBetween(String value1, String value2) {
+            addCriterion("lecturer_position between", value1, value2, "lecturerPosition");
             return (Criteria) this;
         }
 
-        public Criteria andLecturerEmailNotBetween(String value1, String value2) {
-            addCriterion("lecturer_email not between", value1, value2, "lecturerEmail");
+        public Criteria andLecturerPositionNotBetween(String value1, String value2) {
+            addCriterion("lecturer_position not between", value1, value2, "lecturerPosition");
             return (Criteria) this;
         }
 
-        public Criteria andPositionIsNull() {
-            addCriterion("position is null");
+        public Criteria andLecturerHeadIsNull() {
+            addCriterion("lecturer_head is null");
             return (Criteria) this;
         }
 
-        public Criteria andPositionIsNotNull() {
-            addCriterion("position is not null");
+        public Criteria andLecturerHeadIsNotNull() {
+            addCriterion("lecturer_head is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPositionEqualTo(String value) {
-            addCriterion("position =", value, "position");
+        public Criteria andLecturerHeadEqualTo(String value) {
+            addCriterion("lecturer_head =", value, "lecturerHead");
             return (Criteria) this;
         }
 
-        public Criteria andPositionNotEqualTo(String value) {
-            addCriterion("position <>", value, "position");
+        public Criteria andLecturerHeadNotEqualTo(String value) {
+            addCriterion("lecturer_head <>", value, "lecturerHead");
             return (Criteria) this;
         }
 
-        public Criteria andPositionGreaterThan(String value) {
-            addCriterion("position >", value, "position");
+        public Criteria andLecturerHeadGreaterThan(String value) {
+            addCriterion("lecturer_head >", value, "lecturerHead");
             return (Criteria) this;
         }
 
-        public Criteria andPositionGreaterThanOrEqualTo(String value) {
-            addCriterion("position >=", value, "position");
+        public Criteria andLecturerHeadGreaterThanOrEqualTo(String value) {
+            addCriterion("lecturer_head >=", value, "lecturerHead");
             return (Criteria) this;
         }
 
-        public Criteria andPositionLessThan(String value) {
-            addCriterion("position <", value, "position");
+        public Criteria andLecturerHeadLessThan(String value) {
+            addCriterion("lecturer_head <", value, "lecturerHead");
             return (Criteria) this;
         }
 
-        public Criteria andPositionLessThanOrEqualTo(String value) {
-            addCriterion("position <=", value, "position");
+        public Criteria andLecturerHeadLessThanOrEqualTo(String value) {
+            addCriterion("lecturer_head <=", value, "lecturerHead");
             return (Criteria) this;
         }
 
-        public Criteria andPositionLike(String value) {
-            addCriterion("position like", value, "position");
+        public Criteria andLecturerHeadLike(String value) {
+            addCriterion("lecturer_head like", value, "lecturerHead");
             return (Criteria) this;
         }
 
-        public Criteria andPositionNotLike(String value) {
-            addCriterion("position not like", value, "position");
+        public Criteria andLecturerHeadNotLike(String value) {
+            addCriterion("lecturer_head not like", value, "lecturerHead");
             return (Criteria) this;
         }
 
-        public Criteria andPositionIn(List<String> values) {
-            addCriterion("position in", values, "position");
+        public Criteria andLecturerHeadIn(List<String> values) {
+            addCriterion("lecturer_head in", values, "lecturerHead");
             return (Criteria) this;
         }
 
-        public Criteria andPositionNotIn(List<String> values) {
-            addCriterion("position not in", values, "position");
+        public Criteria andLecturerHeadNotIn(List<String> values) {
+            addCriterion("lecturer_head not in", values, "lecturerHead");
             return (Criteria) this;
         }
 
-        public Criteria andPositionBetween(String value1, String value2) {
-            addCriterion("position between", value1, value2, "position");
+        public Criteria andLecturerHeadBetween(String value1, String value2) {
+            addCriterion("lecturer_head between", value1, value2, "lecturerHead");
             return (Criteria) this;
         }
 
-        public Criteria andPositionNotBetween(String value1, String value2) {
-            addCriterion("position not between", value1, value2, "position");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgUrlIsNull() {
-            addCriterion("head_img_url is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgUrlIsNotNull() {
-            addCriterion("head_img_url is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgUrlEqualTo(String value) {
-            addCriterion("head_img_url =", value, "headImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgUrlNotEqualTo(String value) {
-            addCriterion("head_img_url <>", value, "headImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgUrlGreaterThan(String value) {
-            addCriterion("head_img_url >", value, "headImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgUrlGreaterThanOrEqualTo(String value) {
-            addCriterion("head_img_url >=", value, "headImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgUrlLessThan(String value) {
-            addCriterion("head_img_url <", value, "headImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgUrlLessThanOrEqualTo(String value) {
-            addCriterion("head_img_url <=", value, "headImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgUrlLike(String value) {
-            addCriterion("head_img_url like", value, "headImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgUrlNotLike(String value) {
-            addCriterion("head_img_url not like", value, "headImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgUrlIn(List<String> values) {
-            addCriterion("head_img_url in", values, "headImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgUrlNotIn(List<String> values) {
-            addCriterion("head_img_url not in", values, "headImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgUrlBetween(String value1, String value2) {
-            addCriterion("head_img_url between", value1, value2, "headImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andHeadImgUrlNotBetween(String value1, String value2) {
-            addCriterion("head_img_url not between", value1, value2, "headImgUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceIsNull() {
-            addCriterion("introduce is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceIsNotNull() {
-            addCriterion("introduce is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceEqualTo(String value) {
-            addCriterion("introduce =", value, "introduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceNotEqualTo(String value) {
-            addCriterion("introduce <>", value, "introduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceGreaterThan(String value) {
-            addCriterion("introduce >", value, "introduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceGreaterThanOrEqualTo(String value) {
-            addCriterion("introduce >=", value, "introduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceLessThan(String value) {
-            addCriterion("introduce <", value, "introduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceLessThanOrEqualTo(String value) {
-            addCriterion("introduce <=", value, "introduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceLike(String value) {
-            addCriterion("introduce like", value, "introduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceNotLike(String value) {
-            addCriterion("introduce not like", value, "introduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceIn(List<String> values) {
-            addCriterion("introduce in", values, "introduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceNotIn(List<String> values) {
-            addCriterion("introduce not in", values, "introduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceBetween(String value1, String value2) {
-            addCriterion("introduce between", value1, value2, "introduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andIntroduceNotBetween(String value1, String value2) {
-            addCriterion("introduce not between", value1, value2, "introduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerProportionIsNull() {
-            addCriterion("lecturer_proportion is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerProportionIsNotNull() {
-            addCriterion("lecturer_proportion is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerProportionEqualTo(BigDecimal value) {
-            addCriterion("lecturer_proportion =", value, "lecturerProportion");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerProportionNotEqualTo(BigDecimal value) {
-            addCriterion("lecturer_proportion <>", value, "lecturerProportion");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerProportionGreaterThan(BigDecimal value) {
-            addCriterion("lecturer_proportion >", value, "lecturerProportion");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerProportionGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("lecturer_proportion >=", value, "lecturerProportion");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerProportionLessThan(BigDecimal value) {
-            addCriterion("lecturer_proportion <", value, "lecturerProportion");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerProportionLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("lecturer_proportion <=", value, "lecturerProportion");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerProportionIn(List<BigDecimal> values) {
-            addCriterion("lecturer_proportion in", values, "lecturerProportion");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerProportionNotIn(List<BigDecimal> values) {
-            addCriterion("lecturer_proportion not in", values, "lecturerProportion");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerProportionBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("lecturer_proportion between", value1, value2, "lecturerProportion");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerProportionNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("lecturer_proportion not between", value1, value2, "lecturerProportion");
+        public Criteria andLecturerHeadNotBetween(String value1, String value2) {
+            addCriterion("lecturer_head not between", value1, value2, "lecturerHead");
             return (Criteria) this;
         }
     }

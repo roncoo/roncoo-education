@@ -5,11 +5,13 @@ package com.roncoo.education.common.core.tools;
 
 import org.springframework.beans.BeanUtils;
 
+import java.beans.BeanInfo;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.lang.reflect.Method;
+import java.util.*;
 
 /**
  * 队列属性复制
@@ -70,4 +72,31 @@ public final class BeanUtil<T extends Serializable> {
         return res;
     }
 
+    public static <T> T objToBean(Map<?, ?> map, Class<T> clazz) {
+        return cn.hutool.core.bean.BeanUtil.toBeanIgnoreCase(map, clazz, true);
+    }
+
+    public static Map<String, String> beanToStringMap(Object obj) {
+        try {
+            Map<String, String> resultMap = new HashMap<>();
+            //获取类的属性描述器
+            BeanInfo beaninfo = Introspector.getBeanInfo(obj.getClass(), Object.class);
+            //获取类的属性集
+            PropertyDescriptor[] pro = beaninfo.getPropertyDescriptors();
+            for (PropertyDescriptor property : pro) {
+                //得到属性的name
+                String key = property.getName();
+                Method get = property.getReadMethod();
+                //执行get方法得到属性的值
+                Object value = get.invoke(obj);
+                if (value != null) {
+                    resultMap.put(key, String.valueOf(value));
+                }
+            }
+            return resultMap;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

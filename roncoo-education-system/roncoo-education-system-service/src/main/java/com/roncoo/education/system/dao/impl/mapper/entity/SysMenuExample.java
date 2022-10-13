@@ -1,7 +1,7 @@
 package com.roncoo.education.system.dao.impl.mapper.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class SysMenuExample {
@@ -69,7 +69,7 @@ public class SysMenuExample {
     }
 
     public void setLimitStart(int limitStart) {
-        this.limitStart = limitStart;
+        this.limitStart=limitStart;
     }
 
     public int getLimitStart() {
@@ -77,7 +77,7 @@ public class SysMenuExample {
     }
 
     public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
+        this.pageSize=pageSize;
     }
 
     public int getPageSize() {
@@ -195,52 +195,52 @@ public class SysMenuExample {
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateEqualTo(Date value) {
+        public Criteria andGmtCreateEqualTo(LocalDateTime value) {
             addCriterion("gmt_create =", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotEqualTo(Date value) {
+        public Criteria andGmtCreateNotEqualTo(LocalDateTime value) {
             addCriterion("gmt_create <>", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateGreaterThan(Date value) {
+        public Criteria andGmtCreateGreaterThan(LocalDateTime value) {
             addCriterion("gmt_create >", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateGreaterThanOrEqualTo(Date value) {
+        public Criteria andGmtCreateGreaterThanOrEqualTo(LocalDateTime value) {
             addCriterion("gmt_create >=", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateLessThan(Date value) {
+        public Criteria andGmtCreateLessThan(LocalDateTime value) {
             addCriterion("gmt_create <", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateLessThanOrEqualTo(Date value) {
+        public Criteria andGmtCreateLessThanOrEqualTo(LocalDateTime value) {
             addCriterion("gmt_create <=", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateIn(List<Date> values) {
+        public Criteria andGmtCreateIn(List<LocalDateTime> values) {
             addCriterion("gmt_create in", values, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotIn(List<Date> values) {
+        public Criteria andGmtCreateNotIn(List<LocalDateTime> values) {
             addCriterion("gmt_create not in", values, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateBetween(Date value1, Date value2) {
+        public Criteria andGmtCreateBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("gmt_create between", value1, value2, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotBetween(Date value1, Date value2) {
+        public Criteria andGmtCreateNotBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("gmt_create not between", value1, value2, "gmtCreate");
             return (Criteria) this;
         }
@@ -255,52 +255,52 @@ public class SysMenuExample {
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedEqualTo(Date value) {
+        public Criteria andGmtModifiedEqualTo(LocalDateTime value) {
             addCriterion("gmt_modified =", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedNotEqualTo(Date value) {
+        public Criteria andGmtModifiedNotEqualTo(LocalDateTime value) {
             addCriterion("gmt_modified <>", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedGreaterThan(Date value) {
+        public Criteria andGmtModifiedGreaterThan(LocalDateTime value) {
             addCriterion("gmt_modified >", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedGreaterThanOrEqualTo(Date value) {
+        public Criteria andGmtModifiedGreaterThanOrEqualTo(LocalDateTime value) {
             addCriterion("gmt_modified >=", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedLessThan(Date value) {
+        public Criteria andGmtModifiedLessThan(LocalDateTime value) {
             addCriterion("gmt_modified <", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedLessThanOrEqualTo(Date value) {
+        public Criteria andGmtModifiedLessThanOrEqualTo(LocalDateTime value) {
             addCriterion("gmt_modified <=", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedIn(List<Date> values) {
+        public Criteria andGmtModifiedIn(List<LocalDateTime> values) {
             addCriterion("gmt_modified in", values, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedNotIn(List<Date> values) {
+        public Criteria andGmtModifiedNotIn(List<LocalDateTime> values) {
             addCriterion("gmt_modified not in", values, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedBetween(Date value1, Date value2) {
+        public Criteria andGmtModifiedBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("gmt_modified between", value1, value2, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedNotBetween(Date value1, Date value2) {
+        public Criteria andGmtModifiedNotBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("gmt_modified not between", value1, value2, "gmtModified");
             return (Criteria) this;
         }
@@ -622,76 +622,6 @@ public class SysMenuExample {
 
         public Criteria andMenuUrlNotBetween(String value1, String value2) {
             addCriterion("menu_url not between", value1, value2, "menuUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andApiUrlIsNull() {
-            addCriterion("api_url is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andApiUrlIsNotNull() {
-            addCriterion("api_url is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andApiUrlEqualTo(String value) {
-            addCriterion("api_url =", value, "apiUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andApiUrlNotEqualTo(String value) {
-            addCriterion("api_url <>", value, "apiUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andApiUrlGreaterThan(String value) {
-            addCriterion("api_url >", value, "apiUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andApiUrlGreaterThanOrEqualTo(String value) {
-            addCriterion("api_url >=", value, "apiUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andApiUrlLessThan(String value) {
-            addCriterion("api_url <", value, "apiUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andApiUrlLessThanOrEqualTo(String value) {
-            addCriterion("api_url <=", value, "apiUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andApiUrlLike(String value) {
-            addCriterion("api_url like", value, "apiUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andApiUrlNotLike(String value) {
-            addCriterion("api_url not like", value, "apiUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andApiUrlIn(List<String> values) {
-            addCriterion("api_url in", values, "apiUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andApiUrlNotIn(List<String> values) {
-            addCriterion("api_url not in", values, "apiUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andApiUrlBetween(String value1, String value2) {
-            addCriterion("api_url between", value1, value2, "apiUrl");
-            return (Criteria) this;
-        }
-
-        public Criteria andApiUrlNotBetween(String value1, String value2) {
-            addCriterion("api_url not between", value1, value2, "apiUrl");
             return (Criteria) this;
         }
 

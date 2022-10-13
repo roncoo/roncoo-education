@@ -17,28 +17,36 @@ public class SysMenuRoleDaoImpl implements SysMenuRoleDao {
     @Autowired
     private SysMenuRoleMapper sysMenuRoleMapper;
 
+    @Override
     public int save(SysMenuRole record) {
-        record.setId(IdWorker.getId());
+        if (record.getId() == null) {
+            record.setId(IdWorker.getId());
+        }
         return this.sysMenuRoleMapper.insertSelective(record);
     }
 
+    @Override
     public int deleteById(Long id) {
         return this.sysMenuRoleMapper.deleteByPrimaryKey(id);
     }
 
+    @Override
     public int updateById(SysMenuRole record) {
         return this.sysMenuRoleMapper.updateByPrimaryKeySelective(record);
     }
 
+    @Override
     public int updateByExampleSelective(SysMenuRole record, SysMenuRoleExample example) {
         return this.sysMenuRoleMapper.updateByExampleSelective(record, example);
     }
 
+    @Override
     public SysMenuRole getById(Long id) {
         return this.sysMenuRoleMapper.selectByPrimaryKey(id);
     }
 
-    public Page<SysMenuRole> listForPage(int pageCurrent, int pageSize, SysMenuRoleExample example) {
+    @Override
+    public Page<SysMenuRole> page(int pageCurrent, int pageSize, SysMenuRoleExample example) {
         int count = this.sysMenuRoleMapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);
         pageCurrent = PageUtil.checkPageCurrent(count, pageSize, pageCurrent);
@@ -52,6 +60,13 @@ public class SysMenuRoleDaoImpl implements SysMenuRoleDao {
     public List<SysMenuRole> listByRoleId(Long roleId) {
         SysMenuRoleExample example = new SysMenuRoleExample();
         example.createCriteria().andRoleIdEqualTo(roleId);
+        return this.sysMenuRoleMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<SysMenuRole> listByRoleIds(List<Long> roleIds) {
+        SysMenuRoleExample example = new SysMenuRoleExample();
+        example.createCriteria().andRoleIdIn(roleIds);
         return this.sysMenuRoleMapper.selectByExample(example);
     }
 

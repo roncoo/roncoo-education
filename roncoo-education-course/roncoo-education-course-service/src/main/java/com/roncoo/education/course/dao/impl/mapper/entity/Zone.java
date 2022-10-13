@@ -1,14 +1,14 @@
 package com.roncoo.education.course.dao.impl.mapper.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Zone implements Serializable {
     private Long id;
 
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
 
-    private Date gmtModified;
+    private LocalDateTime gmtModified;
 
     private Integer statusId;
 
@@ -17,8 +17,6 @@ public class Zone implements Serializable {
     private String zoneName;
 
     private String zoneDesc;
-
-    private Integer zoneLocation;
 
     private static final long serialVersionUID = 1L;
 
@@ -30,19 +28,19 @@ public class Zone implements Serializable {
         this.id = id;
     }
 
-    public Date getGmtCreate() {
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModified() {
+    public LocalDateTime getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(LocalDateTime gmtModified) {
         this.gmtModified = gmtModified;
     }
 
@@ -78,14 +76,6 @@ public class Zone implements Serializable {
         this.zoneDesc = zoneDesc == null ? null : zoneDesc.trim();
     }
 
-    public Integer getZoneLocation() {
-        return zoneLocation;
-    }
-
-    public void setZoneLocation(Integer zoneLocation) {
-        this.zoneLocation = zoneLocation;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -99,7 +89,6 @@ public class Zone implements Serializable {
         sb.append(", sort=").append(sort);
         sb.append(", zoneName=").append(zoneName);
         sb.append(", zoneDesc=").append(zoneDesc);
-        sb.append(", zoneLocation=").append(zoneLocation);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

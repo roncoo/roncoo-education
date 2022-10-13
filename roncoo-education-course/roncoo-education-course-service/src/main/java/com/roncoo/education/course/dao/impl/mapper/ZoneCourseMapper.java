@@ -2,10 +2,9 @@ package com.roncoo.education.course.dao.impl.mapper;
 
 import com.roncoo.education.course.dao.impl.mapper.entity.ZoneCourse;
 import com.roncoo.education.course.dao.impl.mapper.entity.ZoneCourseExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 @Mapper
 public interface ZoneCourseMapper {

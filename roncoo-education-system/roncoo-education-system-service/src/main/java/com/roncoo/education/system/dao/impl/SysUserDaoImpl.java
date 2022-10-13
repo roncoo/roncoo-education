@@ -1,6 +1,5 @@
 package com.roncoo.education.system.dao.impl;
 
-import cn.hutool.core.collection.CollectionUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
@@ -8,7 +7,6 @@ import com.roncoo.education.system.dao.SysUserDao;
 import com.roncoo.education.system.dao.impl.mapper.SysUserMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUser;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUserExample;
-import com.roncoo.education.system.dao.impl.mapper.entity.SysUserExample.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,28 +17,36 @@ public class SysUserDaoImpl implements SysUserDao {
     @Autowired
     private SysUserMapper sysUserMapper;
 
+    @Override
     public int save(SysUser record) {
-        record.setId(IdWorker.getId());
+        if (record.getId() == null) {
+            record.setId(IdWorker.getId());
+        }
         return this.sysUserMapper.insertSelective(record);
     }
 
+    @Override
     public int deleteById(Long id) {
         return this.sysUserMapper.deleteByPrimaryKey(id);
     }
 
+    @Override
     public int updateById(SysUser record) {
         return this.sysUserMapper.updateByPrimaryKeySelective(record);
     }
 
+    @Override
     public int updateByExampleSelective(SysUser record, SysUserExample example) {
         return this.sysUserMapper.updateByExampleSelective(record, example);
     }
 
+    @Override
     public SysUser getById(Long id) {
         return this.sysUserMapper.selectByPrimaryKey(id);
     }
 
-    public Page<SysUser> listForPage(int pageCurrent, int pageSize, SysUserExample example) {
+    @Override
+    public Page<SysUser> page(int pageCurrent, int pageSize, SysUserExample example) {
         int count = this.sysUserMapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);
         pageCurrent = PageUtil.checkPageCurrent(count, pageSize, pageCurrent);
@@ -51,14 +57,14 @@ public class SysUserDaoImpl implements SysUserDao {
     }
 
     @Override
-    public SysUser getByUserNo(Long userNo) {
+    public SysUser getByMobile(String mobile) {
         SysUserExample example = new SysUserExample();
-        Criteria c = example.createCriteria();
-        c.andUserNoEqualTo(userNo);
-        List<SysUser> list = sysUserMapper.selectByExample(example);
-        if (CollectionUtil.isEmpty(list)) {
+        example.createCriteria().andMobileEqualTo(mobile);
+        List<SysUser> list = this.sysUserMapper.selectByExample(example);
+        if(list.isEmpty()){
             return null;
         }
         return list.get(0);
     }
+
 }

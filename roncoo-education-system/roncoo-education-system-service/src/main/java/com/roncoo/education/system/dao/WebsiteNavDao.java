@@ -15,23 +15,13 @@ public interface WebsiteNavDao {
 
     WebsiteNav getById(Long id);
 
-    Page<WebsiteNav> listForPage(int pageCurrent, int pageSize, WebsiteNavExample example);
+    Page<WebsiteNav> page(int pageCurrent, int pageSize, WebsiteNavExample example);
 
     /**
-     * 根据父类ID查找站点导航信息
-     *
-     * @param parentId
-     * @return
-     * @author wuyun
-     */
-    List<WebsiteNav> listByParentId(Long id);
-
-    /**
-     * 根据状态和父ID信息查找站点导航信息
+     * 根据状态获取集合
      *
      * @param statusId
-     * @param parentId
-     * @author wuyun
+     * @return
      */
-    List<WebsiteNav> listByStatusIdAndParentId(Integer statusId, Long parentId);
+    List<WebsiteNav> listByStatusId(Integer statusId);
 }

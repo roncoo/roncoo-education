@@ -15,13 +15,7 @@ public interface SysUserDao {
 
     SysUser getById(Long id);
 
-    Page<SysUser> listForPage(int pageCurrent, int pageSize, SysUserExample example);
+    Page<SysUser> page(int pageCurrent, int pageSize, SysUserExample example);
 
-    /**
-     * 根据用户编号获取管理员信息
-     *
-     * @param userNo
-     * @return
-     */
-    SysUser getByUserNo(Long userNo);
+    SysUser getByMobile(String mobile);
 }

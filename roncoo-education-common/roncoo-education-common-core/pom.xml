@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.roncoo</groupId>
         <artifactId>roncoo-education-common</artifactId>
-        <version>10.0.0-RELEASE</version>
+        <version>11.0.0-RELEASE</version>
     </parent>
 
     <artifactId>roncoo-education-common-core</artifactId>
@@ -31,7 +31,7 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>5.3.8</version>
+            <version>5.8.5</version>
         </dependency>
 
         <!-- jwt -->
@@ -79,6 +79,11 @@
             <version>2.0.7</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+        </dependency>
+
         <!-- org.apache.httpcomponents -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -101,54 +106,13 @@
         </dependency>
 
         <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-registry-prometheus</artifactId>
-        </dependency>
-
-        <!-- log -->
-        <dependency>
-            <groupId>net.logstash.logback</groupId>
-            <artifactId>logstash-logback-encoder</artifactId>
-            <version>6.4</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jul-to-slf4j</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-    </dependencies>
 
-    <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <targetPath>${project.build.directory}/classes</targetPath>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-                <filtering>true</filtering>
-            </resource>
-            <resource>
-                <directory>src/main/resources/config/${env}</directory>
-                <targetPath>${project.build.directory}/classes</targetPath>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-    </build>
+        <dependency>
+            <groupId>com.roncoo</groupId>
+            <artifactId>roncoo-education-common-log</artifactId>
+        </dependency>
+    </dependencies>
 </project>

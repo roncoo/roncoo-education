@@ -1,15 +1,14 @@
 package com.roncoo.education.course.dao.impl.mapper.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class CourseChapter implements Serializable {
     private Long id;
 
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
 
-    private Date gmtModified;
+    private LocalDateTime gmtModified;
 
     private Integer statusId;
 
@@ -23,10 +22,6 @@ public class CourseChapter implements Serializable {
 
     private Integer isFree;
 
-    private BigDecimal chapterOriginal;
-
-    private BigDecimal chapterDiscount;
-
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -37,19 +32,19 @@ public class CourseChapter implements Serializable {
         this.id = id;
     }
 
-    public Date getGmtCreate() {
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModified() {
+    public LocalDateTime getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(LocalDateTime gmtModified) {
         this.gmtModified = gmtModified;
     }
 
@@ -101,22 +96,6 @@ public class CourseChapter implements Serializable {
         this.isFree = isFree;
     }
 
-    public BigDecimal getChapterOriginal() {
-        return chapterOriginal;
-    }
-
-    public void setChapterOriginal(BigDecimal chapterOriginal) {
-        this.chapterOriginal = chapterOriginal;
-    }
-
-    public BigDecimal getChapterDiscount() {
-        return chapterDiscount;
-    }
-
-    public void setChapterDiscount(BigDecimal chapterDiscount) {
-        this.chapterDiscount = chapterDiscount;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -132,8 +111,6 @@ public class CourseChapter implements Serializable {
         sb.append(", chapterName=").append(chapterName);
         sb.append(", chapterDesc=").append(chapterDesc);
         sb.append(", isFree=").append(isFree);
-        sb.append(", chapterOriginal=").append(chapterOriginal);
-        sb.append(", chapterDiscount=").append(chapterDiscount);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

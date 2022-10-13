@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.roncoo</groupId>
         <artifactId>roncoo-education-course</artifactId>
-        <version>10.0.0-RELEASE</version>
+        <version>11.0.0-RELEASE</version>
     </parent>
 
     <artifactId>roncoo-education-course-service</artifactId>
@@ -31,6 +31,10 @@
             <groupId>com.roncoo</groupId>
             <artifactId>roncoo-education-common-service</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.roncoo</groupId>
+            <artifactId>roncoo-education-common-polyv</artifactId>
+        </dependency>
 
         <!-- test -->
         <dependency>
@@ -41,7 +45,7 @@
     </dependencies>
 
     <build>
-        <finalName>course-service</finalName>
+        <finalName>course</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

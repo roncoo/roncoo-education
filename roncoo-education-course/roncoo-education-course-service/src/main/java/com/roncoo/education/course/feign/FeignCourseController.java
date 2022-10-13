@@ -1,55 +1,39 @@
 package com.roncoo.education.course.feign;
 
-import com.roncoo.education.common.core.base.BaseController;
-import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.service.BaseController;
 import com.roncoo.education.course.feign.biz.FeignCourseBiz;
 import com.roncoo.education.course.feign.interfaces.IFeignCourse;
-import com.roncoo.education.course.feign.interfaces.qo.CourseQO;
-import com.roncoo.education.course.feign.interfaces.vo.CourseVO;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.roncoo.education.course.feign.interfaces.vo.CourseViewVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * 课程信息
  *
  * @author wujing
+ * @date 2022-08-27
  */
 @RestController
+@RequiredArgsConstructor
+@RequestMapping("/course/course")
 public class FeignCourseController extends BaseController implements IFeignCourse {
 
-    @Autowired
-    private FeignCourseBiz biz;
+    @NotNull
+    private final FeignCourseBiz biz;
 
     @Override
-    public Page<CourseVO> listForPage(@RequestBody CourseQO qo) {
-        return biz.listForPage(qo);
-    }
-
-    @Override
-    public int save(@RequestBody CourseQO qo) {
-        return biz.save(qo);
-    }
-
-    @Override
-    public int deleteById(@PathVariable(value = "id") Long id) {
-        return biz.deleteById(id);
-    }
-
-    @Override
-    public int updateById(@RequestBody CourseQO qo) {
-        return biz.updateById(qo);
-    }
-
-    @Override
-    public CourseVO getById(@PathVariable(value = "id") Long id) {
+    public CourseViewVO getById(@PathVariable(value = "id") Long id) {
         return biz.getById(id);
     }
 
     @Override
-    public CourseVO getByCourseId(@PathVariable(value = "id") Long id) {
-        return biz.getByCourseId(id);
+    public List<CourseViewVO> listByIds(@RequestBody List<Long> courseIds) {
+        return biz.listByIds(courseIds);
     }
-
 }

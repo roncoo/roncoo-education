@@ -1,35 +1,28 @@
 package com.roncoo.education.user.dao.impl.mapper.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Lecturer implements Serializable {
     private Long id;
 
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
 
-    private Date gmtModified;
+    private LocalDateTime gmtModified;
 
     private Integer statusId;
 
     private Integer sort;
 
-    private Long lecturerUserNo;
-
     private String lecturerName;
 
     private String lecturerMobile;
 
-    private String lecturerEmail;
+    private String lecturerPosition;
 
-    private String position;
-
-    private String headImgUrl;
+    private String lecturerHead;
 
     private String introduce;
-
-    private BigDecimal lecturerProportion;
 
     private static final long serialVersionUID = 1L;
 
@@ -41,19 +34,19 @@ public class Lecturer implements Serializable {
         this.id = id;
     }
 
-    public Date getGmtCreate() {
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModified() {
+    public LocalDateTime getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(LocalDateTime gmtModified) {
         this.gmtModified = gmtModified;
     }
 
@@ -73,14 +66,6 @@ public class Lecturer implements Serializable {
         this.sort = sort;
     }
 
-    public Long getLecturerUserNo() {
-        return lecturerUserNo;
-    }
-
-    public void setLecturerUserNo(Long lecturerUserNo) {
-        this.lecturerUserNo = lecturerUserNo;
-    }
-
     public String getLecturerName() {
         return lecturerName;
     }
@@ -97,28 +82,20 @@ public class Lecturer implements Serializable {
         this.lecturerMobile = lecturerMobile == null ? null : lecturerMobile.trim();
     }
 
-    public String getLecturerEmail() {
-        return lecturerEmail;
+    public String getLecturerPosition() {
+        return lecturerPosition;
     }
 
-    public void setLecturerEmail(String lecturerEmail) {
-        this.lecturerEmail = lecturerEmail == null ? null : lecturerEmail.trim();
+    public void setLecturerPosition(String lecturerPosition) {
+        this.lecturerPosition = lecturerPosition == null ? null : lecturerPosition.trim();
     }
 
-    public String getPosition() {
-        return position;
+    public String getLecturerHead() {
+        return lecturerHead;
     }
 
-    public void setPosition(String position) {
-        this.position = position == null ? null : position.trim();
-    }
-
-    public String getHeadImgUrl() {
-        return headImgUrl;
-    }
-
-    public void setHeadImgUrl(String headImgUrl) {
-        this.headImgUrl = headImgUrl == null ? null : headImgUrl.trim();
+    public void setLecturerHead(String lecturerHead) {
+        this.lecturerHead = lecturerHead == null ? null : lecturerHead.trim();
     }
 
     public String getIntroduce() {
@@ -127,14 +104,6 @@ public class Lecturer implements Serializable {
 
     public void setIntroduce(String introduce) {
         this.introduce = introduce == null ? null : introduce.trim();
-    }
-
-    public BigDecimal getLecturerProportion() {
-        return lecturerProportion;
-    }
-
-    public void setLecturerProportion(BigDecimal lecturerProportion) {
-        this.lecturerProportion = lecturerProportion;
     }
 
     @Override
@@ -148,14 +117,11 @@ public class Lecturer implements Serializable {
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", statusId=").append(statusId);
         sb.append(", sort=").append(sort);
-        sb.append(", lecturerUserNo=").append(lecturerUserNo);
         sb.append(", lecturerName=").append(lecturerName);
         sb.append(", lecturerMobile=").append(lecturerMobile);
-        sb.append(", lecturerEmail=").append(lecturerEmail);
-        sb.append(", position=").append(position);
-        sb.append(", headImgUrl=").append(headImgUrl);
+        sb.append(", lecturerPosition=").append(lecturerPosition);
+        sb.append(", lecturerHead=").append(lecturerHead);
         sb.append(", introduce=").append(introduce);
-        sb.append(", lecturerProportion=").append(lecturerProportion);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -1,22 +1,20 @@
 package com.roncoo.education.course.dao.impl.mapper.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class ZoneCourse implements Serializable {
     private Long id;
 
-    private Date gmtCreate;
+    private LocalDateTime gmtCreate;
 
-    private Date gmtModified;
+    private LocalDateTime gmtModified;
 
     private Integer statusId;
 
     private Integer sort;
 
     private Long zoneId;
-
-    private Integer zoneLocation;
 
     private Long courseId;
 
@@ -30,19 +28,19 @@ public class ZoneCourse implements Serializable {
         this.id = id;
     }
 
-    public Date getGmtCreate() {
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModified() {
+    public LocalDateTime getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(LocalDateTime gmtModified) {
         this.gmtModified = gmtModified;
     }
 
@@ -70,14 +68,6 @@ public class ZoneCourse implements Serializable {
         this.zoneId = zoneId;
     }
 
-    public Integer getZoneLocation() {
-        return zoneLocation;
-    }
-
-    public void setZoneLocation(Integer zoneLocation) {
-        this.zoneLocation = zoneLocation;
-    }
-
     public Long getCourseId() {
         return courseId;
     }
@@ -98,7 +88,6 @@ public class ZoneCourse implements Serializable {
         sb.append(", statusId=").append(statusId);
         sb.append(", sort=").append(sort);
         sb.append(", zoneId=").append(zoneId);
-        sb.append(", zoneLocation=").append(zoneLocation);
         sb.append(", courseId=").append(courseId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

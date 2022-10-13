@@ -1,8 +1,7 @@
 package com.roncoo.education.course.dao.impl.mapper.entity;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class CourseChapterExample {
@@ -70,7 +69,7 @@ public class CourseChapterExample {
     }
 
     public void setLimitStart(int limitStart) {
-        this.limitStart = limitStart;
+        this.limitStart=limitStart;
     }
 
     public int getLimitStart() {
@@ -78,7 +77,7 @@ public class CourseChapterExample {
     }
 
     public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
+        this.pageSize=pageSize;
     }
 
     public int getPageSize() {
@@ -196,52 +195,52 @@ public class CourseChapterExample {
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateEqualTo(Date value) {
+        public Criteria andGmtCreateEqualTo(LocalDateTime value) {
             addCriterion("gmt_create =", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotEqualTo(Date value) {
+        public Criteria andGmtCreateNotEqualTo(LocalDateTime value) {
             addCriterion("gmt_create <>", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateGreaterThan(Date value) {
+        public Criteria andGmtCreateGreaterThan(LocalDateTime value) {
             addCriterion("gmt_create >", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateGreaterThanOrEqualTo(Date value) {
+        public Criteria andGmtCreateGreaterThanOrEqualTo(LocalDateTime value) {
             addCriterion("gmt_create >=", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateLessThan(Date value) {
+        public Criteria andGmtCreateLessThan(LocalDateTime value) {
             addCriterion("gmt_create <", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateLessThanOrEqualTo(Date value) {
+        public Criteria andGmtCreateLessThanOrEqualTo(LocalDateTime value) {
             addCriterion("gmt_create <=", value, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateIn(List<Date> values) {
+        public Criteria andGmtCreateIn(List<LocalDateTime> values) {
             addCriterion("gmt_create in", values, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotIn(List<Date> values) {
+        public Criteria andGmtCreateNotIn(List<LocalDateTime> values) {
             addCriterion("gmt_create not in", values, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateBetween(Date value1, Date value2) {
+        public Criteria andGmtCreateBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("gmt_create between", value1, value2, "gmtCreate");
             return (Criteria) this;
         }
 
-        public Criteria andGmtCreateNotBetween(Date value1, Date value2) {
+        public Criteria andGmtCreateNotBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("gmt_create not between", value1, value2, "gmtCreate");
             return (Criteria) this;
         }
@@ -256,52 +255,52 @@ public class CourseChapterExample {
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedEqualTo(Date value) {
+        public Criteria andGmtModifiedEqualTo(LocalDateTime value) {
             addCriterion("gmt_modified =", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedNotEqualTo(Date value) {
+        public Criteria andGmtModifiedNotEqualTo(LocalDateTime value) {
             addCriterion("gmt_modified <>", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedGreaterThan(Date value) {
+        public Criteria andGmtModifiedGreaterThan(LocalDateTime value) {
             addCriterion("gmt_modified >", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedGreaterThanOrEqualTo(Date value) {
+        public Criteria andGmtModifiedGreaterThanOrEqualTo(LocalDateTime value) {
             addCriterion("gmt_modified >=", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedLessThan(Date value) {
+        public Criteria andGmtModifiedLessThan(LocalDateTime value) {
             addCriterion("gmt_modified <", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedLessThanOrEqualTo(Date value) {
+        public Criteria andGmtModifiedLessThanOrEqualTo(LocalDateTime value) {
             addCriterion("gmt_modified <=", value, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedIn(List<Date> values) {
+        public Criteria andGmtModifiedIn(List<LocalDateTime> values) {
             addCriterion("gmt_modified in", values, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedNotIn(List<Date> values) {
+        public Criteria andGmtModifiedNotIn(List<LocalDateTime> values) {
             addCriterion("gmt_modified not in", values, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedBetween(Date value1, Date value2) {
+        public Criteria andGmtModifiedBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("gmt_modified between", value1, value2, "gmtModified");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedNotBetween(Date value1, Date value2) {
+        public Criteria andGmtModifiedNotBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("gmt_modified not between", value1, value2, "gmtModified");
             return (Criteria) this;
         }
@@ -683,126 +682,6 @@ public class CourseChapterExample {
 
         public Criteria andIsFreeNotBetween(Integer value1, Integer value2) {
             addCriterion("is_free not between", value1, value2, "isFree");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalIsNull() {
-            addCriterion("chapter_original is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalIsNotNull() {
-            addCriterion("chapter_original is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalEqualTo(BigDecimal value) {
-            addCriterion("chapter_original =", value, "chapterOriginal");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalNotEqualTo(BigDecimal value) {
-            addCriterion("chapter_original <>", value, "chapterOriginal");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalGreaterThan(BigDecimal value) {
-            addCriterion("chapter_original >", value, "chapterOriginal");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("chapter_original >=", value, "chapterOriginal");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalLessThan(BigDecimal value) {
-            addCriterion("chapter_original <", value, "chapterOriginal");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("chapter_original <=", value, "chapterOriginal");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalIn(List<BigDecimal> values) {
-            addCriterion("chapter_original in", values, "chapterOriginal");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalNotIn(List<BigDecimal> values) {
-            addCriterion("chapter_original not in", values, "chapterOriginal");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("chapter_original between", value1, value2, "chapterOriginal");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterOriginalNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("chapter_original not between", value1, value2, "chapterOriginal");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountIsNull() {
-            addCriterion("chapter_discount is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountIsNotNull() {
-            addCriterion("chapter_discount is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountEqualTo(BigDecimal value) {
-            addCriterion("chapter_discount =", value, "chapterDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountNotEqualTo(BigDecimal value) {
-            addCriterion("chapter_discount <>", value, "chapterDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountGreaterThan(BigDecimal value) {
-            addCriterion("chapter_discount >", value, "chapterDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("chapter_discount >=", value, "chapterDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountLessThan(BigDecimal value) {
-            addCriterion("chapter_discount <", value, "chapterDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("chapter_discount <=", value, "chapterDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountIn(List<BigDecimal> values) {
-            addCriterion("chapter_discount in", values, "chapterDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountNotIn(List<BigDecimal> values) {
-            addCriterion("chapter_discount not in", values, "chapterDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("chapter_discount between", value1, value2, "chapterDiscount");
-            return (Criteria) this;
-        }
-
-        public Criteria andChapterDiscountNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("chapter_discount not between", value1, value2, "chapterDiscount");
             return (Criteria) this;
         }
     }

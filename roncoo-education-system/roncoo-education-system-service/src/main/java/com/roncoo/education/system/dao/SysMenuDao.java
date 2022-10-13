@@ -17,7 +17,7 @@ public interface SysMenuDao {
 
     SysMenu getById(Long id);
 
-    Page<SysMenu> listForPage(int pageCurrent, int pageSize, SysMenuExample example);
+    Page<SysMenu> page(int pageCurrent, int pageSize, SysMenuExample example);
 
     /**
      * 根据父ID获取菜单
@@ -27,27 +27,9 @@ public interface SysMenuDao {
      */
     List<SysMenu> listByParentId(Long parentId);
 
-    /**
-     * 根据父ID、如果菜单类型为空获取所有菜单，包含按钮,则获取所有菜单，不包含按钮
-     *
-     * @param parentId
-     * @param menuType
-     * @return
-     */
-    List<SysMenu> listByParentIdAndNotMenuType(Long parentId, Integer menuType);
+    List<SysMenu> getByIds(List<Long> ids);
 
-    /**
-     * 列出所有菜单
-     *
-     * @return
-     */
-    List<SysMenu> listAll();
+    List<SysMenu> listByExample(SysMenuExample example);
 
-    /**
-     * 根据菜单名称列出菜单信息(模糊查询)
-     *
-     * @param menuName
-     * @return
-     */
-    List<SysMenu> listByMenuName(String menuName);
+    List<SysMenu> selectByExampleWithBLOBs(SysMenuExample example);
 }

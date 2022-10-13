@@ -7,7 +7,6 @@ import com.roncoo.education.system.dao.WebsiteNavDao;
 import com.roncoo.education.system.dao.impl.mapper.WebsiteNavMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNav;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavExample;
-import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavExample.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,27 +14,35 @@ import java.util.List;
 
 @Repository
 public class WebsiteNavDaoImpl implements WebsiteNavDao {
+
     @Autowired
     private WebsiteNavMapper websiteNavMapper;
 
+    @Override
     public int save(WebsiteNav record) {
-        record.setId(IdWorker.getId());
+        if (record.getId() == null) {
+            record.setId(IdWorker.getId());
+        }
         return this.websiteNavMapper.insertSelective(record);
     }
 
+    @Override
     public int deleteById(Long id) {
         return this.websiteNavMapper.deleteByPrimaryKey(id);
     }
 
+    @Override
     public int updateById(WebsiteNav record) {
         return this.websiteNavMapper.updateByPrimaryKeySelective(record);
     }
 
+    @Override
     public WebsiteNav getById(Long id) {
         return this.websiteNavMapper.selectByPrimaryKey(id);
     }
 
-    public Page<WebsiteNav> listForPage(int pageCurrent, int pageSize, WebsiteNavExample example) {
+    @Override
+    public Page<WebsiteNav> page(int pageCurrent, int pageSize, WebsiteNavExample example) {
         int count = this.websiteNavMapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);
         pageCurrent = PageUtil.checkPageCurrent(count, pageSize, pageCurrent);
@@ -46,20 +53,10 @@ public class WebsiteNavDaoImpl implements WebsiteNavDao {
     }
 
     @Override
-    public List<WebsiteNav> listByParentId(Long parentId) {
+    public List<WebsiteNav> listByStatusId(Integer statusId) {
         WebsiteNavExample example = new WebsiteNavExample();
-        Criteria C = example.createCriteria();
-        C.andParentIdEqualTo(parentId);
-        return this.websiteNavMapper.selectByExample(example);
-    }
-
-    @Override
-    public List<WebsiteNav> listByStatusIdAndParentId(Integer statusId, Long parentId) {
-        WebsiteNavExample example = new WebsiteNavExample();
-        Criteria C = example.createCriteria();
-        C.andStatusIdEqualTo(statusId);
-        C.andParentIdEqualTo(parentId);
-        example.setOrderByClause("status_id desc, sort desc, id desc");
+        example.createCriteria().andStatusIdEqualTo(statusId);
+        example.setOrderByClause(" sort asc, id desc ");
         return this.websiteNavMapper.selectByExample(example);
     }
 

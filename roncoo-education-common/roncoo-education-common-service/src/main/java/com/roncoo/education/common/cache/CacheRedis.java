@@ -2,8 +2,10 @@ package com.roncoo.education.common.cache;
 
 import com.roncoo.education.common.core.tools.JSUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -11,17 +13,25 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class CacheRedis {
 
-    private static final int MINUTE = 5;
+    @Value("${spring.cache.redis.time-to-live:60000}")
+    private int timeToLive;
 
     @Autowired
-    private RedisTemplate<Object, Object> redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
+
+    public StringRedisTemplate getStringRedisTemplate() {
+        return stringRedisTemplate;
+    }
 
     /**
      * 默认缓存5分钟
      */
-    public <T> T set(Object key, T t) {
+    public <T> T set(String key, T t) {
         if (t != null) {
-            redisTemplate.opsForValue().set(key, JSUtil.toJSONString(t), MINUTE, TimeUnit.MINUTES);
+            if (t instanceof String) {
+                stringRedisTemplate.opsForValue().set(key, t.toString(), timeToLive, TimeUnit.MICROSECONDS);
+            }
+            stringRedisTemplate.opsForValue().set(key, JSUtil.toJsonString(t), timeToLive, TimeUnit.MICROSECONDS);
         }
         return t;
     }
@@ -29,27 +39,38 @@ public class CacheRedis {
     /**
      * 默认缓存5分钟
      */
-    public <T> T set(Object key, T t, int mimute) {
+    public <T> T set(String key, T t, int time, TimeUnit timeUnit) {
         if (t != null) {
-            redisTemplate.opsForValue().set(key, JSUtil.toJSONString(t), mimute, TimeUnit.MINUTES);
+            stringRedisTemplate.opsForValue().set(key, JSUtil.toJsonString(t), time, timeUnit);
         }
         return t;
     }
 
-    public <T> T get(Object key, Class<T> clazz) {
-        return JSUtil.parseObject(redisTemplate.opsForValue().get(key).toString(), clazz);
+    public String get(String key) {
+        if (null != key) {
+            return stringRedisTemplate.opsForValue().get(key);
+        }
+        return null;
     }
 
-    public void delete(Object key) {
-        redisTemplate.delete(key);
+    public <T> T getByJson(String key, Class<T> clazz) {
+        String value = get(key);
+        if (StringUtils.hasText(value)) {
+            return JSUtil.parseObject(value, clazz);
+        }
+        return null;
     }
 
-    public <T> List<T> list(Object key, Class<T> clazz) {
-        return JSUtil.parseArray(redisTemplate.opsForValue().get(key).toString(), clazz);
+    public void delete(String key) {
+        stringRedisTemplate.delete(key);
     }
 
-    public boolean hasKey(Object key) {
-        return redisTemplate.hasKey(key);
+    public <T> List<T> listByJson(String key, Class<T> clazz) {
+        return JSUtil.parseArray(stringRedisTemplate.opsForValue().get(key), clazz);
+    }
+
+    public boolean hasKey(String key) {
+        return stringRedisTemplate.hasKey(key);
     }
 
 }
