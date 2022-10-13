@@ -17,6 +17,7 @@
 * 所有使用到的框架或者组件都是基于开源项目，代码保证100%开源。
 * 系统功能通用，无论是个人还是企业都可以利用该系统快速搭建一个属于自己的在线教育平台。
 * 如需商业技术服务支持，可使用 [领课教育系统商业版](https://www.roncoo.net/)，功能更丰富，架构更健壮，VIP服务，上线快速。
+* 友情链接：领课教育系统的视频云服务基于 [保利威视频云](https://my.polyv.net/v3/register/?f=qd=lingke) 实现。
 
 ### 前台主要功能介绍
 
@@ -67,7 +68,3 @@
 ### 官方交流群（加群即可获取sql脚本）
 
 <img src="images/qun.jpg" alt="领课教育系统-官方开源群" width="200"/>
-
-## 项目推荐
-
-##### 龙果支付系统(roncoo-pay)：[码云地址](https://gitee.com/roncoocom/roncoo-pay) | [Github地址](https://github.com/roncoo/roncoo-pay)
