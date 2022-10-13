@@ -36,7 +36,7 @@
         <dependency>
             <groupId>com.roncoo</groupId>
             <artifactId>roncoo-spring-boot-starter-fastdfs</artifactId>
-            <version>1.4.2</version>
+            <version>1.4.3</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
@@ -49,7 +49,7 @@
         <dependency>
             <groupId>com.roncoo</groupId>
             <artifactId>roncoo-spring-boot-starter-minio</artifactId>
-            <version>1.4.2</version>
+            <version>1.4.3</version>
         </dependency>
 
         <!-- mybatis -->
