@@ -16,6 +16,7 @@ import com.roncoo.education.system.service.admin.resp.AdminWebsiteNavPageResp;
 import com.roncoo.education.system.service.admin.resp.AdminWebsiteNavViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 
@@ -40,6 +41,9 @@ public class AdminWebsiteNavBiz extends BaseBiz {
     public Result<Page<AdminWebsiteNavPageResp>> page(AdminWebsiteNavPageReq req) {
         WebsiteNavExample example = new WebsiteNavExample();
         Criteria c = example.createCriteria();
+        if (StringUtils.hasText(req.getNavTitle())) {
+            c.andNavTitleLike(PageUtil.rightLike(req.getNavTitle()));
+        }
         example.setOrderByClause("sort asc, id desc");
         Page<WebsiteNav> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminWebsiteNavPageResp> respPage = PageUtil.transform(page, AdminWebsiteNavPageResp.class);
