@@ -4,11 +4,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
+/**
+ * @author fengyw
+ */
 @RestController
 public class IndexController {
 
     @GetMapping("/")
     public Mono<String> index() {
-        return Mono.just("SUCCESS");
+        String html = "<center>Gateway Run Success</center>";
+        return Mono.just(html);
     }
 }
