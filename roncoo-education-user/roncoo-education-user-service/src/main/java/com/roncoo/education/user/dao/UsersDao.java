@@ -4,6 +4,8 @@ import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.user.dao.impl.mapper.entity.Users;
 import com.roncoo.education.user.dao.impl.mapper.entity.UsersExample;
 
+import java.util.List;
+
 public interface UsersDao {
     int save(Users record);
 
@@ -17,4 +19,5 @@ public interface UsersDao {
 
     Users getByMobile(String mobile);
 
+    List<Users> listByIds(List<Long> userIdList);
 }
