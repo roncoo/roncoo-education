@@ -51,15 +51,13 @@ public class ApiUsersBiz extends BaseBiz {
             return Result.error("手机号不能为空");
         }
 
-        if (!req.getCode().equals("888888")) {
-            // 验证码校验
-            String redisCode = cacheRedis.get(Constants.RedisPre.CODE + req.getMobile());
-            if (!StringUtils.hasText(redisCode)) {
-                return Result.error("验证码已经过期");
-            }
-            if (!req.getCode().equals(redisCode)) {
-                return Result.error("验证码不正确");
-            }
+        // 验证码校验
+        String redisCode = cacheRedis.get(Constants.RedisPre.CODE + req.getMobile());
+        if (!StringUtils.hasText(redisCode)) {
+            return Result.error("验证码已经过期");
+        }
+        if (!req.getCode().equals(redisCode)) {
+            return Result.error("验证码不正确");
         }
 
         if (StringUtils.isEmpty(req.getMobilePwd())) {
