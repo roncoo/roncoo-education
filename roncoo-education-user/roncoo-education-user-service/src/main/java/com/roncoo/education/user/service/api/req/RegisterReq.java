@@ -45,7 +45,7 @@ public class RegisterReq implements Serializable {
     @ApiModelProperty(value = "登录IP", required = false)
     private String loginIp;
     @ApiModelProperty(value = "国家", required = false)
-    private String country;
+    private String country = "中国";
     @ApiModelProperty(value = "省", required = false)
     private String province;
     @ApiModelProperty(value = "市", required = false)
