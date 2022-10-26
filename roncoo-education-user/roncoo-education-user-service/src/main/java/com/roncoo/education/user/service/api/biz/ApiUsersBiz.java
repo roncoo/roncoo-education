@@ -6,6 +6,7 @@ import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.aliyun.AliyunSmsUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.LoginStatusEnum;
+import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.common.core.tools.JWTUtil;
 import com.roncoo.education.common.core.tools.NOUtil;
@@ -44,8 +45,7 @@ public class ApiUsersBiz extends BaseBiz {
     @Autowired
     private IFeignSysConfig feignSysConfig;
 
-
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Result<UsersLoginResp> register(RegisterReq req) {
         if (StringUtils.isEmpty(req.getMobile())) {
             return Result.error("手机号不能为空");
@@ -80,7 +80,7 @@ public class ApiUsersBiz extends BaseBiz {
         user = register(req.getMobile(), req.getMobilePwd());
 
         // 登录日志
-        loginLog(user.getId(), LoginStatusEnum.SUCCESS, req.getIp());
+        loginLog(user.getId(), LoginStatusEnum.SUCCESS, req);
 
         UsersLoginResp dto = new UsersLoginResp();
         dto.setMobile(user.getMobile());
@@ -105,13 +105,13 @@ public class ApiUsersBiz extends BaseBiz {
 
         // 密码校验
         if (!DigestUtil.sha1Hex(user.getMobileSalt() + req.getPassword()).equals(user.getMobilePsw())) {
-            loginLog(user.getId(), LoginStatusEnum.FAIL, req.getIp());
+            loginLog(user.getId(), LoginStatusEnum.FAIL, req);
             // 放入缓存，错误次数+1
             return Result.error("账号或者密码不正确");
         }
 
         // 登录日志
-        loginLog(user.getId(), LoginStatusEnum.SUCCESS, req.getIp());
+        loginLog(user.getId(), LoginStatusEnum.SUCCESS, req);
 
         UsersLoginResp dto = new UsersLoginResp();
         dto.setMobile(user.getMobile());
@@ -130,11 +130,17 @@ public class ApiUsersBiz extends BaseBiz {
         return user;
     }
 
-    private void loginLog(Long userId, LoginStatusEnum status, String ip) {
-        LogLogin record = new LogLogin();
+    private void loginLog(Long userId, LoginStatusEnum status, LoginReq req) {
+        LogLogin record = BeanUtil.copyProperties(req, LogLogin.class);
         record.setUserId(userId);
         record.setLoginStatus(status.getCode());
-        record.setLoginIp(ip);
+        logLoginDao.save(record);
+    }
+
+    private void loginLog(Long userId, LoginStatusEnum status, RegisterReq req) {
+        LogLogin record = BeanUtil.copyProperties(req, LogLogin.class);
+        record.setUserId(userId);
+        record.setLoginStatus(status.getCode());
         logLoginDao.save(record);
     }
 

@@ -29,5 +29,15 @@ public class LoginReq implements Serializable {
     private String password;
 
     @ApiModelProperty(value = "登录IP", required = false)
-    private String ip;
+    private String loginIp;
+    @ApiModelProperty(value = "国家", required = false)
+    private String country;
+    @ApiModelProperty(value = "省", required = false)
+    private String province;
+    @ApiModelProperty(value = "市", required = false)
+    private String city;
+    @ApiModelProperty(value = "浏览器", required = false)
+    private String browser;
+    @ApiModelProperty(value = "操作系统", required = false)
+    private String os;
 }
