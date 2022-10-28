@@ -77,8 +77,8 @@ public class ApiUsersBiz extends BaseBiz {
         // 用户注册
         user = register(req.getMobile(), req.getMobilePwd());
 
-        // 登录日志
-        loginLog(user.getId(), LoginStatusEnum.SUCCESS, req);
+        // 日志
+        loginLog(user.getId(), LoginStatusEnum.REGISTER, req);
 
         UsersLoginResp dto = new UsersLoginResp();
         dto.setMobile(user.getMobile());

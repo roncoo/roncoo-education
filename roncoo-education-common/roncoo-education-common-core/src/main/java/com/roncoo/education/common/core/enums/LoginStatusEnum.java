@@ -13,6 +13,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum LoginStatusEnum {
 
+    REGISTER(2, "注册成功", ""),
+    //
     SUCCESS(1, "登录成功", ""),
     //
     FAIL(0, "登录失败", "red");
