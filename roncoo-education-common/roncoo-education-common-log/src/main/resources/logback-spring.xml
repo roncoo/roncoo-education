@@ -25,6 +25,7 @@
     <springProfile name="!local">
         <logger name="com.roncoo.education" level="warn"/>
         <root level="warn">
+            <appender-ref ref="CONSOLE"/>
             <appender-ref ref="FILE"/>
         </root>
     </springProfile>
