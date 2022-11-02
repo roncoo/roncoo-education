@@ -32,7 +32,6 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortOrder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
@@ -65,7 +64,7 @@ public class ApiCourseBiz extends BaseBiz {
     private final CourseChapterDao chapterDao;
     @NotNull
     private final CourseChapterPeriodDao periodDao;
-    @Autowired
+    @NotNull
     private final CategoryDao categoryDao;
 
     @NotNull
