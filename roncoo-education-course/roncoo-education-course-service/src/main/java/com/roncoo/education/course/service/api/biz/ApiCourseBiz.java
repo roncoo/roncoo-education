@@ -108,6 +108,7 @@ public class ApiCourseBiz extends BaseBiz {
         example.createCriteria().andStatusIdEqualTo(StatusIdEnum.YES.getCode());
         List<Category> categories = categoryDao.listByExample(example);
         List<Long> idList = new ArrayList<>();
+        // 需要查询的ID
         idList.add(categoryId);
         filter(idList, categories, categoryId);
         return idList;
