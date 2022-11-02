@@ -10,13 +10,13 @@ import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.elasticsearch.EsCourse;
 import com.roncoo.education.common.elasticsearch.EsPageUtil;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.course.dao.CategoryDao;
 import com.roncoo.education.course.dao.CourseChapterDao;
 import com.roncoo.education.course.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.dao.CourseDao;
-import com.roncoo.education.course.dao.impl.mapper.entity.Course;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapter;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
+import com.roncoo.education.course.dao.impl.mapper.entity.*;
 import com.roncoo.education.course.service.api.req.ApiCoursePageReq;
+import com.roncoo.education.course.service.api.resp.ApiCategoryResp;
 import com.roncoo.education.course.service.api.resp.ApiCoursePageResp;
 import com.roncoo.education.course.service.biz.req.CourseReq;
 import com.roncoo.education.course.service.biz.resp.CourseChapterPeriodResp;
@@ -32,6 +32,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortOrder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
@@ -43,6 +44,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -63,6 +65,8 @@ public class ApiCourseBiz extends BaseBiz {
     private final CourseChapterDao chapterDao;
     @NotNull
     private final CourseChapterPeriodDao periodDao;
+    @Autowired
+    private final CategoryDao categoryDao;
 
     @NotNull
     private final IFeignLecturer feignLecturer;
@@ -80,10 +84,11 @@ public class ApiCourseBiz extends BaseBiz {
 
         BoolQueryBuilder qb = QueryBuilders.boolQuery();
         if (ObjectUtil.isNotEmpty(req.getCategoryId())) {
-            qb.must(QueryBuilders.termQuery("categoryId", req.getCategoryId().toString()));
+            List<Long> categoryIdList = listCategoryId(req.getCategoryId());
+            qb.must(QueryBuilders.termsQuery("categoryId", categoryIdList));
         }
         if (ObjectUtil.isNotEmpty(req.getIsFree())) {
-            qb.must(QueryBuilders.termQuery("isFree", req.getIsFree().toString()));
+            qb.must(QueryBuilders.termQuery("isFree", req.getIsFree()));
         }
         if (StringUtils.hasText(req.getCourseName())) {
             // 模糊查询multiMatchQuery，最佳字段best_fields
@@ -98,6 +103,30 @@ public class ApiCourseBiz extends BaseBiz {
         SearchHits<EsCourse> searchHits = elasticsearchRestTemplate.search(nsb.build(), EsCourse.class, IndexCoordinates.of(EsCourse.COURSE));
         return Result.success(EsPageUtil.transform(searchHits, req.getPageCurrent(), req.getPageSize(), ApiCoursePageResp.class));
     }
+
+    private List<Long> listCategoryId(Long categoryId) {
+        CategoryExample example = new CategoryExample();
+        example.createCriteria().andStatusIdEqualTo(StatusIdEnum.YES.getCode());
+        List<Category> categories = categoryDao.listByExample(example);
+        List<Long> idList = new ArrayList<>();
+        idList.add(categoryId);
+        filter(idList, categories, categoryId);
+        return idList;
+    }
+
+    private List<ApiCategoryResp> filter(List<Long> idList, List<Category> categories, Long categoryId) {
+        List<Category> list = categories.stream().filter(item -> item.getParentId().compareTo(categoryId) == 0).collect(Collectors.toList());
+        if (CollUtil.isNotEmpty(list)) {
+            idList.addAll(list.stream().map(Category::getId).collect(Collectors.toList()));
+            List<ApiCategoryResp> resps = BeanUtil.copyProperties(list, ApiCategoryResp.class);
+            for (ApiCategoryResp resp : resps) {
+                resp.setList(filter(idList, categories, resp.getId()));
+            }
+            return resps;
+        }
+        return new ArrayList<>();
+    }
+
 
     @Cacheable
     public Result<CourseResp> view(CourseReq req) {

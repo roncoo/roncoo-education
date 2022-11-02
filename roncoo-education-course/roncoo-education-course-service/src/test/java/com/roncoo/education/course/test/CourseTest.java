@@ -36,7 +36,7 @@ public class CourseTest extends BaseTest {
     @Test
     public void search() {
         ApiCoursePageReq req = new ApiCoursePageReq();
-        req.setCategoryId(1248244148498632705L);
+        req.setCategoryId(1080756158205726721L);
         //req.setIsFree(1);
         System.out.println(JSUtil.toJsonString(courseBiz.searchForPage(req)));
     }
