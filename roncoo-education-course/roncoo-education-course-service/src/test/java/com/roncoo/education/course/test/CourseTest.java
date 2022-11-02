@@ -1,8 +1,10 @@
 package com.roncoo.education.course.test;
 
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.course.job.CourseJob;
 import com.roncoo.education.course.service.api.biz.ApiCourseBiz;
+import com.roncoo.education.course.service.api.req.ApiCoursePageReq;
 import com.roncoo.education.course.service.biz.req.CourseReq;
 import com.roncoo.education.course.service.biz.resp.CourseResp;
 import lombok.extern.slf4j.Slf4j;
@@ -29,5 +31,13 @@ public class CourseTest extends BaseTest {
     @Test
     public void es() {
         courseJob.course();
+    }
+
+    @Test
+    public void search() {
+        ApiCoursePageReq req = new ApiCoursePageReq();
+        req.setCategoryId(1248244148498632705L);
+        //req.setIsFree(1);
+        System.out.println(JSUtil.toJsonString(courseBiz.searchForPage(req)));
     }
 }

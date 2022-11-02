@@ -80,15 +80,15 @@ public class ApiCourseBiz extends BaseBiz {
 
         BoolQueryBuilder qb = QueryBuilders.boolQuery();
         if (ObjectUtil.isNotEmpty(req.getCategoryId())) {
-            qb.must(QueryBuilders.termQuery(req.getCategoryId().toString(), "categoryId"));
+            qb.must(QueryBuilders.termQuery("categoryId", req.getCategoryId().toString()));
         }
         if (ObjectUtil.isNotEmpty(req.getIsFree())) {
-            qb.must(QueryBuilders.termQuery(req.getIsFree().toString(), "isFree"));
+            qb.must(QueryBuilders.termQuery("isFree", req.getIsFree().toString()));
         }
         if (StringUtils.hasText(req.getCourseName())) {
             // 模糊查询multiMatchQuery，最佳字段best_fields
             qb.must(QueryBuilders.multiMatchQuery(req.getCourseName(), "courseName").type(MultiMatchQueryBuilder.Type.BEST_FIELDS));
-        }else{
+        } else {
             // 课程排序（courseSort）
             nsb.withSort(new FieldSortBuilder("courseSort").order(SortOrder.ASC));
             nsb.withSort(new FieldSortBuilder("id").order(SortOrder.DESC));

@@ -31,11 +31,6 @@ public class ApiCoursePageReq implements Serializable {
     @ApiModelProperty(value = "是否免费(1:免费，0:收费)")
     private Integer isFree;
 
-    @ApiModelProperty(value = "购买人数")
-    private Integer countBuy;
-
-    @ApiModelProperty(value = "学习人数")
-    private Integer countStudy;
     /**
      * 当前页
      */
