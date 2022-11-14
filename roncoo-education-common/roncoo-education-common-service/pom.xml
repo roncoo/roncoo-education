@@ -47,9 +47,9 @@
 
         <!-- minio -->
         <dependency>
-            <groupId>com.roncoo</groupId>
-            <artifactId>roncoo-spring-boot-starter-minio</artifactId>
-            <version>1.4.3</version>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>8.3.3</version>
         </dependency>
 
         <!-- mybatis -->
