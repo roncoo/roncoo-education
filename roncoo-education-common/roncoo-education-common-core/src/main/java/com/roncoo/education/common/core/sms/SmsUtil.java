@@ -78,7 +78,7 @@ public class SmsUtil {
         try {
             JSONObject jn = JSONUtil.parseObj(HttpRequest.post("https://cloud.roncoos.com/gateway/user/api/sms/send/sms").header("Content-Type", "application/json").body(JSONUtil.toJsonStr(map)).execute().body());
             if (!jn.getInt("code").equals(200)) {
-                log.error("发送错误", jn.toString());
+                log.error("短信发送错误={}", jn.toString());
                 return false;
             }
             return true;
