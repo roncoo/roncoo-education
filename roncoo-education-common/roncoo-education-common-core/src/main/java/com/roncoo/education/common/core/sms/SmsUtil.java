@@ -118,7 +118,7 @@ public class SmsUtil {
         try {
             JSONObject resultJson = JSONUtil.parseObj(acsClient.getCommonResponse(request).getData());
             if (!"OK".equals(resultJson.getStr("Code"))) {
-                log.error("短信发送错误={}", resultJson.getStr("Message"));
+                log.error("短信发送错误={}", resultJson);
                 return false;
             }
             return true;
