@@ -2,7 +2,7 @@ package com.roncoo.education.system.feign.biz;
 
 
 import cn.hutool.core.collection.CollUtil;
-import com.roncoo.education.common.core.aliyun.Aliyun;
+import com.roncoo.education.common.core.sms.Sms;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.system.dao.SysConfigDao;
@@ -30,12 +30,11 @@ public class FeignSysConfigBiz extends BaseBiz {
     @NotNull
     private final SysConfigDao dao;
 
-
-    public Aliyun getAliyun() {
+    public Sms getSms() {
         SysConfigExample example = new SysConfigExample();
         List<SysConfig> sysConfigs = dao.listByExample(example);
         Map<String, String> map = sysConfigs.stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
-        return BeanUtil.objToBean(map, Aliyun.class);
+        return BeanUtil.objToBean(map, Sms.class);
     }
 
     public VodConfig getVod() {

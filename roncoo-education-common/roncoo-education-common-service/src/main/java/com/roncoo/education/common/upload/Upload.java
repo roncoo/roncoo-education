@@ -29,6 +29,9 @@ public class Upload implements Serializable {
     /**
      * MinIO
      */
+    private String minioEndpoint;
+    private String minioAccessKey;
+    private String minioSecretKey;
     private String minioDomain;
     private String minioBucket;
 }

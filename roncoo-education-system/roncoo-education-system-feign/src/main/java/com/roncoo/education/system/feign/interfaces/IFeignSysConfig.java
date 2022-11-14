@@ -1,6 +1,6 @@
 package com.roncoo.education.system.feign.interfaces;
 
-import com.roncoo.education.common.core.aliyun.Aliyun;
+import com.roncoo.education.common.core.sms.Sms;
 import com.roncoo.education.system.feign.interfaces.vo.SysConfigViewVO;
 import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -21,8 +21,8 @@ public interface IFeignSysConfig {
     @GetMapping(value = "/getMapByConfigType/{type}")
     Map<String, String> getMapByConfigType(@PathVariable(value = "type") Integer configType);
 
-    @GetMapping(value = "/getAliyun")
-    Aliyun getAliyun();
+    @GetMapping(value = "/getSms")
+    Sms getSms();
 
     @GetMapping(value = "/getVod")
     VodConfig getVod();
