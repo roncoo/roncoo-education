@@ -2,7 +2,7 @@ package com.roncoo.education.common.core.sms;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
-import cn.hutool.http.HttpUtil;
+import cn.hutool.http.HttpRequest;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.aliyuncs.CommonRequest;
@@ -75,17 +75,17 @@ public class SmsUtil {
         map.put("signName", signName);
         map.put("signatureNonce", String.valueOf(System.currentTimeMillis()));
         map.put("sign", sign(map, accessKeySecret));
-       try {
-           JSONObject jn = JSONUtil.parseObj(HttpUtil.post("https://cloud.roncoos.com/gateway/user/api/sms/send/sms", map));
-           if (!jn.getInt("code").equals(200)) {
-               log.error("发送错误", jn.toString());
-               return false;
-           }
-           return true;
-       } catch (Exception e) {
-           log.error("发送错误", e);
-           return false;
-       }
+        try {
+            JSONObject jn = JSONUtil.parseObj(HttpRequest.post("https://cloud.roncoos.com/gateway/user/api/sms/send/sms").header("Content-Type", "application/json").body(JSONUtil.toJsonStr(map)).execute().body());
+            if (!jn.getInt("code").equals(200)) {
+                log.error("发送错误", jn.toString());
+                return false;
+            }
+            return true;
+        } catch (Exception e) {
+            log.error("发送错误", e);
+            return false;
+        }
     }
 
     /**
