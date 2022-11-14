@@ -75,13 +75,17 @@ public class SmsUtil {
         map.put("signName", signName);
         map.put("signatureNonce", String.valueOf(System.currentTimeMillis()));
         map.put("sign", sign(map, accessKeySecret));
-        JSONObject jn = JSONUtil.parseObj(HttpUtil.post("https://cloud.roncoos.com/gateway/user/api/sms/send/sms", map));
-        if (jn.getInt("code").equals(200)) {
-            return true;
-        } else {
-            log.error("发送错误", jn.getStr("msg"));
-            return false;
-        }
+       try {
+           JSONObject jn = JSONUtil.parseObj(HttpUtil.post("https://cloud.roncoos.com/gateway/user/api/sms/send/sms", map));
+           if (!jn.getInt("code").equals(200)) {
+               log.error("发送错误", jn.toString());
+               return false;
+           }
+           return true;
+       } catch (Exception e) {
+           log.error("发送错误", e);
+           return false;
+       }
     }
 
     /**

@@ -144,7 +144,6 @@ public class ApiUsersBiz extends BaseBiz {
 
     public Result<String> sendCode(SendCodeReq req) {
         String code = NOUtil.getVerCode();
-
         if (SmsUtil.sendVerCode(req.getMobile(), code, feignSysConfig.getSms())) {
             // 缓存5分钟
             cacheRedis.set(Constants.RedisPre.CODE + req.getMobile(), code, 5, TimeUnit.MINUTES);
