@@ -3,9 +3,9 @@ package com.roncoo.education.user.service.api.biz;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.roncoo.education.common.cache.CacheRedis;
-import com.roncoo.education.common.core.aliyun.AliyunSmsUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.LoginStatusEnum;
+import com.roncoo.education.common.core.sms.SmsUtil;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.common.core.tools.JWTUtil;
@@ -144,7 +144,8 @@ public class ApiUsersBiz extends BaseBiz {
 
     public Result<String> sendCode(SendCodeReq req) {
         String code = NOUtil.getVerCode();
-        if (AliyunSmsUtil.sendVerCode(req.getMobile(), code, feignSysConfig.getAliyun())) {
+
+        if (SmsUtil.sendVerCode(req.getMobile(), code, feignSysConfig.getSms())) {
             // 缓存5分钟
             cacheRedis.set(Constants.RedisPre.CODE + req.getMobile(), code, 5, TimeUnit.MINUTES);
             return Result.success("发送成功");

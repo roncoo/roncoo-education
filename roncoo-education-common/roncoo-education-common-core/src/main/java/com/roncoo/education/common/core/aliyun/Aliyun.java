@@ -20,10 +20,10 @@ public class Aliyun implements Serializable {
     private String aliyunOssEndpoint;
     private String aliyunOssBucket;
 
-    // 短信签名
-    private String aliyunSmsSignName;
-    private String aliyunSmsAccessKeyId;
-    private String aliyunSmsAccessKeySecret;
-    private String aliyunSmsAuthCode;
+//    // 短信签名
+//    private String aliyunSmsSignName;
+//    private String aliyunSmsAccessKeyId;
+//    private String aliyunSmsAccessKeySecret;
+//    private String aliyunSmsAuthCode;
 
 }
