@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * 点播直播统计
+ * 注册登录统计
  *
  * @author wujing
  */
