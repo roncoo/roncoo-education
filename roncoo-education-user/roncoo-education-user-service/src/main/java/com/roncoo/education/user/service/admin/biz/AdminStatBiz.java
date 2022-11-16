@@ -10,7 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -30,7 +32,16 @@ public class AdminStatBiz extends BaseBiz {
         List<AdminStatLogin> respList = logLoginDao.statByDate(dates);
         if (CollUtil.isNotEmpty(respList)) {
             resp.setDateList(respList.stream().map(AdminStatLogin::getDates).collect(Collectors.toList()));
-            resp.setLoginList(respList.stream().map(AdminStatLogin::getLogins).collect(Collectors.toList()));
+            Map<String, Long> loginMap = respList.stream().filter(s -> s.getLoginStatus().equals(1)).collect(Collectors.toMap(s -> s.getDates(), s -> s.getLogins()));
+            Map<String, Long> registerMap = respList.stream().filter(s -> s.getLoginStatus().equals(2)).collect(Collectors.toMap(s -> s.getDates(), s -> s.getLogins()));
+            List<Long> loginList = new ArrayList<>();
+            List<Long> registerList = new ArrayList<>();
+            for (String data : resp.getDateList()) {
+                loginList.add(loginMap.get(data) == null ? 0 : loginMap.get(data));
+                registerList.add(registerMap.get(data) == null ? 0 : registerMap.get(data));
+            }
+            resp.setLoginList(loginList);
+            resp.setRegisterList(registerList);
         }
         return Result.success(resp);
     }
