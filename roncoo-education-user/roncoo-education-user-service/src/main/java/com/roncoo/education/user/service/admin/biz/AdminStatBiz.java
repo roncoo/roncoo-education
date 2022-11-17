@@ -31,7 +31,7 @@ public class AdminStatBiz extends BaseBiz {
         AdminStatLoginResp resp = new AdminStatLoginResp();
         List<AdminStatLogin> respList = logLoginDao.statByDate(dates);
         if (CollUtil.isNotEmpty(respList)) {
-            resp.setDateList(respList.stream().map(AdminStatLogin::getDates).collect(Collectors.toList()));
+            resp.setDateList(respList.stream().distinct().map(AdminStatLogin::getDates).collect(Collectors.toList()));
             Map<String, Long> loginMap = respList.stream().filter(s -> s.getLoginStatus().equals(1)).collect(Collectors.toMap(s -> s.getDates(), s -> s.getLogins()));
             Map<String, Long> registerMap = respList.stream().filter(s -> s.getLoginStatus().equals(2)).collect(Collectors.toMap(s -> s.getDates(), s -> s.getLogins()));
             List<Long> loginList = new ArrayList<>();
