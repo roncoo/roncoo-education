@@ -1,6 +1,7 @@
 package com.roncoo.education.course.service.admin.biz;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.DesensitizedUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
@@ -67,6 +68,7 @@ public class AdminUserCourseBiz extends BaseBiz {
         if (req.getUserId() != null) {
             c.andUserIdEqualTo(req.getUserId());
         }
+        example.setOrderByClause("id desc");
         Page<UserCourse> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminUserCoursePageResp> respPage = PageUtil.transform(page, AdminUserCoursePageResp.class);
         if (CollUtil.isNotEmpty(respPage.getList())) {
@@ -86,7 +88,7 @@ public class AdminUserCourseBiz extends BaseBiz {
             for (AdminUserCoursePageResp auc : respPage.getList()) {
                 UsersVO usersVO = usersVOMap.get(auc.getUserId());
                 if (ObjectUtil.isNotEmpty(usersVO)) {
-                    auc.setMobile(usersVO.getMobile());
+                    auc.setMobile(DesensitizedUtil.mobilePhone(usersVO.getMobile()));
                     auc.setNickname(usersVO.getNickname());
                 }
 
