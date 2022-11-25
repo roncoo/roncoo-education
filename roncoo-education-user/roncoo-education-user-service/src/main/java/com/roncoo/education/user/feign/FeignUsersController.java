@@ -22,7 +22,7 @@ import java.util.Map;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user/lecturer")
+@RequestMapping("/user/users")
 public class FeignUsersController extends BaseController implements IFeignUsers {
 
     @NotNull
