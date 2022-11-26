@@ -152,7 +152,7 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
         }
 
         // 更新时间，使token不过期
-        stringRedisTemplate.opsForValue().set(userId.toString(), token, Constants.SESSIONTIME, TimeUnit.MINUTES);
+        stringRedisTemplate.opsForValue().set(Constants.RedisPre.USERS_INFO.concat(userId.toString()), token, Constants.SESSIONTIME, TimeUnit.MINUTES);
         return userId;
     }
 

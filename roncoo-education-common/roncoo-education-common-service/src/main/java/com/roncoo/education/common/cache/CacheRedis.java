@@ -28,10 +28,11 @@ public class CacheRedis {
      */
     public <T> T set(String key, T t) {
         if (t != null) {
+            String value = JSUtil.toJsonString(t);
             if (t instanceof String) {
-                stringRedisTemplate.opsForValue().set(key, t.toString(), timeToLive, TimeUnit.MICROSECONDS);
+                value = t.toString();
             }
-            stringRedisTemplate.opsForValue().set(key, JSUtil.toJsonString(t), timeToLive, TimeUnit.MICROSECONDS);
+            stringRedisTemplate.opsForValue().set(key, value, timeToLive, TimeUnit.MICROSECONDS);
         }
         return t;
     }
@@ -41,7 +42,11 @@ public class CacheRedis {
      */
     public <T> T set(String key, T t, int time, TimeUnit timeUnit) {
         if (t != null) {
-            stringRedisTemplate.opsForValue().set(key, JSUtil.toJsonString(t), time, timeUnit);
+            String value = JSUtil.toJsonString(t);
+            if (t instanceof String) {
+                value = t.toString();
+            }
+            stringRedisTemplate.opsForValue().set(key, value, time, timeUnit);
         }
         return t;
     }
@@ -66,11 +71,7 @@ public class CacheRedis {
     }
 
     public <T> List<T> listByJson(String key, Class<T> clazz) {
-        return JSUtil.parseArray(stringRedisTemplate.opsForValue().get(key), clazz);
-    }
-
-    public boolean hasKey(String key) {
-        return stringRedisTemplate.hasKey(key);
+        return JSUtil.parseArray(get(key), clazz);
     }
 
 }
