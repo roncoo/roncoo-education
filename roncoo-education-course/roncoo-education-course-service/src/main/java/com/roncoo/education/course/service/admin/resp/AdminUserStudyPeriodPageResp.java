@@ -33,7 +33,7 @@ public class AdminUserStudyPeriodPageResp implements Serializable {
     private LocalDateTime gmtModified;
 
     @ApiModelProperty(value = "课时ID")
-    private Long periodId;
+    private Long id;
 
     @ApiModelProperty(value = "课时名称")
     private String periodName;

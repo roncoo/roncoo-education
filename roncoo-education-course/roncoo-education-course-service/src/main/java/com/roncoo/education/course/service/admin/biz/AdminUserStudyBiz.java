@@ -73,7 +73,7 @@ public class AdminUserStudyBiz extends BaseBiz {
                 for (AdminUserStudyPageResp resp : respPage.getList()) {
                     resp.setUserStudyPeriodPageRespList(BeanUtil.copyProperties(periodMap.get(resp.getId()), AdminUserStudyPeriodPageResp.class));
                     for (AdminUserStudyPeriodPageResp period : resp.getUserStudyPeriodPageRespList()) {
-                        UserStudy userStudy = userStudyMap.get(period.getPeriodId());
+                        UserStudy userStudy = userStudyMap.get(period.getId());
                         if (ObjectUtil.isNotEmpty(userStudy)) {
                             period.setProgress(userStudy.getProgress());
                             period.setGmtCreate(userStudy.getGmtCreate());
