@@ -2,6 +2,7 @@ package com.roncoo.education.app.gateway;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Result;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,8 +42,11 @@ public class GlobalErrorWebExceptionHandler implements ErrorWebExceptionHandler 
             DataBufferFactory bufferFactory = response.bufferFactory();
             try {
                 //返回响应结果
+                if (ex instanceof BaseException) {
+                    return bufferFactory.wrap(objectMapper.writeValueAsBytes(Result.error(((BaseException) ex).getCode(), ex.getMessage())));
+                }
                 return bufferFactory.wrap(objectMapper.writeValueAsBytes(Result.error(ex.getMessage())));
-            } catch (JsonProcessingException e) {
+            } catch (Exception e) {
                 log.error("Error writing response", ex);
                 return bufferFactory.wrap(new byte[0]);
             }
