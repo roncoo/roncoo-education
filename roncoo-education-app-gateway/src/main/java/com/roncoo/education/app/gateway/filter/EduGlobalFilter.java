@@ -100,7 +100,7 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
                 throw new BaseException(ResultEnum.MENU_NO);
             }
             // 更新时间，使用户菜单不过期
-            stringRedisTemplate.opsForValue().set(Constants.RedisPre.ADMINI_MENU.concat(userId.toString()), tk, Constants.SESSIONTIME, TimeUnit.MINUTES);
+            stringRedisTemplate.expire(Constants.RedisPre.ADMINI_MENU.concat(userId.toString()), Constants.SESSIONTIME, TimeUnit.MINUTES);
         }
         request.mutate().header(Constants.USER_ID, String.valueOf(userId));
         return chain.filter(exchange);
@@ -133,6 +133,10 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
             throw new BaseException("token不存在，请重新登录");
         }
 
+        if (!stringRedisTemplate.hasKey(token)) {
+            throw new BaseException(ResultEnum.TOKEN_PAST);
+        }
+
         // 解析 token
         DecodedJWT jwt = null;
         try {
@@ -152,7 +156,7 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
         }
 
         // 更新时间，使token不过期
-        stringRedisTemplate.opsForValue().set(Constants.RedisPre.USERS_INFO.concat(userId.toString()), token, Constants.SESSIONTIME, TimeUnit.MINUTES);
+        stringRedisTemplate.expire(token, Constants.SESSIONTIME, TimeUnit.MINUTES);
         return userId;
     }
 

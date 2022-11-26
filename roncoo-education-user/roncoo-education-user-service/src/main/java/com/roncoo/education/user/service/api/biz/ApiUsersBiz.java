@@ -115,6 +115,9 @@ public class ApiUsersBiz extends BaseBiz {
         dto.setMobile(user.getMobile());
         dto.setToken(JWTUtil.create(user.getId(), JWTUtil.DATE));
 
+        // token，放入缓存
+        cacheRedis.set(dto.getToken(), user.getId(), 1, TimeUnit.DAYS);
+
         return Result.success(dto);
     }
 
