@@ -66,17 +66,19 @@ public class AdminUserStudyBiz extends BaseBiz {
             List<CourseChapterPeriod> periodList = courseChapterPeriodDao.listByChapterIds(chapterIds);
             if (CollUtil.isNotEmpty(periodList)) {
                 // 记录
-                List<UserStudy> userStudyList =  dao.listByUserIdAndCourseId(req.getUserId(), req.getCourseId());
+                List<UserStudy> userStudyList = dao.listByUserIdAndCourseId(req.getUserId(), req.getCourseId());
                 Map<Long, UserStudy> userStudyMap = userStudyList.stream().collect(Collectors.toMap(item -> item.getPeriodId(), item -> item));
                 Map<Long, List<CourseChapterPeriod>> periodMap = periodList.stream().collect(Collectors.groupingBy(CourseChapterPeriod::getChapterId, Collectors.toList()));
 
                 for (AdminUserStudyPageResp resp : respPage.getList()) {
                     resp.setUserStudyPeriodPageRespList(BeanUtil.copyProperties(periodMap.get(resp.getId()), AdminUserStudyPeriodPageResp.class));
                     for (AdminUserStudyPeriodPageResp period : resp.getUserStudyPeriodPageRespList()) {
-                        UserStudy userStudy=  userStudyMap.get(period.getPeriodId());
-                        period.setProgress(userStudy.getProgress());
-                        period.setGmtCreate(userStudy.getGmtCreate());
-                        period.setGmtModified(userStudy.getGmtModified());
+                        UserStudy userStudy = userStudyMap.get(period.getPeriodId());
+                        if (ObjectUtil.isNotEmpty(userStudy)) {
+                            period.setProgress(userStudy.getProgress());
+                            period.setGmtCreate(userStudy.getGmtCreate());
+                            period.setGmtModified(userStudy.getGmtModified());
+                        }
                     }
                 }
             }
