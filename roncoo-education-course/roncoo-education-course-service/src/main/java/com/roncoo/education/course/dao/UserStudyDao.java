@@ -72,10 +72,17 @@ public interface UserStudyDao {
      */
     int countByExample(UserStudyExample example);
 
+    /**
+     * 获取
+     *
+     * @param periodId
+     * @param userId
+     * @return
+     */
     UserStudy getByPeriodIdAndUserId(Long periodId, Long userId);
 
     /**
-     * 获取当前课程的最新学习课时记录
+     * 获取指定课程的最新学习课时记录
      *
      * @param userId
      * @param courseIdList
@@ -83,11 +90,49 @@ public interface UserStudyDao {
      */
     List<UserStudy> listByUserIdAndCourseIdsForMax(Long userId, List<Long> courseIdList);
 
+    /**
+     * 获取当前学习的课程的最新课时
+     *
+     * @param userId
+     * @param courseId
+     * @return
+     */
     UserStudy getByCourseIdForLast(Long userId, Long courseId);
 
+    /**
+     * 获取指定课程的课时进度总和
+     *
+     * @param userId
+     * @param courseIdList
+     * @return
+     */
     List<UserStudy> listByUserIdAndCourseIdsForSumProgress(Long userId, List<Long> courseIdList);
 
-    List<UserStudy>  listByUserIdAndCourseId(Long userId, Long courseId);
+    /**
+     * 获取指定课程的课时进度总和
+     *
+     * @param courseId
+     * @param userIdList
+     * @return
+     */
+    List<UserStudy> listByCourseIdAndUserIdsForSumProgress(Long courseId, List<Long> userIdList);
 
+    /**
+     * 获取集合
+     *
+     * @param userId
+     * @param courseId
+     * @return
+     */
+    List<UserStudy> listByUserIdAndCourseId(Long userId, Long courseId);
+
+    /**
+     * 删除
+     *
+     * @param periodId
+     * @return
+     */
     int deleteByPeriodId(Long periodId);
+
+
 }

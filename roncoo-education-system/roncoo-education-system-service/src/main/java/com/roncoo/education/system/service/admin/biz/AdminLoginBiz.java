@@ -6,7 +6,6 @@ import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.Constants;
-import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.common.core.tools.JWTUtil;
 import com.roncoo.education.common.core.tools.SHA1Util;
 import com.roncoo.education.system.dao.SysMenuDao;
@@ -69,11 +68,10 @@ public class AdminLoginBiz {
         resp.setToken(JWTUtil.create(sysUser.getId(), JWTUtil.DATE));
 
         // token，放入缓存
-        cacheRedis.set(Constants.RedisPre.USERS_INFO.concat(sysUser.getId().toString()), resp.getToken(), 1, TimeUnit.DAYS);
+        cacheRedis.set(resp.getToken(), sysUser.getId(), 1, TimeUnit.DAYS);
 
         // 获取菜单权限，放入缓存
-        List<String> menus = extracted(sysUser);
-        cacheRedis.set(Constants.RedisPre.ADMINI_MENU.concat(sysUser.getId().toString()), JSUtil.toJsonString(menus), 1, TimeUnit.DAYS);
+        cacheRedis.set(Constants.RedisPre.ADMINI_MENU.concat(sysUser.getId().toString()), extracted(sysUser), 1, TimeUnit.DAYS);
 
         // TODO 登录日志
         return Result.success(resp);

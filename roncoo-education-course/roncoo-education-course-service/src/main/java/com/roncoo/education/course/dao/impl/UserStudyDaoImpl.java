@@ -119,6 +119,15 @@ public class UserStudyDaoImpl extends AbstractBaseJdbc implements UserStudyDao {
     }
 
     @Override
+    public List<UserStudy> listByCourseIdAndUserIdsForSumProgress(Long courseId, List<Long> userIdList) {
+        String sql = "select user_id, sum(progress) as progress from user_study where course_id=:COURSEID and user_id in (:USERIDS) GROUP BY user_id";
+        Map<String, Object> map = new HashMap();
+        map.put("COURSEID", courseId);
+        map.put("USERIDS", userIdList);
+        return namedParameterJdbcTemplate.query(sql, map, new BeanPropertyRowMapper<>(UserStudy.class));
+    }
+
+    @Override
     public List<UserStudy> listByUserIdAndCourseId(Long userId, Long courseId) {
         UserStudyExample example = new UserStudyExample();
         example.createCriteria().andUserIdEqualTo(userId).andCourseIdEqualTo(courseId);

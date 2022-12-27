@@ -28,4 +28,7 @@ public class AdminStatLoginResp implements Serializable {
     @ApiModelProperty(value = "当天登录总次数")
     private List<Long> loginList;
 
+    @ApiModelProperty(value = "当天注册总次数")
+    private List<Long> registerList;
+
 }

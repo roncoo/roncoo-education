@@ -1,6 +1,6 @@
 package com.roncoo.education.system.feign;
 
-import com.roncoo.education.common.core.aliyun.Aliyun;
+import com.roncoo.education.common.core.sms.Sms;
 import com.roncoo.education.system.feign.biz.FeignSysConfigBiz;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.SysConfigViewVO;
@@ -34,8 +34,8 @@ public class FeignSysConfigController implements IFeignSysConfig {
     }
 
     @Override
-    public Aliyun getAliyun() {
-        return biz.getAliyun();
+    public Sms getSms() {
+        return biz.getSms();
     }
 
     @Override

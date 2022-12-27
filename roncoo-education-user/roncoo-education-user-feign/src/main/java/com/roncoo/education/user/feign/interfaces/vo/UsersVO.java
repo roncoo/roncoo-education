@@ -1,4 +1,4 @@
-package com.roncoo.education.course.service.admin.resp;
+package com.roncoo.education.user.feign.interfaces.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
@@ -7,20 +7,19 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
  * <p>
- * ADMIN-课程用户关联表
+ * ADMIN-用户信息
  * </p>
  *
  * @author wujing
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminUserCoursePageResp", description = "ADMIN-课程用户关联表分页")
-public class AdminUserCoursePageResp implements Serializable {
+@ApiModel(value = "AdminUsersViewResp", description = "ADMIN-用户信息查看")
+public class UsersVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -38,24 +37,21 @@ public class AdminUserCoursePageResp implements Serializable {
     @ApiModelProperty(value = "状态(1:正常，0:禁用)")
     private Integer statusId;
 
-    @ApiModelProperty(value = "排序")
-    private Integer sort;
-
-    @ApiModelProperty(value = "用户ID")
-    private Long userId;
-
-    @ApiModelProperty(value = "课程ID")
-    private Long courseId;
-
-    @ApiModelProperty(value = "购买类型(1支付，2免费)")
-    private Integer buyType;
-
     @ApiModelProperty(value = "手机号码")
     private String mobile;
 
     @ApiModelProperty(value = "昵称")
     private String nickname;
 
-    @ApiModelProperty(value = "该课程总进度")
-    private BigDecimal courseProgress = BigDecimal.ZERO;
+    @ApiModelProperty(value = "用户性别(1男，2女，3保密)")
+    private Integer userSex;
+
+    @ApiModelProperty(value = "用户年龄")
+    private Integer userAge;
+
+    @ApiModelProperty(value = "用户头像")
+    private String userHead;
+
+    @ApiModelProperty(value = "备注")
+    private String remark;
 }
