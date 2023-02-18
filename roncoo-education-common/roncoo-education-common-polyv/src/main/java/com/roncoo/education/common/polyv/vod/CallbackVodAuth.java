@@ -1,4 +1,4 @@
-package com.roncoo.education.common.polyv.callback;
+package com.roncoo.education.common.polyv.vod;
 
 import lombok.Data;
 

@@ -6,9 +6,9 @@ import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.*;
 import com.roncoo.education.common.polyv.PolyvVodUtil;
-import com.roncoo.education.common.polyv.callback.CallbackVodAuthCode;
-import com.roncoo.education.common.polyv.vod.PolyvSign;
-import com.roncoo.education.common.polyv.vod.PolyvSignResponse;
+import com.roncoo.education.common.polyv.vod.CallbackVodAuthCode;
+import com.roncoo.education.common.polyv.vod.req.PlayConfigReq;
+import com.roncoo.education.common.polyv.vod.resp.PolyvPlayResponse;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.*;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
@@ -54,7 +54,7 @@ public class AuthCourseBiz extends BaseBiz {
             UserStudy userStudy = userStudyDao.getByCourseIdForLast(ThreadContext.userId(), req.getCourseId());
             if (ObjectUtil.isNotNull(userStudy)) {
                 req.setPeriodId(userStudy.getPeriodId());
-            }else{
+            } else {
                 return Result.error("请选择要学习的课时");
             }
         }
@@ -100,26 +100,28 @@ public class AuthCourseBiz extends BaseBiz {
     }
 
     private void polyvSign(AuthCourseSignReq req, Resource resource, AuthCourseSignResp resp) {
-        PolyvSign polyvSign = new PolyvSign();
-        polyvSign.setIp(req.getClientIp());
-        polyvSign.setUserNo(ThreadContext.userId());
+        PlayConfigReq polyvSign = new PlayConfigReq();
+        polyvSign.setViewerIp(req.getClientIp());
+        polyvSign.setViewerId(ThreadContext.userId().toString());
         polyvSign.setVid(resource.getVideoVid());
-        VodConfig vodConfig = feignSysConfig.getVod();
-
-        PolyvSignResponse polyvSignResponse = PolyvVodUtil.getSignForH5(polyvSign, vodConfig.getPolyvUserId(), vodConfig.getPolyvSecretKey());
-        if (ObjectUtil.isEmpty(polyvSignResponse)) {
-            throw new BaseException("系统繁忙，请重试");
-        }
-        resp.setTs(polyvSignResponse.getTs());
-        resp.setSign(polyvSignResponse.getSign());
-        resp.setToken(polyvSignResponse.getToken());
 
         // 获取code
         CallbackVodAuthCode authCode = new CallbackVodAuthCode();
         authCode.setPeriodId(req.getPeriodId());
         authCode.setShowText("领课开源");
         authCode.setUserId(ThreadContext.userId());
-        resp.setCode(PolyvVodUtil.getPolyvCode(authCode));
+        polyvSign.setCallbackVodAuthCode(authCode);
+
+        VodConfig vodConfig = feignSysConfig.getVod();
+
+        PolyvPlayResponse polyvSignResponse = PolyvVodUtil.getSignForPlay(vodConfig.getPolyvUserId(), vodConfig.getPolyvSecretKey(), polyvSign);
+        if (ObjectUtil.isEmpty(polyvSignResponse)) {
+            throw new BaseException("系统繁忙，请重试");
+        }
+        resp.setTs(polyvSignResponse.getTs());
+        resp.setSign(polyvSignResponse.getSign());
+        resp.setToken(polyvSignResponse.getToken());
+        resp.setCode(polyvSignResponse.getCode());
     }
 
     private Boolean check(CourseChapterPeriod period) {

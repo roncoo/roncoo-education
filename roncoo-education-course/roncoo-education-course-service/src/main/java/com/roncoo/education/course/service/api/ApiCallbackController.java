@@ -1,6 +1,6 @@
 package com.roncoo.education.course.service.api;
 
-import com.roncoo.education.common.polyv.callback.CallbackVodUpload;
+import com.roncoo.education.common.polyv.vod.CallbackVodUpload;
 import com.roncoo.education.common.service.BaseController;
 import com.roncoo.education.course.service.api.biz.ApiCallbackBiz;
 import io.swagger.annotations.ApiOperation;

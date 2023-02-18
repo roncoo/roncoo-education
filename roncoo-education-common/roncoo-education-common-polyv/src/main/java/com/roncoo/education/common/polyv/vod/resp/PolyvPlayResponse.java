@@ -1,7 +1,7 @@
 /**
  * Copyright 2015-现在 广州市领课网络科技有限公司
  */
-package com.roncoo.education.common.polyv.vod;
+package com.roncoo.education.common.polyv.vod.resp;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -15,9 +15,11 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-public class PolyvSignResponse implements Serializable {
+public class PolyvPlayResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    private String vid;
 
     private String ts;
 
@@ -25,4 +27,5 @@ public class PolyvSignResponse implements Serializable {
 
     private String token;
 
+    private String code;
 }

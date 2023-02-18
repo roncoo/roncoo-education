@@ -6,9 +6,9 @@ import com.roncoo.education.common.core.enums.VideoStatusEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.common.polyv.PolyvVodUtil;
-import com.roncoo.education.common.polyv.callback.CallbackVodUpload;
-import com.roncoo.education.common.polyv.enums.CallbackEventTypeEnum;
-import com.roncoo.education.common.polyv.vod.response.VideoInfoResponse;
+import com.roncoo.education.common.polyv.vod.CallbackEventTypeEnum;
+import com.roncoo.education.common.polyv.vod.CallbackVodUpload;
+import com.roncoo.education.common.polyv.vod.resp.PolyvVideoInfoResp;
 import com.roncoo.education.course.dao.ResourceDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
@@ -48,9 +48,9 @@ public class ApiCallbackBiz {
 
         if (CallbackEventTypeEnum.PASS.getCode().equals(callbackVodUpload.getType())) {
             // 视频审核完成处理
-            List<VideoInfoResponse> responseList = PolyvVodUtil.getVideoInfo(Collections.singletonList(callbackVodUpload.getVid()), vodConfig.getPolyvUserId(), vodConfig.getPolyvSecretKey());
+            List<PolyvVideoInfoResp> responseList = PolyvVodUtil.getVideoInfo(Collections.singletonList(callbackVodUpload.getVid()), vodConfig.getPolyvUserId(), vodConfig.getPolyvSecretKey());
             if (CollUtil.isNotEmpty(responseList)) {
-                VideoInfoResponse videoResponse = responseList.get(0);
+                PolyvVideoInfoResp videoResponse = responseList.get(0);
                 Resource resource = resourceDao.getByVideoVid(callbackVodUpload.getVid());
                 if (ObjectUtil.isNotEmpty(resource)) {
                     resource.setVideoLength(videoResponse.getBasicInfo().getDuration().toString());

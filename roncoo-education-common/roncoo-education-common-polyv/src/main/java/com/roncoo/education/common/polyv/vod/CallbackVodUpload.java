@@ -1,10 +1,13 @@
-package com.roncoo.education.common.polyv.callback;
+package com.roncoo.education.common.polyv.vod;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.util.List;
 
+/**
+ * @author fengyw
+ */
 @Data
 @Accessors(chain = true)
 public class CallbackVodUpload {

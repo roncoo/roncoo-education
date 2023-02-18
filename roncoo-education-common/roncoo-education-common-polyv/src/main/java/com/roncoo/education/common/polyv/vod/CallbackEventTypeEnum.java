@@ -1,4 +1,4 @@
-package com.roncoo.education.common.polyv.enums;
+package com.roncoo.education.common.polyv.vod;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

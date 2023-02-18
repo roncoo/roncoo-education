@@ -1,4 +1,4 @@
-package com.roncoo.education.common.polyv.vod.response;
+package com.roncoo.education.common.polyv.vod.resp;
 
 import lombok.Data;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @author LYQ
  */
 @Data
-public class VideoInfoResponse implements Serializable {
+public class PolyvVideoInfoResp implements Serializable {
 
     private static final long serialVersionUID = 2222356652726536710L;
 
