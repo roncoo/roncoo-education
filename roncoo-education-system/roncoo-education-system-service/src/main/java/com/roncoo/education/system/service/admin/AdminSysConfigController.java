@@ -71,4 +71,10 @@ public class AdminSysConfigController {
     public Result<String> delete(@RequestParam Long id) {
         return biz.delete(id);
     }
+
+    @ApiOperation(value = "视频云初始化设置", notes = "视频云初始化设置")
+    @GetMapping(value = "/video/init")
+    public Result<String> videoInit() {
+        return biz.init();
+    }
 }

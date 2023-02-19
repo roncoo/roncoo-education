@@ -26,7 +26,7 @@ import java.util.TreeMap;
 @Slf4j
 public class SmsUtil {
 
-    public static Boolean sendVerCode(String mobile, String code, Sms sms) {
+    public static Boolean sendVerCode(String mobile, String code, SmsConfig sms) {
         if (sms.getSmsPlatform().equals(SmsPlatformEnum.LK_YUN.getCode())) {
             return lkyun(mobile, getParamForCode(code), sms.getLkyunSmsSignName(), sms.getLkyunSmsAuthCode(), sms.getLkyunSmsAccessKeyId(), sms.getLkyunSmsAccessKeySecret());
         } else if (sms.getSmsPlatform().equals(SmsPlatformEnum.ALI_YUN.getCode())) {

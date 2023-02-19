@@ -9,11 +9,13 @@ import com.roncoo.education.common.core.enums.SmsPlatformEnum;
 import com.roncoo.education.common.core.enums.StoragePlatformEnum;
 import com.roncoo.education.common.core.enums.VodPlatformEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.polyv.PolyvVodUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.system.dao.SysConfigDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfig;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfigExample;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfigExample.Criteria;
+import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
 import com.roncoo.education.system.service.admin.req.AdminSysConfigEditReq;
 import com.roncoo.education.system.service.admin.req.AdminSysConfigListReq;
 import com.roncoo.education.system.service.admin.req.AdminSysConfigPageReq;
@@ -26,6 +28,8 @@ import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * ADMIN-系统配置
@@ -139,5 +143,17 @@ public class AdminSysConfigBiz extends BaseBiz {
 
         List<SysConfig> configList = dao.listByExample(example);
         return Result.success(BeanUtil.copyProperties(configList, AdminSysConfigListResp.class));
+    }
+
+    public Result<String> init() {
+        Map<String, String> configMap = dao.listByExample(new SysConfigExample()).stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
+        VodConfig vodConfig = BeanUtil.objToBean(configMap, VodConfig.class);
+        // 设置视频回调地址
+        String callbackUrl = vodConfig.getWebsiteDomain() + "gateway/course/api/callback/polyv/upload";
+        PolyvVodUtil.setCallback(vodConfig.getPolyvAppId(), vodConfig.getPolyvAppSecret(), callbackUrl);
+
+        // 开启加密，使用web授权
+        PolyvVodUtil.setPlaysafe(vodConfig.getPolyvUserId(), vodConfig.getPolyvSecretKey(), "1", "web");
+        return Result.success("操作成功");
     }
 }

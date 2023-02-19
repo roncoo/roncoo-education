@@ -1,6 +1,6 @@
 package com.roncoo.education.system.feign;
 
-import com.roncoo.education.common.core.sms.Sms;
+import com.roncoo.education.common.core.sms.SmsConfig;
 import com.roncoo.education.system.feign.biz.FeignSysConfigBiz;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.SysConfigViewVO;
@@ -34,7 +34,7 @@ public class FeignSysConfigController implements IFeignSysConfig {
     }
 
     @Override
-    public Sms getSms() {
+    public SmsConfig getSms() {
         return biz.getSms();
     }
 
