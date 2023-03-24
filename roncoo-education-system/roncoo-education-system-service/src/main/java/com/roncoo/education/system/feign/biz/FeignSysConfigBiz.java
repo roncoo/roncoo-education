@@ -1,22 +1,17 @@
 package com.roncoo.education.system.feign.biz;
 
-
-import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.sms.SmsConfig;
-import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.pay.util.AliPayConfig;
+import com.roncoo.education.common.pay.util.WxPayConfig;
 import com.roncoo.education.common.service.BaseBiz;
-import com.roncoo.education.system.dao.SysConfigDao;
-import com.roncoo.education.system.dao.impl.mapper.entity.SysConfig;
-import com.roncoo.education.system.dao.impl.mapper.entity.SysConfigExample;
-import com.roncoo.education.system.feign.interfaces.vo.SysConfigViewVO;
+import com.roncoo.education.system.feign.interfaces.vo.PayConfig;
+import com.roncoo.education.system.feign.interfaces.vo.SysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
+import com.roncoo.education.system.service.biz.SysConfigCommonBiz;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * 系统配置
@@ -28,36 +23,26 @@ import java.util.stream.Collectors;
 public class FeignSysConfigBiz extends BaseBiz {
 
     @NotNull
-    private final SysConfigDao dao;
+    private final SysConfigCommonBiz sysConfigCommonBiz;
+
+    public SysConfig getSys() {
+        return sysConfigCommonBiz.getSysConfig(SysConfig.class);
+    }
+
+    public PayConfig getPay() {
+        PayConfig payConfig = new PayConfig();
+        payConfig.setAliPayConfig(sysConfigCommonBiz.getSysConfig(AliPayConfig.class));
+        payConfig.setWxPayConfig(sysConfigCommonBiz.getSysConfig(WxPayConfig.class));
+        return payConfig;
+    }
 
     public SmsConfig getSms() {
-        SysConfigExample example = new SysConfigExample();
-        List<SysConfig> sysConfigs = dao.listByExample(example);
-        Map<String, String> map = sysConfigs.stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
-        return BeanUtil.objToBean(map, SmsConfig.class);
+        return sysConfigCommonBiz.getSysConfig(SmsConfig.class);
     }
 
     public VodConfig getVod() {
-        SysConfigExample example = new SysConfigExample();
-        List<SysConfig> sysConfigs = dao.listByExample(example);
-        Map<String, String> map = sysConfigs.stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
-        return BeanUtil.objToBean(map, VodConfig.class);
+        return sysConfigCommonBiz.getSysConfig(VodConfig.class);
     }
 
-    public Map<String, String> getMapByConfigType(Integer configType) {
-        SysConfigExample example = new SysConfigExample();
-        example.createCriteria().andConfigTypeEqualTo(configType);
-        List<SysConfig> sysConfigs = dao.listByExample(example);
-        return sysConfigs.stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
-    }
 
-    public SysConfigViewVO getByConfigKey(String configKey) {
-        SysConfigExample example = new SysConfigExample();
-        example.createCriteria().andConfigKeyEqualTo(configKey);
-        List<SysConfig> sysConfigs = dao.listByExample(example);
-        if (CollUtil.isNotEmpty(sysConfigs)) {
-            return BeanUtil.copyProperties(sysConfigs.get(0), SysConfigViewVO.class);
-        }
-        return null;
-    }
 }

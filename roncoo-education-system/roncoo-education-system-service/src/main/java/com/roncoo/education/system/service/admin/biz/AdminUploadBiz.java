@@ -6,21 +6,16 @@ package com.roncoo.education.system.service.admin.biz;
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.StoragePlatformEnum;
-import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.upload.Upload;
 import com.roncoo.education.common.upload.UploadFace;
-import com.roncoo.education.system.dao.SysConfigDao;
-import com.roncoo.education.system.dao.impl.mapper.entity.SysConfig;
-import com.roncoo.education.system.dao.impl.mapper.entity.SysConfigExample;
+import com.roncoo.education.system.service.biz.SysConfigCommonBiz;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * 上传接口
@@ -35,10 +30,10 @@ public class AdminUploadBiz {
     private Map<String, UploadFace> uploadFaceMap;
 
     @Autowired
-    private SysConfigDao sysConfigDao;
+    private SysConfigCommonBiz sysConfigCommonBiz;
 
     public Result<String> uploadPic(MultipartFile picFile) {
-        Upload upload = getUploadForSysConfig();
+        Upload upload = sysConfigCommonBiz.getSysConfig(Upload.class);
         if (ObjectUtil.isNotEmpty(upload) || StringUtils.isEmpty(upload.getStoragePlatform())) {
             UploadFace uploadFace = uploadFaceMap.get(StoragePlatformEnum.byCode(Integer.valueOf(upload.getStoragePlatform())).getMode());
             String fileUrl = uploadFace.uploadPic(picFile, upload);
@@ -51,10 +46,4 @@ public class AdminUploadBiz {
         return null;
     }
 
-    private Upload getUploadForSysConfig() {
-        SysConfigExample example = new SysConfigExample();
-        List<SysConfig> sysConfigs = sysConfigDao.listByExample(example);
-        Map<String, String> map = sysConfigs.stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
-        return BeanUtil.objToBean(map, Upload.class);
-    }
 }

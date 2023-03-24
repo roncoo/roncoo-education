@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>com.roncoo</groupId>
-            <artifactId>roncoo-education-common-core</artifactId>
+            <artifactId>roncoo-education-common-service</artifactId>
         </dependency>
     </dependencies>
 
