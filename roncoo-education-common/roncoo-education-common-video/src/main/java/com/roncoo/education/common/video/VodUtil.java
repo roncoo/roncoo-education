@@ -61,9 +61,9 @@ public final class VodUtil {
     public static InfoResp getInfo(VideoConfig req) {
         InfoResp infoResp = new InfoResp();
         if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
-            // 无需初始化
             PrivateYunInfoResp privateYunInfoResp = PrivateYunVodUtil.getInfo(req.getPriYunUrl(), req.getPriYunAccessKeyId(), req.getPriYunAccessKeySecret());
             infoResp.setUsedSpace(BigDecimal.valueOf(privateYunInfoResp.getStorage()).divide(BigDecimal.valueOf(1024 * 1024 * 1024)).setScale(2, BigDecimal.ROUND_HALF_UP));
+            return infoResp;
         }
         if (VodPlatformEnum.POLYV.getCode().equals(req.getVodPlatform())) {
             JSONObject result = PolyvVodUtil.getUserMain(req.getPolyvUserId(), req.getPolyvSecretKey());
