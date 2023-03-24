@@ -46,13 +46,13 @@ public class ControllerGenerator {
         List<FileOutConfig> focList = new ArrayList<>();
 
         // service.dao
-        //focList.addAll(serviceDaoList());
+        focList.addAll(serviceDaoList());
 
         // service.api
         //focList.addAll(serviceApiList());
 
         // service.auth
-        //focList.addAll(serviceAuthList());
+        focList.addAll(serviceAuthList());
 
         // service.admin
         focList.addAll(serviceAdminList());

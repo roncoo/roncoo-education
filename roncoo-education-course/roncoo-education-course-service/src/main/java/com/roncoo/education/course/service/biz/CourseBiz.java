@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +43,10 @@ public class CourseBiz extends BaseBiz {
     private final CourseChapterDao chapterDao;
     @NotNull
     private final CourseChapterPeriodDao periodDao;
+    @NotNull
+    private final UserCourseCommentDao userCourseCommentDao;
+    @NotNull
+    private final UserCourseCollectDao userCourseCollectDao;
     @NotNull
     private final ResourceDao resourceDao;
     @NotNull
@@ -83,6 +88,12 @@ public class CourseBiz extends BaseBiz {
             if (CollUtil.isNotEmpty(userStudyList)) {
                 userStudyProgressMap = userStudyList.stream().collect(Collectors.toMap(UserStudy::getPeriodId, UserStudy::getProgress));
             }
+
+            // 课程收藏状态
+            UserCourseCollect userCourseCollect = userCourseCollectDao.getByCouserIdAndUserId(req.getCourseId(), userId);
+            if (ObjectUtil.isNotEmpty(userCourseCollect)) {
+                courseResp.setCourseCollect(Boolean.TRUE);
+            }
         }
         // 获取讲师信息
         LecturerViewVO lecturerViewVO = feignLecturer.getById(course.getLecturerId());
@@ -113,6 +124,24 @@ public class CourseBiz extends BaseBiz {
                 }
             }
         }
+
+        // 课程评论信息
+        List<UserCourseComment> userCourseCommentList = userCourseCommentDao.listByCourseIdAndStatusId(course.getId(), StatusIdEnum.YES.getCode());
+        if (CollUtil.isNotEmpty(userCourseCommentList)) {
+            courseResp.setCourseCommentRespList(filter(userCourseCommentList, 0L));
+        }
         return Result.success(courseResp);
+    }
+
+    private List<CourseCommentResp> filter(List<UserCourseComment> userCourseComments, Long commentId) {
+        List<UserCourseComment> list = userCourseComments.stream().filter(item -> item.getCommentId().compareTo(commentId) == 0).collect(Collectors.toList());
+        if (CollUtil.isNotEmpty(list)) {
+            List<CourseCommentResp> resps = BeanUtil.copyProperties(list, CourseCommentResp.class);
+            for (CourseCommentResp resp : resps) {
+                resp.setCourseCommentRespList(filter(userCourseComments, resp.getCommentId()));
+            }
+            return resps;
+        }
+        return new ArrayList<>();
     }
 }

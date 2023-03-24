@@ -48,7 +48,7 @@ public class AdminVodConfigResp {
     }
 
     /**
-     * 私有化
+     * 私有云
      */
     @Data
     @NoArgsConstructor

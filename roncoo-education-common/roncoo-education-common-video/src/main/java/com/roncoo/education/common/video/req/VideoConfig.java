@@ -62,15 +62,15 @@ public class VideoConfig implements Serializable {
     private String polyvAppSecret;
 
     /**
-     * 私有化，Url
+     * 私有云，Url
      */
     private String priYunUrl;
     /**
-     * 私有化，AccessKeyId
+     * 私有云，AccessKeyId
      */
     private String priYunAccessKeyId;
     /**
-     * 私有化，AccessKeySecret
+     * 私有云，AccessKeySecret
      */
     private String priYunAccessKeySecret;
 }
