@@ -9,8 +9,8 @@ import com.roncoo.education.common.core.enums.SmsPlatformEnum;
 import com.roncoo.education.common.core.enums.StoragePlatformEnum;
 import com.roncoo.education.common.core.enums.VodPlatformEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.polyv.PolyvVodUtil;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.video.VodUtil;
 import com.roncoo.education.system.dao.SysConfigDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfig;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfigExample;
@@ -148,12 +148,8 @@ public class AdminSysConfigBiz extends BaseBiz {
     public Result<String> init() {
         Map<String, String> configMap = dao.listByExample(new SysConfigExample()).stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
         VodConfig vodConfig = BeanUtil.objToBean(configMap, VodConfig.class);
-        // 设置视频回调地址
-        String callbackUrl = vodConfig.getWebsiteDomain() + "gateway/course/api/callback/polyv/upload";
-        PolyvVodUtil.setCallback(vodConfig.getPolyvAppId(), vodConfig.getPolyvAppSecret(), callbackUrl);
-
-        // 开启加密，使用web授权
-        PolyvVodUtil.setPlaysafe(vodConfig.getPolyvUserId(), vodConfig.getPolyvSecretKey(), "1", "web");
+        // 初始化
+        VodUtil.init(vodConfig);
         return Result.success("操作成功");
     }
 }

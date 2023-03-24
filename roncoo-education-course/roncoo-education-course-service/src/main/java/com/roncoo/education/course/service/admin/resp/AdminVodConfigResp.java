@@ -15,7 +15,12 @@ public class AdminVodConfigResp {
     @ApiModelProperty(value = "使用平台")
     private Integer vodPlatform;
 
+    @ApiModelProperty(value = "视频云上传配置")
+    private String vodUploadConfig;
+
+    @Deprecated
     private PolyvConfig polyvConfig;
+    @Deprecated
     private PriConfig priConfig;
 
     /**
@@ -49,7 +54,6 @@ public class AdminVodConfigResp {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class PriConfig {
-        // TODO
         @ApiModelProperty(value = "sign")
         private String sign;
     }

@@ -1,13 +1,16 @@
 package com.roncoo.education.course.service.admin.biz;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.ResourceTypeEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.common.core.tools.MD5Util;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.video.VodUtil;
 import com.roncoo.education.course.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.dao.ResourceDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
@@ -51,6 +54,8 @@ public class AdminResourceBiz extends BaseBiz {
         VodConfig vodConfig = feignSysConfig.getVod();
         AdminVodConfigResp resp = new AdminVodConfigResp();
         resp.setVodPlatform(vodConfig.getVodPlatform());
+        resp.setVodUploadConfig(VodUtil.getUploadConfig(vodConfig));
+
         resp.setPolyvConfig(getCofigByPolyv(vodConfig));
         return Result.success(resp);
     }
@@ -133,12 +138,19 @@ public class AdminResourceBiz extends BaseBiz {
      * @return 删除结果
      */
     public Result<String> delete(Long id) {
+        Resource resource = dao.getById(id);
+        if (ObjectUtil.isNull(resource)) {
+            return Result.error("资源不存在");
+        }
         List<CourseChapterPeriod> record = courseChapterPeriodDao.listByResourceId(id);
         if (CollUtil.isNotEmpty(record)) {
             log.warn("资源引用={}", JSUtil.toJsonString(record.stream().map(CourseChapterPeriod::getPeriodName).collect(Collectors.toList())));
             return Result.error("该资源存在引用，暂不能删除");
         }
         if (dao.deleteById(id) > 0) {
+            if (ResourceTypeEnum.VIDEO.getCode().equals(resource.getResourceType()) || ResourceTypeEnum.AUDIO.getCode().equals(resource.getResourceType())) {
+                VodUtil.deleteVideo(feignSysConfig.getVod(), resource.getVideoVid());
+            }
             return Result.success("操作成功");
         }
         return Result.error("操作失败");

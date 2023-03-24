@@ -1,7 +1,7 @@
 package com.roncoo.education.course.service.api;
 
-import com.roncoo.education.common.polyv.vod.CallbackVodUpload;
 import com.roncoo.education.common.service.BaseController;
+import com.roncoo.education.common.video.impl.polyv.vod.CallbackVodUpload;
 import com.roncoo.education.course.service.api.biz.ApiCallbackBiz;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

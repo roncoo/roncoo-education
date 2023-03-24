@@ -16,7 +16,7 @@ public enum VodPlatformEnum {
     /**
      * 私有云
      */
-    PRIVATE(1, "私有云(待开发)", "pri%"),
+    PRIVATE(1, "私有化", "pri%"),
 
     /**
      * 保利威

@@ -18,7 +18,7 @@
     <modules>
         <module>roncoo-education-common-log</module>
         <module>roncoo-education-common-core</module>
-        <module>roncoo-education-common-polyv</module>
+        <module>roncoo-education-common-video</module>
         <module>roncoo-education-common-service</module>
     </modules>
 </project>

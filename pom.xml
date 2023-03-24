@@ -143,7 +143,7 @@
             </dependency>
             <dependency>
                 <groupId>com.roncoo</groupId>
-                <artifactId>roncoo-education-common-polyv</artifactId>
+                <artifactId>roncoo-education-common-video</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
