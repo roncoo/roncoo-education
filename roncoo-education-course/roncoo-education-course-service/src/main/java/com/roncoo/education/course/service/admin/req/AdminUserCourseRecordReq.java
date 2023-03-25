@@ -16,13 +16,13 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminUserCoursePageReq", description = "ADMIN-课程用户关联表分页")
-public class AdminUserCoursePageReq implements Serializable {
+@ApiModel(value = "AdminUserCourseRecordReq", description = "ADMIN-课程用户关联表分页")
+public class AdminUserCourseRecordReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "用户ID")
-    private Long userId;
+    @ApiModelProperty(value = "课程ID")
+    private Long courseId;
 
     @ApiModelProperty(value = "购买类型(1支付，2免费)")
     private Integer buyType;

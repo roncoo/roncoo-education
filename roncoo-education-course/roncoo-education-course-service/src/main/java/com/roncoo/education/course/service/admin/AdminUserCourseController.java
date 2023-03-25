@@ -5,8 +5,10 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.service.admin.biz.AdminUserCourseBiz;
 import com.roncoo.education.course.service.admin.req.AdminUserCourseEditReq;
 import com.roncoo.education.course.service.admin.req.AdminUserCoursePageReq;
+import com.roncoo.education.course.service.admin.req.AdminUserCourseRecordReq;
 import com.roncoo.education.course.service.admin.req.AdminUserCourseSaveReq;
 import com.roncoo.education.course.service.admin.resp.AdminUserCoursePageResp;
+import com.roncoo.education.course.service.admin.resp.AdminUserCourseRecordResp;
 import com.roncoo.education.course.service.admin.resp.AdminUserCourseViewResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -30,6 +32,12 @@ public class AdminUserCourseController {
 
     @NotNull
     private final AdminUserCourseBiz biz;
+
+    @ApiOperation(value = "课程用户关联表分页", notes = "课程用户关联表分页")
+    @PostMapping(value = "/record")
+    public Result<Page<AdminUserCourseRecordResp>> record(@RequestBody AdminUserCourseRecordReq req) {
+        return biz.record(req);
+    }
 
     @ApiOperation(value = "课程用户关联表分页", notes = "课程用户关联表分页")
     @PostMapping(value = "/page")
