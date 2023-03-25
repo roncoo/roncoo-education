@@ -64,13 +64,13 @@ public class VideoConfig implements Serializable {
     /**
      * 私有云，Url
      */
-    private String priYunUrl;
+    private String priyUrl;
     /**
      * 私有云，AccessKeyId
      */
-    private String priYunAccessKeyId;
+    private String priyAccessKeyId;
     /**
      * 私有云，AccessKeySecret
      */
-    private String priYunAccessKeySecret;
+    private String priyAccessKeySecret;
 }

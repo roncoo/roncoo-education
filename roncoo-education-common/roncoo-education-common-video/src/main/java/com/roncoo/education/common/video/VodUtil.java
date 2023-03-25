@@ -61,7 +61,7 @@ public final class VodUtil {
     public static InfoResp getInfo(VideoConfig req) {
         InfoResp infoResp = new InfoResp();
         if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
-            PrivateYunInfoResp privateYunInfoResp = PrivateYunVodUtil.getInfo(req.getPriYunUrl(), req.getPriYunAccessKeyId(), req.getPriYunAccessKeySecret());
+            PrivateYunInfoResp privateYunInfoResp = PrivateYunVodUtil.getInfo(req.getPriyUrl(), req.getPriyAccessKeyId(), req.getPriyAccessKeySecret());
             infoResp.setUsedSpace(BigDecimal.valueOf(privateYunInfoResp.getStorage()).divide(BigDecimal.valueOf(1024 * 1024 * 1024)).setScale(2, BigDecimal.ROUND_HALF_UP));
             return infoResp;
         }
@@ -87,7 +87,7 @@ public final class VodUtil {
         if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
             // 上传回调地址
             String callbackUrl = req.getWebsiteDomain() + "gateway/course/api/callback/priyun/vod/upload";
-            return JSUtil.toJsonString(PrivateYunVodUtil.getUploadConfig(req.getPriYunAccessKeyId(), req.getPriYunAccessKeySecret(), req.getPriYunUrl(), callbackUrl, ""));
+            return JSUtil.toJsonString(PrivateYunVodUtil.getUploadConfig(req.getPriyAccessKeyId(), req.getPriyAccessKeySecret(), req.getPriyUrl(), callbackUrl, ""));
         }
         if (VodPlatformEnum.POLYV.getCode().equals(req.getVodPlatform())) {
             return JSUtil.toJsonString(PolyvVodUtil.getUploadConfig(req.getPolyvUserId(), req.getPolyvSecretKey(), req.getPolyvWriteToken()));
@@ -107,7 +107,7 @@ public final class VodUtil {
         resp.setVodPlatform(req.getVodPlatform());
         resp.setVid(vid);
         if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
-            PrivateYunVideoInfoResp videoInfoResp = PrivateYunVodUtil.getVideoInfo(req.getPriYunUrl(), req.getPriYunAccessKeyId(), req.getPriYunAccessKeySecret(), vid, "");
+            PrivateYunVideoInfoResp videoInfoResp = PrivateYunVodUtil.getVideoInfo(req.getPriyUrl(), req.getPriyAccessKeyId(), req.getPriyAccessKeySecret(), vid, "");
             if (ObjectUtil.isNotNull(videoInfoResp)) {
                 resp.setDuration(Integer.valueOf(videoInfoResp.getVideoDuration()));
                 resp.setCoverUrl(videoInfoResp.getVideoThumbnail());
@@ -144,7 +144,7 @@ public final class VodUtil {
      */
     public static void deleteVideo(VideoConfig req, String vid) {
         if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
-            PrivateYunVodUtil.delete(req.getPriYunUrl(), req.getPriYunAccessKeyId(), req.getPriYunAccessKeySecret(), vid, "");
+            PrivateYunVodUtil.delete(req.getPriyUrl(), req.getPriyAccessKeyId(), req.getPriyAccessKeySecret(), vid, "");
             return;
         }
         if (VodPlatformEnum.POLYV.getCode().equals(req.getVodPlatform())) {
@@ -164,7 +164,7 @@ public final class VodUtil {
         if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
             // 播放授权地址
             String authUrl = req.getWebsiteDomain() + "gateway/course/api/callback/priyun/auth";
-            PrivateYunPlayTokenRes tokenResponse = PrivateYunVodUtil.token(req.getPriYunUrl(), authUrl, req.getPriYunAccessKeyId(), req.getPriYunAccessKeySecret(), playConfigReq.getVid(), "", playConfigReq.getExpiresIn().toString(), playConfigReq.getViewerId());
+            PrivateYunPlayTokenRes tokenResponse = PrivateYunVodUtil.token(req.getPriyUrl(), authUrl, req.getPriyAccessKeyId(), req.getPriyAccessKeySecret(), playConfigReq.getVid(), "", playConfigReq.getExpiresIn().toString(), playConfigReq.getViewerId());
             PrivateYunVideoClarityResp playUrls = tokenResponse.getVideoClarityResp();
             if (ObjectUtil.isNotNull(playUrls)) {
                 playUrls.setSdUrl(playUrls.getSdUrl() + "?token=" + tokenResponse.getToken());
