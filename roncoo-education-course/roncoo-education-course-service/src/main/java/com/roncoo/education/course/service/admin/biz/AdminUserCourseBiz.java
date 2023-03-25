@@ -9,13 +9,11 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.CourseChapterPeriodDao;
+import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.UserCourseDao;
 import com.roncoo.education.course.dao.UserStudyDao;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodExample;
-import com.roncoo.education.course.dao.impl.mapper.entity.UserCourse;
-import com.roncoo.education.course.dao.impl.mapper.entity.UserCourseExample;
+import com.roncoo.education.course.dao.impl.mapper.entity.*;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserCourseExample.Criteria;
-import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
 import com.roncoo.education.course.service.admin.req.AdminUserCourseEditReq;
 import com.roncoo.education.course.service.admin.req.AdminUserCoursePageReq;
 import com.roncoo.education.course.service.admin.req.AdminUserCourseSaveReq;
@@ -48,6 +46,8 @@ public class AdminUserCourseBiz extends BaseBiz {
     @NotNull
     private final UserCourseDao dao;
     @NotNull
+    private final CourseDao courseDao;
+    @NotNull
     private final CourseChapterPeriodDao courseChapterPeriodDao;
     @NotNull
     private final UserStudyDao userStudyDao;
@@ -76,6 +76,9 @@ public class AdminUserCourseBiz extends BaseBiz {
             courseChapterPeriodExample.createCriteria().andCourseIdEqualTo(req.getCourseId());
             int periods = courseChapterPeriodDao.countByExample(courseChapterPeriodExample);
 
+            List<Long> couserIdList = respPage.getList().stream().map(item -> item.getCourseId()).collect(Collectors.toList());
+            Map<Long, Course> courseMap = courseDao.listByIds(couserIdList).stream().collect(Collectors.toMap(Course::getId, item -> item));
+
             List<Long> userIdList = respPage.getList().stream().map(item -> item.getUserId()).collect(Collectors.toList());
             Map<Long, UsersVO> usersVOMap = feignUsers.listByIds(userIdList);
 
@@ -86,6 +89,12 @@ public class AdminUserCourseBiz extends BaseBiz {
             }
 
             for (AdminUserCoursePageResp auc : respPage.getList()) {
+                Course course = courseMap.get(auc.getCourseId());
+                if (ObjectUtil.isNotEmpty(course)) {
+                    auc.setCourseName(course.getCourseName());
+                    auc.setCourseLogo(course.getCourseLogo());
+                }
+
                 UsersVO usersVO = usersVOMap.get(auc.getUserId());
                 if (ObjectUtil.isNotEmpty(usersVO)) {
                     auc.setMobile(DesensitizedUtil.mobilePhone(usersVO.getMobile()));

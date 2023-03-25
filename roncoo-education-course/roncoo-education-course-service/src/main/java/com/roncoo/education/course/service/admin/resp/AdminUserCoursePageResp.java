@@ -44,17 +44,23 @@ public class AdminUserCoursePageResp implements Serializable {
     @ApiModelProperty(value = "用户ID")
     private Long userId;
 
-    @ApiModelProperty(value = "课程ID")
-    private Long courseId;
-
-    @ApiModelProperty(value = "购买类型(1支付，2免费)")
-    private Integer buyType;
-
     @ApiModelProperty(value = "手机号码")
     private String mobile;
 
     @ApiModelProperty(value = "昵称")
     private String nickname;
+
+    @ApiModelProperty(value = "课程ID")
+    private Long courseId;
+
+    @ApiModelProperty(value = "课程名称")
+    private String courseName;
+
+    @ApiModelProperty(value = "课程封面")
+    private String courseLogo;
+
+    @ApiModelProperty(value = "购买类型(1支付，2免费)")
+    private Integer buyType;
 
     @ApiModelProperty(value = "该课程总进度")
     private BigDecimal courseProgress = BigDecimal.ZERO;
