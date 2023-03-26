@@ -30,8 +30,7 @@ public class SmsUtil {
         if (sms.getSmsPlatform().equals(SmsPlatformEnum.LK_YUN.getCode())) {
             return lkyun(mobile, getParamForCode(code), sms.getLkyunSmsSignName(), sms.getLkyunSmsAuthCode(), sms.getLkyunSmsAccessKeyId(), sms.getLkyunSmsAccessKeySecret());
         } else if (sms.getSmsPlatform().equals(SmsPlatformEnum.ALI_YUN.getCode())) {
-            String templateParam = "{\"code\":\"{code}\"}".replace("{code}", code);
-            return aliyun(mobile, templateParam, sms.getAliyunSmsSignName(), sms.getAliyunSmsAuthCode(), sms.getAliyunSmsAccessKeyId(), sms.getAliyunSmsAccessKeySecret());
+            return aliyun(mobile, getParamForCode(code), sms.getAliyunSmsSignName(), sms.getAliyunSmsAuthCode(), sms.getAliyunSmsAccessKeyId(), sms.getAliyunSmsAccessKeySecret());
         }
         log.error("该短信平台暂没实现，smsPlatform={}", sms.getSmsPlatform());
         return false;
@@ -78,7 +77,7 @@ public class SmsUtil {
         try {
             JSONObject jn = JSONUtil.parseObj(HttpRequest.post("https://cloud.roncoos.com/gateway/user/api/sms/send/sms").header("Content-Type", "application/json").body(JSONUtil.toJsonStr(map)).execute().body());
             if (!jn.getInt("code").equals(200)) {
-                log.error("短信发送错误={}", jn.toString());
+                log.error("短信发送错误={}，手机号={}，templateParam={}", jn, phone, templateParam);
                 return false;
             }
             return true;
@@ -118,7 +117,7 @@ public class SmsUtil {
         try {
             JSONObject resultJson = JSONUtil.parseObj(acsClient.getCommonResponse(request).getData());
             if (!"OK".equals(resultJson.getStr("Code"))) {
-                log.error("短信发送错误={}", resultJson);
+                log.error("短信发送错误={}，手机号={}，templateParam={}", resultJson, phone, templateParam);
                 return false;
             }
             return true;
