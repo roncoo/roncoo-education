@@ -16,7 +16,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminCategoryListReq", description = "ADMIN-分类分页")
+@ApiModel(description = "ADMIN-分类分页")
 public class AdminCategoryListReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

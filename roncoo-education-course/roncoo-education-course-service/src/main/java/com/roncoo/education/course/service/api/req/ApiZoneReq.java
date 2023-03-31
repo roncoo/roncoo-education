@@ -17,7 +17,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "ApiZoneReq", description = "API-专区")
+@ApiModel(description = "API-专区")
 public class ApiZoneReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

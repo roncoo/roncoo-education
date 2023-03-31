@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminVodConfigResp", description = "Admin-上传音视频配置")
+@ApiModel(description = "Admin-上传音视频配置")
 public class AdminVodConfigResp {
 
     @ApiModelProperty(value = "使用平台")

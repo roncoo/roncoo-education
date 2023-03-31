@@ -1,8 +1,10 @@
 package com.roncoo.education.system.service.api.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -18,7 +20,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "ApiWebsiteCarouselResp", description = "API-广告信息")
+@ApiModel(description = "API-广告信息")
 public class ApiWebsiteCarouselResp implements Serializable {
 
     private static final long serialVersionUID = 1L;

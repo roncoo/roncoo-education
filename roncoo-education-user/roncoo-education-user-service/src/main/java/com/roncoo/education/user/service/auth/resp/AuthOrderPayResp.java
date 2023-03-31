@@ -18,7 +18,7 @@ import java.math.BigDecimal;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AuthOrderPayResp", description = "API-AUTH-订单支付信息表")
+@ApiModel(description = "API-AUTH-订单支付信息表")
 public class AuthOrderPayResp implements Serializable {
 
     private static final long serialVersionUID = 1L;

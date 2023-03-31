@@ -1,8 +1,10 @@
 package com.roncoo.education.course.service.admin.req;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -17,7 +19,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminUserCourseCommentEditReq", description = "ADMIN-课程评论修改")
+@ApiModel(description = "ADMIN-课程评论修改")
 public class AdminUserCourseCommentEditReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

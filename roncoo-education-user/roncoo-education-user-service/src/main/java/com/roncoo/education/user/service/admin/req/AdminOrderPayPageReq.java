@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminOrderPayPageReq", description = "ADMIN-订单支付信息表分页")
+@ApiModel(description = "ADMIN-订单支付信息表分页")
 public class AdminOrderPayPageReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

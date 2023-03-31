@@ -17,7 +17,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "ApiWebsiteNavResp", description = "API-头部导航")
+@ApiModel(description = "API-头部导航")
 public class ApiWebsiteNavResp implements Serializable {
 
     private static final long serialVersionUID = 1L;

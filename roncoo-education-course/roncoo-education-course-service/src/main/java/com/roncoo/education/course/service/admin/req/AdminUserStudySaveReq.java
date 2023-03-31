@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminUserStudySaveReq", description = "ADMIN-课程用户学习日志添加")
+@ApiModel(description = "ADMIN-课程用户学习日志添加")
 public class AdminUserStudySaveReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

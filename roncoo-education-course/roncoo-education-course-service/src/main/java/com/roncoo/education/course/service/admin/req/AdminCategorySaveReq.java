@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminCategorySaveReq", description = "ADMIN-分类添加")
+@ApiModel(description = "ADMIN-分类添加")
 public class AdminCategorySaveReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

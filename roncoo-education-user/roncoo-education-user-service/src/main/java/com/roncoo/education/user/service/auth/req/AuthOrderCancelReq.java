@@ -17,7 +17,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AuthOrderCancelReq", description = "API-AUTH-订单取消支付")
+@ApiModel(description = "API-AUTH-订单取消支付")
 public class AuthOrderCancelReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

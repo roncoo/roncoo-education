@@ -17,7 +17,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "ApiSysConfigWebsiteResp", description = "API-AUTH-系统配置")
+@ApiModel(description = "API-AUTH-系统配置")
 public class ApiSysConfigWebsiteResp implements Serializable {
 
     private static final long serialVersionUID = 1L;

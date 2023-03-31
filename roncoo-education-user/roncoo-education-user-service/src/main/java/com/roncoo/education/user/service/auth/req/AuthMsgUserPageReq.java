@@ -17,7 +17,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AuthMsgUserReq", description = "API-AUTH-站内信用户记录表")
+@ApiModel(description = "API-AUTH-站内信用户记录表")
 public class AuthMsgUserPageReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

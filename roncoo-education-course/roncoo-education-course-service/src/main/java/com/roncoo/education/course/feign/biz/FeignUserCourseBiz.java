@@ -36,6 +36,7 @@ public class FeignUserCourseBiz extends BaseBiz {
                 // 课程购买数+1
                 courseDao.addCountBuy(1, qo.getCourseId());
             }
+            // 课程学习数+1
             courseDao.addCountStudy(1, qo.getCourseId());
             return 1;
         }

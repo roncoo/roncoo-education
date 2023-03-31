@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "CourseCommentResp", description = "课程评论")
+@ApiModel(description = "课程评论")
 public class CourseCommentResp implements Serializable {
 
     private static final long serialVersionUID = 1L;

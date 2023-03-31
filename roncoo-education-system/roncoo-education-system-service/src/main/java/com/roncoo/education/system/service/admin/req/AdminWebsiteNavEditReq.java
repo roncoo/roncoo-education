@@ -16,7 +16,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminWebsiteNavEditReq", description = "ADMIN-头部导航修改")
+@ApiModel(description = "ADMIN-头部导航修改")
 public class AdminWebsiteNavEditReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -18,7 +18,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-@ApiModel(value = "ApiVerCodeResp", description = "验证码")
+@ApiModel(description = "验证码")
 public class ApiVerCodeResp implements Serializable {
 
     private static final long serialVersionUID = 1L;

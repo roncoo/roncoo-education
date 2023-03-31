@@ -16,15 +16,35 @@ import org.springframework.web.bind.annotation.GetMapping;
 @FeignClient(value = "system-service", path = "/system/sys/config")
 public interface IFeignSysConfig {
 
+    /**
+     * 系统配置
+     *
+     * @return
+     */
     @GetMapping(value = "/getSys")
     SysConfig getSys();
 
+    /**
+     * 支付配置
+     *
+     * @return
+     */
     @GetMapping(value = "/getPay")
     PayConfig getPay();
 
+    /**
+     * 短信配置
+     *
+     * @return
+     */
     @GetMapping(value = "/getSms")
     SmsConfig getSms();
 
+    /**
+     * 视频云配置
+     *
+     * @return
+     */
     @GetMapping(value = "/getVod")
     VodConfig getVod();
 }

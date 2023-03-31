@@ -16,7 +16,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminWebsiteLinkEditReq", description = "ADMIN-站点友情链接修改")
+@ApiModel(description = "ADMIN-站点友情链接修改")
 public class AdminWebsiteLinkEditReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

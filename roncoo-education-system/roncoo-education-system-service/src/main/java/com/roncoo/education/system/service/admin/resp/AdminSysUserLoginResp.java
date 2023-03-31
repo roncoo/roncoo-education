@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminUsersLoginResp", description = "用户登录")
+@ApiModel(description = "用户登录")
 public class AdminSysUserLoginResp implements Serializable {
 
     private static final long serialVersionUID = -5227677558610916215L;

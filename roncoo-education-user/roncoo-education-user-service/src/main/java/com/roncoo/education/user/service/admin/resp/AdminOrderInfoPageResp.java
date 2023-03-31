@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminOrderInfoPageResp", description = "ADMIN-订单信息表分页")
+@ApiModel(description = "ADMIN-订单信息表分页")
 public class AdminOrderInfoPageResp implements Serializable {
 
     private static final long serialVersionUID = 1L;

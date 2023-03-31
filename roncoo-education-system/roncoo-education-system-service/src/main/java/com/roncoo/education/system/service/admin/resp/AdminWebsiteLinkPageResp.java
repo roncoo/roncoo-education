@@ -1,8 +1,10 @@
 package com.roncoo.education.system.service.admin.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -17,7 +19,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminWebsiteLinkPageResp", description = "ADMIN-站点友情链接分页")
+@ApiModel(description = "ADMIN-站点友情链接分页")
 public class AdminWebsiteLinkPageResp implements Serializable {
 
     private static final long serialVersionUID = 1L;

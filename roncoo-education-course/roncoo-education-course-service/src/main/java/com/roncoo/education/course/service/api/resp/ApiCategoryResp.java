@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "ApiCategoryResp", description = "API-分类")
+@ApiModel(description = "API-分类")
 public class ApiCategoryResp implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -17,7 +17,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AuthResourceReq", description = "API-AUTH-课程视频信息")
+@ApiModel(description = "API-AUTH-课程视频信息")
 public class AuthResourceReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

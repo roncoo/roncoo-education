@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminUserStudyPageResp", description = "ADMIN-课程用户学习日志分页")
+@ApiModel(description = "ADMIN-课程用户学习日志分页")
 public class AdminUserStudyPageResp implements Serializable {
     private static final long serialVersionUID = 1L;
 
