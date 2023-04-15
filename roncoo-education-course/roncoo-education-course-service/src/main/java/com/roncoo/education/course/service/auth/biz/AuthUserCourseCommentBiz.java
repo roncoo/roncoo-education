@@ -38,5 +38,4 @@ public class AuthUserCourseCommentBiz extends BaseBiz {
         return Result.success("评论成功");
     }
 
-
 }

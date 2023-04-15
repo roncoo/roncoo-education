@@ -3,9 +3,9 @@ package com.roncoo.education.course.service.auth;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.service.auth.biz.AuthUserCourseCollectBiz;
+import com.roncoo.education.course.service.auth.req.AuthUserCourseCollectPageReq;
 import com.roncoo.education.course.service.auth.req.AuthUserCourseCollectReq;
-import com.roncoo.education.course.service.auth.req.AuthUserCourseCommentPageReq;
-import com.roncoo.education.course.service.auth.resp.AuthUserCourseCommentResp;
+import com.roncoo.education.course.service.auth.resp.AuthUserCourseCollectResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -32,13 +32,13 @@ public class AuthUserCourseCollectController {
     private final AuthUserCourseCollectBiz biz;
 
     /**
-     * 课程评论列表
+     * 课程收藏列表
      *
      * @author fengyw
      */
-    @ApiOperation(value = "课程评论列出", notes = "根据条件进行课程评论分页")
+    @ApiOperation(value = "课程收藏列出", notes = "根据条件进行课程收藏分页")
     @RequestMapping(value = "/page", method = RequestMethod.POST)
-    public Result<Page<AuthUserCourseCommentResp>> listForPage(@RequestBody AuthUserCourseCommentPageReq req) {
+    public Result<Page<AuthUserCourseCollectResp>> listForPage(@RequestBody AuthUserCourseCollectPageReq req) {
         return biz.listForPage(req);
     }
 
