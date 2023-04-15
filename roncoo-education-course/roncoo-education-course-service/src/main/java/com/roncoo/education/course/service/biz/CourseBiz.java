@@ -2,6 +2,8 @@ package com.roncoo.education.course.service.biz;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.FreeEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
@@ -9,6 +11,7 @@ import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.*;
 import com.roncoo.education.course.dao.impl.mapper.entity.*;
+import com.roncoo.education.course.service.biz.req.CourseCommentPageReq;
 import com.roncoo.education.course.service.biz.req.CourseReq;
 import com.roncoo.education.course.service.biz.resp.*;
 import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
@@ -124,12 +127,6 @@ public class CourseBiz extends BaseBiz {
                 }
             }
         }
-
-        // 课程评论信息
-        List<UserCourseComment> userCourseCommentList = userCourseCommentDao.listByCourseIdAndStatusId(course.getId(), StatusIdEnum.YES.getCode());
-        if (CollUtil.isNotEmpty(userCourseCommentList)) {
-            courseResp.setCourseCommentRespList(filter(userCourseCommentList, 0L));
-        }
         return Result.success(courseResp);
     }
 
@@ -143,5 +140,17 @@ public class CourseBiz extends BaseBiz {
             return resps;
         }
         return new ArrayList<>();
+    }
+
+    public Result<Page<CourseCommentResp>> comment(CourseCommentPageReq req) {
+        UserCourseCommentExample example = new UserCourseCommentExample();
+        example.createCriteria().andCourseIdEqualTo(req.getCourseId());
+        example.setOrderByClause("id desc");
+        Page<UserCourseComment> userCourseCommentPage = userCourseCommentDao.page(req.getPageCurrent(), req.getPageSize(), example);
+        Page<CourseCommentResp> resp = PageUtil.transform(userCourseCommentPage, CourseCommentResp.class);
+        if (CollUtil.isNotEmpty(userCourseCommentPage.getList())) {
+            resp.setList(filter(userCourseCommentPage.getList(), 0L));
+        }
+        return Result.success(resp);
     }
 }

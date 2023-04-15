@@ -79,6 +79,4 @@ public class CourseResp implements Serializable {
     @ApiModelProperty(value = "课程收藏状态")
     private Boolean courseCollect = false;
 
-    @ApiModelProperty(value = "课程评论")
-    private List<CourseCommentResp> courseCommentRespList;
 }

@@ -6,7 +6,9 @@ import com.roncoo.education.course.service.api.biz.ApiCourseBiz;
 import com.roncoo.education.course.service.api.req.ApiCoursePageReq;
 import com.roncoo.education.course.service.api.resp.ApiCoursePageResp;
 import com.roncoo.education.course.service.biz.CourseBiz;
+import com.roncoo.education.course.service.biz.req.CourseCommentPageReq;
 import com.roncoo.education.course.service.biz.req.CourseReq;
+import com.roncoo.education.course.service.biz.resp.CourseCommentResp;
 import com.roncoo.education.course.service.biz.resp.CourseResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -54,5 +56,16 @@ public class ApiCourseController {
     @RequestMapping(value = "/view", method = RequestMethod.POST)
     public Result<CourseResp> view(@RequestBody CourseReq req) {
         return courseBiz.view(req, null);
+    }
+
+    /**
+     * 课程评论列表
+     *
+     * @author fengyw
+     */
+    @ApiOperation(value = "课程评论列出", notes = "根据条件进行课程评论分页")
+    @RequestMapping(value = "/comment", method = RequestMethod.POST)
+    public Result<Page<CourseCommentResp>> comment(@RequestBody CourseCommentPageReq req) {
+        return courseBiz.comment(req);
     }
 }
