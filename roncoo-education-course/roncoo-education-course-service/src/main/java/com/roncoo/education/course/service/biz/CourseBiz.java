@@ -134,11 +134,11 @@ public class CourseBiz extends BaseBiz {
     }
 
     private List<CourseCommentResp> filter(List<UserCourseComment> userCourseComments, Long commentId) {
-        List<UserCourseComment> list = userCourseComments.stream().filter(item -> item.getCommentId().compareTo(commentId) == 0).collect(Collectors.toList());
+        List<UserCourseComment> list = userCourseComments.stream().filter(item -> item.getCommentId().equals(commentId)).collect(Collectors.toList());
         if (CollUtil.isNotEmpty(list)) {
             List<CourseCommentResp> resps = BeanUtil.copyProperties(list, CourseCommentResp.class);
             for (CourseCommentResp resp : resps) {
-                resp.setCourseCommentRespList(filter(userCourseComments, resp.getCommentId()));
+                resp.setCourseCommentRespList(filter(userCourseComments, resp.getId()));
             }
             return resps;
         }
