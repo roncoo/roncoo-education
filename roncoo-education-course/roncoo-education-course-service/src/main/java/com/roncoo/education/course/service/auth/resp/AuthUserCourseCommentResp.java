@@ -1,6 +1,7 @@
 package com.roncoo.education.course.service.auth.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.roncoo.education.course.service.biz.resp.CourseResp;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -52,4 +53,7 @@ public class AuthUserCourseCommentResp implements Serializable {
 
     @ApiModelProperty(value = "评论内容")
     private String commentText;
+
+    @ApiModelProperty(value = "课程信息")
+    private CourseResp courseResp;
 }

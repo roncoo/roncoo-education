@@ -1,14 +1,14 @@
 package com.roncoo.education.course.service.auth.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.time.LocalDateTime;
-import java.io.Serializable;
-
+import com.roncoo.education.course.service.biz.resp.CourseResp;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -47,4 +47,7 @@ public class AuthUserCourseCollectResp implements Serializable {
 
     @ApiModelProperty(value = "课程ID")
     private Long courseId;
+
+    @ApiModelProperty(value = "课程信息")
+    private CourseResp courseResp;
 }
