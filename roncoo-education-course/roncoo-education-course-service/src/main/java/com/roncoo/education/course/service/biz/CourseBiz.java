@@ -141,9 +141,10 @@ public class CourseBiz extends BaseBiz {
         Page<UserCourseComment> userCourseCommentPage = userCourseCommentDao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<CourseCommentResp> resp = PageUtil.transform(userCourseCommentPage, CourseCommentResp.class);
         if (CollUtil.isNotEmpty(userCourseCommentPage.getList())) {
+            resp.setList(filter(userCourseCommentPage.getList(), 0L));
+            // 用户信息
             List<Long> userIds = userCourseCommentPage.getList().stream().map(UserCourseComment::getUserId).collect(Collectors.toList());
             Map<Long, UsersVO> usersVOMap = feignUsers.listByIds(userIds);
-            resp.setList(filter(userCourseCommentPage.getList(), 0L));
             for (CourseCommentResp commentResp : resp.getList()) {
                 commentResp.setUsersVO(usersVOMap.get(commentResp.getUserId()));
             }
