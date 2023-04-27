@@ -131,8 +131,8 @@ public class AdminCourseChapterBiz extends BaseBiz {
      */
     @Transactional(rollbackFor = Exception.class)
     public Result<String> delete(Long id) {
-        List<CourseChapterPeriod> periodList =  courseChapterPeriodDao.listByChapterId(id);
-        if(CollUtil.isNotEmpty(periodList) && periodList.size() > 0){
+        List<CourseChapterPeriod> periodList = courseChapterPeriodDao.listByChapterId(id);
+        if (CollUtil.isNotEmpty(periodList) && periodList.size() > 0) {
             return Result.error("请先删除节，才能删除章");
         }
         if (dao.deleteById(id) > 0) {

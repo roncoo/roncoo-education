@@ -1,23 +1,31 @@
 package com.roncoo.education.course.service.admin.biz;
 
-import com.roncoo.education.common.service.BaseBiz;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.DesensitizedUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.course.dao.UserCourseCollectDao;
+import com.roncoo.education.course.dao.impl.mapper.entity.UserCourseCollect;
+import com.roncoo.education.course.dao.impl.mapper.entity.UserCourseCollectExample;
+import com.roncoo.education.course.dao.impl.mapper.entity.UserCourseCollectExample.Criteria;
 import com.roncoo.education.course.service.admin.req.AdminUserCourseCollectEditReq;
 import com.roncoo.education.course.service.admin.req.AdminUserCourseCollectPageReq;
 import com.roncoo.education.course.service.admin.req.AdminUserCourseCollectSaveReq;
 import com.roncoo.education.course.service.admin.resp.AdminUserCourseCollectPageResp;
 import com.roncoo.education.course.service.admin.resp.AdminUserCourseCollectViewResp;
-import com.roncoo.education.course.dao.UserCourseCollectDao;
-import com.roncoo.education.course.dao.impl.mapper.entity.UserCourseCollect;
-import com.roncoo.education.course.dao.impl.mapper.entity.UserCourseCollectExample;
-import com.roncoo.education.course.dao.impl.mapper.entity.UserCourseCollectExample.Criteria;
+import com.roncoo.education.user.feign.interfaces.IFeignUsers;
+import com.roncoo.education.user.feign.interfaces.vo.UsersVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * ADMIN-课程收藏
@@ -27,6 +35,8 @@ import javax.validation.constraints.NotNull;
 @Component
 @RequiredArgsConstructor
 public class AdminUserCourseCollectBiz extends BaseBiz {
+    @NotNull
+    private final IFeignUsers feignUsers;
 
     @NotNull
     private final UserCourseCollectDao dao;
@@ -40,8 +50,22 @@ public class AdminUserCourseCollectBiz extends BaseBiz {
     public Result<Page<AdminUserCourseCollectPageResp>> page(AdminUserCourseCollectPageReq req) {
         UserCourseCollectExample example = new UserCourseCollectExample();
         Criteria c = example.createCriteria();
+        if (ObjectUtil.isNotEmpty(req.getCourseId())) {
+            c.andCourseIdEqualTo(req.getCourseId());
+        }
         Page<UserCourseCollect> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminUserCourseCollectPageResp> respPage = PageUtil.transform(page, AdminUserCourseCollectPageResp.class);
+        if (CollUtil.isNotEmpty(respPage.getList())) {
+            List<Long> userIdList = respPage.getList().stream().map(item -> item.getUserId()).collect(Collectors.toList());
+            Map<Long, UsersVO> usersVOMap = feignUsers.listByIds(userIdList);
+            for (AdminUserCourseCollectPageResp resp : respPage.getList()) {
+                UsersVO usersVO = usersVOMap.get(resp.getUserId());
+                if (ObjectUtil.isNotEmpty(usersVO)) {
+                    resp.setMobile(DesensitizedUtil.mobilePhone(usersVO.getMobile()));
+                    resp.setNickname(usersVO.getNickname());
+                }
+            }
+        }
         return Result.success(respPage);
     }
 

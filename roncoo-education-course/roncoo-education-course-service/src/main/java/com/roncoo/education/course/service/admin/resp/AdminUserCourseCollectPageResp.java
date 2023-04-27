@@ -1,14 +1,13 @@
 package com.roncoo.education.course.service.admin.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.time.LocalDateTime;
-import java.io.Serializable;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -43,6 +42,12 @@ public class AdminUserCourseCollectPageResp implements Serializable {
 
     @ApiModelProperty(value = "用户ID")
     private Long userId;
+
+    @ApiModelProperty(value = "手机号码")
+    private String mobile;
+
+    @ApiModelProperty(value = "昵称")
+    private String nickname;
 
     @ApiModelProperty(value = "课程ID")
     private Long courseId;
