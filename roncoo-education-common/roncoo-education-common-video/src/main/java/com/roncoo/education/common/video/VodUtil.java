@@ -45,14 +45,14 @@ public final class VodUtil {
         }
         if (VodPlatformEnum.POLYV.getCode().equals(req.getVodPlatform())) {
             // 设置视频回调地址
-            String callbackUrl = req.getWebsiteDomain() + "gateway/course/api/callback/polyv/upload";
+            String callbackUrl = req.getWebsiteDomain() + "gateway/course/callback/polyv/vod/upload";
             PolyvVodUtil.setCallback(req.getPolyvAppId(), req.getPolyvAppSecret(), callbackUrl);
 
             // 开启加密，使用web授权
             PolyvVodUtil.setPlaysafe(req.getPolyvUserId(), req.getPolyvSecretKey(), "1", "web");
 
             // 设置授权播放和防录屏跑马灯地址
-            //String marqueeUrl = req.getWebsiteDomain() + "gateway/course/api/callback/polyv/vod/auth";
+            //String marqueeUrl = req.getWebsiteDomain() + "gateway/course/callback/polyv/vod/auth";
             //PolyvVodUtil.setMarquee(req.getPolyvAppId(), req.getPolyvAppSecret(), marqueeUrl);
             return;
         }
@@ -86,7 +86,7 @@ public final class VodUtil {
     public static String getUploadConfig(VideoConfig req) {
         if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
             // 上传回调地址
-            String callbackUrl = req.getWebsiteDomain() + "gateway/course/api/callback/priyun/vod/upload";
+            String callbackUrl = req.getWebsiteDomain() + "gateway/course/callback/priyun/vod/upload";
             return JSUtil.toJsonString(PrivateYunVodUtil.getUploadConfig(req.getPriyAccessKeyId(), req.getPriyAccessKeySecret(), req.getPriyUrl(), callbackUrl, ""));
         }
         if (VodPlatformEnum.POLYV.getCode().equals(req.getVodPlatform())) {
@@ -163,7 +163,7 @@ public final class VodUtil {
     public static String getPlayConfig(VideoConfig req, VodPlayConfigReq playConfigReq) {
         if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
             // 播放授权地址
-            String authUrl = req.getWebsiteDomain() + "gateway/course/api/callback/priyun/auth";
+            String authUrl = req.getWebsiteDomain() + "gateway/course/callback/priyun/vod/auth";
             PrivateYunPlayTokenRes tokenResponse = PrivateYunVodUtil.token(req.getPriyUrl(), authUrl, req.getPriyAccessKeyId(), req.getPriyAccessKeySecret(), playConfigReq.getVid(), "", playConfigReq.getExpiresIn().toString(), playConfigReq.getViewerId());
             PrivateYunVideoClarityResp playUrls = tokenResponse.getVideoClarityResp();
             if (ObjectUtil.isNotNull(playUrls)) {

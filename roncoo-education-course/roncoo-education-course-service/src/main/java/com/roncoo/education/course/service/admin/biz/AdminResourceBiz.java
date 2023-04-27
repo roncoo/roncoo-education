@@ -51,8 +51,10 @@ public class AdminResourceBiz extends BaseBiz {
     private final IFeignSysConfig feignSysConfig;
 
     public Result<AdminVodConfigResp> getVodConfig() {
-        VodConfig vodConfig = feignSysConfig.getVod();
         AdminVodConfigResp resp = new AdminVodConfigResp();
+
+        // 视频云配置
+        VodConfig vodConfig = feignSysConfig.getVod();
         resp.setVodPlatform(vodConfig.getVodPlatform());
         resp.setVodUploadConfig(VodUtil.getUploadConfig(vodConfig));
 

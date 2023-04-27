@@ -23,6 +23,10 @@ import java.util.Map;
 @Component
 public class BaseBiz extends Base {
 
+    public static final String FAIL = "fail";
+    public static final String SUCCESS = "success";
+    public static final String PASS = "pass";
+
     @Autowired
     protected CacheRedis cacheRedis;
 

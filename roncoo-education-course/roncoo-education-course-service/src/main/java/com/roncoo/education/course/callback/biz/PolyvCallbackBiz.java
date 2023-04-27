@@ -1,21 +1,18 @@
-package com.roncoo.education.course.service.api.biz;
+package com.roncoo.education.course.callback.biz;
 
-import cn.hutool.core.util.ObjectUtil;
-import com.roncoo.education.common.core.enums.VideoStatusEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.JSUtil;
-import com.roncoo.education.common.video.VodUtil;
+import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.video.impl.polyv.PolyvVodUtil;
 import com.roncoo.education.common.video.impl.polyv.vod.CallbackEventTypeEnum;
 import com.roncoo.education.common.video.impl.polyv.vod.CallbackVodUpload;
-import com.roncoo.education.common.video.resp.VodInfoResp;
-import com.roncoo.education.course.dao.ResourceDao;
-import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * 课程分类
@@ -24,18 +21,18 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class ApiCallbackBiz {
+@RequiredArgsConstructor
+public class PolyvCallbackBiz extends BaseBiz {
 
-    public static final String SUCCESS = "success";
-    public static final String FAIL = "fail";
+    @NotNull
+    private final VodCommonBiz vodCommonBiz;
 
-    @Autowired
-    private ResourceDao resourceDao;
-
-    @Autowired
-    private IFeignSysConfig feignSysConfig;
+    @NotNull
+    private final IFeignSysConfig feignSysConfig;
 
     public String polyvUpload(CallbackVodUpload callbackVodUpload) {
+        log.warn("保利威-上传回调，{}", JSUtil.toJsonString(callbackVodUpload));
+
         VodConfig vodConfig = feignSysConfig.getVod();
         String sign = PolyvVodUtil.getCallbackSign(BeanUtil.beanToStringMap(callbackVodUpload), vodConfig.getPolyvSecretKey());
         if (!callbackVodUpload.getSign().equals(sign)) {
@@ -45,15 +42,7 @@ public class ApiCallbackBiz {
 
         if (CallbackEventTypeEnum.PASS.getCode().equals(callbackVodUpload.getType())) {
             // 视频审核完成处理
-            VodInfoResp videoResponse = VodUtil.getVideoInfo(vodConfig, callbackVodUpload.getVid());
-            if (ObjectUtil.isNotNull(videoResponse)) {
-                Resource resource = resourceDao.getByVideoVid(callbackVodUpload.getVid());
-                if (ObjectUtil.isNotEmpty(resource)) {
-                    resource.setVideoLength(videoResponse.getDuration().toString());
-                    resource.setVideoStatus(VideoStatusEnum.SUCCES.getCode());
-                    resourceDao.updateById(resource);
-                }
-            }
+            vodCommonBiz.completeUpload(callbackVodUpload.getVid(), vodConfig);
         }
         return SUCCESS;
     }
