@@ -261,7 +261,7 @@ public final class PolyvVodUtil {
             map.put("iswxa", 1);
         }
         map.put("extraParams", playConfigReq.getExtraParams());
-        map.put("sign", PolyvSignUtil.getSha1Sign(map, secretKey));
+        map.put("sign", PolyvSignUtil.getMd5Sign(map, secretKey));
 
         String result = HttpUtil.post("https://hls.videocc.net/service/v1/token", map);
         JSONObject resultJson = JSONUtil.parseObj(result);
@@ -269,16 +269,11 @@ public final class PolyvVodUtil {
             log.error("获取保利威播放sign值失败，返回参数={}", result);
             return null;
         }
-        JSONObject dataJson = resultJson.getJSONObject("data");
-        if (ObjectUtil.isNull(dataJson)) {
-            log.error("获取保利威播放sign值失败，返回参数={}", result);
-            return null;
-        }
         PolyvPlayResponse dto = new PolyvPlayResponse();
         dto.setVid(map.get("videoId").toString());
         dto.setSign(MD5Util.md5(secretKey + map.get("videoId") + ts));
         dto.setTs(ts);
-        dto.setToken(dataJson.getStr("token"));
+        dto.setToken(resultJson.getJSONObject("data").getStr("token"));
         dto.setCode(encodeForPlay(playConfigReq.getVodAuthCode()));
         return dto;
     }
