@@ -49,7 +49,7 @@ public class AuthCourseBiz extends BaseBiz {
     private final IFeignSysConfig feignSysConfig;
 
     public Result<AuthCourseSignResp> sign(AuthCourseSignReq req) {
-        if (ObjectUtil.isNotEmpty(req.getCourseId())) {
+        if (ObjectUtil.isNotEmpty(req.getCourseId()) && ObjectUtil.isEmpty(req.getPeriodId())) {
             // 若课程ID存在，则获取该课程的最新学习课时
             UserStudy userStudy = userStudyDao.getByCourseIdForLast(ThreadContext.userId(), req.getCourseId());
             if (ObjectUtil.isNotNull(userStudy)) {
