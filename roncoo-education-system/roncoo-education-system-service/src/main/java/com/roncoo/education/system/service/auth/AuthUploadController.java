@@ -2,7 +2,7 @@ package com.roncoo.education.system.service.auth;
 
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.service.BaseController;
-import com.roncoo.education.system.service.admin.biz.AdminUploadBiz;
+import com.roncoo.education.system.service.biz.UploadCommonBiz;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -26,7 +26,7 @@ import java.io.File;
 public class AuthUploadController extends BaseController {
 
     @Autowired
-    private AdminUploadBiz biz;
+    private UploadCommonBiz biz;
 
     @ApiOperation(value = "上传图片", notes = "服务端上传图片接口，只支持图片格式")
     @ApiImplicitParam(name = "picFile", value = "图片文件", dataType = "File", dataTypeClass = File.class, paramType = "query", required = true)
