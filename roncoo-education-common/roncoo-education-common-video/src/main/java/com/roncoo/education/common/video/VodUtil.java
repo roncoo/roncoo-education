@@ -67,11 +67,13 @@ public final class VodUtil {
         }
         if (VodPlatformEnum.POLYV.getCode().equals(req.getVodPlatform())) {
             JSONObject result = PolyvVodUtil.getUserMain(req.getPolyvUserId(), req.getPolyvSecretKey());
-            infoResp.setTotalSpace(result.getBigDecimal("totalSpace").divide(BigDecimal.valueOf(1024 * 1024 * 1024)).setScale(2, BigDecimal.ROUND_HALF_UP));
-            infoResp.setUsedSpace(result.getBigDecimal("usedSpace").divide(BigDecimal.valueOf(1024 * 1024 * 1024)).setScale(2, BigDecimal.ROUND_HALF_UP));
-            infoResp.setTotalFlow(result.getBigDecimal("totalFlow").divide(BigDecimal.valueOf(1024 * 1024 * 1024)).setScale(2, BigDecimal.ROUND_HALF_UP));
-            infoResp.setUsedFlow(result.getBigDecimal("usedFlow").divide(BigDecimal.valueOf(1024 * 1024 * 1024)).setScale(2, BigDecimal.ROUND_HALF_UP));
-            //infoResp.setUniqueNo(result.getStr("email"));
+            if (ObjectUtil.isNotNull(result)) {
+                infoResp.setTotalSpace(result.getBigDecimal("totalSpace").divide(BigDecimal.valueOf(1024 * 1024 * 1024)).setScale(2, BigDecimal.ROUND_HALF_UP));
+                infoResp.setUsedSpace(result.getBigDecimal("usedSpace").divide(BigDecimal.valueOf(1024 * 1024 * 1024)).setScale(2, BigDecimal.ROUND_HALF_UP));
+                infoResp.setTotalFlow(result.getBigDecimal("totalFlow").divide(BigDecimal.valueOf(1024 * 1024 * 1024)).setScale(2, BigDecimal.ROUND_HALF_UP));
+                infoResp.setUsedFlow(result.getBigDecimal("usedFlow").divide(BigDecimal.valueOf(1024 * 1024 * 1024)).setScale(2, BigDecimal.ROUND_HALF_UP));
+                //infoResp.setUniqueNo(result.getStr("email"));
+            }
             return infoResp;
         }
 
