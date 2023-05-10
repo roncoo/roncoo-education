@@ -18,7 +18,7 @@ import java.math.BigDecimal;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "ApiZoneCourseResp", description = "API-专区课程关联表")
+@ApiModel(description = "API-专区课程关联表")
 public class ApiZoneCourseResp implements Serializable {
 
     private static final long serialVersionUID = 1L;

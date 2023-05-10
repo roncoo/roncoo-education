@@ -9,13 +9,18 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminVodConfigResp", description = "Admin-上传音视频配置")
+@ApiModel(description = "Admin-上传音视频配置")
 public class AdminVodConfigResp {
 
     @ApiModelProperty(value = "使用平台")
     private Integer vodPlatform;
 
+    @ApiModelProperty(value = "视频云上传配置")
+    private String vodUploadConfig;
+
+    @Deprecated
     private PolyvConfig polyvConfig;
+    @Deprecated
     private PriConfig priConfig;
 
     /**
@@ -43,13 +48,12 @@ public class AdminVodConfigResp {
     }
 
     /**
-     * 私有化
+     * 私有云
      */
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
     public static class PriConfig {
-        // TODO
         @ApiModelProperty(value = "sign")
         private String sign;
     }

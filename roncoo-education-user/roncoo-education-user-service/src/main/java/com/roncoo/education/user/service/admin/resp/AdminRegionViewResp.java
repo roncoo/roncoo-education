@@ -17,7 +17,7 @@ import java.math.BigDecimal;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminRegionViewResp", description = "ADMIN-行政区域表查看")
+@ApiModel(description = "ADMIN-行政区域表查看")
 public class AdminRegionViewResp implements Serializable {
 
     private static final long serialVersionUID = 1L;

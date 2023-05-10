@@ -1,8 +1,8 @@
 package com.roncoo.education.system.service.admin;
 
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.video.resp.InfoResp;
 import com.roncoo.education.system.service.admin.biz.AdminStatBiz;
-import com.roncoo.education.system.service.admin.resp.StatVodResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class AdminStatController {
 
     @ApiOperation(value = "点播", notes = "点播空间和流量的统计")
     @GetMapping(value = "/vod")
-    public Result<StatVodResp> vod() {
+    public Result<InfoResp> vod() {
         return biz.vod();
     }
 

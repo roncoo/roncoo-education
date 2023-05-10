@@ -4,20 +4,21 @@ import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.config.ThreadContext;
 import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.core.enums.*;
+import com.roncoo.education.common.core.enums.OrderStatusEnum;
+import com.roncoo.education.common.core.enums.PayTypeEnum;
+import com.roncoo.education.common.core.enums.PutawayEnum;
+import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.common.core.tools.NOUtil;
 import com.roncoo.education.common.pay.PayFace;
 import com.roncoo.education.common.pay.req.TradeOrderReq;
 import com.roncoo.education.common.pay.resp.TradeOrderResp;
-import com.roncoo.education.common.pay.util.AliPayConfig;
 import com.roncoo.education.common.pay.util.PayModelEnum;
-import com.roncoo.education.common.pay.util.WxPayConfig;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.feign.interfaces.IFeignCourse;
 import com.roncoo.education.course.feign.interfaces.vo.CourseViewVO;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
+import com.roncoo.education.system.feign.interfaces.vo.PayConfig;
 import com.roncoo.education.user.dao.OrderInfoDao;
 import com.roncoo.education.user.dao.OrderPayDao;
 import com.roncoo.education.user.dao.UsersDao;
@@ -36,9 +37,7 @@ import org.springframework.util.StringUtils;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * AUTH-订单支付信息表
@@ -186,13 +185,9 @@ public class AuthOrderPayBiz extends BaseBiz {
     }
 
     private void getPayConfig(TradeOrderReq orderReq) {
-        Map<String, String> payConfig = cacheRedis.getByJson(Constants.RedisPre.PAY + ConfigTypeEnum.PAY.getCode(), HashMap.class);
-        if (ObjectUtil.isEmpty(payConfig)) {
-            payConfig = feignSysConfig.getMapByConfigType(ConfigTypeEnum.PAY.getCode());
-            cacheRedis.set(Constants.RedisPre.PAY + ConfigTypeEnum.PAY.getCode(), payConfig);
-        }
-        orderReq.setAliPayConfig(BeanUtil.objToBean(payConfig, AliPayConfig.class));
-        orderReq.setWxPayConfig(BeanUtil.objToBean(payConfig, WxPayConfig.class));
+        PayConfig payConfig = feignSysConfig.getPay();
+        orderReq.setAliPayConfig(payConfig.getAliPayConfig());
+        orderReq.setWxPayConfig(payConfig.getWxPayConfig());
     }
 
     /**
@@ -226,11 +221,6 @@ public class AuthOrderPayBiz extends BaseBiz {
     }
 
     private String getNotifyUrl(Integer payModel, String impl) {
-        String websiteDomain = cacheRedis.get(Constants.RedisPre.DOMAIN);
-        if (!StringUtils.hasText(websiteDomain)) {
-            websiteDomain = feignSysConfig.getByConfigKey("websiteDomain").getConfigValue();
-            cacheRedis.set(Constants.RedisPre.DOMAIN, websiteDomain, 1, TimeUnit.HOURS);
-        }
-        return NOTIFYURL.replace("{domain}", websiteDomain).replace("{payModel}", payModel.toString()).replace("{payImpl}", impl);
+        return NOTIFYURL.replace("{domain}", feignSysConfig.getSys().getWebsiteDomain()).replace("{payModel}", payModel.toString()).replace("{payImpl}", impl);
     }
 }

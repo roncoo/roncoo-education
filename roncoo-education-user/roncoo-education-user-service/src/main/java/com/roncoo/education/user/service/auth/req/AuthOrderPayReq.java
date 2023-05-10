@@ -17,7 +17,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AuthOrderPayReq", description = "API-AUTH-订单支付信息表")
+@ApiModel(description = "API-AUTH-订单支付信息表")
 public class AuthOrderPayReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

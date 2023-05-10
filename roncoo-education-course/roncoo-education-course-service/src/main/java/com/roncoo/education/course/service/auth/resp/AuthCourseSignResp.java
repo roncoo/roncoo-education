@@ -17,7 +17,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AuthCourseSignResp", description = "API-AUTH-课程信息")
+@ApiModel(description = "API-AUTH-课程信息")
 public class AuthCourseSignResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,15 +37,25 @@ public class AuthCourseSignResp implements Serializable {
     @ApiModelProperty(value = "播放vid")
     private String vid;
 
+    @ApiModelProperty(value = "点播平台")
+    private Integer vodPlatform;
+
+    @ApiModelProperty(value = "点播播放配置参数")
+    private String vodPlayConfig;
+
+    @Deprecated
     @ApiModelProperty(value = "播放ts")
     private String ts;
 
+    @Deprecated
     @ApiModelProperty(value = "播放sign")
     private String sign;
 
+    @Deprecated
     @ApiModelProperty(value = "播放token")
     private String token;
 
+    @Deprecated
     @ApiModelProperty(value = "播放code")
     private String code;
 }

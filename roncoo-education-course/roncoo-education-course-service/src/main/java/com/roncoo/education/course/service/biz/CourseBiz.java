@@ -2,6 +2,8 @@ package com.roncoo.education.course.service.biz;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
+import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.FreeEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
@@ -9,15 +11,19 @@ import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.*;
 import com.roncoo.education.course.dao.impl.mapper.entity.*;
+import com.roncoo.education.course.service.biz.req.CourseCommentPageReq;
 import com.roncoo.education.course.service.biz.req.CourseReq;
 import com.roncoo.education.course.service.biz.resp.*;
 import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
+import com.roncoo.education.user.feign.interfaces.IFeignUsers;
 import com.roncoo.education.user.feign.interfaces.vo.LecturerViewVO;
+import com.roncoo.education.user.feign.interfaces.vo.UsersVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,9 +49,15 @@ public class CourseBiz extends BaseBiz {
     @NotNull
     private final CourseChapterPeriodDao periodDao;
     @NotNull
+    private final UserCourseCommentDao userCourseCommentDao;
+    @NotNull
+    private final UserCourseCollectDao userCourseCollectDao;
+    @NotNull
     private final ResourceDao resourceDao;
     @NotNull
     private final IFeignLecturer feignLecturer;
+    @NotNull
+    private final IFeignUsers feignUsers;
 
     /**
      * 课程查看接口
@@ -83,6 +95,12 @@ public class CourseBiz extends BaseBiz {
             if (CollUtil.isNotEmpty(userStudyList)) {
                 userStudyProgressMap = userStudyList.stream().collect(Collectors.toMap(UserStudy::getPeriodId, UserStudy::getProgress));
             }
+
+            // 课程收藏状态
+            UserCourseCollect userCourseCollect = userCourseCollectDao.getByCouserIdAndUserId(req.getCourseId(), userId);
+            if (ObjectUtil.isNotEmpty(userCourseCollect)) {
+                courseResp.setCourseCollect(Boolean.TRUE);
+            }
         }
         // 获取讲师信息
         LecturerViewVO lecturerViewVO = feignLecturer.getById(course.getLecturerId());
@@ -114,5 +132,35 @@ public class CourseBiz extends BaseBiz {
             }
         }
         return Result.success(courseResp);
+    }
+
+    public Result<Page<CourseCommentResp>> comment(CourseCommentPageReq req) {
+        UserCourseCommentExample example = new UserCourseCommentExample();
+        example.createCriteria().andCourseIdEqualTo(req.getCourseId());
+        example.setOrderByClause("id desc");
+        Page<UserCourseComment> userCourseCommentPage = userCourseCommentDao.page(req.getPageCurrent(), req.getPageSize(), example);
+        Page<CourseCommentResp> resp = PageUtil.transform(userCourseCommentPage, CourseCommentResp.class);
+        if (CollUtil.isNotEmpty(userCourseCommentPage.getList())) {
+            resp.setList(filter(userCourseCommentPage.getList(), 0L));
+            // 用户信息
+            List<Long> userIds = userCourseCommentPage.getList().stream().map(UserCourseComment::getUserId).collect(Collectors.toList());
+            Map<Long, UsersVO> usersVOMap = feignUsers.listByIds(userIds);
+            for (CourseCommentResp commentResp : resp.getList()) {
+                commentResp.setUsersVO(usersVOMap.get(commentResp.getUserId()));
+            }
+        }
+        return Result.success(resp);
+    }
+
+    private List<CourseCommentResp> filter(List<UserCourseComment> userCourseComments, Long commentId) {
+        List<UserCourseComment> list = userCourseComments.stream().filter(item -> item.getCommentId().equals(commentId)).collect(Collectors.toList());
+        if (CollUtil.isNotEmpty(list)) {
+            List<CourseCommentResp> resps = BeanUtil.copyProperties(list, CourseCommentResp.class);
+            for (CourseCommentResp resp : resps) {
+                resp.setCourseCommentRespList(filter(userCourseComments, resp.getId()));
+            }
+            return resps;
+        }
+        return new ArrayList<>();
     }
 }

@@ -17,7 +17,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AuthSysConfigReq", description = "API-AUTH-系统配置")
+@ApiModel(description = "API-AUTH-系统配置")
 public class AuthSysConfigReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

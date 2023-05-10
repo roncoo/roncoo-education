@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminSysConfigViewResp", description = "ADMIN-系统配置查看")
+@ApiModel(description = "ADMIN-系统配置查看")
 public class AdminSysConfigViewResp implements Serializable {
 
     private static final long serialVersionUID = 1L;

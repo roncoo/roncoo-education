@@ -17,7 +17,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AuthUserCourseReq", description = "API-AUTH-课程用户关联表")
+@ApiModel(description = "API-AUTH-课程用户关联表")
 public class AuthUserCourseReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -16,7 +16,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminUsersPageReq", description = "ADMIN-用户信息分页")
+@ApiModel(description = "ADMIN-用户信息分页")
 public class AdminUsersPageReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

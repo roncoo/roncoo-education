@@ -16,7 +16,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminUsersEditReq", description = "ADMIN-用户信息修改")
+@ApiModel(description = "ADMIN-用户信息修改")
 public class AdminUsersEditReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

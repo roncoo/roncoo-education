@@ -2,21 +2,17 @@ package com.roncoo.education.user.service.api.biz;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.enums.BuyTypeEnum;
-import com.roncoo.education.common.core.enums.ConfigTypeEnum;
 import com.roncoo.education.common.core.enums.OrderStatusEnum;
-import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.common.pay.PayFace;
 import com.roncoo.education.common.pay.req.TradeNotifyReq;
 import com.roncoo.education.common.pay.resp.TradeNotifyResp;
-import com.roncoo.education.common.pay.util.AliPayConfig;
 import com.roncoo.education.common.pay.util.TradeStatusEnum;
-import com.roncoo.education.common.pay.util.WxPayConfig;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.feign.interfaces.IFeignUserCourse;
 import com.roncoo.education.course.feign.interfaces.qo.UserCourseBindingQO;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
+import com.roncoo.education.system.feign.interfaces.vo.PayConfig;
 import com.roncoo.education.user.dao.OrderInfoDao;
 import com.roncoo.education.user.dao.OrderPayDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.OrderInfo;
@@ -29,7 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -102,13 +97,9 @@ public class ApiOrderPayBiz extends BaseBiz {
     }
 
     private void getPayConfig(TradeNotifyReq req) {
-        Map<String, String> payConfig = cacheRedis.getByJson(Constants.RedisPre.PAY + ConfigTypeEnum.PAY.getCode(), HashMap.class);
-        if (ObjectUtil.isEmpty(payConfig)) {
-            payConfig = feignSysConfig.getMapByConfigType(ConfigTypeEnum.PAY.getCode());
-            cacheRedis.set(Constants.RedisPre.PAY + ConfigTypeEnum.PAY.getCode(), payConfig);
-        }
-        req.setAliPayConfig(BeanUtil.objToBean(payConfig, AliPayConfig.class));
-        req.setWxPayConfig(BeanUtil.objToBean(payConfig, WxPayConfig.class));
+        PayConfig payConfig = feignSysConfig.getPay();
+        req.setAliPayConfig(payConfig.getAliPayConfig());
+        req.setWxPayConfig(payConfig.getWxPayConfig());
     }
 
     /**

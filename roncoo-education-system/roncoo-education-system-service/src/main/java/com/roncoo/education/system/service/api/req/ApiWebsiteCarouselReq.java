@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "ApiWebsiteCarouselReq", description = "API-广告信息")
+@ApiModel(description = "API-广告信息")
 public class ApiWebsiteCarouselReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

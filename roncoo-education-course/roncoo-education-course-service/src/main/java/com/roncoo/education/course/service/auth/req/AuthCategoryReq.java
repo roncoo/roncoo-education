@@ -17,7 +17,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AuthCategoryReq", description = "API-AUTH-分类")
+@ApiModel(description = "API-AUTH-分类")
 public class AuthCategoryReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

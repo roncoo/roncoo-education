@@ -16,7 +16,7 @@ public enum VodPlatformEnum {
     /**
      * 私有云
      */
-    PRIVATE(1, "私有云(待开发)", "pri%"),
+    PRIVATEY(1, "私有云", "priy%"),
 
     /**
      * 保利威
@@ -26,7 +26,12 @@ public enum VodPlatformEnum {
     /**
      * 百家云
      */
-    BJYUN(3, "百家云(待实现)", "baijy%");
+    BAIJY(3, "百家云(待实现)", "baijy%"),
+
+    /**
+     * 百家云
+     */
+    BOKECC(4, "获得场景(待实现)", "bokecc%");
 
     /**
      * 编码

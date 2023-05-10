@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "ApiZoneResp", description = "API-专区")
+@ApiModel(description = "API-专区")
 public class ApiZoneResp implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -1,8 +1,10 @@
 package com.roncoo.education.course.service.auth.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -18,7 +20,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AuthCourseChapterPeriodResp", description = "API-AUTH-课时信息")
+@ApiModel(description = "API-AUTH-课时信息")
 public class AuthCourseChapterPeriodResp implements Serializable {
 
     private static final long serialVersionUID = 1L;

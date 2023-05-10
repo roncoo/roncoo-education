@@ -1,9 +1,11 @@
 package com.roncoo.education.user.service.admin.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -18,7 +20,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminOrderPayPageResp", description = "ADMIN-订单支付信息表分页")
+@ApiModel(description = "ADMIN-订单支付信息表分页")
 public class AdminOrderPayPageResp implements Serializable {
 
     private static final long serialVersionUID = 1L;

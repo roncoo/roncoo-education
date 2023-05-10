@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminResourceEditReq", description = "ADMIN-课程视频信息修改")
+@ApiModel(description = "ADMIN-课程视频信息修改")
 public class AdminResourceEditReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminUsersLoginReq", description = "用户登录")
+@ApiModel(description = "用户登录")
 public class AdminSysUserLoginReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

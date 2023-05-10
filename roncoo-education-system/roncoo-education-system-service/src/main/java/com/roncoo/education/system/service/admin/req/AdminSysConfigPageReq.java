@@ -16,7 +16,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminSysConfigPageReq", description = "ADMIN-系统配置分页")
+@ApiModel(description = "ADMIN-系统配置分页")
 public class AdminSysConfigPageReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -2,15 +2,17 @@ package com.roncoo.education.course.service.auth.biz;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.config.ThreadContext;
-import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.*;
-import com.roncoo.education.common.polyv.PolyvVodUtil;
-import com.roncoo.education.common.polyv.callback.CallbackVodAuthCode;
-import com.roncoo.education.common.polyv.vod.PolyvSign;
-import com.roncoo.education.common.polyv.vod.PolyvSignResponse;
 import com.roncoo.education.common.service.BaseBiz;
-import com.roncoo.education.course.dao.*;
+import com.roncoo.education.common.video.VodUtil;
+import com.roncoo.education.common.video.impl.polyv.PolyvVodUtil;
+import com.roncoo.education.common.video.impl.polyv.vod.resp.PolyvPlayResponse;
+import com.roncoo.education.common.video.req.VodPlayConfigReq;
+import com.roncoo.education.course.dao.CourseChapterPeriodDao;
+import com.roncoo.education.course.dao.ResourceDao;
+import com.roncoo.education.course.dao.UserCourseDao;
+import com.roncoo.education.course.dao.UserStudyDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
 import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserCourse;
@@ -35,8 +37,6 @@ import java.math.BigDecimal;
 public class AuthCourseBiz extends BaseBiz {
 
     @NotNull
-    private final CourseDao dao;
-    @NotNull
     private final CourseChapterPeriodDao periodDao;
     @NotNull
     private final ResourceDao resourceDao;
@@ -49,12 +49,12 @@ public class AuthCourseBiz extends BaseBiz {
     private final IFeignSysConfig feignSysConfig;
 
     public Result<AuthCourseSignResp> sign(AuthCourseSignReq req) {
-        if (ObjectUtil.isNotEmpty(req.getCourseId())) {
+        if (ObjectUtil.isNotEmpty(req.getCourseId()) && ObjectUtil.isEmpty(req.getPeriodId())) {
             // 若课程ID存在，则获取该课程的最新学习课时
             UserStudy userStudy = userStudyDao.getByCourseIdForLast(ThreadContext.userId(), req.getCourseId());
             if (ObjectUtil.isNotNull(userStudy)) {
                 req.setPeriodId(userStudy.getPeriodId());
-            }else{
+            } else {
                 return Result.error("请选择要学习的课时");
             }
         }
@@ -100,26 +100,25 @@ public class AuthCourseBiz extends BaseBiz {
     }
 
     private void polyvSign(AuthCourseSignReq req, Resource resource, AuthCourseSignResp resp) {
-        PolyvSign polyvSign = new PolyvSign();
-        polyvSign.setIp(req.getClientIp());
-        polyvSign.setUserNo(ThreadContext.userId());
-        polyvSign.setVid(resource.getVideoVid());
-        VodConfig vodConfig = feignSysConfig.getVod();
+        VodPlayConfigReq playConfigReq = new VodPlayConfigReq();
+        playConfigReq.setVid(resource.getVideoVid());
+        playConfigReq.setViewerId(ThreadContext.userId().toString());
+        playConfigReq.setViewerIp(req.getClientIp());
+        VodPlayConfigReq.VodAuthCode authCode = new VodPlayConfigReq.VodAuthCode();
+        authCode.setUserId(ThreadContext.userId());
+        authCode.setPeriodId(req.getPeriodId());
+        playConfigReq.setVodAuthCode(authCode);
 
-        PolyvSignResponse polyvSignResponse = PolyvVodUtil.getSignForH5(polyvSign, vodConfig.getPolyvUserId(), vodConfig.getPolyvSecretKey());
-        if (ObjectUtil.isEmpty(polyvSignResponse)) {
-            throw new BaseException("系统繁忙，请重试");
-        }
+        // 视频云配置
+        VodConfig vodConfig = feignSysConfig.getVod();
+        resp.setVodPlatform(vodConfig.getVodPlatform());
+        resp.setVodPlayConfig(VodUtil.getPlayConfig(vodConfig, playConfigReq));
+
+        PolyvPlayResponse polyvSignResponse = PolyvVodUtil.getSignForPlay(vodConfig.getPolyvUserId(), vodConfig.getPolyvSecretKey(), playConfigReq);
         resp.setTs(polyvSignResponse.getTs());
         resp.setSign(polyvSignResponse.getSign());
         resp.setToken(polyvSignResponse.getToken());
-
-        // 获取code
-        CallbackVodAuthCode authCode = new CallbackVodAuthCode();
-        authCode.setPeriodId(req.getPeriodId());
-        authCode.setShowText("领课开源");
-        authCode.setUserId(ThreadContext.userId());
-        resp.setCode(PolyvVodUtil.getPolyvCode(authCode));
+        resp.setCode(polyvSignResponse.getCode());
     }
 
     private Boolean check(CourseChapterPeriod period) {

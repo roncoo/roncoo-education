@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminWebsiteCarouselPageReq", description = "ADMIN-广告信息分页")
+@ApiModel(description = "ADMIN-广告信息分页")
 public class AdminWebsiteCarouselPageReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

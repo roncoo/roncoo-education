@@ -17,7 +17,7 @@ import java.math.BigDecimal;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AdminRegionEditReq", description = "ADMIN-行政区域表修改")
+@ApiModel(description = "ADMIN-行政区域表修改")
 public class AdminRegionEditReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

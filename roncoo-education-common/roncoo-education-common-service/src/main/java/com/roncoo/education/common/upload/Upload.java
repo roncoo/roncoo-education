@@ -6,7 +6,7 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 /**
- * 交易下单通知
+ * 上传接口
  *
  * @author LYQ
  */

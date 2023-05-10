@@ -18,7 +18,7 @@ import java.math.BigDecimal;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "AuthRegionReq", description = "API-AUTH-行政区域表")
+@ApiModel(description = "API-AUTH-行政区域表")
 public class AuthRegionReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

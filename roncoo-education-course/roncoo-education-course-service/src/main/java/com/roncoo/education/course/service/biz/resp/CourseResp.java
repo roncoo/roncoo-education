@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "ApiCourseResp", description = "API-课程信息")
+@ApiModel(description = "API-课程信息")
 public class CourseResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -75,4 +75,8 @@ public class CourseResp implements Serializable {
 
     @ApiModelProperty(value = "章节信息")
     private List<CourseChapterResp> chapterRespList;
+
+    @ApiModelProperty(value = "课程收藏状态")
+    private Boolean courseCollect = false;
+
 }
