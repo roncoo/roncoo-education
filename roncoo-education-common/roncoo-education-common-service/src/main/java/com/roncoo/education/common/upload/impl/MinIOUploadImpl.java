@@ -21,13 +21,16 @@ import java.util.Map;
 @Component(value = "minio")
 public class MinIOUploadImpl implements UploadFace {
 
-    private static final String FILEDIR = "education";
+    /**
+     * 公共读的文件都存入该目录
+     */
+    private static final String FILEDIR = "public";
 
     @Override
     public String uploadPic(MultipartFile file, Upload upload) {
         try {
             String fileName = IdUtil.simpleUUID() + "." + FileUtil.getSuffix(file.getOriginalFilename());
-            String filePath = uploadForMinio(upload, FILEDIR, fileName, file.getName(), file.getContentType(), true, file.getInputStream());
+            String filePath = uploadForMinio(upload, FILEDIR, fileName, file.getName(), file.getContentType(), file.getInputStream());
             return getMinioFileUrl(upload.getMinioDomain(), filePath);
         } catch (Exception e) {
             log.error("MinIO上传错误", e);
@@ -45,7 +48,7 @@ public class MinIOUploadImpl implements UploadFace {
      * @return 上传后的文件地址
      * @throws Exception 上传异常
      */
-    private String uploadForMinio(Upload storageConfig, String fileDir, String fileName, String fileOriginalName, String contentType, boolean publicRead, InputStream stream) throws Exception {
+    private String uploadForMinio(Upload storageConfig, String fileDir, String fileName, String fileOriginalName, String contentType, InputStream stream) throws Exception {
         MinioClient minioClient = getMinioClient(storageConfig);
 
         // 处理前缀目录
