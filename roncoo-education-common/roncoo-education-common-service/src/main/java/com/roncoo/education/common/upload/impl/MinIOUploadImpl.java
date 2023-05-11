@@ -21,11 +21,13 @@ import java.util.Map;
 @Component(value = "minio")
 public class MinIOUploadImpl implements UploadFace {
 
+    private static final String FILEDIR = "education";
+
     @Override
     public String uploadPic(MultipartFile file, Upload upload) {
         try {
             String fileName = IdUtil.simpleUUID() + "." + FileUtil.getSuffix(file.getOriginalFilename());
-            String filePath = uploadForMinio(upload, "education", fileName, file.getName(), file.getContentType(), true, file.getInputStream());
+            String filePath = uploadForMinio(upload, FILEDIR, fileName, file.getName(), file.getContentType(), true, file.getInputStream());
             return getMinioFileUrl(upload.getMinioDomain(), filePath);
         } catch (Exception e) {
             log.error("MinIO上传错误", e);
@@ -45,14 +47,6 @@ public class MinIOUploadImpl implements UploadFace {
      */
     private String uploadForMinio(Upload storageConfig, String fileDir, String fileName, String fileOriginalName, String contentType, boolean publicRead, InputStream stream) throws Exception {
         MinioClient minioClient = getMinioClient(storageConfig);
-
-        if (!minioClient.bucketExists(BucketExistsArgs.builder().bucket(storageConfig.getMinioBucket()).build())) {
-            // 创建Bucket
-            minioClient.makeBucket(MakeBucketArgs.builder().bucket(storageConfig.getMinioBucket()).build());
-            // 设置Bucket访问策略
-            String policy = "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"*\"]},\"Action\":[\"s3:GetBucketLocation\"],\"Resource\":[\"arn:aws:s3:::{bucket}\"]},{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"*\"]},\"Action\":[\"s3:ListBucket\"],\"Resource\":[\"arn:aws:s3:::{bucket}\"],\"Condition\":{\"StringEquals\":{\"s3:prefix\":[\"public/**\"]}}},{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"*\"]},\"Action\":[\"s3:GetObject\"],\"Resource\":[\"arn:aws:s3:::{bucket}/public/***\"]}]}\n";
-            minioClient.setBucketPolicy(SetBucketPolicyArgs.builder().bucket(storageConfig.getMinioBucket()).config(policy.replace("{bucket}", storageConfig.getMinioBucket())).build());
-        }
 
         // 处理前缀目录
         String objectName = StringUtils.hasText(fileDir) ? fileDir + "/" + fileName : fileName;
@@ -89,8 +83,8 @@ public class MinIOUploadImpl implements UploadFace {
                 if (!minioClient.bucketExists(BucketExistsArgs.builder().bucket(upload.getMinioBucket()).build())) {
                     minioClient.makeBucket(MakeBucketArgs.builder().bucket(upload.getMinioBucket()).build());
                     // 设置访问策略
-                    String policy = "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"*\"]},\"Action\":[\"s3:GetBucketLocation\"],\"Resource\":[\"arn:aws:s3:::{bucket}\"]},{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"*\"]},\"Action\":[\"s3:ListBucket\"],\"Resource\":[\"arn:aws:s3:::{bucket}\"],\"Condition\":{\"StringEquals\":{\"s3:prefix\":[\"public/**\"]}}},{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"*\"]},\"Action\":[\"s3:GetObject\"],\"Resource\":[\"arn:aws:s3:::{bucket}/public/***\"]}]}\n";
-                    minioClient.setBucketPolicy(SetBucketPolicyArgs.builder().bucket(upload.getMinioBucket()).config(policy.replace("{bucket}", upload.getMinioBucket())).build());
+                    String policy = "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"*\"]},\"Action\":[\"s3:GetBucketLocation\"],\"Resource\":[\"arn:aws:s3:::{bucket}\"]},{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"*\"]},\"Action\":[\"s3:ListBucket\"],\"Resource\":[\"arn:aws:s3:::{bucket}\"],\"Condition\":{\"StringEquals\":{\"s3:prefix\":[\"{public}/**\"]}}},{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"*\"]},\"Action\":[\"s3:GetObject\"],\"Resource\":[\"arn:aws:s3:::{bucket}/{public}/***\"]}]}\n";
+                    minioClient.setBucketPolicy(SetBucketPolicyArgs.builder().bucket(upload.getMinioBucket()).config(policy.replace("{bucket}", upload.getMinioBucket()).replace("{public}", FILEDIR)).build());
                 }
             } catch (Exception e) {
                 throw new RuntimeException("初始化MinIo错误", e);
