@@ -24,13 +24,13 @@ public class MinIOUploadImpl implements UploadFace {
     /**
      * 公共读的文件都存入该目录
      */
-    private static final String FILEDIR = "public";
+    private static final String PUBLICFILE = "public";
 
     @Override
     public String uploadPic(MultipartFile file, Upload upload) {
         try {
             String fileName = IdUtil.simpleUUID() + "." + FileUtil.getSuffix(file.getOriginalFilename());
-            String filePath = uploadForMinio(upload, FILEDIR, fileName, file.getName(), file.getContentType(), file.getInputStream());
+            String filePath = uploadForMinio(upload, PUBLICFILE, fileName, file.getName(), file.getContentType(), file.getInputStream());
             return getMinioFileUrl(upload.getMinioDomain(), filePath);
         } catch (Exception e) {
             log.error("MinIO上传错误", e);
@@ -87,7 +87,7 @@ public class MinIOUploadImpl implements UploadFace {
                     minioClient.makeBucket(MakeBucketArgs.builder().bucket(upload.getMinioBucket()).build());
                     // 设置访问策略
                     String policy = "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"*\"]},\"Action\":[\"s3:GetBucketLocation\"],\"Resource\":[\"arn:aws:s3:::{bucket}\"]},{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"*\"]},\"Action\":[\"s3:ListBucket\"],\"Resource\":[\"arn:aws:s3:::{bucket}\"],\"Condition\":{\"StringEquals\":{\"s3:prefix\":[\"{public}/**\"]}}},{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"*\"]},\"Action\":[\"s3:GetObject\"],\"Resource\":[\"arn:aws:s3:::{bucket}/{public}/***\"]}]}\n";
-                    minioClient.setBucketPolicy(SetBucketPolicyArgs.builder().bucket(upload.getMinioBucket()).config(policy.replace("{bucket}", upload.getMinioBucket()).replace("{public}", FILEDIR)).build());
+                    minioClient.setBucketPolicy(SetBucketPolicyArgs.builder().bucket(upload.getMinioBucket()).config(policy.replace("{bucket}", upload.getMinioBucket()).replace("{public}", PUBLICFILE)).build());
                 }
             } catch (Exception e) {
                 throw new RuntimeException("初始化MinIo错误", e);
