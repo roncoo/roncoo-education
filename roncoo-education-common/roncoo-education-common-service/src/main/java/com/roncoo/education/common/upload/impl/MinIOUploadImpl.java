@@ -90,7 +90,7 @@ public class MinIOUploadImpl implements UploadFace {
                     minioClient.makeBucket(MakeBucketArgs.builder().bucket(upload.getMinioBucket()).build());
                     // 设置访问策略
                     String policy = "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"*\"]},\"Action\":[\"s3:GetBucketLocation\"],\"Resource\":[\"arn:aws:s3:::{bucket}\"]},{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"*\"]},\"Action\":[\"s3:ListBucket\"],\"Resource\":[\"arn:aws:s3:::{bucket}\"],\"Condition\":{\"StringEquals\":{\"s3:prefix\":[\"public/**\"]}}},{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"*\"]},\"Action\":[\"s3:GetObject\"],\"Resource\":[\"arn:aws:s3:::{bucket}/public/***\"]}]}\n";
-                    minioClient.setBucketPolicy(SetBucketPolicyArgs.builder().bucket(upload.getMinioBucket()).config(policy.replace("${bucket}", upload.getMinioBucket())).build());
+                    minioClient.setBucketPolicy(SetBucketPolicyArgs.builder().bucket(upload.getMinioBucket()).config(policy.replace("{bucket}", upload.getMinioBucket())).build());
                 }
             } catch (Exception e) {
                 throw new RuntimeException("初始化MinIo错误", e);
