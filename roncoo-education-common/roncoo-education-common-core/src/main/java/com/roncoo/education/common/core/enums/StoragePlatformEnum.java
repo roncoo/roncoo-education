@@ -14,7 +14,7 @@ public enum StoragePlatformEnum {
 
     LOCAL(1, "本地", "local%", "local"),
     MinIO(2, "MinIO", "minio%", "minio"),
-    ALIYUN(3, "阿里云(待开发)", "aliyun%", "aliyun"),
+    ALIYUN(3, "阿里云", "aliyun%", "aliyun"),
     TENCENT(4, "腾讯云(待开发)", "tencent%", "tencent");
 
     private Integer code;
