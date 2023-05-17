@@ -24,7 +24,7 @@ public class CacheRedis {
     }
 
     /**
-     * 默认缓存5分钟
+     * 默认缓存1分钟
      */
     public <T> T set(String key, T t) {
         if (t != null) {
@@ -32,7 +32,7 @@ public class CacheRedis {
             if (t instanceof String) {
                 value = t.toString();
             }
-            stringRedisTemplate.opsForValue().set(key, value, timeToLive, TimeUnit.MICROSECONDS);
+            stringRedisTemplate.opsForValue().set(key, value, timeToLive, TimeUnit.MILLISECONDS);
         }
         return t;
     }
