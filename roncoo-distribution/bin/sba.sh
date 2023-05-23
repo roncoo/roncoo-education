@@ -1,14 +1,6 @@
 #!/bin/bash
 # Copyright 2019-现在 LingKe, Co., Ltd.
-[ ! -e "$JAVA_HOME/bin/java" ] && JAVA_HOME=$HOME/jdk/java
-[ ! -e "$JAVA_HOME/bin/java" ] && JAVA_HOME=/usr/java
-[ ! -e "$JAVA_HOME/bin/java" ] && JAVA_HOME=/opt/java
-[ ! -e "$JAVA_HOME/bin/java" ] && unset JAVA_HOME
-if [ -z "$JAVA_HOME" ]; then
-  echo "Please set the JAVA_HOME variable in your environment, We need java(x64)! jdk8 or later is better!"
-  echo
-fi
-export JAVA_HOME
+export JAVA_HOME=/opt/java
 export JAVA="$JAVA_HOME/bin/java"
 export BASE_DIR=`cd $(dirname $0)/..; pwd`
 export SERVER="sba"
