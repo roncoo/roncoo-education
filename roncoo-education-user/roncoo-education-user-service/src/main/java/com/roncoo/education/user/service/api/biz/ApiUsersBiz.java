@@ -147,10 +147,12 @@ public class ApiUsersBiz extends BaseBiz {
 
     public Result<String> sendCode(SendCodeReq req) {
         String code = NOUtil.getVerCode();
-        log.debug("手机号：{}，验证码：{}", req.getMobile(), code);
+        log.warn("手机号：{}，验证码：{}", req.getMobile(), code);
+
+        // 正常应该是发送成功才放入缓存，这里方便没有短信通道的情况下，也能测试注册
+        cacheRedis.set(Constants.RedisPre.CODE + req.getMobile(), code, 5, TimeUnit.MINUTES);
+
         if (SmsUtil.sendVerCode(req.getMobile(), code, feignSysConfig.getSms())) {
-            // 缓存5分钟
-            cacheRedis.set(Constants.RedisPre.CODE + req.getMobile(), code, 5, TimeUnit.MINUTES);
             return Result.success("发送成功");
         }
         return Result.error("发送失败");
