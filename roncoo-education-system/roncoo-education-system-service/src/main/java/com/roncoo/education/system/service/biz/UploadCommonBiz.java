@@ -40,7 +40,7 @@ public class UploadCommonBiz {
         Upload upload = sysConfigCommonBiz.getSysConfig(Upload.class);
         if (ObjectUtil.isNotEmpty(upload) || StringUtils.isEmpty(upload.getStoragePlatform())) {
             UploadFace uploadFace = uploadFaceMap.get(StoragePlatformEnum.byCode(Integer.valueOf(upload.getStoragePlatform())).getMode());
-            if(ObjectUtil.isNotEmpty(uploadFace)){
+            if(ObjectUtil.isEmpty(uploadFace)){
                 return Result.error("暂不支持该类型");
             }
             String fileUrl = uploadFace.uploadPic(picFile, upload);
