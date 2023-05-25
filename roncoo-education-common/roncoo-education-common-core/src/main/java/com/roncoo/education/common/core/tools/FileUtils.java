@@ -6,6 +6,7 @@ package com.roncoo.education.common.core.tools;
 import cn.hutool.core.io.FileTypeUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -24,7 +25,10 @@ public final class FileUtils {
 
     public static boolean isPic(MultipartFile file) {
         try {
-            String fileType = FileTypeUtil.getType(file.getInputStream());
+            String fileType = FilenameUtils.getExtension(file.getOriginalFilename());
+            if (!StringUtils.hasText(fileType)) {
+                fileType = FileTypeUtil.getType(file.getInputStream());
+            }
             return StrUtil.isNotBlank(fileType) && PIC_TYPE_MAP.contains(fileType);
         } catch (IOException e) {
             log.error("判断文件类型错误", e);
