@@ -4,6 +4,7 @@
 package com.roncoo.education.common.core.tools;
 
 import cn.hutool.core.io.FileTypeUtil;
+import cn.hutool.core.io.file.FileNameUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
@@ -25,7 +26,7 @@ public final class FileUtils {
 
     public static boolean isPic(MultipartFile file) {
         try {
-            String fileType = FilenameUtils.getExtension(file.getOriginalFilename());
+            String fileType = FileNameUtil.getSuffix(file.getOriginalFilename());
             if (!StringUtils.hasText(fileType)) {
                 fileType = FileTypeUtil.getType(file.getInputStream());
             }
