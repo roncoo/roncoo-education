@@ -48,14 +48,15 @@ import java.util.stream.Collectors;
 public class AdminCourseBiz extends BaseBiz {
 
     @NotNull
+    private final ElasticsearchRestTemplate elasticsearchRestTemplate;
+
+    @NotNull
     private final IFeignLecturer feignLecturer;
 
     @NotNull
     private final CourseDao dao;
     @NotNull
     private final CategoryDao categoryDao;
-
-    private final ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     /**
      * 课程信息分页
@@ -104,10 +105,8 @@ public class AdminCourseBiz extends BaseBiz {
         }
         Course record = BeanUtil.copyProperties(req, Course.class);
         if (dao.save(record) > 0) {
-            if (ObjectUtil.isNotNull(elasticsearchRestTemplate)) {
-                EsCourse esCourse = BeanUtil.copyProperties(record, EsCourse.class);
-                elasticsearchRestTemplate.index(new IndexQueryBuilder().withObject(esCourse).build(), IndexCoordinates.of(EsCourse.COURSE));
-            }
+            EsCourse esCourse = BeanUtil.copyProperties(record, EsCourse.class);
+            elasticsearchRestTemplate.index(new IndexQueryBuilder().withObject(esCourse).build(), IndexCoordinates.of(EsCourse.COURSE));
             return Result.success("操作成功");
         }
         return Result.error("操作失败");
@@ -140,10 +139,8 @@ public class AdminCourseBiz extends BaseBiz {
         }
         Course record = BeanUtil.copyProperties(req, Course.class);
         if (dao.updateById(record) > 0) {
-            if (ObjectUtil.isNotNull(elasticsearchRestTemplate)) {
-                EsCourse esCourse = BeanUtil.copyProperties(record, EsCourse.class);
-                elasticsearchRestTemplate.index(new IndexQueryBuilder().withObject(esCourse).build(), IndexCoordinates.of(EsCourse.COURSE));
-            }
+            EsCourse esCourse = BeanUtil.copyProperties(record, EsCourse.class);
+            elasticsearchRestTemplate.index(new IndexQueryBuilder().withObject(esCourse).build(), IndexCoordinates.of(EsCourse.COURSE));
             return Result.success("操作成功");
         }
         return Result.error("操作失败");
@@ -172,15 +169,13 @@ public class AdminCourseBiz extends BaseBiz {
         List<Course> courseList = dao.listByExample(example);
         if (CollUtil.isNotEmpty(courseList)) {
             List<IndexQuery> queries = new ArrayList<>();
-            if (ObjectUtil.isNotNull(elasticsearchRestTemplate)) {
-                for (Course course : courseList) {
-                    EsCourse esCourse = BeanUtil.copyProperties(course, EsCourse.class);
-                    queries.add(new IndexQueryBuilder().withObject(esCourse).build());
-                }
-                // 更新es
-                elasticsearchRestTemplate.indexOps(EsCourse.class).delete();
-                elasticsearchRestTemplate.bulkIndex(queries, IndexCoordinates.of(EsCourse.COURSE));
+            for (Course course : courseList) {
+                EsCourse esCourse = BeanUtil.copyProperties(course, EsCourse.class);
+                queries.add(new IndexQueryBuilder().withObject(esCourse).build());
             }
+            // 更新es
+            elasticsearchRestTemplate.indexOps(EsCourse.class).delete();
+            elasticsearchRestTemplate.bulkIndex(queries, IndexCoordinates.of(EsCourse.COURSE));
         }
         return Result.success("操作成功");
     }

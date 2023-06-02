@@ -1,7 +1,6 @@
 package com.roncoo.education.course.job;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.enums.PutawayEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
@@ -31,7 +30,7 @@ import java.util.List;
 @Component
 public class CourseJob {
 
-    @Autowired(required = false)
+    @Autowired
     private ElasticsearchRestTemplate elasticsearchRestTemplate;
     @Autowired
     private CourseDao courseDao;
@@ -41,20 +40,18 @@ public class CourseJob {
      */
     @XxlJob("courseJobHandler")
     public void course() {
-        if (ObjectUtil.isNotNull(elasticsearchRestTemplate)) {
-            CourseExample example = new CourseExample();
-            example.createCriteria().andStatusIdEqualTo(StatusIdEnum.YES.getCode()).andIsPutawayEqualTo(PutawayEnum.UP.getCode());
-            List<Course> courseList = courseDao.listByExample(example);
-            if (CollUtil.isNotEmpty(courseList)) {
-                List<IndexQuery> queries = new ArrayList<>();
-                for (Course course : courseList) {
-                    EsCourse esCourse = BeanUtil.copyProperties(course, EsCourse.class);
-                    IndexQuery query = new IndexQueryBuilder().withObject(esCourse).build();
-                    queries.add(query);
-                }
-                elasticsearchRestTemplate.indexOps(EsCourse.class).delete();
-                elasticsearchRestTemplate.bulkIndex(queries, IndexCoordinates.of(EsCourse.COURSE));
+        CourseExample example = new CourseExample();
+        example.createCriteria().andStatusIdEqualTo(StatusIdEnum.YES.getCode()).andIsPutawayEqualTo(PutawayEnum.UP.getCode());
+        List<Course> courseList = courseDao.listByExample(example);
+        if (CollUtil.isNotEmpty(courseList)) {
+            List<IndexQuery> queries = new ArrayList<>();
+            for (Course course : courseList) {
+                EsCourse esCourse = BeanUtil.copyProperties(course, EsCourse.class);
+                IndexQuery query = new IndexQueryBuilder().withObject(esCourse).build();
+                queries.add(query);
             }
+            elasticsearchRestTemplate.indexOps(EsCourse.class).delete();
+            elasticsearchRestTemplate.bulkIndex(queries, IndexCoordinates.of(EsCourse.COURSE));
         }
         XxlJobHelper.handleSuccess("完成");
     }
