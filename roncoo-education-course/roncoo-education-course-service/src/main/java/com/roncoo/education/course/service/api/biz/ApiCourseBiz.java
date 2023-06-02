@@ -3,7 +3,6 @@ package com.roncoo.education.course.service.api.biz;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.PutawayEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
@@ -60,9 +59,6 @@ import java.util.stream.Collectors;
 public class ApiCourseBiz extends BaseBiz {
 
     @NotNull
-    private final IFeignLecturer feignLecturer;
-
-    @NotNull
     private final CourseDao dao;
     @NotNull
     private final CourseChapterDao chapterDao;
@@ -71,31 +67,13 @@ public class ApiCourseBiz extends BaseBiz {
     @NotNull
     private final CategoryDao categoryDao;
 
+    @NotNull
+    private final IFeignLecturer feignLecturer;
+
+    @NotNull
     private final ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     public Result<Page<ApiCoursePageResp>> searchForPage(ApiCoursePageReq req) {
-        if (ObjectUtil.isNotNull(elasticsearchRestTemplate)) {
-            // elasticsearch
-            return getPageResultForElasticsearch(req);
-        }
-        // mysql
-        CourseExample example = new CourseExample();
-        CourseExample.Criteria criteria = example.createCriteria();
-        if (ObjectUtil.isNotEmpty(req.getCategoryId())) {
-            criteria.andCategoryIdEqualTo(req.getCategoryId());
-        }
-        if (ObjectUtil.isNotEmpty(req.getIsFree())) {
-            criteria.andIsFreeEqualTo(req.getIsFree());
-        }
-        if (StringUtils.hasText(req.getCourseName())) {
-            criteria.andCourseNameLike(PageUtil.like(req.getCourseName()));
-        }
-        example.setOrderByClause("course_sort asc, id desc");
-        Page<Course> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
-        return Result.success(PageUtil.transform(page, ApiCoursePageResp.class));
-    }
-
-    private Result<Page<ApiCoursePageResp>> getPageResultForElasticsearch(ApiCoursePageReq req) {
         NativeSearchQueryBuilder nsb = new NativeSearchQueryBuilder();
         // 高亮字段
         nsb.withHighlightFields(new HighlightBuilder.Field("courseName").preTags("<mark>").postTags("</mark>"));
