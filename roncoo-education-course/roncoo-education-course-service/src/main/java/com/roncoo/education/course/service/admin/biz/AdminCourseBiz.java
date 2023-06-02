@@ -24,7 +24,6 @@ import com.roncoo.education.course.service.admin.resp.AdminCoursePageResp;
 import com.roncoo.education.course.service.admin.resp.AdminCourseViewResp;
 import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
@@ -49,15 +48,14 @@ import java.util.stream.Collectors;
 public class AdminCourseBiz extends BaseBiz {
 
     @NotNull
+    private final IFeignLecturer feignLecturer;
+
+    @NotNull
     private final CourseDao dao;
     @NotNull
     private final CategoryDao categoryDao;
 
-    @NotNull
-    private final IFeignLecturer feignLecturer;
-
-    @Autowired
-    private ElasticsearchRestTemplate elasticsearchRestTemplate;
+    private final ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     /**
      * 课程信息分页
@@ -106,8 +104,10 @@ public class AdminCourseBiz extends BaseBiz {
         }
         Course record = BeanUtil.copyProperties(req, Course.class);
         if (dao.save(record) > 0) {
-            EsCourse esCourse = BeanUtil.copyProperties(record, EsCourse.class);
-            elasticsearchRestTemplate.index(new IndexQueryBuilder().withObject(esCourse).build(), IndexCoordinates.of(EsCourse.COURSE));
+            if (ObjectUtil.isNotNull(elasticsearchRestTemplate)) {
+                EsCourse esCourse = BeanUtil.copyProperties(record, EsCourse.class);
+                elasticsearchRestTemplate.index(new IndexQueryBuilder().withObject(esCourse).build(), IndexCoordinates.of(EsCourse.COURSE));
+            }
             return Result.success("操作成功");
         }
         return Result.error("操作失败");
@@ -140,8 +140,10 @@ public class AdminCourseBiz extends BaseBiz {
         }
         Course record = BeanUtil.copyProperties(req, Course.class);
         if (dao.updateById(record) > 0) {
-            EsCourse esCourse = BeanUtil.copyProperties(record, EsCourse.class);
-            elasticsearchRestTemplate.index(new IndexQueryBuilder().withObject(esCourse).build(), IndexCoordinates.of(EsCourse.COURSE));
+            if (ObjectUtil.isNotNull(elasticsearchRestTemplate)) {
+                EsCourse esCourse = BeanUtil.copyProperties(record, EsCourse.class);
+                elasticsearchRestTemplate.index(new IndexQueryBuilder().withObject(esCourse).build(), IndexCoordinates.of(EsCourse.COURSE));
+            }
             return Result.success("操作成功");
         }
         return Result.error("操作失败");
@@ -155,7 +157,9 @@ public class AdminCourseBiz extends BaseBiz {
      */
     public Result<String> delete(Long id) {
         if (dao.deleteById(id) > 0) {
-            elasticsearchRestTemplate.delete(id.toString(), EsCourse.class);
+            if (ObjectUtil.isNotNull(elasticsearchRestTemplate)) {
+                elasticsearchRestTemplate.delete(id.toString(), EsCourse.class);
+            }
             return Result.success("操作成功");
         }
         return Result.error("操作失败");
@@ -168,13 +172,15 @@ public class AdminCourseBiz extends BaseBiz {
         List<Course> courseList = dao.listByExample(example);
         if (CollUtil.isNotEmpty(courseList)) {
             List<IndexQuery> queries = new ArrayList<>();
-            for (Course course : courseList) {
-                EsCourse esCourse = BeanUtil.copyProperties(course, EsCourse.class);
-                queries.add(new IndexQueryBuilder().withObject(esCourse).build());
+            if (ObjectUtil.isNotNull(elasticsearchRestTemplate)) {
+                for (Course course : courseList) {
+                    EsCourse esCourse = BeanUtil.copyProperties(course, EsCourse.class);
+                    queries.add(new IndexQueryBuilder().withObject(esCourse).build());
+                }
+                // 更新es
+                elasticsearchRestTemplate.indexOps(EsCourse.class).delete();
+                elasticsearchRestTemplate.bulkIndex(queries, IndexCoordinates.of(EsCourse.COURSE));
             }
-            // 更新es
-            elasticsearchRestTemplate.indexOps(EsCourse.class).delete();
-            elasticsearchRestTemplate.bulkIndex(queries, IndexCoordinates.of(EsCourse.COURSE));
         }
         return Result.success("操作成功");
     }

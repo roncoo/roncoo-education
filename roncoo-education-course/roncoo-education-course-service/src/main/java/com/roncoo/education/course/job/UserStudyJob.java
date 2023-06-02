@@ -23,11 +23,11 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Component
 public class UserStudyJob {
-    @Autowired
-    private UserStudyDao userStudyDao;
 
     @Autowired
     private CacheRedis cacheRedis;
+    @Autowired
+    private UserStudyDao userStudyDao;
 
     /**
      * 每10秒执行一次
