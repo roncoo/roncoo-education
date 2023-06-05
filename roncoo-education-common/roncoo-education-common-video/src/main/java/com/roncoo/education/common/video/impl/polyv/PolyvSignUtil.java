@@ -3,7 +3,6 @@ package com.roncoo.education.common.video.impl.polyv;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
-import cn.hutool.crypto.digest.DigestUtil;
 import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.common.core.tools.MD5Util;
 import com.roncoo.education.common.video.req.VodPlayConfigReq;
@@ -32,17 +31,6 @@ public class PolyvSignUtil {
     public static final String ALGORITHM_SHA256 = "SHA-256";
 
     private PolyvSignUtil() {
-    }
-
-    /**
-     * 获取保利威直播回调签名
-     *
-     * @param timestamp 回调时间戳
-     * @param appSecret 签名秘钥
-     * @return 签名结果
-     */
-    public static String getCallbackSign(Long timestamp, String appSecret) {
-        return DigestUtil.md5Hex(appSecret + timestamp);
     }
 
     /**
@@ -112,12 +100,9 @@ public class PolyvSignUtil {
      */
     public static String getMd5Sign(Map<String, Object> params, String appSecret) {
         // 处理参数，计算MD5哈希值
-        log.debug("参与签名参数：{}", params);
         String concatStr = concatParams(params);
         String plain = appSecret + concatStr + appSecret;
-        log.debug("签名原始字符串：{}", plain);
         String encrypted = md5Hex(plain).toUpperCase();
-        log.debug("签名结果： {}", encrypted);
         // 32位大写MD5值
         return encrypted;
     }

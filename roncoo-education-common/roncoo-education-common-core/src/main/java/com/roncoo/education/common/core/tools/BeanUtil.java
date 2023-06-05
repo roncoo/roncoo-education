@@ -76,9 +76,9 @@ public final class BeanUtil<T extends Serializable> {
         return cn.hutool.core.bean.BeanUtil.toBeanIgnoreCase(map, clazz, true);
     }
 
-    public static Map<String, Object> beanToStringMap(Object obj) {
+    public static Map<String, String> beanToStringMap(Object obj) {
         try {
-            Map<String, Object> resultMap = new HashMap<>();
+            Map<String, String> resultMap = new HashMap<>();
             //获取类的属性描述器
             BeanInfo beaninfo = Introspector.getBeanInfo(obj.getClass(), Object.class);
             //获取类的属性集

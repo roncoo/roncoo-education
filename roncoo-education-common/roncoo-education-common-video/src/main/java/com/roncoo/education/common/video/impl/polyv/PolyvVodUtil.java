@@ -301,14 +301,14 @@ public final class PolyvVodUtil {
      * @param secretKey 签名秘钥
      * @return 签名结果
      */
-    public static String getCallbackSign(Map<String, Object> paramMap, String secretKey) {
+    public static String getCallbackSign(Map<String, String> paramMap, String secretKey) {
         if (CollectionUtil.isEmpty(paramMap)) {
             return null;
         }
 
-        String type = paramMap.get("type").toString();
+        String type = paramMap.get("type");
         if (StrUtil.isBlank(type)) {
-            type = paramMap.get("eventType").toString();
+            type = paramMap.get("eventType");
         }
 
         StringBuilder sb = new StringBuilder();
