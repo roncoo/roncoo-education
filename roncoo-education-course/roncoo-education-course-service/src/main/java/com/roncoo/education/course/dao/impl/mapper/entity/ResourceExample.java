@@ -685,6 +685,66 @@ public class ResourceExample {
             return (Criteria) this;
         }
 
+        public Criteria andVodPlatformIsNull() {
+            addCriterion("vod_platform is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVodPlatformIsNotNull() {
+            addCriterion("vod_platform is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVodPlatformEqualTo(Integer value) {
+            addCriterion("vod_platform =", value, "vodPlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andVodPlatformNotEqualTo(Integer value) {
+            addCriterion("vod_platform <>", value, "vodPlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andVodPlatformGreaterThan(Integer value) {
+            addCriterion("vod_platform >", value, "vodPlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andVodPlatformGreaterThanOrEqualTo(Integer value) {
+            addCriterion("vod_platform >=", value, "vodPlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andVodPlatformLessThan(Integer value) {
+            addCriterion("vod_platform <", value, "vodPlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andVodPlatformLessThanOrEqualTo(Integer value) {
+            addCriterion("vod_platform <=", value, "vodPlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andVodPlatformIn(List<Integer> values) {
+            addCriterion("vod_platform in", values, "vodPlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andVodPlatformNotIn(List<Integer> values) {
+            addCriterion("vod_platform not in", values, "vodPlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andVodPlatformBetween(Integer value1, Integer value2) {
+            addCriterion("vod_platform between", value1, value2, "vodPlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andVodPlatformNotBetween(Integer value1, Integer value2) {
+            addCriterion("vod_platform not between", value1, value2, "vodPlatform");
+            return (Criteria) this;
+        }
+
         public Criteria andVideoStatusIsNull() {
             addCriterion("video_status is null");
             return (Criteria) this;

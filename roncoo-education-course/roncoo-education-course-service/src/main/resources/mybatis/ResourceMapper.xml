@@ -11,6 +11,7 @@
     <result column="resource_type" jdbcType="TINYINT" property="resourceType" />
     <result column="resource_size" jdbcType="BIGINT" property="resourceSize" />
     <result column="resource_url" jdbcType="VARCHAR" property="resourceUrl" />
+    <result column="vod_platform" jdbcType="TINYINT" property="vodPlatform" />
     <result column="video_status" jdbcType="TINYINT" property="videoStatus" />
     <result column="video_length" jdbcType="VARCHAR" property="videoLength" />
     <result column="video_vid" jdbcType="VARCHAR" property="videoVid" />
@@ -75,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, gmt_create, gmt_modified, status_id, sort, resource_name, resource_type, resource_size, 
-    resource_url, video_status, video_length, video_vid
+    resource_url, vod_platform, video_status, video_length, video_vid
   </sql>
   <select id="selectByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample" resultMap="BaseResultMap">
     select
@@ -114,13 +115,13 @@
     insert into resource (id, gmt_create, gmt_modified, 
       status_id, sort, resource_name, 
       resource_type, resource_size, resource_url, 
-      video_status, video_length, video_vid
-      )
+      vod_platform, video_status, video_length, 
+      video_vid)
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{resourceName,jdbcType=VARCHAR}, 
       #{resourceType,jdbcType=TINYINT}, #{resourceSize,jdbcType=BIGINT}, #{resourceUrl,jdbcType=VARCHAR}, 
-      #{videoStatus,jdbcType=TINYINT}, #{videoLength,jdbcType=VARCHAR}, #{videoVid,jdbcType=VARCHAR}
-      )
+      #{vodPlatform,jdbcType=TINYINT}, #{videoStatus,jdbcType=TINYINT}, #{videoLength,jdbcType=VARCHAR}, 
+      #{videoVid,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Resource">
     insert into resource
@@ -151,6 +152,9 @@
       </if>
       <if test="resourceUrl != null">
         resource_url,
+      </if>
+      <if test="vodPlatform != null">
+        vod_platform,
       </if>
       <if test="videoStatus != null">
         video_status,
@@ -189,6 +193,9 @@
       </if>
       <if test="resourceUrl != null">
         #{resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="vodPlatform != null">
+        #{vodPlatform,jdbcType=TINYINT},
       </if>
       <if test="videoStatus != null">
         #{videoStatus,jdbcType=TINYINT},
@@ -237,6 +244,9 @@
       <if test="record.resourceUrl != null">
         resource_url = #{record.resourceUrl,jdbcType=VARCHAR},
       </if>
+      <if test="record.vodPlatform != null">
+        vod_platform = #{record.vodPlatform,jdbcType=TINYINT},
+      </if>
       <if test="record.videoStatus != null">
         video_status = #{record.videoStatus,jdbcType=TINYINT},
       </if>
@@ -262,6 +272,7 @@
       resource_type = #{record.resourceType,jdbcType=TINYINT},
       resource_size = #{record.resourceSize,jdbcType=BIGINT},
       resource_url = #{record.resourceUrl,jdbcType=VARCHAR},
+      vod_platform = #{record.vodPlatform,jdbcType=TINYINT},
       video_status = #{record.videoStatus,jdbcType=TINYINT},
       video_length = #{record.videoLength,jdbcType=VARCHAR},
       video_vid = #{record.videoVid,jdbcType=VARCHAR}
@@ -296,6 +307,9 @@
       <if test="resourceUrl != null">
         resource_url = #{resourceUrl,jdbcType=VARCHAR},
       </if>
+      <if test="vodPlatform != null">
+        vod_platform = #{vodPlatform,jdbcType=TINYINT},
+      </if>
       <if test="videoStatus != null">
         video_status = #{videoStatus,jdbcType=TINYINT},
       </if>
@@ -318,6 +332,7 @@
       resource_type = #{resourceType,jdbcType=TINYINT},
       resource_size = #{resourceSize,jdbcType=BIGINT},
       resource_url = #{resourceUrl,jdbcType=VARCHAR},
+      vod_platform = #{vodPlatform,jdbcType=TINYINT},
       video_status = #{videoStatus,jdbcType=TINYINT},
       video_length = #{videoLength,jdbcType=VARCHAR},
       video_vid = #{videoVid,jdbcType=VARCHAR}

@@ -92,6 +92,7 @@ public class AuthCourseBiz extends BaseBiz {
         resp.setPeriodId(req.getPeriodId());
         resp.setResourceId(resource.getId());
         resp.setVid(resource.getVideoVid());
+        resp.setVodPlatform(resource.getVodPlatform());
         // 播放参数
         playConfig(req, resp);
         return Result.success(resp);
@@ -109,14 +110,8 @@ public class AuthCourseBiz extends BaseBiz {
 
         // 视频云配置
         VodConfig vodConfig = feignSysConfig.getVod();
-        resp.setVodPlatform(vodConfig.getVodPlatform());
+        vodConfig.setVodPlatform(resp.getVodPlatform());
         resp.setVodPlayConfig(VodUtil.getPlayConfig(vodConfig, playConfigReq));
-
-//        PolyvPlayResponse polyvSignResponse = PolyvVodUtil.getSignForPlay(vodConfig.getPolyvUserId(), vodConfig.getPolyvSecretKey(), playConfigReq);
-//        resp.setTs(polyvSignResponse.getTs());
-//        resp.setSign(polyvSignResponse.getSign());
-//        resp.setToken(polyvSignResponse.getToken());
-//        resp.setCode(polyvSignResponse.getCode());
     }
 
     private Boolean check(CourseChapterPeriod period) {
