@@ -52,14 +52,13 @@ public final class PrivateYunVodUtil {
         paramMap.put("sign", getSign(paramMap, secretKey));
         // 请求
         String result = HttpUtil.post(requestUrl, JSONUtil.toJsonStr(paramMap));
-        log.info("私有云--查询账号信息响应结果：{}", result);
 
         JSONObject resultJson = JSONUtil.parseObj(result);
         if (SUCCESS_CODE.equals(resultJson.getInt("code"))) {
             return JSONUtil.toBean(resultJson.getStr("data"), PrivateYunInfoResp.class);
         }
 
-        log.info("私有云--查询账号信息失败：{}", result);
+        log.error("私有云--查询账号信息失败：{}", result);
         return null;
     }
 
@@ -99,14 +98,13 @@ public final class PrivateYunVodUtil {
         paramMap.put("state", state);
         // 请求
         String result = HttpUtil.post(requestUrl, JSONUtil.toJsonStr(paramMap));
-        log.info("私有云--查询视频信息响应结果：{}", result);
 
         JSONObject resultJson = JSONUtil.parseObj(result);
         if (SUCCESS_CODE.equals(resultJson.getInt("code"))) {
             return JSONUtil.toBean(resultJson.getStr("data"), PrivateYunVideoInfoResp.class);
         }
 
-        log.info("私有云--查询视频信息失败：{}", result);
+        log.error("私有云--查询视频信息失败：{}", result);
         return null;
     }
 
@@ -131,14 +129,13 @@ public final class PrivateYunVodUtil {
         paramMap.put("state", state);
         // 请求
         String result = HttpUtil.post(requestUrl, JSONUtil.toJsonStr(paramMap));
-        log.info("私有云--删除视频响应结果：{}", result);
 
         JSONObject resultJson = JSONUtil.parseObj(result);
         if (SUCCESS_CODE.equals(resultJson.getInt("code"))) {
             return resultJson.getStr("msg");
         }
 
-        log.info("私有云--删除视频响应结果失败：{}", result);
+        log.error("私有云--删除视频响应结果失败：{}", result);
         return resultJson.getStr("data");
     }
 
@@ -170,14 +167,13 @@ public final class PrivateYunVodUtil {
         paramMap.put("authUrl", authUrl);
         // 请求
         String result = HttpUtil.post(requestUrl, JSONUtil.toJsonStr(paramMap));
-        log.info("私有云--获取token响应结果：{}", result);
 
         JSONObject resultJson = JSONUtil.parseObj(result);
         if (SUCCESS_CODE.equals(resultJson.getInt("code"))) {
             return JSONUtil.toBean(resultJson.getStr("data"), PrivateYunPlayTokenRes.class);
         }
 
-        log.info("私有云--获取token响应结果：{}", result);
+        log.error("私有云--获取token响应结果：{}", result);
         return null;
     }
 
