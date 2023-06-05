@@ -6,10 +6,11 @@ import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.user.dao.LogLoginDao;
 import com.roncoo.education.user.service.admin.resp.AdminStatLogin;
 import com.roncoo.education.user.service.admin.resp.AdminStatLoginResp;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,10 +23,11 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class AdminStatBiz extends BaseBiz {
 
-    @Autowired
-    private LogLoginDao logLoginDao;
+    @NotNull
+    private final LogLoginDao logLoginDao;
 
     public Result<AdminStatLoginResp> statLogin(Integer dates) {
         AdminStatLoginResp resp = new AdminStatLoginResp();
