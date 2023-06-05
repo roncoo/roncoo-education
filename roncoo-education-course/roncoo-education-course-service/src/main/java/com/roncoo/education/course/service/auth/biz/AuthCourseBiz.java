@@ -6,8 +6,6 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.*;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.video.VodUtil;
-import com.roncoo.education.common.video.impl.polyv.PolyvVodUtil;
-import com.roncoo.education.common.video.impl.polyv.vod.resp.PolyvPlayResponse;
 import com.roncoo.education.common.video.req.VodPlayConfigReq;
 import com.roncoo.education.course.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.dao.ResourceDao;
@@ -95,13 +93,13 @@ public class AuthCourseBiz extends BaseBiz {
         resp.setResourceId(resource.getId());
         resp.setVid(resource.getVideoVid());
         // 播放参数
-        polyvSign(req, resource, resp);
+        playConfig(req, resp);
         return Result.success(resp);
     }
 
-    private void polyvSign(AuthCourseSignReq req, Resource resource, AuthCourseSignResp resp) {
+    private void playConfig(AuthCourseSignReq req, AuthCourseSignResp resp) {
         VodPlayConfigReq playConfigReq = new VodPlayConfigReq();
-        playConfigReq.setVid(resource.getVideoVid());
+        playConfigReq.setVid(resp.getVid());
         playConfigReq.setViewerId(ThreadContext.userId().toString());
         playConfigReq.setViewerIp(req.getClientIp());
         VodPlayConfigReq.VodAuthCode authCode = new VodPlayConfigReq.VodAuthCode();
@@ -114,11 +112,11 @@ public class AuthCourseBiz extends BaseBiz {
         resp.setVodPlatform(vodConfig.getVodPlatform());
         resp.setVodPlayConfig(VodUtil.getPlayConfig(vodConfig, playConfigReq));
 
-        PolyvPlayResponse polyvSignResponse = PolyvVodUtil.getSignForPlay(vodConfig.getPolyvUserId(), vodConfig.getPolyvSecretKey(), playConfigReq);
-        resp.setTs(polyvSignResponse.getTs());
-        resp.setSign(polyvSignResponse.getSign());
-        resp.setToken(polyvSignResponse.getToken());
-        resp.setCode(polyvSignResponse.getCode());
+//        PolyvPlayResponse polyvSignResponse = PolyvVodUtil.getSignForPlay(vodConfig.getPolyvUserId(), vodConfig.getPolyvSecretKey(), playConfigReq);
+//        resp.setTs(polyvSignResponse.getTs());
+//        resp.setSign(polyvSignResponse.getSign());
+//        resp.setToken(polyvSignResponse.getToken());
+//        resp.setCode(polyvSignResponse.getCode());
     }
 
     private Boolean check(CourseChapterPeriod period) {

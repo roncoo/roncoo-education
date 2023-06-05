@@ -43,19 +43,19 @@ public class AuthCourseSignResp implements Serializable {
     @ApiModelProperty(value = "点播播放配置参数")
     private String vodPlayConfig;
 
-    @Deprecated
-    @ApiModelProperty(value = "播放ts")
-    private String ts;
-
-    @Deprecated
-    @ApiModelProperty(value = "播放sign")
-    private String sign;
-
-    @Deprecated
-    @ApiModelProperty(value = "播放token")
-    private String token;
-
-    @Deprecated
-    @ApiModelProperty(value = "播放code")
-    private String code;
+//    @Deprecated
+//    @ApiModelProperty(value = "播放ts")
+//    private String ts;
+//
+//    @Deprecated
+//    @ApiModelProperty(value = "播放sign")
+//    private String sign;
+//
+//    @Deprecated
+//    @ApiModelProperty(value = "播放token")
+//    private String token;
+//
+//    @Deprecated
+//    @ApiModelProperty(value = "播放code")
+//    private String code;
 }
