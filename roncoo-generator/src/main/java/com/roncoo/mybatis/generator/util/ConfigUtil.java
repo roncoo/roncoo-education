@@ -34,7 +34,7 @@ public class ConfigUtil {
     /**
      * 数据库类名 class
      **/
-    public final static String dbClass = "com.mysql.jdbc.Driver";
+    public final static String dbClass = "com.mysql.cj.jdbc.Driver";
     /**
      * 数据库链接 url
      **/

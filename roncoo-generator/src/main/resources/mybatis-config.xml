@@ -47,11 +47,12 @@
 
         <!-- %代表生成全部的表 -->
         <!-- <table tableName="%" />-->
-        <table tableName="${tableNames}"/>
-        <!-- tableName=表名；domainObjectName=生成的实体名；column为你需要覆盖的数据库字段-->
-        <!-- <table tableName="${tableNames}" domainObjectName="WholeProcesssMark">-->
-        <!--  <columnOverride column="src_url" jdbcType="VARCHAR" />-->
-        <!--  <columnOverride column="mark_content" jdbcType="VARCHAR" />-->
-        <!-- </table>-->
+
+        <!--<table tableName="${tableNames}"/>-->
+
+         <!--tableName=表名；domainObjectName=生成的实体名；column为你需要覆盖的数据库字段-->
+         <table tableName="${tableNames}">
+          <columnOverride column="mark_content" jdbcType="VARCHAR" />
+         </table>
     </context>
 </generatorConfiguration>
