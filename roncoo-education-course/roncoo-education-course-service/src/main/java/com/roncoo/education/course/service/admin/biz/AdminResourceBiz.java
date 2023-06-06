@@ -8,7 +8,6 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ResourceTypeEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.JSUtil;
-import com.roncoo.education.common.core.tools.MD5Util;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.video.VodUtil;
 import com.roncoo.education.course.dao.CourseChapterPeriodDao;
@@ -52,29 +51,11 @@ public class AdminResourceBiz extends BaseBiz {
 
     public Result<AdminVodConfigResp> getVodConfig() {
         AdminVodConfigResp resp = new AdminVodConfigResp();
-
         // 视频云配置
         VodConfig vodConfig = feignSysConfig.getVod();
         resp.setVodPlatform(vodConfig.getVodPlatform());
         resp.setVodUploadConfig(VodUtil.getUploadConfig(vodConfig));
-
-        resp.setPolyvConfig(getCofigByPolyv(vodConfig));
         return Result.success(resp);
-    }
-
-    /**
-     * 获取保利威上传参数
-     *
-     * @param vodConfig
-     * @return
-     */
-    private AdminVodConfigResp.PolyvConfig getCofigByPolyv(VodConfig vodConfig) {
-        AdminVodConfigResp.PolyvConfig polyvConfig = new AdminVodConfigResp.PolyvConfig();
-        polyvConfig.setUserid(vodConfig.getPolyvUserId());
-        polyvConfig.setPtime(System.currentTimeMillis());
-        polyvConfig.setSign(MD5Util.md5(vodConfig.getPolyvSecretKey() + polyvConfig.getPtime()));
-        polyvConfig.setHash(MD5Util.md5(polyvConfig.getPtime() + vodConfig.getPolyvWriteToken()));
-        return polyvConfig;
     }
 
     /**

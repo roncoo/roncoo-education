@@ -25,12 +25,25 @@ public class MinIOUploadImpl implements UploadFace {
      * 公共读的文件都存入该目录
      */
     private static final String PUBLICFILE = "public";
+    private static final String PRIVATE = "private";
 
     @Override
     public String uploadPic(MultipartFile file, Upload upload) {
         try {
             String fileName = IdUtil.simpleUUID() + "." + FileUtil.getSuffix(file.getOriginalFilename());
             String filePath = uploadForMinio(upload, PUBLICFILE, fileName, file.getName(), file.getContentType(), file.getInputStream());
+            return getMinioFileUrl(upload.getMinioDomain(), filePath);
+        } catch (Exception e) {
+            log.error("MinIO上传错误", e);
+        }
+        return "";
+    }
+
+    @Override
+    public String uploadDoc(MultipartFile file, Upload upload) {
+        try {
+            String fileName = IdUtil.simpleUUID() + "." + FileUtil.getSuffix(file.getOriginalFilename());
+            String filePath = uploadForMinio(upload, PRIVATE, fileName, file.getName(), file.getContentType(), file.getInputStream());
             return getMinioFileUrl(upload.getMinioDomain(), filePath);
         } catch (Exception e) {
             log.error("MinIO上传错误", e);

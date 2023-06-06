@@ -4,6 +4,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 上传功能
+ *
+ * @author fengyw
  */
 public interface UploadFace {
 
@@ -13,4 +15,11 @@ public interface UploadFace {
      * @return 图片url
      */
     String uploadPic(MultipartFile file, Upload upload);
+
+    /**
+     * 图片上传
+     *
+     * @return 图片url
+     */
+    String uploadDoc(MultipartFile file, Upload upload);
 }

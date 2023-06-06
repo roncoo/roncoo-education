@@ -3,7 +3,10 @@ package com.roncoo.education.common.core.aliyun;
 import cn.hutool.core.util.IdUtil;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
-import com.aliyun.oss.model.*;
+import com.aliyun.oss.model.CannedAccessControlList;
+import com.aliyun.oss.model.GeneratePresignedUrlRequest;
+import com.aliyun.oss.model.ObjectMetadata;
+import com.aliyun.oss.model.PutObjectResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,7 +47,7 @@ public final class AliyunOssUtil {
         }
     }
 
-    public static String uploadPic( MultipartFile file, Aliyun aliyun) {
+    public static String uploadPic(MultipartFile file, Aliyun aliyun) {
         // 上传
         InputStream in = null;
         try {
@@ -66,11 +69,11 @@ public final class AliyunOssUtil {
         }
     }
 
-    public static String uploadDoc( File file, Aliyun aliyun) {
+    public static String uploadDoc(File file, Aliyun aliyun) {
         // 上传
         try {
             String name = file.getName();
-            String filePath = PREFIX+ "/" + IdUtil.simpleUUID() + name.substring(name.lastIndexOf("."));
+            String filePath = PREFIX + "/" + IdUtil.simpleUUID() + name.substring(name.lastIndexOf("."));
             putObjectForFile(aliyun.getAliyunOssEndpoint(), aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret(), aliyun.getAliyunOssBucket(), filePath, new FileInputStream(file), file.getName());
             return aliyun.getAliyunOssUrl() + filePath;
         } catch (Exception e) {
@@ -79,13 +82,13 @@ public final class AliyunOssUtil {
         }
     }
 
-    public static String uploadDoc( MultipartFile file, Aliyun aliyun) {
+    public static String uploadDoc(MultipartFile file, Aliyun aliyun) {
         InputStream in = null;
         // 上传
         try {
             in = file.getInputStream();
             String name = file.getOriginalFilename();
-            String filePath = PREFIX+ "/" + IdUtil.simpleUUID() + name.substring(name.lastIndexOf("."));
+            String filePath = PREFIX + "/" + IdUtil.simpleUUID() + name.substring(name.lastIndexOf("."));
             putObjectForFile(aliyun.getAliyunOssEndpoint(), aliyun.getAliyunAccessKeyId(), aliyun.getAliyunAccessKeySecret(), aliyun.getAliyunOssBucket(), filePath, in, file.getOriginalFilename());
             return aliyun.getAliyunOssUrl() + filePath;
         } catch (Exception e) {
@@ -138,6 +141,7 @@ public final class AliyunOssUtil {
     private static PutObjectResult putObjectForFile(String endpoint, String keyId, String keySecret, String bucketName, String key, InputStream inputStream, String fileName) {
         OSS ossClient = getOssClient(endpoint, keyId, keySecret);
         ObjectMetadata meta = new ObjectMetadata();
+        meta.setContentEncoding("UTF-8");
         if (StringUtils.hasText(fileName)) {
             meta.setContentDisposition("attachment;filename={}".replace("{}", fileName));
             meta.setObjectAcl(CannedAccessControlList.Private);

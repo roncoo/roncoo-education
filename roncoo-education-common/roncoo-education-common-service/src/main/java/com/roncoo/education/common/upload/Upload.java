@@ -19,7 +19,7 @@ public class Upload implements Serializable {
     /**
      * 存储平台，参考：UploadModeEnum
      */
-    private String storagePlatform;
+    private Integer storagePlatform;
 
     /**
      * 站点域名

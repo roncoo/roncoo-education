@@ -19,7 +19,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler(LocalUploadImpl.PATH+"/**").addResourceLocations("file:" + LocalUploadImpl.LOCALPATH);
+        registry.addResourceHandler(LocalUploadImpl.PATH_IMAGES + "/**").addResourceLocations("file:" + LocalUploadImpl.LOCALPATH_IMAGES, LocalUploadImpl.PATH_DOCS + "/**").addResourceLocations("file:" + LocalUploadImpl.LOCALPATH_DOCS);
     }
 
 

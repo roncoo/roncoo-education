@@ -1,13 +1,11 @@
 package com.roncoo.education.course.service.admin.req;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -52,4 +50,7 @@ public class AdminResourceSaveReq implements Serializable {
 
     @ApiModelProperty(value = "vid")
     private String videoVid;
+
+    @ApiModelProperty(value = "页数")
+    private Integer docPage;
 }

@@ -3,6 +3,7 @@ package com.roncoo.education.system.service.admin;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.service.BaseController;
 import com.roncoo.education.system.service.biz.UploadCommonBiz;
+import com.roncoo.education.system.service.biz.resp.UploadDocResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -38,7 +39,7 @@ public class AdminUploadController extends BaseController {
     @ApiOperation(value = "上传文档", notes = "服务端上传文档接口，只支持文档格式")
     @ApiImplicitParam(name = "docFile", value = "文档文件", dataType = "File", dataTypeClass = File.class, paramType = "query", required = true)
     @PostMapping(value = "/doc")
-    public Result<String> uploadDoc(@RequestParam(name = "docFile", required = false) MultipartFile docFile) {
+    public Result<UploadDocResp> uploadDoc(@RequestParam(name = "docFile", required = false) MultipartFile docFile) {
         return biz.uploadDoc(docFile);
     }
 

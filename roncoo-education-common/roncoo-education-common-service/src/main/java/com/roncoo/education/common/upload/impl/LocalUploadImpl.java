@@ -17,19 +17,34 @@ import java.io.IOException;
 @Component(value = "local")
 public class LocalUploadImpl implements UploadFace {
 
-    public static final String LOCALPATH = System.getProperty("user.dir") + "/files/images/";
-    public static final String PATH = "/system/images/";
+    public static final String LOCALPATH_IMAGES = System.getProperty("user.dir") + "/files/images/";
+    public static final String PATH_IMAGES = "/system/images/";
+
+    public static final String LOCALPATH_DOCS = System.getProperty("user.dir") + "/files/docs/";
+    public static final String PATH_DOCS = "/system/docs/";
 
     @Override
     public String uploadPic(MultipartFile file, Upload upload) {
         String fileName = IdUtil.simpleUUID() + "." + FileUtil.getSuffix(file.getOriginalFilename());
         try {
-            file.transferTo(FileUtil.file(FileUtil.mkdir(LOCALPATH), fileName));
+            file.transferTo(FileUtil.file(FileUtil.mkdir(LOCALPATH_IMAGES), fileName));
         } catch (IOException e) {
             log.error("本地上传错误", e);
             return "";
         }
-        return upload.getWebsiteDomain() + "gateway" + PATH + fileName;
+        return upload.getWebsiteDomain() + "gateway" + PATH_IMAGES + fileName;
+    }
+
+    @Override
+    public String uploadDoc(MultipartFile file, Upload upload) {
+        String fileName = IdUtil.simpleUUID() + "." + FileUtil.getSuffix(file.getOriginalFilename());
+        try {
+            file.transferTo(FileUtil.file(FileUtil.mkdir(LOCALPATH_DOCS), fileName));
+        } catch (IOException e) {
+            log.error("本地上传错误", e);
+            return "";
+        }
+        return upload.getWebsiteDomain() + "gateway" + PATH_DOCS + fileName;
     }
 
 }

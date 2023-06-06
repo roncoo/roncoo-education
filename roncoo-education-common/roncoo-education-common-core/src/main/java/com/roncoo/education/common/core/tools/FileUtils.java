@@ -19,7 +19,8 @@ import java.io.IOException;
  */
 @Slf4j
 public final class FileUtils {
-    private static final String PIC_TYPE_MAP = "jpg|png|gif|bmp|webp";
+    public static final String PIC_TYPE_MAP = "jpg|png|gif|bmp|webp";
+    public static final String DOC_TYPE_MAP = "doc|docx|xls|xlsx|ppt|pptx|txt|pdf";
 
     private FileUtils() {
     }
@@ -31,6 +32,19 @@ public final class FileUtils {
                 fileType = FileTypeUtil.getType(file.getInputStream());
             }
             return StrUtil.isNotBlank(fileType) && PIC_TYPE_MAP.contains(fileType);
+        } catch (IOException e) {
+            log.error("判断文件类型错误", e);
+            return false;
+        }
+    }
+
+    public static boolean isDoc(MultipartFile file) {
+        try {
+            String fileType = FileNameUtil.getSuffix(file.getOriginalFilename());
+            if (!StringUtils.hasText(fileType)) {
+                fileType = FileTypeUtil.getType(file.getInputStream());
+            }
+            return StrUtil.isNotBlank(fileType) && DOC_TYPE_MAP.contains(fileType);
         } catch (IOException e) {
             log.error("判断文件类型错误", e);
             return false;

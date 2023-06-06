@@ -16,13 +16,16 @@ import org.springframework.web.multipart.MultipartFile;
 @Component(value = "aliyun")
 public class AliyunUploadImpl implements UploadFace {
 
-    public static final String LOCALPATH = System.getProperty("user.dir") + "/files/images/";
-    public static final String PATH = "/system/images/";
-
     @Override
     public String uploadPic(MultipartFile file, Upload upload) {
         Aliyun aliyun = BeanUtil.copyProperties(upload, Aliyun.class);
         return AliyunOssUtil.uploadPic(file, aliyun);
+    }
+
+    @Override
+    public String uploadDoc(MultipartFile file, Upload upload) {
+        Aliyun aliyun = BeanUtil.copyProperties(upload, Aliyun.class);
+        return AliyunOssUtil.uploadDoc(file, aliyun);
     }
 
 }
