@@ -35,9 +35,12 @@ public class AuthUserStudyReq implements Serializable {
     @ApiModelProperty(value = "当前观看页数，文档类型必传")
     private Integer currentPage;
 
+    @ApiModelProperty(value = "资源类型，内部传参使用", hidden = true)
+    private Integer resourceType;
+
     @ApiModelProperty(value = "总时长，单位秒，内部传参使用", hidden = true)
     private BigDecimal totalDuration;
 
     @ApiModelProperty(value = "总页数，内部传参使用", hidden = true)
-    private BigDecimal totalPage;
+    private Integer totalPage;
 }

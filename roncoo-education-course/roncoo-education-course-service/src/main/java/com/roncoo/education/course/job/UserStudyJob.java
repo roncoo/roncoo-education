@@ -2,6 +2,7 @@ package com.roncoo.education.course.job;
 
 import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.cache.CacheRedis;
+import com.roncoo.education.common.core.enums.ResourceTypeEnum;
 import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.course.dao.UserStudyDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
@@ -42,7 +43,12 @@ public class UserStudyJob {
                     // 默认过期时间为60分钟，若剩余时间小于59分，则处理
                     AuthUserStudyReq req = cacheRedis.getByJson(key, AuthUserStudyReq.class);
                     UserStudy userStudy = userStudyDao.getById(req.getStudyId());
-                    userStudy.setProgress(req.getCurrentDuration().divide(req.getTotalDuration(), BigDecimal.ROUND_CEILING).multiply(BigDecimal.valueOf(100)).setScale(2, RoundingMode.HALF_UP));
+                    if (ResourceTypeEnum.VIDEO.getCode().equals(req.getResourceType()) || ResourceTypeEnum.AUDIO.getCode().equals(req.getResourceType())) {
+                        userStudy.setProgress(req.getCurrentDuration().divide(req.getTotalDuration(), BigDecimal.ROUND_CEILING).multiply(BigDecimal.valueOf(100)).setScale(2, RoundingMode.HALF_UP));
+                    } else if (ResourceTypeEnum.DOC.getCode().equals(req.getResourceType())) {
+                        userStudy.setProgress(BigDecimal.valueOf(req.getCurrentPage()).divide(BigDecimal.valueOf(req.getTotalPage())).multiply(BigDecimal.valueOf(100)).setScale(2, RoundingMode.HALF_UP));
+                    }
+
                     userStudyDao.updateById(userStudy);
                     // 清楚缓存
                     cacheRedis.delete(Constants.RedisPre.USER_STUDY + req.getStudyId());

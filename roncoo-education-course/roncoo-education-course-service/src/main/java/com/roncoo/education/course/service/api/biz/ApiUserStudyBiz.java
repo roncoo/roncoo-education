@@ -40,33 +40,42 @@ public class ApiUserStudyBiz extends BaseBiz {
         if (ObjectUtil.isEmpty(resource)) {
             Result.error("resourceId不正确");
         }
+        req.setResourceType(resource.getResourceType());
         if (ResourceTypeEnum.AUDIO.getCode().equals(resource.getResourceType()) || ResourceTypeEnum.VIDEO.getCode().equals(resource.getResourceType())) {
             // 音视频处理
             if (new BigDecimal(resource.getVideoLength()).subtract(req.getCurrentDuration()).intValue() < 1) {
-                // 若视频时长-观看时长<1s,则认为观看完成
-                UserStudy userStudy = getUserStudy(req);
-                if (ObjectUtil.isEmpty(userStudy)) {
-                    Result.error("studyId不正确");
-                }
-                if (userStudy.getProgress().compareTo(BigDecimal.valueOf(100)) < 0) {
-                    // 更新进度
-                    userStudy.setProgress(BigDecimal.valueOf(100));
-                }
-                // 更新观看记录
-                dao.updateById(userStudy);
-                // 清空缓存
-                cacheRedis.delete(Constants.RedisPre.USER_STUDY + req.getStudyId());
-                cacheRedis.delete(Constants.RedisPre.PROGRESS + req.getStudyId());
-                return Result.success("OK");
+                // 学习完成
+                return completeStudy(req);
             }
             // 没观看完成，进度存入redis，如没看完，定时任务处理
             req.setTotalDuration(new BigDecimal(resource.getVideoLength()));
-            cacheRedis.set(Constants.RedisPre.PROGRESS + req.getStudyId(), req, 1, TimeUnit.DAYS);
+
         } else if (ResourceTypeEnum.DOC.getCode().equals(resource.getResourceType())) {
             // 文档类型处理
-
+            if (req.getCurrentPage().compareTo(resource.getDocPage()) >= 0) {
+                // 学习完成
+                return completeStudy(req);
+            }
+            // 没学习完成，进度存入redis，如没学习完，定时任务处理
+            req.setTotalPage(resource.getDocPage());
         }
+        cacheRedis.set(Constants.RedisPre.PROGRESS + req.getStudyId(), req, 1, TimeUnit.DAYS);
         return Result.success("学习中");
+    }
+
+    private Result<String> completeStudy(AuthUserStudyReq req) {
+        UserStudy userStudy = getUserStudy(req);
+        if (ObjectUtil.isEmpty(userStudy)) {
+            return Result.error("studyId不正确");
+        }
+
+        userStudy.setProgress(BigDecimal.valueOf(100));
+        // 更新观看记录
+        dao.updateById(userStudy);
+        // 清空缓存
+        cacheRedis.delete(Constants.RedisPre.USER_STUDY + req.getStudyId());
+        cacheRedis.delete(Constants.RedisPre.PROGRESS + req.getStudyId());
+        return Result.success("OK");
     }
 
     private Resource getByResource(AuthUserStudyReq req) {

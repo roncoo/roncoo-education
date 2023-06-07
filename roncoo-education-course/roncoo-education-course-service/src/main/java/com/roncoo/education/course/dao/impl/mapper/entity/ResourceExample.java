@@ -944,6 +944,66 @@ public class ResourceExample {
             addCriterion("video_vid not between", value1, value2, "videoVid");
             return (Criteria) this;
         }
+
+        public Criteria andDocPageIsNull() {
+            addCriterion("doc_page is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocPageIsNotNull() {
+            addCriterion("doc_page is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocPageEqualTo(Integer value) {
+            addCriterion("doc_page =", value, "docPage");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocPageNotEqualTo(Integer value) {
+            addCriterion("doc_page <>", value, "docPage");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocPageGreaterThan(Integer value) {
+            addCriterion("doc_page >", value, "docPage");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocPageGreaterThanOrEqualTo(Integer value) {
+            addCriterion("doc_page >=", value, "docPage");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocPageLessThan(Integer value) {
+            addCriterion("doc_page <", value, "docPage");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocPageLessThanOrEqualTo(Integer value) {
+            addCriterion("doc_page <=", value, "docPage");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocPageIn(List<Integer> values) {
+            addCriterion("doc_page in", values, "docPage");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocPageNotIn(List<Integer> values) {
+            addCriterion("doc_page not in", values, "docPage");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocPageBetween(Integer value1, Integer value2) {
+            addCriterion("doc_page between", value1, value2, "docPage");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocPageNotBetween(Integer value1, Integer value2) {
+            addCriterion("doc_page not between", value1, value2, "docPage");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

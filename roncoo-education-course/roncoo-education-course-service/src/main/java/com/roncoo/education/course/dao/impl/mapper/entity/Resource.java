@@ -30,6 +30,8 @@ public class Resource implements Serializable {
 
     private String videoVid;
 
+    private Integer docPage;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -136,6 +138,14 @@ public class Resource implements Serializable {
         this.videoVid = videoVid == null ? null : videoVid.trim();
     }
 
+    public Integer getDocPage() {
+        return docPage;
+    }
+
+    public void setDocPage(Integer docPage) {
+        this.docPage = docPage;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -155,6 +165,7 @@ public class Resource implements Serializable {
         sb.append(", videoStatus=").append(videoStatus);
         sb.append(", videoLength=").append(videoLength);
         sb.append(", videoVid=").append(videoVid);
+        sb.append(", docPage=").append(docPage);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
