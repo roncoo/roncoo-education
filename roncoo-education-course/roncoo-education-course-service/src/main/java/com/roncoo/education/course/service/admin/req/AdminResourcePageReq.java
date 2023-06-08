@@ -21,6 +21,9 @@ public class AdminResourcePageReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty(value = "资源类型(1:视频2:音频;3:文档)")
+    private Integer resourceType = 1;
+
     @ApiModelProperty(value = "资源名称")
     private String resourceName;
 

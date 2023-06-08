@@ -97,7 +97,7 @@ public final class PrivateYunVodUtil {
         paramMap.put("videoVid", videoVid);
         paramMap.put("state", state);
         // 请求
-        String result = HttpUtil.post(requestUrl, JSONUtil.toJsonStr(paramMap));
+        String result = HttpUtil.post(requestUrl, JSONUtil.toJsonStr(paramMap), 60000);
 
         JSONObject resultJson = JSONUtil.parseObj(result);
         if (SUCCESS_CODE.equals(resultJson.getInt("code"))) {

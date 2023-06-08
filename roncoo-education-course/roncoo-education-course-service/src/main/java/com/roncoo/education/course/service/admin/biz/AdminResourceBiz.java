@@ -67,6 +67,9 @@ public class AdminResourceBiz extends BaseBiz {
     public Result<Page<AdminResourcePageResp>> page(AdminResourcePageReq req) {
         ResourceExample example = new ResourceExample();
         Criteria c = example.createCriteria();
+        if (ObjectUtil.isNotNull(req.getResourceType())) {
+            c.andResourceTypeEqualTo(req.getResourceType());
+        }
         if (StringUtils.hasText(req.getResourceName())) {
             c.andResourceNameLike(PageUtil.rightLike(req.getResourceName()));
         }

@@ -3,6 +3,7 @@ package com.roncoo.education.common.video;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONObject;
+import com.roncoo.education.common.core.enums.VideoStatusEnum;
 import com.roncoo.education.common.core.enums.VodPlatformEnum;
 import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.common.video.impl.polyv.PolyvVodUtil;
@@ -114,9 +115,13 @@ public final class VodUtil {
         if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
             PrivateYunVideoInfoResp videoInfoResp = PrivateYunVodUtil.getVideoInfo(req.getPriyUrl(), req.getPriyAccessKeyId(), req.getPriyAccessKeySecret(), vid, "");
             if (ObjectUtil.isNotNull(videoInfoResp)) {
-                resp.setDuration(Integer.valueOf(videoInfoResp.getVideoDuration()));
-                resp.setCoverUrl(videoInfoResp.getVideoThumbnail());
-                resp.setFileSize(Long.valueOf(videoInfoResp.getVideoSize()));
+                if (videoInfoResp.getVideoStatus().equals("5")) {
+                    // 视频状态(1:上传中;2:上传失败;3:转码中;4:转码失败;5:转码完成)
+                    resp.setVideoStatusEnum(VideoStatusEnum.SUCCES);
+                    resp.setDuration(Integer.valueOf(videoInfoResp.getVideoDuration()));
+                    resp.setCoverUrl(videoInfoResp.getVideoThumbnail());
+                    resp.setFileSize(Long.valueOf(videoInfoResp.getVideoSize()));
+                }
             }
             return resp;
         }
@@ -129,6 +134,7 @@ public final class VodUtil {
             // 视频状态码(60/61：已发布、10：等待编码、20：正在编码、40：编码失败、50：等待审核、51：审核不通过、-1：已删除)
             if (basicInfo.getStatus() == 60 || basicInfo.getStatus() == 61) {
                 // 审核通过
+                resp.setVideoStatusEnum(VideoStatusEnum.SUCCES);
                 resp.setDuration(basicInfo.getDuration());
                 resp.setCoverUrl(basicInfo.getCoverURL());
                 resp.setFileSize(basicInfo.getSize());

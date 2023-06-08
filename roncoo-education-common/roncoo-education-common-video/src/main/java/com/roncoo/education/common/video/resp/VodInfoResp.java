@@ -1,5 +1,6 @@
 package com.roncoo.education.common.video.resp;
 
+import com.roncoo.education.common.core.enums.VideoStatusEnum;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -37,5 +38,10 @@ public class VodInfoResp implements Serializable {
      * 源文件大小，单位：字节
      */
     private Long fileSize;
+
+    /**
+     * 视频状态(1转码中，2成功，3失败)
+     */
+    private VideoStatusEnum videoStatusEnum = VideoStatusEnum.WAIT;
 
 }

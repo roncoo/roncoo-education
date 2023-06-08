@@ -36,7 +36,7 @@ public class CourseJob {
     private CourseDao courseDao;
 
     /**
-     * 每天凌晨5点执行一次
+     * 建议：每天凌晨5点执行一次
      */
     @XxlJob("courseJobHandler")
     public void course() {

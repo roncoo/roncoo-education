@@ -31,7 +31,7 @@ public class UserStudyJob {
     private UserStudyDao userStudyDao;
 
     /**
-     * 每10秒执行一次
+     * 建议：每10秒执行一次
      */
     @XxlJob("userStudyJobHandler")
     public void progress() {

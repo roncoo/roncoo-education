@@ -1,7 +1,6 @@
 package com.roncoo.education.course.callback.biz;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.roncoo.education.common.core.enums.VideoStatusEnum;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.video.VodUtil;
 import com.roncoo.education.common.video.resp.VodInfoResp;
@@ -33,8 +32,8 @@ public class VodCommonBiz extends BaseBiz {
         if (ObjectUtil.isNotNull(videoResponse)) {
             Resource resource = resourceDao.getByVideoVid(videoId);
             if (ObjectUtil.isNotEmpty(resource)) {
-                resource.setVideoLength(videoResponse.getDuration().toString());
-                resource.setVideoStatus(VideoStatusEnum.SUCCES.getCode());
+                resource.setVideoLength(videoResponse.getDuration());
+                resource.setVideoStatus(videoResponse.getVideoStatusEnum().getCode());
                 resourceDao.updateById(resource);
             }
         }
