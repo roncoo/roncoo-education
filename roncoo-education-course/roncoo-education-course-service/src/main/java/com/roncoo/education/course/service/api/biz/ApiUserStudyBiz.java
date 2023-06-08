@@ -68,7 +68,6 @@ public class ApiUserStudyBiz extends BaseBiz {
         if (ObjectUtil.isEmpty(userStudy)) {
             return Result.error("studyId不正确");
         }
-
         userStudy.setProgress(BigDecimal.valueOf(100));
         // 更新观看记录
         dao.updateById(userStudy);

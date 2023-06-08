@@ -82,6 +82,9 @@ public class AuthCourseBiz extends BaseBiz {
             userStudy.setChapterId(period.getChapterId());
             userStudy.setPeriodId(period.getId());
             userStudy.setUserId(ThreadContext.userId());
+            userStudy.setResourceType(resource.getResourceType());
+            userStudy.setCurrentDuration(0);
+            userStudy.setCurrentPage(0);
             userStudy.setProgress(BigDecimal.ZERO);
             userStudyDao.save(userStudy);
         }
@@ -93,8 +96,14 @@ public class AuthCourseBiz extends BaseBiz {
         resp.setResourceId(resource.getId());
         resp.setVid(resource.getVideoVid());
         resp.setVodPlatform(resource.getVodPlatform());
-        // 播放参数
-        playConfig(req, resp);
+        resp.setCurrentDuration(userStudy.getCurrentDuration());
+        resp.setCurrentPage(userStudy.getCurrentPage());
+        if (ResourceTypeEnum.VIDEO.getCode().equals(resource.getResourceType()) || ResourceTypeEnum.AUDIO.getCode().equals(resource.getResourceType())) {
+            // 播放参数
+            playConfig(req, resp);
+        } else if (ResourceTypeEnum.DOC.getCode().equals(resource.getResourceType())) {
+            docConfig(req, resp);
+        }
         return Result.success(resp);
     }
 
@@ -112,6 +121,10 @@ public class AuthCourseBiz extends BaseBiz {
         VodConfig vodConfig = feignSysConfig.getVod();
         vodConfig.setVodPlatform(resp.getVodPlatform());
         resp.setVodPlayConfig(VodUtil.getPlayConfig(vodConfig, playConfigReq));
+    }
+
+    private void docConfig(AuthCourseSignReq req, AuthCourseSignResp resp) {
+
     }
 
     private Boolean check(CourseChapterPeriod period) {

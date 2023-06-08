@@ -13,9 +13,9 @@
     <result column="resource_url" jdbcType="VARCHAR" property="resourceUrl" />
     <result column="vod_platform" jdbcType="TINYINT" property="vodPlatform" />
     <result column="video_status" jdbcType="TINYINT" property="videoStatus" />
-    <result column="video_length" jdbcType="VARCHAR" property="videoLength" />
+    <result column="video_length" jdbcType="INTEGER" property="videoLength"/>
     <result column="video_vid" jdbcType="VARCHAR" property="videoVid" />
-    <result column="doc_page" jdbcType="INTEGER" property="docPage"/>
+      <result column="doc_page" jdbcType="INTEGER" property="docPage"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -97,8 +97,8 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
+      select
+      <include refid="Base_Column_List" />
     from resource
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -121,7 +121,7 @@
       values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
               #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{resourceName,jdbcType=VARCHAR},
               #{resourceType,jdbcType=TINYINT}, #{resourceSize,jdbcType=BIGINT}, #{resourceUrl,jdbcType=VARCHAR},
-              #{vodPlatform,jdbcType=TINYINT}, #{videoStatus,jdbcType=TINYINT}, #{videoLength,jdbcType=VARCHAR},
+              #{vodPlatform,jdbcType=TINYINT}, #{videoStatus,jdbcType=TINYINT}, #{videoLength,jdbcType=INTEGER},
               #{videoVid,jdbcType=VARCHAR}, #{docPage,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Resource">
@@ -148,15 +148,15 @@
       <if test="resourceType != null">
         resource_type,
       </if>
-      <if test="resourceSize != null">
-        resource_size,
-      </if>
-      <if test="resourceUrl != null">
-        resource_url,
-      </if>
-      <if test="vodPlatform != null">
-          vod_platform,
-      </if>
+        <if test="resourceSize != null">
+            resource_size,
+        </if>
+        <if test="resourceUrl != null">
+            resource_url,
+        </if>
+        <if test="vodPlatform != null">
+            vod_platform,
+        </if>
         <if test="videoStatus != null">
             video_status,
         </if>
@@ -192,20 +192,20 @@
       <if test="resourceType != null">
         #{resourceType,jdbcType=TINYINT},
       </if>
-      <if test="resourceSize != null">
-        #{resourceSize,jdbcType=BIGINT},
-      </if>
-      <if test="resourceUrl != null">
-        #{resourceUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="vodPlatform != null">
-        #{vodPlatform,jdbcType=TINYINT},
-      </if>
+        <if test="resourceSize != null">
+            #{resourceSize,jdbcType=BIGINT},
+        </if>
+        <if test="resourceUrl != null">
+            #{resourceUrl,jdbcType=VARCHAR},
+        </if>
+        <if test="vodPlatform != null">
+            #{vodPlatform,jdbcType=TINYINT},
+        </if>
         <if test="videoStatus != null">
             #{videoStatus,jdbcType=TINYINT},
         </if>
         <if test="videoLength != null">
-            #{videoLength,jdbcType=VARCHAR},
+            #{videoLength,jdbcType=INTEGER},
         </if>
         <if test="videoVid != null">
             #{videoVid,jdbcType=VARCHAR},
@@ -245,20 +245,20 @@
       <if test="record.resourceType != null">
         resource_type = #{record.resourceType,jdbcType=TINYINT},
       </if>
-      <if test="record.resourceSize != null">
-        resource_size = #{record.resourceSize,jdbcType=BIGINT},
-      </if>
-      <if test="record.resourceUrl != null">
-        resource_url = #{record.resourceUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="record.vodPlatform != null">
-          vod_platform = #{record.vodPlatform,jdbcType=TINYINT},
-      </if>
+        <if test="record.resourceSize != null">
+            resource_size = #{record.resourceSize,jdbcType=BIGINT},
+        </if>
+        <if test="record.resourceUrl != null">
+            resource_url = #{record.resourceUrl,jdbcType=VARCHAR},
+        </if>
+        <if test="record.vodPlatform != null">
+            vod_platform = #{record.vodPlatform,jdbcType=TINYINT},
+        </if>
         <if test="record.videoStatus != null">
             video_status = #{record.videoStatus,jdbcType=TINYINT},
         </if>
         <if test="record.videoLength != null">
-            video_length = #{record.videoLength,jdbcType=VARCHAR},
+            video_length = #{record.videoLength,jdbcType=INTEGER},
         </if>
         <if test="record.videoVid != null">
             video_vid = #{record.videoVid,jdbcType=VARCHAR},
@@ -284,12 +284,12 @@
       resource_url = #{record.resourceUrl,jdbcType=VARCHAR},
       vod_platform = #{record.vodPlatform,jdbcType=TINYINT},
       video_status = #{record.videoStatus,jdbcType=TINYINT},
-      video_length = #{record.videoLength,jdbcType=VARCHAR},
+      video_length = #{record.videoLength,jdbcType=INTEGER},
       video_vid = #{record.videoVid,jdbcType=VARCHAR},
       doc_page = #{record.docPage,jdbcType=INTEGER}
       <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
+          <include refid="Update_By_Example_Where_Clause"/>
+      </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Resource">
     update resource
@@ -312,20 +312,20 @@
       <if test="resourceType != null">
         resource_type = #{resourceType,jdbcType=TINYINT},
       </if>
-      <if test="resourceSize != null">
-        resource_size = #{resourceSize,jdbcType=BIGINT},
-      </if>
-      <if test="resourceUrl != null">
-        resource_url = #{resourceUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="vodPlatform != null">
-        vod_platform = #{vodPlatform,jdbcType=TINYINT},
-      </if>
+        <if test="resourceSize != null">
+            resource_size = #{resourceSize,jdbcType=BIGINT},
+        </if>
+        <if test="resourceUrl != null">
+            resource_url = #{resourceUrl,jdbcType=VARCHAR},
+        </if>
+        <if test="vodPlatform != null">
+            vod_platform = #{vodPlatform,jdbcType=TINYINT},
+        </if>
         <if test="videoStatus != null">
             video_status = #{videoStatus,jdbcType=TINYINT},
         </if>
         <if test="videoLength != null">
-            video_length = #{videoLength,jdbcType=VARCHAR},
+            video_length = #{videoLength,jdbcType=INTEGER},
         </if>
         <if test="videoVid != null">
             video_vid = #{videoVid,jdbcType=VARCHAR},
@@ -337,20 +337,20 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Resource">
-    update resource
-    set gmt_create    = #{gmtCreate,jdbcType=TIMESTAMP},
-        gmt_modified  = #{gmtModified,jdbcType=TIMESTAMP},
-        status_id     = #{statusId,jdbcType=TINYINT},
-        sort          = #{sort,jdbcType=INTEGER},
-        resource_name = #{resourceName,jdbcType=VARCHAR},
-        resource_type = #{resourceType,jdbcType=TINYINT},
-        resource_size = #{resourceSize,jdbcType=BIGINT},
-        resource_url  = #{resourceUrl,jdbcType=VARCHAR},
-        vod_platform  = #{vodPlatform,jdbcType=TINYINT},
-        video_status  = #{videoStatus,jdbcType=TINYINT},
-        video_length  = #{videoLength,jdbcType=VARCHAR},
-        video_vid     = #{videoVid,jdbcType=VARCHAR},
-        doc_page      = #{docPage,jdbcType=INTEGER}
-    where id = #{id,jdbcType=BIGINT}
+      update resource
+      set gmt_create    = #{gmtCreate,jdbcType=TIMESTAMP},
+          gmt_modified  = #{gmtModified,jdbcType=TIMESTAMP},
+          status_id     = #{statusId,jdbcType=TINYINT},
+          sort          = #{sort,jdbcType=INTEGER},
+          resource_name = #{resourceName,jdbcType=VARCHAR},
+          resource_type = #{resourceType,jdbcType=TINYINT},
+          resource_size = #{resourceSize,jdbcType=BIGINT},
+          resource_url  = #{resourceUrl,jdbcType=VARCHAR},
+          vod_platform  = #{vodPlatform,jdbcType=TINYINT},
+          video_status  = #{videoStatus,jdbcType=TINYINT},
+          video_length  = #{videoLength,jdbcType=INTEGER},
+          video_vid     = #{videoVid,jdbcType=VARCHAR},
+          doc_page      = #{docPage,jdbcType=INTEGER}
+      where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

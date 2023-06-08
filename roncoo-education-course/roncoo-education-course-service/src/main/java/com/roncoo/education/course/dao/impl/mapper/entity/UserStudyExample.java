@@ -546,6 +546,186 @@ public class UserStudyExample {
             return (Criteria) this;
         }
 
+        public Criteria andResourceTypeIsNull() {
+            addCriterion("resource_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeIsNotNull() {
+            addCriterion("resource_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeEqualTo(Integer value) {
+            addCriterion("resource_type =", value, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeNotEqualTo(Integer value) {
+            addCriterion("resource_type <>", value, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeGreaterThan(Integer value) {
+            addCriterion("resource_type >", value, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("resource_type >=", value, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeLessThan(Integer value) {
+            addCriterion("resource_type <", value, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("resource_type <=", value, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeIn(List<Integer> values) {
+            addCriterion("resource_type in", values, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeNotIn(List<Integer> values) {
+            addCriterion("resource_type not in", values, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeBetween(Integer value1, Integer value2) {
+            addCriterion("resource_type between", value1, value2, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("resource_type not between", value1, value2, "resourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentDurationIsNull() {
+            addCriterion("current_duration is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentDurationIsNotNull() {
+            addCriterion("current_duration is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentDurationEqualTo(Integer value) {
+            addCriterion("current_duration =", value, "currentDuration");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentDurationNotEqualTo(Integer value) {
+            addCriterion("current_duration <>", value, "currentDuration");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentDurationGreaterThan(Integer value) {
+            addCriterion("current_duration >", value, "currentDuration");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentDurationGreaterThanOrEqualTo(Integer value) {
+            addCriterion("current_duration >=", value, "currentDuration");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentDurationLessThan(Integer value) {
+            addCriterion("current_duration <", value, "currentDuration");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentDurationLessThanOrEqualTo(Integer value) {
+            addCriterion("current_duration <=", value, "currentDuration");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentDurationIn(List<Integer> values) {
+            addCriterion("current_duration in", values, "currentDuration");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentDurationNotIn(List<Integer> values) {
+            addCriterion("current_duration not in", values, "currentDuration");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentDurationBetween(Integer value1, Integer value2) {
+            addCriterion("current_duration between", value1, value2, "currentDuration");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentDurationNotBetween(Integer value1, Integer value2) {
+            addCriterion("current_duration not between", value1, value2, "currentDuration");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPageIsNull() {
+            addCriterion("current_page is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPageIsNotNull() {
+            addCriterion("current_page is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPageEqualTo(Integer value) {
+            addCriterion("current_page =", value, "currentPage");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPageNotEqualTo(Integer value) {
+            addCriterion("current_page <>", value, "currentPage");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPageGreaterThan(Integer value) {
+            addCriterion("current_page >", value, "currentPage");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPageGreaterThanOrEqualTo(Integer value) {
+            addCriterion("current_page >=", value, "currentPage");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPageLessThan(Integer value) {
+            addCriterion("current_page <", value, "currentPage");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPageLessThanOrEqualTo(Integer value) {
+            addCriterion("current_page <=", value, "currentPage");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPageIn(List<Integer> values) {
+            addCriterion("current_page in", values, "currentPage");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPageNotIn(List<Integer> values) {
+            addCriterion("current_page not in", values, "currentPage");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPageBetween(Integer value1, Integer value2) {
+            addCriterion("current_page between", value1, value2, "currentPage");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPageNotBetween(Integer value1, Integer value2) {
+            addCriterion("current_page not between", value1, value2, "currentPage");
+            return (Criteria) this;
+        }
+
         public Criteria andProgressIsNull() {
             addCriterion("progress is null");
             return (Criteria) this;

@@ -26,7 +26,7 @@ public class Resource implements Serializable {
 
     private Integer videoStatus;
 
-    private String videoLength;
+    private Integer videoLength;
 
     private String videoVid;
 
@@ -122,12 +122,12 @@ public class Resource implements Serializable {
         this.videoStatus = videoStatus;
     }
 
-    public String getVideoLength() {
+    public Integer getVideoLength() {
         return videoLength;
     }
 
-    public void setVideoLength(String videoLength) {
-        this.videoLength = videoLength == null ? null : videoLength.trim();
+    public void setVideoLength(Integer videoLength) {
+        this.videoLength = videoLength;
     }
 
     public String getVideoVid() {

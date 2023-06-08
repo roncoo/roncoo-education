@@ -50,7 +50,7 @@ public class AuthCourseController {
      *
      * @author fengyw
      */
-    @ApiOperation(value = "观看授权", notes = "课程观看授权")
+    @ApiOperation(value = "学习配置", notes = "获取课时学习需要的配置参数")
     @RequestMapping(value = "/sign", method = RequestMethod.POST)
     public Result<AuthCourseSignResp> sign(@RequestBody AuthCourseSignReq req) {
         return biz.sign(req);

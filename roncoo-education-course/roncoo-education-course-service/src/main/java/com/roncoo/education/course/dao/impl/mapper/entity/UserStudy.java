@@ -19,6 +19,12 @@ public class UserStudy implements Serializable {
 
     private Long userId;
 
+    private Integer resourceType;
+
+    private Integer currentDuration;
+
+    private Integer currentPage;
+
     private BigDecimal progress;
 
     private static final long serialVersionUID = 1L;
@@ -79,6 +85,30 @@ public class UserStudy implements Serializable {
         this.userId = userId;
     }
 
+    public Integer getResourceType() {
+        return resourceType;
+    }
+
+    public void setResourceType(Integer resourceType) {
+        this.resourceType = resourceType;
+    }
+
+    public Integer getCurrentDuration() {
+        return currentDuration;
+    }
+
+    public void setCurrentDuration(Integer currentDuration) {
+        this.currentDuration = currentDuration;
+    }
+
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
+    }
+
     public BigDecimal getProgress() {
         return progress;
     }
@@ -100,6 +130,9 @@ public class UserStudy implements Serializable {
         sb.append(", chapterId=").append(chapterId);
         sb.append(", periodId=").append(periodId);
         sb.append(", userId=").append(userId);
+        sb.append(", resourceType=").append(resourceType);
+        sb.append(", currentDuration=").append(currentDuration);
+        sb.append(", currentPage=").append(currentPage);
         sb.append(", progress=").append(progress);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

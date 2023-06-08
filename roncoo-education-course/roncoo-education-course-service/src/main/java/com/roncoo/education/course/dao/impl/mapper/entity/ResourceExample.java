@@ -815,62 +815,52 @@ public class ResourceExample {
             return (Criteria) this;
         }
 
-        public Criteria andVideoLengthEqualTo(String value) {
+        public Criteria andVideoLengthEqualTo(Integer value) {
             addCriterion("video_length =", value, "videoLength");
             return (Criteria) this;
         }
 
-        public Criteria andVideoLengthNotEqualTo(String value) {
+        public Criteria andVideoLengthNotEqualTo(Integer value) {
             addCriterion("video_length <>", value, "videoLength");
             return (Criteria) this;
         }
 
-        public Criteria andVideoLengthGreaterThan(String value) {
+        public Criteria andVideoLengthGreaterThan(Integer value) {
             addCriterion("video_length >", value, "videoLength");
             return (Criteria) this;
         }
 
-        public Criteria andVideoLengthGreaterThanOrEqualTo(String value) {
+        public Criteria andVideoLengthGreaterThanOrEqualTo(Integer value) {
             addCriterion("video_length >=", value, "videoLength");
             return (Criteria) this;
         }
 
-        public Criteria andVideoLengthLessThan(String value) {
+        public Criteria andVideoLengthLessThan(Integer value) {
             addCriterion("video_length <", value, "videoLength");
             return (Criteria) this;
         }
 
-        public Criteria andVideoLengthLessThanOrEqualTo(String value) {
+        public Criteria andVideoLengthLessThanOrEqualTo(Integer value) {
             addCriterion("video_length <=", value, "videoLength");
             return (Criteria) this;
         }
 
-        public Criteria andVideoLengthLike(String value) {
-            addCriterion("video_length like", value, "videoLength");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoLengthNotLike(String value) {
-            addCriterion("video_length not like", value, "videoLength");
-            return (Criteria) this;
-        }
-
-        public Criteria andVideoLengthIn(List<String> values) {
+        public Criteria andVideoLengthIn(List<Integer> values) {
             addCriterion("video_length in", values, "videoLength");
             return (Criteria) this;
         }
 
-        public Criteria andVideoLengthNotIn(List<String> values) {
+        public Criteria andVideoLengthNotIn(List<Integer> values) {
             addCriterion("video_length not in", values, "videoLength");
             return (Criteria) this;
         }
 
-        public Criteria andVideoLengthBetween(String value1, String value2) {
+        public Criteria andVideoLengthBetween(Integer value1, Integer value2) {
             addCriterion("video_length between", value1, value2, "videoLength");
             return (Criteria) this;
         }
 
-        public Criteria andVideoLengthNotBetween(String value1, String value2) {
+        public Criteria andVideoLengthNotBetween(Integer value1, Integer value2) {
             addCriterion("video_length not between", value1, value2, "videoLength");
             return (Criteria) this;
         }

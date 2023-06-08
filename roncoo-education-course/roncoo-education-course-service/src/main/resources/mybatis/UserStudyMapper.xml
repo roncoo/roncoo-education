@@ -2,14 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.roncoo.education.course.dao.impl.mapper.UserStudyMapper">
   <resultMap id="BaseResultMap" type="com.roncoo.education.course.dao.impl.mapper.entity.UserStudy">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
-    <result column="course_id" jdbcType="BIGINT" property="courseId" />
-    <result column="chapter_id" jdbcType="BIGINT" property="chapterId" />
-    <result column="period_id" jdbcType="BIGINT" property="periodId" />
-    <result column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="progress" jdbcType="DECIMAL" property="progress" />
+      <id column="id" jdbcType="BIGINT" property="id"/>
+      <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+      <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+      <result column="course_id" jdbcType="BIGINT" property="courseId"/>
+      <result column="chapter_id" jdbcType="BIGINT" property="chapterId"/>
+      <result column="period_id" jdbcType="BIGINT" property="periodId"/>
+      <result column="user_id" jdbcType="BIGINT" property="userId"/>
+      <result column="resource_type" jdbcType="TINYINT" property="resourceType"/>
+      <result column="current_duration" jdbcType="INTEGER" property="currentDuration"/>
+      <result column="current_page" jdbcType="INTEGER" property="currentPage"/>
+      <result column="progress" jdbcType="DECIMAL" property="progress"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, course_id, chapter_id, period_id, user_id, progress
+      id, gmt_create, gmt_modified, course_id, chapter_id, period_id, user_id, resource_type,
+    current_duration, current_page, progress
   </sql>
   <select id="selectByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.UserStudyExample" resultMap="BaseResultMap">
     select
@@ -90,7 +94,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from user_study
     where id = #{id,jdbcType=BIGINT}
@@ -106,12 +110,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.UserStudy">
-    insert into user_study (id, gmt_create, gmt_modified, 
-      course_id, chapter_id, period_id, 
-      user_id, progress)
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{courseId,jdbcType=BIGINT}, #{chapterId,jdbcType=BIGINT}, #{periodId,jdbcType=BIGINT}, 
-      #{userId,jdbcType=BIGINT}, #{progress,jdbcType=DECIMAL})
+      insert into user_study (id, gmt_create, gmt_modified,
+                              course_id, chapter_id, period_id,
+                              user_id, resource_type, current_duration,
+                              current_page, progress)
+      values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
+              #{courseId,jdbcType=BIGINT}, #{chapterId,jdbcType=BIGINT}, #{periodId,jdbcType=BIGINT},
+              #{userId,jdbcType=BIGINT}, #{resourceType,jdbcType=TINYINT}, #{currentDuration,jdbcType=INTEGER},
+              #{currentPage,jdbcType=INTEGER}, #{progress,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.UserStudy">
     insert into user_study
@@ -126,20 +132,29 @@
         gmt_modified,
       </if>
       <if test="courseId != null">
-        course_id,
+          course_id,
       </if>
-      <if test="chapterId != null">
-        chapter_id,
-      </if>
-      <if test="periodId != null">
-        period_id,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="progress != null">
-        progress,
-      </if>
+        <if test="chapterId != null">
+            chapter_id,
+        </if>
+        <if test="periodId != null">
+            period_id,
+        </if>
+        <if test="userId != null">
+            user_id,
+        </if>
+        <if test="resourceType != null">
+            resource_type,
+        </if>
+        <if test="currentDuration != null">
+            current_duration,
+        </if>
+        <if test="currentPage != null">
+            current_page,
+        </if>
+        <if test="progress != null">
+            progress,
+        </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -152,20 +167,29 @@
         #{gmtModified,jdbcType=TIMESTAMP},
       </if>
       <if test="courseId != null">
-        #{courseId,jdbcType=BIGINT},
+          #{courseId,jdbcType=BIGINT},
       </if>
-      <if test="chapterId != null">
-        #{chapterId,jdbcType=BIGINT},
-      </if>
-      <if test="periodId != null">
-        #{periodId,jdbcType=BIGINT},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="progress != null">
-        #{progress,jdbcType=DECIMAL},
-      </if>
+        <if test="chapterId != null">
+            #{chapterId,jdbcType=BIGINT},
+        </if>
+        <if test="periodId != null">
+            #{periodId,jdbcType=BIGINT},
+        </if>
+        <if test="userId != null">
+            #{userId,jdbcType=BIGINT},
+        </if>
+        <if test="resourceType != null">
+            #{resourceType,jdbcType=TINYINT},
+        </if>
+        <if test="currentDuration != null">
+            #{currentDuration,jdbcType=INTEGER},
+        </if>
+        <if test="currentPage != null">
+            #{currentPage,jdbcType=INTEGER},
+        </if>
+        <if test="progress != null">
+            #{progress,jdbcType=DECIMAL},
+        </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.UserStudyExample" resultType="java.lang.Integer">
@@ -187,36 +211,48 @@
         gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
       </if>
       <if test="record.courseId != null">
-        course_id = #{record.courseId,jdbcType=BIGINT},
+          course_id = #{record.courseId,jdbcType=BIGINT},
       </if>
-      <if test="record.chapterId != null">
-        chapter_id = #{record.chapterId,jdbcType=BIGINT},
-      </if>
-      <if test="record.periodId != null">
-        period_id = #{record.periodId,jdbcType=BIGINT},
-      </if>
-      <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=BIGINT},
-      </if>
-      <if test="record.progress != null">
-        progress = #{record.progress,jdbcType=DECIMAL},
-      </if>
+        <if test="record.chapterId != null">
+            chapter_id = #{record.chapterId,jdbcType=BIGINT},
+        </if>
+        <if test="record.periodId != null">
+            period_id = #{record.periodId,jdbcType=BIGINT},
+        </if>
+        <if test="record.userId != null">
+            user_id = #{record.userId,jdbcType=BIGINT},
+        </if>
+        <if test="record.resourceType != null">
+            resource_type = #{record.resourceType,jdbcType=TINYINT},
+        </if>
+        <if test="record.currentDuration != null">
+            current_duration = #{record.currentDuration,jdbcType=INTEGER},
+        </if>
+        <if test="record.currentPage != null">
+            current_page = #{record.currentPage,jdbcType=INTEGER},
+        </if>
+        <if test="record.progress != null">
+            progress = #{record.progress,jdbcType=DECIMAL},
+        </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update user_study
-    set id = #{record.id,jdbcType=BIGINT},
+      update user_study
+      set id = #{record.id,jdbcType=BIGINT},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
       course_id = #{record.courseId,jdbcType=BIGINT},
       chapter_id = #{record.chapterId,jdbcType=BIGINT},
       period_id = #{record.periodId,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
+      resource_type = #{record.resourceType,jdbcType=TINYINT},
+      current_duration = #{record.currentDuration,jdbcType=INTEGER},
+      current_page = #{record.currentPage,jdbcType=INTEGER},
       progress = #{record.progress,jdbcType=DECIMAL}
-    <if test="_parameter != null">
+      <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
@@ -232,30 +268,42 @@
       <if test="courseId != null">
         course_id = #{courseId,jdbcType=BIGINT},
       </if>
-      <if test="chapterId != null">
-        chapter_id = #{chapterId,jdbcType=BIGINT},
-      </if>
-      <if test="periodId != null">
-        period_id = #{periodId,jdbcType=BIGINT},
-      </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="progress != null">
-        progress = #{progress,jdbcType=DECIMAL},
-      </if>
+        <if test="chapterId != null">
+            chapter_id = #{chapterId,jdbcType=BIGINT},
+        </if>
+        <if test="periodId != null">
+            period_id = #{periodId,jdbcType=BIGINT},
+        </if>
+        <if test="userId != null">
+            user_id = #{userId,jdbcType=BIGINT},
+        </if>
+        <if test="resourceType != null">
+            resource_type = #{resourceType,jdbcType=TINYINT},
+        </if>
+        <if test="currentDuration != null">
+            current_duration = #{currentDuration,jdbcType=INTEGER},
+        </if>
+        <if test="currentPage != null">
+            current_page = #{currentPage,jdbcType=INTEGER},
+        </if>
+        <if test="progress != null">
+            progress = #{progress,jdbcType=DECIMAL},
+        </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.UserStudy">
-    update user_study
-    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      course_id = #{courseId,jdbcType=BIGINT},
-      chapter_id = #{chapterId,jdbcType=BIGINT},
-      period_id = #{periodId,jdbcType=BIGINT},
-      user_id = #{userId,jdbcType=BIGINT},
-      progress = #{progress,jdbcType=DECIMAL}
-    where id = #{id,jdbcType=BIGINT}
+      update user_study
+      set gmt_create       = #{gmtCreate,jdbcType=TIMESTAMP},
+          gmt_modified     = #{gmtModified,jdbcType=TIMESTAMP},
+          course_id        = #{courseId,jdbcType=BIGINT},
+          chapter_id       = #{chapterId,jdbcType=BIGINT},
+          period_id        = #{periodId,jdbcType=BIGINT},
+          user_id          = #{userId,jdbcType=BIGINT},
+          resource_type    = #{resourceType,jdbcType=TINYINT},
+          current_duration = #{currentDuration,jdbcType=INTEGER},
+          current_page     = #{currentPage,jdbcType=INTEGER},
+          progress         = #{progress,jdbcType=DECIMAL}
+      where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
