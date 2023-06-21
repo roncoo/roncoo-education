@@ -52,6 +52,9 @@ public class AdminResourcePageResp implements Serializable {
     @ApiModelProperty(value = "资源地址")
     private String resourceUrl;
 
+    @ApiModelProperty(value = "点播平台")
+    private Integer vodPlatform;
+
     @ApiModelProperty(value = "状态(1转码中，2成功，3失败)")
     private Integer videoStatus;
 
