@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright 2019-现在 Daocao Ltd.
+  ~ Copyright 2019-现在 LingKe Ltd.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -18,19 +18,19 @@
     <id>${project.version}</id>
     <includeBaseDirectory>false</includeBaseDirectory>
     <formats>
-        <format>dir</format>
-        <format>tar.gz</format>
+        <!--<format>dir</format>-->
         <!--<format>zip</format>-->
+        <format>tar.gz</format>
     </formats>
     <fileSets>
         <fileSet>
-            <directory>${project.parent.basedir}/roncoo-distribution/bin</directory>
+            <directory>${project.parent.basedir}/distribution/bin</directory>
             <outputDirectory>bin</outputDirectory>
             <directoryMode>0755</directoryMode>
             <fileMode>0755</fileMode>
         </fileSet>
         <fileSet>
-            <directory>${project.parent.basedir}/roncoo-distribution/conf</directory>
+            <directory>${project.parent.basedir}/distribution/conf</directory>
             <outputDirectory>conf</outputDirectory>
             <directoryMode>0755</directoryMode>
             <fileMode>0755</fileMode>

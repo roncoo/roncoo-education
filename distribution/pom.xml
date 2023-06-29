@@ -10,9 +10,9 @@
         <version>13.0.0-RELEASE</version>
     </parent>
 
-    <artifactId>roncoo-distribution</artifactId>
+    <artifactId>distribution</artifactId>
     <packaging>pom</packaging>
-    <name>roncoo-distribution</name>
+    <name>distribution</name>
 
     <profiles>
         <profile>
