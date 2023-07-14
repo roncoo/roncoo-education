@@ -41,11 +41,11 @@
             <version>3.10.3</version>
         </dependency>
 
-        <!-- excel -->
+        <!-- easyexcel -->
         <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>3.17</version>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>3.2.1</version>
         </dependency>
 
         <!-- ECharts -->
