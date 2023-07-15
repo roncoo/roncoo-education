@@ -5,17 +5,21 @@ package com.roncoo.education;
 
 import com.spring4all.swagger.EnableSwagger2Doc;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * 用户服务
+ *
+ * @author fengyw
  */
 @EnableSwagger2Doc
 @EnableFeignClients
 @ServletComponentScan
-@SpringCloudApplication
+@EnableDiscoveryClient
+@SpringBootApplication
 public class UserServiceApplication {
 
     public static void main(String[] args) {

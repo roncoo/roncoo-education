@@ -11,20 +11,4 @@
 
     <artifactId>roncoo-education-feign-system</artifactId>
     <name>roncoo-education-feign-system</name>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.roncoo</groupId>
-            <artifactId>roncoo-education-common-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.roncoo</groupId>
-            <artifactId>roncoo-education-common-video</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-    </dependencies>
 </project>
