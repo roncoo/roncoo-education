@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.roncoo.education.system.dao.impl.mapper.WebsiteCarouselMapper">
+    <resultMap id="BaseResultMap" type="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarousel">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+        <result column="status_id" jdbcType="TINYINT" property="statusId"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="carousel_title" jdbcType="VARCHAR" property="carouselTitle"/>
+        <result column="carousel_img" jdbcType="VARCHAR" property="carouselImg"/>
+        <result column="carousel_url" jdbcType="VARCHAR" property="carouselUrl"/>
+        <result column="carousel_target" jdbcType="VARCHAR" property="carouselTarget"/>
+        <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, gmt_create, gmt_modified, status_id, sort, carousel_title, carousel_img, carousel_url,
+    carousel_target, begin_time, end_time
+    </sql>
+    <select id="selectByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarouselExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from website_carousel
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="limitStart >= 0">
+            limit ${limitStart} , ${pageSize}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from website_carousel
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from website_carousel
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarouselExample">
+        delete from website_carousel
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarousel">
+        insert into website_carousel (id, gmt_create, gmt_modified,
+                                      status_id, sort, carousel_title,
+                                      carousel_img, carousel_url, carousel_target,
+                                      begin_time, end_time)
+        values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
+                #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{carouselTitle,jdbcType=VARCHAR},
+                #{carouselImg,jdbcType=VARCHAR}, #{carouselUrl,jdbcType=VARCHAR}, #{carouselTarget,jdbcType=VARCHAR},
+                #{beginTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarousel">
+        insert into website_carousel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+            <if test="statusId != null">
+                status_id,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="carouselTitle != null">
+                carousel_title,
+            </if>
+            <if test="carouselImg != null">
+                carousel_img,
+            </if>
+            <if test="carouselUrl != null">
+                carousel_url,
+            </if>
+            <if test="carouselTarget != null">
+                carousel_target,
+            </if>
+            <if test="beginTime != null">
+                begin_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="statusId != null">
+                #{statusId,jdbcType=TINYINT},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="carouselTitle != null">
+                #{carouselTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="carouselImg != null">
+                #{carouselImg,jdbcType=VARCHAR},
+            </if>
+            <if test="carouselUrl != null">
+                #{carouselUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="carouselTarget != null">
+                #{carouselTarget,jdbcType=VARCHAR},
+            </if>
+            <if test="beginTime != null">
+                #{beginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarouselExample" resultType="java.lang.Integer">
+        select count(*) from website_carousel
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update website_carousel
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.gmtCreate != null">
+                gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.gmtModified != null">
+                gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.statusId != null">
+                status_id = #{record.statusId,jdbcType=TINYINT},
+            </if>
+            <if test="record.sort != null">
+                sort = #{record.sort,jdbcType=INTEGER},
+            </if>
+            <if test="record.carouselTitle != null">
+                carousel_title = #{record.carouselTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="record.carouselImg != null">
+                carousel_img = #{record.carouselImg,jdbcType=VARCHAR},
+            </if>
+            <if test="record.carouselUrl != null">
+                carousel_url = #{record.carouselUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.carouselTarget != null">
+                carousel_target = #{record.carouselTarget,jdbcType=VARCHAR},
+            </if>
+            <if test="record.beginTime != null">
+                begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.endTime != null">
+                end_time = #{record.endTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update website_carousel
+        set id = #{record.id,jdbcType=BIGINT},
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+        status_id = #{record.statusId,jdbcType=TINYINT},
+        sort = #{record.sort,jdbcType=INTEGER},
+        carousel_title = #{record.carouselTitle,jdbcType=VARCHAR},
+        carousel_img = #{record.carouselImg,jdbcType=VARCHAR},
+        carousel_url = #{record.carouselUrl,jdbcType=VARCHAR},
+        carousel_target = #{record.carouselTarget,jdbcType=VARCHAR},
+        begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
+        end_time = #{record.endTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarousel">
+        update website_carousel
+        <set>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="statusId != null">
+                status_id = #{statusId,jdbcType=TINYINT},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="carouselTitle != null">
+                carousel_title = #{carouselTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="carouselImg != null">
+                carousel_img = #{carouselImg,jdbcType=VARCHAR},
+            </if>
+            <if test="carouselUrl != null">
+                carousel_url = #{carouselUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="carouselTarget != null">
+                carousel_target = #{carouselTarget,jdbcType=VARCHAR},
+            </if>
+            <if test="beginTime != null">
+                begin_time = #{beginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarousel">
+        update website_carousel
+        set gmt_create      = #{gmtCreate,jdbcType=TIMESTAMP},
+            gmt_modified    = #{gmtModified,jdbcType=TIMESTAMP},
+            status_id       = #{statusId,jdbcType=TINYINT},
+            sort            = #{sort,jdbcType=INTEGER},
+            carousel_title  = #{carouselTitle,jdbcType=VARCHAR},
+            carousel_img    = #{carouselImg,jdbcType=VARCHAR},
+            carousel_url    = #{carouselUrl,jdbcType=VARCHAR},
+            carousel_target = #{carouselTarget,jdbcType=VARCHAR},
+            begin_time      = #{beginTime,jdbcType=TIMESTAMP},
+            end_time        = #{endTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

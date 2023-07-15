@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.roncoo.education.system.dao.impl.mapper.SysConfigMapper">
+    <resultMap id="BaseResultMap" type="com.roncoo.education.system.dao.impl.mapper.entity.SysConfig">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="config_type" jdbcType="TINYINT" property="configType"/>
+        <result column="content_type" jdbcType="TINYINT" property="contentType"/>
+        <result column="config_name" jdbcType="VARCHAR" property="configName"/>
+        <result column="config_key" jdbcType="VARCHAR" property="configKey"/>
+        <result column="config_show" jdbcType="BIT" property="configShow"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.roncoo.education.system.dao.impl.mapper.entity.SysConfig">
+        <result column="config_value" jdbcType="LONGVARCHAR" property="configValue"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, config_type, content_type, config_name, config_key, config_show, remark, sort,
+    gmt_create, gmt_modified
+    </sql>
+    <sql id="Blob_Column_List">
+        config_value
+    </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysConfigExample" resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from sys_config
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysConfigExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from sys_config
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="limitStart >= 0">
+            limit ${limitStart} , ${pageSize}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from sys_config
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from sys_config
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysConfigExample">
+        delete from sys_config
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysConfig">
+        insert into sys_config (id, config_type, content_type,
+                                config_name, config_key, config_show,
+                                remark, sort, gmt_create,
+                                gmt_modified, config_value)
+        values (#{id,jdbcType=BIGINT}, #{configType,jdbcType=TINYINT}, #{contentType,jdbcType=TINYINT},
+                #{configName,jdbcType=VARCHAR}, #{configKey,jdbcType=VARCHAR}, #{configShow,jdbcType=BIT},
+                #{remark,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP},
+                #{gmtModified,jdbcType=TIMESTAMP}, #{configValue,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysConfig">
+        insert into sys_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="configType != null">
+                config_type,
+            </if>
+            <if test="contentType != null">
+                content_type,
+            </if>
+            <if test="configName != null">
+                config_name,
+            </if>
+            <if test="configKey != null">
+                config_key,
+            </if>
+            <if test="configShow != null">
+                config_show,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+            <if test="configValue != null">
+                config_value,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="configType != null">
+                #{configType,jdbcType=TINYINT},
+            </if>
+            <if test="contentType != null">
+                #{contentType,jdbcType=TINYINT},
+            </if>
+            <if test="configName != null">
+                #{configName,jdbcType=VARCHAR},
+            </if>
+            <if test="configKey != null">
+                #{configKey,jdbcType=VARCHAR},
+            </if>
+            <if test="configShow != null">
+                #{configShow,jdbcType=BIT},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="configValue != null">
+                #{configValue,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysConfigExample" resultType="java.lang.Integer">
+        select count(*) from sys_config
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update sys_config
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.configType != null">
+                config_type = #{record.configType,jdbcType=TINYINT},
+            </if>
+            <if test="record.contentType != null">
+                content_type = #{record.contentType,jdbcType=TINYINT},
+            </if>
+            <if test="record.configName != null">
+                config_name = #{record.configName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.configKey != null">
+                config_key = #{record.configKey,jdbcType=VARCHAR},
+            </if>
+            <if test="record.configShow != null">
+                config_show = #{record.configShow,jdbcType=BIT},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sort != null">
+                sort = #{record.sort,jdbcType=INTEGER},
+            </if>
+            <if test="record.gmtCreate != null">
+                gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.gmtModified != null">
+                gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.configValue != null">
+                config_value = #{record.configValue,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update sys_config
+        set id = #{record.id,jdbcType=BIGINT},
+        config_type = #{record.configType,jdbcType=TINYINT},
+        content_type = #{record.contentType,jdbcType=TINYINT},
+        config_name = #{record.configName,jdbcType=VARCHAR},
+        config_key = #{record.configKey,jdbcType=VARCHAR},
+        config_show = #{record.configShow,jdbcType=BIT},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        sort = #{record.sort,jdbcType=INTEGER},
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+        config_value = #{record.configValue,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update sys_config
+        set id = #{record.id,jdbcType=BIGINT},
+        config_type = #{record.configType,jdbcType=TINYINT},
+        content_type = #{record.contentType,jdbcType=TINYINT},
+        config_name = #{record.configName,jdbcType=VARCHAR},
+        config_key = #{record.configKey,jdbcType=VARCHAR},
+        config_show = #{record.configShow,jdbcType=BIT},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        sort = #{record.sort,jdbcType=INTEGER},
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysConfig">
+        update sys_config
+        <set>
+            <if test="configType != null">
+                config_type = #{configType,jdbcType=TINYINT},
+            </if>
+            <if test="contentType != null">
+                content_type = #{contentType,jdbcType=TINYINT},
+            </if>
+            <if test="configName != null">
+                config_name = #{configName,jdbcType=VARCHAR},
+            </if>
+            <if test="configKey != null">
+                config_key = #{configKey,jdbcType=VARCHAR},
+            </if>
+            <if test="configShow != null">
+                config_show = #{configShow,jdbcType=BIT},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="configValue != null">
+                config_value = #{configValue,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysConfig">
+        update sys_config
+        set config_type  = #{configType,jdbcType=TINYINT},
+            content_type = #{contentType,jdbcType=TINYINT},
+            config_name  = #{configName,jdbcType=VARCHAR},
+            config_key   = #{configKey,jdbcType=VARCHAR},
+            config_show  = #{configShow,jdbcType=BIT},
+            remark       = #{remark,jdbcType=VARCHAR},
+            sort         = #{sort,jdbcType=INTEGER},
+            gmt_create   = #{gmtCreate,jdbcType=TIMESTAMP},
+            gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            config_value = #{configValue,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysConfig">
+        update sys_config
+        set config_type  = #{configType,jdbcType=TINYINT},
+            content_type = #{contentType,jdbcType=TINYINT},
+            config_name  = #{configName,jdbcType=VARCHAR},
+            config_key   = #{configKey,jdbcType=VARCHAR},
+            config_show  = #{configShow,jdbcType=BIT},
+            remark       = #{remark,jdbcType=VARCHAR},
+            sort         = #{sort,jdbcType=INTEGER},
+            gmt_create   = #{gmtCreate,jdbcType=TIMESTAMP},
+            gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

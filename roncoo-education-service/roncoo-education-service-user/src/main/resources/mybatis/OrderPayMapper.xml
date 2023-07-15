@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.roncoo.education.user.dao.impl.mapper.OrderPayMapper">
+    <resultMap id="BaseResultMap" type="com.roncoo.education.user.dao.impl.mapper.entity.OrderPay">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="order_no" jdbcType="BIGINT" property="orderNo"/>
+        <result column="serial_number" jdbcType="BIGINT" property="serialNumber"/>
+        <result column="ruling_price" jdbcType="DECIMAL" property="rulingPrice"/>
+        <result column="course_price" jdbcType="DECIMAL" property="coursePrice"/>
+        <result column="pay_type" jdbcType="TINYINT" property="payType"/>
+        <result column="order_status" jdbcType="TINYINT" property="orderStatus"/>
+        <result column="remark_cus" jdbcType="VARCHAR" property="remarkCus"/>
+        <result column="pay_time" jdbcType="TIMESTAMP" property="payTime"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, gmt_create, order_no, serial_number, ruling_price, course_price, pay_type, order_status,
+    remark_cus, pay_time
+    </sql>
+    <select id="selectByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.OrderPayExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from order_pay
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="limitStart >= 0">
+            limit ${limitStart} , ${pageSize}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from order_pay
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from order_pay
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.OrderPayExample">
+        delete from order_pay
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.OrderPay">
+        insert into order_pay (id, gmt_create, order_no,
+                               serial_number, ruling_price, course_price,
+                               pay_type, order_status, remark_cus,
+                               pay_time)
+        values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{orderNo,jdbcType=BIGINT},
+                #{serialNumber,jdbcType=BIGINT}, #{rulingPrice,jdbcType=DECIMAL}, #{coursePrice,jdbcType=DECIMAL},
+                #{payType,jdbcType=TINYINT}, #{orderStatus,jdbcType=TINYINT}, #{remarkCus,jdbcType=VARCHAR},
+                #{payTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.OrderPay">
+        insert into order_pay
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="orderNo != null">
+                order_no,
+            </if>
+            <if test="serialNumber != null">
+                serial_number,
+            </if>
+            <if test="rulingPrice != null">
+                ruling_price,
+            </if>
+            <if test="coursePrice != null">
+                course_price,
+            </if>
+            <if test="payType != null">
+                pay_type,
+            </if>
+            <if test="orderStatus != null">
+                order_status,
+            </if>
+            <if test="remarkCus != null">
+                remark_cus,
+            </if>
+            <if test="payTime != null">
+                pay_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=BIGINT},
+            </if>
+            <if test="serialNumber != null">
+                #{serialNumber,jdbcType=BIGINT},
+            </if>
+            <if test="rulingPrice != null">
+                #{rulingPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="coursePrice != null">
+                #{coursePrice,jdbcType=DECIMAL},
+            </if>
+            <if test="payType != null">
+                #{payType,jdbcType=TINYINT},
+            </if>
+            <if test="orderStatus != null">
+                #{orderStatus,jdbcType=TINYINT},
+            </if>
+            <if test="remarkCus != null">
+                #{remarkCus,jdbcType=VARCHAR},
+            </if>
+            <if test="payTime != null">
+                #{payTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.OrderPayExample" resultType="java.lang.Integer">
+        select count(*) from order_pay
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update order_pay
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.gmtCreate != null">
+                gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.orderNo != null">
+                order_no = #{record.orderNo,jdbcType=BIGINT},
+            </if>
+            <if test="record.serialNumber != null">
+                serial_number = #{record.serialNumber,jdbcType=BIGINT},
+            </if>
+            <if test="record.rulingPrice != null">
+                ruling_price = #{record.rulingPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="record.coursePrice != null">
+                course_price = #{record.coursePrice,jdbcType=DECIMAL},
+            </if>
+            <if test="record.payType != null">
+                pay_type = #{record.payType,jdbcType=TINYINT},
+            </if>
+            <if test="record.orderStatus != null">
+                order_status = #{record.orderStatus,jdbcType=TINYINT},
+            </if>
+            <if test="record.remarkCus != null">
+                remark_cus = #{record.remarkCus,jdbcType=VARCHAR},
+            </if>
+            <if test="record.payTime != null">
+                pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update order_pay
+        set id = #{record.id,jdbcType=BIGINT},
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+        order_no = #{record.orderNo,jdbcType=BIGINT},
+        serial_number = #{record.serialNumber,jdbcType=BIGINT},
+        ruling_price = #{record.rulingPrice,jdbcType=DECIMAL},
+        course_price = #{record.coursePrice,jdbcType=DECIMAL},
+        pay_type = #{record.payType,jdbcType=TINYINT},
+        order_status = #{record.orderStatus,jdbcType=TINYINT},
+        remark_cus = #{record.remarkCus,jdbcType=VARCHAR},
+        pay_time = #{record.payTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.OrderPay">
+        update order_pay
+        <set>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderNo != null">
+                order_no = #{orderNo,jdbcType=BIGINT},
+            </if>
+            <if test="serialNumber != null">
+                serial_number = #{serialNumber,jdbcType=BIGINT},
+            </if>
+            <if test="rulingPrice != null">
+                ruling_price = #{rulingPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="coursePrice != null">
+                course_price = #{coursePrice,jdbcType=DECIMAL},
+            </if>
+            <if test="payType != null">
+                pay_type = #{payType,jdbcType=TINYINT},
+            </if>
+            <if test="orderStatus != null">
+                order_status = #{orderStatus,jdbcType=TINYINT},
+            </if>
+            <if test="remarkCus != null">
+                remark_cus = #{remarkCus,jdbcType=VARCHAR},
+            </if>
+            <if test="payTime != null">
+                pay_time = #{payTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.OrderPay">
+        update order_pay
+        set gmt_create    = #{gmtCreate,jdbcType=TIMESTAMP},
+            order_no      = #{orderNo,jdbcType=BIGINT},
+            serial_number = #{serialNumber,jdbcType=BIGINT},
+            ruling_price  = #{rulingPrice,jdbcType=DECIMAL},
+            course_price  = #{coursePrice,jdbcType=DECIMAL},
+            pay_type      = #{payType,jdbcType=TINYINT},
+            order_status  = #{orderStatus,jdbcType=TINYINT},
+            remark_cus    = #{remarkCus,jdbcType=VARCHAR},
+            pay_time      = #{payTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

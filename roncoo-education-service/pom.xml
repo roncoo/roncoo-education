@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.roncoo</groupId>
+        <artifactId>roncoo-education</artifactId>
+        <version>13.0.0-RELEASE</version>
+    </parent>
+
+    <artifactId>roncoo-education-service</artifactId>
+    <packaging>pom</packaging>
+
+    <name>roncoo-education-service</name>
+
+    <modules>
+        <!-- 系统微服务 -->
+        <module>roncoo-education-service-system</module>
+        <!-- 用户微服务 -->
+        <module>roncoo-education-service-user</module>
+        <!-- 课程微服务 -->
+        <module>roncoo-education-service-course</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.roncoo</groupId>
+            <artifactId>roncoo-education-feign-system</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.roncoo</groupId>
+            <artifactId>roncoo-education-feign-user</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.roncoo</groupId>
+            <artifactId>roncoo-education-feign-course</artifactId>
+        </dependency>
+        <!-- roncoo -->
+        <dependency>
+            <groupId>com.roncoo</groupId>
+            <artifactId>roncoo-education-common-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.roncoo</groupId>
+            <artifactId>roncoo-education-common-video</artifactId>
+        </dependency>
+
+        <!-- test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
