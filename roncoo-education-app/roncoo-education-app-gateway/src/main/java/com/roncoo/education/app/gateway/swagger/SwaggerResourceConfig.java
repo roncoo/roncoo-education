@@ -12,11 +12,17 @@ import springfox.documentation.swagger.web.SwaggerResourcesProvider;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author fengyw
+ */
 @Slf4j
 @Component
 @Primary
 @AllArgsConstructor
 public class SwaggerResourceConfig implements SwaggerResourcesProvider {
+
+    private static final String LOCATION = "/v3/api-docs";
+    private static final String VERSION = "3.0";
 
     private final RouteLocator routeLocator;
     private final GatewayProperties gatewayProperties;
@@ -28,12 +34,9 @@ public class SwaggerResourceConfig implements SwaggerResourcesProvider {
         routeLocator.getRoutes().subscribe(route -> routes.add(route.getId()));
         gatewayProperties.getRoutes().stream()
                 .filter(routeDefinition -> routes.contains(routeDefinition.getId()))
-                .forEach(
-                        route -> {
-                            route.getPredicates().forEach(
-                                    predicateDefinition ->
-                                            resources.add(swaggerResource(route.getId(), "/v2/api-docs")));
-                        });
+                .forEach(route -> route.getPredicates().forEach(
+                        predicateDefinition -> resources.add(swaggerResource(route.getId(), LOCATION))
+                ));
         return resources;
     }
 
@@ -41,7 +44,7 @@ public class SwaggerResourceConfig implements SwaggerResourcesProvider {
         SwaggerResource swaggerResource = new SwaggerResource();
         swaggerResource.setName(name);
         swaggerResource.setLocation("/" + name + location);
-        swaggerResource.setSwaggerVersion("2.0");
+        swaggerResource.setSwaggerVersion(VERSION);
         return swaggerResource;
     }
 }
