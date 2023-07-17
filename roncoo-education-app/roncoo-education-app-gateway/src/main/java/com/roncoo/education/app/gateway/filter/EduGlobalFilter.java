@@ -41,8 +41,7 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
     private static final List<String> EXCLUDE_URL = Arrays.asList(
             "/system/admin/sys/menu/user/list",
             "/system/admin/sys/menu/permission/list",
-            "/system/admin/sys/user/current",
-            "/system/admin/upload/pic"
+            "/system/admin/sys/user/current"
     );
 
     @Autowired
