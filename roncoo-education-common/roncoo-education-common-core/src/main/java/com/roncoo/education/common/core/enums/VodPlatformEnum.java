@@ -7,14 +7,14 @@ import lombok.Getter;
 /**
  * 点播平台枚举
  *
- * @author LYQ
+ * @author fengyw
  */
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum VodPlatformEnum {
 
     /**
-     * 私有云
+     * 私有云，需付费购买，请联系作者：18302045627
      */
     PRIVATEY(1, "私有云", "priy%"),
 
@@ -29,7 +29,7 @@ public enum VodPlatformEnum {
     BAIJY(3, "百家云(待实现)", "baijy%"),
 
     /**
-     * 百家云
+     * 获得场景
      */
     BOKECC(4, "获得场景(待实现)", "bokecc%");
 
