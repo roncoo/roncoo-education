@@ -23,7 +23,7 @@ public final class FilterUtil {
     /**
      * 技术文档
      */
-    public static final String API_V2 = "/v2";
+    public static final String API_V3 = "/v3";
     /**
      * 图片
      */

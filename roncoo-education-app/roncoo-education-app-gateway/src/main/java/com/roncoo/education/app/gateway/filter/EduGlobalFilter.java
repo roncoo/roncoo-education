@@ -32,7 +32,6 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
      * admin不需要token校验的接口
      */
     private static final List<String> EXCLUDE_TOKEN_URL = Arrays.asList(
-            // 登录接口
             "/system/admin/login/password"
     );
 
@@ -40,13 +39,9 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
      * admin不需要权限校验的接口
      */
     private static final List<String> EXCLUDE_URL = Arrays.asList(
-            // 登录获取菜单接口
             "/system/admin/sys/menu/user/list",
-            // 登录获取权限接口
             "/system/admin/sys/menu/permission/list",
-            // 登录获取当前用户接口
             "/system/admin/sys/user/current",
-            // 上传接口
             "/system/admin/upload/pic"
     );
 
@@ -75,8 +70,8 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
             // 路径存在关键词：/api，不鉴权
             return chain.filter(exchange);
         }
-        if (FilterUtil.checkUri(uri, FilterUtil.API_V2)) {
-            // 路径存在关键词：/v2，不鉴权
+        if (FilterUtil.checkUri(uri, FilterUtil.API_V3)) {
+            // 路径存在关键词：/v3，不鉴权
             return chain.filter(exchange);
         }
         if (FilterUtil.checkUri(uri, FilterUtil.IMAGES)) {
