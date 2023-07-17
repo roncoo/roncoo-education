@@ -14,7 +14,7 @@ import lombok.Getter;
 public enum VodPlatformEnum {
 
     /**
-     * 私有云，需付费购买，请联系作者：18302045627
+     * 私有云，支持定制，需付费购买，请联系作者：18302045627
      */
     PRIVATEY(1, "私有云", "priy%"),
 
