@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright 2019-现在 LingKe, Co., Ltd.
+# Copyright 2016-现在 LingKe, Co., Ltd.
 export JAVA_HOME=/opt/java
 export JAVA="$JAVA_HOME/bin/java"
 export BASE_DIR=`cd $(dirname $0)/..; pwd`
