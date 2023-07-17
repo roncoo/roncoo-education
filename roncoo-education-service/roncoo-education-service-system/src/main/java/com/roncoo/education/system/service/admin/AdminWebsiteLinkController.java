@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author wujing
  */
-@Api(tags = "ADMIN-站点友情链接")
+@Api(tags = "admin-站点友情链接")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/system/admin/website/link")

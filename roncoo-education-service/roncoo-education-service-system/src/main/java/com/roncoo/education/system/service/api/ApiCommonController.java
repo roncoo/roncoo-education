@@ -9,6 +9,7 @@ import com.roncoo.education.common.core.tools.EnumUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
 import com.roncoo.education.system.service.api.req.ApiEnumReq;
 import com.roncoo.education.system.service.api.resp.ApiVerCodeResp;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import java.util.concurrent.TimeUnit;
  * @author liaoh
  */
 @Slf4j
+@Api(tags = "api-枚举接口")
 @RestController
 @RequestMapping(value = "/system/api/common")
 public class ApiCommonController {

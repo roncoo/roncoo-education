@@ -25,7 +25,7 @@ import java.util.List;
  *
  * @author wujing
  */
-@Api(tags = "ADMIN-分类")
+@Api(tags = "admin-分类")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/course/admin/category")

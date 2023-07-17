@@ -5,6 +5,7 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysLogBiz;
 import com.roncoo.education.system.service.admin.req.AdminSysLogPageReq;
 import com.roncoo.education.system.service.admin.resp.AdminSysLogPageResp;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author wujing
  */
+@Api(value = "admin-日志")
 @RestController
 @RequestMapping(value = "/system/admin/sys/log")
 public class AdminSysLogController {

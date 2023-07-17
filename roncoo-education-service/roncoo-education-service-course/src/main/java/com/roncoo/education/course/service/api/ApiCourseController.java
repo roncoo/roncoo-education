@@ -26,7 +26,7 @@ import javax.validation.constraints.NotNull;
  * @author wujing
  * @date 2022-08-25
  */
-@Api(tags = "API-课程信息")
+@Api(tags = "api-课程信息")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/course/api/course")

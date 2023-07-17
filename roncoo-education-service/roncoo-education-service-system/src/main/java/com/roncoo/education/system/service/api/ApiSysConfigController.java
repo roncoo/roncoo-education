@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
  * @author wujing
  * @date 2022-08-25
  */
-@Api(tags = "AUTH-系统配置")
+@Api(tags = "api-系统配置")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/system/api/sys/config")

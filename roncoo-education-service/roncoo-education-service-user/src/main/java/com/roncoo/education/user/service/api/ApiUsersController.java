@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author wujing
  */
-@Api(tags = "Api-用户登录注册")
+@Api(tags = "api-用户登录注册")
 @RestController
 @RequestMapping(value = "/user/api/users")
 public class ApiUsersController {

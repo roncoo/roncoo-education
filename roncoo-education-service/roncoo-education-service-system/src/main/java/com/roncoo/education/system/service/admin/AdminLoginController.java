@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author fengyw
  */
-@Api(tags = "登录接口")
+@Api(tags = "admin-登录接口")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/system/admin/login")

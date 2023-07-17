@@ -4,6 +4,7 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysMenuRoleBiz;
 import com.roncoo.education.system.service.admin.req.AdminSysMenuRoleListReq;
 import com.roncoo.education.system.service.admin.req.AdminSysMenuRoleSaveReq;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import java.util.List;
  *
  * @author wujing
  */
+@Api(tags = "admin-菜单角色接口")
 @RestController
 @RequestMapping(value = "/system/admin/sys/menu/role")
 public class AdminSysMenuRoleController {

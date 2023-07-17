@@ -21,7 +21,7 @@ import java.io.File;
  *
  * @author wuyun
  */
-@Api(tags = "Admin-上传接口")
+@Api(tags = "admin-上传接口")
 @RestController
 @RequestMapping(value = "/system/admin/upload")
 public class AdminUploadController extends BaseController {

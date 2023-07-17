@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
  * @author wujing
  * @date 2023-03-24
  */
-@Api(tags = "AUTH-课程收藏")
+@Api(tags = "auth-课程收藏")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/course/auth/user/course/collect")

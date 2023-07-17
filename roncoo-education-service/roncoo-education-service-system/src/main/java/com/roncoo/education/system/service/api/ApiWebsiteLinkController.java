@@ -3,6 +3,7 @@ package com.roncoo.education.system.service.api;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.api.biz.ApiWebsiteLinkBiz;
 import com.roncoo.education.system.service.api.resp.ApiWebsiteLinkResp;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import java.util.List;
  *
  * @author wuyun
  */
+@Api(tags = "api-友情链接")
 @RestController
 @RequestMapping(value = "/system/api/website/link")
 public class ApiWebsiteLinkController {

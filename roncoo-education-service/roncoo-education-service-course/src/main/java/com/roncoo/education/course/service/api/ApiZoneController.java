@@ -4,6 +4,7 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.service.BaseController;
 import com.roncoo.education.course.service.api.biz.ApiZoneBiz;
 import com.roncoo.education.course.service.api.resp.ApiZoneResp;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import java.util.List;
  *
  * @author wuyun
  */
+@Api(tags = "api-分区")
 @RestController
 @RequestMapping(value = "/course/api/zone")
 public class ApiZoneController extends BaseController {

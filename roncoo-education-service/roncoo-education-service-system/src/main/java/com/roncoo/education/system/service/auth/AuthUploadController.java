@@ -20,7 +20,7 @@ import java.io.File;
  *
  * @author wuyun
  */
-@Api(tags = "Admin-上传接口")
+@Api(tags = "auth-上传接口")
 @RestController
 @RequestMapping(value = "/system/auth/upload")
 public class AuthUploadController extends BaseController {

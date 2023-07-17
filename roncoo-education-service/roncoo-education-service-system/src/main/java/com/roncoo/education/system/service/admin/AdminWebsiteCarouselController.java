@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author wujing
  */
-@Api(tags = "ADMIN-广告信息")
+@Api(tags = "admin-广告信息")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/system/admin/website/carousel")

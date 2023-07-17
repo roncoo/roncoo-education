@@ -6,6 +6,7 @@ import com.roncoo.education.system.service.admin.biz.AdminSysRoleBiz;
 import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminSysRolePageResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysRoleViewResp;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author wujing
  */
+@Api(tags = "admin-角色接口")
 @RestController
 @RequestMapping(value = "/system/admin/sys/role")
 public class AdminSysRoleController {

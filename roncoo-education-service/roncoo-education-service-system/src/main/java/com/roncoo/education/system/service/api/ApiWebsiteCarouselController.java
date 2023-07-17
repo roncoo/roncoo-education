@@ -19,7 +19,7 @@ import java.util.List;
  * @author wujing
  * @date 2022-09-16
  */
-@Api(tags = "API-广告信息")
+@Api(tags = "api-广告信息")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/system/api/website/carousel")

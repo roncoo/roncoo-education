@@ -7,6 +7,7 @@ import com.roncoo.education.system.service.admin.biz.AdminSysUserBiz;
 import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserPageResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserViewResp;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
  *
  * @author wujing
  */
+@Api(tags = "admin-用户接口")
 @RestController
 @RequestMapping(value = "/system/admin/sys/user")
 public class AdminSysUserController {

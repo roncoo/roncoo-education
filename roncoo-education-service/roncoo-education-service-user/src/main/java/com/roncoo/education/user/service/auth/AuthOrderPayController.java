@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
  * @author wujing
  * @date 2022-08-25
  */
-@Api(tags = "AUTH-订单支付")
+@Api(tags = "auth-订单支付")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user/auth/order/pay")

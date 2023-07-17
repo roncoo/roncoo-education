@@ -21,7 +21,7 @@ import java.util.List;
  *
  * @author wujing
  */
-@Api(tags = "Api-行政区域")
+@Api(tags = "api-行政区域")
 @RestController
 @RequestMapping(value = "/user/api/region")
 public class ApiRegionController {

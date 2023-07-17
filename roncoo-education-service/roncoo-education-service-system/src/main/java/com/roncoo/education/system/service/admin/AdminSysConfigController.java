@@ -25,7 +25,7 @@ import java.util.List;
  *
  * @author wujing
  */
-@Api(tags = "ADMIN-系统配置")
+@Api(tags = "admin-系统配置")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/system/admin/sys/config")

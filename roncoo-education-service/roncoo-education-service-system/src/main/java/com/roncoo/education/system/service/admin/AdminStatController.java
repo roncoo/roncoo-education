@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author wujing
  */
+@Api(value = "admin-点播直播统计")
 @RestController
 @RequestMapping("/system/admin/stat")
-@Api(value = "system-点播直播统计", tags = {"system-点播直播统计"})
 public class AdminStatController {
 
     @Autowired

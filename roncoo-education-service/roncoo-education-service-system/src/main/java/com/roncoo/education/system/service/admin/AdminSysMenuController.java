@@ -21,7 +21,7 @@ import java.util.List;
  *
  * @author wujing
  */
-@Api(tags = "菜单接口")
+@Api(tags = "admin-菜单接口")
 @RestController
 @RequestMapping(value = "/system/admin/sys/menu")
 public class AdminSysMenuController {

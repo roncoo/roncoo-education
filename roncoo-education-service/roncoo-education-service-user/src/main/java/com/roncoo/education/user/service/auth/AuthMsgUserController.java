@@ -23,7 +23,7 @@ import javax.validation.constraints.NotNull;
  * @author wujing
  * @date 2022-08-25
  */
-@Api(tags = "AUTH-站内信用户记录表")
+@Api(tags = "auth-站内信用户记录表")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user/auth/msg/user")

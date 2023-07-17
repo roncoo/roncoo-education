@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author wujing
  */
-@Api(tags = "ADMIN-讲师信息")
+@Api(tags = "admin-讲师信息")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user/admin/lecturer")
