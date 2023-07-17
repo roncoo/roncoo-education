@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
  * @author ${author}
  * @date ${date}
  */
-@Api(tags = "API-${table.comment!}")
+@Api(tags = "api-${table.comment!}")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/${cfg.packageName}/api/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.name?replace('_', "/")}</#if>")

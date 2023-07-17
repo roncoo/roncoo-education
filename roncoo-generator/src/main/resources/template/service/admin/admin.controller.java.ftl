@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author ${author}
  */
-@Api(tags = "ADMIN-${table.comment!}")
+@Api(tags = "admin-${table.comment!}")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/${cfg.packageName}/admin/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.name ?replace("_","/")}</#if>")
