@@ -5,7 +5,7 @@ services:
       context: ./roncoo-education-app/roncoo-education-app-gateway
       args:
         JAVA_OPTS: '-Xmn256M -Xmx256M'
-        RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=192.168.100.11:8848'
+        RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=localhost:8848'
     image: roncoo-education-app-gateway
     container_name: gateway
     restart: always
@@ -20,7 +20,7 @@ services:
       context: ./roncoo-education-app/roncoo-education-app-sba
       args:
         JAVA_OPTS: '-Xmn256M -Xmx256M'
-        RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=192.168.100.11:8848'
+        RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=localhost:8848'
     image: roncoo-education-app-sba
     container_name: sba
     restart: always
@@ -35,7 +35,7 @@ services:
       context: ./roncoo-education-service/roncoo-education-service-system
       args:
         JAVA_OPTS: '-Xmn256M -Xmx256M'
-        RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=192.168.100.11:8848'
+        RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=localhost:8848'
     image: roncoo-education-service-system
     container_name: system
     restart: always
@@ -50,7 +50,7 @@ services:
       context: ./roncoo-education-service/roncoo-education-service-user
       args:
         JAVA_OPTS: '-Xmn256M -Xmx256M'
-        RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=192.168.100.11:8848'
+        RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=localhost:8848'
     image: roncoo-education-service-user
     container_name: user
     restart: always
@@ -65,7 +65,7 @@ services:
       context: ./roncoo-education-service/roncoo-education-service-course
       args:
         JAVA_OPTS: '-Xmn256M -Xmx256M'
-        RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=192.168.100.11:8848'
+        RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=localhost:8848'
     image: roncoo-education-service-course
     container_name: course
     restart: always
@@ -77,4 +77,4 @@ services:
       - "8188:8188"
 networks:
   education:
-    driver: bridge
+    driver: host
