@@ -123,7 +123,7 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
     private Long getUserId(ServerHttpRequest request) {
         // 头部
         String token = request.getHeaders().getFirst(Constants.TOKEN);
-        if (StringUtils.isEmpty(token)) {
+        if (!StringUtils.hasText(token)) {
             throw new BaseException("token不存在，请重新登录");
         }
 
