@@ -745,6 +745,66 @@ public class ResourceExample {
             return (Criteria) this;
         }
 
+        public Criteria andStoragePlatformIsNull() {
+            addCriterion("storage_platform is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoragePlatformIsNotNull() {
+            addCriterion("storage_platform is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoragePlatformEqualTo(Integer value) {
+            addCriterion("storage_platform =", value, "storagePlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoragePlatformNotEqualTo(Integer value) {
+            addCriterion("storage_platform <>", value, "storagePlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoragePlatformGreaterThan(Integer value) {
+            addCriterion("storage_platform >", value, "storagePlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoragePlatformGreaterThanOrEqualTo(Integer value) {
+            addCriterion("storage_platform >=", value, "storagePlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoragePlatformLessThan(Integer value) {
+            addCriterion("storage_platform <", value, "storagePlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoragePlatformLessThanOrEqualTo(Integer value) {
+            addCriterion("storage_platform <=", value, "storagePlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoragePlatformIn(List<Integer> values) {
+            addCriterion("storage_platform in", values, "storagePlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoragePlatformNotIn(List<Integer> values) {
+            addCriterion("storage_platform not in", values, "storagePlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoragePlatformBetween(Integer value1, Integer value2) {
+            addCriterion("storage_platform between", value1, value2, "storagePlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoragePlatformNotBetween(Integer value1, Integer value2) {
+            addCriterion("storage_platform not between", value1, value2, "storagePlatform");
+            return (Criteria) this;
+        }
+
         public Criteria andVideoStatusIsNull() {
             addCriterion("video_status is null");
             return (Criteria) this;

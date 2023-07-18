@@ -87,6 +87,13 @@ public class AdminResourceBiz extends BaseBiz {
      */
     public Result<String> save(AdminResourceSaveReq req) {
         Resource record = BeanUtil.copyProperties(req, Resource.class);
+        if (ResourceTypeEnum.VIDEO.getCode().equals(req.getResourceType()) || ResourceTypeEnum.AUDIO.getCode().equals(req.getResourceType())) {
+            // 视频类型，填写视频平台
+            record.setVodPlatform(feignSysConfig.getVod().getVodPlatform());
+        } else {
+            // 文档类型，填写存储平台
+            record.setStoragePlatform(feignSysConfig.getSys().getStoragePlatform());
+        }
         if (dao.save(record) > 0) {
             return Result.success("操作成功");
         }

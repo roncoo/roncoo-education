@@ -24,6 +24,8 @@ public class Resource implements Serializable {
 
     private Integer vodPlatform;
 
+    private Integer storagePlatform;
+
     private Integer videoStatus;
 
     private Integer videoLength;
@@ -114,6 +116,14 @@ public class Resource implements Serializable {
         this.vodPlatform = vodPlatform;
     }
 
+    public Integer getStoragePlatform() {
+        return storagePlatform;
+    }
+
+    public void setStoragePlatform(Integer storagePlatform) {
+        this.storagePlatform = storagePlatform;
+    }
+
     public Integer getVideoStatus() {
         return videoStatus;
     }
@@ -162,6 +172,7 @@ public class Resource implements Serializable {
         sb.append(", resourceSize=").append(resourceSize);
         sb.append(", resourceUrl=").append(resourceUrl);
         sb.append(", vodPlatform=").append(vodPlatform);
+        sb.append(", storagePlatform=").append(storagePlatform);
         sb.append(", videoStatus=").append(videoStatus);
         sb.append(", videoLength=").append(videoLength);
         sb.append(", videoVid=").append(videoVid);

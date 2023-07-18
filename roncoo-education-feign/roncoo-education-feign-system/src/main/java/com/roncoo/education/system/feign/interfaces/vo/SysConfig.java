@@ -21,4 +21,9 @@ public class SysConfig implements Serializable {
      */
     private String websiteDomain;
 
+    /**
+     * 存储平台
+     */
+    private Integer storagePlatform;
+
 }

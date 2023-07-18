@@ -44,7 +44,6 @@
         <sqlMapGenerator targetPackage="mybatis" targetProject="${projectPath}/${projectName}/src/main/resources"></sqlMapGenerator>
         <!-- 生成mapper类 -->
         <javaClientGenerator targetPackage="${packagePrefix}.${packageName}.dao.impl.mapper" targetProject="${projectPath}/${projectName}/src/main/java" type="XMLMAPPER"></javaClientGenerator>
-
         <!-- %代表生成全部的表 -->
         <table tableName="${tableNames}"/>
     </context>
