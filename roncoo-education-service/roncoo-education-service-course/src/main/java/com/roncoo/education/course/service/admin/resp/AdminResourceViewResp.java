@@ -55,6 +55,9 @@ public class AdminResourceViewResp implements Serializable {
     @ApiModelProperty(value = "点播平台")
     private Integer vodPlatform;
 
+    @ApiModelProperty(value = "存储平台")
+    private Integer storagePlatform;
+
     @ApiModelProperty(value = "状态(1转码中，2成功，3失败)")
     private Integer videoStatus;
 
