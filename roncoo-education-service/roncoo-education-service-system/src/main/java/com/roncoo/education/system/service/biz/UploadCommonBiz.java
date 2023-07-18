@@ -52,7 +52,7 @@ public class UploadCommonBiz {
     }
 
     public Result<UploadDocResp> uploadDoc(MultipartFile docFile) {
-        if (!FileUtils.isPic(docFile)) {
+        if (!FileUtils.isDoc(docFile)) {
             return Result.error("目前只支持：{}，请选择文件上传".replace("{}", FileUtils.DOC_TYPE_MAP));
         }
 

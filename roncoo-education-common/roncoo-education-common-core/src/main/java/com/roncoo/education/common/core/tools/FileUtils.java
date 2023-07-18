@@ -10,8 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-
 /**
  * 判断文件类型
  *
@@ -32,7 +30,7 @@ public final class FileUtils {
                 fileType = FileTypeUtil.getType(file.getInputStream());
             }
             return StrUtil.isNotBlank(fileType) && PIC_TYPE_MAP.contains(fileType);
-        } catch (IOException e) {
+        } catch (Exception e) {
             log.error("判断文件类型错误", e);
             return false;
         }
@@ -45,7 +43,7 @@ public final class FileUtils {
                 fileType = FileTypeUtil.getType(file.getInputStream());
             }
             return StrUtil.isNotBlank(fileType) && DOC_TYPE_MAP.contains(fileType);
-        } catch (IOException e) {
+        } catch (Exception e) {
             log.error("判断文件类型错误", e);
             return false;
         }
