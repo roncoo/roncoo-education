@@ -69,4 +69,5 @@ public class AdminResourceViewResp implements Serializable {
 
     @ApiModelProperty(value = "页数")
     private Integer docPage;
+
 }

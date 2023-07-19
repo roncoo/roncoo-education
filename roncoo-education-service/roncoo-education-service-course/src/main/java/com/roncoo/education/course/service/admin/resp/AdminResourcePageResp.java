@@ -66,4 +66,7 @@ public class AdminResourcePageResp implements Serializable {
 
     @ApiModelProperty(value = "vid")
     private String videoVid;
+
+    @ApiModelProperty(value = "页数")
+    private Integer docPage;
 }
