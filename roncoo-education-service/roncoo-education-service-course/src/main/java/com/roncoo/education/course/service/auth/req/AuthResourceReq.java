@@ -47,7 +47,7 @@ public class AuthResourceReq implements Serializable {
     private Integer videoStatus;
 
     @ApiModelProperty(value = "时长")
-    private String videoLength;
+    private Integer videoLength;
 
     @ApiModelProperty(value = "vid")
     private String videoVid;
