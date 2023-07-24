@@ -1,12 +1,10 @@
 #### 端口设置
-|              service              |       port      | 
-| --------------------------------- | --------------- |
-| roncoo-education-gateway      |     5840        |
-| roncoo-education-app-job          |     5820        |
-| roncoo-education-app-sba          |     5800        |
-| roncoo-education-system           |     5710        |
-| roncoo-education-user             |     5720        |
-| roncoo-education-course           |     5730        |
+| service                          | port | 
+|----------------------------------|------|
+| roncoo-education-gateway         | 8180 |
+| roncoo-education-system          | 8184 |
+| roncoo-education-user            | 8186 |
+| roncoo-education-course          | 8188 |
 -------------------------------------------------------
 
 #### 如何进行docker部署
