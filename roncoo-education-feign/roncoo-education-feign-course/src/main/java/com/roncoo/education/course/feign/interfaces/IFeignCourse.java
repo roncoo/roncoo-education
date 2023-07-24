@@ -15,7 +15,7 @@ import java.util.List;
  * @author wujing
  * @date 2022-08-27
  */
-@FeignClient(value = "course-service", path = "/course/course")
+@FeignClient(value = "service-course", path = "/course/course")
 public interface IFeignCourse {
 
     /**

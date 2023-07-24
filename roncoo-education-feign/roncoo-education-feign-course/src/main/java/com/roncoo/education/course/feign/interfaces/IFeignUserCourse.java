@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author wujing
  * @date 2022-08-27
  */
-@FeignClient(value = "course-service", path = "/course/user/course")
+@FeignClient(value = "service-course", path = "/course/user/course")
 public interface IFeignUserCourse {
 
     @PutMapping(value = "/binding")

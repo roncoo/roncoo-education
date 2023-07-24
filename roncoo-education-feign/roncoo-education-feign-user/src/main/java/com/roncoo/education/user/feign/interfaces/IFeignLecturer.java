@@ -16,7 +16,7 @@ import java.util.Map;
  * @author wujing
  * @date 2022-08-27
  */
-@FeignClient(value = "user-service", path = "/user/lecturer")
+@FeignClient(value = "service-user", path = "/user/lecturer")
 public interface IFeignLecturer {
     /**
      * 根据ID获取讲师信息

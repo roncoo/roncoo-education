@@ -15,7 +15,7 @@ services:
       - education
     ports:
       - "8180:8180"
-  system-service:
+  service-system:
     build:
       context: ./roncoo-education-service/roncoo-education-service-system
       args:
@@ -30,7 +30,7 @@ services:
       - education
     ports:
       - "8184:8184"
-  user-service:
+  service-user:
     build:
       context: ./roncoo-education-service/roncoo-education-service-user
       args:
@@ -45,7 +45,7 @@ services:
       - education
     ports:
       - "8186:8186"
-  course-service:
+  service-course:
     build:
       context: ./roncoo-education-service/roncoo-education-service-course
       args:

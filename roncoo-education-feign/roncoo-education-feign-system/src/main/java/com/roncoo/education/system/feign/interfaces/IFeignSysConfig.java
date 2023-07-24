@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author wujing
  * @date 2022-08-25
  */
-@FeignClient(value = "system-service", path = "/system/sys/config")
+@FeignClient(value = "service-system", path = "/system/sys/config")
 public interface IFeignSysConfig {
 
     /**

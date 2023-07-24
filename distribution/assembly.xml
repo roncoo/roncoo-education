@@ -42,15 +42,15 @@
             <outputDirectory>target</outputDirectory>
         </file>
         <file>
-            <source>${project.parent.basedir}/roncoo-education-course/roncoo-education-course-service/target/course.jar</source>
+            <source>${project.parent.basedir}/roncoo-education-service/roncoo-education-service-course/target/course.jar</source>
             <outputDirectory>target</outputDirectory>
         </file>
         <file>
-            <source>${project.parent.basedir}/roncoo-education-system/roncoo-education-system-service/target/system.jar</source>
+            <source>${project.parent.basedir}/roncoo-education-service/roncoo-education-service-system/target/system.jar</source>
             <outputDirectory>target</outputDirectory>
         </file>
         <file>
-            <source>${project.parent.basedir}/roncoo-education-user/roncoo-education-user-service/target/user.jar</source>
+            <source>${project.parent.basedir}/roncoo-education-service/roncoo-education-service-user/target/user.jar</source>
             <outputDirectory>target</outputDirectory>
         </file>
     </files>
