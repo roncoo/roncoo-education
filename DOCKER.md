@@ -1,7 +1,7 @@
 #### 端口设置
 |              service              |       port      | 
 | --------------------------------- | --------------- |
-| roncoo-education-app-gateway      |     5840        |
+| roncoo-education-gateway      |     5840        |
 | roncoo-education-app-job          |     5820        |
 | roncoo-education-app-sba          |     5800        |
 | roncoo-education-system           |     5710        |

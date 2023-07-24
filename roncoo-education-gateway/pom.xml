@@ -5,12 +5,12 @@
 
     <parent>
         <groupId>com.roncoo</groupId>
-        <artifactId>roncoo-education-app</artifactId>
+        <artifactId>roncoo-education</artifactId>
         <version>13.0.0-RELEASE</version>
     </parent>
 
-    <artifactId>roncoo-education-app-gateway</artifactId>
-    <name>roncoo-education-app-gateway</name>
+    <artifactId>roncoo-education-gateway</artifactId>
+    <name>roncoo-education-gateway</name>
 
     <dependencies>
         <!-- gateway -->
@@ -21,6 +21,26 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+
+        <!-- Nacos -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+
+        <!-- actuator -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
         <dependency>

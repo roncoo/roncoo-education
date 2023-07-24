@@ -38,15 +38,7 @@
     </fileSets>
     <files>
         <file>
-            <source>${project.parent.basedir}/roncoo-education-app-gateway/target/gateway.jar</source>
-            <outputDirectory>target</outputDirectory>
-        </file>
-        <file>
-            <source>${project.parent.basedir}/roncoo-education-app-job/target/job.jar</source>
-            <outputDirectory>target</outputDirectory>
-        </file>
-        <file>
-            <source>${project.parent.basedir}/roncoo-education-app-sba/target/sba.jar</source>
+            <source>${project.parent.basedir}/roncoo-education-gateway/target/gateway.jar</source>
             <outputDirectory>target</outputDirectory>
         </file>
         <file>

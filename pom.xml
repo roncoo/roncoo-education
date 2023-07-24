@@ -188,10 +188,10 @@
     <modules>
         <!-- 基础工程 -->
         <module>roncoo-education-common</module>
-        <!-- 网关监控 -->
-        <module>roncoo-education-app</module>
         <!-- 接口模块 -->
         <module>roncoo-education-feign</module>
+        <!-- 网关模块 -->
+        <module>roncoo-education-gateway</module>
         <!-- 服务模块 -->
         <module>roncoo-education-service</module>
     </modules>

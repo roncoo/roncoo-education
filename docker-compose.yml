@@ -1,12 +1,12 @@
 version: "3.0"
 services:
-  app-gateway:
+  gateway:
     build:
-      context: ./roncoo-education-app/roncoo-education-app-gateway
+      context: ./roncoo-education-app/roncoo-education-gateway
       args:
         JAVA_OPTS: '-Xmn256M -Xmx256M'
         RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=localhost:8848'
-    image: roncoo-education-app-gateway
+    image: roncoo-education-gateway
     container_name: gateway
     restart: always
     volumes:
@@ -15,21 +15,6 @@ services:
       - education
     ports:
       - "8180:8180"
-  app-sba:
-    build:
-      context: ./roncoo-education-app/roncoo-education-app-sba
-      args:
-        JAVA_OPTS: '-Xmn256M -Xmx256M'
-        RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=localhost:8848'
-    image: roncoo-education-app-sba
-    container_name: sba
-    restart: always
-    volumes:
-      - /home/roncoo/logs/sba:/root/logs/sba
-    networks:
-      - education
-    ports:
-      - "8182:8182"
   system-service:
     build:
       context: ./roncoo-education-service/roncoo-education-service-system
