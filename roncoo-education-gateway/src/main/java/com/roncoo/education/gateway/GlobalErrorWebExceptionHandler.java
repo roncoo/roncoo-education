@@ -1,4 +1,4 @@
-package com.roncoo.education.app.gateway;
+package com.roncoo.education.gateway;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.roncoo.education.common.core.base.BaseException;

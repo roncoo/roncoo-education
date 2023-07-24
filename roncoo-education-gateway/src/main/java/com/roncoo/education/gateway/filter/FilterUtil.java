@@ -1,4 +1,4 @@
-package com.roncoo.education.app.gateway.filter;
+package com.roncoo.education.gateway.filter;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.roncoo.education.common.core.base.BaseException;

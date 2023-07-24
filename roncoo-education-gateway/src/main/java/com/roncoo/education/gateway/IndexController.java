@@ -1,4 +1,4 @@
-package com.roncoo.education.app.gateway;
+package com.roncoo.education.gateway;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
