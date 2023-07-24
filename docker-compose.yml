@@ -2,7 +2,7 @@ version: "3.0"
 services:
   gateway:
     build:
-      context: ./roncoo-education-app/roncoo-education-gateway
+      context: ./roncoo-education-gateway
       args:
         JAVA_OPTS: '-Xmn256M -Xmx256M'
         RUN_ARGS: '--spring.profiles.active=demo --spring.cloud.nacos.server-addr=localhost:8848'
