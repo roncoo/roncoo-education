@@ -1,15 +1,14 @@
 package com.roncoo.education.user.service.api.biz;
 
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.crypto.digest.DigestUtil;
+import cn.hutool.extra.servlet.ServletUtil;
 import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.LoginStatusEnum;
 import com.roncoo.education.common.core.sms.SmsUtil;
-import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.core.tools.Constants;
-import com.roncoo.education.common.core.tools.JWTUtil;
-import com.roncoo.education.common.core.tools.NOUtil;
+import com.roncoo.education.common.core.tools.*;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.user.dao.LogLoginDao;
@@ -26,6 +25,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -44,10 +44,12 @@ public class ApiUsersBiz extends BaseBiz {
     private CacheRedis cacheRedis;
     @Autowired
     private IFeignSysConfig feignSysConfig;
+    @Autowired
+    private HttpServletRequest request;
 
     @Transactional(rollbackFor = Exception.class)
     public Result<UsersLoginResp> register(RegisterReq req) {
-        if (StringUtils.isEmpty(req.getMobile())) {
+        if (!StringUtils.hasText(req.getMobile())) {
             return Result.error("手机号不能为空");
         }
 
@@ -60,7 +62,7 @@ public class ApiUsersBiz extends BaseBiz {
             return Result.error("验证码不正确");
         }
 
-        if (StringUtils.isEmpty(req.getMobilePwd())) {
+        if (!StringUtils.hasText(req.getMobilePwd())) {
             return Result.error("密码不能为空");
         }
         // 密码校验
@@ -78,7 +80,7 @@ public class ApiUsersBiz extends BaseBiz {
         user = register(req.getMobile(), req.getMobilePwd());
 
         // 日志
-        loginLog(user.getId(), LoginStatusEnum.REGISTER, req);
+        log(user.getId(), LoginStatusEnum.REGISTER, BeanUtil.copyProperties(req, LogLogin.class));
 
         UsersLoginResp dto = new UsersLoginResp();
         dto.setMobile(user.getMobile());
@@ -87,10 +89,10 @@ public class ApiUsersBiz extends BaseBiz {
     }
 
     public Result<UsersLoginResp> login(LoginReq req) {
-        if (StringUtils.isEmpty(req.getMobile())) {
+        if (!StringUtils.hasText(req.getMobile())) {
             return Result.error("手机号不能为空");
         }
-        if (StringUtils.isEmpty(req.getPassword())) {
+        if (!StringUtils.hasText(req.getPassword())) {
             return Result.error("密码不能为空");
         }
         // 密码错误次数校验
@@ -103,13 +105,13 @@ public class ApiUsersBiz extends BaseBiz {
 
         // 密码校验
         if (!DigestUtil.sha1Hex(user.getMobileSalt() + req.getPassword()).equals(user.getMobilePsw())) {
-            loginLog(user.getId(), LoginStatusEnum.FAIL, req);
+            log(user.getId(), LoginStatusEnum.FAIL, BeanUtil.copyProperties(req, LogLogin.class));
             // 放入缓存，错误次数+1
             return Result.error("账号或者密码不正确");
         }
 
-        // 登录日志
-        loginLog(user.getId(), LoginStatusEnum.SUCCESS, req);
+        // 日志
+        log(user.getId(), LoginStatusEnum.SUCCESS, BeanUtil.copyProperties(req, LogLogin.class));
 
         UsersLoginResp dto = new UsersLoginResp();
         dto.setMobile(user.getMobile());
@@ -131,17 +133,17 @@ public class ApiUsersBiz extends BaseBiz {
         return user;
     }
 
-    private void loginLog(Long userId, LoginStatusEnum status, LoginReq req) {
-        LogLogin record = BeanUtil.copyProperties(req, LogLogin.class);
+    private void log(Long userId, LoginStatusEnum status, LogLogin record) {
         record.setUserId(userId);
         record.setLoginStatus(status.getCode());
-        logLoginDao.save(record);
-    }
-
-    private void loginLog(Long userId, LoginStatusEnum status, RegisterReq req) {
-        LogLogin record = BeanUtil.copyProperties(req, LogLogin.class);
-        record.setUserId(userId);
-        record.setLoginStatus(status.getCode());
+        if (!StringUtils.hasText(record.getLoginIp())) {
+            IPUtil.IpInfo ipInfo = IPUtil.getIpInfo(ServletUtil.getClientIP(request));
+            if (ObjectUtil.isNotNull(ipInfo)) {
+                record.setLoginIp(ipInfo.getIp());
+                record.setProvince(ipInfo.getPro());
+                record.setCity(ipInfo.getCity());
+            }
+        }
         logLoginDao.save(record);
     }
 
