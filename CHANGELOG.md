@@ -4,11 +4,12 @@
 ###### v13.0.0-RELEASE(待发布)
 
 1. 工程架构优化调整，移除app-job工程，采用官方xxl-job-admin;
-2. 大版本升级到：spring boot 2.6.3，ribbon改用为loadbalancer
-3. 增加点播私有化视频播放功能
-4. 增加文档课时功能，课时可以选择文档(word、excel、ppt、pdf等)，不限于音视频
-5. 增加对象存储类型支持：阿里云OSS
-6. 优化打包流程，修复打包配置错误bug
+2. 方便xxl-job-admin的使用，单独加入roncoo-job(和官方的xxl-job-admin完全一致)
+3. 大版本升级到：spring boot 2.6.3，ribbon改用为loadbalancer
+4. 增加点播私有化视频播放功能
+5. 增加文档课时功能，课时可以选择文档(word、excel、ppt、pdf等)，不限于音视频
+6. 增加对象存储类型支持：阿里云OSS
+7. 优化打包流程，修复打包配置错误bug
 
 ---
 
