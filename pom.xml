@@ -69,7 +69,6 @@
     </developers>
 
     <properties>
-        <mysql.connector.version>8.0.22</mysql.connector.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -110,6 +109,12 @@
                 <version>4.8.1</version>
             </dependency>
 
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-spring-boot-starter</artifactId>
+                <version>1.6.1</version>
+            </dependency>
+
             <!-- com.roncoo -->
             <dependency>
                 <groupId>com.roncoo</groupId>
@@ -145,12 +150,6 @@
                 <groupId>com.roncoo</groupId>
                 <artifactId>roncoo-education-common-service</artifactId>
                 <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.connector.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
