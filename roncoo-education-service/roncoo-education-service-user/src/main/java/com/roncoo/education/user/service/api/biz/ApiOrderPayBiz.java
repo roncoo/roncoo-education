@@ -92,7 +92,7 @@ public class ApiOrderPayBiz extends BaseBiz {
         OrderPay pay = new OrderPay();
         pay.setId(orderPay.getId());
         pay.setOrderStatus(OrderStatusEnum.SUCCESS.getCode());
-        pay.setPayTime(LocalDateTime.now());
+        //pay.setPayTime(LocalDateTime.now());
         dao.updateById(pay);
     }
 
