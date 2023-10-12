@@ -17,10 +17,10 @@ import com.roncoo.education.user.dao.OrderInfoDao;
 import com.roncoo.education.user.dao.OrderPayDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.OrderInfo;
 import com.roncoo.education.user.dao.impl.mapper.entity.OrderPay;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
@@ -49,7 +49,7 @@ public class ApiOrderPayBiz extends BaseBiz {
     @NotNull
     private final Map<String, PayFace> payFaceMap;
 
-    @Transactional(rollbackFor = Exception.class)
+    @GlobalTransactional(rollbackFor = Exception.class)
     public String notify(HttpServletRequest request, Integer payModel, String payImpl) {
         // step1：获取支付通知参数
         TradeNotifyReq notifyParam = getTradeNotifyParam(request);

@@ -10,7 +10,6 @@ import com.roncoo.education.course.dao.impl.mapper.entity.UserCourse;
 import com.roncoo.education.course.feign.interfaces.qo.UserCourseBindingQO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
 
@@ -28,7 +27,7 @@ public class FeignUserCourseBiz extends BaseBiz {
     @NotNull
     private final CourseDao courseDao;
 
-    @Transactional(rollbackFor = Exception.class)
+    //@Transactional(rollbackFor = Exception.class) // 使用了全局事务，这里不能再使用本地事务
     public int binding(UserCourseBindingQO qo) {
         UserCourse record = BeanUtil.copyProperties(qo, UserCourse.class);
         if (dao.save(record) > 0) {
