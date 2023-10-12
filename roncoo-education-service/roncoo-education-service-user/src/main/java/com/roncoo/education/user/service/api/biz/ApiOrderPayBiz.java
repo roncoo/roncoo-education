@@ -24,7 +24,6 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 import java.util.Map;
 
 /**
@@ -84,7 +83,7 @@ public class ApiOrderPayBiz extends BaseBiz {
         OrderInfo info = new OrderInfo();
         info.setId(orderInfo.getId());
         info.setOrderStatus(OrderStatusEnum.SUCCESS.getCode());
-        info.setPayTime(LocalDateTime.now());
+        //info.setPayTime(LocalDateTime.now());
         orderInfoDao.updateById(info);
     }
 
