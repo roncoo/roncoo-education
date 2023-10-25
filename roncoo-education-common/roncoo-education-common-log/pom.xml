@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.roncoo</groupId>
         <artifactId>roncoo-education-common</artifactId>
-        <version>13.0.0-RELEASE</version>
+        <version>14.0.0-RELEASE</version>
     </parent>
 
     <artifactId>roncoo-education-common-log</artifactId>
