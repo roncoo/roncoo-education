@@ -99,6 +99,7 @@ public class ApiCourseBiz extends BaseBiz {
         nsb.withQuery(qb);
         SearchHits<EsCourse> searchHits = elasticsearchRestTemplate.search(nsb.build(), EsCourse.class, IndexCoordinates.of(EsCourse.COURSE));
         if(searchHits.getTotalHits() > 0){
+            // es
             return Result.success(EsPageUtil.transform(searchHits, req.getPageCurrent(), req.getPageSize(), ApiCoursePageResp.class));
         }else{
             // 直接查库
