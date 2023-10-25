@@ -1,6 +1,12 @@
 ### 版本升级日志
 ---
 
+###### v14.0.0-RELEASE（待发布）
+
+1. elasticsearch优化过期的方法，列出搜索功能兼容优化
+
+---
+
 ###### v13.0.0-RELEASE
 
 1. 大版本升级到：spring boot 2.6.3，ribbon改用为loadbalancer
