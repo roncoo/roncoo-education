@@ -3,6 +3,7 @@ package com.roncoo.education.course.service.api.biz;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.PutawayEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
@@ -97,7 +98,24 @@ public class ApiCourseBiz extends BaseBiz {
         }
         nsb.withQuery(qb);
         SearchHits<EsCourse> searchHits = elasticsearchRestTemplate.search(nsb.build(), EsCourse.class, IndexCoordinates.of(EsCourse.COURSE));
-        return Result.success(EsPageUtil.transform(searchHits, req.getPageCurrent(), req.getPageSize(), ApiCoursePageResp.class));
+        if(searchHits.getTotalHits() > 0){
+            return Result.success(EsPageUtil.transform(searchHits, req.getPageCurrent(), req.getPageSize(), ApiCoursePageResp.class));
+        }else{
+            CourseExample example = new CourseExample();
+            CourseExample.Criteria c = example.createCriteria();
+            if (ObjectUtil.isNotEmpty(req.getCategoryId())) {
+                c.andCategoryIdEqualTo(req.getCategoryId());
+            }
+            if (ObjectUtil.isNotEmpty(req.getIsFree())) {
+                c.andIsFreeEqualTo(req.getIsFree());
+            }
+            if (StringUtils.hasText(req.getCourseName())) {
+                c.andCourseNameLike(PageUtil.like(req.getCourseName()));
+            }
+            example.setOrderByClause("course_sort asc, id desc");
+            Page<Course> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
+            return Result.success(PageUtil.transform(page, ApiCoursePageResp.class));
+        }
     }
 
     private List<Long> listCategoryId(Long categoryId) {
