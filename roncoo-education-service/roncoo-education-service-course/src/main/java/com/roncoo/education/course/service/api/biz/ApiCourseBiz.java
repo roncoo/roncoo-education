@@ -101,6 +101,7 @@ public class ApiCourseBiz extends BaseBiz {
         if(searchHits.getTotalHits() > 0){
             return Result.success(EsPageUtil.transform(searchHits, req.getPageCurrent(), req.getPageSize(), ApiCoursePageResp.class));
         }else{
+            // 直接查库
             CourseExample example = new CourseExample();
             CourseExample.Criteria c = example.createCriteria();
             if (ObjectUtil.isNotEmpty(req.getCategoryId())) {
