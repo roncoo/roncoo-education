@@ -92,8 +92,8 @@ public class ApiCourseBiz extends BaseBiz {
             qb.must(QueryBuilders.multiMatchQuery(req.getCourseName(), "courseName").type(MultiMatchQueryBuilder.Type.BEST_FIELDS));
         } else {
             // 课程排序（courseSort）
-            nsb.withSort(new FieldSortBuilder("courseSort").order(SortOrder.ASC));
-            nsb.withSort(new FieldSortBuilder("id").order(SortOrder.DESC));
+            nsb.withSorts(new FieldSortBuilder("courseSort").order(SortOrder.ASC));
+            nsb.withSorts(new FieldSortBuilder("id").order(SortOrder.DESC));
         }
         nsb.withQuery(qb);
         SearchHits<EsCourse> searchHits = elasticsearchRestTemplate.search(nsb.build(), EsCourse.class, IndexCoordinates.of(EsCourse.COURSE));
