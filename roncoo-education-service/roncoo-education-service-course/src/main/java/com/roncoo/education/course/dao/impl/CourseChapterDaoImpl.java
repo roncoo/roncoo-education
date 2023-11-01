@@ -87,4 +87,11 @@ public class CourseChapterDaoImpl implements CourseChapterDao {
         example.setOrderByClause(" sort asc, id desc ");
         return this.mapper.selectByExample(example);
     }
+
+    @Override
+    public int deleteByCourseId(Long courseId) {
+        CourseChapterExample example = new CourseChapterExample();
+        example.createCriteria().andCourseIdEqualTo(courseId);
+        return this.mapper.deleteByExample(example);
+    }
 }

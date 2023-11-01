@@ -12,6 +12,8 @@ import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.elasticsearch.EsCourse;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.CategoryDao;
+import com.roncoo.education.course.dao.CourseChapterDao;
+import com.roncoo.education.course.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Category;
 import com.roncoo.education.course.dao.impl.mapper.entity.Course;
@@ -29,6 +31,7 @@ import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
@@ -55,6 +58,10 @@ public class AdminCourseBiz extends BaseBiz {
 
     @NotNull
     private final CourseDao dao;
+    @NotNull
+    private final CourseChapterDao courseChapterDao;
+    @NotNull
+    private final CourseChapterPeriodDao courseChapterPeriodDao;
     @NotNull
     private final CategoryDao categoryDao;
 
@@ -152,14 +159,19 @@ public class AdminCourseBiz extends BaseBiz {
      * @param id ID主键
      * @return 删除结果
      */
+    @Transactional(rollbackFor = Exception.class)
     public Result<String> delete(Long id) {
-        if (dao.deleteById(id) > 0) {
-            if (ObjectUtil.isNotNull(elasticsearchRestTemplate)) {
-                elasticsearchRestTemplate.delete(id.toString(), EsCourse.class);
-            }
-            return Result.success("操作成功");
+        // 删除节信息
+        courseChapterPeriodDao.deleteByCourseId(id);
+        // 删除章信息
+        courseChapterDao.deleteByCourseId(id);
+        // 删除课程信息
+        dao.deleteById(id);
+        if (ObjectUtil.isNotNull(elasticsearchRestTemplate)) {
+            elasticsearchRestTemplate.delete(id.toString(), EsCourse.class);
         }
-        return Result.error("操作失败");
+        return Result.success("操作成功");
+
     }
 
     public Result<String> syncEs() {

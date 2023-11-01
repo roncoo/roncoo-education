@@ -81,4 +81,6 @@ public interface CourseChapterPeriodDao {
     List<CourseChapterPeriod> listByResourceId(Long resourceId);
 
     List<CourseChapterPeriod> listByChapterId(Long id);
+
+    int deleteByCourseId(Long courseId);
 }

@@ -75,4 +75,6 @@ public interface CourseChapterDao {
     List<CourseChapter> listByCourseId(Long courseId);
 
     List<CourseChapter> listByCourseIdAndStatusId(Long id, Integer statusId);
+
+    int deleteByCourseId(Long courseId);
 }
