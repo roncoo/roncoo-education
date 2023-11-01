@@ -171,7 +171,6 @@ public class AdminCourseBiz extends BaseBiz {
             elasticsearchRestTemplate.delete(id.toString(), EsCourse.class);
         }
         return Result.success("操作成功");
-
     }
 
     public Result<String> syncEs() {
