@@ -27,6 +27,12 @@ public class AdminUserCourseCommentPageReq implements Serializable {
     @ApiModelProperty(value = "课程ID")
     private Long courseId;
 
+    @ApiModelProperty(value = "手机号码")
+    private String mobile;
+
+    @ApiModelProperty(value = "评论内容")
+    private String commentText;
+
     @ApiModelProperty(value = "当前页")
     private int pageCurrent = 1;
 

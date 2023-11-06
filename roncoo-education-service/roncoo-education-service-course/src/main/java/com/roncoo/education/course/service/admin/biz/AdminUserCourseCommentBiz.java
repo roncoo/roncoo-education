@@ -21,6 +21,7 @@ import com.roncoo.education.user.feign.interfaces.IFeignUsers;
 import com.roncoo.education.user.feign.interfaces.vo.UsersVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -51,6 +52,9 @@ public class AdminUserCourseCommentBiz extends BaseBiz {
         Criteria c = example.createCriteria();
         if (ObjectUtil.isNotEmpty(req.getCourseId())) {
             c.andCourseIdEqualTo(req.getCourseId());
+        }
+        if (StringUtils.hasText(req.getCommentText())) {
+            c.andCommentTextLike(PageUtil.like(req.getCommentText()));
         }
         Page<UserCourseComment> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminUserCourseCommentPageResp> respPage = PageUtil.transform(page, AdminUserCourseCommentPageResp.class);
