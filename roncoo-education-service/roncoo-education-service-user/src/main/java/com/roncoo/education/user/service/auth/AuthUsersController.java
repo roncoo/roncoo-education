@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -37,7 +38,7 @@ public class AuthUsersController {
 
     @ApiOperation(value = "更新接口", notes = "更新当前用户的基本信息")
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public Result<String> update(@RequestBody AuthUsersReq req) {
+    public Result<String> update(@RequestBody @Valid AuthUsersReq req) {
         return biz.update(req);
     }
 

@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
@@ -28,6 +29,7 @@ public class AuthUserCourseCommentReq implements Serializable {
     @ApiModelProperty(value = "评论ID，被评论的ID", required = false)
     private Long commentId;
 
+    @NotBlank(message = "请填写评论内容")
     @ApiModelProperty(value = "评论内容")
     private String commentText;
 }

@@ -1,7 +1,9 @@
 package com.roncoo.education.course.service.biz;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.DesensitizedUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
@@ -146,7 +148,12 @@ public class CourseBiz extends BaseBiz {
             List<Long> userIds = userCourseCommentPage.getList().stream().map(UserCourseComment::getUserId).collect(Collectors.toList());
             Map<Long, UsersVO> usersVOMap = feignUsers.listByIds(userIds);
             for (CourseCommentResp commentResp : resp.getList()) {
-                commentResp.setUsersVO(usersVOMap.get(commentResp.getUserId()));
+                UsersVO usersVO = usersVOMap.get(commentResp.getUserId());
+                usersVO.setMobile(DesensitizedUtil.mobilePhone(usersVO.getMobile()));
+                if (StrUtil.isBlank(usersVO.getNickname())) {
+                    usersVO.setNickname(usersVO.getMobile());
+                }
+                commentResp.setUsersVO(usersVO);
             }
         }
         return Result.success(resp);

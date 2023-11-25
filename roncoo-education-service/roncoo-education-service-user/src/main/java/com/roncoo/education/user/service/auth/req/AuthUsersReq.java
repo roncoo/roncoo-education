@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -22,12 +24,15 @@ public class AuthUsersReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @NotBlank(message = "请填写昵称")
     @ApiModelProperty(value = "昵称")
     private String nickname;
 
+    @NotNull(message = "请选择性别")
     @ApiModelProperty(value = "用户性别(1男，2女，3保密)")
     private Integer userSex;
 
+    @NotNull(message = "请填写年龄")
     @ApiModelProperty(value = "用户年龄")
     private Integer userAge;
 

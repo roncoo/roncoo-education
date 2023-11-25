@@ -2,6 +2,7 @@ package com.roncoo.education.user.service.api.biz;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.extra.servlet.ServletUtil;
 import com.roncoo.education.common.cache.CacheRedis;
@@ -129,6 +130,8 @@ public class ApiUsersBiz extends BaseBiz {
         user.setMobile(mobile);
         user.setMobileSalt(IdUtil.simpleUUID());
         user.setMobilePsw(DigestUtil.sha1Hex(user.getMobileSalt() + password));
+        // 默认8位随机字符串
+        user.setNickname(RandomUtil.randomString(8));
         userDao.save(user);
         return user;
     }

@@ -56,6 +56,7 @@ public class AdminUserCourseCommentBiz extends BaseBiz {
         if (StringUtils.hasText(req.getCommentText())) {
             c.andCommentTextLike(PageUtil.like(req.getCommentText()));
         }
+        example.setOrderByClause("id desc");
         Page<UserCourseComment> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminUserCourseCommentPageResp> respPage = PageUtil.transform(page, AdminUserCourseCommentPageResp.class);
         if (CollUtil.isNotEmpty(respPage.getList())) {

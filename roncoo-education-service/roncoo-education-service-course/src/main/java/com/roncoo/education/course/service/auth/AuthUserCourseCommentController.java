@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -51,7 +52,7 @@ public class AuthUserCourseCommentController {
      */
     @ApiOperation(value = "课程评论添加", notes = "用户进行课程评论")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public Result<String> add(@RequestBody AuthUserCourseCommentReq req) {
+    public Result<String> add(@RequestBody @Valid AuthUserCourseCommentReq req) {
         return biz.add(req);
     }
 
