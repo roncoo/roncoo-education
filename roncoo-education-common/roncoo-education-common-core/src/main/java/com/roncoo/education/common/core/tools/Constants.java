@@ -26,9 +26,19 @@ public final class Constants {
         String ADMINI_MENU = "admin::menu::";
         String ADMIN_VERI_CODE = "admin::ver::code::";
         String USER_STUDY = "user::study::";
+        /**
+         * 资源
+         */
         String RESOURCE = "resource::";
+        /**
+         * 学习进度
+         */
         String PROGRESS = "progress::";
+        /**
+         * 短信验证码
+         */
         String CODE = "code::";
+        String CODE_STAT = "code::stat::";
     }
 
 }

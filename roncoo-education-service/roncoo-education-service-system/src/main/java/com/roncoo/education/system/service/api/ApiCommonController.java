@@ -48,7 +48,7 @@ public class ApiCommonController {
         }
     }
 
-    @ApiOperation(value = "获取验证码", notes = "获取图片验证码")
+    @ApiOperation(value = "获取图片验证码", notes = "获取图片验证码")
     @GetMapping(value = "/code")
     public Result<ApiVerCodeResp> getVerCode() {
         CircleCaptcha captcha = CaptchaUtil.createCircleCaptcha(200, 100, 4, 20);

@@ -28,9 +28,9 @@ public class CacheRedis {
      */
     public <T> T set(String key, T t) {
         if (t != null) {
-            String value = JSUtil.toJsonString(t);
-            if (t instanceof String) {
-                value = t.toString();
+            String value = t.toString();
+            if (!(t instanceof String)) {
+                value = JSUtil.toJsonString(t);
             }
             stringRedisTemplate.opsForValue().set(key, value, timeToLive, TimeUnit.MILLISECONDS);
         }
@@ -42,9 +42,9 @@ public class CacheRedis {
      */
     public <T> T set(String key, T t, int time, TimeUnit timeUnit) {
         if (t != null) {
-            String value = JSUtil.toJsonString(t);
-            if (t instanceof String) {
-                value = t.toString();
+            String value = t.toString();
+            if (!(t instanceof String)) {
+                value = JSUtil.toJsonString(t);
             }
             stringRedisTemplate.opsForValue().set(key, value, time, timeUnit);
         }
@@ -58,7 +58,7 @@ public class CacheRedis {
         return null;
     }
 
-    public <T> T getByJson(String key, Class<T> clazz) {
+    public <T> T get(String key, Class<T> clazz) {
         String value = get(key);
         if (StringUtils.hasText(value)) {
             return JSUtil.parseObject(value, clazz);
@@ -66,12 +66,13 @@ public class CacheRedis {
         return null;
     }
 
+    public <T> List<T> list(String key, Class<T> clazz) {
+        return JSUtil.parseArray(get(key), clazz);
+    }
+
     public void delete(String key) {
         stringRedisTemplate.delete(key);
     }
 
-    public <T> List<T> listByJson(String key, Class<T> clazz) {
-        return JSUtil.parseArray(get(key), clazz);
-    }
 
 }

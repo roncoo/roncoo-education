@@ -34,4 +34,13 @@ public class Upload implements Serializable {
     private String minioSecretKey;
     private String minioDomain;
     private String minioBucket;
+
+    /**
+     * OSS
+     */
+    private String aliyunOssEndpoint;
+    private String aliyunAccessKeyId;
+    private String aliyunAccessKeySecret;
+    private String aliyunOssUrl;
+    private String aliyunOssBucket;
 }

@@ -8,9 +8,9 @@ import cn.hutool.extra.servlet.ServletUtil;
 import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.LoginStatusEnum;
-import com.roncoo.education.common.core.sms.SmsUtil;
 import com.roncoo.education.common.core.tools.*;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.sms.SmsUtil;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.user.dao.LogLoginDao;
 import com.roncoo.education.user.dao.UsersDao;
@@ -53,7 +53,6 @@ public class ApiUsersBiz extends BaseBiz {
         if (!StringUtils.hasText(req.getMobile())) {
             return Result.error("手机号不能为空");
         }
-
         // 验证码校验
         String redisCode = cacheRedis.get(Constants.RedisPre.CODE + req.getMobile());
         if (!StringUtils.hasText(redisCode)) {
@@ -62,6 +61,8 @@ public class ApiUsersBiz extends BaseBiz {
         if (!req.getCode().equals(redisCode)) {
             return Result.error("验证码不正确");
         }
+        // 删除验证码缓存
+        cacheRedis.delete(Constants.RedisPre.CODE + req.getMobile());
 
         if (!StringUtils.hasText(req.getMobilePwd())) {
             return Result.error("密码不能为空");
@@ -96,8 +97,6 @@ public class ApiUsersBiz extends BaseBiz {
         if (!StringUtils.hasText(req.getPassword())) {
             return Result.error("密码不能为空");
         }
-        // 密码错误次数校验
-
         // 用户校验
         Users user = userDao.getByMobile(req.getMobile());
         if (null == user) {
@@ -155,13 +154,39 @@ public class ApiUsersBiz extends BaseBiz {
         String code = NOUtil.getVerCode();
         log.warn("手机号：{}，验证码：{}", req.getMobile(), code);
 
-        // 正常应该是发送成功才放入缓存，这里方便没有短信通道的情况下，也能测试注册
+        // 验证码发送次数校验
+        if (!sendCodeCheck(req.getMobile())) {
+            return Result.error("验证码发送次数过多，请稍后再试");
+        }
+
+        // 正常应该是发送成功才放入缓存，这里方便没有短信通道的情况下，也能测试注册（上线需要删除，并打开下面）
         cacheRedis.set(Constants.RedisPre.CODE + req.getMobile(), code, 5, TimeUnit.MINUTES);
 
         if (SmsUtil.sendVerCode(req.getMobile(), code, feignSysConfig.getSms())) {
+            // 发送成功才放入缓存
+            // cacheRedis.set(Constants.RedisPre.CODE + req.getMobile(), code, 5, TimeUnit.MINUTES);
             return Result.success("发送成功");
         }
         return Result.error("发送失败");
+    }
+
+    /**
+     * 5分钟内，同一个手机号不能超2次发送验证码
+     *
+     * @param mobile
+     */
+    private Boolean sendCodeCheck(String mobile) {
+        String count = cacheRedis.get(Constants.RedisPre.CODE_STAT + mobile);
+        if (StringUtils.hasText(count)) {
+            int countNum = Integer.valueOf(count);
+            if (countNum < 2) {
+                cacheRedis.set(Constants.RedisPre.CODE_STAT + mobile, countNum++);
+                return Boolean.TRUE;
+            }
+        } else {
+            cacheRedis.set(Constants.RedisPre.CODE_STAT + mobile, 1);
+        }
+        return Boolean.FALSE;
     }
 
     public Result<String> password(PasswordReq req) {
@@ -173,7 +198,10 @@ public class ApiUsersBiz extends BaseBiz {
         if (!req.getCode().equals(redisCode)) {
             return Result.error("验证码不正确");
         }
-        if (StringUtils.isEmpty(req.getMobilePwd())) {
+        // 删除验证码缓存
+        cacheRedis.delete(Constants.RedisPre.CODE + req.getMobile());
+
+        if (!StringUtils.hasText(req.getMobilePwd())) {
             return Result.error("密码不能为空");
         }
         // 密码校验

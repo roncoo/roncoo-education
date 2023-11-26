@@ -1,4 +1,4 @@
-package com.roncoo.education.common.core.sms;
+package com.roncoo.education.common.sms;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

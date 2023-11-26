@@ -29,9 +29,9 @@ public class ApiUsersController {
     private ApiUsersBiz biz;
 
     /**
-     * 注册验证码发送接口
+     * 验证码发送接口(注册验证码 + 重置密码验证码)
      */
-    @ApiOperation(value = "注册验证码发送接口", notes = "发送手机验证码")
+    @ApiOperation(value = "验证码发送接口", notes = "发送手机验证码")
     @RequestMapping(value = "/send/code", method = RequestMethod.POST)
     public Result<String> sendCode(@RequestBody SendCodeReq req) {
         return biz.sendCode(req);

@@ -1,4 +1,4 @@
-package com.roncoo.education.common.core.sms;
+package com.roncoo.education.common.sms;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;

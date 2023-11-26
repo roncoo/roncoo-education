@@ -1,6 +1,6 @@
 package com.roncoo.education.system.feign;
 
-import com.roncoo.education.common.core.sms.SmsConfig;
+import com.roncoo.education.common.sms.SmsConfig;
 import com.roncoo.education.system.feign.biz.FeignSysConfigBiz;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.PayConfig;

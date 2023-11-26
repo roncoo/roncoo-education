@@ -78,7 +78,7 @@ public class ApiUserStudyBiz extends BaseBiz {
     }
 
     private Resource getByResource(AuthUserStudyReq req) {
-        Resource resource = cacheRedis.getByJson(Constants.RedisPre.RESOURCE + req.getResourceId(), Resource.class);
+        Resource resource = cacheRedis.get(Constants.RedisPre.RESOURCE + req.getResourceId(), Resource.class);
         if (ObjectUtil.isEmpty(resource)) {
             resource = resourceDao.getById(req.getResourceId());
             cacheRedis.set(Constants.RedisPre.RESOURCE + req.getResourceId(), resource, 1, TimeUnit.HOURS);
@@ -87,7 +87,7 @@ public class ApiUserStudyBiz extends BaseBiz {
     }
 
     private UserStudy getUserStudy(AuthUserStudyReq req) {
-        UserStudy userStudy = cacheRedis.getByJson(Constants.RedisPre.USER_STUDY + req.getStudyId(), UserStudy.class);
+        UserStudy userStudy = cacheRedis.get(Constants.RedisPre.USER_STUDY + req.getStudyId(), UserStudy.class);
         if (ObjectUtil.isEmpty(userStudy)) {
             userStudy = dao.getById(req.getStudyId());
             cacheRedis.set(Constants.RedisPre.USER_STUDY + req.getStudyId(), userStudy, 1, TimeUnit.HOURS);

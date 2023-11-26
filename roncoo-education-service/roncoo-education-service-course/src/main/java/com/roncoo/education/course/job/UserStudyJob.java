@@ -41,7 +41,7 @@ public class UserStudyJob {
             for (String key : keys) {
                 if (cacheRedis.getStringRedisTemplate().getExpire(key, TimeUnit.MINUTES) < 1439) {
                     // 默认过期时间为60分钟，若剩余时间小于59分，则处理
-                    AuthUserStudyReq req = cacheRedis.getByJson(key, AuthUserStudyReq.class);
+                    AuthUserStudyReq req = cacheRedis.get(key, AuthUserStudyReq.class);
                     UserStudy userStudy = userStudyDao.getById(req.getStudyId());
                     if (ResourceTypeEnum.VIDEO.getCode().equals(req.getResourceType()) || ResourceTypeEnum.AUDIO.getCode().equals(req.getResourceType())) {
                         userStudy.setProgress(req.getCurrentDuration().divide(req.getTotalDuration(), BigDecimal.ROUND_CEILING).multiply(BigDecimal.valueOf(100)).setScale(2, RoundingMode.HALF_UP));
