@@ -155,7 +155,7 @@ public class ApiUsersBiz extends BaseBiz {
         log.warn("手机号：{}，验证码：{}", req.getMobile(), code);
 
         // 验证码发送次数校验
-        if (!sendCodeCheck(req.getMobile())) {
+        if (sendCodeCheck(req.getMobile())) {
             return Result.error("验证码发送次数过多，请稍后再试");
         }
 
