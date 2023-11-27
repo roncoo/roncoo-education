@@ -178,13 +178,13 @@ public class ApiUsersBiz extends BaseBiz {
     private Boolean sendCodeCheck(String mobile) {
         String count = cacheRedis.get(Constants.RedisPre.CODE_STAT + mobile);
         if (StringUtils.hasText(count)) {
-            int countNum = cacheRedis.set(Constants.RedisPre.CODE_STAT + mobile, Integer.valueOf(count) + 1);
+            int countNum = cacheRedis.set(Constants.RedisPre.CODE_STAT + mobile, Integer.valueOf(count) + 1, 5, TimeUnit.MINUTES);
             if (countNum < 2) {
                 return Boolean.TRUE;
             }
             return Boolean.FALSE;
         }
-        cacheRedis.set(Constants.RedisPre.CODE_STAT + mobile, 1);
+        cacheRedis.set(Constants.RedisPre.CODE_STAT + mobile, 1, 5, TimeUnit.MINUTES);
         return Boolean.TRUE;
     }
 
