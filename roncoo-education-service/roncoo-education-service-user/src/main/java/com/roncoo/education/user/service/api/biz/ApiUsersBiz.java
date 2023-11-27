@@ -155,7 +155,7 @@ public class ApiUsersBiz extends BaseBiz {
         log.warn("手机号：{}，验证码：{}", req.getMobile(), code);
 
         // 验证码发送次数校验
-        if (sendCodeCheck(req.getMobile())) {
+        if (!sendCodeCheck(req.getMobile())) {
             return Result.error("验证码发送次数过多，请稍后再试");
         }
 
@@ -183,10 +183,11 @@ public class ApiUsersBiz extends BaseBiz {
                 cacheRedis.set(Constants.RedisPre.CODE_STAT + mobile, countNum++);
                 return Boolean.TRUE;
             }
+            return Boolean.FALSE;
         } else {
             cacheRedis.set(Constants.RedisPre.CODE_STAT + mobile, 1);
         }
-        return Boolean.FALSE;
+        return Boolean.TRUE;
     }
 
     public Result<String> password(PasswordReq req) {
