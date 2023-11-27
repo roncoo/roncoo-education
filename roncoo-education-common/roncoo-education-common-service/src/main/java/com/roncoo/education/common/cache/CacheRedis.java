@@ -29,7 +29,7 @@ public class CacheRedis {
     public <T> T set(String key, T t) {
         if (t != null) {
             String value = t.toString();
-            if (!(t instanceof String)) {
+            if (!(t instanceof String || t instanceof Long || t instanceof Integer)) {
                 value = JSUtil.toJsonString(t);
             }
             stringRedisTemplate.opsForValue().set(key, value, timeToLive, TimeUnit.MILLISECONDS);
@@ -43,7 +43,7 @@ public class CacheRedis {
     public <T> T set(String key, T t, int time, TimeUnit timeUnit) {
         if (t != null) {
             String value = t.toString();
-            if (!(t instanceof String)) {
+            if (!(t instanceof String || t instanceof Long || t instanceof Integer)) {
                 value = JSUtil.toJsonString(t);
             }
             stringRedisTemplate.opsForValue().set(key, value, time, timeUnit);
