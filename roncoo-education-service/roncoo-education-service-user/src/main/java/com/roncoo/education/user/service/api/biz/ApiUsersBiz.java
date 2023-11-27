@@ -178,7 +178,7 @@ public class ApiUsersBiz extends BaseBiz {
     private Boolean sendCodeCheck(String mobile) {
         String count = cacheRedis.get(Constants.RedisPre.CODE_STAT + mobile);
         if (StringUtils.hasText(count)) {
-            int countNum = cacheRedis.set(Constants.RedisPre.CODE_STAT + mobile, Integer.valueOf(count) + 1, 5, TimeUnit.MINUTES);
+            int countNum = cacheRedis.set(Constants.RedisPre.CODE_STAT + mobile, Integer.valueOf(count).intValue() + 1, 5, TimeUnit.MINUTES);
             if (countNum < 2) {
                 return Boolean.TRUE;
             }
