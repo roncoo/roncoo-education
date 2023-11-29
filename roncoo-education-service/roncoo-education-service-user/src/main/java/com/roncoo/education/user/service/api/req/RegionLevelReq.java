@@ -14,7 +14,7 @@ import java.io.Serializable;
  * 用户基本信息
  * </p>
  *
- * @author wujing123
+ * @author wujing
  */
 @Data
 @Accessors(chain = true)

@@ -6,6 +6,7 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.extra.servlet.ServletUtil;
 import com.roncoo.education.common.cache.CacheRedis;
+import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.LoginStatusEnum;
 import com.roncoo.education.common.core.tools.*;
@@ -151,13 +152,13 @@ public class ApiUsersBiz extends BaseBiz {
     }
 
     public Result<String> sendCode(SendCodeReq req) {
-        String code = NOUtil.getVerCode();
-        log.warn("手机号：{}，验证码：{}", req.getMobile(), code);
-
         // 验证码发送次数校验
         if (!sendCodeCheck(req.getMobile())) {
-            return Result.error("验证码发送次数过多，请稍后再试");
+            throw new BaseException("验证码发送次数过多，请稍后再试");
         }
+
+        String code = NOUtil.getVerCode();
+        log.warn("手机号：{}，验证码：{}", req.getMobile(), code);
 
         // 正常应该是发送成功才放入缓存，这里方便没有短信通道的情况下，也能测试注册（上线需要删除，并打开下面）
         cacheRedis.set(Constants.RedisPre.CODE + req.getMobile(), code, 5, TimeUnit.MINUTES);
