@@ -20,13 +20,28 @@
             <pattern>${PATTERNFILE}</pattern>
         </layout>
     </appender>
+    <appender name="GELF" class="de.siegmar.logbackgelf.GelfUdpAppender">
+        <!-- Graylog服务的地址 -->
+        <graylogHost>10.10.100.63</graylogHost>
+        <!-- UDP Input端口 -->
+        <graylogPort>12201</graylogPort>
+        <!-- 是否使用压缩 -->
+        <useCompression>true</useCompression>
+        <encoder class="de.siegmar.logbackgelf.GelfEncoder">
+            <fullPatternLayout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>${PATTERNFILE}</pattern>
+            </fullPatternLayout>
+            <staticField>AppName:${springApplicationName}</staticField>
+        </encoder>
+    </appender>
 
-    <!-- 环境 -->
+    <!-- 其他环境 -->
     <springProfile name="!local">
         <logger name="com.roncoo.education" level="warn"/>
         <root level="warn">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="FILE"/>
+            <appender-ref ref="GELF"/>
         </root>
     </springProfile>
 
@@ -39,13 +54,14 @@
         </root>
     </springProfile>
 
-    <!-- 开发测试环境 -->
+    <!-- 开发环境 -->
     <springProfile name="dev">
         <logger name="com.roncoo.education" level="debug"/>
         <logger name="org.springframework.jdbc.core.JdbcTemplate" level="debug"/>
         <root level="info">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="FILE"/>
+            <appender-ref ref="GELF"/>
         </root>
     </springProfile>
 </configuration>

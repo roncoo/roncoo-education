@@ -15,6 +15,13 @@
     <name>roncoo-education-common-log</name>
 
     <dependencies>
+        <!--graylog-->
+        <dependency>
+            <groupId>de.siegmar</groupId>
+            <artifactId>logback-gelf</artifactId>
+            <version>4.0.2</version>
+        </dependency>
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
