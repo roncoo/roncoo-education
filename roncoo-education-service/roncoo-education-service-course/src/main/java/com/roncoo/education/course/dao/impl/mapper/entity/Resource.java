@@ -14,6 +14,8 @@ public class Resource implements Serializable {
 
     private Integer sort;
 
+    private Long categoryId;
+
     private String resourceName;
 
     private Integer resourceType;
@@ -74,6 +76,14 @@ public class Resource implements Serializable {
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getResourceName() {
@@ -167,6 +177,7 @@ public class Resource implements Serializable {
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", statusId=").append(statusId);
         sb.append(", sort=").append(sort);
+        sb.append(", categoryId=").append(categoryId);
         sb.append(", resourceName=").append(resourceName);
         sb.append(", resourceType=").append(resourceType);
         sb.append(", resourceSize=").append(resourceSize);

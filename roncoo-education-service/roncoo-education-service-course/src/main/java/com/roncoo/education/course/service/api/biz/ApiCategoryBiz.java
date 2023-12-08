@@ -2,6 +2,7 @@ package com.roncoo.education.course.service.api.biz;
 
 import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.CategoryTypeEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.course.dao.CategoryDao;
@@ -39,7 +40,7 @@ public class ApiCategoryBiz {
     public Result<List<ApiCategoryResp>> list() {
         // 根据分类类型、层级查询可用状态的课程分类集合
         CategoryExample example = new CategoryExample();
-        example.createCriteria().andStatusIdEqualTo(StatusIdEnum.YES.getCode());
+        example.createCriteria().andStatusIdEqualTo(StatusIdEnum.YES.getCode()).andCategoryTypeEqualTo(CategoryTypeEnum.COURSE.getCode());
         example.setOrderByClause(" sort asc, id desc ");
         List<Category> categories = dao.listByExample(example);
         return Result.success(filter(categories, Long.valueOf(0)));

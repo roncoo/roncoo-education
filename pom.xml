@@ -57,15 +57,6 @@
             </roles>
             <timezone>+8</timezone>
         </developer>
-        <developer>
-            <name>yangzj</name>
-            <organization>LingKe, Co., Ltd.</organization>
-            <organizationUrl>http://www.roncoo.net</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
     </developers>
 
     <properties>

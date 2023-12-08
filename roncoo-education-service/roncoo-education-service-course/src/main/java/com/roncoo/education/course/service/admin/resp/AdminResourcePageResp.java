@@ -40,6 +40,9 @@ public class AdminResourcePageResp implements Serializable {
     @ApiModelProperty(value = "排序")
     private Integer sort;
 
+    @ApiModelProperty(value = "分类ID")
+    private Long categoryId;
+
     @ApiModelProperty(value = "资源名称")
     private String resourceName;
 

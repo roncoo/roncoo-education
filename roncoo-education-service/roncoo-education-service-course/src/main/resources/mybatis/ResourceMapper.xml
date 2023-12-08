@@ -7,6 +7,7 @@
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
     <result column="status_id" jdbcType="TINYINT" property="statusId"/>
     <result column="sort" jdbcType="INTEGER" property="sort"/>
+    <result column="category_id" jdbcType="BIGINT" property="categoryId"/>
     <result column="resource_name" jdbcType="VARCHAR" property="resourceName"/>
     <result column="resource_type" jdbcType="TINYINT" property="resourceType"/>
     <result column="resource_size" jdbcType="BIGINT" property="resourceSize"/>
@@ -77,9 +78,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, status_id, sort, resource_name, resource_type, resource_size,
-    resource_url, vod_platform, storage_platform, video_status, video_length, video_vid,
-    doc_page
+    id, gmt_create, gmt_modified, status_id, sort, category_id, resource_name, resource_type,
+    resource_size, resource_url, vod_platform, storage_platform, video_status, video_length,
+    video_vid, doc_page
   </sql>
   <select id="selectByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample" resultMap="BaseResultMap">
     select
@@ -117,15 +118,17 @@
   </delete>
   <insert id="insert" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Resource">
     insert into resource (id, gmt_create, gmt_modified,
-                          status_id, sort, resource_name,
-                          resource_type, resource_size, resource_url,
-                          vod_platform, storage_platform, video_status,
-                          video_length, video_vid, doc_page)
+                          status_id, sort, category_id,
+                          resource_name, resource_type, resource_size,
+                          resource_url, vod_platform, storage_platform,
+                          video_status, video_length, video_vid,
+                          doc_page)
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
-            #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{resourceName,jdbcType=VARCHAR},
-            #{resourceType,jdbcType=TINYINT}, #{resourceSize,jdbcType=BIGINT}, #{resourceUrl,jdbcType=VARCHAR},
-            #{vodPlatform,jdbcType=TINYINT}, #{storagePlatform,jdbcType=TINYINT}, #{videoStatus,jdbcType=TINYINT},
-            #{videoLength,jdbcType=INTEGER}, #{videoVid,jdbcType=VARCHAR}, #{docPage,jdbcType=INTEGER})
+            #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{categoryId,jdbcType=BIGINT},
+            #{resourceName,jdbcType=VARCHAR}, #{resourceType,jdbcType=TINYINT}, #{resourceSize,jdbcType=BIGINT},
+            #{resourceUrl,jdbcType=VARCHAR}, #{vodPlatform,jdbcType=TINYINT}, #{storagePlatform,jdbcType=TINYINT},
+            #{videoStatus,jdbcType=TINYINT}, #{videoLength,jdbcType=INTEGER}, #{videoVid,jdbcType=VARCHAR},
+            #{docPage,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Resource">
     insert into resource
@@ -144,6 +147,9 @@
       </if>
       <if test="sort != null">
         sort,
+      </if>
+      <if test="categoryId != null">
+        category_id,
       </if>
       <if test="resourceName != null">
         resource_name,
@@ -191,6 +197,9 @@
       </if>
       <if test="sort != null">
         #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=BIGINT},
       </if>
       <if test="resourceName != null">
         #{resourceName,jdbcType=VARCHAR},
@@ -248,6 +257,9 @@
       <if test="record.sort != null">
         sort = #{record.sort,jdbcType=INTEGER},
       </if>
+      <if test="record.categoryId != null">
+        category_id = #{record.categoryId,jdbcType=BIGINT},
+      </if>
       <if test="record.resourceName != null">
         resource_name = #{record.resourceName,jdbcType=VARCHAR},
       </if>
@@ -290,6 +302,7 @@
     gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
     status_id = #{record.statusId,jdbcType=TINYINT},
     sort = #{record.sort,jdbcType=INTEGER},
+    category_id = #{record.categoryId,jdbcType=BIGINT},
     resource_name = #{record.resourceName,jdbcType=VARCHAR},
     resource_type = #{record.resourceType,jdbcType=TINYINT},
     resource_size = #{record.resourceSize,jdbcType=BIGINT},
@@ -318,6 +331,9 @@
       </if>
       <if test="sort != null">
         sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=BIGINT},
       </if>
       <if test="resourceName != null">
         resource_name = #{resourceName,jdbcType=VARCHAR},
@@ -358,6 +374,7 @@
         gmt_modified     = #{gmtModified,jdbcType=TIMESTAMP},
         status_id        = #{statusId,jdbcType=TINYINT},
         sort             = #{sort,jdbcType=INTEGER},
+        category_id      = #{categoryId,jdbcType=BIGINT},
         resource_name    = #{resourceName,jdbcType=VARCHAR},
         resource_type    = #{resourceType,jdbcType=TINYINT},
         resource_size    = #{resourceSize,jdbcType=BIGINT},
