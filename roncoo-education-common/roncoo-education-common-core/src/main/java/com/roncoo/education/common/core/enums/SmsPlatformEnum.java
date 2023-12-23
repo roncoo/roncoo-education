@@ -18,7 +18,17 @@ public enum SmsPlatformEnum {
     /**
      * 阿里云
      */
-    ALI_YUN(2, "阿里云", "aliyun%");
+    ALI_YUN(2, "阿里云", "aliyun%"),
+
+    /**
+     * 腾讯云
+     */
+    TENCENT_YUN(3, "腾讯云(待接入)", "tencent%"),
+
+    /**
+     * 华为云
+     */
+    HUAWEI_YUN(4, "华为云(待接入)", "huawei%");
 
     /**
      * 编码

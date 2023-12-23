@@ -1,5 +1,6 @@
 package com.roncoo.education.user.service.api.biz;
 
+import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
@@ -111,8 +112,10 @@ public class ApiUsersBiz extends BaseBiz {
             return Result.error("账号或者密码不正确");
         }
 
-        // 日志
-        log(user.getId(), LoginStatusEnum.SUCCESS, BeanUtil.copyProperties(req, LogLogin.class));
+        // 登录日志，异步处理
+        ThreadUtil.newExecutor().execute(() -> {
+            log(user.getId(), LoginStatusEnum.SUCCESS, BeanUtil.copyProperties(req, LogLogin.class));
+        });
 
         UsersLoginResp dto = new UsersLoginResp();
         dto.setMobile(user.getMobile());
@@ -166,9 +169,9 @@ public class ApiUsersBiz extends BaseBiz {
         if (SmsUtil.sendVerCode(req.getMobile(), code, feignSysConfig.getSms())) {
             // 发送成功才放入缓存
             // cacheRedis.set(Constants.RedisPre.CODE + req.getMobile(), code, 5, TimeUnit.MINUTES);
-            return Result.success("发送成功");
+            return Result.success("验证码发送成功，请查收");
         }
-        return Result.error("发送失败");
+        return Result.error("验证码发送失败，请稍后再试");
     }
 
     /**

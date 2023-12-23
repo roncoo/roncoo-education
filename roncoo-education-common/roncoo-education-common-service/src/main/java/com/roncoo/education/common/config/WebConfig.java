@@ -22,7 +22,6 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler(LocalUploadImpl.PATH_IMAGES + "/**").addResourceLocations("file:" + LocalUploadImpl.LOCALPATH_IMAGES, LocalUploadImpl.PATH_DOCS + "/**").addResourceLocations("file:" + LocalUploadImpl.LOCALPATH_DOCS);
     }
 
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new InterceptorConfig());

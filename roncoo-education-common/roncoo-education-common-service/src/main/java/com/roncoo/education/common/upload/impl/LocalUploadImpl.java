@@ -13,6 +13,7 @@ import java.io.IOException;
 /**
  * @author fengyw
  */
+@Deprecated
 @Slf4j
 @Component(value = "local")
 public class LocalUploadImpl implements UploadFace {
