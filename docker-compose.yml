@@ -14,7 +14,7 @@ services:
     networks:
       - education
     ports:
-      - "8180:8180"
+      - "7700:7700"
   service-system:
     build:
       context: ./roncoo-education-service/roncoo-education-service-system
@@ -29,7 +29,7 @@ services:
     networks:
       - education
     ports:
-      - "8184:8184"
+      - "7710:7710"
   service-user:
     build:
       context: ./roncoo-education-service/roncoo-education-service-user
@@ -44,7 +44,7 @@ services:
     networks:
       - education
     ports:
-      - "8186:8186"
+      - "7720:7720"
   service-course:
     build:
       context: ./roncoo-education-service/roncoo-education-service-course
@@ -59,7 +59,7 @@ services:
     networks:
       - education
     ports:
-      - "8188:8188"
+      - "7730:7730"
 networks:
   education:
     driver: host

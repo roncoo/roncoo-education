@@ -13,7 +13,7 @@ public class IndexController {
     @GetMapping("/")
     public Mono<String> index() {
         String html = "<center>Gateway Run Success</center><br/>";
-        html = html + "<center>网关地址：http://localhost:8180</center>";
+        html = html + "<center>网关地址：http://localhost:7700</center>";
         return Mono.just(html);
     }
 }
