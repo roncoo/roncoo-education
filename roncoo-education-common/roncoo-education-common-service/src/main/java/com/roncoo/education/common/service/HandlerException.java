@@ -22,7 +22,7 @@ import java.util.StringJoiner;
 public class HandlerException extends BaseController {
 
     @ExceptionHandler({FeignException.class})
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result<String> processBizException(FeignException e) {
         String msg = e.getMessage();
         if (!StringUtils.hasText(msg)) {
