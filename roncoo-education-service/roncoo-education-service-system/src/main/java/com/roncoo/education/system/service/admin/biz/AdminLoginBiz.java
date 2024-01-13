@@ -90,7 +90,7 @@ public class AdminLoginBiz {
         if (CollectionUtil.isEmpty(sysMenus)) {
             return new ArrayList<>();
         }
-        return sysMenus.stream().map(SysMenu::getAuthValue).collect(Collectors.toList());
+        return sysMenus.stream().map(SysMenu::getPathApi).collect(Collectors.toList());
     }
 
 }
