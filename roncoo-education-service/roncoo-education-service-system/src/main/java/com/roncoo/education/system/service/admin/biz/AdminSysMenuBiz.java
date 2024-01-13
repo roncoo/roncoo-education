@@ -52,7 +52,7 @@ public class AdminSysMenuBiz {
             c.andStatusIdEqualTo(req.getStatusId());
         }
         example.setOrderByClause("sort asc, id desc");
-        List<SysMenu> sysMenuList = dao.selectByExampleWithBLOBs(example);
+        List<SysMenu> sysMenuList = dao.listByExample(example);
         return Result.success(filter(0L, sysMenuList));
     }
 
@@ -187,7 +187,7 @@ public class AdminSysMenuBiz {
         // 只需要获取权限
         c.andMenuTypeEqualTo(MenuTypeEnum.PERMISSION.getCode());
         example.setOrderByClause("sort asc, id desc");
-        List<SysMenu> sysMenuList = dao.selectByExampleWithBLOBs(example);
+        List<SysMenu> sysMenuList = dao.listByExample(example);
         return Result.success(sysMenuList.stream().map(SysMenu::getPathApi).collect(Collectors.toList()));
     }
 }

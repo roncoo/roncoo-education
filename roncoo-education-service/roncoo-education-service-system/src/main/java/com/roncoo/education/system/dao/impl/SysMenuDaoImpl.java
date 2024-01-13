@@ -53,7 +53,7 @@ public class SysMenuDaoImpl implements SysMenuDao {
         int totalPage = PageUtil.countTotalPage(count, pageSize);
         example.setLimitStart(PageUtil.countOffset(pageCurrent, pageSize));
         example.setPageSize(pageSize);
-        return new Page<SysMenu>(count, totalPage, pageCurrent, pageSize, this.sysMenuMapper.selectByExampleWithBLOBs(example));
+        return new Page<SysMenu>(count, totalPage, pageCurrent, pageSize, this.sysMenuMapper.selectByExample(example));
     }
 
     @Override
@@ -68,7 +68,7 @@ public class SysMenuDaoImpl implements SysMenuDao {
     public List<SysMenu> getByIds(List<Long> ids) {
         SysMenuExample example = new SysMenuExample();
         example.createCriteria().andIdIn(ids);
-        return this.sysMenuMapper.selectByExampleWithBLOBs(example);
+        return this.sysMenuMapper.selectByExample(example);
     }
 
     @Override
@@ -76,8 +76,4 @@ public class SysMenuDaoImpl implements SysMenuDao {
         return this.sysMenuMapper.selectByExample(example);
     }
 
-    @Override
-    public List<SysMenu> selectByExampleWithBLOBs(SysMenuExample example) {
-        return this.sysMenuMapper.selectByExampleWithBLOBs(example);
-    }
 }
