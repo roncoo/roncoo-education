@@ -27,35 +27,38 @@ public class AdminSysMenuUserResp implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
     /**
-     * 菜单名称
-     */
-    @ApiModelProperty(value = "菜单名称")
-    private String name;
-    /**
-     * 菜单英文
-     */
-    @ApiModelProperty(value = "菜单英文")
-    private String nameEn;
-    /**
-     * 菜单类型(1目录 2菜单 3权限)
-     */
-    @ApiModelProperty(value = "菜单类型(1目录 2菜单 3权限)")
-    private Integer menuType;
-    /**
-     * 接口URL
-     */
-    @ApiModelProperty(value = "接口URL")
-    private String path;
-    /**
      * 排序
      */
     @ApiModelProperty(value = "排序")
     private Integer sort;
     /**
-     * 目标
+     * 菜单类型(1目录 2菜单 3按钮)
      */
-    @ApiModelProperty(value = "icon")
-    private String targetName;
+    @ApiModelProperty(value = "菜单类型(1目录 2菜单 3按钮)")
+    private Integer menuType;
+    /**
+     * 菜单名称
+     */
+    @ApiModelProperty(value = "菜单名称")
+    private String menuName;
+
+    @ApiModelProperty(value = "菜单名称")
+    private String menuIcon;
+
+    @ApiModelProperty(value = "路由地址")
+    private String pathRouter;
+
+    @ApiModelProperty(value = "接口地址")
+    private String pathApi;
+
+    @ApiModelProperty(value = "组件路径")
+    private String componentPath;
+
+    @ApiModelProperty(value = "组件名称")
+    private String componentName;
+
+    @ApiModelProperty(value = "权限标识")
+    private String permission;
 
     private List<AdminSysMenuUserResp> children;
 }

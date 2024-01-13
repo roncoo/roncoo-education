@@ -16,17 +16,21 @@ public class SysMenu implements Serializable {
 
     private Long parentId;
 
-    private String menuName;
+    private Integer menuType;
 
-    private String menuUrl;
+    private String menuName;
 
     private String menuIcon;
 
-    private String remark;
+    private String pathRouter;
 
-    private Integer menuType;
+    private String pathApi;
 
-    private String authValue;
+    private String componentPath;
+
+    private String componentName;
+
+    private String permission;
 
     private static final long serialVersionUID = 1L;
 
@@ -78,20 +82,20 @@ public class SysMenu implements Serializable {
         this.parentId = parentId;
     }
 
+    public Integer getMenuType() {
+        return menuType;
+    }
+
+    public void setMenuType(Integer menuType) {
+        this.menuType = menuType;
+    }
+
     public String getMenuName() {
         return menuName;
     }
 
     public void setMenuName(String menuName) {
         this.menuName = menuName == null ? null : menuName.trim();
-    }
-
-    public String getMenuUrl() {
-        return menuUrl;
-    }
-
-    public void setMenuUrl(String menuUrl) {
-        this.menuUrl = menuUrl == null ? null : menuUrl.trim();
     }
 
     public String getMenuIcon() {
@@ -102,28 +106,44 @@ public class SysMenu implements Serializable {
         this.menuIcon = menuIcon == null ? null : menuIcon.trim();
     }
 
-    public String getRemark() {
-        return remark;
+    public String getPathRouter() {
+        return pathRouter;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
+    public void setPathRouter(String pathRouter) {
+        this.pathRouter = pathRouter == null ? null : pathRouter.trim();
     }
 
-    public Integer getMenuType() {
-        return menuType;
+    public String getPathApi() {
+        return pathApi;
     }
 
-    public void setMenuType(Integer menuType) {
-        this.menuType = menuType;
+    public void setPathApi(String pathApi) {
+        this.pathApi = pathApi == null ? null : pathApi.trim();
     }
 
-    public String getAuthValue() {
-        return authValue;
+    public String getComponentPath() {
+        return componentPath;
     }
 
-    public void setAuthValue(String authValue) {
-        this.authValue = authValue == null ? null : authValue.trim();
+    public void setComponentPath(String componentPath) {
+        this.componentPath = componentPath == null ? null : componentPath.trim();
+    }
+
+    public String getComponentName() {
+        return componentName;
+    }
+
+    public void setComponentName(String componentName) {
+        this.componentName = componentName == null ? null : componentName.trim();
+    }
+
+    public String getPermission() {
+        return permission;
+    }
+
+    public void setPermission(String permission) {
+        this.permission = permission == null ? null : permission.trim();
     }
 
     @Override
@@ -138,12 +158,14 @@ public class SysMenu implements Serializable {
         sb.append(", statusId=").append(statusId);
         sb.append(", sort=").append(sort);
         sb.append(", parentId=").append(parentId);
-        sb.append(", menuName=").append(menuName);
-        sb.append(", menuUrl=").append(menuUrl);
-        sb.append(", menuIcon=").append(menuIcon);
-        sb.append(", remark=").append(remark);
         sb.append(", menuType=").append(menuType);
-        sb.append(", authValue=").append(authValue);
+        sb.append(", menuName=").append(menuName);
+        sb.append(", menuIcon=").append(menuIcon);
+        sb.append(", pathRouter=").append(pathRouter);
+        sb.append(", pathApi=").append(pathApi);
+        sb.append(", componentPath=").append(componentPath);
+        sb.append(", componentName=").append(componentName);
+        sb.append(", permission=").append(permission);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

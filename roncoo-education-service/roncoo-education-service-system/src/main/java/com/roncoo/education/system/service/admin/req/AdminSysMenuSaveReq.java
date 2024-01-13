@@ -46,9 +46,9 @@ public class AdminSysMenuSaveReq implements Serializable {
     @ApiModelProperty(value = "备注")
     private String remark;
     /**
-     * 菜单类型(1目录 2菜单 3权限)
+     * 菜单类型(1目录 2菜单 3按钮)
      */
-    @ApiModelProperty(value = "菜单类型(1目录 2菜单 3权限)")
+    @ApiModelProperty(value = "菜单类型(1目录 2菜单 3按钮)")
     private Integer menuType;
     /**
      * 排序

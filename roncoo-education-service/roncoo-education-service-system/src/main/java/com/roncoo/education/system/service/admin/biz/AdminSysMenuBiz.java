@@ -11,7 +11,6 @@ import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.system.dao.SysMenuDao;
 import com.roncoo.education.system.dao.SysMenuRoleDao;
 import com.roncoo.education.system.dao.SysRoleUserDao;
-import com.roncoo.education.system.dao.SysUserDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenu;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuExample;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuRole;
@@ -38,8 +37,6 @@ public class AdminSysMenuBiz {
 
     @Autowired
     private SysMenuDao dao;
-    @Autowired
-    private SysUserDao sysUserDao;
     @Autowired
     private SysRoleUserDao sysRoleUserDao;
     @Autowired
@@ -160,29 +157,13 @@ public class AdminSysMenuBiz {
     private List<AdminSysMenuUserResp> filters(Long parentId, List<SysMenu> menuList) {
         List<SysMenu> sysMenuList = menuList.stream().filter(item -> parentId.compareTo(item.getParentId()) == 0).collect(Collectors.toList());
         if (CollectionUtil.isNotEmpty(sysMenuList)) {
-            List<AdminSysMenuUserResp> respList = copys(sysMenuList);
+            List<AdminSysMenuUserResp> respList = BeanUtil.copyProperties(sysMenuList, AdminSysMenuUserResp.class);
             for (AdminSysMenuUserResp resp : respList) {
                 resp.setChildren(filters(resp.getId(), menuList));
             }
             return respList;
         }
         return null;
-    }
-
-    private List<AdminSysMenuUserResp> copys(List<SysMenu> sysMenuList) {
-        List<AdminSysMenuUserResp> respList = new ArrayList<>();
-        for (SysMenu sysMenu : sysMenuList) {
-            AdminSysMenuUserResp resp = new AdminSysMenuUserResp();
-            resp.setId(sysMenu.getId());
-            resp.setName(sysMenu.getMenuName());
-            resp.setNameEn(sysMenu.getMenuName());
-            resp.setMenuType(sysMenu.getMenuType());
-            resp.setPath(sysMenu.getMenuUrl());
-            resp.setSort(sysMenu.getSort());
-            resp.setTargetName(sysMenu.getMenuIcon());
-            respList.add(resp);
-        }
-        return respList;
     }
 
     public Result<List<String>> permissionList() {
@@ -207,6 +188,6 @@ public class AdminSysMenuBiz {
         c.andMenuTypeEqualTo(MenuTypeEnum.PERMISSION.getCode());
         example.setOrderByClause("sort asc, id desc");
         List<SysMenu> sysMenuList = dao.selectByExampleWithBLOBs(example);
-        return Result.success(sysMenuList.stream().map(SysMenu::getAuthValue).collect(Collectors.toList()));
+        return Result.success(sysMenuList.stream().map(SysMenu::getPathApi).collect(Collectors.toList()));
     }
 }

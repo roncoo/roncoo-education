@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * 菜单类型(1目录 2菜单 3权限)
+ * 菜单类型(1目录 2菜单 3按钮)
  *
  * @author fengyw
  */

@@ -5,7 +5,7 @@ import com.alibaba.druid.filter.config.ConfigTools;
 public class DruidUtil {
 
     public static void main(String[] args) throws Exception {
-        String password = "Edu.123";
+        String password = "my1024.edu";
         System.out.println(ConfigTools.encrypt(password));
     }
 
