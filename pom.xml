@@ -191,5 +191,9 @@
         <module>roncoo-education-gateway</module>
         <!-- 服务模块 -->
         <module>roncoo-education-service</module>
+        <!-- xxl-job-admin -->
+        <module>roncoo-job</module>
+        <!-- 代码生成工具 -->
+        <module>roncoo-generator</module>
     </modules>
 </project>
