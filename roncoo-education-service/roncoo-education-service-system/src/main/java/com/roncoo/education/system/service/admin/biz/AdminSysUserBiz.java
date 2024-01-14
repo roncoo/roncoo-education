@@ -142,7 +142,7 @@ public class AdminSysUserBiz {
         }
         AdminSysUserViewResp resp = BeanUtil.copyProperties(sysUser, AdminSysUserViewResp.class);
         // 列出菜单
-        List<SysMenu> sysMenus = sysUserCommonBiz.listMenu(sysUser);
+        List<SysMenu> sysMenus = sysUserCommonBiz.listMenu(sysUser.getId());
         // 路由权限返回
         resp.setRouterList(BeanUtil.copyProperties(sysMenus, AdminSysUserLoginRouterResp.class));
         return Result.success(resp);

@@ -65,7 +65,7 @@ public class AdminLoginBiz {
         cacheRedis.set(resp.getToken(), sysUser.getId(), 1, TimeUnit.DAYS);
 
         // 列出菜单
-        List<SysMenu> sysMenus = sysUserCommonBiz.listMenu(sysUser);
+        List<SysMenu> sysMenus = sysUserCommonBiz.listMenu(sysUser.getId());
 
         // 路由权限返回
         resp.setRouterList(BeanUtil.copyProperties(sysMenus, AdminSysUserLoginRouterResp.class));

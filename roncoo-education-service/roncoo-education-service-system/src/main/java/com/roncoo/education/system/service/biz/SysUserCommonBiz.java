@@ -10,7 +10,6 @@ import com.roncoo.education.system.dao.SysRoleUserDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenu;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuRole;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser;
-import com.roncoo.education.system.dao.impl.mapper.entity.SysUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -33,8 +32,8 @@ public class SysUserCommonBiz {
     private final SysMenuRoleDao sysMenuRoleDao;
     private final SysMenuDao sysMenuDao;
 
-    public List<SysMenu> listMenu(SysUser sysUser) {
-        List<SysRoleUser> roleUsers = sysRoleUserDao.listByUserId(sysUser.getId());
+    public List<SysMenu> listMenu(Long userId) {
+        List<SysRoleUser> roleUsers = sysRoleUserDao.listByUserId(userId);
         if (CollectionUtil.isEmpty(roleUsers)) {
             return new ArrayList<>();
         }
