@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author fengyw
@@ -23,6 +24,9 @@ public class AdminSysUserLoginResp implements Serializable {
     @ApiModelProperty(value = "昵称", required = true)
     private String realName;
 
-    @ApiModelProperty(value = "token，有效期为1天", required = true)
+    @ApiModelProperty(value = "token", required = true)
     private String token;
+
+    @ApiModelProperty(value = "用户路由", required = true)
+    private List<AdminSysUserLoginRouterResp> routerList;
 }

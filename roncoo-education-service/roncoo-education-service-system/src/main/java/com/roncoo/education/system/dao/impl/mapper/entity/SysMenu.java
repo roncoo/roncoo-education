@@ -16,21 +16,23 @@ public class SysMenu implements Serializable {
 
     private Long parentId;
 
+    private Boolean isShow;
+
     private Integer menuType;
 
     private String menuName;
 
     private String menuIcon;
 
-    private String pathRouter;
+    private String path;
 
-    private String pathApi;
+    private String component;
 
-    private String componentPath;
-
-    private String componentName;
+    private String apis;
 
     private String permission;
+
+    private String remark;
 
     private static final long serialVersionUID = 1L;
 
@@ -82,6 +84,14 @@ public class SysMenu implements Serializable {
         this.parentId = parentId;
     }
 
+    public Boolean getIsShow() {
+        return isShow;
+    }
+
+    public void setIsShow(Boolean isShow) {
+        this.isShow = isShow;
+    }
+
     public Integer getMenuType() {
         return menuType;
     }
@@ -106,36 +116,28 @@ public class SysMenu implements Serializable {
         this.menuIcon = menuIcon == null ? null : menuIcon.trim();
     }
 
-    public String getPathRouter() {
-        return pathRouter;
+    public String getPath() {
+        return path;
     }
 
-    public void setPathRouter(String pathRouter) {
-        this.pathRouter = pathRouter == null ? null : pathRouter.trim();
+    public void setPath(String path) {
+        this.path = path == null ? null : path.trim();
     }
 
-    public String getPathApi() {
-        return pathApi;
+    public String getComponent() {
+        return component;
     }
 
-    public void setPathApi(String pathApi) {
-        this.pathApi = pathApi == null ? null : pathApi.trim();
+    public void setComponent(String component) {
+        this.component = component == null ? null : component.trim();
     }
 
-    public String getComponentPath() {
-        return componentPath;
+    public String getApis() {
+        return apis;
     }
 
-    public void setComponentPath(String componentPath) {
-        this.componentPath = componentPath == null ? null : componentPath.trim();
-    }
-
-    public String getComponentName() {
-        return componentName;
-    }
-
-    public void setComponentName(String componentName) {
-        this.componentName = componentName == null ? null : componentName.trim();
+    public void setApis(String apis) {
+        this.apis = apis == null ? null : apis.trim();
     }
 
     public String getPermission() {
@@ -144,6 +146,14 @@ public class SysMenu implements Serializable {
 
     public void setPermission(String permission) {
         this.permission = permission == null ? null : permission.trim();
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 
     @Override
@@ -158,14 +168,15 @@ public class SysMenu implements Serializable {
         sb.append(", statusId=").append(statusId);
         sb.append(", sort=").append(sort);
         sb.append(", parentId=").append(parentId);
+        sb.append(", isShow=").append(isShow);
         sb.append(", menuType=").append(menuType);
         sb.append(", menuName=").append(menuName);
         sb.append(", menuIcon=").append(menuIcon);
-        sb.append(", pathRouter=").append(pathRouter);
-        sb.append(", pathApi=").append(pathApi);
-        sb.append(", componentPath=").append(componentPath);
-        sb.append(", componentName=").append(componentName);
+        sb.append(", path=").append(path);
+        sb.append(", component=").append(component);
+        sb.append(", apis=").append(apis);
         sb.append(", permission=").append(permission);
+        sb.append(", remark=").append(remark);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

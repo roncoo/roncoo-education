@@ -188,6 +188,6 @@ public class AdminSysMenuBiz {
         c.andMenuTypeEqualTo(MenuTypeEnum.PERMISSION.getCode());
         example.setOrderByClause("sort asc, id desc");
         List<SysMenu> sysMenuList = dao.listByExample(example);
-        return Result.success(sysMenuList.stream().map(SysMenu::getPathApi).collect(Collectors.toList()));
+        return Result.success(sysMenuList.stream().map(SysMenu::getPermission).collect(Collectors.toList()));
     }
 }

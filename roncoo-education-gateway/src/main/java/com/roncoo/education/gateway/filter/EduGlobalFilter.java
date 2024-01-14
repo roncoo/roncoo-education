@@ -85,16 +85,16 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
         Long userId = getUserId(request);
         if (FilterUtil.checkUri(uri, FilterUtil.ADMIN_URL_PREFIX)) {
             // admin校验
-            if (!stringRedisTemplate.hasKey(Constants.RedisPre.ADMINI_MENU.concat(userId.toString()))) {
+            if (!stringRedisTemplate.hasKey(Constants.RedisPre.ADMINI_APIS.concat(userId.toString()))) {
                 throw new BaseException(ResultEnum.MENU_PAST);
             }
-            String tk = stringRedisTemplate.opsForValue().get(Constants.RedisPre.ADMINI_MENU.concat(userId.toString()));
+            String tk = stringRedisTemplate.opsForValue().get(Constants.RedisPre.ADMINI_APIS.concat(userId.toString()));
             // 校验接口是否有权限
             if (!checkUri(uri, tk)) {
                 throw new BaseException(ResultEnum.MENU_NO);
             }
             // 更新时间，使用户菜单不过期
-            stringRedisTemplate.expire(Constants.RedisPre.ADMINI_MENU.concat(userId.toString()), Constants.SESSIONTIME, TimeUnit.MINUTES);
+            stringRedisTemplate.expire(Constants.RedisPre.ADMINI_APIS.concat(userId.toString()), Constants.SESSIONTIME, TimeUnit.MINUTES);
         }
         request.mutate().header(Constants.USER_ID, String.valueOf(userId));
         return chain.filter(exchange);

@@ -8,14 +8,15 @@
         <result column="status_id" jdbcType="TINYINT" property="statusId"/>
         <result column="sort" jdbcType="INTEGER" property="sort"/>
         <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
+        <result column="is_show" jdbcType="BIT" property="isShow"/>
         <result column="menu_type" jdbcType="TINYINT" property="menuType"/>
         <result column="menu_name" jdbcType="VARCHAR" property="menuName"/>
         <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon"/>
-        <result column="path_router" jdbcType="VARCHAR" property="pathRouter"/>
-        <result column="path_api" jdbcType="VARCHAR" property="pathApi"/>
-        <result column="component_path" jdbcType="VARCHAR" property="componentPath"/>
-        <result column="component_name" jdbcType="VARCHAR" property="componentName"/>
+        <result column="path" jdbcType="VARCHAR" property="path"/>
+        <result column="component" jdbcType="VARCHAR" property="component"/>
+        <result column="apis" jdbcType="VARCHAR" property="apis"/>
         <result column="permission" jdbcType="VARCHAR" property="permission"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -77,8 +78,8 @@
     </sql>
     <sql id="Base_Column_List">
         id
-        , gmt_create, gmt_modified, status_id, sort, parent_id, menu_type, menu_name, menu_icon,
-    path_router, path_api, component_path, component_name, permission
+        , gmt_create, gmt_modified, status_id, sort, parent_id, is_show, menu_type, menu_name,
+    menu_icon, path, component, apis, permission, remark
     </sql>
     <select id="selectByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysMenuExample" resultMap="BaseResultMap">
         select
@@ -117,14 +118,14 @@
     <insert id="insert" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysMenu">
         insert into sys_menu (id, gmt_create, gmt_modified,
                               status_id, sort, parent_id,
-                              menu_type, menu_name, menu_icon,
-                              path_router, path_api, component_path,
-                              component_name, permission)
+                              is_show, menu_type, menu_name,
+                              menu_icon, path, component,
+                              apis, permission, remark)
         values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
                 #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{parentId,jdbcType=BIGINT},
-                #{menuType,jdbcType=TINYINT}, #{menuName,jdbcType=VARCHAR}, #{menuIcon,jdbcType=VARCHAR},
-                #{pathRouter,jdbcType=VARCHAR}, #{pathApi,jdbcType=VARCHAR}, #{componentPath,jdbcType=VARCHAR},
-                #{componentName,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR})
+                #{isShow,jdbcType=BIT}, #{menuType,jdbcType=TINYINT}, #{menuName,jdbcType=VARCHAR},
+                #{menuIcon,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{component,jdbcType=VARCHAR},
+                #{apis,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysMenu">
         insert into sys_menu
@@ -147,6 +148,9 @@
             <if test="parentId != null">
                 parent_id,
             </if>
+            <if test="isShow != null">
+                is_show,
+            </if>
             <if test="menuType != null">
                 menu_type,
             </if>
@@ -156,20 +160,20 @@
             <if test="menuIcon != null">
                 menu_icon,
             </if>
-            <if test="pathRouter != null">
-                path_router,
+            <if test="path != null">
+                path,
             </if>
-            <if test="pathApi != null">
-                path_api,
+            <if test="component != null">
+                component,
             </if>
-            <if test="componentPath != null">
-                component_path,
-            </if>
-            <if test="componentName != null">
-                component_name,
+            <if test="apis != null">
+                apis,
             </if>
             <if test="permission != null">
                 permission,
+            </if>
+            <if test="remark != null">
+                remark,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -191,6 +195,9 @@
             <if test="parentId != null">
                 #{parentId,jdbcType=BIGINT},
             </if>
+            <if test="isShow != null">
+                #{isShow,jdbcType=BIT},
+            </if>
             <if test="menuType != null">
                 #{menuType,jdbcType=TINYINT},
             </if>
@@ -200,20 +207,20 @@
             <if test="menuIcon != null">
                 #{menuIcon,jdbcType=VARCHAR},
             </if>
-            <if test="pathRouter != null">
-                #{pathRouter,jdbcType=VARCHAR},
+            <if test="path != null">
+                #{path,jdbcType=VARCHAR},
             </if>
-            <if test="pathApi != null">
-                #{pathApi,jdbcType=VARCHAR},
+            <if test="component != null">
+                #{component,jdbcType=VARCHAR},
             </if>
-            <if test="componentPath != null">
-                #{componentPath,jdbcType=VARCHAR},
-            </if>
-            <if test="componentName != null">
-                #{componentName,jdbcType=VARCHAR},
+            <if test="apis != null">
+                #{apis,jdbcType=VARCHAR},
             </if>
             <if test="permission != null">
                 #{permission,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -244,6 +251,9 @@
             <if test="record.parentId != null">
                 parent_id = #{record.parentId,jdbcType=BIGINT},
             </if>
+            <if test="record.isShow != null">
+                is_show = #{record.isShow,jdbcType=BIT},
+            </if>
             <if test="record.menuType != null">
                 menu_type = #{record.menuType,jdbcType=TINYINT},
             </if>
@@ -253,20 +263,20 @@
             <if test="record.menuIcon != null">
                 menu_icon = #{record.menuIcon,jdbcType=VARCHAR},
             </if>
-            <if test="record.pathRouter != null">
-                path_router = #{record.pathRouter,jdbcType=VARCHAR},
+            <if test="record.path != null">
+                path = #{record.path,jdbcType=VARCHAR},
             </if>
-            <if test="record.pathApi != null">
-                path_api = #{record.pathApi,jdbcType=VARCHAR},
+            <if test="record.component != null">
+                component = #{record.component,jdbcType=VARCHAR},
             </if>
-            <if test="record.componentPath != null">
-                component_path = #{record.componentPath,jdbcType=VARCHAR},
-            </if>
-            <if test="record.componentName != null">
-                component_name = #{record.componentName,jdbcType=VARCHAR},
+            <if test="record.apis != null">
+                apis = #{record.apis,jdbcType=VARCHAR},
             </if>
             <if test="record.permission != null">
                 permission = #{record.permission,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=VARCHAR},
             </if>
         </set>
         <if test="_parameter != null">
@@ -281,14 +291,15 @@
         status_id = #{record.statusId,jdbcType=TINYINT},
         sort = #{record.sort,jdbcType=INTEGER},
         parent_id = #{record.parentId,jdbcType=BIGINT},
+        is_show = #{record.isShow,jdbcType=BIT},
         menu_type = #{record.menuType,jdbcType=TINYINT},
         menu_name = #{record.menuName,jdbcType=VARCHAR},
         menu_icon = #{record.menuIcon,jdbcType=VARCHAR},
-        path_router = #{record.pathRouter,jdbcType=VARCHAR},
-        path_api = #{record.pathApi,jdbcType=VARCHAR},
-        component_path = #{record.componentPath,jdbcType=VARCHAR},
-        component_name = #{record.componentName,jdbcType=VARCHAR},
-        permission = #{record.permission,jdbcType=VARCHAR}
+        path = #{record.path,jdbcType=VARCHAR},
+        component = #{record.component,jdbcType=VARCHAR},
+        apis = #{record.apis,jdbcType=VARCHAR},
+        permission = #{record.permission,jdbcType=VARCHAR},
+        remark = #{record.remark,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -311,6 +322,9 @@
             <if test="parentId != null">
                 parent_id = #{parentId,jdbcType=BIGINT},
             </if>
+            <if test="isShow != null">
+                is_show = #{isShow,jdbcType=BIT},
+            </if>
             <if test="menuType != null">
                 menu_type = #{menuType,jdbcType=TINYINT},
             </if>
@@ -320,39 +334,40 @@
             <if test="menuIcon != null">
                 menu_icon = #{menuIcon,jdbcType=VARCHAR},
             </if>
-            <if test="pathRouter != null">
-                path_router = #{pathRouter,jdbcType=VARCHAR},
+            <if test="path != null">
+                path = #{path,jdbcType=VARCHAR},
             </if>
-            <if test="pathApi != null">
-                path_api = #{pathApi,jdbcType=VARCHAR},
+            <if test="component != null">
+                component = #{component,jdbcType=VARCHAR},
             </if>
-            <if test="componentPath != null">
-                component_path = #{componentPath,jdbcType=VARCHAR},
-            </if>
-            <if test="componentName != null">
-                component_name = #{componentName,jdbcType=VARCHAR},
+            <if test="apis != null">
+                apis = #{apis,jdbcType=VARCHAR},
             </if>
             <if test="permission != null">
                 permission = #{permission,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysMenu">
         update sys_menu
-        set gmt_create     = #{gmtCreate,jdbcType=TIMESTAMP},
-            gmt_modified   = #{gmtModified,jdbcType=TIMESTAMP},
-            status_id      = #{statusId,jdbcType=TINYINT},
-            sort           = #{sort,jdbcType=INTEGER},
-            parent_id      = #{parentId,jdbcType=BIGINT},
-            menu_type      = #{menuType,jdbcType=TINYINT},
-            menu_name      = #{menuName,jdbcType=VARCHAR},
-            menu_icon      = #{menuIcon,jdbcType=VARCHAR},
-            path_router    = #{pathRouter,jdbcType=VARCHAR},
-            path_api       = #{pathApi,jdbcType=VARCHAR},
-            component_path = #{componentPath,jdbcType=VARCHAR},
-            component_name = #{componentName,jdbcType=VARCHAR},
-            permission     = #{permission,jdbcType=VARCHAR}
+        set gmt_create   = #{gmtCreate,jdbcType=TIMESTAMP},
+            gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            status_id    = #{statusId,jdbcType=TINYINT},
+            sort         = #{sort,jdbcType=INTEGER},
+            parent_id    = #{parentId,jdbcType=BIGINT},
+            is_show      = #{isShow,jdbcType=BIT},
+            menu_type    = #{menuType,jdbcType=TINYINT},
+            menu_name    = #{menuName,jdbcType=VARCHAR},
+            menu_icon    = #{menuIcon,jdbcType=VARCHAR},
+            path         = #{path,jdbcType=VARCHAR},
+            component    = #{component,jdbcType=VARCHAR},
+            apis         = #{apis,jdbcType=VARCHAR},
+            permission   = #{permission,jdbcType=VARCHAR},
+            remark       = #{remark,jdbcType=VARCHAR}
         where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

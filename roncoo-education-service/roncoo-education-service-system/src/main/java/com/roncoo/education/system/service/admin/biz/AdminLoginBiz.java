@@ -5,6 +5,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
+import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.common.core.tools.JWTUtil;
 import com.roncoo.education.common.core.tools.SHA1Util;
@@ -18,6 +19,7 @@ import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUser;
 import com.roncoo.education.system.service.admin.req.AdminSysUserLoginReq;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserLoginResp;
+import com.roncoo.education.system.service.admin.resp.AdminSysUserLoginRouterResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -70,14 +72,20 @@ public class AdminLoginBiz {
         // token，放入缓存
         cacheRedis.set(resp.getToken(), sysUser.getId(), 1, TimeUnit.DAYS);
 
-        // 获取菜单权限，放入缓存
-        cacheRedis.set(Constants.RedisPre.ADMINI_MENU.concat(sysUser.getId().toString()), extracted(sysUser), 1, TimeUnit.DAYS);
+        // 列出菜单
+        List<SysMenu> sysMenus = listMenu(sysUser);
 
-        // TODO 登录日志
+        // 路由权限返回
+        resp.setRouterList(BeanUtil.copyProperties(sysMenus, AdminSysUserLoginRouterResp.class));
+
+        // 获取接口权限，放入缓存
+        List<String> apis = sysMenus.stream().map(SysMenu::getApis).collect(Collectors.toList());
+        cacheRedis.set(Constants.RedisPre.ADMINI_APIS.concat(sysUser.getId().toString()), apis, 1, TimeUnit.DAYS);
+
         return Result.success(resp);
     }
 
-    private List<String> extracted(SysUser sysUser) {
+    private List<SysMenu> listMenu(SysUser sysUser) {
         List<SysRoleUser> roleUsers = sysRoleUserDao.listByUserId(sysUser.getId());
         if (CollectionUtil.isEmpty(roleUsers)) {
             return new ArrayList<>();
@@ -90,7 +98,8 @@ public class AdminLoginBiz {
         if (CollectionUtil.isEmpty(sysMenus)) {
             return new ArrayList<>();
         }
-        return sysMenus.stream().map(SysMenu::getPathApi).collect(Collectors.toList());
+        return sysMenus;
+        //return sysMenus.stream().map(SysMenu::getApis).collect(Collectors.toList());
     }
 
 }

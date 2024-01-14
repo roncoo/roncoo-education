@@ -23,7 +23,7 @@ public final class Constants {
     public final static int SESSIONTIME = 40;
 
     public interface RedisPre {
-        String ADMINI_MENU = "admin::menu::";
+        String ADMINI_APIS = "admin::apis::";
         String ADMIN_VERI_CODE = "admin::ver::code::";
         String USER_STUDY = "user::study::";
         /**

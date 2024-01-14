@@ -43,46 +43,35 @@ public class AdminSysMenuResp implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long parentId;
     /**
+     * 是否显示(1: 显示；0:不显示)
+     */
+    @ApiModelProperty(value = "是否显示(1: 显示；0:隐藏)")
+    private Integer isShow;
+    /**
+     * 菜单类型(1目录 2菜单 3按钮)
+     */
+    @ApiModelProperty(value = "菜单类型(1目录 2菜单 3按钮)")
+    private Integer menuType;
+    /**
      * 菜单名称
      */
     @ApiModelProperty(value = "菜单名称")
     private String menuName;
-
-    /**
-     * 菜单名称(Tree 树形控件规范)
-     */
-    @ApiModelProperty(value = "菜单名称")
-    private String label;
-    /**
-     * 菜单路径
-     */
-    @ApiModelProperty(value = "菜单路径")
-    private String menuUrl;
     /**
      * 菜单图标
      */
     @ApiModelProperty(value = "菜单图标")
     private String menuIcon;
     /**
-     * 接口URL
+     * 菜单路径
      */
-    @ApiModelProperty(value = "接口URL")
-    private String authValue;
+    @ApiModelProperty(value = "菜单路径")
+    private String path;
     /**
-     * 备注
+     * 前端权限
      */
-    @ApiModelProperty(value = "备注")
-    private String remark;
-    /**
-     * 是否显示(1: 显示；0:不显示)
-     */
-    @ApiModelProperty(value = "是否显示(1: 显示；0:不显示)")
-    private Integer hiddenType;
-    /**
-     * 菜单类型(1目录 2菜单 3按钮)
-     */
-    @ApiModelProperty(value = "菜单类型(1目录 2菜单 3按钮)")
-    private Integer menuType;
+    @ApiModelProperty(value = "前端权限")
+    private String permission;
     /**
      * 下级菜单集合
      */
