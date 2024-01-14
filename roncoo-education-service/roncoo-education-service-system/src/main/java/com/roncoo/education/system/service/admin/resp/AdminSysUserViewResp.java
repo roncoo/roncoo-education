@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 后台用户信息-查看
@@ -50,4 +51,7 @@ public class AdminSysUserViewResp implements Serializable {
      */
     @ApiModelProperty(value = "备注")
     private String remark;
+
+    @ApiModelProperty(value = "用户路由", required = true)
+    private List<AdminSysUserLoginRouterResp> routerList;
 }

@@ -1,7 +1,6 @@
 package com.roncoo.education.system.service.admin.biz;
 
 
-import cn.hutool.core.collection.CollectionUtil;
 import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
@@ -9,21 +8,16 @@ import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.common.core.tools.JWTUtil;
 import com.roncoo.education.common.core.tools.SHA1Util;
-import com.roncoo.education.system.dao.SysMenuDao;
-import com.roncoo.education.system.dao.SysMenuRoleDao;
-import com.roncoo.education.system.dao.SysRoleUserDao;
 import com.roncoo.education.system.dao.SysUserDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenu;
-import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuRole;
-import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUser;
 import com.roncoo.education.system.service.admin.req.AdminSysUserLoginReq;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserLoginResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserLoginRouterResp;
+import com.roncoo.education.system.service.biz.SysUserCommonBiz;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -38,10 +32,8 @@ import java.util.stream.Collectors;
 public class AdminLoginBiz {
 
     private final SysUserDao sysUserDao;
-    private final SysRoleUserDao sysRoleUserDao;
-    private final SysMenuRoleDao sysMenuRoleDao;
-    private final SysMenuDao sysMenuDao;
     private final CacheRedis cacheRedis;
+    private final SysUserCommonBiz sysUserCommonBiz;
 
     /**
      * 用户登录
@@ -73,7 +65,7 @@ public class AdminLoginBiz {
         cacheRedis.set(resp.getToken(), sysUser.getId(), 1, TimeUnit.DAYS);
 
         // 列出菜单
-        List<SysMenu> sysMenus = listMenu(sysUser);
+        List<SysMenu> sysMenus = sysUserCommonBiz.listMenu(sysUser);
 
         // 路由权限返回
         resp.setRouterList(BeanUtil.copyProperties(sysMenus, AdminSysUserLoginRouterResp.class));
@@ -83,23 +75,6 @@ public class AdminLoginBiz {
         cacheRedis.set(Constants.RedisPre.ADMINI_APIS.concat(sysUser.getId().toString()), apis, 1, TimeUnit.DAYS);
 
         return Result.success(resp);
-    }
-
-    private List<SysMenu> listMenu(SysUser sysUser) {
-        List<SysRoleUser> roleUsers = sysRoleUserDao.listByUserId(sysUser.getId());
-        if (CollectionUtil.isEmpty(roleUsers)) {
-            return new ArrayList<>();
-        }
-        List<SysMenuRole> menuRoles = sysMenuRoleDao.listByRoleIds(roleUsers.stream().map(SysRoleUser::getRoleId).collect(Collectors.toList()));
-        if (CollectionUtil.isEmpty(menuRoles)) {
-            return new ArrayList<>();
-        }
-        List<SysMenu> sysMenus = sysMenuDao.getByIds(menuRoles.stream().map(SysMenuRole::getMenuId).collect(Collectors.toList()));
-        if (CollectionUtil.isEmpty(sysMenus)) {
-            return new ArrayList<>();
-        }
-        return sysMenus;
-        //return sysMenus.stream().map(SysMenu::getApis).collect(Collectors.toList());
     }
 
 }

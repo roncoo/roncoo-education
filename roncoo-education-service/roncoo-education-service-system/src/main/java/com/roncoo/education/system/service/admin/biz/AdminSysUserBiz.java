@@ -12,14 +12,13 @@ import com.roncoo.education.common.core.tools.SHA1Util;
 import com.roncoo.education.system.dao.SysRoleDao;
 import com.roncoo.education.system.dao.SysRoleUserDao;
 import com.roncoo.education.system.dao.SysUserDao;
-import com.roncoo.education.system.dao.impl.mapper.entity.SysRole;
-import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser;
-import com.roncoo.education.system.dao.impl.mapper.entity.SysUser;
-import com.roncoo.education.system.dao.impl.mapper.entity.SysUserExample;
+import com.roncoo.education.system.dao.impl.mapper.entity.*;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUserExample.Criteria;
 import com.roncoo.education.system.service.admin.req.*;
+import com.roncoo.education.system.service.admin.resp.AdminSysUserLoginRouterResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserPageResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserViewResp;
+import com.roncoo.education.system.service.biz.SysUserCommonBiz;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -46,6 +45,8 @@ public class AdminSysUserBiz {
     private SysRoleUserDao sysRoleUserDao;
     @Autowired
     private SysRoleDao sysRoleDao;
+    @Autowired
+    private SysUserCommonBiz sysUserCommonBiz;
 
     public Result<Page<AdminSysUserPageResp>> listForPage(AdminSysUserPageReq req) {
         SysUserExample example = new SysUserExample();
@@ -139,7 +140,12 @@ public class AdminSysUserBiz {
         if (ObjectUtil.isNull(sysUser)) {
             return Result.error("管理员不存在");
         }
-        return Result.success(BeanUtil.copyProperties(sysUser, AdminSysUserViewResp.class));
+        AdminSysUserViewResp resp = BeanUtil.copyProperties(sysUser, AdminSysUserViewResp.class);
+        // 列出菜单
+        List<SysMenu> sysMenus = sysUserCommonBiz.listMenu(sysUser);
+        // 路由权限返回
+        resp.setRouterList(BeanUtil.copyProperties(sysMenus, AdminSysUserLoginRouterResp.class));
+        return Result.success(resp);
     }
 
     public Result<String> updatePassword(AdminSysUserUpdatePasswordReq req) {
