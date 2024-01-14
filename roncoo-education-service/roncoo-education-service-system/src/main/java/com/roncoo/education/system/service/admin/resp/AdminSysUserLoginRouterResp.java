@@ -34,6 +34,11 @@ public class AdminSysUserLoginRouterResp implements Serializable {
     @ApiModelProperty(value = "菜单名称")
     private String menuName;
     /**
+     * 菜单图标
+     */
+    @ApiModelProperty(value = "菜单图标")
+    private String menuIcon;
+    /**
      * 菜单路径
      */
     @ApiModelProperty(value = "菜单路径")
