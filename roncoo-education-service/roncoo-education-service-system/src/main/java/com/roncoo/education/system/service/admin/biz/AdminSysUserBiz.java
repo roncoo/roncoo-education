@@ -7,6 +7,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.MenuTypeEnum;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.SHA1Util;
@@ -177,7 +178,7 @@ public class AdminSysUserBiz {
      * 菜单层级处理
      */
     private List<AdminSysMenuUserResp> filters(Long parentId, List<SysMenu> menuList) {
-        List<SysMenu> sysMenuList = menuList.stream().filter(item -> parentId.compareTo(item.getParentId()) == 0).collect(Collectors.toList());
+        List<SysMenu> sysMenuList = menuList.stream().filter(item -> parentId.compareTo(item.getParentId()) == 0 && !item.getMenuType().equals(MenuTypeEnum.PERMISSION)).collect(Collectors.toList());
         if (CollectionUtil.isNotEmpty(sysMenuList)) {
             List<AdminSysMenuUserResp> respList = BeanUtil.copyProperties(sysMenuList, AdminSysMenuUserResp.class);
             for (AdminSysMenuUserResp resp : respList) {
