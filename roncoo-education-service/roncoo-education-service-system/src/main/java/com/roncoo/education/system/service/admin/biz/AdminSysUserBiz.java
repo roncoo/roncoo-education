@@ -1,6 +1,7 @@
 package com.roncoo.education.system.service.admin.biz;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
@@ -15,6 +16,7 @@ import com.roncoo.education.system.dao.SysUserDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.*;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUserExample.Criteria;
 import com.roncoo.education.system.service.admin.req.*;
+import com.roncoo.education.system.service.admin.resp.AdminSysMenuUserResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserLoginRouterResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserPageResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserViewResp;
@@ -143,8 +145,10 @@ public class AdminSysUserBiz {
         AdminSysUserViewResp resp = BeanUtil.copyProperties(sysUser, AdminSysUserViewResp.class);
         // 列出菜单
         List<SysMenu> sysMenus = sysUserCommonBiz.listMenu(sysUser.getId());
-        // 路由权限返回
+        // 路由
         resp.setRouterList(BeanUtil.copyProperties(sysMenus, AdminSysUserLoginRouterResp.class));
+        // 菜单
+        resp.setMenuList(filters(0L, sysMenus));
         return Result.success(resp);
     }
 
@@ -167,6 +171,21 @@ public class AdminSysUserBiz {
         record.setMobilePsw(SHA1Util.getSign(record.getMobileSalt() + req.getMobilePwd()));
         dao.updateById(record);
         return Result.success("操作成功");
+    }
+
+    /**
+     * 菜单层级处理
+     */
+    private List<AdminSysMenuUserResp> filters(Long parentId, List<SysMenu> menuList) {
+        List<SysMenu> sysMenuList = menuList.stream().filter(item -> parentId.compareTo(item.getParentId()) == 0).collect(Collectors.toList());
+        if (CollectionUtil.isNotEmpty(sysMenuList)) {
+            List<AdminSysMenuUserResp> respList = BeanUtil.copyProperties(sysMenuList, AdminSysMenuUserResp.class);
+            for (AdminSysMenuUserResp resp : respList) {
+                resp.setChildren(filters(resp.getId(), menuList));
+            }
+            return respList;
+        }
+        return null;
     }
 
 }

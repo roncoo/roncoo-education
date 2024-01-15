@@ -4,7 +4,6 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysMenuBiz;
 import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuResp;
-import com.roncoo.education.system.service.admin.resp.AdminSysMenuUserResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuViewResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -72,24 +71,6 @@ public class AdminSysMenuController {
     @RequestMapping(value = "/view", method = RequestMethod.POST)
     public Result<AdminSysMenuViewResp> view(@RequestBody AdminSysMenuViewReq sysMenuViewREQ) {
         return biz.view(sysMenuViewREQ);
-    }
-
-    /**
-     * 用户菜单信息列出信息接口
-     */
-    @ApiOperation(value = "用户菜单接口", notes = "获取指定用户的所有菜单")
-    @RequestMapping(value = "/user/list", method = RequestMethod.POST)
-    public Result<List<AdminSysMenuUserResp>> userList(@RequestBody AdminSysMenuUserListReq req) {
-        return biz.userList(req);
-    }
-
-    /**
-     * 用户菜单信息列出信息接口
-     */
-    @ApiOperation(value = "用户权限接口", notes = "获取当前登录用户的权限")
-    @RequestMapping(value = "/permission/list", method = RequestMethod.GET)
-    public Result<List<String>> permissionList() {
-        return biz.permissionList();
     }
 
 }
