@@ -46,16 +46,7 @@ public class AdminSysMenuUserResp implements Serializable {
     private String menuIcon;
 
     @ApiModelProperty(value = "路由地址")
-    private String pathRouter;
-
-    @ApiModelProperty(value = "接口地址")
-    private String pathApi;
-
-    @ApiModelProperty(value = "组件路径")
-    private String componentPath;
-
-    @ApiModelProperty(value = "组件名称")
-    private String componentName;
+    private String path;
 
     @ApiModelProperty(value = "权限标识")
     private String permission;
