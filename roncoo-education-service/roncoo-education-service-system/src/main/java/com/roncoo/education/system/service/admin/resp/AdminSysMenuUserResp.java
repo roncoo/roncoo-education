@@ -20,25 +20,19 @@ public class AdminSysMenuUserResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键
-     */
     @ApiModelProperty(value = "主键")
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
-    /**
-     * 排序
-     */
+
+    @ApiModelProperty(value = "父ID")
+    private Long parentId;
+
     @ApiModelProperty(value = "排序")
     private Integer sort;
-    /**
-     * 菜单类型(1目录 2菜单 3按钮)
-     */
+
     @ApiModelProperty(value = "菜单类型(1目录 2菜单 3按钮)")
     private Integer menuType;
-    /**
-     * 菜单名称
-     */
+
     @ApiModelProperty(value = "菜单名称")
     private String menuName;
 
