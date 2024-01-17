@@ -4,7 +4,6 @@ package com.roncoo.education.system.service.admin.biz;
 import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
-import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.common.core.tools.JWTUtil;
 import com.roncoo.education.common.core.tools.SHA1Util;
@@ -13,7 +12,6 @@ import com.roncoo.education.system.dao.impl.mapper.entity.SysMenu;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUser;
 import com.roncoo.education.system.service.admin.req.AdminSysUserLoginReq;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserLoginResp;
-import com.roncoo.education.system.service.admin.resp.AdminSysUserLoginRouterResp;
 import com.roncoo.education.system.service.biz.SysUserCommonBiz;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -66,9 +64,10 @@ public class AdminLoginBiz {
 
         // 列出菜单
         List<SysMenu> sysMenus = sysUserCommonBiz.listMenu(sysUser.getId());
-
-        // 路由权限返回
-        resp.setRouterList(BeanUtil.copyProperties(sysMenus, AdminSysUserLoginRouterResp.class));
+        // 路由
+        resp.setRouterList(sysUserCommonBiz.routerList(sysMenus));
+        // 菜单
+        resp.setMenuList(sysUserCommonBiz.menuList(sysMenus));
 
         // 获取接口权限，放入缓存
         List<String> apis = sysMenus.stream().map(SysMenu::getApis).collect(Collectors.toList());

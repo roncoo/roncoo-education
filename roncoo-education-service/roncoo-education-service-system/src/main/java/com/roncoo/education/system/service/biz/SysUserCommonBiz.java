@@ -4,12 +4,16 @@
 package com.roncoo.education.system.service.biz;
 
 import cn.hutool.core.collection.CollectionUtil;
+import com.roncoo.education.common.core.enums.MenuTypeEnum;
+import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.system.dao.SysMenuDao;
 import com.roncoo.education.system.dao.SysMenuRoleDao;
 import com.roncoo.education.system.dao.SysRoleUserDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenu;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuRole;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser;
+import com.roncoo.education.system.service.admin.resp.AdminSysMenuUserResp;
+import com.roncoo.education.system.service.admin.resp.AdminSysUserLoginRouterResp;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -47,5 +51,29 @@ public class SysUserCommonBiz {
         }
         return sysMenus;
     }
+
+    public List<AdminSysUserLoginRouterResp> routerList(List<SysMenu> menuList) {
+        return BeanUtil.copyProperties(menuList, AdminSysUserLoginRouterResp.class);
+    }
+
+    public List<AdminSysMenuUserResp> menuList(List<SysMenu> menuList) {
+        return filters(0L, menuList);
+    }
+
+    /**
+     * 菜单层级处理
+     */
+    private List<AdminSysMenuUserResp> filters(Long parentId, List<SysMenu> menuList) {
+        List<SysMenu> sysMenuList = menuList.stream().filter(item -> parentId.compareTo(item.getParentId()) == 0 && !item.getMenuType().equals(MenuTypeEnum.PERMISSION.getCode())).collect(Collectors.toList());
+        if (CollectionUtil.isNotEmpty(sysMenuList)) {
+            List<AdminSysMenuUserResp> respList = BeanUtil.copyProperties(sysMenuList, AdminSysMenuUserResp.class);
+            for (AdminSysMenuUserResp resp : respList) {
+                resp.setChildren(filters(resp.getId(), menuList));
+            }
+            return respList;
+        }
+        return null;
+    }
+
 
 }

@@ -18,7 +18,6 @@ import com.roncoo.education.system.dao.impl.mapper.entity.*;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUserExample.Criteria;
 import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuUserResp;
-import com.roncoo.education.system.service.admin.resp.AdminSysUserLoginRouterResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserPageResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserViewResp;
 import com.roncoo.education.system.service.biz.SysUserCommonBiz;
@@ -147,9 +146,9 @@ public class AdminSysUserBiz {
         // 列出菜单
         List<SysMenu> sysMenus = sysUserCommonBiz.listMenu(sysUser.getId());
         // 路由
-        resp.setRouterList(BeanUtil.copyProperties(sysMenus, AdminSysUserLoginRouterResp.class));
+        resp.setRouterList(sysUserCommonBiz.routerList(sysMenus));
         // 菜单
-        resp.setMenuList(filters(0L, sysMenus));
+        resp.setMenuList(sysUserCommonBiz.menuList(sysMenus));
         return Result.success(resp);
     }
 

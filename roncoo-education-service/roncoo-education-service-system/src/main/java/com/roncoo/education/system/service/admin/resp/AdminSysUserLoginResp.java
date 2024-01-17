@@ -29,4 +29,7 @@ public class AdminSysUserLoginResp implements Serializable {
 
     @ApiModelProperty(value = "用户路由", required = true)
     private List<AdminSysUserLoginRouterResp> routerList;
+
+    @ApiModelProperty(value = "用户菜单", required = true)
+    private List<AdminSysMenuUserResp> menuList;
 }
