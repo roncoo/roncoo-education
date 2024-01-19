@@ -37,7 +37,7 @@ public class HandlerException extends BaseController {
     }
 
     @ExceptionHandler({MethodArgumentNotValidException.class})
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result<String> processException(MethodArgumentNotValidException ex) {
         StringJoiner joiner = new StringJoiner("、");
         for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
@@ -48,14 +48,14 @@ public class HandlerException extends BaseController {
     }
 
     @ExceptionHandler({BaseException.class})
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result<String> processException(BaseException e) {
         log.error("BaseException", e);
         return Result.error(e.getMessage());
     }
 
     @ExceptionHandler({Exception.class})
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result<String> processException(Exception e) {
         log.error("Exception", e);
         return Result.error("服务繁忙，请重试");
