@@ -74,7 +74,7 @@ public class AdminSysUserController {
      * 后台管理员密码接口
      */
     @ApiOperation(value = "后台管理员密码接口", notes = "后台管理员更新密码接口")
-    @RequestMapping(value = "/password", method = RequestMethod.POST)
+    @RequestMapping(value = "/password", method = RequestMethod.PUT)
     public Result<String> updatePassword(@RequestBody AdminSysUserUpdatePasswordReq sysUserUpdatePasswordREQ) {
         return biz.updatePassword(sysUserUpdatePasswordREQ);
     }
