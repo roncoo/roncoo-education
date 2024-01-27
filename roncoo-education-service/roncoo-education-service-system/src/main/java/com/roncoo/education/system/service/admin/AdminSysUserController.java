@@ -47,7 +47,7 @@ public class AdminSysUserController {
      * 后台管理员删除接口
      */
     @ApiOperation(value = "后台管理员删除接口", notes = "后台管理员删除接口")
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", method = RequestMethod.PUT)
     public Result<String> delete(@RequestBody AdminSysUserDeleteReq sysUserSaveREQ) {
         return biz.delete(sysUserSaveREQ);
     }
@@ -56,7 +56,7 @@ public class AdminSysUserController {
      * 后台管理员更新接口
      */
     @ApiOperation(value = "后台管理员更新接口", notes = "后台管理员更新接口")
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit", method = RequestMethod.PUT)
     public Result<String> update(@RequestBody AdminSysUserUpdateReq sysUserUpdateREQ) {
         return biz.update(sysUserUpdateREQ);
     }

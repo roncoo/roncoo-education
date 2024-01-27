@@ -49,7 +49,7 @@ public class AdminSysRoleController {
      * 角色删除接口
      */
     @ApiOperation(value = "角色删除接口", notes = "角色删除接口")
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", method = RequestMethod.PUT)
     public Result<String> delete(@RequestBody AdminSysRoleDeleteReq sysRoleDeleteREQ) {
         return biz.delete(sysRoleDeleteREQ);
     }
@@ -58,7 +58,7 @@ public class AdminSysRoleController {
      * 角色更新接口
      */
     @ApiOperation(value = "角色更新接口", notes = "角色更新接口")
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit", method = RequestMethod.PUT)
     public Result<String> update(@RequestBody AdminSysRoleUpdateReq sysRoleUpdateREQ) {
         return biz.update(sysRoleUpdateREQ);
     }

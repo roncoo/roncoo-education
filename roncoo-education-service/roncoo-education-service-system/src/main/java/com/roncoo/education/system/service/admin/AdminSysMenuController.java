@@ -50,7 +50,7 @@ public class AdminSysMenuController {
      * 菜单信息删除接口
      */
     @ApiOperation(value = "菜单删除", notes = "根据ID删除菜单")
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", method = RequestMethod.PUT)
     public Result<String> delete(@RequestBody AdminSysMenuDeleteReq sysMenuDeleteReq) {
         return biz.delete(sysMenuDeleteReq);
     }
@@ -59,7 +59,7 @@ public class AdminSysMenuController {
      * 菜单信息更新接口
      */
     @ApiOperation(value = "菜单更新", notes = "菜单修改")
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit", method = RequestMethod.PUT)
     public Result<String> update(@RequestBody AdminSysMenuUpdateReq sysMenuUpdateReq) {
         return biz.update(sysMenuUpdateReq);
     }
