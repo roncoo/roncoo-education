@@ -52,10 +52,22 @@ public class SysUserCommonBiz {
         return sysMenus;
     }
 
+    /**
+     * 获取路由
+     *
+     * @param menuList
+     * @return
+     */
     public List<AdminSysUserLoginRouterResp> routerList(List<SysMenu> menuList) {
+        menuList = menuList.stream().filter(item -> item.getMenuType().equals(MenuTypeEnum.MENU.getCode())).collect(Collectors.toList());
         return BeanUtil.copyProperties(menuList, AdminSysUserLoginRouterResp.class);
     }
 
+    /**
+     * 获取菜单
+     * @param menuList
+     * @return
+     */
     public List<AdminSysMenuUserResp> menuList(List<SysMenu> menuList) {
         return filters(0L, menuList);
     }

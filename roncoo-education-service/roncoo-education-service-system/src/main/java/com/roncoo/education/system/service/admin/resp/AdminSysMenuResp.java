@@ -67,6 +67,13 @@ public class AdminSysMenuResp implements Serializable {
      */
     @ApiModelProperty(value = "菜单路径")
     private String path;
+
+    @ApiModelProperty(value = "组件")
+    private String component;
+
+    @ApiModelProperty(value = "后端接口")
+    private String apis;
+
     /**
      * 前端权限
      */
