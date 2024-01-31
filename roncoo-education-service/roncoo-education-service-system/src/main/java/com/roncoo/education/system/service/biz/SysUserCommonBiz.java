@@ -76,7 +76,7 @@ public class SysUserCommonBiz {
      * 菜单层级处理
      */
     private List<AdminSysMenuUserResp> filters(Long parentId, List<SysMenu> menuList) {
-        List<SysMenu> sysMenuList = menuList.stream().filter(item -> parentId.compareTo(item.getParentId()) == 0 && item.getIsShow() && !item.getMenuType().equals(MenuTypeEnum.PERMISSION.getCode())).collect(Collectors.toList());
+        List<SysMenu> sysMenuList = menuList.stream().filter(item -> parentId.compareTo(item.getParentId()) == 0 && !item.getMenuType().equals(MenuTypeEnum.PERMISSION.getCode())).collect(Collectors.toList());
         if (CollectionUtil.isNotEmpty(sysMenuList)) {
             List<AdminSysMenuUserResp> respList = BeanUtil.copyProperties(sysMenuList, AdminSysMenuUserResp.class);
             for (AdminSysMenuUserResp resp : respList) {
@@ -86,6 +86,5 @@ public class SysUserCommonBiz {
         }
         return null;
     }
-
 
 }
