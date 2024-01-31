@@ -38,7 +38,7 @@ public class AdminSysMenuViewResp implements Serializable {
     private Long parentId;
 
     @ApiModelProperty(value = "是否显示")
-    private Integer isShow;
+    private Boolean isShow;
     /**
      * 菜单类型(1目录 2菜单 3按钮)
      */

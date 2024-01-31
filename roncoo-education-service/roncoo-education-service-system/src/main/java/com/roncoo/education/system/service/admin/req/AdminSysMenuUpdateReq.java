@@ -41,7 +41,7 @@ public class AdminSysMenuUpdateReq implements Serializable {
      * 是否显示(1: 显示；0:不显示)
      */
     @ApiModelProperty(value = "是否显示")
-    private Integer isShow;
+    private Boolean isShow;
     /**
      * 菜单类型(1目录 2菜单 3按钮)
      */
