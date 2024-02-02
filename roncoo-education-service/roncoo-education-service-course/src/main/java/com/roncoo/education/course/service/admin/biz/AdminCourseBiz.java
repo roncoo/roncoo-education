@@ -126,7 +126,11 @@ public class AdminCourseBiz extends BaseBiz {
      * @return 课程信息
      */
     public Result<AdminCourseViewResp> view(Long id) {
-        return Result.success(BeanUtil.copyProperties(dao.getById(id), AdminCourseViewResp.class));
+        AdminCourseViewResp resp = BeanUtil.copyProperties(dao.getById(id), AdminCourseViewResp.class);
+        if (ObjectUtil.isNotNull(resp.getLecturerId())) {
+            resp.setLecturerName(feignLecturer.getById(resp.getLecturerId()).getLecturerName());
+        }
+        return Result.success(resp);
     }
 
     /**

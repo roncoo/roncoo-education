@@ -44,6 +44,9 @@ public class AdminCourseViewResp implements Serializable {
     @ApiModelProperty(value = "讲师ID")
     private Long lecturerId;
 
+    @ApiModelProperty(value = "讲师名称")
+    private String lecturerName;
+
     @ApiModelProperty(value = "分类ID")
     private Long categoryId;
 
