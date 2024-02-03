@@ -21,15 +21,6 @@ public class AdminResourceSaveReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
-    private Long id;
-
-    @ApiModelProperty(value = "状态(1:正常，0:禁用)")
-    private Integer statusId;
-
-    @ApiModelProperty(value = "排序")
-    private Integer sort;
-
     @ApiModelProperty(value = "分类ID")
     private Long categoryId;
 
