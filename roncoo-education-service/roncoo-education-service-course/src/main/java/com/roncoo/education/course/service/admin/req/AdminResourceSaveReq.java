@@ -39,8 +39,11 @@ public class AdminResourceSaveReq implements Serializable {
     @ApiModelProperty(value = "状态(1转码中，2成功，3失败)")
     private Integer videoStatus;
 
-    @ApiModelProperty(value = "时长")
-    private Integer videoLength;
+    @ApiModelProperty(value = "点播平台")
+    private Integer vodPlatform;
+
+    @ApiModelProperty(value = "存储平台")
+    private Integer storagePlatform;
 
     @ApiModelProperty(value = "vid")
     private String videoVid;
