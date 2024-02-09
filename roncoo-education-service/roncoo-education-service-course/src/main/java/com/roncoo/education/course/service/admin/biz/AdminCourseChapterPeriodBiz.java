@@ -6,6 +6,7 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.CourseChapterPeriodDao;
+import com.roncoo.education.course.dao.UserStudyDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodExample.Criteria;
@@ -30,6 +31,8 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
 
     @NotNull
     private final CourseChapterPeriodDao dao;
+    @NotNull
+    private final UserStudyDao userStudyDao;
 
     /**
      * 课时信息分页
@@ -91,6 +94,8 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
      */
     public Result<String> delete(Long id) {
         if (dao.deleteById(id) > 0) {
+            // 删除课时，也需要删除对应的学习记录，否则统计进度出现数据异常
+            userStudyDao.deleteByPeriodId(id);
             return Result.success("操作成功");
         }
         return Result.error("操作失败");
