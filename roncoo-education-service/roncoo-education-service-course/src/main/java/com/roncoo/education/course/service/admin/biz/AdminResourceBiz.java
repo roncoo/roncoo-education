@@ -10,11 +10,10 @@ import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.video.VodUtil;
+import com.roncoo.education.course.dao.CategoryDao;
 import com.roncoo.education.course.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.dao.ResourceDao;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
-import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
-import com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample;
+import com.roncoo.education.course.dao.impl.mapper.entity.*;
 import com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample.Criteria;
 import com.roncoo.education.course.service.admin.req.AdminResourceEditReq;
 import com.roncoo.education.course.service.admin.req.AdminResourcePageReq;
@@ -29,6 +28,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,6 +43,9 @@ public class AdminResourceBiz extends BaseBiz {
 
     @NotNull
     private final ResourceDao dao;
+
+    @NotNull
+    private final CategoryDao categoryDao;
     @NotNull
     private final CourseChapterPeriodDao courseChapterPeriodDao;
 
@@ -73,10 +76,30 @@ public class AdminResourceBiz extends BaseBiz {
         if (StringUtils.hasText(req.getResourceName())) {
             c.andResourceNameLike(PageUtil.rightLike(req.getResourceName()));
         }
+        if (ObjectUtil.isNotNull(req.getCategoryId())) {
+            List<Category> list = categoryDao.listByExample(new CategoryExample());
+            List<Long> ids = new ArrayList<>();
+            ids.add(req.getCategoryId());
+            filter(ids, list, req.getCategoryId());
+            c.andCategoryIdIn(ids);
+        }
+
         example.setOrderByClause("sort asc, id desc");
         Page<Resource> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminResourcePageResp> respPage = PageUtil.transform(page, AdminResourcePageResp.class);
         return Result.success(respPage);
+    }
+
+    /**
+     * 层级处理
+     */
+    private void filter(List<Long> ids, List<Category> categoryList, Long categoryId) {
+        for (Category category : categoryList) {
+            if (categoryId.compareTo(category.getParentId()) == 0) {
+                ids.add(category.getId());
+                filter(ids, categoryList, category.getId());
+            }
+        }
     }
 
     /**

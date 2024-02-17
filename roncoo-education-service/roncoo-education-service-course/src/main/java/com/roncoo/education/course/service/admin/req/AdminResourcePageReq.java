@@ -27,6 +27,9 @@ public class AdminResourcePageReq implements Serializable {
     @ApiModelProperty(value = "资源名称")
     private String resourceName;
 
+    @ApiModelProperty(value = "分类ID")
+    private Long categoryId;
+
     @ApiModelProperty(value = "当前页")
     private int pageCurrent = 1;
 
