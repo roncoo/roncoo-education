@@ -68,6 +68,7 @@ public class SysMenuDaoImpl implements SysMenuDao {
     public List<SysMenu> getByIds(List<Long> ids) {
         SysMenuExample example = new SysMenuExample();
         example.createCriteria().andIdIn(ids);
+        example.setOrderByClause("sort asc, id desc");
         return this.sysMenuMapper.selectByExample(example);
     }
 
