@@ -113,7 +113,7 @@ public class ApiUsersBiz extends BaseBiz {
         }
 
         // 登录日志，异步处理
-        ThreadUtil.newExecutor().execute(() -> {
+        ThreadUtil.newSingleExecutor().execute(() -> {
             log(user.getId(), LoginStatusEnum.SUCCESS, BeanUtil.copyProperties(req, LogLogin.class));
         });
 
