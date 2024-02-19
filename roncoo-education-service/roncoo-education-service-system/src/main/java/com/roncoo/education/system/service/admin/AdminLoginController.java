@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * @author fengyw
  */
@@ -25,7 +27,7 @@ public class AdminLoginController {
 
     @ApiOperation(value = "密码登录", notes = "用户使用密码登录")
     @PostMapping(value = "/password")
-    public Result<AdminSysUserLoginResp> login(@RequestBody AdminSysUserLoginReq req) {
+    public Result<AdminSysUserLoginResp> login(@RequestBody @Valid AdminSysUserLoginReq req) {
         return biz.login(req);
     }
 

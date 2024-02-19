@@ -15,6 +15,7 @@ import com.roncoo.education.system.service.admin.resp.AdminSysUserLoginResp;
 import com.roncoo.education.system.service.biz.SysUserCommonBiz;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -40,6 +41,15 @@ public class AdminLoginBiz {
      * @return 登录结果
      */
     public Result<AdminSysUserLoginResp> login(AdminSysUserLoginReq req) {
+        // 验证码校验
+        String varCode = cacheRedis.get(Constants.RedisPre.ADMIN_VERI_CODE + req.getVerToken());
+        if (!StringUtils.hasText(varCode)) {
+            return Result.error("验证码已过期");
+        }
+        if (!varCode.equals(req.getVerCode())) {
+            return Result.error("验证码不正确");
+        }
+
         SysUser sysUser = sysUserDao.getByMobile(req.getMobile());
         if (sysUser == null) {
             return Result.error("用户不存在");
