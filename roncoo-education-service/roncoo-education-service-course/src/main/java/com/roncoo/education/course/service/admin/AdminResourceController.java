@@ -6,6 +6,7 @@ import com.roncoo.education.course.service.admin.biz.AdminResourceBiz;
 import com.roncoo.education.course.service.admin.req.AdminResourceEditReq;
 import com.roncoo.education.course.service.admin.req.AdminResourcePageReq;
 import com.roncoo.education.course.service.admin.req.AdminResourceSaveReq;
+import com.roncoo.education.course.service.admin.resp.AdminPreviewResp;
 import com.roncoo.education.course.service.admin.resp.AdminResourcePageResp;
 import com.roncoo.education.course.service.admin.resp.AdminResourceViewResp;
 import com.roncoo.education.course.service.admin.resp.AdminVodConfigResp;
@@ -68,5 +69,12 @@ public class AdminResourceController {
     @DeleteMapping(value = "/delete")
     public Result<String> delete(@RequestParam Long id) {
         return biz.delete(id);
+    }
+
+    @ApiOperation(value = "预览", notes = "获取预览参数")
+    @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
+    @GetMapping(value = "/preview")
+    public Result<AdminPreviewResp> preview(@RequestParam Long id) {
+        return biz.preview(id);
     }
 }

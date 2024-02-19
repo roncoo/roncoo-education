@@ -2,6 +2,8 @@ package com.roncoo.education.course.service.admin.biz;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.extra.servlet.ServletUtil;
+import com.roncoo.education.common.config.ThreadContext;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
@@ -10,6 +12,7 @@ import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.video.VodUtil;
+import com.roncoo.education.common.video.req.VodPlayConfigReq;
 import com.roncoo.education.course.dao.CategoryDao;
 import com.roncoo.education.course.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.dao.ResourceDao;
@@ -18,15 +21,18 @@ import com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample.Criter
 import com.roncoo.education.course.service.admin.req.AdminResourceEditReq;
 import com.roncoo.education.course.service.admin.req.AdminResourcePageReq;
 import com.roncoo.education.course.service.admin.req.AdminResourceSaveReq;
+import com.roncoo.education.course.service.admin.resp.AdminPreviewResp;
 import com.roncoo.education.course.service.admin.resp.AdminResourcePageResp;
 import com.roncoo.education.course.service.admin.resp.AdminResourceViewResp;
 import com.roncoo.education.course.service.admin.resp.AdminVodConfigResp;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +57,9 @@ public class AdminResourceBiz extends BaseBiz {
 
     @NotNull
     private final IFeignSysConfig feignSysConfig;
+
+    @Autowired
+    private HttpServletRequest request;
 
     public Result<AdminVodConfigResp> getVodConfig() {
         AdminVodConfigResp resp = new AdminVodConfigResp();
@@ -170,5 +179,30 @@ public class AdminResourceBiz extends BaseBiz {
             return Result.success("操作成功");
         }
         return Result.error("操作失败");
+    }
+
+    public Result<AdminPreviewResp> preview(Long id) {
+        Resource resource = dao.getById(id);
+        if (ObjectUtil.isNull(resource)) {
+            return Result.error("资源不存在");
+        }
+        AdminPreviewResp resp = new AdminPreviewResp();
+        resp.setId(resource.getId());
+        resp.setVid(resource.getVideoVid());
+        resp.setVodPlatform(resource.getVodPlatform());
+
+        VodPlayConfigReq playConfigReq = new VodPlayConfigReq();
+        playConfigReq.setVid(resp.getVid());
+        playConfigReq.setViewerId(ThreadContext.userId().toString());
+        playConfigReq.setViewerIp(ServletUtil.getClientIP(request));
+        VodPlayConfigReq.VodAuthCode authCode = new VodPlayConfigReq.VodAuthCode();
+        authCode.setUserId(ThreadContext.userId());
+        playConfigReq.setVodAuthCode(authCode);
+
+        VodConfig vodConfig = feignSysConfig.getVod();
+        vodConfig.setVodPlatform(resp.getVodPlatform());
+        resp.setVodPlayConfig(VodUtil.getPlayConfig(vodConfig, playConfigReq));
+
+        return Result.success(resp);
     }
 }
