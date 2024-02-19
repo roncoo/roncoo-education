@@ -1,6 +1,5 @@
 package com.roncoo.education.user.service.api.biz;
 
-import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
@@ -107,15 +106,13 @@ public class ApiUsersBiz extends BaseBiz {
 
         // 密码校验
         if (!DigestUtil.sha1Hex(user.getMobileSalt() + req.getPassword()).equals(user.getMobilePsw())) {
+            // 错误登录日志
             log(user.getId(), LoginStatusEnum.FAIL, BeanUtil.copyProperties(req, LogLogin.class));
-            // 放入缓存，错误次数+1
             return Result.error("账号或者密码不正确");
         }
 
-        // 登录日志，异步处理
-        ThreadUtil.newSingleExecutor().execute(() -> {
-            log(user.getId(), LoginStatusEnum.SUCCESS, BeanUtil.copyProperties(req, LogLogin.class));
-        });
+        // 成功登录日志
+        log(user.getId(), LoginStatusEnum.SUCCESS, BeanUtil.copyProperties(req, LogLogin.class));
 
         UsersLoginResp dto = new UsersLoginResp();
         dto.setMobile(user.getMobile());
@@ -123,7 +120,6 @@ public class ApiUsersBiz extends BaseBiz {
 
         // token，放入缓存
         cacheRedis.set(dto.getToken(), user.getId(), 1, TimeUnit.DAYS);
-
         return Result.success(dto);
     }
 
