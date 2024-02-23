@@ -34,7 +34,7 @@ public class AdminLogLoginPageResp implements Serializable {
     private Long userId;
 
     @ApiModelProperty(value = "用户手机")
-    private String moblie;
+    private String mobile;
 
     @ApiModelProperty(value = "登录状态(1成功，0失败)")
     private Integer loginStatus;

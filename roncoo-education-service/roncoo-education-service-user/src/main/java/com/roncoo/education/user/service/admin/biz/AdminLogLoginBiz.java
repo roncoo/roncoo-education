@@ -56,7 +56,7 @@ public class AdminLogLoginBiz extends BaseBiz {
             Map<Long, String> mobileMap = usersDao.listByIds(userIdList).stream().collect(Collectors.toMap(item -> item.getId(), item -> item.getMobile()));
             for (AdminLogLoginPageResp resp : respPage.getList()) {
                 // 手机号
-                resp.setMoblie(DesensitizedUtil.mobilePhone(mobileMap.get(resp.getUserId())));
+                resp.setMobile(DesensitizedUtil.mobilePhone(mobileMap.get(resp.getUserId())));
             }
         }
         return Result.success(respPage);
