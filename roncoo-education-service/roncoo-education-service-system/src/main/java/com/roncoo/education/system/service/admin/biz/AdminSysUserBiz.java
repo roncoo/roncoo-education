@@ -4,12 +4,14 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
+import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.MenuTypeEnum;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.common.core.tools.SHA1Util;
 import com.roncoo.education.system.dao.SysRoleDao;
 import com.roncoo.education.system.dao.SysRoleUserDao;
@@ -30,6 +32,7 @@ import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -49,6 +52,8 @@ public class AdminSysUserBiz {
     private SysRoleDao sysRoleDao;
     @Autowired
     private SysUserCommonBiz sysUserCommonBiz;
+    @Autowired
+    private CacheRedis cacheRedis;
 
     public Result<Page<AdminSysUserPageResp>> listForPage(AdminSysUserPageReq req) {
         SysUserExample example = new SysUserExample();
@@ -149,6 +154,11 @@ public class AdminSysUserBiz {
         resp.setRouterList(sysUserCommonBiz.routerList(sysMenus));
         // 菜单
         resp.setMenuList(sysUserCommonBiz.menuList(sysMenus));
+        // 权限
+        resp.setPermissionList(sysMenus.stream().filter(item -> StringUtils.hasText(item.getPermission())).map(SysMenu::getPermission).collect(Collectors.toList()));
+        // 获取接口权限，放入缓存
+        List<String> apis = sysMenus.stream().filter(item -> StringUtils.hasText(item.getApis())).map(SysMenu::getApis).collect(Collectors.toList());
+        cacheRedis.set(Constants.RedisPre.ADMINI_APIS.concat(sysUser.getId().toString()), apis, 1, TimeUnit.DAYS);
         return Result.success(resp);
     }
 
