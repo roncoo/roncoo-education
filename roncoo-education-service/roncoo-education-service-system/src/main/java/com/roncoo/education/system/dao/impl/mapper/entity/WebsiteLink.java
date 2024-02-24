@@ -18,7 +18,7 @@ public class WebsiteLink implements Serializable {
 
     private String linkUrl;
 
-    private String linkTarget;
+    private Integer linkTarget;
 
     private static final long serialVersionUID = 1L;
 
@@ -78,12 +78,12 @@ public class WebsiteLink implements Serializable {
         this.linkUrl = linkUrl == null ? null : linkUrl.trim();
     }
 
-    public String getLinkTarget() {
+    public Integer getLinkTarget() {
         return linkTarget;
     }
 
-    public void setLinkTarget(String linkTarget) {
-        this.linkTarget = linkTarget == null ? null : linkTarget.trim();
+    public void setLinkTarget(Integer linkTarget) {
+        this.linkTarget = linkTarget;
     }
 
     @Override

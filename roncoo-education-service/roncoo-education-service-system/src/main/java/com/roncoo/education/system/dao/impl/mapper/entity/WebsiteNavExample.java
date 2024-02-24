@@ -565,73 +565,63 @@ public class WebsiteNavExample {
             return (Criteria) this;
         }
 
-        public Criteria andTargetIsNull() {
-            addCriterion("target is null");
+        public Criteria andNavTargetIsNull() {
+            addCriterion("nav_target is null");
             return (Criteria) this;
         }
 
-        public Criteria andTargetIsNotNull() {
-            addCriterion("target is not null");
+        public Criteria andNavTargetIsNotNull() {
+            addCriterion("nav_target is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTargetEqualTo(String value) {
-            addCriterion("target =", value, "target");
+        public Criteria andNavTargetEqualTo(Integer value) {
+            addCriterion("nav_target =", value, "navTarget");
             return (Criteria) this;
         }
 
-        public Criteria andTargetNotEqualTo(String value) {
-            addCriterion("target <>", value, "target");
+        public Criteria andNavTargetNotEqualTo(Integer value) {
+            addCriterion("nav_target <>", value, "navTarget");
             return (Criteria) this;
         }
 
-        public Criteria andTargetGreaterThan(String value) {
-            addCriterion("target >", value, "target");
+        public Criteria andNavTargetGreaterThan(Integer value) {
+            addCriterion("nav_target >", value, "navTarget");
             return (Criteria) this;
         }
 
-        public Criteria andTargetGreaterThanOrEqualTo(String value) {
-            addCriterion("target >=", value, "target");
+        public Criteria andNavTargetGreaterThanOrEqualTo(Integer value) {
+            addCriterion("nav_target >=", value, "navTarget");
             return (Criteria) this;
         }
 
-        public Criteria andTargetLessThan(String value) {
-            addCriterion("target <", value, "target");
+        public Criteria andNavTargetLessThan(Integer value) {
+            addCriterion("nav_target <", value, "navTarget");
             return (Criteria) this;
         }
 
-        public Criteria andTargetLessThanOrEqualTo(String value) {
-            addCriterion("target <=", value, "target");
+        public Criteria andNavTargetLessThanOrEqualTo(Integer value) {
+            addCriterion("nav_target <=", value, "navTarget");
             return (Criteria) this;
         }
 
-        public Criteria andTargetLike(String value) {
-            addCriterion("target like", value, "target");
+        public Criteria andNavTargetIn(List<Integer> values) {
+            addCriterion("nav_target in", values, "navTarget");
             return (Criteria) this;
         }
 
-        public Criteria andTargetNotLike(String value) {
-            addCriterion("target not like", value, "target");
+        public Criteria andNavTargetNotIn(List<Integer> values) {
+            addCriterion("nav_target not in", values, "navTarget");
             return (Criteria) this;
         }
 
-        public Criteria andTargetIn(List<String> values) {
-            addCriterion("target in", values, "target");
+        public Criteria andNavTargetBetween(Integer value1, Integer value2) {
+            addCriterion("nav_target between", value1, value2, "navTarget");
             return (Criteria) this;
         }
 
-        public Criteria andTargetNotIn(List<String> values) {
-            addCriterion("target not in", values, "target");
-            return (Criteria) this;
-        }
-
-        public Criteria andTargetBetween(String value1, String value2) {
-            addCriterion("target between", value1, value2, "target");
-            return (Criteria) this;
-        }
-
-        public Criteria andTargetNotBetween(String value1, String value2) {
-            addCriterion("target not between", value1, value2, "target");
+        public Criteria andNavTargetNotBetween(Integer value1, Integer value2) {
+            addCriterion("nav_target not between", value1, value2, "navTarget");
             return (Criteria) this;
         }
     }

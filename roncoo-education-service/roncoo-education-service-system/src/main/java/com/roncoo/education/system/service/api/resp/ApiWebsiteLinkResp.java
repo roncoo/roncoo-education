@@ -38,6 +38,6 @@ public class ApiWebsiteLinkResp implements Serializable {
     /**
      * 跳转方式(_blank，_self)
      */
-    @ApiModelProperty(value = "跳转方式(_blank，_self)")
-    private String linkTarget;
+    @ApiModelProperty(value = "跳转方式")
+    private Integer linkTarget;
 }

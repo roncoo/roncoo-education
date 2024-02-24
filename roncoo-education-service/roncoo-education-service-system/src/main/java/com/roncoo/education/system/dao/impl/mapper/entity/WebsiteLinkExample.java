@@ -575,62 +575,52 @@ public class WebsiteLinkExample {
             return (Criteria) this;
         }
 
-        public Criteria andLinkTargetEqualTo(String value) {
+        public Criteria andLinkTargetEqualTo(Integer value) {
             addCriterion("link_target =", value, "linkTarget");
             return (Criteria) this;
         }
 
-        public Criteria andLinkTargetNotEqualTo(String value) {
+        public Criteria andLinkTargetNotEqualTo(Integer value) {
             addCriterion("link_target <>", value, "linkTarget");
             return (Criteria) this;
         }
 
-        public Criteria andLinkTargetGreaterThan(String value) {
+        public Criteria andLinkTargetGreaterThan(Integer value) {
             addCriterion("link_target >", value, "linkTarget");
             return (Criteria) this;
         }
 
-        public Criteria andLinkTargetGreaterThanOrEqualTo(String value) {
+        public Criteria andLinkTargetGreaterThanOrEqualTo(Integer value) {
             addCriterion("link_target >=", value, "linkTarget");
             return (Criteria) this;
         }
 
-        public Criteria andLinkTargetLessThan(String value) {
+        public Criteria andLinkTargetLessThan(Integer value) {
             addCriterion("link_target <", value, "linkTarget");
             return (Criteria) this;
         }
 
-        public Criteria andLinkTargetLessThanOrEqualTo(String value) {
+        public Criteria andLinkTargetLessThanOrEqualTo(Integer value) {
             addCriterion("link_target <=", value, "linkTarget");
             return (Criteria) this;
         }
 
-        public Criteria andLinkTargetLike(String value) {
-            addCriterion("link_target like", value, "linkTarget");
-            return (Criteria) this;
-        }
-
-        public Criteria andLinkTargetNotLike(String value) {
-            addCriterion("link_target not like", value, "linkTarget");
-            return (Criteria) this;
-        }
-
-        public Criteria andLinkTargetIn(List<String> values) {
+        public Criteria andLinkTargetIn(List<Integer> values) {
             addCriterion("link_target in", values, "linkTarget");
             return (Criteria) this;
         }
 
-        public Criteria andLinkTargetNotIn(List<String> values) {
+        public Criteria andLinkTargetNotIn(List<Integer> values) {
             addCriterion("link_target not in", values, "linkTarget");
             return (Criteria) this;
         }
 
-        public Criteria andLinkTargetBetween(String value1, String value2) {
+        public Criteria andLinkTargetBetween(Integer value1, Integer value2) {
             addCriterion("link_target between", value1, value2, "linkTarget");
             return (Criteria) this;
         }
 
-        public Criteria andLinkTargetNotBetween(String value1, String value2) {
+        public Criteria andLinkTargetNotBetween(Integer value1, Integer value2) {
             addCriterion("link_target not between", value1, value2, "linkTarget");
             return (Criteria) this;
         }

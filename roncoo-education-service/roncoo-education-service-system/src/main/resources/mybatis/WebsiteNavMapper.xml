@@ -9,7 +9,7 @@
         <result column="sort" jdbcType="INTEGER" property="sort"/>
         <result column="nav_title" jdbcType="VARCHAR" property="navTitle"/>
         <result column="nav_url" jdbcType="VARCHAR" property="navUrl"/>
-        <result column="target" jdbcType="VARCHAR" property="target"/>
+        <result column="nav_target" jdbcType="TINYINT" property="navTarget"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -29,7 +29,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -58,7 +59,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -70,9 +72,11 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        id, gmt_create, gmt_modified, status_id, sort, nav_title, nav_url, target
+        id
+        , gmt_create, gmt_modified, status_id, sort, nav_title, nav_url, nav_target
     </sql>
-    <select id="selectByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavExample"
+            resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -109,10 +113,10 @@
     <insert id="insert" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNav">
         insert into website_nav (id, gmt_create, gmt_modified,
                                  status_id, sort, nav_title,
-                                 nav_url, target)
+                                 nav_url, nav_target)
         values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
                 #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{navTitle,jdbcType=VARCHAR},
-                #{navUrl,jdbcType=VARCHAR}, #{target,jdbcType=VARCHAR})
+                #{navUrl,jdbcType=VARCHAR}, #{navTarget,jdbcType=TINYINT})
     </insert>
     <insert id="insertSelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNav">
         insert into website_nav
@@ -138,8 +142,8 @@
             <if test="navUrl != null">
                 nav_url,
             </if>
-            <if test="target != null">
-                target,
+            <if test="navTarget != null">
+                nav_target,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -164,12 +168,13 @@
             <if test="navUrl != null">
                 #{navUrl,jdbcType=VARCHAR},
             </if>
-            <if test="target != null">
-                #{target,jdbcType=VARCHAR},
+            <if test="navTarget != null">
+                #{navTarget,jdbcType=TINYINT},
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavExample" resultType="java.lang.Integer">
+    <select id="countByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavExample"
+            resultType="java.lang.Integer">
         select count(*) from website_nav
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -199,8 +204,8 @@
             <if test="record.navUrl != null">
                 nav_url = #{record.navUrl,jdbcType=VARCHAR},
             </if>
-            <if test="record.target != null">
-                target = #{record.target,jdbcType=VARCHAR},
+            <if test="record.navTarget != null">
+                nav_target = #{record.navTarget,jdbcType=TINYINT},
             </if>
         </set>
         <if test="_parameter != null">
@@ -216,12 +221,13 @@
         sort = #{record.sort,jdbcType=INTEGER},
         nav_title = #{record.navTitle,jdbcType=VARCHAR},
         nav_url = #{record.navUrl,jdbcType=VARCHAR},
-        target = #{record.target,jdbcType=VARCHAR}
+        nav_target = #{record.navTarget,jdbcType=TINYINT}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNav">
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNav">
         update website_nav
         <set>
             <if test="gmtCreate != null">
@@ -242,8 +248,8 @@
             <if test="navUrl != null">
                 nav_url = #{navUrl,jdbcType=VARCHAR},
             </if>
-            <if test="target != null">
-                target = #{target,jdbcType=VARCHAR},
+            <if test="navTarget != null">
+                nav_target = #{navTarget,jdbcType=TINYINT},
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
@@ -256,7 +262,7 @@
             sort         = #{sort,jdbcType=INTEGER},
             nav_title    = #{navTitle,jdbcType=VARCHAR},
             nav_url      = #{navUrl,jdbcType=VARCHAR},
-            target       = #{target,jdbcType=VARCHAR}
+            nav_target   = #{navTarget,jdbcType=TINYINT}
         where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

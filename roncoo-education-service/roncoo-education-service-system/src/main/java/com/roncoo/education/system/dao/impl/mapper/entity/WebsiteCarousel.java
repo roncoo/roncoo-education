@@ -20,7 +20,7 @@ public class WebsiteCarousel implements Serializable {
 
     private String carouselUrl;
 
-    private String carouselTarget;
+    private Integer carouselTarget;
 
     private LocalDateTime beginTime;
 
@@ -92,12 +92,12 @@ public class WebsiteCarousel implements Serializable {
         this.carouselUrl = carouselUrl == null ? null : carouselUrl.trim();
     }
 
-    public String getCarouselTarget() {
+    public Integer getCarouselTarget() {
         return carouselTarget;
     }
 
-    public void setCarouselTarget(String carouselTarget) {
-        this.carouselTarget = carouselTarget == null ? null : carouselTarget.trim();
+    public void setCarouselTarget(Integer carouselTarget) {
+        this.carouselTarget = carouselTarget;
     }
 
     public LocalDateTime getBeginTime() {

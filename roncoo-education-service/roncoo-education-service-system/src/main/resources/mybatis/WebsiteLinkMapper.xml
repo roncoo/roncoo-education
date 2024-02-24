@@ -9,7 +9,7 @@
         <result column="sort" jdbcType="INTEGER" property="sort"/>
         <result column="link_name" jdbcType="VARCHAR" property="linkName"/>
         <result column="link_url" jdbcType="VARCHAR" property="linkUrl"/>
-        <result column="link_target" jdbcType="VARCHAR" property="linkTarget"/>
+        <result column="link_target" jdbcType="TINYINT" property="linkTarget"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -29,7 +29,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -58,7 +59,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -70,9 +72,11 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        id, gmt_create, gmt_modified, status_id, sort, link_name, link_url, link_target
+        id
+        , gmt_create, gmt_modified, status_id, sort, link_name, link_url, link_target
     </sql>
-    <select id="selectByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample"
+            resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -112,7 +116,7 @@
                                   link_url, link_target)
         values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
                 #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{linkName,jdbcType=VARCHAR},
-                #{linkUrl,jdbcType=VARCHAR}, #{linkTarget,jdbcType=VARCHAR})
+                #{linkUrl,jdbcType=VARCHAR}, #{linkTarget,jdbcType=TINYINT})
     </insert>
     <insert id="insertSelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink">
         insert into website_link
@@ -165,11 +169,12 @@
                 #{linkUrl,jdbcType=VARCHAR},
             </if>
             <if test="linkTarget != null">
-                #{linkTarget,jdbcType=VARCHAR},
+                #{linkTarget,jdbcType=TINYINT},
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample" resultType="java.lang.Integer">
+    <select id="countByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample"
+            resultType="java.lang.Integer">
         select count(*) from website_link
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -200,7 +205,7 @@
                 link_url = #{record.linkUrl,jdbcType=VARCHAR},
             </if>
             <if test="record.linkTarget != null">
-                link_target = #{record.linkTarget,jdbcType=VARCHAR},
+                link_target = #{record.linkTarget,jdbcType=TINYINT},
             </if>
         </set>
         <if test="_parameter != null">
@@ -216,12 +221,13 @@
         sort = #{record.sort,jdbcType=INTEGER},
         link_name = #{record.linkName,jdbcType=VARCHAR},
         link_url = #{record.linkUrl,jdbcType=VARCHAR},
-        link_target = #{record.linkTarget,jdbcType=VARCHAR}
+        link_target = #{record.linkTarget,jdbcType=TINYINT}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink">
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink">
         update website_link
         <set>
             <if test="gmtCreate != null">
@@ -243,7 +249,7 @@
                 link_url = #{linkUrl,jdbcType=VARCHAR},
             </if>
             <if test="linkTarget != null">
-                link_target = #{linkTarget,jdbcType=VARCHAR},
+                link_target = #{linkTarget,jdbcType=TINYINT},
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
@@ -256,7 +262,7 @@
             sort         = #{sort,jdbcType=INTEGER},
             link_name    = #{linkName,jdbcType=VARCHAR},
             link_url     = #{linkUrl,jdbcType=VARCHAR},
-            link_target  = #{linkTarget,jdbcType=VARCHAR}
+            link_target  = #{linkTarget,jdbcType=TINYINT}
         where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

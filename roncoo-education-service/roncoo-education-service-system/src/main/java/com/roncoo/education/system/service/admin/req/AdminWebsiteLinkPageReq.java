@@ -36,8 +36,8 @@ public class AdminWebsiteLinkPageReq implements Serializable {
     @ApiModelProperty(value = "链接")
     private String linkUrl;
 
-    @ApiModelProperty(value = "跳转方式(_blank，_self)")
-    private String linkTarget;
+    @ApiModelProperty(value = "跳转方式")
+    private Integer linkTarget;
 
     @ApiModelProperty(value = "当前页")
     private int pageCurrent = 1;

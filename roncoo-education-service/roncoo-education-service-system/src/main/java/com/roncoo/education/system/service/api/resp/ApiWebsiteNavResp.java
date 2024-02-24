@@ -32,5 +32,5 @@ public class ApiWebsiteNavResp implements Serializable {
     private String navUrl;
 
     @ApiModelProperty(value = "跳转方式")
-    private String target;
+    private Integer navTarget;
 }

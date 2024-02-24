@@ -18,7 +18,7 @@ public class WebsiteNav implements Serializable {
 
     private String navUrl;
 
-    private String target;
+    private Integer navTarget;
 
     private static final long serialVersionUID = 1L;
 
@@ -78,12 +78,12 @@ public class WebsiteNav implements Serializable {
         this.navUrl = navUrl == null ? null : navUrl.trim();
     }
 
-    public String getTarget() {
-        return target;
+    public Integer getNavTarget() {
+        return navTarget;
     }
 
-    public void setTarget(String target) {
-        this.target = target == null ? null : target.trim();
+    public void setNavTarget(Integer navTarget) {
+        this.navTarget = navTarget;
     }
 
     @Override
@@ -99,7 +99,7 @@ public class WebsiteNav implements Serializable {
         sb.append(", sort=").append(sort);
         sb.append(", navTitle=").append(navTitle);
         sb.append(", navUrl=").append(navUrl);
-        sb.append(", target=").append(target);
+        sb.append(", navTarget=").append(navTarget);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

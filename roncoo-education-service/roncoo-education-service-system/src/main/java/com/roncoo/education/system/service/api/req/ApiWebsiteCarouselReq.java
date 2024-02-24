@@ -43,7 +43,7 @@ public class ApiWebsiteCarouselReq implements Serializable {
     private String carouselUrl;
 
     @ApiModelProperty(value = "广告跳转方式")
-    private String carouselTarget;
+    private Integer carouselTarget;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "开始时间")

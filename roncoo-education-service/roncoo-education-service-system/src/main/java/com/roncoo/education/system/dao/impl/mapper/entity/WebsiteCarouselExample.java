@@ -645,62 +645,52 @@ public class WebsiteCarouselExample {
             return (Criteria) this;
         }
 
-        public Criteria andCarouselTargetEqualTo(String value) {
+        public Criteria andCarouselTargetEqualTo(Integer value) {
             addCriterion("carousel_target =", value, "carouselTarget");
             return (Criteria) this;
         }
 
-        public Criteria andCarouselTargetNotEqualTo(String value) {
+        public Criteria andCarouselTargetNotEqualTo(Integer value) {
             addCriterion("carousel_target <>", value, "carouselTarget");
             return (Criteria) this;
         }
 
-        public Criteria andCarouselTargetGreaterThan(String value) {
+        public Criteria andCarouselTargetGreaterThan(Integer value) {
             addCriterion("carousel_target >", value, "carouselTarget");
             return (Criteria) this;
         }
 
-        public Criteria andCarouselTargetGreaterThanOrEqualTo(String value) {
+        public Criteria andCarouselTargetGreaterThanOrEqualTo(Integer value) {
             addCriterion("carousel_target >=", value, "carouselTarget");
             return (Criteria) this;
         }
 
-        public Criteria andCarouselTargetLessThan(String value) {
+        public Criteria andCarouselTargetLessThan(Integer value) {
             addCriterion("carousel_target <", value, "carouselTarget");
             return (Criteria) this;
         }
 
-        public Criteria andCarouselTargetLessThanOrEqualTo(String value) {
+        public Criteria andCarouselTargetLessThanOrEqualTo(Integer value) {
             addCriterion("carousel_target <=", value, "carouselTarget");
             return (Criteria) this;
         }
 
-        public Criteria andCarouselTargetLike(String value) {
-            addCriterion("carousel_target like", value, "carouselTarget");
-            return (Criteria) this;
-        }
-
-        public Criteria andCarouselTargetNotLike(String value) {
-            addCriterion("carousel_target not like", value, "carouselTarget");
-            return (Criteria) this;
-        }
-
-        public Criteria andCarouselTargetIn(List<String> values) {
+        public Criteria andCarouselTargetIn(List<Integer> values) {
             addCriterion("carousel_target in", values, "carouselTarget");
             return (Criteria) this;
         }
 
-        public Criteria andCarouselTargetNotIn(List<String> values) {
+        public Criteria andCarouselTargetNotIn(List<Integer> values) {
             addCriterion("carousel_target not in", values, "carouselTarget");
             return (Criteria) this;
         }
 
-        public Criteria andCarouselTargetBetween(String value1, String value2) {
+        public Criteria andCarouselTargetBetween(Integer value1, Integer value2) {
             addCriterion("carousel_target between", value1, value2, "carouselTarget");
             return (Criteria) this;
         }
 
-        public Criteria andCarouselTargetNotBetween(String value1, String value2) {
+        public Criteria andCarouselTargetNotBetween(Integer value1, Integer value2) {
             addCriterion("carousel_target not between", value1, value2, "carouselTarget");
             return (Criteria) this;
         }

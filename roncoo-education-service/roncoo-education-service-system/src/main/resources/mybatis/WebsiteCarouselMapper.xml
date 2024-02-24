@@ -10,7 +10,7 @@
         <result column="carousel_title" jdbcType="VARCHAR" property="carouselTitle"/>
         <result column="carousel_img" jdbcType="VARCHAR" property="carouselImg"/>
         <result column="carousel_url" jdbcType="VARCHAR" property="carouselUrl"/>
-        <result column="carousel_target" jdbcType="VARCHAR" property="carouselTarget"/>
+        <result column="carousel_target" jdbcType="TINYINT" property="carouselTarget"/>
         <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime"/>
         <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
     </resultMap>
@@ -32,7 +32,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -61,7 +62,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -73,10 +75,13 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        id, gmt_create, gmt_modified, status_id, sort, carousel_title, carousel_img, carousel_url,
+        id
+        , gmt_create, gmt_modified, status_id, sort, carousel_title, carousel_img, carousel_url,
     carousel_target, begin_time, end_time
     </sql>
-    <select id="selectByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarouselExample" resultMap="BaseResultMap">
+    <select id="selectByExample"
+            parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarouselExample"
+            resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -104,7 +109,8 @@
         from website_carousel
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <delete id="deleteByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarouselExample">
+    <delete id="deleteByExample"
+            parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarouselExample">
         delete from website_carousel
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -117,7 +123,7 @@
                                       begin_time, end_time)
         values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
                 #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{carouselTitle,jdbcType=VARCHAR},
-                #{carouselImg,jdbcType=VARCHAR}, #{carouselUrl,jdbcType=VARCHAR}, #{carouselTarget,jdbcType=VARCHAR},
+                #{carouselImg,jdbcType=VARCHAR}, #{carouselUrl,jdbcType=VARCHAR}, #{carouselTarget,jdbcType=TINYINT},
                 #{beginTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP})
     </insert>
     <insert id="insertSelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarousel">
@@ -183,7 +189,7 @@
                 #{carouselUrl,jdbcType=VARCHAR},
             </if>
             <if test="carouselTarget != null">
-                #{carouselTarget,jdbcType=VARCHAR},
+                #{carouselTarget,jdbcType=TINYINT},
             </if>
             <if test="beginTime != null">
                 #{beginTime,jdbcType=TIMESTAMP},
@@ -193,7 +199,9 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarouselExample" resultType="java.lang.Integer">
+    <select id="countByExample"
+            parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarouselExample"
+            resultType="java.lang.Integer">
         select count(*) from website_carousel
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -227,7 +235,7 @@
                 carousel_url = #{record.carouselUrl,jdbcType=VARCHAR},
             </if>
             <if test="record.carouselTarget != null">
-                carousel_target = #{record.carouselTarget,jdbcType=VARCHAR},
+                carousel_target = #{record.carouselTarget,jdbcType=TINYINT},
             </if>
             <if test="record.beginTime != null">
                 begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
@@ -250,14 +258,15 @@
         carousel_title = #{record.carouselTitle,jdbcType=VARCHAR},
         carousel_img = #{record.carouselImg,jdbcType=VARCHAR},
         carousel_url = #{record.carouselUrl,jdbcType=VARCHAR},
-        carousel_target = #{record.carouselTarget,jdbcType=VARCHAR},
+        carousel_target = #{record.carouselTarget,jdbcType=TINYINT},
         begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
         end_time = #{record.endTime,jdbcType=TIMESTAMP}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarousel">
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarousel">
         update website_carousel
         <set>
             <if test="gmtCreate != null">
@@ -282,7 +291,7 @@
                 carousel_url = #{carouselUrl,jdbcType=VARCHAR},
             </if>
             <if test="carouselTarget != null">
-                carousel_target = #{carouselTarget,jdbcType=VARCHAR},
+                carousel_target = #{carouselTarget,jdbcType=TINYINT},
             </if>
             <if test="beginTime != null">
                 begin_time = #{beginTime,jdbcType=TIMESTAMP},
@@ -302,7 +311,7 @@
             carousel_title  = #{carouselTitle,jdbcType=VARCHAR},
             carousel_img    = #{carouselImg,jdbcType=VARCHAR},
             carousel_url    = #{carouselUrl,jdbcType=VARCHAR},
-            carousel_target = #{carouselTarget,jdbcType=VARCHAR},
+            carousel_target = #{carouselTarget,jdbcType=TINYINT},
             begin_time      = #{beginTime,jdbcType=TIMESTAMP},
             end_time        = #{endTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=BIGINT}

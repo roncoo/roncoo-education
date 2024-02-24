@@ -43,6 +43,6 @@ public class AdminWebsiteLinkUpdateReq implements Serializable {
      * 跳转方式(_blank，_self)
      */
     @ApiModelProperty(value = "跳转方式(_blank，_self)", required = false)
-    private String linkTarget;
+    private Integer linkTarget;
 
 }
