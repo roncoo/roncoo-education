@@ -32,4 +32,7 @@ public class AdminSysUserLoginResp implements Serializable {
 
     @ApiModelProperty(value = "用户菜单", required = true)
     private List<AdminSysMenuUserResp> menuList;
+
+    @ApiModelProperty(value = "前端权限", required = true)
+    private List<String> permissionList;
 }

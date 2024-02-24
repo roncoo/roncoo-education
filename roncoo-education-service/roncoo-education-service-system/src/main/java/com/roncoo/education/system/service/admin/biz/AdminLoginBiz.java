@@ -78,9 +78,11 @@ public class AdminLoginBiz {
         resp.setRouterList(sysUserCommonBiz.routerList(sysMenus));
         // 菜单
         resp.setMenuList(sysUserCommonBiz.menuList(sysMenus));
+        // 权限
+        resp.setPermissionList(sysMenus.stream().filter(item -> StringUtils.hasText(item.getPermission())).map(SysMenu::getPermission).collect(Collectors.toList()));
 
         // 获取接口权限，放入缓存
-        List<String> apis = sysMenus.stream().map(SysMenu::getApis).collect(Collectors.toList());
+        List<String> apis = sysMenus.stream().filter(item -> StringUtils.hasText(item.getApis())).map(SysMenu::getApis).collect(Collectors.toList());
         cacheRedis.set(Constants.RedisPre.ADMINI_APIS.concat(sysUser.getId().toString()), apis, 1, TimeUnit.DAYS);
 
         return Result.success(resp);
