@@ -10,9 +10,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum TargetEnum {
 
-    BLANK("_blank", "新窗口打开"), SELF("_self", "同窗口打开");
+    BLANK(1, "新窗口打开"), SELF(2, "同窗口打开");
 
-    private String code;
+    private Integer code;
 
     private String desc;
 
