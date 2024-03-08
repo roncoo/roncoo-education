@@ -101,7 +101,7 @@ public class AuthOrderPayBiz extends BaseBiz {
             resp.setSerialNumber(orderPay.getSerialNumber());
             return Result.success(resp);
         }
-        return Result.error("下单失败");
+        return Result.error("下单失败，请更换支付方式试试");
     }
 
     /**
@@ -143,7 +143,7 @@ public class AuthOrderPayBiz extends BaseBiz {
             resp.setSerialNumber(orderPay.getSerialNumber());
             return Result.success(resp);
         }
-        return Result.error("下单失败");
+        return Result.error("下单失败，请更换支付方式试试");
     }
 
     @Transactional(rollbackFor = Exception.class)
