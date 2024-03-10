@@ -28,6 +28,12 @@ public class LoginReq implements Serializable {
     @ApiModelProperty(value = "登录密码", required = true)
     private String password;
 
+    @ApiModelProperty(value = "验证KEY", required = true)
+    private String verToken;
+
+    @ApiModelProperty(value = "验证码", required = true)
+    private String verCode;
+
     @ApiModelProperty(value = "登录IP", required = false)
     private String loginIp;
     @ApiModelProperty(value = "国家", required = false)

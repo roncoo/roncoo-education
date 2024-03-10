@@ -98,6 +98,15 @@ public class ApiUsersBiz extends BaseBiz {
         if (!StringUtils.hasText(req.getPassword())) {
             return Result.error("密码不能为空");
         }
+
+        String verCode = cacheRedis.get(Constants.RedisPre.VERI_CODE + req.getVerToken());
+        if (!StringUtils.hasText(verCode)) {
+            return Result.error("验证码已过期");
+        }
+        if (!verCode.equals(req.getVerCode())) {
+            return Result.error("验证码不正确");
+        }
+
         // 用户校验
         Users user = userDao.getByMobile(req.getMobile());
         if (null == user) {

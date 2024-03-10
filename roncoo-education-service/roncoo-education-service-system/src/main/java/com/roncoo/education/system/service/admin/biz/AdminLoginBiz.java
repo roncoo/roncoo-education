@@ -42,7 +42,7 @@ public class AdminLoginBiz {
      */
     public Result<AdminSysUserLoginResp> login(AdminSysUserLoginReq req) {
         // 验证码校验
-        String verCode = cacheRedis.get(Constants.RedisPre.ADMIN_VERI_CODE + req.getVerToken());
+        String verCode = cacheRedis.get(Constants.RedisPre.VERI_CODE + req.getVerToken());
         if (!StringUtils.hasText(verCode)) {
             return Result.error("验证码已过期");
         }

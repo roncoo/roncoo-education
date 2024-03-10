@@ -24,7 +24,7 @@ public final class Constants {
 
     public interface RedisPre {
         String ADMINI_APIS = "admin::apis::";
-        String ADMIN_VERI_CODE = "admin::ver::code::";
+        String VERI_CODE = "ver::code::";
         String USER_STUDY = "user::study::";
         /**
          * 资源
