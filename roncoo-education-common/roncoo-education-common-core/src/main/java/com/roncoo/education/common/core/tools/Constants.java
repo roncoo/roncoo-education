@@ -23,22 +23,22 @@ public final class Constants {
     public final static int SESSIONTIME = 40;
 
     public interface RedisPre {
-        String ADMINI_APIS = "admin::apis::";
-        String VERI_CODE = "ver::code::";
-        String USER_STUDY = "user::study::";
+        String ADMINI_APIS = "admin:apis:";
+        String VERI_CODE = "ver:code:";
+        String USER_STUDY = "user:study:";
         /**
          * 资源
          */
-        String RESOURCE = "resource::";
+        String RESOURCE = "resource:";
         /**
          * 学习进度
          */
-        String PROGRESS = "progress::";
+        String PROGRESS = "progress:";
         /**
          * 短信验证码
          */
-        String CODE = "code::";
-        String CODE_STAT = "code::stat::";
+        String CODE = "code:";
+        String CODE_STAT = "code:stat:";
     }
 
 }

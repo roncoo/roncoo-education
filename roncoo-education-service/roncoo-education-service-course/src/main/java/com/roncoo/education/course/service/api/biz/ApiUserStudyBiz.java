@@ -5,6 +5,7 @@ import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ResourceTypeEnum;
 import com.roncoo.education.common.core.tools.Constants;
+import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.ResourceDao;
 import com.roncoo.education.course.dao.UserStudyDao;
@@ -40,6 +41,7 @@ public class ApiUserStudyBiz extends BaseBiz {
         if (ObjectUtil.isEmpty(resource)) {
             Result.error("resourceId不正确");
         }
+        log.warn("resource={}", JSUtil.toJsonString(resource));
         req.setResourceType(resource.getResourceType());
         if (ResourceTypeEnum.AUDIO.getCode().equals(resource.getResourceType()) || ResourceTypeEnum.VIDEO.getCode().equals(resource.getResourceType())) {
             // 音视频处理
