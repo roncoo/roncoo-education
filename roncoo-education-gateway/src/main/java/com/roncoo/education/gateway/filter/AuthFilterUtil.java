@@ -15,9 +15,9 @@ import org.springframework.util.StringUtils;
  * @author Admin
  */
 @Slf4j
-public final class FilterUtil {
+public final class AuthFilterUtil {
 
-    private FilterUtil() {
+    private AuthFilterUtil() {
     }
 
     /**

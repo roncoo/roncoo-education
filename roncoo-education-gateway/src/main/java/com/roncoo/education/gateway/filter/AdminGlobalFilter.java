@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Component
-public class EduGlobalFilter implements GlobalFilter, Ordered {
+public class AdminGlobalFilter implements GlobalFilter, Ordered {
 
     /**
      * admin不需要token校验的接口
@@ -61,19 +61,19 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
         String uri = request.getPath().value();
-        if (FilterUtil.checkUri(uri, FilterUtil.CALLBACK_URL_PREFIX)) {
+        if (AuthFilterUtil.checkUri(uri, AuthFilterUtil.CALLBACK_URL_PREFIX)) {
             // 路径存在关键词：/callback，不鉴权
             return chain.filter(exchange);
         }
-        if (FilterUtil.checkUri(uri, FilterUtil.API_URL_PREFIX)) {
+        if (AuthFilterUtil.checkUri(uri, AuthFilterUtil.API_URL_PREFIX)) {
             // 路径存在关键词：/api，不鉴权
             return chain.filter(exchange);
         }
-        if (FilterUtil.checkUri(uri, FilterUtil.API_V3)) {
+        if (AuthFilterUtil.checkUri(uri, AuthFilterUtil.API_V3)) {
             // 路径存在关键词：/v3，不鉴权
             return chain.filter(exchange);
         }
-        if (FilterUtil.checkUri(uri, FilterUtil.IMAGES)) {
+        if (AuthFilterUtil.checkUri(uri, AuthFilterUtil.IMAGES)) {
             // 路径存在关键词：/images
             return chain.filter(exchange);
         }
@@ -83,7 +83,7 @@ public class EduGlobalFilter implements GlobalFilter, Ordered {
         }
 
         Long userId = getUserId(request);
-        if (FilterUtil.checkUri(uri, FilterUtil.ADMIN_URL_PREFIX)) {
+        if (AuthFilterUtil.checkUri(uri, AuthFilterUtil.ADMIN_URL_PREFIX)) {
             // admin校验
             if (!stringRedisTemplate.hasKey(Constants.RedisPre.ADMINI_APIS.concat(userId.toString()))) {
                 throw new BaseException(ResultEnum.MENU_PAST);
