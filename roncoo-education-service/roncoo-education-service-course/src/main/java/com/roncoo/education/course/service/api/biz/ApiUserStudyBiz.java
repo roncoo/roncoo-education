@@ -39,9 +39,9 @@ public class ApiUserStudyBiz extends BaseBiz {
         // 资源信息
         Resource resource = getByResource(req);
         if (ObjectUtil.isEmpty(resource)) {
-            Result.error("resourceId不正确");
+            log.error("{}", JSUtil.toJsonString(req));
+            return Result.error("resourceId不正确");
         }
-        log.warn("resource={}", JSUtil.toJsonString(resource));
         req.setResourceType(resource.getResourceType());
         if (ResourceTypeEnum.AUDIO.getCode().equals(resource.getResourceType()) || ResourceTypeEnum.VIDEO.getCode().equals(resource.getResourceType())) {
             // 音视频处理
