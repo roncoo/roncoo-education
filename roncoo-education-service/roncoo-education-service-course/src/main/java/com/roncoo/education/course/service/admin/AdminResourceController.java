@@ -3,6 +3,7 @@ package com.roncoo.education.course.service.admin;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.service.admin.biz.AdminResourceBiz;
+import com.roncoo.education.course.service.admin.req.AdminResourceDeleteReq;
 import com.roncoo.education.course.service.admin.req.AdminResourceEditReq;
 import com.roncoo.education.course.service.admin.req.AdminResourcePageReq;
 import com.roncoo.education.course.service.admin.req.AdminResourceSaveReq;
@@ -69,6 +70,12 @@ public class AdminResourceController {
     @DeleteMapping(value = "/delete")
     public Result<String> delete(@RequestParam Long id) {
         return biz.delete(id);
+    }
+
+    @ApiOperation(value = "课程视频信息删除", notes = "批量删除")
+    @PutMapping(value = "/batch/delete")
+    public Result<String> batchDelete(@RequestBody @Valid AdminResourceDeleteReq req) {
+        return biz.batchDelete(req);
     }
 
     @ApiOperation(value = "预览", notes = "获取预览参数")

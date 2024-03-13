@@ -90,4 +90,11 @@ public class ResourceDaoImpl implements ResourceDao {
         example.createCriteria().andIdIn(ids);
         return this.mapper.selectByExample(example);
     }
+
+    @Override
+    public int deleteByIds(List<Long> ids) {
+        ResourceExample example = new ResourceExample();
+        example.createCriteria().andIdIn(ids);
+        return this.mapper.deleteByExample(example);
+    }
 }

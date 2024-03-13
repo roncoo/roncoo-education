@@ -75,4 +75,6 @@ public interface ResourceDao {
     Resource getByVideoVid(String videoVid);
 
     List<Resource> listByIds(List<Long> ids);
+
+    int deleteByIds(List<Long> ids);
 }

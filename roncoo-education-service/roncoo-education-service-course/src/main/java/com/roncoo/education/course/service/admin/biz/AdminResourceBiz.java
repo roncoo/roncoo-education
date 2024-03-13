@@ -8,6 +8,7 @@ import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ResourceTypeEnum;
+import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.common.service.BaseBiz;
@@ -18,6 +19,7 @@ import com.roncoo.education.course.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.dao.ResourceDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.*;
 import com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample.Criteria;
+import com.roncoo.education.course.service.admin.req.AdminResourceDeleteReq;
 import com.roncoo.education.course.service.admin.req.AdminResourceEditReq;
 import com.roncoo.education.course.service.admin.req.AdminResourcePageReq;
 import com.roncoo.education.course.service.admin.req.AdminResourceSaveReq;
@@ -30,6 +32,7 @@ import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -162,23 +165,45 @@ public class AdminResourceBiz extends BaseBiz {
      * @param id ID主键
      * @return 删除结果
      */
+    @Transactional(rollbackFor = Exception.class)
     public Result<String> delete(Long id) {
         Resource resource = dao.getById(id);
         if (ObjectUtil.isNull(resource)) {
             return Result.error("资源不存在");
         }
-        List<CourseChapterPeriod> record = courseChapterPeriodDao.listByResourceId(id);
-        if (CollUtil.isNotEmpty(record)) {
-            log.warn("资源引用={}", JSUtil.toJsonString(record.stream().map(CourseChapterPeriod::getPeriodName).collect(Collectors.toList())));
-            return Result.error("该资源存在引用，暂不能删除");
+        return handleDelete(resource);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public Result<String> batchDelete(AdminResourceDeleteReq req) {
+        List<Resource> resources = dao.listByIds(req.getIds());
+        if (CollUtil.isEmpty(resources)) {
+            return Result.error("资源不存在");
         }
-        if (dao.deleteById(id) > 0) {
-            if (ResourceTypeEnum.VIDEO.getCode().equals(resource.getResourceType()) || ResourceTypeEnum.AUDIO.getCode().equals(resource.getResourceType())) {
-                VodUtil.deleteVideo(feignSysConfig.getVod(), resource.getVideoVid());
+        for (Resource resource : resources) {
+            Result<String> result = handleDelete(resource);
+            if (!result.getCode().equals(ResultEnum.SUCCESS.getCode())) {
+                return result;
             }
-            return Result.success("操作成功");
         }
-        return Result.error("操作失败");
+        return Result.success("操作成功");
+    }
+
+    private Result<String> handleDelete(Resource resource) {
+        List<CourseChapterPeriod> record = courseChapterPeriodDao.listByResourceId(resource.getId());
+        if (CollUtil.isNotEmpty(record)) {
+            log.warn("{}：资源引用={}", JSUtil.toJsonString(resource), JSUtil.toJsonString(record.stream().map(CourseChapterPeriod::getPeriodName).collect(Collectors.toList())));
+            return Result.error(resource.getResourceName() + "，该资源存在引用，暂不能删除");
+        }
+        if (dao.deleteById(resource.getId()) > 0) {
+            if (ResourceTypeEnum.VIDEO.getCode().equals(resource.getResourceType()) || ResourceTypeEnum.AUDIO.getCode().equals(resource.getResourceType())) {
+                // 删除音视频
+                VodUtil.deleteVideo(feignSysConfig.getVod(), resource.getVideoVid());
+            } else if (ResourceTypeEnum.DOC.getCode().equals(resource.getResourceType())) {
+                // 删除文档
+            }
+        }
+        return Result.success("操作成功");
     }
 
     public Result<AdminPreviewResp> preview(Long id) {
@@ -205,4 +230,6 @@ public class AdminResourceBiz extends BaseBiz {
 
         return Result.success(resp);
     }
+
+
 }
