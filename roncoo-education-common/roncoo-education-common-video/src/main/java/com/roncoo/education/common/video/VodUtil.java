@@ -18,6 +18,7 @@ import com.roncoo.education.common.video.req.VodPlayConfigReq;
 import com.roncoo.education.common.video.resp.InfoResp;
 import com.roncoo.education.common.video.resp.VodInfoResp;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -30,6 +31,9 @@ import java.util.List;
  */
 @Slf4j
 public final class VodUtil {
+
+    private static final String PRIVATEY_CALLBACK = "gateway/course/callback/polyv/vod/upload";
+    private static final String PRIVATEY_AUTH = "gateway/course/callback/priyun/vod/auth";
 
     private VodUtil() {
     }
@@ -46,7 +50,7 @@ public final class VodUtil {
         }
         if (VodPlatformEnum.POLYV.getCode().equals(req.getVodPlatform())) {
             // 设置视频回调地址
-            String callbackUrl = req.getWebsiteDomain() + "gateway/course/callback/polyv/vod/upload";
+            String callbackUrl = req.getWebsiteDomain() + "";
             PolyvVodUtil.setCallback(req.getPolyvAppId(), req.getPolyvAppSecret(), callbackUrl);
 
             // 开启加密，使用web授权
@@ -85,6 +89,22 @@ public final class VodUtil {
     }
 
     /**
+     * 获取上传视频回调地址
+     *
+     * @param req
+     * @return
+     */
+    public static String getCallbackUrl(VideoConfig req) {
+        if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
+            return req.getWebsiteDomain() + PRIVATEY_CALLBACK;
+        }
+        if (VodPlatformEnum.POLYV.getCode().equals(req.getVodPlatform())) {
+            return PolyvVodUtil.getCallbackUrl(req.getPolyvAppId(), req.getPolyvAppSecret());
+        }
+        return "";
+    }
+
+    /**
      * 获取上传配置，web端上传视频
      *
      * @return json
@@ -92,7 +112,7 @@ public final class VodUtil {
     public static String getUploadConfig(VideoConfig req) {
         if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
             // 上传回调地址
-            String callbackUrl = req.getWebsiteDomain() + "gateway/course/callback/priyun/vod/upload";
+            String callbackUrl = req.getWebsiteDomain() + PRIVATEY_CALLBACK;
             return JSUtil.toJsonString(PrivateYunVodUtil.getUploadConfig(req.getPriyAccessKeyId(), req.getPriyAccessKeySecret(), req.getPriyUrl(), callbackUrl, ""));
         }
         if (VodPlatformEnum.POLYV.getCode().equals(req.getVodPlatform())) {
@@ -174,12 +194,16 @@ public final class VodUtil {
     public static String getPlayConfig(VideoConfig req, VodPlayConfigReq playConfigReq) {
         if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
             // 播放授权地址
-            String authUrl = req.getWebsiteDomain() + "gateway/course/callback/priyun/vod/auth";
+            String authUrl = req.getWebsiteDomain() + PRIVATEY_AUTH;
             PrivateYunPlayTokenRes tokenResponse = PrivateYunVodUtil.token(req.getPriyUrl(), authUrl, req.getPriyAccessKeyId(), req.getPriyAccessKeySecret(), playConfigReq.getVid(), "", playConfigReq.getExpiresIn().toString(), playConfigReq.getViewerId());
             PrivateYunVideoClarityResp playUrls = tokenResponse.getVideoClarityResp();
             if (ObjectUtil.isNotNull(playUrls)) {
-                playUrls.setSdUrl(playUrls.getSdUrl() + "?token=" + tokenResponse.getToken());
-                playUrls.setHdUrl(playUrls.getHdUrl() + "?token=" + tokenResponse.getToken());
+                if (StringUtils.hasText(playUrls.getHdUrl())) {
+                    playUrls.setHdUrl(playUrls.getHdUrl() + "?token=" + tokenResponse.getToken());
+                }
+                if (StringUtils.hasText(playUrls.getSdUrl())) {
+                    playUrls.setSdUrl(playUrls.getSdUrl() + "?token=" + tokenResponse.getToken());
+                }
             }
             return JSUtil.toJsonString(playUrls);
         }

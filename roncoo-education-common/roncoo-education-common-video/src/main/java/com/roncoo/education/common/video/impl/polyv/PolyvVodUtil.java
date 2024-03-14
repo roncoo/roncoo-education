@@ -60,6 +60,27 @@ public final class PolyvVodUtil {
         log.info("保利威-修改回调设置-{}", response);
     }
 
+    public static String getCallbackUrl(String appId, String appSecret) {
+        //业务参数
+        try {
+            String url = "http://api.polyv.net/vod/v4/user/setting/callback/get";
+            Map<String, Object> requestMap = new HashMap<>();
+            requestMap.put("appId", appId);
+            requestMap.put("timestamp", String.valueOf(System.currentTimeMillis()));
+            requestMap.put("sign", PolyvSignUtil.getMd5Sign(requestMap, appSecret));
+            String response = PolyvHttpUtil.get(url, requestMap);
+            JSONObject js = JSONUtil.parseObj(response);
+            if (PolyvHttpUtil.SUCCESS_CODE.equals(js.getInt("code"))) {
+                return js.getJSONObject("data").getStr("callbackUrl");
+            }
+            log.error(response);
+        } catch (Exception e) {
+            log.error("请求错误", e);
+        }
+        return "";
+    }
+
+
     /**
      * 修改授权播放和防录屏跑马灯接口
      *

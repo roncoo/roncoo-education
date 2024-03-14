@@ -51,7 +51,6 @@ public class AdminSysConfigBiz extends BaseBiz {
      */
     public Result<Page<AdminSysConfigPageResp>> page(AdminSysConfigPageReq req) {
         SysConfigExample example = new SysConfigExample();
-        Criteria c = example.createCriteria();
         Page<SysConfig> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminSysConfigPageResp> respPage = PageUtil.transform(page, AdminSysConfigPageResp.class);
         return Result.success(respPage);
@@ -154,5 +153,11 @@ public class AdminSysConfigBiz extends BaseBiz {
         // 初始化
         VodUtil.init(vodConfig);
         return Result.success("操作成功");
+    }
+
+    public Result<String> videoGet() {
+        Map<String, String> configMap = dao.listByExample(new SysConfigExample()).stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
+        VodConfig vodConfig = BeanUtil.objToBean(configMap, VodConfig.class);
+        return Result.success(VodUtil.getCallbackUrl(vodConfig));
     }
 }

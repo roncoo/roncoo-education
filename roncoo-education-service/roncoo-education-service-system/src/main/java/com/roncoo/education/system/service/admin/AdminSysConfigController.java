@@ -77,4 +77,10 @@ public class AdminSysConfigController {
     public Result<String> videoInit() {
         return biz.init();
     }
+
+    @ApiOperation(value = "视频云回调地址", notes = "视频云回调地址获取")
+    @GetMapping(value = "/video/config")
+    public Result<String> videoGet() {
+        return biz.videoGet();
+    }
 }
