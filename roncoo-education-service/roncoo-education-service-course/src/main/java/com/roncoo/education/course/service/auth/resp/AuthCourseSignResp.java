@@ -31,9 +31,6 @@ public class AuthCourseSignResp implements Serializable {
     @ApiModelProperty(value = "资源ID")
     private Long resourceId;
 
-    @ApiModelProperty(value = "开始播放时长，单位秒")
-    private Long startTime;
-
     @ApiModelProperty(value = "播放vid")
     private String vid;
 
