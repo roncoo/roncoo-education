@@ -91,7 +91,7 @@ public final class VodUtil {
     /**
      * 获取上传视频回调地址
      *
-     * @param req
+     * @param VideoConfig
      * @return
      */
     public static String getCallbackUrl(VideoConfig req) {
