@@ -134,7 +134,6 @@ public class AuthCourseBiz extends BaseBiz {
             // 已经购买
             return true;
         }
-
         Course course = courseDao.getById(period.getCourseId());
         if (course.getIsFree().equals(FreeEnum.FREE.getCode())) {
             // 课程免费
@@ -145,13 +144,11 @@ public class AuthCourseBiz extends BaseBiz {
             userCourseDao.save(userCourse);
             return true;
         }
-
         CourseChapter courseChapter = chapterDao.getById(period.getChapterId());
         if (courseChapter.getIsFree().equals(FreeEnum.FREE.getCode())) {
             // 章节免费
             return true;
         }
-
         if (period.getIsFree().equals(FreeEnum.FREE.getCode())) {
             // 课时免费
             return true;
