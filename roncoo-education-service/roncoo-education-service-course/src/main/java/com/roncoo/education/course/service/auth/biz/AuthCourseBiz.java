@@ -7,14 +7,8 @@ import com.roncoo.education.common.core.enums.*;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.video.VodUtil;
 import com.roncoo.education.common.video.req.VodPlayConfigReq;
-import com.roncoo.education.course.dao.CourseChapterPeriodDao;
-import com.roncoo.education.course.dao.ResourceDao;
-import com.roncoo.education.course.dao.UserCourseDao;
-import com.roncoo.education.course.dao.UserStudyDao;
-import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
-import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
-import com.roncoo.education.course.dao.impl.mapper.entity.UserCourse;
-import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
+import com.roncoo.education.course.dao.*;
+import com.roncoo.education.course.dao.impl.mapper.entity.*;
 import com.roncoo.education.course.service.auth.req.AuthCourseSignReq;
 import com.roncoo.education.course.service.auth.resp.AuthCourseSignResp;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
@@ -36,6 +30,10 @@ public class AuthCourseBiz extends BaseBiz {
 
     @NotNull
     private final CourseChapterPeriodDao periodDao;
+    @NotNull
+    private final CourseChapterDao chapterDao;
+    @NotNull
+    private final CourseDao courseDao;
     @NotNull
     private final ResourceDao resourceDao;
     @NotNull
@@ -126,20 +124,39 @@ public class AuthCourseBiz extends BaseBiz {
 
     }
 
+    /**
+     * @param period
+     * @return true 可以观看，false 不能观看
+     */
     private Boolean check(CourseChapterPeriod period) {
         UserCourse userCourse = userCourseDao.getByCourseIdAndUserId(period.getCourseId(), ThreadContext.userId());
-        if (ObjectUtil.isEmpty(userCourse)) {
-            if (period.getIsFree().equals(FreeEnum.FREE.getCode())) {
-                // 免费课程不需要购买，直接可以观看
-                userCourse = new UserCourse();
-                userCourse.setUserId(ThreadContext.userId());
-                userCourse.setCourseId(period.getCourseId());
-                userCourse.setBuyType(BuyTypeEnum.FREE.getCode());
-                userCourseDao.save(userCourse);
-                return true;
-            }
-            return false;
+        if (ObjectUtil.isNotEmpty(userCourse)) {
+            // 已经购买
+            return true;
         }
-        return true;
+
+        Course course = courseDao.getById(period.getCourseId());
+        if (course.getIsFree().equals(FreeEnum.FREE.getCode())) {
+            // 课程免费
+            userCourse = new UserCourse();
+            userCourse.setUserId(ThreadContext.userId());
+            userCourse.setCourseId(period.getCourseId());
+            userCourse.setBuyType(BuyTypeEnum.FREE.getCode());
+            userCourseDao.save(userCourse);
+            return true;
+        }
+
+        CourseChapter courseChapter = chapterDao.getById(period.getChapterId());
+        if (courseChapter.getIsFree().equals(FreeEnum.FREE.getCode())) {
+            // 章节免费
+            return true;
+        }
+
+        if (period.getIsFree().equals(FreeEnum.FREE.getCode())) {
+            // 课时免费
+            return true;
+        }
+        // 不能观看
+        return false;
     }
 }
