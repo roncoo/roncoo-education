@@ -70,7 +70,7 @@ public class AuthCourseBiz extends BaseBiz {
         }
 
         if (!check(period)) {
-            return Result.error("没购买，不允许播放");
+            return Result.error("请购买该课程");
         }
         // 可以播放
         UserStudy userStudy = userStudyDao.getByPeriodIdAndUserId(req.getPeriodId(), ThreadContext.userId());
