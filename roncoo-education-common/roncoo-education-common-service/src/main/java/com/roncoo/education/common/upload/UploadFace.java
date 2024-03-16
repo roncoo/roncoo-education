@@ -23,6 +23,12 @@ public interface UploadFace {
      */
     String uploadDoc(MultipartFile file, Upload upload);
 
+
+    /**
+     * 获取下载地址
+     */
+    String getDownloadUrl(String docUrl, int expireSeconds, Upload upload);
+
     /**
      * 获取预览地址
      *

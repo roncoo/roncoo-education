@@ -3,10 +3,12 @@ package com.roncoo.education.common.upload.impl;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.StrUtil;
 import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.common.upload.Upload;
 import com.roncoo.education.common.upload.UploadFace;
 import io.minio.*;
+import io.minio.http.Method;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -56,12 +58,26 @@ public class MinIOUploadImpl implements UploadFace {
     }
 
     @Override
+    public String getDownloadUrl(String docUrl, int expireSeconds, Upload upload) {
+        MinioClient minioClient = getMinioClient(upload);
+        String key = docUrl.replace(upload.getMinioDomain() + upload.getMinioBucket() + StrUtil.SLASH, "");
+        String url;
+        try {
+            url = minioClient.getPresignedObjectUrl(GetPresignedObjectUrlArgs.builder().method(Method.GET).bucket(upload.getMinioBucket()).object(key).expiry(expireSeconds).build());
+        } catch (Exception e) {
+            log.error("获取失败", e);
+            return "";
+        }
+        return upload.getMinioDomain() + url.substring(url.indexOf("/") + 1).substring(url.indexOf("/") + 1).substring(url.indexOf("/") + 1);
+    }
+
+    @Override
     public String getPreviewConfig(String docUrl, int expireSeconds, Upload upload) {
         if (StringUtils.hasText(upload.getMinioPreviewUrl())) {
             String previewUrl = getMinioFileUrl(upload.getMinioPreviewUrl(), "onlinePreview?url=");
             try {
                 Map<String, String> map = new HashMap<>();
-                map.put("previewUrl", previewUrl + URLEncoder.encode(Base64.encode(docUrl), "utf-8"));
+                map.put("previewUrl", previewUrl + URLEncoder.encode(Base64.encode(getDownloadUrl(docUrl, expireSeconds, upload)), "utf-8"));
                 return JSUtil.toJsonString(map);
             } catch (UnsupportedEncodingException e) {
                 log.error("编码失败", e);

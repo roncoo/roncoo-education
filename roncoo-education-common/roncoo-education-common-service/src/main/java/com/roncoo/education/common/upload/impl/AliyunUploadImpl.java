@@ -34,6 +34,11 @@ public class AliyunUploadImpl implements UploadFace {
     }
 
     @Override
+    public String getDownloadUrl(String docUrl, int expireSeconds, Upload upload) {
+        return "";
+    }
+
+    @Override
     public String getPreviewConfig(String docUrl, int expireSeconds, Upload upload) {
         return "";
     }
