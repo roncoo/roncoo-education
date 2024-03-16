@@ -22,4 +22,12 @@ public interface UploadFace {
      * @return 图片url
      */
     String uploadDoc(MultipartFile file, Upload upload);
+
+    /**
+     * 获取预览地址
+     *
+     * @return 预览地址
+     */
+    String getPreviewUrl(String docUrl, int expireSeconds, Upload upload);
+
 }
