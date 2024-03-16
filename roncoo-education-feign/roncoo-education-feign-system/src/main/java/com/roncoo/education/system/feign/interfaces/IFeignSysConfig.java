@@ -1,6 +1,7 @@
 package com.roncoo.education.system.feign.interfaces;
 
 import com.roncoo.education.common.sms.SmsConfig;
+import com.roncoo.education.system.feign.interfaces.vo.DocConfig;
 import com.roncoo.education.system.feign.interfaces.vo.PayConfig;
 import com.roncoo.education.system.feign.interfaces.vo.SysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
@@ -47,4 +48,12 @@ public interface IFeignSysConfig {
      */
     @GetMapping(value = "/getVod")
     VodConfig getVod();
+
+    /**
+     * 文档存储配置
+     *
+     * @return
+     */
+    @GetMapping(value = "/getDoc")
+    DocConfig getDoc();
 }

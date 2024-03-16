@@ -3,6 +3,7 @@ package com.roncoo.education.system.feign;
 import com.roncoo.education.common.sms.SmsConfig;
 import com.roncoo.education.system.feign.biz.FeignSysConfigBiz;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
+import com.roncoo.education.system.feign.interfaces.vo.DocConfig;
 import com.roncoo.education.system.feign.interfaces.vo.PayConfig;
 import com.roncoo.education.system.feign.interfaces.vo.SysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
@@ -44,6 +45,11 @@ public class FeignSysConfigController implements IFeignSysConfig {
     @Override
     public VodConfig getVod() {
         return biz.getVod();
+    }
+
+    @Override
+    public DocConfig getDoc() {
+        return biz.getDoc();
     }
 
 }

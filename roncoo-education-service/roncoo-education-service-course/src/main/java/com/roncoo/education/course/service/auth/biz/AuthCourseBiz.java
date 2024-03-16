@@ -5,6 +5,7 @@ import com.roncoo.education.common.config.ThreadContext;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.*;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.upload.UploadFace;
 import com.roncoo.education.common.video.VodUtil;
 import com.roncoo.education.common.video.req.VodPlayConfigReq;
 import com.roncoo.education.course.dao.*;
@@ -12,12 +13,14 @@ import com.roncoo.education.course.dao.impl.mapper.entity.*;
 import com.roncoo.education.course.service.auth.req.AuthCourseSignReq;
 import com.roncoo.education.course.service.auth.resp.AuthCourseSignResp;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
+import com.roncoo.education.system.feign.interfaces.vo.DocConfig;
 import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Map;
 
 /**
  * AUTH-课程信息
@@ -40,6 +43,8 @@ public class AuthCourseBiz extends BaseBiz {
     private final UserCourseDao userCourseDao;
     @NotNull
     private final UserStudyDao userStudyDao;
+    @NotNull
+    private Map<String, UploadFace> uploadFaceMap;
 
     @NotNull
     private final IFeignSysConfig feignSysConfig;
@@ -72,7 +77,7 @@ public class AuthCourseBiz extends BaseBiz {
         if (!check(period)) {
             return Result.error("请购买该课程");
         }
-        // 可以播放
+        // 用户学习记录
         UserStudy userStudy = userStudyDao.getByPeriodIdAndUserId(req.getPeriodId(), ThreadContext.userId());
         if (ObjectUtil.isEmpty(userStudy)) {
             userStudy = new UserStudy();
@@ -94,12 +99,14 @@ public class AuthCourseBiz extends BaseBiz {
         resp.setVid(resource.getVideoVid());
         resp.setVodPlatform(resource.getVodPlatform());
         resp.setCurrentDuration(userStudy.getCurrentDuration());
+        resp.setStoragePlatform(resource.getStoragePlatform());
         resp.setCurrentPage(userStudy.getCurrentPage());
         if (ResourceTypeEnum.VIDEO.getCode().equals(resource.getResourceType()) || ResourceTypeEnum.AUDIO.getCode().equals(resource.getResourceType())) {
-            // 播放参数
+            // 音视频
             playConfig(req, resp);
         } else if (ResourceTypeEnum.DOC.getCode().equals(resource.getResourceType())) {
-            docConfig(req, resp);
+            // 文档
+            docConfig(resource, resp);
         }
         return Result.success(resp);
     }
@@ -120,8 +127,10 @@ public class AuthCourseBiz extends BaseBiz {
         resp.setVodPlayConfig(VodUtil.getPlayConfig(vodConfig, playConfigReq));
     }
 
-    private void docConfig(AuthCourseSignReq req, AuthCourseSignResp resp) {
-
+    private void docConfig(Resource resource, AuthCourseSignResp resp) {
+        DocConfig docConfig = feignSysConfig.getDoc();
+        UploadFace uploadFace = uploadFaceMap.get(StoragePlatformEnum.byCode(Integer.valueOf(resource.getStoragePlatform())).getMode());
+        resp.setDocStudyConfig(uploadFace.getPreviewConfig(resource.getResourceUrl(), 300, docConfig));
     }
 
     /**

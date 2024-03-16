@@ -28,6 +28,6 @@ public interface UploadFace {
      *
      * @return 预览地址
      */
-    String getPreviewUrl(String docUrl, int expireSeconds, Upload upload);
+    String getPreviewConfig(String docUrl, int expireSeconds, Upload upload);
 
 }

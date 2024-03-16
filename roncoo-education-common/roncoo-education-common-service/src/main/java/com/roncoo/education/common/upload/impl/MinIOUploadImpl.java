@@ -3,6 +3,7 @@ package com.roncoo.education.common.upload.impl;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;
+import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.common.upload.Upload;
 import com.roncoo.education.common.upload.UploadFace;
 import io.minio.*;
@@ -55,11 +56,13 @@ public class MinIOUploadImpl implements UploadFace {
     }
 
     @Override
-    public String getPreviewUrl(String docUrl, int expireSeconds, Upload upload) {
+    public String getPreviewConfig(String docUrl, int expireSeconds, Upload upload) {
         if (StringUtils.hasText(upload.getMinioPreviewUrl())) {
             String previewUrl = getMinioFileUrl(upload.getMinioPreviewUrl(), "onlinePreview?url=");
             try {
-                return previewUrl + URLEncoder.encode(Base64.encode(docUrl), "utf-8");
+                Map<String, String> map = new HashMap<>();
+                map.put("previewUrl", previewUrl + URLEncoder.encode(Base64.encode(docUrl), "utf-8"));
+                return JSUtil.toJsonString(map);
             } catch (UnsupportedEncodingException e) {
                 log.error("编码失败", e);
             }

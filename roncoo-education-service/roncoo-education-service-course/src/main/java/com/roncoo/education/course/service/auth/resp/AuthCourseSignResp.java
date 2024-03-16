@@ -43,6 +43,9 @@ public class AuthCourseSignResp implements Serializable {
     @ApiModelProperty(value = "点播播放配置参数")
     private String vodPlayConfig;
 
+    @ApiModelProperty(value = "存储平台")
+    private Integer storagePlatform;
+
     @ApiModelProperty(value = "当前观看页数")
     private Integer currentPage;
 
