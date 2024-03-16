@@ -1,5 +1,6 @@
 package com.roncoo.education.common.upload.impl;
 
+import cn.hutool.core.codec.Base64;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;
 import com.roncoo.education.common.upload.Upload;
@@ -11,6 +12,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,6 +50,19 @@ public class MinIOUploadImpl implements UploadFace {
             return getMinioFileUrl(upload.getMinioDomain(), filePath);
         } catch (Exception e) {
             log.error("MinIO上传错误", e);
+        }
+        return "";
+    }
+
+    @Override
+    public String getPreviewUrl(String docUrl, int expireSeconds, Upload upload) {
+        if (StringUtils.hasText(upload.getMinioPreviewUrl())) {
+            String previewUrl = getMinioFileUrl(upload.getMinioPreviewUrl(), "onlinePreview?url=");
+            try {
+                return previewUrl + URLEncoder.encode(Base64.encode(docUrl), "utf-8");
+            } catch (UnsupportedEncodingException e) {
+                log.error("编码失败", e);
+            }
         }
         return "";
     }

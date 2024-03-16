@@ -33,6 +33,11 @@ public class AliyunUploadImpl implements UploadFace {
         return putObject(file, upload, CannedAccessControlList.Private);
     }
 
+    @Override
+    public String getPreviewUrl(String docUrl, int expireSeconds, Upload upload) {
+        return "";
+    }
+
     /**
      * 存入OSS
      */
