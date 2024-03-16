@@ -96,6 +96,7 @@ public class AuthCourseBiz extends BaseBiz {
         resp.setStudyId(userStudy.getId());
         resp.setPeriodId(req.getPeriodId());
         resp.setResourceId(resource.getId());
+        resp.setResourceType(resource.getResourceType());
         resp.setVid(resource.getVideoVid());
         resp.setVodPlatform(resource.getVodPlatform());
         resp.setCurrentDuration(userStudy.getCurrentDuration());
