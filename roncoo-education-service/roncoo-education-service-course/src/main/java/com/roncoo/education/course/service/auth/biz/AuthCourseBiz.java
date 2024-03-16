@@ -67,11 +67,11 @@ public class AuthCourseBiz extends BaseBiz {
             return Result.error("该课时没设置资源");
         }
         Resource resource = resourceDao.getById(period.getResourceId());
-        if (ObjectUtil.isEmpty(resource) || resource.getResourceType().equals(ResourceTypeEnum.DOC.getCode())) {
-            return Result.error("资源类型不正确");
+        if (ObjectUtil.isEmpty(resource)) {
+            return Result.error("该资源不存在");
         }
-        if (!resource.getVideoStatus().equals(VideoStatusEnum.SUCCES.getCode())) {
-            return Result.error("资源暂不可用");
+        if ((resource.getResourceType().equals(ResourceTypeEnum.VIDEO.getCode()) || resource.getResourceType().equals(ResourceTypeEnum.AUDIO.getCode())) && !resource.getVideoStatus().equals(VideoStatusEnum.SUCCES.getCode())) {
+            return Result.error("资源处理中，暂不能学习");
         }
 
         if (!check(period)) {
