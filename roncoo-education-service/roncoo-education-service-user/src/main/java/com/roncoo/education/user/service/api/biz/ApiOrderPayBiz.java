@@ -63,20 +63,24 @@ public class ApiOrderPayBiz extends BaseBiz {
 
         if (resp.isSuccess() && resp.getTradeStatus().equals(TradeStatusEnum.SUCCESS.getCode())) {
             // 处理交易成功订单
-            OrderPay orderPay = dao.getBySerialNumber(Long.valueOf(resp.getTradeOrderNo()));
-            if (ObjectUtil.isNotEmpty(orderPay) && !orderPay.getOrderStatus().equals(OrderStatusEnum.SUCCESS.getCode())) {
-                OrderInfo orderInfo = orderInfoDao.getByOrderNo(orderPay.getOrderNo());
-                if (ObjectUtil.isNotEmpty(orderInfo) && !orderInfo.getOrderStatus().equals(OrderStatusEnum.SUCCESS.getCode())) {
-                    // 更新支付订单
-                    updateOrderPay(orderPay);
-                    // 更新订单
-                    updateOrderInfo(orderInfo);
-                    // 课程绑定用户
-                    feignUserCourse.binding(new UserCourseBindingQO().setCourseId(orderInfo.getCourseId()).setUserId(orderInfo.getUserId()).setBuyType(BuyTypeEnum.BUY.getCode()));
-                }
-            }
+            handlerOrder(Long.valueOf(resp.getTradeOrderNo()));
         }
         return resp.getReturnMsg();
+    }
+
+    public void handlerOrder(Long serialNumber) {
+        OrderPay orderPay = dao.getBySerialNumber(serialNumber);
+        if (ObjectUtil.isNotEmpty(orderPay) && !orderPay.getOrderStatus().equals(OrderStatusEnum.SUCCESS.getCode())) {
+            OrderInfo orderInfo = orderInfoDao.getByOrderNo(orderPay.getOrderNo());
+            if (ObjectUtil.isNotEmpty(orderInfo) && !orderInfo.getOrderStatus().equals(OrderStatusEnum.SUCCESS.getCode())) {
+                // 更新支付订单
+                updateOrderPay(orderPay);
+                // 更新订单
+                updateOrderInfo(orderInfo);
+                // 课程绑定用户
+                feignUserCourse.binding(new UserCourseBindingQO().setCourseId(orderInfo.getCourseId()).setUserId(orderInfo.getUserId()).setBuyType(BuyTypeEnum.BUY.getCode()));
+            }
+        }
     }
 
     private void updateOrderInfo(OrderInfo orderInfo) {

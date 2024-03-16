@@ -4,11 +4,9 @@ import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.config.ThreadContext;
 import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.core.enums.OrderStatusEnum;
-import com.roncoo.education.common.core.enums.PayTypeEnum;
-import com.roncoo.education.common.core.enums.PutawayEnum;
-import com.roncoo.education.common.core.enums.StatusIdEnum;
+import com.roncoo.education.common.core.enums.*;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.core.tools.MD5Util;
 import com.roncoo.education.common.core.tools.NOUtil;
 import com.roncoo.education.common.pay.PayFace;
 import com.roncoo.education.common.pay.req.TradeOrderReq;
@@ -19,16 +17,14 @@ import com.roncoo.education.course.feign.interfaces.IFeignCourse;
 import com.roncoo.education.course.feign.interfaces.vo.CourseViewVO;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.PayConfig;
-import com.roncoo.education.user.dao.OrderInfoDao;
-import com.roncoo.education.user.dao.OrderPayDao;
-import com.roncoo.education.user.dao.UsersDao;
-import com.roncoo.education.user.dao.impl.mapper.entity.OrderInfo;
-import com.roncoo.education.user.dao.impl.mapper.entity.OrderPay;
-import com.roncoo.education.user.dao.impl.mapper.entity.Users;
+import com.roncoo.education.user.dao.*;
+import com.roncoo.education.user.dao.impl.mapper.entity.*;
+import com.roncoo.education.user.service.api.biz.ApiOrderPayBiz;
 import com.roncoo.education.user.service.auth.req.AuthOrderCancelReq;
 import com.roncoo.education.user.service.auth.req.AuthOrderCountinuePayReq;
 import com.roncoo.education.user.service.auth.req.AuthOrderPayReq;
 import com.roncoo.education.user.service.auth.resp.AuthOrderPayResp;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,6 +52,12 @@ public class AuthOrderPayBiz extends BaseBiz {
     private final OrderInfoDao orderInfoDao;
     @NotNull
     private final UsersDao usersDao;
+    @NotNull
+    private final UsersAccountDao usersAccountDao;
+    @NotNull
+    private final UsersAccountConsumeDao usersAccountConsumeDao;
+    @NotNull
+    private final ApiOrderPayBiz apiOrderPayBiz;
 
     @NotNull
     private final Map<String, PayFace> payFaceMap;
@@ -64,7 +66,7 @@ public class AuthOrderPayBiz extends BaseBiz {
     @NotNull
     private final IFeignCourse feignCourse;
 
-    @Transactional(rollbackFor = Exception.class)
+    @GlobalTransactional(rollbackFor = Exception.class)
     public Result<AuthOrderPayResp> pay(AuthOrderPayReq req) {
         if (ObjectUtil.isEmpty(req.getCourseId())) {
             return Result.error("请选择需要购买的课程");
@@ -87,10 +89,27 @@ public class AuthOrderPayBiz extends BaseBiz {
             return Result.error("该用户已被禁用");
         }
 
+        // 若是余额支付，校验用户余额是否充足
+        UsersAccount usersAccount = null;
+        if (req.getPayType().equals(PayTypeEnum.BALANCE_PAY.getCode())) {
+            usersAccount = usersAccountDao.getByUserId(users.getId());
+            if (ObjectUtil.isEmpty(usersAccount)) {
+                return Result.error("下单失败，请更换支付方式试试");
+            }
+            if (usersAccount.getAvailableAmount().compareTo(courseViewVO.getCoursePrice()) < 0) {
+                return Result.error("该用户可用余额不足");
+            }
+        }
+
         // 创建支付订单
         OrderPay orderPay = createOrderPay(courseViewVO.getRulingPrice(), courseViewVO.getCoursePrice(), req.getPayType(), NOUtil.getOrderNo(), req.getRemarkCus());
         // 创建订单
         orderInfo = createOrderInfo(courseViewVO, users, orderPay);
+
+        // 若是余额支付，完成订单
+        if (req.getPayType().equals(PayTypeEnum.BALANCE_PAY.getCode())) {
+            return handleBalance(usersAccount, courseViewVO, orderPay, orderInfo);
+        }
 
         // 创建支付
         TradeOrderResp orderResp = createPay(req.getPayType(), req.getUserClientIp(), req.getQuitUrl(), courseViewVO, orderPay);
@@ -131,8 +150,25 @@ public class AuthOrderPayBiz extends BaseBiz {
             return Result.error("该用户已被禁用");
         }
 
+        // 若是余额支付，校验用户余额是否充足
+        UsersAccount usersAccount = null;
+        if (req.getPayType().equals(PayTypeEnum.BALANCE_PAY.getCode())) {
+            usersAccount = usersAccountDao.getByUserId(users.getId());
+            if (ObjectUtil.isEmpty(usersAccount)) {
+                return Result.error("下单失败，请更换支付方式试试");
+            }
+            if (usersAccount.getAvailableAmount().compareTo(courseViewVO.getCoursePrice()) < 0) {
+                return Result.error("该用户可用余额不足");
+            }
+        }
+
         // 每次支付都新增支付订单
         OrderPay orderPay = createOrderPay(orderInfo.getRulingPrice(), orderInfo.getCoursePrice(), req.getPayType(), orderInfo.getOrderNo(), orderInfo.getRemarkCus());
+
+        // 若是余额支付，完成订单
+        if (req.getPayType().equals(PayTypeEnum.BALANCE_PAY.getCode())) {
+            return handleBalance(usersAccount, courseViewVO, orderPay, orderInfo);
+        }
 
         // 创建支付
         TradeOrderResp orderResp = createPay(req.getPayType(), req.getUserClientIp(), req.getQuitUrl(), courseViewVO, orderPay);
@@ -144,6 +180,34 @@ public class AuthOrderPayBiz extends BaseBiz {
             return Result.success(resp);
         }
         return Result.error("下单失败，请更换支付方式试试");
+    }
+
+    private Result<AuthOrderPayResp> handleBalance(UsersAccount usersAccount, CourseViewVO courseViewVO, OrderPay orderPay, OrderInfo orderInfo) {
+        String sign = MD5Util.md5(usersAccount.getUserId().toString(), usersAccount.getAvailableAmount().toPlainString(), usersAccount.getFreezeAmount().toPlainString());
+        if (!usersAccount.getSign().equals(sign)) {
+            return Result.error("该用户账户异常，不允许使用余额支付");
+        }
+        // 创建消费记录
+        UsersAccountConsume usersAccountConsume = new UsersAccountConsume();
+        usersAccountConsume.setConsumeType(ConsumeTypeEnum.Consume.getCode());
+        usersAccountConsume.setBeginAmount(usersAccount.getAvailableAmount());
+        usersAccountConsume.setConsumeAmount(courseViewVO.getCoursePrice());
+        usersAccountConsume.setRemark(String.join("-", courseViewVO.getId().toString(), courseViewVO.getCourseName()));
+        usersAccountConsumeDao.save(usersAccountConsume);
+
+        // 更新用户余额
+        usersAccount.setAvailableAmount(usersAccount.getAvailableAmount().subtract(courseViewVO.getCoursePrice()));
+        usersAccount.setSign(MD5Util.md5(usersAccount.getUserId().toString(), usersAccount.getAvailableAmount().toPlainString(), usersAccount.getFreezeAmount().toPlainString()));
+        usersAccountDao.updateById(usersAccount);
+
+        // 支付成功，处理订单
+        apiOrderPayBiz.handlerOrder(orderPay.getSerialNumber());
+
+        //返回支付信息
+        AuthOrderPayResp resp = BeanUtil.copyProperties(orderInfo, AuthOrderPayResp.class);
+        resp.setSerialNumber(orderPay.getSerialNumber());
+        resp.setPayMessage("success");
+        return Result.success(resp);
     }
 
     @Transactional(rollbackFor = Exception.class)

@@ -14,9 +14,11 @@ import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.sms.SmsUtil;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.user.dao.LogLoginDao;
+import com.roncoo.education.user.dao.UsersAccountDao;
 import com.roncoo.education.user.dao.UsersDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.LogLogin;
 import com.roncoo.education.user.dao.impl.mapper.entity.Users;
+import com.roncoo.education.user.dao.impl.mapper.entity.UsersAccount;
 import com.roncoo.education.user.service.api.req.LoginReq;
 import com.roncoo.education.user.service.api.req.PasswordReq;
 import com.roncoo.education.user.service.api.req.RegisterReq;
@@ -28,6 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -40,6 +43,8 @@ public class ApiUsersBiz extends BaseBiz {
 
     @Autowired
     private UsersDao userDao;
+    @Autowired
+    private UsersAccountDao usersAccountDao;
     @Autowired
     private LogLoginDao logLoginDao;
     @Autowired
@@ -142,6 +147,14 @@ public class ApiUsersBiz extends BaseBiz {
         user.setNickname(RandomUtil.randomString(8));
         user.setUserHead("https://static.roncoos.com/lingke.png");
         userDao.save(user);
+
+        // 用户账户
+        UsersAccount usersAccount = new UsersAccount();
+        usersAccount.setUserId(user.getId());
+        usersAccount.setAvailableAmount(BigDecimal.ZERO);
+        usersAccount.setFreezeAmount(BigDecimal.ZERO);
+        usersAccount.setSign(MD5Util.md5(usersAccount.getUserId().toString(), usersAccount.getAvailableAmount().toPlainString(), usersAccount.getFreezeAmount().toPlainString()));
+        usersAccountDao.save(usersAccount);
         return user;
     }
 

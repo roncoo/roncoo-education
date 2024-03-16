@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.roncoo.education.user.dao.impl.mapper.MsgUserMapper">
-    <resultMap id="BaseResultMap" type="com.roncoo.education.user.dao.impl.mapper.entity.MsgUser">
+<mapper namespace="com.roncoo.education.user.dao.impl.mapper.UsersAccountMapper">
+    <resultMap id="BaseResultMap" type="com.roncoo.education.user.dao.impl.mapper.entity.UsersAccount">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
         <result column="status_id" jdbcType="TINYINT" property="statusId"/>
-        <result column="sort" jdbcType="INTEGER" property="sort"/>
-        <result column="msg_id" jdbcType="BIGINT" property="msgId"/>
         <result column="user_id" jdbcType="BIGINT" property="userId"/>
-        <result column="is_read" jdbcType="TINYINT" property="isRead"/>
-        <result column="is_top" jdbcType="TINYINT" property="isTop"/>
+        <result column="available_amount" jdbcType="DECIMAL" property="availableAmount"/>
+        <result column="freeze_amount" jdbcType="DECIMAL" property="freezeAmount"/>
+        <result column="sign" jdbcType="CHAR" property="sign"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -74,16 +73,17 @@
     </sql>
     <sql id="Base_Column_List">
         id
-        , gmt_create, gmt_modified, status_id, sort, msg_id, user_id, is_read, is_top
+        , gmt_create, gmt_modified, status_id, user_id, available_amount, freeze_amount,
+    sign
     </sql>
-    <select id="selectByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.MsgUserExample"
+    <select id="selectByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UsersAccountExample"
             resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List"/>
-        from msg_user
+        from users_account
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
@@ -97,30 +97,30 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from msg_user
+        from users_account
         where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
-        from msg_user
+        from users_account
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <delete id="deleteByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.MsgUserExample">
-        delete from msg_user
+    <delete id="deleteByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UsersAccountExample">
+        delete from users_account
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.MsgUser">
-        insert into msg_user (id, gmt_create, gmt_modified,
-                              status_id, sort, msg_id,
-                              user_id, is_read, is_top)
+    <insert id="insert" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UsersAccount">
+        insert into users_account (id, gmt_create, gmt_modified,
+                                   status_id, user_id, available_amount,
+                                   freeze_amount, sign)
         values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
-                #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{msgId,jdbcType=BIGINT},
-                #{userId,jdbcType=BIGINT}, #{isRead,jdbcType=TINYINT}, #{isTop,jdbcType=TINYINT})
+                #{statusId,jdbcType=TINYINT}, #{userId,jdbcType=BIGINT}, #{availableAmount,jdbcType=DECIMAL},
+                #{freezeAmount,jdbcType=DECIMAL}, #{sign,jdbcType=CHAR})
     </insert>
-    <insert id="insertSelective" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.MsgUser">
-        insert into msg_user
+    <insert id="insertSelective" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UsersAccount">
+        insert into users_account
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
@@ -134,20 +134,17 @@
             <if test="statusId != null">
                 status_id,
             </if>
-            <if test="sort != null">
-                sort,
-            </if>
-            <if test="msgId != null">
-                msg_id,
-            </if>
             <if test="userId != null">
                 user_id,
             </if>
-            <if test="isRead != null">
-                is_read,
+            <if test="availableAmount != null">
+                available_amount,
             </if>
-            <if test="isTop != null">
-                is_top,
+            <if test="freezeAmount != null">
+                freeze_amount,
+            </if>
+            <if test="sign != null">
+                sign,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -163,32 +160,29 @@
             <if test="statusId != null">
                 #{statusId,jdbcType=TINYINT},
             </if>
-            <if test="sort != null">
-                #{sort,jdbcType=INTEGER},
-            </if>
-            <if test="msgId != null">
-                #{msgId,jdbcType=BIGINT},
-            </if>
             <if test="userId != null">
                 #{userId,jdbcType=BIGINT},
             </if>
-            <if test="isRead != null">
-                #{isRead,jdbcType=TINYINT},
+            <if test="availableAmount != null">
+                #{availableAmount,jdbcType=DECIMAL},
             </if>
-            <if test="isTop != null">
-                #{isTop,jdbcType=TINYINT},
+            <if test="freezeAmount != null">
+                #{freezeAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="sign != null">
+                #{sign,jdbcType=CHAR},
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.MsgUserExample"
+    <select id="countByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UsersAccountExample"
             resultType="java.lang.Integer">
-        select count(*) from msg_user
+        select count(*) from users_account
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </select>
     <update id="updateByExampleSelective" parameterType="map">
-        update msg_user
+        update users_account
         <set>
             <if test="record.id != null">
                 id = #{record.id,jdbcType=BIGINT},
@@ -202,20 +196,17 @@
             <if test="record.statusId != null">
                 status_id = #{record.statusId,jdbcType=TINYINT},
             </if>
-            <if test="record.sort != null">
-                sort = #{record.sort,jdbcType=INTEGER},
-            </if>
-            <if test="record.msgId != null">
-                msg_id = #{record.msgId,jdbcType=BIGINT},
-            </if>
             <if test="record.userId != null">
                 user_id = #{record.userId,jdbcType=BIGINT},
             </if>
-            <if test="record.isRead != null">
-                is_read = #{record.isRead,jdbcType=TINYINT},
+            <if test="record.availableAmount != null">
+                available_amount = #{record.availableAmount,jdbcType=DECIMAL},
             </if>
-            <if test="record.isTop != null">
-                is_top = #{record.isTop,jdbcType=TINYINT},
+            <if test="record.freezeAmount != null">
+                freeze_amount = #{record.freezeAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.sign != null">
+                sign = #{record.sign,jdbcType=CHAR},
             </if>
         </set>
         <if test="_parameter != null">
@@ -223,22 +214,22 @@
         </if>
     </update>
     <update id="updateByExample" parameterType="map">
-        update msg_user
+        update users_account
         set id = #{record.id,jdbcType=BIGINT},
         gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
         gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
         status_id = #{record.statusId,jdbcType=TINYINT},
-        sort = #{record.sort,jdbcType=INTEGER},
-        msg_id = #{record.msgId,jdbcType=BIGINT},
         user_id = #{record.userId,jdbcType=BIGINT},
-        is_read = #{record.isRead,jdbcType=TINYINT},
-        is_top = #{record.isTop,jdbcType=TINYINT}
+        available_amount = #{record.availableAmount,jdbcType=DECIMAL},
+        freeze_amount = #{record.freezeAmount,jdbcType=DECIMAL},
+        sign = #{record.sign,jdbcType=CHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.MsgUser">
-        update msg_user
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UsersAccount">
+        update users_account
         <set>
             <if test="gmtCreate != null">
                 gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -249,34 +240,30 @@
             <if test="statusId != null">
                 status_id = #{statusId,jdbcType=TINYINT},
             </if>
-            <if test="sort != null">
-                sort = #{sort,jdbcType=INTEGER},
-            </if>
-            <if test="msgId != null">
-                msg_id = #{msgId,jdbcType=BIGINT},
-            </if>
             <if test="userId != null">
                 user_id = #{userId,jdbcType=BIGINT},
             </if>
-            <if test="isRead != null">
-                is_read = #{isRead,jdbcType=TINYINT},
+            <if test="availableAmount != null">
+                available_amount = #{availableAmount,jdbcType=DECIMAL},
             </if>
-            <if test="isTop != null">
-                is_top = #{isTop,jdbcType=TINYINT},
+            <if test="freezeAmount != null">
+                freeze_amount = #{freezeAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="sign != null">
+                sign = #{sign,jdbcType=CHAR},
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.MsgUser">
-        update msg_user
-        set gmt_create   = #{gmtCreate,jdbcType=TIMESTAMP},
-            gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-            status_id    = #{statusId,jdbcType=TINYINT},
-            sort         = #{sort,jdbcType=INTEGER},
-            msg_id       = #{msgId,jdbcType=BIGINT},
-            user_id      = #{userId,jdbcType=BIGINT},
-            is_read      = #{isRead,jdbcType=TINYINT},
-            is_top       = #{isTop,jdbcType=TINYINT}
+    <update id="updateByPrimaryKey" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UsersAccount">
+        update users_account
+        set gmt_create       = #{gmtCreate,jdbcType=TIMESTAMP},
+            gmt_modified     = #{gmtModified,jdbcType=TIMESTAMP},
+            status_id        = #{statusId,jdbcType=TINYINT},
+            user_id          = #{userId,jdbcType=BIGINT},
+            available_amount = #{availableAmount,jdbcType=DECIMAL},
+            freeze_amount    = #{freezeAmount,jdbcType=DECIMAL},
+            sign             = #{sign,jdbcType=CHAR}
         where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

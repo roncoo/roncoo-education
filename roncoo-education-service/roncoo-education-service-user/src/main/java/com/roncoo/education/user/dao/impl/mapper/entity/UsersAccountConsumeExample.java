@@ -1,10 +1,11 @@
 package com.roncoo.education.user.dao.impl.mapper.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MsgUserExample {
+public class UsersAccountConsumeExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -15,7 +16,7 @@ public class MsgUserExample {
 
     protected int pageSize = -1;
 
-    public MsgUserExample() {
+    public UsersAccountConsumeExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -245,246 +246,6 @@ public class MsgUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedIsNull() {
-            addCriterion("gmt_modified is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifiedIsNotNull() {
-            addCriterion("gmt_modified is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifiedEqualTo(LocalDateTime value) {
-            addCriterion("gmt_modified =", value, "gmtModified");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifiedNotEqualTo(LocalDateTime value) {
-            addCriterion("gmt_modified <>", value, "gmtModified");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifiedGreaterThan(LocalDateTime value) {
-            addCriterion("gmt_modified >", value, "gmtModified");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifiedGreaterThanOrEqualTo(LocalDateTime value) {
-            addCriterion("gmt_modified >=", value, "gmtModified");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifiedLessThan(LocalDateTime value) {
-            addCriterion("gmt_modified <", value, "gmtModified");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifiedLessThanOrEqualTo(LocalDateTime value) {
-            addCriterion("gmt_modified <=", value, "gmtModified");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifiedIn(List<LocalDateTime> values) {
-            addCriterion("gmt_modified in", values, "gmtModified");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifiedNotIn(List<LocalDateTime> values) {
-            addCriterion("gmt_modified not in", values, "gmtModified");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifiedBetween(LocalDateTime value1, LocalDateTime value2) {
-            addCriterion("gmt_modified between", value1, value2, "gmtModified");
-            return (Criteria) this;
-        }
-
-        public Criteria andGmtModifiedNotBetween(LocalDateTime value1, LocalDateTime value2) {
-            addCriterion("gmt_modified not between", value1, value2, "gmtModified");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIdIsNull() {
-            addCriterion("status_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIdIsNotNull() {
-            addCriterion("status_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIdEqualTo(Integer value) {
-            addCriterion("status_id =", value, "statusId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIdNotEqualTo(Integer value) {
-            addCriterion("status_id <>", value, "statusId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIdGreaterThan(Integer value) {
-            addCriterion("status_id >", value, "statusId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("status_id >=", value, "statusId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIdLessThan(Integer value) {
-            addCriterion("status_id <", value, "statusId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIdLessThanOrEqualTo(Integer value) {
-            addCriterion("status_id <=", value, "statusId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIdIn(List<Integer> values) {
-            addCriterion("status_id in", values, "statusId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIdNotIn(List<Integer> values) {
-            addCriterion("status_id not in", values, "statusId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIdBetween(Integer value1, Integer value2) {
-            addCriterion("status_id between", value1, value2, "statusId");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("status_id not between", value1, value2, "statusId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortIsNull() {
-            addCriterion("sort is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortIsNotNull() {
-            addCriterion("sort is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortEqualTo(Integer value) {
-            addCriterion("sort =", value, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortNotEqualTo(Integer value) {
-            addCriterion("sort <>", value, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortGreaterThan(Integer value) {
-            addCriterion("sort >", value, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortGreaterThanOrEqualTo(Integer value) {
-            addCriterion("sort >=", value, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortLessThan(Integer value) {
-            addCriterion("sort <", value, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortLessThanOrEqualTo(Integer value) {
-            addCriterion("sort <=", value, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortIn(List<Integer> values) {
-            addCriterion("sort in", values, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortNotIn(List<Integer> values) {
-            addCriterion("sort not in", values, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortBetween(Integer value1, Integer value2) {
-            addCriterion("sort between", value1, value2, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortNotBetween(Integer value1, Integer value2) {
-            addCriterion("sort not between", value1, value2, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdIsNull() {
-            addCriterion("msg_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdIsNotNull() {
-            addCriterion("msg_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdEqualTo(Long value) {
-            addCriterion("msg_id =", value, "msgId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdNotEqualTo(Long value) {
-            addCriterion("msg_id <>", value, "msgId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdGreaterThan(Long value) {
-            addCriterion("msg_id >", value, "msgId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("msg_id >=", value, "msgId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdLessThan(Long value) {
-            addCriterion("msg_id <", value, "msgId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdLessThanOrEqualTo(Long value) {
-            addCriterion("msg_id <=", value, "msgId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdIn(List<Long> values) {
-            addCriterion("msg_id in", values, "msgId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdNotIn(List<Long> values) {
-            addCriterion("msg_id not in", values, "msgId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdBetween(Long value1, Long value2) {
-            addCriterion("msg_id between", value1, value2, "msgId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdNotBetween(Long value1, Long value2) {
-            addCriterion("msg_id not between", value1, value2, "msgId");
-            return (Criteria) this;
-        }
-
         public Criteria andUserIdIsNull() {
             addCriterion("user_id is null");
             return (Criteria) this;
@@ -545,123 +306,253 @@ public class MsgUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsReadIsNull() {
-            addCriterion("is_read is null");
+        public Criteria andConsumeTypeIsNull() {
+            addCriterion("consume_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadIsNotNull() {
-            addCriterion("is_read is not null");
+        public Criteria andConsumeTypeIsNotNull() {
+            addCriterion("consume_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadEqualTo(Integer value) {
-            addCriterion("is_read =", value, "isRead");
+        public Criteria andConsumeTypeEqualTo(Integer value) {
+            addCriterion("consume_type =", value, "consumeType");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadNotEqualTo(Integer value) {
-            addCriterion("is_read <>", value, "isRead");
+        public Criteria andConsumeTypeNotEqualTo(Integer value) {
+            addCriterion("consume_type <>", value, "consumeType");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadGreaterThan(Integer value) {
-            addCriterion("is_read >", value, "isRead");
+        public Criteria andConsumeTypeGreaterThan(Integer value) {
+            addCriterion("consume_type >", value, "consumeType");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadGreaterThanOrEqualTo(Integer value) {
-            addCriterion("is_read >=", value, "isRead");
+        public Criteria andConsumeTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("consume_type >=", value, "consumeType");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadLessThan(Integer value) {
-            addCriterion("is_read <", value, "isRead");
+        public Criteria andConsumeTypeLessThan(Integer value) {
+            addCriterion("consume_type <", value, "consumeType");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadLessThanOrEqualTo(Integer value) {
-            addCriterion("is_read <=", value, "isRead");
+        public Criteria andConsumeTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("consume_type <=", value, "consumeType");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadIn(List<Integer> values) {
-            addCriterion("is_read in", values, "isRead");
+        public Criteria andConsumeTypeIn(List<Integer> values) {
+            addCriterion("consume_type in", values, "consumeType");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadNotIn(List<Integer> values) {
-            addCriterion("is_read not in", values, "isRead");
+        public Criteria andConsumeTypeNotIn(List<Integer> values) {
+            addCriterion("consume_type not in", values, "consumeType");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadBetween(Integer value1, Integer value2) {
-            addCriterion("is_read between", value1, value2, "isRead");
+        public Criteria andConsumeTypeBetween(Integer value1, Integer value2) {
+            addCriterion("consume_type between", value1, value2, "consumeType");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadNotBetween(Integer value1, Integer value2) {
-            addCriterion("is_read not between", value1, value2, "isRead");
+        public Criteria andConsumeTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("consume_type not between", value1, value2, "consumeType");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopIsNull() {
-            addCriterion("is_top is null");
+        public Criteria andBeginAmountIsNull() {
+            addCriterion("begin_amount is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopIsNotNull() {
-            addCriterion("is_top is not null");
+        public Criteria andBeginAmountIsNotNull() {
+            addCriterion("begin_amount is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopEqualTo(Integer value) {
-            addCriterion("is_top =", value, "isTop");
+        public Criteria andBeginAmountEqualTo(BigDecimal value) {
+            addCriterion("begin_amount =", value, "beginAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopNotEqualTo(Integer value) {
-            addCriterion("is_top <>", value, "isTop");
+        public Criteria andBeginAmountNotEqualTo(BigDecimal value) {
+            addCriterion("begin_amount <>", value, "beginAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopGreaterThan(Integer value) {
-            addCriterion("is_top >", value, "isTop");
+        public Criteria andBeginAmountGreaterThan(BigDecimal value) {
+            addCriterion("begin_amount >", value, "beginAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopGreaterThanOrEqualTo(Integer value) {
-            addCriterion("is_top >=", value, "isTop");
+        public Criteria andBeginAmountGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("begin_amount >=", value, "beginAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopLessThan(Integer value) {
-            addCriterion("is_top <", value, "isTop");
+        public Criteria andBeginAmountLessThan(BigDecimal value) {
+            addCriterion("begin_amount <", value, "beginAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopLessThanOrEqualTo(Integer value) {
-            addCriterion("is_top <=", value, "isTop");
+        public Criteria andBeginAmountLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("begin_amount <=", value, "beginAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopIn(List<Integer> values) {
-            addCriterion("is_top in", values, "isTop");
+        public Criteria andBeginAmountIn(List<BigDecimal> values) {
+            addCriterion("begin_amount in", values, "beginAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopNotIn(List<Integer> values) {
-            addCriterion("is_top not in", values, "isTop");
+        public Criteria andBeginAmountNotIn(List<BigDecimal> values) {
+            addCriterion("begin_amount not in", values, "beginAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopBetween(Integer value1, Integer value2) {
-            addCriterion("is_top between", value1, value2, "isTop");
+        public Criteria andBeginAmountBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("begin_amount between", value1, value2, "beginAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopNotBetween(Integer value1, Integer value2) {
-            addCriterion("is_top not between", value1, value2, "isTop");
+        public Criteria andBeginAmountNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("begin_amount not between", value1, value2, "beginAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumeAmountIsNull() {
+            addCriterion("consume_amount is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumeAmountIsNotNull() {
+            addCriterion("consume_amount is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumeAmountEqualTo(BigDecimal value) {
+            addCriterion("consume_amount =", value, "consumeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumeAmountNotEqualTo(BigDecimal value) {
+            addCriterion("consume_amount <>", value, "consumeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumeAmountGreaterThan(BigDecimal value) {
+            addCriterion("consume_amount >", value, "consumeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumeAmountGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("consume_amount >=", value, "consumeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumeAmountLessThan(BigDecimal value) {
+            addCriterion("consume_amount <", value, "consumeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumeAmountLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("consume_amount <=", value, "consumeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumeAmountIn(List<BigDecimal> values) {
+            addCriterion("consume_amount in", values, "consumeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumeAmountNotIn(List<BigDecimal> values) {
+            addCriterion("consume_amount not in", values, "consumeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumeAmountBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("consume_amount between", value1, value2, "consumeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumeAmountNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("consume_amount not between", value1, value2, "consumeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkIsNull() {
+            addCriterion("remark is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkIsNotNull() {
+            addCriterion("remark is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkEqualTo(String value) {
+            addCriterion("remark =", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkNotEqualTo(String value) {
+            addCriterion("remark <>", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkGreaterThan(String value) {
+            addCriterion("remark >", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkGreaterThanOrEqualTo(String value) {
+            addCriterion("remark >=", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkLessThan(String value) {
+            addCriterion("remark <", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkLessThanOrEqualTo(String value) {
+            addCriterion("remark <=", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkLike(String value) {
+            addCriterion("remark like", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkNotLike(String value) {
+            addCriterion("remark not like", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkIn(List<String> values) {
+            addCriterion("remark in", values, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkNotIn(List<String> values) {
+            addCriterion("remark not in", values, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkBetween(String value1, String value2) {
+            addCriterion("remark between", value1, value2, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkNotBetween(String value1, String value2) {
+            addCriterion("remark not between", value1, value2, "remark");
             return (Criteria) this;
         }
     }

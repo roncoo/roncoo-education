@@ -1,10 +1,11 @@
 package com.roncoo.education.user.dao.impl.mapper.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MsgUserExample {
+public class UsersAccountExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -15,7 +16,7 @@ public class MsgUserExample {
 
     protected int pageSize = -1;
 
-    public MsgUserExample() {
+    public UsersAccountExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -365,126 +366,6 @@ public class MsgUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andSortIsNull() {
-            addCriterion("sort is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortIsNotNull() {
-            addCriterion("sort is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortEqualTo(Integer value) {
-            addCriterion("sort =", value, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortNotEqualTo(Integer value) {
-            addCriterion("sort <>", value, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortGreaterThan(Integer value) {
-            addCriterion("sort >", value, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortGreaterThanOrEqualTo(Integer value) {
-            addCriterion("sort >=", value, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortLessThan(Integer value) {
-            addCriterion("sort <", value, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortLessThanOrEqualTo(Integer value) {
-            addCriterion("sort <=", value, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortIn(List<Integer> values) {
-            addCriterion("sort in", values, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortNotIn(List<Integer> values) {
-            addCriterion("sort not in", values, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortBetween(Integer value1, Integer value2) {
-            addCriterion("sort between", value1, value2, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortNotBetween(Integer value1, Integer value2) {
-            addCriterion("sort not between", value1, value2, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdIsNull() {
-            addCriterion("msg_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdIsNotNull() {
-            addCriterion("msg_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdEqualTo(Long value) {
-            addCriterion("msg_id =", value, "msgId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdNotEqualTo(Long value) {
-            addCriterion("msg_id <>", value, "msgId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdGreaterThan(Long value) {
-            addCriterion("msg_id >", value, "msgId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("msg_id >=", value, "msgId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdLessThan(Long value) {
-            addCriterion("msg_id <", value, "msgId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdLessThanOrEqualTo(Long value) {
-            addCriterion("msg_id <=", value, "msgId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdIn(List<Long> values) {
-            addCriterion("msg_id in", values, "msgId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdNotIn(List<Long> values) {
-            addCriterion("msg_id not in", values, "msgId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdBetween(Long value1, Long value2) {
-            addCriterion("msg_id between", value1, value2, "msgId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgIdNotBetween(Long value1, Long value2) {
-            addCriterion("msg_id not between", value1, value2, "msgId");
-            return (Criteria) this;
-        }
-
         public Criteria andUserIdIsNull() {
             addCriterion("user_id is null");
             return (Criteria) this;
@@ -545,123 +426,193 @@ public class MsgUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsReadIsNull() {
-            addCriterion("is_read is null");
+        public Criteria andAvailableAmountIsNull() {
+            addCriterion("available_amount is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadIsNotNull() {
-            addCriterion("is_read is not null");
+        public Criteria andAvailableAmountIsNotNull() {
+            addCriterion("available_amount is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadEqualTo(Integer value) {
-            addCriterion("is_read =", value, "isRead");
+        public Criteria andAvailableAmountEqualTo(BigDecimal value) {
+            addCriterion("available_amount =", value, "availableAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadNotEqualTo(Integer value) {
-            addCriterion("is_read <>", value, "isRead");
+        public Criteria andAvailableAmountNotEqualTo(BigDecimal value) {
+            addCriterion("available_amount <>", value, "availableAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadGreaterThan(Integer value) {
-            addCriterion("is_read >", value, "isRead");
+        public Criteria andAvailableAmountGreaterThan(BigDecimal value) {
+            addCriterion("available_amount >", value, "availableAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadGreaterThanOrEqualTo(Integer value) {
-            addCriterion("is_read >=", value, "isRead");
+        public Criteria andAvailableAmountGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("available_amount >=", value, "availableAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadLessThan(Integer value) {
-            addCriterion("is_read <", value, "isRead");
+        public Criteria andAvailableAmountLessThan(BigDecimal value) {
+            addCriterion("available_amount <", value, "availableAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadLessThanOrEqualTo(Integer value) {
-            addCriterion("is_read <=", value, "isRead");
+        public Criteria andAvailableAmountLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("available_amount <=", value, "availableAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadIn(List<Integer> values) {
-            addCriterion("is_read in", values, "isRead");
+        public Criteria andAvailableAmountIn(List<BigDecimal> values) {
+            addCriterion("available_amount in", values, "availableAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadNotIn(List<Integer> values) {
-            addCriterion("is_read not in", values, "isRead");
+        public Criteria andAvailableAmountNotIn(List<BigDecimal> values) {
+            addCriterion("available_amount not in", values, "availableAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadBetween(Integer value1, Integer value2) {
-            addCriterion("is_read between", value1, value2, "isRead");
+        public Criteria andAvailableAmountBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("available_amount between", value1, value2, "availableAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsReadNotBetween(Integer value1, Integer value2) {
-            addCriterion("is_read not between", value1, value2, "isRead");
+        public Criteria andAvailableAmountNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("available_amount not between", value1, value2, "availableAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopIsNull() {
-            addCriterion("is_top is null");
+        public Criteria andFreezeAmountIsNull() {
+            addCriterion("freeze_amount is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopIsNotNull() {
-            addCriterion("is_top is not null");
+        public Criteria andFreezeAmountIsNotNull() {
+            addCriterion("freeze_amount is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopEqualTo(Integer value) {
-            addCriterion("is_top =", value, "isTop");
+        public Criteria andFreezeAmountEqualTo(BigDecimal value) {
+            addCriterion("freeze_amount =", value, "freezeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopNotEqualTo(Integer value) {
-            addCriterion("is_top <>", value, "isTop");
+        public Criteria andFreezeAmountNotEqualTo(BigDecimal value) {
+            addCriterion("freeze_amount <>", value, "freezeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopGreaterThan(Integer value) {
-            addCriterion("is_top >", value, "isTop");
+        public Criteria andFreezeAmountGreaterThan(BigDecimal value) {
+            addCriterion("freeze_amount >", value, "freezeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopGreaterThanOrEqualTo(Integer value) {
-            addCriterion("is_top >=", value, "isTop");
+        public Criteria andFreezeAmountGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("freeze_amount >=", value, "freezeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopLessThan(Integer value) {
-            addCriterion("is_top <", value, "isTop");
+        public Criteria andFreezeAmountLessThan(BigDecimal value) {
+            addCriterion("freeze_amount <", value, "freezeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopLessThanOrEqualTo(Integer value) {
-            addCriterion("is_top <=", value, "isTop");
+        public Criteria andFreezeAmountLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("freeze_amount <=", value, "freezeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopIn(List<Integer> values) {
-            addCriterion("is_top in", values, "isTop");
+        public Criteria andFreezeAmountIn(List<BigDecimal> values) {
+            addCriterion("freeze_amount in", values, "freezeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopNotIn(List<Integer> values) {
-            addCriterion("is_top not in", values, "isTop");
+        public Criteria andFreezeAmountNotIn(List<BigDecimal> values) {
+            addCriterion("freeze_amount not in", values, "freezeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopBetween(Integer value1, Integer value2) {
-            addCriterion("is_top between", value1, value2, "isTop");
+        public Criteria andFreezeAmountBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("freeze_amount between", value1, value2, "freezeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andIsTopNotBetween(Integer value1, Integer value2) {
-            addCriterion("is_top not between", value1, value2, "isTop");
+        public Criteria andFreezeAmountNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("freeze_amount not between", value1, value2, "freezeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignIsNull() {
+            addCriterion("sign is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignIsNotNull() {
+            addCriterion("sign is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignEqualTo(String value) {
+            addCriterion("sign =", value, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNotEqualTo(String value) {
+            addCriterion("sign <>", value, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignGreaterThan(String value) {
+            addCriterion("sign >", value, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignGreaterThanOrEqualTo(String value) {
+            addCriterion("sign >=", value, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignLessThan(String value) {
+            addCriterion("sign <", value, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignLessThanOrEqualTo(String value) {
+            addCriterion("sign <=", value, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignLike(String value) {
+            addCriterion("sign like", value, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNotLike(String value) {
+            addCriterion("sign not like", value, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignIn(List<String> values) {
+            addCriterion("sign in", values, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNotIn(List<String> values) {
+            addCriterion("sign not in", values, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignBetween(String value1, String value2) {
+            addCriterion("sign between", value1, value2, "sign");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignNotBetween(String value1, String value2) {
+            addCriterion("sign not between", value1, value2, "sign");
             return (Criteria) this;
         }
     }

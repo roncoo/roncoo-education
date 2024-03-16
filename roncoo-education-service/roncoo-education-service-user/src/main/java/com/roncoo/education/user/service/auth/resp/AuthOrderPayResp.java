@@ -41,7 +41,7 @@ public class AuthOrderPayResp implements Serializable {
     @ApiModelProperty(value = "课程价格")
     private BigDecimal coursePrice;
 
-    @ApiModelProperty(value = "支付方式：1微信支付，2支付宝支付，3积分支付，4手工录单")
+    @ApiModelProperty(value = "支付方式：1微信支付，2支付宝支付")
     private Integer payType;
 
 }

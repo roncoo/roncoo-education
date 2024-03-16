@@ -37,7 +37,7 @@ public class AuthOrderPayController {
         return biz.pay(req);
     }
 
-    @ApiOperation(value = "支付接口", notes = "课程下单接口")
+    @ApiOperation(value = "继续支付", notes = "课程下单接口，继续支付")
     @RequestMapping(value = "/continue", method = RequestMethod.POST)
     public Result<AuthOrderPayResp> continuePay(@RequestBody AuthOrderCountinuePayReq req) {
         return biz.continuePay(req);

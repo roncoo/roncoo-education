@@ -15,7 +15,8 @@
         <result column="is_top" jdbcType="TINYINT" property="isTop"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
     </resultMap>
-    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.roncoo.education.user.dao.impl.mapper.entity.Msg">
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+               type="com.roncoo.education.user.dao.impl.mapper.entity.Msg">
         <result column="msg_text" jdbcType="LONGVARCHAR" property="msgText"/>
     </resultMap>
     <sql id="Example_Where_Clause">
@@ -36,7 +37,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -65,7 +67,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -77,13 +80,15 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        id, gmt_create, gmt_modified, status_id, sort, msg_type, msg_title, is_time_send,
+        id
+        , gmt_create, gmt_modified, status_id, sort, msg_type, msg_title, is_time_send,
     send_time, is_send, is_top, remark
     </sql>
     <sql id="Blob_Column_List">
         msg_text
     </sql>
-    <select id="selectByExampleWithBLOBs" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.MsgExample" resultMap="ResultMapWithBLOBs">
+    <select id="selectByExampleWithBLOBs" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.MsgExample"
+            resultMap="ResultMapWithBLOBs">
         select
         <if test="distinct">
             distinct
@@ -99,7 +104,8 @@
             order by ${orderByClause}
         </if>
     </select>
-    <select id="selectByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.MsgExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.MsgExample"
+            resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -232,7 +238,8 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.MsgExample" resultType="java.lang.Integer">
+    <select id="countByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.MsgExample"
+            resultType="java.lang.Integer">
         select count(*) from msg
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>

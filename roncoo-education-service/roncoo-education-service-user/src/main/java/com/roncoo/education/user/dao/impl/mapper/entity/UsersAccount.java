@@ -1,9 +1,10 @@
 package com.roncoo.education.user.dao.impl.mapper.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class MsgUser implements Serializable {
+public class UsersAccount implements Serializable {
     private Long id;
 
     private LocalDateTime gmtCreate;
@@ -12,15 +13,13 @@ public class MsgUser implements Serializable {
 
     private Integer statusId;
 
-    private Integer sort;
-
-    private Long msgId;
-
     private Long userId;
 
-    private Integer isRead;
+    private BigDecimal availableAmount;
 
-    private Integer isTop;
+    private BigDecimal freezeAmount;
+
+    private String sign;
 
     private static final long serialVersionUID = 1L;
 
@@ -56,22 +55,6 @@ public class MsgUser implements Serializable {
         this.statusId = statusId;
     }
 
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
-
-    public Long getMsgId() {
-        return msgId;
-    }
-
-    public void setMsgId(Long msgId) {
-        this.msgId = msgId;
-    }
-
     public Long getUserId() {
         return userId;
     }
@@ -80,20 +63,28 @@ public class MsgUser implements Serializable {
         this.userId = userId;
     }
 
-    public Integer getIsRead() {
-        return isRead;
+    public BigDecimal getAvailableAmount() {
+        return availableAmount;
     }
 
-    public void setIsRead(Integer isRead) {
-        this.isRead = isRead;
+    public void setAvailableAmount(BigDecimal availableAmount) {
+        this.availableAmount = availableAmount;
     }
 
-    public Integer getIsTop() {
-        return isTop;
+    public BigDecimal getFreezeAmount() {
+        return freezeAmount;
     }
 
-    public void setIsTop(Integer isTop) {
-        this.isTop = isTop;
+    public void setFreezeAmount(BigDecimal freezeAmount) {
+        this.freezeAmount = freezeAmount;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign == null ? null : sign.trim();
     }
 
     @Override
@@ -106,11 +97,10 @@ public class MsgUser implements Serializable {
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", statusId=").append(statusId);
-        sb.append(", sort=").append(sort);
-        sb.append(", msgId=").append(msgId);
         sb.append(", userId=").append(userId);
-        sb.append(", isRead=").append(isRead);
-        sb.append(", isTop=").append(isTop);
+        sb.append(", availableAmount=").append(availableAmount);
+        sb.append(", freezeAmount=").append(freezeAmount);
+        sb.append(", sign=").append(sign);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

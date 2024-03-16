@@ -13,7 +13,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum PayTypeEnum {
 
-    WEIXIN_SCAN(1, "微信扫码支付", "wxScanPay"), ALIPAY_SCAN(2, "支付宝扫码支付", "aliScanPay");
+    BALANCE_PAY(100, "余额支付", "balancePay"),
+    WEIXIN_SCAN(1, "微信扫码支付", "wxScanPay"),
+    ALIPAY_SCAN(2, "支付宝扫码支付", "aliScanPay");
 
     private Integer code;
 

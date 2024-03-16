@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
     <!-- 配置文件 -->
     <properties resource="config.properties"/>
@@ -24,7 +25,8 @@
             <!-- 指定在生成的注释是否将包括时间戳，默认是false -->
             <property name="suppressDate" value="true"/>
         </commentGenerator>
-        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="${db.url}" userId="${db.username}" password="${db.password}">
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="${db.url}" userId="${db.username}"
+                        password="${db.password}">
             <property name="nullCatalogMeansCurrent" value="true"/>
         </jdbcConnection>
 
@@ -36,13 +38,17 @@
 
         <!-- 注意：targetProject不会自动创建，需要先存在，否则不生成实体和配置文件 -->
         <!-- 生成entity类 -->
-        <javaModelGenerator targetPackage="${packagePrefix}.${packageName}.dao.impl.mapper.entity" targetProject="${projectPath}/${projectName}/src/main/java">
+        <javaModelGenerator targetPackage="${packagePrefix}.${packageName}.dao.impl.mapper.entity"
+                            targetProject="${projectPath}/${projectName}/src/main/java">
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
         <!-- 生成xml文件 -->
-        <sqlMapGenerator targetPackage="mybatis" targetProject="${projectPath}/${projectName}/src/main/resources"></sqlMapGenerator>
+        <sqlMapGenerator targetPackage="mybatis"
+                         targetProject="${projectPath}/${projectName}/src/main/resources"></sqlMapGenerator>
         <!-- 生成mapper类 -->
-        <javaClientGenerator targetPackage="${packagePrefix}.${packageName}.dao.impl.mapper" targetProject="${projectPath}/${projectName}/src/main/java" type="XMLMAPPER"></javaClientGenerator>
+        <javaClientGenerator targetPackage="${packagePrefix}.${packageName}.dao.impl.mapper"
+                             targetProject="${projectPath}/${projectName}/src/main/java"
+                             type="XMLMAPPER"></javaClientGenerator>
         <!-- %代表生成全部的表 -->
         <table tableName="${tableNames}"/>
     </context>
