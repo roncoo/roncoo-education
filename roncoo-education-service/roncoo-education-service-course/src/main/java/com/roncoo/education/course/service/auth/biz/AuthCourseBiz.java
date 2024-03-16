@@ -44,7 +44,7 @@ public class AuthCourseBiz extends BaseBiz {
     @NotNull
     private final UserStudyDao userStudyDao;
     @NotNull
-    private Map<String, UploadFace> uploadFaceMap;
+    private final Map<String, UploadFace> uploadFaceMap;
 
     @NotNull
     private final IFeignSysConfig feignSysConfig;
@@ -129,7 +129,7 @@ public class AuthCourseBiz extends BaseBiz {
 
     private void docConfig(Resource resource, AuthCourseSignResp resp) {
         DocConfig docConfig = feignSysConfig.getDoc();
-        UploadFace uploadFace = uploadFaceMap.get(StoragePlatformEnum.byCode(Integer.valueOf(resource.getStoragePlatform())).getMode());
+        UploadFace uploadFace = uploadFaceMap.get(StoragePlatformEnum.byCode(resource.getStoragePlatform()).getMode());
         resp.setDocStudyConfig(uploadFace.getPreviewConfig(resource.getResourceUrl(), 300, docConfig));
     }
 
