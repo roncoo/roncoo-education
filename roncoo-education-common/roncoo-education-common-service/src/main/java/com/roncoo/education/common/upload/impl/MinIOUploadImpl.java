@@ -68,7 +68,10 @@ public class MinIOUploadImpl implements UploadFace {
             log.error("获取失败", e);
             return "";
         }
-        return upload.getMinioDomain() + url.substring(url.indexOf("/") + 1).substring(url.indexOf("/") + 1).substring(url.indexOf("/") + 1);
+        url = url.substring(url.indexOf("/") + 1);
+        url = url.substring(url.indexOf("/") + 1);
+        url = url.substring(url.indexOf("/") + 1);
+        return upload.getMinioDomain() + url;
     }
 
     @Override
