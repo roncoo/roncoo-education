@@ -86,7 +86,7 @@ public class AdminUsersAccountConsumeBiz extends BaseBiz {
             record.setBalanceAmount(account.getAvailableAmount().add(req.getConsumeAmount()));
         }
         if (dao.save(record) > 0) {
-            account.setAvailableAmount(account.getAvailableAmount().subtract(record.getConsumeAmount()));
+            account.setAvailableAmount(record.getBalanceAmount());
             account.setSign(MD5Util.md5(account.getUserId().toString(), account.getAvailableAmount().toPlainString(), account.getFreezeAmount().toPlainString()));
             usersAccountDao.updateById(account);
             return Result.success("操作成功");
