@@ -2,14 +2,17 @@ package com.roncoo.education.user.service.admin.biz;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.DesensitizedUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.core.tools.MD5Util;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.user.dao.UsersAccountDao;
 import com.roncoo.education.user.dao.UsersDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.Users;
+import com.roncoo.education.user.dao.impl.mapper.entity.UsersAccount;
 import com.roncoo.education.user.dao.impl.mapper.entity.UsersExample;
 import com.roncoo.education.user.dao.impl.mapper.entity.UsersExample.Criteria;
 import com.roncoo.education.user.service.admin.req.AdminUsersEditReq;
@@ -23,6 +26,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 /**
  * ADMIN-用户信息
@@ -84,8 +88,17 @@ public class AdminUsersBiz extends BaseBiz {
      */
     public Result<AdminUsersViewResp> view(Long id) {
         AdminUsersViewResp usersViewResp = BeanUtil.copyProperties(dao.getById(id), AdminUsersViewResp.class);
-        // 用户账户信息
-        usersViewResp.setUsersAccountViewResp(BeanUtil.copyProperties(usersAccountDao.getByUserId(id), AdminUsersAccountViewResp.class));
+        UsersAccount account = usersAccountDao.getByUserId(id);
+        if (ObjectUtil.isEmpty(account)) {
+            /// 用户账户不存在，创建新账户
+            account = new UsersAccount();
+            account.setUserId(req.getUserId());
+            account.setAvailableAmount(BigDecimal.ZERO);
+            account.setFreezeAmount(BigDecimal.ZERO);
+            account.setSign(MD5Util.md5(account.getUserId().toString(), account.getAvailableAmount().toPlainString(), account.getFreezeAmount().toPlainString()));
+            usersAccountDao.save(account);
+        }
+        usersViewResp.setUsersAccountViewResp(BeanUtil.copyProperties(account, AdminUsersAccountViewResp.class));
         return Result.success(usersViewResp);
     }
 
