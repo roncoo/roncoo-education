@@ -80,7 +80,7 @@ public class AdminUsersAccountConsumeBiz extends BaseBiz {
         UsersAccountConsume record = BeanUtil.copyProperties(req, UsersAccountConsume.class);
         record.setBeginAmount(account.getAvailableAmount());
         if (dao.save(record) > 0) {
-            account.setAvailableAmount(account.getAvailableAmount().add(record.getConsumeAmount()));
+            account.setAvailableAmount(account.getAvailableAmount().subtract(record.getConsumeAmount()));
             account.setSign(MD5Util.md5(account.getUserId().toString(), account.getAvailableAmount().toPlainString(), account.getFreezeAmount().toPlainString()));
             usersAccountDao.updateById(account);
             return Result.success("操作成功");
