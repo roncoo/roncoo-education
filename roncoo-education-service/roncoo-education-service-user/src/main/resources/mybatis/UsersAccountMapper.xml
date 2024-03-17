@@ -74,7 +74,7 @@
     <sql id="Base_Column_List">
         id
         , gmt_create, gmt_modified, status_id, user_id, available_amount, freeze_amount,
-    sign
+        sign
     </sql>
     <select id="selectByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UsersAccountExample"
             resultMap="BaseResultMap">

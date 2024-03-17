@@ -82,7 +82,7 @@
     <sql id="Base_Column_List">
         id
         , gmt_create, gmt_modified, status_id, sort, msg_type, msg_title, is_time_send,
-    send_time, is_send, is_top, remark
+        send_time, is_send, is_top, remark
     </sql>
     <sql id="Blob_Column_List">
         msg_text

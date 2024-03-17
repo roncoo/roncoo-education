@@ -1,11 +1,15 @@
 package com.roncoo.education.user.service.admin.biz;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.core.tools.MD5Util;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.user.dao.UsersAccountConsumeDao;
+import com.roncoo.education.user.dao.UsersAccountDao;
+import com.roncoo.education.user.dao.impl.mapper.entity.UsersAccount;
 import com.roncoo.education.user.dao.impl.mapper.entity.UsersAccountConsume;
 import com.roncoo.education.user.dao.impl.mapper.entity.UsersAccountConsumeExample;
 import com.roncoo.education.user.dao.impl.mapper.entity.UsersAccountConsumeExample.Criteria;
@@ -16,8 +20,10 @@ import com.roncoo.education.user.service.admin.resp.AdminUsersAccountConsumePage
 import com.roncoo.education.user.service.admin.resp.AdminUsersAccountConsumeViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 /**
  * ADMIN-用户账户消费记录
@@ -31,6 +37,9 @@ public class AdminUsersAccountConsumeBiz extends BaseBiz {
     @NotNull
     private final UsersAccountConsumeDao dao;
 
+    @NotNull
+    private final UsersAccountDao usersAccountDao;
+
     /**
      * 用户账户消费记录分页
      *
@@ -40,6 +49,10 @@ public class AdminUsersAccountConsumeBiz extends BaseBiz {
     public Result<Page<AdminUsersAccountConsumePageResp>> page(AdminUsersAccountConsumePageReq req) {
         UsersAccountConsumeExample example = new UsersAccountConsumeExample();
         Criteria c = example.createCriteria();
+        if (ObjectUtil.isNotEmpty(req.getUserId())) {
+            c.andUserIdEqualTo(req.getUserId());
+        }
+        example.setOrderByClause("id desc");
         Page<UsersAccountConsume> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminUsersAccountConsumePageResp> respPage = PageUtil.transform(page, AdminUsersAccountConsumePageResp.class);
         return Result.success(respPage);
@@ -51,9 +64,25 @@ public class AdminUsersAccountConsumeBiz extends BaseBiz {
      * @param req 用户账户消费记录
      * @return 添加结果
      */
+    @Transactional(rollbackFor = Exception.class)
     public Result<String> save(AdminUsersAccountConsumeSaveReq req) {
+        UsersAccount account = usersAccountDao.getByUserId(req.getUserId());
+        if (ObjectUtil.isEmpty(account)) {
+            /// 用户账户不存在，创建新账户
+            account = new UsersAccount();
+            account.setUserId(req.getUserId());
+            account.setAvailableAmount(BigDecimal.ZERO);
+            account.setFreezeAmount(BigDecimal.ZERO);
+            account.setSign(MD5Util.md5(account.getUserId().toString(), account.getAvailableAmount().toPlainString(), account.getFreezeAmount().toPlainString()));
+            usersAccountDao.save(account);
+        }
+
         UsersAccountConsume record = BeanUtil.copyProperties(req, UsersAccountConsume.class);
+        record.setBeginAmount(account.getAvailableAmount());
         if (dao.save(record) > 0) {
+            account.setAvailableAmount(account.getAvailableAmount().add(record.getConsumeAmount()));
+            account.setSign(MD5Util.md5(account.getUserId().toString(), account.getAvailableAmount().toPlainString(), account.getFreezeAmount().toPlainString()));
+            usersAccountDao.updateById(account);
             return Result.success("操作成功");
         }
         return Result.error("操作失败");
