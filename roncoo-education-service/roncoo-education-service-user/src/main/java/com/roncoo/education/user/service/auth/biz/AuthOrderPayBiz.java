@@ -189,6 +189,7 @@ public class AuthOrderPayBiz extends BaseBiz {
         }
         // 创建消费记录
         UsersAccountConsume usersAccountConsume = new UsersAccountConsume();
+        usersAccountConsume.setUserId(usersAccount.getUserId());
         usersAccountConsume.setConsumeType(ConsumeTypeEnum.Consume.getCode());
         usersAccountConsume.setBalanceAmount(usersAccount.getAvailableAmount().subtract(courseViewVO.getCoursePrice()));
         usersAccountConsume.setConsumeAmount(courseViewVO.getCoursePrice());
