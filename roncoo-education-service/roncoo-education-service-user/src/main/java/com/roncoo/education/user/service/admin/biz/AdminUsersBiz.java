@@ -92,7 +92,7 @@ public class AdminUsersBiz extends BaseBiz {
         if (ObjectUtil.isEmpty(account)) {
             /// 用户账户不存在，创建新账户
             account = new UsersAccount();
-            account.setUserId(req.getUserId());
+            account.setUserId(id);
             account.setAvailableAmount(BigDecimal.ZERO);
             account.setFreezeAmount(BigDecimal.ZERO);
             account.setSign(MD5Util.md5(account.getUserId().toString(), account.getAvailableAmount().toPlainString(), account.getFreezeAmount().toPlainString()));
