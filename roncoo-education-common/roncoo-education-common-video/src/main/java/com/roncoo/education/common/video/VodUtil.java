@@ -68,7 +68,7 @@ public final class VodUtil {
         if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
             if (req.getPriyUrl().length() > 2) {
                 PrivateYunInfoResp privateYunInfoResp = PrivateYunVodUtil.getInfo(req.getPriyUrl(), req.getPriyAccessKeyId(), req.getPriyAccessKeySecret());
-                infoResp.setUsedSpace(BigDecimal.valueOf(privateYunInfoResp.getStorage()).divide(BigDecimal.valueOf(1024 * 1024 * 1024)).setScale(2, BigDecimal.ROUND_HALF_UP));
+                infoResp.setUsedSpace(BigDecimal.valueOf(privateYunInfoResp.getStorage()).divide(BigDecimal.valueOf(1073741824L)).setScale(2, BigDecimal.ROUND_HALF_UP));
                 return infoResp;
             }
         }
@@ -76,10 +76,10 @@ public final class VodUtil {
             if (req.getPolyvUserId().length() > 2) {
                 JSONObject result = PolyvVodUtil.getUserMain(req.getPolyvUserId(), req.getPolyvSecretKey());
                 if (ObjectUtil.isNotNull(result)) {
-                    infoResp.setTotalSpace(result.getBigDecimal("totalSpace").divide(BigDecimal.valueOf(1024 * 1024 * 1024)).setScale(2, BigDecimal.ROUND_HALF_UP));
-                    infoResp.setUsedSpace(result.getBigDecimal("usedSpace").divide(BigDecimal.valueOf(1024 * 1024 * 1024)).setScale(2, BigDecimal.ROUND_HALF_UP));
-                    infoResp.setTotalFlow(result.getBigDecimal("totalFlow").divide(BigDecimal.valueOf(1024 * 1024 * 1024)).setScale(2, BigDecimal.ROUND_HALF_UP));
-                    infoResp.setUsedFlow(result.getBigDecimal("usedFlow").divide(BigDecimal.valueOf(1024 * 1024 * 1024)).setScale(2, BigDecimal.ROUND_HALF_UP));
+                    infoResp.setTotalSpace(result.getBigDecimal("totalSpace").divide(BigDecimal.valueOf(1073741824L)).setScale(2, BigDecimal.ROUND_HALF_UP));
+                    infoResp.setUsedSpace(result.getBigDecimal("usedSpace").divide(BigDecimal.valueOf(1073741824L)).setScale(2, BigDecimal.ROUND_HALF_UP));
+                    infoResp.setTotalFlow(result.getBigDecimal("totalFlow").divide(BigDecimal.valueOf(1073741824L)).setScale(2, BigDecimal.ROUND_HALF_UP));
+                    infoResp.setUsedFlow(result.getBigDecimal("usedFlow").divide(BigDecimal.valueOf(1073741824L)).setScale(2, BigDecimal.ROUND_HALF_UP));
                     //infoResp.setUniqueNo(result.getStr("email"));
                 }
                 return infoResp;
