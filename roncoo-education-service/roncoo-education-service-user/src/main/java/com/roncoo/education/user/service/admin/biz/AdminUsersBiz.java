@@ -7,6 +7,7 @@ import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.user.dao.UsersAccountDao;
 import com.roncoo.education.user.dao.UsersDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.Users;
 import com.roncoo.education.user.dao.impl.mapper.entity.UsersExample;
@@ -14,6 +15,7 @@ import com.roncoo.education.user.dao.impl.mapper.entity.UsersExample.Criteria;
 import com.roncoo.education.user.service.admin.req.AdminUsersEditReq;
 import com.roncoo.education.user.service.admin.req.AdminUsersPageReq;
 import com.roncoo.education.user.service.admin.req.AdminUsersSaveReq;
+import com.roncoo.education.user.service.admin.resp.AdminUsersAccountViewResp;
 import com.roncoo.education.user.service.admin.resp.AdminUsersPageResp;
 import com.roncoo.education.user.service.admin.resp.AdminUsersViewResp;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +35,8 @@ public class AdminUsersBiz extends BaseBiz {
 
     @NotNull
     private final UsersDao dao;
+    @NotNull
+    private final UsersAccountDao usersAccountDao;
 
     /**
      * 用户信息分页
@@ -79,7 +83,10 @@ public class AdminUsersBiz extends BaseBiz {
      * @return 用户信息
      */
     public Result<AdminUsersViewResp> view(Long id) {
-        return Result.success(BeanUtil.copyProperties(dao.getById(id), AdminUsersViewResp.class));
+        AdminUsersViewResp usersViewResp = BeanUtil.copyProperties(dao.getById(id), AdminUsersViewResp.class);
+        // 用户账户信息
+        usersViewResp.setUsersAccountViewResp(BeanUtil.copyProperties(usersAccountDao.getByUserId(id), AdminUsersAccountViewResp.class));
+        return Result.success(usersViewResp);
     }
 
     /**
