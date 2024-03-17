@@ -6,8 +6,9 @@
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="user_id" jdbcType="BIGINT" property="userId"/>
         <result column="consume_type" jdbcType="TINYINT" property="consumeType"/>
-        <result column="begin_amount" jdbcType="DECIMAL" property="beginAmount"/>
         <result column="consume_amount" jdbcType="DECIMAL" property="consumeAmount"/>
+        <result column="balance_amount" jdbcType="DECIMAL" property="balanceAmount"/>
+        <result column="order_no" jdbcType="BIGINT" property="orderNo"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
     </resultMap>
     <sql id="Example_Where_Clause">
@@ -72,7 +73,8 @@
     </sql>
     <sql id="Base_Column_List">
         id
-        , gmt_create, user_id, consume_type, begin_amount, consume_amount, remark
+        , gmt_create, user_id, consume_type, consume_amount, balance_amount, order_no,
+    remark
     </sql>
     <select id="selectByExample"
             parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UsersAccountConsumeExample"
@@ -113,11 +115,11 @@
     </delete>
     <insert id="insert" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UsersAccountConsume">
         insert into users_account_consume (id, gmt_create, user_id,
-                                           consume_type, begin_amount, consume_amount,
-                                           remark)
+                                           consume_type, consume_amount, balance_amount,
+                                           order_no, remark)
         values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{userId,jdbcType=BIGINT},
-                #{consumeType,jdbcType=TINYINT}, #{beginAmount,jdbcType=DECIMAL}, #{consumeAmount,jdbcType=DECIMAL},
-                #{remark,jdbcType=VARCHAR})
+                #{consumeType,jdbcType=TINYINT}, #{consumeAmount,jdbcType=DECIMAL}, #{balanceAmount,jdbcType=DECIMAL},
+                #{orderNo,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UsersAccountConsume">
         insert into users_account_consume
@@ -134,11 +136,14 @@
             <if test="consumeType != null">
                 consume_type,
             </if>
-            <if test="beginAmount != null">
-                begin_amount,
-            </if>
             <if test="consumeAmount != null">
                 consume_amount,
+            </if>
+            <if test="balanceAmount != null">
+                balance_amount,
+            </if>
+            <if test="orderNo != null">
+                order_no,
             </if>
             <if test="remark != null">
                 remark,
@@ -157,11 +162,14 @@
             <if test="consumeType != null">
                 #{consumeType,jdbcType=TINYINT},
             </if>
-            <if test="beginAmount != null">
-                #{beginAmount,jdbcType=DECIMAL},
-            </if>
             <if test="consumeAmount != null">
                 #{consumeAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="balanceAmount != null">
+                #{balanceAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=BIGINT},
             </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
@@ -191,11 +199,14 @@
             <if test="record.consumeType != null">
                 consume_type = #{record.consumeType,jdbcType=TINYINT},
             </if>
-            <if test="record.beginAmount != null">
-                begin_amount = #{record.beginAmount,jdbcType=DECIMAL},
-            </if>
             <if test="record.consumeAmount != null">
                 consume_amount = #{record.consumeAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.balanceAmount != null">
+                balance_amount = #{record.balanceAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.orderNo != null">
+                order_no = #{record.orderNo,jdbcType=BIGINT},
             </if>
             <if test="record.remark != null">
                 remark = #{record.remark,jdbcType=VARCHAR},
@@ -211,8 +222,9 @@
         gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
         user_id = #{record.userId,jdbcType=BIGINT},
         consume_type = #{record.consumeType,jdbcType=TINYINT},
-        begin_amount = #{record.beginAmount,jdbcType=DECIMAL},
         consume_amount = #{record.consumeAmount,jdbcType=DECIMAL},
+        balance_amount = #{record.balanceAmount,jdbcType=DECIMAL},
+        order_no = #{record.orderNo,jdbcType=BIGINT},
         remark = #{record.remark,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
@@ -231,11 +243,14 @@
             <if test="consumeType != null">
                 consume_type = #{consumeType,jdbcType=TINYINT},
             </if>
-            <if test="beginAmount != null">
-                begin_amount = #{beginAmount,jdbcType=DECIMAL},
-            </if>
             <if test="consumeAmount != null">
                 consume_amount = #{consumeAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="balanceAmount != null">
+                balance_amount = #{balanceAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="orderNo != null">
+                order_no = #{orderNo,jdbcType=BIGINT},
             </if>
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
@@ -249,8 +264,9 @@
         set gmt_create     = #{gmtCreate,jdbcType=TIMESTAMP},
             user_id        = #{userId,jdbcType=BIGINT},
             consume_type   = #{consumeType,jdbcType=TINYINT},
-            begin_amount   = #{beginAmount,jdbcType=DECIMAL},
             consume_amount = #{consumeAmount,jdbcType=DECIMAL},
+            balance_amount = #{balanceAmount,jdbcType=DECIMAL},
+            order_no       = #{orderNo,jdbcType=BIGINT},
             remark         = #{remark,jdbcType=VARCHAR}
         where id = #{id,jdbcType=BIGINT}
     </update>

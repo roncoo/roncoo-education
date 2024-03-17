@@ -4,6 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.ConsumeTypeEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.MD5Util;
 import com.roncoo.education.common.service.BaseBiz;
@@ -78,7 +79,12 @@ public class AdminUsersAccountConsumeBiz extends BaseBiz {
         }
 
         UsersAccountConsume record = BeanUtil.copyProperties(req, UsersAccountConsume.class);
-        record.setBeginAmount(account.getAvailableAmount());
+        if (req.getConsumeType().equals(ConsumeTypeEnum.Consume.getCode())) {
+            record.setBalanceAmount(account.getAvailableAmount().subtract(req.getConsumeAmount()));
+        }
+        if (req.getConsumeType().equals(ConsumeTypeEnum.Income.getCode())) {
+            record.setBalanceAmount(account.getAvailableAmount().add(req.getConsumeAmount()));
+        }
         if (dao.save(record) > 0) {
             account.setAvailableAmount(account.getAvailableAmount().subtract(record.getConsumeAmount()));
             account.setSign(MD5Util.md5(account.getUserId().toString(), account.getAvailableAmount().toPlainString(), account.getFreezeAmount().toPlainString()));

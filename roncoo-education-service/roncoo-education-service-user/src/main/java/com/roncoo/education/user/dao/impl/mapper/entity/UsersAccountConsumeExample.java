@@ -366,66 +366,6 @@ public class UsersAccountConsumeExample {
             return (Criteria) this;
         }
 
-        public Criteria andBeginAmountIsNull() {
-            addCriterion("begin_amount is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBeginAmountIsNotNull() {
-            addCriterion("begin_amount is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBeginAmountEqualTo(BigDecimal value) {
-            addCriterion("begin_amount =", value, "beginAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andBeginAmountNotEqualTo(BigDecimal value) {
-            addCriterion("begin_amount <>", value, "beginAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andBeginAmountGreaterThan(BigDecimal value) {
-            addCriterion("begin_amount >", value, "beginAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andBeginAmountGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("begin_amount >=", value, "beginAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andBeginAmountLessThan(BigDecimal value) {
-            addCriterion("begin_amount <", value, "beginAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andBeginAmountLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("begin_amount <=", value, "beginAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andBeginAmountIn(List<BigDecimal> values) {
-            addCriterion("begin_amount in", values, "beginAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andBeginAmountNotIn(List<BigDecimal> values) {
-            addCriterion("begin_amount not in", values, "beginAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andBeginAmountBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("begin_amount between", value1, value2, "beginAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andBeginAmountNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("begin_amount not between", value1, value2, "beginAmount");
-            return (Criteria) this;
-        }
-
         public Criteria andConsumeAmountIsNull() {
             addCriterion("consume_amount is null");
             return (Criteria) this;
@@ -483,6 +423,126 @@ public class UsersAccountConsumeExample {
 
         public Criteria andConsumeAmountNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("consume_amount not between", value1, value2, "consumeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceAmountIsNull() {
+            addCriterion("balance_amount is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceAmountIsNotNull() {
+            addCriterion("balance_amount is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceAmountEqualTo(BigDecimal value) {
+            addCriterion("balance_amount =", value, "balanceAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceAmountNotEqualTo(BigDecimal value) {
+            addCriterion("balance_amount <>", value, "balanceAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceAmountGreaterThan(BigDecimal value) {
+            addCriterion("balance_amount >", value, "balanceAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceAmountGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("balance_amount >=", value, "balanceAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceAmountLessThan(BigDecimal value) {
+            addCriterion("balance_amount <", value, "balanceAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceAmountLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("balance_amount <=", value, "balanceAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceAmountIn(List<BigDecimal> values) {
+            addCriterion("balance_amount in", values, "balanceAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceAmountNotIn(List<BigDecimal> values) {
+            addCriterion("balance_amount not in", values, "balanceAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceAmountBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("balance_amount between", value1, value2, "balanceAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalanceAmountNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("balance_amount not between", value1, value2, "balanceAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNoIsNull() {
+            addCriterion("order_no is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNoIsNotNull() {
+            addCriterion("order_no is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNoEqualTo(Long value) {
+            addCriterion("order_no =", value, "orderNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNoNotEqualTo(Long value) {
+            addCriterion("order_no <>", value, "orderNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNoGreaterThan(Long value) {
+            addCriterion("order_no >", value, "orderNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNoGreaterThanOrEqualTo(Long value) {
+            addCriterion("order_no >=", value, "orderNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNoLessThan(Long value) {
+            addCriterion("order_no <", value, "orderNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNoLessThanOrEqualTo(Long value) {
+            addCriterion("order_no <=", value, "orderNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNoIn(List<Long> values) {
+            addCriterion("order_no in", values, "orderNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNoNotIn(List<Long> values) {
+            addCriterion("order_no not in", values, "orderNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNoBetween(Long value1, Long value2) {
+            addCriterion("order_no between", value1, value2, "orderNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNoNotBetween(Long value1, Long value2) {
+            addCriterion("order_no not between", value1, value2, "orderNo");
             return (Criteria) this;
         }
 

@@ -10,7 +10,7 @@ import java.util.List;
  * 用户账户消费记录 服务类
  *
  * @author wujing
- * @date 2024-03-16
+ * @date 2024-03-17
  */
 public interface UsersAccountConsumeDao {
 
@@ -59,7 +59,7 @@ public interface UsersAccountConsumeDao {
     /**
      * 用户账户消费记录--条件列出
      *
-     * @param example 查询条件
+     * @param example     查询条件
      * @return 用户账户消费记录列表
      */
     List<UsersAccountConsume> listByExample(UsersAccountConsumeExample example);
@@ -67,7 +67,7 @@ public interface UsersAccountConsumeDao {
     /**
      * 用户账户消费记录--条件统计
      *
-     * @param example 统计条件
+     * @param example     统计条件
      * @return 用户账户消费记录数量
      */
     int countByExample(UsersAccountConsumeExample example);

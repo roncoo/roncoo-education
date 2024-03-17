@@ -24,6 +24,9 @@ public class AdminUsersAccountConsumePageReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty(value = "主键ID")
+    private Long id;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime gmtCreate;
@@ -31,14 +34,17 @@ public class AdminUsersAccountConsumePageReq implements Serializable {
     @ApiModelProperty(value = "用户ID")
     private Long userId;
 
-    @ApiModelProperty(value = "消费类型(1消费，2收入)")
+    @ApiModelProperty(value = "消费类型(1支出，2收入)")
     private Integer consumeType;
 
-    @ApiModelProperty(value = "消费前金额")
-    private BigDecimal beginAmount;
-
-    @ApiModelProperty(value = "消费金额(消费是正数，收入是负数)")
+    @ApiModelProperty(value = "消费金额(支出负数，收入是正数)")
     private BigDecimal consumeAmount;
+
+    @ApiModelProperty(value = "剩余金额")
+    private BigDecimal balanceAmount;
+
+    @ApiModelProperty(value = "消费订单号")
+    private Long orderNo;
 
     @ApiModelProperty(value = "备注")
     private String remark;

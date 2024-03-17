@@ -15,7 +15,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ConsumeTypeEnum {
 
-    Consume(1, "消费"), Income(2, "收入");
+    Consume(1, "支出"), Income(2, "收入");
 
     private Integer code;
 

@@ -13,9 +13,11 @@ public class UsersAccountConsume implements Serializable {
 
     private Integer consumeType;
 
-    private BigDecimal beginAmount;
-
     private BigDecimal consumeAmount;
+
+    private BigDecimal balanceAmount;
+
+    private Long orderNo;
 
     private String remark;
 
@@ -53,20 +55,28 @@ public class UsersAccountConsume implements Serializable {
         this.consumeType = consumeType;
     }
 
-    public BigDecimal getBeginAmount() {
-        return beginAmount;
-    }
-
-    public void setBeginAmount(BigDecimal beginAmount) {
-        this.beginAmount = beginAmount;
-    }
-
     public BigDecimal getConsumeAmount() {
         return consumeAmount;
     }
 
     public void setConsumeAmount(BigDecimal consumeAmount) {
         this.consumeAmount = consumeAmount;
+    }
+
+    public BigDecimal getBalanceAmount() {
+        return balanceAmount;
+    }
+
+    public void setBalanceAmount(BigDecimal balanceAmount) {
+        this.balanceAmount = balanceAmount;
+    }
+
+    public Long getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(Long orderNo) {
+        this.orderNo = orderNo;
     }
 
     public String getRemark() {
@@ -87,8 +97,9 @@ public class UsersAccountConsume implements Serializable {
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", userId=").append(userId);
         sb.append(", consumeType=").append(consumeType);
-        sb.append(", beginAmount=").append(beginAmount);
         sb.append(", consumeAmount=").append(consumeAmount);
+        sb.append(", balanceAmount=").append(balanceAmount);
+        sb.append(", orderNo=").append(orderNo);
         sb.append(", remark=").append(remark);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
