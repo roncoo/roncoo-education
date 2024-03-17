@@ -73,4 +73,6 @@ public interface UsersAccountDao {
     int countByExample(UsersAccountExample example);
 
     UsersAccount getByUserId(Long userId);
+
+    List<UsersAccount> listByUserIds(List<Long> userIds);
 }

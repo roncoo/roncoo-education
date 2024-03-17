@@ -83,4 +83,11 @@ public class UsersAccountDaoImpl implements UsersAccountDao {
         }
         return null;
     }
+
+    @Override
+    public List<UsersAccount> listByUserIds(List<Long> userIds) {
+        UsersAccountExample example = new UsersAccountExample();
+        example.createCriteria().andUserIdIn(userIds);
+        return this.mapper.selectByExample(example);
+    }
 }

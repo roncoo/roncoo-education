@@ -60,4 +60,7 @@ public class AdminUsersPageResp implements Serializable {
 
     @ApiModelProperty(value = "备注")
     private String remark;
+
+    @ApiModelProperty(value = "用户账户信息")
+    private AdminUsersAccountViewResp usersAccountViewResp;
 }

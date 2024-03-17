@@ -27,6 +27,9 @@ import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * ADMIN-用户信息
@@ -58,9 +61,18 @@ public class AdminUsersBiz extends BaseBiz {
         Page<Users> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminUsersPageResp> respPage = PageUtil.transform(page, AdminUsersPageResp.class);
         if (CollUtil.isNotEmpty(respPage.getList())) {
-            // 脱敏处理
+            List<UsersAccount> usersAccounts = usersAccountDao.listByUserIds(respPage.getList().stream().map(AdminUsersPageResp::getId).collect(Collectors.toList()));
+            Map<Long, AdminUsersAccountViewResp> usersAccountMap = null;
+            if (CollUtil.isNotEmpty(usersAccounts)) {
+                usersAccountMap = usersAccounts.stream().collect(Collectors.toMap(UsersAccount::getUserId, item -> BeanUtil.copyProperties(item, AdminUsersAccountViewResp.class)));
+            }
             for (AdminUsersPageResp resp : respPage.getList()) {
+                // 脱敏处理
                 resp.setMobile(DesensitizedUtil.mobilePhone(resp.getMobile()));
+                // 账户信息
+                if (usersAccountMap != null) {
+                    resp.setUsersAccountViewResp(usersAccountMap.get(resp.getId()));
+                }
             }
         }
         return Result.success(respPage);
