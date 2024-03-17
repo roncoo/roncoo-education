@@ -118,6 +118,7 @@ public class AuthOrderPayBiz extends BaseBiz {
             AuthOrderPayResp resp = BeanUtil.copyProperties(orderInfo, AuthOrderPayResp.class);
             resp.setPayMessage(orderResp.getPayMessage());
             resp.setSerialNumber(orderPay.getSerialNumber());
+            resp.setOrderStatus(OrderStatusEnum.WAIT.getCode());
             return Result.success(resp);
         }
         return Result.error("下单失败，请更换支付方式试试");
@@ -177,6 +178,7 @@ public class AuthOrderPayBiz extends BaseBiz {
             AuthOrderPayResp resp = BeanUtil.copyProperties(orderInfo, AuthOrderPayResp.class);
             resp.setPayMessage(orderResp.getPayMessage());
             resp.setSerialNumber(orderPay.getSerialNumber());
+            resp.setOrderStatus(OrderStatusEnum.WAIT.getCode());
             return Result.success(resp);
         }
         return Result.error("下单失败，请更换支付方式试试");
@@ -208,6 +210,7 @@ public class AuthOrderPayBiz extends BaseBiz {
         //返回支付信息
         AuthOrderPayResp resp = BeanUtil.copyProperties(orderInfo, AuthOrderPayResp.class);
         resp.setSerialNumber(orderPay.getSerialNumber());
+        resp.setOrderStatus(OrderStatusEnum.SUCCESS.getCode());
         resp.setPayMessage("success");
         return Result.success(resp);
     }
