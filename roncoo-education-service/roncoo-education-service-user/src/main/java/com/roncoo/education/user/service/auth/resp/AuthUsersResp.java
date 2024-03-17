@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -48,4 +49,10 @@ public class AuthUsersResp implements Serializable {
 
     @ApiModelProperty(value = "备注")
     private String remark;
+
+    @ApiModelProperty(value = "可用金额")
+    private BigDecimal availableAmount;
+
+    @ApiModelProperty(value = "冻结金额")
+    private BigDecimal freezeAmount;
 }
