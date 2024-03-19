@@ -114,7 +114,7 @@ public class AdminGlobalFilter implements GlobalFilter, Ordered {
             return true;
         }
         log.info("用户没该权限点，{}", uri);
-        return true;
+        return false;
     }
 
     private Long getUserId(ServerHttpRequest request) {
