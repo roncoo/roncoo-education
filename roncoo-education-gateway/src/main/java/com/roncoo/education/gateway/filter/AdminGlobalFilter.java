@@ -113,7 +113,7 @@ public class AdminGlobalFilter implements GlobalFilter, Ordered {
         if (tk.contains(uri)) {
             return true;
         }
-        log.info("用户没该权限点，{}", uri);
+        log.error("用户没该权限点，{}", uri);
         return false;
     }
 
