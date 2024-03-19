@@ -8,6 +8,8 @@ import com.roncoo.education.course.dao.impl.mapper.CategoryMapper;
 import com.roncoo.education.course.dao.impl.mapper.entity.Category;
 import com.roncoo.education.course.dao.impl.mapper.entity.CategoryExample;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.NotNull;
@@ -25,6 +27,8 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @NotNull
     private final CategoryMapper mapper;
+    @NotNull
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
     public int save(Category record) {
@@ -77,5 +81,11 @@ public class CategoryDaoImpl implements CategoryDao {
         CategoryExample example = new CategoryExample();
         example.createCriteria().andIdIn(categoryIdList);
         return this.mapper.selectByExample(example);
+    }
+
+    @Override
+    public int updateBatch(List<Category> categoryList) {
+        String sql = "update category set parent_id = :parentId, sort = :sort where id = :id";
+        return namedParameterJdbcTemplate.batchUpdate(sql, SqlParameterSourceUtils.createBatch(categoryList)).length;
     }
 }

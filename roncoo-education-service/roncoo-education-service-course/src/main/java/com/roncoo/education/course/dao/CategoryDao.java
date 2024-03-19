@@ -73,4 +73,7 @@ public interface CategoryDao {
     int countByExample(CategoryExample example);
 
     List<Category> listByIds(List<Long> categoryIdList);
+
+    int updateBatch(List<Category> categoryList);
+
 }

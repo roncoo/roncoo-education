@@ -3,10 +3,7 @@ package com.roncoo.education.course.service.admin;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.service.admin.biz.AdminCategoryBiz;
-import com.roncoo.education.course.service.admin.req.AdminCategoryEditReq;
-import com.roncoo.education.course.service.admin.req.AdminCategoryListReq;
-import com.roncoo.education.course.service.admin.req.AdminCategoryPageReq;
-import com.roncoo.education.course.service.admin.req.AdminCategorySaveReq;
+import com.roncoo.education.course.service.admin.req.*;
 import com.roncoo.education.course.service.admin.resp.AdminCategoryListResp;
 import com.roncoo.education.course.service.admin.resp.AdminCategoryPageResp;
 import com.roncoo.education.course.service.admin.resp.AdminCategoryViewResp;
@@ -70,5 +67,11 @@ public class AdminCategoryController {
     @DeleteMapping(value = "/delete")
     public Result<String> delete(@RequestParam Long id) {
         return biz.delete(id);
+    }
+
+    @ApiOperation(value = "排序", notes = "排序")
+    @PutMapping(value = "/sort")
+    public Result<String> sort(@RequestBody @Valid AdminCategorySortReq req) {
+        return biz.sort(req);
     }
 }

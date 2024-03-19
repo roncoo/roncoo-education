@@ -11,10 +11,7 @@ import com.roncoo.education.course.dao.CategoryDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Category;
 import com.roncoo.education.course.dao.impl.mapper.entity.CategoryExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.CategoryExample.Criteria;
-import com.roncoo.education.course.service.admin.req.AdminCategoryEditReq;
-import com.roncoo.education.course.service.admin.req.AdminCategoryListReq;
-import com.roncoo.education.course.service.admin.req.AdminCategoryPageReq;
-import com.roncoo.education.course.service.admin.req.AdminCategorySaveReq;
+import com.roncoo.education.course.service.admin.req.*;
 import com.roncoo.education.course.service.admin.resp.AdminCategoryListResp;
 import com.roncoo.education.course.service.admin.resp.AdminCategoryPageResp;
 import com.roncoo.education.course.service.admin.resp.AdminCategoryViewResp;
@@ -23,6 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -132,4 +130,25 @@ public class AdminCategoryBiz extends BaseBiz {
         }
         return Result.error("操作失败");
     }
+
+    public Result<String> sort(AdminCategorySortReq req) {
+        List<Category> categoryList = new ArrayList<>();
+        handleSort(0L, req.getChildrenList(), categoryList);
+        dao.updateBatch(categoryList);
+        return Result.success("操作成功");
+    }
+
+    private void handleSort(Long parentId, List<AdminCategorySortReq> reqs, List<Category> categoryList) {
+        for (AdminCategorySortReq req : reqs) {
+            Category updateCategory = new Category();
+            updateCategory.setId(req.getId());
+            updateCategory.setParentId(parentId);
+            updateCategory.setSort(req.getSort());
+            categoryList.add(updateCategory);
+            if (CollectionUtil.isNotEmpty(req.getChildrenList())) {
+                handleSort(req.getId(), req.getChildrenList(), categoryList);
+            }
+        }
+    }
+
 }
