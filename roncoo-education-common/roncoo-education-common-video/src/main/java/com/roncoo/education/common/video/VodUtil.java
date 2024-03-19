@@ -32,7 +32,7 @@ import java.util.List;
 @Slf4j
 public final class VodUtil {
 
-    private static final String PRIVATEY_CALLBACK = "gateway/course/callback/polyv/vod/upload";
+    private static final String PRIVATEY_CALLBACK = "gateway/course/callback/priyun/vod/upload";
     private static final String PRIVATEY_AUTH = "gateway/course/callback/priyun/vod/auth";
 
     private VodUtil() {
