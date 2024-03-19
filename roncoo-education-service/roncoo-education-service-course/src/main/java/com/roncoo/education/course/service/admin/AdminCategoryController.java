@@ -71,7 +71,7 @@ public class AdminCategoryController {
 
     @ApiOperation(value = "排序", notes = "排序")
     @PutMapping(value = "/sort")
-    public Result<String> sort(@RequestBody @Valid AdminCategorySortReq req) {
+    public Result<String> sort(@RequestBody @Valid List<AdminCategorySortReq> req) {
         return biz.sort(req);
     }
 }

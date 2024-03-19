@@ -131,9 +131,9 @@ public class AdminCategoryBiz extends BaseBiz {
         return Result.error("操作失败");
     }
 
-    public Result<String> sort(AdminCategorySortReq req) {
+    public Result<String> sort(List<AdminCategorySortReq> req) {
         List<Category> categoryList = new ArrayList<>();
-        handleSort(0L, req.getChildrenList(), categoryList);
+        handleSort(0L, req, categoryList);
         dao.updateBatch(categoryList);
         return Result.success("操作成功");
     }
