@@ -50,7 +50,7 @@ public final class VodUtil {
         }
         if (VodPlatformEnum.POLYV.getCode().equals(req.getVodPlatform())) {
             // 设置视频回调地址
-            String callbackUrl = req.getWebsiteDomain() + "";
+            String callbackUrl = req.getWebsiteDomain() + "gateway/course/callback/polyv/vod/upload";
             PolyvVodUtil.setCallback(req.getPolyvAppId(), req.getPolyvAppSecret(), callbackUrl);
 
             // 开启加密，使用web授权
