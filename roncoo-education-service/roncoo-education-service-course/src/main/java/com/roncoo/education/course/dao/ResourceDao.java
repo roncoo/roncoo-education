@@ -77,4 +77,6 @@ public interface ResourceDao {
     List<Resource> listByIds(List<Long> ids);
 
     int deleteByIds(List<Long> ids);
+
+    int updateByBatchIds(List<Resource> resources);
 }

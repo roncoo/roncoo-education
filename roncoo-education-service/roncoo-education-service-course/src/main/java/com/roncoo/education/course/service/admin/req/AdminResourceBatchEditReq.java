@@ -18,10 +18,13 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 @ApiModel(description = "ADMIN-课程视频信息删除")
-public class AdminResourceDeleteReq implements Serializable {
+public class AdminResourceBatchEditReq implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "主键集合")
     private List<Long> ids;
+
+    @ApiModelProperty(value = "分类ID")
+    private Long categoryId;
 
 }

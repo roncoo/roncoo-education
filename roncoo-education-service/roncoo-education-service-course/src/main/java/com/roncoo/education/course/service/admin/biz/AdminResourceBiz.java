@@ -19,10 +19,7 @@ import com.roncoo.education.course.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.dao.ResourceDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.*;
 import com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample.Criteria;
-import com.roncoo.education.course.service.admin.req.AdminResourceDeleteReq;
-import com.roncoo.education.course.service.admin.req.AdminResourceEditReq;
-import com.roncoo.education.course.service.admin.req.AdminResourcePageReq;
-import com.roncoo.education.course.service.admin.req.AdminResourceSaveReq;
+import com.roncoo.education.course.service.admin.req.*;
 import com.roncoo.education.course.service.admin.resp.AdminPreviewResp;
 import com.roncoo.education.course.service.admin.resp.AdminResourcePageResp;
 import com.roncoo.education.course.service.admin.resp.AdminResourceViewResp;
@@ -159,6 +156,22 @@ public class AdminResourceBiz extends BaseBiz {
         return Result.error("操作失败");
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public Result<String> batchEdit(AdminResourceBatchEditReq req) {
+        if (CollUtil.isNotEmpty(req.getIds())) {
+            List<Resource> resources = new ArrayList<>();
+            for (Long id : req.getIds()) {
+                Resource resource = new Resource();
+                resource.setId(id);
+                resource.setCategoryId(req.getCategoryId());
+                resources.add(resource);
+            }
+            dao.updateByBatchIds(resources);
+            return Result.success("操作成功");
+        }
+        return Result.error("操作失败");
+    }
+
     /**
      * 课程视频信息删除
      *
@@ -200,7 +213,7 @@ public class AdminResourceBiz extends BaseBiz {
                 // 删除音视频
                 VodUtil.deleteVideo(feignSysConfig.getVod(), resource.getVideoVid());
             } else if (ResourceTypeEnum.DOC.getCode().equals(resource.getResourceType())) {
-                // 删除文档
+                // TODO 删除文档
             }
         }
         return Result.success("操作成功");

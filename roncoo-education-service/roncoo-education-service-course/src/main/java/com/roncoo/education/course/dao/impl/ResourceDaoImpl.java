@@ -9,6 +9,8 @@ import com.roncoo.education.course.dao.impl.mapper.ResourceMapper;
 import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
 import com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.NotNull;
@@ -26,6 +28,10 @@ public class ResourceDaoImpl implements ResourceDao {
 
     @NotNull
     private final ResourceMapper mapper;
+
+
+    @NotNull
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
     public int save(Resource record) {
@@ -96,5 +102,11 @@ public class ResourceDaoImpl implements ResourceDao {
         ResourceExample example = new ResourceExample();
         example.createCriteria().andIdIn(ids);
         return this.mapper.deleteByExample(example);
+    }
+
+    @Override
+    public int updateByBatchIds(List<Resource> resources) {
+        String sql = "update resource set category_id = :categoryId where id = :id";
+        return this.namedParameterJdbcTemplate.batchUpdate(sql, SqlParameterSourceUtils.createBatch(resources)).length;
     }
 }
