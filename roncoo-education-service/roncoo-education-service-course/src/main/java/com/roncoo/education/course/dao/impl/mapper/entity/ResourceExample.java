@@ -1114,6 +1114,126 @@ public class ResourceExample {
             addCriterion("doc_page not between", value1, value2, "docPage");
             return (Criteria) this;
         }
+
+        public Criteria andImgWidthIsNull() {
+            addCriterion("img_width is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthIsNotNull() {
+            addCriterion("img_width is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthEqualTo(Integer value) {
+            addCriterion("img_width =", value, "imgWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthNotEqualTo(Integer value) {
+            addCriterion("img_width <>", value, "imgWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthGreaterThan(Integer value) {
+            addCriterion("img_width >", value, "imgWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthGreaterThanOrEqualTo(Integer value) {
+            addCriterion("img_width >=", value, "imgWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthLessThan(Integer value) {
+            addCriterion("img_width <", value, "imgWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthLessThanOrEqualTo(Integer value) {
+            addCriterion("img_width <=", value, "imgWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthIn(List<Integer> values) {
+            addCriterion("img_width in", values, "imgWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthNotIn(List<Integer> values) {
+            addCriterion("img_width not in", values, "imgWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthBetween(Integer value1, Integer value2) {
+            addCriterion("img_width between", value1, value2, "imgWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgWidthNotBetween(Integer value1, Integer value2) {
+            addCriterion("img_width not between", value1, value2, "imgWidth");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightIsNull() {
+            addCriterion("img_height is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightIsNotNull() {
+            addCriterion("img_height is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightEqualTo(Integer value) {
+            addCriterion("img_height =", value, "imgHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightNotEqualTo(Integer value) {
+            addCriterion("img_height <>", value, "imgHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightGreaterThan(Integer value) {
+            addCriterion("img_height >", value, "imgHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightGreaterThanOrEqualTo(Integer value) {
+            addCriterion("img_height >=", value, "imgHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightLessThan(Integer value) {
+            addCriterion("img_height <", value, "imgHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightLessThanOrEqualTo(Integer value) {
+            addCriterion("img_height <=", value, "imgHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightIn(List<Integer> values) {
+            addCriterion("img_height in", values, "imgHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightNotIn(List<Integer> values) {
+            addCriterion("img_height not in", values, "imgHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightBetween(Integer value1, Integer value2) {
+            addCriterion("img_height between", value1, value2, "imgHeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgHeightNotBetween(Integer value1, Integer value2) {
+            addCriterion("img_height not between", value1, value2, "imgHeight");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

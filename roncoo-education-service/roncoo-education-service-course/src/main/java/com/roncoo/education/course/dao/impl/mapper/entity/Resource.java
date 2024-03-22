@@ -36,6 +36,10 @@ public class Resource implements Serializable {
 
     private Integer docPage;
 
+    private Integer imgWidth;
+
+    private Integer imgHeight;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -166,6 +170,22 @@ public class Resource implements Serializable {
         this.docPage = docPage;
     }
 
+    public Integer getImgWidth() {
+        return imgWidth;
+    }
+
+    public void setImgWidth(Integer imgWidth) {
+        this.imgWidth = imgWidth;
+    }
+
+    public Integer getImgHeight() {
+        return imgHeight;
+    }
+
+    public void setImgHeight(Integer imgHeight) {
+        this.imgHeight = imgHeight;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -188,6 +208,8 @@ public class Resource implements Serializable {
         sb.append(", videoLength=").append(videoLength);
         sb.append(", videoVid=").append(videoVid);
         sb.append(", docPage=").append(docPage);
+        sb.append(", imgWidth=").append(imgWidth);
+        sb.append(", imgHeight=").append(imgHeight);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

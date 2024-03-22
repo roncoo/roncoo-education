@@ -70,4 +70,10 @@ public class AdminResourceViewResp implements Serializable {
     @ApiModelProperty(value = "页数")
     private Integer docPage;
 
+    @ApiModelProperty(value = "图片宽度")
+    private Integer imgWidth;
+
+    @ApiModelProperty(value = "图片高度")
+    private Integer imgHeight;
+
 }
