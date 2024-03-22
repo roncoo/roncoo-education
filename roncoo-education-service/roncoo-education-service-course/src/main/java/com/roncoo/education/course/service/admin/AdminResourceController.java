@@ -68,7 +68,6 @@ public class AdminResourceController {
         return biz.batchEdit(req);
     }
 
-
     @ApiOperation(value = "课程视频信息删除", notes = "课程视频信息删除")
     @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
     @DeleteMapping(value = "/delete")
