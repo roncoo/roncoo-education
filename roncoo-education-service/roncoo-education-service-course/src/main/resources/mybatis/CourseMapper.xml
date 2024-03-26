@@ -18,8 +18,11 @@
         <result column="course_sort" jdbcType="INTEGER" property="courseSort"/>
         <result column="count_buy" jdbcType="INTEGER" property="countBuy"/>
         <result column="count_study" jdbcType="INTEGER" property="countStudy"/>
+        <result column="speed_double" jdbcType="TINYINT" property="speedDouble"/>
+        <result column="speed_drag" jdbcType="TINYINT" property="speedDrag"/>
     </resultMap>
-    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.roncoo.education.course.dao.impl.mapper.entity.Course">
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+               type="com.roncoo.education.course.dao.impl.mapper.entity.Course">
         <result column="introduce" jdbcType="LONGVARCHAR" property="introduce"/>
     </resultMap>
     <sql id="Example_Where_Clause">
@@ -40,7 +43,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -69,7 +73,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -81,14 +86,17 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        id, gmt_create, gmt_modified, status_id, sort, lecturer_id, category_id, course_name,
-    course_logo, is_free, ruling_price, course_price, is_putaway, course_sort, count_buy,
-    count_study
+        id
+        , gmt_create, gmt_modified, status_id, sort, lecturer_id, category_id, course_name,
+    course_logo, is_free, ruling_price, course_price, is_putaway, course_sort, count_buy, 
+    count_study, speed_double, speed_drag
     </sql>
     <sql id="Blob_Column_List">
         introduce
     </sql>
-    <select id="selectByExampleWithBLOBs" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseExample" resultMap="ResultMapWithBLOBs">
+    <select id="selectByExampleWithBLOBs"
+            parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseExample"
+            resultMap="ResultMapWithBLOBs">
         select
         <if test="distinct">
             distinct
@@ -104,7 +112,8 @@
             order by ${orderByClause}
         </if>
     </select>
-    <select id="selectByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseExample"
+            resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -146,13 +155,15 @@
                             category_id, course_name, course_logo,
                             is_free, ruling_price, course_price,
                             is_putaway, course_sort, count_buy,
-                            count_study, introduce)
+                            count_study, speed_double, speed_drag,
+                            introduce)
         values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
                 #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{lecturerId,jdbcType=BIGINT},
                 #{categoryId,jdbcType=BIGINT}, #{courseName,jdbcType=VARCHAR}, #{courseLogo,jdbcType=VARCHAR},
                 #{isFree,jdbcType=TINYINT}, #{rulingPrice,jdbcType=DECIMAL}, #{coursePrice,jdbcType=DECIMAL},
                 #{isPutaway,jdbcType=TINYINT}, #{courseSort,jdbcType=INTEGER}, #{countBuy,jdbcType=INTEGER},
-                #{countStudy,jdbcType=INTEGER}, #{introduce,jdbcType=LONGVARCHAR})
+                #{countStudy,jdbcType=INTEGER}, #{speedDouble,jdbcType=TINYINT}, #{speedDrag,jdbcType=TINYINT},
+                #{introduce,jdbcType=LONGVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Course">
         insert into course
@@ -204,6 +215,12 @@
             </if>
             <if test="countStudy != null">
                 count_study,
+            </if>
+            <if test="speedDouble != null">
+                speed_double,
+            </if>
+            <if test="speedDrag != null">
+                speed_drag,
             </if>
             <if test="introduce != null">
                 introduce,
@@ -258,12 +275,19 @@
             <if test="countStudy != null">
                 #{countStudy,jdbcType=INTEGER},
             </if>
+            <if test="speedDouble != null">
+                #{speedDouble,jdbcType=TINYINT},
+            </if>
+            <if test="speedDrag != null">
+                #{speedDrag,jdbcType=TINYINT},
+            </if>
             <if test="introduce != null">
                 #{introduce,jdbcType=LONGVARCHAR},
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseExample" resultType="java.lang.Integer">
+    <select id="countByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseExample"
+            resultType="java.lang.Integer">
         select count(*) from course
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -320,6 +344,12 @@
             <if test="record.countStudy != null">
                 count_study = #{record.countStudy,jdbcType=INTEGER},
             </if>
+            <if test="record.speedDouble != null">
+                speed_double = #{record.speedDouble,jdbcType=TINYINT},
+            </if>
+            <if test="record.speedDrag != null">
+                speed_drag = #{record.speedDrag,jdbcType=TINYINT},
+            </if>
             <if test="record.introduce != null">
                 introduce = #{record.introduce,jdbcType=LONGVARCHAR},
             </if>
@@ -346,6 +376,8 @@
         course_sort = #{record.courseSort,jdbcType=INTEGER},
         count_buy = #{record.countBuy,jdbcType=INTEGER},
         count_study = #{record.countStudy,jdbcType=INTEGER},
+        speed_double = #{record.speedDouble,jdbcType=TINYINT},
+        speed_drag = #{record.speedDrag,jdbcType=TINYINT},
         introduce = #{record.introduce,jdbcType=LONGVARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
@@ -368,7 +400,9 @@
         is_putaway = #{record.isPutaway,jdbcType=TINYINT},
         course_sort = #{record.courseSort,jdbcType=INTEGER},
         count_buy = #{record.countBuy,jdbcType=INTEGER},
-        count_study = #{record.countStudy,jdbcType=INTEGER}
+        count_study = #{record.countStudy,jdbcType=INTEGER},
+        speed_double = #{record.speedDouble,jdbcType=TINYINT},
+        speed_drag = #{record.speedDrag,jdbcType=TINYINT}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -421,6 +455,12 @@
             <if test="countStudy != null">
                 count_study = #{countStudy,jdbcType=INTEGER},
             </if>
+            <if test="speedDouble != null">
+                speed_double = #{speedDouble,jdbcType=TINYINT},
+            </if>
+            <if test="speedDrag != null">
+                speed_drag = #{speedDrag,jdbcType=TINYINT},
+            </if>
             <if test="introduce != null">
                 introduce = #{introduce,jdbcType=LONGVARCHAR},
             </if>
@@ -444,6 +484,8 @@
             course_sort  = #{courseSort,jdbcType=INTEGER},
             count_buy    = #{countBuy,jdbcType=INTEGER},
             count_study  = #{countStudy,jdbcType=INTEGER},
+            speed_double = #{speedDouble,jdbcType=TINYINT},
+            speed_drag   = #{speedDrag,jdbcType=TINYINT},
             introduce    = #{introduce,jdbcType=LONGVARCHAR}
         where id = #{id,jdbcType=BIGINT}
     </update>
@@ -463,7 +505,9 @@
             is_putaway   = #{isPutaway,jdbcType=TINYINT},
             course_sort  = #{courseSort,jdbcType=INTEGER},
             count_buy    = #{countBuy,jdbcType=INTEGER},
-            count_study  = #{countStudy,jdbcType=INTEGER}
+            count_study  = #{countStudy,jdbcType=INTEGER},
+            speed_double = #{speedDouble,jdbcType=TINYINT},
+            speed_drag   = #{speedDrag,jdbcType=TINYINT}
         where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

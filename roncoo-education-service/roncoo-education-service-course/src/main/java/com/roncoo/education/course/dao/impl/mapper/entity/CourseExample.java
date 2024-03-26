@@ -1105,6 +1105,126 @@ public class CourseExample {
             addCriterion("count_study not between", value1, value2, "countStudy");
             return (Criteria) this;
         }
+
+        public Criteria andSpeedDoubleIsNull() {
+            addCriterion("speed_double is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDoubleIsNotNull() {
+            addCriterion("speed_double is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDoubleEqualTo(Integer value) {
+            addCriterion("speed_double =", value, "speedDouble");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDoubleNotEqualTo(Integer value) {
+            addCriterion("speed_double <>", value, "speedDouble");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDoubleGreaterThan(Integer value) {
+            addCriterion("speed_double >", value, "speedDouble");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDoubleGreaterThanOrEqualTo(Integer value) {
+            addCriterion("speed_double >=", value, "speedDouble");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDoubleLessThan(Integer value) {
+            addCriterion("speed_double <", value, "speedDouble");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDoubleLessThanOrEqualTo(Integer value) {
+            addCriterion("speed_double <=", value, "speedDouble");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDoubleIn(List<Integer> values) {
+            addCriterion("speed_double in", values, "speedDouble");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDoubleNotIn(List<Integer> values) {
+            addCriterion("speed_double not in", values, "speedDouble");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDoubleBetween(Integer value1, Integer value2) {
+            addCriterion("speed_double between", value1, value2, "speedDouble");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDoubleNotBetween(Integer value1, Integer value2) {
+            addCriterion("speed_double not between", value1, value2, "speedDouble");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDragIsNull() {
+            addCriterion("speed_drag is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDragIsNotNull() {
+            addCriterion("speed_drag is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDragEqualTo(Integer value) {
+            addCriterion("speed_drag =", value, "speedDrag");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDragNotEqualTo(Integer value) {
+            addCriterion("speed_drag <>", value, "speedDrag");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDragGreaterThan(Integer value) {
+            addCriterion("speed_drag >", value, "speedDrag");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDragGreaterThanOrEqualTo(Integer value) {
+            addCriterion("speed_drag >=", value, "speedDrag");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDragLessThan(Integer value) {
+            addCriterion("speed_drag <", value, "speedDrag");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDragLessThanOrEqualTo(Integer value) {
+            addCriterion("speed_drag <=", value, "speedDrag");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDragIn(List<Integer> values) {
+            addCriterion("speed_drag in", values, "speedDrag");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDragNotIn(List<Integer> values) {
+            addCriterion("speed_drag not in", values, "speedDrag");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDragBetween(Integer value1, Integer value2) {
+            addCriterion("speed_drag between", value1, value2, "speedDrag");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpeedDragNotBetween(Integer value1, Integer value2) {
+            addCriterion("speed_drag not between", value1, value2, "speedDrag");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

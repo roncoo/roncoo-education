@@ -77,6 +77,12 @@ public class AdminCoursePageResp implements Serializable {
     @ApiModelProperty(value = "学习人数")
     private Integer countStudy;
 
+    @ApiModelProperty(value = "倍速播放")
+    private Integer speedDouble;
+
+    @ApiModelProperty(value = "快进播放")
+    private Integer speedDrag;
+
     @ApiModelProperty(value = "讲师名称")
     private String lecturerName;
 

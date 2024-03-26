@@ -37,6 +37,10 @@ public class Course implements Serializable {
 
     private Integer countStudy;
 
+    private Integer speedDouble;
+
+    private Integer speedDrag;
+
     private String introduce;
 
     private static final long serialVersionUID = 1L;
@@ -169,6 +173,22 @@ public class Course implements Serializable {
         this.countStudy = countStudy;
     }
 
+    public Integer getSpeedDouble() {
+        return speedDouble;
+    }
+
+    public void setSpeedDouble(Integer speedDouble) {
+        this.speedDouble = speedDouble;
+    }
+
+    public Integer getSpeedDrag() {
+        return speedDrag;
+    }
+
+    public void setSpeedDrag(Integer speedDrag) {
+        this.speedDrag = speedDrag;
+    }
+
     public String getIntroduce() {
         return introduce;
     }
@@ -199,6 +219,8 @@ public class Course implements Serializable {
         sb.append(", courseSort=").append(courseSort);
         sb.append(", countBuy=").append(countBuy);
         sb.append(", countStudy=").append(countStudy);
+        sb.append(", speedDouble=").append(speedDouble);
+        sb.append(", speedDrag=").append(speedDrag);
         sb.append(", introduce=").append(introduce);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

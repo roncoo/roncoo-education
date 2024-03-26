@@ -66,4 +66,10 @@ public class AdminCourseSaveReq implements Serializable {
 
     @ApiModelProperty(value = "学习人数")
     private Integer countStudy;
+
+    @ApiModelProperty(value = "倍速播放")
+    private Integer speedDouble;
+
+    @ApiModelProperty(value = "快进播放")
+    private Integer speedDrag;
 }
