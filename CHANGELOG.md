@@ -14,7 +14,7 @@
 1. 大版本升级到：spring boot 2.6.3，ribbon改用为loadbalancer
 2. 增加分布式事务组件，alibaba seata，用户课程购买流程，保证全局事务
 3. 工程架构优化调整，移除app-job工程，单独使用roncoo-job(和官方的xxl-job-admin完全一致);
-4. 增加点播私有化视频播放功能，使其能够本地私有化播放视频
+4. 增加点播领课云视频播放功能，使其能够本地领课云播放视频
 5. 增加文档课时功能，课时可以选择文档(word、excel、ppt、pdf等)，不限于音视频
 6. 增加对象存储类型支持：阿里云OSS
 7. 优化打包流程，修复打包配置错误bug
@@ -132,7 +132,10 @@
 1. 修复视频上传不同步问题
 2. 修复部分微服务日志不打印的问题
 3. 修改配置中心默认获取方式为本地配置，不再依赖于项目：roncoo-education-config
-4. 修改工程名称，更符合业务特性，roncoo-education-crontab-plan修改为：roncoo-education-job，roncoo-education-gateway-api修改为：roncoo-education-gateway
+4.
+
+修改工程名称，更符合业务特性，roncoo-education-crontab-plan修改为：roncoo-education-job，roncoo-education-gateway-api修改为：roncoo-education-gateway
+
 5. 减少ElasticSearch的强依赖，不配置也能启动课程微服务
 6. 增加sonar插件，使代码更健壮
 
