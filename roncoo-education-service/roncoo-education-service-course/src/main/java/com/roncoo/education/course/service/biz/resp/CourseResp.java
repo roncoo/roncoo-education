@@ -67,7 +67,7 @@ public class CourseResp implements Serializable {
     @ApiModelProperty(value = "倍速播放")
     private Integer speedDouble;
 
-    @ApiModelProperty(value = "快进播放")
+    @ApiModelProperty(value = "拖拽播放")
     private Integer speedDrag;
 
     @ApiModelProperty(value = "分类ID")
