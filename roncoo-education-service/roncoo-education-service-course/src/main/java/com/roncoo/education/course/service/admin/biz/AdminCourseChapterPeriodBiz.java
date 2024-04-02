@@ -1,24 +1,33 @@
 package com.roncoo.education.course.service.admin.biz;
 
+import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.CourseChapterPeriodDao;
+import com.roncoo.education.course.dao.ResourceDao;
 import com.roncoo.education.course.dao.UserStudyDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodExample.Criteria;
+import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterPeriodEditReq;
+import com.roncoo.education.course.service.admin.req.AdminCourseChapterPeriodListReq;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterPeriodPageReq;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterPeriodSaveReq;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterPeriodPageResp;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterPeriodViewResp;
+import com.roncoo.education.course.service.admin.resp.AdminResourceViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * ADMIN-课时信息
@@ -33,6 +42,8 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
     private final CourseChapterPeriodDao dao;
     @NotNull
     private final UserStudyDao userStudyDao;
+    @NotNull
+    private final ResourceDao resourceDao;
 
     /**
      * 课时信息分页
@@ -46,6 +57,25 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
         Page<CourseChapterPeriod> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminCourseChapterPeriodPageResp> respPage = PageUtil.transform(page, AdminCourseChapterPeriodPageResp.class);
         return Result.success(respPage);
+    }
+
+    public Result<List<AdminCourseChapterPeriodViewResp>> list(AdminCourseChapterPeriodListReq req) {
+        CourseChapterPeriodExample example = new CourseChapterPeriodExample();
+        Criteria c = example.createCriteria();
+        c.andChapterIdEqualTo(req.getChapterId());
+        example.setOrderByClause("sort asc, id desc");
+        List<CourseChapterPeriod> list = dao.listByExample(example);
+        if (CollUtil.isNotEmpty(list)) {
+            // 资源
+            List<Long> resourceIdList = list.stream().map(courseChapterPeriod -> courseChapterPeriod.getResourceId()).collect(Collectors.toList());
+            Map<Long, Resource> resourceMap = resourceDao.listByIds(resourceIdList).stream().collect(Collectors.toMap(Resource::getId, item -> item));
+            List<AdminCourseChapterPeriodViewResp> respList = BeanUtil.copyProperties(list, AdminCourseChapterPeriodViewResp.class);
+            for (AdminCourseChapterPeriodViewResp period : respList) {
+                period.setResourceViewResp(BeanUtil.copyProperties(resourceMap.get(period.getResourceId()), AdminResourceViewResp.class));
+            }
+            return Result.success(respList);
+        }
+        return Result.success(new ArrayList<>());
     }
 
     /**

@@ -4,6 +4,7 @@ import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.service.admin.biz.AdminCourseChapterPeriodBiz;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterPeriodEditReq;
+import com.roncoo.education.course.service.admin.req.AdminCourseChapterPeriodListReq;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterPeriodPageReq;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterPeriodSaveReq;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterPeriodPageResp;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * ADMIN-课时信息
@@ -35,6 +37,12 @@ public class AdminCourseChapterPeriodController {
     @PostMapping(value = "/page")
     public Result<Page<AdminCourseChapterPeriodPageResp>> page(@RequestBody AdminCourseChapterPeriodPageReq req) {
         return biz.page(req);
+    }
+
+    @ApiOperation(value = "课时信息列表", notes = "课时信息列表")
+    @PostMapping(value = "/list")
+    public Result<List<AdminCourseChapterPeriodViewResp>> list(@RequestBody AdminCourseChapterPeriodListReq req) {
+        return biz.list(req);
     }
 
     @ApiOperation(value = "课时信息添加", notes = "课时信息添加")

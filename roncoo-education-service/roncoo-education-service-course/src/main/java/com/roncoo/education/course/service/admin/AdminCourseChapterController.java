@@ -4,6 +4,7 @@ import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.service.admin.biz.AdminCourseChapterBiz;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterEditReq;
+import com.roncoo.education.course.service.admin.req.AdminCourseChapterListReq;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterPageReq;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterSaveReq;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterPageResp;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * ADMIN-章节信息
@@ -35,6 +37,12 @@ public class AdminCourseChapterController {
     @PostMapping(value = "/page")
     public Result<Page<AdminCourseChapterPageResp>> page(@RequestBody AdminCourseChapterPageReq req) {
         return biz.page(req);
+    }
+
+    @ApiOperation(value = "章节信息列表", notes = "章节信息列表")
+    @PostMapping(value = "/list")
+    public Result<List<AdminCourseChapterViewResp>> list(@RequestBody AdminCourseChapterListReq req) {
+        return biz.list(req);
     }
 
     @ApiOperation(value = "章节信息添加", notes = "章节信息添加")

@@ -16,6 +16,7 @@ import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterExample.C
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
 import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterEditReq;
+import com.roncoo.education.course.service.admin.req.AdminCourseChapterListReq;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterPageReq;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterSaveReq;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterPageResp;
@@ -83,6 +84,20 @@ public class AdminCourseChapterBiz extends BaseBiz {
     }
 
     /**
+     * 章节信息，根据课程ID列出
+     *
+     * @param req
+     * @return
+     */
+    public Result<List<AdminCourseChapterViewResp>> list(AdminCourseChapterListReq req) {
+        CourseChapterExample example = new CourseChapterExample();
+        Criteria c = example.createCriteria();
+        c.andCourseIdEqualTo(req.getCourseId());
+        example.setOrderByClause("sort asc, id desc");
+        return Result.success(BeanUtil.copyProperties(dao.listByExample(example), AdminCourseChapterViewResp.class));
+    }
+
+    /**
      * 章节信息添加
      *
      * @param req 章节信息
@@ -137,4 +152,5 @@ public class AdminCourseChapterBiz extends BaseBiz {
         }
         return Result.error("操作失败");
     }
+
 }

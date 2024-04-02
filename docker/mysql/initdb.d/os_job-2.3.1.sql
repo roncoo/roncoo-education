@@ -72,22 +72,25 @@ CREATE TABLE `xxl_job_info`
 -- ----------------------------
 -- Records of xxl_job_info
 -- ----------------------------
-INSERT INTO `os_job`.`xxl_job_info`
-VALUES (1, 1, '订单过期处理', '2018-11-03 22:21:31', '2022-09-30 22:29:21', 'roncoo', 'xxx@qq.com', 'FIX_RATE', '60',
-        'DO_NOTHING', 'RANDOM', 'orderJobHandler', '', 'DISCARD_LATER', 0, 0, 'BEAN', '', 'GLUE代码初始化',
-        '2018-11-03 22:21:31', '', 1, 1711607472563, 1711607532563);
-INSERT INTO `os_job`.`xxl_job_info`
-VALUES (2, 2, '课程ES同步', '2022-09-25 14:06:18', '2023-07-17 10:40:20', 'roncoo', 'xxx@qq.com', 'CRON', '0 0 5 * * ?',
-        'DO_NOTHING', 'RANDOM', 'courseJobHandler', '', 'DISCARD_LATER', 0, 0, 'BEAN', '', 'GLUE代码初始化',
-        '2022-09-25 14:06:18', '', 0, 0, 0);
-INSERT INTO `os_job`.`xxl_job_info`
-VALUES (3, 2, '课程进度同步', '2022-09-25 14:02:42', '2024-03-14 09:38:48', 'roncoo', 'xxx@qq.com', 'FIX_RATE', '10',
-        'DO_NOTHING', 'RANDOM', 'userStudyJobHandler', '', 'DISCARD_LATER', 0, 0, 'BEAN', '', 'GLUE代码初始化',
-        '2022-09-25 14:02:42', '', 1, 1711607523488, 1711607533488);
-INSERT INTO `os_job`.`xxl_job_info`
-VALUES (4, 2, '视频状态处理', '2023-06-08 14:59:28', '2024-03-14 09:31:14', 'roncoo', 'xxx@qq.com', 'FIX_RATE', '600',
-        'DO_NOTHING', 'RANDOM', 'resourceJobHandler', '', 'DISCARD_LATER', 0, 0, 'BEAN', '', 'GLUE代码初始化',
-        '2023-06-08 14:59:28', '', 1, 1711607479350, 1711608079350);
+-- ----------------------------
+-- Records of xxl_job_info
+-- ----------------------------
+INSERT INTO `xxl_job_info`
+VALUES (1, 1, '订单过期处理', '2018-11-03 22:21:31', '2022-09-30 22:29:21', 'roncoo', 'xxx@qq.com', 'RANDOM',
+        'orderJobHandler', '', 'DISCARD_LATER', 0, 0, 'BEAN', '', 'GLUE代码初始化', '2018-11-03 22:21:31', '', 1,
+        1711612812563, 1711612872563, 'FIX_RATE', '60', 'DO_NOTHING');
+INSERT INTO `xxl_job_info`
+VALUES (2, 2, '课程ES同步', '2022-09-25 14:06:18', '2023-07-17 10:40:20', 'roncoo', 'xxx@qq.com', 'RANDOM',
+        'courseJobHandler', '', 'DISCARD_LATER', 0, 0, 'BEAN', '', 'GLUE代码初始化', '2022-09-25 14:06:18', '', 0, 0, 0,
+        'CRON', '0 0 5 * * ?', 'DO_NOTHING');
+INSERT INTO `xxl_job_info`
+VALUES (3, 2, '课程进度同步', '2022-09-25 14:02:42', '2024-03-14 09:38:48', 'roncoo', 'xxx@qq.com', 'RANDOM',
+        'userStudyJobHandler', '', 'DISCARD_LATER', 0, 0, 'BEAN', '', 'GLUE代码初始化', '2022-09-25 14:02:42', '', 1,
+        1711612817031, 1711612827031, 'FIX_RATE', '10', 'DO_NOTHING');
+INSERT INTO `xxl_job_info`
+VALUES (4, 2, '视频状态处理', '2023-06-08 14:59:28', '2024-03-14 09:31:14', 'roncoo', 'xxx@qq.com', 'RANDOM',
+        'resourceJobHandler', '', 'DISCARD_LATER', 0, 0, 'BEAN', '', 'GLUE代码初始化', '2023-06-08 14:59:28', '', 1,
+        1711612279350, 1711612879350, 'FIX_RATE', '600', 'DO_NOTHING');
 
 -- ----------------------------
 -- Table structure for xxl_job_lock

@@ -17,6 +17,7 @@ import com.roncoo.education.course.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Category;
 import com.roncoo.education.course.dao.impl.mapper.entity.Course;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapter;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseExample.Criteria;
 import com.roncoo.education.course.service.admin.req.AdminCourseEditReq;
@@ -112,6 +113,14 @@ public class AdminCourseBiz extends BaseBiz {
         }
         Course record = BeanUtil.copyProperties(req, Course.class);
         if (dao.save(record) > 0) {
+            // 增加一个默认章节
+            CourseChapter chapter = new CourseChapter();
+            chapter.setCourseId(record.getId());
+            chapter.setChapterName("默认");
+            chapter.setChapterDesc("第一章");
+            courseChapterDao.save(chapter);
+
+            // 添加ES
             EsCourse esCourse = BeanUtil.copyProperties(record, EsCourse.class);
             elasticsearchRestTemplate.index(new IndexQueryBuilder().withObject(esCourse).build(), IndexCoordinates.of(EsCourse.COURSE));
             return Result.success("操作成功");

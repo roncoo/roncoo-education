@@ -22,6 +22,19 @@ services:
       - TZ=Asia/Shanghai
     command: [ "redis-server","--appendonly", "yes", "--requirepass", "123456" ]
     network_mode: host
+  elasticsearch:
+    image: elasticsearch:7.16.2
+    container_name: elasticsearch
+    privileged: true
+    restart: always
+    volumes:
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+      - ./elasticsearch/plugins:/usr/share/elasticsearch/plugins
+    environment:
+      - TZ=Asia/Shanghai
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - discovery.type=single-node
+    network_mode: host
   nacos:
     image: nacos/nacos-server:v2.2.3
     container_name: nacos
@@ -91,5 +104,5 @@ services:
       --spring.datasource.url=jdbc:mysql://localhost:3306/os_job?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
       --spring.datasource.username=root
       --spring.datasource.password=123456
-      --xxl.job.accessToken=os_job'
+      --xxl.job.accessToken=education-job'
     network_mode: host
