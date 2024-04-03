@@ -92,7 +92,7 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
                 // 重新排序
                 period.setSort(maxSort += 1);
             }
-            dao.UpdateSortForBatch(periodList);
+            dao.updateSortForBatch(periodList);
         }
 
         CourseChapterPeriod record = BeanUtil.copyProperties(req, CourseChapterPeriod.class);
