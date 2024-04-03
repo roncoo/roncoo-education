@@ -3,11 +3,13 @@ package com.roncoo.education.course.dao.impl;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
+import com.roncoo.education.common.jdbc.AbstractBaseJdbc;
 import com.roncoo.education.course.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.dao.impl.mapper.CourseChapterPeriodMapper;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodExample;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.NotNull;
@@ -21,7 +23,7 @@ import java.util.List;
  */
 @Repository
 @RequiredArgsConstructor
-public class CourseChapterPeriodDaoImpl implements CourseChapterPeriodDao {
+public class CourseChapterPeriodDaoImpl extends AbstractBaseJdbc implements CourseChapterPeriodDao {
 
     @NotNull
     private final CourseChapterPeriodMapper mapper;
@@ -125,5 +127,11 @@ public class CourseChapterPeriodDaoImpl implements CourseChapterPeriodDao {
         CourseChapterPeriodExample example = new CourseChapterPeriodExample();
         example.createCriteria().andCourseIdEqualTo(courseId);
         return this.mapper.deleteByExample(example);
+    }
+
+    @Override
+    public int updateSortForBatch(List<CourseChapterPeriod> periodList) {
+        String sql = "update course_chapter_period set sort = :sort where id = :id";
+        return namedParameterJdbcTemplate.batchUpdate(sql, SqlParameterSourceUtils.createBatch(periodList)).length;
     }
 }

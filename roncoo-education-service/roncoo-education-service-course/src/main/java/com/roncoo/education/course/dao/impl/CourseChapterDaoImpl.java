@@ -98,7 +98,7 @@ public class CourseChapterDaoImpl extends AbstractBaseJdbc implements CourseChap
     }
 
     @Override
-    public int UpdateSortForBatch(List<CourseChapter> chapterList) {
+    public int updateSortForBatch(List<CourseChapter> chapterList) {
         String sql = "update course_chapter set sort = :sort where id = :id";
         return namedParameterJdbcTemplate.batchUpdate(sql, SqlParameterSourceUtils.createBatch(chapterList)).length;
     }

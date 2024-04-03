@@ -83,4 +83,6 @@ public interface CourseChapterPeriodDao {
     List<CourseChapterPeriod> listByChapterId(Long id);
 
     int deleteByCourseId(Long courseId);
+
+    int updateSortForBatch(List<CourseChapterPeriod> periodList);
 }

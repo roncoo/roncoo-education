@@ -84,5 +84,5 @@ public interface CourseChapterDao {
      * @param chapterList
      * @return
      */
-    int UpdateSortForBatch(List<CourseChapter> chapterList);
+    int updateSortForBatch(List<CourseChapter> chapterList);
 }

@@ -85,7 +85,18 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
      * @return 添加结果
      */
     public Result<String> save(AdminCourseChapterPeriodSaveReq req) {
+        int maxSort = 0;
+        List<CourseChapterPeriod> periodList = dao.listByChapterId(req.getChapterId());
+        if (CollUtil.isNotEmpty(periodList)) {
+            for (CourseChapterPeriod period : periodList) {
+                // 重新排序
+                period.setSort(maxSort += 1);
+            }
+            dao.UpdateSortForBatch(periodList);
+        }
+
         CourseChapterPeriod record = BeanUtil.copyProperties(req, CourseChapterPeriod.class);
+        record.setSort(maxSort + 1);
         if (dao.save(record) > 0) {
             return Result.success("操作成功");
         }

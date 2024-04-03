@@ -111,7 +111,7 @@ public class AdminCourseChapterBiz extends BaseBiz {
                 // 重新排序
                 chapter.setSort(maxSort += 1);
             }
-            dao.UpdateSortForBatch(chapterList);
+            dao.updateSortForBatch(chapterList);
         }
         CourseChapter record = BeanUtil.copyProperties(req, CourseChapter.class);
         record.setSort(maxSort + 1);
