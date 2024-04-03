@@ -77,4 +77,12 @@ public interface CourseChapterDao {
     List<CourseChapter> listByCourseIdAndStatusId(Long id, Integer statusId);
 
     int deleteByCourseId(Long courseId);
+
+    /**
+     * 批量更新排序
+     *
+     * @param chapterList
+     * @return
+     */
+    int UpdateSortForBatch(List<CourseChapter> chapterList);
 }

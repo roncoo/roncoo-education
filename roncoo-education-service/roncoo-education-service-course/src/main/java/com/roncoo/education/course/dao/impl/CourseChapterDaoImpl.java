@@ -3,11 +3,13 @@ package com.roncoo.education.course.dao.impl;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
+import com.roncoo.education.common.jdbc.AbstractBaseJdbc;
 import com.roncoo.education.course.dao.CourseChapterDao;
 import com.roncoo.education.course.dao.impl.mapper.CourseChapterMapper;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapter;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterExample;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.NotNull;
@@ -21,7 +23,7 @@ import java.util.List;
  */
 @Repository
 @RequiredArgsConstructor
-public class CourseChapterDaoImpl implements CourseChapterDao {
+public class CourseChapterDaoImpl extends AbstractBaseJdbc implements CourseChapterDao {
 
     @NotNull
     private final CourseChapterMapper mapper;
@@ -93,5 +95,11 @@ public class CourseChapterDaoImpl implements CourseChapterDao {
         CourseChapterExample example = new CourseChapterExample();
         example.createCriteria().andCourseIdEqualTo(courseId);
         return this.mapper.deleteByExample(example);
+    }
+
+    @Override
+    public int UpdateSortForBatch(List<CourseChapter> chapterList) {
+        String sql = "update course_chapter set sort = :sort where id = :id";
+        return namedParameterJdbcTemplate.batchUpdate(sql, SqlParameterSourceUtils.createBatch(chapterList)).length;
     }
 }

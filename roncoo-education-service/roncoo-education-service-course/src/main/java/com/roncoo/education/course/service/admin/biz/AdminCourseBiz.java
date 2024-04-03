@@ -115,6 +115,7 @@ public class AdminCourseBiz extends BaseBiz {
         if (dao.save(record) > 0) {
             // 增加一个默认章节
             CourseChapter chapter = new CourseChapter();
+            chapter.setIsFree(record.getIsFree());
             chapter.setCourseId(record.getId());
             chapter.setChapterName("默认");
             chapter.setChapterDesc("第一章");

@@ -104,7 +104,17 @@ public class AdminCourseChapterBiz extends BaseBiz {
      * @return 添加结果
      */
     public Result<String> save(AdminCourseChapterSaveReq req) {
+        int maxSort = 0;
+        List<CourseChapter> chapterList = dao.listByCourseId(req.getCourseId());
+        if (CollUtil.isNotEmpty(chapterList)) {
+            for (CourseChapter chapter : chapterList) {
+                // 重新排序
+                chapter.setSort(maxSort += 1);
+            }
+            dao.UpdateSortForBatch(chapterList);
+        }
         CourseChapter record = BeanUtil.copyProperties(req, CourseChapter.class);
+        record.setSort(maxSort + 1);
         if (dao.save(record) > 0) {
             return Result.success("操作成功");
         }
