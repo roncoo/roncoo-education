@@ -3,10 +3,7 @@ package com.roncoo.education.course.service.admin;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.service.admin.biz.AdminCourseChapterBiz;
-import com.roncoo.education.course.service.admin.req.AdminCourseChapterEditReq;
-import com.roncoo.education.course.service.admin.req.AdminCourseChapterListReq;
-import com.roncoo.education.course.service.admin.req.AdminCourseChapterPageReq;
-import com.roncoo.education.course.service.admin.req.AdminCourseChapterSaveReq;
+import com.roncoo.education.course.service.admin.req.*;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterPageResp;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterViewResp;
 import io.swagger.annotations.Api;
@@ -69,5 +66,11 @@ public class AdminCourseChapterController {
     @DeleteMapping(value = "/delete")
     public Result<String> delete(@RequestParam Long id) {
         return biz.delete(id);
+    }
+
+    @ApiOperation(value = "排序", notes = "排序")
+    @PutMapping(value = "/sort")
+    public Result<String> sort(@RequestBody @Valid List<AdminCourseChapterSortReq> req) {
+        return biz.sort(req);
     }
 }

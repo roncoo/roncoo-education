@@ -15,10 +15,7 @@ import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterExample.Criteria;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
 import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
-import com.roncoo.education.course.service.admin.req.AdminCourseChapterEditReq;
-import com.roncoo.education.course.service.admin.req.AdminCourseChapterListReq;
-import com.roncoo.education.course.service.admin.req.AdminCourseChapterPageReq;
-import com.roncoo.education.course.service.admin.req.AdminCourseChapterSaveReq;
+import com.roncoo.education.course.service.admin.req.*;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterPageResp;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterPeriodViewResp;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterViewResp;
@@ -163,4 +160,8 @@ public class AdminCourseChapterBiz extends BaseBiz {
         return Result.error("操作失败");
     }
 
+    public Result<String> sort(List<AdminCourseChapterSortReq> req) {
+        dao.updateSortForBatch(BeanUtil.copyProperties(req, CourseChapter.class));
+        return Result.success("操作成功");
+    }
 }
