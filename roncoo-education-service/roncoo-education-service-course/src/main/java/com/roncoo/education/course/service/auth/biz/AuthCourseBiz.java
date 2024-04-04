@@ -108,6 +108,9 @@ public class AuthCourseBiz extends BaseBiz {
         } else if (ResourceTypeEnum.DOC.getCode().equals(resource.getResourceType())) {
             // 文档
             docConfig(resource, resp);
+        } else if (ResourceTypeEnum.PIC.getCode().equals(resource.getResourceType())) {
+            // 图片
+            picConfig(resource, resp);
         }
         return Result.success(resp);
     }
@@ -132,6 +135,12 @@ public class AuthCourseBiz extends BaseBiz {
         DocConfig docConfig = feignSysConfig.getDoc();
         UploadFace uploadFace = uploadFaceMap.get(StoragePlatformEnum.byCode(resource.getStoragePlatform()).getMode());
         resp.setDocStudyConfig(uploadFace.getPreviewConfig(resource.getResourceUrl(), 300, docConfig));
+    }
+
+    private void picConfig(Resource resource, AuthCourseSignResp resp) {
+        DocConfig docConfig = feignSysConfig.getDoc();
+        UploadFace uploadFace = uploadFaceMap.get(StoragePlatformEnum.byCode(resource.getStoragePlatform()).getMode());
+        resp.setPicStudyConfig(uploadFace.getPreviewConfig(resource.getResourceUrl(), 300, docConfig));
     }
 
     /**

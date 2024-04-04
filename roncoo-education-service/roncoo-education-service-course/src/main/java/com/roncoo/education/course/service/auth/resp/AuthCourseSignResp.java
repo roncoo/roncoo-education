@@ -54,4 +54,7 @@ public class AuthCourseSignResp implements Serializable {
 
     @ApiModelProperty(value = "文档学习配置参数")
     private String docStudyConfig;
+
+    @ApiModelProperty(value = "图片学习配置参数")
+    private String picStudyConfig;
 }
