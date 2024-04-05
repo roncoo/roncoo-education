@@ -6,6 +6,7 @@ import com.roncoo.education.course.service.admin.biz.AdminUserStudyBiz;
 import com.roncoo.education.course.service.admin.req.AdminUserStudyEditReq;
 import com.roncoo.education.course.service.admin.req.AdminUserStudyPageReq;
 import com.roncoo.education.course.service.admin.req.AdminUserStudySaveReq;
+import com.roncoo.education.course.service.admin.resp.AdminUserCourseStatResp;
 import com.roncoo.education.course.service.admin.resp.AdminUserStudyPageResp;
 import com.roncoo.education.course.service.admin.resp.AdminUserStudyViewResp;
 import io.swagger.annotations.Api;
@@ -62,4 +63,12 @@ public class AdminUserStudyController {
     public Result<String> delete(@RequestParam Long id) {
         return biz.delete(id);
     }
+
+    @ApiOperation(value = "课程用户学习统计", notes = "课程用户学习统计")
+    @ApiImplicitParam(name = "userId", value = "用户ID", dataTypeClass = Long.class, paramType = "query", required = false)
+    @GetMapping(value = "/stat")
+    public Result<AdminUserCourseStatResp> stat(@RequestParam Long userId) {
+        return biz.stat(userId);
+    }
+
 }

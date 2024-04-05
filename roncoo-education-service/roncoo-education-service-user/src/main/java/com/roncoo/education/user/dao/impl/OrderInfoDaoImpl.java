@@ -1,13 +1,16 @@
 package com.roncoo.education.user.dao.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
+import com.roncoo.education.common.jdbc.AbstractBaseJdbc;
 import com.roncoo.education.user.dao.OrderInfoDao;
 import com.roncoo.education.user.dao.impl.mapper.OrderInfoMapper;
 import com.roncoo.education.user.dao.impl.mapper.entity.OrderInfo;
 import com.roncoo.education.user.dao.impl.mapper.entity.OrderInfoExample;
+import com.roncoo.education.user.service.admin.resp.AdminOrderInfoStatResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +25,7 @@ import java.util.List;
  */
 @Repository
 @RequiredArgsConstructor
-public class OrderInfoDaoImpl implements OrderInfoDao {
+public class OrderInfoDaoImpl extends AbstractBaseJdbc implements OrderInfoDao {
 
     @NotNull
     private final OrderInfoMapper mapper;
@@ -95,5 +98,14 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
             return orderInfos.get(0);
         }
         return null;
+    }
+
+    @Override
+    public AdminOrderInfoStatResp stat(Long userId) {
+        String sql = "select count(id) as courseBuySum, sum(course_price) as courseBuyMoney form order_info where order_status=2";
+        if (ObjectUtil.isNotEmpty(userId)) {
+            sql = sql + " and user_id=" + userId;
+        }
+        return queryForObject(sql, AdminOrderInfoStatResp.class);
     }
 }
