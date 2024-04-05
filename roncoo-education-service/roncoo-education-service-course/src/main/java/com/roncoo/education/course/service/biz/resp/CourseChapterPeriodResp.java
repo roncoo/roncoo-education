@@ -57,5 +57,5 @@ public class CourseChapterPeriodResp implements Serializable {
     private ResourceResp resourceResp;
 
     @ApiModelProperty(value = "课时进度")
-    private BigDecimal periodProgress;
+    private BigDecimal periodProgress = BigDecimal.ZERO;
 }
