@@ -18,6 +18,7 @@ import com.roncoo.education.user.service.admin.req.AdminOrderInfoEditReq;
 import com.roncoo.education.user.service.admin.req.AdminOrderInfoPageReq;
 import com.roncoo.education.user.service.admin.req.AdminOrderInfoSaveReq;
 import com.roncoo.education.user.service.admin.resp.AdminOrderInfoPageResp;
+import com.roncoo.education.user.service.admin.resp.AdminOrderInfoStatResp;
 import com.roncoo.education.user.service.admin.resp.AdminOrderInfoViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -122,5 +123,9 @@ public class AdminOrderInfoBiz extends BaseBiz {
             return Result.success("操作成功");
         }
         return Result.error("操作失败");
+    }
+
+    public Result<AdminOrderInfoStatResp> stat(Long userId) {
+        return Result.success(dao.stat(userId));
     }
 }

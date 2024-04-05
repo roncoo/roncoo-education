@@ -1,6 +1,7 @@
 package com.roncoo.education.course.dao.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
@@ -9,6 +10,7 @@ import com.roncoo.education.course.dao.UserStudyDao;
 import com.roncoo.education.course.dao.impl.mapper.UserStudyMapper;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudyExample;
+import com.roncoo.education.course.service.admin.resp.AdminUserCourseStatResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
@@ -139,5 +141,14 @@ public class UserStudyDaoImpl extends AbstractBaseJdbc implements UserStudyDao {
         UserStudyExample example = new UserStudyExample();
         example.createCriteria().andPeriodIdEqualTo(periodId);
         return this.mapper.deleteByExample(example);
+    }
+
+    @Override
+    public AdminUserCourseStatResp stat(Long userId) {
+        String sql = "select count(id) as courseStudySum, sum(current_duration) as courseStudyDuration form user_course where 1";
+        if (ObjectUtil.isNotEmpty(userId)) {
+            sql = sql + " and user_id=" + userId;
+        }
+        return queryForObject(sql, AdminUserCourseStatResp.class);
     }
 }

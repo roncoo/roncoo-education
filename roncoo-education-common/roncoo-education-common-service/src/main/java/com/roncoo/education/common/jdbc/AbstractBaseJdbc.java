@@ -49,7 +49,7 @@ public abstract class AbstractBaseJdbc {
      */
     public <T> List<T> queryForObjectList(String sql, Class<T> clazz, Object... args) {
         Assert.hasText(sql, "sql 语句不能为空");
-        return jdbcTemplate.query(sql, args, new BeanPropertyRowMapper<T>(clazz));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<T>(clazz), args);
     }
 
     /**

@@ -17,6 +17,7 @@ import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
 import com.roncoo.education.course.service.admin.req.AdminUserStudyEditReq;
 import com.roncoo.education.course.service.admin.req.AdminUserStudyPageReq;
 import com.roncoo.education.course.service.admin.req.AdminUserStudySaveReq;
+import com.roncoo.education.course.service.admin.resp.AdminUserCourseStatResp;
 import com.roncoo.education.course.service.admin.resp.AdminUserStudyPageResp;
 import com.roncoo.education.course.service.admin.resp.AdminUserStudyPeriodPageResp;
 import com.roncoo.education.course.service.admin.resp.AdminUserStudyViewResp;
@@ -135,5 +136,9 @@ public class AdminUserStudyBiz extends BaseBiz {
             return Result.success("操作成功");
         }
         return Result.error("操作失败");
+    }
+
+    public Result<AdminUserCourseStatResp> stat(Long userId) {
+        return Result.success(BeanUtil.copyProperties(dao.stat(userId), AdminUserCourseStatResp.class));
     }
 }

@@ -7,6 +7,7 @@ import com.roncoo.education.user.service.admin.req.AdminOrderInfoEditReq;
 import com.roncoo.education.user.service.admin.req.AdminOrderInfoPageReq;
 import com.roncoo.education.user.service.admin.req.AdminOrderInfoSaveReq;
 import com.roncoo.education.user.service.admin.resp.AdminOrderInfoPageResp;
+import com.roncoo.education.user.service.admin.resp.AdminOrderInfoStatResp;
 import com.roncoo.education.user.service.admin.resp.AdminOrderInfoViewResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -62,4 +63,12 @@ public class AdminOrderInfoController {
     public Result<String> delete(@RequestParam Long id) {
         return biz.delete(id);
     }
+
+    @ApiOperation(value = "订单信息表统计", notes = "订单信息表统计")
+    @ApiImplicitParam(name = "userId", value = "用户ID", dataTypeClass = Long.class, paramType = "query", required = false)
+    @GetMapping(value = "/stat")
+    public Result<AdminOrderInfoStatResp> stat(@RequestParam Long userId) {
+        return biz.stat(userId);
+    }
+
 }
