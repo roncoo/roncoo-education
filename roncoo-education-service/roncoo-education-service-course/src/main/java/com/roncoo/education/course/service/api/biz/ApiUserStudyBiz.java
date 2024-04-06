@@ -44,22 +44,23 @@ public class ApiUserStudyBiz extends BaseBiz {
         }
         req.setResourceType(resource.getResourceType());
         if (ResourceTypeEnum.AUDIO.getCode().equals(resource.getResourceType()) || ResourceTypeEnum.VIDEO.getCode().equals(resource.getResourceType())) {
+            req.setTotalDuration(resource.getVideoLength());
             // 音视频处理
             if (new BigDecimal(resource.getVideoLength()).subtract(req.getCurrentDuration()).intValue() < 1) {
                 // 学习完成
                 return completeStudy(req);
             }
             // 没观看完成，进度存入redis，如没看完，定时任务处理
-            req.setTotalDuration(new BigDecimal(resource.getVideoLength()));
+
 
         } else if (ResourceTypeEnum.DOC.getCode().equals(resource.getResourceType())) {
+            req.setTotalPage(resource.getDocPage());
             // 文档处理
             if (req.getCurrentPage().compareTo(resource.getDocPage()) >= 0) {
                 // 学习完成
                 return completeStudy(req);
             }
             // 没学习完成，进度存入redis，如没学习完，定时任务处理
-            req.setTotalPage(resource.getDocPage());
         }
         cacheRedis.set(Constants.RedisPre.PROGRESS + req.getStudyId(), req, 1, TimeUnit.DAYS);
         return Result.success("学习中");
@@ -70,7 +71,7 @@ public class ApiUserStudyBiz extends BaseBiz {
         if (ObjectUtil.isEmpty(userStudy)) {
             return Result.error("studyId不正确");
         }
-        userStudy.setCurrentDuration(req.getTotalDuration().intValue());
+        userStudy.setCurrentDuration(req.getTotalDuration());
         userStudy.setCurrentPage(req.getTotalPage());
         userStudy.setProgress(BigDecimal.valueOf(100));
         // 更新观看记录

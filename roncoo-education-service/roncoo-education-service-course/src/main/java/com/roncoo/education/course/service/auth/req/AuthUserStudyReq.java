@@ -39,8 +39,8 @@ public class AuthUserStudyReq implements Serializable {
     private Integer resourceType;
 
     @ApiModelProperty(value = "总时长，单位秒，内部传参使用", hidden = true)
-    private BigDecimal totalDuration;
+    private Integer totalDuration = 0;
 
     @ApiModelProperty(value = "总页数，内部传参使用", hidden = true)
-    private Integer totalPage;
+    private Integer totalPage = 0;
 }
