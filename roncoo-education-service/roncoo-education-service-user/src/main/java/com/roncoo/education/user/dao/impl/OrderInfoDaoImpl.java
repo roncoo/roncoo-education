@@ -113,12 +113,12 @@ public class OrderInfoDaoImpl extends AbstractBaseJdbc implements OrderInfoDao {
 
     @Override
     public List<AdminOrderStat> stat(String startDate, String endDate) {
-        String sql = "select DATE_FORMAT(pay_time, '%Y-%m-%d') as dates, count(id) as orders, sum(course_price) as moneys FROM order_info where order_status = 2  ";
+        String sql = "select DATE_FORMAT(pay_time, '%Y-%m-%d') as dates, count(id) as orders, sum(course_price) as moneys FROM order_info where order_status = 2";
         if (StringUtils.hasText(startDate)) {
-            sql = sql + " and pay_time >=" + startDate;
+            sql = sql + " and pay_time>='" + startDate + "'";
         }
         if (StringUtils.hasText(endDate)) {
-            sql = sql + " and pay_time <" + endDate;
+            sql = sql + " and pay_time<'" + endDate + "'";
         }
         sql = sql + " group by dates";
         return queryForObjectList(sql, AdminOrderStat.class);
