@@ -69,4 +69,9 @@ public class UsersDaoImpl extends AbstractBaseJdbc implements UsersDao {
         example.createCriteria().andIdIn(userIdList);
         return this.usersMapper.selectByExample(example);
     }
+
+    @Override
+    public Integer count(UsersExample example) {
+        return this.usersMapper.countByExample(example);
+    }
 }

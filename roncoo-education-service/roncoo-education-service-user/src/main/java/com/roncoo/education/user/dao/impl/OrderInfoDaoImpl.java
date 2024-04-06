@@ -11,8 +11,10 @@ import com.roncoo.education.user.dao.impl.mapper.OrderInfoMapper;
 import com.roncoo.education.user.dao.impl.mapper.entity.OrderInfo;
 import com.roncoo.education.user.dao.impl.mapper.entity.OrderInfoExample;
 import com.roncoo.education.user.service.admin.resp.AdminOrderInfoStatResp;
+import com.roncoo.education.user.service.admin.resp.AdminOrderStat;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -107,5 +109,18 @@ public class OrderInfoDaoImpl extends AbstractBaseJdbc implements OrderInfoDao {
             sql = sql + " and user_id=" + userId;
         }
         return queryForObject(sql, AdminOrderInfoStatResp.class);
+    }
+
+    @Override
+    public List<AdminOrderStat> stat(String startDate, String endDate) {
+        String sql = "select DATE_FORMAT(pay_time, '%Y-%m-%d') as dates, count(id) as orders, sum(course_price) as moneys FROM order_info where order_status = 2  ";
+        if (StringUtils.hasText(startDate)) {
+            sql = sql + " and pay_time >=" + startDate;
+        }
+        if (StringUtils.hasText(endDate)) {
+            sql = sql + " and pay_time <" + endDate;
+        }
+        sql = sql + " group by dates";
+        return queryForObjectList(sql, AdminOrderStat.class);
     }
 }

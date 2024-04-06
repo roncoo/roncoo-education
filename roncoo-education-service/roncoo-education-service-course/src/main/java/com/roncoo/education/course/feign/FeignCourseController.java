@@ -36,4 +36,9 @@ public class FeignCourseController extends BaseController implements IFeignCours
     public List<CourseViewVO> listByIds(@RequestBody List<Long> courseIds) {
         return biz.listByIds(courseIds);
     }
+
+    @Override
+    public Integer count() {
+        return biz.count();
+    }
 }

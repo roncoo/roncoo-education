@@ -29,4 +29,7 @@ public interface IFeignCourse {
 
     @PostMapping(value = "/listByIds")
     List<CourseViewVO> listByIds(@RequestBody List<Long> courseIds);
+
+    @GetMapping(value = "/count")
+    Integer count();
 }

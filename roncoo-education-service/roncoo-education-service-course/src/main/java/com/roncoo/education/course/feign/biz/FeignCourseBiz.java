@@ -5,6 +5,7 @@ import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Course;
+import com.roncoo.education.course.dao.impl.mapper.entity.CourseExample;
 import com.roncoo.education.course.feign.interfaces.vo.CourseViewVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -32,5 +33,9 @@ public class FeignCourseBiz extends BaseBiz {
     public List<CourseViewVO> listByIds(List<Long> courseIds) {
         List<Course> list = dao.listByIds(courseIds);
         return BeanUtil.copyProperties(list, CourseViewVO.class);
+    }
+
+    public Integer count() {
+        return dao.countByExample(new CourseExample());
     }
 }

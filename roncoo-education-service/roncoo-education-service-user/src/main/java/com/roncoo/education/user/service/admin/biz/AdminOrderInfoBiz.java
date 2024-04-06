@@ -65,6 +65,10 @@ public class AdminOrderInfoBiz extends BaseBiz {
         if (ObjectUtil.isNotNull(req.getCourseId())) {
             c.andCourseIdEqualTo(req.getCourseId());
         }
+        if (ObjectUtil.isNotNull(req.getOrderStatus())) {
+            c.andOrderStatusEqualTo(req.getOrderStatus());
+        }
+
         example.setOrderByClause("id desc");
         Page<OrderInfo> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminOrderInfoPageResp> respPage = PageUtil.transform(page, AdminOrderInfoPageResp.class);

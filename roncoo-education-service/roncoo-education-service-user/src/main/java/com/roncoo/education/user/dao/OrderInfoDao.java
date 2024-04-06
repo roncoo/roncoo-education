@@ -4,6 +4,7 @@ import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.user.dao.impl.mapper.entity.OrderInfo;
 import com.roncoo.education.user.dao.impl.mapper.entity.OrderInfoExample;
 import com.roncoo.education.user.service.admin.resp.AdminOrderInfoStatResp;
+import com.roncoo.education.user.service.admin.resp.AdminOrderStat;
 
 import java.util.List;
 
@@ -78,4 +79,6 @@ public interface OrderInfoDao {
     OrderInfo getByOrderNo(Long orderNo);
 
     AdminOrderInfoStatResp stat(Long userId);
+
+    List<AdminOrderStat> stat(String startDate, String endDate);
 }

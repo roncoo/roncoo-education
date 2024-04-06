@@ -53,7 +53,7 @@ public class AdminOrderInfoPageReq implements Serializable {
     private Integer payType;
 
     @ApiModelProperty(value = "订单状态：1待支付，2成功支付，3支付失败，4关闭支付")
-    private Integer orderStatus;
+    private Integer orderStatus = 2;
 
     @ApiModelProperty(value = "客户备注")
     private String remarkCus;
