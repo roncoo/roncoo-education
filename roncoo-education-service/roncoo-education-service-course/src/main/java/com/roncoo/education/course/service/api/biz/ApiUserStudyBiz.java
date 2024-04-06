@@ -53,7 +53,7 @@ public class ApiUserStudyBiz extends BaseBiz {
             req.setTotalDuration(new BigDecimal(resource.getVideoLength()));
 
         } else if (ResourceTypeEnum.DOC.getCode().equals(resource.getResourceType())) {
-            // 文档类型处理
+            // 文档处理
             if (req.getCurrentPage().compareTo(resource.getDocPage()) >= 0) {
                 // 学习完成
                 return completeStudy(req);
@@ -70,6 +70,8 @@ public class ApiUserStudyBiz extends BaseBiz {
         if (ObjectUtil.isEmpty(userStudy)) {
             return Result.error("studyId不正确");
         }
+        userStudy.setCurrentDuration(req.getTotalDuration().intValue());
+        userStudy.setCurrentPage(req.getTotalPage());
         userStudy.setProgress(BigDecimal.valueOf(100));
         // 更新观看记录
         dao.updateById(userStudy);
