@@ -145,7 +145,7 @@ public class UserStudyDaoImpl extends AbstractBaseJdbc implements UserStudyDao {
 
     @Override
     public AdminUserCourseStatResp stat(Long userId) {
-        String sql = "select count(id) as courseStudySum, sum(current_duration) as courseStudyDuration form user_course where 1";
+        String sql = "select count(id) as courseStudySum, sum(current_duration) as courseStudyDuration from user_course where 1";
         if (ObjectUtil.isNotEmpty(userId)) {
             sql = sql + " and user_id=" + userId;
         }

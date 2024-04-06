@@ -102,7 +102,7 @@ public class OrderInfoDaoImpl extends AbstractBaseJdbc implements OrderInfoDao {
 
     @Override
     public AdminOrderInfoStatResp stat(Long userId) {
-        String sql = "select count(id) as courseBuySum, sum(course_price) as courseBuyMoney form order_info where order_status=2";
+        String sql = "select count(id) as courseBuySum, sum(course_price) as courseBuyMoney from order_info where order_status=2";
         if (ObjectUtil.isNotEmpty(userId)) {
             sql = sql + " and user_id=" + userId;
         }
