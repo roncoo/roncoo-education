@@ -17,7 +17,7 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @ApiModel(description = "ADMIN-用户信息统计")
-public class AdminUserCourseStatResp implements Serializable {
+public class AdminUserStudyStatResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

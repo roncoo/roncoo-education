@@ -10,7 +10,7 @@ import com.roncoo.education.course.dao.UserStudyDao;
 import com.roncoo.education.course.dao.impl.mapper.UserStudyMapper;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudyExample;
-import com.roncoo.education.course.service.admin.resp.AdminUserCourseStatResp;
+import com.roncoo.education.course.service.admin.resp.AdminUserStudyStatResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
@@ -144,11 +144,11 @@ public class UserStudyDaoImpl extends AbstractBaseJdbc implements UserStudyDao {
     }
 
     @Override
-    public AdminUserCourseStatResp stat(Long userId) {
-        String sql = "select count(id) as courseStudySum, sum(current_duration) as courseStudyDuration from user_course where 1";
+    public AdminUserStudyStatResp stat(Long userId) {
+        String sql = "select count(id) as courseStudySum, sum(current_duration) as courseStudyDuration from user_study where 1";
         if (ObjectUtil.isNotEmpty(userId)) {
             sql = sql + " and user_id=" + userId;
         }
-        return queryForObject(sql, AdminUserCourseStatResp.class);
+        return queryForObject(sql, AdminUserStudyStatResp.class);
     }
 }
