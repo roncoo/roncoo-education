@@ -51,8 +51,6 @@ public class ApiUserStudyBiz extends BaseBiz {
                 return completeStudy(req);
             }
             // 没观看完成，进度存入redis，如没看完，定时任务处理
-
-
         } else if (ResourceTypeEnum.DOC.getCode().equals(resource.getResourceType())) {
             req.setTotalPage(resource.getDocPage());
             // 文档处理
