@@ -44,7 +44,7 @@ public class UserStudyJob {
                     AuthUserStudyReq req = cacheRedis.get(key, AuthUserStudyReq.class);
                     UserStudy userStudy = userStudyDao.getById(req.getStudyId());
                     if (ResourceTypeEnum.VIDEO.getCode().equals(req.getResourceType()) || ResourceTypeEnum.AUDIO.getCode().equals(req.getResourceType())) {
-                        userStudy.setProgress(req.getCurrentDuration().divide(req.getTotalDuration(), BigDecimal.ROUND_CEILING).multiply(BigDecimal.valueOf(100)).setScale(2, RoundingMode.HALF_UP));
+                        userStudy.setProgress(req.getCurrentDuration().divide(new BigDecimal(req.getTotalDuration()), BigDecimal.ROUND_CEILING).multiply(BigDecimal.valueOf(100)).setScale(2, RoundingMode.HALF_UP));
                         userStudy.setCurrentDuration(req.getCurrentDuration().intValue());
                     } else if (ResourceTypeEnum.DOC.getCode().equals(req.getResourceType())) {
                         userStudy.setProgress(BigDecimal.valueOf(req.getCurrentPage()).divide(BigDecimal.valueOf(req.getTotalPage())).multiply(BigDecimal.valueOf(100)).setScale(2, RoundingMode.HALF_UP));
