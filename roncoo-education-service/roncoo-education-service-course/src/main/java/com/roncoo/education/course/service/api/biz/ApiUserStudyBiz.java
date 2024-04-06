@@ -59,6 +59,9 @@ public class ApiUserStudyBiz extends BaseBiz {
                 return completeStudy(req);
             }
             // 没学习完成，进度存入redis，如没学习完，定时任务处理
+        } else if (ResourceTypeEnum.PIC.getCode().equals(resource.getResourceType())) {
+            // 学习完成(查看图片即学习完成)
+            return completeStudy(req);
         }
         cacheRedis.set(Constants.RedisPre.PROGRESS + req.getStudyId(), req, 1, TimeUnit.DAYS);
         return Result.success("学习中");
