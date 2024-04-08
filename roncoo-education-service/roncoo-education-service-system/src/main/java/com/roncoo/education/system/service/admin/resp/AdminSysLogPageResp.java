@@ -40,21 +40,6 @@ public class AdminSysLogPageResp implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long userId;
     /**
-     * 手机号
-     */
-    @ApiModelProperty(value = "手机号")
-    private String mobile;
-    /**
-     * 真实姓名
-     */
-    @ApiModelProperty(value = "真实姓名")
-    private String realName;
-    /**
-     * IP地址
-     */
-    @ApiModelProperty(value = "IP地址")
-    private String ip;
-    /**
      * 用户操作
      */
     @ApiModelProperty(value = "用户操作")
@@ -74,4 +59,29 @@ public class AdminSysLogPageResp implements Serializable {
      */
     @ApiModelProperty(value = "请求参数")
     private String content;
+    /**
+     * IP地址
+     */
+    @ApiModelProperty(value = "IP地址")
+    private String loginIp;
+
+    private String country;
+
+    private String province;
+
+    private String city;
+
+    private String browser;
+
+    private String os;
+    /**
+     * 手机号
+     */
+    @ApiModelProperty(value = "手机号")
+    private String mobile;
+    /**
+     * 真实姓名
+     */
+    @ApiModelProperty(value = "真实姓名")
+    private String realName;
 }

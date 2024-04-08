@@ -34,7 +34,7 @@ public class AdminSysLogController {
     @SysLog(value = "后台操作日志分页列表接口")
     @RequestMapping(value = "/page", method = RequestMethod.POST)
     public Result<Page<AdminSysLogPageResp>> list(@RequestBody AdminSysLogPageReq req) {
-        return biz.list(req);
+        return biz.page(req);
     }
 
 }

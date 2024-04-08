@@ -35,7 +35,7 @@ public class AdminSysLogBiz {
     @NotNull
     private final SysUserDao sysUserDao;
 
-    public Result<Page<AdminSysLogPageResp>> list(AdminSysLogPageReq req) {
+    public Result<Page<AdminSysLogPageResp>> page(AdminSysLogPageReq req) {
         SysLogExample example = new SysLogExample();
         Criteria c = example.createCriteria();
         example.setOrderByClause(" id desc ");
