@@ -86,7 +86,6 @@ public class AspectSysLog {
                     }
                 }
                 feignSysLog.save(qo);
-
             });
         } catch (Exception e) {
             log.error("保存操作日志异常", e);
