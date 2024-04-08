@@ -6,8 +6,6 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.system.dao.SysMenuDao;
-import com.roncoo.education.system.dao.SysMenuRoleDao;
-import com.roncoo.education.system.dao.SysRoleUserDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenu;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuExample;
 import com.roncoo.education.system.service.admin.req.*;
@@ -30,10 +28,6 @@ public class AdminSysMenuBiz {
 
     @Autowired
     private SysMenuDao dao;
-    @Autowired
-    private SysRoleUserDao sysRoleUserDao;
-    @Autowired
-    private SysMenuRoleDao sysMenuRoleDao;
 
     public Result<List<AdminSysMenuResp>> list(AdminSysMenuListReq req) {
         SysMenuExample example = new SysMenuExample();

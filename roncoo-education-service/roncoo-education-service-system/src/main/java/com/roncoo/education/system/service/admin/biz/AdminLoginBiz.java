@@ -26,8 +26,8 @@ import java.util.stream.Collectors;
  *
  * @author roncoo
  */
-@RequiredArgsConstructor
 @Component
+@RequiredArgsConstructor
 public class AdminLoginBiz {
 
     private final SysUserDao sysUserDao;
