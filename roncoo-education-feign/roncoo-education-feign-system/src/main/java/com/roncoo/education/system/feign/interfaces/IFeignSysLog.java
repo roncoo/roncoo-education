@@ -3,6 +3,7 @@ package com.roncoo.education.system.feign.interfaces;
 import com.roncoo.education.system.feign.interfaces.qo.FeignSysLogQO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * 系统配置 接口
@@ -14,6 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface IFeignSysLog {
 
     @PostMapping(value = "/save")
-    int save(FeignSysLogQO qo);
+    int save(@RequestBody FeignSysLogQO qo);
 
 }
