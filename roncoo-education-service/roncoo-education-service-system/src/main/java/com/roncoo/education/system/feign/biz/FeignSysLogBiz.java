@@ -27,8 +27,10 @@ public class FeignSysLogBiz extends BaseBiz {
     public int save(FeignSysLogQO qo) {
         if (StringUtils.hasText(qo.getLoginIp())) {
             IPUtil.IpInfo ipInfo = IPUtil.getIpInfo(qo.getLoginIp());
-            qo.setProvince(ipInfo.getPro());
-            qo.setCity(ipInfo.getCity());
+            if (ipInfo != null) {
+                qo.setProvince(ipInfo.getPro());
+                qo.setCity(ipInfo.getCity());
+            }
         }
         return dao.save(BeanUtil.copyProperties(qo, SysLog.class));
     }
