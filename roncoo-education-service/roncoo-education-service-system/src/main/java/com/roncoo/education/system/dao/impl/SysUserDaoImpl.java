@@ -67,4 +67,11 @@ public class SysUserDaoImpl implements SysUserDao {
         return list.get(0);
     }
 
+    @Override
+    public List<SysUser> listByIds(List<Long> userIds) {
+        SysUserExample example = new SysUserExample();
+        example.createCriteria().andIdIn(userIds);
+        return this.sysUserMapper.selectByExample(example);
+    }
+
 }
