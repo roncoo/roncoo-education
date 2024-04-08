@@ -162,15 +162,7 @@ public class ApiUsersBiz extends BaseBiz {
         record.setUserId(userId);
         record.setLoginStatus(status.getCode());
         record.setLoginIp(ServletUtil.getClientIP(request));
-
-        IPUtil.IpInfo ipInfo = cacheRedis.get(record.getLoginIp(), IPUtil.IpInfo.class);
-        if (ipInfo == null) {
-            ipInfo = IPUtil.getIpInfo(ServletUtil.getClientIP(request));
-            if (ipInfo != null) {
-                cacheRedis.set(record.getLoginIp(), ipInfo, 1, TimeUnit.DAYS);
-            }
-        }
-
+        IPUtil.IpInfo ipInfo = getIpInfo(record.getLoginIp());
         if (ObjectUtil.isNotNull(ipInfo)) {
             record.setProvince(ipInfo.getPro());
             record.setCity(ipInfo.getCity());

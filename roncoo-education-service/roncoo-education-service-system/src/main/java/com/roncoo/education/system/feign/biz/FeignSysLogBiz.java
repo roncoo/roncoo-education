@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 系统配置
@@ -31,14 +30,7 @@ public class FeignSysLogBiz extends BaseBiz {
 
     public int save(FeignSysLogQO qo) {
         if (StringUtils.hasText(qo.getLoginIp())) {
-            IPUtil.IpInfo ipInfo = cacheRedis.get(qo.getLoginIp(), IPUtil.IpInfo.class);
-            if (ipInfo == null) {
-                ipInfo = IPUtil.getIpInfo(qo.getLoginIp());
-                if (ipInfo != null) {
-                    cacheRedis.set(qo.getLoginIp(), ipInfo, 1, TimeUnit.DAYS);
-                }
-            }
-
+            IPUtil.IpInfo ipInfo = getIpInfo(qo.getLoginIp());
             if (ipInfo != null) {
                 qo.setProvince(ipInfo.getPro());
                 qo.setCity(ipInfo.getCity());

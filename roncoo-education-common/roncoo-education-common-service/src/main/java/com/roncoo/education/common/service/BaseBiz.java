@@ -5,6 +5,7 @@ package com.roncoo.education.common.service;
 
 import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Base;
+import com.roncoo.education.common.core.tools.IPUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 基础类
@@ -29,6 +31,17 @@ public class BaseBiz extends Base {
 
     @Autowired
     protected CacheRedis cacheRedis;
+
+    protected IPUtil.IpInfo getIpInfo(String ip) {
+        IPUtil.IpInfo ipInfo = cacheRedis.get(ip, IPUtil.IpInfo.class);
+        if (ipInfo == null) {
+            ipInfo = IPUtil.getIpInfo(ip);
+            if (ipInfo != null) {
+                cacheRedis.set(ip, ipInfo, 1, TimeUnit.DAYS);
+            }
+        }
+        return ipInfo;
+    }
 
     protected Map<String, String> getHeaderParam(HttpServletRequest request) {
         Map<String, String> headerMap = new HashMap<>();
