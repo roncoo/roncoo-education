@@ -54,7 +54,7 @@ public class ApiCommonController {
         CircleCaptcha captcha = CaptchaUtil.createCircleCaptcha(200, 100, 4, 20);
         ApiVerCodeResp resp = new ApiVerCodeResp(String.valueOf(IdWorker.getId()), captcha.getImageBase64Data());
         // 存入缓存，过期时间为5分钟
-        cacheRedis.set(Constants.RedisPre.VERI_CODE + resp.getVerToken(), captcha.getCode().toLowerCase(), 5, TimeUnit.MINUTES);
+        cacheRedis.set(Constants.RedisPre.VER_CODE + resp.getVerToken(), captcha.getCode().toLowerCase(), 5, TimeUnit.MINUTES);
         return Result.success(resp);
     }
 

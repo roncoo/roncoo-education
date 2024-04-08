@@ -42,7 +42,7 @@ public class AdminLoginBiz {
      */
     public Result<AdminSysUserLoginResp> login(AdminSysUserLoginReq req) {
         // 验证码校验
-        String verCode = cacheRedis.get(Constants.RedisPre.VERI_CODE + req.getVerToken());
+        String verCode = cacheRedis.get(Constants.RedisPre.VER_CODE + req.getVerToken());
         if (!StringUtils.hasText(verCode)) {
             return Result.error("验证码已过期");
         }
@@ -82,7 +82,7 @@ public class AdminLoginBiz {
         resp.setPermissionList(sysMenus.stream().filter(item -> StringUtils.hasText(item.getPermission())).map(SysMenu::getPermission).collect(Collectors.toList()));
         // 获取接口权限，放入缓存
         List<String> apis = sysMenus.stream().filter(item -> StringUtils.hasText(item.getApis())).map(SysMenu::getApis).collect(Collectors.toList());
-        cacheRedis.set(Constants.RedisPre.ADMINI_APIS.concat(sysUser.getId().toString()), apis, 1, TimeUnit.DAYS);
+        cacheRedis.set(Constants.RedisPre.ADMIN_APIS.concat(sysUser.getId().toString()), apis, 1, TimeUnit.DAYS);
 
         return Result.success(resp);
     }

@@ -104,7 +104,7 @@ public class ApiUsersBiz extends BaseBiz {
             return Result.error("密码不能为空");
         }
 
-        String verCode = cacheRedis.get(Constants.RedisPre.VERI_CODE + req.getVerToken());
+        String verCode = cacheRedis.get(Constants.RedisPre.VER_CODE + req.getVerToken());
         if (!StringUtils.hasText(verCode)) {
             return Result.error("验证码已过期");
         }

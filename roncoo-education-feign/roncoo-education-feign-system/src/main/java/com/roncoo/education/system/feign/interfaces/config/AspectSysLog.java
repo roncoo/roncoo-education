@@ -34,12 +34,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 @Component
 @RequiredArgsConstructor
 public class AspectSysLog {
-
-    /**
-     * 未知
-     */
-    private static final String UNKONWN = "Unkonwn";
-
     /**
      * 核心进程1个
      * 最大线程池100个
@@ -53,9 +47,9 @@ public class AspectSysLog {
     private static final int MAX_LENGTH = 5000;
 
     @NotNull
-    private final IFeignSysLog feignSysLog;
-    @NotNull
     private final CacheRedis cacheRedis;
+    @NotNull
+    private final IFeignSysLog feignSysLog;
 
     @Pointcut("@annotation(com.roncoo.education.common.annotation.SysLog)")
     public void logPointCut() {
@@ -70,19 +64,18 @@ public class AspectSysLog {
                 MethodSignature signature = (MethodSignature) joinPoint.getSignature();
                 com.roncoo.education.common.annotation.SysLog syslog = signature.getMethod().getAnnotation(com.roncoo.education.common.annotation.SysLog.class);
                 qo.setOperation(syslog.value());
-                qo.setContent(JSUtil.toJsonString(joinPoint.getArgs()));// 请求的参数
+                qo.setContent(JSUtil.toJsonString(joinPoint.getArgs()));
                 if (StringUtils.hasText(qo.getContent())) {
                     if (syslog.isUpdate()) {
                         // 如果是修改或者编辑，比对变化
+
                         // 修改后的值
                         Map<String, Object> map1 = JSUtil.parseObject(qo.getContent(), Map.class);
-
                         String redisKey = syslog.key() + qo.getUserId() + map1.get("id").toString();
-
                         if (cacheRedis.hasKey(redisKey)) {
                             // 修改前的值
                             Map<String, Object> map2 = cacheRedis.get(redisKey, Map.class);
-                            // 及时删除缓存
+                            // 删除缓存
                             cacheRedis.delete(redisKey);
                             qo.setContent(ObjMapUtil.contrast(map1, map2)); //进行对比
                         }
@@ -102,7 +95,6 @@ public class AspectSysLog {
 
     private FeignSysLogQO getSysLog() {
         FeignSysLogQO qo = new FeignSysLogQO();
-        // 获取请求信息
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         qo.setUserId(Long.valueOf(request.getHeader(Constants.USER_ID)));
         qo.setIp(IPUtil.getIpAddress(request));
