@@ -36,14 +36,12 @@ public class AdminUserCourseController {
     private final AdminUserCourseBiz biz;
 
     @ApiOperation(value = "课程用户关联表分页", notes = "课程用户关联表分页")
-    @SysLog(value = "课程用户关联表分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminUserCoursePageResp>> page(@RequestBody AdminUserCoursePageReq req) {
         return biz.page(req);
     }
 
     @ApiOperation(value = "课程用户关联表记录", notes = "课程用户关联表记录")
-    @SysLog(value = "课程用户关联表记录")
     @PostMapping(value = "/record")
     public Result<Page<AdminUserCourseRecordResp>> record(@RequestBody AdminUserCourseRecordReq req) {
         return biz.record(req);

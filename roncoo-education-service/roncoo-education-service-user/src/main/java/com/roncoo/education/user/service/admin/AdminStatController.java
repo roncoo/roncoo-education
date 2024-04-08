@@ -1,6 +1,5 @@
 package com.roncoo.education.user.service.admin;
 
-import com.roncoo.education.common.annotation.SysLog;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.user.service.admin.biz.AdminStatBiz;
 import com.roncoo.education.user.service.admin.resp.AdminStatDataResp;
@@ -27,14 +26,12 @@ public class AdminStatController {
     private AdminStatBiz biz;
 
     @ApiOperation(value = "登录统计", notes = "登录统计")
-    @SysLog(value = "登录统计")
     @GetMapping(value = "/login")
     public Result<AdminStatLoginResp> statLogin(@RequestParam Integer dates) {
         return biz.statLogin(dates);
     }
 
     @ApiOperation(value = "数据统计", notes = "数据统计")
-    @SysLog(value = "数据统计")
     @GetMapping(value = "/data")
     public Result<AdminStatDataResp> statData() {
         return biz.statData();

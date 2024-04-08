@@ -37,14 +37,12 @@ public class AdminSysConfigController {
     private final AdminSysConfigBiz biz;
 
     @ApiOperation(value = "系统配置列表", notes = "系统配置列表")
-    @SysLog(value = "系统配置列表")
     @PostMapping(value = "/list")
     public Result<List<AdminSysConfigListResp>> list(@RequestBody AdminSysConfigListReq req) {
         return biz.list(req);
     }
 
     @ApiOperation(value = "系统配置分页", notes = "系统配置分页")
-    @SysLog(value = "系统配置分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminSysConfigPageResp>> page(@RequestBody AdminSysConfigPageReq req) {
         return biz.page(req);
@@ -88,7 +86,6 @@ public class AdminSysConfigController {
     }
 
     @ApiOperation(value = "视频云回调地址", notes = "视频云回调地址获取")
-    @SysLog(value = "视频云回调地址")
     @GetMapping(value = "/video/config")
     public Result<String> videoGet() {
         return biz.videoGet();

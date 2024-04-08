@@ -34,7 +34,6 @@ public class AdminWebsiteCarouselController {
     private final AdminWebsiteCarouselBiz biz;
 
     @ApiOperation(value = "广告信息分页", notes = "广告信息分页")
-    @SysLog(value = "广告信息分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminWebsiteCarouselPageResp>> page(@RequestBody AdminWebsiteCarouselPageReq req) {
         return biz.page(req);

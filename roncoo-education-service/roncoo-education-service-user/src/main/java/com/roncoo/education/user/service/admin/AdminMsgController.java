@@ -34,7 +34,6 @@ public class AdminMsgController {
     private final AdminMsgBiz biz;
 
     @ApiOperation(value = "站内信息表分页", notes = "站内信息表分页")
-    @SysLog(value = "站内信息表分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminMsgPageResp>> page(@RequestBody AdminMsgPageReq req) {
         return biz.page(req);

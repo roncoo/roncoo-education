@@ -34,7 +34,6 @@ public class AdminSysMenuController {
      * 菜单信息列出信息接口
      */
     @ApiOperation(value = "菜单列出", notes = "根据条件列出菜单")
-    @SysLog(value = "菜单列出")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public Result<List<AdminSysMenuResp>> list(@RequestBody AdminSysMenuListReq sysMenuListReq) {
         return biz.list(sysMenuListReq);

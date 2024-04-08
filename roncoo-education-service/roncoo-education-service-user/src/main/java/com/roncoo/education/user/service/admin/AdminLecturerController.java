@@ -34,7 +34,6 @@ public class AdminLecturerController {
     private final AdminLecturerBiz biz;
 
     @ApiOperation(value = "讲师信息分页", notes = "讲师信息分页")
-    @SysLog(value = "讲师信息分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminLecturerPageResp>> page(@RequestBody AdminLecturerPageReq req) {
         return biz.page(req);

@@ -33,14 +33,12 @@ public class AdminCourseChapterController {
     private final AdminCourseChapterBiz biz;
 
     @ApiOperation(value = "章节信息分页", notes = "章节信息分页")
-    @SysLog(value = "章节信息分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminCourseChapterPageResp>> page(@RequestBody AdminCourseChapterPageReq req) {
         return biz.page(req);
     }
 
     @ApiOperation(value = "章节信息列表", notes = "章节信息列表")
-    @SysLog(value = "章节信息列表")
     @PostMapping(value = "/list")
     public Result<List<AdminCourseChapterViewResp>> list(@RequestBody AdminCourseChapterListReq req) {
         return biz.list(req);

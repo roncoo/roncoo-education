@@ -34,7 +34,6 @@ public class AdminLogLoginController {
     private final AdminLogLoginBiz biz;
 
     @ApiOperation(value = "用户登录日志分页", notes = "用户登录日志分页")
-    @SysLog(value = "用户登录日志分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminLogLoginPageResp>> page(@RequestBody AdminLogLoginPageReq req) {
         return biz.page(req);

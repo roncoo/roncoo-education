@@ -34,7 +34,6 @@ public class AdminUserCourseCommentController {
     private final AdminUserCourseCommentBiz biz;
 
     @ApiOperation(value = "课程评论分页", notes = "课程评论分页")
-    @SysLog(value = "课程评论分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminUserCourseCommentPageResp>> page(@RequestBody AdminUserCourseCommentPageReq req) {
         return biz.page(req);

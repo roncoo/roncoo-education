@@ -35,7 +35,6 @@ public class AdminUserStudyController {
     private final AdminUserStudyBiz biz;
 
     @ApiOperation(value = "课程用户学习日志分页", notes = "课程用户学习日志分页")
-    @SysLog(value = "课程用户学习日志分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminUserStudyPageResp>> page(@RequestBody AdminUserStudyPageReq req) {
         return biz.page(req);
@@ -73,7 +72,6 @@ public class AdminUserStudyController {
 
     @ApiOperation(value = "课程用户学习统计", notes = "课程用户学习统计")
     @ApiImplicitParam(name = "userId", value = "用户ID", dataTypeClass = Long.class, paramType = "query", required = false)
-    @SysLog(value = "课程用户学习统计")
     @GetMapping(value = "/stat")
     public Result<AdminUserStudyStatResp> stat(@RequestParam Long userId) {
         return biz.stat(userId);

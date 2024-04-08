@@ -31,7 +31,6 @@ public class AdminSysUserController {
      * 后台管理员分页列表接口
      */
     @ApiOperation(value = "后台管理员分页列表接口", notes = "后台管理员分页列表接口")
-    @SysLog(value = "后台管理员分页列表接口")
     @RequestMapping(value = "/page", method = RequestMethod.POST)
     public Result<Page<AdminSysUserPageResp>> listForPage(@RequestBody AdminSysUserPageReq sysUserPageREQ) {
         return biz.listForPage(sysUserPageREQ);
@@ -80,15 +79,14 @@ public class AdminSysUserController {
     /**
      * 后台管理员密码接口
      */
-    @ApiOperation(value = "后台管理员密码接口", notes = "后台管理员修改密码接口")
-    @SysLog(value = "后台管理员密码接口")
+    @ApiOperation(value = "后台管理员密码修改", notes = "后台管理员密码修改")
+    @SysLog(value = "后台管理员密码修改")
     @RequestMapping(value = "/password", method = RequestMethod.PUT)
     public Result<String> updatePassword(@RequestBody AdminSysUserUpdatePasswordReq sysUserUpdatePasswordREQ) {
         return biz.updatePassword(sysUserUpdatePasswordREQ);
     }
 
     @ApiOperation(value = "获取当前登录用户", notes = "获取当前登录用户")
-    @SysLog(value = "获取当前登录用户")
     @GetMapping(value = "/current")
     public Result<AdminSysUserViewResp> currentView() {
         AdminSysUserViewReq req = new AdminSysUserViewReq();

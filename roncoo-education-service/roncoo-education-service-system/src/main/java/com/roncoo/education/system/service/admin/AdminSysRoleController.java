@@ -33,7 +33,6 @@ public class AdminSysRoleController {
      * 角色分页列表接口
      */
     @ApiOperation(value = "角色分页", notes = "角色分页列表接口")
-    @SysLog(value = "角色分页")
     @RequestMapping(value = "/page", method = RequestMethod.POST)
     public Result<Page<AdminSysRolePageResp>> listForPage(@RequestBody AdminSysRolePageReq sysRolePageREQ) {
         return biz.listForPage(sysRolePageREQ);

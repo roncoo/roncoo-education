@@ -34,7 +34,6 @@ public class AdminResourceController {
     private final AdminResourceBiz biz;
 
     @ApiOperation(value = "课程视频信息分页", notes = "课程视频信息分页")
-    @SysLog(value = "课程视频信息分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminResourcePageResp>> page(@RequestBody AdminResourcePageReq req) {
         return biz.page(req);

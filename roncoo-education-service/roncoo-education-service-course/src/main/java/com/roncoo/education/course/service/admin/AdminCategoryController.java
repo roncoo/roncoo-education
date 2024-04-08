@@ -34,14 +34,12 @@ public class AdminCategoryController {
     private final AdminCategoryBiz biz;
 
     @ApiOperation(value = "分类分页", notes = "分类分页")
-    @SysLog(value = "分类分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminCategoryPageResp>> page(@RequestBody AdminCategoryPageReq req) {
         return biz.page(req);
     }
 
     @ApiOperation(value = "分类列出", notes = "分类列出")
-    @SysLog(value = "分类列出")
     @PostMapping(value = "/list")
     public Result<List<AdminCategoryListResp>> list(@RequestBody AdminCategoryListReq req) {
         return biz.list(req);

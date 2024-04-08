@@ -34,7 +34,6 @@ public class AdminRegionController {
     private final AdminRegionBiz biz;
 
     @ApiOperation(value = "行政区域表分页", notes = "行政区域表分页")
-    @SysLog(value = "行政区域表分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminRegionPageResp>> page(@RequestBody AdminRegionPageReq req) {
         return biz.page(req);

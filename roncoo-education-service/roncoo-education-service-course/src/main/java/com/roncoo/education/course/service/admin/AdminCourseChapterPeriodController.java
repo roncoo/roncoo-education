@@ -33,14 +33,12 @@ public class AdminCourseChapterPeriodController {
     private final AdminCourseChapterPeriodBiz biz;
 
     @ApiOperation(value = "课时信息分页", notes = "课时信息分页")
-    @SysLog(value = "课时信息分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminCourseChapterPeriodPageResp>> page(@RequestBody AdminCourseChapterPeriodPageReq req) {
         return biz.page(req);
     }
 
     @ApiOperation(value = "课时信息列表", notes = "课时信息列表")
-    @SysLog(value = "课时信息列表")
     @PostMapping(value = "/list")
     public Result<List<AdminCourseChapterPeriodViewResp>> list(@RequestBody AdminCourseChapterPeriodListReq req) {
         return biz.list(req);

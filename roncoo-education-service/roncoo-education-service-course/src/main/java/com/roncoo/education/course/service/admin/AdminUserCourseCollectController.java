@@ -34,7 +34,6 @@ public class AdminUserCourseCollectController {
     private final AdminUserCourseCollectBiz biz;
 
     @ApiOperation(value = "课程收藏分页", notes = "课程收藏分页")
-    @SysLog(value = "课程收藏分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminUserCourseCollectPageResp>> page(@RequestBody AdminUserCourseCollectPageReq req) {
         return biz.page(req);

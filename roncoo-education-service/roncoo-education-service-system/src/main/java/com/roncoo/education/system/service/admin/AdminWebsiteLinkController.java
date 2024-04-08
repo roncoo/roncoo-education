@@ -34,7 +34,6 @@ public class AdminWebsiteLinkController {
     private final AdminWebsiteLinkBiz biz;
 
     @ApiOperation(value = "站点友情链接分页", notes = "站点友情链接分页")
-    @SysLog(value = "站点友情链接分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminWebsiteLinkPageResp>> page(@RequestBody AdminWebsiteLinkPageReq req) {
         return biz.page(req);

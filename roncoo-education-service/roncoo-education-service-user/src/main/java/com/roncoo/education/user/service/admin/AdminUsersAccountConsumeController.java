@@ -34,7 +34,6 @@ public class AdminUsersAccountConsumeController {
     private final AdminUsersAccountConsumeBiz biz;
 
     @ApiOperation(value = "用户账户消费记录分页", notes = "用户账户消费记录分页")
-    @SysLog(value = "用户账户消费记录分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminUsersAccountConsumePageResp>> page(@RequestBody AdminUsersAccountConsumePageReq req) {
         return biz.page(req);

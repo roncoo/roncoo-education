@@ -34,7 +34,6 @@ public class AdminZoneCourseController {
     private final AdminZoneCourseBiz biz;
 
     @ApiOperation(value = "专区课程关联表分页", notes = "专区课程关联表分页")
-    @SysLog(value = "专区课程分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminZoneCoursePageResp>> page(@RequestBody AdminZoneCoursePageReq req) {
         return biz.page(req);

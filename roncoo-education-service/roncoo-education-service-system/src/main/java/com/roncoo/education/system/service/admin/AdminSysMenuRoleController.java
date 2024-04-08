@@ -32,7 +32,6 @@ public class AdminSysMenuRoleController {
      * 列出菜单角色关联信息接口
      */
     @ApiOperation(value = "菜单ID列出", notes = "根据角色ID列出该角色的所有菜单ID")
-    @SysLog(value = "菜单ID列出")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public Result<List<Long>> list(@RequestBody AdminSysMenuRoleListReq req) {
         return biz.list(req);

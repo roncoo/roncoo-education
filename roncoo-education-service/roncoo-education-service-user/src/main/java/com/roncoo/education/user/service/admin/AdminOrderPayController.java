@@ -34,7 +34,6 @@ public class AdminOrderPayController {
     private final AdminOrderPayBiz biz;
 
     @ApiOperation(value = "订单支付信息表分页", notes = "订单支付信息表分页")
-    @SysLog(value = "订单支付信息表分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminOrderPayPageResp>> page(@RequestBody AdminOrderPayPageReq req) {
         return biz.page(req);

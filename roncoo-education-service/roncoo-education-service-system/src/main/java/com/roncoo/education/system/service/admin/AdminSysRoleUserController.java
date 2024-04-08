@@ -32,7 +32,6 @@ public class AdminSysRoleUserController {
      * 列出角色用户关联信息接口
      */
     @ApiOperation(value = "角色用户列出", notes = "根据用户ID列出该用户的所有角色")
-    @SysLog(value = "角色用户列出")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public Result<List<Long>> list(@RequestBody AdminSysRoleUserListReq sysRoleUserListREQ) {
         return biz.list(sysRoleUserListREQ);

@@ -34,7 +34,6 @@ public class AdminZoneController {
     private final AdminZoneBiz biz;
 
     @ApiOperation(value = "专区分页", notes = "专区分页")
-    @SysLog(value = "专区分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminZonePageResp>> page(@RequestBody AdminZonePageReq req) {
         return biz.page(req);

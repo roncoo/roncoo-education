@@ -34,7 +34,6 @@ public class AdminUsersController {
     private final AdminUsersBiz biz;
 
     @ApiOperation(value = "用户信息分页", notes = "用户信息分页")
-    @SysLog(value = "用户信息添加")
     @PostMapping(value = "/page")
     public Result<Page<AdminUsersPageResp>> page(@RequestBody AdminUsersPageReq req) {
         return biz.page(req);

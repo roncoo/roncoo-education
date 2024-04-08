@@ -1,6 +1,5 @@
 package com.roncoo.education.system.service.admin;
 
-import com.roncoo.education.common.annotation.SysLog;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysLogBiz;
@@ -31,7 +30,6 @@ public class AdminSysLogController {
      * 后台操作日志分页列表接口
      */
     @ApiOperation(value = "后台操作日志分页列表接口", notes = "后台操作日志分页列表接口")
-    @SysLog(value = "后台操作日志分页列表接口")
     @RequestMapping(value = "/page", method = RequestMethod.POST)
     public Result<Page<AdminSysLogPageResp>> list(@RequestBody AdminSysLogPageReq req) {
         return biz.page(req);

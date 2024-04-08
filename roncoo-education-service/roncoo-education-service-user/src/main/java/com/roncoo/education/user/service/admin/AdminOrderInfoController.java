@@ -35,7 +35,6 @@ public class AdminOrderInfoController {
     private final AdminOrderInfoBiz biz;
 
     @ApiOperation(value = "订单信息表分页", notes = "订单信息表分页")
-    @SysLog(value = "订单信息表分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminOrderInfoPageResp>> page(@RequestBody AdminOrderInfoPageReq req) {
         return biz.page(req);
@@ -73,7 +72,6 @@ public class AdminOrderInfoController {
 
     @ApiOperation(value = "订单信息表统计", notes = "订单信息表统计")
     @ApiImplicitParam(name = "userId", value = "用户ID", dataTypeClass = Long.class, paramType = "query", required = false)
-    @SysLog(value = "订单信息表统计")
     @GetMapping(value = "/stat")
     public Result<AdminOrderInfoStatResp> stat(@RequestParam Long userId) {
         return biz.stat(userId);

@@ -34,7 +34,6 @@ public class AdminWebsiteNavController {
     private final AdminWebsiteNavBiz biz;
 
     @ApiOperation(value = "头部导航分页", notes = "头部导航分页")
-    @SysLog(value = "头部导航分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminWebsiteNavPageResp>> page(@RequestBody AdminWebsiteNavPageReq req) {
         return biz.page(req);
