@@ -40,6 +40,11 @@ public class AdminSysLogPageResp implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long userId;
     /**
+     * 手机号
+     */
+    @ApiModelProperty(value = "手机号")
+    private String mobile;
+    /**
      * 真实姓名
      */
     @ApiModelProperty(value = "真实姓名")

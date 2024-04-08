@@ -47,6 +47,7 @@ public class AdminSysLogBiz {
             Map<Long, SysUser> map = sysUsers.stream().collect(Collectors.toMap(SysUser::getId, sysUser -> sysUser));
             for (AdminSysLogPageResp res : resp.getList()) {
                 res.setRealName(map.get(res.getUserId()).getRealName());
+                res.setMobile(map.get(res.getUserId()).getMobile());
             }
         }
         return Result.success(resp);
