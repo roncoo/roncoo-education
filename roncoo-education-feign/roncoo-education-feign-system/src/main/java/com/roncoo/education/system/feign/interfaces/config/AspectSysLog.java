@@ -67,13 +67,13 @@ public class AspectSysLog {
                 MethodSignature signature = (MethodSignature) joinPoint.getSignature();
                 com.roncoo.education.common.annotation.SysLog syslog = signature.getMethod().getAnnotation(com.roncoo.education.common.annotation.SysLog.class);
                 qo.setOperation(syslog.value());
-                qo.setContent(JSUtil.toJsonString(joinPoint.getArgs()));
+                qo.setContent(joinPoint.getArgs() != null && joinPoint.getArgs().length > 0 ? JSUtil.toJsonString(joinPoint.getArgs()) : "");
                 if (StringUtils.hasText(qo.getContent())) {
                     if (syslog.isUpdate()) {
                         // 如果是修改或者编辑，比对变化
 
                         // 修改后的值
-                        Map<String, Object> map1 = JSUtil.parseObject(qo.getContent(), Map.class);
+                        Map<String, Object> map1 = JSUtil.parseArray(qo.getContent(), Map.class).get(0);
                         String redisKey = syslog.key() + qo.getUserId() + map1.get("id").toString();
                         if (cacheRedis.hasKey(redisKey)) {
                             // 修改前的值
