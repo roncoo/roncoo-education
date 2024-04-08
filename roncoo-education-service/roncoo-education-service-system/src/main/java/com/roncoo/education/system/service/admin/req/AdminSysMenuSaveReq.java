@@ -7,7 +7,7 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 /**
- * 菜单信息-保存
+ * 菜单信息-添加
  *
  * @author wujing
  */

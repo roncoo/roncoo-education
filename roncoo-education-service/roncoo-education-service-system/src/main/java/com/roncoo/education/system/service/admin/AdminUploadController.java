@@ -1,5 +1,6 @@
 package com.roncoo.education.system.service.admin;
 
+import com.roncoo.education.common.annotation.SysLog;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.service.BaseController;
 import com.roncoo.education.system.service.biz.UploadCommonBiz;
@@ -31,6 +32,7 @@ public class AdminUploadController extends BaseController {
 
     @ApiOperation(value = "上传图片", notes = "服务端上传图片接口，只支持图片格式")
     @ApiImplicitParam(name = "picFile", value = "图片文件", dataType = "File", dataTypeClass = File.class, paramType = "query", required = true)
+    @SysLog(value = "上传图片")
     @PostMapping(value = "/pic")
     public Result<String> uploadPic(@RequestParam(value = "picFile", required = false) MultipartFile picFile) {
         return biz.uploadPic(picFile);
@@ -38,6 +40,7 @@ public class AdminUploadController extends BaseController {
 
     @ApiOperation(value = "上传文档", notes = "服务端上传文档接口，只支持文档格式")
     @ApiImplicitParam(name = "docFile", value = "文档文件", dataType = "File", dataTypeClass = File.class, paramType = "query", required = true)
+    @SysLog(value = "上传文档")
     @PostMapping(value = "/doc")
     public Result<UploadDocResp> uploadDoc(@RequestParam(name = "docFile", required = false) MultipartFile docFile) {
         return biz.uploadDoc(docFile);

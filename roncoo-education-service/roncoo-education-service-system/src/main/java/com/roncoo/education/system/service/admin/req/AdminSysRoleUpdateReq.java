@@ -7,7 +7,7 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 /**
- * 角色信息-更新
+ * 角色信息-修改
  *
  * @author wujing
  */

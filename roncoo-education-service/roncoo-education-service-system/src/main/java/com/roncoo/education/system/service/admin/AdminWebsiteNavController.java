@@ -1,5 +1,7 @@
 package com.roncoo.education.system.service.admin;
 
+import com.roncoo.education.common.annotation.SysLog;
+import com.roncoo.education.common.annotation.SysLogCache;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminWebsiteNavBiz;
@@ -32,12 +34,14 @@ public class AdminWebsiteNavController {
     private final AdminWebsiteNavBiz biz;
 
     @ApiOperation(value = "头部导航分页", notes = "头部导航分页")
+    @SysLog(value = "头部导航分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminWebsiteNavPageResp>> page(@RequestBody AdminWebsiteNavPageReq req) {
         return biz.page(req);
     }
 
     @ApiOperation(value = "头部导航添加", notes = "头部导航添加")
+    @SysLog(value = "头部导航添加")
     @PostMapping(value = "/save")
     public Result<String> save(@RequestBody @Valid AdminWebsiteNavSaveReq req) {
         return biz.save(req);
@@ -45,12 +49,14 @@ public class AdminWebsiteNavController {
 
     @ApiOperation(value = "头部导航查看", notes = "头部导航查看")
     @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
+    @SysLogCache
     @GetMapping(value = "/view")
     public Result<AdminWebsiteNavViewResp> view(@RequestParam Long id) {
         return biz.view(id);
     }
 
     @ApiOperation(value = "头部导航修改", notes = "头部导航修改")
+    @SysLog(value = "头部导航修改")
     @PutMapping(value = "/edit")
     public Result<String> edit(@RequestBody @Valid AdminWebsiteNavEditReq req) {
         return biz.edit(req);
@@ -58,6 +64,7 @@ public class AdminWebsiteNavController {
 
     @ApiOperation(value = "头部导航删除", notes = "头部导航删除")
     @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
+    @SysLog(value = "头部导航删除")
     @DeleteMapping(value = "/delete")
     public Result<String> delete(@RequestParam Long id) {
         return biz.delete(id);

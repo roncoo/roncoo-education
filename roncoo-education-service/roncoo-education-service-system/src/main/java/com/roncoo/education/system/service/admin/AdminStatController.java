@@ -1,5 +1,6 @@
 package com.roncoo.education.system.service.admin;
 
+import com.roncoo.education.common.annotation.SysLog;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.video.resp.InfoResp;
 import com.roncoo.education.system.service.admin.biz.AdminStatBiz;
@@ -23,7 +24,8 @@ public class AdminStatController {
     @Autowired
     private AdminStatBiz biz;
 
-    @ApiOperation(value = "点播", notes = "点播空间和流量的统计")
+    @ApiOperation(value = "点播统计", notes = "点播空间和流量的统计")
+    @SysLog(value = "点播统计")
     @GetMapping(value = "/vod")
     public Result<InfoResp> vod() {
         return biz.vod();

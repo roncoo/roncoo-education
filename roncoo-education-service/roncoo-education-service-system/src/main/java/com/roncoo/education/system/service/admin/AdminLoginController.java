@@ -1,5 +1,6 @@
 package com.roncoo.education.system.service.admin;
 
+import com.roncoo.education.common.annotation.SysLog;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminLoginBiz;
 import com.roncoo.education.system.service.admin.req.AdminSysUserLoginReq;
@@ -26,6 +27,7 @@ public class AdminLoginController {
     private final AdminLoginBiz biz;
 
     @ApiOperation(value = "密码登录", notes = "用户使用密码登录")
+    @SysLog(value = "密码登录")
     @PostMapping(value = "/password")
     public Result<AdminSysUserLoginResp> login(@RequestBody @Valid AdminSysUserLoginReq req) {
         return biz.login(req);

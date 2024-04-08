@@ -1,5 +1,7 @@
 package com.roncoo.education.user.service.admin;
 
+import com.roncoo.education.common.annotation.SysLog;
+import com.roncoo.education.common.annotation.SysLogCache;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.user.service.admin.biz.AdminRegionBiz;
@@ -32,12 +34,14 @@ public class AdminRegionController {
     private final AdminRegionBiz biz;
 
     @ApiOperation(value = "行政区域表分页", notes = "行政区域表分页")
+    @SysLog(value = "行政区域表分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminRegionPageResp>> page(@RequestBody AdminRegionPageReq req) {
         return biz.page(req);
     }
 
     @ApiOperation(value = "行政区域表添加", notes = "行政区域表添加")
+    @SysLog(value = "行政区域表添加")
     @PostMapping(value = "/save")
     public Result<String> save(@RequestBody @Valid AdminRegionSaveReq req) {
         return biz.save(req);
@@ -45,12 +49,14 @@ public class AdminRegionController {
 
     @ApiOperation(value = "行政区域表查看", notes = "行政区域表查看")
     @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
+    @SysLogCache
     @GetMapping(value = "/view")
     public Result<AdminRegionViewResp> view(@RequestParam Long id) {
         return biz.view(id);
     }
 
     @ApiOperation(value = "行政区域表修改", notes = "行政区域表修改")
+    @SysLog(value = "行政区域表修改")
     @PutMapping(value = "/edit")
     public Result<String> edit(@RequestBody @Valid AdminRegionEditReq req) {
         return biz.edit(req);
@@ -58,6 +64,7 @@ public class AdminRegionController {
 
     @ApiOperation(value = "行政区域表删除", notes = "行政区域表删除")
     @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
+    @SysLog(value = "行政区域表删除")
     @DeleteMapping(value = "/delete")
     public Result<String> delete(@RequestParam Long id) {
         return biz.delete(id);

@@ -1,5 +1,6 @@
 package com.roncoo.education.system.service.admin;
 
+import com.roncoo.education.common.annotation.SysLog;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysRoleUserBiz;
 import com.roncoo.education.system.service.admin.req.AdminSysRoleUserListReq;
@@ -31,6 +32,7 @@ public class AdminSysRoleUserController {
      * 列出角色用户关联信息接口
      */
     @ApiOperation(value = "角色用户列出", notes = "根据用户ID列出该用户的所有角色")
+    @SysLog(value = "角色用户列出")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public Result<List<Long>> list(@RequestBody AdminSysRoleUserListReq sysRoleUserListREQ) {
         return biz.list(sysRoleUserListREQ);
@@ -39,7 +41,8 @@ public class AdminSysRoleUserController {
     /**
      * 添加用户角色信息接口
      */
-    @ApiOperation(value = "角色用户保存", notes = "用户角色添加接口")
+    @ApiOperation(value = "角色用户添加", notes = "用户角色添加接口")
+    @SysLog(value = "角色用户添加")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Result<String> save(@RequestBody AdminSysRoleUserSaveReq sysRoleUserSaveREQ) {
         return biz.save(sysRoleUserSaveREQ);

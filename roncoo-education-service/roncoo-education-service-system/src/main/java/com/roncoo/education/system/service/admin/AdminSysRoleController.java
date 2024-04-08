@@ -1,5 +1,7 @@
 package com.roncoo.education.system.service.admin;
 
+import com.roncoo.education.common.annotation.SysLog;
+import com.roncoo.education.common.annotation.SysLogCache;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysRoleBiz;
@@ -31,6 +33,7 @@ public class AdminSysRoleController {
      * 角色分页列表接口
      */
     @ApiOperation(value = "角色分页", notes = "角色分页列表接口")
+    @SysLog(value = "角色分页")
     @RequestMapping(value = "/page", method = RequestMethod.POST)
     public Result<Page<AdminSysRolePageResp>> listForPage(@RequestBody AdminSysRolePageReq sysRolePageREQ) {
         return biz.listForPage(sysRolePageREQ);
@@ -39,7 +42,8 @@ public class AdminSysRoleController {
     /**
      * 角色添加接口
      */
-    @ApiOperation(value = "角色保存", notes = "角色添加接口")
+    @ApiOperation(value = "角色添加", notes = "角色添加接口")
+    @SysLog(value = "角色添加")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Result<String> save(@RequestBody AdminSysRoleSaveReq sysRoleSaveREQ) {
         return biz.save(sysRoleSaveREQ);
@@ -49,15 +53,17 @@ public class AdminSysRoleController {
      * 角色删除接口
      */
     @ApiOperation(value = "角色删除接口", notes = "角色删除接口")
+    @SysLog(value = "角色删除接口")
     @RequestMapping(value = "/delete", method = RequestMethod.PUT)
     public Result<String> delete(@RequestBody AdminSysRoleDeleteReq sysRoleDeleteREQ) {
         return biz.delete(sysRoleDeleteREQ);
     }
 
     /**
-     * 角色更新接口
+     * 角色修改接口
      */
-    @ApiOperation(value = "角色更新接口", notes = "角色更新接口")
+    @ApiOperation(value = "角色修改接口", notes = "角色修改接口")
+    @SysLog(value = "角色修改接口")
     @RequestMapping(value = "/edit", method = RequestMethod.PUT)
     public Result<String> update(@RequestBody AdminSysRoleUpdateReq sysRoleUpdateREQ) {
         return biz.update(sysRoleUpdateREQ);
@@ -67,6 +73,7 @@ public class AdminSysRoleController {
      * 角色查看接口
      */
     @ApiOperation(value = "角色查看接口", notes = "角色查看接口")
+    @SysLogCache
     @RequestMapping(value = "/view", method = RequestMethod.POST)
     public Result<AdminSysRoleViewResp> view(@RequestBody AdminSysRoleViewReq sysRoleViewREQ) {
         return biz.view(sysRoleViewREQ);

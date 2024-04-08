@@ -1,5 +1,7 @@
 package com.roncoo.education.system.service.admin;
 
+import com.roncoo.education.common.annotation.SysLog;
+import com.roncoo.education.common.annotation.SysLogCache;
 import com.roncoo.education.common.config.ThreadContext;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
@@ -29,6 +31,7 @@ public class AdminSysUserController {
      * 后台管理员分页列表接口
      */
     @ApiOperation(value = "后台管理员分页列表接口", notes = "后台管理员分页列表接口")
+    @SysLog(value = "后台管理员分页列表接口")
     @RequestMapping(value = "/page", method = RequestMethod.POST)
     public Result<Page<AdminSysUserPageResp>> listForPage(@RequestBody AdminSysUserPageReq sysUserPageREQ) {
         return biz.listForPage(sysUserPageREQ);
@@ -38,6 +41,7 @@ public class AdminSysUserController {
      * 后台管理员添加接口
      */
     @ApiOperation(value = "后台管理员添加接口", notes = "后台管理员添加接口")
+    @SysLog(value = "后台管理员添加接口")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Result<String> save(@RequestBody AdminSysUserSaveReq sysUserSaveREQ) {
         return biz.save(sysUserSaveREQ);
@@ -47,15 +51,17 @@ public class AdminSysUserController {
      * 后台管理员删除接口
      */
     @ApiOperation(value = "后台管理员删除接口", notes = "后台管理员删除接口")
+    @SysLog(value = "后台管理员删除接口")
     @RequestMapping(value = "/delete", method = RequestMethod.PUT)
     public Result<String> delete(@RequestBody AdminSysUserDeleteReq sysUserSaveREQ) {
         return biz.delete(sysUserSaveREQ);
     }
 
     /**
-     * 后台管理员更新接口
+     * 后台管理员修改接口
      */
-    @ApiOperation(value = "后台管理员更新接口", notes = "后台管理员更新接口")
+    @ApiOperation(value = "后台管理员修改接口", notes = "后台管理员修改接口")
+    @SysLog(value = "后台管理员修改接口")
     @RequestMapping(value = "/edit", method = RequestMethod.PUT)
     public Result<String> update(@RequestBody AdminSysUserUpdateReq sysUserUpdateREQ) {
         return biz.update(sysUserUpdateREQ);
@@ -65,6 +71,7 @@ public class AdminSysUserController {
      * 后台管理员查看接口
      */
     @ApiOperation(value = "后台管理员查看接口", notes = "后台管理员查看接口")
+    @SysLogCache
     @RequestMapping(value = "/view", method = RequestMethod.POST)
     public Result<AdminSysUserViewResp> view(@RequestBody AdminSysUserViewReq sysUserViewREQ) {
         return biz.view(sysUserViewREQ);
@@ -73,13 +80,15 @@ public class AdminSysUserController {
     /**
      * 后台管理员密码接口
      */
-    @ApiOperation(value = "后台管理员密码接口", notes = "后台管理员更新密码接口")
+    @ApiOperation(value = "后台管理员密码接口", notes = "后台管理员修改密码接口")
+    @SysLog(value = "后台管理员密码接口")
     @RequestMapping(value = "/password", method = RequestMethod.PUT)
     public Result<String> updatePassword(@RequestBody AdminSysUserUpdatePasswordReq sysUserUpdatePasswordREQ) {
         return biz.updatePassword(sysUserUpdatePasswordREQ);
     }
 
-    @ApiOperation(value = "当前登录用户", notes = "获取当前登录用户")
+    @ApiOperation(value = "获取当前登录用户", notes = "获取当前登录用户")
+    @SysLog(value = "获取当前登录用户")
     @GetMapping(value = "/current")
     public Result<AdminSysUserViewResp> currentView() {
         AdminSysUserViewReq req = new AdminSysUserViewReq();

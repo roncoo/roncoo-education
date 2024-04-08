@@ -50,7 +50,7 @@ public class AdminSysMenuRoleBiz {
         if (CollectionUtil.isNotEmpty(req.getMenuIdList())) {
             // 先删除该角色下所有的菜单
             dao.deleteByRoleId(req.getRoleId());
-            // 再保存新的菜单
+            // 再添加新的菜单
             for (Long menuId : req.getMenuIdList()) {
                 SysMenuRole entity = new SysMenuRole();
                 entity.setMenuId(menuId);

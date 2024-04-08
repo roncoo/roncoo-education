@@ -1,5 +1,7 @@
 package com.roncoo.education.user.service.admin;
 
+import com.roncoo.education.common.annotation.SysLog;
+import com.roncoo.education.common.annotation.SysLogCache;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.user.service.admin.biz.AdminMsgBiz;
@@ -32,12 +34,14 @@ public class AdminMsgController {
     private final AdminMsgBiz biz;
 
     @ApiOperation(value = "站内信息表分页", notes = "站内信息表分页")
+    @SysLog(value = "站内信息表分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminMsgPageResp>> page(@RequestBody AdminMsgPageReq req) {
         return biz.page(req);
     }
 
     @ApiOperation(value = "站内信息表添加", notes = "站内信息表添加")
+    @SysLog(value = "站内信息表添加")
     @PostMapping(value = "/save")
     public Result<String> save(@RequestBody @Valid AdminMsgSaveReq req) {
         return biz.save(req);
@@ -45,12 +49,14 @@ public class AdminMsgController {
 
     @ApiOperation(value = "站内信息表查看", notes = "站内信息表查看")
     @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
+    @SysLogCache
     @GetMapping(value = "/view")
     public Result<AdminMsgViewResp> view(@RequestParam Long id) {
         return biz.view(id);
     }
 
     @ApiOperation(value = "站内信息表修改", notes = "站内信息表修改")
+    @SysLog(value = "站内信息表修改")
     @PutMapping(value = "/edit")
     public Result<String> edit(@RequestBody @Valid AdminMsgEditReq req) {
         return biz.edit(req);
@@ -58,6 +64,7 @@ public class AdminMsgController {
 
     @ApiOperation(value = "站内信息表删除", notes = "站内信息表删除")
     @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
+    @SysLog(value = "站内信息表删除")
     @DeleteMapping(value = "/delete")
     public Result<String> delete(@RequestParam Long id) {
         return biz.delete(id);
