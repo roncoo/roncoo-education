@@ -5,12 +5,16 @@
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="user_id" jdbcType="BIGINT" property="userId"/>
-        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
-        <result column="ip" jdbcType="VARCHAR" property="ip"/>
         <result column="operation" jdbcType="VARCHAR" property="operation"/>
         <result column="method" jdbcType="VARCHAR" property="method"/>
         <result column="path" jdbcType="VARCHAR" property="path"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="login_ip" jdbcType="VARCHAR" property="loginIp"/>
+        <result column="country" jdbcType="VARCHAR" property="country"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="browser" jdbcType="VARCHAR" property="browser"/>
+        <result column="os" jdbcType="VARCHAR" property="os"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -30,7 +34,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -59,7 +64,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -71,9 +77,12 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        id, gmt_create, user_id, real_name, ip, operation, method, path, content
+        id
+        , gmt_create, user_id, operation, method, path, content, login_ip, country, province,
+    city, browser, os
     </sql>
-    <select id="selectByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysLogExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysLogExample"
+            resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -109,11 +118,15 @@
     </delete>
     <insert id="insert" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysLog">
         insert into sys_log (id, gmt_create, user_id,
-                             real_name, ip, operation,
-                             method, path, content)
+                             operation, method, path,
+                             content, login_ip, country,
+                             province, city, browser,
+                             os)
         values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{userId,jdbcType=BIGINT},
-                #{realName,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{operation,jdbcType=VARCHAR},
-                #{method,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR})
+                #{operation,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR},
+                #{content,jdbcType=VARCHAR}, #{loginIp,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR},
+                #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{browser,jdbcType=VARCHAR},
+                #{os,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysLog">
         insert into sys_log
@@ -127,12 +140,6 @@
             <if test="userId != null">
                 user_id,
             </if>
-            <if test="realName != null">
-                real_name,
-            </if>
-            <if test="ip != null">
-                ip,
-            </if>
             <if test="operation != null">
                 operation,
             </if>
@@ -145,6 +152,24 @@
             <if test="content != null">
                 content,
             </if>
+            <if test="loginIp != null">
+                login_ip,
+            </if>
+            <if test="country != null">
+                country,
+            </if>
+            <if test="province != null">
+                province,
+            </if>
+            <if test="city != null">
+                city,
+            </if>
+            <if test="browser != null">
+                browser,
+            </if>
+            <if test="os != null">
+                os,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -155,12 +180,6 @@
             </if>
             <if test="userId != null">
                 #{userId,jdbcType=BIGINT},
-            </if>
-            <if test="realName != null">
-                #{realName,jdbcType=VARCHAR},
-            </if>
-            <if test="ip != null">
-                #{ip,jdbcType=VARCHAR},
             </if>
             <if test="operation != null">
                 #{operation,jdbcType=VARCHAR},
@@ -174,9 +193,28 @@
             <if test="content != null">
                 #{content,jdbcType=VARCHAR},
             </if>
+            <if test="loginIp != null">
+                #{loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="country != null">
+                #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="browser != null">
+                #{browser,jdbcType=VARCHAR},
+            </if>
+            <if test="os != null">
+                #{os,jdbcType=VARCHAR},
+            </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysLogExample" resultType="java.lang.Integer">
+    <select id="countByExample" parameterType="com.roncoo.education.system.dao.impl.mapper.entity.SysLogExample"
+            resultType="java.lang.Integer">
         select count(*) from sys_log
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -194,12 +232,6 @@
             <if test="record.userId != null">
                 user_id = #{record.userId,jdbcType=BIGINT},
             </if>
-            <if test="record.realName != null">
-                real_name = #{record.realName,jdbcType=VARCHAR},
-            </if>
-            <if test="record.ip != null">
-                ip = #{record.ip,jdbcType=VARCHAR},
-            </if>
             <if test="record.operation != null">
                 operation = #{record.operation,jdbcType=VARCHAR},
             </if>
@@ -212,6 +244,24 @@
             <if test="record.content != null">
                 content = #{record.content,jdbcType=VARCHAR},
             </if>
+            <if test="record.loginIp != null">
+                login_ip = #{record.loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="record.country != null">
+                country = #{record.country,jdbcType=VARCHAR},
+            </if>
+            <if test="record.province != null">
+                province = #{record.province,jdbcType=VARCHAR},
+            </if>
+            <if test="record.city != null">
+                city = #{record.city,jdbcType=VARCHAR},
+            </if>
+            <if test="record.browser != null">
+                browser = #{record.browser,jdbcType=VARCHAR},
+            </if>
+            <if test="record.os != null">
+                os = #{record.os,jdbcType=VARCHAR},
+            </if>
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
@@ -222,12 +272,16 @@
         set id = #{record.id,jdbcType=BIGINT},
         gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
         user_id = #{record.userId,jdbcType=BIGINT},
-        real_name = #{record.realName,jdbcType=VARCHAR},
-        ip = #{record.ip,jdbcType=VARCHAR},
         operation = #{record.operation,jdbcType=VARCHAR},
         method = #{record.method,jdbcType=VARCHAR},
         path = #{record.path,jdbcType=VARCHAR},
-        content = #{record.content,jdbcType=VARCHAR}
+        content = #{record.content,jdbcType=VARCHAR},
+        login_ip = #{record.loginIp,jdbcType=VARCHAR},
+        country = #{record.country,jdbcType=VARCHAR},
+        province = #{record.province,jdbcType=VARCHAR},
+        city = #{record.city,jdbcType=VARCHAR},
+        browser = #{record.browser,jdbcType=VARCHAR},
+        os = #{record.os,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -241,12 +295,6 @@
             <if test="userId != null">
                 user_id = #{userId,jdbcType=BIGINT},
             </if>
-            <if test="realName != null">
-                real_name = #{realName,jdbcType=VARCHAR},
-            </if>
-            <if test="ip != null">
-                ip = #{ip,jdbcType=VARCHAR},
-            </if>
             <if test="operation != null">
                 operation = #{operation,jdbcType=VARCHAR},
             </if>
@@ -259,6 +307,24 @@
             <if test="content != null">
                 content = #{content,jdbcType=VARCHAR},
             </if>
+            <if test="loginIp != null">
+                login_ip = #{loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="country != null">
+                country = #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="browser != null">
+                browser = #{browser,jdbcType=VARCHAR},
+            </if>
+            <if test="os != null">
+                os = #{os,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
@@ -266,12 +332,16 @@
         update sys_log
         set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
             user_id    = #{userId,jdbcType=BIGINT},
-            real_name  = #{realName,jdbcType=VARCHAR},
-            ip         = #{ip,jdbcType=VARCHAR},
             operation  = #{operation,jdbcType=VARCHAR},
             method     = #{method,jdbcType=VARCHAR},
             path       = #{path,jdbcType=VARCHAR},
-            content    = #{content,jdbcType=VARCHAR}
+            content    = #{content,jdbcType=VARCHAR},
+            login_ip   = #{loginIp,jdbcType=VARCHAR},
+            country    = #{country,jdbcType=VARCHAR},
+            province   = #{province,jdbcType=VARCHAR},
+            city       = #{city,jdbcType=VARCHAR},
+            browser    = #{browser,jdbcType=VARCHAR},
+            os         = #{os,jdbcType=VARCHAR}
         where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

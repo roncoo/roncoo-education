@@ -1,6 +1,9 @@
 package com.roncoo.education.system.feign.interfaces.config;
 
 import cn.hutool.core.thread.ExecutorBuilder;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.http.useragent.UserAgent;
+import cn.hutool.http.useragent.UserAgentUtil;
 import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.common.core.tools.IPUtil;
@@ -95,11 +98,15 @@ public class AspectSysLog {
     private FeignSysLogQO getSysLog() {
         FeignSysLogQO qo = new FeignSysLogQO();
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        qo.setIp(IPUtil.getIpAddress(request));
         qo.setPath(request.getServletPath());
         qo.setMethod(request.getMethod());
-        log.warn("qo={}, request={}", JSUtil.toJsonString(qo), JSUtil.toJsonString(request));
+        qo.setLoginIp(IPUtil.getIpAddress(request));
         qo.setUserId(Long.valueOf(request.getHeader(Constants.USER_ID)));
+        UserAgent userAgent = UserAgentUtil.parse(request.getHeader("User-Agent"));
+        if (ObjectUtil.isNotNull(userAgent)) {
+            qo.setBrowser(userAgent.getBrowser().toString());
+            qo.setOs(userAgent.getPlatform().toString());
+        }
         return qo;
     }
 

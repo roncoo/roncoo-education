@@ -11,19 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.constraints.NotNull;
 
 /**
- * 系统配置
+ * 日志接口
  *
  * @author wujing
  * @date 2022-08-25
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/system/sys/config")
+@RequestMapping("/system/sys/log")
 public class FeignSysLogController implements IFeignSysLog {
 
     @NotNull
     private final FeignSysLogBiz biz;
-
 
     @Override
     public int save(@RequestBody FeignSysLogQO qo) {

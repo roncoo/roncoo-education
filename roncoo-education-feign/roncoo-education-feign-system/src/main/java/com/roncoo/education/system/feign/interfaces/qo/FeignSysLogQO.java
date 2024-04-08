@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * 后台操作日志
@@ -22,11 +21,6 @@ public class FeignSysLogQO implements Serializable {
      * 用户ID
      */
     private Long userId;
-
-    /**
-     * IP地址
-     */
-    private String ip;
 
     /**
      * 用户操作
@@ -49,8 +43,18 @@ public class FeignSysLogQO implements Serializable {
     private String content;
 
     /**
-     * 创建时间
+     * IP地址
      */
-    private LocalDateTime gmtCreate;
+    private String loginIp;
+
+    private String country;
+
+    private String province;
+
+    private String city;
+
+    private String browser;
+
+    private String os;
 
 }
