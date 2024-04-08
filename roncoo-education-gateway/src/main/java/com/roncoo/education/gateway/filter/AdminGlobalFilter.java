@@ -39,8 +39,6 @@ public class AdminGlobalFilter implements GlobalFilter, Ordered {
      * admin不需要权限校验的接口
      */
     private static final List<String> EXCLUDE_URL = Arrays.asList(
-            "/system/admin/sys/menu/user/list",
-            "/system/admin/sys/menu/permission/list",
             "/system/admin/sys/user/current"
     );
 
@@ -83,6 +81,8 @@ public class AdminGlobalFilter implements GlobalFilter, Ordered {
         }
 
         Long userId = getUserId(request);
+        request.mutate().header(Constants.USER_ID, String.valueOf(userId));
+        
         if (AuthFilterUtil.checkUri(uri, AuthFilterUtil.ADMIN_URL_PREFIX)) {
             // admin校验
             if (!stringRedisTemplate.hasKey(Constants.RedisPre.ADMIN_APIS.concat(userId.toString()))) {
@@ -96,7 +96,6 @@ public class AdminGlobalFilter implements GlobalFilter, Ordered {
             // 更新时间，使用户菜单不过期
             stringRedisTemplate.expire(Constants.RedisPre.ADMIN_APIS.concat(userId.toString()), Constants.SESSIONTIME, TimeUnit.MINUTES);
         }
-        request.mutate().header(Constants.USER_ID, String.valueOf(userId));
         return chain.filter(exchange);
     }
 

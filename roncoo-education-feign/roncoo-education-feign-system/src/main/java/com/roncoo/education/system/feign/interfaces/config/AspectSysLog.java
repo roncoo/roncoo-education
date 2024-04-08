@@ -96,11 +96,11 @@ public class AspectSysLog {
     private FeignSysLogQO getSysLog() {
         FeignSysLogQO qo = new FeignSysLogQO();
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        log.warn("request={}", JSUtil.toJsonString(request));
-        qo.setUserId(Long.valueOf(request.getHeader(Constants.USER_ID)));
         qo.setIp(IPUtil.getIpAddress(request));
         qo.setPath(request.getServletPath());
         qo.setMethod(request.getMethod());
+        log.warn("qo={}, request={}", JSUtil.toJsonString(qo), JSUtil.toJsonString(request));
+        qo.setUserId(Long.valueOf(request.getHeader(Constants.USER_ID)));
         return qo;
     }
 
