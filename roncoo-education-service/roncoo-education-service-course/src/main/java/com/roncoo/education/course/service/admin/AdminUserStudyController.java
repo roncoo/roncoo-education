@@ -1,5 +1,7 @@
 package com.roncoo.education.course.service.admin;
 
+import com.roncoo.education.common.annotation.SysLog;
+import com.roncoo.education.common.annotation.SysLogCache;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.service.admin.biz.AdminUserStudyBiz;
@@ -33,12 +35,14 @@ public class AdminUserStudyController {
     private final AdminUserStudyBiz biz;
 
     @ApiOperation(value = "课程用户学习日志分页", notes = "课程用户学习日志分页")
+    @SysLog(value = "课程用户学习日志分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminUserStudyPageResp>> page(@RequestBody AdminUserStudyPageReq req) {
         return biz.page(req);
     }
 
     @ApiOperation(value = "课程用户学习日志添加", notes = "课程用户学习日志添加")
+    @SysLog(value = "课程用户学习日志添加")
     @PostMapping(value = "/save")
     public Result<String> save(@RequestBody @Valid AdminUserStudySaveReq req) {
         return biz.save(req);
@@ -46,12 +50,14 @@ public class AdminUserStudyController {
 
     @ApiOperation(value = "课程用户学习日志查看", notes = "课程用户学习日志查看")
     @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
+    @SysLogCache
     @GetMapping(value = "/view")
     public Result<AdminUserStudyViewResp> view(@RequestParam Long id) {
         return biz.view(id);
     }
 
     @ApiOperation(value = "课程用户学习日志修改", notes = "课程用户学习日志修改")
+    @SysLog(value = "课程用户学习日志修改")
     @PutMapping(value = "/edit")
     public Result<String> edit(@RequestBody @Valid AdminUserStudyEditReq req) {
         return biz.edit(req);
@@ -59,6 +65,7 @@ public class AdminUserStudyController {
 
     @ApiOperation(value = "课程用户学习日志删除", notes = "课程用户学习日志删除")
     @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
+    @SysLog(value = "课程用户学习日志删除")
     @DeleteMapping(value = "/delete")
     public Result<String> delete(@RequestParam Long id) {
         return biz.delete(id);
@@ -66,6 +73,7 @@ public class AdminUserStudyController {
 
     @ApiOperation(value = "课程用户学习统计", notes = "课程用户学习统计")
     @ApiImplicitParam(name = "userId", value = "用户ID", dataTypeClass = Long.class, paramType = "query", required = false)
+    @SysLog(value = "课程用户学习统计")
     @GetMapping(value = "/stat")
     public Result<AdminUserStudyStatResp> stat(@RequestParam Long userId) {
         return biz.stat(userId);

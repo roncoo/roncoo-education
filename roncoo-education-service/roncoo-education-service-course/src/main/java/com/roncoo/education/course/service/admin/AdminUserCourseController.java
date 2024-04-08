@@ -1,5 +1,7 @@
 package com.roncoo.education.course.service.admin;
 
+import com.roncoo.education.common.annotation.SysLog;
+import com.roncoo.education.common.annotation.SysLogCache;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.service.admin.biz.AdminUserCourseBiz;
@@ -34,18 +36,21 @@ public class AdminUserCourseController {
     private final AdminUserCourseBiz biz;
 
     @ApiOperation(value = "课程用户关联表分页", notes = "课程用户关联表分页")
-    @PostMapping(value = "/record")
-    public Result<Page<AdminUserCourseRecordResp>> record(@RequestBody AdminUserCourseRecordReq req) {
-        return biz.record(req);
-    }
-
-    @ApiOperation(value = "课程用户关联表分页", notes = "课程用户关联表分页")
+    @SysLog(value = "课程用户关联表分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminUserCoursePageResp>> page(@RequestBody AdminUserCoursePageReq req) {
         return biz.page(req);
     }
 
+    @ApiOperation(value = "课程用户关联表记录", notes = "课程用户关联表记录")
+    @SysLog(value = "课程用户关联表记录")
+    @PostMapping(value = "/record")
+    public Result<Page<AdminUserCourseRecordResp>> record(@RequestBody AdminUserCourseRecordReq req) {
+        return biz.record(req);
+    }
+
     @ApiOperation(value = "课程用户关联表添加", notes = "课程用户关联表添加")
+    @SysLog(value = "课程用户关联表添加")
     @PostMapping(value = "/save")
     public Result<String> save(@RequestBody @Valid AdminUserCourseSaveReq req) {
         return biz.save(req);
@@ -53,12 +58,14 @@ public class AdminUserCourseController {
 
     @ApiOperation(value = "课程用户关联表查看", notes = "课程用户关联表查看")
     @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
+    @SysLogCache
     @GetMapping(value = "/view")
     public Result<AdminUserCourseViewResp> view(@RequestParam Long id) {
         return biz.view(id);
     }
 
     @ApiOperation(value = "课程用户关联表修改", notes = "课程用户关联表修改")
+    @SysLog(value = "课程用户关联表修改")
     @PutMapping(value = "/edit")
     public Result<String> edit(@RequestBody @Valid AdminUserCourseEditReq req) {
         return biz.edit(req);
@@ -66,6 +73,7 @@ public class AdminUserCourseController {
 
     @ApiOperation(value = "课程用户关联表删除", notes = "课程用户关联表删除")
     @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
+    @SysLog(value = "课程用户关联表删除")
     @DeleteMapping(value = "/delete")
     public Result<String> delete(@RequestParam Long id) {
         return biz.delete(id);

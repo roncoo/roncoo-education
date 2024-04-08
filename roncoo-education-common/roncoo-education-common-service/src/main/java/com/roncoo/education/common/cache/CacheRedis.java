@@ -74,5 +74,8 @@ public class CacheRedis {
         stringRedisTemplate.delete(key);
     }
 
+    public boolean hasKey(Object key) {
+        return null != key && stringRedisTemplate.hasKey(String.valueOf(key));
+    }
 
 }
