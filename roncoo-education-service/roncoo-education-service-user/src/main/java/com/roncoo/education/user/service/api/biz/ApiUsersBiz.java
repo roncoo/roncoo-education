@@ -161,13 +161,19 @@ public class ApiUsersBiz extends BaseBiz {
     private void log(Long userId, LoginStatusEnum status, LogLogin record) {
         record.setUserId(userId);
         record.setLoginStatus(status.getCode());
-        if (!StringUtils.hasText(record.getLoginIp())) {
-            IPUtil.IpInfo ipInfo = IPUtil.getIpInfo(ServletUtil.getClientIP(request));
-            if (ObjectUtil.isNotNull(ipInfo)) {
-                record.setLoginIp(ipInfo.getIp());
-                record.setProvince(ipInfo.getPro());
-                record.setCity(ipInfo.getCity());
+        record.setLoginIp(ServletUtil.getClientIP(request));
+
+        IPUtil.IpInfo ipInfo = cacheRedis.get(record.getLoginIp(), IPUtil.IpInfo.class);
+        if (ipInfo == null) {
+            ipInfo = IPUtil.getIpInfo(ServletUtil.getClientIP(request));
+            if (ipInfo != null) {
+                cacheRedis.set(record.getLoginIp(), ipInfo, 1, TimeUnit.DAYS);
             }
+        }
+
+        if (ObjectUtil.isNotNull(ipInfo)) {
+            record.setProvince(ipInfo.getPro());
+            record.setCity(ipInfo.getCity());
         }
         logLoginDao.save(record);
     }

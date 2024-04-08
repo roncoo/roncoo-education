@@ -1,6 +1,7 @@
 package com.roncoo.education.common.core.tools;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.servlet.ServletUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
 import lombok.AccessLevel;
@@ -18,8 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class IPUtil {
-    private static final String UNKNOWN = "unknown";
-    private static final String COMMA = ",";
 
     /**
      * 获取请求IP
@@ -28,32 +27,7 @@ public final class IPUtil {
      * @return 访问IP地址
      */
     public static String getIpAddress(HttpServletRequest request) {
-        String ip = request.getHeader("x-forwarded-for");
-        if (ip != null && !ip.isEmpty() && !UNKNOWN.equalsIgnoreCase(ip)) {
-            // 多次反向代理后会有多个ip值，第一个ip才是真实ip
-            if (ip.contains(COMMA)) {
-                ip = ip.split(",")[0];
-            }
-        }
-        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("Proxy-Client-IP");
-        }
-        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("HTTP_CLIENT_IP");
-        }
-        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-        }
-        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("X-Real-IP");
-        }
-        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getRemoteAddr();
-        }
-        return ip;
+        return ServletUtil.getClientIP(request);
     }
 
 

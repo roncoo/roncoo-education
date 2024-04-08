@@ -1,5 +1,6 @@
 package com.roncoo.education.system.feign.biz;
 
+import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.IPUtil;
 import com.roncoo.education.common.service.BaseBiz;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 系统配置
@@ -24,9 +26,19 @@ public class FeignSysLogBiz extends BaseBiz {
     @NotNull
     private final SysLogDao dao;
 
+    @NotNull
+    private final CacheRedis cacheRedis;
+
     public int save(FeignSysLogQO qo) {
         if (StringUtils.hasText(qo.getLoginIp())) {
-            IPUtil.IpInfo ipInfo = IPUtil.getIpInfo(qo.getLoginIp());
+            IPUtil.IpInfo ipInfo = cacheRedis.get(qo.getLoginIp(), IPUtil.IpInfo.class);
+            if (ipInfo == null) {
+                ipInfo = IPUtil.getIpInfo(qo.getLoginIp());
+                if (ipInfo != null) {
+                    cacheRedis.set(qo.getLoginIp(), ipInfo, 1, TimeUnit.DAYS);
+                }
+            }
+
             if (ipInfo != null) {
                 qo.setProvince(ipInfo.getPro());
                 qo.setCity(ipInfo.getCity());
