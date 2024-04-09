@@ -5,10 +5,12 @@ import com.roncoo.education.system.service.api.biz.ApiWebsiteNavBiz;
 import com.roncoo.education.system.service.api.resp.ApiWebsiteNavResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -18,6 +20,7 @@ import java.util.List;
  */
 @Api(tags = "api-站点信息")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "/system/api/website/nav")
 public class ApiWebsiteNavController {
 

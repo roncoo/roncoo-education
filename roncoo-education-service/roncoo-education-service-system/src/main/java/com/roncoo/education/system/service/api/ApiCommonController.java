@@ -11,9 +11,11 @@ import com.roncoo.education.system.service.api.req.ApiEnumReq;
 import com.roncoo.education.system.service.api.resp.ApiVerCodeResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -25,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Api(tags = "api-枚举接口")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "/system/api/common")
 public class ApiCommonController {
 

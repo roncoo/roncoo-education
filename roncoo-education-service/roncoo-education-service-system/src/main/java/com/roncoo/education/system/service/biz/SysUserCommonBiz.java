@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,12 +29,15 @@ import java.util.stream.Collectors;
  * @author wuyun
  */
 @Slf4j
-@RequiredArgsConstructor
 @Component
+@RequiredArgsConstructor
 public class SysUserCommonBiz {
 
+    @NotNull
     private final SysRoleUserDao sysRoleUserDao;
+    @NotNull
     private final SysMenuRoleDao sysMenuRoleDao;
+    @NotNull
     private final SysMenuDao sysMenuDao;
 
     public List<SysMenu> listMenu(Long userId) {
@@ -65,6 +69,7 @@ public class SysUserCommonBiz {
 
     /**
      * 获取菜单
+     *
      * @param menuList
      * @return
      */

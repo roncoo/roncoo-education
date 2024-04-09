@@ -11,11 +11,13 @@ import com.roncoo.education.common.core.tools.FileUtils;
 import com.roncoo.education.common.upload.Upload;
 import com.roncoo.education.common.upload.UploadFace;
 import com.roncoo.education.system.service.biz.resp.UploadDocResp;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 /**
@@ -25,6 +27,7 @@ import java.util.Map;
  */
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class UploadCommonBiz {
 
     @NotNull
