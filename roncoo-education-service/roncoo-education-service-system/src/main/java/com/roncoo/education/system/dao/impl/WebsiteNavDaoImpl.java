@@ -7,7 +7,6 @@ import com.roncoo.education.system.dao.WebsiteNavDao;
 import com.roncoo.education.system.dao.impl.mapper.WebsiteNavMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNav;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavExample;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,8 +14,8 @@ import java.util.List;
 @Repository
 public class WebsiteNavDaoImpl implements WebsiteNavDao {
 
-    @Autowired
-    private WebsiteNavMapper websiteNavMapper;
+    @NotNull
+    private final WebsiteNavMapper websiteNavMapper;
 
     @Override
     public int save(WebsiteNav record) {

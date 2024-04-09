@@ -7,7 +7,6 @@ import com.roncoo.education.system.dao.WebsiteLinkDao;
 import com.roncoo.education.system.dao.impl.mapper.WebsiteLinkMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,8 +14,8 @@ import java.util.List;
 @Repository
 public class WebsiteLinkDaoImpl implements WebsiteLinkDao {
 
-    @Autowired
-    private WebsiteLinkMapper websiteLinkMapper;
+    @NotNull
+    private final WebsiteLinkMapper websiteLinkMapper;
 
     @Override
     public int save(WebsiteLink record) {

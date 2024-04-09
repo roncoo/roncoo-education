@@ -10,11 +10,13 @@ import com.roncoo.education.system.service.admin.resp.AdminSysRolePageResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysRoleViewResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * 角色信息
@@ -23,11 +25,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "admin-角色接口")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "/system/admin/sys/role")
 public class AdminSysRoleController {
 
-    @Autowired
-    private AdminSysRoleBiz biz;
+    @NotNull
+    private final AdminSysRoleBiz biz;
 
     /**
      * 角色分页列表接口

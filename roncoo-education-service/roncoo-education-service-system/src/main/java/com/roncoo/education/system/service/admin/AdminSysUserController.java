@@ -11,8 +11,10 @@ import com.roncoo.education.system.service.admin.resp.AdminSysUserPageResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserViewResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * 后台用户信息
@@ -21,11 +23,12 @@ import org.springframework.web.bind.annotation.*;
  */
 @Api(tags = "admin-用户接口")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "/system/admin/sys/user")
 public class AdminSysUserController {
 
-    @Autowired
-    private AdminSysUserBiz biz;
+    @NotNull
+    private final AdminSysUserBiz biz;
 
     /**
      * 后台管理员分页列表接口

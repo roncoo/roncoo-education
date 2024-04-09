@@ -7,12 +7,13 @@ import com.roncoo.education.system.service.admin.req.AdminSysRoleUserListReq;
 import com.roncoo.education.system.service.admin.req.AdminSysRoleUserSaveReq;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -22,11 +23,12 @@ import java.util.List;
  */
 @Api(tags = "admin-角色用户接口")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "/system/admin/sys/role/user")
 public class AdminSysRoleUserController {
 
-    @Autowired
-    private AdminSysRoleUserBiz biz;
+    @NotNull
+    private final AdminSysRoleUserBiz biz;
 
     /**
      * 列出角色用户关联信息接口

@@ -6,11 +6,13 @@ import com.roncoo.education.user.service.admin.resp.AdminStatDataResp;
 import com.roncoo.education.user.service.admin.resp.AdminStatLoginResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * 点播直播统计
@@ -19,11 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "admin-用户登录统计")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/user/admin/stat")
 public class AdminStatController {
 
-    @Autowired
-    private AdminStatBiz biz;
+    @NotNull
+    private final AdminStatBiz biz;
 
     @ApiOperation(value = "登录统计", notes = "登录统计")
     @GetMapping(value = "/login")

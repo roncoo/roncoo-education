@@ -27,7 +27,6 @@ import com.roncoo.education.course.service.admin.resp.AdminVodConfigResp;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -58,8 +57,8 @@ public class AdminResourceBiz extends BaseBiz {
     @NotNull
     private final IFeignSysConfig feignSysConfig;
 
-    @Autowired
-    private HttpServletRequest request;
+    @NotNull
+    private final HttpServletRequest request;
 
     public Result<AdminVodConfigResp> getVodConfig() {
         AdminVodConfigResp resp = new AdminVodConfigResp();

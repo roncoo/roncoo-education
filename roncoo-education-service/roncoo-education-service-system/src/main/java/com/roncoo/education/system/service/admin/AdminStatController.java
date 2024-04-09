@@ -5,10 +5,12 @@ import com.roncoo.education.common.video.resp.InfoResp;
 import com.roncoo.education.system.service.admin.biz.AdminStatBiz;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * 点播直播统计
@@ -17,11 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(value = "admin-点播直播统计")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/system/admin/stat")
 public class AdminStatController {
 
-    @Autowired
-    private AdminStatBiz biz;
+    @NotNull
+    private final AdminStatBiz biz;
 
     @ApiOperation(value = "点播统计", notes = "点播空间和流量的统计")
     @GetMapping(value = "/vod")

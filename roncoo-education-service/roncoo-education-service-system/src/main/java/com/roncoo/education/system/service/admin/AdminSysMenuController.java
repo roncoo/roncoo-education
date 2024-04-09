@@ -9,12 +9,13 @@ import com.roncoo.education.system.service.admin.resp.AdminSysMenuResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuViewResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -24,11 +25,12 @@ import java.util.List;
  */
 @Api(tags = "admin-菜单接口")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "/system/admin/sys/menu")
 public class AdminSysMenuController {
 
-    @Autowired
-    private AdminSysMenuBiz biz;
+    @NotNull
+    private final AdminSysMenuBiz biz;
 
     /**
      * 菜单信息列出信息接口

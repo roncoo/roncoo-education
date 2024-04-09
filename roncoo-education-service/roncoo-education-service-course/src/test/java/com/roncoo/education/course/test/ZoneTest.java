@@ -6,14 +6,14 @@ import com.roncoo.education.course.service.api.biz.ApiZoneBiz;
 import com.roncoo.education.course.service.api.resp.ApiZoneResp;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Slf4j
 public class ZoneTest extends BaseTest {
 
-    @Autowired
+    @Resource
     private ApiZoneBiz apiZoneBiz;
 
     @Test

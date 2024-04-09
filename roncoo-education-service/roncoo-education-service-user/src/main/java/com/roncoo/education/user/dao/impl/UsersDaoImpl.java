@@ -8,15 +8,14 @@ import com.roncoo.education.user.dao.UsersDao;
 import com.roncoo.education.user.dao.impl.mapper.UsersMapper;
 import com.roncoo.education.user.dao.impl.mapper.entity.Users;
 import com.roncoo.education.user.dao.impl.mapper.entity.UsersExample;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public class UsersDaoImpl extends AbstractBaseJdbc implements UsersDao {
-    @Autowired
-    private UsersMapper usersMapper;
+    @NotNull
+    private final UsersMapper usersMapper;
 
     @Override
     public int save(Users record) {

@@ -12,7 +12,6 @@ import com.roncoo.education.system.service.api.resp.ApiVerCodeResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -29,8 +28,8 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping(value = "/system/api/common")
 public class ApiCommonController {
 
-    @Autowired
-    private CacheRedis cacheRedis;
+    @NotNull
+    private final CacheRedis cacheRedis;
 
     private static final String DEFAULT_ENUM_NAME = "name";
     private static final String DEFAULT_PREFIX = "com.roncoo.education.common.core.enums.";

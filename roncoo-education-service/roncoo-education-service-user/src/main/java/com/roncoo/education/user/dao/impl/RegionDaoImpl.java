@@ -7,15 +7,14 @@ import com.roncoo.education.user.dao.RegionDao;
 import com.roncoo.education.user.dao.impl.mapper.RegionMapper;
 import com.roncoo.education.user.dao.impl.mapper.entity.Region;
 import com.roncoo.education.user.dao.impl.mapper.entity.RegionExample;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public class RegionDaoImpl implements RegionDao {
-    @Autowired
-    private RegionMapper regionMapper;
+    @NotNull
+    private final RegionMapper regionMapper;
 
     @Override
     public int save(Region record) {

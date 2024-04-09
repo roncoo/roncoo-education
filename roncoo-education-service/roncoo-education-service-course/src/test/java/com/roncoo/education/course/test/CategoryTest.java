@@ -6,14 +6,14 @@ import com.roncoo.education.course.service.api.biz.ApiCategoryBiz;
 import com.roncoo.education.course.service.api.resp.ApiCategoryResp;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Slf4j
 public class CategoryTest extends BaseTest {
 
-    @Autowired
+    @Resource
     private ApiCategoryBiz apiCategoryBiz;
 
     @Test

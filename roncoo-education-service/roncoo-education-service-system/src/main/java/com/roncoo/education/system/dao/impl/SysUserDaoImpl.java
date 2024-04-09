@@ -7,15 +7,14 @@ import com.roncoo.education.system.dao.SysUserDao;
 import com.roncoo.education.system.dao.impl.mapper.SysUserMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUser;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUserExample;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public class SysUserDaoImpl implements SysUserDao {
-    @Autowired
-    private SysUserMapper sysUserMapper;
+    @NotNull
+    private final SysUserMapper sysUserMapper;
 
     @Override
     public int save(SysUser record) {

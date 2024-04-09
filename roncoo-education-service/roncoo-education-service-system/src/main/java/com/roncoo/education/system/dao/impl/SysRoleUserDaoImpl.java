@@ -7,15 +7,14 @@ import com.roncoo.education.system.dao.SysRoleUserDao;
 import com.roncoo.education.system.dao.impl.mapper.SysRoleUserMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUserExample;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public class SysRoleUserDaoImpl implements SysRoleUserDao {
-    @Autowired
-    private SysRoleUserMapper sysRoleUserMapper;
+    @NotNull
+    private final SysRoleUserMapper sysRoleUserMapper;
 
     @Override
     public int save(SysRoleUser record) {

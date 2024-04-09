@@ -7,15 +7,14 @@ import com.roncoo.education.system.dao.SysMenuRoleDao;
 import com.roncoo.education.system.dao.impl.mapper.SysMenuRoleMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuRole;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuRoleExample;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public class SysMenuRoleDaoImpl implements SysMenuRoleDao {
-    @Autowired
-    private SysMenuRoleMapper sysMenuRoleMapper;
+    @NotNull
+    private final SysMenuRoleMapper sysMenuRoleMapper;
 
     @Override
     public int save(SysMenuRole record) {

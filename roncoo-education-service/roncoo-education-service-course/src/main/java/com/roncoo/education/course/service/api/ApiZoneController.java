@@ -6,11 +6,12 @@ import com.roncoo.education.course.service.api.biz.ApiZoneBiz;
 import com.roncoo.education.course.service.api.resp.ApiZoneResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -20,11 +21,12 @@ import java.util.List;
  */
 @Api(tags = "api-分区")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "/course/api/zone")
 public class ApiZoneController extends BaseController {
 
-    @Autowired
-    private ApiZoneBiz biz;
+    @NotNull
+    private final ApiZoneBiz biz;
 
     /**
      * 专区课程分页列表接口

@@ -7,15 +7,14 @@ import com.roncoo.education.user.dao.LecturerDao;
 import com.roncoo.education.user.dao.impl.mapper.LecturerMapper;
 import com.roncoo.education.user.dao.impl.mapper.entity.Lecturer;
 import com.roncoo.education.user.dao.impl.mapper.entity.LecturerExample;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public class LecturerDaoImpl implements LecturerDao {
-    @Autowired
-    private LecturerMapper lecturerMapper;
+    @NotNull
+    private final LecturerMapper lecturerMapper;
 
     @Override
     public int save(Lecturer record) {

@@ -6,9 +6,11 @@ import com.roncoo.education.common.video.VodUtil;
 import com.roncoo.education.common.video.resp.InfoResp;
 import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
 import com.roncoo.education.system.service.biz.SysConfigCommonBiz;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * 点播直播统计
@@ -17,10 +19,11 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class AdminStatBiz extends BaseBiz {
 
-    @Autowired
-    private SysConfigCommonBiz sysConfigCommonBiz;
+    @NotNull
+    private final SysConfigCommonBiz sysConfigCommonBiz;
 
     public Result<InfoResp> vod() {
         VodConfig vodConfig = sysConfigCommonBiz.getSysConfig(VodConfig.class);

@@ -10,14 +10,15 @@ import com.roncoo.education.course.dao.impl.mapper.entity.Course;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseExample;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,12 +29,13 @@ import java.util.List;
  */
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class CourseJob {
 
-    @Autowired
-    private ElasticsearchRestTemplate elasticsearchRestTemplate;
-    @Autowired
-    private CourseDao courseDao;
+    @NotNull
+    private final ElasticsearchRestTemplate elasticsearchRestTemplate;
+    @NotNull
+    private final CourseDao courseDao;
 
     /**
      * 建议：每天凌晨5点执行一次

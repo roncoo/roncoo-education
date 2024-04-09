@@ -6,10 +6,11 @@ import com.roncoo.education.system.dao.SysMenuRoleDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuRole;
 import com.roncoo.education.system.service.admin.req.AdminSysMenuRoleListReq;
 import com.roncoo.education.system.service.admin.req.AdminSysMenuRoleSaveReq;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,10 +20,11 @@ import java.util.List;
  * @author wujing
  */
 @Component
+@RequiredArgsConstructor
 public class AdminSysMenuRoleBiz {
 
-    @Autowired
-    private SysMenuRoleDao dao;
+    @NotNull
+    private final SysMenuRoleDao dao;
 
     /**
      * 列出菜单角色关联信息接口

@@ -7,15 +7,14 @@ import com.roncoo.education.system.dao.SysMenuDao;
 import com.roncoo.education.system.dao.impl.mapper.SysMenuMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenu;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuExample;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public class SysMenuDaoImpl implements SysMenuDao {
-    @Autowired
-    private SysMenuMapper sysMenuMapper;
+    @NotNull
+    private final SysMenuMapper sysMenuMapper;
 
     @Override
     public int save(SysMenu record) {

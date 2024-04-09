@@ -23,12 +23,13 @@ import com.roncoo.education.system.service.admin.resp.AdminSysMenuUserResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserPageResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserViewResp;
 import com.roncoo.education.system.service.biz.SysUserCommonBiz;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,18 +43,19 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class AdminSysUserBiz {
 
-    @Autowired
-    private SysUserDao dao;
-    @Autowired
-    private SysRoleUserDao sysRoleUserDao;
-    @Autowired
-    private SysRoleDao sysRoleDao;
-    @Autowired
-    private SysUserCommonBiz sysUserCommonBiz;
-    @Autowired
-    private CacheRedis cacheRedis;
+    @NotNull
+    private final SysUserDao dao;
+    @NotNull
+    private final SysRoleUserDao sysRoleUserDao;
+    @NotNull
+    private final SysRoleDao sysRoleDao;
+    @NotNull
+    private final SysUserCommonBiz sysUserCommonBiz;
+    @NotNull
+    private final CacheRedis cacheRedis;
 
     public Result<Page<AdminSysUserPageResp>> listForPage(AdminSysUserPageReq req) {
         SysUserExample example = new SysUserExample();

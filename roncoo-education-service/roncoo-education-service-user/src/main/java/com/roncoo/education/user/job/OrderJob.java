@@ -8,10 +8,11 @@ import com.roncoo.education.user.dao.impl.mapper.entity.OrderInfo;
 import com.roncoo.education.user.dao.impl.mapper.entity.OrderInfoExample;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,12 +21,13 @@ import java.util.List;
  */
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class OrderJob {
 
-    @Autowired
-    private OrderInfoDao orderInfoDao;
-    @Autowired
-    private OrderPayDao orderPayDao;
+    @NotNull
+    private final OrderInfoDao orderInfoDao;
+    @NotNull
+    private final OrderPayDao orderPayDao;
 
     /**
      * 每10秒执行一次

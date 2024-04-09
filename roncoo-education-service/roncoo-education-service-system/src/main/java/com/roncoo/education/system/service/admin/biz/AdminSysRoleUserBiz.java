@@ -7,10 +7,11 @@ import com.roncoo.education.system.dao.SysRoleUserDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser;
 import com.roncoo.education.system.service.admin.req.AdminSysRoleUserListReq;
 import com.roncoo.education.system.service.admin.req.AdminSysRoleUserSaveReq;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,12 +22,13 @@ import java.util.stream.Collectors;
  * @author wujing
  */
 @Component
+@RequiredArgsConstructor
 public class AdminSysRoleUserBiz {
 
-    @Autowired
-    private SysRoleUserDao dao;
-    @Autowired
-    private SysRoleDao sysRoleDao;
+    @NotNull
+    private final SysRoleUserDao dao;
+    @NotNull
+    private final SysRoleDao sysRoleDao;
 
     public Result<List<Long>> list(AdminSysRoleUserListReq req) {
         if (req.getUserId() == null) {

@@ -8,7 +8,8 @@ import cn.hutool.crypto.digest.DigestUtil;
 import com.roncoo.education.user.dao.UsersDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.Users;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 
 /**
  * 用户注册
@@ -18,7 +19,7 @@ public class UserTest extends BaseTest {
     private static final String MOBILE = "18812345678";
     private static final String PASSWORD = "123456";
 
-    @Autowired
+    @Resource
     private UsersDao usersDao;
 
     @Test

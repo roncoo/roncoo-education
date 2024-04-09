@@ -12,7 +12,6 @@ import com.roncoo.education.common.upload.Upload;
 import com.roncoo.education.common.upload.UploadFace;
 import com.roncoo.education.system.service.biz.resp.UploadDocResp;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,11 +27,11 @@ import java.util.Map;
 @Component
 public class UploadCommonBiz {
 
-    @Autowired
-    private Map<String, UploadFace> uploadFaceMap;
+    @NotNull
+    private final Map<String, UploadFace> uploadFaceMap;
 
-    @Autowired
-    private SysConfigCommonBiz sysConfigCommonBiz;
+    @NotNull
+    private final SysConfigCommonBiz sysConfigCommonBiz;
 
     public Result<String> uploadPic(MultipartFile picFile) {
         if (!FileUtils.isPic(picFile)) {

@@ -5,11 +5,12 @@ import com.roncoo.education.course.service.api.biz.ApiCategoryBiz;
 import com.roncoo.education.course.service.api.resp.ApiCategoryResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -19,11 +20,12 @@ import java.util.List;
  */
 @Api(tags = "api-分类")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "/course/api/category")
 public class ApiCategoryController {
 
-    @Autowired
-    private ApiCategoryBiz biz;
+    @NotNull
+    private final ApiCategoryBiz biz;
 
     /**
      * 普通课程分类列表接口

@@ -7,11 +7,13 @@ import com.roncoo.education.system.service.admin.req.AdminSysLogPageReq;
 import com.roncoo.education.system.service.admin.resp.AdminSysLogPageResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * 后台操作日志表
@@ -20,11 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(value = "admin-日志")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "/system/admin/sys/log")
 public class AdminSysLogController {
 
-    @Autowired
-    private AdminSysLogBiz biz;
+    @NotNull
+    private final AdminSysLogBiz biz;
 
     /**
      * 后台操作日志分页列表接口

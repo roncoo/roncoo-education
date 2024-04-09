@@ -6,7 +6,6 @@ import com.roncoo.education.system.service.biz.UploadCommonBiz;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,8 +24,8 @@ import java.io.File;
 @RequestMapping(value = "/system/auth/upload")
 public class AuthUploadController extends BaseController {
 
-    @Autowired
-    private UploadCommonBiz biz;
+    @NotNull
+    private final UploadCommonBiz biz;
 
     @ApiOperation(value = "上传图片", notes = "服务端上传图片接口，只支持图片格式")
     @ApiImplicitParam(name = "picFile", value = "图片文件", dataType = "File", dataTypeClass = File.class, paramType = "query", required = true)

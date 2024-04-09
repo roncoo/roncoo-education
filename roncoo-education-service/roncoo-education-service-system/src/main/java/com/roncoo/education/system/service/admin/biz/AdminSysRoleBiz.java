@@ -14,10 +14,12 @@ import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleExample.Criteri
 import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminSysRolePageResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysRoleViewResp;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * 角色信息
@@ -25,13 +27,14 @@ import org.springframework.util.StringUtils;
  * @author wujing
  */
 @Component
+@RequiredArgsConstructor
 public class AdminSysRoleBiz {
 
-    @Autowired
-    private SysRoleDao dao;
+    @NotNull
+    private final SysRoleDao dao;
 
-    @Autowired
-    private SysMenuRoleDao sysMenuRoleDao;
+    @NotNull
+    private final SysMenuRoleDao sysMenuRoleDao;
 
     public Result<Page<AdminSysRolePageResp>> listForPage(AdminSysRolePageReq req) {
         SysRoleExample example = new SysRoleExample();

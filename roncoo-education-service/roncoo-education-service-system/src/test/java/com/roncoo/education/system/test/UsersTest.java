@@ -3,11 +3,12 @@ package com.roncoo.education.system.test;
 import com.roncoo.education.system.service.admin.biz.AdminSysUserBiz;
 import com.roncoo.education.system.service.admin.req.AdminSysUserSaveReq;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 
 public class UsersTest extends BaseTest {
 
-    @Autowired
+    @Resource
     private AdminSysUserBiz adminSysUserBiz;
 
     @Test

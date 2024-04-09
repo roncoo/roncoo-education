@@ -8,11 +8,12 @@ import com.roncoo.education.common.core.tools.JSUtil;
 import com.roncoo.education.user.service.admin.biz.AdminStatBiz;
 import com.roncoo.education.user.service.admin.resp.AdminStatLoginResp;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 
 public class StatTest extends BaseTest {
 
-    @Autowired
+    @Resource
     private AdminStatBiz adminStatBiz;
 
     @Test

@@ -11,10 +11,11 @@ import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -26,14 +27,15 @@ import java.util.List;
  */
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class ResourceJob {
 
-    @Autowired
-    private ResourceDao resourceDao;
-    @Autowired
-    private IFeignSysConfig feignSysConfig;
-    @Autowired
-    private VodCommonBiz vodCommonBiz;
+    @NotNull
+    private final ResourceDao resourceDao;
+    @NotNull
+    private final IFeignSysConfig feignSysConfig;
+    @NotNull
+    private final VodCommonBiz vodCommonBiz;
 
     /**
      * 建议：每10分执行一次

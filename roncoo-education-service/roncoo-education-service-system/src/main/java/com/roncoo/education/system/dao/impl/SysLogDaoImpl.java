@@ -7,13 +7,12 @@ import com.roncoo.education.system.dao.SysLogDao;
 import com.roncoo.education.system.dao.impl.mapper.SysLogMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysLog;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysLogExample;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class SysLogDaoImpl implements SysLogDao {
-    @Autowired
-    private SysLogMapper sysLogMapper;
+    @NotNull
+    private final SysLogMapper sysLogMapper;
 
     @Override
     public int save(SysLog record) {

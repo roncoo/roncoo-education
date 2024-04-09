@@ -11,10 +11,11 @@ import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuExample;
 import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuViewResp;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,10 +25,11 @@ import java.util.stream.Collectors;
  * @author wujing
  */
 @Component
+@RequiredArgsConstructor
 public class AdminSysMenuBiz {
 
-    @Autowired
-    private SysMenuDao dao;
+    @NotNull
+    private final SysMenuDao dao;
 
     public Result<List<AdminSysMenuResp>> list(AdminSysMenuListReq req) {
         SysMenuExample example = new SysMenuExample();

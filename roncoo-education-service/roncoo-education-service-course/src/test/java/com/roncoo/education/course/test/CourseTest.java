@@ -9,15 +9,16 @@ import com.roncoo.education.course.service.biz.req.CourseReq;
 import com.roncoo.education.course.service.biz.resp.CourseResp;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 
 @Slf4j
 public class CourseTest extends BaseTest {
 
-    @Autowired
+    @Resource
     private ApiCourseBiz courseBiz;
 
-    @Autowired
+    @Resource
     private CourseJob courseJob;
 
     @Test

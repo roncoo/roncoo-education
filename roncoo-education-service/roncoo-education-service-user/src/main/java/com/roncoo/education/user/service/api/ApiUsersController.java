@@ -9,11 +9,13 @@ import com.roncoo.education.user.service.api.req.SendCodeReq;
 import com.roncoo.education.user.service.api.resp.UsersLoginResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * 用户基本信息
@@ -22,11 +24,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "api-用户登录注册")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "/user/api/users")
 public class ApiUsersController {
 
-    @Autowired
-    private ApiUsersBiz biz;
+    @NotNull
+    private final ApiUsersBiz biz;
 
     /**
      * 验证码发送接口(注册验证码 + 重置密码验证码)

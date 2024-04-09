@@ -6,7 +6,6 @@ import com.roncoo.education.system.dao.SysConfigDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfig;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfigExample;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -22,8 +21,8 @@ import java.util.stream.Collectors;
 @Component
 public class SysConfigCommonBiz extends BaseBiz {
 
-    @Autowired
-    private SysConfigDao dao;
+    @NotNull
+    private final SysConfigDao dao;
 
     public <T> T getSysConfig(Class<T> clazz) {
         List<SysConfig> sysConfigs = dao.listByExample(new SysConfigExample());

@@ -5,7 +5,6 @@ import com.roncoo.education.system.service.api.biz.ApiWebsiteNavBiz;
 import com.roncoo.education.system.service.api.resp.ApiWebsiteNavResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,8 +21,8 @@ import java.util.List;
 @RequestMapping(value = "/system/api/website/nav")
 public class ApiWebsiteNavController {
 
-    @Autowired
-    private ApiWebsiteNavBiz biz;
+    @NotNull
+    private final ApiWebsiteNavBiz biz;
 
     /**
      * 头部导航接口
