@@ -5,12 +5,12 @@ package com.roncoo.education.common.jdbc;
 
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.util.Assert;
 
+import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,10 +23,10 @@ import java.util.List;
  */
 public abstract class AbstractBaseJdbc {
 
-    @Autowired
+    @Resource
     protected JdbcTemplate jdbcTemplate;
 
-    @Autowired
+    @Resource
     protected NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     /**
