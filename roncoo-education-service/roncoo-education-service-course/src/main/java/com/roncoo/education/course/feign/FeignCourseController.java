@@ -41,4 +41,9 @@ public class FeignCourseController extends BaseController implements IFeignCours
     public Integer count() {
         return biz.count();
     }
+
+    @Override
+    public List<CourseViewVO> listByLecturerId(@PathVariable(value = "lecturerId") Long lecturerId) {
+        return biz.listByLecturerId(lecturerId);
+    }
 }

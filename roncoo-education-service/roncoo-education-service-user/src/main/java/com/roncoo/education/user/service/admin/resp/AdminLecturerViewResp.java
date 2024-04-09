@@ -40,9 +40,6 @@ public class AdminLecturerViewResp implements Serializable {
     @ApiModelProperty(value = "排序")
     private Integer sort;
 
-    @ApiModelProperty(value = "用户ID")
-    private Long userId;
-
     @ApiModelProperty(value = "讲师名称")
     private String lecturerName;
 

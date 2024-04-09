@@ -38,4 +38,10 @@ public class FeignCourseBiz extends BaseBiz {
     public Integer count() {
         return dao.countByExample(new CourseExample());
     }
+
+    public List<CourseViewVO> listByLecturerId(Long lecturerId) {
+        CourseExample example = new CourseExample();
+        example.createCriteria().andLecturerIdEqualTo(lecturerId);
+        return BeanUtil.copyProperties(dao.listByExample(example), CourseViewVO.class);
+    }
 }

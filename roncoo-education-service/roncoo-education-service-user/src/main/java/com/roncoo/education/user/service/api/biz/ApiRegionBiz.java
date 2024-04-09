@@ -9,11 +9,12 @@ import com.roncoo.education.user.service.api.req.RegionCityIdReq;
 import com.roncoo.education.user.service.api.req.RegionLevelReq;
 import com.roncoo.education.user.service.api.req.RegionProvinceReq;
 import com.roncoo.education.user.service.api.resp.RegionResp;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -22,11 +23,12 @@ import java.util.List;
  * @author wujing
  */
 @Component
+@RequiredArgsConstructor
 @CacheConfig(cacheNames = {"user"})
 public class ApiRegionBiz {
 
-    @Autowired
-    private RegionDao regionDao;
+    @NotNull
+    private final RegionDao regionDao;
 
     @Cacheable
     public Result<List<RegionResp>> listForLevel(RegionLevelReq userRegionLevelBO) {

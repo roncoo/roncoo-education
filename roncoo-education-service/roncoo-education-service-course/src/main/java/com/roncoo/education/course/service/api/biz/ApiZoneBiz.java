@@ -10,11 +10,12 @@ import com.roncoo.education.course.dao.ZoneDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.*;
 import com.roncoo.education.course.service.api.resp.ApiZoneCourseResp;
 import com.roncoo.education.course.service.api.resp.ApiZoneResp;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,15 +23,16 @@ import java.util.stream.Collectors;
  * @author fengyw
  */
 @Component
+@RequiredArgsConstructor
 @CacheConfig(cacheNames = {"course"})
 public class ApiZoneBiz {
 
-    @Autowired
-    private ZoneDao zoneDao;
-    @Autowired
-    private ZoneCourseDao zoneCourseDao;
-    @Autowired
-    private CourseDao courseDao;
+    @NotNull
+    private final ZoneDao zoneDao;
+    @NotNull
+    private final ZoneCourseDao zoneCourseDao;
+    @NotNull
+    private final CourseDao courseDao;
 
     @Cacheable
     public Result<List<ApiZoneResp>> list() {

@@ -6,7 +6,7 @@ import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.system.dao.WebsiteLinkDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink;
 import com.roncoo.education.system.service.api.resp.ApiWebsiteLinkResp;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
@@ -19,11 +19,11 @@ import java.util.List;
  * @author wuyun
  */
 @Component
+@RequiredArgsConstructor
 @CacheConfig(cacheNames = {"system"})
 public class ApiWebsiteLinkBiz {
 
-    @Autowired
-    private WebsiteLinkDao dao;
+    private final WebsiteLinkDao dao;
 
     @Cacheable
     public Result<List<ApiWebsiteLinkResp>> list() {

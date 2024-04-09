@@ -24,7 +24,7 @@ public interface IFeignLecturer {
      * @param id 主键ID
      * @return 讲师信息
      */
-    @GetMapping(value = "/get/{id}")
+    @GetMapping(value = "/getById/{id}")
     LecturerViewVO getById(@PathVariable(value = "id") Long id);
 
     /**

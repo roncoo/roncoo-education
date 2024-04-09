@@ -1,6 +1,7 @@
-package com.roncoo.education.user.service.admin.resp;
+package com.roncoo.education.user.service.api.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.roncoo.education.course.feign.interfaces.vo.CourseViewVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -8,18 +9,19 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
- * ADMIN-讲师信息
+ * API-讲师信息
  * </p>
  *
- * @author wujing
+ * @author fengyw
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-讲师信息分页")
-public class AdminLecturerPageResp implements Serializable {
+@ApiModel(description = "API-讲师信息查看")
+public class LecturerViewResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -51,4 +53,10 @@ public class AdminLecturerPageResp implements Serializable {
 
     @ApiModelProperty(value = "讲师头像")
     private String lecturerHead;
+
+    @ApiModelProperty(value = "简介")
+    private String introduce;
+
+    @ApiModelProperty(value = "课程集合")
+    private List<CourseViewVO> courseViewVO;
 }

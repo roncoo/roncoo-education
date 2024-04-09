@@ -9,11 +9,12 @@ import com.roncoo.education.course.dao.CategoryDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Category;
 import com.roncoo.education.course.dao.impl.mapper.entity.CategoryExample;
 import com.roncoo.education.course.service.api.resp.ApiCategoryResp;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,11 +25,12 @@ import java.util.stream.Collectors;
  * @author wujing
  */
 @Component
+@RequiredArgsConstructor
 @CacheConfig(cacheNames = {"course"})
 public class ApiCategoryBiz {
 
-    @Autowired
-    private CategoryDao dao;
+    @NotNull
+    private final CategoryDao dao;
 
     /**
      * 获取课程分类列表

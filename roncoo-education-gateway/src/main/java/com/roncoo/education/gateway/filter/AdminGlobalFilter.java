@@ -6,7 +6,6 @@ import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.common.core.tools.JWTUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -17,6 +16,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -42,7 +42,7 @@ public class AdminGlobalFilter implements GlobalFilter, Ordered {
             "/system/admin/sys/user/current"
     );
 
-    @Autowired
+    @Resource
     private StringRedisTemplate stringRedisTemplate;
 
     /**
@@ -82,7 +82,7 @@ public class AdminGlobalFilter implements GlobalFilter, Ordered {
 
         Long userId = getUserId(request);
         request.mutate().header(Constants.USER_ID, String.valueOf(userId));
-        
+
         if (AuthFilterUtil.checkUri(uri, AuthFilterUtil.ADMIN_URL_PREFIX)) {
             // admin校验
             if (!stringRedisTemplate.hasKey(Constants.RedisPre.ADMIN_APIS.concat(userId.toString()))) {

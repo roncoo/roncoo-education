@@ -19,8 +19,8 @@ import java.util.regex.Pattern;
  * @author wujing
  */
 @Component
-@CacheConfig(cacheNames = {"system"})
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = {"system"})
 public class ApiSysConfigBiz extends BaseBiz {
 
     @NotNull

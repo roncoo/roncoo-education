@@ -6,7 +6,7 @@ import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.system.dao.WebsiteNavDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNav;
 import com.roncoo.education.system.service.api.resp.ApiWebsiteNavResp;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
@@ -19,11 +19,11 @@ import java.util.List;
  * @author wuyun
  */
 @Component
+@RequiredArgsConstructor
 @CacheConfig(cacheNames = {"system"})
 public class ApiWebsiteNavBiz {
 
-    @Autowired
-    private WebsiteNavDao websiteNavDao;
+    private final WebsiteNavDao websiteNavDao;
 
     @Cacheable
     public Result<List<ApiWebsiteNavResp>> list() {

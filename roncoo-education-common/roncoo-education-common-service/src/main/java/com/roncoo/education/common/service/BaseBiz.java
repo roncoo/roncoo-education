@@ -6,9 +6,9 @@ package com.roncoo.education.common.service;
 import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Base;
 import com.roncoo.education.common.core.tools.IPUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class BaseBiz extends Base {
     public static final String SUCCESS = "success";
     public static final String PASS = "pass";
 
-    @Autowired
+    @Resource
     protected CacheRedis cacheRedis;
 
     protected IPUtil.IpInfo getIpInfo(String ip) {

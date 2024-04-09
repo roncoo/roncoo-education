@@ -24,7 +24,7 @@ public interface IFeignCourse {
      * @param id 主键ID
      * @return 课程信息
      */
-    @GetMapping(value = "/get/{id}")
+    @GetMapping(value = "/getById/{id}")
     CourseViewVO getById(@PathVariable(value = "id") Long id);
 
     @PostMapping(value = "/listByIds")
@@ -32,4 +32,7 @@ public interface IFeignCourse {
 
     @GetMapping(value = "/count")
     Integer count();
+
+    @GetMapping(value = "/listByLecturerId/{lecturerId}")
+    List<CourseViewVO> listByLecturerId(@PathVariable(value = "lecturerId") Long lecturerId);
 }

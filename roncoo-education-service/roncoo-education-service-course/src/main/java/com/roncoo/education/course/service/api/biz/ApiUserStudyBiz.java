@@ -1,7 +1,6 @@
 package com.roncoo.education.course.service.api.biz;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ResourceTypeEnum;
 import com.roncoo.education.common.core.tools.Constants;
@@ -32,8 +31,6 @@ public class ApiUserStudyBiz extends BaseBiz {
     private final UserStudyDao dao;
     @NotNull
     private final ResourceDao resourceDao;
-    @NotNull
-    private final CacheRedis cacheRedis;
 
     public Result<String> study(AuthUserStudyReq req) {
         // 资源信息

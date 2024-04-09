@@ -24,12 +24,13 @@ import com.roncoo.education.user.service.api.req.PasswordReq;
 import com.roncoo.education.user.service.api.req.RegisterReq;
 import com.roncoo.education.user.service.api.req.SendCodeReq;
 import com.roncoo.education.user.service.api.resp.UsersLoginResp;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.concurrent.TimeUnit;
 
@@ -39,20 +40,21 @@ import java.util.concurrent.TimeUnit;
  * @author wujing
  */
 @Component
+@RequiredArgsConstructor
 public class ApiUsersBiz extends BaseBiz {
 
-    @Autowired
-    private UsersDao userDao;
-    @Autowired
-    private UsersAccountDao usersAccountDao;
-    @Autowired
-    private LogLoginDao logLoginDao;
-    @Autowired
-    private CacheRedis cacheRedis;
-    @Autowired
-    private IFeignSysConfig feignSysConfig;
-    @Autowired
-    private HttpServletRequest request;
+    @NotNull
+    private final UsersDao userDao;
+    @NotNull
+    private final UsersAccountDao usersAccountDao;
+    @NotNull
+    private final LogLoginDao logLoginDao;
+    @NotNull
+    private final CacheRedis cacheRedis;
+    @NotNull
+    private final IFeignSysConfig feignSysConfig;
+    @NotNull
+    private final HttpServletRequest request;
 
     @Transactional(rollbackFor = Exception.class)
     public Result<UsersLoginResp> register(RegisterReq req) {

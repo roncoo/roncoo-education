@@ -55,9 +55,12 @@ import java.util.stream.Collectors;
  * @author wujing
  */
 @Component
-@CacheConfig(cacheNames = {"course"})
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = {"course"})
 public class ApiCourseBiz extends BaseBiz {
+
+    @NotNull
+    private final ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     @NotNull
     private final CourseDao dao;
@@ -70,9 +73,6 @@ public class ApiCourseBiz extends BaseBiz {
 
     @NotNull
     private final IFeignLecturer feignLecturer;
-
-    @NotNull
-    private final ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     public Result<Page<ApiCoursePageResp>> searchForPage(ApiCoursePageReq req) {
         NativeSearchQueryBuilder nsb = new NativeSearchQueryBuilder();

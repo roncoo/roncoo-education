@@ -1,41 +1,28 @@
-package com.roncoo.education.user.service.admin.resp;
+package com.roncoo.education.user.service.api.resp;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * <p>
- * ADMIN-讲师信息
+ * API-讲师信息
  * </p>
  *
- * @author wujing
+ * @author fengyw
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-讲师信息分页")
-public class AdminLecturerPageResp implements Serializable {
+@ApiModel(description = "API-讲师信息")
+public class LecturerPageResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "主键")
     private Long id;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
-    private LocalDateTime gmtCreate;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "修改时间")
-    private LocalDateTime gmtModified;
-
-    @ApiModelProperty(value = "状态(1:正常，0:禁用)")
-    private Integer statusId;
 
     @ApiModelProperty(value = "排序")
     private Integer sort;
@@ -51,4 +38,7 @@ public class AdminLecturerPageResp implements Serializable {
 
     @ApiModelProperty(value = "讲师头像")
     private String lecturerHead;
+
+    @ApiModelProperty(value = "简介")
+    private String introduce;
 }
