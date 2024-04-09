@@ -5,9 +5,11 @@ import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.system.dao.SysConfigDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfig;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfigExample;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class SysConfigCommonBiz extends BaseBiz {
 
     @NotNull

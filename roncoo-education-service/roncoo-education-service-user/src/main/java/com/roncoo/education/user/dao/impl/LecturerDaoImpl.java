@@ -7,11 +7,14 @@ import com.roncoo.education.user.dao.LecturerDao;
 import com.roncoo.education.user.dao.impl.mapper.LecturerMapper;
 import com.roncoo.education.user.dao.impl.mapper.entity.Lecturer;
 import com.roncoo.education.user.dao.impl.mapper.entity.LecturerExample;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class LecturerDaoImpl implements LecturerDao {
     @NotNull
     private final LecturerMapper lecturerMapper;

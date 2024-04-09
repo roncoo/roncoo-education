@@ -7,11 +7,14 @@ import com.roncoo.education.system.dao.WebsiteNavDao;
 import com.roncoo.education.system.dao.impl.mapper.WebsiteNavMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNav;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteNavExample;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class WebsiteNavDaoImpl implements WebsiteNavDao {
 
     @NotNull

@@ -7,11 +7,14 @@ import com.roncoo.education.system.dao.SysRoleUserDao;
 import com.roncoo.education.system.dao.impl.mapper.SysRoleUserMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUser;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleUserExample;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class SysRoleUserDaoImpl implements SysRoleUserDao {
     @NotNull
     private final SysRoleUserMapper sysRoleUserMapper;

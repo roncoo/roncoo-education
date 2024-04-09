@@ -8,11 +8,14 @@ import com.roncoo.education.user.dao.UsersDao;
 import com.roncoo.education.user.dao.impl.mapper.UsersMapper;
 import com.roncoo.education.user.dao.impl.mapper.entity.Users;
 import com.roncoo.education.user.dao.impl.mapper.entity.UsersExample;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class UsersDaoImpl extends AbstractBaseJdbc implements UsersDao {
     @NotNull
     private final UsersMapper usersMapper;

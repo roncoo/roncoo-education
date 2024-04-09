@@ -7,11 +7,14 @@ import com.roncoo.education.system.dao.WebsiteLinkDao;
 import com.roncoo.education.system.dao.impl.mapper.WebsiteLinkMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLink;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteLinkExample;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class WebsiteLinkDaoImpl implements WebsiteLinkDao {
 
     @NotNull

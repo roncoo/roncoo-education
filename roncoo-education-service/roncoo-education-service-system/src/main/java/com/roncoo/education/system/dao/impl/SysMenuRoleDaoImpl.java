@@ -7,11 +7,14 @@ import com.roncoo.education.system.dao.SysMenuRoleDao;
 import com.roncoo.education.system.dao.impl.mapper.SysMenuRoleMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuRole;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuRoleExample;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class SysMenuRoleDaoImpl implements SysMenuRoleDao {
     @NotNull
     private final SysMenuRoleMapper sysMenuRoleMapper;

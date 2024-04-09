@@ -7,11 +7,14 @@ import com.roncoo.education.user.dao.RegionDao;
 import com.roncoo.education.user.dao.impl.mapper.RegionMapper;
 import com.roncoo.education.user.dao.impl.mapper.entity.Region;
 import com.roncoo.education.user.dao.impl.mapper.entity.RegionExample;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class RegionDaoImpl implements RegionDao {
     @NotNull
     private final RegionMapper regionMapper;

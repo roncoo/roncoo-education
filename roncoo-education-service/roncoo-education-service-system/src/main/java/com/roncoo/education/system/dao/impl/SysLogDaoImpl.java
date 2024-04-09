@@ -7,9 +7,13 @@ import com.roncoo.education.system.dao.SysLogDao;
 import com.roncoo.education.system.dao.impl.mapper.SysLogMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysLog;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysLogExample;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
+
 @Repository
+@RequiredArgsConstructor
 public class SysLogDaoImpl implements SysLogDao {
     @NotNull
     private final SysLogMapper sysLogMapper;
