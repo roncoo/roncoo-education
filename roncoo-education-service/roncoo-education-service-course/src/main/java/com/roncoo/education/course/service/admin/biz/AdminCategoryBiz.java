@@ -53,13 +53,15 @@ public class AdminCategoryBiz extends BaseBiz {
      * 菜单层级处理
      */
     private List<AdminCategoryListResp> filter(Long parentId, List<Category> categoryList) {
-        List<Category> list = categoryList.stream().filter(item -> parentId.compareTo(item.getParentId()) == 0).collect(Collectors.toList());
-        if (CollectionUtil.isNotEmpty(list)) {
-            List<AdminCategoryListResp> respList = BeanUtil.copyProperties(list, AdminCategoryListResp.class);
-            for (AdminCategoryListResp resp : respList) {
-                resp.setChildrenList(filter(resp.getId(), categoryList));
+        if (CollectionUtil.isNotEmpty(categoryList)) {
+            List<Category> list = categoryList.stream().filter(item -> parentId.compareTo(item.getParentId()) == 0).collect(Collectors.toList());
+            if (CollectionUtil.isNotEmpty(list)) {
+                List<AdminCategoryListResp> respList = BeanUtil.copyProperties(list, AdminCategoryListResp.class);
+                for (AdminCategoryListResp resp : respList) {
+                    resp.setChildrenList(filter(resp.getId(), categoryList));
+                }
+                return respList;
             }
-            return respList;
         }
         return null;
     }
