@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,7 +33,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AdminCategoryBiz extends BaseBiz {
 
-    CategoryDao dao;
+    @NotNull
+    private final CategoryDao dao;
 
     public Result<List<AdminCategoryListResp>> list(AdminCategoryListReq req) {
         CategoryExample example = new CategoryExample();
