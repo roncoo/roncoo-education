@@ -51,4 +51,7 @@ public class AdminLecturerPageResp implements Serializable {
 
     @ApiModelProperty(value = "讲师头像")
     private String lecturerHead;
+
+    @ApiModelProperty(value = "简介")
+    private String introduce;
 }
