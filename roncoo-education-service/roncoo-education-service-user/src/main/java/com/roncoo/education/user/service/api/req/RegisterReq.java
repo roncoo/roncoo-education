@@ -29,13 +29,8 @@ public class RegisterReq implements Serializable {
     /**
      * 登录密码
      */
-    @ApiModelProperty(value = "密码", required = true)
-    private String mobilePwd;
-    /**
-     * 重复密码
-     */
-    @ApiModelProperty(value = "重复密码", required = true)
-    private String repassword;
+    @ApiModelProperty(value = "登录密码，RSA加密", required = true)
+    private String mobilePwdEncrypt;
     /**
      * 手机验证码
      */

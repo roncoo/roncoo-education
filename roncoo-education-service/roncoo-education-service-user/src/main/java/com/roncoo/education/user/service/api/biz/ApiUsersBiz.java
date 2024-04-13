@@ -72,12 +72,13 @@ public class ApiUsersBiz extends BaseBiz {
         // 删除验证码缓存
         cacheRedis.delete(Constants.RedisPre.CODE + req.getMobile());
 
-        if (!StringUtils.hasText(req.getMobilePwd())) {
+        if (!StringUtils.hasText(req.getMobilePwdEncrypt())) {
             return Result.error("密码不能为空");
         }
-        // 密码校验
-        if (!req.getMobilePwd().equals(req.getRepassword())) {
-            return Result.error("密码不一致");
+        // 解密
+        String mobilePsw = decrypt(req.getMobilePwdEncrypt());
+        if (!StringUtils.hasText(mobilePsw)) {
+            return Result.error("密码不能为空");
         }
 
         // 手机号重复校验
@@ -87,7 +88,7 @@ public class ApiUsersBiz extends BaseBiz {
         }
 
         // 用户注册
-        user = register(req.getMobile(), req.getMobilePwd());
+        user = register(req.getMobile(), mobilePsw);
 
         // 日志
         log(user.getId(), LoginStatusEnum.REGISTER, BeanUtil.copyProperties(req, LogLogin.class));
@@ -102,7 +103,7 @@ public class ApiUsersBiz extends BaseBiz {
         if (!StringUtils.hasText(req.getMobile())) {
             return Result.error("手机号不能为空");
         }
-        if (!StringUtils.hasText(req.getPassword())) {
+        if (!StringUtils.hasText(req.getMobilePwdEncrypt())) {
             return Result.error("密码不能为空");
         }
 
@@ -120,8 +121,14 @@ public class ApiUsersBiz extends BaseBiz {
             return Result.error("账号或者密码不正确");
         }
 
+        // 解密
+        String mobilePsw = decrypt(req.getMobilePwdEncrypt());
+        if (!StringUtils.hasText(mobilePsw)) {
+            return Result.error("密码不能为空");
+        }
+
         // 密码校验
-        if (!DigestUtil.sha1Hex(user.getMobileSalt() + req.getPassword()).equals(user.getMobilePsw())) {
+        if (!DigestUtil.sha1Hex(user.getMobileSalt() + mobilePsw).equals(user.getMobilePsw())) {
             // 错误登录日志
             log(user.getId(), LoginStatusEnum.FAIL, BeanUtil.copyProperties(req, LogLogin.class));
             return Result.error("账号或者密码不正确");
@@ -137,6 +144,15 @@ public class ApiUsersBiz extends BaseBiz {
         // token，放入缓存
         cacheRedis.set(dto.getToken(), user.getId(), 1, TimeUnit.DAYS);
         return Result.success(dto);
+    }
+
+    private String decrypt(String password) {
+        String privateKey = cacheRedis.get(Constants.RedisPre.PRIVATEKEY);
+        if (StringUtils.isEmpty(privateKey)) {
+            privateKey = feignSysConfig.getLogin().getRsaLoginPrivateKey();
+            cacheRedis.set(Constants.RedisPre.PRIVATEKEY, privateKey, 1, TimeUnit.DAYS);
+        }
+        return RSAUtil.decrypt(password, privateKey);
     }
 
     private Users register(String mobile, String password) {

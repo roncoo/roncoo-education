@@ -2,6 +2,7 @@ package com.roncoo.education.system.service.api.biz;
 
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.system.feign.interfaces.vo.LoginConfig;
 import com.roncoo.education.system.service.api.resp.ApiSysConfigWebsiteResp;
 import com.roncoo.education.system.service.biz.SysConfigCommonBiz;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,7 @@ public class ApiSysConfigBiz extends BaseBiz {
         ApiSysConfigWebsiteResp resp = sysConfigCommonBiz.getSysConfig(ApiSysConfigWebsiteResp.class);
         // 公安网备案号处理
         resp.setWebsitePrnNo(getNumeric(resp.getWebsitePrn()));
+        resp.setRsaLoginPublicKey(sysConfigCommonBiz.getSysConfig(LoginConfig.class).getRsaLoginPublicKey());
         return Result.success(resp);
     }
 

@@ -3,10 +3,7 @@ package com.roncoo.education.system.feign;
 import com.roncoo.education.common.sms.SmsConfig;
 import com.roncoo.education.system.feign.biz.FeignSysConfigBiz;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
-import com.roncoo.education.system.feign.interfaces.vo.DocConfig;
-import com.roncoo.education.system.feign.interfaces.vo.PayConfig;
-import com.roncoo.education.system.feign.interfaces.vo.SysConfig;
-import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
+import com.roncoo.education.system.feign.interfaces.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +27,11 @@ public class FeignSysConfigController implements IFeignSysConfig {
     @Override
     public SysConfig getSys() {
         return biz.getSys();
+    }
+
+    @Override
+    public LoginConfig getLogin() {
+        return biz.getLogin();
     }
 
     @Override

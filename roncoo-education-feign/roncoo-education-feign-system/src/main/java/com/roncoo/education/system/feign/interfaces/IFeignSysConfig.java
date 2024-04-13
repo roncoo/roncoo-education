@@ -1,10 +1,7 @@
 package com.roncoo.education.system.feign.interfaces;
 
 import com.roncoo.education.common.sms.SmsConfig;
-import com.roncoo.education.system.feign.interfaces.vo.DocConfig;
-import com.roncoo.education.system.feign.interfaces.vo.PayConfig;
-import com.roncoo.education.system.feign.interfaces.vo.SysConfig;
-import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
+import com.roncoo.education.system.feign.interfaces.vo.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -26,20 +23,12 @@ public interface IFeignSysConfig {
     SysConfig getSys();
 
     /**
-     * 支付配置
+     * 登录
      *
      * @return
      */
-    @GetMapping(value = "/getPay")
-    PayConfig getPay();
-
-    /**
-     * 短信配置
-     *
-     * @return
-     */
-    @GetMapping(value = "/getSms")
-    SmsConfig getSms();
+    @GetMapping(value = "/getLogin")
+    LoginConfig getLogin();
 
     /**
      * 视频云配置
@@ -56,4 +45,20 @@ public interface IFeignSysConfig {
      */
     @GetMapping(value = "/getDoc")
     DocConfig getDoc();
+
+    /**
+     * 短信配置
+     *
+     * @return
+     */
+    @GetMapping(value = "/getSms")
+    SmsConfig getSms();
+
+    /**
+     * 支付配置
+     *
+     * @return
+     */
+    @GetMapping(value = "/getPay")
+    PayConfig getPay();
 }

@@ -25,8 +25,8 @@ public class LoginReq implements Serializable {
     @ApiModelProperty(value = "手机号", required = true)
     private String mobile;
 
-    @ApiModelProperty(value = "登录密码", required = true)
-    private String password;
+    @ApiModelProperty(value = "登录密码，RSA加密", required = true)
+    private String mobilePwdEncrypt;
 
     @ApiModelProperty(value = "验证KEY", required = true)
     private String verToken;

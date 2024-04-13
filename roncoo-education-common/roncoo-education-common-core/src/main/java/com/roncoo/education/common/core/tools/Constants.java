@@ -23,6 +23,7 @@ public final class Constants {
     public final static int SESSIONTIME = 40;
 
     public interface RedisPre {
+        String PRIVATEKEY = "private:key:";
         String ADMIN_APIS = "admin:apis:";
         String VER_CODE = "ver:code:";
         String USER_STUDY = "user:study:";

@@ -4,10 +4,7 @@ import com.roncoo.education.common.pay.util.AliPayConfig;
 import com.roncoo.education.common.pay.util.WxPayConfig;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.sms.SmsConfig;
-import com.roncoo.education.system.feign.interfaces.vo.DocConfig;
-import com.roncoo.education.system.feign.interfaces.vo.PayConfig;
-import com.roncoo.education.system.feign.interfaces.vo.SysConfig;
-import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
+import com.roncoo.education.system.feign.interfaces.vo.*;
 import com.roncoo.education.system.service.biz.SysConfigCommonBiz;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -48,5 +45,9 @@ public class FeignSysConfigBiz extends BaseBiz {
 
     public DocConfig getDoc() {
         return sysConfigCommonBiz.getSysConfig(DocConfig.class);
+    }
+
+    public LoginConfig getLogin() {
+        return sysConfigCommonBiz.getSysConfig(LoginConfig.class);
     }
 }
