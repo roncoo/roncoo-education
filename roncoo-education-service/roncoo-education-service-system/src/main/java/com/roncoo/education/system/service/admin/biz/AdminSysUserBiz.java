@@ -22,6 +22,7 @@ import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuUserResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserPageResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserViewResp;
+import com.roncoo.education.system.service.biz.SysConfigCommonBiz;
 import com.roncoo.education.system.service.biz.SysUserCommonBiz;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -54,6 +55,8 @@ public class AdminSysUserBiz {
     private final SysRoleDao sysRoleDao;
     @NotNull
     private final SysUserCommonBiz sysUserCommonBiz;
+    @NotNull
+    private final SysConfigCommonBiz sysConfigCommonBiz;
     @NotNull
     private final CacheRedis cacheRedis;
 
@@ -96,16 +99,19 @@ public class AdminSysUserBiz {
     }
 
     public Result<String> save(AdminSysUserSaveReq req) {
-        if (!req.getMobilePwd().equals(req.getRePassword())) {
-            return Result.error("密码不一致");
+        // 解密
+        String mobilePsw = sysConfigCommonBiz.decrypt(req.getMobilePwdEncrypt());
+        if (!StringUtils.hasText(mobilePsw)) {
+            return Result.error("密码不能为空");
         }
+
         SysUser sysUser = dao.getByMobile(req.getMobile());
         if (ObjectUtil.isNotNull(sysUser)) {
             return Result.error("用户已添加成管理员");
         }
         SysUser record = BeanUtil.copyProperties(req, SysUser.class);
         record.setMobileSalt(IdUtil.simpleUUID());
-        record.setMobilePsw(SHA1Util.getSign(record.getMobileSalt() + req.getMobilePwd()));
+        record.setMobilePsw(SHA1Util.getSign(record.getMobileSalt() + mobilePsw));
         int results = dao.save(record);
         if (results > 0) {
             return Result.success("操作成功");
@@ -165,22 +171,18 @@ public class AdminSysUserBiz {
     }
 
     public Result<String> updatePassword(AdminSysUserUpdatePasswordReq req) {
+        // 解密
+        String mobilePsw = sysConfigCommonBiz.decrypt(req.getMobilePwdEncrypt());
+        if (!StringUtils.hasText(mobilePsw)) {
+            return Result.error("密码不能为空");
+        }
         if (req.getUserId() == null) {
             return Result.error("用户ID不能为空,请重试");
-        }
-        if (StringUtils.isEmpty(req.getMobilePwd())) {
-            return Result.error("新密码不能为空,请重试");
-        }
-        if (StringUtils.isEmpty(req.getConfirmPassword())) {
-            return Result.error("确认密码不能为空,请重试");
-        }
-        if (!req.getConfirmPassword().equals(req.getMobilePwd())) {
-            return Result.error("密码不一致,请重试");
         }
         SysUser record = new SysUser();
         record.setId(req.getUserId());
         record.setMobileSalt(IdUtil.simpleUUID());
-        record.setMobilePsw(SHA1Util.getSign(record.getMobileSalt() + req.getMobilePwd()));
+        record.setMobilePsw(SHA1Util.getSign(record.getMobileSalt() + mobilePsw));
         dao.updateById(record);
         return Result.success("操作成功");
     }

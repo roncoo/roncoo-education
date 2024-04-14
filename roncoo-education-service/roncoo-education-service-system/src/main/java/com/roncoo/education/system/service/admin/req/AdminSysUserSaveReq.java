@@ -25,12 +25,7 @@ public class AdminSysUserSaveReq implements Serializable {
      * 登录密码
      */
     @ApiModelProperty(value = "密码", required = true)
-    private String mobilePwd;
-    /**
-     * 重复密码
-     */
-    @ApiModelProperty(value = "重复密码", required = true)
-    private String rePassword;
+    private String mobilePwdEncrypt;
     /**
      * 真实姓名
      */

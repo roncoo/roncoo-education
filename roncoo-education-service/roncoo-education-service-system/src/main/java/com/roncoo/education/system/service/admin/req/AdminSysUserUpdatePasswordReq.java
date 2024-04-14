@@ -25,11 +25,6 @@ public class AdminSysUserUpdatePasswordReq implements Serializable {
      * 新密码
      */
     @ApiModelProperty(value = "新密码", required = true)
-    private String mobilePwd;
-    /**
-     * 确认密码
-     */
-    @ApiModelProperty(value = "确认密码", required = true)
-    private String confirmPassword;
+    private String mobilePwdEncrypt;
 
 }

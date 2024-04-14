@@ -12,11 +12,13 @@ import com.roncoo.education.system.dao.impl.mapper.entity.SysMenu;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUser;
 import com.roncoo.education.system.service.admin.req.AdminSysUserLoginReq;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserLoginResp;
+import com.roncoo.education.system.service.biz.SysConfigCommonBiz;
 import com.roncoo.education.system.service.biz.SysUserCommonBiz;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -29,10 +31,14 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class AdminLoginBiz {
-
+    @NotNull
     private final SysUserDao sysUserDao;
+    @NotNull
     private final CacheRedis cacheRedis;
+    @NotNull
     private final SysUserCommonBiz sysUserCommonBiz;
+    @NotNull
+    private final SysConfigCommonBiz sysConfigCommonBiz;
 
     /**
      * 用户登录
@@ -58,8 +64,15 @@ public class AdminLoginBiz {
         if (!StatusIdEnum.YES.getCode().equals(sysUser.getStatusId())) {
             return Result.error("账号不可用");
         }
+
+        // 解密
+        String mobilePsw = sysConfigCommonBiz.decrypt(req.getMobilePwdEncrypt());
+        if (!StringUtils.hasText(mobilePsw)) {
+            return Result.error("密码不能为空");
+        }
+
         // 密码校验
-        if (!SHA1Util.getSign(sysUser.getMobileSalt() + req.getMobilePwd()).equals(sysUser.getMobilePsw())) {
+        if (!SHA1Util.getSign(sysUser.getMobileSalt() + mobilePsw).equals(sysUser.getMobilePsw())) {
             return Result.error("账号或密码不正确");
         }
 

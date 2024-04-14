@@ -238,12 +238,13 @@ public class ApiUsersBiz extends BaseBiz {
         // 删除验证码缓存
         cacheRedis.delete(Constants.RedisPre.CODE + req.getMobile());
 
-        if (!StringUtils.hasText(req.getMobilePwd())) {
+        if (!StringUtils.hasText(req.getMobilePwdEncrypt())) {
             return Result.error("密码不能为空");
         }
-        // 密码校验
-        if (!req.getMobilePwd().equals(req.getRepassword())) {
-            return Result.error("密码不一致");
+        // 解密
+        String mobilePsw = decrypt(req.getMobilePwdEncrypt());
+        if (!StringUtils.hasText(mobilePsw)) {
+            return Result.error("密码不能为空");
         }
 
         // 手机号重复校验
@@ -256,7 +257,7 @@ public class ApiUsersBiz extends BaseBiz {
         Users recorde = new Users();
         recorde.setId(user.getId());
         recorde.setMobileSalt(IdUtil.simpleUUID());
-        recorde.setMobilePsw(DigestUtil.sha1Hex(recorde.getMobileSalt() + req.getMobilePwd()));
+        recorde.setMobilePsw(DigestUtil.sha1Hex(recorde.getMobileSalt() + mobilePsw));
         userDao.updateById(recorde);
 
         return Result.success("重置成功");

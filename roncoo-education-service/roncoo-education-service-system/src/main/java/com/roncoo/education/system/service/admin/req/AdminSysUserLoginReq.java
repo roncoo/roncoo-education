@@ -25,7 +25,7 @@ public class AdminSysUserLoginReq implements Serializable {
 
     @NotBlank(message = "登录密码不能为空")
     @ApiModelProperty(value = "登录密码", required = true)
-    private String mobilePwd;
+    private String mobilePwdEncrypt;
 
     @NotBlank(message = "验证KEY不能为空")
     @ApiModelProperty(value = "验证KEY")

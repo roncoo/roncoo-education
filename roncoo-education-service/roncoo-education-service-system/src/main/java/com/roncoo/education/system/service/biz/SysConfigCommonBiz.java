@@ -1,17 +1,22 @@
 package com.roncoo.education.system.service.biz;
 
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.core.tools.Constants;
+import com.roncoo.education.common.core.tools.RSAUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.system.dao.SysConfigDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfig;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfigExample;
+import com.roncoo.education.system.feign.interfaces.vo.LoginConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -31,5 +36,14 @@ public class SysConfigCommonBiz extends BaseBiz {
         List<SysConfig> sysConfigs = dao.listByExample(new SysConfigExample());
         Map<String, String> map = sysConfigs.stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
         return BeanUtil.objToBean(map, clazz);
+    }
+
+    public String decrypt(String password) {
+        String privateKey = cacheRedis.get(Constants.RedisPre.PRIVATEKEY);
+        if (StringUtils.isEmpty(privateKey)) {
+            privateKey = getSysConfig(LoginConfig.class).getRsaLoginPrivateKey();
+            cacheRedis.set(Constants.RedisPre.PRIVATEKEY, privateKey, 1, TimeUnit.DAYS);
+        }
+        return RSAUtil.decrypt(password, privateKey);
     }
 }

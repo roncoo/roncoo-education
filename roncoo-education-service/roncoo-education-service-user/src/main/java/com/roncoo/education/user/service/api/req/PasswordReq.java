@@ -25,18 +25,13 @@ public class PasswordReq implements Serializable {
     @ApiModelProperty(value = "手机号", required = true)
     private String mobile;
     /**
-     * 登录密码
-     */
-    @ApiModelProperty(value = "密码", required = true)
-    private String mobilePwd;
-    /**
-     * 重复密码
-     */
-    @ApiModelProperty(value = "重复密码", required = true)
-    private String repassword;
-    /**
      * 手机验证码
      */
     @ApiModelProperty(value = "手机验证码", required = true)
     private String code;
+    /**
+     * 登录密码
+     */
+    @ApiModelProperty(value = "密码", required = true)
+    private String mobilePwdEncrypt;
 }
