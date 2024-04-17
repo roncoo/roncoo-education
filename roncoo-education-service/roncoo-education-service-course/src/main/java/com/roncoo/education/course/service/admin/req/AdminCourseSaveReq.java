@@ -59,7 +59,7 @@ public class AdminCourseSaveReq implements Serializable {
     private Integer isPutaway;
 
     @ApiModelProperty(value = "课程排序(前端显示使用)")
-    private Integer courseSort;
+    private Integer sort;
 
     @ApiModelProperty(value = "购买人数")
     private Integer countBuy;

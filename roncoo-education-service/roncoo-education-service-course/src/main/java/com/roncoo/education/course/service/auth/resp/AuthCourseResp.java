@@ -61,5 +61,5 @@ public class AuthCourseResp implements Serializable {
     private BigDecimal coursePrice;
 
     @ApiModelProperty(value = "课程排序(前端显示使用)")
-    private Integer courseSort;
+    private Integer sort;
 }

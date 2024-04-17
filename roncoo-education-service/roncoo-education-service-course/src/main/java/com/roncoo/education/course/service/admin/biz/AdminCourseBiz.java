@@ -78,7 +78,7 @@ public class AdminCourseBiz extends BaseBiz {
         if (StringUtils.hasText(req.getCourseName())) {
             c.andCourseNameLike(PageUtil.rightLike(req.getCourseName()));
         }
-        example.setOrderByClause("course_sort asc, id desc");
+        example.setOrderByClause("sort asc, id desc");
         Page<Course> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminCoursePageResp> respPage = PageUtil.transform(page, AdminCoursePageResp.class);
         if (CollUtil.isNotEmpty(respPage.getList())) {

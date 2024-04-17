@@ -61,5 +61,5 @@ public class EsCourse implements Serializable {
     /**
      * 课程排序
      */
-    private Integer courseSort;
+    private Integer sort;
 }

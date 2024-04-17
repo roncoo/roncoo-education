@@ -92,8 +92,8 @@ public class ApiCourseBiz extends BaseBiz {
             // 模糊查询multiMatchQuery，最佳字段best_fields
             qb.must(QueryBuilders.multiMatchQuery(req.getCourseName(), "courseName").type(MultiMatchQueryBuilder.Type.BEST_FIELDS));
         } else {
-            // 课程排序（courseSort）
-            nsb.withSorts(new FieldSortBuilder("courseSort").order(SortOrder.ASC));
+            // 课程排序（sort）
+            nsb.withSorts(new FieldSortBuilder("sort").order(SortOrder.ASC));
             nsb.withSorts(new FieldSortBuilder("id").order(SortOrder.DESC));
         }
         nsb.withQuery(qb);
@@ -114,7 +114,7 @@ public class ApiCourseBiz extends BaseBiz {
             if (StringUtils.hasText(req.getCourseName())) {
                 c.andCourseNameLike(PageUtil.like(req.getCourseName()));
             }
-            example.setOrderByClause("course_sort asc, id desc");
+            example.setOrderByClause("sort asc, id desc");
             Page<Course> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
             return Result.success(PageUtil.transform(page, ApiCoursePageResp.class));
         }

@@ -90,11 +90,6 @@ public class CourseViewVO implements Serializable {
     private Integer isPutaway;
 
     /**
-     * 课程排序(前端显示使用)
-     */
-    private Integer courseSort;
-
-    /**
      * 购买人数
      */
     private Integer countBuy;
