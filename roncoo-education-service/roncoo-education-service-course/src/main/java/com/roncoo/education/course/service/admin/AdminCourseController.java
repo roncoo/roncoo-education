@@ -82,6 +82,9 @@ public class AdminCourseController {
     @SysLog(value = "排序")
     @PutMapping(value = "/sort")
     public Result<Integer> sort(@RequestBody List<SortReq> req) {
-        return Result.success(biz.sort(req, "Course"));
+        int sort = biz.sort(req, "Course");
+        // 同步ES
+        biz.syncEs();
+        return Result.success(sort);
     }
 }
