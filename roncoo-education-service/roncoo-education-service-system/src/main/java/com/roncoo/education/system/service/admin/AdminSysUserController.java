@@ -5,6 +5,7 @@ import com.roncoo.education.common.annotation.SysLogCache;
 import com.roncoo.education.common.config.ThreadContext;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.service.SortReq;
 import com.roncoo.education.system.service.admin.biz.AdminSysUserBiz;
 import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminSysUserPageResp;
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * 后台用户信息
@@ -95,6 +97,13 @@ public class AdminSysUserController {
         AdminSysUserViewReq req = new AdminSysUserViewReq();
         req.setId(ThreadContext.userId());
         return biz.view(req);
+    }
+
+    @ApiOperation(value = "排序", notes = "排序")
+    @SysLog(value = "排序")
+    @PutMapping(value = "/sort")
+    public Result<Integer> sort(@RequestBody List<SortReq> req) {
+        return Result.success(biz.sort(req, "SysUser"));
     }
 
 }

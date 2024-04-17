@@ -9,7 +9,6 @@ import com.roncoo.education.course.dao.impl.mapper.CourseChapterPeriodMapper;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodExample;
 import lombok.RequiredArgsConstructor;
-import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.NotNull;
@@ -129,9 +128,4 @@ public class CourseChapterPeriodDaoImpl extends AbstractBaseJdbc implements Cour
         return this.mapper.deleteByExample(example);
     }
 
-    @Override
-    public int updateSortForBatch(List<CourseChapterPeriod> periodList) {
-        String sql = "update course_chapter_period set sort = :sort where id = :id";
-        return namedParameterJdbcTemplate.batchUpdate(sql, SqlParameterSourceUtils.createBatch(periodList)).length;
-    }
 }

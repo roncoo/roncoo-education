@@ -4,6 +4,7 @@ import com.roncoo.education.common.annotation.SysLog;
 import com.roncoo.education.common.annotation.SysLogCache;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.service.SortReq;
 import com.roncoo.education.course.service.admin.biz.AdminResourceBiz;
 import com.roncoo.education.course.service.admin.req.*;
 import com.roncoo.education.course.service.admin.resp.AdminPreviewResp;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * ADMIN-课程视频信息
@@ -96,5 +98,12 @@ public class AdminResourceController {
     @GetMapping(value = "/preview")
     public Result<AdminPreviewResp> preview(@RequestParam Long id) {
         return biz.preview(id);
+    }
+
+    @ApiOperation(value = "排序", notes = "排序")
+    @SysLog(value = "排序")
+    @PutMapping(value = "/sort")
+    public Result<Integer> sort(@RequestBody List<SortReq> req) {
+        return Result.success(biz.sort(req, "Resource"));
     }
 }

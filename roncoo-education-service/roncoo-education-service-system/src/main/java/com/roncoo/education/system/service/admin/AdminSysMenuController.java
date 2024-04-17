@@ -3,6 +3,7 @@ package com.roncoo.education.system.service.admin;
 import com.roncoo.education.common.annotation.SysLog;
 import com.roncoo.education.common.annotation.SysLogCache;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.service.SortReq;
 import com.roncoo.education.system.service.admin.biz.AdminSysMenuBiz;
 import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuResp;
@@ -10,10 +11,7 @@ import com.roncoo.education.system.service.admin.resp.AdminSysMenuViewResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -79,6 +77,13 @@ public class AdminSysMenuController {
     @RequestMapping(value = "/view", method = RequestMethod.POST)
     public Result<AdminSysMenuViewResp> view(@RequestBody AdminSysMenuViewReq sysMenuViewREQ) {
         return biz.view(sysMenuViewREQ);
+    }
+
+    @ApiOperation(value = "排序", notes = "排序")
+    @SysLog(value = "排序")
+    @PutMapping(value = "/sort")
+    public Result<Integer> sort(@RequestBody List<SortReq> req) {
+        return Result.success(biz.sort(req, "SysMenu"));
     }
 
 }

@@ -3,6 +3,7 @@ package com.roncoo.education.user.dao.impl;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
+import com.roncoo.education.common.jdbc.AbstractBaseJdbc;
 import com.roncoo.education.user.dao.LecturerDao;
 import com.roncoo.education.user.dao.impl.mapper.LecturerMapper;
 import com.roncoo.education.user.dao.impl.mapper.entity.Lecturer;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class LecturerDaoImpl implements LecturerDao {
+public class LecturerDaoImpl extends AbstractBaseJdbc implements LecturerDao {
     @NotNull
     private final LecturerMapper lecturerMapper;
 

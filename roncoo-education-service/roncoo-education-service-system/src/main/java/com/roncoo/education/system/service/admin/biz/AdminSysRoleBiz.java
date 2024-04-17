@@ -6,6 +6,7 @@ import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.system.dao.SysMenuRoleDao;
 import com.roncoo.education.system.dao.SysRoleDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRole;
@@ -28,7 +29,7 @@ import javax.validation.constraints.NotNull;
  */
 @Component
 @RequiredArgsConstructor
-public class AdminSysRoleBiz {
+public class AdminSysRoleBiz extends BaseBiz {
 
     @NotNull
     private final SysRoleDao dao;
@@ -99,5 +100,4 @@ public class AdminSysRoleBiz {
         }
         return Result.success(BeanUtil.copyProperties(record, AdminSysRoleViewResp.class));
     }
-
 }

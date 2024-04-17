@@ -5,6 +5,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.system.dao.SysMenuDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenu;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenuExample;
@@ -26,7 +27,7 @@ import java.util.stream.Collectors;
  */
 @Component
 @RequiredArgsConstructor
-public class AdminSysMenuBiz {
+public class AdminSysMenuBiz extends BaseBiz {
 
     @NotNull
     private final SysMenuDao dao;
@@ -111,6 +112,4 @@ public class AdminSysMenuBiz {
         }
         return Result.success(BeanUtil.copyProperties(record, AdminSysMenuViewResp.class));
     }
-
-
 }

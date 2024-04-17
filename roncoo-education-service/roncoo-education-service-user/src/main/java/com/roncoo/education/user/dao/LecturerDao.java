@@ -31,8 +31,9 @@ public interface LecturerDao {
     /**
      * 根据讲师编号集合获取讲师信息
      *
-     * @param lectureruserIds
+     * @param ids
      * @return
      */
     List<Lecturer> listByIds(List<Long> ids);
+
 }

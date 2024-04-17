@@ -6,6 +6,7 @@ import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.service.SortReq;
 import com.roncoo.education.course.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.dao.ResourceDao;
 import com.roncoo.education.course.dao.UserStudyDao;
@@ -13,7 +14,10 @@ import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodExample.Criteria;
 import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
-import com.roncoo.education.course.service.admin.req.*;
+import com.roncoo.education.course.service.admin.req.AdminCourseChapterPeriodEditReq;
+import com.roncoo.education.course.service.admin.req.AdminCourseChapterPeriodListReq;
+import com.roncoo.education.course.service.admin.req.AdminCourseChapterPeriodPageReq;
+import com.roncoo.education.course.service.admin.req.AdminCourseChapterPeriodSaveReq;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterPeriodPageResp;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterPeriodViewResp;
 import com.roncoo.education.course.service.admin.resp.AdminResourceViewResp;
@@ -85,11 +89,12 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
         int maxSort = 0;
         List<CourseChapterPeriod> periodList = dao.listByChapterId(req.getChapterId());
         if (CollUtil.isNotEmpty(periodList)) {
+            List<SortReq> sorts = new ArrayList<>();
             for (CourseChapterPeriod period : periodList) {
                 // 重新排序
-                period.setSort(maxSort += 1);
+                sorts.add(new SortReq().setId(period.getId()).setSort(maxSort += 1));
             }
-            dao.updateSortForBatch(periodList);
+            sort(sorts, "CourseChapterPeriod");
         }
 
         CourseChapterPeriod record = BeanUtil.copyProperties(req, CourseChapterPeriod.class);
@@ -137,10 +142,5 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
             return Result.success("操作成功");
         }
         return Result.error("操作失败");
-    }
-
-    public Result<String> sort(List<AdminCourseChapterPeriodSortReq> req) {
-        dao.updateSortForBatch(BeanUtil.copyProperties(req, CourseChapterPeriod.class));
-        return Result.success("操作成功");
     }
 }

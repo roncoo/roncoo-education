@@ -13,6 +13,7 @@ import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.common.core.tools.SHA1Util;
+import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.system.dao.SysRoleDao;
 import com.roncoo.education.system.dao.SysRoleUserDao;
 import com.roncoo.education.system.dao.SysUserDao;
@@ -45,7 +46,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class AdminSysUserBiz {
+public class AdminSysUserBiz extends BaseBiz {
 
     @NotNull
     private final SysUserDao dao;
@@ -201,5 +202,4 @@ public class AdminSysUserBiz {
         }
         return null;
     }
-
 }

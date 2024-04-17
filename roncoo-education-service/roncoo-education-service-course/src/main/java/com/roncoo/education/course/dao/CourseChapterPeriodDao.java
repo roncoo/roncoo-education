@@ -84,5 +84,4 @@ public interface CourseChapterPeriodDao {
 
     int deleteByCourseId(Long courseId);
 
-    int updateSortForBatch(List<CourseChapterPeriod> periodList);
 }

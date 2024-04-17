@@ -38,6 +38,33 @@ public final class PageUtil<T extends Serializable> implements Serializable {
     private PageUtil() {
     }
 
+
+    /**
+     * 将驼峰命名风格的字符串转换为下划线连接风格的字符串。
+     *
+     * @param camelCaseStr 驼峰命名风格的字符串
+     * @return 转换后的下划线连接风格字符串
+     */
+    public static String camelToUnderscore(String camelCaseStr) {
+        if (camelCaseStr == null || camelCaseStr.isEmpty()) {
+            return camelCaseStr;
+        }
+        StringBuilder sb = new StringBuilder(camelCaseStr.length());
+        for (int i = 0; i < camelCaseStr.length(); i++) {
+            char ch = camelCaseStr.charAt(i);
+            if (Character.isUpperCase(ch)) {
+                if (i > 0) {
+                    sb.append('_');
+                }
+                sb.append(Character.toLowerCase(ch));
+            } else {
+                sb.append(ch);
+            }
+        }
+        return sb.toString();
+    }
+
+
     public static <T extends Serializable> Page<T> transform(Page<?> page, Class<T> classType) {
         Page<T> pb = new Page<>();
         try {

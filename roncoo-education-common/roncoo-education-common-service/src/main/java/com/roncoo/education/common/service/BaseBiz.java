@@ -5,7 +5,10 @@ package com.roncoo.education.common.service;
 
 import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Base;
+import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IPUtil;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -14,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -31,6 +35,15 @@ public class BaseBiz extends Base {
 
     @Resource
     protected CacheRedis cacheRedis;
+
+    @Resource
+    protected NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+    public int sort(List<SortReq> sorts, String tableName) {
+        tableName = PageUtil.camelToUnderscore(tableName);
+        String sql = "update TABLENAME set sort = :sort where id = :id".replace("TABLENAME", tableName);
+        return this.namedParameterJdbcTemplate.batchUpdate(sql, SqlParameterSourceUtils.createBatch(sorts)).length;
+    }
 
     protected IPUtil.IpInfo getIpInfo(String ip) {
         IPUtil.IpInfo ipInfo = cacheRedis.get(ip, IPUtil.IpInfo.class);

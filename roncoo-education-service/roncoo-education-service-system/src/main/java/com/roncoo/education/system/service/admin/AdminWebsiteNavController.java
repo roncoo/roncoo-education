@@ -4,6 +4,7 @@ import com.roncoo.education.common.annotation.SysLog;
 import com.roncoo.education.common.annotation.SysLogCache;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.service.SortReq;
 import com.roncoo.education.system.service.admin.biz.AdminWebsiteNavBiz;
 import com.roncoo.education.system.service.admin.req.AdminWebsiteNavEditReq;
 import com.roncoo.education.system.service.admin.req.AdminWebsiteNavPageReq;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * ADMIN-头部导航
@@ -67,5 +69,12 @@ public class AdminWebsiteNavController {
     @DeleteMapping(value = "/delete")
     public Result<String> delete(@RequestParam Long id) {
         return biz.delete(id);
+    }
+
+    @ApiOperation(value = "排序", notes = "排序")
+    @SysLog(value = "排序")
+    @PutMapping(value = "/sort")
+    public Result<Integer> sort(@RequestBody List<SortReq> req) {
+        return Result.success(biz.sort(req, "WebsiteNav"));
     }
 }
