@@ -68,9 +68,6 @@ public class AdminCoursePageResp implements Serializable {
     @ApiModelProperty(value = "是否上架(1:上架，0:下架)")
     private Integer isPutaway;
 
-    @ApiModelProperty(value = "课程排序(前端显示使用)")
-    private Integer sort;
-
     @ApiModelProperty(value = "购买人数")
     private Integer countBuy;
 
