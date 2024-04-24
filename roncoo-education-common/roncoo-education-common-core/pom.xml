@@ -13,12 +13,6 @@
     <name>roncoo-education-common-core</name>
 
     <dependencies>
-        <dependency>
-            <groupId>com.github.ulisesbocchio</groupId>
-            <artifactId>jasypt-spring-boot</artifactId>
-            <version>3.0.5</version>
-        </dependency>
-
         <!-- aliyun oss -->
         <dependency>
             <groupId>com.aliyun.oss</groupId>
@@ -92,6 +86,13 @@
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
+        </dependency>
+
+        <!-- jasypt -->
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot</artifactId>
+            <version>3.0.5</version>
         </dependency>
 
         <!-- org.apache.httpcomponents -->
