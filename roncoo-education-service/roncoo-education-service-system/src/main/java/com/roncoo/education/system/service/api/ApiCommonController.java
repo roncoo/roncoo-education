@@ -1,7 +1,7 @@
 package com.roncoo.education.system.service.api;
 
 import cn.hutool.captcha.CaptchaUtil;
-import cn.hutool.captcha.CircleCaptcha;
+import cn.hutool.captcha.GifCaptcha;
 import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.Constants;
@@ -53,7 +53,7 @@ public class ApiCommonController {
     @ApiOperation(value = "获取图片验证码", notes = "获取图片验证码")
     @GetMapping(value = "/code")
     public Result<ApiVerCodeResp> getVerCode() {
-        CircleCaptcha captcha = CaptchaUtil.createCircleCaptcha(200, 100, 4, 20);
+        GifCaptcha captcha = CaptchaUtil.createGifCaptcha(200, 100, 4);
         ApiVerCodeResp resp = new ApiVerCodeResp(String.valueOf(IdWorker.getId()), captcha.getImageBase64Data());
         // 存入缓存，过期时间为5分钟
         cacheRedis.set(Constants.RedisPre.VER_CODE + resp.getVerToken(), captcha.getCode().toLowerCase(), 5, TimeUnit.MINUTES);
