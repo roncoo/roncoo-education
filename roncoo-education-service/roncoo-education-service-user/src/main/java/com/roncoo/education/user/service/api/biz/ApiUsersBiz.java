@@ -191,7 +191,7 @@ public class ApiUsersBiz extends BaseBiz {
     public Result<String> sendCode(SendCodeReq req) {
         // 验证码发送次数校验
         if (!sendCodeCheck(req.getMobile())) {
-            throw new BaseException("验证码发送次数过多，请稍后再试");
+            throw new BaseException("操作频繁，请稍后再试");
         }
 
         String code = NOUtil.getVerCode();
