@@ -13,6 +13,12 @@
     <name>roncoo-education-common-core</name>
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot</artifactId>
+            <version>3.0.5</version>
+        </dependency>
+
         <!-- aliyun oss -->
         <dependency>
             <groupId>com.aliyun.oss</groupId>
