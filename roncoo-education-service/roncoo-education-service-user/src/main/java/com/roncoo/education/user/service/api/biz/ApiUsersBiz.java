@@ -197,12 +197,12 @@ public class ApiUsersBiz extends BaseBiz {
         String code = NOUtil.getVerCode();
         log.warn("手机号：{}，验证码：{}", req.getMobile(), code);
 
-        // 正常应该是发送成功才放入缓存，这里方便没有短信通道的情况下，也能测试注册（上线需要删除，并打开下面）
+        // TODO 正常应该是发送成功才放入缓存，这里方便没有短信通道的情况下，也能测试注册（上线需要删除该处）
         cacheRedis.set(Constants.RedisPre.CODE + req.getMobile(), code, 5, TimeUnit.MINUTES);
 
         if (SmsUtil.sendVerCode(req.getMobile(), code, feignSysConfig.getSms())) {
-            // 发送成功才放入缓存
-            // cacheRedis.set(Constants.RedisPre.CODE + req.getMobile(), code, 5, TimeUnit.MINUTES);
+            // 发送成功，放入缓存
+            cacheRedis.set(Constants.RedisPre.CODE + req.getMobile(), code, 5, TimeUnit.MINUTES);
             return Result.success("验证码发送成功，请查收");
         }
         return Result.error("验证码发送失败，请稍后再试");
