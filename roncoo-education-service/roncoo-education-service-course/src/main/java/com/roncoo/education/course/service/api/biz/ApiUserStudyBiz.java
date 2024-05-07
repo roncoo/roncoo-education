@@ -51,7 +51,7 @@ public class ApiUserStudyBiz extends BaseBiz {
         } else if (ResourceTypeEnum.DOC.getCode().equals(resource.getResourceType())) {
             req.setTotalPage(resource.getDocPage());
             // 文档处理
-            if (req.getCurrentPage().compareTo(resource.getDocPage()) >= 0) {
+            if (req.getCurrentPage().compareTo(Integer.valueOf(1)) >= 0) {
                 // 学习完成
                 return completeStudy(req);
             }
