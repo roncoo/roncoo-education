@@ -40,15 +40,16 @@ public class UploadCommonBiz {
         }
 
         Upload upload = sysConfigCommonBiz.getSysConfig(Upload.class);
-        if (ObjectUtil.isNotEmpty(upload) || StringUtils.isEmpty(upload.getStoragePlatform())) {
-            UploadFace uploadFace = uploadFaceMap.get(StoragePlatformEnum.byCode(Integer.valueOf(upload.getStoragePlatform())).getMode());
-            if (ObjectUtil.isEmpty(uploadFace)) {
-                return Result.error("暂不支持该类型");
-            }
-            String fileUrl = uploadFace.uploadPic(picFile, upload);
-            return Result.success(fileUrl);
+        if (ObjectUtil.isEmpty(upload) || StringUtils.isEmpty(upload.getStoragePlatform())) {
+            return Result.error("上传参数没配置");
         }
-        return Result.error("上传参数没配置");
+
+        UploadFace uploadFace = uploadFaceMap.get(StoragePlatformEnum.byCode(Integer.valueOf(upload.getStoragePlatform())).getMode());
+        if (ObjectUtil.isEmpty(uploadFace)) {
+            return Result.error("暂不支持该类型");
+        }
+        String fileUrl = uploadFace.uploadPic(picFile, upload);
+        return Result.success(fileUrl);
     }
 
     public Result<UploadDocResp> uploadDoc(MultipartFile docFile) {
@@ -59,21 +60,22 @@ public class UploadCommonBiz {
         UploadDocResp resp = new UploadDocResp();
         Upload upload = sysConfigCommonBiz.getSysConfig(Upload.class);
         resp.setStoragePlatform(upload.getStoragePlatform());
-        if (ObjectUtil.isNotEmpty(upload) || StringUtils.isEmpty(upload.getStoragePlatform())) {
-            UploadFace uploadFace = uploadFaceMap.get(StoragePlatformEnum.byCode(upload.getStoragePlatform()).getMode());
-            if (ObjectUtil.isEmpty(uploadFace)) {
-                return Result.error("暂不支持该类型");
-            }
-            resp.setDocUrl(uploadFace.uploadDoc(docFile, upload));
-            try {
-                resp.setPageCount(DocUtil.getDocPageCount(docFile.getOriginalFilename(), docFile.getInputStream()));
-                return Result.success(resp);
-            } catch (Exception e) {
-                log.error("文档错误", e);
-                return Result.error("文档错误");
-            }
+        if (ObjectUtil.isEmpty(upload) || StringUtils.isEmpty(upload.getStoragePlatform())) {
+            return Result.error("上传参数没配置");
         }
-        return Result.error("系统异常，请重试");
+
+        UploadFace uploadFace = uploadFaceMap.get(StoragePlatformEnum.byCode(upload.getStoragePlatform()).getMode());
+        if (ObjectUtil.isEmpty(uploadFace)) {
+            return Result.error("暂不支持该类型");
+        }
+        resp.setDocUrl(uploadFace.uploadDoc(docFile, upload));
+        try {
+            resp.setPageCount(DocUtil.getDocPageCount(docFile.getOriginalFilename(), docFile.getInputStream()));
+            return Result.success(resp);
+        } catch (Exception e) {
+            log.error("文档错误", e);
+            return Result.error("文档错误");
+        }
     }
 
 }
