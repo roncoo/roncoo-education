@@ -37,7 +37,7 @@ public class Upload implements Serializable {
 
 
     /**
-     * 存储平台，参考：UploadModeEnum
+     * 存储平台，参考：StoragePlatformEnum
      */
     private Integer storagePlatform;
 
