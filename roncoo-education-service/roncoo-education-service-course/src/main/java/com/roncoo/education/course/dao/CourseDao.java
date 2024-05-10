@@ -78,5 +78,11 @@ public interface CourseDao {
 
     void addCountStudy(int countStudy, Long id);
 
+    /**
+     * 模糊查询
+     *
+     * @param courseName
+     * @return
+     */
     List<Course> listByCourseName(String courseName);
 }

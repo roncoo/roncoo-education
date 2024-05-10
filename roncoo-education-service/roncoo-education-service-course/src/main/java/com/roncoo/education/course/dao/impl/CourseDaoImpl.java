@@ -102,7 +102,7 @@ public class CourseDaoImpl extends AbstractBaseJdbc implements CourseDao {
     @Override
     public List<Course> listByCourseName(String courseName) {
         CourseExample example = new CourseExample();
-        example.createCriteria().andCourseNameEqualTo(courseName);
+        example.createCriteria().andCourseNameLike(PageUtil.rightLike(courseName));
         return listByExample(example);
     }
 }
