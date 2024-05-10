@@ -25,6 +25,7 @@ import com.roncoo.education.user.feign.interfaces.IFeignUsers;
 import com.roncoo.education.user.feign.interfaces.vo.UsersVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -61,6 +62,11 @@ public class AdminUserCourseBiz extends BaseBiz {
         if (req.getCourseId() != null) {
             c.andCourseIdEqualTo(req.getCourseId());
         }
+        if (StringUtils.hasText(req.getMobile())) {
+            UsersVO usersVO = feignUsers.getByMobile(req.getMobile());
+            c.andUserIdEqualTo(usersVO.getId());
+        }
+
         example.setOrderByClause("id desc");
         Page<UserCourse> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminUserCourseRecordResp> respPage = PageUtil.transform(page, AdminUserCourseRecordResp.class);
@@ -107,6 +113,12 @@ public class AdminUserCourseBiz extends BaseBiz {
         Criteria c = example.createCriteria();
         if (req.getUserId() != null) {
             c.andUserIdEqualTo(req.getUserId());
+        }
+        if (StringUtils.hasText(req.getCourseName())) {
+            List<Course> courseList = courseDao.listByCourseName(req.getCourseName());
+            if (CollUtil.isNotEmpty(courseList)) {
+                c.andCourseIdIn(courseList.stream().map(item -> item.getId()).collect(Collectors.toList()));
+            }
         }
         example.setOrderByClause("id desc");
         Page<UserCourse> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);

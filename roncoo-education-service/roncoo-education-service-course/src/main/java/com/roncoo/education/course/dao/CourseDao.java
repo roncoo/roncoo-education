@@ -77,4 +77,6 @@ public interface CourseDao {
     void addCountBuy(int countBuy, Long id);
 
     void addCountStudy(int countStudy, Long id);
+
+    List<Course> listByCourseName(String courseName);
 }

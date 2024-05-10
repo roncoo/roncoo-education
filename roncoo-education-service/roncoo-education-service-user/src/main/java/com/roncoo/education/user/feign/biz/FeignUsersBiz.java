@@ -33,6 +33,11 @@ public class FeignUsersBiz extends BaseBiz {
         return BeanUtil.copyProperties(record, UsersVO.class);
     }
 
+    public UsersVO getByMobile(String mobile) {
+        Users record = dao.getByMobile(mobile);
+        return BeanUtil.copyProperties(record, UsersVO.class);
+    }
+
     public Map<Long, UsersVO> listByIds(List<Long> userIdList) {
         List<Users> usersList = dao.listByIds(userIdList);
         if (CollUtil.isNotEmpty(usersList)) {

@@ -98,4 +98,11 @@ public class CourseDaoImpl extends AbstractBaseJdbc implements CourseDao {
         String sql = "update course set count_study=count_study+? where id=?";
         this.jdbcTemplate.update(sql, countStudy, id);
     }
+
+    @Override
+    public List<Course> listByCourseName(String courseName) {
+        CourseExample example = new CourseExample();
+        example.createCriteria().andCourseNameEqualTo(courseName);
+        return listByExample(example);
+    }
 }

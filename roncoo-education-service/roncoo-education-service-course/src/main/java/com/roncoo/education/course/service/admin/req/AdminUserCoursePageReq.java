@@ -27,6 +27,9 @@ public class AdminUserCoursePageReq implements Serializable {
     @ApiModelProperty(value = "购买类型(1支付，2免费)")
     private Integer buyType;
 
+    @ApiModelProperty(value = "课程名称")
+    private String courseName;
+
     @ApiModelProperty(value = "当前页")
     private int pageCurrent = 1;
 

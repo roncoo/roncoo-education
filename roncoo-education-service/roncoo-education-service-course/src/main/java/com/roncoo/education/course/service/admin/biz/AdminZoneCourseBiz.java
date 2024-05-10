@@ -21,6 +21,7 @@ import com.roncoo.education.course.service.admin.resp.AdminZoneCoursePageResp;
 import com.roncoo.education.course.service.admin.resp.AdminZoneCourseViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -52,6 +53,12 @@ public class AdminZoneCourseBiz extends BaseBiz {
         Criteria c = example.createCriteria();
         if (ObjectUtil.isNotEmpty(req.getZoneId())) {
             c.andZoneIdEqualTo(req.getZoneId());
+        }
+        if (StringUtils.hasText(req.getCourseName())) {
+            List<Course> courseList = courseDao.listByCourseName(req.getCourseName());
+            if (CollUtil.isNotEmpty(courseList)) {
+                c.andCourseIdIn(courseList.stream().map(item -> item.getId()).collect(Collectors.toList()));
+            }
         }
         example.setOrderByClause("sort asc, id desc");
         Page<ZoneCourse> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);

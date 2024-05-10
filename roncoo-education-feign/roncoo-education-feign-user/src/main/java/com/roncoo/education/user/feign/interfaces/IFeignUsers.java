@@ -28,6 +28,15 @@ public interface IFeignUsers {
     UsersVO getById(@PathVariable(value = "id") Long id);
 
     /**
+     * 根据ID获取信息
+     *
+     * @param id 主键ID
+     * @return 讲师信息
+     */
+    @GetMapping(value = "/getByMobile/{mobile}")
+    UsersVO getByMobile(@PathVariable(value = "mobile") String mobile);
+
+    /**
      * 根据ID集合获取集合
      *
      * @param userIdList

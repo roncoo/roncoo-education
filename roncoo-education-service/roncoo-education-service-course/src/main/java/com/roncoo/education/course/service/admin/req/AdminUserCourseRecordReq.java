@@ -27,6 +27,9 @@ public class AdminUserCourseRecordReq implements Serializable {
     @ApiModelProperty(value = "购买类型(1支付，2免费)")
     private Integer buyType;
 
+    @ApiModelProperty(value = "手机号")
+    private String mobile;
+
     @ApiModelProperty(value = "当前页")
     private int pageCurrent = 1;
 

@@ -36,6 +36,9 @@ public class AdminZoneCoursePageReq implements Serializable {
     @ApiModelProperty(value = "课程ID")
     private Long courseId;
 
+    @ApiModelProperty(value = "课程名称")
+    private String courseName;
+
     @ApiModelProperty(value = "当前页")
     private int pageCurrent = 1;
 
