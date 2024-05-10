@@ -40,6 +40,12 @@ public class AdminWebsiteCarouselBiz extends BaseBiz {
     public Result<Page<AdminWebsiteCarouselPageResp>> page(AdminWebsiteCarouselPageReq req) {
         WebsiteCarouselExample example = new WebsiteCarouselExample();
         Criteria c = example.createCriteria();
+        if (req.getStatusId() != null) {
+            c.andStatusIdEqualTo(req.getStatusId());
+        }
+        if (req.getCarouselTarget() != null) {
+            c.andCarouselTargetEqualTo(req.getCarouselTarget());
+        }
         example.setOrderByClause("sort asc, id desc");
         Page<WebsiteCarousel> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminWebsiteCarouselPageResp> respPage = PageUtil.transform(page, AdminWebsiteCarouselPageResp.class);
