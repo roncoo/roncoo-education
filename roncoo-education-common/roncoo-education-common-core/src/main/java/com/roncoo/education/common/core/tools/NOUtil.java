@@ -5,6 +5,8 @@ package com.roncoo.education.common.core.tools;
 
 import cn.hutool.core.util.RandomUtil;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -23,11 +25,23 @@ public final class NOUtil {
     }
 
     public static Long getOrderNo() {
-        return Long.valueOf(DateUtil.format(new Date(), YYYYMMDDHHMMSS) + RandomUtil.randomNumbers(3));
+        return Long.valueOf(format(new Date(), YYYYMMDDHHMMSS) + RandomUtil.randomNumbers(3));
     }
 
     public static Long getSerialNumber() {
-        return Long.valueOf(DateUtil.format(new Date(), YYYYMMDDHHMMSS) + RandomUtil.randomNumbers(4));
+        return Long.valueOf(format(new Date(), YYYYMMDDHHMMSS) + RandomUtil.randomNumbers(4));
+    }
+
+    private static String format(Date date, String format) {
+        String result = "";
+        try {
+            if (date != null) {
+                DateFormat dateFormat = new SimpleDateFormat(format);
+                result = dateFormat.format(date);
+            }
+        } catch (Exception e) {
+        }
+        return result;
     }
 
 }
