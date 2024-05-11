@@ -196,6 +196,9 @@ public final class VodUtil {
             // 播放授权地址
             String authUrl = req.getWebsiteDomain() + PRIVATEY_AUTH;
             PrivateYunPlayTokenRes tokenResponse = PrivateYunVodUtil.token(req.getPriyUrl(), authUrl, req.getPriyAccessKeyId(), req.getPriyAccessKeySecret(), playConfigReq.getVid(), "", playConfigReq.getExpiresIn().toString(), playConfigReq.getViewerId());
+            if (tokenResponse == null) {
+                return "";
+            }
             PrivateYunVideoClarityResp playUrls = tokenResponse.getVideoClarityResp();
             if (ObjectUtil.isNotNull(playUrls)) {
                 if (StringUtils.hasText(playUrls.getHdUrl())) {
