@@ -2,7 +2,7 @@ package com.roncoo.education.common.service;
 
 import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.core.tools.JSUtil;
+import com.roncoo.education.common.core.tools.JsonUtil;
 import feign.FeignException;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
@@ -29,7 +29,7 @@ public class HandlerException extends BaseController {
             return Result.error("服务繁忙，请重试");
         }
         log.error("FeignException, {}", msg);
-        Map<String, Object> m = JSUtil.parseArray(msg.substring(msg.lastIndexOf("[{")), Map.class).get(0);
+        Map<String, Object> m = JsonUtil.parseArray(msg.substring(msg.lastIndexOf("[{")), Map.class).get(0);
         if (null != m.get("message")) {
             return Result.error(m.get("message").toString());
         }

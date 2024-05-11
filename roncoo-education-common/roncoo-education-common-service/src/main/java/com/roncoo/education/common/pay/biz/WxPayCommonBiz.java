@@ -12,7 +12,7 @@ import com.github.binarywang.wxpay.bean.result.WxPayRefundQueryV3Result;
 import com.github.binarywang.wxpay.bean.result.WxPayRefundV3Result;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
-import com.roncoo.education.common.core.tools.JSUtil;
+import com.roncoo.education.common.core.tools.JsonUtil;
 import com.roncoo.education.common.pay.req.*;
 import com.roncoo.education.common.pay.resp.RefundQueryResp;
 import com.roncoo.education.common.pay.resp.RefundResp;
@@ -73,7 +73,7 @@ public class WxPayCommonBiz {
      */
     private TradeQueryResp serviceProviderTradeQuery(TradeQueryReq req) {
         // 服务商
-        log.info("微信服务商--交易查询，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("微信服务商--交易查询，请求参数：{}", JsonUtil.toJsonString(req));
         WxPayConfig wxPayConfig = req.getWxPayConfig();
 
         // step1：创建返回对象
@@ -125,7 +125,7 @@ public class WxPayCommonBiz {
      */
     private TradeQueryResp directTradeQuery(TradeQueryReq req) {
         // 直营商户
-        log.info("微信直营商户--交易查询，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("微信直营商户--交易查询，请求参数：{}", JsonUtil.toJsonString(req));
 
         // step1：创建返回对象
         TradeQueryResp resp = new TradeQueryResp();
@@ -185,7 +185,7 @@ public class WxPayCommonBiz {
      * @return 关闭结果
      */
     private Boolean serviceProviderTradeClose(TradeCloseReq req) {
-        log.info("微信服务商--交易关闭，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("微信服务商--交易关闭，请求参数：{}", JsonUtil.toJsonString(req));
         // step1：获取支付配置
         WxPayConfig wxPayConfig = req.getWxPayConfig();
 
@@ -213,7 +213,7 @@ public class WxPayCommonBiz {
      * @return 关闭结果
      */
     private Boolean directTradeClose(TradeCloseReq req) {
-        log.info("微信直营商户--交易关闭，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("微信直营商户--交易关闭，请求参数：{}", JsonUtil.toJsonString(req));
         WxPayService wxPayService = WxPayUtil.initService(req.getWxPayConfig());
         try {
             wxPayService.closeOrderV3(req.getOrderNo());
@@ -231,7 +231,7 @@ public class WxPayCommonBiz {
      * @return 通知处理结果
      */
     public TradeNotifyResp tradeNotify(TradeNotifyReq req) {
-        log.info("微信支付--交易通知，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("微信支付--交易通知，请求参数：{}", JsonUtil.toJsonString(req));
 
         // step1：创建返回对象
         TradeNotifyResp resp = new TradeNotifyResp();
@@ -297,7 +297,7 @@ public class WxPayCommonBiz {
      * @return 响应结果
      */
     public RefundResp refund(RefundReq req) {
-        log.info("微信支付--申请退款，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("微信支付--申请退款，请求参数：{}", JsonUtil.toJsonString(req));
         WxPayConfig wxPayConfig = req.getWxPayConfig();
 
         // step1：创建返回对象
@@ -330,7 +330,7 @@ public class WxPayCommonBiz {
             if (ObjectUtil.isNull(result)) {
                 return resp;
             }
-            log.info("微信支付--申请退款，请求响应结果：{}", JSUtil.toJsonString(result));
+            log.info("微信支付--申请退款，请求响应结果：{}", JsonUtil.toJsonString(result));
 
             // step5：处理响应信息
             if (!RefundStateEnum.ABNORMAL.getCode().equals(result.getStatus()) && !RefundStateEnum.CLOSED.getCode().equals(result.getStatus())) {
@@ -349,7 +349,7 @@ public class WxPayCommonBiz {
      * @return 响应结果
      */
     public RefundQueryResp refundQuery(RefundQueryReq req) {
-        log.info("微信支付--交易退款查询，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("微信支付--交易退款查询，请求参数：{}", JsonUtil.toJsonString(req));
         // step1：创建返回对象
         RefundQueryResp resp = new RefundQueryResp();
         resp.setSuccess(false);

@@ -7,7 +7,7 @@ import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.core.tools.MD5Util;
+import com.roncoo.education.common.core.tools.Md5Util;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.user.dao.UsersAccountDao;
 import com.roncoo.education.user.dao.UsersDao;
@@ -107,7 +107,7 @@ public class AdminUsersBiz extends BaseBiz {
             account.setUserId(id);
             account.setAvailableAmount(BigDecimal.ZERO);
             account.setFreezeAmount(BigDecimal.ZERO);
-            account.setSign(MD5Util.md5(account.getUserId().toString(), account.getAvailableAmount().toPlainString(), account.getFreezeAmount().toPlainString()));
+            account.setSign(Md5Util.md5(account.getUserId().toString(), account.getAvailableAmount().toPlainString(), account.getFreezeAmount().toPlainString()));
             usersAccountDao.save(account);
         }
         usersViewResp.setUsersAccountViewResp(BeanUtil.copyProperties(account, AdminUsersAccountViewResp.class));

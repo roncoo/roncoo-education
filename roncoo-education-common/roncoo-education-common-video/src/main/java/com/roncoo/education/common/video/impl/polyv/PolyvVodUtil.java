@@ -13,8 +13,8 @@ import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.roncoo.education.common.core.tools.JSUtil;
-import com.roncoo.education.common.core.tools.MD5Util;
+import com.roncoo.education.common.core.tools.JsonUtil;
+import com.roncoo.education.common.core.tools.Md5Util;
 import com.roncoo.education.common.video.impl.polyv.vod.resp.PolyvGetKeyframeResp;
 import com.roncoo.education.common.video.impl.polyv.vod.resp.PolyvPlayResponse;
 import com.roncoo.education.common.video.impl.polyv.vod.resp.PolyvVideoInfoResp;
@@ -154,8 +154,8 @@ public final class PolyvVodUtil {
         PolyvVodUploadConfig config = new PolyvVodUploadConfig();
         config.setUserid(userid);
         config.setPtime(System.currentTimeMillis());
-        config.setSign(MD5Util.md5(key + config.getPtime()));
-        config.setHash(MD5Util.md5(config.getPtime() + token));
+        config.setSign(Md5Util.md5(key + config.getPtime()));
+        config.setHash(Md5Util.md5(config.getPtime() + token));
         config.setCategoryId("1");
         return config;
     }
@@ -231,7 +231,7 @@ public final class PolyvVodUtil {
 
         JSONObject resultJson = JSONUtil.parseObj(result);
         if (PolyvHttpUtil.SUCCESS_CODE.equals(resultJson.getInt("code"))) {
-            return JSUtil.parseArray(resultJson.getStr("data"), PolyvVideoInfoResp.class);
+            return JsonUtil.parseArray(resultJson.getStr("data"), PolyvVideoInfoResp.class);
         }
         return null;
     }
@@ -292,7 +292,7 @@ public final class PolyvVodUtil {
         }
         PolyvPlayResponse dto = new PolyvPlayResponse();
         dto.setVid(map.get("videoId").toString());
-        dto.setSign(MD5Util.md5(secretKey + map.get("videoId") + ts));
+        dto.setSign(Md5Util.md5(secretKey + map.get("videoId") + ts));
         dto.setTs(ts);
         dto.setToken(resultJson.getJSONObject("data").getStr("token"));
         dto.setCode(encodeForPlay(playConfigReq.getVodAuthCode()));
@@ -308,7 +308,7 @@ public final class PolyvVodUtil {
     private static String encodeForPlay(VodPlayConfigReq.VodAuthCode authCode) {
         log.debug("获取codePolyvCode={}", JSONUtil.toJsonStr(authCode));
         try {
-            return URLUtil.encodeQuery(Base64.encode(SecureUtil.des(Base64.decode(PolyvHttpUtil.KEY)).encrypt(JSUtil.toJsonString(authCode))), StandardCharsets.UTF_8);
+            return URLUtil.encodeQuery(Base64.encode(SecureUtil.des(Base64.decode(PolyvHttpUtil.KEY)).encrypt(JsonUtil.toJsonString(authCode))), StandardCharsets.UTF_8);
         } catch (Exception e) {
             log.error("保利威视，加密出错", e);
             return "";

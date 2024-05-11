@@ -1,6 +1,6 @@
 package com.roncoo.education.course.callback;
 
-import com.roncoo.education.common.core.tools.JSUtil;
+import com.roncoo.education.common.core.tools.JsonUtil;
 import com.roncoo.education.common.video.impl.priyun.req.PrivateYunVodAuth;
 import com.roncoo.education.common.video.impl.priyun.req.PrivateYunVodUpload;
 import com.roncoo.education.course.callback.biz.PriYunCallbackBiz;
@@ -29,13 +29,13 @@ public class PriYunCallbackController {
 
     @RequestMapping(value = "/vod/upload", method = {RequestMethod.GET, RequestMethod.POST})
     public String vodUpload(@RequestBody PrivateYunVodUpload vodUpload) {
-        log.warn("领课云--点播上传回调--回调参数：{}", JSUtil.toJsonString(vodUpload));
+        log.warn("领课云--点播上传回调--回调参数：{}", JsonUtil.toJsonString(vodUpload));
         return biz.vodUpload(vodUpload);
     }
 
     @RequestMapping(value = "/vod/auth", method = {RequestMethod.GET, RequestMethod.POST})
     public String auth(@RequestBody PrivateYunVodAuth vodAuth) {
-        log.warn("领课云--授权地址--回调参数：{}", JSUtil.toJsonString(vodAuth));
+        log.warn("领课云--授权地址--回调参数：{}", JsonUtil.toJsonString(vodAuth));
         return biz.auth(vodAuth);
     }
 

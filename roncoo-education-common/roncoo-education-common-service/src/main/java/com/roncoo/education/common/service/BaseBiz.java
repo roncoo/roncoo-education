@@ -6,7 +6,7 @@ package com.roncoo.education.common.service;
 import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Base;
 import com.roncoo.education.common.core.base.PageUtil;
-import com.roncoo.education.common.core.tools.IPUtil;
+import com.roncoo.education.common.core.tools.IpUtil;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.stereotype.Component;
@@ -45,10 +45,10 @@ public class BaseBiz extends Base {
         return this.namedParameterJdbcTemplate.batchUpdate(sql, SqlParameterSourceUtils.createBatch(sorts)).length;
     }
 
-    protected IPUtil.IpInfo getIpInfo(String ip) {
-        IPUtil.IpInfo ipInfo = cacheRedis.get(ip, IPUtil.IpInfo.class);
+    protected IpUtil.IpInfo getIpInfo(String ip) {
+        IpUtil.IpInfo ipInfo = cacheRedis.get(ip, IpUtil.IpInfo.class);
         if (ipInfo == null) {
-            ipInfo = IPUtil.getIpInfo(ip);
+            ipInfo = IpUtil.getIpInfo(ip);
             if (ipInfo != null) {
                 cacheRedis.set(ip, ipInfo, 1, TimeUnit.DAYS);
             }

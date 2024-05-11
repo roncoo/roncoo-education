@@ -9,15 +9,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 /**
  * 时间+随机数，一定几率是会重复的，但忽略这个，数据库校验了唯一性
  */
-public final class NOUtil {
+public final class NumUtil {
 
     private final static String YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
 
-    private NOUtil() {
+    private NumUtil() {
     }
 
     public static String getVerCode() {

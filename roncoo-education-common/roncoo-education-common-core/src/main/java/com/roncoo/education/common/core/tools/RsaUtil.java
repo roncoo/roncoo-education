@@ -9,8 +9,8 @@ import org.springframework.util.StringUtils;
 import java.security.KeyPair;
 
 @Slf4j
-public final class RSAUtil {
-    private RSAUtil() {
+public final class RsaUtil {
+    private RsaUtil() {
     }
 
     public static void init() {

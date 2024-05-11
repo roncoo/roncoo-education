@@ -6,8 +6,8 @@ import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
 import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.tools.Constants;
-import com.roncoo.education.common.core.tools.IPUtil;
-import com.roncoo.education.common.core.tools.JSUtil;
+import com.roncoo.education.common.core.tools.IpUtil;
+import com.roncoo.education.common.core.tools.JsonUtil;
 import com.roncoo.education.common.core.tools.ObjMapUtil;
 import com.roncoo.education.system.feign.interfaces.IFeignSysLog;
 import com.roncoo.education.system.feign.interfaces.qo.FeignSysLogQO;
@@ -67,13 +67,13 @@ public class AspectSysLog {
                 MethodSignature signature = (MethodSignature) joinPoint.getSignature();
                 com.roncoo.education.common.annotation.SysLog syslog = signature.getMethod().getAnnotation(com.roncoo.education.common.annotation.SysLog.class);
                 qo.setOperation(syslog.value());
-                qo.setContent(joinPoint.getArgs() != null && joinPoint.getArgs().length > 0 ? JSUtil.toJsonString(joinPoint.getArgs()) : "");
+                qo.setContent(joinPoint.getArgs() != null && joinPoint.getArgs().length > 0 ? JsonUtil.toJsonString(joinPoint.getArgs()) : "");
                 if (StringUtils.hasText(qo.getContent())) {
                     if (syslog.isUpdate()) {
                         // 如果是修改或者编辑，比对变化
 
                         // 修改后的值
-                        Map<String, Object> map1 = JSUtil.parseArray(qo.getContent(), Map.class).get(0);
+                        Map<String, Object> map1 = JsonUtil.parseArray(qo.getContent(), Map.class).get(0);
                         String redisKey = syslog.key() + qo.getUserId() + map1.get("id").toString();
                         if (cacheRedis.hasKey(redisKey)) {
                             // 修改前的值
@@ -84,7 +84,7 @@ public class AspectSysLog {
                         }
                     }
                     if (qo.getContent().length() > MAX_LENGTH) {
-                        log.warn("操作日志：{}", JSUtil.toJsonString(qo));
+                        log.warn("操作日志：{}", JsonUtil.toJsonString(qo));
                         qo.setContent(qo.getContent().substring(0, MAX_LENGTH));
                     }
                 }
@@ -100,7 +100,7 @@ public class AspectSysLog {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         qo.setPath(request.getServletPath());
         qo.setMethod(request.getMethod());
-        qo.setLoginIp(IPUtil.getIpAddress(request));
+        qo.setLoginIp(IpUtil.getIpAddress(request));
         qo.setUserId(Long.valueOf(request.getHeader(Constants.USER_ID)));
         UserAgent userAgent = UserAgentUtil.parse(request.getHeader("User-Agent"));
         if (ObjectUtil.isNotNull(userAgent)) {

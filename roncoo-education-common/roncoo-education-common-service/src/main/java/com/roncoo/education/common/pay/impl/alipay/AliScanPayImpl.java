@@ -5,7 +5,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.alipay.api.domain.AlipayTradePrecreateModel;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
-import com.roncoo.education.common.core.tools.JSUtil;
+import com.roncoo.education.common.core.tools.JsonUtil;
 import com.roncoo.education.common.pay.PayFace;
 import com.roncoo.education.common.pay.biz.AliPayCommonBiz;
 import com.roncoo.education.common.pay.req.*;
@@ -43,7 +43,7 @@ public class AliScanPayImpl implements PayFace {
      */
     @Override
     public TradeOrderResp tradeOrder(TradeOrderReq req) {
-        log.info("支付宝扫码支付--交易下单，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("支付宝扫码支付--交易下单，请求参数：{}", JsonUtil.toJsonString(req));
         AliPayConfig aliPayConfig = req.getAliPayConfig();
 
         // step1：创建交易返回对象
@@ -91,7 +91,7 @@ public class AliScanPayImpl implements PayFace {
      */
     @Override
     public TradeQueryResp tradeQuery(TradeQueryReq req) {
-        log.info("支付宝扫码支付--交易查询，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("支付宝扫码支付--交易查询，请求参数：{}", JsonUtil.toJsonString(req));
         return aliPayCommonBiz.tradeQuery(req);
     }
 
@@ -103,7 +103,7 @@ public class AliScanPayImpl implements PayFace {
      */
     @Override
     public Boolean tradeClose(TradeCloseReq req) {
-        log.info("支付宝扫码支付--交易关闭，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("支付宝扫码支付--交易关闭，请求参数：{}", JsonUtil.toJsonString(req));
         return aliPayCommonBiz.tradeClose(req);
     }
 
@@ -115,7 +115,7 @@ public class AliScanPayImpl implements PayFace {
      */
     @Override
     public TradeNotifyResp tradeNotify(TradeNotifyReq req) {
-        log.info("支付宝扫码支付--交易回调通知，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("支付宝扫码支付--交易回调通知，请求参数：{}", JsonUtil.toJsonString(req));
         return aliPayCommonBiz.tradeNotify(req);
     }
 
@@ -127,7 +127,7 @@ public class AliScanPayImpl implements PayFace {
      */
     @Override
     public RefundResp refund(RefundReq req) {
-        log.info("支付宝扫码支付--申请退款，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("支付宝扫码支付--申请退款，请求参数：{}", JsonUtil.toJsonString(req));
         return aliPayCommonBiz.refund(req);
     }
 
@@ -139,7 +139,7 @@ public class AliScanPayImpl implements PayFace {
      */
     @Override
     public RefundQueryResp refundQuery(RefundQueryReq req) {
-        log.info("支付宝扫码支付--退款查询，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("支付宝扫码支付--退款查询，请求参数：{}", JsonUtil.toJsonString(req));
         return aliPayCommonBiz.refundQuery(req);
     }
 }

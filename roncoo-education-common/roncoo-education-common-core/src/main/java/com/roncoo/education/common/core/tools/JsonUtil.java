@@ -14,9 +14,9 @@ import java.util.List;
  * @author wujing
  */
 @Slf4j
-public final class JSUtil {
+public final class JsonUtil {
 
-    private JSUtil() {
+    private JsonUtil() {
     }
 
     public static String toJsonString(Object obj) {

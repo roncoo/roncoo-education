@@ -12,9 +12,9 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author wujing
  */
-public final class MD5Util {
+public final class Md5Util {
 
-    private MD5Util() {
+    private Md5Util() {
     }
 
     /**

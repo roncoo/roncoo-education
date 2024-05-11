@@ -12,7 +12,7 @@ import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import com.roncoo.education.common.core.enums.SmsPlatformEnum;
-import com.roncoo.education.common.core.tools.JSUtil;
+import com.roncoo.education.common.core.tools.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
@@ -39,7 +39,7 @@ public class SmsUtil {
     private static String getParamForCode(String code) {
         HashMap<String, String> map = new HashMap<>();
         map.put("code", code);
-        return JSUtil.toJsonString(map);
+        return JsonUtil.toJsonString(map);
     }
 
     private static String sign(Map<String, Object> paramMap, String key) {

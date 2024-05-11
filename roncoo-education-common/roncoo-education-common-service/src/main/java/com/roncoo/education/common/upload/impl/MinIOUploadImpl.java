@@ -4,7 +4,7 @@ import cn.hutool.core.codec.Base64;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
-import com.roncoo.education.common.core.tools.JSUtil;
+import com.roncoo.education.common.core.tools.JsonUtil;
 import com.roncoo.education.common.upload.Upload;
 import com.roncoo.education.common.upload.UploadFace;
 import io.minio.*;
@@ -81,7 +81,7 @@ public class MinIOUploadImpl implements UploadFace {
             try {
                 Map<String, String> map = new HashMap<>();
                 map.put("previewUrl", previewUrl + URLEncoder.encode(Base64.encode(getDownloadUrl(docUrl, expireSeconds, upload)), "utf-8"));
-                return JSUtil.toJsonString(map);
+                return JsonUtil.toJsonString(map);
             } catch (UnsupportedEncodingException e) {
                 log.error("编码失败", e);
             }

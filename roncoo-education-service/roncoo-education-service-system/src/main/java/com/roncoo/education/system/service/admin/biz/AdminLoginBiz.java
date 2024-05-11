@@ -5,8 +5,8 @@ import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.Constants;
-import com.roncoo.education.common.core.tools.JWTUtil;
-import com.roncoo.education.common.core.tools.SHA1Util;
+import com.roncoo.education.common.core.tools.JwtUtil;
+import com.roncoo.education.common.core.tools.Sha1Util;
 import com.roncoo.education.system.dao.SysUserDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenu;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUser;
@@ -72,7 +72,7 @@ public class AdminLoginBiz {
         }
 
         // 密码校验
-        if (!SHA1Util.getSign(sysUser.getMobileSalt() + mobilePsw).equals(sysUser.getMobilePsw())) {
+        if (!Sha1Util.getSign(sysUser.getMobileSalt() + mobilePsw).equals(sysUser.getMobilePsw())) {
             return Result.error("账号或密码不正确");
         }
 
@@ -80,7 +80,7 @@ public class AdminLoginBiz {
         AdminSysUserLoginResp resp = new AdminSysUserLoginResp();
         resp.setMobile(sysUser.getMobile());
         resp.setRealName(sysUser.getRealName());
-        resp.setToken(JWTUtil.create(sysUser.getId(), JWTUtil.DATE));
+        resp.setToken(JwtUtil.create(sysUser.getId(), JwtUtil.DATE));
 
         // token，放入缓存
         cacheRedis.set(resp.getToken(), sysUser.getId(), 1, TimeUnit.DAYS);

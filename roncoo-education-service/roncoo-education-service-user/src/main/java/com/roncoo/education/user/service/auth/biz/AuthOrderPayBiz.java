@@ -6,8 +6,8 @@ import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.*;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.core.tools.MD5Util;
-import com.roncoo.education.common.core.tools.NOUtil;
+import com.roncoo.education.common.core.tools.Md5Util;
+import com.roncoo.education.common.core.tools.NumUtil;
 import com.roncoo.education.common.pay.PayFace;
 import com.roncoo.education.common.pay.req.TradeOrderReq;
 import com.roncoo.education.common.pay.resp.TradeOrderResp;
@@ -102,7 +102,7 @@ public class AuthOrderPayBiz extends BaseBiz {
         }
 
         // 创建支付订单
-        OrderPay orderPay = createOrderPay(courseViewVO.getRulingPrice(), courseViewVO.getCoursePrice(), req.getPayType(), NOUtil.getOrderNo(), req.getRemarkCus());
+        OrderPay orderPay = createOrderPay(courseViewVO.getRulingPrice(), courseViewVO.getCoursePrice(), req.getPayType(), NumUtil.getOrderNo(), req.getRemarkCus());
         // 创建订单
         orderInfo = createOrderInfo(courseViewVO, users, orderPay);
 
@@ -185,7 +185,7 @@ public class AuthOrderPayBiz extends BaseBiz {
     }
 
     private Result<AuthOrderPayResp> handleBalance(UsersAccount usersAccount, CourseViewVO courseViewVO, OrderPay orderPay, OrderInfo orderInfo) {
-        String sign = MD5Util.md5(usersAccount.getUserId().toString(), usersAccount.getAvailableAmount().toPlainString(), usersAccount.getFreezeAmount().toPlainString());
+        String sign = Md5Util.md5(usersAccount.getUserId().toString(), usersAccount.getAvailableAmount().toPlainString(), usersAccount.getFreezeAmount().toPlainString());
         if (!usersAccount.getSign().equals(sign)) {
             return Result.error("该用户账户异常，不允许使用余额支付");
         }
@@ -201,7 +201,7 @@ public class AuthOrderPayBiz extends BaseBiz {
 
         // 更新用户余额
         usersAccount.setAvailableAmount(usersAccount.getAvailableAmount().subtract(courseViewVO.getCoursePrice()));
-        usersAccount.setSign(MD5Util.md5(usersAccount.getUserId().toString(), usersAccount.getAvailableAmount().toPlainString(), usersAccount.getFreezeAmount().toPlainString()));
+        usersAccount.setSign(Md5Util.md5(usersAccount.getUserId().toString(), usersAccount.getAvailableAmount().toPlainString(), usersAccount.getFreezeAmount().toPlainString()));
         usersAccountDao.updateById(usersAccount);
 
         // 支付成功，处理订单
@@ -278,7 +278,7 @@ public class AuthOrderPayBiz extends BaseBiz {
     private OrderPay createOrderPay(BigDecimal rulingPrice, BigDecimal coursePrice, int payType, Long orderNo, String remarkCus) {
         OrderPay orderpay = new OrderPay();
         orderpay.setOrderNo(orderNo);
-        orderpay.setSerialNumber(NOUtil.getSerialNumber());
+        orderpay.setSerialNumber(NumUtil.getSerialNumber());
         orderpay.setRulingPrice(rulingPrice);
         orderpay.setCoursePrice(coursePrice);
         orderpay.setPayType(payType);

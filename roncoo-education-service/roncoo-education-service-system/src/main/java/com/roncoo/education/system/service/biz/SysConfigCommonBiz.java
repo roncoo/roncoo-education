@@ -2,7 +2,7 @@ package com.roncoo.education.system.service.biz;
 
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.Constants;
-import com.roncoo.education.common.core.tools.RSAUtil;
+import com.roncoo.education.common.core.tools.RsaUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.system.dao.SysConfigDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfig;
@@ -44,6 +44,6 @@ public class SysConfigCommonBiz extends BaseBiz {
             privateKey = getSysConfig(LoginConfig.class).getRsaLoginPrivateKey();
             cacheRedis.set(Constants.RedisPre.PRIVATEKEY, privateKey, 1, TimeUnit.DAYS);
         }
-        return RSAUtil.decrypt(password, privateKey);
+        return RsaUtil.decrypt(password, privateKey);
     }
 }

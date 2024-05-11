@@ -8,7 +8,7 @@ import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.*;
 import com.alipay.api.request.*;
 import com.alipay.api.response.*;
-import com.roncoo.education.common.core.tools.JSUtil;
+import com.roncoo.education.common.core.tools.JsonUtil;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -248,6 +248,6 @@ public final class AlipayUtil {
     }
 
     public static <T> T toBean(String content, Class<T> clazz) {
-        return JSUtil.parseObject(content, clazz);
+        return JsonUtil.parseObject(content, clazz);
     }
 }

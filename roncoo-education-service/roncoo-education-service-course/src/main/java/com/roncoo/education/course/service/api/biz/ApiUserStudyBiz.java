@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ResourceTypeEnum;
 import com.roncoo.education.common.core.tools.Constants;
-import com.roncoo.education.common.core.tools.JSUtil;
+import com.roncoo.education.common.core.tools.JsonUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.ResourceDao;
 import com.roncoo.education.course.dao.UserStudyDao;
@@ -36,7 +36,7 @@ public class ApiUserStudyBiz extends BaseBiz {
         // 资源信息
         Resource resource = getByResource(req);
         if (ObjectUtil.isEmpty(resource)) {
-            log.error("{}", JSUtil.toJsonString(req));
+            log.error("{}", JsonUtil.toJsonString(req));
             return Result.error("resourceId不正确");
         }
         req.setResourceType(resource.getResourceType());

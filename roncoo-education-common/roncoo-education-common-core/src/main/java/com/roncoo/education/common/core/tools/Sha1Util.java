@@ -11,9 +11,9 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author wujing
  */
-public final class SHA1Util {
+public final class Sha1Util {
 
-    private SHA1Util() {
+    private Sha1Util() {
     }
 
     public static final String getSign(String message) {

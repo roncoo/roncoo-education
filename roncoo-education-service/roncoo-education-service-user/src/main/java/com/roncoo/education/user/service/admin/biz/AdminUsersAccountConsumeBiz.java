@@ -6,7 +6,7 @@ import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ConsumeTypeEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.core.tools.MD5Util;
+import com.roncoo.education.common.core.tools.Md5Util;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.user.dao.UsersAccountConsumeDao;
 import com.roncoo.education.user.dao.UsersAccountDao;
@@ -74,7 +74,7 @@ public class AdminUsersAccountConsumeBiz extends BaseBiz {
             account.setUserId(req.getUserId());
             account.setAvailableAmount(BigDecimal.ZERO);
             account.setFreezeAmount(BigDecimal.ZERO);
-            account.setSign(MD5Util.md5(account.getUserId().toString(), account.getAvailableAmount().toPlainString(), account.getFreezeAmount().toPlainString()));
+            account.setSign(Md5Util.md5(account.getUserId().toString(), account.getAvailableAmount().toPlainString(), account.getFreezeAmount().toPlainString()));
             usersAccountDao.save(account);
         }
 
@@ -87,7 +87,7 @@ public class AdminUsersAccountConsumeBiz extends BaseBiz {
         }
         if (dao.save(record) > 0) {
             account.setAvailableAmount(record.getBalanceAmount());
-            account.setSign(MD5Util.md5(account.getUserId().toString(), account.getAvailableAmount().toPlainString(), account.getFreezeAmount().toPlainString()));
+            account.setSign(Md5Util.md5(account.getUserId().toString(), account.getAvailableAmount().toPlainString(), account.getFreezeAmount().toPlainString()));
             usersAccountDao.updateById(account);
             return Result.success("操作成功");
         }

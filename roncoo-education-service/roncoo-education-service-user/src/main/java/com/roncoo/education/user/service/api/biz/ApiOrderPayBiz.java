@@ -3,7 +3,7 @@ package com.roncoo.education.user.service.api.biz;
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.enums.BuyTypeEnum;
 import com.roncoo.education.common.core.enums.OrderStatusEnum;
-import com.roncoo.education.common.core.tools.JSUtil;
+import com.roncoo.education.common.core.tools.JsonUtil;
 import com.roncoo.education.common.pay.PayFace;
 import com.roncoo.education.common.pay.req.TradeNotifyReq;
 import com.roncoo.education.common.pay.resp.TradeNotifyResp;
@@ -59,7 +59,7 @@ public class ApiOrderPayBiz extends BaseBiz {
         // 获取支付通道
         PayFace payFace = payFaceMap.get(payImpl);
         TradeNotifyResp resp = payFace.tradeNotify(notifyParam);
-        log.info("回调通知处理={}", JSUtil.toJsonString(resp));
+        log.info("回调通知处理={}", JsonUtil.toJsonString(resp));
 
         if (resp.isSuccess() && resp.getTradeStatus().equals(TradeStatusEnum.SUCCESS.getCode())) {
             // 处理交易成功订单

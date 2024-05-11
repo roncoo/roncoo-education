@@ -8,7 +8,7 @@ import com.alipay.api.response.AlipayTradeCloseResponse;
 import com.alipay.api.response.AlipayTradeFastpayRefundQueryResponse;
 import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.alipay.api.response.AlipayTradeRefundResponse;
-import com.roncoo.education.common.core.tools.JSUtil;
+import com.roncoo.education.common.core.tools.JsonUtil;
 import com.roncoo.education.common.pay.req.*;
 import com.roncoo.education.common.pay.resp.RefundQueryResp;
 import com.roncoo.education.common.pay.resp.RefundResp;
@@ -44,7 +44,7 @@ public class AliPayCommonBiz {
      * @return 响应结果
      */
     public TradeQueryResp tradeQuery(TradeQueryReq req) {
-        log.info("支付宝支付--交易查询，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("支付宝支付--交易查询，请求参数：{}", JsonUtil.toJsonString(req));
 
         // step1：创建返回对象
         TradeQueryResp resp = new TradeQueryResp();
@@ -96,7 +96,7 @@ public class AliPayCommonBiz {
      * @return 响应结果
      */
     public Boolean tradeClose(TradeCloseReq req) {
-        log.info("支付宝支付--交易关闭，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("支付宝支付--交易关闭，请求参数：{}", JsonUtil.toJsonString(req));
 
         // step1：创建返回对象
         TradeQueryResp resp = new TradeQueryResp();
@@ -126,7 +126,7 @@ public class AliPayCommonBiz {
      * @return 通知处理结果
      */
     public TradeNotifyResp tradeNotify(TradeNotifyReq req) {
-        log.info("支付宝支付--交易回调通知，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("支付宝支付--交易回调通知，请求参数：{}", JsonUtil.toJsonString(req));
 
         // step1：创建返回对象
         TradeNotifyResp resp = new TradeNotifyResp();
@@ -151,7 +151,7 @@ public class AliPayCommonBiz {
         }
 
         // step4：处理请求参数
-        TradeNotifyRequest tradeNotifyRequest = AlipayUtil.toBean(JSUtil.toJsonString(paramMap), TradeNotifyRequest.class);
+        TradeNotifyRequest tradeNotifyRequest = AlipayUtil.toBean(JsonUtil.toJsonString(paramMap), TradeNotifyRequest.class);
 
         //WAIT_BUYER_PAY（交易创建，等待买家付款
         // TRADE_CLOSED（未付款交易超时关闭，或支付完成后全额退款）
@@ -186,7 +186,7 @@ public class AliPayCommonBiz {
      * @return 响应结果
      */
     public RefundResp refund(RefundReq req) {
-        log.info("支付宝支付--申请退款，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("支付宝支付--申请退款，请求参数：{}", JsonUtil.toJsonString(req));
 
         // step1：创建返回对象
         RefundResp resp = new RefundResp();
@@ -224,7 +224,7 @@ public class AliPayCommonBiz {
      * @return 响应结果
      */
     public RefundQueryResp refundQuery(RefundQueryReq req) {
-        log.info("支付宝支付--退款查询，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("支付宝支付--退款查询，请求参数：{}", JsonUtil.toJsonString(req));
 
         // step1：创建返回对象
         RefundQueryResp resp = new RefundQueryResp();

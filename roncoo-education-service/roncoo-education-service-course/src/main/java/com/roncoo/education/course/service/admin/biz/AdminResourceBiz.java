@@ -10,7 +10,7 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ResourceTypeEnum;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.core.tools.JSUtil;
+import com.roncoo.education.common.core.tools.JsonUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.video.VodUtil;
 import com.roncoo.education.common.video.req.VodPlayConfigReq;
@@ -204,7 +204,7 @@ public class AdminResourceBiz extends BaseBiz {
     private Result<String> handleDelete(Resource resource) {
         List<CourseChapterPeriod> record = courseChapterPeriodDao.listByResourceId(resource.getId());
         if (CollUtil.isNotEmpty(record)) {
-            log.warn("{}：资源引用={}", JSUtil.toJsonString(resource), JSUtil.toJsonString(record.stream().map(CourseChapterPeriod::getPeriodName).collect(Collectors.toList())));
+            log.warn("{}：资源引用={}", JsonUtil.toJsonString(resource), JsonUtil.toJsonString(record.stream().map(CourseChapterPeriod::getPeriodName).collect(Collectors.toList())));
             return Result.error(resource.getResourceName() + "，该资源存在引用，暂不能删除");
         }
         if (dao.deleteById(resource.getId()) > 0) {

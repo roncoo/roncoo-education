@@ -2,7 +2,7 @@ package com.roncoo.education.system.feign.biz;
 
 import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.core.tools.IPUtil;
+import com.roncoo.education.common.core.tools.IpUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.system.dao.SysLogDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysLog;
@@ -30,7 +30,7 @@ public class FeignSysLogBiz extends BaseBiz {
 
     public int save(FeignSysLogQO qo) {
         if (StringUtils.hasText(qo.getLoginIp())) {
-            IPUtil.IpInfo ipInfo = getIpInfo(qo.getLoginIp());
+            IpUtil.IpInfo ipInfo = getIpInfo(qo.getLoginIp());
             if (ipInfo != null) {
                 qo.setProvince(ipInfo.getPro());
                 qo.setCity(ipInfo.getCity());

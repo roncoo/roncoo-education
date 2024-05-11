@@ -1,7 +1,7 @@
 package com.roncoo.education.course.test;
 
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.core.tools.JSUtil;
+import com.roncoo.education.common.core.tools.JsonUtil;
 import com.roncoo.education.course.service.api.biz.ApiZoneBiz;
 import com.roncoo.education.course.service.api.resp.ApiZoneResp;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +19,6 @@ public class ZoneTest extends BaseTest {
     @Test
     public void list() {
         Result<List<ApiZoneResp>> result = apiZoneBiz.list();
-        log.info("zone={}", JSUtil.toJsonString(result.getData()));
+        log.info("zone={}", JsonUtil.toJsonString(result.getData()));
     }
 }

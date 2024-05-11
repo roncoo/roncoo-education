@@ -17,7 +17,7 @@ import java.util.Date;
  * @author wujing
  */
 @Slf4j
-public final class JWTUtil {
+public final class JwtUtil {
 
     private static final String TOKEN_SECRET = "eyJhbGciOiJIUzI1NiJ9";
     private static final String ISSUER = "RONCOO";

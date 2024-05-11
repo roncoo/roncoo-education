@@ -8,7 +8,7 @@ import com.github.binarywang.wxpay.bean.result.WxPayUnifiedOrderV3Result;
 import com.github.binarywang.wxpay.bean.result.enums.TradeTypeEnum;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
-import com.roncoo.education.common.core.tools.JSUtil;
+import com.roncoo.education.common.core.tools.JsonUtil;
 import com.roncoo.education.common.pay.PayFace;
 import com.roncoo.education.common.pay.biz.WxPayCommonBiz;
 import com.roncoo.education.common.pay.req.*;
@@ -58,7 +58,7 @@ public class WxScanPayImpl implements PayFace {
      * @return 支付下单结果
      */
     private TradeOrderResp serviceProviderPay(TradeOrderReq req) {
-        log.info("微信服务商--扫码支付--交易下单，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("微信服务商--扫码支付--交易下单，请求参数：{}", JsonUtil.toJsonString(req));
 
         // step1：创建交易返回对象
         TradeOrderResp resp = new TradeOrderResp();
@@ -102,7 +102,7 @@ public class WxScanPayImpl implements PayFace {
      * @return 支付下单结果
      */
     private TradeOrderResp directPay(TradeOrderReq req) {
-        log.info("微信直营商户--扫码支付--交易下单，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("微信直营商户--扫码支付--交易下单，请求参数：{}", JsonUtil.toJsonString(req));
 
         // step1：创建交易返回对象
         TradeOrderResp resp = new TradeOrderResp();
@@ -146,7 +146,7 @@ public class WxScanPayImpl implements PayFace {
      */
     @Override
     public TradeQueryResp tradeQuery(TradeQueryReq req) {
-        log.info("微信扫码支付--交易查询，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("微信扫码支付--交易查询，请求参数：{}", JsonUtil.toJsonString(req));
         return wxPayCommonBiz.tradeQuery(req);
     }
 
@@ -158,7 +158,7 @@ public class WxScanPayImpl implements PayFace {
      */
     @Override
     public Boolean tradeClose(TradeCloseReq req) {
-        log.info("微信扫码支付--交易关闭，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("微信扫码支付--交易关闭，请求参数：{}", JsonUtil.toJsonString(req));
         return wxPayCommonBiz.tradeClose(req);
     }
 
@@ -170,7 +170,7 @@ public class WxScanPayImpl implements PayFace {
      */
     @Override
     public TradeNotifyResp tradeNotify(TradeNotifyReq req) {
-        log.info("微信扫码支付--交易通知，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("微信扫码支付--交易通知，请求参数：{}", JsonUtil.toJsonString(req));
         return wxPayCommonBiz.tradeNotify(req);
     }
 
@@ -182,7 +182,7 @@ public class WxScanPayImpl implements PayFace {
      */
     @Override
     public RefundResp refund(RefundReq req) {
-        log.info("微信扫码支付--交易退款，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("微信扫码支付--交易退款，请求参数：{}", JsonUtil.toJsonString(req));
         return wxPayCommonBiz.refund(req);
     }
 
@@ -194,7 +194,7 @@ public class WxScanPayImpl implements PayFace {
      */
     @Override
     public RefundQueryResp refundQuery(RefundQueryReq req) {
-        log.info("微信扫码支付--交易退款查询，请求参数：{}", JSUtil.toJsonString(req));
+        log.info("微信扫码支付--交易退款查询，请求参数：{}", JsonUtil.toJsonString(req));
         return wxPayCommonBiz.refundQuery(req);
     }
 }

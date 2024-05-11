@@ -3,8 +3,8 @@ package com.roncoo.education.common.video.impl.polyv;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
-import com.roncoo.education.common.core.tools.JSUtil;
-import com.roncoo.education.common.core.tools.MD5Util;
+import com.roncoo.education.common.core.tools.JsonUtil;
+import com.roncoo.education.common.core.tools.Md5Util;
 import com.roncoo.education.common.video.req.VodPlayConfigReq;
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,7 +42,7 @@ public class PolyvSignUtil {
      * @return 观看签名
      */
     public static String getExternalAuthSign(String secretKey, String userId, Long ts) {
-        return MD5Util.md5(secretKey + userId + secretKey + ts);
+        return Md5Util.md5(secretKey + userId + secretKey + ts);
     }
 
     public static String getSha1Sign(Map<String, Object> params, String secretKey) {
@@ -208,7 +208,7 @@ public class PolyvSignUtil {
     public static VodPlayConfigReq.VodAuthCode decodeForPlay(String code) {
         try {
             code = replace(code);
-            return JSUtil.parseObject(new String(SecureUtil.des(Base64.decode(PolyvHttpUtil.KEY)).decrypt(Base64.decode(URLDecoder.decode(code, StandardCharsets.UTF_8.name())))), VodPlayConfigReq.VodAuthCode.class);
+            return JsonUtil.parseObject(new String(SecureUtil.des(Base64.decode(PolyvHttpUtil.KEY)).decrypt(Base64.decode(URLDecoder.decode(code, StandardCharsets.UTF_8.name())))), VodPlayConfigReq.VodAuthCode.class);
         } catch (Exception e) {
             log.error("保利威视，解密出错", e);
             return null;

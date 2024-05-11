@@ -5,7 +5,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONObject;
 import com.roncoo.education.common.core.enums.VideoStatusEnum;
 import com.roncoo.education.common.core.enums.VodPlatformEnum;
-import com.roncoo.education.common.core.tools.JSUtil;
+import com.roncoo.education.common.core.tools.JsonUtil;
 import com.roncoo.education.common.video.impl.polyv.PolyvVodUtil;
 import com.roncoo.education.common.video.impl.polyv.vod.resp.PolyvVideoInfoResp;
 import com.roncoo.education.common.video.impl.priyun.PrivateYunVodUtil;
@@ -113,10 +113,10 @@ public final class VodUtil {
         if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
             // 上传回调地址
             String callbackUrl = req.getWebsiteDomain() + PRIVATEY_CALLBACK;
-            return JSUtil.toJsonString(PrivateYunVodUtil.getUploadConfig(req.getPriyAccessKeyId(), req.getPriyAccessKeySecret(), req.getPriyUrl(), callbackUrl, ""));
+            return JsonUtil.toJsonString(PrivateYunVodUtil.getUploadConfig(req.getPriyAccessKeyId(), req.getPriyAccessKeySecret(), req.getPriyUrl(), callbackUrl, ""));
         }
         if (VodPlatformEnum.POLYV.getCode().equals(req.getVodPlatform())) {
-            return JSUtil.toJsonString(PolyvVodUtil.getUploadConfig(req.getPolyvUserId(), req.getPolyvSecretKey(), req.getPolyvWriteToken()));
+            return JsonUtil.toJsonString(PolyvVodUtil.getUploadConfig(req.getPolyvUserId(), req.getPolyvSecretKey(), req.getPolyvWriteToken()));
         }
         return "";
     }
@@ -159,7 +159,7 @@ public final class VodUtil {
                 resp.setCoverUrl(basicInfo.getCoverURL());
                 resp.setFileSize(basicInfo.getSize());
             } else {
-                log.warn("保利威-getVideoInfo={}", JSUtil.toJsonString(basicInfo));
+                log.warn("保利威-getVideoInfo={}", JsonUtil.toJsonString(basicInfo));
             }
             return resp;
         }
@@ -205,11 +205,11 @@ public final class VodUtil {
                     playUrls.setSdUrl(playUrls.getSdUrl() + "?token=" + tokenResponse.getToken());
                 }
             }
-            return JSUtil.toJsonString(playUrls);
+            return JsonUtil.toJsonString(playUrls);
         }
         if (VodPlatformEnum.POLYV.getCode().equals(req.getVodPlatform())) {
             // 返回播放配置
-            return JSUtil.toJsonString(PolyvVodUtil.getSignForPlay(req.getPolyvUserId(), req.getPolyvSecretKey(), playConfigReq));
+            return JsonUtil.toJsonString(PolyvVodUtil.getSignForPlay(req.getPolyvUserId(), req.getPolyvSecretKey(), playConfigReq));
         }
         return "";
     }

@@ -12,7 +12,7 @@ import com.roncoo.education.common.core.enums.MenuTypeEnum;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.Constants;
-import com.roncoo.education.common.core.tools.SHA1Util;
+import com.roncoo.education.common.core.tools.Sha1Util;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.system.dao.SysRoleDao;
 import com.roncoo.education.system.dao.SysRoleUserDao;
@@ -112,7 +112,7 @@ public class AdminSysUserBiz extends BaseBiz {
         }
         SysUser record = BeanUtil.copyProperties(req, SysUser.class);
         record.setMobileSalt(IdUtil.simpleUUID());
-        record.setMobilePsw(SHA1Util.getSign(record.getMobileSalt() + mobilePsw));
+        record.setMobilePsw(Sha1Util.getSign(record.getMobileSalt() + mobilePsw));
         int results = dao.save(record);
         if (results > 0) {
             return Result.success("操作成功");
@@ -183,7 +183,7 @@ public class AdminSysUserBiz extends BaseBiz {
         SysUser record = new SysUser();
         record.setId(req.getUserId());
         record.setMobileSalt(IdUtil.simpleUUID());
-        record.setMobilePsw(SHA1Util.getSign(record.getMobileSalt() + mobilePsw));
+        record.setMobilePsw(Sha1Util.getSign(record.getMobileSalt() + mobilePsw));
         dao.updateById(record);
         return Result.success("操作成功");
     }

@@ -1,6 +1,6 @@
 package com.roncoo.education.common.video.impl.polyv;
 
-import com.roncoo.education.common.core.tools.JSUtil;
+import com.roncoo.education.common.core.tools.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -136,7 +136,7 @@ public class PolyvHttpUtil {
         try {
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, UTF8));
         } catch (UnsupportedEncodingException e) {
-            log.error("请求异常，url={}, paramMap={}", url, JSUtil.toJsonString(paramMap), e);
+            log.error("请求异常，url={}, paramMap={}", url, JsonUtil.toJsonString(paramMap), e);
         }
         // 设置header信息
         // 指定报文头【Content-type】、【User-Agent】
@@ -184,7 +184,7 @@ public class PolyvHttpUtil {
      * @throws IOException 读写异常
      */
     private static <T> T post(String url, HttpPost httpPost, String encoding, DataParse<T> dataParse) {
-        log.debug("http post url: {} , 请求参数: {}", url, JSUtil.toJsonString(httpPost));
+        log.debug("http post url: {} , 请求参数: {}", url, JsonUtil.toJsonString(httpPost));
 
         T result = null;
         CloseableHttpResponse response;

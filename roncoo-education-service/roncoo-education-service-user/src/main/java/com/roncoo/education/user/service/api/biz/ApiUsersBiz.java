@@ -95,7 +95,7 @@ public class ApiUsersBiz extends BaseBiz {
 
         UsersLoginResp dto = new UsersLoginResp();
         dto.setMobile(user.getMobile());
-        dto.setToken(JWTUtil.create(user.getId(), JWTUtil.DATE));
+        dto.setToken(JwtUtil.create(user.getId(), JwtUtil.DATE));
         return Result.success(dto);
     }
 
@@ -139,7 +139,7 @@ public class ApiUsersBiz extends BaseBiz {
 
         UsersLoginResp dto = new UsersLoginResp();
         dto.setMobile(user.getMobile());
-        dto.setToken(JWTUtil.create(user.getId(), JWTUtil.DATE));
+        dto.setToken(JwtUtil.create(user.getId(), JwtUtil.DATE));
 
         // token，放入缓存
         cacheRedis.set(dto.getToken(), user.getId(), 1, TimeUnit.DAYS);
@@ -152,7 +152,7 @@ public class ApiUsersBiz extends BaseBiz {
             privateKey = feignSysConfig.getLogin().getRsaLoginPrivateKey();
             cacheRedis.set(Constants.RedisPre.PRIVATEKEY, privateKey, 1, TimeUnit.DAYS);
         }
-        return RSAUtil.decrypt(password, privateKey);
+        return RsaUtil.decrypt(password, privateKey);
     }
 
     private Users register(String mobile, String password) {
@@ -171,7 +171,7 @@ public class ApiUsersBiz extends BaseBiz {
         usersAccount.setUserId(user.getId());
         usersAccount.setAvailableAmount(BigDecimal.ZERO);
         usersAccount.setFreezeAmount(BigDecimal.ZERO);
-        usersAccount.setSign(MD5Util.md5(usersAccount.getUserId().toString(), usersAccount.getAvailableAmount().toPlainString(), usersAccount.getFreezeAmount().toPlainString()));
+        usersAccount.setSign(Md5Util.md5(usersAccount.getUserId().toString(), usersAccount.getAvailableAmount().toPlainString(), usersAccount.getFreezeAmount().toPlainString()));
         usersAccountDao.save(usersAccount);
         return user;
     }
@@ -180,7 +180,7 @@ public class ApiUsersBiz extends BaseBiz {
         record.setUserId(userId);
         record.setLoginStatus(status.getCode());
         record.setLoginIp(ServletUtil.getClientIP(request));
-        IPUtil.IpInfo ipInfo = getIpInfo(record.getLoginIp());
+        IpUtil.IpInfo ipInfo = getIpInfo(record.getLoginIp());
         if (ObjectUtil.isNotNull(ipInfo)) {
             record.setProvince(ipInfo.getPro());
             record.setCity(ipInfo.getCity());
@@ -194,7 +194,7 @@ public class ApiUsersBiz extends BaseBiz {
             throw new BaseException("操作频繁，请稍后再试");
         }
 
-        String code = NOUtil.getVerCode();
+        String code = NumUtil.getVerCode();
         log.warn("手机号：{}，验证码：{}", req.getMobile(), code);
 
         // TODO 正常应该是发送成功才放入缓存，这里方便没有短信通道的情况下，也能测试注册（上线需要删除该处）

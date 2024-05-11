@@ -1,7 +1,7 @@
 package com.roncoo.education.course.callback.biz;
 
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.core.tools.JSUtil;
+import com.roncoo.education.common.core.tools.JsonUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.video.impl.polyv.PolyvVodUtil;
 import com.roncoo.education.common.video.impl.polyv.vod.CallbackEventTypeEnum;
@@ -31,12 +31,12 @@ public class PolyvCallbackBiz extends BaseBiz {
     private final IFeignSysConfig feignSysConfig;
 
     public String polyvUpload(CallbackVodUpload callbackVodUpload) {
-        log.warn("保利威-上传回调，{}", JSUtil.toJsonString(callbackVodUpload));
+        log.warn("保利威-上传回调，{}", JsonUtil.toJsonString(callbackVodUpload));
 
         VodConfig vodConfig = feignSysConfig.getVod();
         String sign = PolyvVodUtil.getCallbackSign(BeanUtil.beanToStringMap(callbackVodUpload), vodConfig.getPolyvSecretKey());
         if (!callbackVodUpload.getSign().equals(sign)) {
-            log.error("保利威视--点播上传回调--验签失败 {}", JSUtil.toJsonString(callbackVodUpload));
+            log.error("保利威视--点播上传回调--验签失败 {}", JsonUtil.toJsonString(callbackVodUpload));
             return FAIL;
         }
 

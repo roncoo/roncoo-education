@@ -4,7 +4,7 @@
 package com.roncoo.education.common.service;
 
 import com.roncoo.education.common.core.base.Base;
-import com.roncoo.education.common.core.tools.JSUtil;
+import com.roncoo.education.common.core.tools.JsonUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.DataInputStream;
@@ -58,7 +58,7 @@ public class BaseController extends Base {
             paramMap.put(key, map.get(key)[0]);
         }
         if (paramMap.isEmpty()) {
-            return new TreeMap<>(JSUtil.parseObject(getString(request), TreeMap.class));
+            return new TreeMap<>(JsonUtil.parseObject(getString(request), TreeMap.class));
         }
         return paramMap;
     }

@@ -1,6 +1,6 @@
 package com.roncoo.education.common.cache;
 
-import com.roncoo.education.common.core.tools.JSUtil;
+import com.roncoo.education.common.core.tools.JsonUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
@@ -30,7 +30,7 @@ public class CacheRedis {
         if (t != null) {
             String value = t.toString();
             if (!(t instanceof String || t instanceof Long || t instanceof Integer)) {
-                value = JSUtil.toJsonString(t);
+                value = JsonUtil.toJsonString(t);
             }
             stringRedisTemplate.opsForValue().set(key, value, timeToLive, TimeUnit.MILLISECONDS);
         }
@@ -44,7 +44,7 @@ public class CacheRedis {
         if (t != null) {
             String value = t.toString();
             if (!(t instanceof String || t instanceof Long || t instanceof Integer)) {
-                value = JSUtil.toJsonString(t);
+                value = JsonUtil.toJsonString(t);
             }
             stringRedisTemplate.opsForValue().set(key, value, time, timeUnit);
         }
@@ -61,13 +61,13 @@ public class CacheRedis {
     public <T> T get(String key, Class<T> clazz) {
         String value = get(key);
         if (StringUtils.hasText(value)) {
-            return JSUtil.parseObject(value, clazz);
+            return JsonUtil.parseObject(value, clazz);
         }
         return null;
     }
 
     public <T> List<T> list(String key, Class<T> clazz) {
-        return JSUtil.parseArray(get(key), clazz);
+        return JsonUtil.parseArray(get(key), clazz);
     }
 
     public void delete(String key) {
