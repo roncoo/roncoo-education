@@ -1,5 +1,5 @@
 <div style="text-align:center">
-    <img src="images/logo.jpg" alt="领课教育系统-开源版"/>
+    <img src="distribution/images/logo.jpg" alt="领课教育系统-开源版"/>
     <div>    
         <a href="http://spring.io/projects/spring-boot">
             <img src="https://img.shields.io/badge/spring--boot-2.6.3-blue.svg" alt="spring-boot">
@@ -29,20 +29,20 @@ Cloud为核心框架。系统目前主要功能有课程点播功能，支持多
 
 <table>
 <tr>
-  <td><img src="images/web1.png"/></td>
-  <td><img src="images/web2.png"/></td>
+  <td><img src="distribution/images/web1.png"/></td>
+  <td><img src="distribution/images/web2.png"/></td>
 </tr>
 <tr>
-  <td><img src="images/web3.png"/></td>
-  <td><img src="images/web4.png"/></td>
+  <td><img src="distribution/images/web3.png"/></td>
+  <td><img src="distribution/images/web4.png"/></td>
 </tr>
 <tr>
-  <td><img src="images/admin1.png"/></td>
-  <td><img src="images/admin2.png"/></td>
+  <td><img src="distribution/images/admin1.png"/></td>
+  <td><img src="distribution/images/admin2.png"/></td>
 </tr>
 <tr>
-  <td><img src="images/admin3.png"/></td>
-  <td><img src="images/admin4.png"/></td>
+  <td><img src="distribution/images/admin3.png"/></td>
+  <td><img src="distribution/images/admin4.png"/></td>
 </tr>
 </table>
 
@@ -57,5 +57,5 @@ Cloud为核心框架。系统目前主要功能有课程点播功能，支持多
 
 <div style="text-align:center">
 <div>关注微信公众号可获取更多学习资料（包含sql脚本）</div>
-<img src="images/gzh.png" alt="领课开源-微信公众号" width="600"/>
+<img src="distribution/images/gzh.png" alt="领课开源-微信公众号" width="600"/>
 </div>
