@@ -96,6 +96,8 @@ public class ApiCourseBiz extends BaseBiz {
             nsb.withSorts(new FieldSortBuilder("sort").order(SortOrder.ASC));
             nsb.withSorts(new FieldSortBuilder("id").order(SortOrder.DESC));
         }
+        qb.must(QueryBuilders.termQuery("statusId", StatusIdEnum.YES.getCode()));
+        qb.must(QueryBuilders.termQuery("isPutaway", PutawayEnum.UP.getCode()));
         nsb.withQuery(qb);
         SearchHits<EsCourse> searchHits = elasticsearchRestTemplate.search(nsb.build(), EsCourse.class, IndexCoordinates.of(EsCourse.COURSE));
         if (searchHits.getTotalHits() > 0) {
@@ -114,6 +116,8 @@ public class ApiCourseBiz extends BaseBiz {
             if (StringUtils.hasText(req.getCourseName())) {
                 c.andCourseNameLike(PageUtil.like(req.getCourseName()));
             }
+            c.andStatusIdEqualTo(StatusIdEnum.YES.getCode());
+            c.andIsPutawayEqualTo(PutawayEnum.UP.getCode());
             example.setOrderByClause("sort asc, id desc");
             Page<Course> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
             return Result.success(PageUtil.transform(page, ApiCoursePageResp.class));

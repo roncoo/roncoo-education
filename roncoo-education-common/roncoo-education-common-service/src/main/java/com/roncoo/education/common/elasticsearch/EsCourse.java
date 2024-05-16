@@ -62,4 +62,12 @@ public class EsCourse implements Serializable {
      * 课程排序
      */
     private Integer sort;
+    /**
+     * 状态
+     */
+    private Integer statusId;
+    /**
+     * 是否上架
+     */
+    private Integer isPutaway;
 }
