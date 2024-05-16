@@ -42,7 +42,7 @@ public class AdminWebsiteNavBiz extends BaseBiz {
         WebsiteNavExample example = new WebsiteNavExample();
         Criteria c = example.createCriteria();
         if (StringUtils.hasText(req.getNavTitle())) {
-            c.andNavTitleLike(PageUtil.rightLike(req.getNavTitle()));
+            c.andNavTitleLike(PageUtil.like(req.getNavTitle()));
         }
         example.setOrderByClause("sort asc, id desc");
         Page<WebsiteNav> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);

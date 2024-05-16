@@ -42,7 +42,7 @@ public class AdminWebsiteLinkBiz extends BaseBiz {
         WebsiteLinkExample example = new WebsiteLinkExample();
         Criteria c = example.createCriteria();
         if (StringUtils.hasText(req.getLinkName())) {
-            c.andLinkNameLike(PageUtil.rightLike(req.getLinkName()));
+            c.andLinkNameLike(PageUtil.like(req.getLinkName()));
         }
         example.setOrderByClause(" sort asc, id desc ");
         Page<WebsiteLink> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);

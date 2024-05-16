@@ -44,7 +44,7 @@ public class ApiLecturerBiz extends BaseBiz {
         LecturerExample.Criteria c = example.createCriteria();
         c.andStatusIdEqualTo(StatusIdEnum.YES.getCode());
         if (StringUtils.hasText(req.getLecturerName())) {
-            c.andLecturerNameLike(PageUtil.rightLike(req.getLecturerName()));
+            c.andLecturerNameLike(PageUtil.like(req.getLecturerName()));
         }
         example.setOrderByClause("sort asc, id desc");
         Page<Lecturer> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);

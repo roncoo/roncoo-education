@@ -68,7 +68,7 @@ public class LecturerDaoImpl extends AbstractBaseJdbc implements LecturerDao {
     public List<Lecturer> getByLecturerName(String LecturerName) {
         LecturerExample example = new LecturerExample();
         LecturerExample.Criteria criteria = example.createCriteria();
-        criteria.andLecturerNameLike(PageUtil.rightLike(LecturerName));
+        criteria.andLecturerNameLike(PageUtil.like(LecturerName));
         List<Lecturer> resultList = this.lecturerMapper.selectByExample(example);
         if (resultList.isEmpty()) {
             return null;

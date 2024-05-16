@@ -76,7 +76,7 @@ public class AdminCourseBiz extends BaseBiz {
         CourseExample example = new CourseExample();
         Criteria c = example.createCriteria();
         if (StringUtils.hasText(req.getCourseName())) {
-            c.andCourseNameLike(PageUtil.rightLike(req.getCourseName()));
+            c.andCourseNameLike(PageUtil.like(req.getCourseName()));
         }
         example.setOrderByClause("sort asc, id desc");
         Page<Course> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);

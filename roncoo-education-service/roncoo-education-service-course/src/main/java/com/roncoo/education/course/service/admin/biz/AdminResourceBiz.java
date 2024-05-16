@@ -82,7 +82,7 @@ public class AdminResourceBiz extends BaseBiz {
             c.andResourceTypeEqualTo(req.getResourceType());
         }
         if (StringUtils.hasText(req.getResourceName())) {
-            c.andResourceNameLike(PageUtil.rightLike(req.getResourceName()));
+            c.andResourceNameLike(PageUtil.like(req.getResourceName()));
         }
         if (ObjectUtil.isNotNull(req.getCategoryId())) {
             List<Category> list = categoryDao.listByExample(new CategoryExample());

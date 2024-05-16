@@ -42,7 +42,7 @@ public class AdminZoneBiz extends BaseBiz {
         ZoneExample example = new ZoneExample();
         Criteria c = example.createCriteria();
         if (StringUtils.hasText(req.getZoneName())) {
-            c.andZoneNameLike(PageUtil.rightLike(req.getZoneName()));
+            c.andZoneNameLike(PageUtil.like(req.getZoneName()));
         }
         example.setOrderByClause("sort asc, id desc");
         Page<Zone> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
