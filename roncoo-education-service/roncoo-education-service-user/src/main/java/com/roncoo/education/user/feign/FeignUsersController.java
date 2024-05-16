@@ -39,6 +39,12 @@ public class FeignUsersController extends BaseController implements IFeignUsers 
     }
 
     @Override
+    public List<UsersVO> listByMobile(@PathVariable(value = "mobile") String mobile) {
+        return biz.listByMobile(mobile);
+    }
+
+
+    @Override
     public Map<Long, UsersVO> listByIds(@RequestBody List<Long> userIdList) {
         return biz.listByIds(userIdList);
     }

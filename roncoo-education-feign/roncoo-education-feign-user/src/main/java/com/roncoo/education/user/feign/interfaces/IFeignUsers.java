@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 讲师信息 接口
+ * 用户信息 接口
  *
  * @author wujing
  * @date 2022-08-27
@@ -22,7 +22,7 @@ public interface IFeignUsers {
      * 根据ID获取信息
      *
      * @param id 主键ID
-     * @return 讲师信息
+     * @return 用户信息
      */
     @GetMapping(value = "/getById/{id}")
     UsersVO getById(@PathVariable(value = "id") Long id);
@@ -31,10 +31,19 @@ public interface IFeignUsers {
      * 根据ID获取信息
      *
      * @param id 主键ID
-     * @return 讲师信息
+     * @return 用户信息
      */
     @GetMapping(value = "/getByMobile/{mobile}")
     UsersVO getByMobile(@PathVariable(value = "mobile") String mobile);
+
+    /**
+     * 根据ID获取信息，模糊查询
+     *
+     * @param id 主键ID
+     * @return 用户信息
+     */
+    @GetMapping(value = "/listByMobile/{mobile}")
+    List<UsersVO> listByMobile(@PathVariable(value = "mobile") String mobile);
 
     /**
      * 根据ID集合获取集合

@@ -21,6 +21,7 @@ import com.roncoo.education.user.feign.interfaces.IFeignUsers;
 import com.roncoo.education.user.feign.interfaces.vo.UsersVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -52,6 +53,12 @@ public class AdminUserCourseCollectBiz extends BaseBiz {
         Criteria c = example.createCriteria();
         if (ObjectUtil.isNotEmpty(req.getCourseId())) {
             c.andCourseIdEqualTo(req.getCourseId());
+        }
+        if (StringUtils.hasText(req.getMobile())) {
+            List<UsersVO> usersList = feignUsers.listByMobile(req.getMobile());
+            if (CollUtil.isNotEmpty(usersList)) {
+                c.andUserIdIn(usersList.stream().map(UsersVO::getId).collect(Collectors.toList()));
+            }
         }
         Page<UserCourseCollect> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminUserCourseCollectPageResp> respPage = PageUtil.transform(page, AdminUserCourseCollectPageResp.class);

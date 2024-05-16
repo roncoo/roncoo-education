@@ -76,4 +76,11 @@ public class UsersDaoImpl extends AbstractBaseJdbc implements UsersDao {
     public Integer count(UsersExample example) {
         return this.usersMapper.countByExample(example);
     }
+
+    @Override
+    public List<Users> listByMobile(String mobile) {
+        UsersExample example = new UsersExample();
+        example.createCriteria().andMobileLike(PageUtil.rightLike(mobile));
+        return this.usersMapper.selectByExample(example);
+    }
 }

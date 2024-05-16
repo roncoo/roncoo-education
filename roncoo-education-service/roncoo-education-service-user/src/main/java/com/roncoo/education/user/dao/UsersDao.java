@@ -22,4 +22,6 @@ public interface UsersDao {
     List<Users> listByIds(List<Long> userIdList);
 
     Integer count(UsersExample example);
+
+    List<Users> listByMobile(String mobile);
 }

@@ -63,10 +63,11 @@ public class AdminUserCourseBiz extends BaseBiz {
             c.andCourseIdEqualTo(req.getCourseId());
         }
         if (StringUtils.hasText(req.getMobile())) {
-            UsersVO usersVO = feignUsers.getByMobile(req.getMobile());
-            c.andUserIdEqualTo(usersVO.getId());
+            List<UsersVO> usersList = feignUsers.listByMobile(req.getMobile());
+            if (CollUtil.isNotEmpty(usersList)) {
+                c.andUserIdIn(usersList.stream().map(UsersVO::getId).collect(Collectors.toList()));
+            }
         }
-
         example.setOrderByClause("id desc");
         Page<UserCourse> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminUserCourseRecordResp> respPage = PageUtil.transform(page, AdminUserCourseRecordResp.class);

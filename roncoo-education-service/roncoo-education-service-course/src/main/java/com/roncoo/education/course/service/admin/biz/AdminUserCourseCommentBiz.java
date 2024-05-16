@@ -56,6 +56,12 @@ public class AdminUserCourseCommentBiz extends BaseBiz {
         if (StringUtils.hasText(req.getCommentText())) {
             c.andCommentTextLike(PageUtil.like(req.getCommentText()));
         }
+        if (StringUtils.hasText(req.getMobile())) {
+            List<UsersVO> usersList = feignUsers.listByMobile(req.getMobile());
+            if (CollUtil.isNotEmpty(usersList)) {
+                c.andUserIdIn(usersList.stream().map(UsersVO::getId).collect(Collectors.toList()));
+            }
+        }
         example.setOrderByClause("id desc");
         Page<UserCourseComment> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminUserCourseCommentPageResp> respPage = PageUtil.transform(page, AdminUserCourseCommentPageResp.class);
