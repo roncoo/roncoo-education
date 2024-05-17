@@ -53,7 +53,7 @@ public class LecturerDaoImpl extends AbstractBaseJdbc implements LecturerDao {
         int totalPage = PageUtil.countTotalPage(count, pageSize);
         example.setLimitStart(PageUtil.countOffset(pageCurrent, pageSize));
         example.setPageSize(pageSize);
-        return new Page<Lecturer>(count, totalPage, pageCurrent, pageSize, this.lecturerMapper.selectByExampleWithBLOBs(example));
+        return new Page<Lecturer>(count, totalPage, pageCurrent, pageSize, this.lecturerMapper.selectByExample(example));
     }
 
     @Override
