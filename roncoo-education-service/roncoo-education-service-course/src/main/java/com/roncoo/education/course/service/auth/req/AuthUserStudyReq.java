@@ -35,6 +35,9 @@ public class AuthUserStudyReq implements Serializable {
     @ApiModelProperty(value = "当前观看页数，文档类型必传")
     private Integer currentPage;
 
+    @ApiModelProperty(value = "学习状态，1学习中，2暂停")
+    private Integer studyStatus = 1;
+
     @ApiModelProperty(value = "资源类型，内部传参使用", hidden = true)
     private Integer resourceType;
 
