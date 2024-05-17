@@ -31,7 +31,7 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>5.8.18</version>
+            <version>5.8.27</version>
         </dependency>
 
         <!-- jwt -->
