@@ -111,7 +111,7 @@ public class ApiUsersBiz extends BaseBiz {
         if (!StringUtils.hasText(verCode)) {
             return Result.error("验证码已过期");
         }
-        if (!verCode.equals(req.getVerCode())) {
+        if (!verCode.equals(req.getVerCode().toLowerCase())) {
             return Result.error("验证码不正确");
         }
 
