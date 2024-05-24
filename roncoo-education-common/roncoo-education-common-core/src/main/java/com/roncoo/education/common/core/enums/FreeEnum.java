@@ -12,8 +12,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum FreeEnum {
-
-    FREE(1, "免费", ""), CHARGE(0, "收费", "red");
+    
+    CHARGE(0, "收费", "red"),
+    FREE(1, "免费", "");
 
     private Integer code;
 
