@@ -215,7 +215,6 @@ public class AuthOrderPayBiz extends BaseBiz {
         resp.setSerialNumber(orderPay.getSerialNumber());
         resp.setOrderStatus(OrderStatusEnum.SUCCESS.getCode());
         resp.setPayMessage("success");
-        resp.setPayType(pay)
         return Result.success(resp);
     }
 
