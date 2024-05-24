@@ -76,6 +76,7 @@ public class ApiOrderPayBiz extends BaseBiz {
                 // 更新支付订单
                 updateOrderPay(orderPay);
                 // 更新订单
+                orderInfo.setPayType(orderPay.getPayType());
                 updateOrderInfo(orderInfo);
                 // 课程绑定用户
                 feignUserCourse.binding(new UserCourseBindingQO().setCourseId(orderInfo.getCourseId()).setUserId(orderInfo.getUserId()).setBuyType(BuyTypeEnum.BUY.getCode()));
@@ -86,6 +87,7 @@ public class ApiOrderPayBiz extends BaseBiz {
     private void updateOrderInfo(OrderInfo orderInfo) {
         OrderInfo info = new OrderInfo();
         info.setId(orderInfo.getId());
+        info.setPayType(orderInfo.getPayType());
         info.setOrderStatus(OrderStatusEnum.SUCCESS.getCode());
         //info.setPayTime(LocalDateTime.now());
         orderInfoDao.updateById(info);

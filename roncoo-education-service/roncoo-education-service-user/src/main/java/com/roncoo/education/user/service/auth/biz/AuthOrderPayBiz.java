@@ -139,6 +139,9 @@ public class AuthOrderPayBiz extends BaseBiz {
             return Result.error("请确认订单号是否正确");
         }
 
+        // 支付方式
+        orderInfo.setPayType(req.getPayType());
+
         // 校验课程信息
         CourseViewVO courseViewVO = feignCourse.getById(orderInfo.getCourseId());
         if (!courseViewVO.getStatusId().equals(StatusIdEnum.YES.getCode()) || !courseViewVO.getIsPutaway().equals(PutawayEnum.UP.getCode())) {
@@ -212,6 +215,7 @@ public class AuthOrderPayBiz extends BaseBiz {
         resp.setSerialNumber(orderPay.getSerialNumber());
         resp.setOrderStatus(OrderStatusEnum.SUCCESS.getCode());
         resp.setPayMessage("success");
+        resp.setPayType(pay)
         return Result.success(resp);
     }
 
@@ -275,7 +279,7 @@ public class AuthOrderPayBiz extends BaseBiz {
     /**
      * 创建支付订单
      */
-    private OrderPay createOrderPay(BigDecimal rulingPrice, BigDecimal coursePrice, int payType, Long orderNo, String remarkCus) {
+    private OrderPay createOrderPay(BigDecimal rulingPrice, BigDecimal coursePrice, Integer payType, Long orderNo, String remarkCus) {
         OrderPay orderpay = new OrderPay();
         orderpay.setOrderNo(orderNo);
         orderpay.setSerialNumber(NumUtil.getSerialNumber());
