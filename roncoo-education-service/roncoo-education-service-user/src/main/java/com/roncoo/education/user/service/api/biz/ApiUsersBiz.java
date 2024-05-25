@@ -96,6 +96,9 @@ public class ApiUsersBiz extends BaseBiz {
         UsersLoginResp dto = new UsersLoginResp();
         dto.setMobile(user.getMobile());
         dto.setToken(JwtUtil.create(user.getId(), JwtUtil.DATE));
+
+        // token，放入缓存
+        cacheRedis.set(dto.getToken(), user.getId(), 1, TimeUnit.DAYS);
         return Result.success(dto);
     }
 
