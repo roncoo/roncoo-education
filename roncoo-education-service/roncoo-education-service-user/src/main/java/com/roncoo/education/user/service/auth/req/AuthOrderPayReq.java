@@ -37,4 +37,10 @@ public class AuthOrderPayReq implements Serializable {
     @ApiModelProperty(value = "用户备注", required = false)
     private String remarkCus;
 
+    @ApiModelProperty(value = "微信OpenId(微信公众号支付、微信小程序支付使用)", required = false)
+    private String openId;
+
+    @ApiModelProperty(value = "授权Code(openId和code不能同时为空，优先使用openId)", required = false)
+    private String code;
+
 }
