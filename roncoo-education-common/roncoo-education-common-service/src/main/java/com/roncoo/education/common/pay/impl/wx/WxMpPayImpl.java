@@ -4,6 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderV3Request;
 import com.github.binarywang.wxpay.bean.result.WxPayUnifiedOrderV3Result;
 import com.github.binarywang.wxpay.bean.result.enums.TradeTypeEnum;
+import com.github.binarywang.wxpay.config.WxPayConfig;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.roncoo.education.common.core.tools.JsonUtil;
@@ -19,14 +20,14 @@ import org.springframework.stereotype.Component;
 import javax.validation.constraints.NotNull;
 
 /**
- * 微信扫码支付
+ * 微信小程序支付
  *
  * @author LYQ
  */
 @Slf4j
-@Component(value = "wxScanPay")
+@Component(value = "wxMpPay")
 @RequiredArgsConstructor
-public class WxScanPayImpl implements PayFace {
+public class WxMpPayImpl implements PayFace {
 
     @NotNull
     private final WxPayCommonBiz wxPayCommonBiz;
@@ -43,19 +44,22 @@ public class WxScanPayImpl implements PayFace {
     }
 
     /**
-     * 微信直营商户扫码支付
+     * 微信直营商户小程序支付
      *
      * @param req 支付请求参数
      * @return 支付下单结果
      */
     private TradeOrderResp directPay(TradeOrderReq req) {
-        // step1：创建交易返回对象
+        // 创建交易返回对象
         TradeOrderResp resp = new TradeOrderResp();
         resp.setSuccess(false);
 
-        // step2：处理请求参数
+        // 处理请求参数
         WxPayUnifiedOrderV3Request.Amount amount = new WxPayUnifiedOrderV3Request.Amount()
                 .setTotal(WxPayUtil.yuanToCent(req.getAmount()));
+
+        WxPayUnifiedOrderV3Request.Payer payer = new WxPayUnifiedOrderV3Request.Payer();
+        payer.setOpenid(req.getOpenId());
 
         WxPayUnifiedOrderV3Request request = new WxPayUnifiedOrderV3Request()
                 .setDescription(req.getGoodsName())
@@ -63,22 +67,25 @@ public class WxScanPayImpl implements PayFace {
                 .setTimeExpire(WxPayUtil.timeExpireFormat(req.getTimeExpire()))
                 .setAttach(req.getAttach())
                 .setNotifyUrl(req.getNotifyUrl())
-                .setAmount(amount);
+                .setAmount(amount)
+                .setPayer(payer);
 
-        // step3：发起下单请求
+        // 发起下单请求
         WxPayService wxPayService = WxPayUtil.initService(req.getWxPayConfig());
         try {
-            WxPayUnifiedOrderV3Result result = wxPayService.unifiedOrderV3(TradeTypeEnum.NATIVE, request);
+            WxPayUnifiedOrderV3Result result = wxPayService.unifiedOrderV3(TradeTypeEnum.JSAPI, request);
             if (ObjectUtil.isNull(result)) {
-                log.error("微信直营商户--扫码支付--交易下单，响应信息为空！");
+                log.error("微信直营商户--小程序支付--交易下单，响应信息为空");
                 return resp;
             }
 
+            WxPayConfig payConfig = wxPayService.getConfig();
+            WxPayUnifiedOrderV3Result.JsapiResult jsapiResult = result.getPayInfo(TradeTypeEnum.JSAPI, payConfig.getAppId(), payConfig.getMchId(), payConfig.getPrivateKey());
             // 下单成功，返回支付信息
             resp.setSuccess(true);
-            resp.setPayMessage(result.getCodeUrl());
+            resp.setPayMessage(JsonUtil.toJsonString(jsapiResult));
         } catch (WxPayException e) {
-            log.error("微信直营商户--扫码支付--交易下单，请求失败！", e);
+            log.error("微信直营商户--小程序支付--交易下单，请求失败", e);
         }
         return resp;
     }
@@ -91,7 +98,7 @@ public class WxScanPayImpl implements PayFace {
      */
     @Override
     public TradeQueryResp tradeQuery(TradeQueryReq req) {
-        log.info("微信扫码支付--交易查询，请求参数：{}", JsonUtil.toJsonString(req));
+        log.info("微信小程序支付--交易查询，请求参数：{}", JsonUtil.toJsonString(req));
         return wxPayCommonBiz.tradeQuery(req);
     }
 
@@ -103,7 +110,7 @@ public class WxScanPayImpl implements PayFace {
      */
     @Override
     public Boolean tradeClose(TradeCloseReq req) {
-        log.info("微信扫码支付--交易关闭，请求参数：{}", JsonUtil.toJsonString(req));
+        log.info("微信小程序支付--交易关闭，请求参数：{}", JsonUtil.toJsonString(req));
         return wxPayCommonBiz.tradeClose(req);
     }
 
@@ -115,7 +122,7 @@ public class WxScanPayImpl implements PayFace {
      */
     @Override
     public TradeNotifyResp tradeNotify(TradeNotifyReq req) {
-        log.info("微信扫码支付--交易通知，请求参数：{}", JsonUtil.toJsonString(req));
+        log.info("微信小程序支付--交易通知，请求参数：{}", JsonUtil.toJsonString(req));
         return wxPayCommonBiz.tradeNotify(req);
     }
 
@@ -127,7 +134,7 @@ public class WxScanPayImpl implements PayFace {
      */
     @Override
     public RefundResp refund(RefundReq req) {
-        log.info("微信扫码支付--交易退款，请求参数：{}", JsonUtil.toJsonString(req));
+        log.info("微信小程序支付--交易退款，请求参数：{}", JsonUtil.toJsonString(req));
         return wxPayCommonBiz.refund(req);
     }
 
@@ -139,7 +146,7 @@ public class WxScanPayImpl implements PayFace {
      */
     @Override
     public RefundQueryResp refundQuery(RefundQueryReq req) {
-        log.info("微信扫码支付--交易退款查询，请求参数：{}", JsonUtil.toJsonString(req));
+        log.info("微信小程序支付--交易退款查询，请求参数：{}", JsonUtil.toJsonString(req));
         return wxPayCommonBiz.refundQuery(req);
     }
 }
