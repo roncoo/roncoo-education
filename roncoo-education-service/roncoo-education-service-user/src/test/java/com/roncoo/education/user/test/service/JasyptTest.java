@@ -1,4 +1,4 @@
-package com.roncoo.education.user.service.test;
+package com.roncoo.education.user.test.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.jasypt.encryption.StringEncryptor;

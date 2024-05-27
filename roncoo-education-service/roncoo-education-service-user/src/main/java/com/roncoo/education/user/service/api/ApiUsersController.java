@@ -9,6 +9,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,6 +22,7 @@ import javax.validation.constraints.NotNull;
  * @author wujing
  */
 @Api(tags = "api-用户登录注册")
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/user/api/users")
@@ -74,7 +77,13 @@ public class ApiUsersController {
     @Operation(summary = "微信登录", description = "返回用户信息")
     @PostMapping(value = "/wx/auth")
     public Result<WxAuthResp> wxAuth(@RequestBody WxAuthReq req) {
-        return biz.wxAuth(req);
+        try {
+            return biz.wxAuth(req);
+        } catch (WxErrorException e) {
+            log.error("请重试", e);
+            Thread.currentThread().interrupt();
+            return Result.error("请重试");
+        }
     }
 
 }

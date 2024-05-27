@@ -1,7 +1,7 @@
 /**
  * Copyright 2015-现在 广州市领课网络科技有限公司
  */
-package com.roncoo.education.user.service.test;
+package com.roncoo.education.user.test.service;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.crypto.digest.DigestUtil;

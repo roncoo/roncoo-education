@@ -1,4 +1,4 @@
-package com.roncoo.education.user.service.test;
+package com.roncoo.education.user.test.service;
 
 import com.alibaba.druid.filter.config.ConfigTools;
 

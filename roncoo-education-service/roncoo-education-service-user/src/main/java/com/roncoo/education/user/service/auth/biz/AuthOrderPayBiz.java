@@ -253,7 +253,7 @@ public class AuthOrderPayBiz extends BaseBiz {
         if (StringUtils.hasText(quitUrl)) {
             orderReq.setQuitUrl(quitUrl + "?tradeSerialNo=" + orderReq.getTradeSerialNo());
         }
-        if (payType.equals(PayTypeEnum.WEIXIN_JS.getCode()) || payType.equals(PayTypeEnum.WEIXIN_MP.getCode())) {
+        if (payType.equals(PayTypeEnum.WEIXIN_MP.getCode()) || payType.equals(PayTypeEnum.WEIXIN_MA.getCode())) {
             orderReq.setOpenId(openId);
         }
         return payFace.tradeOrder(orderReq);
