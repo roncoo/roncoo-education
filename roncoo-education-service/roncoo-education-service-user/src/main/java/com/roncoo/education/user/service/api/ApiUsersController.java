@@ -7,13 +7,11 @@ import com.roncoo.education.user.service.api.resp.UsersLoginResp;
 import com.roncoo.education.user.service.api.resp.WxAuthResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -70,11 +68,11 @@ public class ApiUsersController {
 
     @ApiOperation(value = "微信登录", notes = "返回微信登录授权地址")
     @PostMapping(value = "/wx/login")
-    public Result<String> wxLogin(@RequestBody @Valid WxLoginReq req) {
+    public Result<String> wxLogin(@RequestBody WxLoginReq req) {
         return biz.wxLogin(req);
     }
 
-    @Operation(summary = "微信登录", description = "返回用户信息")
+    @ApiOperation(value = "微信登录", notes = "返回用户信息")
     @PostMapping(value = "/wx/auth")
     public Result<WxAuthResp> wxAuth(@RequestBody WxAuthReq req) {
         try {
