@@ -25,8 +25,8 @@ public class AuthOrderPayReq implements Serializable {
     @ApiModelProperty(value = "课程ID")
     private Long courseId;
 
-    @ApiModelProperty(value = "支付方式：1微信扫码支付(默认)，2支付宝扫码支付")
-    private Integer payType = 1;
+    @ApiModelProperty(value = "支付方式，参考枚举PayTypeEnum")
+    private Integer payType;
 
     @ApiModelProperty(value = "用户终端IP")
     private String userClientIp;
