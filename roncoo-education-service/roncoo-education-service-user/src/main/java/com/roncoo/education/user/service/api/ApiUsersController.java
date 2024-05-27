@@ -2,19 +2,16 @@ package com.roncoo.education.user.service.api;
 
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.user.service.api.biz.ApiUsersBiz;
-import com.roncoo.education.user.service.api.req.LoginReq;
-import com.roncoo.education.user.service.api.req.PasswordReq;
-import com.roncoo.education.user.service.api.req.RegisterReq;
-import com.roncoo.education.user.service.api.req.SendCodeReq;
+import com.roncoo.education.user.service.api.req.*;
 import com.roncoo.education.user.service.api.resp.UsersLoginResp;
+import com.roncoo.education.user.service.api.resp.WxAuthResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -41,7 +38,7 @@ public class ApiUsersController {
     }
 
     /**
-     * 注册接口
+     * 用户密码注册接口
      */
     @ApiOperation(value = "注册接口", notes = "注册成功返回登录信息")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -65,6 +62,19 @@ public class ApiUsersController {
     @RequestMapping(value = "/password", method = RequestMethod.POST)
     public Result<String> password(@RequestBody PasswordReq req) {
         return biz.password(req);
+    }
+
+
+    @ApiOperation(value = "微信登录", notes = "返回微信登录授权地址")
+    @PostMapping(value = "/wx/login")
+    public Result<String> wxLogin(@RequestBody @Valid WxLoginReq req) {
+        return biz.wxLogin(req);
+    }
+
+    @Operation(summary = "微信登录", description = "返回用户信息")
+    @PostMapping(value = "/wx/auth")
+    public Result<WxAuthResp> wxAuth(@RequestBody WxAuthReq req) {
+        return biz.wxAuth(req);
     }
 
 }

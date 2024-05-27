@@ -33,4 +33,7 @@ public class AuthOrderCountinuePayReq implements Serializable {
 
     @ApiModelProperty(value = "用户付款中途退出的回调地址")
     private String quitUrl;
+
+    @ApiModelProperty(value = "OpenID")
+    private String openId;
 }

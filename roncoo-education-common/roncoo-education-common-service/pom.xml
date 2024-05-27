@@ -14,6 +14,22 @@
     <name>roncoo-education-common-service</name>
 
     <dependencies>
+        <!-- 微信登录 -->
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-open</artifactId>
+            <version>4.6.1.B</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-mp</artifactId>
+            <version>4.6.1.B</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-miniapp</artifactId>
+            <version>4.6.1.B</version>
+        </dependency>
         <!-- 支付宝支付 -->
         <dependency>
             <groupId>com.alipay.sdk</groupId>
@@ -29,7 +45,7 @@
         <dependency>
             <groupId>com.github.binarywang</groupId>
             <artifactId>weixin-java-pay</artifactId>
-            <version>4.4.9.B</version>
+            <version>4.6.1.B</version>
         </dependency>
 
         <!-- minio -->

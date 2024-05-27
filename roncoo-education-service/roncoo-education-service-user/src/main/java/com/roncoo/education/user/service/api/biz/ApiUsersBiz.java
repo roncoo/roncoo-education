@@ -1,5 +1,8 @@
 package com.roncoo.education.user.service.api.biz;
 
+import cn.binarywang.wx.miniapp.api.WxMaService;
+import cn.binarywang.wx.miniapp.api.impl.WxMaServiceImpl;
+import cn.binarywang.wx.miniapp.config.impl.WxMaDefaultConfigImpl;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
@@ -8,23 +11,32 @@ import cn.hutool.extra.servlet.ServletUtil;
 import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.LoginAuthTypeEnum;
 import com.roncoo.education.common.core.enums.LoginStatusEnum;
 import com.roncoo.education.common.core.tools.*;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.sms.SmsUtil;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
+import com.roncoo.education.system.feign.interfaces.vo.LoginConfig;
 import com.roncoo.education.user.dao.LogLoginDao;
 import com.roncoo.education.user.dao.UsersAccountDao;
 import com.roncoo.education.user.dao.UsersDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.LogLogin;
 import com.roncoo.education.user.dao.impl.mapper.entity.Users;
 import com.roncoo.education.user.dao.impl.mapper.entity.UsersAccount;
-import com.roncoo.education.user.service.api.req.LoginReq;
-import com.roncoo.education.user.service.api.req.PasswordReq;
-import com.roncoo.education.user.service.api.req.RegisterReq;
-import com.roncoo.education.user.service.api.req.SendCodeReq;
+import com.roncoo.education.user.service.api.req.*;
 import com.roncoo.education.user.service.api.resp.UsersLoginResp;
+import com.roncoo.education.user.service.api.resp.WxAuthResp;
 import lombok.RequiredArgsConstructor;
+import me.chanjar.weixin.common.api.WxConsts;
+import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
+import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
+import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.common.service.WxOAuth2Service;
+import me.chanjar.weixin.mp.api.WxMpService;
+import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
+import me.chanjar.weixin.mp.config.impl.WxMpMapConfigImpl;
+import me.chanjar.weixin.open.api.impl.WxOpenOAuth2ServiceImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -264,5 +276,70 @@ public class ApiUsersBiz extends BaseBiz {
         userDao.updateById(recorde);
 
         return Result.success("重置成功");
+    }
+
+    public Result<String> wxLogin(WxLoginReq req) {
+        LoginConfig loginConfig = feignSysConfig.getLogin();
+        if (req.getLoginAuthType().equals(LoginAuthTypeEnum.PC.getCode())) {
+            if (!loginConfig.getWxPcLoginEnable().equals("1")) {
+                return Result.error("网页应用登录没开启");
+            }
+            WxOAuth2Service wxOAuth2Service = new WxOpenOAuth2ServiceImpl(loginConfig.getWxPcLoginAppId(), loginConfig.getWxPcLoginAppSecret(), null);
+            String authorizationUrl = wxOAuth2Service.buildAuthorizationUrl(req.getRedirectUrl(), WxConsts.QrConnectScope.SNSAPI_LOGIN, null);
+            return Result.success(authorizationUrl);
+        }
+        if (req.getLoginAuthType().equals(LoginAuthTypeEnum.MP.getCode())) {
+            if (!loginConfig.getWxMpLoginEnable().equals("1")) {
+                return Result.error("公众号登录没开启");
+            }
+            WxMpService wxMpService = new WxMpServiceImpl();
+            WxMpMapConfigImpl mpMapConfig = new WxMpMapConfigImpl();
+            mpMapConfig.setAppId(loginConfig.getWxMpLoginAppId());
+            mpMapConfig.setSecret(loginConfig.getWxMpLoginAppSecret());
+            wxMpService.setWxMpConfigStorage(mpMapConfig);
+            String authorizationUrl = wxMpService.getOAuth2Service().buildAuthorizationUrl(req.getRedirectUrl(), WxConsts.OAuth2Scope.SNSAPI_USERINFO, null);
+            return Result.success(authorizationUrl);
+        }
+        log.error("登录类型暂没支持={}", JsonUtil.toJsonString(req));
+        return Result.error("登录类型暂没支持");
+    }
+
+    public Result<WxAuthResp> wxAuth(WxAuthReq req) throws WxErrorException {
+        LoginConfig loginConfig = feignSysConfig.getLogin();
+        WxAuthResp authResp = new WxAuthResp();
+        if (req.getLoginAuthType().equals(LoginAuthTypeEnum.PC.getCode())) {
+            // 网页应用
+            WxOAuth2Service wxOAuth2Service = new WxOpenOAuth2ServiceImpl(loginConfig.getWxPcLoginAppId(), loginConfig.getWxPcLoginAppSecret(), null);
+            WxOAuth2AccessToken accessToken = wxOAuth2Service.getAccessToken(req.getCode());
+            authResp.setAuthInfo(getAuthInfo(wxOAuth2Service, accessToken));
+        } else if (req.getLoginAuthType().equals(LoginAuthTypeEnum.MP.getCode())) {
+            // 公众号
+            WxMpService wxMpService = new WxMpServiceImpl();
+            WxMpMapConfigImpl mpMapConfig = new WxMpMapConfigImpl();
+            mpMapConfig.setAppId(loginConfig.getWxMpLoginAppId());
+            mpMapConfig.setSecret(loginConfig.getWxMpLoginAppSecret());
+            wxMpService.setWxMpConfigStorage(mpMapConfig);
+            WxOAuth2AccessToken accessToken = wxMpService.getOAuth2Service().getAccessToken(req.getCode());
+            authResp.setAuthInfo(getAuthInfo(wxMpService.getOAuth2Service(), accessToken));
+        } else if (req.getLoginAuthType().equals(LoginAuthTypeEnum.MA.getCode())) {
+            // 小程序
+            WxMaService wxMaService = new WxMaServiceImpl();
+            WxMaDefaultConfigImpl wxMaConfig = new WxMaDefaultConfigImpl();
+            wxMaConfig.setAppid(loginConfig.getWxMaLoginAppId());
+            wxMaConfig.setSecret(loginConfig.getWxMaLoginAppSecret());
+            wxMaService.setWxMaConfig(wxMaConfig);
+        }
+        return Result.success(authResp);
+    }
+
+
+    private WxAuthResp.AuthInfo getAuthInfo(WxOAuth2Service wxOAuth2Service, WxOAuth2AccessToken accessToken) throws WxErrorException {
+        WxOAuth2UserInfo userInfo = wxOAuth2Service.getUserInfo(accessToken, null);
+        WxAuthResp.AuthInfo authInfo = new WxAuthResp.AuthInfo();
+        authInfo.setUnionId(userInfo.getUnionId());
+        authInfo.setHeadImg(userInfo.getHeadImgUrl());
+        authInfo.setNickname(userInfo.getNickname());
+        authInfo.setGender(userInfo.getSex());
+        return authInfo;
     }
 }

@@ -112,7 +112,7 @@ public class AuthOrderPayBiz extends BaseBiz {
         }
 
         // 创建支付
-        TradeOrderResp orderResp = createPay(req.getPayType(), req.getUserClientIp(), req.getQuitUrl(), courseViewVO, orderPay);
+        TradeOrderResp orderResp = createPay(req.getPayType(), req.getUserClientIp(), req.getQuitUrl(), req.getOpenId(), courseViewVO, orderPay);
         if (orderResp.isSuccess()) {
             //返回支付信息
             AuthOrderPayResp resp = BeanUtil.copyProperties(orderInfo, AuthOrderPayResp.class);
@@ -175,7 +175,7 @@ public class AuthOrderPayBiz extends BaseBiz {
         }
 
         // 创建支付
-        TradeOrderResp orderResp = createPay(req.getPayType(), req.getUserClientIp(), req.getQuitUrl(), courseViewVO, orderPay);
+        TradeOrderResp orderResp = createPay(req.getPayType(), req.getUserClientIp(), req.getQuitUrl(), req.getOpenId(), courseViewVO, orderPay);
         if (orderResp.isSuccess()) {
             //返回支付信息
             AuthOrderPayResp resp = BeanUtil.copyProperties(orderInfo, AuthOrderPayResp.class);
@@ -230,7 +230,7 @@ public class AuthOrderPayBiz extends BaseBiz {
         return Result.success("操作成功");
     }
 
-    private TradeOrderResp createPay(Integer payType, String userClientIp, String quitUrl, CourseViewVO courseViewVO, OrderPay orderPay) {
+    private TradeOrderResp createPay(Integer payType, String userClientIp, String quitUrl, String openId, CourseViewVO courseViewVO, OrderPay orderPay) {
         // 下单支付
         String impl = PayTypeEnum.byCode(payType).getImpl();
         PayFace payFace = payFaceMap.get(impl);
@@ -252,6 +252,9 @@ public class AuthOrderPayBiz extends BaseBiz {
         orderReq.setNotifyUrl(getNotifyUrl(orderReq.getPayModel(), impl));
         if (StringUtils.hasText(quitUrl)) {
             orderReq.setQuitUrl(quitUrl + "?tradeSerialNo=" + orderReq.getTradeSerialNo());
+        }
+        if (payType.equals(PayTypeEnum.WEIXIN_JS.getCode()) || payType.equals(PayTypeEnum.WEIXIN_MP.getCode())) {
+            orderReq.setOpenId(openId);
         }
         return payFace.tradeOrder(orderReq);
     }
