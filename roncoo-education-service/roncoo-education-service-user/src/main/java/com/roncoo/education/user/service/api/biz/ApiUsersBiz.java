@@ -36,7 +36,6 @@ import me.chanjar.weixin.common.service.WxOAuth2Service;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.config.impl.WxMpMapConfigImpl;
-import me.chanjar.weixin.open.api.WxOpenConfigStorage;
 import me.chanjar.weixin.open.api.impl.WxOpenInMemoryConfigStorage;
 import me.chanjar.weixin.open.api.impl.WxOpenOAuth2ServiceImpl;
 import org.springframework.stereotype.Component;
@@ -286,9 +285,8 @@ public class ApiUsersBiz extends BaseBiz {
             if (!loginConfig.getWxPcLoginEnable().equals("1")) {
                 return Result.error("网页应用登录没开启");
             }
-            WxOpenConfigStorage configStorage = new WxOpenInMemoryConfigStorage();
-            WxOAuth2Service wxOAuth2Service = new WxOpenOAuth2ServiceImpl(loginConfig.getWxPcLoginAppId(), loginConfig.getWxPcLoginAppSecret(), configStorage);
-            String authorizationUrl = wxOAuth2Service.buildAuthorizationUrl(req.getRedirectUrl(), WxConsts.QrConnectScope.SNSAPI_LOGIN, null);
+            WxOAuth2Service wxOAuth2Service = new WxOpenOAuth2ServiceImpl(loginConfig.getWxPcLoginAppId(), loginConfig.getWxPcLoginAppSecret(), new WxOpenInMemoryConfigStorage());
+            String authorizationUrl = wxOAuth2Service.buildAuthorizationUrl(req.getRedirectUrl(), WxConsts.QrConnectScope.SNSAPI_LOGIN, LoginAuthTypeEnum.PC.name());
             return Result.success(authorizationUrl);
         }
         if (req.getLoginAuthType().equals(LoginAuthTypeEnum.MP.getCode())) {
@@ -300,7 +298,7 @@ public class ApiUsersBiz extends BaseBiz {
             mpMapConfig.setAppId(loginConfig.getWxMpLoginAppId());
             mpMapConfig.setSecret(loginConfig.getWxMpLoginAppSecret());
             wxMpService.setWxMpConfigStorage(mpMapConfig);
-            String authorizationUrl = wxMpService.getOAuth2Service().buildAuthorizationUrl(req.getRedirectUrl(), WxConsts.OAuth2Scope.SNSAPI_USERINFO, null);
+            String authorizationUrl = wxMpService.getOAuth2Service().buildAuthorizationUrl(req.getRedirectUrl(), WxConsts.OAuth2Scope.SNSAPI_USERINFO, LoginAuthTypeEnum.MP.name());
             return Result.success(authorizationUrl);
         }
         log.error("登录类型暂没支持={}", JsonUtil.toJsonString(req));
