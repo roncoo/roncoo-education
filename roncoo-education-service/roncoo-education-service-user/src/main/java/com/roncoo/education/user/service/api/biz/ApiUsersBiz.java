@@ -312,7 +312,7 @@ public class ApiUsersBiz extends BaseBiz {
         WxAuthResp authResp = new WxAuthResp();
         if (req.getLoginAuthType().equals(LoginAuthTypeEnum.PC.getCode())) {
             // 网页应用
-            WxOAuth2Service wxOAuth2Service = new WxOpenOAuth2ServiceImpl(loginConfig.getWxPcLoginAppId(), loginConfig.getWxPcLoginAppSecret(), null);
+            WxOAuth2Service wxOAuth2Service = new WxOpenOAuth2ServiceImpl(loginConfig.getWxPcLoginAppId(), loginConfig.getWxPcLoginAppSecret(), new WxOpenInMemoryConfigStorage());
             WxOAuth2AccessToken accessToken = wxOAuth2Service.getAccessToken(req.getCode());
             authResp.setAuthInfo(getAuthInfo(wxOAuth2Service, accessToken));
         } else if (req.getLoginAuthType().equals(LoginAuthTypeEnum.MP.getCode())) {
