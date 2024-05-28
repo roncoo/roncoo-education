@@ -16,6 +16,7 @@ import com.roncoo.education.common.core.enums.LoginAuthTypeEnum;
 import com.roncoo.education.common.core.enums.LoginStatusEnum;
 import com.roncoo.education.common.core.tools.*;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.service.BaseWxBiz;
 import com.roncoo.education.common.sms.SmsUtil;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.LoginConfig;
@@ -31,7 +32,6 @@ import com.roncoo.education.user.service.api.resp.WxCodeResp;
 import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
-import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.service.WxOAuth2Service;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -68,6 +68,8 @@ public class ApiUsersBiz extends BaseBiz {
     private final IFeignSysConfig feignSysConfig;
     @NotNull
     private final HttpServletRequest request;
+    @NotNull
+    private final BaseWxBiz baseWxBiz;
 
     @Transactional(rollbackFor = Exception.class)
     public Result<UsersLoginResp> register(RegisterReq req) {
@@ -319,10 +321,10 @@ public class ApiUsersBiz extends BaseBiz {
         WxCodeResp codeResp = new WxCodeResp();
         if (req.getLoginAuthType().equals(LoginAuthTypeEnum.PC.getCode())) {
             // 网页应用
-            codeResp.setUserInfo(getAuthInfo(loginConfig.getWxPcLoginAppId(), loginConfig.getWxPcLoginAppSecret(), req.getCode()));
+            codeResp.setUserInfo(baseWxBiz.getAuthInfo(loginConfig.getWxPcLoginAppId(), loginConfig.getWxPcLoginAppSecret(), req.getCode()));
         } else if (req.getLoginAuthType().equals(LoginAuthTypeEnum.MP.getCode())) {
             // 公众号
-            codeResp.setUserInfo(getAuthInfo(loginConfig.getWxMpLoginAppId(), loginConfig.getWxMpLoginAppSecret(), req.getCode()));
+            codeResp.setUserInfo(baseWxBiz.getAuthInfo(loginConfig.getWxMpLoginAppId(), loginConfig.getWxMpLoginAppSecret(), req.getCode()));
         } else if (req.getLoginAuthType().equals(LoginAuthTypeEnum.MA.getCode())) {
             // 小程序
             WxMaService wxMaService = new WxMaServiceImpl();
@@ -354,15 +356,6 @@ public class ApiUsersBiz extends BaseBiz {
         return Result.success(codeResp);
     }
 
-    private static WxOAuth2UserInfo getAuthInfo(String appId, String appSecret, String code) throws WxErrorException {
-        WxMpService wxMpService = new WxMpServiceImpl();
-        WxMpMapConfigImpl mpMapConfig = new WxMpMapConfigImpl();
-        mpMapConfig.setAppId(appId);
-        mpMapConfig.setSecret(appSecret);
-        wxMpService.setWxMpConfigStorage(mpMapConfig);
-        WxOAuth2AccessToken accessToken = wxMpService.getOAuth2Service().getAccessToken(code);
-        return wxMpService.getOAuth2Service().getUserInfo(accessToken, "zh_CN");
-    }
 
     public Result<UsersLoginResp> wxBinding(WxBindingReq req) {
         if (!StringUtils.hasText(req.getMobile())) {

@@ -26,6 +26,21 @@ public class AuthUsersResp implements Serializable {
     @ApiModelProperty(value = "主键")
     private Long id;
 
+    @ApiModelProperty(value = "微信unionId")
+    private String unionId;
+
+    @ApiModelProperty(value = "微信OpenId")
+    private String openId;
+
+    @ApiModelProperty(value = "城市")
+    private String city;
+
+    @ApiModelProperty(value = "省份")
+    private String province;
+
+    @ApiModelProperty(value = "国家")
+    private String country;
+
     @ApiModelProperty(value = "状态(1:正常，0:禁用)")
     private Integer statusId;
 
