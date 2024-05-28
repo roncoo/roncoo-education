@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <springProperty name="springApplicationName" source="spring.application.name" defaultValue="education"/>
-    <springProperty name="FILENAME" source="management.endpoint.logfile.external-file" defaultValue="/tmp/education/info.log"/>
+    <springProperty name="FILENAME" source="management.endpoint.logfile.external-file"
+                    defaultValue="/tmp/education/info.log"/>
     <springProperty name="FILEMAXHISTORY" source="logging.logback.rollingpolicy.max-history" defaultValue="7"/>
-    <springProperty name="PATTERNFILE" source="logging.pattern.file" defaultValue="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -|   %msg%n"/>
+    <springProperty name="PATTERNFILE" source="logging.pattern.file"
+                    defaultValue="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -|   %msg%n"/>
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -61,7 +63,6 @@
         <root level="info">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="FILE"/>
-            <appender-ref ref="GELF"/>
         </root>
     </springProfile>
 </configuration>
