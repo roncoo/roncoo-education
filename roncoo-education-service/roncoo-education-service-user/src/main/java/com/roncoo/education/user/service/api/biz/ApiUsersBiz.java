@@ -334,7 +334,7 @@ public class ApiUsersBiz extends BaseBiz {
         return new WxOpenOAuth2ServiceImpl(appId, appSecret, configStorage);
     }
 
-    private WxCodeResp.AuthInfo getAuthInfo(String appId, String appSecret, String code) throws WxErrorException {
+    private static WxCodeResp.AuthInfo getAuthInfo(String appId, String appSecret, String code) throws WxErrorException {
         WxMpService wxMpService = new WxMpServiceImpl();
         WxMpMapConfigImpl mpMapConfig = new WxMpMapConfigImpl();
         mpMapConfig.setAppId(appId);
@@ -348,5 +348,9 @@ public class ApiUsersBiz extends BaseBiz {
         authInfo.setNickname(userInfo.getNickname());
         authInfo.setGender(userInfo.getSex());
         return authInfo;
+    }
+
+    public static void main(String[] args) throws WxErrorException {
+        System.out.println(getAuthInfo("wxdceed997154e7071", "0cc365bab902e1e9f3d9f60fa692617a", "0417Q20w3GV6R23AFM2w3sBLhE17Q20g"));
     }
 }

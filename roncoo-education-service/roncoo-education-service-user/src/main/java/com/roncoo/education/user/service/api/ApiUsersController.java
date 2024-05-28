@@ -74,14 +74,8 @@ public class ApiUsersController {
 
     @ApiOperation(value = "微信登录，获取用户信息", notes = "返回用户信息")
     @PostMapping(value = "/wx/code")
-    public Result<WxCodeResp> wxCode(@RequestBody WxCodeReq req) {
-        try {
-            return biz.wxCode(req);
-        } catch (WxErrorException e) {
-            log.error("请重试", e);
-            Thread.currentThread().interrupt();
-            return Result.error("请重试");
-        }
+    public Result<WxCodeResp> wxCode(@RequestBody WxCodeReq req) throws WxErrorException {
+        return biz.wxCode(req);
     }
 
 }
