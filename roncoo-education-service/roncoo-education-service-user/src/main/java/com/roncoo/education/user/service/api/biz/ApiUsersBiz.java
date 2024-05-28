@@ -26,7 +26,7 @@ import com.roncoo.education.user.dao.impl.mapper.entity.Users;
 import com.roncoo.education.user.dao.impl.mapper.entity.UsersAccount;
 import com.roncoo.education.user.service.api.req.*;
 import com.roncoo.education.user.service.api.resp.UsersLoginResp;
-import com.roncoo.education.user.service.api.resp.WxAuthResp;
+import com.roncoo.education.user.service.api.resp.WxCodeResp;
 import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
@@ -305,14 +305,14 @@ public class ApiUsersBiz extends BaseBiz {
         return Result.error("登录类型暂没支持");
     }
 
-    public Result<WxAuthResp> wxAuth(WxAuthReq req) throws WxErrorException {
+    public Result<WxCodeResp> wxCode(WxCodeReq req) throws WxErrorException {
         LoginConfig loginConfig = feignSysConfig.getLogin();
-        WxAuthResp authResp = new WxAuthResp();
+        WxCodeResp codeResp = new WxCodeResp();
         if (req.getLoginAuthType().equals(LoginAuthTypeEnum.PC.getCode())) {
             // 网页应用
             WxOAuth2Service wxOAuth2Service = new WxOpenOAuth2ServiceImpl(loginConfig.getWxPcLoginAppId(), loginConfig.getWxPcLoginAppSecret(), new WxOpenInMemoryConfigStorage());
             WxOAuth2AccessToken accessToken = wxOAuth2Service.getAccessToken(req.getCode());
-            authResp.setAuthInfo(getAuthInfo(wxOAuth2Service, accessToken));
+            codeResp.setAuthInfo(getAuthInfo(wxOAuth2Service, accessToken));
         } else if (req.getLoginAuthType().equals(LoginAuthTypeEnum.MP.getCode())) {
             // 公众号
             WxMpService wxMpService = new WxMpServiceImpl();
@@ -321,7 +321,7 @@ public class ApiUsersBiz extends BaseBiz {
             mpMapConfig.setSecret(loginConfig.getWxMpLoginAppSecret());
             wxMpService.setWxMpConfigStorage(mpMapConfig);
             WxOAuth2AccessToken accessToken = wxMpService.getOAuth2Service().getAccessToken(req.getCode());
-            authResp.setAuthInfo(getAuthInfo(wxMpService.getOAuth2Service(), accessToken));
+            codeResp.setAuthInfo(getAuthInfo(wxMpService.getOAuth2Service(), accessToken));
         } else if (req.getLoginAuthType().equals(LoginAuthTypeEnum.MA.getCode())) {
             // 小程序
             WxMaService wxMaService = new WxMaServiceImpl();
@@ -330,13 +330,13 @@ public class ApiUsersBiz extends BaseBiz {
             wxMaConfig.setSecret(loginConfig.getWxMaLoginAppSecret());
             wxMaService.setWxMaConfig(wxMaConfig);
         }
-        return Result.success(authResp);
+        return Result.success(codeResp);
     }
 
 
-    private WxAuthResp.AuthInfo getAuthInfo(WxOAuth2Service wxOAuth2Service, WxOAuth2AccessToken accessToken) throws WxErrorException {
+    private WxCodeResp.AuthInfo getAuthInfo(WxOAuth2Service wxOAuth2Service, WxOAuth2AccessToken accessToken) throws WxErrorException {
         WxOAuth2UserInfo userInfo = wxOAuth2Service.getUserInfo(accessToken, null);
-        WxAuthResp.AuthInfo authInfo = new WxAuthResp.AuthInfo();
+        WxCodeResp.AuthInfo authInfo = new WxCodeResp.AuthInfo();
         authInfo.setUnionId(userInfo.getUnionId());
         authInfo.setHeadImg(userInfo.getHeadImgUrl());
         authInfo.setNickname(userInfo.getNickname());

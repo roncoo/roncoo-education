@@ -4,7 +4,7 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.user.service.api.biz.ApiUsersBiz;
 import com.roncoo.education.user.service.api.req.*;
 import com.roncoo.education.user.service.api.resp.UsersLoginResp;
-import com.roncoo.education.user.service.api.resp.WxAuthResp;
+import com.roncoo.education.user.service.api.resp.WxCodeResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -73,10 +73,10 @@ public class ApiUsersController {
     }
 
     @ApiOperation(value = "微信登录", notes = "返回用户信息")
-    @PostMapping(value = "/wx/auth")
-    public Result<WxAuthResp> wxAuth(@RequestBody WxAuthReq req) {
+    @PostMapping(value = "/wx/code")
+    public Result<WxCodeResp> wxCode(@RequestBody WxCodeReq req) {
         try {
-            return biz.wxAuth(req);
+            return biz.wxCode(req);
         } catch (WxErrorException e) {
             log.error("请重试", e);
             Thread.currentThread().interrupt();
