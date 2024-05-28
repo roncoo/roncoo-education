@@ -6,12 +6,18 @@ package com.roncoo.education.user.test.service;
 import com.roncoo.education.common.core.enums.ClientTypeEnum;
 import com.roncoo.education.common.core.enums.LoginAuthTypeEnum;
 import com.roncoo.education.common.core.tools.JsonUtil;
+import com.roncoo.education.user.service.api.biz.ApiUsersBiz;
 import com.roncoo.education.user.service.api.req.WxCodeReq;
 import com.roncoo.education.user.service.api.req.WxLoginReq;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import javax.annotation.Resource;
+
 public class LoginTest extends BaseTest {
+
+    @Resource
+    private ApiUsersBiz apiUsersBiz;
 
     @Test
     public void wxLogin() throws Exception {
@@ -27,7 +33,7 @@ public class LoginTest extends BaseTest {
         req.setLoginAuthType(LoginAuthTypeEnum.PC.getCode());
         req.setClientType(ClientTypeEnum.PC.getCode());
         req.setCode("222");
-        mvc.perform(MockMvcRequestBuilders.post("/user/api/users/wx/code").content(JsonUtil.toJsonString(req)));
+        apiUsersBiz.wxCode(req);
     }
 
 }

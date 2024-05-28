@@ -331,7 +331,7 @@ public class ApiUsersBiz extends BaseBiz {
         WxOpenConfigStorage configStorage = new WxOpenInRedisTemplateConfigStorage(cacheRedis.getStringRedisTemplate(), appId);
         configStorage.setComponentAppId(appId);
         configStorage.setComponentAppSecret(appSecret);
-        return new WxOpenOAuth2ServiceImpl(appId, appSecret, configStorage);
+        return new WxOpenOAuth2ServiceImpl(appId, appSecret);
     }
 
     private static WxCodeResp.AuthInfo getAuthInfo(String appId, String appSecret, String code) throws WxErrorException {
@@ -348,9 +348,5 @@ public class ApiUsersBiz extends BaseBiz {
         authInfo.setNickname(userInfo.getNickname());
         authInfo.setGender(userInfo.getSex());
         return authInfo;
-    }
-
-    public static void main(String[] args) throws WxErrorException {
-        System.out.println(getAuthInfo("wxdceed997154e7071", "0cc365bab902e1e9f3d9f60fa692617a", "0417Q20w3GV6R23AFM2w3sBLhE17Q20g"));
     }
 }
