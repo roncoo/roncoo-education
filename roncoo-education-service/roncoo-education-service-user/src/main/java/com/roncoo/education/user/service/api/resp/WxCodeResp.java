@@ -12,15 +12,9 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-public class WxCodeResp implements Serializable {
+public class WxCodeResp extends UsersLoginResp implements Serializable {
 
     private static final long serialVersionUID = 2621609267080102065L;
-
-    @ApiModelProperty(value = "用户ID")
-    private Long userId;
-
-    @ApiModelProperty(value = "token，有效期为1天")
-    private String token;
 
     @ApiModelProperty(value = "绑定状态(true已绑定，false没绑定)")
     private Boolean bindingStatus = false;

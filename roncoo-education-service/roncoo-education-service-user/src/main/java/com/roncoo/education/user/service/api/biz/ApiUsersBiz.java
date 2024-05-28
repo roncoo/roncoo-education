@@ -106,13 +106,7 @@ public class ApiUsersBiz extends BaseBiz {
         // 日志
         log(user.getId(), LoginStatusEnum.REGISTER, BeanUtil.copyProperties(req, LogLogin.class));
 
-        UsersLoginResp dto = new UsersLoginResp();
-        dto.setMobile(user.getMobile());
-        dto.setToken(JwtUtil.create(user.getId(), JwtUtil.DATE));
-
-        // token，放入缓存
-        cacheRedis.set(dto.getToken(), user.getId(), 1, TimeUnit.DAYS);
-        return Result.success(dto);
+        return Result.success(login(user.getId(), user.getMobile()));
     }
 
     public Result<UsersLoginResp> login(LoginReq req) {
@@ -150,16 +144,10 @@ public class ApiUsersBiz extends BaseBiz {
             return Result.error("账号或者密码不正确");
         }
 
-        // 成功登录日志
+        // 日志
         log(user.getId(), LoginStatusEnum.SUCCESS, BeanUtil.copyProperties(req, LogLogin.class));
 
-        UsersLoginResp dto = new UsersLoginResp();
-        dto.setMobile(user.getMobile());
-        dto.setToken(JwtUtil.create(user.getId(), JwtUtil.DATE));
-
-        // token，放入缓存
-        cacheRedis.set(dto.getToken(), user.getId(), 1, TimeUnit.DAYS);
-        return Result.success(dto);
+        return Result.success(login(user.getId(), user.getMobile()));
     }
 
     private String decrypt(String password) {
@@ -356,13 +344,13 @@ public class ApiUsersBiz extends BaseBiz {
             }
             return Result.success(codeResp);
         }
+
         // 已经绑定
         codeResp.setBindingStatus(true);
-        codeResp.setUserId(users.getId());
-        codeResp.setToken(JwtUtil.create(users.getId(), JwtUtil.DATE));
-
-        // token，放入缓存
-        cacheRedis.set(codeResp.getToken(), users.getId(), 1, TimeUnit.DAYS);
+        // 登录
+        UsersLoginResp loginResp = login(users.getId(), users.getMobile());
+        codeResp.setMobile(loginResp.getMobile());
+        codeResp.setToken(loginResp.getToken());
         return Result.success(codeResp);
     }
 
@@ -393,14 +381,18 @@ public class ApiUsersBiz extends BaseBiz {
 
         // 手机号重复校验
         Users user = usersDao.getByMobile(req.getMobile());
-        if (null != user) {
-            if (StringUtils.hasText(req.getUnionId()) || StringUtils.hasText(req.getOpenId())) {
+        if (ObjectUtil.isNotNull(user)) {
+            if (StringUtils.hasText(user.getUnionId()) || StringUtils.hasText(user.getOpenId())) {
                 return Result.error("该手机号已绑定，请更换其他手机号");
             }
-            user.setUnionId(req.getUnionId());
-            user.setOpenId(req.getOpenId());
-            user.setRegisterSource(req.getRegisterSource());
-            usersDao.updateById(user);
+            Users newUser = new Users();
+            newUser.setId(user.getId());
+            newUser.setUnionId(req.getUnionId());
+            newUser.setOpenId(req.getOpenId());
+            newUser.setRegisterSource(req.getRegisterSource());
+            usersDao.updateById(newUser);
+
+            return Result.success(login(user.getId(), user.getMobile()));
         }
 
         // 用户注册
@@ -409,12 +401,16 @@ public class ApiUsersBiz extends BaseBiz {
         // 日志
         log(user.getId(), LoginStatusEnum.REGISTER, BeanUtil.copyProperties(req, LogLogin.class));
 
-        UsersLoginResp dto = new UsersLoginResp();
-        dto.setMobile(user.getMobile());
-        dto.setToken(JwtUtil.create(user.getId(), JwtUtil.DATE));
+        return Result.success(login(user.getId(), user.getMobile()));
+    }
 
+
+    private UsersLoginResp login(Long userId, String mobile) {
+        UsersLoginResp resp = new UsersLoginResp();
+        resp.setMobile(mobile);
+        resp.setToken(JwtUtil.create(userId, JwtUtil.DATE));
         // token，放入缓存
-        cacheRedis.set(dto.getToken(), user.getId(), 1, TimeUnit.DAYS);
-        return Result.success(dto);
+        cacheRedis.set(resp.getToken(), userId, 1, TimeUnit.DAYS);
+        return resp;
     }
 }
