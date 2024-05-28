@@ -25,7 +25,13 @@ public final class Constants {
     public interface RedisPre {
         String PRIVATEKEY = "private:key:";
         String ADMIN_APIS = "admin:apis:";
+        /**
+         * 验证码
+         */
         String VER_CODE = "ver:code:";
+        /**
+         * 学习进度
+         */
         String USER_STUDY = "user:study:";
         /**
          * 资源
@@ -40,6 +46,10 @@ public final class Constants {
          */
         String CODE = "code:";
         String CODE_STAT = "code:stat:";
+        /**
+         * 微信用户信息
+         */
+        String WX_USER = "wx:user:";
     }
 
 }

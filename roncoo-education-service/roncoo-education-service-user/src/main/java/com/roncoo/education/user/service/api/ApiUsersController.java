@@ -72,10 +72,16 @@ public class ApiUsersController {
         return biz.wxLogin(req);
     }
 
-    @ApiOperation(value = "微信登录，获取用户信息", notes = "返回用户信息")
+    @ApiOperation(value = "微信登录，获取登录信息", notes = "返回用登录信息")
     @PostMapping(value = "/wx/code")
     public Result<WxCodeResp> wxCode(@RequestBody WxCodeReq req) throws WxErrorException {
         return biz.wxCode(req);
+    }
+
+    @ApiOperation(value = "微信登录，绑定用户信息", notes = "返回用登录信息")
+    @PostMapping(value = "/wx/binding")
+    public Result<UsersLoginResp> wxBinding(@RequestBody WxBindingReq req) {
+        return biz.wxBinding(req);
     }
 
 }

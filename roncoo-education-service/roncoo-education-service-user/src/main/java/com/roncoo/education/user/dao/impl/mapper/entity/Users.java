@@ -28,6 +28,18 @@ public class Users implements Serializable {
 
     private String remark;
 
+    private String unionId;
+
+    private String openId;
+
+    private String city;
+
+    private String province;
+
+    private String country;
+
+    private Integer registerSource;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -126,6 +138,54 @@ public class Users implements Serializable {
         this.remark = remark == null ? null : remark.trim();
     }
 
+    public String getUnionId() {
+        return unionId;
+    }
+
+    public void setUnionId(String unionId) {
+        this.unionId = unionId == null ? null : unionId.trim();
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId == null ? null : openId.trim();
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city == null ? null : city.trim();
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province == null ? null : province.trim();
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country == null ? null : country.trim();
+    }
+
+    public Integer getRegisterSource() {
+        return registerSource;
+    }
+
+    public void setRegisterSource(Integer registerSource) {
+        this.registerSource = registerSource;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -144,6 +204,12 @@ public class Users implements Serializable {
         sb.append(", userAge=").append(userAge);
         sb.append(", userHead=").append(userHead);
         sb.append(", remark=").append(remark);
+        sb.append(", unionId=").append(unionId);
+        sb.append(", openId=").append(openId);
+        sb.append(", city=").append(city);
+        sb.append(", province=").append(province);
+        sb.append(", country=").append(country);
+        sb.append(", registerSource=").append(registerSource);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

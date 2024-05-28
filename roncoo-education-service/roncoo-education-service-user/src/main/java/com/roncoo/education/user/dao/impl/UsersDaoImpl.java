@@ -10,8 +10,10 @@ import com.roncoo.education.user.dao.impl.mapper.entity.Users;
 import com.roncoo.education.user.dao.impl.mapper.entity.UsersExample;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -56,6 +58,9 @@ public class UsersDaoImpl extends AbstractBaseJdbc implements UsersDao {
 
     @Override
     public Users getByMobile(String mobile) {
+        if (!StringUtils.hasText(mobile)) {
+            return null;
+        }
         UsersExample example = new UsersExample();
         example.createCriteria().andMobileEqualTo(mobile);
         List<Users> list = this.usersMapper.selectByExample(example);
@@ -79,8 +84,30 @@ public class UsersDaoImpl extends AbstractBaseJdbc implements UsersDao {
 
     @Override
     public List<Users> listByMobile(String mobile) {
+        if (!StringUtils.hasText(mobile)) {
+            return new ArrayList<>();
+        }
         UsersExample example = new UsersExample();
         example.createCriteria().andMobileLike(PageUtil.rightLike(mobile));
         return this.usersMapper.selectByExample(example);
+    }
+
+    @Override
+    public Users getByUnionIdOrOpenId(String unionId, String openId) {
+        UsersExample example = new UsersExample();
+        if (StringUtils.hasText(unionId)) {
+            example.createCriteria().andUnionIdEqualTo(unionId);
+        } else {
+            if (StringUtils.hasText(openId)) {
+                example.or().andOpenIdEqualTo(openId);
+            } else {
+                return null;
+            }
+        }
+        List<Users> list = this.usersMapper.selectByExample(example);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 }

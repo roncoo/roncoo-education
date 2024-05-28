@@ -3,6 +3,7 @@
  */
 package com.roncoo.education.user.service.api.req;
 
+import com.roncoo.education.common.core.enums.RegisterSourceEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -37,6 +38,8 @@ public class RegisterReq implements Serializable {
     @ApiModelProperty(value = "登录密码，RSA加密", required = true)
     private String mobilePwdEncrypt;
 
+    @ApiModelProperty(value = "注册来源", required = false)
+    private Integer RegisterSource = RegisterSourceEnum.SYS_PC.getCode();
     @ApiModelProperty(value = "登录IP", required = false)
     private String loginIp;
     @ApiModelProperty(value = "国家", required = false)

@@ -3,6 +3,7 @@ package com.roncoo.education.user.service.api.biz;
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.api.impl.WxMaServiceImpl;
 import cn.binarywang.wx.miniapp.config.impl.WxMaDefaultConfigImpl;
+import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
@@ -36,8 +37,6 @@ import me.chanjar.weixin.common.service.WxOAuth2Service;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.config.impl.WxMpMapConfigImpl;
-import me.chanjar.weixin.open.api.WxOpenConfigStorage;
-import me.chanjar.weixin.open.api.impl.WxOpenInRedisTemplateConfigStorage;
 import me.chanjar.weixin.open.api.impl.WxOpenOAuth2ServiceImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,7 +57,7 @@ import java.util.concurrent.TimeUnit;
 public class ApiUsersBiz extends BaseBiz {
 
     @NotNull
-    private final UsersDao userDao;
+    private final UsersDao usersDao;
     @NotNull
     private final UsersAccountDao usersAccountDao;
     @NotNull
@@ -96,13 +95,13 @@ public class ApiUsersBiz extends BaseBiz {
         }
 
         // 手机号重复校验
-        Users user = userDao.getByMobile(req.getMobile());
+        Users user = usersDao.getByMobile(req.getMobile());
         if (null != user) {
             return Result.error("该手机号已经注册，请更换手机号");
         }
 
         // 用户注册
-        user = register(req.getMobile(), mobilePsw);
+        user = register(req.getMobile(), mobilePsw, req.getRegisterSource(), null, null);
 
         // 日志
         log(user.getId(), LoginStatusEnum.REGISTER, BeanUtil.copyProperties(req, LogLogin.class));
@@ -133,7 +132,7 @@ public class ApiUsersBiz extends BaseBiz {
         }
 
         // 用户校验
-        Users user = userDao.getByMobile(req.getMobile());
+        Users user = usersDao.getByMobile(req.getMobile());
         if (null == user) {
             return Result.error("账号或者密码不正确");
         }
@@ -172,7 +171,7 @@ public class ApiUsersBiz extends BaseBiz {
         return RsaUtil.decrypt(password, privateKey);
     }
 
-    private Users register(String mobile, String password) {
+    private Users register(String mobile, String password, Integer registerSource, String unionId, String openId) {
         // 用户基本信息
         Users user = new Users();
         user.setMobile(mobile);
@@ -181,7 +180,26 @@ public class ApiUsersBiz extends BaseBiz {
         // 默认8位随机字符串
         user.setNickname(RandomUtil.randomString(8));
         user.setUserHead("https://static.roncoos.com/lingke.png");
-        userDao.save(user);
+        user.setRegisterSource(registerSource);
+        user.setUnionId(unionId);
+        user.setOpenId(openId);
+
+        WxOAuth2UserInfo userInfo = null;
+        if (StringUtils.hasText(unionId)) {
+            userInfo = cacheRedis.get(Constants.RedisPre.WX_USER + unionId + openId, WxOAuth2UserInfo.class);
+        } else {
+            if (StringUtils.hasText(openId)) {
+                userInfo = cacheRedis.get(Constants.RedisPre.WX_USER + openId, WxOAuth2UserInfo.class);
+            }
+        }
+        if (ObjectUtil.isNotNull(userInfo)) {
+            user.setCity(userInfo.getCity());
+            user.setProvince(userInfo.getProvince());
+            user.setCountry(userInfo.getCountry());
+            user.setUserSex(userInfo.getSex());
+            user.setNickname(userInfo.getNickname());
+        }
+        usersDao.save(user);
 
         // 用户账户
         UsersAccount usersAccount = new UsersAccount();
@@ -194,15 +212,17 @@ public class ApiUsersBiz extends BaseBiz {
     }
 
     private void log(Long userId, LoginStatusEnum status, LogLogin record) {
-        record.setUserId(userId);
-        record.setLoginStatus(status.getCode());
-        record.setLoginIp(ServletUtil.getClientIP(request));
-        IpUtil.IpInfo ipInfo = getIpInfo(record.getLoginIp());
-        if (ObjectUtil.isNotNull(ipInfo)) {
-            record.setProvince(ipInfo.getPro());
-            record.setCity(ipInfo.getCity());
-        }
-        logLoginDao.save(record);
+        ThreadUtil.execute(() -> {
+            record.setUserId(userId);
+            record.setLoginStatus(status.getCode());
+            record.setLoginIp(ServletUtil.getClientIP(request));
+            IpUtil.IpInfo ipInfo = getIpInfo(record.getLoginIp());
+            if (ObjectUtil.isNotNull(ipInfo)) {
+                record.setProvince(ipInfo.getPro());
+                record.setCity(ipInfo.getCity());
+            }
+            logLoginDao.save(record);
+        });
     }
 
     public Result<String> sendCode(SendCodeReq req) {
@@ -265,7 +285,7 @@ public class ApiUsersBiz extends BaseBiz {
         }
 
         // 手机号重复校验
-        Users user = userDao.getByMobile(req.getMobile());
+        Users user = usersDao.getByMobile(req.getMobile());
         if (null == user) {
             return Result.error("该手机号没注册，请先注册");
         }
@@ -275,7 +295,7 @@ public class ApiUsersBiz extends BaseBiz {
         recorde.setId(user.getId());
         recorde.setMobileSalt(IdUtil.simpleUUID());
         recorde.setMobilePsw(DigestUtil.sha1Hex(recorde.getMobileSalt() + mobilePsw));
-        userDao.updateById(recorde);
+        usersDao.updateById(recorde);
 
         return Result.success("重置成功");
     }
@@ -286,7 +306,7 @@ public class ApiUsersBiz extends BaseBiz {
             if (!loginConfig.getWxPcLoginEnable().equals("1")) {
                 return Result.error("网页应用登录没开启");
             }
-            WxOAuth2Service wxOAuth2Service = getWxOAuth2Service(loginConfig.getWxPcLoginAppId(), loginConfig.getWxPcLoginAppSecret());
+            WxOAuth2Service wxOAuth2Service = new WxOpenOAuth2ServiceImpl(loginConfig.getWxPcLoginAppId(), loginConfig.getWxPcLoginAppSecret());
             String authorizationUrl = wxOAuth2Service.buildAuthorizationUrl(req.getRedirectUrl(), WxConsts.QrConnectScope.SNSAPI_LOGIN, LoginAuthTypeEnum.PC.name());
             return Result.success(authorizationUrl);
         }
@@ -311,10 +331,10 @@ public class ApiUsersBiz extends BaseBiz {
         WxCodeResp codeResp = new WxCodeResp();
         if (req.getLoginAuthType().equals(LoginAuthTypeEnum.PC.getCode())) {
             // 网页应用
-            codeResp.setAuthInfo(getAuthInfo(loginConfig.getWxPcLoginAppId(), loginConfig.getWxPcLoginAppSecret(), req.getCode()));
+            codeResp.setUserInfo(getAuthInfo(loginConfig.getWxPcLoginAppId(), loginConfig.getWxPcLoginAppSecret(), req.getCode()));
         } else if (req.getLoginAuthType().equals(LoginAuthTypeEnum.MP.getCode())) {
             // 公众号
-            codeResp.setAuthInfo(getAuthInfo(loginConfig.getWxMpLoginAppId(), loginConfig.getWxMpLoginAppSecret(), req.getCode()));
+            codeResp.setUserInfo(getAuthInfo(loginConfig.getWxMpLoginAppId(), loginConfig.getWxMpLoginAppSecret(), req.getCode()));
         } else if (req.getLoginAuthType().equals(LoginAuthTypeEnum.MA.getCode())) {
             // 小程序
             WxMaService wxMaService = new WxMaServiceImpl();
@@ -323,30 +343,78 @@ public class ApiUsersBiz extends BaseBiz {
             wxMaConfig.setSecret(loginConfig.getWxMaLoginAppSecret());
             wxMaService.setWxMaConfig(wxMaConfig);
         }
+
+        Users users = usersDao.getByUnionIdOrOpenId(codeResp.getUserInfo().getUnionId(), codeResp.getUserInfo().getOpenid());
+        if (ObjectUtil.isNull(users)) {
+            // 没绑定
+            codeResp.setBindingStatus(false);
+            // 缓存用户信息
+            if (StringUtils.hasText(codeResp.getUserInfo().getUnionId())) {
+                cacheRedis.set(Constants.RedisPre.WX_USER + codeResp.getUserInfo().getUnionId(), codeResp.getUserInfo(), 1, TimeUnit.DAYS);
+            } else {
+                cacheRedis.set(Constants.RedisPre.WX_USER + codeResp.getUserInfo().getOpenid(), codeResp.getUserInfo(), 1, TimeUnit.DAYS);
+            }
+            return Result.success(codeResp);
+        }
+        // 已经绑定
+        codeResp.setBindingStatus(true);
+        codeResp.setUserId(users.getId());
+        codeResp.setToken(JwtUtil.create(users.getId(), JwtUtil.DATE));
+
+        // token，放入缓存
+        cacheRedis.set(codeResp.getToken(), users.getId(), 1, TimeUnit.DAYS);
         return Result.success(codeResp);
     }
 
-
-    private WxOAuth2Service getWxOAuth2Service(String appId, String appSecret) {
-        WxOpenConfigStorage configStorage = new WxOpenInRedisTemplateConfigStorage(cacheRedis.getStringRedisTemplate(), appId);
-        configStorage.setComponentAppId(appId);
-        configStorage.setComponentAppSecret(appSecret);
-        return new WxOpenOAuth2ServiceImpl(appId, appSecret);
-    }
-
-    private static WxCodeResp.AuthInfo getAuthInfo(String appId, String appSecret, String code) throws WxErrorException {
+    private static WxOAuth2UserInfo getAuthInfo(String appId, String appSecret, String code) throws WxErrorException {
         WxMpService wxMpService = new WxMpServiceImpl();
         WxMpMapConfigImpl mpMapConfig = new WxMpMapConfigImpl();
         mpMapConfig.setAppId(appId);
         mpMapConfig.setSecret(appSecret);
         wxMpService.setWxMpConfigStorage(mpMapConfig);
         WxOAuth2AccessToken accessToken = wxMpService.getOAuth2Service().getAccessToken(code);
-        WxOAuth2UserInfo userInfo = wxMpService.getOAuth2Service().getUserInfo(accessToken, "zh_CN");
-        WxCodeResp.AuthInfo authInfo = new WxCodeResp.AuthInfo();
-        authInfo.setUnionId(userInfo.getUnionId());
-        authInfo.setHeadImg(userInfo.getHeadImgUrl());
-        authInfo.setNickname(userInfo.getNickname());
-        authInfo.setGender(userInfo.getSex());
-        return authInfo;
+        return wxMpService.getOAuth2Service().getUserInfo(accessToken, "zh_CN");
+    }
+
+    public Result<UsersLoginResp> wxBinding(WxBindingReq req) {
+        if (!StringUtils.hasText(req.getMobile())) {
+            return Result.error("手机号不能为空");
+        }
+        // 验证码校验
+        String redisCode = cacheRedis.get(Constants.RedisPre.CODE + req.getMobile());
+        if (!StringUtils.hasText(redisCode)) {
+            return Result.error("验证码已经过期");
+        }
+        if (!req.getCode().equals(redisCode)) {
+            return Result.error("验证码不正确");
+        }
+        // 删除验证码缓存
+        cacheRedis.delete(Constants.RedisPre.CODE + req.getMobile());
+
+        // 手机号重复校验
+        Users user = usersDao.getByMobile(req.getMobile());
+        if (null != user) {
+            if (StringUtils.hasText(req.getUnionId()) || StringUtils.hasText(req.getOpenId())) {
+                return Result.error("该手机号已绑定，请更换其他手机号");
+            }
+            user.setUnionId(req.getUnionId());
+            user.setOpenId(req.getOpenId());
+            user.setRegisterSource(req.getRegisterSource());
+            usersDao.updateById(user);
+        }
+
+        // 用户注册
+        user = register(req.getMobile(), IdUtil.fastUUID(), req.getRegisterSource(), req.getUnionId(), req.getOpenId());
+
+        // 日志
+        log(user.getId(), LoginStatusEnum.REGISTER, BeanUtil.copyProperties(req, LogLogin.class));
+
+        UsersLoginResp dto = new UsersLoginResp();
+        dto.setMobile(user.getMobile());
+        dto.setToken(JwtUtil.create(user.getId(), JwtUtil.DATE));
+
+        // token，放入缓存
+        cacheRedis.set(dto.getToken(), user.getId(), 1, TimeUnit.DAYS);
+        return Result.success(dto);
     }
 }

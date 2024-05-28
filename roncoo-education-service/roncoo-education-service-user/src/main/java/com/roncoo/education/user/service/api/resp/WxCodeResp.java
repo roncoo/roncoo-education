@@ -3,6 +3,7 @@ package com.roncoo.education.user.service.api.resp;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 
 import java.io.Serializable;
 
@@ -21,32 +22,10 @@ public class WxCodeResp implements Serializable {
     @ApiModelProperty(value = "token，有效期为1天")
     private String token;
 
-    @ApiModelProperty(value = "已绑定用户")
-    private Boolean bindUser;
+    @ApiModelProperty(value = "绑定状态(true已绑定，false没绑定)")
+    private Boolean bindingStatus = false;
 
     @ApiModelProperty(value = "授权信息")
-    private AuthInfo authInfo;
+    private WxOAuth2UserInfo userInfo;
 
-    /**
-     * 授权信息
-     */
-    @Data
-    @Accessors(chain = true)
-    public static class AuthInfo implements Serializable {
-
-        @ApiModelProperty(value = "允许用户注册(false:禁止注册、true:允许注册)")
-        private Boolean allowUserRegister;
-
-        @ApiModelProperty(value = "UnionId")
-        private String unionId;
-
-        @ApiModelProperty(value = "用户头像")
-        private String headImg;
-
-        @ApiModelProperty(value = "用户昵称")
-        private String nickname;
-
-        @ApiModelProperty(value = "性别(1:男、2:女)")
-        private Integer gender;
-    }
 }

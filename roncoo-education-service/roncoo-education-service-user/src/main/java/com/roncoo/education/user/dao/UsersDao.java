@@ -24,4 +24,13 @@ public interface UsersDao {
     Integer count(UsersExample example);
 
     List<Users> listByMobile(String mobile);
+
+    /**
+     * 根据unionId或openId查询用户，优先查询unionId
+     *
+     * @param unionId
+     * @param openId
+     * @return
+     */
+    Users getByUnionIdOrOpenId(String unionId, String openId);
 }
