@@ -66,13 +66,13 @@ public class ApiUsersController {
     }
 
 
-    @ApiOperation(value = "微信登录", notes = "返回微信登录授权地址")
+    @ApiOperation(value = "微信登录，获取授权地址", notes = "返回微信登录授权地址")
     @PostMapping(value = "/wx/login")
     public Result<String> wxLogin(@RequestBody WxLoginReq req) {
         return biz.wxLogin(req);
     }
 
-    @ApiOperation(value = "微信登录", notes = "返回用户信息")
+    @ApiOperation(value = "微信登录，获取用户信息", notes = "返回用户信息")
     @PostMapping(value = "/wx/code")
     public Result<WxCodeResp> wxCode(@RequestBody WxCodeReq req) {
         try {
