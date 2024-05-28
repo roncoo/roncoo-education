@@ -311,18 +311,10 @@ public class ApiUsersBiz extends BaseBiz {
         WxCodeResp codeResp = new WxCodeResp();
         if (req.getLoginAuthType().equals(LoginAuthTypeEnum.PC.getCode())) {
             // 网页应用
-            WxOAuth2Service wxOAuth2Service = getWxOAuth2Service(loginConfig.getWxPcLoginAppId(), loginConfig.getWxPcLoginAppSecret());
-            WxOAuth2AccessToken accessToken = wxOAuth2Service.getAccessToken(req.getCode());
-            codeResp.setAuthInfo(getAuthInfo(wxOAuth2Service, accessToken));
+            codeResp.setAuthInfo(getAuthInfo(loginConfig.getWxPcLoginAppId(), loginConfig.getWxPcLoginAppSecret(), req.getCode()));
         } else if (req.getLoginAuthType().equals(LoginAuthTypeEnum.MP.getCode())) {
             // 公众号
-            WxMpService wxMpService = new WxMpServiceImpl();
-            WxMpMapConfigImpl mpMapConfig = new WxMpMapConfigImpl();
-            mpMapConfig.setAppId(loginConfig.getWxMpLoginAppId());
-            mpMapConfig.setSecret(loginConfig.getWxMpLoginAppSecret());
-            wxMpService.setWxMpConfigStorage(mpMapConfig);
-            WxOAuth2AccessToken accessToken = wxMpService.getOAuth2Service().getAccessToken(req.getCode());
-            codeResp.setAuthInfo(getAuthInfo(wxMpService.getOAuth2Service(), accessToken));
+            codeResp.setAuthInfo(getAuthInfo(loginConfig.getWxMpLoginAppId(), loginConfig.getWxMpLoginAppSecret(), req.getCode()));
         } else if (req.getLoginAuthType().equals(LoginAuthTypeEnum.MA.getCode())) {
             // 小程序
             WxMaService wxMaService = new WxMaServiceImpl();
@@ -342,8 +334,14 @@ public class ApiUsersBiz extends BaseBiz {
         return new WxOpenOAuth2ServiceImpl(appId, appSecret, configStorage);
     }
 
-    private WxCodeResp.AuthInfo getAuthInfo(WxOAuth2Service wxOAuth2Service, WxOAuth2AccessToken accessToken) throws WxErrorException {
-        WxOAuth2UserInfo userInfo = wxOAuth2Service.getUserInfo(accessToken, "zh_CN");
+    private WxCodeResp.AuthInfo getAuthInfo(String appId, String appSecret, String code) throws WxErrorException {
+        WxMpService wxMpService = new WxMpServiceImpl();
+        WxMpMapConfigImpl mpMapConfig = new WxMpMapConfigImpl();
+        mpMapConfig.setAppId(appId);
+        mpMapConfig.setSecret(appSecret);
+        wxMpService.setWxMpConfigStorage(mpMapConfig);
+        WxOAuth2AccessToken accessToken = wxMpService.getOAuth2Service().getAccessToken(code);
+        WxOAuth2UserInfo userInfo = wxMpService.getOAuth2Service().getUserInfo(accessToken, "zh_CN");
         WxCodeResp.AuthInfo authInfo = new WxCodeResp.AuthInfo();
         authInfo.setUnionId(userInfo.getUnionId());
         authInfo.setHeadImg(userInfo.getHeadImgUrl());
