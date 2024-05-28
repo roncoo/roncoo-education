@@ -36,7 +36,8 @@ import me.chanjar.weixin.common.service.WxOAuth2Service;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.config.impl.WxMpMapConfigImpl;
-import me.chanjar.weixin.open.api.impl.WxOpenInMemoryConfigStorage;
+import me.chanjar.weixin.open.api.WxOpenConfigStorage;
+import me.chanjar.weixin.open.api.impl.WxOpenInRedisTemplateConfigStorage;
 import me.chanjar.weixin.open.api.impl.WxOpenOAuth2ServiceImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -285,7 +286,7 @@ public class ApiUsersBiz extends BaseBiz {
             if (!loginConfig.getWxPcLoginEnable().equals("1")) {
                 return Result.error("网页应用登录没开启");
             }
-            WxOAuth2Service wxOAuth2Service = new WxOpenOAuth2ServiceImpl(loginConfig.getWxPcLoginAppId(), loginConfig.getWxPcLoginAppSecret(), new WxOpenInMemoryConfigStorage());
+            WxOAuth2Service wxOAuth2Service = getWxOAuth2Service(loginConfig.getWxPcLoginAppId(), loginConfig.getWxPcLoginAppSecret());
             String authorizationUrl = wxOAuth2Service.buildAuthorizationUrl(req.getRedirectUrl(), WxConsts.QrConnectScope.SNSAPI_LOGIN, LoginAuthTypeEnum.PC.name());
             return Result.success(authorizationUrl);
         }
@@ -310,7 +311,7 @@ public class ApiUsersBiz extends BaseBiz {
         WxCodeResp codeResp = new WxCodeResp();
         if (req.getLoginAuthType().equals(LoginAuthTypeEnum.PC.getCode())) {
             // 网页应用
-            WxOAuth2Service wxOAuth2Service = new WxOpenOAuth2ServiceImpl(loginConfig.getWxPcLoginAppId(), loginConfig.getWxPcLoginAppSecret(), new WxOpenInMemoryConfigStorage());
+            WxOAuth2Service wxOAuth2Service = getWxOAuth2Service(loginConfig.getWxPcLoginAppId(), loginConfig.getWxPcLoginAppSecret());
             WxOAuth2AccessToken accessToken = wxOAuth2Service.getAccessToken(req.getCode());
             codeResp.setAuthInfo(getAuthInfo(wxOAuth2Service, accessToken));
         } else if (req.getLoginAuthType().equals(LoginAuthTypeEnum.MP.getCode())) {
@@ -334,8 +335,15 @@ public class ApiUsersBiz extends BaseBiz {
     }
 
 
+    private WxOAuth2Service getWxOAuth2Service(String appId, String appSecret) {
+        WxOpenConfigStorage configStorage = new WxOpenInRedisTemplateConfigStorage(cacheRedis.getStringRedisTemplate(), appId);
+        configStorage.setComponentAppId(appId);
+        configStorage.setComponentAppSecret(appSecret);
+        return new WxOpenOAuth2ServiceImpl(appId, appSecret, configStorage);
+    }
+
     private WxCodeResp.AuthInfo getAuthInfo(WxOAuth2Service wxOAuth2Service, WxOAuth2AccessToken accessToken) throws WxErrorException {
-        WxOAuth2UserInfo userInfo = wxOAuth2Service.getUserInfo(accessToken, null);
+        WxOAuth2UserInfo userInfo = wxOAuth2Service.getUserInfo(accessToken, "zh_CN");
         WxCodeResp.AuthInfo authInfo = new WxCodeResp.AuthInfo();
         authInfo.setUnionId(userInfo.getUnionId());
         authInfo.setHeadImg(userInfo.getHeadImgUrl());
