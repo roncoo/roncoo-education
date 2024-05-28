@@ -1,5 +1,6 @@
 package com.roncoo.education.user.service.auth.biz;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.config.ThreadContext;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
@@ -19,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 
@@ -66,10 +68,17 @@ public class AuthUsersBiz extends BaseBiz {
 
     public Result<String> binding(AuthBindingReq req) throws WxErrorException {
         Users users = dao.getById(ThreadContext.userId());
+        if (StringUtils.hasText(users.getUnionId()) || StringUtils.hasText(users.getOpenId())) {
+            return Result.error("您已绑定微信，请勿重复绑定");
+        }
 
         // 获取微信用户信息
         LoginConfig loginConfig = feignSysConfig.getLogin();
         WxOAuth2UserInfo userInfo = baseWxBiz.getAuthInfo(loginConfig.getWxPcLoginAppId(), loginConfig.getWxPcLoginAppSecret(), req.getCode());
+        Users usersRecord = dao.getByUnionIdOrOpenId(userInfo.getUnionId(), userInfo.getOpenid());
+        if (ObjectUtil.isNotNull(usersRecord)) {
+            return Result.error("该微信已绑定其他账号，请更换微信重新绑定");
+        }
 
         // 更新用户信息
         Users newUser = new Users();
