@@ -13,22 +13,22 @@ public enum SmsPlatformEnum {
     /**
      * 领课云
      */
-    LK_YUN(1, "领课云", "lkyun%"),
+    LK_YUN(1, "领课云", "lkyun%", "lkyunSms"),
 
     /**
      * 阿里云
      */
-    ALI_YUN(2, "阿里云", "aliyun%"),
+    ALI_YUN(2, "阿里云", "aliyun%", "aliyunSms"),
 
     /**
      * 腾讯云
      */
-    TENCENT_YUN(3, "腾讯云(待接入)", "tencent%"),
+    TENCENT_YUN(3, "腾讯云(待接入)", "tencent%", "tencentSms"),
 
     /**
      * 华为云
      */
-    HUAWEI_YUN(4, "华为云(待接入)", "huawei%");
+    HUAWEI_YUN(4, "华为云(待接入)", "huawei%", "huaweiSms");
 
     /**
      * 编码
@@ -44,6 +44,11 @@ public enum SmsPlatformEnum {
      * 标记
      */
     private final String tag;
+
+    /**
+     * 模式
+     */
+    private String mode;
 
     /**
      * @param code

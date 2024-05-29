@@ -14,10 +14,12 @@ import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.LoginAuthTypeEnum;
 import com.roncoo.education.common.core.enums.LoginStatusEnum;
+import com.roncoo.education.common.core.enums.SmsPlatformEnum;
 import com.roncoo.education.common.core.tools.*;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.service.BaseWxBiz;
-import com.roncoo.education.common.sms.SmsUtil;
+import com.roncoo.education.common.sms.Sms;
+import com.roncoo.education.common.sms.SmsFace;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.LoginConfig;
 import com.roncoo.education.user.dao.LogLoginDao;
@@ -45,6 +47,7 @@ import org.springframework.util.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -70,6 +73,8 @@ public class ApiUsersBiz extends BaseBiz {
     private final HttpServletRequest request;
     @NotNull
     private final BaseWxBiz baseWxBiz;
+    @NotNull
+    private final Map<String, SmsFace> smsFaceMap;
 
     @Transactional(rollbackFor = Exception.class)
     public Result<UsersLoginResp> register(RegisterReq req) {
@@ -227,7 +232,12 @@ public class ApiUsersBiz extends BaseBiz {
         // TODO 正常应该是发送成功才放入缓存，这里方便没有短信通道的情况下，也能测试注册（上线需要删除该处）
         cacheRedis.set(Constants.RedisPre.CODE + req.getMobile(), code, 5, TimeUnit.MINUTES);
 
-        if (SmsUtil.sendVerCode(req.getMobile(), code, feignSysConfig.getSms())) {
+        Sms sms = feignSysConfig.getSms();
+        SmsFace smsFace = smsFaceMap.get(SmsPlatformEnum.byCode(sms.getSmsPlatform()).getMode());
+        if (ObjectUtil.isEmpty(smsFace)) {
+            return Result.error("暂不支持该平台");
+        }
+        if (smsFace.sendVerCode(req.getMobile(), code, sms)) {
             // 发送成功，放入缓存
             cacheRedis.set(Constants.RedisPre.CODE + req.getMobile(), code, 5, TimeUnit.MINUTES);
             return Result.success("验证码发送成功，请查收");

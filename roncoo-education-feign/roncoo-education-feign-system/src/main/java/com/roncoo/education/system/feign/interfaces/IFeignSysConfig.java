@@ -1,6 +1,6 @@
 package com.roncoo.education.system.feign.interfaces;
 
-import com.roncoo.education.common.sms.SmsConfig;
+import com.roncoo.education.common.sms.Sms;
 import com.roncoo.education.system.feign.interfaces.vo.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,7 +52,7 @@ public interface IFeignSysConfig {
      * @return
      */
     @GetMapping(value = "/getSms")
-    SmsConfig getSms();
+    Sms getSms();
 
     /**
      * 支付配置
