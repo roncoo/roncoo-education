@@ -55,4 +55,13 @@ public class ApiSysConfigWebsiteResp implements Serializable {
     @ApiModelProperty(value = "登录加密公钥")
     private String rsaLoginPublicKey;
 
+    @ApiModelProperty(value = "是否开启微信网页应用授权")
+    private String wxPcLoginEnable;
+
+    @ApiModelProperty(value = "是否开启微信公众号授权")
+    private String wxMpLoginEnable;
+
+    @ApiModelProperty(value = "是否开启微信小程序授权")
+    private String wxMaLoginEnable;
+
 }

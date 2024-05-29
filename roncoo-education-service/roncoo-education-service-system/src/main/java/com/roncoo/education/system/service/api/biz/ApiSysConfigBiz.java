@@ -32,7 +32,13 @@ public class ApiSysConfigBiz extends BaseBiz {
         ApiSysConfigWebsiteResp resp = sysConfigCommonBiz.getSysConfig(ApiSysConfigWebsiteResp.class);
         // 公安网备案号处理
         resp.setWebsitePrnNo(getNumeric(resp.getWebsitePrn()));
-        resp.setRsaLoginPublicKey(sysConfigCommonBiz.getSysConfig(LoginConfig.class).getRsaLoginPublicKey());
+        LoginConfig loginConfig = sysConfigCommonBiz.getSysConfig(LoginConfig.class);
+        if (loginConfig != null) {
+            resp.setRsaLoginPublicKey(loginConfig.getRsaLoginPublicKey());
+            resp.setWxPcLoginEnable(loginConfig.getWxPcLoginEnable());
+            resp.setWxMpLoginEnable(loginConfig.getWxMpLoginEnable());
+            resp.setWxMaLoginEnable(loginConfig.getWxMaLoginEnable());
+        }
         return Result.success(resp);
     }
 
