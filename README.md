@@ -56,6 +56,6 @@ Cloud为核心框架。系统目前主要功能有课程点播功能，支持多
 ---
 
 <div style="text-align:center">
-<div>关注微信公众号可获取更多学习资料（包含sql脚本）</div>
+<div>关注微信公众号可获取更多学习资料（SQL脚本、部署教程、常见问题等）</div>
 <img src="distribution/images/gzh.png" alt="领课开源-微信公众号" width="600"/>
 </div>
