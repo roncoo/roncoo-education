@@ -25,7 +25,7 @@ public class LecturerJob {
     /**
      * 建议：每天凌晨5点执行一次
      */
-    @XxlJob("courseJobHandler")
+    @XxlJob("lecturerJobHandler")
     public void course() {
         adminLecturerBiz.syncEs();
         XxlJobHelper.handleSuccess("完成");
