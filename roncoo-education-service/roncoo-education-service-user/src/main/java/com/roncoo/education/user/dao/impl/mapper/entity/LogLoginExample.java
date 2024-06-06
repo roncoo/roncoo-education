@@ -69,7 +69,7 @@ public class LogLoginExample {
     }
 
     public void setLimitStart(int limitStart) {
-        this.limitStart = limitStart;
+        this.limitStart=limitStart;
     }
 
     public int getLimitStart() {
@@ -77,7 +77,7 @@ public class LogLoginExample {
     }
 
     public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
+        this.pageSize=pageSize;
     }
 
     public int getPageSize() {
@@ -362,6 +362,66 @@ public class LogLoginExample {
 
         public Criteria andLoginStatusNotBetween(Integer value1, Integer value2) {
             addCriterion("login_status not between", value1, value2, "loginStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginClientIsNull() {
+            addCriterion("login_client is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginClientIsNotNull() {
+            addCriterion("login_client is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginClientEqualTo(Integer value) {
+            addCriterion("login_client =", value, "loginClient");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginClientNotEqualTo(Integer value) {
+            addCriterion("login_client <>", value, "loginClient");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginClientGreaterThan(Integer value) {
+            addCriterion("login_client >", value, "loginClient");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginClientGreaterThanOrEqualTo(Integer value) {
+            addCriterion("login_client >=", value, "loginClient");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginClientLessThan(Integer value) {
+            addCriterion("login_client <", value, "loginClient");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginClientLessThanOrEqualTo(Integer value) {
+            addCriterion("login_client <=", value, "loginClient");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginClientIn(List<Integer> values) {
+            addCriterion("login_client in", values, "loginClient");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginClientNotIn(List<Integer> values) {
+            addCriterion("login_client not in", values, "loginClient");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginClientBetween(Integer value1, Integer value2) {
+            addCriterion("login_client between", value1, value2, "loginClient");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginClientNotBetween(Integer value1, Integer value2) {
+            addCriterion("login_client not between", value1, value2, "loginClient");
             return (Criteria) this;
         }
 

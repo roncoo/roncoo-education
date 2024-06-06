@@ -3,6 +3,7 @@
  */
 package com.roncoo.education.user.service.api.req;
 
+import com.roncoo.education.common.core.enums.LoginClientEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -34,6 +35,8 @@ public class LoginReq implements Serializable {
     @ApiModelProperty(value = "验证码", required = true)
     private String verCode;
 
+    @ApiModelProperty(value = "登录客户端", required = false)
+    private Integer loginClient = LoginClientEnum.PC.getCode();
     @ApiModelProperty(value = "登录IP", required = false)
     private String loginIp;
     @ApiModelProperty(value = "国家", required = false)

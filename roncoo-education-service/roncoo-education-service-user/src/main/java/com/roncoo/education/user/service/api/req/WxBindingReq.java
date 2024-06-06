@@ -40,5 +40,5 @@ public class WxBindingReq implements Serializable {
     private String openId;
 
     @ApiModelProperty(value = "注册来源", required = false)
-    private Integer RegisterSource = RegisterSourceEnum.SYS_PC_WX.getCode();
+    private Integer registerSource = RegisterSourceEnum.SYS_PC_WX.getCode();
 }

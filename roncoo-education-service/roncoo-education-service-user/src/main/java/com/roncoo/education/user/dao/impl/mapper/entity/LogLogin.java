@@ -12,6 +12,8 @@ public class LogLogin implements Serializable {
 
     private Integer loginStatus;
 
+    private Integer loginClient;
+
     private String loginIp;
 
     private String country;
@@ -56,6 +58,14 @@ public class LogLogin implements Serializable {
 
     public void setLoginStatus(Integer loginStatus) {
         this.loginStatus = loginStatus;
+    }
+
+    public Integer getLoginClient() {
+        return loginClient;
+    }
+
+    public void setLoginClient(Integer loginClient) {
+        this.loginClient = loginClient;
     }
 
     public String getLoginIp() {
@@ -116,6 +126,7 @@ public class LogLogin implements Serializable {
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", userId=").append(userId);
         sb.append(", loginStatus=").append(loginStatus);
+        sb.append(", loginClient=").append(loginClient);
         sb.append(", loginIp=").append(loginIp);
         sb.append(", country=").append(country);
         sb.append(", province=").append(province);
