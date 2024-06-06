@@ -52,6 +52,12 @@ public class ApiSysConfigWebsiteResp implements Serializable {
     @ApiModelProperty(value = "用户协议")
     private String websiteUserAgreement;
 
+    @ApiModelProperty(value = "隐私政策")
+    private String websitePrivacyPolicy;
+
+    @ApiModelProperty(value = "关于我们")
+    private String websiteAboutUs;
+
     @ApiModelProperty(value = "登录加密公钥")
     private String rsaLoginPublicKey;
 
