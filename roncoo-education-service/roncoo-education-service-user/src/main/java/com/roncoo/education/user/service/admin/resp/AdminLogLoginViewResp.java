@@ -36,6 +36,9 @@ public class AdminLogLoginViewResp implements Serializable {
     @ApiModelProperty(value = "登录状态(1成功，0失败)")
     private Integer loginStatus;
 
+    @ApiModelProperty(value = "登录客户端")
+    private String loginClient;
+
     @ApiModelProperty(value = "登录IP")
     private String loginIp;
 
