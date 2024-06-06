@@ -3,7 +3,6 @@ package com.roncoo.education.user.service.api.biz;
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.api.impl.WxMaServiceImpl;
 import cn.binarywang.wx.miniapp.config.impl.WxMaDefaultConfigImpl;
-import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
@@ -207,17 +206,15 @@ public class ApiUsersBiz extends BaseBiz {
     }
 
     private void log(Long userId, LoginStatusEnum status, LogLogin record) {
-        ThreadUtil.execute(() -> {
-            record.setUserId(userId);
-            record.setLoginStatus(status.getCode());
-            record.setLoginIp(ServletUtil.getClientIP(request));
-            IpUtil.IpInfo ipInfo = getIpInfo(record.getLoginIp());
-            if (ObjectUtil.isNotNull(ipInfo)) {
-                record.setProvince(ipInfo.getPro());
-                record.setCity(ipInfo.getCity());
-            }
-            logLoginDao.save(record);
-        });
+        record.setUserId(userId);
+        record.setLoginStatus(status.getCode());
+        record.setLoginIp(ServletUtil.getClientIP(request));
+        IpUtil.IpInfo ipInfo = getIpInfo(record.getLoginIp());
+        if (ObjectUtil.isNotNull(ipInfo)) {
+            record.setProvince(ipInfo.getPro());
+            record.setCity(ipInfo.getCity());
+        }
+        logLoginDao.save(record);
     }
 
     public Result<String> sendCode(SendCodeReq req) {
