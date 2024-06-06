@@ -31,7 +31,7 @@ public class ApiLecturerController {
 
     @ApiOperation(value = "讲师列出", notes = "讲师列出")
     @PostMapping(value = "/search")
-    public Result<Page<LecturerPageResp>> search(LecturerPageReq req) {
+    public Result<Page<LecturerPageResp>> search(@RequestBody LecturerPageReq req) {
         return biz.search(req);
     }
 
