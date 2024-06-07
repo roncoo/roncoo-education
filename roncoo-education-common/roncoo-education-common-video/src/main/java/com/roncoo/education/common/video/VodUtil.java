@@ -13,7 +13,7 @@ import com.roncoo.education.common.video.impl.priyun.resp.PrivateYunInfoResp;
 import com.roncoo.education.common.video.impl.priyun.resp.PrivateYunPlayTokenRes;
 import com.roncoo.education.common.video.impl.priyun.resp.PrivateYunVideoClarityResp;
 import com.roncoo.education.common.video.impl.priyun.resp.PrivateYunVideoInfoResp;
-import com.roncoo.education.common.video.req.VideoConfig;
+import com.roncoo.education.common.video.req.VideoConfigReq;
 import com.roncoo.education.common.video.req.VodPlayConfigReq;
 import com.roncoo.education.common.video.resp.InfoResp;
 import com.roncoo.education.common.video.resp.VodInfoResp;
@@ -43,7 +43,7 @@ public final class VodUtil {
      *
      * @param req
      */
-    public static void init(VideoConfig req) {
+    public static void init(VideoConfigReq req) {
         if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
             // 无需初始化
             return;
@@ -63,7 +63,7 @@ public final class VodUtil {
         }
     }
 
-    public static InfoResp getInfo(VideoConfig req) {
+    public static InfoResp getInfo(VideoConfigReq req) {
         InfoResp infoResp = new InfoResp();
         if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
             if (req.getPriyUrl().length() > 2) {
@@ -91,10 +91,10 @@ public final class VodUtil {
     /**
      * 获取上传视频回调地址
      *
-     * @param VideoConfig
+     * @param req
      * @return
      */
-    public static String getCallbackUrl(VideoConfig req) {
+    public static String getCallbackUrl(VideoConfigReq req) {
         if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
             return req.getWebsiteDomain() + PRIVATEY_CALLBACK;
         }
@@ -109,7 +109,7 @@ public final class VodUtil {
      *
      * @return json
      */
-    public static String getUploadConfig(VideoConfig req) {
+    public static String getUploadConfig(VideoConfigReq req) {
         if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
             // 上传回调地址
             String callbackUrl = req.getWebsiteDomain() + PRIVATEY_CALLBACK;
@@ -128,7 +128,7 @@ public final class VodUtil {
      * @param vid
      * @return
      */
-    public static VodInfoResp getVideoInfo(VideoConfig req, String vid) {
+    public static VodInfoResp getVideoInfo(VideoConfigReq req, String vid) {
         VodInfoResp resp = new VodInfoResp();
         resp.setVodPlatform(req.getVodPlatform());
         resp.setVid(vid);
@@ -173,7 +173,7 @@ public final class VodUtil {
      * @param vid
      * @return
      */
-    public static void deleteVideo(VideoConfig req, String vid) {
+    public static void deleteVideo(VideoConfigReq req, String vid) {
         if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
             PrivateYunVodUtil.delete(req.getPriyUrl(), req.getPriyAccessKeyId(), req.getPriyAccessKeySecret(), vid, "");
             return;
@@ -191,7 +191,7 @@ public final class VodUtil {
      * @param playConfigReq
      * @return
      */
-    public static String getPlayConfig(VideoConfig req, VodPlayConfigReq playConfigReq) {
+    public static String getPlayConfig(VideoConfigReq req, VodPlayConfigReq playConfigReq) {
         if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
             // 播放授权地址
             String authUrl = req.getWebsiteDomain() + PRIVATEY_AUTH;

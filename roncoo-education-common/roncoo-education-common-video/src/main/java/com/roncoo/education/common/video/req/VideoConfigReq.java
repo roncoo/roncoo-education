@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-public class VideoConfig implements Serializable {
+public class VideoConfigReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -30,6 +30,16 @@ public class VideoConfig implements Serializable {
      * 点播跑马灯(0:关闭、1:开启)
      */
     private Boolean vodEnableMarquee = false;
+
+    /**
+     * 直播平台
+     */
+    private Integer livePlatform;
+
+    /**
+     * 直播跑马灯(0:关闭、1:开启)
+     */
+    private Boolean liveEnableMarquee = false;
 
     /**
      * 保利威--账号ID
@@ -60,6 +70,10 @@ public class VideoConfig implements Serializable {
      * 保利威--应用秘钥
      */
     private String polyvAppSecret;
+    /**
+     * 保利威--直播域名
+     */
+    private String polyvLiveDomain = "https://live.polyv.cn/";
 
     /**
      * 领课云，Url
@@ -73,4 +87,5 @@ public class VideoConfig implements Serializable {
      * 领课云，AccessKeySecret
      */
     private String priyAccessKeySecret;
+
 }

@@ -135,7 +135,7 @@ public class PolyvSignUtil {
      * @throws NoSuchAlgorithmException     签名异常
      * @throws UnsupportedEncodingException 编码异常
      */
-    private static String md5Hex(String text) {
+    public static String md5Hex(String text) {
         try {
             return digestHex(text, ALGORITHM_MD5);
         } catch (NoSuchAlgorithmException e) {
