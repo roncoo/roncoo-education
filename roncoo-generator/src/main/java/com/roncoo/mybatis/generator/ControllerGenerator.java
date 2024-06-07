@@ -49,13 +49,13 @@ public class ControllerGenerator {
         focList.addAll(serviceDaoList());
 
         // service.api
-        //focList.addAll(serviceApiList());
+        focList.addAll(serviceApiList());
 
         // service.auth
         //focList.addAll(serviceAuthList());
 
         // service.admin
-        //focList.addAll(serviceAdminList());
+        focList.addAll(serviceAdminList());
 
         // feign
         //focList.addAll(feignList());
