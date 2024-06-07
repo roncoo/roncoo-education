@@ -17,11 +17,11 @@ public interface UploadFace {
     String uploadPic(MultipartFile file, Upload upload);
 
     /**
-     * 图片上传
+     * 文档上传
      *
-     * @return 图片url
+     * @return 文档url
      */
-    String uploadDoc(MultipartFile file, Upload upload);
+    String uploadDoc(MultipartFile file, Upload upload, Boolean isPublicRead);
 
 
     /**

@@ -45,7 +45,15 @@ public class AdminUploadController extends BaseController {
     @SysLog(value = "上传文档")
     @PostMapping(value = "/doc")
     public Result<UploadDocResp> uploadDoc(@RequestParam(name = "docFile", required = false) MultipartFile docFile) {
-        return biz.uploadDoc(docFile);
+        return biz.uploadDoc(docFile, false);
+    }
+
+    @ApiOperation(value = "上传app", notes = "服务端上传app接口，该接口只支持app格式")
+    @ApiImplicitParam(name = "appFile", value = "app文件", dataType = "File", dataTypeClass = File.class, paramType = "query", required = true)
+    @SysLog(value = "上传app")
+    @PostMapping(value = "/app")
+    public Result<UploadDocResp> uploadApp(@RequestParam(name = "appFile", required = false) MultipartFile appFile) {
+        return biz.uploadDoc(appFile, true);
     }
 
 }

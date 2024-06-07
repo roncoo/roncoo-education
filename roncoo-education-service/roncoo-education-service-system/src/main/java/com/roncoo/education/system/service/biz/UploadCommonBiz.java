@@ -54,9 +54,12 @@ public class UploadCommonBiz {
         return Result.success(fileUrl);
     }
 
-    public Result<UploadDocResp> uploadDoc(MultipartFile docFile) {
-        if (!FileUtils.isDoc(docFile)) {
+    public Result<UploadDocResp> uploadDoc(MultipartFile docFile, Boolean isPublicRead) {
+        if (!isPublicRead && !FileUtils.isDoc(docFile)) {
             return Result.error("目前只支持：{}，请选择文件上传".replace("{}", FileUtils.DOC_TYPE_MAP));
+        }
+        if (isPublicRead && !FileUtils.isApp(docFile)) {
+            return Result.error("目前只支持：{}，请选择文件上传".replace("{}", FileUtils.APP_TYPE_MAP));
         }
 
         UploadDocResp resp = new UploadDocResp();
@@ -70,7 +73,7 @@ public class UploadCommonBiz {
         if (ObjectUtil.isEmpty(uploadFace)) {
             return Result.error("暂不支持该类型");
         }
-        resp.setDocUrl(uploadFace.uploadDoc(docFile, upload));
+        resp.setDocUrl(uploadFace.uploadDoc(docFile, upload, isPublicRead));
         try {
             resp.setPageCount(DocUtil.getDocPageCount(docFile.getOriginalFilename(), docFile.getInputStream()));
             return Result.success(resp);

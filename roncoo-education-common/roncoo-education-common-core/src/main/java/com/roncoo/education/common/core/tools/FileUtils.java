@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 public final class FileUtils {
     public static final String PIC_TYPE_MAP = "jpg|png|gif|bmp|webp";
     public static final String DOC_TYPE_MAP = "doc|docx|xls|xlsx|ppt|pptx|txt|pdf";
+    public static final String APP_TYPE_MAP = "apk|ipa";
 
     private FileUtils() {
     }
@@ -43,6 +44,19 @@ public final class FileUtils {
                 fileType = FileTypeUtil.getType(file.getInputStream());
             }
             return StrUtil.isNotBlank(fileType) && DOC_TYPE_MAP.contains(fileType);
+        } catch (Exception e) {
+            log.error("判断文件类型错误", e);
+            return false;
+        }
+    }
+
+    public static boolean isApp(MultipartFile file) {
+        try {
+            String fileType = FileNameUtil.getSuffix(file.getOriginalFilename());
+            if (!StringUtils.hasText(fileType)) {
+                fileType = FileTypeUtil.getType(file.getInputStream());
+            }
+            return StrUtil.isNotBlank(fileType) && APP_TYPE_MAP.contains(fileType);
         } catch (Exception e) {
             log.error("判断文件类型错误", e);
             return false;

@@ -29,8 +29,8 @@ public class AliyunUploadImpl implements UploadFace {
     }
 
     @Override
-    public String uploadDoc(MultipartFile file, Upload upload) {
-        return putObject(file, upload, CannedAccessControlList.Private);
+    public String uploadDoc(MultipartFile file, Upload upload, Boolean isPublicRead) {
+        return putObject(file, upload, isPublicRead ? CannedAccessControlList.PublicRead : CannedAccessControlList.Private);
     }
 
     @Override
