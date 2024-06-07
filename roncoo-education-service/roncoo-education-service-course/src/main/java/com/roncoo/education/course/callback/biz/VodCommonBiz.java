@@ -6,7 +6,7 @@ import com.roncoo.education.common.video.VodUtil;
 import com.roncoo.education.common.video.resp.VodInfoResp;
 import com.roncoo.education.course.dao.ResourceDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
-import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
+import com.roncoo.education.system.feign.interfaces.vo.VideoConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -26,9 +26,9 @@ public class VodCommonBiz extends BaseBiz {
     @NotNull
     private final ResourceDao resourceDao;
 
-    public void completeUpload(String videoId, VodConfig vodConfig) {
+    public void completeUpload(String videoId, VideoConfig videoConfig) {
         // 视频审核完成处理
-        VodInfoResp videoResponse = VodUtil.getVideoInfo(vodConfig, videoId);
+        VodInfoResp videoResponse = VodUtil.getVideoInfo(videoConfig, videoId);
         if (ObjectUtil.isNotNull(videoResponse)) {
             Resource resource = resourceDao.getByVideoVid(videoId);
             if (ObjectUtil.isNotEmpty(resource)) {

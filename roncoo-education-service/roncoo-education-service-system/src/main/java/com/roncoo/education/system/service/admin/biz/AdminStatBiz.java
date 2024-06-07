@@ -4,7 +4,7 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.video.VodUtil;
 import com.roncoo.education.common.video.resp.InfoResp;
-import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
+import com.roncoo.education.system.feign.interfaces.vo.VideoConfig;
 import com.roncoo.education.system.service.biz.SysConfigCommonBiz;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,8 +26,8 @@ public class AdminStatBiz extends BaseBiz {
     private final SysConfigCommonBiz sysConfigCommonBiz;
 
     public Result<InfoResp> vod() {
-        VodConfig vodConfig = sysConfigCommonBiz.getSysConfig(VodConfig.class);
-        InfoResp resp = VodUtil.getInfo(vodConfig);
+        VideoConfig videoConfig = sysConfigCommonBiz.getSysConfig(VideoConfig.class);
+        InfoResp resp = VodUtil.getInfo(videoConfig);
         return Result.success(resp);
     }
 }

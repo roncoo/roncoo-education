@@ -14,6 +14,8 @@ import com.roncoo.education.course.service.admin.req.AdminLivePageReq;
 import com.roncoo.education.course.service.admin.req.AdminLiveSaveReq;
 import com.roncoo.education.course.service.admin.resp.AdminLivePageResp;
 import com.roncoo.education.course.service.admin.resp.AdminLiveViewResp;
+import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
+import com.roncoo.education.system.feign.interfaces.vo.VideoConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +32,26 @@ public class AdminLiveBiz extends BaseBiz {
 
     @NotNull
     private final LiveDao dao;
+    @NotNull
+    private final IFeignSysConfig feignSysConfig;
+
+
+    /**
+     * 获取开播地址
+     *
+     * @param id
+     * @return
+     */
+    public Result<String> broadcast(Long id) {
+        Live live = dao.getById(id);
+
+        VideoConfig videoConfig = feignSysConfig.getVideo();
+
+        // 获取开播记录
+
+
+        return null;
+    }
 
     /**
      * 直播信息分页

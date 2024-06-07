@@ -45,8 +45,8 @@ public class FeignSysConfigController implements IFeignSysConfig {
     }
 
     @Override
-    public VodConfig getVod() {
-        return biz.getVod();
+    public VideoConfig getVideo() {
+        return biz.getVideo();
     }
 
     @Override

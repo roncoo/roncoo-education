@@ -1,5 +1,6 @@
 package com.roncoo.education.common.video.req;
 
+import com.roncoo.education.common.core.enums.LivePlatformEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -34,7 +35,7 @@ public class VideoConfigReq implements Serializable {
     /**
      * 直播平台
      */
-    private Integer livePlatform;
+    private Integer livePlatform = LivePlatformEnum.POLYV.getCode();
 
     /**
      * 直播跑马灯(0:关闭、1:开启)

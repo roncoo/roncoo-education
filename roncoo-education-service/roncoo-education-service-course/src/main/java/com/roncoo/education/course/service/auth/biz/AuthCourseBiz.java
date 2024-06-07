@@ -14,7 +14,7 @@ import com.roncoo.education.course.service.auth.req.AuthCourseSignReq;
 import com.roncoo.education.course.service.auth.resp.AuthCourseSignResp;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.DocConfig;
-import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
+import com.roncoo.education.system.feign.interfaces.vo.VideoConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -126,9 +126,9 @@ public class AuthCourseBiz extends BaseBiz {
         playConfigReq.setVodAuthCode(authCode);
 
         // 视频云配置
-        VodConfig vodConfig = feignSysConfig.getVod();
-        vodConfig.setVodPlatform(resp.getVodPlatform());
-        resp.setVodPlayConfig(VodUtil.getPlayConfig(vodConfig, playConfigReq));
+        VideoConfig videoConfig = feignSysConfig.getVideo();
+        videoConfig.setVodPlatform(resp.getVodPlatform());
+        resp.setVodPlayConfig(VodUtil.getPlayConfig(videoConfig, playConfigReq));
     }
 
     private void docConfig(Resource resource, AuthCourseSignResp resp) {

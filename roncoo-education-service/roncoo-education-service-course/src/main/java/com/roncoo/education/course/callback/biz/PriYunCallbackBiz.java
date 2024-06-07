@@ -5,7 +5,7 @@ import com.roncoo.education.common.video.impl.priyun.enums.PrivateYunVideoStatus
 import com.roncoo.education.common.video.impl.priyun.req.PrivateYunVodAuth;
 import com.roncoo.education.common.video.impl.priyun.req.PrivateYunVodUpload;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
-import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
+import com.roncoo.education.system.feign.interfaces.vo.VideoConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -35,10 +35,10 @@ public class PriYunCallbackBiz extends BaseBiz {
      * @return
      */
     public String vodUpload(PrivateYunVodUpload vodUpload) {
-        VodConfig vodConfig = feignSysConfig.getVod();
+        VideoConfig videoConfig = feignSysConfig.getVideo();
         if (PrivateYunVideoStatusEnum.COMPLETE.getCode().equals(vodUpload.getVideoStatus())) {
             // 视频处理完成
-            vodCommonBiz.completeUpload(vodUpload.getVideoVid(), vodConfig);
+            vodCommonBiz.completeUpload(vodUpload.getVideoVid(), videoConfig);
         }
         return SUCCESS;
     }

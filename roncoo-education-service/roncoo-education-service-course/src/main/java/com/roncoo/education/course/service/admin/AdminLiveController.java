@@ -31,6 +31,13 @@ public class AdminLiveController {
     @NotNull
     private final AdminLiveBiz biz;
 
+    @ApiOperation(value = "讲师开播地址", notes = "获取讲师开播地址")
+    @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
+    @GetMapping(value = "/broadcast")
+    public Result<String> broadcast(@RequestParam Long id) {
+        return biz.broadcast(id);
+    }
+
     @ApiOperation(value = "直播信息分页", notes = "直播信息分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminLivePageResp>> page(@RequestBody AdminLivePageReq req) {

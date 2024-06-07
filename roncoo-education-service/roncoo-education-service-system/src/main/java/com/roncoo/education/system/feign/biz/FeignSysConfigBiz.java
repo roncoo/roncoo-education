@@ -38,8 +38,8 @@ public class FeignSysConfigBiz extends BaseBiz {
         return sysConfigCommonBiz.getSysConfig(Sms.class);
     }
 
-    public VodConfig getVod() {
-        return sysConfigCommonBiz.getSysConfig(VodConfig.class);
+    public VideoConfig getVideo() {
+        return sysConfigCommonBiz.getSysConfig(VideoConfig.class);
     }
 
 

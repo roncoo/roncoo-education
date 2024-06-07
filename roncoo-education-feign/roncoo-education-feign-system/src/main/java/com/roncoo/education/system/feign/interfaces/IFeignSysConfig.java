@@ -31,12 +31,12 @@ public interface IFeignSysConfig {
     LoginConfig getLogin();
 
     /**
-     * 视频云配置
+     * 视频云配置(录播）
      *
      * @return
      */
-    @GetMapping(value = "/getVod")
-    VodConfig getVod();
+    @GetMapping(value = "/getVideo")
+    VideoConfig getVideo();
 
     /**
      * 文档存储配置

@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-public class VodConfig extends VideoConfigReq implements Serializable {
+public class VideoConfig extends VideoConfigReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

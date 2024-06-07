@@ -15,7 +15,7 @@ import com.roncoo.education.system.dao.SysConfigDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfig;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfigExample;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfigExample.Criteria;
-import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
+import com.roncoo.education.system.feign.interfaces.vo.VideoConfig;
 import com.roncoo.education.system.service.admin.req.AdminSysConfigEditReq;
 import com.roncoo.education.system.service.admin.req.AdminSysConfigListReq;
 import com.roncoo.education.system.service.admin.req.AdminSysConfigPageReq;
@@ -149,15 +149,15 @@ public class AdminSysConfigBiz extends BaseBiz {
 
     public Result<String> init() {
         Map<String, String> configMap = dao.listByExample(new SysConfigExample()).stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
-        VodConfig vodConfig = BeanUtil.objToBean(configMap, VodConfig.class);
+        VideoConfig videoConfig = BeanUtil.objToBean(configMap, VideoConfig.class);
         // 初始化
-        VodUtil.init(vodConfig);
+        VodUtil.init(videoConfig);
         return Result.success("操作成功");
     }
 
     public Result<String> videoGet() {
         Map<String, String> configMap = dao.listByExample(new SysConfigExample()).stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
-        VodConfig vodConfig = BeanUtil.objToBean(configMap, VodConfig.class);
-        return Result.success(VodUtil.getCallbackUrl(vodConfig));
+        VideoConfig videoConfig = BeanUtil.objToBean(configMap, VideoConfig.class);
+        return Result.success(VodUtil.getCallbackUrl(videoConfig));
     }
 }

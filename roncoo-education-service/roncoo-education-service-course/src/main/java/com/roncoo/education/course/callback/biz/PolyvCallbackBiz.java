@@ -7,7 +7,7 @@ import com.roncoo.education.common.video.impl.polyv.PolyvVodUtil;
 import com.roncoo.education.common.video.impl.polyv.vod.CallbackEventTypeEnum;
 import com.roncoo.education.common.video.impl.polyv.vod.CallbackVodUpload;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
-import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
+import com.roncoo.education.system.feign.interfaces.vo.VideoConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -33,8 +33,8 @@ public class PolyvCallbackBiz extends BaseBiz {
     public String polyvUpload(CallbackVodUpload callbackVodUpload) {
         log.warn("保利威-上传回调，{}", JsonUtil.toJsonString(callbackVodUpload));
 
-        VodConfig vodConfig = feignSysConfig.getVod();
-        String sign = PolyvVodUtil.getCallbackSign(BeanUtil.beanToStringMap(callbackVodUpload), vodConfig.getPolyvSecretKey());
+        VideoConfig videoConfig = feignSysConfig.getVideo();
+        String sign = PolyvVodUtil.getCallbackSign(BeanUtil.beanToStringMap(callbackVodUpload), videoConfig.getPolyvSecretKey());
         if (!callbackVodUpload.getSign().equals(sign)) {
             log.error("保利威视--点播上传回调--验签失败 {}", JsonUtil.toJsonString(callbackVodUpload));
             return FAIL;
@@ -42,7 +42,7 @@ public class PolyvCallbackBiz extends BaseBiz {
 
         if (CallbackEventTypeEnum.PASS.getCode().equals(callbackVodUpload.getType())) {
             // 视频审核完成处理
-            vodCommonBiz.completeUpload(callbackVodUpload.getVid(), vodConfig);
+            vodCommonBiz.completeUpload(callbackVodUpload.getVid(), videoConfig);
         }
         return SUCCESS;
     }

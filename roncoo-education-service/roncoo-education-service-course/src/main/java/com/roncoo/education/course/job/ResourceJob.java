@@ -8,7 +8,7 @@ import com.roncoo.education.course.dao.ResourceDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
 import com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
-import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
+import com.roncoo.education.system.feign.interfaces.vo.VideoConfig;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import lombok.RequiredArgsConstructor;
@@ -50,9 +50,9 @@ public class ResourceJob {
         c.andGmtCreateLessThanOrEqualTo(LocalDateTime.now().plusHours(-1));
         List<Resource> list = resourceDao.listByExample(example);
         if (CollUtil.isNotEmpty(list)) {
-            VodConfig vodConfig = feignSysConfig.getVod();
+            VideoConfig videoConfig = feignSysConfig.getVideo();
             for (Resource resource : list) {
-                vodCommonBiz.completeUpload(resource.getVideoVid(), vodConfig);
+                vodCommonBiz.completeUpload(resource.getVideoVid(), videoConfig);
             }
         }
         XxlJobHelper.handleSuccess("完成");

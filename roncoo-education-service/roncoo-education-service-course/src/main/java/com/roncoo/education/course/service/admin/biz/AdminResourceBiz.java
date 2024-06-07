@@ -25,7 +25,7 @@ import com.roncoo.education.course.service.admin.resp.AdminResourcePageResp;
 import com.roncoo.education.course.service.admin.resp.AdminResourceViewResp;
 import com.roncoo.education.course.service.admin.resp.AdminVodConfigResp;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
-import com.roncoo.education.system.feign.interfaces.vo.VodConfig;
+import com.roncoo.education.system.feign.interfaces.vo.VideoConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,9 +63,9 @@ public class AdminResourceBiz extends BaseBiz {
     public Result<AdminVodConfigResp> getVodConfig() {
         AdminVodConfigResp resp = new AdminVodConfigResp();
         // 视频云配置
-        VodConfig vodConfig = feignSysConfig.getVod();
-        resp.setVodPlatform(vodConfig.getVodPlatform());
-        resp.setVodUploadConfig(VodUtil.getUploadConfig(vodConfig));
+        VideoConfig videoConfig = feignSysConfig.getVideo();
+        resp.setVodPlatform(videoConfig.getVodPlatform());
+        resp.setVodUploadConfig(VodUtil.getUploadConfig(videoConfig));
         return Result.success(resp);
     }
 
@@ -120,7 +120,7 @@ public class AdminResourceBiz extends BaseBiz {
         Resource record = BeanUtil.copyProperties(req, Resource.class);
         if (ResourceTypeEnum.VIDEO.getCode().equals(req.getResourceType()) || ResourceTypeEnum.AUDIO.getCode().equals(req.getResourceType())) {
             // 视频类型，填写视频平台
-            record.setVodPlatform(feignSysConfig.getVod().getVodPlatform());
+            record.setVodPlatform(feignSysConfig.getVideo().getVodPlatform());
         } else {
             // 文档类型，填写存储平台
             record.setStoragePlatform(feignSysConfig.getSys().getStoragePlatform());
@@ -210,7 +210,7 @@ public class AdminResourceBiz extends BaseBiz {
         if (dao.deleteById(resource.getId()) > 0) {
             if (ResourceTypeEnum.VIDEO.getCode().equals(resource.getResourceType()) || ResourceTypeEnum.AUDIO.getCode().equals(resource.getResourceType())) {
                 // 删除音视频
-                VodUtil.deleteVideo(feignSysConfig.getVod(), resource.getVideoVid());
+                VodUtil.deleteVideo(feignSysConfig.getVideo(), resource.getVideoVid());
             } else if (ResourceTypeEnum.DOC.getCode().equals(resource.getResourceType())) {
                 // TODO 删除文档
             }
@@ -236,9 +236,9 @@ public class AdminResourceBiz extends BaseBiz {
         authCode.setUserId(ThreadContext.userId());
         playConfigReq.setVodAuthCode(authCode);
 
-        VodConfig vodConfig = feignSysConfig.getVod();
-        vodConfig.setVodPlatform(resp.getVodPlatform());
-        resp.setVodPlayConfig(VodUtil.getPlayConfig(vodConfig, playConfigReq));
+        VideoConfig videoConfig = feignSysConfig.getVideo();
+        videoConfig.setVodPlatform(resp.getVodPlatform());
+        resp.setVodPlayConfig(VodUtil.getPlayConfig(videoConfig, playConfigReq));
 
         return Result.success(resp);
     }

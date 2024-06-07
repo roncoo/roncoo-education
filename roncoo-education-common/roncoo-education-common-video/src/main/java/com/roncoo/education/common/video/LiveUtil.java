@@ -60,23 +60,23 @@ public final class LiveUtil {
      * @param configReq
      * @return
      */
-    public static LiveChannelResp getLiveChannel(VideoConfigReq req, LiveChannelReq configReq) {
+    public static LiveChannelResp getLiveChannel(VideoConfigReq req, LiveChannelReq channelReq) {
         LiveChannelResp resp = new LiveChannelResp();
-        resp.setLiveModel(configReq.getLiveModel());
+        resp.setLiveModel(channelReq.getLiveModel());
         if (LivePlatformEnum.POLYV.getCode().equals(req.getLivePlatform())) {
             ChannelCreateRequest request = new ChannelCreateRequest();
-            if (LiveSceneEnum.LARGE_CLASS.equals(configReq.getLiveScene())) {
+            if (LiveSceneEnum.LARGE_CLASS.equals(channelReq.getLiveScene())) {
                 request.setNewScene("topclass");
-            } else if (LiveSceneEnum.SEMINAR.equals(configReq.getLiveScene())) {
+            } else if (LiveSceneEnum.SEMINAR.equals(channelReq.getLiveScene())) {
                 request.setNewScene("seminar");
             } else {
-                log.error("保利威-暂不支持该场景：{}", JsonUtil.toJsonString(configReq));
+                log.error("保利威-暂不支持该场景：{}", JsonUtil.toJsonString(channelReq));
                 throw new BaseException("暂不支持该场景");
             }
-            request.setName(configReq.getLiveName());
-            request.setLinkMicLimit(configReq.getLinkMicLimit());
-            request.setPureRtcEnabled(configReq.getWebrtc() ? "Y" : "N");
-            request.setTemplate(configReq.getLiveModel().getDesc());
+            request.setName(channelReq.getLiveName());
+            request.setLinkMicLimit(channelReq.getLinkMicLimit());
+            request.setPureRtcEnabled(channelReq.getWebrtc() ? "Y" : "N");
+            request.setTemplate(channelReq.getLiveModel().getDesc());
             // 设置频道号密码
             request.setChannelPasswd(RandomUtil.randomNumbers(6));
             // 创建频道号
@@ -99,22 +99,22 @@ public final class LiveUtil {
      * @param urlReq
      * @return
      */
-    public static String getLiveBroadcastUrl(VideoConfigReq req, LiveBroadcastReq urlReq) {
+    public static String getLiveBroadcastUrl(VideoConfigReq req, LiveBroadcastReq broadcastReq) {
         if (LivePlatformEnum.POLYV.getCode().equals(req.getLivePlatform())) {
-            if (urlReq.getLiveScene().equals(LiveSceneEnum.LARGE_CLASS)) {
-                if (urlReq.getEnableMarquee()) {
+            if (broadcastReq.getLiveScene().equals(LiveSceneEnum.LARGE_CLASS)) {
+                if (broadcastReq.getEnableMarquee()) {
                     // 跑马灯类型
-                    if (MarqueeTypeEnum.FIXED_VALUE.getCode().equals(urlReq.getMarqueeTypeEnum())) {
+                    if (MarqueeTypeEnum.FIXED_VALUE.getCode().equals(broadcastReq.getMarqueeTypeEnum())) {
                         // 固定值
-                        PolyvLiveUtil.channelRecordSetting(urlReq.getChannelId(), req.getPolyvAppId(), req.getPolyvAppSecret(), "marquee", "fixed", urlReq.getMarqueeContent(), "30", null);
+                        PolyvLiveUtil.channelRecordSetting(broadcastReq.getChannelId(), req.getPolyvAppId(), req.getPolyvAppSecret(), "marquee", "fixed", broadcastReq.getMarqueeContent(), "30", null);
                     } else {
                         // 动态值：这里设置为空，具体的内容由回调设置
-                        PolyvLiveUtil.channelRecordSetting(urlReq.getChannelId(), req.getPolyvAppId(), req.getPolyvAppSecret(), "marquee", "nickname", null, "30", null);
+                        PolyvLiveUtil.channelRecordSetting(broadcastReq.getChannelId(), req.getPolyvAppId(), req.getPolyvAppSecret(), "marquee", "nickname", null, "30", null);
                     }
                 }
                 // 大班课
-                urlReq.setExternalUrl(String.format("%s" + "gateway/course/callback/polyv/live/auth", req.getWebsiteDomain()));
-                return PolyvLiveUtil.getLargeClassBroadcastUrl(req, urlReq);
+                broadcastReq.setExternalUrl(String.format("%s" + "gateway/course/callback/polyv/live/auth", req.getWebsiteDomain()));
+                return PolyvLiveUtil.getLargeClassBroadcastUrl(req, broadcastReq);
             }
         }
         return "";
