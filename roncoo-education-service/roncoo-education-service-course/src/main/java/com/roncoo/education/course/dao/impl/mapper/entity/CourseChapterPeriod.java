@@ -24,7 +24,11 @@ public class CourseChapterPeriod implements Serializable {
 
     private Integer isFree;
 
+    private Integer periodType;
+
     private Long resourceId;
+
+    private Long liveId;
 
     private static final long serialVersionUID = 1L;
 
@@ -108,12 +112,28 @@ public class CourseChapterPeriod implements Serializable {
         this.isFree = isFree;
     }
 
+    public Integer getPeriodType() {
+        return periodType;
+    }
+
+    public void setPeriodType(Integer periodType) {
+        this.periodType = periodType;
+    }
+
     public Long getResourceId() {
         return resourceId;
     }
 
     public void setResourceId(Long resourceId) {
         this.resourceId = resourceId;
+    }
+
+    public Long getLiveId() {
+        return liveId;
+    }
+
+    public void setLiveId(Long liveId) {
+        this.liveId = liveId;
     }
 
     @Override
@@ -132,7 +152,9 @@ public class CourseChapterPeriod implements Serializable {
         sb.append(", periodName=").append(periodName);
         sb.append(", periodDesc=").append(periodDesc);
         sb.append(", isFree=").append(isFree);
+        sb.append(", periodType=").append(periodType);
         sb.append(", resourceId=").append(resourceId);
+        sb.append(", liveId=").append(liveId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

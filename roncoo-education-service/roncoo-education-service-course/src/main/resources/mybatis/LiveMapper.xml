@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.roncoo.education.course.dao.impl.mapper.CourseChapterPeriodMapper">
-  <resultMap id="BaseResultMap" type="com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod">
+<mapper namespace="com.roncoo.education.course.dao.impl.mapper.LiveMapper">
+  <resultMap id="BaseResultMap" type="com.roncoo.education.course.dao.impl.mapper.entity.Live">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     <result column="status_id" jdbcType="TINYINT" property="statusId" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
-    <result column="course_id" jdbcType="BIGINT" property="courseId" />
-    <result column="chapter_id" jdbcType="BIGINT" property="chapterId" />
-    <result column="period_name" jdbcType="VARCHAR" property="periodName" />
-    <result column="period_desc" jdbcType="VARCHAR" property="periodDesc" />
-    <result column="is_free" jdbcType="TINYINT" property="isFree" />
-    <result column="period_type" jdbcType="TINYINT" property="periodType" />
+    <result column="live_model" jdbcType="TINYINT" property="liveModel" />
+    <result column="live_delay" jdbcType="TINYINT" property="liveDelay" />
+    <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+    <result column="live_duration" jdbcType="INTEGER" property="liveDuration" />
+    <result column="live_status" jdbcType="TINYINT" property="liveStatus" />
+    <result column="playback_save" jdbcType="TINYINT" property="playbackSave" />
+    <result column="live_platform" jdbcType="TINYINT" property="livePlatform" />
+    <result column="channel_id" jdbcType="VARCHAR" property="channelId" />
     <result column="resource_id" jdbcType="BIGINT" property="resourceId" />
-    <result column="live_id" jdbcType="BIGINT" property="liveId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -75,16 +76,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, gmt_create, gmt_modified, status_id, sort, course_id, chapter_id, period_name, 
-    period_desc, is_free, period_type, resource_id, live_id
+    id, gmt_create, gmt_modified, status_id, sort, live_model, live_delay, begin_time, 
+    live_duration, live_status, playback_save, live_platform, channel_id, resource_id
   </sql>
-  <select id="selectByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from course_chapter_period
+    from live
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -98,33 +99,33 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from course_chapter_period
+    from live
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from course_chapter_period
+    delete from live
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodExample">
-    delete from course_chapter_period
+  <delete id="deleteByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveExample">
+    delete from live
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod">
-    insert into course_chapter_period (id, gmt_create, gmt_modified, 
-      status_id, sort, course_id, 
-      chapter_id, period_name, period_desc, 
-      is_free, period_type, resource_id, 
-      live_id)
+  <insert id="insert" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Live">
+    insert into live (id, gmt_create, gmt_modified, 
+      status_id, sort, live_model, 
+      live_delay, begin_time, live_duration, 
+      live_status, playback_save, live_platform, 
+      channel_id, resource_id)
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
-      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{courseId,jdbcType=BIGINT}, 
-      #{chapterId,jdbcType=BIGINT}, #{periodName,jdbcType=VARCHAR}, #{periodDesc,jdbcType=VARCHAR}, 
-      #{isFree,jdbcType=TINYINT}, #{periodType,jdbcType=TINYINT}, #{resourceId,jdbcType=BIGINT}, 
-      #{liveId,jdbcType=BIGINT})
+      #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{liveModel,jdbcType=TINYINT}, 
+      #{liveDelay,jdbcType=TINYINT}, #{beginTime,jdbcType=TIMESTAMP}, #{liveDuration,jdbcType=INTEGER}, 
+      #{liveStatus,jdbcType=TINYINT}, #{playbackSave,jdbcType=TINYINT}, #{livePlatform,jdbcType=TINYINT}, 
+      #{channelId,jdbcType=VARCHAR}, #{resourceId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod">
-    insert into course_chapter_period
+  <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Live">
+    insert into live
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -141,29 +142,32 @@
       <if test="sort != null">
         sort,
       </if>
-      <if test="courseId != null">
-        course_id,
+      <if test="liveModel != null">
+        live_model,
       </if>
-      <if test="chapterId != null">
-        chapter_id,
+      <if test="liveDelay != null">
+        live_delay,
       </if>
-      <if test="periodName != null">
-        period_name,
+      <if test="beginTime != null">
+        begin_time,
       </if>
-      <if test="periodDesc != null">
-        period_desc,
+      <if test="liveDuration != null">
+        live_duration,
       </if>
-      <if test="isFree != null">
-        is_free,
+      <if test="liveStatus != null">
+        live_status,
       </if>
-      <if test="periodType != null">
-        period_type,
+      <if test="playbackSave != null">
+        playback_save,
+      </if>
+      <if test="livePlatform != null">
+        live_platform,
+      </if>
+      <if test="channelId != null">
+        channel_id,
       </if>
       <if test="resourceId != null">
         resource_id,
-      </if>
-      <if test="liveId != null">
-        live_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -182,40 +186,43 @@
       <if test="sort != null">
         #{sort,jdbcType=INTEGER},
       </if>
-      <if test="courseId != null">
-        #{courseId,jdbcType=BIGINT},
+      <if test="liveModel != null">
+        #{liveModel,jdbcType=TINYINT},
       </if>
-      <if test="chapterId != null">
-        #{chapterId,jdbcType=BIGINT},
+      <if test="liveDelay != null">
+        #{liveDelay,jdbcType=TINYINT},
       </if>
-      <if test="periodName != null">
-        #{periodName,jdbcType=VARCHAR},
+      <if test="beginTime != null">
+        #{beginTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="periodDesc != null">
-        #{periodDesc,jdbcType=VARCHAR},
+      <if test="liveDuration != null">
+        #{liveDuration,jdbcType=INTEGER},
       </if>
-      <if test="isFree != null">
-        #{isFree,jdbcType=TINYINT},
+      <if test="liveStatus != null">
+        #{liveStatus,jdbcType=TINYINT},
       </if>
-      <if test="periodType != null">
-        #{periodType,jdbcType=TINYINT},
+      <if test="playbackSave != null">
+        #{playbackSave,jdbcType=TINYINT},
+      </if>
+      <if test="livePlatform != null">
+        #{livePlatform,jdbcType=TINYINT},
+      </if>
+      <if test="channelId != null">
+        #{channelId,jdbcType=VARCHAR},
       </if>
       <if test="resourceId != null">
         #{resourceId,jdbcType=BIGINT},
       </if>
-      <if test="liveId != null">
-        #{liveId,jdbcType=BIGINT},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodExample" resultType="java.lang.Integer">
-    select count(*) from course_chapter_period
+  <select id="countByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveExample" resultType="java.lang.Integer">
+    select count(*) from live
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update course_chapter_period
+    update live
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
@@ -232,29 +239,32 @@
       <if test="record.sort != null">
         sort = #{record.sort,jdbcType=INTEGER},
       </if>
-      <if test="record.courseId != null">
-        course_id = #{record.courseId,jdbcType=BIGINT},
+      <if test="record.liveModel != null">
+        live_model = #{record.liveModel,jdbcType=TINYINT},
       </if>
-      <if test="record.chapterId != null">
-        chapter_id = #{record.chapterId,jdbcType=BIGINT},
+      <if test="record.liveDelay != null">
+        live_delay = #{record.liveDelay,jdbcType=TINYINT},
       </if>
-      <if test="record.periodName != null">
-        period_name = #{record.periodName,jdbcType=VARCHAR},
+      <if test="record.beginTime != null">
+        begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.periodDesc != null">
-        period_desc = #{record.periodDesc,jdbcType=VARCHAR},
+      <if test="record.liveDuration != null">
+        live_duration = #{record.liveDuration,jdbcType=INTEGER},
       </if>
-      <if test="record.isFree != null">
-        is_free = #{record.isFree,jdbcType=TINYINT},
+      <if test="record.liveStatus != null">
+        live_status = #{record.liveStatus,jdbcType=TINYINT},
       </if>
-      <if test="record.periodType != null">
-        period_type = #{record.periodType,jdbcType=TINYINT},
+      <if test="record.playbackSave != null">
+        playback_save = #{record.playbackSave,jdbcType=TINYINT},
+      </if>
+      <if test="record.livePlatform != null">
+        live_platform = #{record.livePlatform,jdbcType=TINYINT},
+      </if>
+      <if test="record.channelId != null">
+        channel_id = #{record.channelId,jdbcType=VARCHAR},
       </if>
       <if test="record.resourceId != null">
         resource_id = #{record.resourceId,jdbcType=BIGINT},
-      </if>
-      <if test="record.liveId != null">
-        live_id = #{record.liveId,jdbcType=BIGINT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -262,26 +272,27 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update course_chapter_period
+    update live
     set id = #{record.id,jdbcType=BIGINT},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
       status_id = #{record.statusId,jdbcType=TINYINT},
       sort = #{record.sort,jdbcType=INTEGER},
-      course_id = #{record.courseId,jdbcType=BIGINT},
-      chapter_id = #{record.chapterId,jdbcType=BIGINT},
-      period_name = #{record.periodName,jdbcType=VARCHAR},
-      period_desc = #{record.periodDesc,jdbcType=VARCHAR},
-      is_free = #{record.isFree,jdbcType=TINYINT},
-      period_type = #{record.periodType,jdbcType=TINYINT},
-      resource_id = #{record.resourceId,jdbcType=BIGINT},
-      live_id = #{record.liveId,jdbcType=BIGINT}
+      live_model = #{record.liveModel,jdbcType=TINYINT},
+      live_delay = #{record.liveDelay,jdbcType=TINYINT},
+      begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
+      live_duration = #{record.liveDuration,jdbcType=INTEGER},
+      live_status = #{record.liveStatus,jdbcType=TINYINT},
+      playback_save = #{record.playbackSave,jdbcType=TINYINT},
+      live_platform = #{record.livePlatform,jdbcType=TINYINT},
+      channel_id = #{record.channelId,jdbcType=VARCHAR},
+      resource_id = #{record.resourceId,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod">
-    update course_chapter_period
+  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Live">
+    update live
     <set>
       <if test="gmtCreate != null">
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -295,47 +306,51 @@
       <if test="sort != null">
         sort = #{sort,jdbcType=INTEGER},
       </if>
-      <if test="courseId != null">
-        course_id = #{courseId,jdbcType=BIGINT},
+      <if test="liveModel != null">
+        live_model = #{liveModel,jdbcType=TINYINT},
       </if>
-      <if test="chapterId != null">
-        chapter_id = #{chapterId,jdbcType=BIGINT},
+      <if test="liveDelay != null">
+        live_delay = #{liveDelay,jdbcType=TINYINT},
       </if>
-      <if test="periodName != null">
-        period_name = #{periodName,jdbcType=VARCHAR},
+      <if test="beginTime != null">
+        begin_time = #{beginTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="periodDesc != null">
-        period_desc = #{periodDesc,jdbcType=VARCHAR},
+      <if test="liveDuration != null">
+        live_duration = #{liveDuration,jdbcType=INTEGER},
       </if>
-      <if test="isFree != null">
-        is_free = #{isFree,jdbcType=TINYINT},
+      <if test="liveStatus != null">
+        live_status = #{liveStatus,jdbcType=TINYINT},
       </if>
-      <if test="periodType != null">
-        period_type = #{periodType,jdbcType=TINYINT},
+      <if test="playbackSave != null">
+        playback_save = #{playbackSave,jdbcType=TINYINT},
+      </if>
+      <if test="livePlatform != null">
+        live_platform = #{livePlatform,jdbcType=TINYINT},
+      </if>
+      <if test="channelId != null">
+        channel_id = #{channelId,jdbcType=VARCHAR},
       </if>
       <if test="resourceId != null">
         resource_id = #{resourceId,jdbcType=BIGINT},
       </if>
-      <if test="liveId != null">
-        live_id = #{liveId,jdbcType=BIGINT},
-      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod">
-    update course_chapter_period
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Live">
+    update live
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       status_id = #{statusId,jdbcType=TINYINT},
       sort = #{sort,jdbcType=INTEGER},
-      course_id = #{courseId,jdbcType=BIGINT},
-      chapter_id = #{chapterId,jdbcType=BIGINT},
-      period_name = #{periodName,jdbcType=VARCHAR},
-      period_desc = #{periodDesc,jdbcType=VARCHAR},
-      is_free = #{isFree,jdbcType=TINYINT},
-      period_type = #{periodType,jdbcType=TINYINT},
-      resource_id = #{resourceId,jdbcType=BIGINT},
-      live_id = #{liveId,jdbcType=BIGINT}
+      live_model = #{liveModel,jdbcType=TINYINT},
+      live_delay = #{liveDelay,jdbcType=TINYINT},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      live_duration = #{liveDuration,jdbcType=INTEGER},
+      live_status = #{liveStatus,jdbcType=TINYINT},
+      playback_save = #{playbackSave,jdbcType=TINYINT},
+      live_platform = #{livePlatform,jdbcType=TINYINT},
+      channel_id = #{channelId,jdbcType=VARCHAR},
+      resource_id = #{resourceId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

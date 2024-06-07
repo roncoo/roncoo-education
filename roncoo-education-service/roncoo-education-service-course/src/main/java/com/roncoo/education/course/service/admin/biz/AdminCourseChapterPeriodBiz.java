@@ -4,15 +4,18 @@ import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.PeriodTypeEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.service.SortReq;
 import com.roncoo.education.course.dao.CourseChapterPeriodDao;
+import com.roncoo.education.course.dao.LiveDao;
 import com.roncoo.education.course.dao.ResourceDao;
 import com.roncoo.education.course.dao.UserStudyDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodExample.Criteria;
+import com.roncoo.education.course.dao.impl.mapper.entity.Live;
 import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterPeriodEditReq;
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterPeriodListReq;
@@ -20,9 +23,11 @@ import com.roncoo.education.course.service.admin.req.AdminCourseChapterPeriodPag
 import com.roncoo.education.course.service.admin.req.AdminCourseChapterPeriodSaveReq;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterPeriodPageResp;
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterPeriodViewResp;
+import com.roncoo.education.course.service.admin.resp.AdminLiveViewResp;
 import com.roncoo.education.course.service.admin.resp.AdminResourceViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -41,6 +46,9 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
 
     @NotNull
     private final CourseChapterPeriodDao dao;
+    @NotNull
+    private final LiveDao liveDao;
+
     @NotNull
     private final UserStudyDao userStudyDao;
     @NotNull
@@ -67,12 +75,22 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
         example.setOrderByClause("sort asc, id desc");
         List<CourseChapterPeriod> list = dao.listByExample(example);
         if (CollUtil.isNotEmpty(list)) {
-            // 资源
-            List<Long> resourceIdList = list.stream().map(courseChapterPeriod -> courseChapterPeriod.getResourceId()).collect(Collectors.toList());
-            Map<Long, Resource> resourceMap = resourceDao.listByIds(resourceIdList).stream().collect(Collectors.toMap(Resource::getId, item -> item));
             List<AdminCourseChapterPeriodViewResp> respList = BeanUtil.copyProperties(list, AdminCourseChapterPeriodViewResp.class);
-            for (AdminCourseChapterPeriodViewResp period : respList) {
-                period.setResourceViewResp(BeanUtil.copyProperties(resourceMap.get(period.getResourceId()), AdminResourceViewResp.class));
+            // 资源
+            List<Long> resourceIdList = list.stream().filter(courseChapterPeriod -> courseChapterPeriod.getPeriodType().equals(PeriodTypeEnum.RESOURCE.getCode())).map(courseChapterPeriod -> courseChapterPeriod.getResourceId()).collect(Collectors.toList());
+            if (CollUtil.isNotEmpty(resourceIdList)) {
+                Map<Long, Resource> resourceMap = resourceDao.listByIds(resourceIdList).stream().collect(Collectors.toMap(Resource::getId, item -> item));
+                for (AdminCourseChapterPeriodViewResp period : respList) {
+                    period.setResourceViewResp(BeanUtil.copyProperties(resourceMap.get(period.getResourceId()), AdminResourceViewResp.class));
+                }
+            }
+            // 直播
+            List<Long> liveIdList = list.stream().filter(courseChapterPeriod -> courseChapterPeriod.getPeriodType().equals(PeriodTypeEnum.LIVE.getCode())).map(courseChapterPeriod -> courseChapterPeriod.getLiveId()).collect(Collectors.toList());
+            if (CollUtil.isNotEmpty(liveIdList)) {
+                Map<Long, Live> liveMap = liveDao.listByIds(liveIdList).stream().collect(Collectors.toMap(Live::getId, item -> item));
+                for (AdminCourseChapterPeriodViewResp period : respList) {
+                    period.setLiveViewResp(BeanUtil.copyProperties(liveMap.get(period.getLiveId()), AdminLiveViewResp.class));
+                }
             }
             return Result.success(respList);
         }
@@ -85,6 +103,7 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
      * @param req 课时信息
      * @return 添加结果
      */
+    @Transactional(rollbackFor = Exception.class)
     public Result<String> save(AdminCourseChapterPeriodSaveReq req) {
         int maxSort = 0;
         List<CourseChapterPeriod> periodList = dao.listByChapterId(req.getChapterId());
@@ -99,6 +118,15 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
 
         CourseChapterPeriod record = BeanUtil.copyProperties(req, CourseChapterPeriod.class);
         record.setSort(maxSort + 1);
+
+        if (req.getPeriodType().equals(PeriodTypeEnum.LIVE.getCode())) {
+            // 直播
+            Live live = BeanUtil.copyProperties(req, Live.class);
+            liveDao.save(live);
+            // 保存直播记录
+            record.setLiveId(live.getId());
+        }
+
         if (dao.save(record) > 0) {
             return Result.success("操作成功");
         }
@@ -121,8 +149,17 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
      * @param req 课时信息修改对象
      * @return 修改结果
      */
+    @Transactional(rollbackFor = Exception.class)
     public Result<String> edit(AdminCourseChapterPeriodEditReq req) {
         CourseChapterPeriod record = BeanUtil.copyProperties(req, CourseChapterPeriod.class);
+
+        if (req.getPeriodType().equals(PeriodTypeEnum.LIVE.getCode())) {
+            // 直播
+            Live live = BeanUtil.copyProperties(req, Live.class);
+            live.setId(req.getLiveId());
+            liveDao.updateById(live);
+        }
+
         if (dao.updateById(record) > 0) {
             return Result.success("操作成功");
         }

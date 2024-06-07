@@ -1,11 +1,13 @@
 package com.roncoo.education.course.service.admin.req;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -47,4 +49,29 @@ public class AdminCourseChapterPeriodEditReq implements Serializable {
 
     @ApiModelProperty(value = "资源ID")
     private Long resourceId;
+
+    @ApiModelProperty(value = "课时类型(1资源，2直播)")
+    private Integer periodType;
+
+    @ApiModelProperty(value = "直播ID")
+    private Long liveId;
+
+    @ApiModelProperty(value = "直播模式(1三分屏)")
+    private Integer liveModel;
+
+    @ApiModelProperty(value = "直播延迟(1正常延迟，2无延迟)")
+    private Integer liveDelay;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(value = "开播时间")
+    private LocalDateTime beginTime;
+
+    @ApiModelProperty(value = "开播时长，单位:秒")
+    private Integer liveDuration;
+
+    @ApiModelProperty(value = "直播状态(1待开播，2直播中，3已结束，4可回放)")
+    private Integer liveStatus;
+
+    @ApiModelProperty(value = "回放保存(1保存，2丢弃)")
+    private Integer playbackSave;
 }

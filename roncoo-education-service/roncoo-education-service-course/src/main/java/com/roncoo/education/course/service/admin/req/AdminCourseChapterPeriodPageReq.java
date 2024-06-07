@@ -48,6 +48,12 @@ public class AdminCourseChapterPeriodPageReq implements Serializable {
     @ApiModelProperty(value = "资源ID")
     private Long resourceId;
 
+    @ApiModelProperty(value = "课时类型(1资源，2直播)")
+    private Integer periodType;
+
+    @ApiModelProperty(value = "直播ID")
+    private Long liveId;
+
     @ApiModelProperty(value = "当前页")
     private int pageCurrent = 1;
 

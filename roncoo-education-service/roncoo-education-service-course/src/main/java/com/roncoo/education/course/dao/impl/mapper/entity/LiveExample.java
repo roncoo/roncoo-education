@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseChapterPeriodExample {
+public class LiveExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -15,7 +15,7 @@ public class CourseChapterPeriodExample {
 
     protected int pageSize = -1;
 
-    public CourseChapterPeriodExample() {
+    public LiveExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -425,383 +425,493 @@ public class CourseChapterPeriodExample {
             return (Criteria) this;
         }
 
-        public Criteria andCourseIdIsNull() {
-            addCriterion("course_id is null");
+        public Criteria andLiveModelIsNull() {
+            addCriterion("live_model is null");
             return (Criteria) this;
         }
 
-        public Criteria andCourseIdIsNotNull() {
-            addCriterion("course_id is not null");
+        public Criteria andLiveModelIsNotNull() {
+            addCriterion("live_model is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCourseIdEqualTo(Long value) {
-            addCriterion("course_id =", value, "courseId");
+        public Criteria andLiveModelEqualTo(Integer value) {
+            addCriterion("live_model =", value, "liveModel");
             return (Criteria) this;
         }
 
-        public Criteria andCourseIdNotEqualTo(Long value) {
-            addCriterion("course_id <>", value, "courseId");
+        public Criteria andLiveModelNotEqualTo(Integer value) {
+            addCriterion("live_model <>", value, "liveModel");
             return (Criteria) this;
         }
 
-        public Criteria andCourseIdGreaterThan(Long value) {
-            addCriterion("course_id >", value, "courseId");
+        public Criteria andLiveModelGreaterThan(Integer value) {
+            addCriterion("live_model >", value, "liveModel");
             return (Criteria) this;
         }
 
-        public Criteria andCourseIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("course_id >=", value, "courseId");
+        public Criteria andLiveModelGreaterThanOrEqualTo(Integer value) {
+            addCriterion("live_model >=", value, "liveModel");
             return (Criteria) this;
         }
 
-        public Criteria andCourseIdLessThan(Long value) {
-            addCriterion("course_id <", value, "courseId");
+        public Criteria andLiveModelLessThan(Integer value) {
+            addCriterion("live_model <", value, "liveModel");
             return (Criteria) this;
         }
 
-        public Criteria andCourseIdLessThanOrEqualTo(Long value) {
-            addCriterion("course_id <=", value, "courseId");
+        public Criteria andLiveModelLessThanOrEqualTo(Integer value) {
+            addCriterion("live_model <=", value, "liveModel");
             return (Criteria) this;
         }
 
-        public Criteria andCourseIdIn(List<Long> values) {
-            addCriterion("course_id in", values, "courseId");
+        public Criteria andLiveModelIn(List<Integer> values) {
+            addCriterion("live_model in", values, "liveModel");
             return (Criteria) this;
         }
 
-        public Criteria andCourseIdNotIn(List<Long> values) {
-            addCriterion("course_id not in", values, "courseId");
+        public Criteria andLiveModelNotIn(List<Integer> values) {
+            addCriterion("live_model not in", values, "liveModel");
             return (Criteria) this;
         }
 
-        public Criteria andCourseIdBetween(Long value1, Long value2) {
-            addCriterion("course_id between", value1, value2, "courseId");
+        public Criteria andLiveModelBetween(Integer value1, Integer value2) {
+            addCriterion("live_model between", value1, value2, "liveModel");
             return (Criteria) this;
         }
 
-        public Criteria andCourseIdNotBetween(Long value1, Long value2) {
-            addCriterion("course_id not between", value1, value2, "courseId");
+        public Criteria andLiveModelNotBetween(Integer value1, Integer value2) {
+            addCriterion("live_model not between", value1, value2, "liveModel");
             return (Criteria) this;
         }
 
-        public Criteria andChapterIdIsNull() {
-            addCriterion("chapter_id is null");
+        public Criteria andLiveDelayIsNull() {
+            addCriterion("live_delay is null");
             return (Criteria) this;
         }
 
-        public Criteria andChapterIdIsNotNull() {
-            addCriterion("chapter_id is not null");
+        public Criteria andLiveDelayIsNotNull() {
+            addCriterion("live_delay is not null");
             return (Criteria) this;
         }
 
-        public Criteria andChapterIdEqualTo(Long value) {
-            addCriterion("chapter_id =", value, "chapterId");
+        public Criteria andLiveDelayEqualTo(Integer value) {
+            addCriterion("live_delay =", value, "liveDelay");
             return (Criteria) this;
         }
 
-        public Criteria andChapterIdNotEqualTo(Long value) {
-            addCriterion("chapter_id <>", value, "chapterId");
+        public Criteria andLiveDelayNotEqualTo(Integer value) {
+            addCriterion("live_delay <>", value, "liveDelay");
             return (Criteria) this;
         }
 
-        public Criteria andChapterIdGreaterThan(Long value) {
-            addCriterion("chapter_id >", value, "chapterId");
+        public Criteria andLiveDelayGreaterThan(Integer value) {
+            addCriterion("live_delay >", value, "liveDelay");
             return (Criteria) this;
         }
 
-        public Criteria andChapterIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("chapter_id >=", value, "chapterId");
+        public Criteria andLiveDelayGreaterThanOrEqualTo(Integer value) {
+            addCriterion("live_delay >=", value, "liveDelay");
             return (Criteria) this;
         }
 
-        public Criteria andChapterIdLessThan(Long value) {
-            addCriterion("chapter_id <", value, "chapterId");
+        public Criteria andLiveDelayLessThan(Integer value) {
+            addCriterion("live_delay <", value, "liveDelay");
             return (Criteria) this;
         }
 
-        public Criteria andChapterIdLessThanOrEqualTo(Long value) {
-            addCriterion("chapter_id <=", value, "chapterId");
+        public Criteria andLiveDelayLessThanOrEqualTo(Integer value) {
+            addCriterion("live_delay <=", value, "liveDelay");
             return (Criteria) this;
         }
 
-        public Criteria andChapterIdIn(List<Long> values) {
-            addCriterion("chapter_id in", values, "chapterId");
+        public Criteria andLiveDelayIn(List<Integer> values) {
+            addCriterion("live_delay in", values, "liveDelay");
             return (Criteria) this;
         }
 
-        public Criteria andChapterIdNotIn(List<Long> values) {
-            addCriterion("chapter_id not in", values, "chapterId");
+        public Criteria andLiveDelayNotIn(List<Integer> values) {
+            addCriterion("live_delay not in", values, "liveDelay");
             return (Criteria) this;
         }
 
-        public Criteria andChapterIdBetween(Long value1, Long value2) {
-            addCriterion("chapter_id between", value1, value2, "chapterId");
+        public Criteria andLiveDelayBetween(Integer value1, Integer value2) {
+            addCriterion("live_delay between", value1, value2, "liveDelay");
             return (Criteria) this;
         }
 
-        public Criteria andChapterIdNotBetween(Long value1, Long value2) {
-            addCriterion("chapter_id not between", value1, value2, "chapterId");
+        public Criteria andLiveDelayNotBetween(Integer value1, Integer value2) {
+            addCriterion("live_delay not between", value1, value2, "liveDelay");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodNameIsNull() {
-            addCriterion("period_name is null");
+        public Criteria andBeginTimeIsNull() {
+            addCriterion("begin_time is null");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodNameIsNotNull() {
-            addCriterion("period_name is not null");
+        public Criteria andBeginTimeIsNotNull() {
+            addCriterion("begin_time is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodNameEqualTo(String value) {
-            addCriterion("period_name =", value, "periodName");
+        public Criteria andBeginTimeEqualTo(LocalDateTime value) {
+            addCriterion("begin_time =", value, "beginTime");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodNameNotEqualTo(String value) {
-            addCriterion("period_name <>", value, "periodName");
+        public Criteria andBeginTimeNotEqualTo(LocalDateTime value) {
+            addCriterion("begin_time <>", value, "beginTime");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodNameGreaterThan(String value) {
-            addCriterion("period_name >", value, "periodName");
+        public Criteria andBeginTimeGreaterThan(LocalDateTime value) {
+            addCriterion("begin_time >", value, "beginTime");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodNameGreaterThanOrEqualTo(String value) {
-            addCriterion("period_name >=", value, "periodName");
+        public Criteria andBeginTimeGreaterThanOrEqualTo(LocalDateTime value) {
+            addCriterion("begin_time >=", value, "beginTime");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodNameLessThan(String value) {
-            addCriterion("period_name <", value, "periodName");
+        public Criteria andBeginTimeLessThan(LocalDateTime value) {
+            addCriterion("begin_time <", value, "beginTime");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodNameLessThanOrEqualTo(String value) {
-            addCriterion("period_name <=", value, "periodName");
+        public Criteria andBeginTimeLessThanOrEqualTo(LocalDateTime value) {
+            addCriterion("begin_time <=", value, "beginTime");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodNameLike(String value) {
-            addCriterion("period_name like", value, "periodName");
+        public Criteria andBeginTimeIn(List<LocalDateTime> values) {
+            addCriterion("begin_time in", values, "beginTime");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodNameNotLike(String value) {
-            addCriterion("period_name not like", value, "periodName");
+        public Criteria andBeginTimeNotIn(List<LocalDateTime> values) {
+            addCriterion("begin_time not in", values, "beginTime");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodNameIn(List<String> values) {
-            addCriterion("period_name in", values, "periodName");
+        public Criteria andBeginTimeBetween(LocalDateTime value1, LocalDateTime value2) {
+            addCriterion("begin_time between", value1, value2, "beginTime");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodNameNotIn(List<String> values) {
-            addCriterion("period_name not in", values, "periodName");
+        public Criteria andBeginTimeNotBetween(LocalDateTime value1, LocalDateTime value2) {
+            addCriterion("begin_time not between", value1, value2, "beginTime");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodNameBetween(String value1, String value2) {
-            addCriterion("period_name between", value1, value2, "periodName");
+        public Criteria andLiveDurationIsNull() {
+            addCriterion("live_duration is null");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodNameNotBetween(String value1, String value2) {
-            addCriterion("period_name not between", value1, value2, "periodName");
+        public Criteria andLiveDurationIsNotNull() {
+            addCriterion("live_duration is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodDescIsNull() {
-            addCriterion("period_desc is null");
+        public Criteria andLiveDurationEqualTo(Integer value) {
+            addCriterion("live_duration =", value, "liveDuration");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodDescIsNotNull() {
-            addCriterion("period_desc is not null");
+        public Criteria andLiveDurationNotEqualTo(Integer value) {
+            addCriterion("live_duration <>", value, "liveDuration");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodDescEqualTo(String value) {
-            addCriterion("period_desc =", value, "periodDesc");
+        public Criteria andLiveDurationGreaterThan(Integer value) {
+            addCriterion("live_duration >", value, "liveDuration");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodDescNotEqualTo(String value) {
-            addCriterion("period_desc <>", value, "periodDesc");
+        public Criteria andLiveDurationGreaterThanOrEqualTo(Integer value) {
+            addCriterion("live_duration >=", value, "liveDuration");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodDescGreaterThan(String value) {
-            addCriterion("period_desc >", value, "periodDesc");
+        public Criteria andLiveDurationLessThan(Integer value) {
+            addCriterion("live_duration <", value, "liveDuration");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodDescGreaterThanOrEqualTo(String value) {
-            addCriterion("period_desc >=", value, "periodDesc");
+        public Criteria andLiveDurationLessThanOrEqualTo(Integer value) {
+            addCriterion("live_duration <=", value, "liveDuration");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodDescLessThan(String value) {
-            addCriterion("period_desc <", value, "periodDesc");
+        public Criteria andLiveDurationIn(List<Integer> values) {
+            addCriterion("live_duration in", values, "liveDuration");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodDescLessThanOrEqualTo(String value) {
-            addCriterion("period_desc <=", value, "periodDesc");
+        public Criteria andLiveDurationNotIn(List<Integer> values) {
+            addCriterion("live_duration not in", values, "liveDuration");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodDescLike(String value) {
-            addCriterion("period_desc like", value, "periodDesc");
+        public Criteria andLiveDurationBetween(Integer value1, Integer value2) {
+            addCriterion("live_duration between", value1, value2, "liveDuration");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodDescNotLike(String value) {
-            addCriterion("period_desc not like", value, "periodDesc");
+        public Criteria andLiveDurationNotBetween(Integer value1, Integer value2) {
+            addCriterion("live_duration not between", value1, value2, "liveDuration");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodDescIn(List<String> values) {
-            addCriterion("period_desc in", values, "periodDesc");
+        public Criteria andLiveStatusIsNull() {
+            addCriterion("live_status is null");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodDescNotIn(List<String> values) {
-            addCriterion("period_desc not in", values, "periodDesc");
+        public Criteria andLiveStatusIsNotNull() {
+            addCriterion("live_status is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodDescBetween(String value1, String value2) {
-            addCriterion("period_desc between", value1, value2, "periodDesc");
+        public Criteria andLiveStatusEqualTo(Integer value) {
+            addCriterion("live_status =", value, "liveStatus");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodDescNotBetween(String value1, String value2) {
-            addCriterion("period_desc not between", value1, value2, "periodDesc");
+        public Criteria andLiveStatusNotEqualTo(Integer value) {
+            addCriterion("live_status <>", value, "liveStatus");
             return (Criteria) this;
         }
 
-        public Criteria andIsFreeIsNull() {
-            addCriterion("is_free is null");
+        public Criteria andLiveStatusGreaterThan(Integer value) {
+            addCriterion("live_status >", value, "liveStatus");
             return (Criteria) this;
         }
 
-        public Criteria andIsFreeIsNotNull() {
-            addCriterion("is_free is not null");
+        public Criteria andLiveStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("live_status >=", value, "liveStatus");
             return (Criteria) this;
         }
 
-        public Criteria andIsFreeEqualTo(Integer value) {
-            addCriterion("is_free =", value, "isFree");
+        public Criteria andLiveStatusLessThan(Integer value) {
+            addCriterion("live_status <", value, "liveStatus");
             return (Criteria) this;
         }
 
-        public Criteria andIsFreeNotEqualTo(Integer value) {
-            addCriterion("is_free <>", value, "isFree");
+        public Criteria andLiveStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("live_status <=", value, "liveStatus");
             return (Criteria) this;
         }
 
-        public Criteria andIsFreeGreaterThan(Integer value) {
-            addCriterion("is_free >", value, "isFree");
+        public Criteria andLiveStatusIn(List<Integer> values) {
+            addCriterion("live_status in", values, "liveStatus");
             return (Criteria) this;
         }
 
-        public Criteria andIsFreeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("is_free >=", value, "isFree");
+        public Criteria andLiveStatusNotIn(List<Integer> values) {
+            addCriterion("live_status not in", values, "liveStatus");
             return (Criteria) this;
         }
 
-        public Criteria andIsFreeLessThan(Integer value) {
-            addCriterion("is_free <", value, "isFree");
+        public Criteria andLiveStatusBetween(Integer value1, Integer value2) {
+            addCriterion("live_status between", value1, value2, "liveStatus");
             return (Criteria) this;
         }
 
-        public Criteria andIsFreeLessThanOrEqualTo(Integer value) {
-            addCriterion("is_free <=", value, "isFree");
+        public Criteria andLiveStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("live_status not between", value1, value2, "liveStatus");
             return (Criteria) this;
         }
 
-        public Criteria andIsFreeIn(List<Integer> values) {
-            addCriterion("is_free in", values, "isFree");
+        public Criteria andPlaybackSaveIsNull() {
+            addCriterion("playback_save is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsFreeNotIn(List<Integer> values) {
-            addCriterion("is_free not in", values, "isFree");
+        public Criteria andPlaybackSaveIsNotNull() {
+            addCriterion("playback_save is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsFreeBetween(Integer value1, Integer value2) {
-            addCriterion("is_free between", value1, value2, "isFree");
+        public Criteria andPlaybackSaveEqualTo(Integer value) {
+            addCriterion("playback_save =", value, "playbackSave");
             return (Criteria) this;
         }
 
-        public Criteria andIsFreeNotBetween(Integer value1, Integer value2) {
-            addCriterion("is_free not between", value1, value2, "isFree");
+        public Criteria andPlaybackSaveNotEqualTo(Integer value) {
+            addCriterion("playback_save <>", value, "playbackSave");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodTypeIsNull() {
-            addCriterion("period_type is null");
+        public Criteria andPlaybackSaveGreaterThan(Integer value) {
+            addCriterion("playback_save >", value, "playbackSave");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodTypeIsNotNull() {
-            addCriterion("period_type is not null");
+        public Criteria andPlaybackSaveGreaterThanOrEqualTo(Integer value) {
+            addCriterion("playback_save >=", value, "playbackSave");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodTypeEqualTo(Integer value) {
-            addCriterion("period_type =", value, "periodType");
+        public Criteria andPlaybackSaveLessThan(Integer value) {
+            addCriterion("playback_save <", value, "playbackSave");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodTypeNotEqualTo(Integer value) {
-            addCriterion("period_type <>", value, "periodType");
+        public Criteria andPlaybackSaveLessThanOrEqualTo(Integer value) {
+            addCriterion("playback_save <=", value, "playbackSave");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodTypeGreaterThan(Integer value) {
-            addCriterion("period_type >", value, "periodType");
+        public Criteria andPlaybackSaveIn(List<Integer> values) {
+            addCriterion("playback_save in", values, "playbackSave");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("period_type >=", value, "periodType");
+        public Criteria andPlaybackSaveNotIn(List<Integer> values) {
+            addCriterion("playback_save not in", values, "playbackSave");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodTypeLessThan(Integer value) {
-            addCriterion("period_type <", value, "periodType");
+        public Criteria andPlaybackSaveBetween(Integer value1, Integer value2) {
+            addCriterion("playback_save between", value1, value2, "playbackSave");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("period_type <=", value, "periodType");
+        public Criteria andPlaybackSaveNotBetween(Integer value1, Integer value2) {
+            addCriterion("playback_save not between", value1, value2, "playbackSave");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodTypeIn(List<Integer> values) {
-            addCriterion("period_type in", values, "periodType");
+        public Criteria andLivePlatformIsNull() {
+            addCriterion("live_platform is null");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodTypeNotIn(List<Integer> values) {
-            addCriterion("period_type not in", values, "periodType");
+        public Criteria andLivePlatformIsNotNull() {
+            addCriterion("live_platform is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodTypeBetween(Integer value1, Integer value2) {
-            addCriterion("period_type between", value1, value2, "periodType");
+        public Criteria andLivePlatformEqualTo(Integer value) {
+            addCriterion("live_platform =", value, "livePlatform");
             return (Criteria) this;
         }
 
-        public Criteria andPeriodTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("period_type not between", value1, value2, "periodType");
+        public Criteria andLivePlatformNotEqualTo(Integer value) {
+            addCriterion("live_platform <>", value, "livePlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andLivePlatformGreaterThan(Integer value) {
+            addCriterion("live_platform >", value, "livePlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andLivePlatformGreaterThanOrEqualTo(Integer value) {
+            addCriterion("live_platform >=", value, "livePlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andLivePlatformLessThan(Integer value) {
+            addCriterion("live_platform <", value, "livePlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andLivePlatformLessThanOrEqualTo(Integer value) {
+            addCriterion("live_platform <=", value, "livePlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andLivePlatformIn(List<Integer> values) {
+            addCriterion("live_platform in", values, "livePlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andLivePlatformNotIn(List<Integer> values) {
+            addCriterion("live_platform not in", values, "livePlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andLivePlatformBetween(Integer value1, Integer value2) {
+            addCriterion("live_platform between", value1, value2, "livePlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andLivePlatformNotBetween(Integer value1, Integer value2) {
+            addCriterion("live_platform not between", value1, value2, "livePlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIdIsNull() {
+            addCriterion("channel_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIdIsNotNull() {
+            addCriterion("channel_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIdEqualTo(String value) {
+            addCriterion("channel_id =", value, "channelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIdNotEqualTo(String value) {
+            addCriterion("channel_id <>", value, "channelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIdGreaterThan(String value) {
+            addCriterion("channel_id >", value, "channelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIdGreaterThanOrEqualTo(String value) {
+            addCriterion("channel_id >=", value, "channelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIdLessThan(String value) {
+            addCriterion("channel_id <", value, "channelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIdLessThanOrEqualTo(String value) {
+            addCriterion("channel_id <=", value, "channelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIdLike(String value) {
+            addCriterion("channel_id like", value, "channelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIdNotLike(String value) {
+            addCriterion("channel_id not like", value, "channelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIdIn(List<String> values) {
+            addCriterion("channel_id in", values, "channelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIdNotIn(List<String> values) {
+            addCriterion("channel_id not in", values, "channelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIdBetween(String value1, String value2) {
+            addCriterion("channel_id between", value1, value2, "channelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIdNotBetween(String value1, String value2) {
+            addCriterion("channel_id not between", value1, value2, "channelId");
             return (Criteria) this;
         }
 
@@ -862,66 +972,6 @@ public class CourseChapterPeriodExample {
 
         public Criteria andResourceIdNotBetween(Long value1, Long value2) {
             addCriterion("resource_id not between", value1, value2, "resourceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiveIdIsNull() {
-            addCriterion("live_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiveIdIsNotNull() {
-            addCriterion("live_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiveIdEqualTo(Long value) {
-            addCriterion("live_id =", value, "liveId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiveIdNotEqualTo(Long value) {
-            addCriterion("live_id <>", value, "liveId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiveIdGreaterThan(Long value) {
-            addCriterion("live_id >", value, "liveId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiveIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("live_id >=", value, "liveId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiveIdLessThan(Long value) {
-            addCriterion("live_id <", value, "liveId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiveIdLessThanOrEqualTo(Long value) {
-            addCriterion("live_id <=", value, "liveId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiveIdIn(List<Long> values) {
-            addCriterion("live_id in", values, "liveId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiveIdNotIn(List<Long> values) {
-            addCriterion("live_id not in", values, "liveId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiveIdBetween(Long value1, Long value2) {
-            addCriterion("live_id between", value1, value2, "liveId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLiveIdNotBetween(Long value1, Long value2) {
-            addCriterion("live_id not between", value1, value2, "liveId");
             return (Criteria) this;
         }
     }
