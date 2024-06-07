@@ -68,7 +68,14 @@ public class LiveDaoImpl implements LiveDao {
     }
 
     @Override
-    public int countByExample(LiveExample example){
+    public int countByExample(LiveExample example) {
         return this.mapper.countByExample(example);
+    }
+
+    @Override
+    public List<Live> listByIds(List<Long> liveIdList) {
+        LiveExample example = new LiveExample();
+        example.createCriteria().andIdIn(liveIdList);
+        return this.listByExample(example);
     }
 }
