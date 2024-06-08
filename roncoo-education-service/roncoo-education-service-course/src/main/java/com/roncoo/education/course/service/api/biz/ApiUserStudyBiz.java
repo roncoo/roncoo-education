@@ -21,7 +21,7 @@ import java.math.RoundingMode;
 import java.util.concurrent.TimeUnit;
 
 /**
- * API-课程用户学习日志
+ * API-资源学习记录
  *
  * @author wujing
  */

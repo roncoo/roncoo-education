@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * API-课程用户学习日志
+ * API-资源学习记录
  * </p>
  *
  * @author wujing
@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "API-课程用户学习日志")
+@ApiModel(description = "API-资源学习记录")
 public class ApiUserStudyResp implements Serializable {
 
     private static final long serialVersionUID = 1L;

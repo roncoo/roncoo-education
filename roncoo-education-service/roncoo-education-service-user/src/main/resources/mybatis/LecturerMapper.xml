@@ -7,12 +7,14 @@
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
         <result column="status_id" jdbcType="TINYINT" property="statusId"/>
         <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
         <result column="lecturer_name" jdbcType="VARCHAR" property="lecturerName"/>
         <result column="lecturer_mobile" jdbcType="CHAR" property="lecturerMobile"/>
         <result column="lecturer_position" jdbcType="VARCHAR" property="lecturerPosition"/>
         <result column="lecturer_head" jdbcType="VARCHAR" property="lecturerHead"/>
     </resultMap>
-    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.roncoo.education.user.dao.impl.mapper.entity.Lecturer">
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+               type="com.roncoo.education.user.dao.impl.mapper.entity.Lecturer">
         <result column="introduce" jdbcType="LONGVARCHAR" property="introduce"/>
     </resultMap>
     <sql id="Example_Where_Clause">
@@ -33,7 +35,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -62,7 +65,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -74,13 +78,16 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        id, gmt_create, gmt_modified, status_id, sort, lecturer_name, lecturer_mobile, lecturer_position,
-    lecturer_head
+        id
+        , gmt_create, gmt_modified, status_id, sort, user_id, lecturer_name, lecturer_mobile,
+    lecturer_position, lecturer_head
     </sql>
     <sql id="Blob_Column_List">
         introduce
     </sql>
-    <select id="selectByExampleWithBLOBs" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.LecturerExample" resultMap="ResultMapWithBLOBs">
+    <select id="selectByExampleWithBLOBs"
+            parameterType="com.roncoo.education.user.dao.impl.mapper.entity.LecturerExample"
+            resultMap="ResultMapWithBLOBs">
         select
         <if test="distinct">
             distinct
@@ -96,7 +103,8 @@
             order by ${orderByClause}
         </if>
     </select>
-    <select id="selectByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.LecturerExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.LecturerExample"
+            resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -134,13 +142,13 @@
     </delete>
     <insert id="insert" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.Lecturer">
         insert into lecturer (id, gmt_create, gmt_modified,
-                              status_id, sort, lecturer_name,
-                              lecturer_mobile, lecturer_position, lecturer_head,
-                              introduce)
+                              status_id, sort, user_id,
+                              lecturer_name, lecturer_mobile, lecturer_position,
+                              lecturer_head, introduce)
         values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
-                #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{lecturerName,jdbcType=VARCHAR},
-                #{lecturerMobile,jdbcType=CHAR}, #{lecturerPosition,jdbcType=VARCHAR}, #{lecturerHead,jdbcType=VARCHAR},
-                #{introduce,jdbcType=LONGVARCHAR})
+                #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT},
+                #{lecturerName,jdbcType=VARCHAR}, #{lecturerMobile,jdbcType=CHAR}, #{lecturerPosition,jdbcType=VARCHAR},
+                #{lecturerHead,jdbcType=VARCHAR}, #{introduce,jdbcType=LONGVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.Lecturer">
         insert into lecturer
@@ -159,6 +167,9 @@
             </if>
             <if test="sort != null">
                 sort,
+            </if>
+            <if test="userId != null">
+                user_id,
             </if>
             <if test="lecturerName != null">
                 lecturer_name,
@@ -192,6 +203,9 @@
             <if test="sort != null">
                 #{sort,jdbcType=INTEGER},
             </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
             <if test="lecturerName != null">
                 #{lecturerName,jdbcType=VARCHAR},
             </if>
@@ -209,7 +223,8 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.LecturerExample" resultType="java.lang.Integer">
+    <select id="countByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.LecturerExample"
+            resultType="java.lang.Integer">
         select count(*) from lecturer
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -232,6 +247,9 @@
             </if>
             <if test="record.sort != null">
                 sort = #{record.sort,jdbcType=INTEGER},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=BIGINT},
             </if>
             <if test="record.lecturerName != null">
                 lecturer_name = #{record.lecturerName,jdbcType=VARCHAR},
@@ -260,6 +278,7 @@
         gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
         status_id = #{record.statusId,jdbcType=TINYINT},
         sort = #{record.sort,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=BIGINT},
         lecturer_name = #{record.lecturerName,jdbcType=VARCHAR},
         lecturer_mobile = #{record.lecturerMobile,jdbcType=CHAR},
         lecturer_position = #{record.lecturerPosition,jdbcType=VARCHAR},
@@ -276,6 +295,7 @@
         gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
         status_id = #{record.statusId,jdbcType=TINYINT},
         sort = #{record.sort,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=BIGINT},
         lecturer_name = #{record.lecturerName,jdbcType=VARCHAR},
         lecturer_mobile = #{record.lecturerMobile,jdbcType=CHAR},
         lecturer_position = #{record.lecturerPosition,jdbcType=VARCHAR},
@@ -298,6 +318,9 @@
             </if>
             <if test="sort != null">
                 sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
             </if>
             <if test="lecturerName != null">
                 lecturer_name = #{lecturerName,jdbcType=VARCHAR},
@@ -323,6 +346,7 @@
             gmt_modified      = #{gmtModified,jdbcType=TIMESTAMP},
             status_id         = #{statusId,jdbcType=TINYINT},
             sort              = #{sort,jdbcType=INTEGER},
+            user_id           = #{userId,jdbcType=BIGINT},
             lecturer_name     = #{lecturerName,jdbcType=VARCHAR},
             lecturer_mobile   = #{lecturerMobile,jdbcType=CHAR},
             lecturer_position = #{lecturerPosition,jdbcType=VARCHAR},
@@ -336,6 +360,7 @@
             gmt_modified      = #{gmtModified,jdbcType=TIMESTAMP},
             status_id         = #{statusId,jdbcType=TINYINT},
             sort              = #{sort,jdbcType=INTEGER},
+            user_id           = #{userId,jdbcType=BIGINT},
             lecturer_name     = #{lecturerName,jdbcType=VARCHAR},
             lecturer_mobile   = #{lecturerMobile,jdbcType=CHAR},
             lecturer_position = #{lecturerPosition,jdbcType=VARCHAR},

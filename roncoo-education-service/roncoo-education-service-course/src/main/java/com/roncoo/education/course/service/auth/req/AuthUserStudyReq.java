@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 /**
  * <p>
- * API-AUTH-课程用户学习日志
+ * API-AUTH-资源学习记录
  * </p>
  *
  * @author wujing
@@ -18,7 +18,7 @@ import java.math.BigDecimal;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "API-AUTH-课程用户学习日志")
+@ApiModel(description = "API-AUTH-资源学习记录")
 public class AuthUserStudyReq implements Serializable {
 
     private static final long serialVersionUID = 1L;

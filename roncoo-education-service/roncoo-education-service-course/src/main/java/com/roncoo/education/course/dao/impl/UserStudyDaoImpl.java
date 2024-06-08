@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 课程用户学习日志 服务实现类
+ * 资源学习记录 服务实现类
  *
  * @author wujing
  * @date 2022-09-03

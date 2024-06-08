@@ -53,7 +53,7 @@ public class AdminLivePageResp implements Serializable {
     @ApiModelProperty(value = "开播时长，单位:秒")
     private Integer liveDuration;
 
-    @ApiModelProperty(value = "直播状态(1待开播，2直播中，3已结束，4可回放)")
+    @ApiModelProperty(value = "直播状态(1待开播，2直播中，3待回放，4直播结束)")
     private Integer liveStatus;
 
     @ApiModelProperty(value = "回放保存(1保存，2丢弃)")

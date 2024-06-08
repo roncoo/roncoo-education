@@ -52,7 +52,7 @@ public class AuthUserCourseBiz extends BaseBiz {
         Page<AuthUserCourseResp> respPage = PageUtil.transform(userCoursePage, AuthUserCourseResp.class);
         if (CollUtil.isNotEmpty(respPage.getList())) {
             List<Long> courseIdList = respPage.getList().stream().map(AuthUserCourseResp::getCourseId).collect(Collectors.toList());
-            // 用户学习记录，获取每个课程里面最新学习的课时
+            // 资源学习记录，获取每个课程里面最新学习的课时
             Map<Long, UserStudy> userStudyMap = new HashMap<>();
             List<UserStudy> userStudyList = userStudyDao.listByUserIdAndCourseIdsForMax(ThreadContext.userId(), courseIdList);
             if (CollUtil.isNotEmpty(userStudyList)) {

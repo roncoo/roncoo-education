@@ -12,14 +12,14 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * ADMIN-课程用户学习日志
+ * ADMIN-资源学习记录
  * </p>
  *
  * @author wujing
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-课程用户学习日志查看")
+@ApiModel(description = "ADMIN-资源学习记录查看")
 public class AdminUserStudyViewResp implements Serializable {
 
     private static final long serialVersionUID = 1L;

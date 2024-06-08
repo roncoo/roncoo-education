@@ -8,7 +8,7 @@ import com.roncoo.education.course.service.admin.resp.AdminUserStudyStatResp;
 import java.util.List;
 
 /**
- * 课程用户学习日志 服务类
+ * 资源学习记录 服务类
  *
  * @author wujing
  * @date 2022-09-03
@@ -16,15 +16,15 @@ import java.util.List;
 public interface UserStudyDao {
 
     /**
-     * 保存课程用户学习日志
+     * 保存资源学习记录
      *
-     * @param record 课程用户学习日志
+     * @param record 资源学习记录
      * @return 影响记录数
      */
     int save(UserStudy record);
 
     /**
-     * 根据ID删除课程用户学习日志
+     * 根据ID删除资源学习记录
      *
      * @param id 主键ID
      * @return 影响记录数
@@ -32,23 +32,23 @@ public interface UserStudyDao {
     int deleteById(Long id);
 
     /**
-     * 修改课程用户学习日志
+     * 修改资源学习记录
      *
-     * @param record 课程用户学习日志
+     * @param record 资源学习记录
      * @return 影响记录数
      */
     int updateById(UserStudy record);
 
     /**
-     * 根据ID获取课程用户学习日志
+     * 根据ID获取资源学习记录
      *
      * @param id 主键ID
-     * @return 课程用户学习日志
+     * @return 资源学习记录
      */
     UserStudy getById(Long id);
 
     /**
-     * 课程用户学习日志--分页查询
+     * 资源学习记录--分页查询
      *
      * @param pageCurrent 当前页
      * @param pageSize    分页大小
@@ -58,18 +58,18 @@ public interface UserStudyDao {
     Page<UserStudy> page(int pageCurrent, int pageSize, UserStudyExample example);
 
     /**
-     * 课程用户学习日志--条件列出
+     * 资源学习记录--条件列出
      *
      * @param example 查询条件
-     * @return 课程用户学习日志列表
+     * @return 资源学习记录列表
      */
     List<UserStudy> listByExample(UserStudyExample example);
 
     /**
-     * 课程用户学习日志--条件统计
+     * 资源学习记录--条件统计
      *
      * @param example 统计条件
-     * @return 课程用户学习日志数量
+     * @return 资源学习记录数量
      */
     int countByExample(UserStudyExample example);
 

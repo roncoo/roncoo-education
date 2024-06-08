@@ -77,7 +77,7 @@ public class AuthCourseBiz extends BaseBiz {
         if (!check(period)) {
             return Result.error("请购买该课程");
         }
-        // 用户学习记录
+        // 资源学习记录
         UserStudy userStudy = userStudyDao.getByPeriodIdAndUserId(req.getPeriodId(), ThreadContext.userId());
         if (ObjectUtil.isEmpty(userStudy)) {
             userStudy = new UserStudy();

@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.constraints.NotNull;
 
 /**
- * API-课程用户学习日志
+ * API-资源学习记录
  *
  * @author wujing
  * @date 2022-09-03
  */
-@Api(tags = "api-课程用户学习日志")
+@Api(tags = "api-资源学习记录")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/course/api/user/study")

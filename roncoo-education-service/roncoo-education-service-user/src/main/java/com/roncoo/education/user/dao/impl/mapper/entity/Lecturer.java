@@ -14,6 +14,8 @@ public class Lecturer implements Serializable {
 
     private Integer sort;
 
+    private Long userId;
+
     private String lecturerName;
 
     private String lecturerMobile;
@@ -64,6 +66,14 @@ public class Lecturer implements Serializable {
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getLecturerName() {
@@ -117,6 +127,7 @@ public class Lecturer implements Serializable {
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", statusId=").append(statusId);
         sb.append(", sort=").append(sort);
+        sb.append(", userId=").append(userId);
         sb.append(", lecturerName=").append(lecturerName);
         sb.append(", lecturerMobile=").append(lecturerMobile);
         sb.append(", lecturerPosition=").append(lecturerPosition);

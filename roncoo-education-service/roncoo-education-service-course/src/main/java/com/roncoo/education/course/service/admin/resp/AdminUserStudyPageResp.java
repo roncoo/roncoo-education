@@ -10,14 +10,14 @@ import java.util.List;
 
 /**
  * <p>
- * ADMIN-课程用户学习日志
+ * ADMIN-资源学习记录
  * </p>
  *
  * @author wujing
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-课程用户学习日志分页")
+@ApiModel(description = "ADMIN-资源学习记录分页")
 public class AdminUserStudyPageResp implements Serializable {
     private static final long serialVersionUID = 1L;
 

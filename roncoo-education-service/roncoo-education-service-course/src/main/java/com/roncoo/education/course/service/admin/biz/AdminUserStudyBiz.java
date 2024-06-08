@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * ADMIN-课程用户学习日志
+ * ADMIN-资源学习记录
  *
  * @author wujing
  */
@@ -47,10 +47,10 @@ public class AdminUserStudyBiz extends BaseBiz {
     private final CourseChapterPeriodDao courseChapterPeriodDao;
 
     /**
-     * 课程用户学习日志分页
+     * 资源学习记录分页
      *
-     * @param req 课程用户学习日志分页查询参数
-     * @return 课程用户学习日志分页查询结果
+     * @param req 资源学习记录分页查询参数
+     * @return 资源学习记录分页查询结果
      */
     public Result<Page<AdminUserStudyPageResp>> page(AdminUserStudyPageReq req) {
         CourseChapterExample example = new CourseChapterExample();
@@ -88,9 +88,9 @@ public class AdminUserStudyBiz extends BaseBiz {
     }
 
     /**
-     * 课程用户学习日志添加
+     * 资源学习记录添加
      *
-     * @param req 课程用户学习日志
+     * @param req 资源学习记录
      * @return 添加结果
      */
     public Result<String> save(AdminUserStudySaveReq req) {
@@ -102,19 +102,19 @@ public class AdminUserStudyBiz extends BaseBiz {
     }
 
     /**
-     * 课程用户学习日志查看
+     * 资源学习记录查看
      *
      * @param id 主键ID
-     * @return 课程用户学习日志
+     * @return 资源学习记录
      */
     public Result<AdminUserStudyViewResp> view(Long id) {
         return Result.success(BeanUtil.copyProperties(dao.getById(id), AdminUserStudyViewResp.class));
     }
 
     /**
-     * 课程用户学习日志修改
+     * 资源学习记录修改
      *
-     * @param req 课程用户学习日志修改对象
+     * @param req 资源学习记录修改对象
      * @return 修改结果
      */
     public Result<String> edit(AdminUserStudyEditReq req) {
@@ -126,7 +126,7 @@ public class AdminUserStudyBiz extends BaseBiz {
     }
 
     /**
-     * 课程用户学习日志删除
+     * 资源学习记录删除
      *
      * @param id ID主键
      * @return 删除结果
