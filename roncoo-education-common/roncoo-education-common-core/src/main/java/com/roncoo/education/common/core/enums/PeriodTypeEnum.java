@@ -13,8 +13,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum PeriodTypeEnum {
 
-    RESOURCE(1, "资源"),
-    LIVE(2, "直播");
+    RESOURCE(10, "资源"),
+    LIVE(20, "直播");
 
     private Integer code;
 

@@ -50,7 +50,7 @@ public class AdminCourseChapterPeriodEditReq implements Serializable {
     @ApiModelProperty(value = "资源ID")
     private Long resourceId;
 
-    @ApiModelProperty(value = "课时类型(1资源，2直播)")
+    @ApiModelProperty(value = "课时类型(10资源，20直播)")
     private Integer periodType;
 
     @ApiModelProperty(value = "直播ID")
