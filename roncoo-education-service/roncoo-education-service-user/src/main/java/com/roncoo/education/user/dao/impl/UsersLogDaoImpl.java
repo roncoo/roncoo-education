@@ -77,7 +77,7 @@ public class UsersLogDaoImpl extends AbstractBaseJdbc implements UsersLogDao {
 
     @Override
     public List<AdminStatLogin> statByDate(int date) {
-        String sql = "select DATE_FORMAT(gmt_create, '%Y-%m-%d') as dates, count(*) as logins, login_status from log_login where login_status>0 and gmt_create>? GROUP BY dates,login_status order by dates asc";
+        String sql = "select DATE_FORMAT(gmt_create, '%Y-%m-%d') as dates, count(*) as logins, login_status from users_log where login_status>0 and gmt_create>? GROUP BY dates,login_status order by dates asc";
         return this.queryForObjectList(sql, AdminStatLogin.class, DateUtil.offsetDay(new Date(), date));
     }
 }
