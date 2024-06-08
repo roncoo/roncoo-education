@@ -3,7 +3,7 @@ package com.roncoo.education.user.dao.impl.mapper.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class LogLogin implements Serializable {
+public class UsersLog implements Serializable {
     private Long id;
 
     private LocalDateTime gmtCreate;

@@ -6,9 +6,9 @@ import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.feign.interfaces.IFeignCourse;
-import com.roncoo.education.user.dao.LogLoginDao;
 import com.roncoo.education.user.dao.OrderInfoDao;
 import com.roncoo.education.user.dao.UsersDao;
+import com.roncoo.education.user.dao.UsersLogDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.UsersExample;
 import com.roncoo.education.user.service.admin.resp.*;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 public class AdminStatBiz extends BaseBiz {
 
     @NotNull
-    private final LogLoginDao logLoginDao;
+    private final UsersLogDao usersLogDao;
 
     @NotNull
     private final UsersDao usersDao;
@@ -45,7 +45,7 @@ public class AdminStatBiz extends BaseBiz {
 
     public Result<AdminStatLoginResp> statLogin(Integer dates) {
         AdminStatLoginResp resp = new AdminStatLoginResp();
-        List<AdminStatLogin> respList = logLoginDao.statByDate(dates);
+        List<AdminStatLogin> respList = usersLogDao.statByDate(dates);
         if (CollUtil.isNotEmpty(respList)) {
             resp.setDateList(respList.stream().map(AdminStatLogin::getDates).distinct().collect(Collectors.toList()));
             Map<String, Long> loginMap = respList.stream().filter(s -> s.getLoginStatus().equals(1)).collect(Collectors.toMap(s -> s.getDates(), s -> s.getLogins()));

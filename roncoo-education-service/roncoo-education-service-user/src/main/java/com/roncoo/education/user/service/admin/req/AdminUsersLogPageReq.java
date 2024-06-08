@@ -17,7 +17,7 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @ApiModel(description = "ADMIN-用户登录日志分页")
-public class AdminLogLoginPageReq implements Serializable {
+public class AdminUsersLogPageReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

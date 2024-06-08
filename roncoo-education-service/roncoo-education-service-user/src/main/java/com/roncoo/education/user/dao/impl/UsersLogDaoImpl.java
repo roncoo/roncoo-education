@@ -5,10 +5,10 @@ import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.tools.IdWorker;
 import com.roncoo.education.common.jdbc.AbstractBaseJdbc;
-import com.roncoo.education.user.dao.LogLoginDao;
-import com.roncoo.education.user.dao.impl.mapper.LogLoginMapper;
-import com.roncoo.education.user.dao.impl.mapper.entity.LogLogin;
-import com.roncoo.education.user.dao.impl.mapper.entity.LogLoginExample;
+import com.roncoo.education.user.dao.UsersLogDao;
+import com.roncoo.education.user.dao.impl.mapper.UsersLogMapper;
+import com.roncoo.education.user.dao.impl.mapper.entity.UsersLog;
+import com.roncoo.education.user.dao.impl.mapper.entity.UsersLogExample;
 import com.roncoo.education.user.service.admin.resp.AdminStatLogin;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -25,13 +25,13 @@ import java.util.List;
  */
 @Repository
 @RequiredArgsConstructor
-public class LogLoginDaoImpl extends AbstractBaseJdbc implements LogLoginDao {
+public class UsersLogDaoImpl extends AbstractBaseJdbc implements UsersLogDao {
 
     @NotNull
-    private final LogLoginMapper mapper;
+    private final UsersLogMapper mapper;
 
     @Override
-    public int save(LogLogin record) {
+    public int save(UsersLog record) {
         if (record.getId() == null) {
             record.setId(IdWorker.getId());
         }
@@ -44,18 +44,18 @@ public class LogLoginDaoImpl extends AbstractBaseJdbc implements LogLoginDao {
     }
 
     @Override
-    public int updateById(LogLogin record) {
+    public int updateById(UsersLog record) {
         record.setGmtCreate(null);
         return this.mapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
-    public LogLogin getById(Long id) {
+    public UsersLog getById(Long id) {
         return this.mapper.selectByPrimaryKey(id);
     }
 
     @Override
-    public Page<LogLogin> page(int pageCurrent, int pageSize, LogLoginExample example) {
+    public Page<UsersLog> page(int pageCurrent, int pageSize, UsersLogExample example) {
         int count = this.mapper.countByExample(example);
         pageSize = PageUtil.checkPageSize(pageSize);
         pageCurrent = PageUtil.checkPageCurrent(count, pageSize, pageCurrent);
@@ -66,12 +66,12 @@ public class LogLoginDaoImpl extends AbstractBaseJdbc implements LogLoginDao {
     }
 
     @Override
-    public List<LogLogin> listByExample(LogLoginExample example) {
+    public List<UsersLog> listByExample(UsersLogExample example) {
         return this.mapper.selectByExample(example);
     }
 
     @Override
-    public int countByExample(LogLoginExample example) {
+    public int countByExample(UsersLogExample example) {
         return this.mapper.countByExample(example);
     }
 

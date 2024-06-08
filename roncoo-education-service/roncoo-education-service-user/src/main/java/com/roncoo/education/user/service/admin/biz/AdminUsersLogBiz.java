@@ -7,16 +7,15 @@ import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
-import com.roncoo.education.user.dao.LogLoginDao;
 import com.roncoo.education.user.dao.UsersDao;
-import com.roncoo.education.user.dao.impl.mapper.entity.LogLogin;
-import com.roncoo.education.user.dao.impl.mapper.entity.LogLoginExample;
-import com.roncoo.education.user.dao.impl.mapper.entity.LogLoginExample.Criteria;
-import com.roncoo.education.user.service.admin.req.AdminLogLoginEditReq;
-import com.roncoo.education.user.service.admin.req.AdminLogLoginPageReq;
-import com.roncoo.education.user.service.admin.req.AdminLogLoginSaveReq;
-import com.roncoo.education.user.service.admin.resp.AdminLogLoginPageResp;
-import com.roncoo.education.user.service.admin.resp.AdminLogLoginViewResp;
+import com.roncoo.education.user.dao.UsersLogDao;
+import com.roncoo.education.user.dao.impl.mapper.entity.UsersLog;
+import com.roncoo.education.user.dao.impl.mapper.entity.UsersLogExample;
+import com.roncoo.education.user.service.admin.req.AdminUsersLogEditReq;
+import com.roncoo.education.user.service.admin.req.AdminUsersLogPageReq;
+import com.roncoo.education.user.service.admin.req.AdminUsersLogSaveReq;
+import com.roncoo.education.user.service.admin.resp.AdminUsersLogPageResp;
+import com.roncoo.education.user.service.admin.resp.AdminUsersLogViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -32,10 +31,10 @@ import java.util.stream.Collectors;
  */
 @Component
 @RequiredArgsConstructor
-public class AdminLogLoginBiz extends BaseBiz {
+public class AdminUsersLogBiz extends BaseBiz {
 
     @NotNull
-    private final LogLoginDao dao;
+    private final UsersLogDao dao;
     @NotNull
     private final UsersDao usersDao;
 
@@ -45,16 +44,16 @@ public class AdminLogLoginBiz extends BaseBiz {
      * @param req 用户登录日志分页查询参数
      * @return 用户登录日志分页查询结果
      */
-    public Result<Page<AdminLogLoginPageResp>> page(AdminLogLoginPageReq req) {
-        LogLoginExample example = new LogLoginExample();
-        Criteria c = example.createCriteria();
+    public Result<Page<AdminUsersLogPageResp>> page(AdminUsersLogPageReq req) {
+        UsersLogExample example = new UsersLogExample();
+        UsersLogExample.Criteria c = example.createCriteria();
         example.setOrderByClause("id desc");
-        Page<LogLogin> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
-        Page<AdminLogLoginPageResp> respPage = PageUtil.transform(page, AdminLogLoginPageResp.class);
+        Page<UsersLog> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
+        Page<AdminUsersLogPageResp> respPage = PageUtil.transform(page, AdminUsersLogPageResp.class);
         if (CollUtil.isNotEmpty(respPage.getList())) {
-            List<Long> userIdList = respPage.getList().stream().map(AdminLogLoginPageResp::getUserId).collect(Collectors.toList());
+            List<Long> userIdList = respPage.getList().stream().map(AdminUsersLogPageResp::getUserId).collect(Collectors.toList());
             Map<Long, String> mobileMap = usersDao.listByIds(userIdList).stream().collect(Collectors.toMap(item -> item.getId(), item -> item.getMobile()));
-            for (AdminLogLoginPageResp resp : respPage.getList()) {
+            for (AdminUsersLogPageResp resp : respPage.getList()) {
                 // 手机号
                 resp.setMobile(DesensitizedUtil.mobilePhone(mobileMap.get(resp.getUserId())));
             }
@@ -68,8 +67,8 @@ public class AdminLogLoginBiz extends BaseBiz {
      * @param req 用户登录日志
      * @return 添加结果
      */
-    public Result<String> save(AdminLogLoginSaveReq req) {
-        LogLogin record = BeanUtil.copyProperties(req, LogLogin.class);
+    public Result<String> save(AdminUsersLogSaveReq req) {
+        UsersLog record = BeanUtil.copyProperties(req, UsersLog.class);
         if (dao.save(record) > 0) {
             return Result.success("操作成功");
         }
@@ -82,8 +81,8 @@ public class AdminLogLoginBiz extends BaseBiz {
      * @param id 主键ID
      * @return 用户登录日志
      */
-    public Result<AdminLogLoginViewResp> view(Long id) {
-        return Result.success(BeanUtil.copyProperties(dao.getById(id), AdminLogLoginViewResp.class));
+    public Result<AdminUsersLogViewResp> view(Long id) {
+        return Result.success(BeanUtil.copyProperties(dao.getById(id), AdminUsersLogViewResp.class));
     }
 
     /**
@@ -92,8 +91,8 @@ public class AdminLogLoginBiz extends BaseBiz {
      * @param req 用户登录日志修改对象
      * @return 修改结果
      */
-    public Result<String> edit(AdminLogLoginEditReq req) {
-        LogLogin record = BeanUtil.copyProperties(req, LogLogin.class);
+    public Result<String> edit(AdminUsersLogEditReq req) {
+        UsersLog record = BeanUtil.copyProperties(req, UsersLog.class);
         if (dao.updateById(record) > 0) {
             return Result.success("操作成功");
         }

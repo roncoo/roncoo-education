@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LogLoginExample {
+public class UsersLogExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -15,7 +15,7 @@ public class LogLoginExample {
 
     protected int pageSize = -1;
 
-    public LogLoginExample() {
+    public UsersLogExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

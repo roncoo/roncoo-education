@@ -21,12 +21,12 @@ import com.roncoo.education.common.sms.Sms;
 import com.roncoo.education.common.sms.SmsFace;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.LoginConfig;
-import com.roncoo.education.user.dao.LogLoginDao;
 import com.roncoo.education.user.dao.UsersAccountDao;
 import com.roncoo.education.user.dao.UsersDao;
-import com.roncoo.education.user.dao.impl.mapper.entity.LogLogin;
+import com.roncoo.education.user.dao.UsersLogDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.Users;
 import com.roncoo.education.user.dao.impl.mapper.entity.UsersAccount;
+import com.roncoo.education.user.dao.impl.mapper.entity.UsersLog;
 import com.roncoo.education.user.service.api.req.*;
 import com.roncoo.education.user.service.api.resp.UsersLoginResp;
 import com.roncoo.education.user.service.api.resp.WxCodeResp;
@@ -41,6 +41,7 @@ import me.chanjar.weixin.mp.config.impl.WxMpMapConfigImpl;
 import me.chanjar.weixin.open.api.impl.WxOpenOAuth2ServiceImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,7 +64,7 @@ public class ApiUsersBiz extends BaseBiz {
     @NotNull
     private final UsersAccountDao usersAccountDao;
     @NotNull
-    private final LogLoginDao logLoginDao;
+    private final UsersLogDao usersLogDao;
     @NotNull
     private final CacheRedis cacheRedis;
     @NotNull
@@ -110,7 +111,7 @@ public class ApiUsersBiz extends BaseBiz {
         user = register(req.getMobile(), mobilePsw, req.getRegisterSource(), null, null);
 
         // 日志
-        log(user.getId(), LoginStatusEnum.REGISTER, BeanUtil.copyProperties(req, LogLogin.class));
+        log(user.getId(), LoginStatusEnum.REGISTER, BeanUtil.copyProperties(req, UsersLog.class));
 
         return Result.success(login(user.getId(), user.getMobile()));
     }
@@ -146,19 +147,19 @@ public class ApiUsersBiz extends BaseBiz {
         // 密码校验
         if (!DigestUtil.sha1Hex(user.getMobileSalt() + mobilePsw).equals(user.getMobilePsw())) {
             // 错误登录日志
-            log(user.getId(), LoginStatusEnum.FAIL, BeanUtil.copyProperties(req, LogLogin.class));
+            log(user.getId(), LoginStatusEnum.FAIL, BeanUtil.copyProperties(req, UsersLog.class));
             return Result.error("账号或者密码不正确");
         }
 
         // 日志
-        log(user.getId(), LoginStatusEnum.SUCCESS, BeanUtil.copyProperties(req, LogLogin.class));
+        log(user.getId(), LoginStatusEnum.SUCCESS, BeanUtil.copyProperties(req, UsersLog.class));
 
         return Result.success(login(user.getId(), user.getMobile()));
     }
 
     private String decrypt(String password) {
         String privateKey = cacheRedis.get(Constants.RedisPre.PRIVATEKEY);
-        if (StringUtils.isEmpty(privateKey)) {
+        if (ObjectUtils.isEmpty(privateKey)) {
             privateKey = feignSysConfig.getLogin().getRsaLoginPrivateKey();
             cacheRedis.set(Constants.RedisPre.PRIVATEKEY, privateKey, 1, TimeUnit.DAYS);
         }
@@ -205,7 +206,7 @@ public class ApiUsersBiz extends BaseBiz {
         return user;
     }
 
-    private void log(Long userId, LoginStatusEnum status, LogLogin record) {
+    private void log(Long userId, LoginStatusEnum status, UsersLog record) {
         record.setUserId(userId);
         record.setLoginStatus(status.getCode());
         record.setLoginIp(ServletUtil.getClientIP(request));
@@ -214,7 +215,7 @@ public class ApiUsersBiz extends BaseBiz {
             record.setProvince(ipInfo.getPro());
             record.setCity(ipInfo.getCity());
         }
-        logLoginDao.save(record);
+        usersLogDao.save(record);
     }
 
     public Result<String> sendCode(SendCodeReq req) {
@@ -399,7 +400,7 @@ public class ApiUsersBiz extends BaseBiz {
         user = register(req.getMobile(), IdUtil.fastUUID(), req.getRegisterSource(), req.getUnionId(), req.getOpenId());
 
         // 日志
-        log(user.getId(), LoginStatusEnum.REGISTER, BeanUtil.copyProperties(req, LogLogin.class));
+        log(user.getId(), LoginStatusEnum.REGISTER, BeanUtil.copyProperties(req, UsersLog.class));
 
         return Result.success(login(user.getId(), user.getMobile()));
     }

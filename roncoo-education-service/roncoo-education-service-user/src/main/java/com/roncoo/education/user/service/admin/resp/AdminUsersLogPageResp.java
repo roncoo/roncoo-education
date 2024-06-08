@@ -1,4 +1,4 @@
-package com.roncoo.education.user.service.admin.req;
+package com.roncoo.education.user.service.admin.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
@@ -18,8 +18,8 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-用户登录日志修改")
-public class AdminLogLoginEditReq implements Serializable {
+@ApiModel(description = "ADMIN-用户登录日志分页")
+public class AdminUsersLogPageResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,6 +32,9 @@ public class AdminLogLoginEditReq implements Serializable {
 
     @ApiModelProperty(value = "用户ID")
     private Long userId;
+
+    @ApiModelProperty(value = "用户手机")
+    private String mobile;
 
     @ApiModelProperty(value = "登录状态(1成功，0失败)")
     private Integer loginStatus;
