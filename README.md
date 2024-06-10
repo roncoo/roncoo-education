@@ -1,4 +1,4 @@
-<div style="text-align:center">
+<div style="margin:0 auto;text-align:center">
     <img src="distribution/images/logo.jpg" alt="领课教育系统-开源版"/>
     <div>    
         <a href="http://spring.io/projects/spring-boot">
@@ -45,16 +45,19 @@ Cloud为核心框架。系统目前主要功能有课程点播功能，支持多
 </tr>
 </table>
 
-### 演示地址
+### 相关说明
 
 * 前端门户演示地址：[https://eduos.roncoo.net/](https://eduos.roncoo.net/)
-* 后台管理演示地址：[https://eduos.roncoo.net/admin](https://eduos.roncoo.net/admin/)
+* 前端管理演示地址：[https://eduos.roncoo.net/admin](https://eduos.roncoo.net/admin/)
+* 后端服务系统地址：[roncoo-education](./roncoo-education)
+* 前端门户系统地址：[roncoo-education-web](./roncoo-education-web)
+* 前端管理系统地址：[roncoo-education-admin](./roncoo-education-admin)
 * 前端技术体系：Vue3 + Vite5 + Vue-Router + Element-Plus + Pinia + Axios
 * 后端技术体系：Spring Cloud Alibaba2021 + MySQL8 + Nacos + Seata + Mybatis + Druid
 
 ---
 
-<div style="text-align:center">
+<div style="margin:0 auto;text-align:center">
 <div>关注微信公众号可获取更多学习资料（SQL脚本、部署教程、常见问题等）</div>
 <img src="distribution/images/gzh.png" alt="领课开源-微信公众号" width="600"/>
 </div>
