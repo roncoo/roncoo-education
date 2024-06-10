@@ -1,362 +1,362 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.roncoo.education.course.dao.impl.mapper.LiveMapper">
-  <resultMap id="BaseResultMap" type="com.roncoo.education.course.dao.impl.mapper.entity.Live">
-    <id column="id" jdbcType="BIGINT" property="id"/>
-    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
-    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
-    <result column="status_id" jdbcType="TINYINT" property="statusId"/>
-    <result column="sort" jdbcType="INTEGER" property="sort"/>
-    <result column="live_name" jdbcType="VARCHAR" property="liveName"/>
-    <result column="lecturer_id" jdbcType="BIGINT" property="lecturerId"/>
-    <result column="live_model" jdbcType="TINYINT" property="liveModel"/>
-    <result column="live_delay" jdbcType="TINYINT" property="liveDelay"/>
-    <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime"/>
-    <result column="live_duration" jdbcType="INTEGER" property="liveDuration"/>
-    <result column="live_status" jdbcType="TINYINT" property="liveStatus"/>
-    <result column="playback_save" jdbcType="TINYINT" property="playbackSave"/>
-    <result column="resource_id" jdbcType="BIGINT" property="resourceId"/>
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="("
-                           separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.roncoo.education.course.dao.impl.mapper.entity.Live">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+        <result column="status_id" jdbcType="TINYINT" property="statusId"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="live_name" jdbcType="VARCHAR" property="liveName"/>
+        <result column="lecturer_id" jdbcType="BIGINT" property="lecturerId"/>
+        <result column="live_model" jdbcType="TINYINT" property="liveModel"/>
+        <result column="live_delay" jdbcType="TINYINT" property="liveDelay"/>
+        <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime"/>
+        <result column="live_duration" jdbcType="INTEGER" property="liveDuration"/>
+        <result column="live_status" jdbcType="TINYINT" property="liveStatus"/>
+        <result column="playback_save" jdbcType="TINYINT" property="playbackSave"/>
+        <result column="resource_id" jdbcType="BIGINT" property="resourceId"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="("
-                           separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id
-    , gmt_create, gmt_modified, status_id, sort, live_name, lecturer_id, live_model,
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id
+        , gmt_create, gmt_modified, status_id, sort, live_name, lecturer_id, live_model,
     live_delay, begin_time, live_duration, live_status, playback_save, resource_id
-  </sql>
-  <select id="selectByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveExample"
-          resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List"/>
-    from live
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause"/>
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-    <if test="limitStart >= 0">
-      limit ${limitStart} , ${pageSize}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from live
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete
-    from live
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveExample">
-    delete from live
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause"/>
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Live">
-    insert into live (id, gmt_create, gmt_modified,
-                      status_id, sort, live_name,
-                      lecturer_id, live_model, live_delay,
-                      begin_time, live_duration, live_status,
-                      playback_save, resource_id)
-    values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
-            #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{liveName,jdbcType=VARCHAR},
-            #{lecturerId,jdbcType=BIGINT}, #{liveModel,jdbcType=TINYINT}, #{liveDelay,jdbcType=TINYINT},
-            #{beginTime,jdbcType=TIMESTAMP}, #{liveDuration,jdbcType=INTEGER}, #{liveStatus,jdbcType=TINYINT},
-            #{playbackSave,jdbcType=TINYINT}, #{resourceId,jdbcType=BIGINT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Live">
-    insert into live
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create,
-      </if>
-      <if test="gmtModified != null">
-        gmt_modified,
-      </if>
-      <if test="statusId != null">
-        status_id,
-      </if>
-      <if test="sort != null">
-        sort,
-      </if>
-      <if test="liveName != null">
-        live_name,
-      </if>
-      <if test="lecturerId != null">
-        lecturer_id,
-      </if>
-      <if test="liveModel != null">
-        live_model,
-      </if>
-      <if test="liveDelay != null">
-        live_delay,
-      </if>
-      <if test="beginTime != null">
-        begin_time,
-      </if>
-      <if test="liveDuration != null">
-        live_duration,
-      </if>
-      <if test="liveStatus != null">
-        live_status,
-      </if>
-      <if test="playbackSave != null">
-        playback_save,
-      </if>
-      <if test="resourceId != null">
-        resource_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="gmtCreate != null">
-        #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null">
-        #{gmtModified,jdbcType=TIMESTAMP},
-      </if>
-      <if test="statusId != null">
-        #{statusId,jdbcType=TINYINT},
-      </if>
-      <if test="sort != null">
-        #{sort,jdbcType=INTEGER},
-      </if>
-      <if test="liveName != null">
-        #{liveName,jdbcType=VARCHAR},
-      </if>
-      <if test="lecturerId != null">
-        #{lecturerId,jdbcType=BIGINT},
-      </if>
-      <if test="liveModel != null">
-        #{liveModel,jdbcType=TINYINT},
-      </if>
-      <if test="liveDelay != null">
-        #{liveDelay,jdbcType=TINYINT},
-      </if>
-      <if test="beginTime != null">
-        #{beginTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="liveDuration != null">
-        #{liveDuration,jdbcType=INTEGER},
-      </if>
-      <if test="liveStatus != null">
-        #{liveStatus,jdbcType=TINYINT},
-      </if>
-      <if test="playbackSave != null">
-        #{playbackSave,jdbcType=TINYINT},
-      </if>
-      <if test="resourceId != null">
-        #{resourceId,jdbcType=BIGINT},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveExample"
-          resultType="java.lang.Integer">
-    select count(*) from live
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause"/>
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update live
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=BIGINT},
-      </if>
-      <if test="record.gmtCreate != null">
+    </sql>
+    <select id="selectByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from live
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="limitStart >= 0">
+            limit ${limitStart} , ${pageSize}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from live
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from live
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveExample">
+        delete from live
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Live">
+        insert into live (id, gmt_create, gmt_modified,
+                          status_id, sort, live_name,
+                          lecturer_id, live_model, live_delay,
+                          begin_time, live_duration, live_status,
+                          playback_save, resource_id)
+        values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
+                #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{liveName,jdbcType=VARCHAR},
+                #{lecturerId,jdbcType=BIGINT}, #{liveModel,jdbcType=TINYINT}, #{liveDelay,jdbcType=TINYINT},
+                #{beginTime,jdbcType=TIMESTAMP}, #{liveDuration,jdbcType=INTEGER}, #{liveStatus,jdbcType=TINYINT},
+                #{playbackSave,jdbcType=TINYINT}, #{resourceId,jdbcType=BIGINT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Live">
+        insert into live
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+            <if test="statusId != null">
+                status_id,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="liveName != null">
+                live_name,
+            </if>
+            <if test="lecturerId != null">
+                lecturer_id,
+            </if>
+            <if test="liveModel != null">
+                live_model,
+            </if>
+            <if test="liveDelay != null">
+                live_delay,
+            </if>
+            <if test="beginTime != null">
+                begin_time,
+            </if>
+            <if test="liveDuration != null">
+                live_duration,
+            </if>
+            <if test="liveStatus != null">
+                live_status,
+            </if>
+            <if test="playbackSave != null">
+                playback_save,
+            </if>
+            <if test="resourceId != null">
+                resource_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="statusId != null">
+                #{statusId,jdbcType=TINYINT},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="liveName != null">
+                #{liveName,jdbcType=VARCHAR},
+            </if>
+            <if test="lecturerId != null">
+                #{lecturerId,jdbcType=BIGINT},
+            </if>
+            <if test="liveModel != null">
+                #{liveModel,jdbcType=TINYINT},
+            </if>
+            <if test="liveDelay != null">
+                #{liveDelay,jdbcType=TINYINT},
+            </if>
+            <if test="beginTime != null">
+                #{beginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="liveDuration != null">
+                #{liveDuration,jdbcType=INTEGER},
+            </if>
+            <if test="liveStatus != null">
+                #{liveStatus,jdbcType=TINYINT},
+            </if>
+            <if test="playbackSave != null">
+                #{playbackSave,jdbcType=TINYINT},
+            </if>
+            <if test="resourceId != null">
+                #{resourceId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveExample"
+            resultType="java.lang.Integer">
+        select count(*) from live
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update live
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.gmtCreate != null">
+                gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.gmtModified != null">
+                gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.statusId != null">
+                status_id = #{record.statusId,jdbcType=TINYINT},
+            </if>
+            <if test="record.sort != null">
+                sort = #{record.sort,jdbcType=INTEGER},
+            </if>
+            <if test="record.liveName != null">
+                live_name = #{record.liveName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lecturerId != null">
+                lecturer_id = #{record.lecturerId,jdbcType=BIGINT},
+            </if>
+            <if test="record.liveModel != null">
+                live_model = #{record.liveModel,jdbcType=TINYINT},
+            </if>
+            <if test="record.liveDelay != null">
+                live_delay = #{record.liveDelay,jdbcType=TINYINT},
+            </if>
+            <if test="record.beginTime != null">
+                begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.liveDuration != null">
+                live_duration = #{record.liveDuration,jdbcType=INTEGER},
+            </if>
+            <if test="record.liveStatus != null">
+                live_status = #{record.liveStatus,jdbcType=TINYINT},
+            </if>
+            <if test="record.playbackSave != null">
+                playback_save = #{record.playbackSave,jdbcType=TINYINT},
+            </if>
+            <if test="record.resourceId != null">
+                resource_id = #{record.resourceId,jdbcType=BIGINT},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update live
+        set id = #{record.id,jdbcType=BIGINT},
         gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.gmtModified != null">
         gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.statusId != null">
         status_id = #{record.statusId,jdbcType=TINYINT},
-      </if>
-      <if test="record.sort != null">
         sort = #{record.sort,jdbcType=INTEGER},
-      </if>
-      <if test="record.liveName != null">
         live_name = #{record.liveName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.lecturerId != null">
         lecturer_id = #{record.lecturerId,jdbcType=BIGINT},
-      </if>
-      <if test="record.liveModel != null">
         live_model = #{record.liveModel,jdbcType=TINYINT},
-      </if>
-      <if test="record.liveDelay != null">
         live_delay = #{record.liveDelay,jdbcType=TINYINT},
-      </if>
-      <if test="record.beginTime != null">
         begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.liveDuration != null">
         live_duration = #{record.liveDuration,jdbcType=INTEGER},
-      </if>
-      <if test="record.liveStatus != null">
         live_status = #{record.liveStatus,jdbcType=TINYINT},
-      </if>
-      <if test="record.playbackSave != null">
         playback_save = #{record.playbackSave,jdbcType=TINYINT},
-      </if>
-      <if test="record.resourceId != null">
-        resource_id = #{record.resourceId,jdbcType=BIGINT},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause"/>
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update live
-    set id = #{record.id,jdbcType=BIGINT},
-    gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
-    gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
-    status_id = #{record.statusId,jdbcType=TINYINT},
-    sort = #{record.sort,jdbcType=INTEGER},
-    live_name = #{record.liveName,jdbcType=VARCHAR},
-    lecturer_id = #{record.lecturerId,jdbcType=BIGINT},
-    live_model = #{record.liveModel,jdbcType=TINYINT},
-    live_delay = #{record.liveDelay,jdbcType=TINYINT},
-    begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
-    live_duration = #{record.liveDuration,jdbcType=INTEGER},
-    live_status = #{record.liveStatus,jdbcType=TINYINT},
-    playback_save = #{record.playbackSave,jdbcType=TINYINT},
-    resource_id = #{record.resourceId,jdbcType=BIGINT}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause"/>
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Live">
-    update live
-    <set>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null">
-        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      </if>
-      <if test="statusId != null">
-        status_id = #{statusId,jdbcType=TINYINT},
-      </if>
-      <if test="sort != null">
-        sort = #{sort,jdbcType=INTEGER},
-      </if>
-      <if test="liveName != null">
-        live_name = #{liveName,jdbcType=VARCHAR},
-      </if>
-      <if test="lecturerId != null">
-        lecturer_id = #{lecturerId,jdbcType=BIGINT},
-      </if>
-      <if test="liveModel != null">
-        live_model = #{liveModel,jdbcType=TINYINT},
-      </if>
-      <if test="liveDelay != null">
-        live_delay = #{liveDelay,jdbcType=TINYINT},
-      </if>
-      <if test="beginTime != null">
-        begin_time = #{beginTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="liveDuration != null">
-        live_duration = #{liveDuration,jdbcType=INTEGER},
-      </if>
-      <if test="liveStatus != null">
-        live_status = #{liveStatus,jdbcType=TINYINT},
-      </if>
-      <if test="playbackSave != null">
-        playback_save = #{playbackSave,jdbcType=TINYINT},
-      </if>
-      <if test="resourceId != null">
-        resource_id = #{resourceId,jdbcType=BIGINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Live">
-    update live
-    set gmt_create    = #{gmtCreate,jdbcType=TIMESTAMP},
-        gmt_modified  = #{gmtModified,jdbcType=TIMESTAMP},
-        status_id     = #{statusId,jdbcType=TINYINT},
-        sort          = #{sort,jdbcType=INTEGER},
-        live_name     = #{liveName,jdbcType=VARCHAR},
-        lecturer_id   = #{lecturerId,jdbcType=BIGINT},
-        live_model    = #{liveModel,jdbcType=TINYINT},
-        live_delay    = #{liveDelay,jdbcType=TINYINT},
-        begin_time    = #{beginTime,jdbcType=TIMESTAMP},
-        live_duration = #{liveDuration,jdbcType=INTEGER},
-        live_status   = #{liveStatus,jdbcType=TINYINT},
-        playback_save = #{playbackSave,jdbcType=TINYINT},
-        resource_id   = #{resourceId,jdbcType=BIGINT}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        resource_id = #{record.resourceId,jdbcType=BIGINT}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Live">
+        update live
+        <set>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="statusId != null">
+                status_id = #{statusId,jdbcType=TINYINT},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="liveName != null">
+                live_name = #{liveName,jdbcType=VARCHAR},
+            </if>
+            <if test="lecturerId != null">
+                lecturer_id = #{lecturerId,jdbcType=BIGINT},
+            </if>
+            <if test="liveModel != null">
+                live_model = #{liveModel,jdbcType=TINYINT},
+            </if>
+            <if test="liveDelay != null">
+                live_delay = #{liveDelay,jdbcType=TINYINT},
+            </if>
+            <if test="beginTime != null">
+                begin_time = #{beginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="liveDuration != null">
+                live_duration = #{liveDuration,jdbcType=INTEGER},
+            </if>
+            <if test="liveStatus != null">
+                live_status = #{liveStatus,jdbcType=TINYINT},
+            </if>
+            <if test="playbackSave != null">
+                playback_save = #{playbackSave,jdbcType=TINYINT},
+            </if>
+            <if test="resourceId != null">
+                resource_id = #{resourceId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Live">
+        update live
+        set gmt_create    = #{gmtCreate,jdbcType=TIMESTAMP},
+            gmt_modified  = #{gmtModified,jdbcType=TIMESTAMP},
+            status_id     = #{statusId,jdbcType=TINYINT},
+            sort          = #{sort,jdbcType=INTEGER},
+            live_name     = #{liveName,jdbcType=VARCHAR},
+            lecturer_id   = #{lecturerId,jdbcType=BIGINT},
+            live_model    = #{liveModel,jdbcType=TINYINT},
+            live_delay    = #{liveDelay,jdbcType=TINYINT},
+            begin_time    = #{beginTime,jdbcType=TIMESTAMP},
+            live_duration = #{liveDuration,jdbcType=INTEGER},
+            live_status   = #{liveStatus,jdbcType=TINYINT},
+            playback_save = #{playbackSave,jdbcType=TINYINT},
+            resource_id   = #{resourceId,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>
