@@ -53,6 +53,9 @@ public class AdminCourseChapterPeriodSaveReq implements Serializable {
     @ApiModelProperty(value = "课时类型(10资源，20直播)")
     private Integer periodType;
 
+    @ApiModelProperty(value = "讲师ID")
+    private Long lecturerId;
+
     @ApiModelProperty(value = "直播模式(1三分屏)")
     private Integer liveModel;
 

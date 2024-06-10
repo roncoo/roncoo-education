@@ -122,6 +122,7 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
         if (req.getPeriodType().equals(PeriodTypeEnum.LIVE.getCode())) {
             // 直播
             Live live = BeanUtil.copyProperties(req, Live.class);
+            live.setLiveName(req.getPeriodName());
             liveDao.save(live);
             // 保存直播记录
             record.setLiveId(live.getId());
@@ -156,6 +157,7 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
         if (req.getPeriodType().equals(PeriodTypeEnum.LIVE.getCode())) {
             // 直播
             Live live = BeanUtil.copyProperties(req, Live.class);
+            live.setLiveName(req.getPeriodName());
             live.setId(req.getLiveId());
             liveDao.updateById(live);
         }

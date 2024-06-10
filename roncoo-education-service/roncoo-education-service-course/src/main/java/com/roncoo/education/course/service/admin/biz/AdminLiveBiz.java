@@ -3,12 +3,21 @@ package com.roncoo.education.course.service.admin.biz;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.LiveModelEnum;
+import com.roncoo.education.common.core.enums.LiveSceneEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.video.LiveUtil;
+import com.roncoo.education.common.video.req.LiveBroadcastReq;
+import com.roncoo.education.common.video.req.LiveChannelReq;
+import com.roncoo.education.common.video.resp.LiveChannelResp;
+import com.roncoo.education.course.dao.LiveChannelDao;
 import com.roncoo.education.course.dao.LiveDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Live;
+import com.roncoo.education.course.dao.impl.mapper.entity.LiveChannel;
 import com.roncoo.education.course.dao.impl.mapper.entity.LiveExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.LiveExample.Criteria;
+import com.roncoo.education.course.service.admin.req.AdminLiveBroadcastReq;
 import com.roncoo.education.course.service.admin.req.AdminLiveEditReq;
 import com.roncoo.education.course.service.admin.req.AdminLivePageReq;
 import com.roncoo.education.course.service.admin.req.AdminLiveSaveReq;
@@ -16,6 +25,8 @@ import com.roncoo.education.course.service.admin.resp.AdminLivePageResp;
 import com.roncoo.education.course.service.admin.resp.AdminLiveViewResp;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.VideoConfig;
+import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
+import com.roncoo.education.user.feign.interfaces.vo.LecturerViewVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -33,24 +44,53 @@ public class AdminLiveBiz extends BaseBiz {
     @NotNull
     private final LiveDao dao;
     @NotNull
+    private final LiveChannelDao liveChannelDao;
+    @NotNull
     private final IFeignSysConfig feignSysConfig;
-
+    private final IFeignLecturer feignLecturer;
 
     /**
      * 获取开播地址
      *
-     * @param id
-     * @return
+     * @param req 参数
+     * @return 开播地址
      */
-    public Result<String> broadcast(Long id) {
-        Live live = dao.getById(id);
-
+    public Result<String> broadcast(AdminLiveBroadcastReq req) {
+        Live live = dao.getById(req.getId());
         VideoConfig videoConfig = feignSysConfig.getVideo();
+        // 获取频道信息
+        LiveChannel liveChannel = liveChannelDao.getByCourseId(req.getCourseId());
+        if (liveChannel == null) {
+            // 创建频道
+            LiveChannelReq channelReq = new LiveChannelReq();
+            channelReq.setLiveName(live.getLiveName());
+            channelReq.setLiveScene(LiveSceneEnum.LARGE_CLASS);
+            channelReq.setLiveModel(LiveModelEnum.byCode(live.getLiveModel()));
+            LiveChannelResp channelResp = LiveUtil.getLiveChannel(videoConfig, channelReq);
+            if (channelResp == null) {
+                return Result.error("获取直播频道失败");
+            }
+            liveChannel = new LiveChannel();
+            liveChannel.setCourseId(req.getCourseId());
+            liveChannel.setLivePlatform(videoConfig.getLivePlatform());
+            liveChannel.setChannelNo(channelResp.getChannelId());
+            liveChannel.setChannelPwd(channelResp.getChannelPwd());
+            liveChannelDao.save(liveChannel);
+        }
 
-        // 获取开播记录
-
-
-        return null;
+        // 获取开播地址
+        LiveBroadcastReq broadcastReq = new LiveBroadcastReq();
+        broadcastReq.setEnableMarquee(videoConfig.getLiveEnableMarquee());
+        broadcastReq.setChannelId(liveChannel.getChannelNo());
+        broadcastReq.setChannelPwd(liveChannel.getChannelPwd());
+        broadcastReq.setLiveName(live.getLiveName());
+        broadcastReq.setLiveDesc(live.getLiveName());
+        // 讲师信息
+        LecturerViewVO lecturerViewVO = feignLecturer.getById(live.getLecturerId());
+        broadcastReq.setUserId(lecturerViewVO.getId());
+        broadcastReq.setUserName(lecturerViewVO.getLecturerName());
+        broadcastReq.setUserAvatar(lecturerViewVO.getLecturerHead());
+        return Result.success(LiveUtil.getLiveBroadcastUrl(videoConfig, broadcastReq));
     }
 
     /**

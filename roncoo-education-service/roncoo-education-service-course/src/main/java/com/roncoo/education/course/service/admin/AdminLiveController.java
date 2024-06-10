@@ -3,6 +3,7 @@ package com.roncoo.education.course.service.admin;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.service.admin.biz.AdminLiveBiz;
+import com.roncoo.education.course.service.admin.req.AdminLiveBroadcastReq;
 import com.roncoo.education.course.service.admin.req.AdminLiveEditReq;
 import com.roncoo.education.course.service.admin.req.AdminLivePageReq;
 import com.roncoo.education.course.service.admin.req.AdminLiveSaveReq;
@@ -33,9 +34,9 @@ public class AdminLiveController {
 
     @ApiOperation(value = "讲师开播地址", notes = "获取讲师开播地址")
     @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
-    @GetMapping(value = "/broadcast")
-    public Result<String> broadcast(@RequestParam Long id) {
-        return biz.broadcast(id);
+    @PostMapping(value = "/broadcast")
+    public Result<String> broadcast(@RequestBody AdminLiveBroadcastReq req) {
+        return biz.broadcast(req);
     }
 
     @ApiOperation(value = "直播信息分页", notes = "直播信息分页")

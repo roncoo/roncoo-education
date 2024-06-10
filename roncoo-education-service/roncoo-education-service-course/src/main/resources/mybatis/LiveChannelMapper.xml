@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.roncoo.education.course.dao.impl.mapper.LiveChannelMapper">
+    <resultMap id="BaseResultMap" type="com.roncoo.education.course.dao.impl.mapper.entity.LiveChannel">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="course_id" jdbcType="BIGINT" property="courseId"/>
+        <result column="live_platform" jdbcType="TINYINT" property="livePlatform"/>
+        <result column="channel_no" jdbcType="VARCHAR" property="channelNo"/>
+        <result column="channel_pwd" jdbcType="VARCHAR" property="channelPwd"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id
+        , gmt_create, course_id, live_platform, channel_no, channel_pwd
+    </sql>
+    <select id="selectByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveChannelExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from live_channel
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="limitStart >= 0">
+            limit ${limitStart} , ${pageSize}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from live_channel
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from live_channel
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveChannelExample">
+        delete from live_channel
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveChannel">
+        insert into live_channel (id, gmt_create, course_id,
+                                  live_platform, channel_no, channel_pwd)
+        values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{courseId,jdbcType=BIGINT},
+                #{livePlatform,jdbcType=TINYINT}, #{channelNo,jdbcType=VARCHAR}, #{channelPwd,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveChannel">
+        insert into live_channel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="courseId != null">
+                course_id,
+            </if>
+            <if test="livePlatform != null">
+                live_platform,
+            </if>
+            <if test="channelNo != null">
+                channel_no,
+            </if>
+            <if test="channelPwd != null">
+                channel_pwd,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="courseId != null">
+                #{courseId,jdbcType=BIGINT},
+            </if>
+            <if test="livePlatform != null">
+                #{livePlatform,jdbcType=TINYINT},
+            </if>
+            <if test="channelNo != null">
+                #{channelNo,jdbcType=VARCHAR},
+            </if>
+            <if test="channelPwd != null">
+                #{channelPwd,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveChannelExample"
+            resultType="java.lang.Integer">
+        select count(*) from live_channel
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update live_channel
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.gmtCreate != null">
+                gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.courseId != null">
+                course_id = #{record.courseId,jdbcType=BIGINT},
+            </if>
+            <if test="record.livePlatform != null">
+                live_platform = #{record.livePlatform,jdbcType=TINYINT},
+            </if>
+            <if test="record.channelNo != null">
+                channel_no = #{record.channelNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.channelPwd != null">
+                channel_pwd = #{record.channelPwd,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update live_channel
+        set id = #{record.id,jdbcType=BIGINT},
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+        course_id = #{record.courseId,jdbcType=BIGINT},
+        live_platform = #{record.livePlatform,jdbcType=TINYINT},
+        channel_no = #{record.channelNo,jdbcType=VARCHAR},
+        channel_pwd = #{record.channelPwd,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveChannel">
+        update live_channel
+        <set>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="courseId != null">
+                course_id = #{courseId,jdbcType=BIGINT},
+            </if>
+            <if test="livePlatform != null">
+                live_platform = #{livePlatform,jdbcType=TINYINT},
+            </if>
+            <if test="channelNo != null">
+                channel_no = #{channelNo,jdbcType=VARCHAR},
+            </if>
+            <if test="channelPwd != null">
+                channel_pwd = #{channelPwd,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveChannel">
+        update live_channel
+        set gmt_create    = #{gmtCreate,jdbcType=TIMESTAMP},
+            course_id     = #{courseId,jdbcType=BIGINT},
+            live_platform = #{livePlatform,jdbcType=TINYINT},
+            channel_no    = #{channelNo,jdbcType=VARCHAR},
+            channel_pwd   = #{channelPwd,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

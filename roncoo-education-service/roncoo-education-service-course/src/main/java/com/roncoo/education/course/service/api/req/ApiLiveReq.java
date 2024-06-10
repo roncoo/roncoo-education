@@ -1,25 +1,27 @@
-package com.roncoo.education.course.service.admin.req;
+package com.roncoo.education.course.service.api.req;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDateTime;
+import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
 /**
  * <p>
- * ADMIN-直播信息
+ * API-直播信息
  * </p>
  *
  * @author fengyw
+ * @date 2024-06-08
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-直播信息修改")
-public class AdminLiveEditReq implements Serializable {
+@ApiModel(description = "API-直播信息")
+public class ApiLiveReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

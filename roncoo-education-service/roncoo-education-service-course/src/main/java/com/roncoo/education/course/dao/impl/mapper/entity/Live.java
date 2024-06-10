@@ -14,6 +14,10 @@ public class Live implements Serializable {
 
     private Integer sort;
 
+    private String liveName;
+
+    private Long lecturerId;
+
     private Integer liveModel;
 
     private Integer liveDelay;
@@ -25,10 +29,6 @@ public class Live implements Serializable {
     private Integer liveStatus;
 
     private Integer playbackSave;
-
-    private Integer livePlatform;
-
-    private String channelId;
 
     private Long resourceId;
 
@@ -72,6 +72,22 @@ public class Live implements Serializable {
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public String getLiveName() {
+        return liveName;
+    }
+
+    public void setLiveName(String liveName) {
+        this.liveName = liveName == null ? null : liveName.trim();
+    }
+
+    public Long getLecturerId() {
+        return lecturerId;
+    }
+
+    public void setLecturerId(Long lecturerId) {
+        this.lecturerId = lecturerId;
     }
 
     public Integer getLiveModel() {
@@ -122,22 +138,6 @@ public class Live implements Serializable {
         this.playbackSave = playbackSave;
     }
 
-    public Integer getLivePlatform() {
-        return livePlatform;
-    }
-
-    public void setLivePlatform(Integer livePlatform) {
-        this.livePlatform = livePlatform;
-    }
-
-    public String getChannelId() {
-        return channelId;
-    }
-
-    public void setChannelId(String channelId) {
-        this.channelId = channelId == null ? null : channelId.trim();
-    }
-
     public Long getResourceId() {
         return resourceId;
     }
@@ -157,14 +157,14 @@ public class Live implements Serializable {
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", statusId=").append(statusId);
         sb.append(", sort=").append(sort);
+        sb.append(", liveName=").append(liveName);
+        sb.append(", lecturerId=").append(lecturerId);
         sb.append(", liveModel=").append(liveModel);
         sb.append(", liveDelay=").append(liveDelay);
         sb.append(", beginTime=").append(beginTime);
         sb.append(", liveDuration=").append(liveDuration);
         sb.append(", liveStatus=").append(liveStatus);
         sb.append(", playbackSave=").append(playbackSave);
-        sb.append(", livePlatform=").append(livePlatform);
-        sb.append(", channelId=").append(channelId);
         sb.append(", resourceId=").append(resourceId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

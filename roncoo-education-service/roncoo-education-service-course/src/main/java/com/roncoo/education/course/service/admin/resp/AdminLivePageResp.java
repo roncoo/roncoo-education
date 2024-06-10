@@ -59,12 +59,6 @@ public class AdminLivePageResp implements Serializable {
     @ApiModelProperty(value = "回放保存(1保存，2丢弃)")
     private Integer playbackSave;
 
-    @ApiModelProperty(value = "直播平台")
-    private Integer livePlatform;
-
-    @ApiModelProperty(value = "频道ID(记录开播频道)")
-    private String channelId;
-
     @ApiModelProperty(value = "资源ID(记录回放视频)")
     private Long resourceId;
 }
