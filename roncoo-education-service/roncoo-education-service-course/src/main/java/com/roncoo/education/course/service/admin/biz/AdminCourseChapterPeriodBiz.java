@@ -25,6 +25,7 @@ import com.roncoo.education.course.service.admin.resp.AdminCourseChapterPeriodPa
 import com.roncoo.education.course.service.admin.resp.AdminCourseChapterPeriodViewResp;
 import com.roncoo.education.course.service.admin.resp.AdminLiveViewResp;
 import com.roncoo.education.course.service.admin.resp.AdminResourceViewResp;
+import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,6 +54,8 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
     private final UserStudyDao userStudyDao;
     @NotNull
     private final ResourceDao resourceDao;
+    @NotNull
+    private final IFeignLecturer feignLecturer;
 
     /**
      * 课时信息分页
@@ -87,9 +90,15 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
             // 直播
             List<Long> liveIdList = list.stream().filter(courseChapterPeriod -> courseChapterPeriod.getPeriodType().equals(PeriodTypeEnum.LIVE.getCode())).map(courseChapterPeriod -> courseChapterPeriod.getLiveId()).collect(Collectors.toList());
             if (CollUtil.isNotEmpty(liveIdList)) {
-                Map<Long, Live> liveMap = liveDao.listByIds(liveIdList).stream().collect(Collectors.toMap(Live::getId, item -> item));
+                List<Live> liveList = liveDao.listByIds(liveIdList);
+                Map<Long, Live> liveMap = liveList.stream().collect(Collectors.toMap(Live::getId, item -> item));
+                // 讲师
+                List<Long> lecturerIdList = liveList.stream().map(live -> live.getLecturerId()).collect(Collectors.toList());
+                Map<Long, String> lecturerNameMap = feignLecturer.listByIds(lecturerIdList);
                 for (AdminCourseChapterPeriodViewResp period : respList) {
-                    period.setLiveViewResp(BeanUtil.copyProperties(liveMap.get(period.getLiveId()), AdminLiveViewResp.class));
+                    AdminLiveViewResp liveViewResp = BeanUtil.copyProperties(liveMap.get(period.getLiveId()), AdminLiveViewResp.class);
+                    liveViewResp.setLecturerName(lecturerNameMap.get(liveViewResp.getLecturerId()));
+                    period.setLiveViewResp(liveViewResp);
                 }
             }
             return Result.success(respList);

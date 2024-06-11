@@ -40,6 +40,12 @@ public class AdminLiveViewResp implements Serializable {
     @ApiModelProperty(value = "排序")
     private Integer sort;
 
+    @ApiModelProperty(value = "讲师ID")
+    private Long lecturerId;
+
+    @ApiModelProperty(value = "讲师名称")
+    private String lecturerName;
+
     @ApiModelProperty(value = "直播模式(1三分屏)")
     private Integer liveModel;
 
