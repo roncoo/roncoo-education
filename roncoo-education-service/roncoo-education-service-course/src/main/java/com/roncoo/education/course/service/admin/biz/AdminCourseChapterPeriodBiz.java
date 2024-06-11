@@ -6,6 +6,7 @@ import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.PeriodTypeEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.core.tools.JsonUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.service.SortReq;
 import com.roncoo.education.course.dao.CourseChapterPeriodDao;
@@ -97,6 +98,8 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
                 Map<Long, String> lecturerNameMap = feignLecturer.listByIds(lecturerIdList);
                 for (AdminCourseChapterPeriodViewResp period : respList) {
                     AdminLiveViewResp liveViewResp = BeanUtil.copyProperties(liveMap.get(period.getLiveId()), AdminLiveViewResp.class);
+                    log.warn("liveViewResp={}", JsonUtil.toJsonString(liveViewResp));
+                    log.warn("lecturerNameMap={}", JsonUtil.toJsonString(lecturerNameMap));
                     liveViewResp.setLecturerName(lecturerNameMap.get(liveViewResp.getLecturerId()));
                     period.setLiveViewResp(liveViewResp);
                 }
