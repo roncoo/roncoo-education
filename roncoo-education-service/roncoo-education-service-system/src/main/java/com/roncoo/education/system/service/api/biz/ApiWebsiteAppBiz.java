@@ -43,7 +43,8 @@ public class ApiWebsiteAppBiz extends BaseBiz {
             // 不需要更新
             return Result.success(resp);
         }
-        if (compareVersion(req.getAppVersion(), appList.get(0).getAppVersion()) > 0) {
+        if (compareVersion(req.getAppVersion(), appList.get(0).getAppVersion()) >= 0) {
+            // 等于或者大于不用更新
             return Result.success(resp);
         }
         resp = BeanUtil.copyProperties(appList.get(0), ApiWebsiteAppResp.class);
@@ -56,7 +57,7 @@ public class ApiWebsiteAppBiz extends BaseBiz {
      *
      * @param version1 当前版本
      * @param version2 基准版本
-     * @return -1 当前版本较低 0 版本一样 1 当前版本较高
+     * @return -1当前版本较低 0版本一样 1当前版本较高
      */
     private static int compareVersion(String version1, String version2) {
         String[] array1 = version1.split("\\.");

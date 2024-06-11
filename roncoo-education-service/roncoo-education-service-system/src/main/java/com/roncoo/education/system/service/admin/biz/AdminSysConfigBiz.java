@@ -10,6 +10,7 @@ import com.roncoo.education.common.core.enums.StoragePlatformEnum;
 import com.roncoo.education.common.core.enums.VodPlatformEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.video.LiveUtil;
 import com.roncoo.education.common.video.VodUtil;
 import com.roncoo.education.system.dao.SysConfigDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfig;
@@ -152,8 +153,10 @@ public class AdminSysConfigBiz extends BaseBiz {
     public Result<String> init() {
         Map<String, String> configMap = dao.listByExample(new SysConfigExample()).stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
         VideoConfig videoConfig = BeanUtil.objToBean(configMap, VideoConfig.class);
-        // 初始化
+        // 点播初始化
         VodUtil.init(videoConfig);
+        // 直播初始化
+        LiveUtil.init(videoConfig);
         return Result.success("操作成功");
     }
 
