@@ -38,11 +38,11 @@ public class LiveChannelReq implements Serializable {
     /**
      * 直播延迟
      */
-    private Boolean webrtc;
+    private Boolean webrtc = false;
 
     /**
      * 连麦人数限制
      */
-    private Integer linkMicLimit;
+    private Integer linkMicLimit = 16;
 
 }
