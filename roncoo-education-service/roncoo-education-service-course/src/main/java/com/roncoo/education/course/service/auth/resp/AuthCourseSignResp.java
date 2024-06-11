@@ -28,6 +28,9 @@ public class AuthCourseSignResp implements Serializable {
     @ApiModelProperty(value = "课时ID")
     private Long periodId;
 
+    @ApiModelProperty(value = "课时类型")
+    private Integer periodType;
+
     @ApiModelProperty(value = "资源ID")
     private Long resourceId;
 
@@ -45,6 +48,9 @@ public class AuthCourseSignResp implements Serializable {
 
     @ApiModelProperty(value = "点播播放配置参数")
     private String vodPlayConfig;
+
+    @ApiModelProperty(value = "直播观看配置参数")
+    private String liveViewConfig;
 
     @ApiModelProperty(value = "存储平台")
     private Integer storagePlatform;

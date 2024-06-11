@@ -1,6 +1,7 @@
 package com.roncoo.education.course.service.admin.req;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.roncoo.education.common.core.enums.PeriodTypeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -51,7 +52,7 @@ public class AdminCourseChapterPeriodSaveReq implements Serializable {
     private Long resourceId;
 
     @ApiModelProperty(value = "课时类型(10资源，20直播)")
-    private Integer periodType;
+    private Integer periodType = PeriodTypeEnum.RESOURCE.getCode();
 
     @ApiModelProperty(value = "讲师ID")
     private Long lecturerId;

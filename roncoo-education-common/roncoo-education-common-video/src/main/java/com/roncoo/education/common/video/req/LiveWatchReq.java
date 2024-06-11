@@ -20,10 +20,6 @@ public class LiveWatchReq implements Serializable {
     private static final long serialVersionUID = 2222356652726536710L;
 
     /**
-     * 店铺ID
-     */
-    private Long sid;
-    /**
      * 频道号
      */
     private String channelId;
