@@ -71,6 +71,7 @@ public class VideoConfigReq implements Serializable {
      * 保利威--应用秘钥
      */
     private String polyvAppSecret;
+
     /**
      * 保利威--直播域名
      */

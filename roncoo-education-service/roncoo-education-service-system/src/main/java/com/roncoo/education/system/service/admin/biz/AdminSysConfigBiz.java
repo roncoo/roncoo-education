@@ -117,6 +117,7 @@ public class AdminSysConfigBiz extends BaseBiz {
             if (req.getConfigType().equals(3)) {
                 c.andConfigKeyLike(VodPlatformEnum.byCode(Integer.valueOf(dao.getByConfigKey("vodPlatform").getConfigValue())).getTag());
                 example.or(example.createCriteria().andConfigKeyLike(PageUtil.rightLike("vod")));
+                example.or(example.createCriteria().andConfigKeyLike(PageUtil.rightLike("live")));
             }
             if (req.getConfigType().equals(4)) {
                 c.andConfigKeyLike(StoragePlatformEnum.byCode(Integer.valueOf(dao.getByConfigKey("storagePlatform").getConfigValue())).getTag());
