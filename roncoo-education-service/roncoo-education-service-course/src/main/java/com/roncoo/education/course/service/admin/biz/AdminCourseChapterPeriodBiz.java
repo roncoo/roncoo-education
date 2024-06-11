@@ -93,17 +93,15 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
             if (CollUtil.isNotEmpty(liveIdList)) {
                 List<Live> liveList = liveDao.listByIds(liveIdList);
                 Map<Long, Live> liveMap = liveList.stream().collect(Collectors.toMap(Live::getId, item -> item));
-                log.warn("liveList={}", JsonUtil.toJsonString(liveList));
-                log.warn("liveMap={}", JsonUtil.toJsonString(liveMap));
                 // 讲师
                 List<Long> lecturerIdList = liveList.stream().map(Live::getLecturerId).collect(Collectors.toList());
                 Map<Long, String> lecturerNameMap = feignLecturer.listByIds(lecturerIdList);
                 for (AdminCourseChapterPeriodViewResp period : respList) {
-                    log.warn("period={}", JsonUtil.toJsonString(period));
-
-                    AdminLiveViewResp liveViewResp = BeanUtil.copyProperties(liveMap.get(period.getLiveId()), AdminLiveViewResp.class);
-                    liveViewResp.setLecturerName(lecturerNameMap.get(liveViewResp.getLecturerId()));
-                    period.setLiveViewResp(liveViewResp);
+                    if(period.getLiveId() > 0){
+                        AdminLiveViewResp liveViewResp = BeanUtil.copyProperties(liveMap.get(period.getLiveId()), AdminLiveViewResp.class);
+                        liveViewResp.setLecturerName(lecturerNameMap.get(liveViewResp.getLecturerId()));
+                        period.setLiveViewResp(liveViewResp);
+                    }
                 }
             }
             return Result.success(respList);
