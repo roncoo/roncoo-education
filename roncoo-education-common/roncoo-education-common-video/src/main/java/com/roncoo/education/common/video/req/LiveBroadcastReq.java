@@ -90,5 +90,5 @@ public class LiveBroadcastReq implements Serializable {
     /**
      * 助教(0:老师、1:助教)
      */
-    private Boolean assistant;
+    private Boolean assistant = false;
 }
