@@ -3,6 +3,7 @@ package com.roncoo.education.course.service.admin.biz;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.core.enums.LiveDelayEnum;
 import com.roncoo.education.common.core.enums.LiveModelEnum;
 import com.roncoo.education.common.core.enums.LiveSceneEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
@@ -81,6 +82,7 @@ public class AdminLiveBiz extends BaseBiz {
         // 获取开播地址
         LiveBroadcastReq broadcastReq = new LiveBroadcastReq();
         broadcastReq.setEnableMarquee(videoConfig.getLiveEnableMarquee());
+        broadcastReq.setWebrtc(live.getLiveDelay().equals(LiveDelayEnum.WEBRTC.getCode()));
         broadcastReq.setChannelId(liveChannel.getChannelNo());
         broadcastReq.setChannelPwd(liveChannel.getChannelPwd());
         broadcastReq.setLiveName(live.getLiveName());

@@ -54,11 +54,11 @@ public class LiveBroadcastReq implements Serializable {
     /**
      * 连麦人数限制
      */
-    private Integer linkMicLimit;
+    private Integer linkMicLimit = 16;
     /**
      * 是否开启无延迟，默认不开启
      */
-    private Boolean webrtc;
+    private Boolean webrtc = false;
     /**
      * 频道号
      */
