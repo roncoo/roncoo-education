@@ -76,14 +76,14 @@ public class LiveDaoImpl implements LiveDao {
     public List<Live> listByIds(List<Long> liveIdList) {
         LiveExample example = new LiveExample();
         example.createCriteria().andIdIn(liveIdList);
-        return this.listByExample(example);
+        return this.mapper.selectByExampleWithBLOBs(example);
     }
 
     @Override
     public Live getByChannelId(String channelId) {
         LiveExample example = new LiveExample();
         example.createCriteria().andChannelIdEqualTo(channelId);
-        List<Live> list = this.mapper.selectByExample(example);
+        List<Live> list = this.mapper.selectByExampleWithBLOBs(example);
         if (list.isEmpty()) {
             return null;
         }
