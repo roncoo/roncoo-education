@@ -71,4 +71,6 @@ public interface LiveLogDao {
      * @return 直播开播日志数量
      */
     int countByExample(LiveLogExample example);
+
+    LiveLog getBySessionId(String sessionId);
 }

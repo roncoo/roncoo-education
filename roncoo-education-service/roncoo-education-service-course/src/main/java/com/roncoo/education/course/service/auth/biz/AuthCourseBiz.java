@@ -44,8 +44,6 @@ public class AuthCourseBiz extends BaseBiz {
     @NotNull
     private final LiveDao liveDao;
     @NotNull
-    private final LiveChannelDao liveChannelDao;
-    @NotNull
     private final ResourceDao resourceDao;
     @NotNull
     private final UserCourseDao userCourseDao;
@@ -95,10 +93,9 @@ public class AuthCourseBiz extends BaseBiz {
             if (live.getLiveStatus().equals(LiveStatusEnum.WAITING.getCode())) {
                 return Result.error("该直播没开始，请稍后再试");
             }
-            LiveChannel liveChannel = liveChannelDao.getByCourseId(period.getCourseId());
 
             // 获取直播观看地址
-            viewConfig(req.getIsPc(), liveChannel.getChannelNo(), resp);
+            viewConfig(req.getIsPc(), live.getChannelId(), resp);
             return Result.success(resp);
         }
 

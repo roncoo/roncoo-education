@@ -1,5 +1,6 @@
 package com.roncoo.education.course.service.admin.biz;
 
+import cn.hutool.core.util.StrUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
@@ -12,10 +13,8 @@ import com.roncoo.education.common.video.LiveUtil;
 import com.roncoo.education.common.video.req.LiveBroadcastReq;
 import com.roncoo.education.common.video.req.LiveChannelReq;
 import com.roncoo.education.common.video.resp.LiveChannelResp;
-import com.roncoo.education.course.dao.LiveChannelDao;
 import com.roncoo.education.course.dao.LiveDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Live;
-import com.roncoo.education.course.dao.impl.mapper.entity.LiveChannel;
 import com.roncoo.education.course.dao.impl.mapper.entity.LiveExample;
 import com.roncoo.education.course.dao.impl.mapper.entity.LiveExample.Criteria;
 import com.roncoo.education.course.service.admin.req.AdminLiveBroadcastReq;
@@ -45,8 +44,6 @@ public class AdminLiveBiz extends BaseBiz {
     @NotNull
     private final LiveDao dao;
     @NotNull
-    private final LiveChannelDao liveChannelDao;
-    @NotNull
     private final IFeignSysConfig feignSysConfig;
     private final IFeignLecturer feignLecturer;
 
@@ -59,9 +56,11 @@ public class AdminLiveBiz extends BaseBiz {
     public Result<String> broadcast(AdminLiveBroadcastReq req) {
         Live live = dao.getById(req.getId());
         VideoConfig videoConfig = feignSysConfig.getVideo();
-        // 获取频道信息
-        LiveChannel liveChannel = liveChannelDao.getByCourseId(req.getCourseId());
-        if (liveChannel == null) {
+
+        Live channel = new Live();
+        channel.setId(live.getId());
+        channel.setLivePlatform(videoConfig.getLivePlatform());
+        if (StrUtil.isBlank(live.getChannelId())) {
             // 创建频道
             LiveChannelReq channelReq = new LiveChannelReq();
             channelReq.setLiveName(live.getLiveName());
@@ -71,22 +70,19 @@ public class AdminLiveBiz extends BaseBiz {
             if (channelResp == null) {
                 return Result.error("获取直播频道失败");
             }
-            liveChannel = new LiveChannel();
-            liveChannel.setCourseId(req.getCourseId());
-            liveChannel.setLivePlatform(videoConfig.getLivePlatform());
-            liveChannel.setChannelNo(channelResp.getChannelId());
-            liveChannel.setChannelPwd(channelResp.getChannelPwd());
-            liveChannelDao.save(liveChannel);
+            channel.setChannelId(channelResp.getChannelId());
+            channel.setChannelPwd(channelResp.getChannelPwd());
+            dao.updateById(channel);
         }
 
         // 获取开播地址
         LiveBroadcastReq broadcastReq = new LiveBroadcastReq();
         broadcastReq.setEnableMarquee(videoConfig.getLiveEnableMarquee());
         broadcastReq.setWebrtc(live.getLiveDelay().equals(LiveDelayEnum.WEBRTC.getCode()));
-        broadcastReq.setChannelId(liveChannel.getChannelNo());
-        broadcastReq.setChannelPwd(liveChannel.getChannelPwd());
+        broadcastReq.setChannelId(channel.getChannelId());
+        broadcastReq.setChannelPwd(channel.getChannelPwd());
         broadcastReq.setLiveName(live.getLiveName());
-        broadcastReq.setLiveDesc(live.getLiveName());
+        broadcastReq.setLiveDesc(live.getLiveIntroduce());
         // 讲师信息
         LecturerViewVO lecturerViewVO = feignLecturer.getById(live.getLecturerId());
         broadcastReq.setUserId(lecturerViewVO.getId());

@@ -10,15 +10,19 @@ public class LiveLog implements Serializable {
 
     private Long liveId;
 
-    private Long userId;
+    private Integer livePlatform;
 
-    private Long channelId;
+    private Integer liveStatus;
 
-    private String sessionNo;
+    private String channelId;
+
+    private String sessionId;
 
     private LocalDateTime startTime;
 
     private LocalDateTime endTime;
+
+    private Integer playbackSave;
 
     private static final long serialVersionUID = 1L;
 
@@ -46,28 +50,36 @@ public class LiveLog implements Serializable {
         this.liveId = liveId;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Integer getLivePlatform() {
+        return livePlatform;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setLivePlatform(Integer livePlatform) {
+        this.livePlatform = livePlatform;
     }
 
-    public Long getChannelId() {
+    public Integer getLiveStatus() {
+        return liveStatus;
+    }
+
+    public void setLiveStatus(Integer liveStatus) {
+        this.liveStatus = liveStatus;
+    }
+
+    public String getChannelId() {
         return channelId;
     }
 
-    public void setChannelId(Long channelId) {
-        this.channelId = channelId;
+    public void setChannelId(String channelId) {
+        this.channelId = channelId == null ? null : channelId.trim();
     }
 
-    public String getSessionNo() {
-        return sessionNo;
+    public String getSessionId() {
+        return sessionId;
     }
 
-    public void setSessionNo(String sessionNo) {
-        this.sessionNo = sessionNo == null ? null : sessionNo.trim();
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId == null ? null : sessionId.trim();
     }
 
     public LocalDateTime getStartTime() {
@@ -86,6 +98,14 @@ public class LiveLog implements Serializable {
         this.endTime = endTime;
     }
 
+    public Integer getPlaybackSave() {
+        return playbackSave;
+    }
+
+    public void setPlaybackSave(Integer playbackSave) {
+        this.playbackSave = playbackSave;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -95,11 +115,13 @@ public class LiveLog implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", liveId=").append(liveId);
-        sb.append(", userId=").append(userId);
+        sb.append(", livePlatform=").append(livePlatform);
+        sb.append(", liveStatus=").append(liveStatus);
         sb.append(", channelId=").append(channelId);
-        sb.append(", sessionNo=").append(sessionNo);
+        sb.append(", sessionId=").append(sessionId);
         sb.append(", startTime=").append(startTime);
         sb.append(", endTime=").append(endTime);
+        sb.append(", playbackSave=").append(playbackSave);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -1,7 +1,9 @@
 package com.roncoo.education.system.service.admin;
 
+import com.roncoo.education.common.annotation.SysLog;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.service.SortReq;
 import com.roncoo.education.system.service.admin.biz.AdminWebsiteAppBiz;
 import com.roncoo.education.system.service.admin.req.AdminWebsiteAppEditReq;
 import com.roncoo.education.system.service.admin.req.AdminWebsiteAppPageReq;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * ADMIN-app版本管理
@@ -61,5 +64,12 @@ public class AdminWebsiteAppController {
     @DeleteMapping(value = "/delete")
     public Result<String> delete(@RequestParam Long id) {
         return biz.delete(id);
+    }
+
+    @ApiOperation(value = "排序", notes = "排序")
+    @SysLog(value = "排序")
+    @PutMapping(value = "/sort")
+    public Result<Integer> sort(@RequestBody List<SortReq> req) {
+        return Result.success(biz.sort(req, "WebsiteApp"));
     }
 }

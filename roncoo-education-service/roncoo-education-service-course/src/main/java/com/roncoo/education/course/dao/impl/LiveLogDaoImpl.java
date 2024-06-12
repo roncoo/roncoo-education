@@ -70,4 +70,16 @@ public class LiveLogDaoImpl implements LiveLogDao {
     public int countByExample(LiveLogExample example) {
         return this.mapper.countByExample(example);
     }
+
+    @Override
+    public LiveLog getBySessionId(String sessionId) {
+        LiveLogExample example = new LiveLogExample();
+        example.createCriteria().andSessionIdEqualTo(sessionId);
+        example.setOrderByClause("id desc");
+        List<LiveLog> list = this.mapper.selectByExample(example);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
 }

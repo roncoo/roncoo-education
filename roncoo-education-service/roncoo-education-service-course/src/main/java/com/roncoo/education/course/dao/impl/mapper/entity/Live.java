@@ -32,6 +32,14 @@ public class Live implements Serializable {
 
     private Long resourceId;
 
+    private Integer livePlatform;
+
+    private String channelId;
+
+    private String channelPwd;
+
+    private String liveIntroduce;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -146,6 +154,38 @@ public class Live implements Serializable {
         this.resourceId = resourceId;
     }
 
+    public Integer getLivePlatform() {
+        return livePlatform;
+    }
+
+    public void setLivePlatform(Integer livePlatform) {
+        this.livePlatform = livePlatform;
+    }
+
+    public String getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(String channelId) {
+        this.channelId = channelId == null ? null : channelId.trim();
+    }
+
+    public String getChannelPwd() {
+        return channelPwd;
+    }
+
+    public void setChannelPwd(String channelPwd) {
+        this.channelPwd = channelPwd == null ? null : channelPwd.trim();
+    }
+
+    public String getLiveIntroduce() {
+        return liveIntroduce;
+    }
+
+    public void setLiveIntroduce(String liveIntroduce) {
+        this.liveIntroduce = liveIntroduce == null ? null : liveIntroduce.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -166,6 +206,10 @@ public class Live implements Serializable {
         sb.append(", liveStatus=").append(liveStatus);
         sb.append(", playbackSave=").append(playbackSave);
         sb.append(", resourceId=").append(resourceId);
+        sb.append(", livePlatform=").append(livePlatform);
+        sb.append(", channelId=").append(channelId);
+        sb.append(", channelPwd=").append(channelPwd);
+        sb.append(", liveIntroduce=").append(liveIntroduce);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

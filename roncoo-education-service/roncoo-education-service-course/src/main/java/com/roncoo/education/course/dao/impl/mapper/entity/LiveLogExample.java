@@ -305,63 +305,123 @@ public class LiveLogExample {
             return (Criteria) this;
         }
 
-        public Criteria andUserIdIsNull() {
-            addCriterion("user_id is null");
+        public Criteria andLivePlatformIsNull() {
+            addCriterion("live_platform is null");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdIsNotNull() {
-            addCriterion("user_id is not null");
+        public Criteria andLivePlatformIsNotNull() {
+            addCriterion("live_platform is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdEqualTo(Long value) {
-            addCriterion("user_id =", value, "userId");
+        public Criteria andLivePlatformEqualTo(Integer value) {
+            addCriterion("live_platform =", value, "livePlatform");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotEqualTo(Long value) {
-            addCriterion("user_id <>", value, "userId");
+        public Criteria andLivePlatformNotEqualTo(Integer value) {
+            addCriterion("live_platform <>", value, "livePlatform");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdGreaterThan(Long value) {
-            addCriterion("user_id >", value, "userId");
+        public Criteria andLivePlatformGreaterThan(Integer value) {
+            addCriterion("live_platform >", value, "livePlatform");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("user_id >=", value, "userId");
+        public Criteria andLivePlatformGreaterThanOrEqualTo(Integer value) {
+            addCriterion("live_platform >=", value, "livePlatform");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdLessThan(Long value) {
-            addCriterion("user_id <", value, "userId");
+        public Criteria andLivePlatformLessThan(Integer value) {
+            addCriterion("live_platform <", value, "livePlatform");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdLessThanOrEqualTo(Long value) {
-            addCriterion("user_id <=", value, "userId");
+        public Criteria andLivePlatformLessThanOrEqualTo(Integer value) {
+            addCriterion("live_platform <=", value, "livePlatform");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdIn(List<Long> values) {
-            addCriterion("user_id in", values, "userId");
+        public Criteria andLivePlatformIn(List<Integer> values) {
+            addCriterion("live_platform in", values, "livePlatform");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotIn(List<Long> values) {
-            addCriterion("user_id not in", values, "userId");
+        public Criteria andLivePlatformNotIn(List<Integer> values) {
+            addCriterion("live_platform not in", values, "livePlatform");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdBetween(Long value1, Long value2) {
-            addCriterion("user_id between", value1, value2, "userId");
+        public Criteria andLivePlatformBetween(Integer value1, Integer value2) {
+            addCriterion("live_platform between", value1, value2, "livePlatform");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotBetween(Long value1, Long value2) {
-            addCriterion("user_id not between", value1, value2, "userId");
+        public Criteria andLivePlatformNotBetween(Integer value1, Integer value2) {
+            addCriterion("live_platform not between", value1, value2, "livePlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveStatusIsNull() {
+            addCriterion("live_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveStatusIsNotNull() {
+            addCriterion("live_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveStatusEqualTo(Integer value) {
+            addCriterion("live_status =", value, "liveStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveStatusNotEqualTo(Integer value) {
+            addCriterion("live_status <>", value, "liveStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveStatusGreaterThan(Integer value) {
+            addCriterion("live_status >", value, "liveStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("live_status >=", value, "liveStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveStatusLessThan(Integer value) {
+            addCriterion("live_status <", value, "liveStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("live_status <=", value, "liveStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveStatusIn(List<Integer> values) {
+            addCriterion("live_status in", values, "liveStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveStatusNotIn(List<Integer> values) {
+            addCriterion("live_status not in", values, "liveStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveStatusBetween(Integer value1, Integer value2) {
+            addCriterion("live_status between", value1, value2, "liveStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andLiveStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("live_status not between", value1, value2, "liveStatus");
             return (Criteria) this;
         }
 
@@ -375,123 +435,133 @@ public class LiveLogExample {
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdEqualTo(Long value) {
+        public Criteria andChannelIdEqualTo(String value) {
             addCriterion("channel_id =", value, "channelId");
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdNotEqualTo(Long value) {
+        public Criteria andChannelIdNotEqualTo(String value) {
             addCriterion("channel_id <>", value, "channelId");
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdGreaterThan(Long value) {
+        public Criteria andChannelIdGreaterThan(String value) {
             addCriterion("channel_id >", value, "channelId");
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdGreaterThanOrEqualTo(Long value) {
+        public Criteria andChannelIdGreaterThanOrEqualTo(String value) {
             addCriterion("channel_id >=", value, "channelId");
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdLessThan(Long value) {
+        public Criteria andChannelIdLessThan(String value) {
             addCriterion("channel_id <", value, "channelId");
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdLessThanOrEqualTo(Long value) {
+        public Criteria andChannelIdLessThanOrEqualTo(String value) {
             addCriterion("channel_id <=", value, "channelId");
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdIn(List<Long> values) {
+        public Criteria andChannelIdLike(String value) {
+            addCriterion("channel_id like", value, "channelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIdNotLike(String value) {
+            addCriterion("channel_id not like", value, "channelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIdIn(List<String> values) {
             addCriterion("channel_id in", values, "channelId");
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdNotIn(List<Long> values) {
+        public Criteria andChannelIdNotIn(List<String> values) {
             addCriterion("channel_id not in", values, "channelId");
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdBetween(Long value1, Long value2) {
+        public Criteria andChannelIdBetween(String value1, String value2) {
             addCriterion("channel_id between", value1, value2, "channelId");
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdNotBetween(Long value1, Long value2) {
+        public Criteria andChannelIdNotBetween(String value1, String value2) {
             addCriterion("channel_id not between", value1, value2, "channelId");
             return (Criteria) this;
         }
 
-        public Criteria andSessionNoIsNull() {
-            addCriterion("session_no is null");
+        public Criteria andSessionIdIsNull() {
+            addCriterion("session_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andSessionNoIsNotNull() {
-            addCriterion("session_no is not null");
+        public Criteria andSessionIdIsNotNull() {
+            addCriterion("session_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSessionNoEqualTo(String value) {
-            addCriterion("session_no =", value, "sessionNo");
+        public Criteria andSessionIdEqualTo(String value) {
+            addCriterion("session_id =", value, "sessionId");
             return (Criteria) this;
         }
 
-        public Criteria andSessionNoNotEqualTo(String value) {
-            addCriterion("session_no <>", value, "sessionNo");
+        public Criteria andSessionIdNotEqualTo(String value) {
+            addCriterion("session_id <>", value, "sessionId");
             return (Criteria) this;
         }
 
-        public Criteria andSessionNoGreaterThan(String value) {
-            addCriterion("session_no >", value, "sessionNo");
+        public Criteria andSessionIdGreaterThan(String value) {
+            addCriterion("session_id >", value, "sessionId");
             return (Criteria) this;
         }
 
-        public Criteria andSessionNoGreaterThanOrEqualTo(String value) {
-            addCriterion("session_no >=", value, "sessionNo");
+        public Criteria andSessionIdGreaterThanOrEqualTo(String value) {
+            addCriterion("session_id >=", value, "sessionId");
             return (Criteria) this;
         }
 
-        public Criteria andSessionNoLessThan(String value) {
-            addCriterion("session_no <", value, "sessionNo");
+        public Criteria andSessionIdLessThan(String value) {
+            addCriterion("session_id <", value, "sessionId");
             return (Criteria) this;
         }
 
-        public Criteria andSessionNoLessThanOrEqualTo(String value) {
-            addCriterion("session_no <=", value, "sessionNo");
+        public Criteria andSessionIdLessThanOrEqualTo(String value) {
+            addCriterion("session_id <=", value, "sessionId");
             return (Criteria) this;
         }
 
-        public Criteria andSessionNoLike(String value) {
-            addCriterion("session_no like", value, "sessionNo");
+        public Criteria andSessionIdLike(String value) {
+            addCriterion("session_id like", value, "sessionId");
             return (Criteria) this;
         }
 
-        public Criteria andSessionNoNotLike(String value) {
-            addCriterion("session_no not like", value, "sessionNo");
+        public Criteria andSessionIdNotLike(String value) {
+            addCriterion("session_id not like", value, "sessionId");
             return (Criteria) this;
         }
 
-        public Criteria andSessionNoIn(List<String> values) {
-            addCriterion("session_no in", values, "sessionNo");
+        public Criteria andSessionIdIn(List<String> values) {
+            addCriterion("session_id in", values, "sessionId");
             return (Criteria) this;
         }
 
-        public Criteria andSessionNoNotIn(List<String> values) {
-            addCriterion("session_no not in", values, "sessionNo");
+        public Criteria andSessionIdNotIn(List<String> values) {
+            addCriterion("session_id not in", values, "sessionId");
             return (Criteria) this;
         }
 
-        public Criteria andSessionNoBetween(String value1, String value2) {
-            addCriterion("session_no between", value1, value2, "sessionNo");
+        public Criteria andSessionIdBetween(String value1, String value2) {
+            addCriterion("session_id between", value1, value2, "sessionId");
             return (Criteria) this;
         }
 
-        public Criteria andSessionNoNotBetween(String value1, String value2) {
-            addCriterion("session_no not between", value1, value2, "sessionNo");
+        public Criteria andSessionIdNotBetween(String value1, String value2) {
+            addCriterion("session_id not between", value1, value2, "sessionId");
             return (Criteria) this;
         }
 
@@ -612,6 +682,66 @@ public class LiveLogExample {
 
         public Criteria andEndTimeNotBetween(LocalDateTime value1, LocalDateTime value2) {
             addCriterion("end_time not between", value1, value2, "endTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveIsNull() {
+            addCriterion("playback_save is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveIsNotNull() {
+            addCriterion("playback_save is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveEqualTo(Integer value) {
+            addCriterion("playback_save =", value, "playbackSave");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveNotEqualTo(Integer value) {
+            addCriterion("playback_save <>", value, "playbackSave");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveGreaterThan(Integer value) {
+            addCriterion("playback_save >", value, "playbackSave");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveGreaterThanOrEqualTo(Integer value) {
+            addCriterion("playback_save >=", value, "playbackSave");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveLessThan(Integer value) {
+            addCriterion("playback_save <", value, "playbackSave");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveLessThanOrEqualTo(Integer value) {
+            addCriterion("playback_save <=", value, "playbackSave");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveIn(List<Integer> values) {
+            addCriterion("playback_save in", values, "playbackSave");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveNotIn(List<Integer> values) {
+            addCriterion("playback_save not in", values, "playbackSave");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveBetween(Integer value1, Integer value2) {
+            addCriterion("playback_save between", value1, value2, "playbackSave");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveNotBetween(Integer value1, Integer value2) {
+            addCriterion("playback_save not between", value1, value2, "playbackSave");
             return (Criteria) this;
         }
     }

@@ -5,11 +5,13 @@
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
         <result column="live_id" jdbcType="BIGINT" property="liveId"/>
-        <result column="user_id" jdbcType="BIGINT" property="userId"/>
-        <result column="channel_id" jdbcType="BIGINT" property="channelId"/>
-        <result column="session_no" jdbcType="VARCHAR" property="sessionNo"/>
+        <result column="live_platform" jdbcType="TINYINT" property="livePlatform"/>
+        <result column="live_status" jdbcType="TINYINT" property="liveStatus"/>
+        <result column="channel_id" jdbcType="VARCHAR" property="channelId"/>
+        <result column="session_id" jdbcType="VARCHAR" property="sessionId"/>
         <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
         <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="playback_save" jdbcType="TINYINT" property="playbackSave"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -73,7 +75,8 @@
     </sql>
     <sql id="Base_Column_List">
         id
-        , gmt_create, live_id, user_id, channel_id, session_no, start_time, end_time
+        , gmt_create, live_id, live_platform, live_status, channel_id, session_id, start_time,
+    end_time, playback_save
     </sql>
     <select id="selectByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveLogExample"
             resultMap="BaseResultMap">
@@ -112,11 +115,13 @@
     </delete>
     <insert id="insert" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveLog">
         insert into live_log (id, gmt_create, live_id,
-                              user_id, channel_id, session_no,
-                              start_time, end_time)
+                              live_platform, live_status, channel_id,
+                              session_id, start_time, end_time,
+                              playback_save)
         values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{liveId,jdbcType=BIGINT},
-                #{userId,jdbcType=BIGINT}, #{channelId,jdbcType=BIGINT}, #{sessionNo,jdbcType=VARCHAR},
-                #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP})
+                #{livePlatform,jdbcType=TINYINT}, #{liveStatus,jdbcType=TINYINT}, #{channelId,jdbcType=VARCHAR},
+                #{sessionId,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
+                #{playbackSave,jdbcType=TINYINT})
     </insert>
     <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveLog">
         insert into live_log
@@ -130,20 +135,26 @@
             <if test="liveId != null">
                 live_id,
             </if>
-            <if test="userId != null">
-                user_id,
+            <if test="livePlatform != null">
+                live_platform,
+            </if>
+            <if test="liveStatus != null">
+                live_status,
             </if>
             <if test="channelId != null">
                 channel_id,
             </if>
-            <if test="sessionNo != null">
-                session_no,
+            <if test="sessionId != null">
+                session_id,
             </if>
             <if test="startTime != null">
                 start_time,
             </if>
             <if test="endTime != null">
                 end_time,
+            </if>
+            <if test="playbackSave != null">
+                playback_save,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -156,20 +167,26 @@
             <if test="liveId != null">
                 #{liveId,jdbcType=BIGINT},
             </if>
-            <if test="userId != null">
-                #{userId,jdbcType=BIGINT},
+            <if test="livePlatform != null">
+                #{livePlatform,jdbcType=TINYINT},
+            </if>
+            <if test="liveStatus != null">
+                #{liveStatus,jdbcType=TINYINT},
             </if>
             <if test="channelId != null">
-                #{channelId,jdbcType=BIGINT},
+                #{channelId,jdbcType=VARCHAR},
             </if>
-            <if test="sessionNo != null">
-                #{sessionNo,jdbcType=VARCHAR},
+            <if test="sessionId != null">
+                #{sessionId,jdbcType=VARCHAR},
             </if>
             <if test="startTime != null">
                 #{startTime,jdbcType=TIMESTAMP},
             </if>
             <if test="endTime != null">
                 #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="playbackSave != null">
+                #{playbackSave,jdbcType=TINYINT},
             </if>
         </trim>
     </insert>
@@ -192,20 +209,26 @@
             <if test="record.liveId != null">
                 live_id = #{record.liveId,jdbcType=BIGINT},
             </if>
-            <if test="record.userId != null">
-                user_id = #{record.userId,jdbcType=BIGINT},
+            <if test="record.livePlatform != null">
+                live_platform = #{record.livePlatform,jdbcType=TINYINT},
+            </if>
+            <if test="record.liveStatus != null">
+                live_status = #{record.liveStatus,jdbcType=TINYINT},
             </if>
             <if test="record.channelId != null">
-                channel_id = #{record.channelId,jdbcType=BIGINT},
+                channel_id = #{record.channelId,jdbcType=VARCHAR},
             </if>
-            <if test="record.sessionNo != null">
-                session_no = #{record.sessionNo,jdbcType=VARCHAR},
+            <if test="record.sessionId != null">
+                session_id = #{record.sessionId,jdbcType=VARCHAR},
             </if>
             <if test="record.startTime != null">
                 start_time = #{record.startTime,jdbcType=TIMESTAMP},
             </if>
             <if test="record.endTime != null">
                 end_time = #{record.endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.playbackSave != null">
+                playback_save = #{record.playbackSave,jdbcType=TINYINT},
             </if>
         </set>
         <if test="_parameter != null">
@@ -217,11 +240,13 @@
         set id = #{record.id,jdbcType=BIGINT},
         gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
         live_id = #{record.liveId,jdbcType=BIGINT},
-        user_id = #{record.userId,jdbcType=BIGINT},
-        channel_id = #{record.channelId,jdbcType=BIGINT},
-        session_no = #{record.sessionNo,jdbcType=VARCHAR},
+        live_platform = #{record.livePlatform,jdbcType=TINYINT},
+        live_status = #{record.liveStatus,jdbcType=TINYINT},
+        channel_id = #{record.channelId,jdbcType=VARCHAR},
+        session_id = #{record.sessionId,jdbcType=VARCHAR},
         start_time = #{record.startTime,jdbcType=TIMESTAMP},
-        end_time = #{record.endTime,jdbcType=TIMESTAMP}
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+        playback_save = #{record.playbackSave,jdbcType=TINYINT}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -235,14 +260,17 @@
             <if test="liveId != null">
                 live_id = #{liveId,jdbcType=BIGINT},
             </if>
-            <if test="userId != null">
-                user_id = #{userId,jdbcType=BIGINT},
+            <if test="livePlatform != null">
+                live_platform = #{livePlatform,jdbcType=TINYINT},
+            </if>
+            <if test="liveStatus != null">
+                live_status = #{liveStatus,jdbcType=TINYINT},
             </if>
             <if test="channelId != null">
-                channel_id = #{channelId,jdbcType=BIGINT},
+                channel_id = #{channelId,jdbcType=VARCHAR},
             </if>
-            <if test="sessionNo != null">
-                session_no = #{sessionNo,jdbcType=VARCHAR},
+            <if test="sessionId != null">
+                session_id = #{sessionId,jdbcType=VARCHAR},
             </if>
             <if test="startTime != null">
                 start_time = #{startTime,jdbcType=TIMESTAMP},
@@ -250,18 +278,23 @@
             <if test="endTime != null">
                 end_time = #{endTime,jdbcType=TIMESTAMP},
             </if>
+            <if test="playbackSave != null">
+                playback_save = #{playbackSave,jdbcType=TINYINT},
+            </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveLog">
         update live_log
-        set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-            live_id    = #{liveId,jdbcType=BIGINT},
-            user_id    = #{userId,jdbcType=BIGINT},
-            channel_id = #{channelId,jdbcType=BIGINT},
-            session_no = #{sessionNo,jdbcType=VARCHAR},
-            start_time = #{startTime,jdbcType=TIMESTAMP},
-            end_time   = #{endTime,jdbcType=TIMESTAMP}
+        set gmt_create    = #{gmtCreate,jdbcType=TIMESTAMP},
+            live_id       = #{liveId,jdbcType=BIGINT},
+            live_platform = #{livePlatform,jdbcType=TINYINT},
+            live_status   = #{liveStatus,jdbcType=TINYINT},
+            channel_id    = #{channelId,jdbcType=VARCHAR},
+            session_id    = #{sessionId,jdbcType=VARCHAR},
+            start_time    = #{startTime,jdbcType=TIMESTAMP},
+            end_time      = #{endTime,jdbcType=TIMESTAMP},
+            playback_save = #{playbackSave,jdbcType=TINYINT}
         where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

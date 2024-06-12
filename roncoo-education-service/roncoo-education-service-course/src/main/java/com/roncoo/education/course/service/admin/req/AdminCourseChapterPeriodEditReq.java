@@ -59,6 +59,9 @@ public class AdminCourseChapterPeriodEditReq implements Serializable {
     @ApiModelProperty(value = "讲师ID")
     private Long lecturerId;
 
+    @ApiModelProperty(value = "直播介绍")
+    private String liveIntroduce;
+
     @ApiModelProperty(value = "直播模式(1三分屏)")
     private Integer liveModel;
 

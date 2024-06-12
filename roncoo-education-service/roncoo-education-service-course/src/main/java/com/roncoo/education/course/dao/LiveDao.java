@@ -73,4 +73,6 @@ public interface LiveDao {
     int countByExample(LiveExample example);
 
     List<Live> listByIds(List<Long> liveIdList);
+
+    Live getByChannelId(String channelId);
 }

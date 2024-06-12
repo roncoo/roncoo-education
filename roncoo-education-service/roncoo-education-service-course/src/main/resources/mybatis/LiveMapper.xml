@@ -16,6 +16,13 @@
         <result column="live_status" jdbcType="TINYINT" property="liveStatus"/>
         <result column="playback_save" jdbcType="TINYINT" property="playbackSave"/>
         <result column="resource_id" jdbcType="BIGINT" property="resourceId"/>
+        <result column="live_platform" jdbcType="TINYINT" property="livePlatform"/>
+        <result column="channel_id" jdbcType="VARCHAR" property="channelId"/>
+        <result column="channel_pwd" jdbcType="VARCHAR" property="channelPwd"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+               type="com.roncoo.education.course.dao.impl.mapper.entity.Live">
+        <result column="live_introduce" jdbcType="LONGVARCHAR" property="liveIntroduce"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -80,8 +87,29 @@
     <sql id="Base_Column_List">
         id
         , gmt_create, gmt_modified, status_id, sort, live_name, lecturer_id, live_model,
-    live_delay, begin_time, live_duration, live_status, playback_save, resource_id
+    live_delay, begin_time, live_duration, live_status, playback_save, resource_id, live_platform, 
+    channel_id, channel_pwd
     </sql>
+    <sql id="Blob_Column_List">
+        live_introduce
+    </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from live
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
     <select id="selectByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.LiveExample"
             resultMap="BaseResultMap">
         select
@@ -100,9 +128,11 @@
             limit ${limitStart} , ${pageSize}
         </if>
     </select>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
         from live
         where id = #{id,jdbcType=BIGINT}
     </select>
@@ -122,12 +152,14 @@
                           status_id, sort, live_name,
                           lecturer_id, live_model, live_delay,
                           begin_time, live_duration, live_status,
-                          playback_save, resource_id)
+                          playback_save, resource_id, live_platform,
+                          channel_id, channel_pwd, live_introduce)
         values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP},
                 #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{liveName,jdbcType=VARCHAR},
                 #{lecturerId,jdbcType=BIGINT}, #{liveModel,jdbcType=TINYINT}, #{liveDelay,jdbcType=TINYINT},
                 #{beginTime,jdbcType=TIMESTAMP}, #{liveDuration,jdbcType=INTEGER}, #{liveStatus,jdbcType=TINYINT},
-                #{playbackSave,jdbcType=TINYINT}, #{resourceId,jdbcType=BIGINT})
+                #{playbackSave,jdbcType=TINYINT}, #{resourceId,jdbcType=BIGINT}, #{livePlatform,jdbcType=TINYINT},
+                #{channelId,jdbcType=VARCHAR}, #{channelPwd,jdbcType=VARCHAR}, #{liveIntroduce,jdbcType=LONGVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Live">
         insert into live
@@ -174,6 +206,18 @@
             <if test="resourceId != null">
                 resource_id,
             </if>
+            <if test="livePlatform != null">
+                live_platform,
+            </if>
+            <if test="channelId != null">
+                channel_id,
+            </if>
+            <if test="channelPwd != null">
+                channel_pwd,
+            </if>
+            <if test="liveIntroduce != null">
+                live_introduce,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -217,6 +261,18 @@
             </if>
             <if test="resourceId != null">
                 #{resourceId,jdbcType=BIGINT},
+            </if>
+            <if test="livePlatform != null">
+                #{livePlatform,jdbcType=TINYINT},
+            </if>
+            <if test="channelId != null">
+                #{channelId,jdbcType=VARCHAR},
+            </if>
+            <if test="channelPwd != null">
+                #{channelPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="liveIntroduce != null">
+                #{liveIntroduce,jdbcType=LONGVARCHAR},
             </if>
         </trim>
     </insert>
@@ -272,7 +328,43 @@
             <if test="record.resourceId != null">
                 resource_id = #{record.resourceId,jdbcType=BIGINT},
             </if>
+            <if test="record.livePlatform != null">
+                live_platform = #{record.livePlatform,jdbcType=TINYINT},
+            </if>
+            <if test="record.channelId != null">
+                channel_id = #{record.channelId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.channelPwd != null">
+                channel_pwd = #{record.channelPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="record.liveIntroduce != null">
+                live_introduce = #{record.liveIntroduce,jdbcType=LONGVARCHAR},
+            </if>
         </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update live
+        set id = #{record.id,jdbcType=BIGINT},
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+        status_id = #{record.statusId,jdbcType=TINYINT},
+        sort = #{record.sort,jdbcType=INTEGER},
+        live_name = #{record.liveName,jdbcType=VARCHAR},
+        lecturer_id = #{record.lecturerId,jdbcType=BIGINT},
+        live_model = #{record.liveModel,jdbcType=TINYINT},
+        live_delay = #{record.liveDelay,jdbcType=TINYINT},
+        begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
+        live_duration = #{record.liveDuration,jdbcType=INTEGER},
+        live_status = #{record.liveStatus,jdbcType=TINYINT},
+        playback_save = #{record.playbackSave,jdbcType=TINYINT},
+        resource_id = #{record.resourceId,jdbcType=BIGINT},
+        live_platform = #{record.livePlatform,jdbcType=TINYINT},
+        channel_id = #{record.channelId,jdbcType=VARCHAR},
+        channel_pwd = #{record.channelPwd,jdbcType=VARCHAR},
+        live_introduce = #{record.liveIntroduce,jdbcType=LONGVARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -292,7 +384,10 @@
         live_duration = #{record.liveDuration,jdbcType=INTEGER},
         live_status = #{record.liveStatus,jdbcType=TINYINT},
         playback_save = #{record.playbackSave,jdbcType=TINYINT},
-        resource_id = #{record.resourceId,jdbcType=BIGINT}
+        resource_id = #{record.resourceId,jdbcType=BIGINT},
+        live_platform = #{record.livePlatform,jdbcType=TINYINT},
+        channel_id = #{record.channelId,jdbcType=VARCHAR},
+        channel_pwd = #{record.channelPwd,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -339,7 +434,40 @@
             <if test="resourceId != null">
                 resource_id = #{resourceId,jdbcType=BIGINT},
             </if>
+            <if test="livePlatform != null">
+                live_platform = #{livePlatform,jdbcType=TINYINT},
+            </if>
+            <if test="channelId != null">
+                channel_id = #{channelId,jdbcType=VARCHAR},
+            </if>
+            <if test="channelPwd != null">
+                channel_pwd = #{channelPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="liveIntroduce != null">
+                live_introduce = #{liveIntroduce,jdbcType=LONGVARCHAR},
+            </if>
         </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Live">
+        update live
+        set gmt_create     = #{gmtCreate,jdbcType=TIMESTAMP},
+            gmt_modified   = #{gmtModified,jdbcType=TIMESTAMP},
+            status_id      = #{statusId,jdbcType=TINYINT},
+            sort           = #{sort,jdbcType=INTEGER},
+            live_name      = #{liveName,jdbcType=VARCHAR},
+            lecturer_id    = #{lecturerId,jdbcType=BIGINT},
+            live_model     = #{liveModel,jdbcType=TINYINT},
+            live_delay     = #{liveDelay,jdbcType=TINYINT},
+            begin_time     = #{beginTime,jdbcType=TIMESTAMP},
+            live_duration  = #{liveDuration,jdbcType=INTEGER},
+            live_status    = #{liveStatus,jdbcType=TINYINT},
+            playback_save  = #{playbackSave,jdbcType=TINYINT},
+            resource_id    = #{resourceId,jdbcType=BIGINT},
+            live_platform  = #{livePlatform,jdbcType=TINYINT},
+            channel_id     = #{channelId,jdbcType=VARCHAR},
+            channel_pwd    = #{channelPwd,jdbcType=VARCHAR},
+            live_introduce = #{liveIntroduce,jdbcType=LONGVARCHAR}
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.Live">
@@ -356,7 +484,10 @@
             live_duration = #{liveDuration,jdbcType=INTEGER},
             live_status   = #{liveStatus,jdbcType=TINYINT},
             playback_save = #{playbackSave,jdbcType=TINYINT},
-            resource_id   = #{resourceId,jdbcType=BIGINT}
+            resource_id   = #{resourceId,jdbcType=BIGINT},
+            live_platform = #{livePlatform,jdbcType=TINYINT},
+            channel_id    = #{channelId,jdbcType=VARCHAR},
+            channel_pwd   = #{channelPwd,jdbcType=VARCHAR}
         where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>
