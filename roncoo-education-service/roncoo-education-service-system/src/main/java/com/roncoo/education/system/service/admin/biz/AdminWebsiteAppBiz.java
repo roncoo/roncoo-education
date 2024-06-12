@@ -1,19 +1,20 @@
 package com.roncoo.education.system.service.admin.biz;
 
-import com.roncoo.education.common.service.BaseBiz;
+import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.system.dao.WebsiteAppDao;
+import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteApp;
+import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteAppExample;
+import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteAppExample.Criteria;
 import com.roncoo.education.system.service.admin.req.AdminWebsiteAppEditReq;
 import com.roncoo.education.system.service.admin.req.AdminWebsiteAppPageReq;
 import com.roncoo.education.system.service.admin.req.AdminWebsiteAppSaveReq;
 import com.roncoo.education.system.service.admin.resp.AdminWebsiteAppPageResp;
 import com.roncoo.education.system.service.admin.resp.AdminWebsiteAppViewResp;
-import com.roncoo.education.system.dao.WebsiteAppDao;
-import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteApp;
-import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteAppExample;
-import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteAppExample.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -39,7 +40,11 @@ public class AdminWebsiteAppBiz extends BaseBiz {
      */
     public Result<Page<AdminWebsiteAppPageResp>> page(AdminWebsiteAppPageReq req) {
         WebsiteAppExample example = new WebsiteAppExample();
+        example.setOrderByClause("publish_time desc");
         Criteria c = example.createCriteria();
+        if (ObjectUtil.isNotEmpty(req.getAppType())) {
+            c.andAppTypeEqualTo(req.getAppType());
+        }
         Page<WebsiteApp> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminWebsiteAppPageResp> respPage = PageUtil.transform(page, AdminWebsiteAppPageResp.class);
         return Result.success(respPage);
