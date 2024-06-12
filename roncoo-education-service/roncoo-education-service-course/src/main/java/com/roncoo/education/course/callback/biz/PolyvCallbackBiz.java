@@ -15,6 +15,7 @@ import com.roncoo.education.course.dao.impl.mapper.entity.Live;
 import com.roncoo.education.course.dao.impl.mapper.entity.LiveLog;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.VideoConfig;
+import com.roncoo.education.user.feign.interfaces.IFeignUsers;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -40,6 +41,8 @@ public class PolyvCallbackBiz extends BaseBiz {
     private final LiveLogDao liveLogDao;
     @NotNull
     private final IFeignSysConfig feignSysConfig;
+    @NotNull
+    private final IFeignUsers feignUsers;
 
     /**
      * 点播上传回调
@@ -114,7 +117,9 @@ public class PolyvCallbackBiz extends BaseBiz {
 
     public String liveAuth(CallbackLiveAuth callbackLiveAuth) {
         log.warn("保利威--直播观看授权--回调参数：{}", JsonUtil.toJsonString(callbackLiveAuth));
-        return "";
+        CallbackLiveAuthResult result = new CallbackLiveAuthResult();
+        result.setUserid(callbackLiveAuth.getUserid());
+        return JsonUtil.toJsonString(result);
     }
 
     public String livePlayback(CallbackLivePlayback callbackLivePlayback) {
