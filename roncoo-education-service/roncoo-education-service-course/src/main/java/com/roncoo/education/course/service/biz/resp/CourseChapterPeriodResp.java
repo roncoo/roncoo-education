@@ -42,6 +42,9 @@ public class CourseChapterPeriodResp implements Serializable {
     @ApiModelProperty(value = "章节ID")
     private Long chapterId;
 
+    @ApiModelProperty(value = "课时类型")
+    private Integer periodType;
+
     @ApiModelProperty(value = "课时名称")
     private String periodName;
 
