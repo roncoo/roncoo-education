@@ -8,7 +8,6 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -27,25 +26,11 @@ public class AdminUsersViewResp implements Serializable {
     @ApiModelProperty(value = "主键")
     private Long id;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
-    private LocalDateTime gmtCreate;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "修改时间")
-    private LocalDateTime gmtModified;
-
     @ApiModelProperty(value = "状态(1:正常，0:禁用)")
     private Integer statusId;
 
     @ApiModelProperty(value = "手机号码")
     private String mobile;
-
-    @ApiModelProperty(value = "密码盐")
-    private String mobileSalt;
-
-    @ApiModelProperty(value = "登录密码")
-    private String mobilePsw;
 
     @ApiModelProperty(value = "昵称")
     private String nickname;
@@ -53,6 +38,7 @@ public class AdminUsersViewResp implements Serializable {
     @ApiModelProperty(value = "用户性别(1男，2女，3保密)")
     private Integer userSex;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty(value = "用户年龄")
     private LocalDate userAge;
 

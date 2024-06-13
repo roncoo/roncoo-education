@@ -1,5 +1,6 @@
 package com.roncoo.education.user.service.admin.req;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -34,6 +35,7 @@ public class AdminUsersEditReq implements Serializable {
     @ApiModelProperty(value = "用户性别(1男，2女，3保密)")
     private Integer userSex;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty(value = "用户年龄")
     private LocalDate userAge;
 
