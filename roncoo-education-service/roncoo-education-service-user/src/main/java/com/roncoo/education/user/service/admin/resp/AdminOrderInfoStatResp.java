@@ -23,8 +23,8 @@ public class AdminOrderInfoStatResp implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "购买课程总数量")
-    private Integer courseBuySum;
+    private Integer courseBuySum = 0;
 
     @ApiModelProperty(value = "购买课程总金额")
-    private BigDecimal courseBuyMoney;
+    private BigDecimal courseBuyMoney = BigDecimal.ZERO;
 }

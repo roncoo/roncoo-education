@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  * <p>
@@ -43,7 +44,7 @@ public class AdminUsersSaveReq implements Serializable {
     private Integer userSex;
 
     @ApiModelProperty(value = "用户年龄")
-    private Integer userAge;
+    private LocalDate userAge;
 
     @ApiModelProperty(value = "用户头像")
     private String userHead;

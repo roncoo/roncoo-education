@@ -11,7 +11,7 @@
     <result column="mobile_psw" jdbcType="VARCHAR" property="mobilePsw" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
     <result column="user_sex" jdbcType="TINYINT" property="userSex" />
-    <result column="user_age" jdbcType="INTEGER" property="userAge" />
+      <result column="user_age" jdbcType="DATE" property="userAge"/>
     <result column="user_head" jdbcType="VARCHAR" property="userHead" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="union_id" jdbcType="VARCHAR" property="unionId" />
@@ -127,8 +127,8 @@
       )
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{statusId,jdbcType=TINYINT}, #{mobile,jdbcType=VARCHAR}, #{mobileSalt,jdbcType=VARCHAR}, 
-      #{mobilePsw,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{userSex,jdbcType=TINYINT}, 
-      #{userAge,jdbcType=INTEGER}, #{userHead,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{mobilePsw,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{userSex,jdbcType=TINYINT},
+            #{userAge,jdbcType=DATE}, #{userHead,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
       #{unionId,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
       #{province,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{registerSource,jdbcType=TINYINT}
       )
@@ -220,7 +220,7 @@
         #{userSex,jdbcType=TINYINT},
       </if>
       <if test="userAge != null">
-        #{userAge,jdbcType=INTEGER},
+          #{userAge,jdbcType=DATE},
       </if>
       <if test="userHead != null">
         #{userHead,jdbcType=VARCHAR},
@@ -285,7 +285,7 @@
         user_sex = #{record.userSex,jdbcType=TINYINT},
       </if>
       <if test="record.userAge != null">
-        user_age = #{record.userAge,jdbcType=INTEGER},
+          user_age = #{record.userAge,jdbcType=DATE},
       </if>
       <if test="record.userHead != null">
         user_head = #{record.userHead,jdbcType=VARCHAR},
@@ -327,7 +327,7 @@
       mobile_psw = #{record.mobilePsw,jdbcType=VARCHAR},
       nickname = #{record.nickname,jdbcType=VARCHAR},
       user_sex = #{record.userSex,jdbcType=TINYINT},
-      user_age = #{record.userAge,jdbcType=INTEGER},
+      user_age = #{record.userAge,jdbcType=DATE},
       user_head = #{record.userHead,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
       union_id = #{record.unionId,jdbcType=VARCHAR},
@@ -368,7 +368,7 @@
         user_sex = #{userSex,jdbcType=TINYINT},
       </if>
       <if test="userAge != null">
-        user_age = #{userAge,jdbcType=INTEGER},
+          user_age = #{userAge,jdbcType=DATE},
       </if>
       <if test="userHead != null">
         user_head = #{userHead,jdbcType=VARCHAR},
@@ -407,7 +407,7 @@
       mobile_psw = #{mobilePsw,jdbcType=VARCHAR},
       nickname = #{nickname,jdbcType=VARCHAR},
       user_sex = #{userSex,jdbcType=TINYINT},
-      user_age = #{userAge,jdbcType=INTEGER},
+        user_age = #{userAge,jdbcType=DATE},
       user_head = #{userHead,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       union_id = #{unionId,jdbcType=VARCHAR},

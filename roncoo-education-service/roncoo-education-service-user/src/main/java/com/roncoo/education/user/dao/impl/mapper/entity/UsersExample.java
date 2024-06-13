@@ -1,5 +1,6 @@
 package com.roncoo.education.user.dao.impl.mapper.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -715,52 +716,52 @@ public class UsersExample {
             return (Criteria) this;
         }
 
-        public Criteria andUserAgeEqualTo(Integer value) {
+        public Criteria andUserAgeEqualTo(LocalDate value) {
             addCriterion("user_age =", value, "userAge");
             return (Criteria) this;
         }
 
-        public Criteria andUserAgeNotEqualTo(Integer value) {
+        public Criteria andUserAgeNotEqualTo(LocalDate value) {
             addCriterion("user_age <>", value, "userAge");
             return (Criteria) this;
         }
 
-        public Criteria andUserAgeGreaterThan(Integer value) {
+        public Criteria andUserAgeGreaterThan(LocalDate value) {
             addCriterion("user_age >", value, "userAge");
             return (Criteria) this;
         }
 
-        public Criteria andUserAgeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andUserAgeGreaterThanOrEqualTo(LocalDate value) {
             addCriterion("user_age >=", value, "userAge");
             return (Criteria) this;
         }
 
-        public Criteria andUserAgeLessThan(Integer value) {
+        public Criteria andUserAgeLessThan(LocalDate value) {
             addCriterion("user_age <", value, "userAge");
             return (Criteria) this;
         }
 
-        public Criteria andUserAgeLessThanOrEqualTo(Integer value) {
+        public Criteria andUserAgeLessThanOrEqualTo(LocalDate value) {
             addCriterion("user_age <=", value, "userAge");
             return (Criteria) this;
         }
 
-        public Criteria andUserAgeIn(List<Integer> values) {
+        public Criteria andUserAgeIn(List<LocalDate> values) {
             addCriterion("user_age in", values, "userAge");
             return (Criteria) this;
         }
 
-        public Criteria andUserAgeNotIn(List<Integer> values) {
+        public Criteria andUserAgeNotIn(List<LocalDate> values) {
             addCriterion("user_age not in", values, "userAge");
             return (Criteria) this;
         }
 
-        public Criteria andUserAgeBetween(Integer value1, Integer value2) {
+        public Criteria andUserAgeBetween(LocalDate value1, LocalDate value2) {
             addCriterion("user_age between", value1, value2, "userAge");
             return (Criteria) this;
         }
 
-        public Criteria andUserAgeNotBetween(Integer value1, Integer value2) {
+        public Criteria andUserAgeNotBetween(LocalDate value1, LocalDate value2) {
             addCriterion("user_age not between", value1, value2, "userAge");
             return (Criteria) this;
         }

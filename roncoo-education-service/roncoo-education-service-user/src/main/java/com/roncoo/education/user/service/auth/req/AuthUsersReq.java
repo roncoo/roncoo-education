@@ -8,6 +8,7 @@ import lombok.experimental.Accessors;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  * <p>
@@ -34,7 +35,7 @@ public class AuthUsersReq implements Serializable {
 
     @NotNull(message = "请填写年龄")
     @ApiModelProperty(value = "用户年龄")
-    private Integer userAge;
+    private LocalDate userAge;
 
     @ApiModelProperty(value = "用户头像")
     private String userHead;

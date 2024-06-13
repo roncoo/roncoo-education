@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  * <p>
@@ -26,7 +27,7 @@ public class UsersVO implements Serializable {
 
     private Integer userSex;
 
-    private Integer userAge;
+    private LocalDate userAge;
 
     private String userHead;
 

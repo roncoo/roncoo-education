@@ -13,8 +13,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum RegisterSourceEnum {
 
-    SYS_PC(11, "PC系统注册"),
-    SYS_H5(12, "H5系统注册"),
+    SYS_PC(11, "PC端注册"),
+    SYS_H5(12, "H5端注册"),
     SYS_PC_WX(13, "微信网页应用"),
     WX_MP(21, "公众号"),
     WX_MA(22, "小程序"),
