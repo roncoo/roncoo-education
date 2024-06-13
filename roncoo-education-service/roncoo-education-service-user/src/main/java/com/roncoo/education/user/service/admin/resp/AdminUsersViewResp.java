@@ -61,6 +61,24 @@ public class AdminUsersViewResp implements Serializable {
     @ApiModelProperty(value = "备注")
     private String remark;
 
+    @ApiModelProperty(value = "微信唯一ID")
+    private String unionId;
+
+    @ApiModelProperty(value = "微信OpenId")
+    private String openId;
+
+    @ApiModelProperty(value = "城市")
+    private String city;
+
+    @ApiModelProperty(value = "省份")
+    private String province;
+
+    @ApiModelProperty(value = "国家")
+    private String country;
+
+    @ApiModelProperty(value = "注册来源")
+    private Integer registerSource;
+
     @ApiModelProperty(value = "用户账户信息")
     private AdminUsersAccountViewResp usersAccountViewResp;
 }

@@ -41,4 +41,13 @@ public class AdminUsersEditReq implements Serializable {
 
     @ApiModelProperty(value = "备注")
     private String remark;
+
+    @ApiModelProperty(value = "城市")
+    private String city;
+
+    @ApiModelProperty(value = "省份")
+    private String province;
+
+    @ApiModelProperty(value = "国家")
+    private String country;
 }
