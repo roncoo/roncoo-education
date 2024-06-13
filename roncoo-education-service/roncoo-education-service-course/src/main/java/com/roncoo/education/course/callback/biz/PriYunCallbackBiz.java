@@ -50,6 +50,7 @@ public class PriYunCallbackBiz extends BaseBiz {
      * @return
      */
     public String auth(PrivateYunVodAuth vodAuth) {
+        // 这里可以进行播放授权
         return PASS;
     }
 }

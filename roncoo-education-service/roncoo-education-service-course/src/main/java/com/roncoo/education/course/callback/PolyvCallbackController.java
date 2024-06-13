@@ -2,6 +2,7 @@ package com.roncoo.education.course.callback;
 
 import com.roncoo.education.common.service.BaseController;
 import com.roncoo.education.common.video.impl.polyv.live.*;
+import com.roncoo.education.common.video.impl.polyv.vod.CallbackVodAuth;
 import com.roncoo.education.common.video.impl.polyv.vod.CallbackVodUpload;
 import com.roncoo.education.course.callback.biz.PolyvCallbackBiz;
 import io.swagger.annotations.ApiOperation;
@@ -32,11 +33,18 @@ public class PolyvCallbackController extends BaseController {
      * @param callbackVodUpload
      * @return
      */
-    @ApiOperation(value = "点播上传回调接口", notes = "点播上传回调接口")
+    @ApiOperation(value = "点播上传状态回调", notes = "上传状态回调")
     @RequestMapping(value = "/vod/upload", method = {RequestMethod.POST, RequestMethod.GET})
     public String vodUpload(CallbackVodUpload callbackVodUpload) {
         return biz.vodUpload(callbackVodUpload);
     }
+
+    @ApiOperation(value = "点播播放授权回调", notes = "播放授权回调")
+    @GetMapping(value = "/vod/auth")
+    public String vodAuth(CallbackVodAuth callbackVodAuth) {
+        return biz.vodAuth(callbackVodAuth);
+    }
+
 
     @ApiOperation(value = "直播状态回调", notes = "直播状态回调")
     @GetMapping(value = "/live/status")

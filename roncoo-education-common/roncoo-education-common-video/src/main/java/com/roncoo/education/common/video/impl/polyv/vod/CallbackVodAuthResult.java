@@ -19,7 +19,7 @@ public class CallbackVodAuthResult implements Serializable {
     private Integer status = 2;
 
     /**
-     * 用户名
+     * 用户名，跑马灯内容
      */
     private String username = "";
 
@@ -104,8 +104,8 @@ public class CallbackVodAuthResult implements Serializable {
     private Integer strength = 0;
 
     /**
-     * 是否显示跑马灯，默认为否=off
+     * 是否显示跑马灯，显示：on，关闭：off
      */
-    private String show = "on";
+    private String show = "off";
 
 }

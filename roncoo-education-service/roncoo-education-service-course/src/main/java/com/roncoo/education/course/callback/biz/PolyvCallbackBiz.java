@@ -4,10 +4,13 @@ import cn.hutool.core.date.LocalDateTimeUtil;
 import com.roncoo.education.common.core.enums.LiveStatusEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.core.tools.JsonUtil;
+import com.roncoo.education.common.core.tools.Md5Util;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.video.impl.polyv.PolyvVodUtil;
 import com.roncoo.education.common.video.impl.polyv.live.*;
 import com.roncoo.education.common.video.impl.polyv.vod.CallbackEventTypeEnum;
+import com.roncoo.education.common.video.impl.polyv.vod.CallbackVodAuth;
+import com.roncoo.education.common.video.impl.polyv.vod.CallbackVodAuthResult;
 import com.roncoo.education.common.video.impl.polyv.vod.CallbackVodUpload;
 import com.roncoo.education.course.dao.LiveDao;
 import com.roncoo.education.course.dao.LiveLogDao;
@@ -62,6 +65,32 @@ public class PolyvCallbackBiz extends BaseBiz {
             vodCommonBiz.completeUpload(callbackVodUpload.getVid(), videoConfig);
         }
         return SUCCESS;
+    }
+
+    public String vodAuth(CallbackVodAuth callbackVodAuth) {
+        log.info("保利威--点播授权播放--回调参数：{}", JsonUtil.toJsonString(callbackVodAuth));
+        // 这里可以进行播放授权
+        CallbackVodAuthResult result = new CallbackVodAuthResult();
+        result.setStatus(1);
+        return vodAuthResponse(callbackVodAuth, result);
+    }
+
+    private String vodAuthResponse(CallbackVodAuth vodAuth, CallbackVodAuthResult result) {
+        VideoConfig videoConfig = feignSysConfig.getVideo();
+        // 判断是否开启跑马灯功能
+        if (videoConfig.getVodEnableMarquee()) {
+            result.setShow("on");
+        }
+        String sign = "vid=" + vodAuth.getVid() + "&secretkey=" + videoConfig.getPolyvSecretKey() + "&username=" + result.getUsername() +
+                "&code=" + vodAuth.getCode().replace(" ", "+") + "&status=" + result.getStatus() +
+                "&t=" + vodAuth.getT() + "&msg=" + result.getMsg() + "&fontSize=" + result.getFontSize() +
+                "&fontColor=" + result.getFontColor() + "&speed=" + result.getSpeed() + "&filter=" + result.getFilter() +
+                "&setting=" + result.getSetting() + "&alpha=" + result.getAlpha() + "&filterAlpha=" + result.getFilterAlpha() +
+                "&filterColor=" + result.getFilterColor() + "&blurX=" + result.getBlurX() + "&blurY=" + result.getBlurY() +
+                "&interval=" + result.getInterval() + "&lifeTime=" + result.getLifeTime() + "&tweenTime=" + result.getTweenTime() +
+                "&strength=" + result.getStrength() + "&show=" + result.getShow();
+        result.setSign(Md5Util.md5(sign));
+        return vodAuth.getCallback() + "(" + JsonUtil.toJsonString(result) + ")";
     }
 
     /**
@@ -136,4 +165,5 @@ public class PolyvCallbackBiz extends BaseBiz {
         log.warn("保利威--直播课件重制--回调参数：{}", JsonUtil.toJsonString(callbackLiveRefashion));
         return SUCCESS;
     }
+
 }

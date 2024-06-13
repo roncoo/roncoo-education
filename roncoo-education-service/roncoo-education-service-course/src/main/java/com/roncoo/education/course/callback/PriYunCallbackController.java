@@ -29,13 +29,13 @@ public class PriYunCallbackController {
 
     @RequestMapping(value = "/vod/upload", method = {RequestMethod.GET, RequestMethod.POST})
     public String vodUpload(@RequestBody PrivateYunVodUpload vodUpload) {
-        log.warn("领课云--点播上传回调--回调参数：{}", JsonUtil.toJsonString(vodUpload));
+        log.warn("领课云--上传状态回调--回调参数：{}", JsonUtil.toJsonString(vodUpload));
         return biz.vodUpload(vodUpload);
     }
 
     @RequestMapping(value = "/vod/auth", method = {RequestMethod.GET, RequestMethod.POST})
     public String auth(@RequestBody PrivateYunVodAuth vodAuth) {
-        log.warn("领课云--授权地址--回调参数：{}", JsonUtil.toJsonString(vodAuth));
+        log.warn("领课云--播放授权地址--回调参数：{}", JsonUtil.toJsonString(vodAuth));
         return biz.auth(vodAuth);
     }
 
