@@ -132,6 +132,7 @@ public class PolyvCallbackBiz extends BaseBiz {
                 LiveLog liveLogStatus = new LiveLog();
                 liveLogStatus.setId(liveLog.getId());
                 liveLogStatus.setLiveStatus(LiveStatusEnum.PLAYBACK.getCode());
+                liveLogStatus.setEndTime(LocalDateTimeUtil.of(callbackLiveStatus.getEndTime()));
                 liveLogDao.updateById(liveLogStatus);
             }
 

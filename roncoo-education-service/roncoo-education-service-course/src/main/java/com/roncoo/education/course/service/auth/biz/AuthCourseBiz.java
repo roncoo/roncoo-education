@@ -90,8 +90,8 @@ public class AuthCourseBiz extends BaseBiz {
             if (ObjectUtil.isEmpty(live)) {
                 return Result.error("该直播不存在");
             }
-            if (live.getLiveStatus().equals(LiveStatusEnum.WAITING.getCode())) {
-                return Result.error("该直播没开始，请稍后再试");
+            if (!live.getLiveStatus().equals(LiveStatusEnum.LIVING.getCode())) {
+                return Result.error("直播还没开始，请稍后再试");
             }
 
             // 获取直播观看地址
