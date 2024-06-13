@@ -57,7 +57,12 @@ public class CourseChapterPeriodResp implements Serializable {
     @ApiModelProperty(value = "资源ID")
     private Long resourceId;
 
+    @ApiModelProperty(value = "直播ID")
+    private Long liveId;
+
     private ResourceResp resourceResp;
+
+    private LiveResp liveResp;
 
     @ApiModelProperty(value = "课时进度")
     private BigDecimal periodProgress = BigDecimal.ZERO;

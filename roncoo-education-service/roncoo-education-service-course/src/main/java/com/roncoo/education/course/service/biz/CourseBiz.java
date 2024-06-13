@@ -8,6 +8,7 @@ import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.FreeEnum;
+import com.roncoo.education.common.core.enums.PeriodTypeEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
@@ -56,6 +57,8 @@ public class CourseBiz extends BaseBiz {
     private final UserCourseCollectDao userCourseCollectDao;
     @NotNull
     private final ResourceDao resourceDao;
+    @NotNull
+    private final LiveDao liveDao;
     @NotNull
     private final IFeignLecturer feignLecturer;
     @NotNull
@@ -118,17 +121,36 @@ public class CourseBiz extends BaseBiz {
 
             if (CollUtil.isNotEmpty(periodList)) {
                 Map<Long, List<CourseChapterPeriod>> map = periodList.stream().collect(Collectors.groupingBy(CourseChapterPeriod::getChapterId, Collectors.toList()));
-                List<Long> resourceIdList = periodList.stream().map(courseChapterPeriod -> courseChapterPeriod.getResourceId()).collect(Collectors.toList());
                 // 资源信息
-                List<Resource> resourceList = resourceDao.listByIds(resourceIdList);
+                Map<Long, Resource> resourceMap = null;
+                List<Long> resourceIdList = periodList.stream().filter(courseChapterPeriod -> courseChapterPeriod.getPeriodType().equals(PeriodTypeEnum.RESOURCE.getCode())).map(courseChapterPeriod -> courseChapterPeriod.getResourceId()).collect(Collectors.toList());
+                if (CollUtil.isNotEmpty(resourceIdList)) {
+                    List<Resource> resourceList = resourceDao.listByIds(resourceIdList);
+                    if (CollUtil.isNotEmpty(resourceList)) {
+                        resourceMap = resourceList.stream().collect(Collectors.toMap(Resource::getId, item -> item));
+                    }
+                }
+
+                // 直播信息
+                Map<Long, Live> liveMap = null;
+                List<Long> liveIdList = periodList.stream().filter(courseChapterPeriod -> courseChapterPeriod.getPeriodType().equals(PeriodTypeEnum.LIVE.getCode())).map(courseChapterPeriod -> courseChapterPeriod.getLiveId()).collect(Collectors.toList());
+                if (CollUtil.isNotEmpty(liveIdList)) {
+                    List<Live> liveList = liveDao.listByIds(liveIdList);
+                    if (CollUtil.isNotEmpty(liveList)) {
+                        liveMap = liveList.stream().collect(Collectors.toMap(Live::getId, item -> item));
+                    }
+                }
+
                 for (CourseChapterResp chapterResp : courseResp.getChapterRespList()) {
                     chapterResp.setPeriodRespList(BeanUtil.copyProperties(map.get(chapterResp.getId()), CourseChapterPeriodResp.class));
-                    if (CollUtil.isNotEmpty(resourceList)) {
-                        Map<Long, Resource> resourceMap = resourceList.stream().collect(Collectors.toMap(Resource::getId, item -> item));
-                        for (CourseChapterPeriodResp periodResp : chapterResp.getPeriodRespList()) {
+                    for (CourseChapterPeriodResp periodResp : chapterResp.getPeriodRespList()) {
+                        if (resourceMap != null) {
                             periodResp.setResourceResp(BeanUtil.copyProperties(resourceMap.get(periodResp.getResourceId()), ResourceResp.class));
-                            periodResp.setPeriodProgress(userStudyProgressMap.get(periodResp.getId()));
                         }
+                        if (liveMap != null) {
+                            periodResp.setLiveResp(BeanUtil.copyProperties(liveMap.get(periodResp.getLiveId()), LiveResp.class));
+                        }
+                        periodResp.setPeriodProgress(userStudyProgressMap.get(periodResp.getId()));
                     }
                 }
             }
