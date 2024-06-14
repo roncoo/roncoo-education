@@ -90,13 +90,22 @@ public class AuthCourseBiz extends BaseBiz {
             if (ObjectUtil.isEmpty(live)) {
                 return Result.error("该直播不存在");
             }
-            if (!live.getLiveStatus().equals(LiveStatusEnum.LIVING.getCode())) {
+            if (live.getLiveStatus().equals(LiveStatusEnum.WAITING.getCode())) {
                 return Result.error("直播还没开始，请稍后再试");
             }
-
-            // 获取直播观看地址
-            viewConfig(req.getIsPc(), live.getChannelId(), resp);
-            return Result.success(resp);
+            if (live.getLiveStatus().equals(LiveStatusEnum.PLAYBACK.getCode())) {
+                // 待回放状态
+                return Result.error("直播已经结束，回放请稍候");
+            }
+            if (live.getLiveStatus().equals(LiveStatusEnum.LIVING.getCode())) {
+                // 获取直播观看地址
+                viewConfig(req.getIsPc(), live.getChannelId(), resp);
+                return Result.success(resp);
+            }
+            if (live.getLiveStatus().equals(LiveStatusEnum.COMPLETION.getCode())) {
+                // 获取回放地址观看回放
+                period.setResourceId(live.getResourceId());
+            }
         }
 
         // 资源类型

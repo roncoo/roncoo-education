@@ -16,7 +16,7 @@ public enum LiveStatusEnum {
     WAITING(1, "待开播"),
     LIVING(2, "直播中"),
     PLAYBACK(3, "待回放"),
-    COMPLETION(4, "直播结束");
+    COMPLETION(4, "直播完成");
 
     private Integer code;
 
