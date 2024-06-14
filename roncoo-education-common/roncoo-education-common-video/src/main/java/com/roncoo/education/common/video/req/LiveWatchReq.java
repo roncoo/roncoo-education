@@ -24,10 +24,6 @@ public class LiveWatchReq implements Serializable {
      */
     private String channelId;
     /**
-     * 是否为移动端
-     */
-    private Boolean appWatch = false;
-    /**
      * 用户ID
      */
     private Long userId;

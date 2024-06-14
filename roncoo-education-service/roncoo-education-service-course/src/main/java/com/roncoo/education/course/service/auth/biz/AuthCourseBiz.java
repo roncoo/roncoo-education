@@ -99,7 +99,7 @@ public class AuthCourseBiz extends BaseBiz {
             }
             if (live.getLiveStatus().equals(LiveStatusEnum.LIVING.getCode())) {
                 // 获取直播观看地址
-                viewConfig(req.getIsPc(), live.getChannelId(), resp);
+                viewConfig(live.getChannelId(), resp);
                 return Result.success(resp);
             }
             if (live.getLiveStatus().equals(LiveStatusEnum.COMPLETION.getCode())) {
@@ -154,10 +154,9 @@ public class AuthCourseBiz extends BaseBiz {
         return Result.success(resp);
     }
 
-    private void viewConfig(Boolean isPc, String channelNo, AuthCourseSignResp resp) {
+    private void viewConfig(String channelNo, AuthCourseSignResp resp) {
         LiveWatchReq liveWatchReq = new LiveWatchReq();
         liveWatchReq.setChannelId(channelNo);
-        liveWatchReq.setAppWatch(!isPc);
         UsersVO usersVO = feignUsers.getById(ThreadContext.userId());
         liveWatchReq.setUserId(usersVO.getId());
         liveWatchReq.setUserName(usersVO.getNickname());

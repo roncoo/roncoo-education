@@ -31,7 +31,4 @@ public class AuthCourseSignReq implements Serializable {
     @ApiModelProperty(value = "观看者IP")
     private String clientIp;
 
-    @ApiModelProperty(value = "是否为电脑端")
-    private Boolean isPc;
-
 }

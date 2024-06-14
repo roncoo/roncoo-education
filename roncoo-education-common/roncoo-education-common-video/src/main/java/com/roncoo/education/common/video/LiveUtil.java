@@ -129,9 +129,6 @@ public final class LiveUtil {
      */
     public static String getLiveWatchUrl(VideoConfigReq req, LiveWatchReq watchReq) {
         if (LivePlatformEnum.POLYV.getCode().equals(req.getLivePlatform())) {
-            if (watchReq.getAppWatch()) {
-                return watchReq.getChannelId();
-            }
             // 获取频道观看条件
             List<ChannelWatchConditionResponse> conditionResponseList = PolyvLiveUtil.getWatchCondition(watchReq.getChannelId(), req.getPolyvAppId(), req.getPolyvAppSecret());
             // 处理观看地址
