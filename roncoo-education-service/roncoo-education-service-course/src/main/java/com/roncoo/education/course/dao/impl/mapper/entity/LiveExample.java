@@ -425,6 +425,66 @@ public class LiveExample {
             return (Criteria) this;
         }
 
+        public Criteria andLecturerIdIsNull() {
+            addCriterion("lecturer_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLecturerIdIsNotNull() {
+            addCriterion("lecturer_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLecturerIdEqualTo(Long value) {
+            addCriterion("lecturer_id =", value, "lecturerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLecturerIdNotEqualTo(Long value) {
+            addCriterion("lecturer_id <>", value, "lecturerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLecturerIdGreaterThan(Long value) {
+            addCriterion("lecturer_id >", value, "lecturerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLecturerIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("lecturer_id >=", value, "lecturerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLecturerIdLessThan(Long value) {
+            addCriterion("lecturer_id <", value, "lecturerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLecturerIdLessThanOrEqualTo(Long value) {
+            addCriterion("lecturer_id <=", value, "lecturerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLecturerIdIn(List<Long> values) {
+            addCriterion("lecturer_id in", values, "lecturerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLecturerIdNotIn(List<Long> values) {
+            addCriterion("lecturer_id not in", values, "lecturerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLecturerIdBetween(Long value1, Long value2) {
+            addCriterion("lecturer_id between", value1, value2, "lecturerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLecturerIdNotBetween(Long value1, Long value2) {
+            addCriterion("lecturer_id not between", value1, value2, "lecturerId");
+            return (Criteria) this;
+        }
+
         public Criteria andLiveNameIsNull() {
             addCriterion("live_name is null");
             return (Criteria) this;
@@ -492,66 +552,6 @@ public class LiveExample {
 
         public Criteria andLiveNameNotBetween(String value1, String value2) {
             addCriterion("live_name not between", value1, value2, "liveName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdIsNull() {
-            addCriterion("lecturer_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdIsNotNull() {
-            addCriterion("lecturer_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdEqualTo(Long value) {
-            addCriterion("lecturer_id =", value, "lecturerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdNotEqualTo(Long value) {
-            addCriterion("lecturer_id <>", value, "lecturerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdGreaterThan(Long value) {
-            addCriterion("lecturer_id >", value, "lecturerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("lecturer_id >=", value, "lecturerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdLessThan(Long value) {
-            addCriterion("lecturer_id <", value, "lecturerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdLessThanOrEqualTo(Long value) {
-            addCriterion("lecturer_id <=", value, "lecturerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdIn(List<Long> values) {
-            addCriterion("lecturer_id in", values, "lecturerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdNotIn(List<Long> values) {
-            addCriterion("lecturer_id not in", values, "lecturerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdBetween(Long value1, Long value2) {
-            addCriterion("lecturer_id between", value1, value2, "lecturerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLecturerIdNotBetween(Long value1, Long value2) {
-            addCriterion("lecturer_id not between", value1, value2, "lecturerId");
             return (Criteria) this;
         }
 
@@ -855,126 +855,6 @@ public class LiveExample {
             return (Criteria) this;
         }
 
-        public Criteria andPlaybackSaveIsNull() {
-            addCriterion("playback_save is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlaybackSaveIsNotNull() {
-            addCriterion("playback_save is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlaybackSaveEqualTo(Integer value) {
-            addCriterion("playback_save =", value, "playbackSave");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlaybackSaveNotEqualTo(Integer value) {
-            addCriterion("playback_save <>", value, "playbackSave");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlaybackSaveGreaterThan(Integer value) {
-            addCriterion("playback_save >", value, "playbackSave");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlaybackSaveGreaterThanOrEqualTo(Integer value) {
-            addCriterion("playback_save >=", value, "playbackSave");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlaybackSaveLessThan(Integer value) {
-            addCriterion("playback_save <", value, "playbackSave");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlaybackSaveLessThanOrEqualTo(Integer value) {
-            addCriterion("playback_save <=", value, "playbackSave");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlaybackSaveIn(List<Integer> values) {
-            addCriterion("playback_save in", values, "playbackSave");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlaybackSaveNotIn(List<Integer> values) {
-            addCriterion("playback_save not in", values, "playbackSave");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlaybackSaveBetween(Integer value1, Integer value2) {
-            addCriterion("playback_save between", value1, value2, "playbackSave");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlaybackSaveNotBetween(Integer value1, Integer value2) {
-            addCriterion("playback_save not between", value1, value2, "playbackSave");
-            return (Criteria) this;
-        }
-
-        public Criteria andResourceIdIsNull() {
-            addCriterion("resource_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andResourceIdIsNotNull() {
-            addCriterion("resource_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andResourceIdEqualTo(Long value) {
-            addCriterion("resource_id =", value, "resourceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andResourceIdNotEqualTo(Long value) {
-            addCriterion("resource_id <>", value, "resourceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andResourceIdGreaterThan(Long value) {
-            addCriterion("resource_id >", value, "resourceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andResourceIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("resource_id >=", value, "resourceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andResourceIdLessThan(Long value) {
-            addCriterion("resource_id <", value, "resourceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andResourceIdLessThanOrEqualTo(Long value) {
-            addCriterion("resource_id <=", value, "resourceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andResourceIdIn(List<Long> values) {
-            addCriterion("resource_id in", values, "resourceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andResourceIdNotIn(List<Long> values) {
-            addCriterion("resource_id not in", values, "resourceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andResourceIdBetween(Long value1, Long value2) {
-            addCriterion("resource_id between", value1, value2, "resourceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andResourceIdNotBetween(Long value1, Long value2) {
-            addCriterion("resource_id not between", value1, value2, "resourceId");
-            return (Criteria) this;
-        }
-
         public Criteria andLivePlatformIsNull() {
             addCriterion("live_platform is null");
             return (Criteria) this;
@@ -1172,6 +1052,126 @@ public class LiveExample {
 
         public Criteria andChannelPwdNotBetween(String value1, String value2) {
             addCriterion("channel_pwd not between", value1, value2, "channelPwd");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveIsNull() {
+            addCriterion("playback_save is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveIsNotNull() {
+            addCriterion("playback_save is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveEqualTo(Integer value) {
+            addCriterion("playback_save =", value, "playbackSave");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveNotEqualTo(Integer value) {
+            addCriterion("playback_save <>", value, "playbackSave");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveGreaterThan(Integer value) {
+            addCriterion("playback_save >", value, "playbackSave");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveGreaterThanOrEqualTo(Integer value) {
+            addCriterion("playback_save >=", value, "playbackSave");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveLessThan(Integer value) {
+            addCriterion("playback_save <", value, "playbackSave");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveLessThanOrEqualTo(Integer value) {
+            addCriterion("playback_save <=", value, "playbackSave");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveIn(List<Integer> values) {
+            addCriterion("playback_save in", values, "playbackSave");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveNotIn(List<Integer> values) {
+            addCriterion("playback_save not in", values, "playbackSave");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveBetween(Integer value1, Integer value2) {
+            addCriterion("playback_save between", value1, value2, "playbackSave");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlaybackSaveNotBetween(Integer value1, Integer value2) {
+            addCriterion("playback_save not between", value1, value2, "playbackSave");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdIsNull() {
+            addCriterion("resource_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdIsNotNull() {
+            addCriterion("resource_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdEqualTo(Long value) {
+            addCriterion("resource_id =", value, "resourceId");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdNotEqualTo(Long value) {
+            addCriterion("resource_id <>", value, "resourceId");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdGreaterThan(Long value) {
+            addCriterion("resource_id >", value, "resourceId");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("resource_id >=", value, "resourceId");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdLessThan(Long value) {
+            addCriterion("resource_id <", value, "resourceId");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdLessThanOrEqualTo(Long value) {
+            addCriterion("resource_id <=", value, "resourceId");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdIn(List<Long> values) {
+            addCriterion("resource_id in", values, "resourceId");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdNotIn(List<Long> values) {
+            addCriterion("resource_id not in", values, "resourceId");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdBetween(Long value1, Long value2) {
+            addCriterion("resource_id between", value1, value2, "resourceId");
+            return (Criteria) this;
+        }
+
+        public Criteria andResourceIdNotBetween(Long value1, Long value2) {
+            addCriterion("resource_id not between", value1, value2, "resourceId");
             return (Criteria) this;
         }
     }

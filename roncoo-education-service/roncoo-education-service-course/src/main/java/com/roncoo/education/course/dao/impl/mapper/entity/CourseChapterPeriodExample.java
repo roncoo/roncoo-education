@@ -745,66 +745,6 @@ public class CourseChapterPeriodExample {
             return (Criteria) this;
         }
 
-        public Criteria andPeriodTypeIsNull() {
-            addCriterion("period_type is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTypeIsNotNull() {
-            addCriterion("period_type is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTypeEqualTo(Integer value) {
-            addCriterion("period_type =", value, "periodType");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTypeNotEqualTo(Integer value) {
-            addCriterion("period_type <>", value, "periodType");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTypeGreaterThan(Integer value) {
-            addCriterion("period_type >", value, "periodType");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("period_type >=", value, "periodType");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTypeLessThan(Integer value) {
-            addCriterion("period_type <", value, "periodType");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("period_type <=", value, "periodType");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTypeIn(List<Integer> values) {
-            addCriterion("period_type in", values, "periodType");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTypeNotIn(List<Integer> values) {
-            addCriterion("period_type not in", values, "periodType");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTypeBetween(Integer value1, Integer value2) {
-            addCriterion("period_type between", value1, value2, "periodType");
-            return (Criteria) this;
-        }
-
-        public Criteria andPeriodTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("period_type not between", value1, value2, "periodType");
-            return (Criteria) this;
-        }
-
         public Criteria andResourceIdIsNull() {
             addCriterion("resource_id is null");
             return (Criteria) this;
@@ -862,6 +802,66 @@ public class CourseChapterPeriodExample {
 
         public Criteria andResourceIdNotBetween(Long value1, Long value2) {
             addCriterion("resource_id not between", value1, value2, "resourceId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodTypeIsNull() {
+            addCriterion("period_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodTypeIsNotNull() {
+            addCriterion("period_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodTypeEqualTo(Integer value) {
+            addCriterion("period_type =", value, "periodType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodTypeNotEqualTo(Integer value) {
+            addCriterion("period_type <>", value, "periodType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodTypeGreaterThan(Integer value) {
+            addCriterion("period_type >", value, "periodType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("period_type >=", value, "periodType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodTypeLessThan(Integer value) {
+            addCriterion("period_type <", value, "periodType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("period_type <=", value, "periodType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodTypeIn(List<Integer> values) {
+            addCriterion("period_type in", values, "periodType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodTypeNotIn(List<Integer> values) {
+            addCriterion("period_type not in", values, "periodType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodTypeBetween(Integer value1, Integer value2) {
+            addCriterion("period_type between", value1, value2, "periodType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("period_type not between", value1, value2, "periodType");
             return (Criteria) this;
         }
 

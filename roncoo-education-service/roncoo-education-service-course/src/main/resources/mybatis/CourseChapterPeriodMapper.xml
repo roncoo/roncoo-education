@@ -12,8 +12,8 @@
     <result column="period_name" jdbcType="VARCHAR" property="periodName" />
     <result column="period_desc" jdbcType="VARCHAR" property="periodDesc" />
     <result column="is_free" jdbcType="TINYINT" property="isFree" />
-    <result column="period_type" jdbcType="TINYINT" property="periodType" />
     <result column="resource_id" jdbcType="BIGINT" property="resourceId" />
+      <result column="period_type" jdbcType="TINYINT" property="periodType"/>
     <result column="live_id" jdbcType="BIGINT" property="liveId" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -76,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, gmt_create, gmt_modified, status_id, sort, course_id, chapter_id, period_name, 
-    period_desc, is_free, period_type, resource_id, live_id
+    period_desc, is_free, resource_id, period_type, live_id
   </sql>
   <select id="selectByExample" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriodExample" resultMap="BaseResultMap">
     select
@@ -114,13 +114,13 @@
   <insert id="insert" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod">
     insert into course_chapter_period (id, gmt_create, gmt_modified, 
       status_id, sort, course_id, 
-      chapter_id, period_name, period_desc, 
-      is_free, period_type, resource_id, 
+      chapter_id, period_name, period_desc,
+                                       is_free, resource_id, period_type,
       live_id)
     values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{statusId,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{courseId,jdbcType=BIGINT}, 
-      #{chapterId,jdbcType=BIGINT}, #{periodName,jdbcType=VARCHAR}, #{periodDesc,jdbcType=VARCHAR}, 
-      #{isFree,jdbcType=TINYINT}, #{periodType,jdbcType=TINYINT}, #{resourceId,jdbcType=BIGINT}, 
+      #{chapterId,jdbcType=BIGINT}, #{periodName,jdbcType=VARCHAR}, #{periodDesc,jdbcType=VARCHAR},
+            #{isFree,jdbcType=TINYINT}, #{resourceId,jdbcType=BIGINT}, #{periodType,jdbcType=TINYINT},
       #{liveId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.roncoo.education.course.dao.impl.mapper.entity.CourseChapterPeriod">
@@ -156,11 +156,11 @@
       <if test="isFree != null">
         is_free,
       </if>
-      <if test="periodType != null">
-        period_type,
-      </if>
       <if test="resourceId != null">
         resource_id,
+      </if>
+        <if test="periodType != null">
+            period_type,
       </if>
       <if test="liveId != null">
         live_id,
@@ -197,11 +197,11 @@
       <if test="isFree != null">
         #{isFree,jdbcType=TINYINT},
       </if>
+        <if test="resourceId != null">
+            #{resourceId,jdbcType=BIGINT},
+        </if>
       <if test="periodType != null">
         #{periodType,jdbcType=TINYINT},
-      </if>
-      <if test="resourceId != null">
-        #{resourceId,jdbcType=BIGINT},
       </if>
       <if test="liveId != null">
         #{liveId,jdbcType=BIGINT},
@@ -247,11 +247,11 @@
       <if test="record.isFree != null">
         is_free = #{record.isFree,jdbcType=TINYINT},
       </if>
-      <if test="record.periodType != null">
-        period_type = #{record.periodType,jdbcType=TINYINT},
-      </if>
       <if test="record.resourceId != null">
         resource_id = #{record.resourceId,jdbcType=BIGINT},
+      </if>
+        <if test="record.periodType != null">
+            period_type = #{record.periodType,jdbcType=TINYINT},
       </if>
       <if test="record.liveId != null">
         live_id = #{record.liveId,jdbcType=BIGINT},
@@ -273,8 +273,8 @@
       period_name = #{record.periodName,jdbcType=VARCHAR},
       period_desc = #{record.periodDesc,jdbcType=VARCHAR},
       is_free = #{record.isFree,jdbcType=TINYINT},
-      period_type = #{record.periodType,jdbcType=TINYINT},
       resource_id = #{record.resourceId,jdbcType=BIGINT},
+      period_type = #{record.periodType,jdbcType=TINYINT},
       live_id = #{record.liveId,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -310,11 +310,11 @@
       <if test="isFree != null">
         is_free = #{isFree,jdbcType=TINYINT},
       </if>
+        <if test="resourceId != null">
+            resource_id = #{resourceId,jdbcType=BIGINT},
+        </if>
       <if test="periodType != null">
         period_type = #{periodType,jdbcType=TINYINT},
-      </if>
-      <if test="resourceId != null">
-        resource_id = #{resourceId,jdbcType=BIGINT},
       </if>
       <if test="liveId != null">
         live_id = #{liveId,jdbcType=BIGINT},
@@ -333,8 +333,8 @@
       period_name = #{periodName,jdbcType=VARCHAR},
       period_desc = #{periodDesc,jdbcType=VARCHAR},
       is_free = #{isFree,jdbcType=TINYINT},
+        resource_id = #{resourceId,jdbcType=BIGINT},
       period_type = #{periodType,jdbcType=TINYINT},
-      resource_id = #{resourceId,jdbcType=BIGINT},
       live_id = #{liveId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
