@@ -7,6 +7,7 @@
         <result column="user_id" jdbcType="BIGINT" property="userId"/>
         <result column="login_status" jdbcType="TINYINT" property="loginStatus"/>
         <result column="login_client" jdbcType="TINYINT" property="loginClient"/>
+        <result column="login_type" jdbcType="TINYINT" property="loginType"/>
         <result column="login_ip" jdbcType="VARCHAR" property="loginIp"/>
         <result column="country" jdbcType="VARCHAR" property="country"/>
         <result column="province" jdbcType="VARCHAR" property="province"/>
@@ -76,8 +77,8 @@
     </sql>
     <sql id="Base_Column_List">
         id
-        , gmt_create, user_id, login_status, login_client, login_ip, country, province,
-    city, browser, os
+        , gmt_create, user_id, login_status, login_client, login_type, login_ip, country,
+    province, city, browser, os
     </sql>
     <select id="selectByExample" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UsersLogExample"
             resultMap="BaseResultMap">
@@ -116,13 +117,13 @@
     </delete>
     <insert id="insert" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UsersLog">
         insert into users_log (id, gmt_create, user_id,
-                               login_status, login_client, login_ip,
-                               country, province, city,
-                               browser, os)
+                               login_status, login_client, login_type,
+                               login_ip, country, province,
+                               city, browser, os)
         values (#{id,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{userId,jdbcType=BIGINT},
-                #{loginStatus,jdbcType=TINYINT}, #{loginClient,jdbcType=TINYINT}, #{loginIp,jdbcType=VARCHAR},
-                #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
-                #{browser,jdbcType=VARCHAR}, #{os,jdbcType=VARCHAR})
+                #{loginStatus,jdbcType=TINYINT}, #{loginClient,jdbcType=TINYINT}, #{loginType,jdbcType=TINYINT},
+                #{loginIp,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR},
+                #{city,jdbcType=VARCHAR}, #{browser,jdbcType=VARCHAR}, #{os,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.roncoo.education.user.dao.impl.mapper.entity.UsersLog">
         insert into users_log
@@ -141,6 +142,9 @@
             </if>
             <if test="loginClient != null">
                 login_client,
+            </if>
+            <if test="loginType != null">
+                login_type,
             </if>
             <if test="loginIp != null">
                 login_ip,
@@ -176,6 +180,9 @@
             </if>
             <if test="loginClient != null">
                 #{loginClient,jdbcType=TINYINT},
+            </if>
+            <if test="loginType != null">
+                #{loginType,jdbcType=TINYINT},
             </if>
             <if test="loginIp != null">
                 #{loginIp,jdbcType=VARCHAR},
@@ -222,6 +229,9 @@
             <if test="record.loginClient != null">
                 login_client = #{record.loginClient,jdbcType=TINYINT},
             </if>
+            <if test="record.loginType != null">
+                login_type = #{record.loginType,jdbcType=TINYINT},
+            </if>
             <if test="record.loginIp != null">
                 login_ip = #{record.loginIp,jdbcType=VARCHAR},
             </if>
@@ -252,6 +262,7 @@
         user_id = #{record.userId,jdbcType=BIGINT},
         login_status = #{record.loginStatus,jdbcType=TINYINT},
         login_client = #{record.loginClient,jdbcType=TINYINT},
+        login_type = #{record.loginType,jdbcType=TINYINT},
         login_ip = #{record.loginIp,jdbcType=VARCHAR},
         country = #{record.country,jdbcType=VARCHAR},
         province = #{record.province,jdbcType=VARCHAR},
@@ -276,6 +287,9 @@
             </if>
             <if test="loginClient != null">
                 login_client = #{loginClient,jdbcType=TINYINT},
+            </if>
+            <if test="loginType != null">
+                login_type = #{loginType,jdbcType=TINYINT},
             </if>
             <if test="loginIp != null">
                 login_ip = #{loginIp,jdbcType=VARCHAR},
@@ -304,6 +318,7 @@
             user_id      = #{userId,jdbcType=BIGINT},
             login_status = #{loginStatus,jdbcType=TINYINT},
             login_client = #{loginClient,jdbcType=TINYINT},
+            login_type   = #{loginType,jdbcType=TINYINT},
             login_ip     = #{loginIp,jdbcType=VARCHAR},
             country      = #{country,jdbcType=VARCHAR},
             province     = #{province,jdbcType=VARCHAR},

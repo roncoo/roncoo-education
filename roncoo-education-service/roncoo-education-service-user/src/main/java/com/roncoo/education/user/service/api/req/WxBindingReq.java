@@ -1,5 +1,6 @@
 package com.roncoo.education.user.service.api.req;
 
+import com.roncoo.education.common.core.enums.LoginTypeEnum;
 import com.roncoo.education.common.core.enums.RegisterSourceEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -41,4 +42,13 @@ public class WxBindingReq implements Serializable {
 
     @ApiModelProperty(value = "注册来源", required = false)
     private Integer registerSource = RegisterSourceEnum.SYS_PC_WX.getCode();
+
+    @ApiModelProperty(value = "登录方式", required = false)
+    private Integer loginType = LoginTypeEnum.WX_WEB_AUTH.getCode();
+
+    @ApiModelProperty(value = "浏览器", required = false)
+    private String browser;
+
+    @ApiModelProperty(value = "操作系统", required = false)
+    private String os;
 }

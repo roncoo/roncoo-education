@@ -37,16 +37,13 @@ public class LoginReq implements Serializable {
 
     @ApiModelProperty(value = "登录客户端", required = false)
     private Integer loginClient = LoginClientEnum.PC.getCode();
+
     @ApiModelProperty(value = "登录IP", required = false)
     private String loginIp;
-    @ApiModelProperty(value = "国家", required = false)
-    private String country = "中国";
-    @ApiModelProperty(value = "省", required = false)
-    private String province;
-    @ApiModelProperty(value = "市", required = false)
-    private String city;
+
     @ApiModelProperty(value = "浏览器", required = false)
     private String browser;
+
     @ApiModelProperty(value = "操作系统", required = false)
     private String os;
 }

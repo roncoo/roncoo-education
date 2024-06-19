@@ -11,13 +11,10 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum LoginClientEnum {
+public enum LoginTypeEnum {
 
-    PC(11, "电脑端"),
-    H5(21, "H5端"),
-    MP(31, "小程序端"),
-    ANDROID(41, "安卓端"),
-    IOS(51, "苹果端");
+    PASSWORD(11, "密码登录"),
+    WX_WEB_AUTH(21, "微信网页授权");
 
     private Integer code;
 

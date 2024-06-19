@@ -14,6 +14,8 @@ public class UsersLog implements Serializable {
 
     private Integer loginClient;
 
+    private Integer loginType;
+
     private String loginIp;
 
     private String country;
@@ -66,6 +68,14 @@ public class UsersLog implements Serializable {
 
     public void setLoginClient(Integer loginClient) {
         this.loginClient = loginClient;
+    }
+
+    public Integer getLoginType() {
+        return loginType;
+    }
+
+    public void setLoginType(Integer loginType) {
+        this.loginType = loginType;
     }
 
     public String getLoginIp() {
@@ -127,6 +137,7 @@ public class UsersLog implements Serializable {
         sb.append(", userId=").append(userId);
         sb.append(", loginStatus=").append(loginStatus);
         sb.append(", loginClient=").append(loginClient);
+        sb.append(", loginType=").append(loginType);
         sb.append(", loginIp=").append(loginIp);
         sb.append(", country=").append(country);
         sb.append(", province=").append(province);

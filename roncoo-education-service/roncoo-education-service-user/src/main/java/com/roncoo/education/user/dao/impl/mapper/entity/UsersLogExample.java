@@ -425,6 +425,66 @@ public class UsersLogExample {
             return (Criteria) this;
         }
 
+        public Criteria andLoginTypeIsNull() {
+            addCriterion("login_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTypeIsNotNull() {
+            addCriterion("login_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTypeEqualTo(Integer value) {
+            addCriterion("login_type =", value, "loginType");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTypeNotEqualTo(Integer value) {
+            addCriterion("login_type <>", value, "loginType");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTypeGreaterThan(Integer value) {
+            addCriterion("login_type >", value, "loginType");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("login_type >=", value, "loginType");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTypeLessThan(Integer value) {
+            addCriterion("login_type <", value, "loginType");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("login_type <=", value, "loginType");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTypeIn(List<Integer> values) {
+            addCriterion("login_type in", values, "loginType");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTypeNotIn(List<Integer> values) {
+            addCriterion("login_type not in", values, "loginType");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTypeBetween(Integer value1, Integer value2) {
+            addCriterion("login_type between", value1, value2, "loginType");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("login_type not between", value1, value2, "loginType");
+            return (Criteria) this;
+        }
+
         public Criteria andLoginIpIsNull() {
             addCriterion("login_ip is null");
             return (Criteria) this;

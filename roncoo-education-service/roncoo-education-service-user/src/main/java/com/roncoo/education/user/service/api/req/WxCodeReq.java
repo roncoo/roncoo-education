@@ -2,6 +2,7 @@ package com.roncoo.education.user.service.api.req;
 
 import com.roncoo.education.common.core.enums.ClientTypeEnum;
 import com.roncoo.education.common.core.enums.LoginAuthTypeEnum;
+import com.roncoo.education.common.core.enums.LoginTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -33,4 +34,13 @@ public class WxCodeReq implements Serializable {
      */
     @ApiModelProperty(value = "客户端类型，参考：ClientTypeEnum")
     private Integer clientType;
+
+    @ApiModelProperty(value = "登录方式", required = false)
+    private Integer loginType = LoginTypeEnum.WX_WEB_AUTH.getCode();
+
+    @ApiModelProperty(value = "浏览器", required = false)
+    private String browser;
+
+    @ApiModelProperty(value = "操作系统", required = false)
+    private String os;
 }
