@@ -39,6 +39,9 @@ public class AdminUsersLogViewResp implements Serializable {
     @ApiModelProperty(value = "登录客户端")
     private Integer loginClient;
 
+    @ApiModelProperty(value = "登录方式")
+    private Integer loginType;
+
     @ApiModelProperty(value = "登录IP")
     private String loginIp;
 
