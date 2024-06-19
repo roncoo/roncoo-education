@@ -13,7 +13,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum LoginTypeEnum {
 
-    PASSWORD(11, "密码登录"),
+    PASSWORD(1, "密码登录"),
     WX_WEB_AUTH(21, "微信网页授权");
 
     private Integer code;
