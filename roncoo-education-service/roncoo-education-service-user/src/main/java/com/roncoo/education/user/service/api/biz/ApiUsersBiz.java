@@ -110,10 +110,7 @@ public class ApiUsersBiz extends BaseBiz {
         // 用户注册
         user = register(req.getMobile(), mobilePsw, req.getRegisterSource(), null, null);
 
-        // 日志
-        log(user.getId(), LoginStatusEnum.REGISTER, BeanUtil.copyProperties(req, UsersLog.class));
-
-        return Result.success(login(user.getId(), user.getMobile()));
+        return Result.success(login(user.getId(), user.getMobile(), LoginStatusEnum.REGISTER, BeanUtil.copyProperties(req, UsersLog.class)));
     }
 
     public Result<UsersLoginResp> login(LoginReq req) {
@@ -151,10 +148,7 @@ public class ApiUsersBiz extends BaseBiz {
             return Result.error("账号或者密码不正确");
         }
 
-        // 日志
-        log(user.getId(), LoginStatusEnum.SUCCESS, BeanUtil.copyProperties(req, UsersLog.class));
-
-        return Result.success(login(user.getId(), user.getMobile()));
+        return Result.success(login(user.getId(), user.getMobile(), LoginStatusEnum.SUCCESS, BeanUtil.copyProperties(req, UsersLog.class)));
     }
 
     private String decrypt(String password) {
@@ -204,18 +198,6 @@ public class ApiUsersBiz extends BaseBiz {
         usersAccount.setSign(Md5Util.md5(usersAccount.getUserId().toString(), usersAccount.getAvailableAmount().toPlainString(), usersAccount.getFreezeAmount().toPlainString()));
         usersAccountDao.save(usersAccount);
         return user;
-    }
-
-    private void log(Long userId, LoginStatusEnum status, UsersLog record) {
-        record.setUserId(userId);
-        record.setLoginStatus(status.getCode());
-        record.setLoginIp(ServletUtil.getClientIP(request));
-        IpUtil.IpInfo ipInfo = getIpInfo(record.getLoginIp());
-        if (ObjectUtil.isNotNull(ipInfo)) {
-            record.setProvince(ipInfo.getPro());
-            record.setCity(ipInfo.getCity());
-        }
-        usersLogDao.save(record);
     }
 
     public Result<String> sendCode(SendCodeReq req) {
@@ -358,7 +340,7 @@ public class ApiUsersBiz extends BaseBiz {
         // 已经绑定
         codeResp.setBindingStatus(true);
         // 登录
-        UsersLoginResp loginResp = login(users.getId(), users.getMobile());
+        UsersLoginResp loginResp = login(users.getId(), users.getMobile(), LoginStatusEnum.SUCCESS, BeanUtil.copyProperties(req, UsersLog.class));
         codeResp.setMobile(loginResp.getMobile());
         codeResp.setToken(loginResp.getToken());
         return Result.success(codeResp);
@@ -393,25 +375,37 @@ public class ApiUsersBiz extends BaseBiz {
             newUser.setRegisterSource(req.getRegisterSource());
             usersDao.updateById(newUser);
 
-            return Result.success(login(user.getId(), user.getMobile()));
+            return Result.success(login(user.getId(), user.getMobile(), LoginStatusEnum.SUCCESS, BeanUtil.copyProperties(req, UsersLog.class)));
         }
 
         // 用户注册
         user = register(req.getMobile(), IdUtil.fastUUID(), req.getRegisterSource(), req.getUnionId(), req.getOpenId());
 
-        // 日志
-        log(user.getId(), LoginStatusEnum.REGISTER, BeanUtil.copyProperties(req, UsersLog.class));
-
-        return Result.success(login(user.getId(), user.getMobile()));
+        return Result.success(login(user.getId(), user.getMobile(), LoginStatusEnum.REGISTER, BeanUtil.copyProperties(req, UsersLog.class)));
     }
 
 
-    private UsersLoginResp login(Long userId, String mobile) {
+    private UsersLoginResp login(Long userId, String mobile, LoginStatusEnum loginStatusEnum, UsersLog usersLog) {
+        // 日志
+        log(userId, loginStatusEnum, usersLog);
+
         UsersLoginResp resp = new UsersLoginResp();
         resp.setMobile(mobile);
         resp.setToken(JwtUtil.create(userId, JwtUtil.DATE));
         // token，放入缓存
         cacheRedis.set(resp.getToken(), userId, 1, TimeUnit.DAYS);
         return resp;
+    }
+
+    private void log(Long userId, LoginStatusEnum status, UsersLog record) {
+        record.setUserId(userId);
+        record.setLoginStatus(status.getCode());
+        record.setLoginIp(ServletUtil.getClientIP(request));
+        IpUtil.IpInfo ipInfo = getIpInfo(record.getLoginIp());
+        if (ObjectUtil.isNotNull(ipInfo)) {
+            record.setProvince(ipInfo.getPro());
+            record.setCity(ipInfo.getCity());
+        }
+        usersLogDao.save(record);
     }
 }
