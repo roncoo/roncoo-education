@@ -13,7 +13,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum LoginClientEnum {
 
-    PC(11, "电脑端"),
+    PC(1, "电脑端"),
     H5(21, "H5端"),
     MP(31, "小程序端"),
     ANDROID(41, "安卓端"),
