@@ -2,6 +2,7 @@ package com.roncoo.education.user.service.admin.biz;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.DesensitizedUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
@@ -47,6 +48,12 @@ public class AdminUsersLogBiz extends BaseBiz {
     public Result<Page<AdminUsersLogPageResp>> page(AdminUsersLogPageReq req) {
         UsersLogExample example = new UsersLogExample();
         UsersLogExample.Criteria c = example.createCriteria();
+        if (ObjectUtil.isNotEmpty(req.getLoginClient())) {
+            c.andLoginClientEqualTo(req.getLoginClient());
+        }
+        if (ObjectUtil.isNotEmpty(req.getLoginType())) {
+            c.andLoginTypeEqualTo(req.getLoginType());
+        }
         example.setOrderByClause("id desc");
         Page<UsersLog> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
         Page<AdminUsersLogPageResp> respPage = PageUtil.transform(page, AdminUsersLogPageResp.class);

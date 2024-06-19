@@ -21,6 +21,12 @@ public class AdminUsersLogPageReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty(value = "登录客户端")
+    private Integer loginClient;
+
+    @ApiModelProperty(value = "登录方式")
+    private Integer loginType;
+
     @ApiModelProperty(value = "当前页")
     private int pageCurrent = 1;
 
