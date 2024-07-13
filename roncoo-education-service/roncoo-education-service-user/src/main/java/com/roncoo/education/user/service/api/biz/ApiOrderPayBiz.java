@@ -68,7 +68,7 @@ public class ApiOrderPayBiz extends BaseBiz {
         return resp.getReturnMsg();
     }
 
-    public void handlerOrder(Long serialNumber) {
+    private void handlerOrder(Long serialNumber) {
         OrderPay orderPay = dao.getBySerialNumber(serialNumber);
         if (ObjectUtil.isNotEmpty(orderPay) && !orderPay.getOrderStatus().equals(OrderStatusEnum.SUCCESS.getCode())) {
             OrderInfo orderInfo = orderInfoDao.getByOrderNo(orderPay.getOrderNo());
