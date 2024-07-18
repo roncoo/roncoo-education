@@ -74,7 +74,7 @@ public class UserCourseCollectDaoImpl implements UserCourseCollectDao {
     }
 
     @Override
-    public UserCourseCollect getByCouserIdAndUserId(Long courseId, Long userId) {
+    public UserCourseCollect getByCourseIdAndUserId(Long courseId, Long userId) {
         UserCourseCollectExample example = new UserCourseCollectExample();
         example.createCriteria().andCourseIdEqualTo(courseId).andUserIdEqualTo(userId);
         List<UserCourseCollect> list = this.mapper.selectByExample(example);

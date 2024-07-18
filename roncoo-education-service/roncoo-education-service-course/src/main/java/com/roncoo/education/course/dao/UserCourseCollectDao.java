@@ -72,5 +72,5 @@ public interface UserCourseCollectDao {
      */
     int countByExample(UserCourseCollectExample example);
 
-    UserCourseCollect getByCouserIdAndUserId(Long courseId, Long userId);
+    UserCourseCollect getByCourseIdAndUserId(Long courseId, Long userId);
 }
