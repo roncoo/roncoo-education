@@ -43,8 +43,10 @@ public class AdminLiveBiz extends BaseBiz {
 
     @NotNull
     private final LiveDao dao;
+
     @NotNull
     private final IFeignSysConfig feignSysConfig;
+    @NotNull
     private final IFeignLecturer feignLecturer;
 
     /**
