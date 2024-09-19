@@ -52,6 +52,7 @@ public class AdminUserCourseRecordResp implements Serializable {
 
     @ApiModelProperty(value = "课程ID")
     private Long courseId;
+
     @ApiModelProperty(value = "购买类型(1支付，2免费)")
     private Integer buyType;
 
