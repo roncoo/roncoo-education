@@ -3,15 +3,19 @@
  */
 package com.roncoo.education.common.core.tools;
 
+import cn.hutool.extra.spring.SpringUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.roncoo.education.common.core.base.NacosConfig;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author wujing
@@ -19,11 +23,10 @@ import java.util.Date;
 @Slf4j
 public final class JwtUtil {
 
-    private static final String TOKEN_SECRET = "eyJhbGciOiJIUzI1NiJ9";
+    private static final Map<String, String> secretMap = new HashMap<>();
     private static final String ISSUER = "RONCOO";
     public static final String USERID = "userId";
-    // 1个月
-    public static final Long DATE = 30 * 24 * 3600 * 1000L;
+    public static final Long DATE = 30 * 24 * 3600 * 1000L; // 1个月
 
     /**
      * @param userId
@@ -35,7 +38,7 @@ public final class JwtUtil {
      */
     public static String create(Long userId, Long date) {
         try {
-            return JWT.create().withIssuer(ISSUER).withClaim(USERID, userId.toString()).withExpiresAt(new Date(System.currentTimeMillis() + date)).sign(Algorithm.HMAC256(TOKEN_SECRET));
+            return JWT.create().withIssuer(ISSUER).withClaim(USERID, userId.toString()).withExpiresAt(new Date(System.currentTimeMillis() + date)).sign(Algorithm.HMAC256(getSecret()));
         } catch (Exception e) {
             log.error("JWT生成失败", e);
             return "";
@@ -50,7 +53,7 @@ public final class JwtUtil {
      * @throws UnsupportedEncodingException
      */
     public static DecodedJWT verify(String token) throws JWTVerificationException, IllegalArgumentException {
-        return JWT.require(Algorithm.HMAC256(TOKEN_SECRET)).withIssuer(ISSUER).build().verify(token);
+        return JWT.require(Algorithm.HMAC256(getSecret())).withIssuer(ISSUER).build().verify(token);
     }
 
     /**
@@ -60,4 +63,20 @@ public final class JwtUtil {
         return Long.valueOf(decodedJWT.getClaim(USERID).asString());
     }
 
+    /**
+     * @return
+     */
+    private static String getSecret() {
+        String secret = secretMap.get(ISSUER);
+        if (secret == null) {
+            try {
+                secret = SpringUtil.getBean(NacosConfig.class).getSecret();
+            } catch (Exception e) {
+                log.warn("请在app.properties配置：jwt.token.secret", e);
+                secret = "JhbGciOiJIUzI1NiJ9ey";
+            }
+            secretMap.put(ISSUER, secret);
+        }
+        return secret;
+    }
 }
