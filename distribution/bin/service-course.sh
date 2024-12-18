@@ -2,7 +2,8 @@
 # Copyright 2016-现在 LingKe, Co., Ltd.
 
 if [ -z "$JAVA_HOME" ]; then
-  error_exit "Please set the JAVA_HOME variable in your environment"
+  echo "Please set the JAVA_HOME variable in your environment"
+  exit 1
 fi
 export JAVA="${JAVA_HOME}/bin/java"
 export SERVER="course"
