@@ -48,16 +48,22 @@ Cloud为核心框架。系统目前主要功能有课程点播功能，支持多
 
 ### 演示地址
 
-* 门户系统：[https://eduos.roncoo.net/](https://eduos.roncoo.net/)
-* 管理系统：[https://eduos.roncoo.net/admin/](https://eduos.roncoo.net/admin/)
+* 门户系统：[https://eduos.roncoos.com/](https://eduos.roncoos.com/)
+* 管理系统：[https://eduos.roncoos.com/admin/](https://eduos.roncoos.com/admin/)
 * 前端技术体系：Vue3 + Nuxt3 + Vite5 + Vue-Router + Element-Plus + Pinia + Axios
 * 后端技术体系：Spring Cloud Alibaba2021 + MySQL8 + Nacos + Seata + Mybatis + Druid
 
 ### 源码地址
 
-* 后端系统：roncoo-education（核心框架：Spring Cloud Alibaba）：[码云](https://gitee.com/roncoocom/roncoo-education) | [Github](https://github.com/roncoo/roncoo-education)
-* 门户系统：roncoo-education-web（核心框架：Nuxt3）：[码云](https://gitee.com/roncoocom/roncoo-education-web) | [Github](https://github.com/roncoo/roncoo-education-web)
-* 管理系统：roncoo-education-admin（核心框架：Vue3）：[码云](https://gitee.com/roncoocom/roncoo-education-admin) | [Github](https://github.com/roncoo/roncoo-education-admin)
+* 后端系统：roncoo-education（核心框架：Spring Cloud
+  Alibaba）：[码云](https://gitee.com/roncoocom/roncoo-education) | [Github](https://github.com/roncoo/roncoo-education)
+*
+
+门户系统：roncoo-education-web（核心框架：Nuxt3）：[码云](https://gitee.com/roncoocom/roncoo-education-web) | [Github](https://github.com/roncoo/roncoo-education-web)
+
+*
+
+管理系统：roncoo-education-admin（核心框架：Vue3）：[码云](https://gitee.com/roncoocom/roncoo-education-admin) | [Github](https://github.com/roncoo/roncoo-education-admin)
 
 ---
 
