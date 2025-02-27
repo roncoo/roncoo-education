@@ -26,7 +26,12 @@ public enum LoginAuthTypeEnum {
     /**
      * 微信小程序端
      */
-    MA(3, "小程序");
+    MA(3, "小程序"),
+
+    /**
+     * 支付宝登录
+     */
+    ALIPAY(4, "支付宝");
 
     /**
      * 编码

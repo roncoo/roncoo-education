@@ -322,6 +322,24 @@ public class ApiUsersBiz extends BaseBiz {
         log.error("登录类型暂没支持={}", JsonUtil.toJsonString(req));
         return Result.error("登录类型暂没支持");
     }
+    
+    public Result<String> alipayLogin(AlipayLoginReq req) {
+        LoginConfig loginConfig = feignSysConfig.getLogin();
+        if (req.getLoginAuthType().equals(LoginAuthTypeEnum.ALIPAY.getCode())) {
+            if (!loginConfig.getAlipayLoginEnable().equals("1")) {
+                return Result.error("支付宝登录没开启");
+            }
+            // 构建支付宝授权URL
+            String authUrl = "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm" +
+                    "?app_id=" + loginConfig.getAlipayLoginAppId() +
+                    "&scope=auth_user" +
+                    "&redirect_uri=" + req.getRedirectUrl() +
+                    "&state=" + LoginAuthTypeEnum.ALIPAY.name();
+            return Result.success(authUrl);
+        }
+        log.error("登录类型暂没支持={}", JsonUtil.toJsonString(req));
+        return Result.error("登录类型暂没支持");
+    }
 
     public Result<WxCodeResp> wxCode(WxCodeReq req) throws WxErrorException {
         LoginConfig loginConfig = feignSysConfig.getLogin();
@@ -362,9 +380,87 @@ public class ApiUsersBiz extends BaseBiz {
         codeResp.setToken(loginResp.getToken());
         return Result.success(codeResp);
     }
+    
+    public Result<WxCodeResp> alipayCode(AlipayCodeReq req) throws Exception {
+        LoginConfig loginConfig = feignSysConfig.getLogin();
+        WxCodeResp codeResp = new WxCodeResp();
+        if (req.getLoginAuthType().equals(LoginAuthTypeEnum.ALIPAY.getCode())) {
+            // 支付宝登录
+            codeResp.setUserInfo(AlipayOAuthUtil.getAuthInfo(
+                    loginConfig.getAlipayLoginAppId(),
+                    loginConfig.getAlipayLoginAppSecret(),
+                    loginConfig.getAliPayPublicKey(),
+                    req.getCode()));
+        }
+
+        if (codeResp.getUserInfo() == null) {
+            return Result.error("获取支付宝用户信息失败");
+        }
+
+        Users users = usersDao.getByUnionIdOrOpenId(codeResp.getUserInfo().getUnionId(), codeResp.getUserInfo().getOpenid());
+        if (ObjectUtil.isNull(users)) {
+            // 没绑定
+            codeResp.setBindingStatus(false);
+            // 缓存用户信息
+            if (StringUtils.hasText(codeResp.getUserInfo().getUnionId())) {
+                cacheRedis.set(Constants.RedisPre.WX_USER + codeResp.getUserInfo().getUnionId(), codeResp.getUserInfo(), 1, TimeUnit.DAYS);
+            } else {
+                cacheRedis.set(Constants.RedisPre.WX_USER + codeResp.getUserInfo().getOpenid(), codeResp.getUserInfo(), 1, TimeUnit.DAYS);
+            }
+            return Result.success(codeResp);
+        }
+
+        // 已经绑定
+        codeResp.setBindingStatus(true);
+        // 登录
+        UsersLoginResp loginResp = login(users.getId(), users.getMobile());
+        codeResp.setMobile(loginResp.getMobile());
+        codeResp.setToken(loginResp.getToken());
+        return Result.success(codeResp);
+    }
 
 
     public Result<UsersLoginResp> wxBinding(WxBindingReq req) {
+        if (!StringUtils.hasText(req.getMobile())) {
+            return Result.error("手机号不能为空");
+        }
+        // 验证码校验
+        String redisCode = cacheRedis.get(Constants.RedisPre.CODE + req.getMobile());
+        if (!StringUtils.hasText(redisCode)) {
+            return Result.error("验证码已经过期");
+        }
+        if (!req.getCode().equals(redisCode)) {
+            return Result.error("验证码不正确");
+        }
+        // 删除验证码缓存
+        cacheRedis.delete(Constants.RedisPre.CODE + req.getMobile());
+
+        // 手机号重复校验
+        Users user = usersDao.getByMobile(req.getMobile());
+        if (ObjectUtil.isNotNull(user)) {
+            if (StringUtils.hasText(user.getUnionId()) || StringUtils.hasText(user.getOpenId())) {
+                return Result.error("该手机号已绑定，请更换其他手机号");
+            }
+            Users newUser = new Users();
+            newUser.setId(user.getId());
+            newUser.setUnionId(req.getUnionId());
+            newUser.setOpenId(req.getOpenId());
+            newUser.setRegisterSource(req.getRegisterSource());
+            usersDao.updateById(newUser);
+
+            return Result.success(login(user.getId(), user.getMobile()));
+        }
+
+        // 用户注册
+        user = register(req.getMobile(), IdUtil.fastUUID(), req.getRegisterSource(), req.getUnionId(), req.getOpenId());
+
+        // 日志
+        log(user.getId(), LoginStatusEnum.REGISTER, BeanUtil.copyProperties(req, LogLogin.class));
+
+        return Result.success(login(user.getId(), user.getMobile()));
+    }
+    
+    public Result<UsersLoginResp> alipayBinding(AlipayBindingReq req) {
         if (!StringUtils.hasText(req.getMobile())) {
             return Result.error("手机号不能为空");
         }
