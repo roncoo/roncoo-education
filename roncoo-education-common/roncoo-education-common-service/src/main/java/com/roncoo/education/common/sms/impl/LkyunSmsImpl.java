@@ -27,6 +27,11 @@ public class LkyunSmsImpl implements SmsFace {
     public Boolean sendVerCode(String mobile, String code, Sms sms) {
         return lkyun(mobile, getParamForCode(code), sms.getLkyunSmsSignName(), sms.getLkyunSmsAuthCode(), sms.getLkyunSmsAccessKeyId(), sms.getLkyunSmsAccessKeySecret());
     }
+    
+    @Override
+    public Boolean sendPurchaseSuccess(String mobile, String courseName, Long orderNo, Sms sms) {
+        return lkyun(mobile, getParamForPurchase(courseName, orderNo), sms.getLkyunSmsSignName(), sms.getLkyunSmsAuthCode(), sms.getLkyunSmsAccessKeyId(), sms.getLkyunSmsAccessKeySecret());
+    }
 
     /**
      * 领课云
@@ -64,6 +69,13 @@ public class LkyunSmsImpl implements SmsFace {
     private static String getParamForCode(String code) {
         HashMap<String, String> map = new HashMap<>();
         map.put("code", code);
+        return JsonUtil.toJsonString(map);
+    }
+    
+    private static String getParamForPurchase(String courseName, Long orderNo) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("courseName", courseName);
+        map.put("orderNo", orderNo.toString());
         return JsonUtil.toJsonString(map);
     }
 
