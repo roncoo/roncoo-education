@@ -21,11 +21,13 @@ public class Sms implements Serializable {
     private String lkyunSmsAccessKeyId;
     private String lkyunSmsAccessKeySecret;
     private String lkyunSmsAuthCode;
+    private String lkyunSmsPurchaseCode;
 
     // Aliyun短信签名
     private String aliyunSmsSignName;
     private String aliyunSmsAccessKeyId;
     private String aliyunSmsAccessKeySecret;
     private String aliyunSmsAuthCode;
+    private String aliyunSmsPurchaseCode;
 
 }
