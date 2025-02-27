@@ -54,6 +54,8 @@ public class ApiOrderPayBiz extends BaseBiz {
 
     @NotNull
     private final Map<String, PayFace> payFaceMap;
+    @NotNull
+    private final Map<String, SmsFace> smsFaceMap;
 
     @GlobalTransactional(rollbackFor = Exception.class)
     public String notify(HttpServletRequest request, Integer payModel, String payImpl) {
@@ -87,7 +89,6 @@ public class ApiOrderPayBiz extends BaseBiz {
                 updateOrderInfo(orderInfo);
                 // 课程绑定用户
                 feignUserCourse.binding(new UserCourseBindingQO().setCourseId(orderInfo.getCourseId()).setUserId(orderInfo.getUserId()).setBuyType(BuyTypeEnum.BUY.getCode()));
-                
                 // 发送购买成功短信通知
                 sendPurchaseSuccessSms(orderInfo);
             }
@@ -116,7 +117,7 @@ public class ApiOrderPayBiz extends BaseBiz {
         req.setAliPayConfig(payConfig.getAliPayConfig());
         req.setWxPayConfig(payConfig.getWxPayConfig());
     }
-    
+
     /**
      * 发送购买成功短信通知
      *
@@ -130,15 +131,15 @@ public class ApiOrderPayBiz extends BaseBiz {
                 log.error("发送购买成功短信通知失败，未找到课程信息，courseId={}", orderInfo.getCourseId());
                 return;
             }
-            
+
             // 获取短信配置
             Sms sms = feignSysConfig.getSms();
-            SmsFace smsFace = payFaceMap.get(SmsPlatformEnum.byCode(sms.getSmsPlatform()).getMode());
+            SmsFace smsFace = smsFaceMap.get(SmsPlatformEnum.byCode(sms.getSmsPlatform()).getMode());
             if (ObjectUtil.isEmpty(smsFace)) {
                 log.error("发送购买成功短信通知失败，未找到短信服务，smsPlatform={}", sms.getSmsPlatform());
                 return;
             }
-            
+
             // 发送短信
             smsFace.sendPurchaseSuccess(orderInfo.getMobile(), courseViewVO.getCourseName(), orderInfo.getOrderNo(), sms);
         } catch (Exception e) {
