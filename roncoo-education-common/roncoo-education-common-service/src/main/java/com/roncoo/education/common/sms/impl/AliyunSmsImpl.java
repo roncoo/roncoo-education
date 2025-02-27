@@ -27,6 +27,11 @@ public class AliyunSmsImpl implements SmsFace {
     public Boolean sendVerCode(String mobile, String code, Sms sms) {
         return aliyun(mobile, getParamForCode(code), sms.getAliyunSmsSignName(), sms.getAliyunSmsAuthCode(), sms.getAliyunSmsAccessKeyId(), sms.getAliyunSmsAccessKeySecret());
     }
+    
+    @Override
+    public Boolean sendPurchaseSuccess(String mobile, String courseName, Long orderNo, Sms sms) {
+        return aliyun(mobile, getParamForPurchase(courseName, orderNo), sms.getAliyunSmsSignName(), sms.getAliyunSmsAuthCode(), sms.getAliyunSmsAccessKeyId(), sms.getAliyunSmsAccessKeySecret());
+    }
 
     /**
      * 阿里云
@@ -71,6 +76,13 @@ public class AliyunSmsImpl implements SmsFace {
     private static String getParamForCode(String code) {
         HashMap<String, String> map = new HashMap<>();
         map.put("code", code);
+        return JsonUtil.toJsonString(map);
+    }
+    
+    private static String getParamForPurchase(String courseName, Long orderNo) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("courseName", courseName);
+        map.put("orderNo", orderNo.toString());
         return JsonUtil.toJsonString(map);
     }
 }
