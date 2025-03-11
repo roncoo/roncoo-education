@@ -15,4 +15,15 @@ public interface SmsFace {
      * @return
      */
     Boolean sendVerCode(String mobile, String code, Sms sms);
+    
+    /**
+     * 发送课程购买成功通知
+     *
+     * @param mobile 手机
+     * @param courseName 课程名称
+     * @param orderNo 订单号
+     * @param sms
+     * @return
+     */
+    Boolean sendPurchaseSuccess(String mobile, String courseName, Long orderNo, Sms sms);
 }

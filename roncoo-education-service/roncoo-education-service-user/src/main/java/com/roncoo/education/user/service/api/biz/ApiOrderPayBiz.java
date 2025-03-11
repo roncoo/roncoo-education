@@ -3,14 +3,19 @@ package com.roncoo.education.user.service.api.biz;
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.enums.BuyTypeEnum;
 import com.roncoo.education.common.core.enums.OrderStatusEnum;
+import com.roncoo.education.common.core.enums.SmsPlatformEnum;
 import com.roncoo.education.common.core.tools.JsonUtil;
 import com.roncoo.education.common.pay.PayFace;
 import com.roncoo.education.common.pay.req.TradeNotifyReq;
 import com.roncoo.education.common.pay.resp.TradeNotifyResp;
 import com.roncoo.education.common.pay.util.TradeStatusEnum;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.sms.Sms;
+import com.roncoo.education.common.sms.SmsFace;
+import com.roncoo.education.course.feign.interfaces.IFeignCourse;
 import com.roncoo.education.course.feign.interfaces.IFeignUserCourse;
 import com.roncoo.education.course.feign.interfaces.qo.UserCourseBindingQO;
+import com.roncoo.education.course.feign.interfaces.vo.CourseViewVO;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.PayConfig;
 import com.roncoo.education.user.dao.OrderInfoDao;
@@ -44,9 +49,13 @@ public class ApiOrderPayBiz extends BaseBiz {
     private final IFeignSysConfig feignSysConfig;
     @NotNull
     private final IFeignUserCourse feignUserCourse;
+    @NotNull
+    private final IFeignCourse feignCourse;
 
     @NotNull
     private final Map<String, PayFace> payFaceMap;
+    @NotNull
+    private final Map<String, SmsFace> smsFaceMap;
 
     @GlobalTransactional(rollbackFor = Exception.class)
     public String notify(HttpServletRequest request, Integer payModel, String payImpl) {
@@ -80,6 +89,8 @@ public class ApiOrderPayBiz extends BaseBiz {
                 updateOrderInfo(orderInfo);
                 // 课程绑定用户
                 feignUserCourse.binding(new UserCourseBindingQO().setCourseId(orderInfo.getCourseId()).setUserId(orderInfo.getUserId()).setBuyType(BuyTypeEnum.BUY.getCode()));
+                // 发送购买成功短信通知
+                sendPurchaseSuccessSms(orderInfo);
             }
         }
     }
@@ -105,6 +116,35 @@ public class ApiOrderPayBiz extends BaseBiz {
         PayConfig payConfig = feignSysConfig.getPay();
         req.setAliPayConfig(payConfig.getAliPayConfig());
         req.setWxPayConfig(payConfig.getWxPayConfig());
+    }
+
+    /**
+     * 发送购买成功短信通知
+     *
+     * @param orderInfo 订单信息
+     */
+    private void sendPurchaseSuccessSms(OrderInfo orderInfo) {
+        try {
+            // 获取课程信息
+            CourseViewVO courseViewVO = feignCourse.getById(orderInfo.getCourseId());
+            if (ObjectUtil.isEmpty(courseViewVO)) {
+                log.error("发送购买成功短信通知失败，未找到课程信息，courseId={}", orderInfo.getCourseId());
+                return;
+            }
+
+            // 获取短信配置
+            Sms sms = feignSysConfig.getSms();
+            SmsFace smsFace = smsFaceMap.get(SmsPlatformEnum.byCode(sms.getSmsPlatform()).getMode());
+            if (ObjectUtil.isEmpty(smsFace)) {
+                log.error("发送购买成功短信通知失败，未找到短信服务，smsPlatform={}", sms.getSmsPlatform());
+                return;
+            }
+
+            // 发送短信
+            smsFace.sendPurchaseSuccess(orderInfo.getMobile(), courseViewVO.getCourseName(), orderInfo.getOrderNo(), sms);
+        } catch (Exception e) {
+            log.error("发送购买成功短信通知失败", e);
+        }
     }
 
     /**
