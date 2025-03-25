@@ -70,4 +70,19 @@ public class LoginConfig implements Serializable {
      * 小程序App Secret
      */
     private String wxMaLoginAppSecret;
+
+    /**
+     * 支付宝登录
+     */
+    private String alipayLoginEnable;
+
+    /**
+     * 支付宝App ID
+     */
+    private String alipayLoginAppId;
+
+    /**
+     * 支付宝App Secret
+     */
+    private String alipayLoginAppSecret;
 }
