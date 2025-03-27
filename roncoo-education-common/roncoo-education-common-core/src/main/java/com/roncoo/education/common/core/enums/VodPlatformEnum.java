@@ -14,11 +14,6 @@ import lombok.Getter;
 public enum VodPlatformEnum {
 
     /**
-     * 领课云，支持定制，需付费购买，请联系作者：18302045627
-     */
-    PRIVATEY(1, "领课云", "priy%"),
-
-    /**
      * 保利威
      */
     POLYV(2, "保利威", "polyv%"),
@@ -31,7 +26,12 @@ public enum VodPlatformEnum {
     /**
      * 获得场景
      */
-    BOKECC(4, "获得场景(待实现)", "bokecc%");
+    BOKECC(4, "获得场景(待实现)", "bokecc%"),
+
+    /**
+     * 领课云，支持定制，需付费购买，请联系作者：18302045627
+     */
+    PRIVATEY(1, "领课云", "priy%");
 
     /**
      * 编码

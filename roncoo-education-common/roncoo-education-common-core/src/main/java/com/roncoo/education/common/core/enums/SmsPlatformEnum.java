@@ -10,10 +10,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum SmsPlatformEnum {
-    /**
-     * 领课云
-     */
-    LK_YUN(1, "领课云", "lkyun%", "lkyunSms"),
 
     /**
      * 阿里云
@@ -28,7 +24,12 @@ public enum SmsPlatformEnum {
     /**
      * 华为云
      */
-    HUAWEI_YUN(4, "华为云(待接入)", "huawei%", "huaweiSms");
+    HUAWEI_YUN(4, "华为云(待接入)", "huawei%", "huaweiSms"),
+
+    /**
+     * 领课云
+     */
+    LK_YUN(1, "领课云", "lkyun%", "lkyunSms");
 
     /**
      * 编码

@@ -14,11 +14,6 @@ import lombok.Getter;
 public enum LivePlatformEnum {
 
     /**
-     * 领课云，只支持点播，暂不支持直播
-     */
-//    PRIVATEY(1, "领课云", "livePriy%"),
-
-    /**
      * 保利威
      */
     POLYV(2, "保利威", "livePolyv%"),
@@ -32,6 +27,11 @@ public enum LivePlatformEnum {
      * 获得场景
      */
     BOKECC(4, "获得场景(待实现)", "liveBokecc%");
+
+    /**
+     * 领课云，只支持点播，暂不支持直播
+     */
+    // PRIVATEY(1, "领课云", "livePriy%");
 
     /**
      * 编码
