@@ -84,4 +84,21 @@ public class ApiUsersController {
         return biz.wxBinding(req);
     }
 
+    @ApiOperation(value = "支付宝登录，获取授权地址", notes = "返回支付宝登录授权地址")
+    @PostMapping(value = "/alipay/login")
+    public Result<String> alipayLogin(@RequestBody AlipayLoginReq req) {
+        return biz.alipayLogin(req);
+    }
+
+    @ApiOperation(value = "支付宝登录，获取登录信息", notes = "返回用登录信息")
+    @PostMapping(value = "/alipay/code")
+    public Result<WxCodeResp> alipayCode(@RequestBody AlipayCodeReq req) throws Exception {
+        return biz.alipayCode(req);
+    }
+
+    @ApiOperation(value = "支付宝登录，绑定用户信息", notes = "返回用登录信息")
+    @PostMapping(value = "/alipay/binding")
+    public Result<UsersLoginResp> alipayBinding(@RequestBody AlipayBindingReq req) {
+        return biz.alipayBinding(req);
+    }
 }
