@@ -11,7 +11,7 @@ export BASE_DIR=$(cd $(dirname "$0")/..; pwd)
 export CONFIG_LOCATION=file:${BASE_DIR}/conf/
 
 # JVM Configuration
-JAVA_OPT="${JAVA_OPT} -Xms512m -Xmx512m"
+JAVA_OPT="${JAVA_OPT} -Xms256m -Xmx256m"
 JAVA_OPT="${JAVA_OPT} -jar ${BASE_DIR}/target/${SERVER}.jar"
 JAVA_OPT="${JAVA_OPT} --spring.config.additional-location=${CONFIG_LOCATION}"
 
