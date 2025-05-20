@@ -2,7 +2,6 @@ package com.roncoo.education.course.test;
 
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.tools.JsonUtil;
-import com.roncoo.education.course.job.CourseJob;
 import com.roncoo.education.course.service.api.biz.ApiCourseBiz;
 import com.roncoo.education.course.service.api.req.ApiCoursePageReq;
 import com.roncoo.education.course.service.biz.req.CourseReq;
@@ -18,20 +17,12 @@ public class CourseTest extends BaseTest {
     @Resource
     private ApiCourseBiz courseBiz;
 
-    @Resource
-    private CourseJob courseJob;
-
     @Test
     public void view() {
         CourseReq req = new CourseReq();
         req.setCourseId(1080759557655564289L);
         Result<CourseResp> result = courseBiz.view(req);
         log.info("course={}", result.getData());
-    }
-
-    @Test
-    public void es() {
-        courseJob.course();
     }
 
     @Test

@@ -1,12 +1,9 @@
 package com.roncoo.education.user.service.admin.biz;
 
-import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.elasticsearch.EsLecturer;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.user.dao.LecturerDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.Lecturer;
@@ -18,16 +15,10 @@ import com.roncoo.education.user.service.admin.req.AdminLecturerSaveReq;
 import com.roncoo.education.user.service.admin.resp.AdminLecturerPageResp;
 import com.roncoo.education.user.service.admin.resp.AdminLecturerViewResp;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
-import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
-import org.springframework.data.elasticsearch.core.query.IndexQuery;
-import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * ADMIN-讲师信息
@@ -37,9 +28,6 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class AdminLecturerBiz extends BaseBiz {
-
-    @NotNull
-    private final ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     @NotNull
     private final LecturerDao dao;
@@ -71,11 +59,6 @@ public class AdminLecturerBiz extends BaseBiz {
     public Result<String> save(AdminLecturerSaveReq req) {
         Lecturer record = BeanUtil.copyProperties(req, Lecturer.class);
         if (dao.save(record) > 0) {
-
-            // 添加ES
-            EsLecturer esLecturer = BeanUtil.copyProperties(record, EsLecturer.class);
-            elasticsearchRestTemplate.index(new IndexQueryBuilder().withObject(esLecturer).build(), IndexCoordinates.of(EsLecturer.LECTURER));
-
             return Result.success("操作成功");
         }
         return Result.error("操作失败");
@@ -100,9 +83,6 @@ public class AdminLecturerBiz extends BaseBiz {
     public Result<String> edit(AdminLecturerEditReq req) {
         Lecturer record = BeanUtil.copyProperties(req, Lecturer.class);
         if (dao.updateById(record) > 0) {
-            // 添加ES
-            EsLecturer esLecturer = BeanUtil.copyProperties(record, EsLecturer.class);
-            elasticsearchRestTemplate.index(new IndexQueryBuilder().withObject(esLecturer).build(), IndexCoordinates.of(EsLecturer.LECTURER));
             return Result.success("操作成功");
         }
         return Result.error("操作失败");
@@ -116,25 +96,8 @@ public class AdminLecturerBiz extends BaseBiz {
      */
     public Result<String> delete(Long id) {
         if (dao.deleteById(id) > 0) {
-            elasticsearchRestTemplate.delete(id.toString(), EsLecturer.class);
             return Result.success("操作成功");
         }
         return Result.error("操作失败");
-    }
-
-    public Result<String> syncEs() {
-        // 获取全部讲师
-        List<Lecturer> lecturerList = dao.listByStatusId(StatusIdEnum.YES.getCode());
-        if (CollUtil.isNotEmpty(lecturerList)) {
-            List<IndexQuery> queries = new ArrayList<>();
-            for (Lecturer lecturer : lecturerList) {
-                EsLecturer esLecturer = BeanUtil.copyProperties(lecturer, EsLecturer.class);
-                queries.add(new IndexQueryBuilder().withObject(esLecturer).build());
-            }
-            // 更新es
-            elasticsearchRestTemplate.indexOps(EsLecturer.class).delete();
-            elasticsearchRestTemplate.bulkIndex(queries, IndexCoordinates.of(EsLecturer.LECTURER));
-        }
-        return Result.success("操作成功");
     }
 }

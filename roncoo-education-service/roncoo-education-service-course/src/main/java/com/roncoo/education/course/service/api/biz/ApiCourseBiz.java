@@ -3,12 +3,11 @@ package com.roncoo.education.course.service.api.biz;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.PutawayEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.elasticsearch.EsCourse;
-import com.roncoo.education.common.elasticsearch.EsPageUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.CategoryDao;
 import com.roncoo.education.course.dao.CourseChapterDao;
@@ -26,19 +25,8 @@ import com.roncoo.education.course.service.biz.resp.CourseResp;
 import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
 import com.roncoo.education.user.feign.interfaces.vo.LecturerViewVO;
 import lombok.RequiredArgsConstructor;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.MultiMatchQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
-import org.elasticsearch.search.sort.FieldSortBuilder;
-import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
-import org.springframework.data.elasticsearch.core.SearchHits;
-import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -59,9 +47,6 @@ import java.util.stream.Collectors;
 public class ApiCourseBiz extends BaseBiz {
 
     @NotNull
-    private final ElasticsearchRestTemplate elasticsearchRestTemplate;
-
-    @NotNull
     private final CourseDao dao;
     @NotNull
     private final CourseChapterDao chapterDao;
@@ -74,32 +59,22 @@ public class ApiCourseBiz extends BaseBiz {
     private final IFeignLecturer feignLecturer;
 
     public Result<Page<ApiCoursePageResp>> searchForPage(ApiCoursePageReq req) {
-        NativeSearchQueryBuilder nsb = new NativeSearchQueryBuilder();
-        // 高亮字段
-        nsb.withHighlightFields(new HighlightBuilder.Field("courseName").preTags("<mark>").postTags("</mark>"));
-        // 分页
-        nsb.withPageable(PageRequest.of(req.getPageCurrent() - 1, req.getPageSize()));
-        BoolQueryBuilder qb = QueryBuilders.boolQuery();
+        CourseExample example = new CourseExample();
+        CourseExample.Criteria c = example.createCriteria();
         if (ObjectUtil.isNotEmpty(req.getCategoryId())) {
-            List<Long> categoryIdList = listCategoryId(req.getCategoryId());
-            qb.must(QueryBuilders.termsQuery("categoryId", categoryIdList));
+            c.andCategoryIdEqualTo(req.getCategoryId());
         }
         if (ObjectUtil.isNotEmpty(req.getIsFree())) {
-            qb.must(QueryBuilders.termQuery("isFree", req.getIsFree()));
+            c.andIsFreeEqualTo(req.getIsFree());
         }
         if (StringUtils.hasText(req.getCourseName())) {
-            // 模糊查询multiMatchQuery，最佳字段best_fields
-            qb.must(QueryBuilders.multiMatchQuery(req.getCourseName(), "courseName").type(MultiMatchQueryBuilder.Type.BEST_FIELDS));
-        } else {
-            // 课程排序（sort）
-            nsb.withSorts(new FieldSortBuilder("sort").order(SortOrder.ASC));
-            nsb.withSorts(new FieldSortBuilder("id").order(SortOrder.DESC));
+            c.andCourseNameLike(PageUtil.like(req.getCourseName()));
         }
-        qb.must(QueryBuilders.termQuery("statusId", StatusIdEnum.YES.getCode()));
-        qb.must(QueryBuilders.termQuery("isPutaway", PutawayEnum.UP.getCode()));
-        nsb.withQuery(qb);
-        SearchHits<EsCourse> searchHits = elasticsearchRestTemplate.search(nsb.build(), EsCourse.class, IndexCoordinates.of(EsCourse.COURSE));
-        return Result.success(EsPageUtil.transform(searchHits, req.getPageCurrent(), req.getPageSize(), ApiCoursePageResp.class));
+        c.andStatusIdEqualTo(StatusIdEnum.YES.getCode());
+        c.andIsPutawayEqualTo(PutawayEnum.UP.getCode());
+        example.setOrderByClause("sort asc, id desc");
+        Page<Course> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
+        return Result.success(PageUtil.transform(page, ApiCoursePageResp.class));
     }
 
     private List<Long> listCategoryId(Long categoryId) {

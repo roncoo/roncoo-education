@@ -71,20 +71,11 @@ public class AdminCourseController {
         return biz.delete(id);
     }
 
-    @ApiOperation(value = "ES同步", notes = "将课程同步到ES")
-    @SysLog(value = "ES同步")
-    @GetMapping(value = "/es")
-    public Result<String> syncEs() {
-        return biz.syncEs();
-    }
-
     @ApiOperation(value = "排序", notes = "排序")
     @SysLog(value = "排序")
     @PutMapping(value = "/sort")
     public Result<Integer> sort(@RequestBody List<SortReq> req) {
         int sort = biz.sort(req, "Course");
-        // 同步ES
-        biz.syncEs();
         return Result.success(sort);
     }
 }
