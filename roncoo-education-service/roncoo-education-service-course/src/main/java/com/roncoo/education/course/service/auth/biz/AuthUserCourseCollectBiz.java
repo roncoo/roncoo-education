@@ -55,7 +55,7 @@ public class AuthUserCourseCollectBiz extends BaseBiz {
     }
 
     public Result<String> add(AuthUserCourseCollectReq req) {
-        UserCourseCollect userCourseCollect = dao.getByCouserIdAndUserId(req.getCourseId(), ThreadContext.userId());
+        UserCourseCollect userCourseCollect = dao.getByCourseIdAndUserId(req.getCourseId(), ThreadContext.userId());
         if (ObjectUtil.isNotEmpty(userCourseCollect)) {
             dao.deleteById(userCourseCollect.getId());
             return Result.success("cancel");

@@ -6,7 +6,6 @@ import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.PeriodTypeEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.core.tools.JsonUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.service.SortReq;
 import com.roncoo.education.course.dao.CourseChapterPeriodDao;
@@ -97,7 +96,7 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
                 List<Long> lecturerIdList = liveList.stream().map(Live::getLecturerId).collect(Collectors.toList());
                 Map<Long, String> lecturerNameMap = feignLecturer.listByIds(lecturerIdList);
                 for (AdminCourseChapterPeriodViewResp period : respList) {
-                    if(period.getLiveId() > 0){
+                    if (period.getLiveId() > 0) {
                         AdminLiveViewResp liveViewResp = BeanUtil.copyProperties(liveMap.get(period.getLiveId()), AdminLiveViewResp.class);
                         liveViewResp.setLecturerName(lecturerNameMap.get(liveViewResp.getLecturerId()));
                         period.setLiveViewResp(liveViewResp);
@@ -186,6 +185,7 @@ public class AdminCourseChapterPeriodBiz extends BaseBiz {
      * @param id ID主键
      * @return 删除结果
      */
+    @Transactional(rollbackFor = Exception.class)
     public Result<String> delete(Long id) {
         if (dao.deleteById(id) > 0) {
             // 删除课时，也需要删除对应的学习记录，否则统计进度出现数据异常

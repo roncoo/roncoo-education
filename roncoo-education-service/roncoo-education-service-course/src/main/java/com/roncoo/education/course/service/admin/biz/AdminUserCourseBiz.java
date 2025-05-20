@@ -55,54 +55,6 @@ public class AdminUserCourseBiz extends BaseBiz {
     @NotNull
     private final UserStudyDao userStudyDao;
 
-
-    public Result<Page<AdminUserCourseRecordResp>> record(AdminUserCourseRecordReq req) {
-        UserCourseExample example = new UserCourseExample();
-        Criteria c = example.createCriteria();
-        if (req.getCourseId() != null) {
-            c.andCourseIdEqualTo(req.getCourseId());
-        }
-        if (StringUtils.hasText(req.getMobile())) {
-            List<UsersVO> usersList = feignUsers.listByMobile(req.getMobile());
-            if (CollUtil.isNotEmpty(usersList)) {
-                c.andUserIdIn(usersList.stream().map(UsersVO::getId).collect(Collectors.toList()));
-            }
-        }
-        example.setOrderByClause("id desc");
-        Page<UserCourse> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
-        Page<AdminUserCourseRecordResp> respPage = PageUtil.transform(page, AdminUserCourseRecordResp.class);
-        if (CollUtil.isNotEmpty(respPage.getList())) {
-            CourseChapterPeriodExample courseChapterPeriodExample = new CourseChapterPeriodExample();
-            courseChapterPeriodExample.createCriteria().andCourseIdEqualTo(req.getCourseId());
-            int periods = courseChapterPeriodDao.countByExample(courseChapterPeriodExample);
-
-            List<Long> userIdList = respPage.getList().stream().map(item -> item.getUserId()).collect(Collectors.toList());
-            Map<Long, UsersVO> usersVOMap = feignUsers.listByIds(userIdList);
-
-            List<UserStudy> userStudyList = userStudyDao.listByCourseIdAndUserIdsForSumProgress(req.getCourseId(), userIdList);
-            Map<Long, BigDecimal> userStudySumMap = new HashMap<>();
-            if (CollUtil.isNotEmpty(userStudyList)) {
-                userStudySumMap = userStudyList.stream().collect(Collectors.toMap(item -> item.getUserId(), item -> item.getProgress()));
-            }
-
-            for (AdminUserCourseRecordResp auc : respPage.getList()) {
-
-                UsersVO usersVO = usersVOMap.get(auc.getUserId());
-                if (ObjectUtil.isNotEmpty(usersVO)) {
-                    auc.setMobile(DesensitizedUtil.mobilePhone(usersVO.getMobile()));
-                    auc.setNickname(usersVO.getNickname());
-                }
-
-                BigDecimal progress = userStudySumMap.get(auc.getUserId());
-                if (ObjectUtil.isNotEmpty(progress)) {
-                    // 课程进度
-                    auc.setCourseProgress(progress.divide(BigDecimal.valueOf(periods), BigDecimal.ROUND_UP));
-                }
-            }
-        }
-        return Result.success(respPage);
-    }
-
     /**
      * 课程用户关联表分页
      *
@@ -152,6 +104,53 @@ public class AdminUserCourseBiz extends BaseBiz {
                 if (ObjectUtil.isNotEmpty(progress)) {
                     // 课程进度
                     auc.setCourseProgress(progress.divide(BigDecimal.valueOf(periodSumMap.get(auc.getCourseId())), BigDecimal.ROUND_UP));
+                }
+            }
+        }
+        return Result.success(respPage);
+    }
+
+    public Result<Page<AdminUserCourseRecordResp>> record(AdminUserCourseRecordReq req) {
+        UserCourseExample example = new UserCourseExample();
+        Criteria c = example.createCriteria();
+        if (req.getCourseId() != null) {
+            c.andCourseIdEqualTo(req.getCourseId());
+        }
+        if (StringUtils.hasText(req.getMobile())) {
+            List<UsersVO> usersList = feignUsers.listByMobile(req.getMobile());
+            if (CollUtil.isNotEmpty(usersList)) {
+                c.andUserIdIn(usersList.stream().map(UsersVO::getId).collect(Collectors.toList()));
+            }
+        }
+        example.setOrderByClause("id desc");
+        Page<UserCourse> page = dao.page(req.getPageCurrent(), req.getPageSize(), example);
+        Page<AdminUserCourseRecordResp> respPage = PageUtil.transform(page, AdminUserCourseRecordResp.class);
+        if (CollUtil.isNotEmpty(respPage.getList())) {
+            CourseChapterPeriodExample courseChapterPeriodExample = new CourseChapterPeriodExample();
+            courseChapterPeriodExample.createCriteria().andCourseIdEqualTo(req.getCourseId());
+            int periods = courseChapterPeriodDao.countByExample(courseChapterPeriodExample);
+
+            List<Long> userIdList = respPage.getList().stream().map(item -> item.getUserId()).collect(Collectors.toList());
+            Map<Long, UsersVO> usersVOMap = feignUsers.listByIds(userIdList);
+
+            List<UserStudy> userStudyList = userStudyDao.listByCourseIdAndUserIdsForSumProgress(req.getCourseId(), userIdList);
+            Map<Long, BigDecimal> userStudySumMap = new HashMap<>();
+            if (CollUtil.isNotEmpty(userStudyList)) {
+                userStudySumMap = userStudyList.stream().collect(Collectors.toMap(item -> item.getUserId(), item -> item.getProgress()));
+            }
+
+            for (AdminUserCourseRecordResp auc : respPage.getList()) {
+
+                UsersVO usersVO = usersVOMap.get(auc.getUserId());
+                if (ObjectUtil.isNotEmpty(usersVO)) {
+                    auc.setMobile(DesensitizedUtil.mobilePhone(usersVO.getMobile()));
+                    auc.setNickname(usersVO.getNickname());
+                }
+
+                BigDecimal progress = userStudySumMap.get(auc.getUserId());
+                if (ObjectUtil.isNotEmpty(progress)) {
+                    // 课程进度
+                    auc.setCourseProgress(progress.divide(BigDecimal.valueOf(periods), BigDecimal.ROUND_UP));
                 }
             }
         }

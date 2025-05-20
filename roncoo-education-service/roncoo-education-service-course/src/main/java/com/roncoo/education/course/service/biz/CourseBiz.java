@@ -102,7 +102,7 @@ public class CourseBiz extends BaseBiz {
             }
 
             // 课程收藏状态
-            UserCourseCollect userCourseCollect = userCourseCollectDao.getByCouserIdAndUserId(req.getCourseId(), userId);
+            UserCourseCollect userCourseCollect = userCourseCollectDao.getByCourseIdAndUserId(req.getCourseId(), userId);
             if (ObjectUtil.isNotEmpty(userCourseCollect)) {
                 courseResp.setCourseCollect(Boolean.TRUE);
             }
