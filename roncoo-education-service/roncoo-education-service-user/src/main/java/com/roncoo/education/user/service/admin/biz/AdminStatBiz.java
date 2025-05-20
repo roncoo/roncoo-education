@@ -88,8 +88,4 @@ public class AdminStatBiz extends BaseBiz {
         return Result.success(resp);
     }
 
-    public static void main(String[] args) {
-        System.out.println(DateUtil.formatDate(DateUtil.yesterday()));
-        System.out.println(DateUtil.formatDate(DateUtil.tomorrow()));
-    }
 }

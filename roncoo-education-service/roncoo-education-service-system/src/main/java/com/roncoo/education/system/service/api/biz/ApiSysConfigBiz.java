@@ -2,7 +2,6 @@ package com.roncoo.education.system.service.api.biz;
 
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.service.BaseBiz;
-import com.roncoo.education.system.feign.interfaces.vo.LoginConfig;
 import com.roncoo.education.system.service.api.resp.ApiSysConfigWebsiteResp;
 import com.roncoo.education.system.service.biz.SysConfigCommonBiz;
 import lombok.RequiredArgsConstructor;
@@ -32,13 +31,6 @@ public class ApiSysConfigBiz extends BaseBiz {
         ApiSysConfigWebsiteResp resp = sysConfigCommonBiz.getSysConfig(ApiSysConfigWebsiteResp.class);
         // 公安网备案号处理
         resp.setWebsitePrnNo(getNumeric(resp.getWebsitePrn()));
-        LoginConfig loginConfig = sysConfigCommonBiz.getSysConfig(LoginConfig.class);
-        if (loginConfig != null) {
-            resp.setRsaLoginPublicKey(loginConfig.getRsaLoginPublicKey());
-            resp.setWxPcLoginEnable(loginConfig.getWxPcLoginEnable());
-            resp.setWxMpLoginEnable(loginConfig.getWxMpLoginEnable());
-            resp.setWxMaLoginEnable(loginConfig.getWxMaLoginEnable());
-        }
         return Result.success(resp);
     }
 

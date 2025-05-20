@@ -1,6 +1,5 @@
 package com.roncoo.education.user.service.api;
 
-import com.roncoo.education.common.annotation.SysLogCache;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.user.service.api.biz.ApiLecturerBiz;
@@ -37,7 +36,6 @@ public class ApiLecturerController {
 
     @ApiOperation(value = "讲师信息查看", notes = "讲师信息查看")
     @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
-    @SysLogCache
     @GetMapping(value = "/view")
     public Result<LecturerViewResp> view(@RequestParam Long id) {
         return biz.view(id);
