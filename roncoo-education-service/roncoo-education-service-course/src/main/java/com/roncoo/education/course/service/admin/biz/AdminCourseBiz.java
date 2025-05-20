@@ -6,10 +6,7 @@ import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.FreeEnum;
-import com.roncoo.education.common.core.enums.PutawayEnum;
-import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.elasticsearch.EsCourse;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.CategoryDao;
 import com.roncoo.education.course.dao.CourseChapterDao;
@@ -27,17 +24,12 @@ import com.roncoo.education.course.service.admin.resp.AdminCoursePageResp;
 import com.roncoo.education.course.service.admin.resp.AdminCourseViewResp;
 import com.roncoo.education.user.feign.interfaces.IFeignLecturer;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
-import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
-import org.springframework.data.elasticsearch.core.query.IndexQuery;
-import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -50,9 +42,6 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class AdminCourseBiz extends BaseBiz {
-
-    @NotNull
-    private final ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     @NotNull
     private final IFeignLecturer feignLecturer;
@@ -120,10 +109,6 @@ public class AdminCourseBiz extends BaseBiz {
             chapter.setChapterName("默认");
             chapter.setChapterDesc("第一章");
             courseChapterDao.save(chapter);
-
-            // 添加ES
-            EsCourse esCourse = BeanUtil.copyProperties(record, EsCourse.class);
-            elasticsearchRestTemplate.index(new IndexQueryBuilder().withObject(esCourse).build(), IndexCoordinates.of(EsCourse.COURSE));
             return Result.success("操作成功");
         }
         return Result.error("操作失败");
@@ -160,8 +145,6 @@ public class AdminCourseBiz extends BaseBiz {
         }
         Course record = BeanUtil.copyProperties(req, Course.class);
         if (dao.updateById(record) > 0) {
-            EsCourse esCourse = BeanUtil.copyProperties(record, EsCourse.class);
-            elasticsearchRestTemplate.index(new IndexQueryBuilder().withObject(esCourse).build(), IndexCoordinates.of(EsCourse.COURSE));
             return Result.success("操作成功");
         }
         return Result.error("操作失败");
@@ -181,27 +164,6 @@ public class AdminCourseBiz extends BaseBiz {
         courseChapterDao.deleteByCourseId(id);
         // 删除课程信息
         dao.deleteById(id);
-        if (ObjectUtil.isNotNull(elasticsearchRestTemplate)) {
-            elasticsearchRestTemplate.delete(id.toString(), EsCourse.class);
-        }
-        return Result.success("操作成功");
-    }
-
-    public Result<String> syncEs() {
-        // 获取全部课程
-        CourseExample example = new CourseExample();
-        example.createCriteria().andIsPutawayEqualTo(PutawayEnum.UP.getCode()).andStatusIdEqualTo(StatusIdEnum.YES.getCode());
-        List<Course> courseList = dao.listByExample(example);
-        if (CollUtil.isNotEmpty(courseList)) {
-            List<IndexQuery> queries = new ArrayList<>();
-            for (Course course : courseList) {
-                EsCourse esCourse = BeanUtil.copyProperties(course, EsCourse.class);
-                queries.add(new IndexQueryBuilder().withObject(esCourse).build());
-            }
-            // 更新es
-            elasticsearchRestTemplate.indexOps(EsCourse.class).delete();
-            elasticsearchRestTemplate.bulkIndex(queries, IndexCoordinates.of(EsCourse.COURSE));
-        }
         return Result.success("操作成功");
     }
 }

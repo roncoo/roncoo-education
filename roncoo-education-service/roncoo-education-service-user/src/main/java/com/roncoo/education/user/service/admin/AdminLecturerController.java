@@ -77,11 +77,4 @@ public class AdminLecturerController {
     public Result<Integer> sort(@RequestBody List<SortReq> req) {
         return Result.success(biz.sort(req, "Lecturer"));
     }
-
-    @ApiOperation(value = "ES同步", notes = "将讲师同步到ES")
-    @SysLog(value = "ES同步")
-    @GetMapping(value = "/es")
-    public Result<String> syncEs() {
-        return biz.syncEs();
-    }
 }
