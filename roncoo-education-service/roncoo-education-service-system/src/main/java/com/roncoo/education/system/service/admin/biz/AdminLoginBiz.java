@@ -2,11 +2,11 @@ package com.roncoo.education.system.service.admin.biz;
 
 
 import com.roncoo.education.common.cache.CacheRedis;
+import com.roncoo.education.common.core.base.Constants;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
-import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.common.core.tools.JwtUtil;
-import com.roncoo.education.common.core.tools.Sha1Util;
+import com.roncoo.education.common.tools.Sha1Util;
 import com.roncoo.education.system.dao.SysUserDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysMenu;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysUser;

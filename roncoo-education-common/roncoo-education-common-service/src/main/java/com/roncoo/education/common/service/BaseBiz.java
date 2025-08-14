@@ -6,7 +6,7 @@ package com.roncoo.education.common.service;
 import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Base;
 import com.roncoo.education.common.core.base.PageUtil;
-import com.roncoo.education.common.core.tools.IpUtil;
+import com.roncoo.education.common.tools.IpUtil;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.stereotype.Component;

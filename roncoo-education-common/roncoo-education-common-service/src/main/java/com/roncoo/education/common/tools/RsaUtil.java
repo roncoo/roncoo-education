@@ -1,4 +1,4 @@
-package com.roncoo.education.common.core.tools;
+package com.roncoo.education.common.tools;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.crypto.SecureUtil;

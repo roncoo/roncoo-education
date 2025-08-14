@@ -10,15 +10,17 @@ import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.extra.servlet.ServletUtil;
 import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.BaseException;
+import com.roncoo.education.common.core.base.Constants;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.LoginAuthTypeEnum;
 import com.roncoo.education.common.core.enums.LoginStatusEnum;
 import com.roncoo.education.common.core.enums.SmsPlatformEnum;
-import com.roncoo.education.common.core.tools.*;
+import com.roncoo.education.common.core.tools.JwtUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.service.BaseWxBiz;
 import com.roncoo.education.common.sms.Sms;
 import com.roncoo.education.common.sms.SmsFace;
+import com.roncoo.education.common.tools.*;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.LoginConfig;
 import com.roncoo.education.user.dao.UsersAccountDao;
@@ -233,7 +235,7 @@ public class ApiUsersBiz extends BaseBiz {
     private Boolean sendCodeCheck(String mobile) {
         String count = cacheRedis.get(Constants.RedisPre.CODE_STAT + mobile);
         if (StringUtils.hasText(count)) {
-            int countNum = cacheRedis.set(Constants.RedisPre.CODE_STAT + mobile, Integer.valueOf(count).intValue() + 1, 5, TimeUnit.MINUTES);
+            int countNum = cacheRedis.set(Constants.RedisPre.CODE_STAT + mobile, Integer.parseInt(count) + 1, 5, TimeUnit.MINUTES);
             if (countNum < 2) {
                 return Boolean.TRUE;
             }

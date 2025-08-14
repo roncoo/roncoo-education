@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.config.ThreadContext;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
-import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.service.BaseWxBiz;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;

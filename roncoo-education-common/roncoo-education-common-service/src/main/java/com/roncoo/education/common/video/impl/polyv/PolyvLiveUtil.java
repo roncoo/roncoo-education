@@ -6,7 +6,7 @@ import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
-import com.roncoo.education.common.core.tools.JsonUtil;
+import com.roncoo.education.common.tools.JsonUtil;
 import com.roncoo.education.common.video.impl.polyv.live.request.*;
 import com.roncoo.education.common.video.impl.polyv.live.response.*;
 import com.roncoo.education.common.video.req.LiveBroadcastReq;

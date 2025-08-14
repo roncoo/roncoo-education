@@ -1,6 +1,6 @@
 package com.roncoo.education.common.config;
 
-import com.roncoo.education.common.core.tools.Constants;
+import com.roncoo.education.common.core.base.Constants;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

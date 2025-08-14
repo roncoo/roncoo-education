@@ -3,7 +3,7 @@ package com.roncoo.education.system.dao.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
-import com.roncoo.education.common.core.tools.IdWorker;
+import com.roncoo.education.common.tools.IdWorker;
 import com.roncoo.education.system.dao.SysConfigDao;
 import com.roncoo.education.system.dao.impl.mapper.SysConfigMapper;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfig;

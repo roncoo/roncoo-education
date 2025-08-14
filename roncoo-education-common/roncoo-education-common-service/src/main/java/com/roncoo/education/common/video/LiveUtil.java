@@ -6,7 +6,7 @@ import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.enums.LivePlatformEnum;
 import com.roncoo.education.common.core.enums.LiveSceneEnum;
 import com.roncoo.education.common.core.enums.MarqueeTypeEnum;
-import com.roncoo.education.common.core.tools.JsonUtil;
+import com.roncoo.education.common.tools.JsonUtil;
 import com.roncoo.education.common.video.impl.polyv.PolyvLiveUtil;
 import com.roncoo.education.common.video.impl.polyv.PolyvSignUtil;
 import com.roncoo.education.common.video.impl.polyv.live.request.ChannelCreateRequest;

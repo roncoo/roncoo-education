@@ -32,9 +32,5 @@
             <groupId>com.roncoo</groupId>
             <artifactId>roncoo-education-common-service</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.roncoo</groupId>
-            <artifactId>roncoo-education-common-video</artifactId>
-        </dependency>
     </dependencies>
 </project>

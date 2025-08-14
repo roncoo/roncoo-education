@@ -2,10 +2,10 @@ package com.roncoo.education.system.feign.interfaces.config;
 
 import com.roncoo.education.common.annotation.SysLogCache;
 import com.roncoo.education.common.cache.CacheRedis;
+import com.roncoo.education.common.core.base.Constants;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ResultEnum;
-import com.roncoo.education.common.core.tools.Constants;
-import com.roncoo.education.common.core.tools.ObjMapUtil;
+import com.roncoo.education.common.tools.ObjMapUtil;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;

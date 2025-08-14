@@ -3,5 +3,5 @@
 | | | (_) | | | | (_| (_) | (_) |
 |_|  \___/|_| |_|\___\___/ \___/
 
-领课技术团队开发: https://www.roncoo.net
+领课技术团队开发: https://www.roncoo.net/
 Spring Boot Version: ${spring-boot.version}${spring-boot.formatted-version}

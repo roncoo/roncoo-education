@@ -1,7 +1,7 @@
 package com.roncoo.education.course.test;
 
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.core.tools.JsonUtil;
+import com.roncoo.education.common.tools.JsonUtil;
 import com.roncoo.education.course.service.api.biz.ApiCourseBiz;
 import com.roncoo.education.course.service.api.req.ApiCoursePageReq;
 import com.roncoo.education.course.service.biz.req.CourseReq;

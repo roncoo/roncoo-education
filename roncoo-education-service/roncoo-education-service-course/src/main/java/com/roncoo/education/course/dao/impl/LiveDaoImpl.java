@@ -2,7 +2,7 @@ package com.roncoo.education.course.dao.impl;
 
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
-import com.roncoo.education.common.core.tools.IdWorker;
+import com.roncoo.education.common.tools.IdWorker;
 import com.roncoo.education.course.dao.LiveDao;
 import com.roncoo.education.course.dao.impl.mapper.LiveMapper;
 import com.roncoo.education.course.dao.impl.mapper.entity.Live;

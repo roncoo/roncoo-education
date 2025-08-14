@@ -1,6 +1,6 @@
 package com.roncoo.education.course.callback;
 
-import com.roncoo.education.common.core.tools.JsonUtil;
+import com.roncoo.education.common.tools.JsonUtil;
 import com.roncoo.education.common.video.impl.priyun.req.PrivateYunVodAuth;
 import com.roncoo.education.common.video.impl.priyun.req.PrivateYunVodUpload;
 import com.roncoo.education.course.callback.biz.PriYunCallbackBiz;

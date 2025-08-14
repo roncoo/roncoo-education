@@ -6,7 +6,7 @@ import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ReadEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
-import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.user.dao.MsgDao;
 import com.roncoo.education.user.dao.MsgUserDao;

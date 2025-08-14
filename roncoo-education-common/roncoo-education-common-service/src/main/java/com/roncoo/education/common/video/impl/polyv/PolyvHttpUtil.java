@@ -1,6 +1,6 @@
 package com.roncoo.education.common.video.impl.polyv;
 
-import com.roncoo.education.common.core.tools.JsonUtil;
+import com.roncoo.education.common.tools.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;

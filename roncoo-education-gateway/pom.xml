@@ -51,12 +51,6 @@
         <dependency>
             <groupId>com.roncoo</groupId>
             <artifactId>roncoo-education-common-core</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-web</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>

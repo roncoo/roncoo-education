@@ -2,7 +2,7 @@ package com.roncoo.education.user.feign.biz;
 
 
 import cn.hutool.core.collection.CollUtil;
-import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.user.dao.LecturerDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.Lecturer;

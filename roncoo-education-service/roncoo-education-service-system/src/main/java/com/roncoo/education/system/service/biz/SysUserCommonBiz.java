@@ -5,7 +5,7 @@ package com.roncoo.education.system.service.biz;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.roncoo.education.common.core.enums.MenuTypeEnum;
-import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.tools.BeanUtil;
 import com.roncoo.education.system.dao.SysMenuDao;
 import com.roncoo.education.system.dao.SysMenuRoleDao;
 import com.roncoo.education.system.dao.SysRoleUserDao;

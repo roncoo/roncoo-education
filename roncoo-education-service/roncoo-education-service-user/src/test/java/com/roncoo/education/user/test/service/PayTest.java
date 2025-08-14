@@ -4,7 +4,7 @@
 package com.roncoo.education.user.test.service;
 
 import com.roncoo.education.common.core.enums.PayTypeEnum;
-import com.roncoo.education.common.core.tools.JsonUtil;
+import com.roncoo.education.common.tools.JsonUtil;
 import com.roncoo.education.user.service.auth.req.AuthOrderPayReq;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;

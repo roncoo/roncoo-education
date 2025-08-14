@@ -2,8 +2,8 @@ package com.roncoo.education.gateway.filter;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.roncoo.education.common.core.base.BaseException;
+import com.roncoo.education.common.core.base.Constants;
 import com.roncoo.education.common.core.enums.ResultEnum;
-import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.common.core.tools.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.server.reactive.ServerHttpRequest;

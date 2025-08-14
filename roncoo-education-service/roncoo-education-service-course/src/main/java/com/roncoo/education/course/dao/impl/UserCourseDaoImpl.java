@@ -3,7 +3,7 @@ package com.roncoo.education.course.dao.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
-import com.roncoo.education.common.core.tools.IdWorker;
+import com.roncoo.education.common.tools.IdWorker;
 import com.roncoo.education.course.dao.UserCourseDao;
 import com.roncoo.education.course.dao.impl.mapper.UserCourseMapper;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserCourse;

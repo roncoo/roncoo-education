@@ -8,7 +8,7 @@ import com.aliyuncs.IAcsClient;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
-import com.roncoo.education.common.core.tools.JsonUtil;
+import com.roncoo.education.common.tools.JsonUtil;
 import com.roncoo.education.common.sms.Sms;
 import com.roncoo.education.common.sms.SmsFace;
 import lombok.extern.slf4j.Slf4j;

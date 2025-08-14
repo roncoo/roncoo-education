@@ -2,7 +2,7 @@ package com.roncoo.education.course.feign.biz;
 
 
 import com.roncoo.education.common.core.enums.BuyTypeEnum;
-import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.UserCourseDao;

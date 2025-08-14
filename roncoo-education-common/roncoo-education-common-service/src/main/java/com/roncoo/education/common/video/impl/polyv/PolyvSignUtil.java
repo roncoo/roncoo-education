@@ -3,8 +3,8 @@ package com.roncoo.education.common.video.impl.polyv;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
-import com.roncoo.education.common.core.tools.JsonUtil;
-import com.roncoo.education.common.core.tools.Md5Util;
+import com.roncoo.education.common.tools.JsonUtil;
+import com.roncoo.education.common.tools.Md5Util;
 import com.roncoo.education.common.video.req.VodPlayConfigReq;
 import lombok.extern.slf4j.Slf4j;
 

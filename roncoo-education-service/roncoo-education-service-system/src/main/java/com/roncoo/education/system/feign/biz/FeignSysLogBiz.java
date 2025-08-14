@@ -1,8 +1,8 @@
 package com.roncoo.education.system.feign.biz;
 
 import com.roncoo.education.common.cache.CacheRedis;
-import com.roncoo.education.common.core.tools.BeanUtil;
-import com.roncoo.education.common.core.tools.IpUtil;
+import com.roncoo.education.common.tools.BeanUtil;
+import com.roncoo.education.common.tools.IpUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.system.dao.SysLogDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysLog;

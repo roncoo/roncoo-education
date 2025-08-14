@@ -5,7 +5,7 @@ package com.roncoo.education.user.test.service;
 
 import com.roncoo.education.common.core.enums.ClientTypeEnum;
 import com.roncoo.education.common.core.enums.LoginAuthTypeEnum;
-import com.roncoo.education.common.core.tools.JsonUtil;
+import com.roncoo.education.common.tools.JsonUtil;
 import com.roncoo.education.user.service.api.req.WxCodeReq;
 import com.roncoo.education.user.service.api.req.WxLoginReq;
 import org.junit.jupiter.api.Test;

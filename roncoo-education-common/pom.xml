@@ -16,9 +16,7 @@
     <name>roncoo-education-common</name>
 
     <modules>
-        <module>roncoo-education-common-log</module>
         <module>roncoo-education-common-core</module>
-        <module>roncoo-education-common-video</module>
         <module>roncoo-education-common-service</module>
     </modules>
 </project>

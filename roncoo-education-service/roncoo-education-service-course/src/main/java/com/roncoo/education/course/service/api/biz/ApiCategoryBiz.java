@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.CategoryTypeEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
-import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.tools.BeanUtil;
 import com.roncoo.education.course.dao.CategoryDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Category;
 import com.roncoo.education.course.dao.impl.mapper.entity.CategoryExample;

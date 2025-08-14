@@ -2,7 +2,7 @@ package com.roncoo.education.user.dao.impl;
 
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
-import com.roncoo.education.common.core.tools.IdWorker;
+import com.roncoo.education.common.tools.IdWorker;
 import com.roncoo.education.user.dao.MsgUserDao;
 import com.roncoo.education.user.dao.impl.mapper.MsgUserMapper;
 import com.roncoo.education.user.dao.impl.mapper.entity.MsgUser;

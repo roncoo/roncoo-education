@@ -2,8 +2,8 @@ package com.roncoo.education.course.job;
 
 import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.cache.CacheRedis;
+import com.roncoo.education.common.core.base.Constants;
 import com.roncoo.education.common.core.enums.ResourceTypeEnum;
-import com.roncoo.education.common.core.tools.Constants;
 import com.roncoo.education.course.dao.UserStudyDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
 import com.roncoo.education.course.service.auth.req.AuthUserStudyReq;

@@ -8,7 +8,7 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.SmsPlatformEnum;
 import com.roncoo.education.common.core.enums.StoragePlatformEnum;
 import com.roncoo.education.common.core.enums.VodPlatformEnum;
-import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.common.video.LiveUtil;
 import com.roncoo.education.common.video.VodUtil;

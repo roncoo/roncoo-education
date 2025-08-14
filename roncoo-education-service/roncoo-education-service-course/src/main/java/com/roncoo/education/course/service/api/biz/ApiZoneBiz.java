@@ -3,7 +3,7 @@ package com.roncoo.education.course.service.api.biz;
 import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
-import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.tools.BeanUtil;
 import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.ZoneCourseDao;
 import com.roncoo.education.course.dao.ZoneDao;

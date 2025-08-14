@@ -1,4 +1,4 @@
-package com.roncoo.education.common.core.tools;
+package com.roncoo.education.common.tools;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

@@ -3,7 +3,7 @@ package com.roncoo.education.user.service.admin.biz;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.core.tools.BeanUtil;
+import com.roncoo.education.common.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
 import com.roncoo.education.user.dao.LecturerDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.Lecturer;

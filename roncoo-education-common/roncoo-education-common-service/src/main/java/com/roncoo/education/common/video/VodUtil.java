@@ -5,7 +5,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONObject;
 import com.roncoo.education.common.core.enums.VideoStatusEnum;
 import com.roncoo.education.common.core.enums.VodPlatformEnum;
-import com.roncoo.education.common.core.tools.JsonUtil;
+import com.roncoo.education.common.tools.JsonUtil;
 import com.roncoo.education.common.video.impl.polyv.PolyvVodUtil;
 import com.roncoo.education.common.video.impl.polyv.vod.resp.PolyvVideoInfoResp;
 import com.roncoo.education.common.video.impl.priyun.PrivateYunVodUtil;
