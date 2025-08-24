@@ -4,18 +4,18 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
-import com.roncoo.education.common.tools.IdWorker;
 import com.roncoo.education.common.jdbc.AbstractBaseJdbc;
+import com.roncoo.education.common.tools.IdWorker;
 import com.roncoo.education.course.dao.UserStudyDao;
 import com.roncoo.education.course.dao.impl.mapper.UserStudyMapper;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudyExample;
 import com.roncoo.education.course.service.admin.resp.AdminUserStudyStatResp;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
-import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +24,6 @@ import java.util.Map;
  * 资源学习记录 服务实现类
  *
  * @author wujing
- * @date 2022-09-03
  */
 @Repository
 @RequiredArgsConstructor
@@ -114,7 +113,7 @@ public class UserStudyDaoImpl extends AbstractBaseJdbc implements UserStudyDao {
     @Override
     public List<UserStudy> listByUserIdAndCourseIdsForSumProgress(Long userId, List<Long> courseIdList) {
         String sql = "select course_id, sum(progress) as progress from user_study where user_id=:USERID and course_id in (:COURSEIDS) GROUP BY course_id";
-        Map<String, Object> map = new HashMap();
+        Map<String, Object> map = new HashMap<>();
         map.put("USERID", userId);
         map.put("COURSEIDS", courseIdList);
         return namedParameterJdbcTemplate.query(sql, map, new BeanPropertyRowMapper<>(UserStudy.class));
@@ -123,7 +122,7 @@ public class UserStudyDaoImpl extends AbstractBaseJdbc implements UserStudyDao {
     @Override
     public List<UserStudy> listByCourseIdAndUserIdsForSumProgress(Long courseId, List<Long> userIdList) {
         String sql = "select user_id, sum(progress) as progress from user_study where course_id=:COURSEID and user_id in (:USERIDS) GROUP BY user_id";
-        Map<String, Object> map = new HashMap();
+        Map<String, Object> map = new HashMap<>();
         map.put("COURSEID", courseId);
         map.put("USERIDS", userIdList);
         return namedParameterJdbcTemplate.query(sql, map, new BeanPropertyRowMapper<>(UserStudy.class));

@@ -10,7 +10,8 @@ import com.roncoo.education.user.feign.interfaces.vo.LecturerViewVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

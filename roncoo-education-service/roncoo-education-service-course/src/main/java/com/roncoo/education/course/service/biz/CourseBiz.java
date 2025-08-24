@@ -24,7 +24,8 @@ import com.roncoo.education.user.feign.interfaces.vo.UsersVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;

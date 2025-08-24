@@ -2,9 +2,8 @@ package com.roncoo.education.system.test;
 
 import com.roncoo.education.system.service.admin.biz.AdminSysConfigBiz;
 import com.roncoo.education.system.service.admin.req.AdminSysConfigListReq;
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
-
-import javax.annotation.Resource;
 
 public class ConfigTest extends BaseTest {
 

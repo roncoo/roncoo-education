@@ -1,10 +1,9 @@
 package com.roncoo.education.user.test.service;
 
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.jasypt.encryption.StringEncryptor;
 import org.junit.jupiter.api.Test;
-
-import javax.annotation.Resource;
 
 @Slf4j
 public class JasyptTest extends BaseTest {

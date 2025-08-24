@@ -11,6 +11,8 @@ import com.roncoo.education.common.tools.JsonUtil;
 import com.roncoo.education.common.tools.ObjMapUtil;
 import com.roncoo.education.system.feign.interfaces.IFeignSysLog;
 import com.roncoo.education.system.feign.interfaces.qo.FeignSysLogQO;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -23,8 +25,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.NotNull;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;

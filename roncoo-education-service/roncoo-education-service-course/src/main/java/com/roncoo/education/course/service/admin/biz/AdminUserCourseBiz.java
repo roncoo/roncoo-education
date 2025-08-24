@@ -6,8 +6,8 @@ import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.tools.BeanUtil;
 import com.roncoo.education.course.dao.CourseChapterPeriodDao;
 import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.UserCourseDao;
@@ -23,12 +23,13 @@ import com.roncoo.education.course.service.admin.resp.AdminUserCourseRecordResp;
 import com.roncoo.education.course.service.admin.resp.AdminUserCourseViewResp;
 import com.roncoo.education.user.feign.interfaces.IFeignUsers;
 import com.roncoo.education.user.feign.interfaces.vo.UsersVO;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -103,7 +104,7 @@ public class AdminUserCourseBiz extends BaseBiz {
                 BigDecimal progress = userStudySumMap.get(auc.getCourseId());
                 if (ObjectUtil.isNotEmpty(progress)) {
                     // 课程进度
-                    auc.setCourseProgress(progress.divide(BigDecimal.valueOf(periodSumMap.get(auc.getCourseId())), BigDecimal.ROUND_UP));
+                    auc.setCourseProgress(progress.divide(BigDecimal.valueOf(periodSumMap.get(auc.getCourseId())), RoundingMode.HALF_UP));
                 }
             }
         }
@@ -130,13 +131,13 @@ public class AdminUserCourseBiz extends BaseBiz {
             courseChapterPeriodExample.createCriteria().andCourseIdEqualTo(req.getCourseId());
             int periods = courseChapterPeriodDao.countByExample(courseChapterPeriodExample);
 
-            List<Long> userIdList = respPage.getList().stream().map(item -> item.getUserId()).collect(Collectors.toList());
+            List<Long> userIdList = respPage.getList().stream().map(AdminUserCourseRecordResp::getUserId).collect(Collectors.toList());
             Map<Long, UsersVO> usersVOMap = feignUsers.listByIds(userIdList);
 
             List<UserStudy> userStudyList = userStudyDao.listByCourseIdAndUserIdsForSumProgress(req.getCourseId(), userIdList);
             Map<Long, BigDecimal> userStudySumMap = new HashMap<>();
             if (CollUtil.isNotEmpty(userStudyList)) {
-                userStudySumMap = userStudyList.stream().collect(Collectors.toMap(item -> item.getUserId(), item -> item.getProgress()));
+                userStudySumMap = userStudyList.stream().collect(Collectors.toMap(UserStudy::getUserId, UserStudy::getProgress));
             }
 
             for (AdminUserCourseRecordResp auc : respPage.getList()) {
@@ -150,7 +151,7 @@ public class AdminUserCourseBiz extends BaseBiz {
                 BigDecimal progress = userStudySumMap.get(auc.getUserId());
                 if (ObjectUtil.isNotEmpty(progress)) {
                     // 课程进度
-                    auc.setCourseProgress(progress.divide(BigDecimal.valueOf(periods), BigDecimal.ROUND_UP));
+                    auc.setCourseProgress(progress.divide(BigDecimal.valueOf(periods), RoundingMode.HALF_UP));
                 }
             }
         }

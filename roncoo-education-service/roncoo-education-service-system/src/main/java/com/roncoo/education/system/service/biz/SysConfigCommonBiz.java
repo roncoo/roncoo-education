@@ -8,12 +8,12 @@ import com.roncoo.education.system.dao.SysConfigDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfig;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysConfigExample;
 import com.roncoo.education.system.feign.interfaces.vo.LoginConfig;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -40,7 +40,7 @@ public class SysConfigCommonBiz extends BaseBiz {
 
     public String decrypt(String password) {
         String privateKey = cacheRedis.get(Constants.RedisPre.PRIVATEKEY);
-        if (StringUtils.isEmpty(privateKey)) {
+        if (!StringUtils.hasText(privateKey)) {
             privateKey = getSysConfig(LoginConfig.class).getRsaLoginPrivateKey();
             cacheRedis.set(Constants.RedisPre.PRIVATEKEY, privateKey, 1, TimeUnit.DAYS);
         }

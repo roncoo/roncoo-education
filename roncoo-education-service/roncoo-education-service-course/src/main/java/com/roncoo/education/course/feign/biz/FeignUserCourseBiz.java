@@ -11,7 +11,7 @@ import com.roncoo.education.course.feign.interfaces.qo.UserCourseBindingQO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * 课程用户关联表

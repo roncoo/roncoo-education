@@ -9,11 +9,11 @@ import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
 import com.roncoo.education.course.service.auth.req.AuthUserStudyReq;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Set;
@@ -29,8 +29,10 @@ public class UserStudyJob {
 
     @NotNull
     private final CacheRedis cacheRedis;
+
     @NotNull
     private final UserStudyDao userStudyDao;
+
 
     /**
      * 建议：每10秒执行一次
@@ -46,7 +48,7 @@ public class UserStudyJob {
                     AuthUserStudyReq req = cacheRedis.get(key, AuthUserStudyReq.class);
                     UserStudy userStudy = userStudyDao.getById(req.getStudyId());
                     if (ResourceTypeEnum.VIDEO.getCode().equals(req.getResourceType()) || ResourceTypeEnum.AUDIO.getCode().equals(req.getResourceType())) {
-                        userStudy.setProgress(req.getCurrentDuration().divide(new BigDecimal(req.getTotalDuration()), BigDecimal.ROUND_CEILING).multiply(BigDecimal.valueOf(100)).setScale(2, RoundingMode.HALF_UP));
+                        userStudy.setProgress(req.getCurrentDuration().divide(new BigDecimal(req.getTotalDuration()), RoundingMode.CEILING).multiply(BigDecimal.valueOf(100)).setScale(2, RoundingMode.HALF_UP));
                         userStudy.setCurrentDuration(req.getCurrentDuration().intValue());
                     } else if (ResourceTypeEnum.DOC.getCode().equals(req.getResourceType())) {
                         userStudy.setProgress(BigDecimal.valueOf(req.getCurrentPage()).divide(BigDecimal.valueOf(req.getTotalPage())).multiply(BigDecimal.valueOf(100)).setScale(2, RoundingMode.HALF_UP));

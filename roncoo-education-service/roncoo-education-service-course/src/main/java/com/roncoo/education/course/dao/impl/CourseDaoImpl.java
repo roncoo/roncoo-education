@@ -12,7 +12,8 @@ import com.roncoo.education.course.dao.impl.mapper.entity.CourseExample;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;

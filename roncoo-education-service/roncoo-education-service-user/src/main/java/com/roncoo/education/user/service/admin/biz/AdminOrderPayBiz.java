@@ -17,7 +17,7 @@ import com.roncoo.education.user.service.admin.resp.AdminOrderPayViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * ADMIN-订单支付信息表

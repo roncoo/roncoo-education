@@ -12,7 +12,8 @@ import com.roncoo.education.system.service.api.resp.ApiWebsiteAppResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDateTime;
 import java.util.List;
 

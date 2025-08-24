@@ -4,10 +4,10 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.tools.JsonUtil;
 import com.roncoo.education.course.service.api.biz.ApiCategoryBiz;
 import com.roncoo.education.course.service.api.resp.ApiCategoryResp;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Slf4j

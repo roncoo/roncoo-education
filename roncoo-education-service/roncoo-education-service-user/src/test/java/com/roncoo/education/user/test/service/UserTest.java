@@ -7,9 +7,8 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.roncoo.education.user.dao.UsersDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.Users;
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
-
-import javax.annotation.Resource;
 
 /**
  * 用户注册

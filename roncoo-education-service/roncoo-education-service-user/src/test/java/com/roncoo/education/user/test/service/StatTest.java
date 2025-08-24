@@ -7,9 +7,8 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.tools.JsonUtil;
 import com.roncoo.education.user.service.admin.biz.AdminStatBiz;
 import com.roncoo.education.user.service.admin.resp.AdminStatLoginResp;
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
-
-import javax.annotation.Resource;
 
 public class StatTest extends BaseTest {
 

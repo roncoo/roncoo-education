@@ -12,10 +12,10 @@ import com.roncoo.education.course.dao.UserStudyDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
 import com.roncoo.education.course.service.auth.req.AuthUserStudyReq;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.concurrent.TimeUnit;
@@ -58,7 +58,7 @@ public class ApiUserStudyBiz extends BaseBiz {
         } else if (ResourceTypeEnum.DOC.getCode().equals(resource.getResourceType())) {
             // 文档处理
             req.setTotalPage(resource.getDocPage());
-            if (req.getCurrentPage().compareTo(Integer.valueOf(1)) >= 0) {
+            if (req.getCurrentPage().compareTo(1) >= 0) {
                 // 学习完成
                 return completeStudy(req);
             }
@@ -73,9 +73,6 @@ public class ApiUserStudyBiz extends BaseBiz {
 
     /**
      * 暂停学习
-     *
-     * @param req
-     * @return
      */
     private Result<String> pauseStudy(AuthUserStudyReq req) {
         UserStudy userStudy = getUserStudy(req);
@@ -84,7 +81,7 @@ public class ApiUserStudyBiz extends BaseBiz {
         }
         userStudy.setCurrentDuration(req.getTotalDuration());
         userStudy.setCurrentPage(req.getTotalPage());
-        userStudy.setProgress(req.getCurrentDuration().divide(new BigDecimal(req.getTotalDuration()), BigDecimal.ROUND_CEILING).multiply(BigDecimal.valueOf(100)).setScale(2, RoundingMode.HALF_UP));
+        userStudy.setProgress(req.getCurrentDuration().divide(new BigDecimal(req.getTotalDuration()), RoundingMode.CEILING).multiply(BigDecimal.valueOf(100)).setScale(2, RoundingMode.HALF_UP));
         // 更新观看记录
         dao.updateById(userStudy);
 

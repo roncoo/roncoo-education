@@ -10,7 +10,7 @@ import com.roncoo.education.system.dao.impl.mapper.entity.SysLogExample;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 @Repository
 @RequiredArgsConstructor

@@ -1,27 +1,28 @@
 package com.roncoo.education.common.cache;
 
 import com.roncoo.education.common.tools.JsonUtil;
+import jakarta.annotation.Resource;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Component
+@RequiredArgsConstructor
 public class CacheRedis {
+
 
     @Value("${spring.cache.redis.time-to-live:60000}")
     private int timeToLive;
 
+    @Getter
     @Resource
     private StringRedisTemplate stringRedisTemplate;
-
-    public StringRedisTemplate getStringRedisTemplate() {
-        return stringRedisTemplate;
-    }
 
     /**
      * 默认缓存1分钟

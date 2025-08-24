@@ -15,7 +15,8 @@ import com.roncoo.education.system.service.admin.resp.AdminSysLogPageResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;

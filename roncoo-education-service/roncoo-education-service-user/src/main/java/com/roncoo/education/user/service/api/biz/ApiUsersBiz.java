@@ -7,7 +7,6 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.digest.DigestUtil;
-import cn.hutool.extra.servlet.ServletUtil;
 import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Constants;
@@ -32,6 +31,8 @@ import com.roncoo.education.user.dao.impl.mapper.entity.UsersLog;
 import com.roncoo.education.user.service.api.req.*;
 import com.roncoo.education.user.service.api.resp.UsersLoginResp;
 import com.roncoo.education.user.service.api.resp.WxCodeResp;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
@@ -46,8 +47,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -402,7 +401,7 @@ public class ApiUsersBiz extends BaseBiz {
     private void log(Long userId, LoginStatusEnum status, UsersLog record) {
         record.setUserId(userId);
         record.setLoginStatus(status.getCode());
-        record.setLoginIp(ServletUtil.getClientIP(request));
+        record.setLoginIp(IpUtil.getIpAddress(request));
         IpUtil.IpInfo ipInfo = getIpInfo(record.getLoginIp());
         if (ObjectUtil.isNotNull(ipInfo)) {
             record.setProvince(ipInfo.getPro());

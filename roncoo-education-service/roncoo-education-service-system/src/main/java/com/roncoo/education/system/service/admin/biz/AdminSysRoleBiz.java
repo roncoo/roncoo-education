@@ -5,8 +5,8 @@ import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ResultEnum;
-import com.roncoo.education.common.tools.BeanUtil;
 import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.tools.BeanUtil;
 import com.roncoo.education.system.dao.SysMenuRoleDao;
 import com.roncoo.education.system.dao.SysRoleDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.SysRole;
@@ -15,12 +15,11 @@ import com.roncoo.education.system.dao.impl.mapper.entity.SysRoleExample.Criteri
 import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminSysRolePageResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysRoleViewResp;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * 角色信息
@@ -52,7 +51,7 @@ public class AdminSysRoleBiz extends BaseBiz {
     }
 
     public Result<String> save(AdminSysRoleSaveReq req) {
-        if (StringUtils.isEmpty(req.getRoleName())) {
+        if (!StringUtils.hasText(req.getRoleName())) {
             return Result.error("角色名称不能为空");
         }
         SysRole record = BeanUtil.copyProperties(req, SysRole.class);
@@ -65,7 +64,7 @@ public class AdminSysRoleBiz extends BaseBiz {
 
     @Transactional(rollbackFor = Exception.class)
     public Result<String> delete(AdminSysRoleDeleteReq req) {
-        if (StringUtils.isEmpty(req.getId())) {
+        if (ObjectUtil.isEmpty(req.getId())) {
             return Result.error("角色ID不能为空");
         }
         // 1、删除角色下的菜单

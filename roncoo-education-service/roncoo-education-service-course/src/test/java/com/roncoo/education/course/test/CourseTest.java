@@ -6,10 +6,9 @@ import com.roncoo.education.course.service.api.biz.ApiCourseBiz;
 import com.roncoo.education.course.service.api.req.ApiCoursePageReq;
 import com.roncoo.education.course.service.biz.req.CourseReq;
 import com.roncoo.education.course.service.biz.resp.CourseResp;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-
-import javax.annotation.Resource;
 
 @Slf4j
 public class CourseTest extends BaseTest {

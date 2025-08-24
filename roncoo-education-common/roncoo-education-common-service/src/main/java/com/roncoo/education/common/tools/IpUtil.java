@@ -1,15 +1,16 @@
 package com.roncoo.education.common.tools;
 
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.extra.servlet.ServletUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.servlet.http.HttpServletRequest;
+import static com.baomidou.mybatisplus.core.toolkit.StringPool.COMMA;
+
 
 /**
  * IP工具类
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class IpUtil {
+    private static final String UNKNOWN = "unknown";
 
     /**
      * 获取请求IP
@@ -27,7 +29,32 @@ public final class IpUtil {
      * @return 访问IP地址
      */
     public static String getIpAddress(HttpServletRequest request) {
-        return ServletUtil.getClientIP(request);
+        String ip = request.getHeader("x-forwarded-for");
+        if (ip != null && !ip.isEmpty() && !UNKNOWN.equalsIgnoreCase(ip)) {
+            // 多次反向代理后会有多个ip值，第一个ip才是真实ip
+            if (ip.contains(COMMA)) {
+                ip = ip.split(COMMA)[0];
+            }
+        }
+        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
+            ip = request.getHeader("HTTP_CLIENT_IP");
+        }
+        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
+            ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+        }
+        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
+            ip = request.getHeader("X-Real-IP");
+        }
+        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        return ip;
     }
 
 
@@ -45,7 +72,7 @@ public final class IpUtil {
             String result = HttpUtil.get("https://whois.pconline.com.cn/ipJson.jsp?json=true&ip=" + ip, 3000);
             return JSONUtil.toBean(result, IpInfo.class);
         } catch (Exception e) {
-            log.error("通过ip获取地址异常", e.getMessage());
+            log.error("通过ip获取地址异常，{}", e.getMessage());
             return null;
         }
     }

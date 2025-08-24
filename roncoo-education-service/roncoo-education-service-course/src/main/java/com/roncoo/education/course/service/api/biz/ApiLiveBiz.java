@@ -5,7 +5,7 @@ import com.roncoo.education.course.dao.LiveDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * API-直播信息

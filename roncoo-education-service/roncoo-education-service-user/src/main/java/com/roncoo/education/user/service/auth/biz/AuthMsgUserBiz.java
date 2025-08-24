@@ -20,7 +20,7 @@ import com.roncoo.education.user.service.auth.resp.AuthMsgUserResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * AUTH-站内信用户记录表

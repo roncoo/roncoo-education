@@ -17,7 +17,7 @@ import com.roncoo.education.user.service.admin.resp.AdminMsgUserViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * ADMIN-站内信用户记录表

@@ -5,6 +5,8 @@ import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Constants;
 import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.tools.JwtUtil;
+import com.roncoo.education.gateway.common.FilterUtil;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -16,8 +18,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import javax.annotation.Resource;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -31,14 +31,14 @@ public class AdminGlobalFilter implements GlobalFilter, Ordered {
     /**
      * admin不需要token校验的接口
      */
-    private static final List<String> EXCLUDE_TOKEN_URL = Arrays.asList(
+    private static final List<String> EXCLUDE_TOKEN_URL = List.of(
             "/system/admin/login/password"
     );
 
     /**
      * admin不需要权限校验的接口
      */
-    private static final List<String> EXCLUDE_URL = Arrays.asList(
+    private static final List<String> EXCLUDE_URL = List.of(
             "/system/admin/sys/user/current"
     );
 
@@ -59,19 +59,19 @@ public class AdminGlobalFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
         String uri = request.getPath().value();
-        if (AuthFilterUtil.checkUri(uri, AuthFilterUtil.CALLBACK_URL_PREFIX)) {
+        if (FilterUtil.checkUri(uri, FilterUtil.CALLBACK_URL_PREFIX)) {
             // 路径存在关键词：/callback，不鉴权
             return chain.filter(exchange);
         }
-        if (AuthFilterUtil.checkUri(uri, AuthFilterUtil.API_URL_PREFIX)) {
+        if (FilterUtil.checkUri(uri, FilterUtil.API_URL_PREFIX)) {
             // 路径存在关键词：/api，不鉴权
             return chain.filter(exchange);
         }
-        if (AuthFilterUtil.checkUri(uri, AuthFilterUtil.API_V3)) {
+        if (FilterUtil.checkUri(uri, FilterUtil.API_V3)) {
             // 路径存在关键词：/v3，不鉴权
             return chain.filter(exchange);
         }
-        if (AuthFilterUtil.checkUri(uri, AuthFilterUtil.IMAGES)) {
+        if (FilterUtil.checkUri(uri, FilterUtil.IMAGES)) {
             // 路径存在关键词：/images
             return chain.filter(exchange);
         }
@@ -83,7 +83,7 @@ public class AdminGlobalFilter implements GlobalFilter, Ordered {
         Long userId = getUserId(request);
         request.mutate().header(Constants.USER_ID, String.valueOf(userId));
 
-        if (AuthFilterUtil.checkUri(uri, AuthFilterUtil.ADMIN_URL_PREFIX)) {
+        if (FilterUtil.checkUri(uri, FilterUtil.ADMIN_URL_PREFIX)) {
             // admin校验
             if (!stringRedisTemplate.hasKey(Constants.RedisPre.ADMIN_APIS.concat(userId.toString()))) {
                 throw new BaseException(ResultEnum.MENU_PAST);

@@ -7,12 +7,12 @@ import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Base;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.tools.IpUtil;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Enumeration;

@@ -18,7 +18,7 @@ import com.roncoo.education.system.service.admin.resp.AdminWebsiteAppViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * ADMIN-app版本管理

@@ -30,7 +30,7 @@ import com.roncoo.education.user.feign.interfaces.vo.LecturerViewVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * ADMIN-直播信息

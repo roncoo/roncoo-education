@@ -11,14 +11,14 @@ import com.roncoo.education.common.tools.FileUtils;
 import com.roncoo.education.common.upload.Upload;
 import com.roncoo.education.common.upload.UploadFace;
 import com.roncoo.education.system.service.biz.resp.UploadDocResp;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.NotNull;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 上传接口
@@ -42,11 +42,11 @@ public class UploadCommonBiz {
         }
 
         Upload upload = sysConfigCommonBiz.getSysConfig(Upload.class);
-        if (ObjectUtil.isEmpty(upload) || StringUtils.isEmpty(upload.getStoragePlatform())) {
+        if (ObjectUtil.isEmpty(upload) || ObjectUtil.isEmpty(upload.getStoragePlatform())) {
             return Result.error("上传参数没配置");
         }
 
-        UploadFace uploadFace = uploadFaceMap.get(StoragePlatformEnum.byCode(Integer.valueOf(upload.getStoragePlatform())).getMode());
+        UploadFace uploadFace = uploadFaceMap.get(Objects.requireNonNull(StoragePlatformEnum.byCode(upload.getStoragePlatform())).getMode());
         if (ObjectUtil.isEmpty(uploadFace)) {
             return Result.error("暂不支持该类型");
         }
@@ -65,11 +65,11 @@ public class UploadCommonBiz {
         UploadDocResp resp = new UploadDocResp();
         Upload upload = sysConfigCommonBiz.getSysConfig(Upload.class);
         resp.setStoragePlatform(upload.getStoragePlatform());
-        if (ObjectUtil.isEmpty(upload) || StringUtils.isEmpty(upload.getStoragePlatform())) {
+        if (ObjectUtil.isEmpty(upload) || ObjectUtil.isEmpty(upload.getStoragePlatform())) {
             return Result.error("上传参数没配置");
         }
 
-        UploadFace uploadFace = uploadFaceMap.get(StoragePlatformEnum.byCode(upload.getStoragePlatform()).getMode());
+        UploadFace uploadFace = uploadFaceMap.get(Objects.requireNonNull(StoragePlatformEnum.byCode(upload.getStoragePlatform())).getMode());
         if (ObjectUtil.isEmpty(uploadFace)) {
             return Result.error("暂不支持该类型");
         }

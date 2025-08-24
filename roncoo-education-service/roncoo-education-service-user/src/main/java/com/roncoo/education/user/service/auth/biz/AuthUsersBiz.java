@@ -22,7 +22,7 @@ import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * AUTH-用户信息

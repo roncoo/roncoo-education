@@ -1,6 +1,6 @@
-package com.roncoo.education.gateway;
+package com.roncoo.education.gateway.common;
 
-import cn.hutool.json.JSONUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Result;
@@ -27,7 +27,6 @@ public class GlobalErrorWebExceptionHandler implements ErrorWebExceptionHandler 
 
     @Override
     public Mono<Void> handle(ServerWebExchange exchange, Throwable ex) {
-        log.error(JSONUtil.toJsonStr(ex));
         ServerHttpResponse response = exchange.getResponse();
         if (response.isCommitted()) {
             return Mono.error(ex);
@@ -36,7 +35,7 @@ public class GlobalErrorWebExceptionHandler implements ErrorWebExceptionHandler 
         // 设置返回JSON
         response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
         if (ex instanceof ResponseStatusException) {
-            response.setStatusCode(((ResponseStatusException) ex).getStatus());
+            response.setStatusCode(((ResponseStatusException) ex).getStatusCode());
         }
 
         return response.writeWith(Mono.fromSupplier(() -> {
@@ -47,7 +46,7 @@ public class GlobalErrorWebExceptionHandler implements ErrorWebExceptionHandler 
                     return bufferFactory.wrap(objectMapper.writeValueAsBytes(Result.error(((BaseException) ex).getCode(), ex.getMessage())));
                 }
                 return bufferFactory.wrap(objectMapper.writeValueAsBytes(Result.error(ex.getMessage())));
-            } catch (Exception e) {
+            } catch (JsonProcessingException e) {
                 log.error("Error writing response", ex);
                 return bufferFactory.wrap(new byte[0]);
             }

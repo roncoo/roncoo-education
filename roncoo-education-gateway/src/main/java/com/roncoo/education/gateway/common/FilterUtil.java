@@ -1,4 +1,4 @@
-package com.roncoo.education.gateway.filter;
+package com.roncoo.education.gateway.common;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.roncoo.education.common.core.base.BaseException;
@@ -15,9 +15,9 @@ import org.springframework.util.StringUtils;
  * @author Admin
  */
 @Slf4j
-public final class AuthFilterUtil {
+public final class FilterUtil {
 
-    private AuthFilterUtil() {
+    private FilterUtil() {
     }
 
     /**

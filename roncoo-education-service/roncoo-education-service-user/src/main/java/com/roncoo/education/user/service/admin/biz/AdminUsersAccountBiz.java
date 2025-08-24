@@ -17,7 +17,7 @@ import com.roncoo.education.user.service.admin.resp.AdminUsersAccountViewResp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * ADMIN-用户账户

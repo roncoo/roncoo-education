@@ -17,7 +17,7 @@ import com.roncoo.education.system.service.admin.resp.AdminWebsiteCarouselViewRe
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * ADMIN-广告信息
