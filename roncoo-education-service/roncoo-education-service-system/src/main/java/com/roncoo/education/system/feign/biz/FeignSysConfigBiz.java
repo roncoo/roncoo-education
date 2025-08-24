@@ -2,7 +2,7 @@ package com.roncoo.education.system.feign.biz;
 
 import com.roncoo.education.common.pay.util.AliPayConfig;
 import com.roncoo.education.common.pay.util.WxPayConfig;
-import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.common.sms.Sms;
 import com.roncoo.education.system.feign.interfaces.vo.*;
 import com.roncoo.education.system.service.biz.SysConfigCommonBiz;

@@ -1,10 +1,10 @@
 package com.roncoo.education.course.service.auth.biz;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.roncoo.education.common.config.ThreadContext;
+import com.roncoo.education.common.base.ThreadContext;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.*;
-import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.common.upload.UploadFace;
 import com.roncoo.education.common.video.LiveUtil;
 import com.roncoo.education.common.video.VodUtil;

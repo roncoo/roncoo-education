@@ -11,7 +11,7 @@ import com.roncoo.education.common.core.enums.FreeEnum;
 import com.roncoo.education.common.core.enums.PeriodTypeEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.tools.BeanUtil;
-import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.course.dao.*;
 import com.roncoo.education.course.dao.impl.mapper.entity.*;
 import com.roncoo.education.course.service.biz.req.CourseCommentPageReq;

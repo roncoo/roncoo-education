@@ -3,7 +3,7 @@ package com.roncoo.education.system.service.api.biz;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.tools.BeanUtil;
-import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.system.dao.WebsiteAppDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteApp;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteAppExample;

@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.tools.IdWorker;
-import com.roncoo.education.common.jdbc.AbstractBaseJdbc;
+import com.roncoo.education.common.base.AbstractBaseJdbc;
 import com.roncoo.education.course.dao.CourseDao;
 import com.roncoo.education.course.dao.impl.mapper.CourseMapper;
 import com.roncoo.education.course.dao.impl.mapper.entity.Course;

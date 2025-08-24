@@ -8,7 +8,7 @@ import com.roncoo.education.common.core.enums.LiveDelayEnum;
 import com.roncoo.education.common.core.enums.LiveModelEnum;
 import com.roncoo.education.common.core.enums.LiveSceneEnum;
 import com.roncoo.education.common.tools.BeanUtil;
-import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.common.video.LiveUtil;
 import com.roncoo.education.common.video.req.LiveBroadcastReq;
 import com.roncoo.education.common.video.req.LiveChannelReq;

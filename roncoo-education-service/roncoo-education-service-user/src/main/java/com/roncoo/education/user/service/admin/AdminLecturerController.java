@@ -1,10 +1,10 @@
 package com.roncoo.education.user.service.admin;
 
-import com.roncoo.education.common.annotation.SysLog;
-import com.roncoo.education.common.annotation.SysLogCache;
+import com.roncoo.education.common.log.SysLog;
+import com.roncoo.education.common.log.SysLogCache;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.service.SortReq;
+import com.roncoo.education.common.base.SortReq;
 import com.roncoo.education.user.service.admin.biz.AdminLecturerBiz;
 import com.roncoo.education.user.service.admin.req.AdminLecturerEditReq;
 import com.roncoo.education.user.service.admin.req.AdminLecturerPageReq;

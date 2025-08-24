@@ -1,6 +1,6 @@
 package com.roncoo.education.course.feign;
 
-import com.roncoo.education.common.service.BaseController;
+import com.roncoo.education.common.base.BaseController;
 import com.roncoo.education.course.feign.biz.FeignUserCourseBiz;
 import com.roncoo.education.course.feign.interfaces.IFeignUserCourse;
 import com.roncoo.education.course.feign.interfaces.qo.UserCourseBindingQO;

@@ -1,7 +1,7 @@
 package com.roncoo.education.system.service.biz;
 
 import com.roncoo.education.common.core.base.Constants;
-import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.common.tools.BeanUtil;
 import com.roncoo.education.common.tools.RsaUtil;
 import com.roncoo.education.system.dao.SysConfigDao;

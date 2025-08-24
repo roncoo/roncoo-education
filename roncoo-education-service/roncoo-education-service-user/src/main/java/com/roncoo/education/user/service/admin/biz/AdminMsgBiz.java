@@ -4,7 +4,7 @@ import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.tools.BeanUtil;
-import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.user.dao.MsgDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.Msg;
 import com.roncoo.education.user.dao.impl.mapper.entity.MsgExample;

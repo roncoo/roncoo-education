@@ -2,13 +2,13 @@ package com.roncoo.education.user.service.auth.biz;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.roncoo.education.common.config.ThreadContext;
+import com.roncoo.education.common.base.ThreadContext;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.OrderStatusEnum;
 import com.roncoo.education.common.tools.BeanUtil;
-import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.course.feign.interfaces.IFeignCourse;
 import com.roncoo.education.course.feign.interfaces.vo.CourseViewVO;
 import com.roncoo.education.user.dao.OrderInfoDao;

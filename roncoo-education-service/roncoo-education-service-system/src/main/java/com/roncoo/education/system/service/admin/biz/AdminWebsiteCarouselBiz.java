@@ -4,7 +4,7 @@ import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.tools.BeanUtil;
-import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.system.dao.WebsiteCarouselDao;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarousel;
 import com.roncoo.education.system.dao.impl.mapper.entity.WebsiteCarouselExample;

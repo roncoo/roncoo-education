@@ -1,7 +1,7 @@
 package com.roncoo.education.system.service.api.biz;
 
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.system.service.api.resp.ApiSysConfigWebsiteResp;
 import com.roncoo.education.system.service.biz.SysConfigCommonBiz;
 import lombok.RequiredArgsConstructor;

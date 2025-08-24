@@ -1,7 +1,7 @@
 package com.roncoo.education.course.callback.biz;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.common.video.VodUtil;
 import com.roncoo.education.common.video.resp.VodInfoResp;
 import com.roncoo.education.course.dao.ResourceDao;

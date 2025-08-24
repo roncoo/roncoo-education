@@ -1,7 +1,7 @@
 package com.roncoo.education.course.service.api;
 
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.service.BaseController;
+import com.roncoo.education.common.base.BaseController;
 import com.roncoo.education.course.service.api.biz.ApiZoneBiz;
 import com.roncoo.education.course.service.api.resp.ApiZoneResp;
 import io.swagger.annotations.Api;

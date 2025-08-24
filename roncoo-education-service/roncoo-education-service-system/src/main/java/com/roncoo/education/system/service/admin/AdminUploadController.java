@@ -1,8 +1,8 @@
 package com.roncoo.education.system.service.admin;
 
-import com.roncoo.education.common.annotation.SysLog;
+import com.roncoo.education.common.log.SysLog;
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.service.BaseController;
+import com.roncoo.education.common.base.BaseController;
 import com.roncoo.education.system.service.biz.UploadCommonBiz;
 import com.roncoo.education.system.service.biz.resp.UploadDocResp;
 import io.swagger.annotations.Api;

@@ -1,4 +1,4 @@
-package com.roncoo.education.common.service;
+package com.roncoo.education.common.base;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

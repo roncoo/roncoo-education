@@ -5,7 +5,7 @@ import com.roncoo.education.common.core.enums.LiveStatusEnum;
 import com.roncoo.education.common.tools.BeanUtil;
 import com.roncoo.education.common.tools.JsonUtil;
 import com.roncoo.education.common.tools.Md5Util;
-import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.common.video.impl.polyv.PolyvVodUtil;
 import com.roncoo.education.common.video.impl.polyv.live.*;
 import com.roncoo.education.common.video.impl.polyv.vod.CallbackEventTypeEnum;

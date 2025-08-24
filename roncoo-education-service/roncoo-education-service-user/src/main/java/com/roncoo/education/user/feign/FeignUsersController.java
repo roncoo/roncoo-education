@@ -1,6 +1,6 @@
 package com.roncoo.education.user.feign;
 
-import com.roncoo.education.common.service.BaseController;
+import com.roncoo.education.common.base.BaseController;
 import com.roncoo.education.user.feign.biz.FeignUsersBiz;
 import com.roncoo.education.user.feign.interfaces.IFeignUsers;
 import com.roncoo.education.user.feign.interfaces.vo.UsersVO;

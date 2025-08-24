@@ -3,7 +3,7 @@ package com.roncoo.education.user.dao.impl;
 import com.roncoo.education.common.core.base.Page;
 import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.tools.IdWorker;
-import com.roncoo.education.common.jdbc.AbstractBaseJdbc;
+import com.roncoo.education.common.base.AbstractBaseJdbc;
 import com.roncoo.education.user.dao.LecturerDao;
 import com.roncoo.education.user.dao.impl.mapper.LecturerMapper;
 import com.roncoo.education.user.dao.impl.mapper.entity.Lecturer;

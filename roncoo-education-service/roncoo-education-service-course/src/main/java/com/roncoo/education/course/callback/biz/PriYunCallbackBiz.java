@@ -1,6 +1,6 @@
 package com.roncoo.education.course.callback.biz;
 
-import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.common.video.impl.priyun.enums.PrivateYunVideoStatusEnum;
 import com.roncoo.education.common.video.impl.priyun.req.PrivateYunVodAuth;
 import com.roncoo.education.common.video.impl.priyun.req.PrivateYunVodUpload;

@@ -8,7 +8,7 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.PutawayEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.tools.BeanUtil;
-import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.course.dao.CategoryDao;
 import com.roncoo.education.course.dao.CourseChapterDao;
 import com.roncoo.education.course.dao.CourseChapterPeriodDao;

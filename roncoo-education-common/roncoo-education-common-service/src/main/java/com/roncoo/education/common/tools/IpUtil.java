@@ -1,5 +1,6 @@
 package com.roncoo.education.common.tools;
 
+import cn.hutool.core.text.StrPool;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
@@ -8,9 +9,6 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
-import static com.baomidou.mybatisplus.core.toolkit.StringPool.COMMA;
-
 
 /**
  * IP工具类
@@ -32,8 +30,8 @@ public final class IpUtil {
         String ip = request.getHeader("x-forwarded-for");
         if (ip != null && !ip.isEmpty() && !UNKNOWN.equalsIgnoreCase(ip)) {
             // 多次反向代理后会有多个ip值，第一个ip才是真实ip
-            if (ip.contains(COMMA)) {
-                ip = ip.split(COMMA)[0];
+            if (ip.contains(StrPool.COMMA)) {
+                ip = ip.split(StrPool.COMMA)[0];
             }
         }
         if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {

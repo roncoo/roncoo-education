@@ -8,7 +8,7 @@ import com.roncoo.education.common.pay.PayFace;
 import com.roncoo.education.common.pay.req.TradeNotifyReq;
 import com.roncoo.education.common.pay.resp.TradeNotifyResp;
 import com.roncoo.education.common.pay.util.TradeStatusEnum;
-import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.common.sms.Sms;
 import com.roncoo.education.common.sms.SmsFace;
 import com.roncoo.education.common.tools.JsonUtil;

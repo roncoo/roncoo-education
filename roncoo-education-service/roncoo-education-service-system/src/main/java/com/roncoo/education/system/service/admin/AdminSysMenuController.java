@@ -1,9 +1,9 @@
 package com.roncoo.education.system.service.admin;
 
-import com.roncoo.education.common.annotation.SysLog;
-import com.roncoo.education.common.annotation.SysLogCache;
+import com.roncoo.education.common.log.SysLog;
+import com.roncoo.education.common.log.SysLogCache;
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.service.SortReq;
+import com.roncoo.education.common.base.SortReq;
 import com.roncoo.education.system.service.admin.biz.AdminSysMenuBiz;
 import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuResp;

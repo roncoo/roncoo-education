@@ -1,7 +1,7 @@
 package com.roncoo.education.system.service.auth;
 
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.service.BaseController;
+import com.roncoo.education.common.base.BaseController;
 import com.roncoo.education.system.service.biz.UploadCommonBiz;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

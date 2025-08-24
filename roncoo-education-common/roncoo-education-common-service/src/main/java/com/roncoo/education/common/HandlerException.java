@@ -1,7 +1,8 @@
-package com.roncoo.education.common.service;
+package com.roncoo.education.common;
 
 import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Result;
+import com.roncoo.education.common.base.BaseController;
 import com.roncoo.education.common.tools.JsonUtil;
 import feign.FeignException;
 import org.springframework.http.HttpStatus;

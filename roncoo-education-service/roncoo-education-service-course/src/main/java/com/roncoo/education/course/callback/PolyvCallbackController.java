@@ -1,6 +1,6 @@
 package com.roncoo.education.course.callback;
 
-import com.roncoo.education.common.service.BaseController;
+import com.roncoo.education.common.base.BaseController;
 import com.roncoo.education.common.video.impl.polyv.live.*;
 import com.roncoo.education.common.video.impl.polyv.vod.CallbackVodAuth;
 import com.roncoo.education.common.video.impl.polyv.vod.CallbackVodUpload;

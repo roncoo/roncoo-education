@@ -1,7 +1,7 @@
 package com.roncoo.education.system.service.admin.biz;
 
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.common.video.VodUtil;
 import com.roncoo.education.common.video.resp.InfoResp;
 import com.roncoo.education.system.feign.interfaces.vo.VideoConfig;

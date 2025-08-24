@@ -1,7 +1,7 @@
 package com.roncoo.education.user.service.auth.biz;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.roncoo.education.common.config.ThreadContext;
+import com.roncoo.education.common.base.ThreadContext;
 import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.*;
@@ -12,7 +12,7 @@ import com.roncoo.education.common.pay.PayFace;
 import com.roncoo.education.common.pay.req.TradeOrderReq;
 import com.roncoo.education.common.pay.resp.TradeOrderResp;
 import com.roncoo.education.common.pay.util.PayModelEnum;
-import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.course.feign.interfaces.IFeignCourse;
 import com.roncoo.education.course.feign.interfaces.vo.CourseViewVO;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;

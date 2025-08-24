@@ -11,7 +11,7 @@ import com.roncoo.education.common.core.base.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.MenuTypeEnum;
 import com.roncoo.education.common.core.enums.ResultEnum;
-import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.common.tools.BeanUtil;
 import com.roncoo.education.common.tools.Sha1Util;
 import com.roncoo.education.system.dao.SysRoleDao;

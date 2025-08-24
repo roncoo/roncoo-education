@@ -4,6 +4,7 @@ import cn.hutool.core.thread.ExecutorBuilder;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
+import com.roncoo.education.common.log.SysLog;
 import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Constants;
 import com.roncoo.education.common.tools.IpUtil;
@@ -54,7 +55,7 @@ public class AspectSysLog {
     @NotNull
     private final IFeignSysLog feignSysLog;
 
-    @Pointcut("@annotation(com.roncoo.education.common.annotation.SysLog)")
+    @Pointcut("@annotation(com.roncoo.education.common.log.SysLog)")
     public void logPointCut() {
     }
 
@@ -65,7 +66,7 @@ public class AspectSysLog {
             // 记录日志，异步执行
             CALLBACK_EXECUTOR.execute(() -> {
                 MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-                com.roncoo.education.common.annotation.SysLog syslog = signature.getMethod().getAnnotation(com.roncoo.education.common.annotation.SysLog.class);
+                SysLog syslog = signature.getMethod().getAnnotation(SysLog.class);
                 qo.setOperation(syslog.value());
                 qo.setContent(joinPoint.getArgs() != null && joinPoint.getArgs().length > 0 ? JsonUtil.toJsonString(joinPoint.getArgs()) : "");
                 if (StringUtils.hasText(qo.getContent())) {

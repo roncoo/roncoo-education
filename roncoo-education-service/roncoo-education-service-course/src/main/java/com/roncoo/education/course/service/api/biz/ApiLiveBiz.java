@@ -1,6 +1,6 @@
 package com.roncoo.education.course.service.api.biz;
 
-import com.roncoo.education.common.service.BaseBiz;
+import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.course.dao.LiveDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

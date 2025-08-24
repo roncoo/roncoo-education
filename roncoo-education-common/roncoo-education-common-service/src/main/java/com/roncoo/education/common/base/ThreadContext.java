@@ -1,4 +1,4 @@
-package com.roncoo.education.common.config;
+package com.roncoo.education.common.base;
 
 /**
  * @author fengyw

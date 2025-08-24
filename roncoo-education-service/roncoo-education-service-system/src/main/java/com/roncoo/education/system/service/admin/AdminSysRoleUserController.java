@@ -1,6 +1,6 @@
 package com.roncoo.education.system.service.admin;
 
-import com.roncoo.education.common.annotation.SysLog;
+import com.roncoo.education.common.log.SysLog;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysRoleUserBiz;
 import com.roncoo.education.system.service.admin.req.AdminSysRoleUserListReq;

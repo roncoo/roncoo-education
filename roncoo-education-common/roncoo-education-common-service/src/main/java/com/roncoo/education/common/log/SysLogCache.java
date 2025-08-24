@@ -1,4 +1,4 @@
-package com.roncoo.education.common.annotation;
+package com.roncoo.education.common.log;
 
 import java.lang.annotation.*;
 

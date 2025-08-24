@@ -1,6 +1,6 @@
 package com.roncoo.education.system.feign.interfaces.config;
 
-import com.roncoo.education.common.annotation.SysLogCache;
+import com.roncoo.education.common.log.SysLogCache;
 import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Constants;
 import com.roncoo.education.common.core.base.Result;
@@ -32,7 +32,7 @@ public class AspectSysLogCache {
     @NotNull
     private final CacheRedis cacheRedis;
 
-    @Pointcut("@annotation(com.roncoo.education.common.annotation.SysLogCache)")
+    @Pointcut("@annotation(com.roncoo.education.common.log.SysLogCache)")
     public void cacheLogPointCut() {
 
     }
@@ -44,7 +44,7 @@ public class AspectSysLogCache {
             Map<String, Object> map = ObjMapUtil.obj2Map(result.getData());
             if (map.get("id") != null) {
                 MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-                SysLogCache sysLogCache = signature.getMethod().getAnnotation(com.roncoo.education.common.annotation.SysLogCache.class);
+                SysLogCache sysLogCache = signature.getMethod().getAnnotation(SysLogCache.class);
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
                 cacheRedis.set(sysLogCache.key() + request.getHeader(Constants.USER_ID) + map.get("id").toString(), map, 60, TimeUnit.MINUTES);
             }
