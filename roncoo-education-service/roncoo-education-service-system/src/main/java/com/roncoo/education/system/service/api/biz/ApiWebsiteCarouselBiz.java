@@ -1,6 +1,6 @@
 package com.roncoo.education.system.service.api.biz;
 
-import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.base.page.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
 import com.roncoo.education.common.base.BaseBiz;

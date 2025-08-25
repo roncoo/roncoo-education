@@ -1,7 +1,7 @@
 /**
  * Copyright 2015-现在 广州市领课网络科技有限公司
  */
-package com.roncoo.education.common.core.tools;
+package com.roncoo.education.common.core.base.utils;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.auth0.jwt.JWT;

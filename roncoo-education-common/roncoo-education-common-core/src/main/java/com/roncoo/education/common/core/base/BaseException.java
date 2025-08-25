@@ -6,6 +6,8 @@ package com.roncoo.education.common.core.base;
 
 import com.roncoo.education.common.core.enums.ResultEnum;
 
+import java.io.Serial;
+
 /**
  * 异常处理类
  *
@@ -13,6 +15,7 @@ import com.roncoo.education.common.core.enums.ResultEnum;
  */
 public class BaseException extends RuntimeException {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

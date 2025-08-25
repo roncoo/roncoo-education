@@ -1,6 +1,6 @@
 package com.roncoo.education.system.service.admin;
 
-import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.base.page.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.admin.biz.AdminSysLogBiz;
 import com.roncoo.education.system.service.admin.req.AdminSysLogPageReq;

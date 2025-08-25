@@ -1,6 +1,6 @@
 package com.roncoo.education.course.service.admin;
 
-import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.base.page.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.service.admin.biz.AdminLiveBiz;
 import com.roncoo.education.course.service.admin.req.AdminLiveBroadcastReq;

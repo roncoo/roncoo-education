@@ -4,7 +4,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Constants;
 import com.roncoo.education.common.core.enums.ResultEnum;
-import com.roncoo.education.common.core.tools.JwtUtil;
+import com.roncoo.education.common.core.base.utils.JwtUtil;
 import com.roncoo.education.gateway.common.FilterUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

@@ -1,7 +1,7 @@
 package com.roncoo.education.system.dao.impl;
 
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.base.page.Page;
+import com.roncoo.education.common.base.page.PageUtil;
 import com.roncoo.education.common.tools.IdWorker;
 import com.roncoo.education.system.dao.SysRoleUserDao;
 import com.roncoo.education.system.dao.impl.mapper.SysRoleUserMapper;

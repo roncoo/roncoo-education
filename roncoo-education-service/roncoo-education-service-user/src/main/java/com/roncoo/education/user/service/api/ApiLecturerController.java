@@ -1,6 +1,6 @@
 package com.roncoo.education.user.service.api;
 
-import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.base.page.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.user.service.api.biz.ApiLecturerBiz;
 import com.roncoo.education.user.service.api.req.LecturerPageReq;

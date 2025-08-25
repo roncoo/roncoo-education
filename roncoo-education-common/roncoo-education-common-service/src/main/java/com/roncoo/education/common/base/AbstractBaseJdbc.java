@@ -3,8 +3,8 @@
  */
 package com.roncoo.education.common.base;
 
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.base.page.Page;
+import com.roncoo.education.common.base.page.PageUtil;
 import jakarta.annotation.Resource;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;

@@ -1,11 +1,12 @@
 /**
  * Copyright 2015-现在 广州市领课网络科技有限公司
  */
-package com.roncoo.education.common.core.base;
+package com.roncoo.education.common.base.page;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import java.util.regex.Pattern;
 @Slf4j
 public final class PageUtil<T extends Serializable> implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

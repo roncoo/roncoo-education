@@ -1,8 +1,8 @@
 package com.roncoo.education.course.service.admin.biz;
 
 import cn.hutool.core.collection.CollUtil;
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.base.page.Page;
+import com.roncoo.education.common.base.page.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.PeriodTypeEnum;
 import com.roncoo.education.common.tools.BeanUtil;
