@@ -4,6 +4,7 @@
 package com.roncoo.education.common.core.base;
 
 import com.roncoo.education.common.core.enums.ResultEnum;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serial;
@@ -17,6 +18,7 @@ import java.io.Serializable;
  * @author wujing
  */
 @Slf4j
+@Getter
 public final class Result<T> implements Serializable {
 
     @Serial
