@@ -8,10 +8,10 @@
             <img src="https://img.shields.io/badge/spring--cloud--alibaba-2023.0.1.0-blue.svg" alt="spring-cloud-alibaba">
         </a> 
         <a href="https://cn.vuejs.org/">
-            <img src="https://img.shields.io/badge/vue-3.4.21-blue.svg" alt="vue">
+            <img src="https://img.shields.io/badge/vue-3.5.20-blue.svg" alt="vue">
         </a> 
         <a href="https://element-plus.org/">
-            <img src="https://img.shields.io/badge/element--plus-2.6.3-blue.svg" alt="element-plus">
+            <img src="https://img.shields.io/badge/element--plus-2.9.9-blue.svg" alt="element-plus">
         </a> 
     </div>
 </div>
