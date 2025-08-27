@@ -28,7 +28,7 @@ public class PasswordReq implements Serializable {
      * 手机验证码
      */
     @ApiModelProperty(value = "手机验证码", required = true)
-    private String code;
+    private String verificationCode;
     /**
      * 登录密码
      */

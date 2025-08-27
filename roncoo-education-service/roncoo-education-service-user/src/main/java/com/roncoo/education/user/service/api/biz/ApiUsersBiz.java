@@ -251,7 +251,7 @@ public class ApiUsersBiz extends BaseBiz {
         if (!StringUtils.hasText(redisCode)) {
             return Result.error("验证码已经过期");
         }
-        if (!req.getCode().equals(redisCode)) {
+        if (!req.getVerificationCode().equals(redisCode)) {
             return Result.error("验证码不正确");
         }
         // 删除验证码缓存
