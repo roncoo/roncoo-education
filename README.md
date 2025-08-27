@@ -28,22 +28,22 @@
 Cloud为核心框架。系统目前主要功能有课程点播功能，支持多家视频云的接入，课程附件管理功能，支持多家存储云的接入，可以帮助个人或者企业快速搭建一个轻量级的在线教育平台。
 
 <table>
-<tr>
-  <td><img src="distribution/images/web1.png"/></td>
-  <td><img src="distribution/images/web2.png"/></td>
-</tr>
-<tr>
-  <td><img src="distribution/images/web3.png"/></td>
-  <td><img src="distribution/images/web4.png"/></td>
-</tr>
-<tr>
-  <td><img src="distribution/images/admin1.png"/></td>
-  <td><img src="distribution/images/admin2.png"/></td>
-</tr>
-<tr>
-  <td><img src="distribution/images/admin3.png"/></td>
-  <td><img src="distribution/images/admin4.png"/></td>
-</tr>
+  <tr>
+    <td><img src="distribution/images/web1.png"/></td>
+    <td><img src="distribution/images/web2.png"/></td>
+  </tr>
+  <tr>
+    <td><img src="distribution/images/web3.png"/></td>
+    <td><img src="distribution/images/web4.png"/></td>
+  </tr>
+  <tr>
+    <td><img src="distribution/images/admin1.png"/></td>
+    <td><img src="distribution/images/admin2.png"/></td>
+  </tr>
+  <tr>
+    <td><img src="distribution/images/admin3.png"/></td>
+    <td><img src="distribution/images/admin4.png"/></td>
+  </tr>
 </table>
 
 ### 演示地址
@@ -55,19 +55,10 @@ Cloud为核心框架。系统目前主要功能有课程点播功能，支持多
 
 ### 源码地址
 
-* 后端系统：roncoo-education（核心框架：Spring Cloud
-  Alibaba）：[码云](https://gitee.com/roncoocom/roncoo-education) | [Github](https://github.com/roncoo/roncoo-education) | [Gitcode](https://gitcode.com/roncoocom/roncoo-education)
-*
-
-门户系统：roncoo-education-web（核心框架：Nuxt3）：[码云](https://gitee.com/roncoocom/roncoo-education-web) | [Github](https://github.com/roncoo/roncoo-education-web) | [Gitcode](https://gitcode.com/roncoocom/roncoo-education-web)
-
-*
-
-管理系统：roncoo-education-admin（核心框架：Vue3）：[码云](https://gitee.com/roncoocom/roncoo-education-admin) | [Github](https://github.com/roncoo/roncoo-education-admin) | [Gitcode](https://gitcode.com/roncoocom/roncoo-education-admin)
+* 后端系统：roncoo-education（核心框架：Spring Cloud Alibaba）：[码云](https://gitee.com/roncoocom/roncoo-education) | [Github](https://github.com/roncoo/roncoo-education) | [Gitcode](https://gitcode.com/roncoocom/roncoo-education)
+* 门户系统：roncoo-education-web（核心框架：Nuxt3）：[码云](https://gitee.com/roncoocom/roncoo-education-web) | [Github](https://github.com/roncoo/roncoo-education-web) | [Gitcode](https://gitcode.com/roncoocom/roncoo-education-web)
+* 管理系统：roncoo-education-admin（核心框架：Vue3）：[码云](https://gitee.com/roncoocom/roncoo-education-admin) | [Github](https://github.com/roncoo/roncoo-education-admin) | [Gitcode](https://gitcode.com/roncoocom/roncoo-education-admin)
 
 ---
-
-<div>
 <div>关注微信公众号可获取更多学习资料（SQL脚本、部署教程、常见问题等）</div>
 <img src="distribution/images/gzh.png" alt="领课开源-微信公众号" width="600"/>
-</div>
