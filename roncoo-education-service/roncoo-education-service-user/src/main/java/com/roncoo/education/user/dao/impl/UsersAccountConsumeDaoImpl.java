@@ -1,7 +1,7 @@
 package com.roncoo.education.user.dao.impl;
 
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.base.page.Page;
+import com.roncoo.education.common.base.page.PageUtil;
 import com.roncoo.education.common.tools.IdWorker;
 import com.roncoo.education.user.dao.UsersAccountConsumeDao;
 import com.roncoo.education.user.dao.impl.mapper.UsersAccountConsumeMapper;

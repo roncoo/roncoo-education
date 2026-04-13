@@ -2,7 +2,7 @@ package com.roncoo.education.user.service.admin;
 
 import com.roncoo.education.common.log.SysLog;
 import com.roncoo.education.common.log.SysLogCache;
-import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.base.page.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.base.SortReq;
 import com.roncoo.education.user.service.admin.biz.AdminLecturerBiz;

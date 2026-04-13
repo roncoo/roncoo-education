@@ -166,6 +166,9 @@
                         <target>${java.version}</target>
                         <skip>true</skip>
                         <encoding>${project.build.sourceEncoding}</encoding>
+                        <compilerArgs>
+                            <arg>-parameters</arg>
+                        </compilerArgs>
                     </configuration>
                 </plugin>
             </plugins>

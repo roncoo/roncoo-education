@@ -14,7 +14,7 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.LoginAuthTypeEnum;
 import com.roncoo.education.common.core.enums.LoginStatusEnum;
 import com.roncoo.education.common.core.enums.SmsPlatformEnum;
-import com.roncoo.education.common.core.tools.JwtUtil;
+import com.roncoo.education.common.core.base.utils.JwtUtil;
 import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.common.base.BaseWxBiz;
 import com.roncoo.education.common.sms.Sms;
@@ -250,7 +250,7 @@ public class ApiUsersBiz extends BaseBiz {
         if (!StringUtils.hasText(redisCode)) {
             return Result.error("验证码已经过期");
         }
-        if (!req.getCode().equals(redisCode)) {
+        if (!req.getVerificationCode().equals(redisCode)) {
             return Result.error("验证码不正确");
         }
         // 删除验证码缓存

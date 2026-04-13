@@ -1,6 +1,6 @@
 package com.roncoo.education.course.service.auth;
 
-import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.base.page.Page;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.service.auth.biz.AuthUserCourseCollectBiz;
 import com.roncoo.education.course.service.auth.req.AuthUserCourseCollectPageReq;

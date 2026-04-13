@@ -1,7 +1,7 @@
 package com.roncoo.education.user.service.api.biz;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.base.page.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.user.dao.RegionDao;
 import com.roncoo.education.user.dao.impl.mapper.entity.Region;

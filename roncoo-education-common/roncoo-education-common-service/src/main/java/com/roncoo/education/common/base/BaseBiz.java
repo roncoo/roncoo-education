@@ -5,7 +5,7 @@ package com.roncoo.education.common.base;
 
 import com.roncoo.education.common.cache.CacheRedis;
 import com.roncoo.education.common.core.base.Base;
-import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.base.page.PageUtil;
 import com.roncoo.education.common.tools.IpUtil;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;

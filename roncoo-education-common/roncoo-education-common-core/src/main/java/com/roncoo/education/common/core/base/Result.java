@@ -4,8 +4,10 @@
 package com.roncoo.education.common.core.base;
 
 import com.roncoo.education.common.core.enums.ResultEnum;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 
@@ -16,9 +18,10 @@ import java.io.Serializable;
  * @author wujing
  */
 @Slf4j
+@Getter
 public final class Result<T> implements Serializable {
 
-
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -62,30 +65,6 @@ public final class Result<T> implements Serializable {
 
     public static <T> Result<T> success(T data) {
         return new Result<T>(ResultEnum.SUCCESS.getCode(), "", data);
-    }
-
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
     }
 
     @Override

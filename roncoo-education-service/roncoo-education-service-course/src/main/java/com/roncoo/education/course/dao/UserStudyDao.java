@@ -1,6 +1,6 @@
 package com.roncoo.education.course.dao;
 
-import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.base.page.Page;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudy;
 import com.roncoo.education.course.dao.impl.mapper.entity.UserStudyExample;
 import com.roncoo.education.course.service.admin.resp.AdminUserStudyStatResp;

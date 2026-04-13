@@ -1,6 +1,6 @@
 package com.roncoo.education.user.dao;
 
-import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.base.page.Page;
 import com.roncoo.education.user.dao.impl.mapper.entity.Msg;
 import com.roncoo.education.user.dao.impl.mapper.entity.MsgExample;
 

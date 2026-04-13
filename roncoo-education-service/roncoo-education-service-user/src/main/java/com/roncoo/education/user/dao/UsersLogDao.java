@@ -1,6 +1,6 @@
 package com.roncoo.education.user.dao;
 
-import com.roncoo.education.common.core.base.Page;
+import com.roncoo.education.common.base.page.Page;
 import com.roncoo.education.user.dao.impl.mapper.entity.UsersLog;
 import com.roncoo.education.user.dao.impl.mapper.entity.UsersLogExample;
 import com.roncoo.education.user.service.admin.resp.AdminStatLogin;

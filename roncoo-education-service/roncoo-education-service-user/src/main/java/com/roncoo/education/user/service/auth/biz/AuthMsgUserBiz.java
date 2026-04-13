@@ -1,8 +1,8 @@
 package com.roncoo.education.user.service.auth.biz;
 
 import com.roncoo.education.common.base.ThreadContext;
-import com.roncoo.education.common.core.base.Page;
-import com.roncoo.education.common.core.base.PageUtil;
+import com.roncoo.education.common.base.page.Page;
+import com.roncoo.education.common.base.page.PageUtil;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.core.enums.ReadEnum;
 import com.roncoo.education.common.core.enums.StatusIdEnum;
