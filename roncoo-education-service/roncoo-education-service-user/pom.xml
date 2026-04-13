@@ -12,15 +12,6 @@
     <artifactId>roncoo-education-service-user</artifactId>
     <name>roncoo-educationr-service-use</name>
 
-    <dependencies>
-        <!-- test -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
     <build>
         <finalName>user</finalName>
         <plugins>

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <springProperty name="springApplicationName" source="spring.application.name" defaultValue="education"/>
-    <springProperty name="FILENAME" source="management.endpoint.logfile.external-file"
-                    defaultValue="/tmp/education/info.log"/>
+    <springProperty name="FILENAME" source="management.endpoint.logfile.external-file" defaultValue="/tmp/education/info.log"/>
     <springProperty name="FILEMAXHISTORY" source="logging.logback.rollingpolicy.max-history" defaultValue="7"/>
-    <springProperty name="PATTERNFILE" source="logging.pattern.file"
-                    defaultValue="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -|   %msg%n"/>
+    <springProperty name="PATTERNFILE" source="logging.pattern.file" defaultValue="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -|   %msg%n"/>
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -18,22 +16,8 @@
             <fileNamePattern>${FILENAME}.%d{yyyy-MM-dd}</fileNamePattern>
             <MaxHistory>${FILEMAXHISTORY}</MaxHistory>
         </rollingPolicy>
-        <layout class="ch.qos.logback.classic.PatternLayout">
+        <encoder>
             <pattern>${PATTERNFILE}</pattern>
-        </layout>
-    </appender>
-    <appender name="GELF" class="de.siegmar.logbackgelf.GelfUdpAppender">
-        <!-- Graylog服务的地址 -->
-        <graylogHost>10.10.100.63</graylogHost>
-        <!-- UDP Input端口 -->
-        <graylogPort>12201</graylogPort>
-        <!-- 是否使用压缩 -->
-        <useCompression>true</useCompression>
-        <encoder class="de.siegmar.logbackgelf.GelfEncoder">
-            <fullPatternLayout class="ch.qos.logback.classic.PatternLayout">
-                <pattern>${PATTERNFILE}</pattern>
-            </fullPatternLayout>
-            <staticField>AppName:${springApplicationName}</staticField>
         </encoder>
     </appender>
 
@@ -43,7 +27,6 @@
         <root level="warn">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="FILE"/>
-            <!--<appender-ref ref="GELF"/>-->
         </root>
     </springProfile>
 
