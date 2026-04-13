@@ -16,22 +16,8 @@
             <fileNamePattern>${FILENAME}.%d{yyyy-MM-dd}</fileNamePattern>
             <MaxHistory>${FILEMAXHISTORY}</MaxHistory>
         </rollingPolicy>
-        <layout class="ch.qos.logback.classic.PatternLayout">
+        <encoder>
             <pattern>${PATTERNFILE}</pattern>
-        </layout>
-    </appender>
-    <appender name="GELF" class="de.siegmar.logbackgelf.GelfUdpAppender">
-        <!-- Graylog服务的地址 -->
-        <graylogHost>10.10.100.63</graylogHost>
-        <!-- UDP Input端口 -->
-        <graylogPort>12201</graylogPort>
-        <!-- 是否使用压缩 -->
-        <useCompression>true</useCompression>
-        <encoder class="de.siegmar.logbackgelf.GelfEncoder">
-            <fullPatternLayout class="ch.qos.logback.classic.PatternLayout">
-                <pattern>${PATTERNFILE}</pattern>
-            </fullPatternLayout>
-            <staticField>AppName:${springApplicationName}</staticField>
         </encoder>
     </appender>
 
@@ -41,7 +27,6 @@
         <root level="warn">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="FILE"/>
-            <!--<appender-ref ref="GELF"/>-->
         </root>
     </springProfile>
 
