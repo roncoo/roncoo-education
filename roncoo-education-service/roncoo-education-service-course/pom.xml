@@ -13,15 +13,6 @@
     <artifactId>roncoo-education-service-course</artifactId>
     <name>roncoo-education-service-course</name>
 
-    <dependencies>
-        <!-- test -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
     <build>
         <finalName>course</finalName>
         <plugins>
