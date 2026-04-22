@@ -19,8 +19,9 @@
 ### 使用须知
 
 1. 允许用于个人学习、毕业设计、教学案例、公益事业等。
-2. 限制商用，若需要商业使用请咨询作者：18302045627（微信可加）。
-3. 禁止将本项目的相关代码和相关资料进行任何形式任何名义的出售。
+2. 使用要求保留“Powered by Roncoo”标识，且衍生版本需要及时开源。
+3. 若需要更好的商业化使用和服务请联系我们：18302045627（微信可加）。
+4. 禁止将本项目的相关代码和相关资料进行任何形式任何名义的出售。
 
 ### 项目介绍
 
@@ -55,9 +56,15 @@ Cloud为核心框架。系统目前主要功能有课程点播功能，支持多
 
 ### 源码地址
 
-* 后端系统：roncoo-education（核心框架：Spring Cloud Alibaba）：[码云](https://gitee.com/roncoocom/roncoo-education) | [Github](https://github.com/roncoo/roncoo-education) | [Gitcode](https://gitcode.com/roncoocom/roncoo-education)
-* 门户系统：roncoo-education-web（核心框架：Nuxt3）：[码云](https://gitee.com/roncoocom/roncoo-education-web) | [Github](https://github.com/roncoo/roncoo-education-web) | [Gitcode](https://gitcode.com/roncoocom/roncoo-education-web)
-* 管理系统：roncoo-education-admin（核心框架：Vue3）：[码云](https://gitee.com/roncoocom/roncoo-education-admin) | [Github](https://github.com/roncoo/roncoo-education-admin) | [Gitcode](https://gitcode.com/roncoocom/roncoo-education-admin)
+* 后端系统：roncoo-education（核心框架：Spring Cloud
+  Alibaba）：[码云](https://gitee.com/roncoocom/roncoo-education) | [Github](https://github.com/roncoo/roncoo-education) | [Gitcode](https://gitcode.com/roncoocom/roncoo-education)
+*
+
+门户系统：roncoo-education-web（核心框架：Nuxt3）：[码云](https://gitee.com/roncoocom/roncoo-education-web) | [Github](https://github.com/roncoo/roncoo-education-web) | [Gitcode](https://gitcode.com/roncoocom/roncoo-education-web)
+
+*
+
+管理系统：roncoo-education-admin（核心框架：Vue3）：[码云](https://gitee.com/roncoocom/roncoo-education-admin) | [Github](https://github.com/roncoo/roncoo-education-admin) | [Gitcode](https://gitcode.com/roncoocom/roncoo-education-admin)
 
 ---
 <div>关注微信公众号可获取更多学习资料（SQL脚本、部署教程、常见问题等）</div>
