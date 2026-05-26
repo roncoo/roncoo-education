@@ -5,7 +5,7 @@
 
     <groupId>com.roncoo</groupId>
     <artifactId>roncoo-education</artifactId>
-    <version>25.0.0-RELEASE</version>
+    <version>26.0.0-RELEASE</version>
     <packaging>pom</packaging>
 
     <name>roncoo-education</name>
@@ -21,35 +21,6 @@
         <developer>
             <name>fengyw</name>
             <email>fengyw@roncoo.com</email>
-            <organization>LingKe, Co., Ltd.</organization>
-            <organizationUrl>http://www.roncoo.net</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
-        <developer>
-            <name>wuy</name>
-            <organization>LingKe, Co., Ltd.</organization>
-            <organizationUrl>http://www.roncoo.net</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
-        <developer>
-            <name>liaohr</name>
-            <email>liaohr@roncoo.com</email>
-            <organization>LingKe, Co., Ltd.</organization>
-            <organizationUrl>http://www.roncoo.net</organizationUrl>
-            <roles>
-                <role>developer</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
-        <developer>
-            <name>keyh</name>
-            <email>keyh@roncoo.com</email>
             <organization>LingKe, Co., Ltd.</organization>
             <organizationUrl>http://www.roncoo.net</organizationUrl>
             <roles>

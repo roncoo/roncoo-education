@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.roncoo</groupId>
         <artifactId>roncoo-education-common</artifactId>
-        <version>25.0.0-RELEASE</version>
+        <version>26.0.0-RELEASE</version>
     </parent>
 
     <artifactId>roncoo-education-common-core</artifactId>
@@ -53,6 +53,16 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+
+        <!-- Nacos -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
     </dependencies>
 </project>
