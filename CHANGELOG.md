@@ -3,11 +3,12 @@
 
 ###### v26.0.0-RELEASE
 1. 集成AI
-2. Spring Boot版本由3.2.4升级到3.5.0，要求jdk>=17
-3. Spring Cloud版升由2023.0.1级到2025.0.0
-4. xxl-job版本由3.1.1升级到3.4.0
-5. nacos版本由2.3.2升级到3.0.3
-6. seata版本由2.0.0升级到2.5.0
+2. Swagger2升级到Swagger3，使用springdoc
+3. Spring Boot版本由3.2.4升级到3.5.0，要求jdk>=17
+4. Spring Cloud版升由2023.0.1级到2025.0.0
+5. xxl-job版本由3.1.1升级到3.4.0
+6. nacos版本由2.3.2升级到3.0.3
+7. seata版本由2.0.0升级到2.5.0
 ---
 
 ###### v25.0.0-RELEASE
