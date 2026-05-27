@@ -48,7 +48,7 @@ public class AdminGlobalFilter implements GlobalFilter, Ordered {
     /**
      * 优先级，order越大，优先级越低
      *
-     * @return
+     * @return 优先级
      */
     @Override
     public int getOrder() {
@@ -129,7 +129,7 @@ public class AdminGlobalFilter implements GlobalFilter, Ordered {
         }
 
         // 解析 token
-        DecodedJWT jwt = null;
+        DecodedJWT jwt;
         try {
             jwt = JwtUtil.verify(token);
         } catch (Exception e) {
