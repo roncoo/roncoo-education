@@ -1,7 +1,6 @@
 package com.roncoo.education.system.service.api.resp;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,14 +17,14 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-@ApiModel(description = "验证码")
+@Schema(description = "验证码")
 public class ApiVerCodeResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "verToken")
+    @Schema(description = "verToken")
     private String verToken;
 
-    @ApiModelProperty(value = "验证码图片")
+    @Schema(description = "验证码图片")
     private String img;
 }

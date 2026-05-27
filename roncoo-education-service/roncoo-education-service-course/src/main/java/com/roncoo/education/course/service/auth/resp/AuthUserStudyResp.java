@@ -1,8 +1,7 @@
 package com.roncoo.education.course.service.auth.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -20,34 +19,34 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "API-AUTH-资源学习记录")
+@Schema(description = "API-AUTH-资源学习记录")
 public class AuthUserStudyResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
+    @Schema(description = "主键")
     private Long id;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
+    @Schema(description = "创建时间")
     private LocalDateTime gmtCreate;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "修改时间")
+    @Schema(description = "修改时间")
     private LocalDateTime gmtModified;
 
-    @ApiModelProperty(value = "课程ID")
+    @Schema(description = "课程ID")
     private Long courseId;
 
-    @ApiModelProperty(value = "章节ID")
+    @Schema(description = "章节ID")
     private Long chapterId;
 
-    @ApiModelProperty(value = "课时ID")
+    @Schema(description = "课时ID")
     private Long periodId;
 
-    @ApiModelProperty(value = "用户ID")
+    @Schema(description = "用户ID")
     private Long userId;
 
-    @ApiModelProperty(value = "进度(百分比)")
+    @Schema(description = "进度(百分比)")
     private BigDecimal progress;
 }

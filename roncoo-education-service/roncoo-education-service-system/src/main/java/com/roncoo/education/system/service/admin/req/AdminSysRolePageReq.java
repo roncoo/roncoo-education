@@ -1,6 +1,6 @@
 package com.roncoo.education.system.service.admin.req;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -20,22 +20,22 @@ public class AdminSysRolePageReq implements Serializable {
     /**
      * 状态(1:正常，0:禁用)
      */
-    @ApiModelProperty(value = "状态(1:正常，0:禁用)", required = false)
+    @Schema(description = "状态(1:正常，0:禁用)", required = false)
     private Integer statusId;
     /**
      * 名称
      */
-    @ApiModelProperty(value = "名称", required = false)
+    @Schema(description = "名称", required = false)
     private String roleName;
 
     /**
      * 当前页
      */
-    @ApiModelProperty(value = "当前页", required = true)
+    @Schema(description = "当前页", required = true)
     private int pageCurrent = 1;
     /**
      * 每页记录数
      */
-    @ApiModelProperty(value = "每页记录数", required = true)
+    @Schema(description = "每页记录数", required = true)
     private int pageSize = 20;
 }

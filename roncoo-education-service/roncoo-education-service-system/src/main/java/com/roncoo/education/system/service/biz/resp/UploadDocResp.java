@@ -1,6 +1,6 @@
 package com.roncoo.education.system.service.biz.resp;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,12 +21,12 @@ public class UploadDocResp implements Serializable {
 
     private static final long serialVersionUID = 6388549853399820582L;
 
-    @ApiModelProperty(value = "存储平台")
+    @Schema(description = "存储平台")
     private Integer storagePlatform;
 
-    @ApiModelProperty(value = "文件Url")
+    @Schema(description = "文件Url")
     private String docUrl;
 
-    @ApiModelProperty("页数")
+    @Schema(description = "页数")
     private Integer pageCount;
 }

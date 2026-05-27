@@ -3,8 +3,8 @@ package com.roncoo.education.system.service.api;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.system.service.api.biz.ApiWebsiteNavBiz;
 import com.roncoo.education.system.service.api.resp.ApiWebsiteNavResp;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author wuyun
  */
-@Api(tags = "api-站点信息")
+@Tag(name = "api-站点信息")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/system/api/website/nav")
@@ -34,7 +34,7 @@ public class ApiWebsiteNavController {
      * @return 头部导航列表
      * @author wuyun
      */
-    @ApiOperation(value = "头部导航接口", notes = "返回头部导航列表")
+    @Operation(summary = "头部导航接口", description = "返回头部导航列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public Result<List<ApiWebsiteNavResp>> list() {
         return biz.list();

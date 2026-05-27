@@ -1,6 +1,6 @@
 package com.roncoo.education.system.service.admin.req;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -20,7 +20,7 @@ public class AdminSysRoleDeleteReq implements Serializable {
     /**
      * 主键
      */
-    @ApiModelProperty(value = "主键", required = true)
+    @Schema(description = "主键", required = true)
     private Long id;
 
 }

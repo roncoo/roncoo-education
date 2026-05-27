@@ -9,8 +9,8 @@ import com.roncoo.education.system.service.admin.biz.AdminSysRoleBiz;
 import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminSysRolePageResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysRoleViewResp;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +23,7 @@ import java.util.List;
  *
  * @author wujing
  */
-@Api(tags = "admin-角色接口")
+@Tag(name = "admin-角色接口")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/system/admin/sys/role")
@@ -35,7 +35,7 @@ public class AdminSysRoleController {
     /**
      * 角色分页列表接口
      */
-    @ApiOperation(value = "角色分页", notes = "角色分页列表接口")
+    @Operation(summary = "角色分页", description = "角色分页列表接口")
     @RequestMapping(value = "/page", method = RequestMethod.POST)
     public Result<Page<AdminSysRolePageResp>> listForPage(@RequestBody AdminSysRolePageReq sysRolePageREQ) {
         return biz.listForPage(sysRolePageREQ);
@@ -44,7 +44,7 @@ public class AdminSysRoleController {
     /**
      * 角色添加接口
      */
-    @ApiOperation(value = "角色添加", notes = "角色添加接口")
+    @Operation(summary = "角色添加", description = "角色添加接口")
     @SysLog(value = "角色添加")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Result<String> save(@RequestBody AdminSysRoleSaveReq sysRoleSaveREQ) {
@@ -54,7 +54,7 @@ public class AdminSysRoleController {
     /**
      * 角色删除接口
      */
-    @ApiOperation(value = "角色删除接口", notes = "角色删除接口")
+    @Operation(summary = "角色删除接口")
     @SysLog(value = "角色删除接口")
     @RequestMapping(value = "/delete", method = RequestMethod.PUT)
     public Result<String> delete(@RequestBody AdminSysRoleDeleteReq sysRoleDeleteREQ) {
@@ -64,7 +64,7 @@ public class AdminSysRoleController {
     /**
      * 角色修改接口
      */
-    @ApiOperation(value = "角色修改接口", notes = "角色修改接口")
+    @Operation(summary = "角色修改接口")
     @SysLog(value = "角色修改接口")
     @RequestMapping(value = "/edit", method = RequestMethod.PUT)
     public Result<String> update(@RequestBody AdminSysRoleUpdateReq sysRoleUpdateREQ) {
@@ -74,14 +74,14 @@ public class AdminSysRoleController {
     /**
      * 角色查看接口
      */
-    @ApiOperation(value = "角色查看接口", notes = "角色查看接口")
+    @Operation(summary = "角色查看接口")
     @SysLogCache
     @RequestMapping(value = "/view", method = RequestMethod.POST)
     public Result<AdminSysRoleViewResp> view(@RequestBody AdminSysRoleViewReq sysRoleViewREQ) {
         return biz.view(sysRoleViewREQ);
     }
 
-    @ApiOperation(value = "排序", notes = "排序")
+    @Operation(summary = "排序")
     @SysLog(value = "排序")
     @PutMapping(value = "/sort")
     public Result<Integer> sort(@RequestBody List<SortReq> req) {

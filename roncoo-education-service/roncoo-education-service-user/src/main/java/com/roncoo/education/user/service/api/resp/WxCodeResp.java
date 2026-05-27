@@ -1,6 +1,6 @@
 package com.roncoo.education.user.service.api.resp;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -20,10 +20,10 @@ public class WxCodeResp extends UsersLoginResp implements Serializable {
     @Serial
     private static final long serialVersionUID = 2621609267080102065L;
 
-    @ApiModelProperty(value = "绑定状态(true已绑定，false没绑定)")
+    @Schema(description = "绑定状态(true已绑定，false没绑定)")
     private Boolean bindingStatus = false;
 
-    @ApiModelProperty(value = "授权信息")
+    @Schema(description = "授权信息")
     private WxOAuth2UserInfo userInfo;
 
 }

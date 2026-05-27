@@ -1,7 +1,6 @@
 package com.roncoo.education.user.service.auth.req;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -17,23 +16,23 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "API-AUTH-站内信用户记录表")
+@Schema(description = "API-AUTH-站内信用户记录表")
 public class AuthMsgUserPageReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "当前页")
+    @Schema(description = "当前页")
     private int pageCurrent = 1;
 
-    @ApiModelProperty(value = "每页条数")
+    @Schema(description = "每页条数")
     private int pageSize = 20;
 
-    @ApiModelProperty(value = "状态(1有效, 0无效)")
+    @Schema(description = "状态(1有效, 0无效)")
     private Integer statusId;
 
-    @ApiModelProperty(value = "是否阅读(1是;0否)")
+    @Schema(description = "是否阅读(1是;0否)")
     private Integer isRead;
 
-    @ApiModelProperty(value = "是否置顶(1是;0否)")
+    @Schema(description = "是否置顶(1是;0否)")
     private Integer isTop;
 }

@@ -1,7 +1,6 @@
 package com.roncoo.education.course.service.admin.req;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -16,23 +15,23 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-课程用户关联表分页")
+@Schema(description = "ADMIN-课程用户关联表分页")
 public class AdminUserCourseRecordReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "课程ID")
+    @Schema(description = "课程ID")
     private Long courseId;
 
-    @ApiModelProperty(value = "购买类型(1支付，2免费)")
+    @Schema(description = "购买类型(1支付，2免费)")
     private Integer buyType;
 
-    @ApiModelProperty(value = "手机号")
+    @Schema(description = "手机号")
     private String mobile;
 
-    @ApiModelProperty(value = "当前页")
+    @Schema(description = "当前页")
     private int pageCurrent = 1;
 
-    @ApiModelProperty(value = "每页条数")
+    @Schema(description = "每页条数")
     private int pageSize = 20;
 }

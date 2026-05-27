@@ -1,7 +1,6 @@
 package com.roncoo.education.system.service.admin.req;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -16,26 +15,26 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-站点友情链接添加")
+@Schema(description = "ADMIN-站点友情链接添加")
 public class AdminWebsiteLinkSaveReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
+    @Schema(description = "主键")
     private Long id;
 
-    @ApiModelProperty(value = "状态(1有效, 0无效)")
+    @Schema(description = "状态(1有效, 0无效)")
     private Integer statusId;
 
-    @ApiModelProperty(value = "排序")
+    @Schema(description = "排序")
     private Integer sort;
 
-    @ApiModelProperty(value = "名称")
+    @Schema(description = "名称")
     private String linkName;
 
-    @ApiModelProperty(value = "链接")
+    @Schema(description = "链接")
     private String linkUrl;
 
-    @ApiModelProperty(value = "跳转方式")
+    @Schema(description = "跳转方式")
     private Integer linkTarget;
 }

@@ -1,8 +1,7 @@
 package com.roncoo.education.course.service.admin.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -19,25 +18,25 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-资源学习记录分页")
+@Schema(description = "ADMIN-资源学习记录分页")
 public class AdminUserStudyPeriodPageResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
+    @Schema(description = "创建时间")
     private LocalDateTime gmtCreate;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "修改时间")
+    @Schema(description = "修改时间")
     private LocalDateTime gmtModified;
 
-    @ApiModelProperty(value = "课时ID")
+    @Schema(description = "课时ID")
     private Long id;
 
-    @ApiModelProperty(value = "课时名称")
+    @Schema(description = "课时名称")
     private String periodName;
 
-    @ApiModelProperty(value = "进度(百分比)")
+    @Schema(description = "进度(百分比)")
     private BigDecimal progress;
 }

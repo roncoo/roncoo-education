@@ -4,8 +4,8 @@ import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.common.base.BaseController;
 import com.roncoo.education.course.service.api.biz.ApiZoneBiz;
 import com.roncoo.education.course.service.api.resp.ApiZoneResp;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author wuyun
  */
-@Api(tags = "api-分区")
+@Tag(name = "api-分区")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/course/api/zone")
@@ -35,7 +35,7 @@ public class ApiZoneController extends BaseController {
      * @param bo
      * @return
      */
-    @ApiOperation(value = "专区接口", notes = "列出专区课程列表")
+    @Operation(summary = "专区接口", description = "列出专区课程列表")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public Result<List<ApiZoneResp>> list() {
         return biz.list();

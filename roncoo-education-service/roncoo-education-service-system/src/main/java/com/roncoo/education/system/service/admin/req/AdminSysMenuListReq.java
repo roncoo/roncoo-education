@@ -1,6 +1,6 @@
 package com.roncoo.education.system.service.admin.req;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -17,10 +17,10 @@ public class AdminSysMenuListReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "菜单名称", required = false)
+    @Schema(description = "菜单名称", required = false)
     private String menuName;
 
-    @ApiModelProperty(value = "状态", required = false)
+    @Schema(description = "状态", required = false)
     private Integer statusId;
 
 }

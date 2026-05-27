@@ -1,7 +1,6 @@
 package com.roncoo.education.course.service.biz.req;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -17,12 +16,12 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "API-课程信息")
+@Schema(description = "API-课程信息")
 public class CourseReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "课程ID")
+    @Schema(description = "课程ID")
     private Long courseId;
 
 }

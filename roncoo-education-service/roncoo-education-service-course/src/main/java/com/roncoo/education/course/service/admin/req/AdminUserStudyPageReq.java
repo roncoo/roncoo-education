@@ -1,7 +1,6 @@
 package com.roncoo.education.course.service.admin.req;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -17,23 +16,23 @@ import java.math.BigDecimal;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-资源学习记录分页")
+@Schema(description = "ADMIN-资源学习记录分页")
 public class AdminUserStudyPageReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "课程ID")
+    @Schema(description = "课程ID")
     private Long courseId;
 
-    @ApiModelProperty(value = "用户ID")
+    @Schema(description = "用户ID")
     private Long userId;
 
-    @ApiModelProperty(value = "进度(百分比)")
+    @Schema(description = "进度(百分比)")
     private BigDecimal progress;
 
-    @ApiModelProperty(value = "当前页")
+    @Schema(description = "当前页")
     private int pageCurrent = 1;
 
-    @ApiModelProperty(value = "每页条数")
+    @Schema(description = "每页条数")
     private int pageSize = 20;
 }

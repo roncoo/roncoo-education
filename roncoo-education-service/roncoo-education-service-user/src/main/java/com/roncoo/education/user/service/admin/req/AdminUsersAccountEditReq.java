@@ -1,8 +1,7 @@
 package com.roncoo.education.user.service.admin.req;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -19,34 +18,34 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-用户账户修改")
+@Schema(description = "ADMIN-用户账户修改")
 public class AdminUsersAccountEditReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键ID")
+    @Schema(description = "主键ID")
     private Long id;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
+    @Schema(description = "创建时间")
     private LocalDateTime gmtCreate;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "修改时间")
+    @Schema(description = "修改时间")
     private LocalDateTime gmtModified;
 
-    @ApiModelProperty(value = "状态(1:正常，0:禁用)")
+    @Schema(description = "状态(1:正常，0:禁用)")
     private Integer statusId;
 
-    @ApiModelProperty(value = "用户ID")
+    @Schema(description = "用户ID")
     private Long userId;
 
-    @ApiModelProperty(value = "可用金额")
+    @Schema(description = "可用金额")
     private BigDecimal availableAmount;
 
-    @ApiModelProperty(value = "冻结金额")
+    @Schema(description = "冻结金额")
     private BigDecimal freezeAmount;
 
-    @ApiModelProperty(value = "防篡改值")
+    @Schema(description = "防篡改值")
     private String sign;
 }

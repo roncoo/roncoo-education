@@ -2,8 +2,7 @@ package com.roncoo.education.course.service.auth.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.roncoo.education.course.service.biz.resp.CourseResp;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -20,40 +19,40 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "API-AUTH-课程评论")
+@Schema(description = "API-AUTH-课程评论")
 public class AuthUserCourseCommentResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
+    @Schema(description = "主键")
     private Long id;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
+    @Schema(description = "创建时间")
     private LocalDateTime gmtCreate;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "修改时间")
+    @Schema(description = "修改时间")
     private LocalDateTime gmtModified;
 
-    @ApiModelProperty(value = "状态(1:正常，0:禁用)")
+    @Schema(description = "状态(1:正常，0:禁用)")
     private Integer statusId;
 
-    @ApiModelProperty(value = "排序")
+    @Schema(description = "排序")
     private Integer sort;
 
-    @ApiModelProperty(value = "用户ID")
+    @Schema(description = "用户ID")
     private Long userId;
 
-    @ApiModelProperty(value = "课程ID")
+    @Schema(description = "课程ID")
     private Long courseId;
 
-    @ApiModelProperty(value = "评论ID")
+    @Schema(description = "评论ID")
     private Long commentId;
 
-    @ApiModelProperty(value = "评论内容")
+    @Schema(description = "评论内容")
     private String commentText;
 
-    @ApiModelProperty(value = "课程信息")
+    @Schema(description = "课程信息")
     private CourseResp courseResp;
 }

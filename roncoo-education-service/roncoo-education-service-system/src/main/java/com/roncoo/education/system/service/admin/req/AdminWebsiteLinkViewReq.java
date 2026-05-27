@@ -1,6 +1,6 @@
 package com.roncoo.education.system.service.admin.req;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -17,6 +17,6 @@ public class AdminWebsiteLinkViewReq implements Serializable {
     /**
      * 主键
      */
-    @ApiModelProperty(value = "主键id", required = true)
+    @Schema(description = "主键id", required = true)
     private Long id;
 }

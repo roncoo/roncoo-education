@@ -5,7 +5,7 @@ import com.roncoo.education.common.video.impl.polyv.live.*;
 import com.roncoo.education.common.video.impl.polyv.vod.CallbackVodAuth;
 import com.roncoo.education.common.video.impl.polyv.vod.CallbackVodUpload;
 import com.roncoo.education.course.callback.biz.PolyvCallbackBiz;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,44 +33,44 @@ public class PolyvCallbackController extends BaseController {
      * @param callbackVodUpload
      * @return
      */
-    @ApiOperation(value = "点播上传状态回调", notes = "上传状态回调")
+    @Operation(summary = "点播上传状态回调", description = "上传状态回调")
     @RequestMapping(value = "/vod/upload", method = {RequestMethod.POST, RequestMethod.GET})
     public String vodUpload(CallbackVodUpload callbackVodUpload) {
         return biz.vodUpload(callbackVodUpload);
     }
 
-    @ApiOperation(value = "点播播放授权回调", notes = "播放授权回调")
+    @Operation(summary = "点播播放授权回调", description = "播放授权回调")
     @GetMapping(value = "/vod/auth")
     public String vodAuth(CallbackVodAuth callbackVodAuth) {
         return biz.vodAuth(callbackVodAuth);
     }
 
 
-    @ApiOperation(value = "直播状态回调", notes = "直播状态回调")
+    @Operation(summary = "直播状态回调")
     @GetMapping(value = "/live/status")
     public String liveStatus(CallbackLiveStatus callbackLiveStatus) {
         return biz.liveStatus(callbackLiveStatus);
     }
 
-    @ApiOperation(value = "直播授观看授权", notes = "直播授观看授权")
+    @Operation(summary = "直播授观看授权")
     @RequestMapping(value = "/live/auth", method = {RequestMethod.POST, RequestMethod.GET})
     public String liveAuth(CallbackLiveAuth callbackLiveAuth) {
         return biz.liveAuth(callbackLiveAuth);
     }
 
-    @ApiOperation(value = "直播回放生成", notes = "直播回放生成")
+    @Operation(summary = "直播回放生成")
     @GetMapping(value = "/live/playback")
     public String livePlayback(CallbackLivePlayback callbackLivePlayback) {
         return biz.livePlayback(callbackLivePlayback);
     }
 
-    @ApiOperation(value = "直播回放转存", notes = "直播回放转存")
+    @Operation(summary = "直播回放转存")
     @GetMapping(value = "/live/convert")
     public String liveConvert(CallbackLiveConvert callbackLiveConvert) {
         return biz.liveConvert(callbackLiveConvert);
     }
 
-    @ApiOperation(value = "直播课件重制", notes = "直播课件重制")
+    @Operation(summary = "直播课件重制")
     @GetMapping(value = "/live/refashion")
     public String liveRefashion(CallbackLiveRefashion callbackLiveRefashion) {
         return biz.liveRefashion(callbackLiveRefashion);

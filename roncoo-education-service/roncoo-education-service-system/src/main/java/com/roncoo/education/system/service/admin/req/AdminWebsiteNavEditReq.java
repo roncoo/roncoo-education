@@ -1,7 +1,6 @@
 package com.roncoo.education.system.service.admin.req;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -16,26 +15,26 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-头部导航修改")
+@Schema(description = "ADMIN-头部导航修改")
 public class AdminWebsiteNavEditReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
+    @Schema(description = "主键")
     private Long id;
 
-    @ApiModelProperty(value = "状态(1有效, 0无效)")
+    @Schema(description = "状态(1有效, 0无效)")
     private Integer statusId;
 
-    @ApiModelProperty(value = "排序")
+    @Schema(description = "排序")
     private Integer sort;
 
-    @ApiModelProperty(value = "导航标题")
+    @Schema(description = "导航标题")
     private String navTitle;
 
-    @ApiModelProperty(value = "导航url")
+    @Schema(description = "导航url")
     private String navUrl;
 
-    @ApiModelProperty(value = "跳转方式")
+    @Schema(description = "跳转方式")
     private Integer navTarget;
 }

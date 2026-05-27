@@ -1,25 +1,23 @@
 package com.roncoo.education.system.service.admin;
 
-import com.roncoo.education.common.log.SysLog;
-import com.roncoo.education.common.log.SysLogCache;
+import com.roncoo.education.common.base.SortReq;
 import com.roncoo.education.common.base.page.Page;
 import com.roncoo.education.common.core.base.Result;
-import com.roncoo.education.common.base.SortReq;
+import com.roncoo.education.common.log.SysLog;
+import com.roncoo.education.common.log.SysLogCache;
 import com.roncoo.education.system.service.admin.biz.AdminWebsiteNavBiz;
 import com.roncoo.education.system.service.admin.req.AdminWebsiteNavEditReq;
 import com.roncoo.education.system.service.admin.req.AdminWebsiteNavPageReq;
 import com.roncoo.education.system.service.admin.req.AdminWebsiteNavSaveReq;
 import com.roncoo.education.system.service.admin.resp.AdminWebsiteNavPageResp;
 import com.roncoo.education.system.service.admin.resp.AdminWebsiteNavViewResp;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-
-import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
@@ -28,7 +26,7 @@ import java.util.List;
  *
  * @author wujing
  */
-@Api(tags = "admin-头部导航")
+@Tag(name = "admin-头部导航")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/system/admin/website/nav")
@@ -37,43 +35,43 @@ public class AdminWebsiteNavController {
     @NotNull
     private final AdminWebsiteNavBiz biz;
 
-    @ApiOperation(value = "头部导航分页", notes = "头部导航分页")
+    @Operation(summary = "头部导航分页")
     @PostMapping(value = "/page")
     public Result<Page<AdminWebsiteNavPageResp>> page(@RequestBody AdminWebsiteNavPageReq req) {
         return biz.page(req);
     }
 
-    @ApiOperation(value = "头部导航添加", notes = "头部导航添加")
+    @Operation(summary = "头部导航添加")
     @SysLog(value = "头部导航添加")
     @PostMapping(value = "/save")
     public Result<String> save(@RequestBody @Valid AdminWebsiteNavSaveReq req) {
         return biz.save(req);
     }
 
-    @ApiOperation(value = "头部导航查看", notes = "头部导航查看")
-    @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
+    @Operation(summary = "头部导航查看")
+    @Parameter(name = "id", description = "主键ID", required = true)
     @SysLogCache
     @GetMapping(value = "/view")
     public Result<AdminWebsiteNavViewResp> view(@RequestParam Long id) {
         return biz.view(id);
     }
 
-    @ApiOperation(value = "头部导航修改", notes = "头部导航修改")
+    @Operation(summary = "头部导航修改")
     @SysLog(value = "头部导航修改")
     @PutMapping(value = "/edit")
     public Result<String> edit(@RequestBody @Valid AdminWebsiteNavEditReq req) {
         return biz.edit(req);
     }
 
-    @ApiOperation(value = "头部导航删除", notes = "头部导航删除")
-    @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
+    @Operation(summary = "头部导航删除")
+    @Parameter(name = "id", description = "主键ID", required = true)
     @SysLog(value = "头部导航删除")
     @DeleteMapping(value = "/delete")
     public Result<String> delete(@RequestParam Long id) {
         return biz.delete(id);
     }
 
-    @ApiOperation(value = "排序", notes = "排序")
+    @Operation(summary = "排序")
     @SysLog(value = "排序")
     @PutMapping(value = "/sort")
     public Result<Integer> sort(@RequestBody List<SortReq> req) {

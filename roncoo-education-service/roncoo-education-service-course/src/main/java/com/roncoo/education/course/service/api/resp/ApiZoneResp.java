@@ -1,7 +1,6 @@
 package com.roncoo.education.course.service.api.resp;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -18,20 +17,20 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "API-专区")
+@Schema(description = "API-专区")
 public class ApiZoneResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
+    @Schema(description = "主键")
     private Long id;
 
-    @ApiModelProperty(value = "名称")
+    @Schema(description = "名称")
     private String zoneName;
 
-    @ApiModelProperty(value = "描述")
+    @Schema(description = "描述")
     private String zoneDesc;
 
-    @ApiModelProperty(value = "课程信息")
+    @Schema(description = "课程信息")
     private List<ApiZoneCourseResp> courseList;
 }

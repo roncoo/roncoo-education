@@ -1,7 +1,6 @@
 package com.roncoo.education.user.service.admin.req;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -16,17 +15,17 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-讲师信息分页")
+@Schema(description = "ADMIN-讲师信息分页")
 public class AdminLecturerPageReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "讲师名称")
+    @Schema(description = "讲师名称")
     private String lecturerName;
 
-    @ApiModelProperty(value = "当前页")
+    @Schema(description = "当前页")
     private int pageCurrent = 1;
 
-    @ApiModelProperty(value = "每页条数")
+    @Schema(description = "每页条数")
     private int pageSize = 20;
 }

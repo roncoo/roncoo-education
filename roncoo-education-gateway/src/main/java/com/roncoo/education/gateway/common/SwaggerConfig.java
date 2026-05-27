@@ -28,15 +28,13 @@ public class SwaggerConfig {
     @ConditionalOnMissingBean
     public ServiceDiscoverHandler serviceDiscoverHandler(Knife4jGatewayProperties knife4jGatewayProperties) {
         return new EduServiceDiscoverHandler(knife4jGatewayProperties);
-
     }
 
     public static class EduServiceDiscoverHandler extends ServiceDiscoverHandler {
-
         public EduServiceDiscoverHandler(Knife4jGatewayProperties knife4jGatewayProperties) {
             super(knife4jGatewayProperties);
         }
-
+        
         public List<OpenAPI2Resource> getResources(String forwardPath) {
             List<OpenAPI2Resource> resourceList = new ArrayList<>();
             Set<OpenAPI2Resource> resources = getGatewayResources();
@@ -45,7 +43,6 @@ public class SwaggerConfig {
                     OpenAPI2Resource copy = resource.copy();
                     copy.setContextPath("");
                     copy.setUrl(PathUtils.append(forwardPath, copy.getUrl()));
-                    // 添加
                     resourceList.add(copy);
                 }
                 return resourceList;

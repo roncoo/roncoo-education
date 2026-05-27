@@ -1,7 +1,6 @@
 package com.roncoo.education.course.service.api.resp;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -18,21 +17,21 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "API-分类")
+@Schema(description = "API-分类")
 public class ApiCategoryResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
+    @Schema(description = "主键")
     private Long id;
 
-    @ApiModelProperty(value = "父分类ID")
+    @Schema(description = "父分类ID")
     private Long parentId;
 
-    @ApiModelProperty(value = "名称")
+    @Schema(description = "名称")
     private String categoryName;
 
-    @ApiModelProperty(value = "备注")
+    @Schema(description = "备注")
     private String remark;
 
     private List<ApiCategoryResp> list;

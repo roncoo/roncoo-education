@@ -1,7 +1,6 @@
 package com.roncoo.education.user.service.admin.resp;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -17,14 +16,14 @@ import java.math.BigDecimal;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-用户信息统计")
+@Schema(description = "ADMIN-用户信息统计")
 public class AdminOrderInfoStatResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "购买课程总数量")
+    @Schema(description = "购买课程总数量")
     private Integer courseBuySum = 0;
 
-    @ApiModelProperty(value = "购买课程总金额")
+    @Schema(description = "购买课程总金额")
     private BigDecimal courseBuyMoney = BigDecimal.ZERO;
 }

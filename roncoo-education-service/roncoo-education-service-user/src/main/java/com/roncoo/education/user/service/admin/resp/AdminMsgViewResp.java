@@ -1,8 +1,7 @@
 package com.roncoo.education.user.service.admin.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -18,50 +17,50 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-站内信息表查看")
+@Schema(description = "ADMIN-站内信息表查看")
 public class AdminMsgViewResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
+    @Schema(description = "主键")
     private Long id;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
+    @Schema(description = "创建时间")
     private LocalDateTime gmtCreate;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "修改时间")
+    @Schema(description = "修改时间")
     private LocalDateTime gmtModified;
 
-    @ApiModelProperty(value = "状态(1有效, 0无效)")
+    @Schema(description = "状态(1有效, 0无效)")
     private Integer statusId;
 
-    @ApiModelProperty(value = "排序")
+    @Schema(description = "排序")
     private Integer sort;
 
-    @ApiModelProperty(value = "短信类型(1系统消息,2其他)")
+    @Schema(description = "短信类型(1系统消息,2其他)")
     private Integer msgType;
 
-    @ApiModelProperty(value = "短信标题")
+    @Schema(description = "短信标题")
     private String msgTitle;
 
-    @ApiModelProperty(value = "短信内容")
+    @Schema(description = "短信内容")
     private String msgText;
 
-    @ApiModelProperty(value = "是否定时发送（1是，0否）")
+    @Schema(description = "是否定时发送（1是，0否）")
     private Integer isTimeSend;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "发送时间")
+    @Schema(description = "发送时间")
     private LocalDateTime sendTime;
 
-    @ApiModelProperty(value = "是否已发送(1是;0否)")
+    @Schema(description = "是否已发送(1是;0否)")
     private Integer isSend;
 
-    @ApiModelProperty(value = "是否置顶(1是;0否)")
+    @Schema(description = "是否置顶(1是;0否)")
     private Integer isTop;
 
-    @ApiModelProperty(value = "备注")
+    @Schema(description = "备注")
     private String remark;
 }

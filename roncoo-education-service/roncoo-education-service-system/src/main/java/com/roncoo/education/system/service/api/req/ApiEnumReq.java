@@ -1,6 +1,6 @@
 package com.roncoo.education.system.service.api.req;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -20,6 +20,6 @@ public class ApiEnumReq implements Serializable {
     /**
      * 文章ID
      */
-    @ApiModelProperty(value = "枚举名称")
+    @Schema(description = "枚举名称")
     private String enumName;
 }

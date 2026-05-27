@@ -6,9 +6,9 @@ import com.roncoo.education.user.service.api.biz.ApiLecturerBiz;
 import com.roncoo.education.user.service.api.req.LecturerPageReq;
 import com.roncoo.education.user.service.api.resp.LecturerPageResp;
 import com.roncoo.education.user.service.api.resp.LecturerViewResp;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +19,7 @@ import jakarta.validation.constraints.NotNull;
  *
  * @author fengyw
  */
-@Api(tags = "api-讲师信息")
+@Tag(name = "api-讲师信息")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user/api/lecturer")
@@ -28,14 +28,14 @@ public class ApiLecturerController {
     @NotNull
     private final ApiLecturerBiz biz;
 
-    @ApiOperation(value = "讲师列出", notes = "讲师列出")
+    @Operation(summary = "讲师列出")
     @PostMapping(value = "/search")
     public Result<Page<LecturerPageResp>> search(@RequestBody LecturerPageReq req) {
         return biz.search(req);
     }
 
-    @ApiOperation(value = "讲师信息查看", notes = "讲师信息查看")
-    @ApiImplicitParam(name = "id", value = "主键ID", dataTypeClass = Long.class, paramType = "query", required = true)
+    @Operation(summary = "讲师信息查看")
+    @Parameter(name = "id", description = "主键ID", required = true)
     @GetMapping(value = "/view")
     public Result<LecturerViewResp> view(@RequestParam Long id) {
         return biz.view(id);

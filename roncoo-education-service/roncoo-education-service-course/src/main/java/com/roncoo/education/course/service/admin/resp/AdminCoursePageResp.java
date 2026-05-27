@@ -1,8 +1,7 @@
 package com.roncoo.education.course.service.admin.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -19,70 +18,70 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-课程信息分页")
+@Schema(description = "ADMIN-课程信息分页")
 public class AdminCoursePageResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
+    @Schema(description = "主键")
     private Long id;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
+    @Schema(description = "创建时间")
     private LocalDateTime gmtCreate;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "修改时间")
+    @Schema(description = "修改时间")
     private LocalDateTime gmtModified;
 
-    @ApiModelProperty(value = "状态(1:正常，0:禁用)")
+    @Schema(description = "状态(1:正常，0:禁用)")
     private Integer statusId;
 
-    @ApiModelProperty(value = "排序")
+    @Schema(description = "排序")
     private Integer sort;
 
-    @ApiModelProperty(value = "讲师ID")
+    @Schema(description = "讲师ID")
     private Long lecturerId;
 
-    @ApiModelProperty(value = "分类ID")
+    @Schema(description = "分类ID")
     private Long categoryId;
 
-    @ApiModelProperty(value = "课程名称")
+    @Schema(description = "课程名称")
     private String courseName;
 
-    @ApiModelProperty(value = "课程封面")
+    @Schema(description = "课程封面")
     private String courseLogo;
 
-    @ApiModelProperty(value = "课程简介")
+    @Schema(description = "课程简介")
     private String introduce;
 
-    @ApiModelProperty(value = "是否免费(1:免费，0:收费)")
+    @Schema(description = "是否免费(1:免费，0:收费)")
     private Integer isFree;
 
-    @ApiModelProperty(value = "划线价")
+    @Schema(description = "划线价")
     private BigDecimal rulingPrice;
 
-    @ApiModelProperty(value = "价格")
+    @Schema(description = "价格")
     private BigDecimal coursePrice;
 
-    @ApiModelProperty(value = "是否上架(1:上架，0:下架)")
+    @Schema(description = "是否上架(1:上架，0:下架)")
     private Integer isPutaway;
 
-    @ApiModelProperty(value = "购买人数")
+    @Schema(description = "购买人数")
     private Integer countBuy;
 
-    @ApiModelProperty(value = "学习人数")
+    @Schema(description = "学习人数")
     private Integer countStudy;
 
-    @ApiModelProperty(value = "倍速播放")
+    @Schema(description = "倍速播放")
     private Integer speedDouble;
 
-    @ApiModelProperty(value = "拖拽播放")
+    @Schema(description = "拖拽播放")
     private Integer speedDrag;
 
-    @ApiModelProperty(value = "讲师名称")
+    @Schema(description = "讲师名称")
     private String lecturerName;
 
-    @ApiModelProperty(value = "分类名称")
+    @Schema(description = "分类名称")
     private String categoryName;
 }

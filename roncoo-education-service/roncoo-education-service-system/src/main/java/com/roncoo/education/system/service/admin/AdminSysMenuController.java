@@ -8,8 +8,8 @@ import com.roncoo.education.system.service.admin.biz.AdminSysMenuBiz;
 import com.roncoo.education.system.service.admin.req.*;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuResp;
 import com.roncoo.education.system.service.admin.resp.AdminSysMenuViewResp;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author wujing
  */
-@Api(tags = "admin-菜单接口")
+@Tag(name = "admin-菜单接口")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/system/admin/sys/menu")
@@ -34,7 +34,7 @@ public class AdminSysMenuController {
     /**
      * 菜单信息列出信息接口
      */
-    @ApiOperation(value = "菜单列出", notes = "根据条件列出菜单")
+    @Operation(summary = "菜单列出", description = "根据条件列出菜单")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public Result<List<AdminSysMenuResp>> list(@RequestBody AdminSysMenuListReq sysMenuListReq) {
         return biz.list(sysMenuListReq);
@@ -43,7 +43,7 @@ public class AdminSysMenuController {
     /**
      * 菜单信息添加信息接口
      */
-    @ApiOperation(value = "菜单添加", notes = "菜单添加")
+    @Operation(summary = "菜单添加")
     @SysLog(value = "菜单添加")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Result<String> save(@RequestBody AdminSysMenuSaveReq sysMenuSaveReq) {
@@ -53,7 +53,7 @@ public class AdminSysMenuController {
     /**
      * 菜单信息删除接口
      */
-    @ApiOperation(value = "菜单删除", notes = "根据ID删除菜单")
+    @Operation(summary = "菜单删除", description = "根据ID删除菜单")
     @SysLog(value = "菜单删除")
     @RequestMapping(value = "/delete", method = RequestMethod.PUT)
     public Result<String> delete(@RequestBody AdminSysMenuDeleteReq sysMenuDeleteReq) {
@@ -63,7 +63,7 @@ public class AdminSysMenuController {
     /**
      * 菜单信息修改接口
      */
-    @ApiOperation(value = "菜单修改", notes = "菜单修改")
+    @Operation(summary = "菜单修改")
     @SysLog(value = "菜单修改")
     @RequestMapping(value = "/edit", method = RequestMethod.PUT)
     public Result<String> update(@RequestBody AdminSysMenuUpdateReq sysMenuUpdateReq) {
@@ -73,14 +73,14 @@ public class AdminSysMenuController {
     /**
      * 菜单信息查看接口
      */
-    @ApiOperation(value = "菜单信息查看接口", notes = "菜单信息查看接口")
+    @Operation(summary = "菜单信息查看接口")
     @SysLogCache
     @RequestMapping(value = "/view", method = RequestMethod.POST)
     public Result<AdminSysMenuViewResp> view(@RequestBody AdminSysMenuViewReq sysMenuViewREQ) {
         return biz.view(sysMenuViewREQ);
     }
 
-    @ApiOperation(value = "排序", notes = "排序")
+    @Operation(summary = "排序")
     @SysLog(value = "排序")
     @PutMapping(value = "/sort")
     public Result<Integer> sort(@RequestBody List<SortReq> req) {

@@ -1,7 +1,6 @@
 package com.roncoo.education.course.service.auth.req;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -17,7 +16,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "API-AUTH-课程用户关联表")
+@Schema(description = "API-AUTH-课程用户关联表")
 public class AuthUserCourseReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,11 +24,11 @@ public class AuthUserCourseReq implements Serializable {
     /**
      * 当前页
      */
-    @ApiModelProperty(value = "当前页")
+    @Schema(description = "当前页")
     private Integer pageCurrent = 1;
     /**
      * 每页条数
      */
-    @ApiModelProperty(value = "每页条数")
+    @Schema(description = "每页条数")
     private Integer pageSize = 20;
 }

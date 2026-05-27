@@ -1,7 +1,6 @@
 package com.roncoo.education.course.service.biz.resp;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -16,26 +15,26 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-讲师信息查看")
+@Schema(description = "ADMIN-讲师信息查看")
 public class CourseLecturerResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
+    @Schema(description = "主键")
     private Long id;
 
-    @ApiModelProperty(value = "讲师名称")
+    @Schema(description = "讲师名称")
     private String lecturerName;
 
-    @ApiModelProperty(value = "讲师手机")
+    @Schema(description = "讲师手机")
     private String lecturerMobile;
 
-    @ApiModelProperty(value = "讲师职位")
+    @Schema(description = "讲师职位")
     private String lecturerPosition;
 
-    @ApiModelProperty(value = "讲师头像")
+    @Schema(description = "讲师头像")
     private String lecturerHead;
 
-    @ApiModelProperty(value = "简介")
+    @Schema(description = "简介")
     private String introduce;
 }

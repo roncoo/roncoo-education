@@ -1,6 +1,6 @@
 package com.roncoo.education.system.service.admin.req;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -19,12 +19,12 @@ public class AdminSysUserUpdatePasswordReq implements Serializable {
     /**
      * 用户ID
      */
-    @ApiModelProperty(value = "用户ID", required = true)
+    @Schema(description = "用户ID", required = true)
     private Long userId;
     /**
      * 新密码
      */
-    @ApiModelProperty(value = "新密码", required = true)
+    @Schema(description = "新密码", required = true)
     private String mobilePwdEncrypt;
 
 }

@@ -1,7 +1,6 @@
 package com.roncoo.education.course.service.auth.req;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -19,18 +18,18 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "API-AUTH-课程评论")
+@Schema(description = "API-AUTH-课程评论")
 public class AuthUserCourseCommentReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "课程ID")
+    @Schema(description = "课程ID")
     private Long courseId;
 
-    @ApiModelProperty(value = "评论ID，被评论的ID", required = false)
+    @Schema(description = "评论ID，被评论的ID", required = false)
     private Long commentId;
 
     @NotBlank(message = "请填写评论内容")
-    @ApiModelProperty(value = "评论内容")
+    @Schema(description = "评论内容")
     private String commentText;
 }

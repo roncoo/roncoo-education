@@ -3,7 +3,7 @@
  */
 package com.roncoo.education.user.service.api.req;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -25,7 +25,7 @@ public class RegionCityIdReq implements Serializable {
     /**
      * cityId
      */
-    @ApiModelProperty(value = "cityId", required = true)
+    @Schema(description = "cityId", required = true)
     private Integer cityId;
 
 }

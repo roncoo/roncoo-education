@@ -1,7 +1,6 @@
 package com.roncoo.education.user.service.admin.resp;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -16,18 +15,18 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "用户登录")
+@Schema(description = "用户登录")
 public class AdminStatLogin implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "时间")
+    @Schema(description = "时间")
     private String dates;
 
-    @ApiModelProperty(value = "当天总次数")
+    @Schema(description = "当天总次数")
     private Long logins;
 
-    @ApiModelProperty(value = "登录状态")
+    @Schema(description = "登录状态")
     private Integer loginStatus;
 
 }

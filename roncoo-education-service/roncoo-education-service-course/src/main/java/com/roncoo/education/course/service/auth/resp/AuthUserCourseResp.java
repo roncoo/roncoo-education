@@ -1,8 +1,7 @@
 package com.roncoo.education.course.service.auth.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -20,44 +19,44 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "API-AUTH-课程用户关联表")
+@Schema(description = "API-AUTH-课程用户关联表")
 public class AuthUserCourseResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
+    @Schema(description = "主键")
     private Long id;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
+    @Schema(description = "创建时间")
     private LocalDateTime gmtCreate;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "修改时间")
+    @Schema(description = "修改时间")
     private LocalDateTime gmtModified;
 
-    @ApiModelProperty(value = "用户ID")
+    @Schema(description = "用户ID")
     private Long userId;
 
-    @ApiModelProperty(value = "课程ID")
+    @Schema(description = "课程ID")
     private Long courseId;
 
-    @ApiModelProperty(value = "购买类型(1支付，2免费)")
+    @Schema(description = "购买类型(1支付，2免费)")
     private Integer buyType;
 
-    @ApiModelProperty(value = "课程信息")
+    @Schema(description = "课程信息")
     private AuthCourseResp courseResp;
 
-    @ApiModelProperty(value = "当前学习的课时名称")
+    @Schema(description = "当前学习的课时名称")
     private String periodName;
 
-    @ApiModelProperty(value = "当前学习的课时进度")
+    @Schema(description = "当前学习的课时进度")
     private BigDecimal periodProgress;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "当前学习的课时时间")
+    @Schema(description = "当前学习的课时时间")
     private LocalDateTime periodTime;
 
-    @ApiModelProperty(value = "该课程总进度")
+    @Schema(description = "该课程总进度")
     private BigDecimal courseProgress;
 }

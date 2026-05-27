@@ -8,8 +8,8 @@ import com.roncoo.education.course.service.auth.resp.AuthCourseSignResp;
 import com.roncoo.education.course.service.biz.CourseBiz;
 import com.roncoo.education.course.service.biz.req.CourseReq;
 import com.roncoo.education.course.service.biz.resp.CourseResp;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +24,7 @@ import jakarta.validation.constraints.NotNull;
  * @author wujing
  * @date 2022-08-25
  */
-@Api(tags = "auth-课程信息")
+@Tag(name = "auth-课程信息")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/course/auth/course")
@@ -39,7 +39,7 @@ public class AuthCourseController {
     /**
      * 课程详情接口
      */
-    @ApiOperation(value = "课程详情", notes = "校验课程是否可以学习")
+    @Operation(summary = "课程详情", description = "校验课程是否可以学习")
     @RequestMapping(value = "/view", method = RequestMethod.POST)
     public Result<CourseResp> view(@RequestBody CourseReq req) {
         return courseBiz.view(req, ThreadContext.userId());
@@ -50,7 +50,7 @@ public class AuthCourseController {
      *
      * @author fengyw
      */
-    @ApiOperation(value = "学习配置", notes = "获取课时学习需要的配置参数")
+    @Operation(summary = "学习配置", description = "获取课时学习需要的配置参数")
     @RequestMapping(value = "/sign", method = RequestMethod.POST)
     public Result<AuthCourseSignResp> sign(@RequestBody AuthCourseSignReq req) {
         return biz.sign(req);

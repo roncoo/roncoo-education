@@ -1,8 +1,7 @@
 package com.roncoo.education.course.service.biz.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -20,34 +19,34 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "API-章节信息")
+@Schema(description = "API-章节信息")
 public class CourseChapterResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
+    @Schema(description = "主键")
     private Long id;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
+    @Schema(description = "创建时间")
     private LocalDateTime gmtCreate;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "修改时间")
+    @Schema(description = "修改时间")
     private LocalDateTime gmtModified;
 
-    @ApiModelProperty(value = "课程ID")
+    @Schema(description = "课程ID")
     private Long courseId;
 
-    @ApiModelProperty(value = "章节名称")
+    @Schema(description = "章节名称")
     private String chapterName;
 
-    @ApiModelProperty(value = "章节描述")
+    @Schema(description = "章节描述")
     private String chapterDesc;
 
-    @ApiModelProperty(value = "是否免费(1免费，0收费)")
+    @Schema(description = "是否免费(1免费，0收费)")
     private Integer isFree;
 
-    @ApiModelProperty(value = "课时信息")
+    @Schema(description = "课时信息")
     private List<CourseChapterPeriodResp> periodRespList;
 }

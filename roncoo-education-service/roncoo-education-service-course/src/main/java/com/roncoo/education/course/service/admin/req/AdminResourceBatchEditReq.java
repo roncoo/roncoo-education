@@ -1,7 +1,6 @@
 package com.roncoo.education.course.service.admin.req;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -17,14 +16,14 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-课程视频信息删除")
+@Schema(description = "ADMIN-课程视频信息删除")
 public class AdminResourceBatchEditReq implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键集合")
+    @Schema(description = "主键集合")
     private List<Long> ids;
 
-    @ApiModelProperty(value = "分类ID")
+    @Schema(description = "分类ID")
     private Long categoryId;
 
 }

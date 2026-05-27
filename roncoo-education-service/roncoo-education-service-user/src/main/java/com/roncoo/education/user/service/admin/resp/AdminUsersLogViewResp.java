@@ -1,8 +1,7 @@
 package com.roncoo.education.user.service.admin.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -18,45 +17,45 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-用户登录日志查看")
+@Schema(description = "ADMIN-用户登录日志查看")
 public class AdminUsersLogViewResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
+    @Schema(description = "主键")
     private Long id;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
+    @Schema(description = "创建时间")
     private LocalDateTime gmtCreate;
 
-    @ApiModelProperty(value = "用户ID")
+    @Schema(description = "用户ID")
     private Long userId;
 
-    @ApiModelProperty(value = "登录状态(1成功，0失败)")
+    @Schema(description = "登录状态(1成功，0失败)")
     private Integer loginStatus;
 
-    @ApiModelProperty(value = "登录客户端")
+    @Schema(description = "登录客户端")
     private Integer loginClient;
 
-    @ApiModelProperty(value = "登录方式")
+    @Schema(description = "登录方式")
     private Integer loginType;
 
-    @ApiModelProperty(value = "登录IP")
+    @Schema(description = "登录IP")
     private String loginIp;
 
-    @ApiModelProperty(value = "国家")
+    @Schema(description = "国家")
     private String country;
 
-    @ApiModelProperty(value = "省")
+    @Schema(description = "省")
     private String province;
 
-    @ApiModelProperty(value = "市")
+    @Schema(description = "市")
     private String city;
 
-    @ApiModelProperty(value = "浏览器")
+    @Schema(description = "浏览器")
     private String browser;
 
-    @ApiModelProperty(value = "操作系统")
+    @Schema(description = "操作系统")
     private String os;
 }

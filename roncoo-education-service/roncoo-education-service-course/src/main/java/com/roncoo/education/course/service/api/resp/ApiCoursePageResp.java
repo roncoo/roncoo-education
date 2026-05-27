@@ -1,8 +1,7 @@
 package com.roncoo.education.course.service.api.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -20,44 +19,44 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "API-课程信息")
+@Schema(description = "API-课程信息")
 public class ApiCoursePageResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
+    @Schema(description = "主键")
     private Long id;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
+    @Schema(description = "创建时间")
     private LocalDateTime gmtCreate;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "修改时间")
+    @Schema(description = "修改时间")
     private LocalDateTime gmtModified;
 
-    @ApiModelProperty(value = "讲师ID")
+    @Schema(description = "讲师ID")
     private Long lecturerId;
 
-    @ApiModelProperty(value = "分类ID")
+    @Schema(description = "分类ID")
     private Long categoryId;
 
-    @ApiModelProperty(value = "课程名称")
+    @Schema(description = "课程名称")
     private String courseName;
 
-    @ApiModelProperty(value = "课程封面")
+    @Schema(description = "课程封面")
     private String courseLogo;
 
-    @ApiModelProperty(value = "课程简介")
+    @Schema(description = "课程简介")
     private String introduce;
 
-    @ApiModelProperty(value = "是否免费(1:免费，0:收费)")
+    @Schema(description = "是否免费(1:免费，0:收费)")
     private Integer isFree;
 
-    @ApiModelProperty(value = "原价")
+    @Schema(description = "原价")
     private BigDecimal rulingPrice;
 
-    @ApiModelProperty(value = "优惠价")
+    @Schema(description = "优惠价")
     private BigDecimal coursePrice;
 
 }

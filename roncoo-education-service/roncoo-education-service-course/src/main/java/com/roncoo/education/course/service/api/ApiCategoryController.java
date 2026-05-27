@@ -3,8 +3,8 @@ package com.roncoo.education.course.service.api;
 import com.roncoo.education.common.core.base.Result;
 import com.roncoo.education.course.service.api.biz.ApiCategoryBiz;
 import com.roncoo.education.course.service.api.resp.ApiCategoryResp;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author wujing
  */
-@Api(tags = "api-分类")
+@Tag(name = "api-分类")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/course/api/category")
@@ -33,7 +33,7 @@ public class ApiCategoryController {
      *
      * @author wuyun
      */
-    @ApiOperation(value = "课程分类列表接口", notes = "课程分类列表")
+    @Operation(summary = "课程分类列表接口", description = "课程分类列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public Result<List<ApiCategoryResp>> list() {
         return biz.list();

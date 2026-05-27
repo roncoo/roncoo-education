@@ -1,7 +1,6 @@
 package com.roncoo.education.course.service.biz.req;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -17,22 +16,22 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "API-课程评论")
+@Schema(description = "API-课程评论")
 public class CourseCommentPageReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "课程ID")
+    @Schema(description = "课程ID")
     private Long courseId;
 
     /**
      * 当前页
      */
-    @ApiModelProperty(value = "当前页")
+    @Schema(description = "当前页")
     private Integer pageCurrent = 1;
     /**
      * 每页条数
      */
-    @ApiModelProperty(value = "每页条数")
+    @Schema(description = "每页条数")
     private Integer pageSize = 20;
 }

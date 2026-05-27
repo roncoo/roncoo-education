@@ -1,7 +1,6 @@
 package com.roncoo.education.user.service.admin.req;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -16,44 +15,44 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-站内信用户记录表分页")
+@Schema(description = "ADMIN-站内信用户记录表分页")
 public class AdminMsgUserPageReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
+    @Schema(description = "主键")
     private Long id;
 
-    @ApiModelProperty(value = "状态(1有效, 0无效)")
+    @Schema(description = "状态(1有效, 0无效)")
     private Integer statusId;
 
-    @ApiModelProperty(value = "排序")
+    @Schema(description = "排序")
     private Integer sort;
 
-    @ApiModelProperty(value = "短信ID")
+    @Schema(description = "短信ID")
     private Long msgId;
 
-    @ApiModelProperty(value = "用户ID")
+    @Schema(description = "用户ID")
     private Long userId;
 
-    @ApiModelProperty(value = "手机号")
+    @Schema(description = "手机号")
     private String mobile;
 
-    @ApiModelProperty(value = "短信类型(1系统消息,2其他)")
+    @Schema(description = "短信类型(1系统消息,2其他)")
     private Integer msgType;
 
-    @ApiModelProperty(value = "短信标题")
+    @Schema(description = "短信标题")
     private String msgTitle;
 
-    @ApiModelProperty(value = "是否阅读(1是;0否)")
+    @Schema(description = "是否阅读(1是;0否)")
     private Integer isRead;
 
-    @ApiModelProperty(value = "是否置顶(1是;0否)")
+    @Schema(description = "是否置顶(1是;0否)")
     private Integer isTop;
 
-    @ApiModelProperty(value = "当前页")
+    @Schema(description = "当前页")
     private int pageCurrent = 1;
 
-    @ApiModelProperty(value = "每页条数")
+    @Schema(description = "每页条数")
     private int pageSize = 20;
 }

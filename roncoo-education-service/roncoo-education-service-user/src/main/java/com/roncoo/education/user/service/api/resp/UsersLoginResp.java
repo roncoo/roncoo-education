@@ -3,7 +3,7 @@
  */
 package com.roncoo.education.user.service.api.resp;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -18,11 +18,11 @@ public class UsersLoginResp implements Serializable {
     /**
      * 手机号码
      */
-    @ApiModelProperty(value = "手机号")
+    @Schema(description = "手机号")
     private String mobile;
     /**
      * token，设置有效期为1天
      */
-    @ApiModelProperty(value = "token，有效期为1天")
+    @Schema(description = "token，有效期为1天")
     private String token;
 }

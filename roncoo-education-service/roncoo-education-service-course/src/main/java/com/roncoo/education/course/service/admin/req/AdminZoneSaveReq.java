@@ -1,7 +1,6 @@
 package com.roncoo.education.course.service.admin.req;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -16,23 +15,23 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-专区添加")
+@Schema(description = "ADMIN-专区添加")
 public class AdminZoneSaveReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
+    @Schema(description = "主键")
     private Long id;
 
-    @ApiModelProperty(value = "状态(1:正常;0:禁用)")
+    @Schema(description = "状态(1:正常;0:禁用)")
     private Integer statusId;
 
-    @ApiModelProperty(value = "排序")
+    @Schema(description = "排序")
     private Integer sort;
 
-    @ApiModelProperty(value = "名称")
+    @Schema(description = "名称")
     private String zoneName;
 
-    @ApiModelProperty(value = "描述")
+    @Schema(description = "描述")
     private String zoneDesc;
 }

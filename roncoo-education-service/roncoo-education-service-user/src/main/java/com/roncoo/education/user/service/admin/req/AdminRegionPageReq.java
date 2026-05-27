@@ -1,7 +1,6 @@
 package com.roncoo.education.user.service.admin.req;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -17,56 +16,56 @@ import java.math.BigDecimal;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-行政区域表分页")
+@Schema(description = "ADMIN-行政区域表分页")
 public class AdminRegionPageReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
+    @Schema(description = "主键")
     private Long id;
 
-    @ApiModelProperty(value = "父id")
+    @Schema(description = "父id")
     private Long parentId;
 
-    @ApiModelProperty(value = "级别")
+    @Schema(description = "级别")
     private Integer level;
 
-    @ApiModelProperty(value = "区域编码（国标）")
+    @Schema(description = "区域编码（国标）")
     private String provinceCode;
 
-    @ApiModelProperty(value = "中心经度")
+    @Schema(description = "中心经度")
     private BigDecimal centerLng;
 
-    @ApiModelProperty(value = "中心维度")
+    @Schema(description = "中心维度")
     private BigDecimal centerLat;
 
-    @ApiModelProperty(value = "省Id")
+    @Schema(description = "省Id")
     private Integer provinceId;
 
-    @ApiModelProperty(value = "省名称")
+    @Schema(description = "省名称")
     private String provinceName;
 
-    @ApiModelProperty(value = "市Id")
+    @Schema(description = "市Id")
     private Integer cityId;
 
-    @ApiModelProperty(value = "城市编码")
+    @Schema(description = "城市编码")
     private String cityCode;
 
-    @ApiModelProperty(value = "市名称")
+    @Schema(description = "市名称")
     private String cityName;
 
-    @ApiModelProperty(value = "区域名称")
+    @Schema(description = "区域名称")
     private String regionName;
 
-    @ApiModelProperty(value = "区名称")
+    @Schema(description = "区名称")
     private String districtName;
 
-    @ApiModelProperty(value = "全路径名称")
+    @Schema(description = "全路径名称")
     private String mergerName;
 
-    @ApiModelProperty(value = "当前页")
+    @Schema(description = "当前页")
     private int pageCurrent = 1;
 
-    @ApiModelProperty(value = "每页条数")
+    @Schema(description = "每页条数")
     private int pageSize = 20;
 }

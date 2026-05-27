@@ -1,10 +1,9 @@
 package com.roncoo.education.common.base;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -16,14 +15,12 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "排序信息")
 public class SortReq implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
     private Long id;
 
-    @ApiModelProperty(value = "排序")
     private Integer sort;
 }

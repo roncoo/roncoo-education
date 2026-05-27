@@ -1,8 +1,7 @@
 package com.roncoo.education.user.service.admin.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -19,33 +18,33 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-用户账户消费记录分页")
+@Schema(description = "ADMIN-用户账户消费记录分页")
 public class AdminUsersAccountConsumePageResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键ID")
+    @Schema(description = "主键ID")
     private Long id;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
+    @Schema(description = "创建时间")
     private LocalDateTime gmtCreate;
 
-    @ApiModelProperty(value = "用户ID")
+    @Schema(description = "用户ID")
     private Long userId;
 
-    @ApiModelProperty(value = "消费类型(1支出，2收入)")
+    @Schema(description = "消费类型(1支出，2收入)")
     private Integer consumeType;
 
-    @ApiModelProperty(value = "消费金额(支出负数，收入是正数)")
+    @Schema(description = "消费金额(支出负数，收入是正数)")
     private BigDecimal consumeAmount;
 
-    @ApiModelProperty(value = "剩余金额")
+    @Schema(description = "剩余金额")
     private BigDecimal balanceAmount;
 
-    @ApiModelProperty(value = "消费订单号")
+    @Schema(description = "消费订单号")
     private Long orderNo;
 
-    @ApiModelProperty(value = "备注")
+    @Schema(description = "备注")
     private String remark;
 }

@@ -1,6 +1,6 @@
 package com.roncoo.education.system.service.admin.req;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -19,22 +19,22 @@ public class AdminSysUserSaveReq implements Serializable {
     /**
      * 手机
      */
-    @ApiModelProperty(value = "手机", required = true)
+    @Schema(description = "手机", required = true)
     private String mobile;
     /**
      * 登录密码
      */
-    @ApiModelProperty(value = "密码", required = true)
+    @Schema(description = "密码", required = true)
     private String mobilePwdEncrypt;
     /**
      * 真实姓名
      */
-    @ApiModelProperty(value = "真实姓名", required = true)
+    @Schema(description = "真实姓名", required = true)
     private String realName;
     /**
      * 备注
      */
-    @ApiModelProperty(value = "备注", required = false)
+    @Schema(description = "备注", required = false)
     private String remark;
 
 }

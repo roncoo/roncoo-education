@@ -1,6 +1,6 @@
 package com.roncoo.education.system.service.admin.req;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -20,7 +20,7 @@ public class AdminSysMenuUserListReq implements Serializable {
     /**
      * 用户ID
      */
-    @ApiModelProperty(value = "用户ID，为空则获取当前登录用户菜单", required = false)
+    @Schema(description = "用户ID，为空则获取当前登录用户菜单", required = false)
     private Long userId;
 
 }

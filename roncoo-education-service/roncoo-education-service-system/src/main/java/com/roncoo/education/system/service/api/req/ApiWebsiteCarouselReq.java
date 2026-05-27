@@ -1,8 +1,7 @@
 package com.roncoo.education.system.service.api.req;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -19,37 +18,37 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "API-广告信息")
+@Schema(description = "API-广告信息")
 public class ApiWebsiteCarouselReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
+    @Schema(description = "主键")
     private Long id;
 
-    @ApiModelProperty(value = "状态(1:正常，0:禁用)")
+    @Schema(description = "状态(1:正常，0:禁用)")
     private Integer statusId;
 
-    @ApiModelProperty(value = "排序")
+    @Schema(description = "排序")
     private Integer sort;
 
-    @ApiModelProperty(value = "广告标题")
+    @Schema(description = "广告标题")
     private String carouselTitle;
 
-    @ApiModelProperty(value = "广告图片")
+    @Schema(description = "广告图片")
     private String carouselImg;
 
-    @ApiModelProperty(value = "广告链接")
+    @Schema(description = "广告链接")
     private String carouselUrl;
 
-    @ApiModelProperty(value = "广告跳转方式")
+    @Schema(description = "广告跳转方式")
     private Integer carouselTarget;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "开始时间")
+    @Schema(description = "开始时间")
     private LocalDateTime beginTime;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "结束时间")
+    @Schema(description = "结束时间")
     private LocalDateTime endTime;
 }

@@ -11,8 +11,8 @@ import com.roncoo.education.common.tools.EnumUtil;
 import com.roncoo.education.common.tools.IdWorker;
 import com.roncoo.education.system.service.api.req.ApiEnumReq;
 import com.roncoo.education.system.service.api.resp.ApiVerCodeResp;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
  * @author liaoh
  */
 @Slf4j
-@Api(tags = "api-枚举接口")
+@Tag(name = "api-枚举接口")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/system/api/common")
@@ -41,7 +41,7 @@ public class ApiCommonController {
     private static final String DEFAULT_ENUM_NAME = "name";
     private static final String DEFAULT_PREFIX = "com.roncoo.education.common.core.enums.";
 
-    @ApiOperation(value = "枚举通用接口", notes = "返回枚举信息")
+    @Operation(summary = "枚举通用接口", description = "返回枚举信息")
     @RequestMapping(value = "/enum", method = RequestMethod.POST)
     public Result<ArrayList<?>> getEnumInfo(@RequestBody ApiEnumReq req) {
         String className = DEFAULT_PREFIX + req.getEnumName();
@@ -54,7 +54,7 @@ public class ApiCommonController {
         }
     }
 
-    @ApiOperation(value = "获取图片验证码", notes = "获取图片验证码")
+    @Operation(summary = "获取图片验证码")
     @GetMapping(value = "/code")
     public Result<ApiVerCodeResp> getVerCode() {
         CircleCaptcha captcha = CaptchaUtil.createCircleCaptcha(200, 100, new RandomGenerator(RandomUtil.BASE_NUMBER, 4), 18);

@@ -1,7 +1,6 @@
 package com.roncoo.education.system.service.admin.req;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -15,24 +14,24 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "用户登录")
+@Schema(description = "用户登录")
 public class AdminSysUserLoginReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @NotBlank(message = "登录账号不能为空")
-    @ApiModelProperty(value = "登录账号", required = true)
+    @Schema(description = "登录账号", required = true)
     private String mobile;
 
     @NotBlank(message = "登录密码不能为空")
-    @ApiModelProperty(value = "登录密码", required = true)
+    @Schema(description = "登录密码", required = true)
     private String mobilePwdEncrypt;
 
     @NotBlank(message = "验证KEY不能为空")
-    @ApiModelProperty(value = "验证KEY")
+    @Schema(description = "验证KEY")
     private String verToken;
 
     @NotBlank(message = "验证码不能为空")
-    @ApiModelProperty(value = "验证码")
+    @Schema(description = "验证码")
     private String verCode;
 }

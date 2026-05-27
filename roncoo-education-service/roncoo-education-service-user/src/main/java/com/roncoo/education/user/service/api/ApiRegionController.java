@@ -6,8 +6,8 @@ import com.roncoo.education.user.service.api.req.RegionCityIdReq;
 import com.roncoo.education.user.service.api.req.RegionLevelReq;
 import com.roncoo.education.user.service.api.req.RegionProvinceReq;
 import com.roncoo.education.user.service.api.resp.RegionResp;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +23,7 @@ import java.util.List;
  *
  * @author wujing
  */
-@Api(tags = "api-行政区域")
+@Tag(name = "api-行政区域")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/user/api/region")
@@ -35,7 +35,7 @@ public class ApiRegionController {
     /**
      * 区域列出接口
      */
-    @ApiOperation(value = "区域列出接口", notes = "根据级别获取区域列出信息")
+    @Operation(summary = "区域列出接口", description = "根据级别获取区域列出信息")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public Result<List<RegionResp>> listForLevel(@RequestBody RegionLevelReq userRegionLevelBO) {
         return biz.listForLevel(userRegionLevelBO);
@@ -44,7 +44,7 @@ public class ApiRegionController {
     /**
      * 区域列出接口
      */
-    @ApiOperation(value = "区域列出接口", notes = "根据provinceId获取区域列表信息")
+    @Operation(summary = "区域列出接口", description = "根据provinceId获取区域列表信息")
     @RequestMapping(value = "/list/province", method = RequestMethod.POST)
     public Result<List<RegionResp>> listForProvince(@RequestBody RegionProvinceReq userRegionProvinceBO) {
         return biz.listForProvince(userRegionProvinceBO);
@@ -53,7 +53,7 @@ public class ApiRegionController {
     /**
      * 区域列出接口
      */
-    @ApiOperation(value = "区域列出接口", notes = "根据cityId获取区域列表信息")
+    @Operation(summary = "区域列出接口", description = "根据cityId获取区域列表信息")
     @RequestMapping(value = "/list/city", method = RequestMethod.POST)
     public Result<List<RegionResp>> listForCity(@RequestBody RegionCityIdReq userRegionCityIdBO) {
         return biz.listForCity(userRegionCityIdBO);

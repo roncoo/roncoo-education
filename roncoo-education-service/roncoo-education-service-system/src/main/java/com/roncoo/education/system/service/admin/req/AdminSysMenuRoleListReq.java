@@ -1,6 +1,6 @@
 package com.roncoo.education.system.service.admin.req;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -20,6 +20,6 @@ public class AdminSysMenuRoleListReq implements Serializable {
     /**
      * 角色ID
      */
-    @ApiModelProperty(value = "角色ID", required = true)
+    @Schema(description = "角色ID", required = true)
     private Long roleId;
 }

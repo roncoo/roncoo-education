@@ -1,6 +1,6 @@
 package com.roncoo.education.system.service.admin.req;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -20,12 +20,12 @@ public class AdminSysRoleUserSaveReq implements Serializable {
     /**
      * 用户ID
      */
-    @ApiModelProperty(value = "用户ID", required = true)
+    @Schema(description = "用户ID", required = true)
     private Long userId;
 
     /**
      * 角色ID集合
      */
-    @ApiModelProperty(value = "角色ID集合", required = true)
+    @Schema(description = "角色ID集合", required = true)
     private List<Long> roleIdList;
 }

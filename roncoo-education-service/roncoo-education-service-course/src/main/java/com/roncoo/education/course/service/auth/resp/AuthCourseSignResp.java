@@ -1,7 +1,6 @@
 package com.roncoo.education.course.service.auth.resp;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -17,50 +16,50 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "API-AUTH-课程信息")
+@Schema(description = "API-AUTH-课程信息")
 public class AuthCourseSignResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "学习ID")
+    @Schema(description = "学习ID")
     private Long studyId;
 
-    @ApiModelProperty(value = "课时ID")
+    @Schema(description = "课时ID")
     private Long periodId;
 
-    @ApiModelProperty(value = "课时类型")
+    @Schema(description = "课时类型")
     private Integer periodType;
 
-    @ApiModelProperty(value = "资源ID")
+    @Schema(description = "资源ID")
     private Long resourceId;
 
-    @ApiModelProperty(value = "资源类型")
+    @Schema(description = "资源类型")
     private Integer resourceType;
 
-    @ApiModelProperty(value = "播放vid")
+    @Schema(description = "播放vid")
     private String vid;
 
-    @ApiModelProperty(value = "点播平台")
+    @Schema(description = "点播平台")
     private Integer vodPlatform;
 
-    @ApiModelProperty(value = "当前观看时长，单位秒")
+    @Schema(description = "当前观看时长，单位秒")
     private Integer currentDuration;
 
-    @ApiModelProperty(value = "点播播放配置参数")
+    @Schema(description = "点播播放配置参数")
     private String vodPlayConfig;
 
-    @ApiModelProperty(value = "直播观看配置参数")
+    @Schema(description = "直播观看配置参数")
     private String liveViewConfig;
 
-    @ApiModelProperty(value = "存储平台")
+    @Schema(description = "存储平台")
     private Integer storagePlatform;
 
-    @ApiModelProperty(value = "当前观看页数")
+    @Schema(description = "当前观看页数")
     private Integer currentPage;
 
-    @ApiModelProperty(value = "文档学习配置参数")
+    @Schema(description = "文档学习配置参数")
     private String docStudyConfig;
 
-    @ApiModelProperty(value = "图片学习配置参数")
+    @Schema(description = "图片学习配置参数")
     private String picStudyConfig;
 }

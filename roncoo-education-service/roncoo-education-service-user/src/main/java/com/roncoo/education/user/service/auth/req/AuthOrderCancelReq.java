@@ -1,7 +1,6 @@
 package com.roncoo.education.user.service.auth.req;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -17,11 +16,11 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "API-AUTH-订单取消支付")
+@Schema(description = "API-AUTH-订单取消支付")
 public class AuthOrderCancelReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "订单编号", required = true)
+    @Schema(description = "订单编号", required = true)
     private Long orderNo;
 }

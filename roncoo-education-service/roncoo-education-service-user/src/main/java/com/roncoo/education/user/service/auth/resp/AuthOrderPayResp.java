@@ -1,7 +1,6 @@
 package com.roncoo.education.user.service.auth.resp;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -18,33 +17,33 @@ import java.math.BigDecimal;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "API-AUTH-订单支付信息表")
+@Schema(description = "API-AUTH-订单支付信息表")
 public class AuthOrderPayResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "支付参数")
+    @Schema(description = "支付参数")
     private String payMessage;
 
-    @ApiModelProperty(value = "订单编号")
+    @Schema(description = "订单编号")
     private Long orderNo;
 
-    @ApiModelProperty(value = "订单状态")
+    @Schema(description = "订单状态")
     private Integer orderStatus;
 
-    @ApiModelProperty(value = "流水号")
+    @Schema(description = "流水号")
     private Long serialNumber;
 
-    @ApiModelProperty(value = "课程ID")
+    @Schema(description = "课程ID")
     private Long courseId;
 
-    @ApiModelProperty(value = "划线价")
+    @Schema(description = "划线价")
     private BigDecimal rulingPrice;
 
-    @ApiModelProperty(value = "课程价格")
+    @Schema(description = "课程价格")
     private BigDecimal coursePrice;
 
-    @ApiModelProperty(value = "支付方式")
+    @Schema(description = "支付方式")
     private Integer payType;
 
 }

@@ -1,8 +1,7 @@
 package com.roncoo.education.course.service.admin.resp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -18,50 +17,50 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel(description = "ADMIN-课时信息查看")
+@Schema(description = "ADMIN-课时信息查看")
 public class AdminCourseChapterPeriodViewResp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
+    @Schema(description = "主键")
     private Long id;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
+    @Schema(description = "创建时间")
     private LocalDateTime gmtCreate;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "修改时间")
+    @Schema(description = "修改时间")
     private LocalDateTime gmtModified;
 
-    @ApiModelProperty(value = "状态(1:正常，0:禁用)")
+    @Schema(description = "状态(1:正常，0:禁用)")
     private Integer statusId;
 
-    @ApiModelProperty(value = "排序")
+    @Schema(description = "排序")
     private Integer sort;
 
-    @ApiModelProperty(value = "课程ID")
+    @Schema(description = "课程ID")
     private Long courseId;
 
-    @ApiModelProperty(value = "章节ID")
+    @Schema(description = "章节ID")
     private Long chapterId;
 
-    @ApiModelProperty(value = "课时名称")
+    @Schema(description = "课时名称")
     private String periodName;
 
-    @ApiModelProperty(value = "课时描述")
+    @Schema(description = "课时描述")
     private String periodDesc;
 
-    @ApiModelProperty(value = "是否免费(1免费，0收费)")
+    @Schema(description = "是否免费(1免费，0收费)")
     private Integer isFree;
 
-    @ApiModelProperty(value = "资源ID")
+    @Schema(description = "资源ID")
     private Long resourceId;
 
-    @ApiModelProperty(value = "课时类型(10资源，20直播)")
+    @Schema(description = "课时类型(10资源，20直播)")
     private Integer periodType;
 
-    @ApiModelProperty(value = "直播ID")
+    @Schema(description = "直播ID")
     private Long liveId;
 
     private AdminResourceViewResp resourceViewResp;

@@ -3,7 +3,7 @@
  */
 package com.roncoo.education.user.service.api.req;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -22,16 +22,16 @@ public class PasswordReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "手机号", required = true)
+    @Schema(description = "手机号", required = true)
     private String mobile;
     /**
      * 手机验证码
      */
-    @ApiModelProperty(value = "手机验证码", required = true)
+    @Schema(description = "手机验证码", required = true)
     private String verificationCode;
     /**
      * 登录密码
      */
-    @ApiModelProperty(value = "密码", required = true)
+    @Schema(description = "密码", required = true)
     private String mobilePwdEncrypt;
 }

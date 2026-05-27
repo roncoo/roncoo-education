@@ -1,6 +1,6 @@
 package com.roncoo.education.system.service.admin.req;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -19,16 +19,16 @@ public class AdminSysUserPageReq implements Serializable {
     /**
      * 手机
      */
-    @ApiModelProperty(value = "手机", required = false)
+    @Schema(description = "手机", required = false)
     private String mobile;
     /**
      * 当前页
      */
-    @ApiModelProperty(value = "当前页", required = true)
+    @Schema(description = "当前页", required = true)
     private int pageCurrent = 1;
     /**
      * 每页记录数
      */
-    @ApiModelProperty(value = "每页记录数", required = true)
+    @Schema(description = "每页记录数", required = true)
     private int pageSize = 20;
 }

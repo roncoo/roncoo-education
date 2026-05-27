@@ -3,7 +3,7 @@
  */
 package com.roncoo.education.user.service.api.req;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -25,7 +25,7 @@ public class RegionLevelReq implements Serializable {
     /**
      * 级别
      */
-    @ApiModelProperty(value = "级别", required = true)
+    @Schema(description = "级别", required = true)
     private Integer level;
 
 }
