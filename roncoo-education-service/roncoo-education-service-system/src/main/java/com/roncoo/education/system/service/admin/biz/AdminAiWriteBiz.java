@@ -147,8 +147,8 @@ public class AdminAiWriteBiz extends BaseBiz {
                         // 解析JSON提取content
                         String content = extractContent(data);
                         if (content != null) {
-                            // 对换行符进行编码，避免破坏SSE格式
-                            String encoded = content.replace("\n", "\\n").replace("\r", "");
+                            // SSE 每条消息以 \n\n 结尾，content 中的换行需编码为 \\n 避免破坏协议格式
+                            String encoded = content.replace("\\", "\\\\").replace("\n", "\\n").replace("\r", "");
                             writer.write("data: " + encoded + "\n\n");
                             writer.flush();
                         }
