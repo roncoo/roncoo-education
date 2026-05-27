@@ -3,8 +3,8 @@ package com.roncoo.education.gateway.filter;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.roncoo.education.common.core.base.BaseException;
 import com.roncoo.education.common.core.base.Constants;
-import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.common.core.base.utils.JwtUtil;
+import com.roncoo.education.common.core.enums.ResultEnum;
 import com.roncoo.education.gateway.common.FilterUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -81,7 +81,8 @@ public class AdminGlobalFilter implements GlobalFilter, Ordered {
         }
 
         Long userId = getUserId(request);
-        request.mutate().header(Constants.USER_ID, String.valueOf(userId));
+        ServerHttpRequest mutatedRequest = request.mutate().header(Constants.USER_ID, String.valueOf(userId)).build();
+        ServerWebExchange mutatedExchange = exchange.mutate().request(mutatedRequest).build();
 
         if (FilterUtil.checkUri(uri, FilterUtil.ADMIN_URL_PREFIX)) {
             // admin校验
@@ -96,7 +97,7 @@ public class AdminGlobalFilter implements GlobalFilter, Ordered {
             // 更新时间，使用户菜单不过期
             stringRedisTemplate.expire(Constants.RedisPre.ADMIN_APIS.concat(userId.toString()), Constants.SESSIONTIME, TimeUnit.MINUTES);
         }
-        return chain.filter(exchange);
+        return chain.filter(mutatedExchange);
     }
 
     // 校验用户是否有权限
