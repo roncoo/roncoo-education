@@ -18,10 +18,14 @@ public final class ThreadContext {
     /**
      * 获取用户ID
      *
-     * @return 用户ID
+     * @return 用户ID，未登录时返回 null
      */
     public static Long userId() {
-        return Long.valueOf(USER_ID_LOCAL.get());
+        String val = USER_ID_LOCAL.get();
+        if (val == null) {
+            return null;
+        }
+        return Long.valueOf(val);
     }
 
     /**

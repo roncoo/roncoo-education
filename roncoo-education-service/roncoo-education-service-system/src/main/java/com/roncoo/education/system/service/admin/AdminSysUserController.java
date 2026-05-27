@@ -95,8 +95,12 @@ public class AdminSysUserController {
     @Operation(summary = "获取当前登录用户")
     @GetMapping(value = "/current")
     public Result<AdminSysUserViewResp> currentView() {
+        Long userId = ThreadContext.userId();
+        if (userId == null) {
+            return Result.error("未获取到登录信息，请重新登录");
+        }
         AdminSysUserViewReq req = new AdminSysUserViewReq();
-        req.setId(ThreadContext.userId());
+        req.setId(userId);
         return biz.view(req);
     }
 
