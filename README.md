@@ -2,16 +2,19 @@
     <img src="distribution/images/logo.jpg" alt="领课教育系统-开源版"/>
     <div>
         <a href="http://spring.io/projects/spring-boot">
-            <img src="https://img.shields.io/badge/spring--boot-3.2.4-blue.svg" alt="spring-boot">
+            <img src="https://img.shields.io/badge/spring--boot-3.5.0-blue.svg" alt="spring-boot">
         </a>
         <a href="https://spring.io/projects/spring-cloud-alibaba">
-            <img src="https://img.shields.io/badge/spring--cloud--alibaba-2023.0.1.0-blue.svg" alt="spring-cloud-alibaba">
+            <img src="https://img.shields.io/badge/spring--cloud--alibaba-2025.0.0.0-blue.svg" alt="spring-cloud-alibaba">
         </a> 
         <a href="https://cn.vuejs.org/">
             <img src="https://img.shields.io/badge/vue-3.5.20-blue.svg" alt="vue">
         </a> 
         <a href="https://element-plus.org/">
-            <img src="https://img.shields.io/badge/element--plus-2.9.9-blue.svg" alt="element-plus">
+            <img src="https://img.shields.io/badge/element--plus-2.11.3-blue.svg" alt="element-plus">
+        </a> 
+        <a href="https://nuxt.com/">
+            <img src="https://img.shields.io/badge/nuxt-3.17.2-blue.svg" alt="nuxt">
         </a> 
     </div>
 </div>
