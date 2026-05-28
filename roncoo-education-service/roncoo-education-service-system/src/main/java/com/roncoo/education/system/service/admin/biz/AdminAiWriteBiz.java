@@ -111,9 +111,10 @@ public class AdminAiWriteBiz extends BaseBiz {
 
         // 调用OpenAI兼容API（流式）
         String apiUrl = baseUrl.replaceAll("/$", "") + "/v1/chat/completions";
-        try (HttpClient client = HttpClient.newBuilder()
+        HttpClient client = HttpClient.newBuilder()
                 .connectTimeout(Duration.ofSeconds(30))
-                .build()) {
+                .build();
+        try {
 
             HttpRequest httpRequest = HttpRequest.newBuilder()
                     .uri(URI.create(apiUrl))
