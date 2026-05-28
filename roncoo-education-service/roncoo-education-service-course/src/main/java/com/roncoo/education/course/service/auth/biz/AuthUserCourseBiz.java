@@ -87,7 +87,11 @@ public class AuthUserCourseBiz extends BaseBiz {
                     resp.setPeriodProgress(userStudy.getProgress());
                     resp.setPeriodTime(userStudy.getGmtModified());
                     resp.setPeriodName(periodNameMap.get(userStudy.getPeriodId()));
-                    resp.setCourseProgress(userStudySumMap.get(resp.getCourseId()).divide(BigDecimal.valueOf(periodSumMap.get(resp.getCourseId())), RoundingMode.HALF_UP));
+                    BigDecimal studySum = userStudySumMap.get(resp.getCourseId());
+                    Long periodSum = periodSumMap.get(resp.getCourseId());
+                    if (studySum != null && periodSum != null && periodSum > 0) {
+                        resp.setCourseProgress(studySum.divide(BigDecimal.valueOf(periodSum), 2, RoundingMode.HALF_UP));
+                    }
                 }
                 resp.setCourseResp(BeanUtil.copyProperties(courseMap.get(resp.getCourseId()), AuthCourseResp.class));
             }
