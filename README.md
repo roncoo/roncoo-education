@@ -32,6 +32,7 @@ Cloud为核心框架。系统目前主要功能有课程点播功能，支持多
 
 <img src="distribution/images/ai.gif"/>
 
+
 <table>
   <tr>
     <td><img src="distribution/images/web1.png"/></td>
