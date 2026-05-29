@@ -128,6 +128,8 @@ public class AdminAiWriteBiz extends BaseBiz {
                     HttpResponse.BodyHandlers.ofInputStream());
 
             if (httpResponse.statusCode() != 200) {
+                String errorBody = new String(httpResponse.body().readAllBytes(), StandardCharsets.UTF_8);
+                log.error("AI服务请求失败，状态码：{}，响应体：{}", httpResponse.statusCode(), errorBody);
                 writeSseError(response, "AI服务请求失败，状态码：" + httpResponse.statusCode());
                 return;
             }
