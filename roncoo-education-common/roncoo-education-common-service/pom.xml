@@ -149,13 +149,13 @@
         <!-- Spring AI OpenAI（兼容协议 + Responses API） -->
         <dependency>
             <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-starter-model-openai</artifactId>
+            <artifactId>spring-ai-openai</artifactId>
         </dependency>
 
-        <!-- Spring AI Anthropic（Claude Messages API） -->
+        <!-- Spring AI Anthropic（Claude Messages API）-->
         <dependency>
             <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-starter-model-anthropic</artifactId>
+            <artifactId>spring-ai-anthropic</artifactId>
         </dependency>
 
         <!-- mysql -->
