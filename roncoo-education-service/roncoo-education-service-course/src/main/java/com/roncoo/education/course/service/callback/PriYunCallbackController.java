@@ -1,17 +1,16 @@
-package com.roncoo.education.course.callback;
+package com.roncoo.education.course.service.callback;
 
 import com.roncoo.education.common.tools.JsonUtil;
 import com.roncoo.education.common.video.impl.priyun.req.PrivateYunVodAuth;
 import com.roncoo.education.common.video.impl.priyun.req.PrivateYunVodUpload;
-import com.roncoo.education.course.callback.biz.PriYunCallbackBiz;
+import com.roncoo.education.course.service.callback.biz.PriYunCallbackBiz;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import jakarta.validation.constraints.NotNull;
 
 /**
  * 领课云

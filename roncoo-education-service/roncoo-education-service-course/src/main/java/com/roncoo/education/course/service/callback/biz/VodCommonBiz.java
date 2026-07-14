@@ -1,4 +1,4 @@
-package com.roncoo.education.course.callback.biz;
+package com.roncoo.education.course.service.callback.biz;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.roncoo.education.common.base.BaseBiz;
@@ -7,11 +7,10 @@ import com.roncoo.education.common.video.resp.VodInfoResp;
 import com.roncoo.education.course.dao.ResourceDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
 import com.roncoo.education.system.feign.interfaces.vo.VideoConfig;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import jakarta.validation.constraints.NotNull;
 
 /**
  * 课程分类

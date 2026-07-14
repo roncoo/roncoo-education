@@ -1,4 +1,4 @@
-package com.roncoo.education.course.callback.biz;
+package com.roncoo.education.course.service.callback.biz;
 
 import com.roncoo.education.common.base.BaseBiz;
 import com.roncoo.education.common.video.impl.priyun.enums.PrivateYunVideoStatusEnum;
@@ -6,11 +6,10 @@ import com.roncoo.education.common.video.impl.priyun.req.PrivateYunVodAuth;
 import com.roncoo.education.common.video.impl.priyun.req.PrivateYunVodUpload;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.VideoConfig;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import jakarta.validation.constraints.NotNull;
 
 /**
  * 回调业务层
