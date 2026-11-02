@@ -135,7 +135,8 @@ public class AuthOrderPayBiz extends BaseBiz {
         }
         // 校验订单
         OrderInfo orderInfo = orderInfoDao.getByOrderNo(req.getOrderNo());
-        if (ObjectUtil.isEmpty(orderInfo) || orderInfo.getOrderStatus().equals(OrderStatusEnum.SUCCESS.getCode())) {
+        if (ObjectUtil.isEmpty(orderInfo) || !orderInfo.getUserId().equals(ThreadContext.userId())
+                || orderInfo.getOrderStatus().equals(OrderStatusEnum.SUCCESS.getCode())) {
             // 成功的订单，不需要支付
             return Result.error("请确认订单号是否正确");
         }
@@ -222,7 +223,8 @@ public class AuthOrderPayBiz extends BaseBiz {
     @Transactional(rollbackFor = Exception.class)
     public Result<String> cancel(AuthOrderCancelReq req) {
         OrderInfo orderInfo = orderInfoDao.getByOrderNo(req.getOrderNo());
-        if (ObjectUtil.isEmpty(orderInfo) || orderInfo.getOrderStatus().equals(OrderStatusEnum.SUCCESS.getCode())) {
+        if (ObjectUtil.isEmpty(orderInfo) || !orderInfo.getUserId().equals(ThreadContext.userId())
+                || orderInfo.getOrderStatus().equals(OrderStatusEnum.SUCCESS.getCode())) {
             // 成功的订单，不能操作
             return Result.error("请确认订单号是否正确");
         }
