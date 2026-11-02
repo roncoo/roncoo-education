@@ -36,6 +36,7 @@ public class AdminLoginBiz {
     private final SysUserDao sysUserDao;
     @NotNull
     private final CacheRedis cacheRedis;
+    private final JwtUtil jwtUtil;
     @NotNull
     private final SysUserCommonBiz sysUserCommonBiz;
     @NotNull
@@ -81,7 +82,7 @@ public class AdminLoginBiz {
         AdminSysUserLoginResp resp = new AdminSysUserLoginResp();
         resp.setMobile(sysUser.getMobile());
         resp.setRealName(sysUser.getRealName());
-        resp.setToken(JwtUtil.create(sysUser.getId(), JwtUtil.DATE));
+        resp.setToken(jwtUtil.create(sysUser.getId(), JwtUtil.DATE));
 
         // token，放入缓存
         cacheRedis.set(resp.getToken(), sysUser.getId(), 1, TimeUnit.DAYS);

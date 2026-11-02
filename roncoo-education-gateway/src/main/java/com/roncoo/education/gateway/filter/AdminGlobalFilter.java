@@ -45,6 +45,9 @@ public class AdminGlobalFilter implements GlobalFilter, Ordered {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
+    @Resource
+    private JwtUtil jwtUtil;
+
     /**
      * 优先级，order越大，优先级越低
      *
@@ -124,14 +127,15 @@ public class AdminGlobalFilter implements GlobalFilter, Ordered {
             throw new BaseException("token不存在，请重新登录");
         }
 
-        if (!stringRedisTemplate.hasKey(token)) {
+        String sessionUserId = stringRedisTemplate.opsForValue().get(token);
+        if (sessionUserId == null) {
             throw new BaseException(ResultEnum.TOKEN_PAST);
         }
 
         // 解析 token
         DecodedJWT jwt;
         try {
-            jwt = JwtUtil.verify(token);
+            jwt = jwtUtil.verify(token);
         } catch (Exception e) {
             log.error("token异常，token={}", token);
             throw new BaseException(ResultEnum.TOKEN_ERROR);
@@ -142,7 +146,7 @@ public class AdminGlobalFilter implements GlobalFilter, Ordered {
             throw new BaseException(ResultEnum.TOKEN_ERROR);
         }
         Long userId = JwtUtil.getUserId(jwt);
-        if (userId <= 0) {
+        if (userId <= 0 || !userId.toString().equals(sessionUserId)) {
             throw new BaseException(ResultEnum.TOKEN_ERROR);
         }
 
