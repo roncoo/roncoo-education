@@ -68,6 +68,7 @@ public class ApiUsersBiz extends BaseBiz {
     private final UsersLogDao usersLogDao;
     @NotNull
     private final CacheRedis cacheRedis;
+    private final JwtUtil jwtUtil;
     @NotNull
     private final IFeignSysConfig feignSysConfig;
     @NotNull
@@ -392,7 +393,7 @@ public class ApiUsersBiz extends BaseBiz {
 
         UsersLoginResp resp = new UsersLoginResp();
         resp.setMobile(mobile);
-        resp.setToken(JwtUtil.create(userId, JwtUtil.DATE));
+        resp.setToken(jwtUtil.create(userId, JwtUtil.DATE));
         // token，放入缓存
         cacheRedis.set(resp.getToken(), userId, 1, TimeUnit.DAYS);
         return resp;

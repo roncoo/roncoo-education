@@ -8,6 +8,7 @@ import com.roncoo.education.common.core.base.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.util.StringUtils;
+import org.springframework.stereotype.Component;
 
 /**
  * 过滤器工具类
@@ -15,9 +16,13 @@ import org.springframework.util.StringUtils;
  * @author Admin
  */
 @Slf4j
+@Component
 public final class FilterUtil {
 
-    private FilterUtil() {
+    private final JwtUtil jwtUtil;
+
+    public FilterUtil(JwtUtil jwtUtil) {
+        this.jwtUtil = jwtUtil;
     }
 
     /**
@@ -63,7 +68,7 @@ public final class FilterUtil {
      * @param request 访问请求
      * @return JWT解码信息
      */
-    public static DecodedJWT getDecodedJWT(ServerHttpRequest request) {
+    public DecodedJWT getDecodedJWT(ServerHttpRequest request) {
         // 头部
         String token = request.getHeaders().getFirst(Constants.TOKEN);
         // 路径
@@ -77,7 +82,7 @@ public final class FilterUtil {
 
         // 解析 token
         try {
-            return JwtUtil.verify(token);
+            return jwtUtil.verify(token);
         } catch (Exception e) {
             log.error("token异常，token={}", token, e);
             throw new BaseException(ResultEnum.TOKEN_ERROR);

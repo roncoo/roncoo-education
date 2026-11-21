@@ -22,13 +22,14 @@
 ### 使用须知
 
 1. 可以用于个人学习、毕业设计、教学案例、公益事业等。
-2. 我们有更好的商业版本，欢迎咨询：18302045627（微信可加）。
+2. 商用限制，若要商用请咨询：18302045627（微信可加）。
 3. 禁止将本项目的相关代码和相关资料进行任何形式任何名义的出售。
 
 ### 项目介绍
 
-领课教育系统（roncoo-education）是基于领课网络多年的在线教育平台开发和运营经验打造出来的产品，致力于打造一个各行业都适用的分布式在线教育系统。系统采用前后端分离模式，前台采用vue.js为核心框架，后台采用Spring
-Cloud为核心框架。系统目前主要功能有课程点播功能，支持多家视频云的接入，课程附件管理功能，支持多家存储云的接入，可以帮助个人或者企业快速搭建一个轻量级的在线教育平台。
+领课教育系统（roncoo-education）是基于领课网络多年的在线教育平台开发和运营经验打造出来的产品，致力于打造一个各行业都适用的分布式在线教育系统。系统采用前后端分离模式，前台采用vue.js为核心框架，后台采用Spring Cloud为核心框架。系统目前主要功能有课程点播功能，支持多家视频云的接入，课程附件管理功能，支持多家存储云的接入，可以帮助个人或者企业快速搭建一个轻量级的在线教育平台。
+
+目前集成AI写作能力，采用流式输出技术，实时生成课程简介、教学大纲等专业教育内容，显著提升课程内容生产效率和质量，我们会陆续添加更多AI能力，请持续关注。
 
 <img src="distribution/images/ai.gif"/>
 
@@ -55,8 +56,8 @@ Cloud为核心框架。系统目前主要功能有课程点播功能，支持多
 
 * 门户系统：[https://eduos.roncoos.com/](https://eduos.roncoos.com/)
 * 管理系统：[https://eduos.roncoos.com/admin/](https://eduos.roncoos.com/admin/)
-* 前端技术体系：Vue3 + Nuxt3 + Vite6 + Vue-Router + Element-Plus + Pinia + Axios
-* 后端技术体系：Spring Cloud Alibaba2023 + MySQL8 + Nacos + Seata + Mybatis + Druid
+* 前端技术体系：Vue3 + Nuxt3 + Vite8 + Vue-Router + Element-Plus + Pinia + Axios
+* 后端技术体系：Spring Cloud Alibaba2025 + MySQL8 + Nacos + Seata + Mybatis + Druid
 
 ### 源码地址
 
