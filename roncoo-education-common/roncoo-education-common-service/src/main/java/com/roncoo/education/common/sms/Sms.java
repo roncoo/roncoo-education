@@ -16,7 +16,8 @@ public class Sms implements Serializable {
 
     private Integer smsPlatform;
 
-    // Lkyun短信签名
+    // Lkyun短信配置
+    private String lkyunSmsDomain;
     private String lkyunSmsSignName;
     private String lkyunSmsAccessKeyId;
     private String lkyunSmsAccessKeySecret;

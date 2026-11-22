@@ -170,7 +170,6 @@ public class ApiUsersBiz extends BaseBiz {
         user.setMobilePsw(DigestUtil.sha1Hex(user.getMobileSalt() + password));
         // 默认8位随机字符串
         user.setNickname(RandomUtil.randomString(8));
-        user.setUserHead("https://static.roncoos.com/lingke.png");
         user.setRegisterSource(registerSource);
         user.setUnionId(unionId);
         user.setOpenId(openId);

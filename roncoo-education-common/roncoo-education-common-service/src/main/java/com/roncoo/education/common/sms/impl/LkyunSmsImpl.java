@@ -23,14 +23,18 @@ import java.util.TreeMap;
 @Component(value = "lkyunSms")
 public class LkyunSmsImpl implements SmsFace {
 
+    private static final String SMS_SEND_PATH = "/gateway/user/api/sms/send/sms";
+
     @Override
     public Boolean sendVerCode(String mobile, String code, Sms sms) {
-        return lkyun(mobile, getParamForCode(code), sms.getLkyunSmsSignName(), sms.getLkyunSmsAuthCode(), sms.getLkyunSmsAccessKeyId(), sms.getLkyunSmsAccessKeySecret());
+        return lkyun(mobile, getParamForCode(code), sms.getLkyunSmsSignName(), sms.getLkyunSmsAuthCode(),
+                sms.getLkyunSmsDomain(), sms.getLkyunSmsAccessKeyId(), sms.getLkyunSmsAccessKeySecret());
     }
     
     @Override
     public Boolean sendPurchaseSuccess(String mobile, String courseName, Long orderNo, Sms sms) {
-        return lkyun(mobile, getParamForPurchase(courseName, orderNo), sms.getLkyunSmsSignName(), sms.getLkyunSmsAuthCode(), sms.getLkyunSmsAccessKeyId(), sms.getLkyunSmsAccessKeySecret());
+        return lkyun(mobile, getParamForPurchase(courseName, orderNo), sms.getLkyunSmsSignName(), sms.getLkyunSmsAuthCode(),
+                sms.getLkyunSmsDomain(), sms.getLkyunSmsAccessKeyId(), sms.getLkyunSmsAccessKeySecret());
     }
 
     /**
@@ -40,11 +44,18 @@ public class LkyunSmsImpl implements SmsFace {
      * @param templateParam
      * @param signName
      * @param templateCode
+     * @param domain
      * @param accessKeyId
      * @param accessKeySecret
      * @return
      */
-    private static Boolean lkyun(String phone, String templateParam, String signName, String templateCode, String accessKeyId, String accessKeySecret) {
+    private static Boolean lkyun(String phone, String templateParam, String signName, String templateCode, String domain,
+                                 String accessKeyId, String accessKeySecret) {
+        if (StrUtil.isBlank(domain)) {
+            log.error("领课云短信接口域名未配置，手机号={}", phone);
+            return false;
+        }
+
         Map<String, Object> map = new HashMap<>();
         map.put("accessKeyId", accessKeyId);
         map.put("phoneNumbers", phone);
@@ -54,7 +65,8 @@ public class LkyunSmsImpl implements SmsFace {
         map.put("signatureNonce", String.valueOf(System.currentTimeMillis()));
         map.put("sign", sign(map, accessKeySecret));
         try {
-            JSONObject jn = JSONUtil.parseObj(HttpRequest.post("https://cloud.roncoos.com/gateway/user/api/sms/send/sms").header("Content-Type", "application/json").body(JSONUtil.toJsonStr(map)).execute().body());
+            String url = StrUtil.removeSuffix(domain.trim(), "/") + SMS_SEND_PATH;
+            JSONObject jn = JSONUtil.parseObj(HttpRequest.post(url).header("Content-Type", "application/json").body(JSONUtil.toJsonStr(map)).execute().body());
             if (!jn.getInt("code").equals(200)) {
                 log.error("短信发送错误={}，手机号={}，templateParam={}", jn, phone, templateParam);
                 return false;
