@@ -23,7 +23,7 @@ import java.util.TreeMap;
 @Component(value = "lkyunSms")
 public class LkyunSmsImpl implements SmsFace {
 
-    private static final String SMS_SEND_PATH = "/gateway/user/api/sms/send/sms";
+    private static final String SMS_SEND_PATH = "/v1/sms/send";
 
     @Override
     public Boolean sendVerCode(String mobile, String code, Sms sms) {
@@ -55,6 +55,10 @@ public class LkyunSmsImpl implements SmsFace {
             log.error("领课云短信接口域名未配置，手机号={}", phone);
             return false;
         }
+        if (StrUtil.isBlank(accessKeyId) || StrUtil.isBlank(accessKeySecret)) {
+            log.error("领课云短信接口鉴权配置未完成，手机号={}", phone);
+            return false;
+        }
 
         Map<String, Object> map = new HashMap<>();
         map.put("accessKeyId", accessKeyId);
@@ -62,12 +66,25 @@ public class LkyunSmsImpl implements SmsFace {
         map.put("templateCode", templateCode);
         map.put("templateParam", templateParam);
         map.put("signName", signName);
-        map.put("signatureNonce", String.valueOf(System.currentTimeMillis()));
-        map.put("sign", sign(map, accessKeySecret));
+        String signatureNonce = String.valueOf(System.currentTimeMillis());
+        map.put("signatureNonce", signatureNonce);
+
+        // wcs-cloud only signs the common authentication fields. The SMS payload
+        // fields are validated after the signature has been checked.
+        SortedMap<String, Object> signParams = new TreeMap<>();
+        signParams.put("accessKeyId", accessKeyId);
+        signParams.put("signatureNonce", signatureNonce);
+        map.put("sign", sign(signParams, accessKeySecret));
         try {
             String url = StrUtil.removeSuffix(domain.trim(), "/") + SMS_SEND_PATH;
-            JSONObject jn = JSONUtil.parseObj(HttpRequest.post(url).header("Content-Type", "application/json").body(JSONUtil.toJsonStr(map)).execute().body());
-            if (!jn.getInt("code").equals(200)) {
+            String responseBody = HttpRequest.post(url)
+                    .header("Content-Type", "application/json")
+                    .body(JSONUtil.toJsonStr(map))
+                    .execute()
+                    .body();
+            JSONObject jn = JSONUtil.parseObj(responseBody);
+            Integer responseCode = jn.getInt("code");
+            if (!Integer.valueOf(200).equals(responseCode)) {
                 log.error("短信发送错误={}，手机号={}，templateParam={}", jn, phone, templateParam);
                 return false;
             }
