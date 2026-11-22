@@ -54,8 +54,8 @@
 
 ### 演示地址
 
-* 门户系统：[https://eduos.roncoos.com/](https://eduos.roncoos.com/)
-* 管理系统：[https://eduos.roncoos.com/admin/](https://eduos.roncoos.com/admin/)
+* 门户系统：[https://eduos.roncoo.com/](https://eduos.roncoo.com/)
+* 管理系统：[https://eduos.roncoo.com/admin/](https://eduos.roncoo.com/admin/)
 * 前端技术体系：Vue3 + Nuxt3 + Vite8 + Vue-Router + Element-Plus + Pinia + Axios
 * 后端技术体系：Spring Cloud Alibaba2025 + MySQL8 + Nacos + Seata + Mybatis + Druid
 
