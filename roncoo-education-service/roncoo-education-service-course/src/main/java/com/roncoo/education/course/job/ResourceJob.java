@@ -3,19 +3,18 @@ package com.roncoo.education.course.job;
 import cn.hutool.core.collection.CollUtil;
 import com.roncoo.education.common.core.enums.ResourceTypeEnum;
 import com.roncoo.education.common.core.enums.VideoStatusEnum;
-import com.roncoo.education.course.callback.biz.VodCommonBiz;
 import com.roncoo.education.course.dao.ResourceDao;
 import com.roncoo.education.course.dao.impl.mapper.entity.Resource;
 import com.roncoo.education.course.dao.impl.mapper.entity.ResourceExample;
+import com.roncoo.education.course.service.callback.biz.VodCommonBiz;
 import com.roncoo.education.system.feign.interfaces.IFeignSysConfig;
 import com.roncoo.education.system.feign.interfaces.vo.VideoConfig;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;

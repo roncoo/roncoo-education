@@ -1,18 +1,17 @@
-package com.roncoo.education.course.callback;
+package com.roncoo.education.course.service.callback;
 
 import com.roncoo.education.common.base.BaseController;
 import com.roncoo.education.common.video.impl.polyv.live.*;
 import com.roncoo.education.common.video.impl.polyv.vod.CallbackVodAuth;
 import com.roncoo.education.common.video.impl.polyv.vod.CallbackVodUpload;
-import com.roncoo.education.course.callback.biz.PolyvCallbackBiz;
+import com.roncoo.education.course.service.callback.biz.PolyvCallbackBiz;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import jakarta.validation.constraints.NotNull;
 
 /**
  * 保利威
