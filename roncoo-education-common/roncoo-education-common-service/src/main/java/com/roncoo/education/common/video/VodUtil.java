@@ -66,9 +66,11 @@ public final class VodUtil {
     public static InfoResp getInfo(VideoConfigReq req) {
         InfoResp infoResp = new InfoResp();
         if (VodPlatformEnum.PRIVATEY.getCode().equals(req.getVodPlatform())) {
-            if (req.getPriyUrl().length() > 2) {
+            if (StringUtils.hasText(req.getPriyUrl())) {
                 PrivateYunInfoResp privateYunInfoResp = PrivateYunVodUtil.getInfo(req.getPriyUrl(), req.getPriyAccessKeyId(), req.getPriyAccessKeySecret());
-                infoResp.setUsedSpace(BigDecimal.valueOf(privateYunInfoResp.getStorage()).divide(BigDecimal.valueOf(1073741824L)).setScale(2, BigDecimal.ROUND_HALF_UP));
+                if (privateYunInfoResp != null && privateYunInfoResp.getStorage() != null) {
+                    infoResp.setUsedSpace(BigDecimal.valueOf(privateYunInfoResp.getStorage()).divide(BigDecimal.valueOf(1073741824L)).setScale(2, BigDecimal.ROUND_HALF_UP));
+                }
                 return infoResp;
             }
         }

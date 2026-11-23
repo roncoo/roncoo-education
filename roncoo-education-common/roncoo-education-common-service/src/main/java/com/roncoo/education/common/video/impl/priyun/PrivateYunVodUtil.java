@@ -5,7 +5,11 @@ package com.roncoo.education.common.video.impl.priyun;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
+import cn.hutool.http.HttpException;
+import cn.hutool.http.HttpRequest;
+import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
+import cn.hutool.json.JSONException;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.roncoo.education.common.video.impl.priyun.resp.PrivateYunConfigResp;
@@ -44,21 +48,31 @@ public final class PrivateYunVodUtil {
      * @return
      */
     public static PrivateYunInfoResp getInfo(String url, String accessKeyId, String secretKey) {
-        String requestUrl = url + "v1/video/info";
+        if (StrUtil.isBlank(url) || StrUtil.isBlank(accessKeyId) || StrUtil.isBlank(secretKey)) {
+            log.warn("领课云--查询账号信息失败：接口地址或鉴权配置未完成");
+            return null;
+        }
+        String requestUrl = StrUtil.addSuffixIfNot(url.trim(), "/") + "v1/video/info";
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("accessKeyId", accessKeyId);
         paramMap.put("signatureNonce", String.valueOf(System.currentTimeMillis()));
         // 签名
         paramMap.put("sign", getSign(paramMap, secretKey));
         // 请求
-        String result = HttpUtil.post(requestUrl, JSONUtil.toJsonStr(paramMap));
-
-        JSONObject resultJson = JSONUtil.parseObj(result);
-        if (SUCCESS_CODE.equals(resultJson.getInt("code"))) {
-            return JSONUtil.toBean(resultJson.getStr("data"), PrivateYunInfoResp.class);
+        try (HttpResponse response = HttpRequest.post(requestUrl).body(JSONUtil.toJsonStr(paramMap)).timeout(10000).execute()) {
+            String result = response.body();
+            if (!response.isOk() || !JSONUtil.isTypeJSONObject(result)) {
+                log.error("领课云--查询账号信息失败：url={}，HTTP状态={}，响应={}", requestUrl, response.getStatus(), result);
+                return null;
+            }
+            JSONObject resultJson = JSONUtil.parseObj(result);
+            if (SUCCESS_CODE.equals(resultJson.getInt("code")) && resultJson.getJSONObject("data") != null) {
+                return resultJson.getJSONObject("data").toBean(PrivateYunInfoResp.class);
+            }
+            log.error("领课云--查询账号信息失败：url={}，响应={}", requestUrl, result);
+        } catch (HttpException | JSONException e) {
+            log.error("领课云--查询账号信息异常：url={}", requestUrl, e);
         }
-
-        log.error("领课云--查询账号信息失败：{}", result);
         return null;
     }
 
